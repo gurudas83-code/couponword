@@ -2,9 +2,9 @@
   {
     "id": 1,
     "store": "Amazon IN",
-    "title": "Amazon Special ₹500 OFF",
+    "title": "Amazon Special \u20b9500 OFF",
     "code": "AMAZON500",
-    "discount": "₹500 OFF",
+    "discount": "\u20b9500 OFF",
     "expiry": "31 Dec 2026",
     "link": "https://amazon.in?tag=guru0906-21",
     "category": "E-commerce"
@@ -18,5 +18,25 @@
     "expiry": "31 Dec 2026",
     "link": "https://flipkart.com?tag=guru0906-21",
     "category": "Electronics"
+  },
+  {
+    "id": 3,
+    "store": "Myntra",
+    "title": "Fashion 60% OFF",
+    "code": "STYLE60",
+    "discount": "60% OFF",
+    "expiry": "31 Dec 2026",
+    "link": "https://amazon.in?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 4,
+    "store": "Ajio",
+    "title": "Shoes Flat \u20b9800",
+    "code": "AJIO800",
+    "discount": "\u20b9800 OFF",
+    "expiry": "31 Dec 2026",
+    "link": "https://amazon.in?tag=guru0906-21",
+    "category": "Shopping"
   }
 ]
