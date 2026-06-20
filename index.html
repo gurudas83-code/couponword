@@ -336,6 +336,31 @@
     .copy-btn:hover { background: #4338ca; }
     .copy-btn.copied { background: #16a34a; }
 
+    .get-deal-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      margin-top: 8px;
+      background: transparent;
+      color: #818cf8;
+      border: 1.5px solid #4f46e5;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.15s;
+    }
+
+    .get-deal-btn:hover {
+      background: #4f46e5;
+      color: #fff;
+    }
+
     .coupon-footer {
       padding: 8px 16px 12px;
       display: flex;
@@ -424,8 +449,8 @@
         <i class="ti ti-sparkles" aria-hidden="true" style="font-size:12px"></i>
         AI-Powered • Auto-Updated Deals
       </div>
-      <h1>Save More,<br><span>Everywhere.</span></h1>
-      <p>Fresh coupon codes from top stores worldwide, refreshed automatically by AI.</p>
+      <h1>Save More on<br><span>Amazon India.</span></h1>
+      <p>Fresh Amazon coupon codes, refreshed automatically by AI.</p>
       <div class="search-bar">
         <input type="text" id="searchInput" placeholder="Search stores, brands, categories..." />
         <button onclick="searchCoupons()"><i class="ti ti-search" aria-hidden="true"></i> Search</button>
@@ -434,7 +459,7 @@
 
     <div class="stats-bar" id="statsBar">
       <div class="stat-item"><div class="stat-value" id="stat-total">—</div><div class="stat-label">Active Coupons</div></div>
-      <div class="stat-item"><div class="stat-value" id="stat-stores">—</div><div class="stat-label">Stores</div></div>
+      <div class="stat-item"><div class="stat-value" id="stat-stores">—</div><div class="stat-label">Categories</div></div>
       <div class="stat-item"><div class="stat-value" id="stat-countries">—</div><div class="stat-label">Countries</div></div>
       <div class="stat-item"><div class="stat-value" id="stat-maxsave">—</div><div class="stat-label">Max Savings</div></div>
     </div>
@@ -466,6 +491,17 @@
     let activeFilter = 'all';
     let searchQuery = '';
 
+    // This site only displays Amazon IN coupons, since that's the only affiliate
+    // program connected. Every "Get Deal" button below points to a real Amazon link,
+    // so what's shown always matches where the click goes (no mismatched-store redirects).
+    const AFFILIATE_STORE = 'Amazon IN';
+    const AMAZON_FALLBACK_LINK = 'https://www.amazon.in';
+
+    function resolveLink(c) {
+      if (c.link && c.link.trim() !== '') return c.link;
+      return AMAZON_FALLBACK_LINK;
+    }
+
     async function loadCoupons(forceRefresh) {
       const btn = document.getElementById('refreshBtn');
       btn.classList.add('spinning');
@@ -473,23 +509,26 @@
       try {
         const res = await fetch('./coupons.json?t=' + Date.now());
         const data = await res.json();
-        
-        allCoupons = data.map((c, i) => ({
-          id: 'c' + c.id,
-          store: c.store,
-          emoji: c.store === 'Amazon IN' ? '📦' : c.store === 'Flipkart' ? '🛒' : c.store === 'Myntra' ? '👗' : c.store === 'Ajio' ? '🛍️' : c.store === 'Nykaa' ? '💄' : '🏪',
-          category: (c.category || 'shopping').toLowerCase(),
-          discount: c.discount,
-          discountNum: parseInt(c.discount.replace(/\D/g,'')) || 0,
-          code: c.code,
-          description: c.title,
-          country: 'India',
-          flag: '🇮🇳',
-          expiresIn: c.expiry,
-          expiringSoon: false,
-          verified: true,
-          uses: Math.floor(Math.random() * 9000) + 1000
-        }));
+
+        allCoupons = data
+          .filter(c => c.store === AFFILIATE_STORE)
+          .map((c, i) => ({
+            id: 'c' + c.id,
+            store: c.store,
+            emoji: '📦',
+            category: (c.category || 'shopping').toLowerCase(),
+            discount: c.discount,
+            discountNum: parseInt(c.discount.replace(/\D/g,'')) || 0,
+            code: c.code,
+            description: c.title,
+            link: c.link || '',
+            country: 'India',
+            flag: '🇮🇳',
+            expiresIn: c.expiry,
+            expiringSoon: false,
+            verified: true,
+            uses: Math.floor(Math.random() * 9000) + 1000
+          }));
 
         renderCoupons();
         updateStats();
@@ -557,6 +596,9 @@
                 <i class="ti ti-copy" aria-hidden="true"></i> Copy
               </button>
             </div>
+            <a class="get-deal-btn" href="${resolveLink(c)}" target="_blank" rel="noopener noreferrer">
+              <i class="ti ti-external-link" aria-hidden="true"></i> Get Deal
+            </a>
           </div>
           <div class="coupon-footer">
             <div class="expiry">
@@ -591,7 +633,7 @@
 
     function updateStats() {
       document.getElementById('stat-total').textContent = allCoupons.length;
-      document.getElementById('stat-stores').textContent = [...new Set(allCoupons.map(c => c.store))].length;
+      document.getElementById('stat-stores').textContent = [...new Set(allCoupons.map(c => c.category))].length;
       document.getElementById('stat-countries').textContent = '1';
       const maxSave = allCoupons.reduce((max, c) => Math.max(max, c.discountNum || 0), 0);
       document.getElementById('stat-maxsave').textContent = maxSave > 0 ? maxSave + '%' : 'Free!';
