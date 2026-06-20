@@ -1,0 +1,20 @@
+name: Daily Coupon Bot
+on:
+  schedule:
+    - cron: '30 3 * * *'  # रोज 9 AM IST
+  workflow_dispatch:
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+      - run: python coupon_bot.py
+      - run: |
+          git config user.name "Coupon Bot"
+          git config user.email "bot@coupon-world.in"
+          git add coupons.json
+          git commit -m "Bot: Added new coupons" || exit 0
+          git push
