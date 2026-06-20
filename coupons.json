@@ -1,1 +1,22 @@
-
+[
+  {
+    "id": 1,
+    "store": "Amazon IN",
+    "title": "Amazon Special ₹500 OFF",
+    "code": "AMAZON500",
+    "discount": "₹500 OFF",
+    "expiry": "31 Dec 2026",
+    "link": "https://amazon.in?tag=guru0906-21",
+    "category": "E-commerce"
+  },
+  {
+    "id": 2,
+    "store": "Flipkart",
+    "title": "Electronics 40% OFF",
+    "code": "ELEC40",
+    "discount": "40% OFF",
+    "expiry": "31 Dec 2026",
+    "link": "https://flipkart.com?tag=guru0906-21",
+    "category": "Electronics"
+  }
+]
