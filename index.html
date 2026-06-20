@@ -1,148 +1,609 @@
-<script>
-let allCoupons = [];
-let activeFilter = 'all';
-let searchQuery = '';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coupon World - AI Deals</title>
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:wght@300;400;500&display=swap');
 
-const REFRESH_INTERVAL = 5 * 60 * 1000;
+    :root {
+      --color-background-tertiary: #0a0a0a;
+      --color-background-primary: #1a1a1a;
+      --color-background-secondary: #2a2a2a;
+      --color-text-primary: #ffffff;
+      --color-text-secondary: rgba(255,255,255,0.7);
+      --color-text-tertiary: rgba(255,255,255,0.5);
+      --color-border-tertiary: rgba(255,255,255,0.1);
+      --color-border-secondary: rgba(255,255,255,0.2);
+    }
 
-async function loadCoupons(forceRefresh) {
-  const btn = document.getElementById('refreshBtn');
-  btn.classList.add('spinning');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  try {
-    // तेरे खुद के coupons.json से पढ़ेगा
-    const res = await fetch('./coupons.json?t=' + Date.now());
-    const data = await res.json();
-    
-    // तेरे JSON को इस डिज़ाइन के format में बदल रहे
-    allCoupons = data.map((c, i) => ({
-      id: 'c' + c.id,
-      store: c.store,
-      emoji: c.store === 'Amazon IN' ? '📦' : c.store === 'Flipkart' ? '🛒' : c.store === 'Myntra' ? '👗' : '🛍️',
-      category: c.category.toLowerCase() || 'shopping',
-      discount: c.discount,
-      discountNum: parseInt(c.discount.replace(/\D/g,'')) || 0,
-      code: c.code,
-      description: c.title,
-      country: 'India',
-      flag: '🇮🇳',
-      expiresIn: c.expiry,
-      expiringSoon: false,
-      verified: true,
-      uses: Math.floor(Math.random() * 9000) + 1000
-    }));
+    body, #app {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--color-background-tertiary);
+      color: var(--color-text-primary);
+      min-height: 100vh;
+    }
 
-    renderCoupons();
-    updateStats();
-    updateLastUpdated(Date.now());
-  } catch(e) {
-    console.log('Error loading coupons.json', e);
-  }
+    .hero {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+      padding: 2.5rem 1.5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40px; left: 50%;
+      transform: translateX(-50%);
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 12px;
+      color: #a5b4fc;
+      margin-bottom: 1rem;
+      font-family: 'DM Sans', sans-serif;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 span { color: #818cf8; }
+
+    .hero p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.5);
+      max-width: 480px;
+      margin: 0 auto 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .search-bar {
+      display: flex;
+      max-width: 520px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      overflow: hidden;
+      padding: 4px;
+      gap: 4px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .search-bar input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 10px 14px;
+      font-size: 14px;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .search-bar input::placeholder { color: rgba(255,255,255,0.35); }
+
+    .search-bar button {
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      white-space: nowrap;
+    }
+
+    .controls {
+      padding: 1rem 1.5rem 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .filter-tab {
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--color-border-tertiary);
+      background: var(--color-background-primary);
+      color: var(--color-text-secondary);
+      transition: all 0.15s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .filter-tab.active {
+      background: #4f46e5;
+      color: #fff;
+      border-color: #4f46e5;
+    }
+
+    .refresh-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      background: var(--color-background-primary);
+      border: 1px solid var(--color-border-tertiary);
+      color: var(--color-text-secondary);
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.15s;
+    }
+
+    .refresh-btn:hover { border-color: #4f46e5; color: #4f46e5; }
+    .refresh-btn.spinning i { animation: spin 0.8s linear infinite; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .last-updated {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .live-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .coupons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+      padding: 1rem 1.5rem 2rem;
+    }
+
+    .coupon-card {
+      background: var(--color-background-primary);
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .coupon-card:hover {
+      border-color: #4f46e5;
+      transform: translateY(-2px);
+    }
+
+    .coupon-header {
+      padding: 14px 16px 10px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .store-info { flex: 1; }
+
+    .store-logo {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6px;
+      background: var(--color-background-secondary);
+    }
+
+    .store-name {
+      font-weight: 600;
+      font-size: 14px;
+      font-family: 'Syne', sans-serif;
+      color: var(--color-text-primary);
+    }
+
+    .store-category {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      margin-top: 1px;
+    }
+
+    .discount-badge {
+      background: #eef2ff;
+      color: #4338ca;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-family: 'Syne', sans-serif;
+      white-space: nowrap;
+    }
+
+    .coupon-divider {
+      margin: 0 16px;
+      border: none;
+      border-top: 1.5px dashed var(--color-border-tertiary);
+      position: relative;
+    }
+
+    .coupon-divider::before, .coupon-divider::after {
+      content: '';
+      position: absolute;
+      top: -7px;
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      background: var(--color-background-tertiary);
+      border: 1px solid var(--color-border-tertiary);
+    }
+
+    .coupon-divider::before { left: -24px; }
+    .coupon-divider::after { right: -24px; }
+
+    .coupon-body { padding: 10px 16px 14px; }
+
+    .coupon-desc {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .code-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .code-box {
+      flex: 1;
+      background: var(--color-background-secondary);
+      border: 1.5px dashed var(--color-border-secondary);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-family: 'Syne', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #4f46e5;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .code-box:hover { background: #eef2ff; }
+    .code-box.copied { background: #f0fdf4; color: #16a34a; border-color: #86efac; }
+
+    .copy-btn {
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.15s;
+    }
+
+    .copy-btn:hover { background: #4338ca; }
+    .copy-btn.copied { background: #16a34a; }
+
+    .coupon-footer {
+      padding: 8px 16px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .expiry {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .expiry.soon { color: #ea580c; }
+
+    .country-flag {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .country-label { font-size: 11px; color: var(--color-text-tertiary); }
+
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: #f0fdf4;
+      color: #15803d;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 2px 7px;
+      border-radius: 10px;
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 0;
+      background: var(--color-background-primary);
+      border-bottom: 1px solid var(--color-border-tertiary);
+      overflow-x: auto;
+    }
+
+    .stat-item {
+      flex: 1;
+      min-width: 100px;
+      padding: 10px 16px;
+      text-align: center;
+      border-right: 1px solid var(--color-border-tertiary);
+    }
+
+    .stat-item:last-child { border-right: none; }
+    .stat-value { font-size: 18px; font-weight: 700; font-family: 'Syne', sans-serif; color: var(--color-text-primary); }
+    .stat-label { font-size: 10px; color: var(--color-text-tertiary); margin-top: 1px; }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      color: var(--color-text-secondary);
+      grid-column: 1 / -1;
+    }
+
+    .empty-state i { font-size: 40px; color: var(--color-text-tertiary); margin-bottom: 1rem; display: block; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <h2 class="sr-only">Global Coupon Code Website</h2>
   
-  btn.classList.remove('spinning');
-}
-
-function setFilter(filter, el) {
-  activeFilter = filter;
-  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  renderCoupons();
-}
-
-function searchCoupons() {
-  searchQuery = document.getElementById('searchInput').value.toLowerCase();
-  renderCoupons();
-}
-
-document.getElementById('searchInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') searchCoupons();
-});
-
-function renderCoupons() {
-  const grid = document.getElementById('couponsGrid');
-  let filtered = allCoupons;
-
-  if (activeFilter !== 'all') {
-    filtered = filtered.filter(c => c.category.includes(activeFilter));
-  }
-  if (searchQuery) {
-    filtered = filtered.filter(c =>
-      c.store.toLowerCase().includes(searchQuery) ||
-      c.description.toLowerCase().includes(searchQuery) ||
-      c.code.toLowerCase().includes(searchQuery)
-    );
-  }
-
-  if (filtered.length === 0) {
-    grid.innerHTML = '<div class="empty-state"><i class="ti ti-mood-empty" aria-hidden="true"></i><p>No coupons found.</p></div>';
-    return;
-  }
-
-  grid.innerHTML = filtered.map(c => `
-    <div class="coupon-card" id="card-${c.id}">
-      <div class="coupon-header">
-        <div class="store-info">
-          <div class="store-logo">${c.emoji}</div>
-          <div class="store-name">${c.store}</div>
-          <div class="store-category">${c.category.charAt(0).toUpperCase()+c.category.slice(1)}</div>
-        </div>
-        <div class="discount-badge">${c.discount}</div>
+  <div id="app">
+    <div class="hero">
+      <div class="hero-badge">
+        <i class="ti ti-sparkles" aria-hidden="true" style="font-size:12px"></i>
+        AI-Powered • Auto-Updated Deals
       </div>
-      <hr class="coupon-divider">
-      <div class="coupon-body">
-        <p class="coupon-desc">${c.description}</p>
-        <div class="code-row">
-          <div class="code-box" id="code-${c.id}" onclick="copyCode('${c.id}','${c.code}')">${c.code}</div>
-          <button class="copy-btn" id="btn-${c.id}" onclick="copyCode('${c.id}','${c.code}')">
-            <i class="ti ti-copy" aria-hidden="true"></i> Copy
-          </button>
-        </div>
-      </div>
-      <div class="coupon-footer">
-        <div class="expiry">
-          <i class="ti ti-clock" aria-hidden="true" style="font-size:12px"></i>
-          Expires: ${c.expiresIn}
-        </div>
-        <div style="display:flex;align-items:center;gap:6px">
-          <span class="country-flag">${c.flag}</span>
-          <span class="country-label">${c.country}</span>
-          ${c.verified ? '<span class="verified-badge"><i class="ti ti-circle-check" style="font-size:10px"></i>Verified</span>' : ''}
-        </div>
+      <h1>Save More,<br><span>Everywhere.</span></h1>
+      <p>Fresh coupon codes from top stores worldwide, refreshed automatically by AI.</p>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search stores, brands, categories..." />
+        <button onclick="searchCoupons()"><i class="ti ti-search" aria-hidden="true"></i> Search</button>
       </div>
     </div>
-  `).join('');
-}
 
-function copyCode(id, code) {
-  navigator.clipboard.writeText(code).catch(()=>{});
-  const codeEl = document.getElementById('code-' + id);
-  const btnEl = document.getElementById('btn-' + id);
-  codeEl.textContent = '✓ Copied!';
-  codeEl.classList.add('copied');
-  btnEl.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> Done';
-  btnEl.classList.add('copied');
-  setTimeout(() => {
-    codeEl.textContent = code;
-    codeEl.classList.remove('copied');
-    btnEl.innerHTML = '<i class="ti ti-copy" aria-hidden="true"></i> Copy';
-    btnEl.classList.remove('copied');
-  }, 2000);
-}
+    <div class="stats-bar" id="statsBar">
+      <div class="stat-item"><div class="stat-value" id="stat-total">—</div><div class="stat-label">Active Coupons</div></div>
+      <div class="stat-item"><div class="stat-value" id="stat-stores">—</div><div class="stat-label">Stores</div></div>
+      <div class="stat-item"><div class="stat-value" id="stat-countries">—</div><div class="stat-label">Countries</div></div>
+      <div class="stat-item"><div class="stat-value" id="stat-maxsave">—</div><div class="stat-label">Max Savings</div></div>
+    </div>
 
-function updateStats() {
-  document.getElementById('stat-total').textContent = allCoupons.length;
-  document.getElementById('stat-stores').textContent = [...new Set(allCoupons.map(c => c.store))].length;
-  document.getElementById('stat-countries').textContent = '1';
-  const maxSave = allCoupons.reduce((max, c) => Math.max(max, c.discountNum || 0), 0);
-  document.getElementById('stat-maxsave').textContent = maxSave > 0 ? maxSave + '%' : 'Free!';
-}
+    <div class="controls">
+      <div class="filter-tabs" id="filterTabs">
+        <button class="filter-tab active" onclick="setFilter('all', this)">All Deals</button>
+        <button class="filter-tab" onclick="setFilter('fashion', this)">Fashion</button>
+        <button class="filter-tab" onclick="setFilter('tech', this)">Tech</button>
+        <button class="filter-tab" onclick="setFilter('food', this)">Food</button>
+        <button class="filter-tab" onclick="setFilter('travel', this)">Travel</button>
+        <button class="filter-tab" onclick="setFilter('beauty', this)">Beauty</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div class="last-updated"><div class="live-dot"></div><span id="lastUpdatedText">Loading...</span></div>
+        <button class="refresh-btn" id="refreshBtn" onclick="loadCoupons(true)">
+          <i class="ti ti-refresh" aria-hidden="true"></i> Refresh
+        </button>
+      </div>
+    </div>
 
-function updateLastUpdated(ts) {
-  const mins = Math.floor((Date.now() - ts) / 60000);
-  const text = mins < 1 ? 'Just now' : mins < 60 ? `${mins}m ago` : `${Math.floor(mins/60)}h ago`;
-  document.getElementById('lastUpdatedText').textContent = 'Updated ' + text;
-}
+    <div class="coupons-grid" id="couponsGrid">
+      <div class="empty-state"><i class="ti ti-ticket" aria-hidden="true"></i><p>Loading deals...</p></div>
+    </div>
+  </div>
 
-loadCoupons(false);
-setInterval(() => loadCoupons(false), REFRESH_INTERVAL);
-</script>
+  <script>
+    let allCoupons = [];
+    let activeFilter = 'all';
+    let searchQuery = '';
+
+    async function loadCoupons(forceRefresh) {
+      const btn = document.getElementById('refreshBtn');
+      btn.classList.add('spinning');
+
+      try {
+        const res = await fetch('./coupons.json?t=' + Date.now());
+        const data = await res.json();
+        
+        allCoupons = data.map((c, i) => ({
+          id: 'c' + c.id,
+          store: c.store,
+          emoji: c.store === 'Amazon IN' ? '📦' : c.store === 'Flipkart' ? '🛒' : c.store === 'Myntra' ? '👗' : c.store === 'Ajio' ? '🛍️' : c.store === 'Nykaa' ? '💄' : '🏪',
+          category: (c.category || 'shopping').toLowerCase(),
+          discount: c.discount,
+          discountNum: parseInt(c.discount.replace(/\D/g,'')) || 0,
+          code: c.code,
+          description: c.title,
+          country: 'India',
+          flag: '🇮🇳',
+          expiresIn: c.expiry,
+          expiringSoon: false,
+          verified: true,
+          uses: Math.floor(Math.random() * 9000) + 1000
+        }));
+
+        renderCoupons();
+        updateStats();
+        updateLastUpdated(Date.now());
+      } catch(e) {
+        console.log('Error:', e);
+        document.getElementById('couponsGrid').innerHTML = '<div class="empty-state"><i class="ti ti-alert-circle"></i><p>Error loading coupons. Check coupons.json</p></div>';
+      }
+      
+      btn.classList.remove('spinning');
+    }
+
+    function setFilter(filter, el) {
+      activeFilter = filter;
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      renderCoupons();
+    }
+
+    function searchCoupons() {
+      searchQuery = document.getElementById('searchInput').value.toLowerCase();
+      renderCoupons();
+    }
+
+    document.getElementById('searchInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') searchCoupons();
+    });
+
+    function renderCoupons() {
+      const grid = document.getElementById('couponsGrid');
+      let filtered = allCoupons;
+
+      if (activeFilter !== 'all') {
+        filtered = filtered.filter(c => c.category.includes(activeFilter));
+      }
+      if (searchQuery) {
+        filtered = filtered.filter(c =>
+          c.store.toLowerCase().includes(searchQuery) ||
+          c.description.toLowerCase().includes(searchQuery) ||
+          c.code.toLowerCase().includes(searchQuery)
+        );
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="empty-state"><i class="ti ti-mood-empty" aria-hidden="true"></i><p>No coupons found.</p></div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(c => `
+        <div class="coupon-card" id="card-${c.id}">
+          <div class="coupon-header">
+            <div class="store-info">
+              <div class="store-logo">${c.emoji}</div>
+              <div class="store-name">${c.store}</div>
+              <div class="store-category">${c.category.charAt(0).toUpperCase()+c.category.slice(1)}</div>
+            </div>
+            <div class="discount-badge">${c.discount}</div>
+          </div>
+          <hr class="coupon-divider">
+          <div class="coupon-body">
+            <p class="coupon-desc">${c.description}</p>
+            <div class="code-row">
+              <div class="code-box" id="code-${c.id}" onclick="copyCode('${c.id}','${c.code}')">${c.code}</div>
+              <button class="copy-btn" id="btn-${c.id}" onclick="copyCode('${c.id}','${c.code}')">
+                <i class="ti ti-copy" aria-hidden="true"></i> Copy
+              </button>
+            </div>
+          </div>
+          <div class="coupon-footer">
+            <div class="expiry">
+              <i class="ti ti-clock" aria-hidden="true" style="font-size:12px"></i>
+              Expires: ${c.expiresIn}
+            </div>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="country-flag">${c.flag}</span>
+              <span class="country-label">${c.country}</span>
+              <span class="verified-badge"><i class="ti ti-circle-check" style="font-size:10px"></i>Verified</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function copyCode(id, code) {
+      navigator.clipboard.writeText(code).catch(()=>{});
+      const codeEl = document.getElementById('code-' + id);
+      const btnEl = document.getElementById('btn-' + id);
+      codeEl.textContent = '✓ Copied!';
+      codeEl.classList.add('copied');
+      btnEl.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> Done';
+      btnEl.classList.add('copied');
+      setTimeout(() => {
+        codeEl.textContent = code;
+        codeEl.classList.remove('copied');
+        btnEl.innerHTML = '<i class="ti ti-copy" aria-hidden="true"></i> Copy';
+        btnEl.classList.remove('copied');
+      }, 2000);
+    }
+
+    function updateStats() {
+      document.getElementById('stat-total').textContent = allCoupons.length;
+      document.getElementById('stat-stores').textContent = [...new Set(allCoupons.map(c => c.store))].length;
+      document.getElementById('stat-countries').textContent = '1';
+      const maxSave = allCoupons.reduce((max, c) => Math.max(max, c.discountNum || 0), 0);
+      document.getElementById('stat-maxsave').textContent = maxSave > 0 ? maxSave + '%' : 'Free!';
+    }
+
+    function updateLastUpdated(ts) {
+      const mins = Math.floor((Date.now() - ts) / 60000);
+      const text = mins < 1 ? 'Just now' : mins < 60 ? `${mins}m ago` : `${Math.floor(mins/60)}h ago`;
+      document.getElementById('lastUpdatedText').textContent = 'Updated ' + text;
+    }
+
+    loadCoupons(false);
+  </script>
+</body>
+</html>
