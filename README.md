@@ -87,7 +87,19 @@
     font-size:12.5px;
     color:rgba(255,255,255,.85);
   }
-
+<section style="max-width:900px; margin:30px auto; padding:0 16px;">
+  <h2 style="font-size:28px; font-weight:800; margin-bottom:16px;">🔥 Mega 70%+ OFF Loot Store</h2>
+  <div style="background:linear-gradient(135deg, #ff7316, #dc2626); padding:24px; border-radius:16px; color:#fff;">
+    <p style="font-size:20px; font-weight:600; margin:0 0 8px 0;">Amazon के सारे 70% से 90% OFF Products एक जगह</p>
+    <p style="opacity:0.9; margin:0 0 20px 0;">Electronics, Fashion, Home - सब कुछ Loot Price पे</p>
+    <a href="https://www.amazon.in/s?rh=n%3A1389401031%2Cp_n_pct-off-with-tax%3A27060457031&tag=guru0906-21" 
+       target="_blank"
+       style="display:inline-block; background:#fff; color:#dc2626; padding:16px 32px; border-radius:12px; font-weight:800; font-size:18px; text-decoration:none;">
+      ⚡ Open Mega Loot Store →
+    </a>
+    <p style="opacity:0.7; font-size:12px; margin:16px 0 0 0;">⏰ Updated 5 mins ago | 2,341 People Shopping Now</p>
+  </div>
+</section>
   /* ===== MAIN / COUPON GRID ===== */
   main{
     max-width:900px;
