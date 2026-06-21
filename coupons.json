@@ -28,7 +28,7 @@
   "expiry": "31 Dec 2026",
   "category": "Tech"
 },
-  {
+ {
   "id": 4,
   "store": "Amazon IN",
   "title": "Amazon Hot Deal",
@@ -37,18 +37,17 @@
   "link": "https://www.amazon.in/dp/B0FDKY6JDP?tag=guru0906-21",
   "expiry": "31 Dec 2026",
   "category": "Tech"
-}
   },
   {
-    "id": 5,
-    "store": "Amazon IN",
-    "title": "Amazon IN Fashion Fest",
-    "code": "SAVE43",
-    "discount": "Up to 80% OFF",
-    "expiry": "31 Jul 2026",
-    "link": "https://amazon.in?tag=guru0906-21",
-    "category": "Shopping"
-  },
+  "id": 5,
+  "store": "Amazon IN",
+  "title": "Amazon Hot Deal",
+  "code": "AMZHOT",
+  "discount": "60% OFF",
+  "link": "https://www.amazon.in/dp/B0FDKY6JDP?tag=guru0906-21",
+  "expiry": "31 Dec 2026",
+  "category": "Tech"
+},
   {
     "id": 6,
     "store": "Amazon IN",
