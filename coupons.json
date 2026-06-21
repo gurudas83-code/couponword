@@ -929,14 +929,13 @@
     "link": "https://meesho.in?tag=guru0906-21",
     "category": "Beauty"
   },
-  {
-    "id": 94,
-    "store": "Snapdeal",
-    "title": "Snapdeal Winter Sale",
-    "code": "BEAUTY36",
-    "discount": "40% OFF",
-    "expiry": "18 Aug 2026",
-    "link": "https://snapdeal.in?tag=guru0906-21",
-    "category": "Tech"
-  }
-]
+{
+  "id": 10,
+  "store": "Amazon IN",
+  "title": "Amazon Product Deal",
+  "code": "AMZDEAL",
+  "discount": "30% OFF",
+  "link": "https://www.amazon.in/dp/B0H293SFTR?tag=guru0906-21",
+  "expiry": "31 Dec 2026",
+  "category": "Tech"
+}
