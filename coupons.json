@@ -70,7 +70,7 @@
   "category": "Tech"
 },
 {
-  "id": 102,
+  "id": 8,
   "store": "Amazon IN",
   "title": "Apple iPhone 17e 256GB Deal",
   "code": "IPHONE17E",
@@ -79,16 +79,16 @@
   "expiry": "31 Dec 2026",
   "category": "Mobiles"
 },
-  {
-    "id": 9,
-    "store": "Amazon IN",
-    "title": "Amazon IN Mega Sale",
-    "code": "TECH67",
-    "discount": "₹2000 OFF",
-    "expiry": "16 Aug 2026",
-    "link": "https://amazon.in?tag=guru0906-21",
-    "category": "Beauty"
-  },
+{
+  "id": 9,
+  "store": "Amazon IN",
+  "title": "Mega 70%+ OFF Store",
+  "code": "MEGA70",
+  "discount": "70% to 90% OFF",
+  "link": "https://www.amazon.in/s?rh=n%3A1389401031%2Cp_n_pct-off-with-tax%3A27060457031&tag=guru0906-21",
+  "expiry": "31 Dec 2026",
+  "category": "Offers"
+},
   {
     "id": 10,
     "store": "Amazon IN",
