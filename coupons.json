@@ -20,15 +20,14 @@
   "category": "Tech"
   },
   {
-    "id": 3,
-    "store": "Amazon IN",
-    "title": "Amazon IN Flash Deal",
-    "code": "SAVE72",
-    "discount": "₹2000 OFF",
-    "expiry": "02 Jul 2026",
-    "link": "https://amazon.in?tag=guru0906-21",
-    "category": "Beauty"
-  },
+ "store": "Amazon IN",
+  "title": "Amazon Tech Deal",
+  "code": "AMZTECH",
+  "discount": "40% OFF",
+  "link": "https://www.amazon.in/dp/B0GDQ28DY5?tag=guru0906-21",
+  "expiry": "31 Dec 2026",
+  "category": "Tech"
+},
   {
     "id": 4,
     "store": "Amazon IN",
