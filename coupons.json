@@ -59,16 +59,16 @@
   "expiry": "31 Dec 2026",
   "category": "Fashion"
 },
-  {
-    "id": 7,
-    "store": "Amazon IN",
-    "title": "Amazon IN Mega Sale",
-    "code": "STYLE50",
-    "discount": "Buy 1 Get 1",
-    "expiry": "18 Jul 2026",
-    "link": "https://amazon.in?tag=guru0906-21",
-    "category": "Food"
-  },
+{
+  "id": 7,
+  "store": "Amazon IN",
+  "title": "Amazon Blockbuster Deal",
+  "code": "LOOT101",
+  "discount": "70% OFF",
+  "link": "https://link.amazon/B0cNlInuL?tag=guru0906-21",
+  "expiry": "31 Dec 2026",
+  "category": "Tech"
+},
   {
     "id": 8,
     "store": "Amazon IN",
