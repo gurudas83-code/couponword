@@ -39,26 +39,26 @@
   "expiry": "31 Dec 2026",
   "category": "Tech"
   },
-  {
+{
   "id": 5,
   "store": "Amazon IN",
-  "title": "Amazon Hot Deal",
-  "code": "AMZHOT",
-  "discount": "60% OFF",
-  "link": "https://www.amazon.in/dp/B0FDKY6JDP?tag=guru0906-21",
+  "title": "Yamaha Portable Keyboard Deal",
+  "code": "MUSIC30",
+  "discount": "30% OFF",
+  "link": "https://www.amazon.in/dp/B08232VZ84?tag=guru0906-21",
   "expiry": "31 Dec 2026",
-  "category": "Tech"
+  "category": "Electronics"
 },
-  {
-    "id": 6,
-    "store": "Amazon IN",
-    "title": "Amazon IN Big Discount",
-    "code": "SAVE87",
-    "discount": "Buy 1 Get 1",
-    "expiry": "04 Aug 2026",
-    "link": "https://amazon.in?tag=guru0906-21",
-    "category": "Food"
-  },
+{
+  "id": 6,
+  "store": "Amazon IN",
+  "title": "ASICS Running Shoes Deal",
+  "code": "RUN20",
+  "discount": "20% OFF",
+  "link": "https://www.amazon.in/dp/B0DNSHMGGS?tag=guru0906-21",
+  "expiry": "31 Dec 2026",
+  "category": "Fashion"
+},
   {
     "id": 7,
     "store": "Amazon IN",
