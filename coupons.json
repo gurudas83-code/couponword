@@ -1,13 +1,13 @@
 [
   {
     "id": 1,
-    "store": "Amazon IN",
-    "title": "Amazon Special ₹500 OFF",
-    "code": "AMAZON500",
-    "discount": "₹500 OFF",
-    "expiry": "31 Dec 2026",
-    "link": "https://amazon.in?tag=guru0906-21",
-    "category": "E-commerce"
+  "store": "Amazon IN",
+  "title": "Amazon Product Deal",
+  "code": "AMZDEAL",
+  "discount": "30% OFF",
+  "link": "https://www.amazon.in/dp/B0GQTSHLLR?tag=guru0906-21",
+  "expiry": "31 Dec 2026",
+  "category": "Tech"
   },
   {
     "id": 2,
