@@ -428,7 +428,7 @@
     "expiry": "12 Aug 2026",
     "link": "https://flipkart.in?tag=guru0906-21",
     "category": "Shopping"
-  }
+  },
   {
   "id": 44,
   "store": "Amazon IN",
@@ -438,7 +438,7 @@
   "code": "NO CODE NEEDED",
   "link": "https://www.amazon.in/s?rh=n%3A1389401031%2Cp_n_pct-off-with-tax%3A27060457031&tag=guru0906-21",
   "expiry": "No expiry"
-}
+},
 {
   "id": 45,
   "store": "Amazon IN",
@@ -448,5 +448,5 @@
   "code": "NO CODE NEEDED",
   "link": "https://www.amazon.in/STEMpedia-Ultimate-Mechanical-Construction-Interesting/dp/B09MG7HSS9?linkCode=ll2&tag=guru0906-21&linkId=2223dab04a15c028b81f99c12e63226e&ref_=as_li_ss_tl",
   "expiry": "Limited Time"
-}  
+},  
 ]
