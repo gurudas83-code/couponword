@@ -429,4 +429,14 @@
     "link": "https://flipkart.in?tag=guru0906-21",
     "category": "Shopping"
   }
+  {
+  "id": 103,
+  "store": "Amazon IN",
+  "category": "Mega Deals",
+  "discount": "70-90% OFF",
+  "title": "Mega Loot Store - All 70%+ Discounted Products",
+  "code": "NO CODE NEEDED",
+  "link": "https://www.amazon.in/s?rh=n%3A1389401031%2Cp_n_pct-off-with-tax%3A27060457031&tag=guru0906-21",
+  "expiry": "No expiry"
+}
 ]
