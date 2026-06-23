@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coupon World - AI Deals</title>
+  <title>Coupon World - Best Amazon India Deals</title>
   <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:wght@300;400;500&display=swap');
@@ -28,6 +28,7 @@
       min-height: 100vh;
     }
 
+    /* ===== HERO ===== */
     .hero {
       background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
       padding: 2.5rem 1.5rem 2rem;
@@ -83,21 +84,7 @@
       position: relative;
       z-index: 1;
     }
-<!-- Hero के बाद Paste कर -->
-<section style="max-width:1200px; margin:0 auto; padding: 1rem 1.5rem 0;">
-  <div style="background:#1a1a1a; border:1px solid #4f46e5; padding:16px; border-radius:12px; display:flex; gap:16px; align-items:center;">
-    <img src="https://m.media-amazon.com/images/I/71+xxx.jpg" style="width:80px; height:80px; border-radius:8px; object-fit:cover;">
-    <div style="flex:1;">
-      <p style="font-size:12px; color:#818cf8; margin:0 0 4px 0;">🔥 Trending Toy</p>
-      <h3 style="font-size:15px; font-weight:700; color:#fff; margin:0 0 8px 0;">STEMpedia Mechanical Kit 7-14 Years</h3>
-      <a href="https://www.amazon.in/STEMpedia-Ultimate-Mechanical-Construction-Interesting/dp/B09MG7HSS9?linkCode=ll2&tag=guru0906-21" 
-         target="_blank"
-         style="display:inline-block; background:#4f46e5; color:#fff; padding:8px 16px; border-radius:8px; font-weight:600; font-size:13px; text-decoration:none;">
-        Buy Now on Amazon →
-      </a>
-    </div>
-  </div>
-</section>
+
     .search-bar {
       display: flex;
       max-width: 520px;
@@ -138,6 +125,131 @@
       white-space: nowrap;
     }
 
+    /* ===== FEATURED PRODUCT BANNER ===== */
+    .featured-banner {
+      max-width: 1200px;
+      margin: 1.25rem auto 0;
+      padding: 0 1.5rem;
+    }
+
+    .featured-inner {
+      background: #1a1a1a;
+      border: 1px solid #4f46e5;
+      padding: 16px;
+      border-radius: 12px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .featured-img {
+      width: 72px;
+      height: 72px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #2a2a2a;
+      flex-shrink: 0;
+    }
+
+    .featured-label {
+      font-size: 11px;
+      color: #818cf8;
+      margin: 0 0 4px 0;
+    }
+
+    .featured-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 10px 0;
+      line-height: 1.4;
+    }
+
+    .featured-btn {
+      display: inline-block;
+      background: #4f46e5;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      text-decoration: none;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* ===== MEGA LOOT BANNER ===== */
+    .mega-banner {
+      max-width: 1200px;
+      margin: 1.25rem auto 0;
+      padding: 0 1.5rem;
+    }
+
+    .mega-inner {
+      background: linear-gradient(135deg, #ff7316 0%, #dc2626 100%);
+      padding: 20px;
+      border-radius: 14px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(220,38,38,0.4);
+    }
+
+    .mega-inner h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .mega-inner p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 14px;
+    }
+
+    .mega-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      color: #dc2626;
+      padding: 11px 22px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .mega-note {
+      font-size: 11px;
+      color: rgba(255,255,255,0.7);
+      margin: 10px 0 0 0;
+    }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      display: flex;
+      gap: 0;
+      background: var(--color-background-primary);
+      border-top: 1px solid var(--color-border-tertiary);
+      border-bottom: 1px solid var(--color-border-tertiary);
+      overflow-x: auto;
+      margin-top: 1.25rem;
+    }
+
+    .stat-item {
+      flex: 1;
+      min-width: 100px;
+      padding: 10px 16px;
+      text-align: center;
+      border-right: 1px solid var(--color-border-tertiary);
+    }
+
+    .stat-item:last-child { border-right: none; }
+    .stat-value { font-size: 18px; font-weight: 700; font-family: 'Syne', sans-serif; color: var(--color-text-primary); }
+    .stat-label { font-size: 10px; color: var(--color-text-tertiary); margin-top: 1px; }
+
+    /* ===== CONTROLS ===== */
     .controls {
       padding: 1rem 1.5rem 0.5rem;
       display: flex;
@@ -213,6 +325,7 @@
       50% { opacity: 0.3; }
     }
 
+    /* ===== COUPON GRID ===== */
     .coupons-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -272,7 +385,7 @@
       background: #eef2ff;
       color: #4338ca;
       font-weight: 700;
-      font-size: 15px;
+      font-size: 14px;
       padding: 6px 10px;
       border-radius: 8px;
       font-family: 'Syne', sans-serif;
@@ -307,61 +420,22 @@
       margin-bottom: 12px;
       line-height: 1.5;
     }
-<!-- ====== MEGA 70% OFF SECTION START ====== -->
-<section style="max-width:1200px; margin:0 auto; padding: 1.5rem 1.5rem 0;">
-  <div style="background:linear-gradient(135deg, #ff7316 0%, #dc2626 100%); padding:20px; border-radius:14px; text-align:center; position:relative; overflow:hidden; box-shadow:0 8px 24px rgba(220,38,38,0.4);">
-    <h2 style="font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:#fff; margin-bottom:8px;">🔥 Mega 70%+ OFF Loot Store</h2>
-    <p style="font-size:14px; color:rgba(255,255,255,0.9); margin-bottom:16px;">Amazon के सारे 70% से 90% OFF Products एक Click में</p>
-    <a href="https://www.amazon.in/s?rh=n%3A1389401031%2Cp_n_pct-off-with-tax%3A27060457031&tag=guru0906-21" 
-       target="_blank"
-       style="display:inline-flex; align-items:center; gap:8px; background:#fff; color:#dc2626; padding:12px 24px; border-radius:10px; font-weight:700; font-size:14px; text-decoration:none; font-family:'DM Sans',sans-serif;">
-      <i class="ti ti-bolt"></i> Open Mega Loot Store
-    </a>
-    <p style="font-size:11px; color:rgba(255,255,255,0.7); margin:12px 0 0 0;">⏰ Live Now | 2,341 People Shopping</p>
-  </div>
-</section>
-<!-- ====== MEGA 70% OFF SECTION END ====== -->
-    .code-row {
+
+    /* No-code label replaces the code box */
+    .no-code-label {
       display: flex;
       align-items: center;
-      gap: 8px;
-    }
-
-    .code-box {
-      flex: 1;
+      justify-content: center;
+      gap: 6px;
       background: var(--color-background-secondary);
       border: 1.5px dashed var(--color-border-secondary);
       border-radius: 8px;
-      padding: 8px 12px;
-      font-family: 'Syne', monospace;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: #4f46e5;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .code-box:hover { background: #eef2ff; }
-    .code-box.copied { background: #f0fdf4; color: #16a34a; border-color: #86efac; }
-
-    .copy-btn {
-      background: #4f46e5;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 8px 12px;
+      padding: 9px 12px;
       font-size: 12px;
       font-weight: 500;
-      cursor: pointer;
-      white-space: nowrap;
-      font-family: 'DM Sans', sans-serif;
-      transition: background 0.15s;
+      color: var(--color-text-tertiary);
+      margin-bottom: 0;
     }
-
-    .copy-btn:hover { background: #4338ca; }
-    .copy-btn.copied { background: #16a34a; }
 
     .get-deal-btn {
       display: flex;
@@ -374,8 +448,8 @@
       color: #818cf8;
       border: 1.5px solid #4f46e5;
       border-radius: 8px;
-      padding: 8px 12px;
-      font-size: 12px;
+      padding: 9px 12px;
+      font-size: 13px;
       font-weight: 600;
       cursor: pointer;
       text-decoration: none;
@@ -403,15 +477,7 @@
       gap: 4px;
     }
 
-    .expiry.soon { color: #ea580c; }
-
-    .country-flag {
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
+    .country-flag { font-size: 14px; display: flex; align-items: center; gap: 4px; }
     .country-label { font-size: 11px; color: var(--color-text-tertiary); }
 
     .verified-badge {
@@ -426,26 +492,6 @@
       border-radius: 10px;
     }
 
-    .stats-bar {
-      display: flex;
-      gap: 0;
-      background: var(--color-background-primary);
-      border-bottom: 1px solid var(--color-border-tertiary);
-      overflow-x: auto;
-    }
-
-    .stat-item {
-      flex: 1;
-      min-width: 100px;
-      padding: 10px 16px;
-      text-align: center;
-      border-right: 1px solid var(--color-border-tertiary);
-    }
-
-    .stat-item:last-child { border-right: none; }
-    .stat-value { font-size: 18px; font-weight: 700; font-family: 'Syne', sans-serif; color: var(--color-text-primary); }
-    .stat-label { font-size: 10px; color: var(--color-text-tertiary); margin-top: 1px; }
-
     .empty-state {
       text-align: center;
       padding: 3rem 1.5rem;
@@ -457,10 +503,8 @@
 
     .sr-only {
       position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
       overflow: hidden;
       clip: rect(0,0,0,0);
       border: 0;
@@ -468,104 +512,174 @@
   </style>
 </head>
 <body>
-  <h2 class="sr-only">Global Coupon Code Website</h2>
-  
+  <h2 class="sr-only">CouponWorld - Best Amazon India Deals</h2>
+
   <div id="app">
+
+    <!-- ===== HERO ===== -->
     <div class="hero">
       <div class="hero-badge">
         <i class="ti ti-sparkles" aria-hidden="true" style="font-size:12px"></i>
         AI-Powered • Auto-Updated Deals
       </div>
       <h1>Save More on<br><span>Amazon India.</span></h1>
-      <p>Fresh Amazon coupon codes, refreshed automatically by AI.</p>
+      <p>Fresh Amazon deals, refreshed automatically by AI.</p>
       <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search stores, brands, categories..." />
+        <input type="text" id="searchInput" placeholder="Search products, categories..." />
         <button onclick="searchCoupons()"><i class="ti ti-search" aria-hidden="true"></i> Search</button>
       </div>
     </div>
 
+    <!-- ===== FEATURED PRODUCT BANNER ===== -->
+    <div class="featured-banner">
+      <div class="featured-inner">
+        <img
+          class="featured-img"
+          src="https://m.media-amazon.com/images/I/61Q-ZXTkBPL._SX679_.jpg"
+          alt="STEMpedia Mechanical Construction Kit"
+          onerror="this.style.display='none'"
+        >
+        <div style="flex:1;">
+          <p class="featured-label">🔥 Trending Toy</p>
+          <h3 class="featured-title">STEMpedia Mechanical Construction Kit — Boys 7–14 Years</h3>
+          <a
+            href="https://www.amazon.in/STEMpedia-Ultimate-Mechanical-Construction-Interesting/dp/B09MG7HSS9?linkCode=ll2&tag=guru0906-21&linkId=2223dab04a15c028b81f99c12e63226e&ref_=as_li_ss_tl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="featured-btn"
+          >Buy Now on Amazon →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MEGA LOOT BANNER ===== -->
+    <div class="mega-banner">
+      <div class="mega-inner">
+        <h2>🔥 Mega 70%+ OFF Loot Store</h2>
+        <p>Amazon के सारे 70% से 90% OFF Products एक Click में</p>
+        <a
+          href="https://www.amazon.in/s?rh=n%3A1389401031%2Cp_n_pct-off-with-tax%3A27060457031&tag=guru0906-21"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mega-btn"
+        ><i class="ti ti-bolt"></i> Open Mega Loot Store</a>
+        <p class="mega-note">⏰ Live Now — Updated Daily</p>
+      </div>
+    </div>
+
+    <!-- ===== STATS BAR ===== -->
     <div class="stats-bar" id="statsBar">
-      <div class="stat-item"><div class="stat-value" id="stat-total">—</div><div class="stat-label">Active Coupons</div></div>
+      <div class="stat-item"><div class="stat-value" id="stat-total">—</div><div class="stat-label">Active Deals</div></div>
       <div class="stat-item"><div class="stat-value" id="stat-stores">—</div><div class="stat-label">Categories</div></div>
-      <div class="stat-item"><div class="stat-value" id="stat-countries">—</div><div class="stat-label">Countries</div></div>
+      <div class="stat-item"><div class="stat-value" id="stat-countries">🇮🇳</div><div class="stat-label">India Only</div></div>
       <div class="stat-item"><div class="stat-value" id="stat-maxsave">—</div><div class="stat-label">Max Savings</div></div>
     </div>
 
+    <!-- ===== CONTROLS ===== -->
     <div class="controls">
       <div class="filter-tabs" id="filterTabs">
-        <button class="filter-tab active" onclick="setFilter('all', this)">All Deals</button>
-        <button class="filter-tab" onclick="setFilter('fashion', this)">Fashion</button>
-        <button class="filter-tab" onclick="setFilter('tech', this)">Tech</button>
-        <button class="filter-tab" onclick="setFilter('food', this)">Food</button>
-        <button class="filter-tab" onclick="setFilter('travel', this)">Travel</button>
-        <button class="filter-tab" onclick="setFilter('beauty', this)">Beauty</button>
+        <!-- Tabs are built dynamically from data -->
       </div>
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
         <div class="last-updated"><div class="live-dot"></div><span id="lastUpdatedText">Loading...</span></div>
-        <button class="refresh-btn" id="refreshBtn" onclick="loadCoupons(true)">
+        <button class="refresh-btn" id="refreshBtn" onclick="loadCoupons()">
           <i class="ti ti-refresh" aria-hidden="true"></i> Refresh
         </button>
       </div>
     </div>
 
+    <!-- ===== COUPON GRID ===== -->
     <div class="coupons-grid" id="couponsGrid">
       <div class="empty-state"><i class="ti ti-ticket" aria-hidden="true"></i><p>Loading deals...</p></div>
     </div>
-  </div>
+
+  </div><!-- /#app -->
 
   <script>
-    let allCoupons = [];
+    // ============================================================
+    // DATA & STATE
+    // ============================================================
+    let allCoupons   = [];
     let activeFilter = 'all';
-    let searchQuery = '';
+    let searchQuery  = '';
 
-    // This site only displays Amazon IN coupons, since that's the only affiliate
-    // program connected. Every "Get Deal" button below points to a real Amazon link,
-    // so what's shown always matches where the click goes (no mismatched-store redirects).
-    const AFFILIATE_STORE = 'Amazon IN';
-    const AMAZON_FALLBACK_LINK = 'https://www.amazon.in';
+    const AMAZON_TAG      = 'tag=guru0906-21';
+    const AMAZON_FALLBACK = 'https://www.amazon.in?' + AMAZON_TAG;
+
+    // Category display order for filter tabs
+    const CATEGORY_ORDER = ['Tech', 'Electronics', 'Mobiles', 'Fashion', 'Beauty', 'Shopping', 'Food', 'Offers', 'Mega Deals', 'Toys'];
 
     function resolveLink(c) {
-      if (c.link && c.link.trim() !== '') return c.link;
-      return AMAZON_FALLBACK_LINK;
+      const link = (c.link || '').trim();
+      // Make sure every Amazon link has the affiliate tag
+      if (link && !link.includes('tag=')) {
+        return link + (link.includes('?') ? '&' : '?') + AMAZON_TAG;
+      }
+      return link || AMAZON_FALLBACK;
     }
 
-    async function loadCoupons(forceRefresh) {
+    // ============================================================
+    // LOAD
+    // ============================================================
+    async function loadCoupons() {
       const btn = document.getElementById('refreshBtn');
       btn.classList.add('spinning');
 
       try {
-        const res = await fetch('./coupons.json?t=' + Date.now());
+        const res  = await fetch('./coupons.json?t=' + Date.now());
+        if (!res.ok) throw new Error('HTTP ' + res.status);
         const data = await res.json();
 
         allCoupons = data
-          .filter(c => c.store === AFFILIATE_STORE)
-          .map((c, i) => ({
-            id: 'c' + c.id,
-            store: c.store,
-            emoji: '📦',
-            category: (c.category || 'shopping').toLowerCase(),
-            discount: c.discount,
-            discountNum: parseInt(c.discount.replace(/\D/g,'')) || 0,
-            code: c.code,
-            description: c.title,
-            link: c.link || '',
-            country: 'India',
-            flag: '🇮🇳',
-            expiresIn: c.expiry,
-            expiringSoon: false,
-            verified: true,
-            uses: Math.floor(Math.random() * 9000) + 1000
+          .filter(c => c.store === 'Amazon IN')   // Only Amazon = only valid affiliate links
+          .map(c => ({
+            id:          'c' + c.id,
+            store:       c.store,
+            emoji:       '📦',
+            category:    (c.category || 'Shopping'),
+            categoryKey: (c.category || 'Shopping').toLowerCase(),
+            discount:    c.discount || '',
+            discountNum: parseInt((c.discount || '').replace(/[^\d]/g, '')) || 0,
+            description: c.title || '',
+            link:        resolveLink(c),
+            expiresIn:   c.expiry || '—',
           }));
 
+        buildFilterTabs();
         renderCoupons();
         updateStats();
-        updateLastUpdated(Date.now());
+        document.getElementById('lastUpdatedText').textContent = 'Updated just now';
+
       } catch(e) {
-        console.log('Error:', e);
-        document.getElementById('couponsGrid').innerHTML = '<div class="empty-state"><i class="ti ti-alert-circle"></i><p>Error loading coupons. Check coupons.json</p></div>';
+        console.error('Load error:', e);
+        document.getElementById('couponsGrid').innerHTML =
+          '<div class="empty-state"><i class="ti ti-alert-circle"></i>' +
+          '<p>Could not load coupons.json<br><small style="opacity:.5">Make sure the file is in the same folder as index.html</small></p></div>';
       }
-      
+
       btn.classList.remove('spinning');
+    }
+
+    // ============================================================
+    // FILTER TABS — built from actual data categories
+    // ============================================================
+    function buildFilterTabs() {
+      const cats = [...new Set(allCoupons.map(c => c.category))];
+      // Sort per CATEGORY_ORDER, remaining alphabetically
+      cats.sort((a, b) => {
+        const ai = CATEGORY_ORDER.indexOf(a), bi = CATEGORY_ORDER.indexOf(b);
+        if (ai !== -1 && bi !== -1) return ai - bi;
+        if (ai !== -1) return -1;
+        if (bi !== -1) return 1;
+        return a.localeCompare(b);
+      });
+
+      const container = document.getElementById('filterTabs');
+      container.innerHTML =
+        `<button class="filter-tab active" onclick="setFilter('all',this)">All Deals (${allCoupons.length})</button>` +
+        cats.map(cat =>
+          `<button class="filter-tab" onclick="setFilter('${cat.toLowerCase()}',this)">${cat}</button>`
+        ).join('');
     }
 
     function setFilter(filter, el) {
@@ -575,8 +689,11 @@
       renderCoupons();
     }
 
+    // ============================================================
+    // SEARCH
+    // ============================================================
     function searchCoupons() {
-      searchQuery = document.getElementById('searchInput').value.toLowerCase();
+      searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
       renderCoupons();
     }
 
@@ -584,23 +701,26 @@
       if (e.key === 'Enter') searchCoupons();
     });
 
+    // ============================================================
+    // RENDER
+    // ============================================================
     function renderCoupons() {
       const grid = document.getElementById('couponsGrid');
       let filtered = allCoupons;
 
       if (activeFilter !== 'all') {
-        filtered = filtered.filter(c => c.category.includes(activeFilter));
+        filtered = filtered.filter(c => c.categoryKey === activeFilter);
       }
       if (searchQuery) {
         filtered = filtered.filter(c =>
           c.store.toLowerCase().includes(searchQuery) ||
           c.description.toLowerCase().includes(searchQuery) ||
-          c.code.toLowerCase().includes(searchQuery)
+          c.category.toLowerCase().includes(searchQuery)
         );
       }
 
       if (filtered.length === 0) {
-        grid.innerHTML = '<div class="empty-state"><i class="ti ti-mood-empty" aria-hidden="true"></i><p>No coupons found.</p></div>';
+        grid.innerHTML = '<div class="empty-state"><i class="ti ti-mood-empty" aria-hidden="true"></i><p>No deals found.</p></div>';
         return;
       }
 
@@ -610,21 +730,19 @@
             <div class="store-info">
               <div class="store-logo">${c.emoji}</div>
               <div class="store-name">${c.store}</div>
-              <div class="store-category">${c.category.charAt(0).toUpperCase()+c.category.slice(1)}</div>
+              <div class="store-category">${c.category}</div>
             </div>
             <div class="discount-badge">${c.discount}</div>
           </div>
           <hr class="coupon-divider">
           <div class="coupon-body">
             <p class="coupon-desc">${c.description}</p>
-            <div class="code-row">
-              <div class="code-box" id="code-${c.id}" onclick="copyCode('${c.id}','${c.code}')">${c.code}</div>
-              <button class="copy-btn" id="btn-${c.id}" onclick="copyCode('${c.id}','${c.code}')">
-                <i class="ti ti-copy" aria-hidden="true"></i> Copy
-              </button>
+            <div class="no-code-label">
+              <i class="ti ti-tag" style="font-size:13px"></i>
+              No coupon code needed — discount applied automatically
             </div>
-            <a class="get-deal-btn" href="${resolveLink(c)}" target="_blank" rel="noopener noreferrer">
-              <i class="ti ti-external-link" aria-hidden="true"></i> Get Deal
+            <a class="get-deal-btn" href="${c.link}" target="_blank" rel="noopener noreferrer">
+              <i class="ti ti-external-link" aria-hidden="true"></i> Get Deal on Amazon
             </a>
           </div>
           <div class="coupon-footer">
@@ -633,46 +751,29 @@
               Expires: ${c.expiresIn}
             </div>
             <div style="display:flex;align-items:center;gap:6px">
-              <span class="country-flag">${c.flag}</span>
-              <span class="country-label">${c.country}</span>
-              <span class="verified-badge"><i class="ti ti-circle-check" style="font-size:10px"></i>Verified</span>
+              <span class="country-flag">🇮🇳</span>
+              <span class="country-label">India</span>
+              <span class="verified-badge"><i class="ti ti-circle-check" style="font-size:10px"></i> Verified</span>
             </div>
           </div>
         </div>
       `).join('');
     }
 
-    function copyCode(id, code) {
-      navigator.clipboard.writeText(code).catch(()=>{});
-      const codeEl = document.getElementById('code-' + id);
-      const btnEl = document.getElementById('btn-' + id);
-      codeEl.textContent = '✓ Copied!';
-      codeEl.classList.add('copied');
-      btnEl.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> Done';
-      btnEl.classList.add('copied');
-      setTimeout(() => {
-        codeEl.textContent = code;
-        codeEl.classList.remove('copied');
-        btnEl.innerHTML = '<i class="ti ti-copy" aria-hidden="true"></i> Copy';
-        btnEl.classList.remove('copied');
-      }, 2000);
-    }
-
+    // ============================================================
+    // STATS
+    // ============================================================
     function updateStats() {
-      document.getElementById('stat-total').textContent = allCoupons.length;
-      document.getElementById('stat-stores').textContent = [...new Set(allCoupons.map(c => c.category))].length;
-      document.getElementById('stat-countries').textContent = '1';
-      const maxSave = allCoupons.reduce((max, c) => Math.max(max, c.discountNum || 0), 0);
-      document.getElementById('stat-maxsave').textContent = maxSave > 0 ? maxSave + '%' : 'Free!';
+      document.getElementById('stat-total').textContent   = allCoupons.length;
+      document.getElementById('stat-stores').textContent  = [...new Set(allCoupons.map(c => c.category))].length;
+      const maxSave = allCoupons.reduce((m, c) => Math.max(m, c.discountNum), 0);
+      document.getElementById('stat-maxsave').textContent = maxSave > 0 ? maxSave + '%' : '—';
     }
 
-    function updateLastUpdated(ts) {
-      const mins = Math.floor((Date.now() - ts) / 60000);
-      const text = mins < 1 ? 'Just now' : mins < 60 ? `${mins}m ago` : `${Math.floor(mins/60)}h ago`;
-      document.getElementById('lastUpdatedText').textContent = 'Updated ' + text;
-    }
-
-    loadCoupons(false);
+    // ============================================================
+    // BOOT
+    // ============================================================
+    loadCoupons();
   </script>
 </body>
 </html>
