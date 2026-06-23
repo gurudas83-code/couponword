@@ -983,5 +983,15 @@
     "expiry": "01 Jul 2026",
     "link": "https://nykaa.in?tag=guru0906-21",
     "category": "Shopping"
-  }
+  },
+  {
+  "id": 107,
+  "store": "Amazon IN",
+  "category": "Electronics",
+  "discount": "Deal Price",
+  "title": "Audavibe 76700 Newtonian Reflector Telescope 235x Zoom for Moon & Planets",
+  "code": "NO CODE NEEDED",
+  "link": "https://www.amazon.in/dp/B0F26CLKW9?tag=guru0906-21",
+  "expiry": "Limited Time"
+}
 ]
