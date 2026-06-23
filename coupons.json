@@ -1003,5 +1003,25 @@
   "code": "NO CODE NEEDED",
   "link": "https://www.amazon.in/dp/B0GKY4WMRV?tag=guru0906-21",
   "expiry": "Limited Time"
+},
+  {
+  "id": 109,
+  "store": "Amazon IN",
+  "category": "Electronics",
+  "discount": "65% OFF",
+  "title": "boAt Airdopes 141 ANC TWS Earbuds",
+  "code": "NO CODE NEEDED",
+  "link": "https://www.amazon.in/dp/B0B1ZQ2Z8Q?tag=guru0906-21",
+  "expiry": "Limited Time"
+},
+{
+  "id": 110,
+  "store": "Amazon IN", 
+  "category": "Fashion",
+  "discount": "Flat 70% OFF",
+  "title": "Campus Men Running Shoes Sports",
+  "code": "NO CODE NEEDED",
+  "link": "https://www.amazon.in/dp/B09X123456?tag=guru0906-21",
+  "expiry": "30 Nov 2026"
 }
 ]
