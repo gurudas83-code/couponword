@@ -666,15 +666,6 @@
     "category": "Shopping"
   },
   {
-    "id": 75,
-    "store": "Meesho",
-    "title": "Meesho Flash Deal",
-    "discount": "50% OFF",
-    "expiry": "21 Aug 2026",
-    "link": "https://www.meesho.com",
-    "category": "Fashion"
-  },
-  {
     "id": 76,
     "store": "Amazon IN",
     "category": "Electronics",
@@ -684,18 +675,8 @@
     "link": "https://www.amazon.in/dp/B0D8YV6KQ5?tag=guru0906-21",
     "expiry": "Limited Time"
   },
-   {
-    "id": 106,
-    "store": "Nykaa",
-    "title": "Nykaa Mega Sale",
-    "code": "DEAL31",
-    "discount": "Flat 45% OFF",
-    "expiry": "01 Jul 2026",
-    "link": "https://nykaa.in?tag=guru0906-21",
-    "category": "Shopping"
-  },
   {
-  "id": 107,
+  "id": 77,
   "store": "Amazon IN",
   "category": "Electronics",
   "discount": "Deal Price",
@@ -705,7 +686,7 @@
   "expiry": "Limited Time"
 },
   {
-  "id": 108,
+  "id": 78,
   "store": "Amazon IN",
   "category": "Electronics",
   "discount": "Deal Price",
@@ -715,7 +696,7 @@
   "expiry": "Limited Time"
 },
   {
-  "id": 109,
+  "id": 79,
   "store": "Amazon IN",
   "category": "Electronics",
   "discount": "65% OFF",
@@ -725,7 +706,7 @@
   "expiry": "Limited Time"
 },
   {
-  "id": 110,
+  "id": 80,
   "store": "Amazon IN",
   "category": "Electronics",
   "discount": "57% OFF",
