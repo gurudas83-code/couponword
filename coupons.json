@@ -1015,13 +1015,17 @@
   "expiry": "Limited Time"
 },
   {
+{
   "id": 110,
-  "store": "Amazon IN", 
-  "category": "Fashion",
-  "discount": "Flat 70% OFF",
-  "title": "Campus Men Running Shoes Sports",
+  "store": "Amazon IN",
+  "category": "Electronics",
+  "discount": "68% OFF",
+  "title": "Storio Astronaut Galaxy Projector with Remote Control, 360° Rotating Nebula Night Light for Kids & Adults",
   "code": "NO CODE NEEDED",
-  "link": "https://amzn.to/4uTbuGW?tag=guru0906-21",
+  "link": "https://www.amazon.in/dp/B0D7RZQVK4?tag=guru0906-21",
+  "image": "https://m.media-amazon.com/images/I/71c3+7xF8GL._SL1500_.jpg",
+  "price": "₹699",
+  "mrp": "₹2199",
   "expiry": "30 Nov 2026"
 }
 ]
