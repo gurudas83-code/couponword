@@ -676,55 +676,355 @@
     "expiry": "Limited Time"
   },
   {
-  "id": 77,
-  "store": "Amazon IN",
-  "category": "Electronics",
-  "discount": "Deal Price",
-  "title": "Audavibe 76700 Newtonian Reflector Telescope 235x Zoom for Moon & Planets",
-  "code": "NO CODE NEEDED",
-  "link": "https://www.amazon.in/dp/B0F26CLKW9?tag=guru0906-21",
-  "expiry": "Limited Time"
-},
+    "id": 77,
+    "store": "Amazon IN",
+    "category": "Electronics",
+    "discount": "Deal Price",
+    "title": "Audavibe 76700 Newtonian Reflector Telescope 235x Zoom for Moon & Planets",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/dp/B0F26CLKW9?tag=guru0906-21",
+    "expiry": "Limited Time"
+  },
   {
-  "id": 78,
-  "store": "Amazon IN",
-  "category": "Electronics",
-  "discount": "Deal Price",
-  "title": "Gesto Galaxy Projector Pro Planetarium - 13 Film Discs Nebula Moon Lamp",
-  "code": "NO CODE NEEDED",
-  "link": "https://www.amazon.in/dp/B0GKY4WMRV?tag=guru0906-21",
-  "expiry": "Limited Time"
-},
+    "id": 78,
+    "store": "Amazon IN",
+    "category": "Electronics",
+    "discount": "Deal Price",
+    "title": "Gesto Galaxy Projector Pro Planetarium - 13 Film Discs Nebula Moon Lamp",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/dp/B0GKY4WMRV?tag=guru0906-21",
+    "expiry": "Limited Time"
+  },
   {
-  "id": 79,
-   "store": "Amazon IN",
-  "category": "Toys",
-  "discount": "67% OFF",
-  "title": "Popsugar Rechargeable Hand Gesture Control Car with Headlight, USB Charging RC Stunt Car for Kids",
-  "code": "NO CODE NEEDED",
-  "link": "https://www.amazon.in/dp/B0CQK691XQ?tag=guru0906-21",
-  "expiry": "30 Nov 2026"
-},
+    "id": 79,
+    "store": "Amazon IN",
+    "category": "Toys",
+    "discount": "67% OFF",
+    "title": "Popsugar Rechargeable Hand Gesture Control Car with Headlight, USB Charging RC Stunt Car for Kids",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/dp/B0CQK691XQ?tag=guru0906-21",
+    "expiry": "30 Nov 2026"
+  },
   {
-  "id": 80,
-  "store": "Amazon IN",
-  "category": "Electronics",
-  "discount": "57% OFF",
-  "title": "Gesto Galaxy Projector Pro Planetarium - 13 Film Discs Nebula Moon Planets Light Projection Lamp",
-  "code": "NO CODE NEEDED",
-  "link": "https://www.amazon.in/dp/B0GKY4WMRV?tag=guru0906-21",
-  "expiry": "30 Nov 2026"
-},
+    "id": 80,
+    "store": "Amazon IN",
+    "category": "Electronics",
+    "discount": "57% OFF",
+    "title": "Gesto Galaxy Projector Pro Planetarium - 13 Film Discs Nebula Moon Planets Light Projection Lamp",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/dp/B0GKY4WMRV?tag=guru0906-21",
+    "expiry": "30 Nov 2026"
+  },
   {
-  "id": 81,
-  "store": "Amazon IN",
-  "category": "Electronics",
-  "discount": "66% OFF",
-  "title": "TEKCOOL Portable Air Cooler Fan with Ice Chamber, USB Rechargeable Mini Cooling Fan for Home Kitchen",
-  "code": "NO CODE NEEDED",
-  "link": "https://www.amazon.in/dp/B0H1QQ7ML1?tag=guru0906-21",
-  "price": "₹1,199",
-  "mrp": "₹3,499",
-  "expiry": "30 Nov 2026"
-}
+    "id": 81,
+    "store": "Amazon IN",
+    "category": "Electronics",
+    "discount": "66% OFF",
+    "title": "TEKCOOL Portable Air Cooler Fan with Ice Chamber, USB Rechargeable Mini Cooling Fan for Home Kitchen",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/dp/B0H1QQ7ML1?tag=guru0906-21",
+    "price": "\u20b91,199",
+    "mrp": "\u20b93,499",
+    "expiry": "30 Nov 2026"
+  },
+  {
+    "id": 82,
+    "store": "Snapdeal",
+    "title": "Snapdeal Big Discount",
+    "code": "TECH41",
+    "discount": "40% OFF",
+    "expiry": "20 Jul 2026",
+    "link": "https://snapdeal.com?tag=guru0906-21",
+    "category": "Tech"
+  },
+  {
+    "id": 83,
+    "store": "Nykaa",
+    "title": "Nykaa Big Discount",
+    "code": "TECH84",
+    "discount": "Up to 80% OFF",
+    "expiry": "03 Jul 2026",
+    "link": "https://nykaa.com?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 84,
+    "store": "TataCliq",
+    "title": "TataCliq Fashion Fest",
+    "code": "SAVE48",
+    "discount": "\u20b9500 OFF",
+    "expiry": "12 Aug 2026",
+    "link": "https://tatacliq.com?tag=guru0906-21",
+    "category": "Food"
+  },
+  {
+    "id": 85,
+    "store": "Croma",
+    "title": "Croma Loot Offer",
+    "code": "SAVE32",
+    "discount": "40% OFF",
+    "expiry": "02 Aug 2026",
+    "link": "https://croma.com?tag=guru0906-21",
+    "category": "Fashion"
+  },
+  {
+    "id": 86,
+    "store": "Nykaa",
+    "title": "Nykaa Big Discount",
+    "code": "BEAUTY16",
+    "discount": "50% OFF",
+    "expiry": "13 Aug 2026",
+    "link": "https://nykaa.com?tag=guru0906-21",
+    "category": "Food"
+  },
+  {
+    "id": 87,
+    "store": "Boat",
+    "title": "Boat Loot Offer",
+    "code": "TECH23",
+    "discount": "40% OFF",
+    "expiry": "28 Jul 2026",
+    "link": "https://boat-lifestyle.com?tag=guru0906-21",
+    "category": "Tech"
+  },
+  {
+    "id": 88,
+    "store": "Croma",
+    "title": "Croma Fashion Fest",
+    "code": "DEAL64",
+    "discount": "\u20b9500 OFF",
+    "expiry": "05 Aug 2026",
+    "link": "https://croma.com?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 89,
+    "store": "Flipkart",
+    "title": "Flipkart Winter Sale",
+    "code": "SAVE27",
+    "discount": "\u20b9500 OFF",
+    "expiry": "30 Jul 2026",
+    "link": "https://flipkart.com?tag=guru0906-21",
+    "category": "Beauty"
+  },
+  {
+    "id": 90,
+    "store": "Nykaa",
+    "title": "Nykaa Limited Deal",
+    "code": "SAVE52",
+    "discount": "50% OFF",
+    "expiry": "02 Jul 2026",
+    "link": "https://nykaa.com?tag=guru0906-21",
+    "category": "Fashion"
+  },
+  {
+    "id": 91,
+    "store": "Croma",
+    "title": "Croma Beauty Offer",
+    "code": "FLASH94",
+    "discount": "70% OFF",
+    "expiry": "31 Jul 2026",
+    "link": "https://croma.com?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 92,
+    "store": "Flipkart",
+    "title": "Flipkart Special Offer",
+    "code": "BEAUTY43",
+    "discount": "Up to 80% OFF",
+    "expiry": "17 Aug 2026",
+    "link": "https://flipkart.com?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 93,
+    "store": "Amazon IN",
+    "title": "Amazon IN Winter Sale",
+    "code": "SAVE84",
+    "discount": "70% OFF",
+    "expiry": "23 Aug 2026",
+    "link": "https://amazon.in?tag=guru0906-21",
+    "category": "Food"
+  },
+  {
+    "id": 94,
+    "store": "Ajio",
+    "title": "Ajio Flash Deal",
+    "code": "FLASH94",
+    "discount": "\u20b92000 OFF",
+    "expiry": "01 Jul 2026",
+    "link": "https://ajio.com?tag=guru0906-21",
+    "category": "Beauty"
+  },
+  {
+    "id": 95,
+    "store": "Croma",
+    "title": "Croma Special Offer",
+    "code": "MEGA35",
+    "discount": "\u20b9500 OFF",
+    "expiry": "07 Jul 2026",
+    "link": "https://croma.com?tag=guru0906-21",
+    "category": "Beauty"
+  },
+  {
+    "id": 96,
+    "store": "Meesho",
+    "title": "Meesho Fashion Fest",
+    "code": "DEAL28",
+    "discount": "Buy 1 Get 1",
+    "expiry": "22 Aug 2026",
+    "link": "https://meesho.com?tag=guru0906-21",
+    "category": "Tech"
+  },
+  {
+    "id": 97,
+    "store": "Snapdeal",
+    "title": "Snapdeal Special Offer",
+    "code": "MEGA33",
+    "discount": "40% OFF",
+    "expiry": "04 Jul 2026",
+    "link": "https://snapdeal.com?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 98,
+    "store": "Croma",
+    "title": "Croma Big Discount",
+    "code": "WINTER57",
+    "discount": "Buy 1 Get 1",
+    "expiry": "10 Aug 2026",
+    "link": "https://croma.com?tag=guru0906-21",
+    "category": "Fashion"
+  },
+  {
+    "id": 99,
+    "store": "Meesho",
+    "title": "Meesho Big Discount",
+    "code": "WINTER17",
+    "discount": "\u20b92000 OFF",
+    "expiry": "19 Jul 2026",
+    "link": "https://meesho.com?tag=guru0906-21",
+    "category": "Fashion"
+  },
+  {
+    "id": 100,
+    "store": "Meesho",
+    "title": "Meesho Flash Deal",
+    "code": "FLASH46",
+    "discount": "\u20b91000 OFF",
+    "expiry": "17 Aug 2026",
+    "link": "https://meesho.com?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 101,
+    "store": "Myntra",
+    "title": "Myntra Winter Sale",
+    "code": "WINTER24",
+    "discount": "50% OFF",
+    "expiry": "08 Jul 2026",
+    "link": "https://myntra.com?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 102,
+    "store": "Nykaa",
+    "title": "Nykaa Loot Offer",
+    "code": "FLASH91",
+    "discount": "50% OFF",
+    "expiry": "13 Jul 2026",
+    "link": "https://nykaa.com?tag=guru0906-21",
+    "category": "Tech"
+  },
+  {
+    "id": 103,
+    "store": "Flipkart",
+    "title": "Flipkart Loot Offer",
+    "code": "SAVE86",
+    "discount": "Buy 1 Get 1",
+    "expiry": "15 Jul 2026",
+    "link": "https://flipkart.com?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 104,
+    "store": "Myntra",
+    "title": "Myntra Flash Deal",
+    "code": "TECH37",
+    "discount": "\u20b92000 OFF",
+    "expiry": "23 Aug 2026",
+    "link": "https://myntra.com?tag=guru0906-21",
+    "category": "Beauty"
+  },
+  {
+    "id": 105,
+    "store": "Myntra",
+    "title": "Myntra Beauty Offer",
+    "code": "MEGA79",
+    "discount": "\u20b92000 OFF",
+    "expiry": "24 Jul 2026",
+    "link": "https://myntra.com?tag=guru0906-21",
+    "category": "Beauty"
+  },
+  {
+    "id": 106,
+    "store": "Meesho",
+    "title": "Meesho Loot Offer",
+    "code": "MEGA91",
+    "discount": "60% OFF",
+    "expiry": "09 Aug 2026",
+    "link": "https://meesho.com?tag=guru0906-21",
+    "category": "Beauty"
+  },
+  {
+    "id": 107,
+    "store": "Amazon IN",
+    "title": "Amazon IN Big Discount",
+    "code": "DEAL21",
+    "discount": "\u20b92000 OFF",
+    "expiry": "13 Aug 2026",
+    "link": "https://amazon.in?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 108,
+    "store": "Boat",
+    "title": "Boat Beauty Offer",
+    "code": "TECH45",
+    "discount": "Up to 80% OFF",
+    "expiry": "11 Jul 2026",
+    "link": "https://boat-lifestyle.com?tag=guru0906-21",
+    "category": "Fashion"
+  },
+  {
+    "id": 109,
+    "store": "Myntra",
+    "title": "Myntra Limited Deal",
+    "code": "GRAB53",
+    "discount": "50% OFF",
+    "expiry": "16 Jul 2026",
+    "link": "https://myntra.com?tag=guru0906-21",
+    "category": "Food"
+  },
+  {
+    "id": 110,
+    "store": "TataCliq",
+    "title": "TataCliq Big Discount",
+    "code": "TECH85",
+    "discount": "\u20b9500 OFF",
+    "expiry": "05 Jul 2026",
+    "link": "https://tatacliq.com?tag=guru0906-21",
+    "category": "Fashion"
+  },
+  {
+    "id": 111,
+    "store": "Amazon IN",
+    "title": "Amazon IN Special Offer",
+    "code": "DEAL72",
+    "discount": "\u20b9500 OFF",
+    "expiry": "08 Jul 2026",
+    "link": "https://amazon.in?tag=guru0906-21",
+    "category": "Shopping"
+  }
 ]
