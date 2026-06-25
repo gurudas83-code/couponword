@@ -1026,5 +1026,305 @@
     "expiry": "08 Jul 2026",
     "link": "https://amazon.in?tag=guru0906-21",
     "category": "Shopping"
+  },
+  {
+    "id": 112,
+    "store": "Meesho",
+    "title": "Meesho Winter Sale",
+    "code": "STYLE96",
+    "discount": "50% OFF",
+    "expiry": "27 Jul 2026",
+    "link": "https://meesho.com?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 113,
+    "store": "Meesho",
+    "title": "Meesho Special Offer",
+    "code": "SAVE96",
+    "discount": "60% OFF",
+    "expiry": "23 Aug 2026",
+    "link": "https://meesho.com?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 114,
+    "store": "Croma",
+    "title": "Croma Beauty Offer",
+    "code": "DEAL93",
+    "discount": "Flat 45% OFF",
+    "expiry": "28 Jul 2026",
+    "link": "https://croma.com?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 115,
+    "store": "TataCliq",
+    "title": "TataCliq Fashion Fest",
+    "code": "DEAL58",
+    "discount": "60% OFF",
+    "expiry": "14 Aug 2026",
+    "link": "https://tatacliq.com?tag=guru0906-21",
+    "category": "Fashion"
+  },
+  {
+    "id": 116,
+    "store": "Croma",
+    "title": "Croma Loot Offer",
+    "code": "TECH15",
+    "discount": "Buy 1 Get 1",
+    "expiry": "30 Jul 2026",
+    "link": "https://croma.com?tag=guru0906-21",
+    "category": "Beauty"
+  },
+  {
+    "id": 117,
+    "store": "TataCliq",
+    "title": "TataCliq Beauty Offer",
+    "code": "BEAUTY59",
+    "discount": "Buy 1 Get 1",
+    "expiry": "05 Aug 2026",
+    "link": "https://tatacliq.com?tag=guru0906-21",
+    "category": "Food"
+  },
+  {
+    "id": 118,
+    "store": "Snapdeal",
+    "title": "Snapdeal Flash Deal",
+    "code": "GRAB27",
+    "discount": "\u20b92000 OFF",
+    "expiry": "11 Aug 2026",
+    "link": "https://snapdeal.com?tag=guru0906-21",
+    "category": "Fashion"
+  },
+  {
+    "id": 119,
+    "store": "Snapdeal",
+    "title": "Snapdeal Loot Offer",
+    "code": "MEGA34",
+    "discount": "Up to 80% OFF",
+    "expiry": "26 Jul 2026",
+    "link": "https://snapdeal.com?tag=guru0906-21",
+    "category": "Fashion"
+  },
+  {
+    "id": 120,
+    "store": "Flipkart",
+    "title": "Flipkart Tech Deal",
+    "code": "MEGA13",
+    "discount": "70% OFF",
+    "expiry": "07 Aug 2026",
+    "link": "https://flipkart.com?tag=guru0906-21",
+    "category": "Tech"
+  },
+  {
+    "id": 121,
+    "store": "Boat",
+    "title": "Boat Flash Deal",
+    "code": "STYLE95",
+    "discount": "60% OFF",
+    "expiry": "24 Aug 2026",
+    "link": "https://boat-lifestyle.com?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 122,
+    "store": "Snapdeal",
+    "title": "Snapdeal Special Offer",
+    "code": "BEAUTY59",
+    "discount": "60% OFF",
+    "expiry": "29 Jul 2026",
+    "link": "https://snapdeal.com?tag=guru0906-21",
+    "category": "Tech"
+  },
+  {
+    "id": 123,
+    "store": "Ajio",
+    "title": "Ajio Fashion Fest",
+    "code": "BEAUTY99",
+    "discount": "Flat 45% OFF",
+    "expiry": "24 Jul 2026",
+    "link": "https://ajio.com?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 124,
+    "store": "Myntra",
+    "title": "Myntra Flash Deal",
+    "code": "BEAUTY70",
+    "discount": "40% OFF",
+    "expiry": "27 Jul 2026",
+    "link": "https://myntra.com?tag=guru0906-21",
+    "category": "Beauty"
+  },
+  {
+    "id": 125,
+    "store": "Croma",
+    "title": "Croma Mega Sale",
+    "code": "SAVE68",
+    "discount": "Flat 45% OFF",
+    "expiry": "23 Jul 2026",
+    "link": "https://croma.com?tag=guru0906-21",
+    "category": "Food"
+  },
+  {
+    "id": 126,
+    "store": "Snapdeal",
+    "title": "Snapdeal Limited Deal",
+    "code": "BEAUTY80",
+    "discount": "\u20b91000 OFF",
+    "expiry": "23 Aug 2026",
+    "link": "https://snapdeal.com?tag=guru0906-21",
+    "category": "Beauty"
+  },
+  {
+    "id": 127,
+    "store": "TataCliq",
+    "title": "TataCliq Loot Offer",
+    "code": "DEAL72",
+    "discount": "Flat 45% OFF",
+    "expiry": "07 Jul 2026",
+    "link": "https://tatacliq.com?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 128,
+    "store": "Boat",
+    "title": "Boat Winter Sale",
+    "code": "TECH39",
+    "discount": "Up to 80% OFF",
+    "expiry": "05 Jul 2026",
+    "link": "https://boat-lifestyle.com?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 129,
+    "store": "Meesho",
+    "title": "Meesho Fashion Fest",
+    "code": "STYLE43",
+    "discount": "Buy 1 Get 1",
+    "expiry": "30 Jul 2026",
+    "link": "https://meesho.com?tag=guru0906-21",
+    "category": "Tech"
+  },
+  {
+    "id": 130,
+    "store": "Amazon IN",
+    "title": "Amazon IN Beauty Offer",
+    "code": "TECH29",
+    "discount": "Flat 45% OFF",
+    "expiry": "30 Jul 2026",
+    "link": "https://amazon.in?tag=guru0906-21",
+    "category": "Tech"
+  },
+  {
+    "id": 131,
+    "store": "Myntra",
+    "title": "Myntra Beauty Offer",
+    "code": "GRAB67",
+    "discount": "Buy 1 Get 1",
+    "expiry": "03 Aug 2026",
+    "link": "https://myntra.com?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 132,
+    "store": "Myntra",
+    "title": "Myntra Loot Offer",
+    "code": "SAVE83",
+    "discount": "\u20b9500 OFF",
+    "expiry": "25 Jul 2026",
+    "link": "https://myntra.com?tag=guru0906-21",
+    "category": "Shopping"
+  },
+  {
+    "id": 133,
+    "store": "Flipkart",
+    "title": "Flipkart Special Offer",
+    "code": "FLASH81",
+    "discount": "Flat 45% OFF",
+    "expiry": "10 Aug 2026",
+    "link": "https://flipkart.com?tag=guru0906-21",
+    "category": "Fashion"
+  },
+  {
+    "id": 134,
+    "store": "TataCliq",
+    "title": "TataCliq Special Offer",
+    "code": "MEGA58",
+    "discount": "40% OFF",
+    "expiry": "31 Jul 2026",
+    "link": "https://tatacliq.com?tag=guru0906-21",
+    "category": "Beauty"
+  },
+  {
+    "id": 135,
+    "store": "Meesho",
+    "title": "Meesho Mega Sale",
+    "code": "MEGA93",
+    "discount": "\u20b92000 OFF",
+    "expiry": "09 Aug 2026",
+    "link": "https://meesho.com?tag=guru0906-21",
+    "category": "Fashion"
+  },
+  {
+    "id": 136,
+    "store": "Snapdeal",
+    "title": "Snapdeal Special Offer",
+    "code": "MEGA81",
+    "discount": "Buy 1 Get 1",
+    "expiry": "07 Jul 2026",
+    "link": "https://snapdeal.com?tag=guru0906-21",
+    "category": "Food"
+  },
+  {
+    "id": 137,
+    "store": "Flipkart",
+    "title": "Flipkart Beauty Offer",
+    "code": "TECH17",
+    "discount": "\u20b91000 OFF",
+    "expiry": "31 Jul 2026",
+    "link": "https://flipkart.com?tag=guru0906-21",
+    "category": "Fashion"
+  },
+  {
+    "id": 138,
+    "store": "Snapdeal",
+    "title": "Snapdeal Special Offer",
+    "code": "BEAUTY16",
+    "discount": "50% OFF",
+    "expiry": "28 Jul 2026",
+    "link": "https://snapdeal.com?tag=guru0906-21",
+    "category": "Fashion"
+  },
+  {
+    "id": 139,
+    "store": "Nykaa",
+    "title": "Nykaa Beauty Offer",
+    "code": "FLASH48",
+    "discount": "\u20b9500 OFF",
+    "expiry": "03 Aug 2026",
+    "link": "https://nykaa.com?tag=guru0906-21",
+    "category": "Food"
+  },
+  {
+    "id": 140,
+    "store": "Snapdeal",
+    "title": "Snapdeal Limited Deal",
+    "code": "WINTER70",
+    "discount": "60% OFF",
+    "expiry": "11 Aug 2026",
+    "link": "https://snapdeal.com?tag=guru0906-21",
+    "category": "Food"
+  },
+  {
+    "id": 141,
+    "store": "Nykaa",
+    "title": "Nykaa Mega Sale",
+    "code": "MEGA92",
+    "discount": "\u20b9500 OFF",
+    "expiry": "16 Jul 2026",
+    "link": "https://nykaa.com?tag=guru0906-21",
+    "category": "Beauty"
   }
 ]
