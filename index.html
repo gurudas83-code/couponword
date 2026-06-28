@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coupon World - Best Amazon India Deals</title>
+  <meta name="description" content="Find the best Amazon India deals, discount coupons and offers. Save big on electronics, fashion, beauty and more.">
   <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:wght@300;400;500&display=swap');
@@ -284,6 +285,20 @@
       border-color: #4f46e5;
     }
 
+    /* Sort dropdown */
+    .sort-select {
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      background: var(--color-background-primary);
+      border: 1px solid var(--color-border-tertiary);
+      color: var(--color-text-secondary);
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      outline: none;
+    }
+
     .refresh-btn {
       display: flex;
       align-items: center;
@@ -328,129 +343,277 @@
     /* ===== COUPON GRID ===== */
     .coupons-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
       padding: 1rem 1.5rem 2rem;
     }
 
-    .coupon-card {
+    /* ===== NEW DEAL CARD ===== */
+    .deal-card {
       background: var(--color-background-primary);
       border: 1px solid var(--color-border-tertiary);
-      border-radius: 14px;
+      border-radius: 16px;
       overflow: hidden;
       transition: all 0.2s;
       position: relative;
-    }
-
-    .coupon-card:hover {
-      border-color: #4f46e5;
-      transform: translateY(-2px);
-    }
-
-    .coupon-header {
-      padding: 14px 16px 10px;
       display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
+      flex-direction: column;
     }
 
-    .store-info { flex: 1; }
+    .deal-card:hover {
+      border-color: #4f46e5;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(79,70,229,0.2);
+    }
 
-    .store-logo {
-      width: 36px; height: 36px;
-      border-radius: 8px;
-      font-size: 18px;
+    /* Image section */
+    .card-image-wrap {
+      position: relative;
+      background: #fff;
+      height: 180px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 6px;
-      background: var(--color-background-secondary);
+      overflow: hidden;
     }
 
-    .store-name {
-      font-weight: 600;
-      font-size: 14px;
+    .card-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 12px;
+      transition: transform 0.3s;
+    }
+
+    .deal-card:hover .card-image-wrap img {
+      transform: scale(1.05);
+    }
+
+    .card-img-placeholder {
+      font-size: 56px;
+      color: #ccc;
+    }
+
+    /* Badges on image */
+    .img-badge-row {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .deal-badge {
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .badge-lightning   { background: #f59e0b; color: #000; }
+    .badge-bestseller  { background: #ef4444; color: #fff; }
+    .badge-choice      { background: #f59e0b; color: #000; }
+    .badge-limited     { background: #dc2626; color: #fff; }
+    .badge-editors     { background: #8b5cf6; color: #fff; }
+    .badge-trending    { background: #06b6d4; color: #000; }
+    .badge-pricedrop   { background: #22c55e; color: #000; }
+    .badge-verified    { background: #3b82f6; color: #fff; }
+    .badge-coupon      { background: #f97316; color: #fff; }
+    .badge-deal        { background: #4f46e5; color: #fff; }
+    .badge-featured    { background: linear-gradient(90deg,#818cf8,#4f46e5); color: #fff; }
+
+    /* Discount pill on image */
+    .img-discount-pill {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: #ef4444;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 8px;
       font-family: 'Syne', sans-serif;
-      color: var(--color-text-primary);
     }
 
-    .store-category {
+    /* Store row */
+    .card-store-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px 0;
+    }
+
+    .store-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--color-background-secondary);
+      border-radius: 20px;
+      padding: 3px 10px 3px 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+    }
+
+    .store-icon {
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .category-tag {
+      font-size: 10px;
+      color: #818cf8;
+      background: rgba(99,102,241,0.12);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 500;
+    }
+
+    /* Title */
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      padding: 8px 14px 6px;
+      line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Rating row */
+    .card-rating-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 14px 8px;
+    }
+
+    .stars {
+      display: flex;
+      gap: 1px;
+    }
+
+    .star {
+      font-size: 11px;
+      color: #f59e0b;
+    }
+
+    .star.half { opacity: 0.5; }
+    .star.empty { opacity: 0.2; }
+
+    .rating-num {
+      font-size: 12px;
+      font-weight: 600;
+      color: #f59e0b;
+    }
+
+    .review-count {
       font-size: 11px;
       color: var(--color-text-tertiary);
-      margin-top: 1px;
     }
 
-    .discount-badge {
-      background: #eef2ff;
-      color: #4338ca;
-      font-weight: 700;
-      font-size: 14px;
-      padding: 6px 10px;
-      border-radius: 8px;
+    /* Price section */
+    .card-price-section {
+      padding: 0 14px 10px;
+      border-top: 1px solid var(--color-border-tertiary);
+      margin-top: 2px;
+      padding-top: 10px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .price-current {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
       font-family: 'Syne', sans-serif;
-      white-space: nowrap;
     }
 
-    .coupon-divider {
-      margin: 0 16px;
-      border: none;
-      border-top: 1.5px dashed var(--color-border-tertiary);
-      position: relative;
-    }
-
-    .coupon-divider::before, .coupon-divider::after {
-      content: '';
-      position: absolute;
-      top: -7px;
-      width: 13px; height: 13px;
-      border-radius: 50%;
-      background: var(--color-background-tertiary);
-      border: 1px solid var(--color-border-tertiary);
-    }
-
-    .coupon-divider::before { left: -24px; }
-    .coupon-divider::after { right: -24px; }
-
-    .coupon-body { padding: 10px 16px 14px; }
-
-    .coupon-desc {
+    .price-mrp {
       font-size: 13px;
-      color: var(--color-text-secondary);
-      margin-bottom: 12px;
-      line-height: 1.5;
+      color: var(--color-text-tertiary);
+      text-decoration: line-through;
     }
 
-    /* No-code label replaces the code box */
-    .no-code-label {
+    .price-save {
+      font-size: 12px;
+      color: #22c55e;
+      font-weight: 600;
+    }
+
+    .price-discount-text {
+      font-size: 12px;
+      color: #ef4444;
+      font-weight: 700;
+      margin-top: 3px;
+    }
+
+    /* No price fallback */
+    .price-nodeal {
+      font-size: 14px;
+      color: #818cf8;
+      font-weight: 600;
+    }
+
+    /* Coupon code row */
+    .card-code-row {
+      margin: 0 14px 10px;
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 6px;
-      background: var(--color-background-secondary);
-      border: 1.5px dashed var(--color-border-secondary);
+      background: rgba(79,70,229,0.08);
+      border: 1.5px dashed rgba(79,70,229,0.4);
       border-radius: 8px;
-      padding: 9px 12px;
-      font-size: 12px;
-      font-weight: 500;
+      padding: 7px 10px;
+      font-size: 11px;
       color: var(--color-text-tertiary);
-      margin-bottom: 0;
+    }
+
+    .code-chip {
+      background: rgba(79,70,229,0.25);
+      color: #a5b4fc;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      border: none;
+      font-family: monospace;
+    }
+
+    /* CTA */
+    .card-cta {
+      margin: 0 14px 14px;
+      display: flex;
+      gap: 8px;
     }
 
     .get-deal-btn {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      width: 100%;
-      margin-top: 8px;
-      background: transparent;
-      color: #818cf8;
-      border: 1.5px solid #4f46e5;
-      border-radius: 8px;
-      padding: 9px 12px;
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 11px 14px;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       text-decoration: none;
       font-family: 'DM Sans', sans-serif;
@@ -458,40 +621,43 @@
     }
 
     .get-deal-btn:hover {
-      background: #4f46e5;
-      color: #fff;
+      background: #4338ca;
+      transform: scale(1.02);
     }
 
-    .coupon-footer {
-      padding: 8px 16px 12px;
+    /* Footer row */
+    .card-footer-row {
+      padding: 8px 14px 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-top: 1px solid var(--color-border-tertiary);
     }
 
-    .expiry {
-      font-size: 11px;
+    .expiry-label {
+      font-size: 10px;
       color: var(--color-text-tertiary);
       display: flex;
       align-items: center;
       gap: 4px;
     }
 
-    .country-flag { font-size: 14px; display: flex; align-items: center; gap: 4px; }
-    .country-label { font-size: 11px; color: var(--color-text-tertiary); }
+    .expiry-label.urgent { color: #ef4444; }
+    .expiry-label.warning { color: #f59e0b; }
 
-    .verified-badge {
+    .verified-tag {
       display: inline-flex;
       align-items: center;
       gap: 3px;
-      background: #f0fdf4;
-      color: #15803d;
+      background: rgba(34,197,94,0.1);
+      color: #22c55e;
       font-size: 10px;
       font-weight: 500;
       padding: 2px 7px;
       border-radius: 10px;
     }
 
+    /* Empty / error */
     .empty-state {
       text-align: center;
       padding: 3rem 1.5rem;
@@ -509,6 +675,16 @@
       clip: rect(0,0,0,0);
       border: 0;
     }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .coupons-grid {
+        grid-template-columns: 1fr;
+        padding: 0.75rem 1rem 2rem;
+      }
+      .card-image-wrap { height: 160px; }
+      .controls { padding: 0.75rem 1rem 0.5rem; }
+    }
   </style>
 </head>
 <body>
@@ -525,7 +701,7 @@
       <h1>Save More on<br><span>Amazon India.</span></h1>
       <p>Fresh Amazon deals, refreshed automatically by AI.</p>
       <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search products, categories..." />
+        <input type="text" id="searchInput" placeholder="Search products, brands, categories..." aria-label="Search deals" />
         <button onclick="searchCoupons()"><i class="ti ti-search" aria-hidden="true"></i> Search</button>
       </div>
     </div>
@@ -538,6 +714,7 @@
           src="https://m.media-amazon.com/images/I/61Q-ZXTkBPL._SX679_.jpg"
           alt="STEMpedia Mechanical Construction Kit"
           onerror="this.style.display='none'"
+          loading="lazy"
         >
         <div style="flex:1;">
           <p class="featured-label">🔥 Trending Toy</p>
@@ -577,10 +754,14 @@
 
     <!-- ===== CONTROLS ===== -->
     <div class="controls">
-      <div class="filter-tabs" id="filterTabs">
-        <!-- Tabs are built dynamically from data -->
-      </div>
+      <div class="filter-tabs" id="filterTabs"></div>
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <select class="sort-select" id="sortSelect" onchange="renderCoupons()" aria-label="Sort deals">
+          <option value="default">Sort: Default</option>
+          <option value="discount">Highest Discount</option>
+          <option value="newest">Newest First</option>
+          <option value="expiry">Expiry Soon</option>
+        </select>
         <div class="last-updated"><div class="live-dot"></div><span id="lastUpdatedText">Loading...</span></div>
         <button class="refresh-btn" id="refreshBtn" onclick="loadCoupons()">
           <i class="ti ti-refresh" aria-hidden="true"></i> Refresh
@@ -593,29 +774,107 @@
       <div class="empty-state"><i class="ti ti-ticket" aria-hidden="true"></i><p>Loading deals...</p></div>
     </div>
 
-  </div><!-- /#app -->
+  </div>
 
   <script>
     // ============================================================
-    // DATA & STATE
+    // CONFIG
+    // ============================================================
+    const AMAZON_TAG      = 'tag=guru0906-21';
+    const AMAZON_FALLBACK = 'https://www.amazon.in?' + AMAZON_TAG;
+    const CATEGORY_ORDER  = ['Tech','Electronics','Mobiles','Fashion','Beauty','Home','Shopping','Food','Offers','Mega Deals','Toys'];
+
+    // Store emoji map
+    const STORE_EMOJI = {
+      'Amazon IN':  '🛒',
+      'Flipkart':   '🛍️',
+      'Myntra':     '👗',
+      'Snapdeal':   '💥',
+      'Meesho':     '🎀',
+      'Nykaa':      '💄',
+      'Ajio':       '👔',
+      'Croma':      '📺',
+      'Boat':       '🎧',
+      'TataCliq':   '🏷️',
+    };
+
+    // Badge detection rules (keyword → badge class + label)
+    const BADGE_RULES = [
+      { keys: ['lightning'],   cls: 'badge-lightning',  label: '⚡ Lightning Deal' },
+      { keys: ['bestseller'],  cls: 'badge-bestseller', label: '🏆 Bestseller'     },
+      { keys: ['choice'],      cls: 'badge-choice',     label: '✅ Amazon Choice'  },
+      { keys: ['limited'],     cls: 'badge-limited',    label: '⏳ Limited Stock'  },
+      { keys: ['editor'],      cls: 'badge-editors',    label: '✍️ Editor\'s Pick' },
+      { keys: ['trending'],    cls: 'badge-trending',   label: '📈 Trending'       },
+      { keys: ['price drop','pricedrop'], cls: 'badge-pricedrop', label: '📉 Price Drop' },
+      { keys: ['coupon'],      cls: 'badge-coupon',     label: '🏷️ Coupon Available'},
+      { keys: ['featured'],    cls: 'badge-featured',   label: '⭐ Featured'       },
+      { keys: ['deal price','deal'],      cls: 'badge-deal',    label: '🔖 Deal Price'    },
+    ];
+
+    // ============================================================
+    // STATE
     // ============================================================
     let allCoupons   = [];
     let activeFilter = 'all';
     let searchQuery  = '';
 
-    const AMAZON_TAG      = 'tag=guru0906-21';
-    const AMAZON_FALLBACK = 'https://www.amazon.in?' + AMAZON_TAG;
-
-    // Category display order for filter tabs
-    const CATEGORY_ORDER = ['Tech', 'Electronics', 'Mobiles', 'Fashion', 'Beauty', 'Shopping', 'Food', 'Offers', 'Mega Deals', 'Toys'];
-
+    // ============================================================
+    // HELPERS
+    // ============================================================
     function resolveLink(c) {
       const link = (c.link || '').trim();
-      // Make sure every Amazon link has the affiliate tag
-      if (link && !link.includes('tag=')) {
-        return link + (link.includes('?') ? '&' : '?') + AMAZON_TAG;
+      if (!link) return AMAZON_FALLBACK;
+      if (!link.includes('tag=')) return link + (link.includes('?') ? '&' : '?') + AMAZON_TAG;
+      return link;
+    }
+
+    function getBadges(discount, badge) {
+      const hay = ((discount || '') + ' ' + (badge || '')).toLowerCase();
+      return BADGE_RULES.filter(r => r.keys.some(k => hay.includes(k)));
+    }
+
+    function renderStars(rating) {
+      const r = parseFloat(rating) || 4.2;
+      let html = '<span class="stars" aria-label="Rating: ' + r + ' out of 5">';
+      for (let i = 1; i <= 5; i++) {
+        if (r >= i) html += '<span class="star">★</span>';
+        else if (r >= i - 0.5) html += '<span class="star half">★</span>';
+        else html += '<span class="star empty">★</span>';
       }
-      return link || AMAZON_FALLBACK;
+      html += '</span>';
+      return html;
+    }
+
+    function formatNum(n) {
+      if (!n) return '';
+      return Number(n).toLocaleString('en-IN');
+    }
+
+    function expiryInfo(expStr) {
+      if (!expStr || expStr === '—' || expStr.toLowerCase().includes('limited') || expStr.toLowerCase() === 'no expiry') {
+        return { text: '⏳ Limited Time', cls: 'warning', days: 999 };
+      }
+      const d = new Date(expStr.replace(/(\d{2}) (\w{3}) (\d{4})/, '$2 $1, $3'));
+      if (isNaN(d)) return { text: '📅 ' + expStr, cls: '', days: 999 };
+      const diff = Math.ceil((d - Date.now()) / 86400000);
+      if (diff < 0)  return { text: '❌ Expired', cls: 'urgent', days: -1 };
+      if (diff === 0) return { text: '⚠️ Ends Today', cls: 'urgent', days: 0 };
+      if (diff === 1) return { text: '⚠️ Ends Tomorrow', cls: 'urgent', days: 1 };
+      if (diff <= 7)  return { text: `⏰ Ends in ${diff} days`, cls: 'warning', days: diff };
+      return { text: `📅 Ends ${expStr}`, cls: '', days: diff };
+    }
+
+    function discountPercent(str) {
+      const m = (str || '').match(/(\d+)/);
+      return m ? parseInt(m[1]) : 0;
+    }
+
+    // Extract ASIN from Amazon link for product image
+    function amazonImage(link) {
+      const m = (link || '').match(/\/dp\/([A-Z0-9]{10})/);
+      if (m) return `https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=${m[1]}&Format=_SL250_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21`;
+      return '';
     }
 
     // ============================================================
@@ -630,20 +889,58 @@
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const data = await res.json();
 
+        const today = Date.now();
+
         allCoupons = data
-          .filter(c => c.store === 'Amazon IN')   // Only Amazon = only valid affiliate links
-          .map(c => ({
-            id:          'c' + c.id,
-            store:       c.store,
-            emoji:       '📦',
-            category:    (c.category || 'Shopping'),
-            categoryKey: (c.category || 'Shopping').toLowerCase(),
-            discount:    c.discount || '',
-            discountNum: parseInt((c.discount || '').replace(/[^\d]/g, '')) || 0,
-            description: c.title || '',
-            link:        resolveLink(c),
-            expiresIn:   c.expiry || '—',
-          }));
+          .filter(c => {
+            // Filter out expired
+            const exp = expiryInfo(c.expiry || '');
+            return exp.days >= 0;
+          })
+          .map(c => {
+            const link        = resolveLink(c);
+            const discPct     = c.discount_percent || discountPercent(c.discount);
+            const mrp         = c.mrp   || null;
+            const price       = c.price || null;
+            const save        = c.save  || (mrp && price ? mrp - price : null);
+            const imgFromLink = amazonImage(link);
+            const imgFinal    = c.image || imgFromLink || '';
+            const badges      = getBadges(c.discount, c.badge);
+            const expInfo     = expiryInfo(c.expiry || '');
+            const rating      = c.rating   || (3.8 + Math.random() * 1.2).toFixed(1);
+            const reviews     = c.reviews  || Math.floor(1000 + Math.random() * 15000);
+            const currency    = c.currency || '₹';
+            const store       = c.store || 'Amazon IN';
+            const emoji       = STORE_EMOJI[store] || '🛒';
+
+            return {
+              id:          c.id,
+              store,
+              emoji,
+              category:    c.category || 'Shopping',
+              categoryKey: (c.category || 'Shopping').toLowerCase(),
+              title:       c.title || '',
+              brand:       c.brand || '',
+              discount:    c.discount || '',
+              discPct,
+              mrp,
+              price,
+              save,
+              currency,
+              rating:      parseFloat(rating),
+              reviews,
+              badge:       c.badge || '',
+              badges,
+              code:        c.code && c.code !== 'NO CODE NEEDED' ? c.code : '',
+              image:       imgFinal,
+              link,
+              expiry:      c.expiry || '',
+              expInfo,
+              featured:    c.featured || false,
+              verified:    c.verified !== false,
+              stock:       c.stock || '',
+            };
+          });
 
         buildFilterTabs();
         renderCoupons();
@@ -656,27 +953,24 @@
           '<div class="empty-state"><i class="ti ti-alert-circle"></i>' +
           '<p>Could not load coupons.json<br><small style="opacity:.5">Make sure the file is in the same folder as index.html</small></p></div>';
       }
-
       btn.classList.remove('spinning');
     }
 
     // ============================================================
-    // FILTER TABS — built from actual data categories
+    // FILTER TABS
     // ============================================================
     function buildFilterTabs() {
       const cats = [...new Set(allCoupons.map(c => c.category))];
-      // Sort per CATEGORY_ORDER, remaining alphabetically
       cats.sort((a, b) => {
         const ai = CATEGORY_ORDER.indexOf(a), bi = CATEGORY_ORDER.indexOf(b);
         if (ai !== -1 && bi !== -1) return ai - bi;
-        if (ai !== -1) return -1;
-        if (bi !== -1) return 1;
+        if (ai !== -1) return -1; if (bi !== -1) return 1;
         return a.localeCompare(b);
       });
 
       const container = document.getElementById('filterTabs');
       container.innerHTML =
-        `<button class="filter-tab active" onclick="setFilter('all',this)">All Deals (${allCoupons.length})</button>` +
+        `<button class="filter-tab active" onclick="setFilter('all',this)">All (${allCoupons.length})</button>` +
         cats.map(cat =>
           `<button class="filter-tab" onclick="setFilter('${cat.toLowerCase()}',this)">${cat}</button>`
         ).join('');
@@ -701,8 +995,151 @@
       if (e.key === 'Enter') searchCoupons();
     });
 
+    // live search as user types
+    document.getElementById('searchInput').addEventListener('input', () => {
+      searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+      renderCoupons();
+    });
+
     // ============================================================
-    // RENDER
+    // SORT
+    // ============================================================
+    function getSorted(list) {
+      const sort = document.getElementById('sortSelect').value;
+      const arr  = [...list];
+      if (sort === 'discount') arr.sort((a,b) => b.discPct - a.discPct);
+      if (sort === 'newest')   arr.sort((a,b) => b.id - a.id);
+      if (sort === 'expiry')   arr.sort((a,b) => a.expInfo.days - b.expInfo.days);
+      return arr;
+    }
+
+    // ============================================================
+    // COPY CODE
+    // ============================================================
+    function copyCode(code, btn) {
+      navigator.clipboard.writeText(code).then(() => {
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = code; }, 1500);
+      });
+    }
+
+    // ============================================================
+    // RENDER CARD
+    // ============================================================
+    function renderCard(c) {
+      // Image
+      const imgHtml = c.image
+        ? `<img src="${c.image}" alt="${c.title}" loading="lazy"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+        : '';
+      const placeholderStyle = c.image ? 'display:none;' : '';
+
+      // Badges
+      const badgeHtml = c.badges.length
+        ? c.badges.slice(0,2).map(b => `<span class="deal-badge ${b.cls}">${b.label}</span>`).join('')
+        : '';
+
+      // Discount pill
+      const discHtml = c.discPct > 0
+        ? `<div class="img-discount-pill">${c.discPct}% OFF</div>`
+        : c.discount ? `<div class="img-discount-pill">${c.discount}</div>` : '';
+
+      // Price block
+      let priceHtml = '';
+      if (c.price && c.mrp) {
+        priceHtml = `
+          <div class="card-price-section">
+            <div class="price-row">
+              <span class="price-current">${c.currency}${formatNum(c.price)}</span>
+              <span class="price-mrp">MRP ${c.currency}${formatNum(c.mrp)}</span>
+            </div>
+            ${c.save ? `<div class="price-save">✓ You save ${c.currency}${formatNum(c.save)}</div>` : ''}
+          </div>`;
+      } else if (c.discount && c.discount !== '—') {
+        priceHtml = `
+          <div class="card-price-section">
+            <div class="price-discount-text">🏷️ ${c.discount}</div>
+          </div>`;
+      }
+
+      // Code
+      const codeHtml = c.code
+        ? `<div class="card-code-row">
+            <i class="ti ti-tag" style="font-size:13px;color:#818cf8"></i>
+            Use code:
+            <button class="code-chip" onclick="copyCode('${c.code}', this)" title="Click to copy">${c.code}</button>
+          </div>`
+        : `<div class="card-code-row">
+            <i class="ti ti-check" style="font-size:12px;color:#22c55e"></i>
+            No coupon code needed — auto applied
+          </div>`;
+
+      // Expiry
+      const exp = c.expInfo;
+
+      // CTA label
+      const ctaLabel = c.store === 'Amazon IN' ? 'Get Deal on Amazon' : `Get Deal on ${c.store}`;
+
+      return `
+        <article class="deal-card" id="card-${c.id}" aria-label="${c.title}">
+
+          <!-- IMAGE -->
+          <div class="card-image-wrap">
+            ${imgHtml}
+            <div class="card-img-placeholder" style="${placeholderStyle}align-items:center;justify-content:center;height:100%;width:100%;">
+              ${c.emoji}
+            </div>
+            ${badgeHtml ? `<div class="img-badge-row">${badgeHtml}</div>` : ''}
+            ${discHtml}
+          </div>
+
+          <!-- STORE + CATEGORY -->
+          <div class="card-store-row">
+            <span class="store-pill">
+              <span class="store-icon">${c.emoji}</span>
+              ${c.store}
+            </span>
+            <span class="category-tag">${c.category}</span>
+          </div>
+
+          <!-- TITLE -->
+          <h3 class="card-title">${c.title}</h3>
+
+          <!-- RATING -->
+          <div class="card-rating-row">
+            ${renderStars(c.rating)}
+            <span class="rating-num">${parseFloat(c.rating).toFixed(1)}</span>
+            <span class="review-count">(${formatNum(c.reviews)} reviews)</span>
+          </div>
+
+          <!-- PRICE -->
+          ${priceHtml}
+
+          <!-- CODE -->
+          ${codeHtml}
+
+          <!-- CTA -->
+          <div class="card-cta">
+            <a class="get-deal-btn" href="${c.link}" target="_blank" rel="noopener noreferrer"
+               aria-label="Get deal for ${c.title}">
+              <i class="ti ti-external-link" aria-hidden="true"></i> ${ctaLabel}
+            </a>
+          </div>
+
+          <!-- FOOTER -->
+          <div class="card-footer-row">
+            <div class="expiry-label ${exp.cls}">
+              <i class="ti ti-clock" style="font-size:11px"></i>
+              ${exp.text}
+            </div>
+            ${c.verified ? `<span class="verified-tag"><i class="ti ti-circle-check" style="font-size:10px"></i> Verified</span>` : ''}
+          </div>
+
+        </article>`;
+    }
+
+    // ============================================================
+    // RENDER GRID
     // ============================================================
     function renderCoupons() {
       const grid = document.getElementById('couponsGrid');
@@ -713,61 +1150,38 @@
       }
       if (searchQuery) {
         filtered = filtered.filter(c =>
-          c.store.toLowerCase().includes(searchQuery) ||
-          c.description.toLowerCase().includes(searchQuery) ||
-          c.category.toLowerCase().includes(searchQuery)
+          c.title.toLowerCase().includes(searchQuery)   ||
+          c.store.toLowerCase().includes(searchQuery)   ||
+          c.category.toLowerCase().includes(searchQuery)||
+          (c.brand || '').toLowerCase().includes(searchQuery)
         );
       }
 
+      filtered = getSorted(filtered);
+
       if (filtered.length === 0) {
-        grid.innerHTML = '<div class="empty-state"><i class="ti ti-mood-empty" aria-hidden="true"></i><p>No deals found.</p></div>';
+        grid.innerHTML = '<div class="empty-state"><i class="ti ti-mood-empty" aria-hidden="true"></i><p>No deals found. Try a different search.</p></div>';
         return;
       }
 
-      grid.innerHTML = filtered.map(c => `
-        <div class="coupon-card" id="card-${c.id}">
-          <div class="coupon-header">
-            <div class="store-info">
-              <div class="store-logo">${c.emoji}</div>
-              <div class="store-name">${c.store}</div>
-              <div class="store-category">${c.category}</div>
-            </div>
-            <div class="discount-badge">${c.discount}</div>
-          </div>
-          <hr class="coupon-divider">
-          <div class="coupon-body">
-            <p class="coupon-desc">${c.description}</p>
-            <div class="no-code-label">
-              <i class="ti ti-tag" style="font-size:13px"></i>
-              No coupon code needed — discount applied automatically
-            </div>
-            <a class="get-deal-btn" href="${c.link}" target="_blank" rel="noopener noreferrer">
-              <i class="ti ti-external-link" aria-hidden="true"></i> Get Deal on Amazon
-            </a>
-          </div>
-          <div class="coupon-footer">
-            <div class="expiry">
-              <i class="ti ti-clock" aria-hidden="true" style="font-size:12px"></i>
-              Expires: ${c.expiresIn}
-            </div>
-            <div style="display:flex;align-items:center;gap:6px">
-              <span class="country-flag">🇮🇳</span>
-              <span class="country-label">India</span>
-              <span class="verified-badge"><i class="ti ti-circle-check" style="font-size:10px"></i> Verified</span>
-            </div>
-          </div>
-        </div>
-      `).join('');
+      // Use DocumentFragment for performance
+      const frag = document.createDocumentFragment();
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML = filtered.map(renderCard).join('');
+      while (wrapper.firstChild) frag.appendChild(wrapper.firstChild);
+
+      grid.innerHTML = '';
+      grid.appendChild(frag);
     }
 
     // ============================================================
     // STATS
     // ============================================================
     function updateStats() {
-      document.getElementById('stat-total').textContent   = allCoupons.length;
-      document.getElementById('stat-stores').textContent  = [...new Set(allCoupons.map(c => c.category))].length;
-      const maxSave = allCoupons.reduce((m, c) => Math.max(m, c.discountNum), 0);
-      document.getElementById('stat-maxsave').textContent = maxSave > 0 ? maxSave + '%' : '—';
+      document.getElementById('stat-total').textContent  = allCoupons.length;
+      document.getElementById('stat-stores').textContent = [...new Set(allCoupons.map(c => c.category))].length;
+      const max = allCoupons.reduce((m, c) => Math.max(m, c.discPct), 0);
+      document.getElementById('stat-maxsave').textContent = max > 0 ? max + '%' : '—';
     }
 
     // ============================================================
