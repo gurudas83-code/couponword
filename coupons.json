@@ -350,5 +350,305 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=echo+dot+5&tag=guru0906-21",
     "expiry": "16 Jul 2026"
+  },
+  {
+    "id": 38,
+    "store": "Myntra",
+    "category": "Fashion",
+    "discount": "Extra ₹1000 OFF",
+    "title": "Nike Running Shoes",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.myntra.com",
+    "expiry": "24 Jul 2026"
+  },
+  {
+    "id": 39,
+    "store": "Croma",
+    "category": "Electronics",
+    "discount": "Lightning Deal",
+    "title": "Dell Laptop",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.croma.com",
+    "expiry": "22 Jul 2026"
+  },
+  {
+    "id": 40,
+    "store": "Croma",
+    "category": "Electronics",
+    "discount": "Deal Price",
+    "title": "Samsung Refrigerator",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.croma.com",
+    "expiry": "05 Aug 2026"
+  },
+  {
+    "id": 41,
+    "store": "Snapdeal",
+    "category": "Home",
+    "discount": "Extra ₹500 OFF",
+    "title": "LED Bulb Pack",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.snapdeal.com",
+    "expiry": "06 Jul 2026"
+  },
+  {
+    "id": 42,
+    "store": "Flipkart",
+    "category": "Electronics",
+    "discount": "Extra 10% Coupon",
+    "title": "LG Smart TV",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.flipkart.com",
+    "expiry": "22 Jul 2026"
+  },
+  {
+    "id": 43,
+    "store": "Meesho",
+    "category": "Fashion",
+    "discount": "Lightning Deal",
+    "title": "Women's Kurti",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.meesho.com",
+    "expiry": "15 Jul 2026"
+  },
+  {
+    "id": 44,
+    "store": "Flipkart",
+    "category": "Fashion",
+    "discount": "Extra 10% Coupon",
+    "title": "Campus Shoes",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.flipkart.com",
+    "expiry": "27 Jul 2026"
+  },
+  {
+    "id": 45,
+    "store": "TataCliq",
+    "category": "Fashion",
+    "discount": "Flat 50% OFF",
+    "title": "Casio Watch",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.tatacliq.com",
+    "expiry": "02 Aug 2026"
+  },
+  {
+    "id": 46,
+    "store": "Boat",
+    "category": "Electronics",
+    "discount": "Up to 80% OFF",
+    "title": "boAt Bassheads Earphones",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.boat-lifestyle.com",
+    "expiry": "23 Jul 2026"
+  },
+  {
+    "id": 47,
+    "store": "Snapdeal",
+    "category": "Home",
+    "discount": "Bank Offer",
+    "title": "Wall Clock",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.snapdeal.com",
+    "expiry": "12 Aug 2026"
+  },
+  {
+    "id": 48,
+    "store": "Flipkart",
+    "category": "Fashion",
+    "discount": "Extra ₹1000 OFF",
+    "title": "Puma Running Shoes",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.flipkart.com",
+    "expiry": "11 Jul 2026"
+  },
+  {
+    "id": 49,
+    "store": "Croma",
+    "category": "Electronics",
+    "discount": "Flat 50% OFF",
+    "title": "Apple iPad",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.croma.com",
+    "expiry": "01 Aug 2026"
+  },
+  {
+    "id": 50,
+    "store": "Myntra",
+    "category": "Fashion",
+    "discount": "Extra 10% Coupon",
+    "title": "Levi's Slim Fit Jeans",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.myntra.com",
+    "expiry": "12 Jul 2026"
+  },
+  {
+    "id": 51,
+    "store": "Amazon IN",
+    "category": "Home",
+    "discount": "Extra ₹500 OFF",
+    "title": "Milton Thermosteel Bottle",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/s?k=milton+thermosteel&tag=guru0906-21",
+    "expiry": "11 Jul 2026"
+  },
+  {
+    "id": 52,
+    "store": "Ajio",
+    "category": "Fashion",
+    "discount": "Up to 80% OFF",
+    "title": "Puma Sneakers",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.ajio.com",
+    "expiry": "15 Jul 2026"
+  },
+  {
+    "id": 53,
+    "store": "Nykaa",
+    "category": "Beauty",
+    "discount": "Flat 50% OFF",
+    "title": "Minimalist Serum",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.nykaa.com",
+    "expiry": "30 Jul 2026"
+  },
+  {
+    "id": 54,
+    "store": "Nykaa",
+    "category": "Beauty",
+    "discount": "Limited Time Deal",
+    "title": "Maybelline Lipstick",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.nykaa.com",
+    "expiry": "20 Jul 2026"
+  },
+  {
+    "id": 55,
+    "store": "Snapdeal",
+    "category": "Home",
+    "discount": "Up to 70% OFF",
+    "title": "Kitchen Storage Set",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.snapdeal.com",
+    "expiry": "10 Jul 2026"
+  },
+  {
+    "id": 56,
+    "store": "Nykaa",
+    "category": "Beauty",
+    "discount": "Bank Offer",
+    "title": "Lakme Foundation",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.nykaa.com",
+    "expiry": "17 Jul 2026"
+  },
+  {
+    "id": 57,
+    "store": "Nykaa",
+    "category": "Beauty",
+    "discount": "Flat 50% OFF",
+    "title": "Mamaearth Face Wash",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.nykaa.com",
+    "expiry": "06 Aug 2026"
+  },
+  {
+    "id": 58,
+    "store": "Meesho",
+    "category": "Home",
+    "discount": "Deal Price",
+    "title": "Kitchen Organizer",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.meesho.com",
+    "expiry": "08 Jul 2026"
+  },
+  {
+    "id": 59,
+    "store": "Flipkart",
+    "category": "Fashion",
+    "discount": "Deal Price",
+    "title": "Levi's Jeans",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.flipkart.com",
+    "expiry": "09 Aug 2026"
+  },
+  {
+    "id": 60,
+    "store": "Ajio",
+    "category": "Fashion",
+    "discount": "Lightning Deal",
+    "title": "Flying Machine Jeans",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.ajio.com",
+    "expiry": "31 Jul 2026"
+  },
+  {
+    "id": 61,
+    "store": "Myntra",
+    "category": "Fashion",
+    "discount": "Up to 70% OFF",
+    "title": "Roadster Shirt",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.myntra.com",
+    "expiry": "07 Aug 2026"
+  },
+  {
+    "id": 62,
+    "store": "Myntra",
+    "category": "Fashion",
+    "discount": "Deal Price",
+    "title": "Adidas Hoodie",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.myntra.com",
+    "expiry": "09 Jul 2026"
+  },
+  {
+    "id": 63,
+    "store": "TataCliq",
+    "category": "Fashion",
+    "discount": "Deal Price",
+    "title": "Titan Watch",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.tatacliq.com",
+    "expiry": "17 Jul 2026"
+  },
+  {
+    "id": 64,
+    "store": "TataCliq",
+    "category": "Fashion",
+    "discount": "Extra 10% Coupon",
+    "title": "Fastrack Smartwatch",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.tatacliq.com",
+    "expiry": "09 Jul 2026"
+  },
+  {
+    "id": 65,
+    "store": "Amazon IN",
+    "category": "Electronics",
+    "discount": "Limited Time Deal",
+    "title": "HP Wireless Mouse",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/s?k=hp+wireless+mouse&tag=guru0906-21",
+    "expiry": "12 Jul 2026"
+  },
+  {
+    "id": 66,
+    "store": "Meesho",
+    "category": "Home",
+    "discount": "Up to 80% OFF",
+    "title": "Bedsheet Set",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.meesho.com",
+    "expiry": "05 Jul 2026"
+  },
+  {
+    "id": 67,
+    "store": "Boat",
+    "category": "Electronics",
+    "discount": "Extra ₹1000 OFF",
+    "title": "boAt Rockerz 450",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.boat-lifestyle.com",
+    "expiry": "18 Jul 2026"
   }
 ]
