@@ -665,5 +665,89 @@
   "expiry": "Limited Time",
   "badge": "📈 TRENDING",
   "verified": true
-}
+},
+  {
+    "id": 51,
+    "store": "Amazon IN",
+    "category": "Electronics",
+    "discount": "Deal Price",
+    "title": "typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023, 7-Color Backlit with Touchpad",
+    "code": "NO CODE NEEDED",
+    "link": "https://amzn.in/d/07ZHBcgL?tag=guru0906-21",
+    "expiry": "Limited Time",
+    "badge": "🔥 HOT",
+    "verified": true
+  },
+  {
+    "id": 52,
+    "store": "Amazon IN",
+    "category": "Home",
+    "discount": "Deal for Prime Members",
+    "title": "Encasify Telescope Cover, Waterproof Dustproof Sunproof Outdoor Protective Cover with Zipper and Durable Closure",
+    "code": "NO CODE NEEDED",
+    "link": "https://amzn.in/d/05P79fhl?tag=guru0906-21",
+    "expiry": "Limited Time",
+    "badge": "📈 TRENDING",
+    "verified": true
+  },
+  {
+    "id": 53,
+    "store": "Amazon IN",
+    "category": "Office Supplies",
+    "discount": "Budget Friendly",
+    "title": "Hauser Fizzy Gel Pen Jar, Transparent Lightweight Body, Comfortable Grip, Smooth Ink Flow, Blue Ink Pack of 25 Pens",
+    "code": "NO CODE NEEDED",
+    "link": "https://amzn.in/d/02EmJVr5?tag=guru0906-21",
+    "expiry": "Limited Time",
+    "badge": "🆕 NEW",
+    "verified": true
+  },
+  {
+    "id": 54,
+    "store": "Amazon IN",
+    "category": "Toys",
+    "discount": "Deal Price",
+    "title": "Wembley Hover Football for Kids, Electric Floating Soccer Ball, Rechargeable Indoor Game, Birthday Gift for Boys",
+    "code": "NO CODE NEEDED",
+    "link": "https://amzn.in/d/06wesyWs?tag=guru0906-21",
+    "expiry": "Limited Time",
+    "badge": "🔥 HOT",
+    "verified": true
+  },
+  {
+    "id": 55,
+    "store": "Amazon IN",
+    "category": "Industrial",
+    "discount": "Deal Price",
+    "title": "Chair Bush Black Colour 10 Pcs, ID 15mm OD 20mm, Round Shape",
+    "code": "NO CODE NEEDED",
+    "link": "https://amzn.in/d/0dy5eMj6?tag=guru0906-21",
+    "expiry": "Limited Time",
+    "badge": "🆕 NEW",
+    "verified": true
+  },
+  {
+    "id": 56,
+    "store": "Amazon IN",
+    "category": "Home",
+    "discount": "Deal Price",
+    "title": "Drivanto Washing Machine Stand Multi-Functional Movable Adjustable Base with Locking Wheels for Washing Machine, Refrigerator and Furniture",
+    "code": "NO CODE NEEDED",
+    "link": "https://amzn.in/d/07ROz7uF?tag=guru0906-21",
+    "expiry": "Limited Time",
+    "badge": "📈 TRENDING",
+    "verified": true
+  },
+  {
+    "id": 57,
+    "store": "Amazon IN",
+    "category": "Home",
+    "discount": "Deal Price",
+    "title": "UGAOO Combo of 3 Indoor Plants with Ibiza Pot, Money Plant Golden, Jade Plant and Peace Lily for Home and Office Decor",
+    "code": "NO CODE NEEDED",
+    "link": "https://amzn.in/d/00I9VfjV?tag=guru0906-21",
+    "expiry": "Limited Time",
+    "badge": "🔥 HOT",
+    "verified": true
+  }
 ]
