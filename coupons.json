@@ -480,12 +480,7 @@
     "link": "https://www.amazon.in/s?k=samsung+25l+microwave+oven&tag=guru0906-21",
     "expiry": "06 Jul 2026",
     "badge": null,
-    "claims": 685,
-    "rating": 4.7,
-    "mrp": 4999,
-    "price": 3453,
-    "save": 1546
-  },
+    },
   {
     "id": 39,
     "store": "Amazon IN",
@@ -514,9 +509,9 @@
     "badge": "🔥 HOT",
     "claims": 415,
     "rating": 4.4,
-    "mrp": 1499,
-    "price": 891,
-    "save": 608
+    "mrp": 969,
+    "price": 849,
+    "save": 120
   },
   {
     "id": 41,
@@ -529,16 +524,16 @@
     "expiry": "06 Jul 2026",
     "badge": "⏳ LIMITED STOCK",
     "claims": 55,
-    "rating": 4.0,
-    "mrp": 24999,
-    "price": 16592,
-    "save": 8407
+    "rating": 3.9,
+    "mrp": 3210,
+    "price": 1999,
+    "save": 1211
   },
   {
     "id": 42,
     "store": "Amazon IN",
     "category": "Home",
-    "discount": "Extra 10% Coupon",
+    "discount": "FLAT 54% OFF",
     "title": "Bajaj Ceiling Fan",
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=bajaj+ceiling+fan&tag=guru0906-21",
@@ -546,9 +541,9 @@
     "badge": "⏳ LIMITED STOCK",
     "claims": 80,
     "rating": 4.5,
-    "mrp": 2499,
-    "price": 1929,
-    "save": 570
+    "mrp": 5678,
+    "price": 2599,
+    "save": 3179
   },
   {
   "id": 43,
@@ -580,9 +575,9 @@
   "badge": "⚡ SELLING FAST",
   "claims": 693,
   "rating": 4.8,
-  "mrp": 19999,
-  "price": 8451,
-  "save": 11548
+  "mrp": 10999,
+  "price": 8399,
+  "save": 2600
 },
 {
   "id": 45,
