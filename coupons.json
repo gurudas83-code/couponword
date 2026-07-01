@@ -566,22 +566,22 @@
     "price": 183,
     "save": 316
   },
-  {
-    "id": 44,
-    "store": "Amazon IN",
-    "category": "Electronics",
-    "discount": "Flat 50% OFF",
-    "title": "Noise ColorFit Smartwatch",
-    "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/s?k=noise+smartwatch&tag=guru0906-21",
-    "expiry": "06 Jul 2026",
-    "badge": "⚡ SELLING FAST",
-    "claims": 693,
-    "rating": 4.8,
-    "mrp": 19999,
-    "price": 8451,
-    "save": 11548
-  },
+{
+  "id": 44,
+  "store": "Amazon IN",
+  "category": "Electronics",
+  "discount": "Flat 24% OFF",
+  "title": "Noise ColorFit Smartwatch",
+  "code": "NO CODE NEEDED",
+  "link": "https://www.amazon.in/s?k=noise+smartwatch&tag=guru0906-21",
+  "expiry": "2026-07-06",
+  "badge": "⚡ SELLING FAST",
+  "claims": 693,
+  "rating": 4.8,
+  "mrp": 19999,
+  "price": 8451,
+  "save": 11548
+},
 {
   "id": 45,
   "store": "Amazon IN",
