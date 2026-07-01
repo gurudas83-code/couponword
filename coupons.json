@@ -661,5 +661,23 @@
     "mrp": 1299,
     "price": 958,
     "save": 341
+  },
+  {
+    "id": 50,
+    "store": "Amazon IN",
+    "category": "Beauty",
+    "discount": "55% OFF",
+    "title": "Lakme Makeup Kit",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/s?k=lakme+makeup+kit&tag=guru0906-21",
+    "expiry": "11 Jul 2026",
+    "badge": "📈 TRENDING",
+    "claims": 353,
+    "rating": 4.5,
+    "reviews": 20866,
+    "mrp": 2246,
+    "price": 1009,
+    "save": 1237,
+    "verified": true
   }
 ]
