@@ -1,12 +1,19 @@
 [
   {
     "id": 1,
-    "store": "Amazon IN",
-    "title": "Amazon Product Deal",
-    "discount": "30% OFF",
-    "link": "https://www.amazon.in/dp/B0GQTSHLLR?tag=guru0906-21",
-    "expiry": "31 Dec 2026",
-    "category": "Tech"
+  "store": "Amazon IN",
+  "category": "Electronics",
+  "discount": "Amazon's Choice",
+  "title": "OnePlus Nord Buds 4 Pro TWS Earbuds, Upto 55dB Real-time ANC, Adaptive Mode, 12mm Titanium-Coated Driver, Spatial Audio, Upto 54hrs Playback, Dual-Device Connectivity, Raven Black",
+  "code": "NO CODE NEEDED",
+  "price": 3999,
+  "mrp": null,
+  "link": "https://www.amazon.in/dp/B0F4KKSKYC?tag=guru0906-21",
+  "expiry": "Limited Time",
+  "badge": "Amazon's Choice",
+  "rating": 4.2,
+  "reviews": 941,
+  "verified": true
   },
   {
     "id": 2,
