@@ -779,16 +779,16 @@
     "badge": null
   },
   {
-  "id": 61,
-  "store": "Amazon IN",
-  "category": "Health & Personal Care",
-  "discount": "10% OFF",
-  "title": "Amway Nutrilite Cal Mag D K2 90 Tabs",
-  "code": "NO CODE NEEDED",
-  "price": "₹949",
-  "mrp": "₹1,059",
-  "link": "https://www.amazon.in/dp/B0D3HKTL6K?tag=guru0906-21",
-  "expiry": "Limited Time",
-  "badge": "Prime"
-}
+    "id": 61,
+    "store": "Amazon IN",
+    "category": "Health & Personal Care",
+    "discount": "10% OFF",
+    "title": "Amway Nutrilite Cal Mag D K2 90 Tabs",
+    "code": "NO CODE NEEDED",
+    "price": "₹949",
+    "mrp": "₹1,059",
+    "link": "https://www.amazon.in/dp/B0D3HKTL6K?tag=guru0906-21",
+    "expiry": "Limited Time",
+    "badge": "Prime"
+  }
 ]
