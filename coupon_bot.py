@@ -114,20 +114,19 @@ def generate_new_coupons(existing):
     new_coupons = []
 
     for title, category, keyword, min_price, max_price in available[:NEW_DEALS_COUNT]:
-        mrp, price, save, discount = make_price(min_price, max_price)
 
-coupon = {
-    "id": next_id,
-    "store": "Amazon IN",
-    "category": category,
-    "discount": "Check Deal",
-    "title": title,
-    "code": "NO CODE NEEDED",
-    "link": build_amazon_link(keyword),
-    "expiry": "Limited Time",
-    "badge": "🔥 HOT",
-    "verified": True
-}
+        coupon = {
+            "id": next_id,
+            "store": "Amazon IN",
+            "category": category,
+            "discount": "Check Deal",
+            "title": title,
+            "code": "NO CODE NEEDED",
+            "link": build_amazon_link(keyword),
+            "expiry": "Limited Time",
+            "badge": "🔥 HOT",
+            "verified": True
+        }
 
         new_coupons.append(coupon)
         next_id += 1
