@@ -2,799 +2,444 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coupon Word — AI Powered Deals, Coupons & Price Alerts</title>
-<meta name="description" content="Coupon Word finds verified coupons and deals across top stores. Search, filter, and save with one tap.">
-
-<!--
-  =====================================================================
-  COUPON WORD — index.html
-  A single-file, dependency-free deals homepage.
-
-  HOW IT WORKS (read this if you're new to the code):
-  1. All the visual styling lives in the <style> tag below.
-  2. All the page content (hero, filters, cards) is built by JavaScript
-     at the bottom of the file, using data from "coupons.json".
-  3. coupons.json must sit in the SAME FOLDER as this index.html file
-     when you deploy (e.g. to GitHub Pages).
-
-  EXPECTED coupons.json FORMAT
-  -----------------------------
-  A JSON ARRAY of objects. Each object can use these fields:
-
-  [
-    {
-      "id": "amz-001",              // any unique string/number
-      "store": "Amazon",            // store name shown on the card
-      "category": "Electronics",    // must match one of the filter buttons
-      "title": "Up to 40% off headphones",
-      "discount": "Up to 40% off",  // shown as free text, NOT a number
-      "badge": "Bestseller",        // optional — omit if none
-      "expiry": "2026-08-31",       // optional — ISO date or free text
-      "code": "SAVE40",             // optional — omit if it's a "deal" not a "code"
-      "link": "https://www.amazon.in/...", // affiliate / shop link
-      "description": "Short one-line note about the deal", // optional
-      "image": "https://...jpg",    // optional — product image URL
-      "price": 1499,                // optional — real current price, number or string
-      "mrp": 2499,                  // optional — real original/list price
-      "save": 1000                  // optional — real rupee amount saved (mrp - price)
-    }
-  ]
-
-  Only "store", "category", "title" and "link" are required — every other
-  field (including price, mrp, save, image) is fully optional. The card
-  layout adapts to whatever subset of fields a given coupon actually has —
-  it never invents a number that isn't in the JSON.
-  NOTE ON PRICE FIELDS: only put "price"/"mrp"/"save" in coupons.json when
-  you have a real, current figure from the store. This site never generates
-  or guesses these values — see the safe-fallback helpers in the JS below.
-  =====================================================================
--->
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Coupon World — Hot Amazon India Deals, Coupons & Price Drops</title>
+<meta name="description" content="Discover hot Amazon India deals, coupons, price drops and trending offers on Coupon World. Browse electronics, mobiles, home, fashion, beauty and more.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://coupon-world.in/">
 
 <style>
-  /* ============================================================
-     1. DESIGN TOKENS
-     Palette: "ledger & foil" — a deep ink-green ledger background
-     (the colour of an old receipt book / cash counter) with a warm
-     foil-amber accent (the colour of a stamped discount seal).
-     This is deliberately NOT the default purple/blue AI gradient —
-     green = savings, amber = a stamped deal, ink = a paper ledger.
-     ============================================================ */
-  :root{
-    --ink-900: #07130f;
-    --ink-800: #0c1f18;
-    --ink-700: #12291f;
-    --ink-600: #1a3a2b;
-    --emerald: #17a672;
-    --emerald-bright: #2ee6a6;
-    --foil: #f2b134;
-    --foil-bright: #ffd066;
-    --paper: #f7f5ef;
-    --paper-dim: #c9d3ca;
-    --line: rgba(242, 245, 240, 0.12);
-    --danger: #ff6b5e;
+:root{
+  --bg:#05070b;
+  --bg2:#090f17;
+  --card:#101924;
+  --card2:#121f2d;
+  --text:#f8fafc;
+  --muted:#aeb9c7;
+  --line:rgba(255,255,255,.12);
+  --orange:#ff8a00;
+  --yellow:#ffd43b;
+  --green:#20e09f;
+  --blue:#4cc9f0;
+  --pink:#ff4d8d;
+  --red:#ff4b4b;
+  --shadow:0 24px 80px rgba(0,0,0,.55);
+  --radius:24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 10% -10%,rgba(255,138,0,.22),transparent 34%),
+    radial-gradient(circle at 95% 0%,rgba(32,224,159,.18),transparent 30%),
+    radial-gradient(circle at 50% 70%,rgba(76,201,240,.09),transparent 38%),
+    linear-gradient(180deg,#05070b,#08111b 55%,#05070b);
+}
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1220px;margin:auto;padding:0 18px}
 
-    --font-display: "Fraunces", "Georgia", serif;
-    --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    --font-mono: "IBM Plex Mono", "Courier New", monospace;
+/* HEADER */
+.header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(5,7,11,.78);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+.header-in{height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{display:flex;align-items:center;gap:12px;font-weight:1000;font-size:1.25rem}
+.logo-mark{
+  width:42px;height:42px;border-radius:15px;
+  background:linear-gradient(135deg,var(--orange),var(--yellow));
+  color:#201000;display:grid;place-items:center;font-weight:1000;
+  box-shadow:0 12px 34px rgba(255,138,0,.28)
+}
+.logo small{display:block;font-size:.68rem;color:var(--muted);font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.nav{display:flex;align-items:center;gap:8px}
+.nav a{padding:9px 12px;border-radius:999px;color:var(--muted);font-size:.88rem;font-weight:800}
+.nav a:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav .post{background:linear-gradient(135deg,var(--green),#88ffcf);color:#04120d}
 
-    --radius-lg: 20px;
-    --radius-md: 14px;
-    --radius-sm: 8px;
-    --shadow-soft: 0 20px 50px rgba(0,0,0,0.35);
-    --header-h: 68px;
-  }
+/* HERO */
+.hero{padding:44px 0 22px}
+.hero-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center}
+.kicker{
+  display:inline-flex;align-items:center;gap:9px;
+  border:1px solid rgba(255,212,59,.35);
+  background:rgba(255,212,59,.1);
+  color:var(--yellow);padding:8px 14px;border-radius:999px;
+  font-size:.78rem;font-weight:1000;text-transform:uppercase;letter-spacing:.07em
+}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#31ff96;box-shadow:0 0 16px #31ff96}
+.hero h1{
+  margin:18px 0 14px;
+  font-size:clamp(2.45rem,5.8vw,5.3rem);
+  line-height:.92;
+  letter-spacing:-.065em;
+}
+.hero h1 span{
+  background:linear-gradient(90deg,var(--orange),var(--yellow),var(--green));
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero p{max-width:62ch;color:var(--muted);font-size:1.08rem;line-height:1.7;margin:0 0 20px}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border:1px solid var(--line);padding:14px 18px;border-radius:16px;
+  font-weight:1000;background:rgba(255,255,255,.06)
+}
+.btn.primary{background:linear-gradient(135deg,var(--orange),var(--yellow));color:#211100;border:0}
+.btn.secondary{background:rgba(255,255,255,.06);color:#fff}
 
-  /* Google Fonts (loaded once, small subset) */
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+.deal-terminal{
+  background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.035));
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:18px;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+.deal-terminal:before{
+  content:"";position:absolute;inset:-2px;
+  background:linear-gradient(135deg,rgba(255,138,0,.28),transparent 40%,rgba(32,224,159,.24));
+  pointer-events:none
+}
+.deal-terminal>*{position:relative}
+.terminal-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;color:var(--muted);font-size:.82rem}
+.hot-pill{color:#180d00;background:linear-gradient(135deg,var(--yellow),var(--orange));padding:6px 10px;border-radius:999px;font-weight:1000}
+.big-deal{
+  background:#070b10;border:1px solid var(--line);border-radius:24px;padding:16px;
+}
+.big-img{
+  height:210px;border-radius:20px;background:
+    radial-gradient(circle at 50% 40%,rgba(255,212,59,.18),transparent 36%),
+    linear-gradient(135deg,#111d2a,#071019);
+  display:grid;place-items:center;overflow:hidden;margin-bottom:14px
+}
+.big-img img{width:100%;height:100%;object-fit:contain;padding:12px}
+.big-placeholder{font-size:4rem;text-align:center;color:var(--yellow)}
+.big-placeholder small{display:block;font-size:.75rem;color:var(--muted);margin-top:8px}
+.big-deal h3{font-size:1.25rem;line-height:1.35;margin:0 0 10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.big-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.big-price{font-size:1.7rem;color:var(--yellow);font-weight:1000}
+.big-discount{color:var(--green);font-weight:1000}
+.big-shop{display:block;margin-top:14px;text-align:center;background:linear-gradient(135deg,var(--green),#89ffd1);color:#03110b;padding:14px;border-radius:16px;font-weight:1000}
 
-  *{ box-sizing: border-box; }
-  html{ scroll-behavior: smooth; }
-  body{
-    margin:0;
-    font-family: var(--font-body);
-    background: radial-gradient(circle at 15% -10%, #143526 0%, var(--ink-900) 45%), var(--ink-900);
-    color: var(--paper);
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-  }
-  img{ max-width:100%; display:block; }
-  a{ color: inherit; text-decoration:none; }
-  button{ font-family: inherit; cursor:pointer; }
+/* IMPULSE STRIP */
+.impulse{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}
+.impulse-card{
+  background:rgba(255,255,255,.055);border:1px solid var(--line);
+  border-radius:18px;padding:16px;min-height:96px;transition:.18s
+}
+.impulse-card:hover{transform:translateY(-3px);border-color:rgba(255,212,59,.45)}
+.impulse-card b{font-size:1.1rem;display:block;margin-bottom:5px}
+.impulse-card span{color:var(--muted);font-size:.84rem}
 
-  /* Respect users who prefer less motion */
-  @media (prefers-reduced-motion: reduce){
-    *, *::before, *::after{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior:auto !important; }
-  }
+/* SEARCH */
+.search-panel{
+  margin:26px 0;
+  background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.035));
+  border:1px solid var(--line);
+  border-radius:28px;
+  padding:18px;
+  box-shadow:var(--shadow)
+}
+.search-row{display:grid;grid-template-columns:1fr 220px;gap:12px}
+.search{position:relative}
+.search:before{content:"🔎";position:absolute;left:15px;top:14px;opacity:.75}
+.search input,select{
+  width:100%;
+  background:#070b10;border:1px solid var(--line);color:var(--text);
+  border-radius:17px;padding:15px 16px
+}
+.search input{padding-left:46px}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;max-height:104px;overflow:auto;padding-bottom:2px}
+.chip{
+  border:1px solid var(--line);background:rgba(255,255,255,.055);
+  color:var(--muted);border-radius:999px;padding:9px 13px;
+  font-size:.82rem;font-weight:900;white-space:nowrap
+}
+.chip.active{background:linear-gradient(135deg,var(--orange),var(--yellow));color:#201000;border:0}
 
-  /* Visible focus ring for keyboard users */
-  a:focus-visible, button:focus-visible, input:focus-visible{
-    outline: 2px solid var(--foil-bright);
-    outline-offset: 2px;
-  }
+/* SECTION */
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:28px 0 16px}
+.section-head h2{font-size:2rem;margin:0;letter-spacing:-.04em}
+.section-head p{margin:6px 0 0;color:var(--muted)}
+.count{color:var(--yellow);font-weight:1000}
 
-  .wrap{ max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+/* DEAL GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:18px;padding-bottom:32px}
+.card{
+  background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.026));
+  border:1px solid var(--line);border-radius:26px;padding:14px;
+  display:flex;flex-direction:column;gap:10px;min-height:440px;
+  position:relative;overflow:hidden;transition:.2s
+}
+.card:hover{transform:translateY(-5px);border-color:rgba(255,138,0,.6);box-shadow:0 18px 50px rgba(0,0,0,.32)}
+.card:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--yellow),var(--green))}
+.imgbox{
+  height:165px;border-radius:21px;background:
+    radial-gradient(circle at 50% 36%,rgba(255,212,59,.13),transparent 34%),
+    linear-gradient(135deg,#142131,#080d13);
+  border:1px solid var(--line);display:grid;place-items:center;overflow:hidden
+}
+.imgbox img{width:100%;height:100%;object-fit:contain;padding:10px}
+.placeholder{text-align:center;font-size:2.8rem;color:var(--yellow)}
+.placeholder small{display:block;color:var(--muted);font-size:.72rem;margin-top:6px}
+.meta{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.store{font-size:.75rem;color:var(--yellow);font-weight:1000}
+.cat{font-size:.68rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 8px;max-width:145px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card h3{font-size:1rem;line-height:1.36;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.discount{font-size:1.28rem;font-weight:1000;color:var(--green)}
+.prices{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.price{font-weight:1000;font-size:1.25rem}
+.mrp{text-decoration:line-through;color:var(--muted);font-size:.84rem}
+.save{font-size:.72rem;font-weight:1000;color:#03110b;background:var(--green);border-radius:999px;padding:4px 8px}
+.desc{color:var(--muted);font-size:.82rem;margin:0;line-height:1.5;min-height:38px}
+.code{display:flex;justify-content:space-between;gap:8px;border:1px dashed rgba(255,255,255,.25);border-radius:14px;padding:9px 10px;color:var(--muted);font-size:.78rem}
+.shop{
+  margin-top:auto;text-align:center;background:linear-gradient(135deg,var(--orange),var(--yellow));
+  color:#201000;padding:13px;border-radius:17px;font-weight:1000
+}
+.card-note{text-align:center;color:var(--muted);font-size:.67rem}
 
-  /* ============================================================
-     2. STICKY HEADER
-     ============================================================ */
-  header.site-header{
-    position: sticky; top:0; z-index: 50;
-    height: var(--header-h);
-    display:flex; align-items:center;
-    background: rgba(7, 19, 15, 0.78);
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
-    border-bottom: 1px solid var(--line);
-  }
-  .header-inner{ display:flex; align-items:center; justify-content:space-between; gap:16px; width:100%; }
-  .brand{ display:flex; align-items:center; gap:10px; font-family: var(--font-display); font-weight:700; font-size:1.25rem; letter-spacing: -0.01em; }
-  .brand-mark{
-    width:34px; height:34px; border-radius: 9px;
-    background: linear-gradient(135deg, var(--emerald), var(--emerald-bright));
-    display:flex; align-items:center; justify-content:center;
-    color: var(--ink-900); font-weight:800; font-family: var(--font-display);
-    box-shadow: 0 6px 16px rgba(46, 230, 166, 0.35);
-  }
-  .brand-sub{ display:none; font-size:.7rem; color: var(--paper-dim); font-weight:500; letter-spacing: .03em; }
-  @media(min-width:640px){ .brand-sub{ display:block; } }
+/* VALUE SECTION */
+.value{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0 42px}
+.value-card{
+  border:1px solid var(--line);border-radius:26px;padding:22px;
+  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03))
+}
+.value-card h3{margin:0 0 10px;font-size:1.45rem}
+.value-card p{color:var(--muted);line-height:1.65;margin:0}
+.steps{display:grid;gap:10px}
+.step{display:flex;gap:12px;align-items:flex-start;color:var(--muted)}
+.step b{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--green),#88ffcf);color:#03110b;display:grid;place-items:center;flex:0 0 28px}
 
-  .header-cta{
-    font-size:.85rem; font-weight:600; padding: 9px 16px;
-    border-radius: 999px; border: 1px solid var(--line);
-    color: var(--paper); background: transparent;
-    transition: border-color .2s, background .2s;
-    white-space:nowrap;
-  }
-  .header-cta:hover{ border-color: var(--foil); background: rgba(242,177,52,0.08); }
+.state{grid-column:1/-1;text-align:center;color:var(--muted);padding:54px 18px}
+.state b{display:block;color:#fff;font-size:1.2rem;margin-bottom:6px}
 
-  /* ============================================================
-     3. HERO
-     Signature element: the search bar sits inside a large
-     "torn coupon stub" — a card with a dashed perforation line
-     and notch cut-outs, like a real voucher you'd tear off.
-     ============================================================ */
-  .hero{ padding: 52px 0 34px; position: relative; overflow:hidden; }
-  .hero::before{
-    /* soft ambient glow, quiet — not the whole page */
-    content:""; position:absolute; top:-140px; right:-120px; width:420px; height:420px;
-    background: radial-gradient(circle, rgba(46,230,166,0.18), transparent 70%);
-    pointer-events:none;
-  }
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:8px;
-    font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
-    color: var(--foil-bright); background: rgba(242,177,52,0.1);
-    border:1px solid rgba(242,177,52,0.35); padding:6px 12px; border-radius:999px;
-    margin-bottom:18px;
-  }
-  .eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--emerald-bright); box-shadow:0 0 8px var(--emerald-bright); }
+footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);font-size:.86rem}
+.footer{display:grid;grid-template-columns:1.2fr .8fr;gap:20px}
+.links{display:flex;gap:13px;flex-wrap:wrap;justify-content:flex-end}
+.links a{color:var(--muted)}
 
-  h1.hero-title{
-    font-family: var(--font-display);
-    font-weight:600;
-    font-size: clamp(2.1rem, 5.4vw, 3.6rem);
-    line-height:1.05; letter-spacing:-0.02em;
-    margin: 0 0 14px;
-    max-width: 15ch;
-  }
-  h1.hero-title em{ font-style:normal; color: var(--emerald-bright); }
-  .hero-tagline{ color: var(--paper-dim); font-size: clamp(1rem, 2vw, 1.15rem); max-width: 46ch; margin: 0 0 30px; }
-
-  /* --- the "coupon stub" search card --- */
-  .stub{
-    position:relative;
-    background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    padding: 22px;
-    backdrop-filter: blur(10px);
-    box-shadow: var(--shadow-soft);
-  }
-  /* notches cut into the left & right edge of the stub, like a real ticket */
-  .stub::before, .stub::after{
-    content:""; position:absolute; top:50%; transform:translateY(-50%);
-    width:26px; height:26px; border-radius:50%;
-    background: var(--ink-900);
-    border: 1px solid var(--line);
-  }
-  .stub::before{ left:-13px; }
-  .stub::after{ right:-13px; }
-
-  .search-row{ display:flex; gap:10px; flex-wrap:wrap; }
-  .search-field{
-    flex: 1 1 260px; position:relative; display:flex; align-items:center;
-  }
-  .search-field svg{ position:absolute; left:14px; width:18px; height:18px; color: var(--paper-dim); }
-  #searchInput{
-    width:100%; padding: 13px 14px 13px 40px;
-    border-radius: var(--radius-md); border: 1px solid var(--line);
-    background: rgba(7,19,15,0.55); color: var(--paper);
-    font-size: .95rem;
-  }
-  #searchInput::placeholder{ color: var(--paper-dim); }
-
-  .sort-select{
-    padding: 13px 14px; border-radius: var(--radius-md);
-    border: 1px solid var(--line); background: rgba(7,19,15,0.55);
-    color: var(--paper); font-size:.9rem; font-weight:500;
-  }
-
-  /* dashed perforation line separating search from quick categories */
-  .perforation{ border:none; border-top: 1.5px dashed rgba(247,245,239,0.22); margin: 20px 0 16px; }
-
-  .chip-row{ display:flex; gap:8px; flex-wrap:wrap; }
-  .chip{
-    padding: 8px 14px; border-radius: 999px; font-size:.82rem; font-weight:600;
-    border: 1px solid var(--line); background: rgba(255,255,255,0.03); color: var(--paper-dim);
-    transition: all .18s ease;
-  }
-  .chip:hover{ color: var(--paper); border-color: rgba(255,255,255,0.28); }
-  .chip.active{
-    background: linear-gradient(135deg, var(--emerald), var(--emerald-bright));
-    color: var(--ink-900); border-color: transparent;
-  }
-
-  /* ============================================================
-     4. RESULTS BAR
-     ============================================================ */
-  .results-bar{
-    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
-    margin: 34px 0 18px;
-  }
-  .results-count{ font-size:.88rem; color: var(--paper-dim); }
-  .results-count strong{ color: var(--paper); }
-
-  /* ============================================================
-     5. DEAL GRID + CARD
-     ============================================================ */
-  .grid{
-    display:grid; grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
-    gap: 18px; padding-bottom: 60px;
-  }
-
-  .card{
-    position:relative;
-    background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    padding: 18px;
-    display:flex; flex-direction:column; gap:10px;
-    backdrop-filter: blur(8px);
-    transition: transform .18s ease, border-color .18s ease;
-  }
-  .card:hover{ transform: translateY(-3px); border-color: rgba(46,230,166,0.4); }
-
-  .card-top{ display:flex; align-items:center; justify-content:space-between; gap:8px; }
-  .store-tag{ display:flex; align-items:center; gap:8px; }
-  .store-dot{
-    width:28px; height:28px; border-radius:8px;
-    background: rgba(242,177,52,0.14); color: var(--foil-bright);
-    display:flex; align-items:center; justify-content:center;
-    font-family: var(--font-display); font-weight:700; font-size:.85rem;
-    flex-shrink:0;
-  }
-  .store-name{ font-size:.85rem; font-weight:700; }
-  .category-pill{
-    font-size:.68rem; font-weight:600; text-transform:uppercase; letter-spacing:.04em;
-    color: var(--paper-dim); border:1px solid var(--line); padding:4px 8px; border-radius:6px;
-  }
-
-  .badge{
-    align-self:flex-start;
-    font-size:.68rem; font-weight:700; letter-spacing:.02em;
-    color: var(--ink-900); background: var(--foil-bright);
-    padding: 3px 9px; border-radius: 6px;
-  }
-
-  .card-title{ font-size:1rem; font-weight:600; line-height:1.35; margin:0; }
-
-  .discount-line{
-    font-family: var(--font-display); font-weight:600;
-    font-size: 1.3rem; color: var(--emerald-bright); letter-spacing:-0.01em;
-  }
-
-  .card-desc{ font-size:.83rem; color: var(--paper-dim); margin:0; }
-
-  /* product image — only rendered if coupons.json provides an "image" field */
-  .card-image{
-    width:100%; height:140px; border-radius: var(--radius-md); overflow:hidden;
-    background: rgba(255,255,255,0.04); border:1px solid var(--line);
-  }
-  .card-image img{ width:100%; height:100%; object-fit: contain; padding:8px; }
-
-  /* price / mrp / save — each piece only renders if that field exists in the data.
-     We never calculate or guess any of these three values. */
-  .price-row{ display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
-  .price-now{ font-family: var(--font-display); font-weight:600; font-size:1.15rem; color: var(--paper); }
-  .price-mrp{ font-size:.82rem; color: var(--paper-dim); text-decoration: line-through; }
-  .price-save{ font-size:.72rem; font-weight:700; color: var(--emerald-bright); background: rgba(46,230,166,0.12); padding:2px 7px; border-radius:6px; }
-
-  .meta-row{ display:flex; align-items:center; justify-content:space-between; font-size:.76rem; color: var(--paper-dim); margin-top:2px; }
-  .expiry.urgent{ color: var(--danger); font-weight:600; }
-
-  .code-row{
-    display:flex; align-items:center; gap:8px;
-    border: 1px dashed rgba(247,245,239,0.28); border-radius: var(--radius-sm);
-    padding: 8px 10px; margin-top:2px;
-  }
-  .code-text{ font-family: var(--font-mono); font-weight:600; font-size:.85rem; letter-spacing:.03em; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .copy-btn{
-    font-size:.72rem; font-weight:700; color: var(--ink-900);
-    background: var(--paper); border:none; border-radius:6px; padding:6px 10px;
-    flex-shrink:0; transition: background .15s;
-  }
-  .copy-btn:hover{ background: var(--foil-bright); }
-  .copy-btn.copied{ background: var(--emerald-bright); }
-
-  .shop-btn{
-    display:flex; align-items:center; justify-content:center; gap:6px;
-    margin-top: 4px;
-    padding: 11px 14px; border-radius: var(--radius-md);
-    background: linear-gradient(135deg, var(--emerald), var(--emerald-bright));
-    color: var(--ink-900); font-weight:700; font-size:.88rem;
-    transition: filter .15s, transform .15s;
-  }
-  .shop-btn:hover{ filter: brightness(1.08); transform: translateY(-1px); }
-
-  .price-note{
-    font-size:.68rem; color: var(--paper-dim); text-align:center;
-    opacity:.8; margin-top:-2px;
-  }
-
-  /* ============================================================
-     6. LOADING / ERROR / EMPTY STATES
-     ============================================================ */
-  .state-panel{
-    text-align:center; padding: 70px 20px; color: var(--paper-dim);
-  }
-  .state-panel h3{ font-family: var(--font-display); color: var(--paper); font-size:1.3rem; margin: 14px 0 6px; }
-  .state-panel p{ font-size:.9rem; max-width: 40ch; margin: 0 auto; }
-
-  .spinner{
-    width:36px; height:36px; margin:0 auto;
-    border-radius:50%; border: 3px solid rgba(255,255,255,0.12);
-    border-top-color: var(--emerald-bright);
-    animation: spin 0.8s linear infinite;
-  }
-  @keyframes spin{ to{ transform: rotate(360deg); } }
-
-  .retry-btn{
-    margin-top:16px; display:inline-block;
-    padding: 10px 20px; border-radius:999px; font-weight:600; font-size:.85rem;
-    background: var(--foil-bright); color: var(--ink-900);
-  }
-
-  /* skeleton loading cards */
-  .skeleton-card{
-    height: 230px; border-radius: var(--radius-lg);
-    background: linear-gradient(100deg, rgba(255,255,255,0.03) 30%, rgba(255,255,255,0.07) 50%, rgba(255,255,255,0.03) 70%);
-    background-size: 200% 100%;
-    animation: shimmer 1.4s infinite;
-    border: 1px solid var(--line);
-  }
-  @keyframes shimmer{ 0%{ background-position: 200% 0; } 100%{ background-position: -200% 0; } }
-
-  /* ============================================================
-     7. FOOTER
-     ============================================================ */
-  footer{ border-top: 1px solid var(--line); padding: 26px 0 40px; }
-  .footer-inner{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; }
-  .footer-note{ font-size:.78rem; color: var(--paper-dim); }
-  .footer-brand{ font-family: var(--font-display); font-weight:600; }
-
-  /* small screens */
-  @media (max-width: 480px){
-    .hero{ padding-top: 30px; }
-    .stub{ padding:16px; }
-    .stub::before, .stub::after{ display:none; }
-  }
+@media(max-width:900px){
+  .hero-layout,.value{grid-template-columns:1fr}
+  .impulse{grid-template-columns:1fr 1fr}
+  .search-row{grid-template-columns:1fr}
+  .nav a:not(.post){display:none}
+}
+@media(max-width:540px){
+  .hero{padding-top:30px}
+  .header-in{height:66px}
+  .logo small{display:none}
+  .impulse{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+  .footer{grid-template-columns:1fr}
+  .links{justify-content:flex-start}
+}
 </style>
 </head>
-<body>
 
-<!-- ============================================================
-     STICKY HEADER
-     ============================================================ -->
-<header class="site-header">
-  <div class="wrap header-inner">
-    <div class="brand">
-      <span class="brand-mark">CW</span>
-      <span>Coupon Word</span>
-      <span class="brand-sub">· AI Powered Deals</span>
-    </div>
-    <a class="header-cta" href="#deals">Browse deals</a>
+<body>
+<header class="header">
+  <div class="wrap header-in">
+    <a href="/" class="logo">
+      <span class="logo-mark">CW</span>
+      <span>Coupon World<small>Hot Deals India</small></span>
+    </a>
+    <nav class="nav">
+      <a href="#hot">Hot Deals</a>
+      <a href="#browse">Browse</a>
+      <a href="#why">Why Us</a>
+      <a class="post" href="#browse">Start Saving</a>
+    </nav>
   </div>
 </header>
 
-<!-- ============================================================
-     HERO — headline, search, category chips
-     ============================================================ -->
-<section class="hero">
-  <div class="wrap">
-    <span class="eyebrow"><span class="dot"></span> Live deals, updated daily</span>
-    <h1 class="hero-title">Real coupons, <em>real savings</em> — no fake claims.</h1>
-    <p class="hero-tagline">AI Powered Deals, Coupons &amp; Price Alerts. Search, filter, and copy a code in seconds.</p>
-
-    <div class="stub">
-      <div class="search-row">
-        <label class="search-field" for="searchInput" style="display:contents;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input id="searchInput" type="text" placeholder="Search by title, store, category or discount…" autocomplete="off">
-        </label>
-        <select id="sortSelect" class="sort-select" aria-label="Sort deals">
-          <option value="latest">Sort: Latest</option>
-          <option value="discount">Sort: Biggest discount</option>
-          <option value="az">Sort: A–Z</option>
-        </select>
+<section class="hero" id="hot">
+  <div class="wrap hero-layout">
+    <div>
+      <span class="kicker"><span class="live-dot"></span> Deal hunting made simple</span>
+      <h1>Don’t just shop. <span>Hunt the best deal.</span></h1>
+      <p>Coupon World turns boring affiliate links into a fast, visual deal discovery page. Browse hot Amazon India offers by category, search products instantly, and jump to the store in one click.</p>
+      <div class="hero-buttons">
+        <a class="btn primary" href="#browse">🔥 Browse Hot Deals</a>
+        <a class="btn secondary" href="#why">Why people should use this?</a>
       </div>
+    </div>
 
-      <hr class="perforation">
-
-      <div class="chip-row" id="categoryChips">
-        <!-- category buttons are injected by JS, "All" is default -->
+    <div class="deal-terminal">
+      <div class="terminal-top">
+        <b>Live Deal Spotlight</b>
+        <span class="hot-pill">Trending Now</span>
+      </div>
+      <div class="big-deal" id="featuredDeal">
+        <div class="big-img"><div class="big-placeholder">🛍️<small>Loading deal...</small></div></div>
+        <h3>Loading featured deal...</h3>
+        <div class="big-row"><span class="big-price">Check Price</span><span class="big-discount">Hot Deal</span></div>
+        <a class="big-shop" href="#browse">View Deals</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     RESULTS + GRID
-     ============================================================ -->
-<main class="wrap" id="deals">
-  <div class="results-bar">
-    <p class="results-count" id="resultsCount">Loading deals…</p>
+<section class="wrap">
+  <div class="impulse">
+    <a class="impulse-card" href="#browse" data-quick="Electronics"><b>⚡ Electronics</b><span>Earbuds, watches, gadgets and accessories.</span></a>
+    <a class="impulse-card" href="#browse" data-quick="Mobiles"><b>📱 Mobiles</b><span>Phone offers and mobile accessories.</span></a>
+    <a class="impulse-card" href="#browse" data-quick="Home"><b>🏠 Home Deals</b><span>Kitchen, home improvement and daily use.</span></a>
+    <a class="impulse-card" href="#browse" data-quick="Fashion"><b>👟 Fashion</b><span>Shoes, bags, watches and clothing deals.</span></a>
+  </div>
+</section>
+
+<main class="wrap" id="browse">
+  <div class="search-panel">
+    <div class="search-row">
+      <div class="search">
+        <input id="searchInput" type="search" placeholder="Search: earbuds, iPhone, smartwatch, kitchen, toys..." autocomplete="off">
+      </div>
+      <select id="sortSelect" aria-label="Sort deals">
+        <option value="latest">Sort: Latest</option>
+        <option value="discount">Sort: Biggest Discount</option>
+        <option value="az">Sort: A–Z</option>
+      </select>
+    </div>
+    <div class="chips" id="categoryChips"></div>
+  </div>
+
+  <div class="section-head">
+    <div>
+      <h2>Hot Deals Wall</h2>
+      <p><span class="count" id="resultsCount">Loading deals...</span></p>
+    </div>
   </div>
 
   <div class="grid" id="dealsGrid">
-    <!-- Deal cards, or loading/empty/error panels, are injected here by JS -->
+    <div class="state"><b>Loading deals...</b>Fetching Coupon World deals.</div>
   </div>
+
+  <section class="value" id="why">
+    <div class="value-card">
+      <h3>Why will people browse this site?</h3>
+      <p>Because the homepage gives them quick visual categories, search, trending deal cards and a clear Shop Now action. It feels like a deal wall, not a static list.</p>
+    </div>
+    <div class="value-card">
+      <h3>How it works</h3>
+      <div class="steps">
+        <div class="step"><b>1</b><span>You add products in your deal engine.</span></div>
+        <div class="step"><b>2</b><span>Coupon World displays them as attractive cards.</span></div>
+        <div class="step"><b>3</b><span>Users click Shop Now and go to Amazon with your affiliate tag.</span></div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
-  <div class="wrap footer-inner">
-    <span class="footer-brand">Coupon Word</span>
-    <span class="footer-note">Prices and offers are set by each store and may change on their site. Coupon Word does not display or guess prices.</span>
+  <div class="wrap footer">
+    <div><b>Coupon World</b><br>Amazon prices and offers can change anytime. Always check final price on Amazon before purchase.</div>
+    <div class="links">
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Affiliate Disclosure</a>
+    </div>
   </div>
 </footer>
 
 <script>
-/* =====================================================================
-   COUPON WORD — app logic
-   Beginner-friendly walkthrough:
-   1. CONFIG        — constants used across the app
-   2. STATE         — variables that hold "what's on screen right now"
-   3. DOM SHORTCUTS — grab elements once so we don't re-query them
-   4. DATA LOADING  — fetch coupons.json, handle loading/error states
-   5. RENDERING     — turn the current filtered/sorted list into HTML
-   6. EVENTS        — search box, category chips, sort dropdown, copy button
-   ===================================================================== */
+const DATA_URL="coupons.json";
+let allDeals=[], categories=["All"], activeCategory="All", searchTerm="", sortMode="latest";
 
-/* ---------- 1. CONFIG ---------- */
-const DATA_URL = "coupons.json"; // must live next to this index.html
-let CATEGORIES = ["All"];
+const grid=document.getElementById("dealsGrid");
+const chips=document.getElementById("categoryChips");
+const results=document.getElementById("resultsCount");
+const searchInput=document.getElementById("searchInput");
+const sortSelect=document.getElementById("sortSelect");
 
-/* ---------- 2. STATE ---------- */
-let allDeals = [];          // everything loaded from coupons.json
-let activeCategory = "All"; // which chip is selected
-let searchTerm = "";        // current text in the search box
-let sortMode = "latest";    // current value of the sort dropdown
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
+const clean=(v,f="")=>(v===null||v===undefined||String(v).trim()==="")?f:String(v).trim();
+const n=v=>{if(v===null||v===undefined||v==="")return null;const x=parseFloat(String(v).replace(/[^\d.]/g,""));return Number.isFinite(x)?x:null}
+const rs=x=>"₹"+Number(x).toLocaleString("en-IN",{maximumFractionDigits:0});
+const disc=x=>{const m=String(x||"").match(/(\d+(\.\d+)?)/);return m?parseFloat(m[1]):-1}
 
-/* ---------- 3. DOM SHORTCUTS ---------- */
-const grid = document.getElementById("dealsGrid");
-const resultsCount = document.getElementById("resultsCount");
-const searchInput = document.getElementById("searchInput");
-const sortSelect = document.getElementById("sortSelect");
-const chipRow = document.getElementById("categoryChips");
-
-/* Build the category chip buttons once, from the CATEGORIES list above */
-function buildCategoryChips(){
-  chipRow.innerHTML = CATEGORIES.map(cat => {
-    const isActive = cat === activeCategory ? "active" : "";
-    return `<button class="chip ${isActive}" data-cat="${cat}" type="button">${cat}</button>`;
-  }).join("");
-
-  // one click listener per chip
-  chipRow.querySelectorAll(".chip").forEach(btn => {
-    btn.addEventListener("click", () => {
-      activeCategory = btn.dataset.cat;
-      buildCategoryChips();  // re-render so the "active" style moves
-      renderDeals();
-    });
-  });
-}
-
-/* ---------- 4. DATA LOADING ---------- */
-async function loadDeals(){
-  showLoadingState();
+async function load(){
   try{
-    const response = await fetch(DATA_URL, { cache: "no-store" });
-    if(!response.ok){
-      throw new Error("HTTP " + response.status);
-    }
-    const data = await response.json();
-
-    if(!Array.isArray(data)){
-      throw new Error("coupons.json must be a JSON array of deal objects.");
-    }
-
-    allDeals = data;
-    CATEGORIES = ["All", ...new Set(allDeals.map(d => d.category || "Deals"))];
-    buildCategoryChips();
-    renderDeals();
-  }catch(err){
-    console.error("Failed to load coupons.json:", err);
-    showErrorState(err.message);
+    const r=await fetch(DATA_URL+"?v="+Date.now(),{cache:"no-store"});
+    if(!r.ok)throw new Error("HTTP "+r.status);
+    const data=await r.json();
+    if(!Array.isArray(data))throw new Error("coupons.json must be JSON array");
+    allDeals=data.filter(d=>d&&d.title&&d.link);
+    categories=["All",...new Set(allDeals.map(d=>clean(d.category,"Deals")))].slice(0,26);
+    buildChips(); feature(); render();
+  }catch(e){
+    results.textContent="No deals loaded";
+    grid.innerHTML=`<div class="state"><b>Could not load deals</b>${esc(e.message)}</div>`;
   }
 }
-
-/* ---------- 5. RENDERING ---------- */
-
-function showLoadingState(){
-  resultsCount.textContent = "Loading deals…";
-  // a few skeleton placeholders so the page doesn't feel empty while fetching
-  grid.innerHTML = Array.from({length: 6}).map(() => `<div class="skeleton-card"></div>`).join("");
+function buildChips(){
+  chips.innerHTML=categories.map(c=>`<button class="chip ${c===activeCategory?"active":""}" data-cat="${esc(c)}">${esc(c)}</button>`).join("");
+  chips.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{activeCategory=b.dataset.cat;buildChips();render();});
 }
-
-function showErrorState(message){
-  resultsCount.textContent = "";
-  grid.innerHTML = `
-    <div class="state-panel" style="grid-column: 1/-1;">
-      <div style="font-size:2.2rem;">⚠️</div>
-      <h3>Couldn't load deals</h3>
-      <p>coupons.json could not be read (${escapeHtml(message)}). Check that the file exists next to index.html and is valid JSON.</p>
-      <button class="retry-btn" id="retryBtn" type="button">Try again</button>
-    </div>`;
-  document.getElementById("retryBtn").addEventListener("click", loadDeals);
-}
-
-function showEmptyState(){
-  grid.innerHTML = `
-    <div class="state-panel" style="grid-column: 1/-1;">
-      <div style="font-size:2.2rem;">🔍</div>
-      <h3>No deals match that search</h3>
-      <p>Try a different keyword, or switch to the "All" category.</p>
-    </div>`;
-}
-
-/* Filters + sorts allDeals based on current state, then draws the grid */
-function renderDeals(){
-  if(allDeals.length === 0){
-    // still loading, or coupons.json was empty — loadDeals() controls the loading UI,
-    // so only show the empty state here if loading has actually finished.
-    return;
-  }
-
-  const term = searchTerm.trim().toLowerCase();
-
-  let filtered = allDeals.filter(deal => {
-    const matchesCategory = activeCategory === "All" || (deal.category || "").toLowerCase() === activeCategory.toLowerCase();
-    if(!matchesCategory) return false;
-
-    if(term === "") return true;
-
-    const haystack = [deal.title, deal.store, deal.category, deal.discount]
-      .filter(Boolean)
-      .join(" ")
-      .toLowerCase();
-    return haystack.includes(term);
+function filtered(){
+  let list=allDeals.filter(d=>{
+    const cat=clean(d.category,"Deals");
+    if(activeCategory!=="All"&&cat!==activeCategory)return false;
+    const t=searchTerm.toLowerCase();
+    if(!t)return true;
+    return [d.title,d.category,d.store,d.discount,d.code].filter(Boolean).join(" ").toLowerCase().includes(t);
   });
-
-  filtered = sortDeals(filtered, sortMode);
-
-  resultsCount.innerHTML = `<strong>${filtered.length}</strong> deal${filtered.length === 1 ? "" : "s"} found`;
-
-  if(filtered.length === 0){
-    showEmptyState();
-    return;
-  }
-
-  grid.innerHTML = filtered.map(dealCardHtml).join("");
-
-  // wire up "copy code" buttons after the cards exist in the DOM
-  grid.querySelectorAll(".copy-btn").forEach(btn => {
-    btn.addEventListener("click", () => copyCode(btn));
-  });
+  if(sortMode==="az")list.sort((a,b)=>clean(a.title).localeCompare(clean(b.title)));
+  if(sortMode==="discount")list.sort((a,b)=>disc(b.discount)-disc(a.discount));
+  return list;
 }
-
-function sortDeals(deals, mode){
-  const copy = [...deals];
-  if(mode === "az"){
-    copy.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
-  }else if(mode === "discount"){
-    // "biggest discount TEXT" — we don't invent numbers, we just pull the
-    // first number found in the discount string (e.g. "40% off" -> 40)
-    // and sort by that. Deals with no number sink to the bottom.
-    copy.sort((a, b) => extractDiscountNumber(b.discount) - extractDiscountNumber(a.discount));
-  }else{
-    // "latest" — trust the order coupons.json is already in (newest first
-    // is the expected convention), so no re-sort needed.
-  }
-  return copy;
+function img(d,cls="imgbox"){
+  const im=clean(d.image,"");
+  if(im)return `<div class="${cls}"><img src="${esc(im)}" alt="${esc(clean(d.title))}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=&quot;placeholder&quot;>🛍️<small>Coupon World</small></div>'"></div>`;
+  return `<div class="${cls}"><div class="placeholder">🛍️<small>Coupon World</small></div></div>`;
 }
-
-function extractDiscountNumber(text){
-  if(!text) return -1;
-  const match = String(text).match(/(\d+(\.\d+)?)/);
-  return match ? parseFloat(match[1]) : -1;
+function price(d){
+  const p=n(d.price),m=n(d.mrp),s=n(d.save);
+  if(p===null&&m===null&&s===null)return "";
+  return `<div class="prices">${p!==null?`<span class="price">${rs(p)}</span>`:""}${m!==null&&m>0?`<span class="mrp">${rs(m)}</span>`:""}${s!==null&&s>0?`<span class="save">Save ${rs(s)}</span>`:""}</div>`;
 }
-
-/* Builds the HTML for one deal card. Every field is optional except
-   store/category/title/link, and the layout adapts if something's missing.
-   Every read from `deal` goes through a safe-fallback helper below, so a
-   coupon missing 8 of its 13 possible fields still renders a clean card
-   instead of showing "undefined". */
-function dealCardHtml(deal){
-  const store = escapeHtml(safeText(deal.store, "Store"));
-  const category = escapeHtml(safeText(deal.category, "General"));
-  const title = escapeHtml(safeText(deal.title, "Untitled deal"));
-  const discount = safeText(deal.discount, "");
-  const badge = safeText(deal.badge, "");
-  const description = safeText(deal.description, "");
-  const link = deal.link ? escapeHtml(deal.link) : "#";
-  const initials = store.slice(0, 2).toUpperCase();
-
-  const imageHtml = imageBlockHtml(deal.image, title);
-  const priceRowHtml = priceRowBlockHtml(deal.price, deal.mrp, deal.save);
-  const expiryHtml = expiryLineHtml(deal.expiry);
-
-  const codeHtml = deal.code ? `
-    <div class="code-row">
-      <span class="code-text">${escapeHtml(safeText(deal.code, ""))}</span>
-      <button class="copy-btn" type="button" data-code="${escapeHtml(safeText(deal.code, ""))}">Copy</button>
-    </div>` : "";
-
-  return `
-    <article class="card">
-      ${imageHtml}
-      <div class="card-top">
-        <div class="store-tag">
-          <span class="store-dot" aria-hidden="true">${initials || "•"}</span>
-          <span class="store-name">${store}</span>
-        </div>
-        <span class="category-pill">${category}</span>
-      </div>
-
-      ${badge ? `<span class="badge">${escapeHtml(badge)}</span>` : ""}
-      <h3 class="card-title">${title}</h3>
-      ${discount ? `<div class="discount-line">${escapeHtml(discount)}</div>` : ""}
-      ${priceRowHtml}
-      ${description ? `<p class="card-desc">${escapeHtml(description)}</p>` : ""}
-
-      ${expiryHtml}
-      ${codeHtml}
-
-      <a class="shop-btn" href="${link}" target="_blank" rel="nofollow sponsored noopener">
-        Shop now
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <p class="price-note">Price may change on Amazon — always check the final price on the store page.</p>
-    </article>`;
+function card(d){
+  return `<article class="card">
+    ${img(d)}
+    <div class="meta"><span class="store">${esc(clean(d.store,"Amazon IN"))}</span><span class="cat">${esc(clean(d.category,"Deals"))}</span></div>
+    <h3>${esc(clean(d.title,"Untitled deal"))}</h3>
+    <div class="discount">${esc(clean(d.discount,"Check Deal"))}</div>
+    ${price(d)}
+    <p class="desc">${esc(clean(d.description,"Click to check the latest price and availability on Amazon."))}</p>
+    <div class="code"><span>${esc(clean(d.code,"NO CODE"))}</span><span>${esc(clean(d.expiry,"Limited Time"))}</span></div>
+    <a class="shop" href="${esc(clean(d.link,"#"))}" target="_blank" rel="nofollow sponsored noopener">Shop Now →</a>
+    <div class="card-note">Final price may change on Amazon.</div>
+  </article>`;
 }
-
-/* ---- safe-fallback helpers ----
-   These exist so ANY missing/null/undefined field in coupons.json degrades
-   gracefully instead of printing "undefined" or throwing an error. */
-
-// returns a trimmed string for a field, or the given fallback if it's
-// missing, null, or not actually text
-function safeText(value, fallback){
-  if(value === null || value === undefined) return fallback;
-  const str = String(value).trim();
-  return str === "" ? fallback : str;
+function render(){
+  const list=filtered();
+  results.textContent=`${list.length} deals found`;
+  grid.innerHTML=list.length?list.map(card).join(""):`<div class="state"><b>No deals found</b>Try another search or category.</div>`;
 }
-
-// returns a finite number for a field (price/mrp/save may arrive as a
-// number OR a numeric string in real-world JSON), or null if it isn't usable
-function safeNumber(value){
-  if(value === null || value === undefined || value === "") return null;
-  const num = typeof value === "number" ? value : parseFloat(String(value).replace(/[^\d.]/g, ""));
-  return Number.isFinite(num) ? num : null;
+function feature(){
+  const d=allDeals.find(x=>x.image)||allDeals[0];
+  if(!d)return;
+  const p=n(d.price);
+  document.getElementById("featuredDeal").innerHTML=`
+    ${img(d,"big-img")}
+    <h3>${esc(clean(d.title,"Featured deal"))}</h3>
+    <div class="big-row"><span class="big-price">${p!==null?rs(p):esc(clean(d.discount,"Check Deal"))}</span><span class="big-discount">${esc(clean(d.category,"Hot Deal"))}</span></div>
+    <a class="big-shop" href="${esc(clean(d.link,"#"))}" target="_blank" rel="nofollow sponsored noopener">Shop Now →</a>`;
 }
-
-// formats a number as Indian Rupees, e.g. 1499 -> "₹1,499"
-function formatRupees(num){
-  return "₹" + num.toLocaleString("en-IN", { maximumFractionDigits: 0 });
-}
-
-// only builds an <img> block if a usable image URL was actually provided;
-// if the image fails to load at runtime, it removes itself rather than
-// showing a broken-image icon
-function imageBlockHtml(image, altText){
-  const url = safeText(image, "");
-  if(!url) return "";
-  return `<div class="card-image"><img src="${escapeHtml(url)}" alt="${altText}" loading="lazy" onerror="this.closest('.card-image').remove()"></div>`;
-}
-
-// builds the price/mrp/save line from whatever real figures exist —
-// each of the three pieces is independently optional, and none of them
-// is ever calculated or guessed if missing from coupons.json
-function priceRowBlockHtml(price, mrp, save){
-  const priceNum = safeNumber(price);
-  const mrpNum = safeNumber(mrp);
-  const saveNum = safeNumber(save);
-
-  if(priceNum === null && mrpNum === null && saveNum === null) return "";
-
-  const parts = [];
-  if(priceNum !== null) parts.push(`<span class="price-now">${formatRupees(priceNum)}</span>`);
-  if(mrpNum !== null) parts.push(`<span class="price-mrp">${formatRupees(mrpNum)}</span>`);
-  if(saveNum !== null) parts.push(`<span class="price-save">Save ${formatRupees(saveNum)}</span>`);
-
-  return `<div class="price-row">${parts.join("")}</div>`;
-}
-
-/* Shows "Expires in X days" style text, and flags it red inside 3 days.
-   If no expiry is given, or it isn't a real date, we just show nothing —
-   we never invent an expiry. */
-function expiryLineHtml(expiry){
-  if(!expiry) return "";
-
-  const parsed = new Date(expiry);
-  if(isNaN(parsed.getTime())){
-    // not a parseable date — show the raw text as-is (e.g. "Limited time")
-    return `<div class="meta-row"><span>Offer</span><span>${escapeHtml(expiry)}</span></div>`;
-  }
-
-  const today = new Date();
-  const msPerDay = 1000 * 60 * 60 * 24;
-  const daysLeft = Math.ceil((parsed - today) / msPerDay);
-
-  let label;
-  if(daysLeft < 0) label = "Expired";
-  else if(daysLeft === 0) label = "Expires today";
-  else if(daysLeft === 1) label = "Expires tomorrow";
-  else label = `Expires in ${daysLeft} days`;
-
-  const urgentClass = (daysLeft <= 3) ? "urgent" : "";
-  return `<div class="meta-row"><span>Valid until</span><span class="expiry ${urgentClass}">${label}</span></div>`;
-}
-
-/* ---------- 6. EVENTS ---------- */
-
-// live search — updates as you type, no button needed
-searchInput.addEventListener("input", (e) => {
-  searchTerm = e.target.value;
-  renderDeals();
-});
-
-sortSelect.addEventListener("change", (e) => {
-  sortMode = e.target.value;
-  renderDeals();
-});
-
-// copies a coupon code to the clipboard and shows brief "Copied" feedback
-function copyCode(button){
-  const code = button.dataset.code;
-  navigator.clipboard.writeText(code).then(() => {
-    const originalText = button.textContent;
-    button.textContent = "Copied!";
-    button.classList.add("copied");
-    setTimeout(() => {
-      button.textContent = originalText;
-      button.classList.remove("copied");
-    }, 1500);
-  }).catch(() => {
-    // clipboard API can fail (e.g. insecure context) — fail quietly with a fallback message
-    button.textContent = "Copy failed";
-    setTimeout(() => { button.textContent = "Copy"; }, 1500);
-  });
-}
-
-// basic HTML-escaping so deal text from coupons.json can never break the page
-// or inject scripts (important since this data may come from many sources)
-function escapeHtml(str){
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-/* ---------- KICK OFF ---------- */
-buildCategoryChips();
-loadDeals();
+searchInput.addEventListener("input",e=>{searchTerm=e.target.value;render();});
+sortSelect.addEventListener("change",e=>{sortMode=e.target.value;render();});
+document.querySelectorAll("[data-quick]").forEach(a=>a.addEventListener("click",()=>{activeCategory=a.dataset.quick;buildChips();setTimeout(render,10);}));
+load();
 </script>
 </body>
 </html>
