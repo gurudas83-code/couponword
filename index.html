@@ -472,7 +472,7 @@
 
 /* ---------- 1. CONFIG ---------- */
 const DATA_URL = "coupons.json"; // must live next to this index.html
-const CATEGORIES = ["All", "Electronics", "Mobiles", "Fashion", "Home", "Beauty", "Toys", "Fitness", "Offers"];
+let CATEGORIES = ["All"];
 
 /* ---------- 2. STATE ---------- */
 let allDeals = [];          // everything loaded from coupons.json
@@ -519,6 +519,7 @@ async function loadDeals(){
     }
 
     allDeals = data;
+    CATEGORIES = ["All", ...new Set(allDeals.map(d => d.category || "Deals"))];
     buildCategoryChips();
     renderDeals();
   }catch(err){
