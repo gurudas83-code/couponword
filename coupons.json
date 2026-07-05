@@ -1,106 +1,96 @@
 [
   {
-    "sl_no": 61,
-    "store": " Amazon IN",
-    "category": "UPDATE: Prime Deal - Toys & Stationery",
-    "discount": "UPDATE: Prime Deal",
+    "store": "Amazon IN",
+    "category": "Prime Deal - Toys & Stationery",
+    "discount": "Prime Deal",
     "title": "JIADA Space Astronaut Stationery Set for Boys - with Badge, Notebook and Pen - Birthday Return Gift/Rakhi Gift for Boys, Kids, Blue",
     "code": "Prime Deal",
     "link": "https://amzn.in/d/04HOO2eq?tag=guru0906-21",
-    "expiry": "30 Jul 2026"
+    "expiry": "30 Jul 2026",
+    "id": 1
   },
   {
-    "sl_no": 62,
-    "store": " Amazon IN",
-    "category": "UPDATE: Prime Deal - Electronics",
-    "discount": "UPDATE: Prime Deal",
-    "title": "Keyboard Case for 【entity-Samsung¦canonical_name=Samsung】 Galaxy Tab A11+ & Tab A9 Plus 11” Folio Cover SM-X230, SM-X236B, SM-X210, SM-X215 with Trackpad, 7 Color Backlit Magnetically Detachable Bluetooth Keyboard, Multi-Angle View",
+    "store": "Amazon IN",
+    "category": "Prime Deal - Electronics",
+    "discount": "Prime Deal",
+    "title": "Keyboard Case for Samsung Galaxy Tab A11+ & Tab A9 Plus 11” Folio Cover SM-X230, SM-X236B, SM-X210, SM-X215 with Trackpad, 7 Color Backlit Magnetically Detachable Bluetooth Keyboard, Multi-Angle View",
     "code": "Prime Deal",
     "link": "https://amzn.in/d/01dfFSgu?tag=guru0906-21",
-    "expiry": "30 Jul 2026"
+    "expiry": "30 Jul 2026",
+    "id": 2
   },
   {
-    "sl_no": 63,
     "store": "Amazon IN",
-    "category": "UPDATE: Clothing",
+    "category": "Clothing",
     "discount": "Check Deal",
     "title": "TeeSlix NASA Cotton Boys t-Shirt, Teenagers | Soft, Premium Fabric | Regular Fit T-Shirt for Boys, Girls | Space Rocket Design | Blue,Black,RED | Age 8 to 17 Years",
     "code": "No code",
     "link": "https://amzn.in/d/06Ksbhq6?tag=guru0906-21",
-    "expiry": "30 Jul 2026"
+    "expiry": "30 Jul 2026",
+    "id": 3
   },
   {
-    "sl_no": 64,
     "store": "Amazon IN",
-    "category": "UPDATE: Health & Personal Care",
+    "category": "Health & Personal Care",
     "discount": "Check Deal",
     "title": "Bausch + Lomb Fresh Multi-Purpose 500Ml Contact Lens Solution (Pack Of 1)",
     "code": "No code",
     "link": "https://amzn.in/d/06XUsLAR?tag=guru0906-21",
-    "expiry": "30 Jul 2026"
+    "expiry": "30 Jul 2026",
+    "id": 4
   },
   {
-    "sl_no": 65,
     "store": "Amazon IN",
-    "category": "UPDATE: Tools & Hardware",
+    "category": "Tools & Hardware",
     "discount": "Check Deal",
     "title": "AASONS Electric Drill Variable Angle Grinder Connecting Rod with 1pc Wood, Marble Cutting Blade, Flap Disk for Paint Remover, Sanding disc and Iron Grinding Wheel",
     "code": "No code",
     "link": "https://amzn.in/d/01GmFjs1?tag=guru0906-21",
-    "expiry": "30 Jul 2026"
+    "expiry": "30 Jul 2026",
+    "id": 5
   },
   {
-    "sl_no": 66,
     "store": "Amazon IN",
-    "category": "UPDATE: Home Improvement",
+    "category": "Home Improvement",
     "discount": "Check Deal",
     "title": "Hebezon Expandable Appliance Roller Stand with Wheels Heavy Duty Mobile Dolly for Washing Machine, Refrigerator,Furniture Adjustable Moving Base for Home, Kitchen,Laundry Use",
     "code": "No code",
     "link": "https://amzn.in/d/0fkG5ElL?tag=guru0906-21",
-    "expiry": "30 Jul 2026"
+    "expiry": "30 Jul 2026",
+    "id": 6
   },
   {
-    "sl_no": 67,
-    "store": " Amazon IN",
-    "category": "UPDATE: Home Improvement",
-    "discount": "Check Deal",
-    "title": "Hebezon Expandable Appliance Roller Stand with Wheels Heavy Duty Mobile Dolly for Washing Machine, Refrigerator,Furniture Adjustable Moving Base for Home, Kitchen,Laundry Use",
-    "code": "No code",
-    "link": "https://amzn.in/d/0fkG5ElL?tag=guru0906-21",
-    "expiry": "30 Jul 2026"
-  },
-  {
-    "sl_no": 68,
     "store": "Amazon IN",
-    "category": "UPDATE: Footwear",
+    "category": "Footwear",
     "discount": "Check Deal",
     "title": "Campus Women's OGL-4 Sneakers",
     "code": "No code",
     "link": "https://amzn.in/d/0b3TayvT?tag=guru0906-21",
-    "expiry": "30 Jul 2026"
+    "expiry": "30 Jul 2026",
+    "id": 7
   },
   {
-    "sl_no": 69,
-    "store": "【entity-Amazon¦canonical_name=Amazon】 IN",
+    "store": "Amazon IN",
     "category": "Home Improvement",
     "discount": "50%",
     "title": "HomeStrap Rectangular Set Of 3 Large Plastic Storage Organizers/Baskets With Lid For Kitchen, Clothes, Multipurpose Vegetables, Toys, Books, Office, Stationery, Wardrobe(Biscuit, Grey, Brown)",
     "code": "Prime Deal",
     "link": "https://amzn.to/4eZdI1O?tag=guru0906-21",
-    "expiry": "30 Jul 2026"
+    "expiry": "30 Jul 2026",
+    "id": 8
   },
   {
-    "sl_no": 70,
-    "store": " 【entity-Amazon¦canonical_name=Amazon】 IN",
+    "store": "Amazon IN",
     "category": "Electronics",
     "discount": "19%",
-    "title": "【entity-Amazon¦canonical_name=Amazon】 Basics 64 GB Micro SD Card with Adapter | Upto 120 MB/s | Class 10 | U1, C10, V10 Speed Classes",
+    "title": "Amazon Basics 64 GB Micro SD Card with Adapter | Upto 120 MB/s | Class 10 | U1, C10, V10 Speed Classes",
     "code": "Prime Day Deal",
     "link": "https://amzn.to/4v9I4o8?tag=guru0906-21",
-    "expiry": "30 Jul 2026"
+    "expiry": "30 Jul 2026",
+    "id": 9
   },
   {
-    "id": 1,
+    "id": 10,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "Redmi Note 13 5G Smartphone",
@@ -108,18 +98,16 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/dp/B0CQPHMWR3?tag=guru0906-21",
     "expiry": "Limited Time",
-    "badge": "🔥 Popular Pick",
     "price": 20999,
     "mrp": 20999,
     "save": 0,
     "priceText": "₹20,999",
     "linkType": "product",
     "asin": "B0CQPHMWR3",
-    "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0CQPHMWR3&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21",
-    "rating": 4.0
+    "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0CQPHMWR3&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21"
   },
   {
-    "id": 2,
+    "id": 11,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "realme Buds Air 8, 11mm+6mm Dual Dynamic Bass Drivers, 58Hrs Playtime, 55dB ANC, 6 Mic ENC, 45ms Low Latency, 360° Spatial Audio, Hi-Res LHDC, IP55 Dust & Water Resistant, BT v5.4 (Master Gold)",
@@ -134,31 +122,27 @@
     "priceText": "₹3,399",
     "linkType": "product",
     "asin": "B0GDQCTYFB",
-    "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0GDQCTYFB&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21",
-    "rating": 4.2
+    "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0GDQCTYFB&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21"
   },
   {
-    "id": 3,
+    "id": 12,
     "store": "Amazon IN",
     "category": "Health & Personal Care",
     "title": "Amway Nutrilite Cal Mag D K2 (90 Tablets)",
     "discount": "6% OFF",
     "price": 999,
     "mrp": 1059,
-    "save": 59,
+    "save": 60,
     "priceText": "₹999",
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/dp/B0D3HKTL6K?tag=guru0906-21",
     "asin": "B0D3HKTL6K",
     "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0D3HKTL6K&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21",
-    "badge": "✅ Trusted Brand",
     "expiry": "Limited Time",
-    "linkType": "product",
-    "reviews": 215,
-    "rating": 4.5
+    "linkType": "product"
   },
   {
-    "id": 4,
+    "id": 13,
     "store": "Amazon IN",
     "category": "Musical Instruments",
     "title": "Yamaha PSS-E30 Remie Portable Mini Keyboard – 37 Keys, White, Built-in Songs, Sound Effects & Quiz Mode, Lightweight, Ideal for Kids & Early Learners",
@@ -171,34 +155,28 @@
     "link": "https://www.amazon.in/dp/B08232VZ84?tag=guru0906-21",
     "asin": "B08232VZ84",
     "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08232VZ84&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21",
-    "badge": "✅ Best for Kids",
     "expiry": "Limited Time",
-    "linkType": "product",
-    "reviews": 951,
-    "rating": 4.4
+    "linkType": "product"
   },
   {
-    "id": 5,
+    "id": 14,
     "store": "Amazon IN",
     "category": "Cell Phones & Accessories",
     "title": "Apple iPhone 17e 256 GB (Black) – 15.40 cm (6.1″) Super Retina XDR Display, A19 Chip, All-Day Battery Life, 48MP Fusion Camera, 256GB Starting Storage",
     "discount": "3% OFF",
     "price": 62900,
     "mrp": 64900,
-    "save": 0,
+    "save": 2000,
     "priceText": "₹62,900",
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/dp/B0GQVL6STN?tag=guru0906-21&th=1",
     "asin": "B0GQVL6STN",
     "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0GQVL6STN&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21",
-    "badge": "💎 Premium Pick",
     "expiry": "Limited Time",
-    "linkType": "product",
-    "reviews": 70,
-    "rating": 4.2
+    "linkType": "product"
   },
   {
-    "id": 6,
+    "id": 15,
     "store": "Amazon IN",
     "category": "Mobiles",
     "title": "Apple iPhone 17e 256GB Deal",
@@ -216,7 +194,7 @@
     "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0GQVL6STN&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21"
   },
   {
-    "id": 7,
+    "id": 16,
     "store": "Amazon IN",
     "category": "Offers",
     "title": "Mega 70%+ OFF Store",
@@ -232,7 +210,7 @@
     "linkType": "search"
   },
   {
-    "id": 8,
+    "id": 17,
     "store": "Amazon IN",
     "category": "Fashion",
     "title": "Amazon IN Fashion Fest",
@@ -248,7 +226,7 @@
     "linkType": "search"
   },
   {
-    "id": 9,
+    "id": 18,
     "store": "Amazon IN",
     "category": "Toys",
     "title": "STEMpedia Mechanical Construction Kit for Boys 7-14 Years",
@@ -266,7 +244,7 @@
     "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B09MG7HSS9&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21"
   },
   {
-    "id": 10,
+    "id": 19,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon Saturn Planets",
@@ -284,7 +262,7 @@
     "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0D8YV6KQ5&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21"
   },
   {
-    "id": 11,
+    "id": 20,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "Audavibe 76700 Newtonian Reflector Telescope 235x Zoom for Moon & Planets",
@@ -302,7 +280,7 @@
     "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0F26CLKW9&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21"
   },
   {
-    "id": 12,
+    "id": 21,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "Gesto Galaxy Projector Pro Planetarium - 13 Film Discs Nebula Moon Lamp",
@@ -320,7 +298,7 @@
     "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0GKY4WMRV&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21"
   },
   {
-    "id": 13,
+    "id": 22,
     "store": "Amazon IN",
     "category": "Toys",
     "title": "Popsugar Rechargeable Hand Gesture Control Car with Headlight, USB Charging RC Stunt Car for Kids",
@@ -338,7 +316,7 @@
     "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0CQK691XQ&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21"
   },
   {
-    "id": 14,
+    "id": 23,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "TEKCOOL Portable Air Cooler Fan with Ice Chamber, USB Rechargeable Mini Cooling Fan for Home Kitchen",
@@ -356,7 +334,7 @@
     "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0H1QQ7ML1&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21"
   },
   {
-    "id": 15,
+    "id": 24,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "Fire-Boltt Ninja Smartwatch",
@@ -372,7 +350,7 @@
     "linkType": "search"
   },
   {
-    "id": 16,
+    "id": 25,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "Sony Wireless Headphones",
@@ -388,7 +366,7 @@
     "linkType": "search"
   },
   {
-    "id": 17,
+    "id": 26,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "Echo Dot 5th Gen",
@@ -404,7 +382,7 @@
     "linkType": "search"
   },
   {
-    "id": 18,
+    "id": 27,
     "store": "Amazon IN",
     "category": "Home",
     "title": "Milton Thermosteel Bottle",
@@ -420,7 +398,7 @@
     "linkType": "search"
   },
   {
-    "id": 19,
+    "id": 28,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "HP Wireless Mouse",
@@ -436,7 +414,7 @@
     "linkType": "search"
   },
   {
-    "id": 20,
+    "id": 29,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "boAt Rockerz 450 Headphones",
@@ -444,7 +422,6 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=boAt+Rockerz+450+Headphones&tag=guru0906-21",
     "expiry": "05 Jul 2026",
-    "badge": "🆕 NEW",
     "price": null,
     "mrp": null,
     "save": null,
@@ -452,7 +429,7 @@
     "linkType": "search"
   },
   {
-    "id": 21,
+    "id": 30,
     "store": "Amazon IN",
     "category": "Mobiles",
     "title": "OnePlus Nord CE",
@@ -460,7 +437,6 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=OnePlus+Nord+CE&tag=guru0906-21",
     "expiry": "10 Jul 2026",
-    "badge": "🔥 HOT",
     "price": null,
     "mrp": null,
     "save": null,
@@ -468,7 +444,7 @@
     "linkType": "search"
   },
   {
-    "id": 22,
+    "id": 31,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "Philips Trimmer",
@@ -484,7 +460,7 @@
     "linkType": "search"
   },
   {
-    "id": 23,
+    "id": 32,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "boAt Airdopes 311 Pro TWS Earbuds",
@@ -500,7 +476,7 @@
     "linkType": "search"
   },
   {
-    "id": 24,
+    "id": 33,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "Boult Audio Bluetooth Speaker",
@@ -508,7 +484,6 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=Boult+Audio+Bluetooth+Speaker&tag=guru0906-21",
     "expiry": "12 Jul 2026",
-    "badge": "🆕 NEW",
     "price": null,
     "mrp": null,
     "save": null,
@@ -516,7 +491,7 @@
     "linkType": "search"
   },
   {
-    "id": 25,
+    "id": 34,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "Fire TV Stick 4K",
@@ -524,7 +499,6 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=Fire+TV+Stick+4K&tag=guru0906-21",
     "expiry": "15 Jul 2026",
-    "badge": "📈 TRENDING",
     "price": null,
     "mrp": null,
     "save": null,
@@ -532,7 +506,7 @@
     "linkType": "search"
   },
   {
-    "id": 26,
+    "id": 35,
     "store": "Amazon IN",
     "category": "Fashion",
     "title": "Puma Men's Running Shoes",
@@ -548,7 +522,7 @@
     "linkType": "search"
   },
   {
-    "id": 27,
+    "id": 36,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "boAt Stone Bluetooth Speaker",
@@ -564,7 +538,7 @@
     "linkType": "search"
   },
   {
-    "id": 28,
+    "id": 37,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "Mi Power Bank 10000mAh",
@@ -572,7 +546,6 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=Mi+Power+Bank+10000mAh&tag=guru0906-21",
     "expiry": "12 Jul 2026",
-    "badge": "📈 TRENDING",
     "price": null,
     "mrp": null,
     "save": null,
@@ -580,7 +553,7 @@
     "linkType": "search"
   },
   {
-    "id": 29,
+    "id": 38,
     "store": "Amazon IN",
     "category": "Mobiles",
     "title": "Samsung Galaxy M16 5G",
@@ -588,7 +561,6 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=Samsung+Galaxy+M16+5G&tag=guru0906-21",
     "expiry": "05 Jul 2026",
-    "badge": "⏳ LIMITED STOCK",
     "price": null,
     "mrp": null,
     "save": null,
@@ -596,7 +568,7 @@
     "linkType": "search"
   },
   {
-    "id": 30,
+    "id": 39,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "Kindle Paperwhite",
@@ -604,7 +576,6 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=Kindle+Paperwhite&tag=guru0906-21",
     "expiry": "12 Jul 2026",
-    "badge": "⚡ SELLING FAST",
     "price": null,
     "mrp": null,
     "save": null,
@@ -612,7 +583,7 @@
     "linkType": "search"
   },
   {
-    "id": 31,
+    "id": 40,
     "store": "Amazon IN",
     "category": "Fashion",
     "title": "American Tourister Trolley Bag",
@@ -620,7 +591,6 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=American+Tourister+Trolley+Bag&tag=guru0906-21",
     "expiry": "05 Jul 2026",
-    "badge": "🆕 NEW",
     "price": null,
     "mrp": null,
     "save": null,
@@ -628,7 +598,7 @@
     "linkType": "search"
   },
   {
-    "id": 32,
+    "id": 41,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "ASUS Gaming Laptop",
@@ -636,7 +606,6 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=ASUS+Gaming+Laptop&tag=guru0906-21",
     "expiry": "06 Jul 2026",
-    "badge": "🔥 HOT",
     "price": null,
     "mrp": null,
     "save": null,
@@ -644,7 +613,7 @@
     "linkType": "search"
   },
   {
-    "id": 33,
+    "id": 42,
     "store": "Amazon IN",
     "category": "Electronics",
     "title": "Realme Buds T100",
@@ -652,7 +621,6 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=Realme+Buds+T100&tag=guru0906-21",
     "expiry": "05 Jul 2026",
-    "badge": "🆕 NEW",
     "price": null,
     "mrp": null,
     "save": null,
@@ -660,7 +628,7 @@
     "linkType": "search"
   },
   {
-    "id": 34,
+    "id": 43,
     "store": "Amazon IN",
     "category": "Fashion",
     "title": "Titan Analog Watch",
@@ -676,7 +644,7 @@
     "linkType": "search"
   },
   {
-    "id": 35,
+    "id": 44,
     "store": "Amazon IN",
     "category": "Fashion",
     "title": "Wildcraft Backpack 35L",
@@ -684,7 +652,6 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=Wildcraft+Backpack+35L&tag=guru0906-21",
     "expiry": "15 Jul 2026",
-    "badge": "📈 TRENDING",
     "price": null,
     "mrp": null,
     "save": null,
@@ -692,7 +659,7 @@
     "linkType": "search"
   },
   {
-    "id": 36,
+    "id": 45,
     "store": "Amazon IN",
     "category": "Fashion",
     "title": "Levi's Men's Jeans",
@@ -700,7 +667,6 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=Levi%27s+Men%27s+Jeans&tag=guru0906-21",
     "expiry": "07 Jul 2026",
-    "badge": "📈 TRENDING",
     "price": null,
     "mrp": null,
     "save": null,
@@ -708,7 +674,7 @@
     "linkType": "search"
   },
   {
-    "id": 37,
+    "id": 46,
     "store": "Amazon IN",
     "category": "Fitness",
     "title": "Strauss Yoga Mat",
@@ -724,7 +690,7 @@
     "linkType": "search"
   },
   {
-    "id": 38,
+    "id": 47,
     "store": "Amazon IN",
     "category": "Home",
     "title": "Samsung 28L Microwave Oven",
@@ -740,7 +706,7 @@
     "linkType": "search"
   },
   {
-    "id": 39,
+    "id": 48,
     "store": "Amazon IN",
     "category": "Beauty",
     "title": "Mamaearth Skincare Combo",
@@ -748,7 +714,6 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=Mamaearth+Skincare+Combo&tag=guru0906-21",
     "expiry": "13 Jul 2026",
-    "badge": "📈 TRENDING",
     "price": null,
     "mrp": null,
     "save": null,
@@ -756,7 +721,7 @@
     "linkType": "search"
   },
   {
-    "id": 40,
+    "id": 49,
     "store": "Amazon IN",
     "category": "Fitness",
     "title": "Kore Adjustable Dumbbells",
@@ -764,157 +729,6 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=Kore+Adjustable+Dumbbells&tag=guru0906-21",
     "expiry": "04 Jul 2026",
-    "badge": "🔥 HOT",
-    "price": null,
-    "mrp": null,
-    "save": null,
-    "priceText": "Check live price on Amazon",
-    "linkType": "search"
-  },
-  {
-    "id": 41,
-    "store": "Amazon IN",
-    "category": "Home",
-    "title": "Cello Water Bottle Set",
-    "discount": "Limited Time Deal",
-    "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/s?k=Cello+Water+Bottle+Set&tag=guru0906-21",
-    "expiry": "06 Jul 2026",
-    "badge": "⏳ LIMITED STOCK",
-    "price": null,
-    "mrp": null,
-    "save": null,
-    "priceText": "Check live price on Amazon",
-    "linkType": "search"
-  },
-  {
-    "id": 42,
-    "store": "Amazon IN",
-    "category": "Home",
-    "title": "Bajaj Ceiling Fan",
-    "discount": "Check Deal",
-    "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/s?k=Bajaj+Ceiling+Fan&tag=guru0906-21",
-    "expiry": "11 Jul 2026",
-    "badge": "⏳ LIMITED STOCK",
-    "price": null,
-    "mrp": null,
-    "save": null,
-    "priceText": "Check live price on Amazon",
-    "linkType": "search"
-  },
-  {
-    "id": 43,
-    "store": "Amazon IN",
-    "category": "Electronics",
-    "title": "Noise Smartwatch with Bluetooth Calling, AMOLED Display, Stainless Steel Design, Emergency SOS & Smart Connectivity",
-    "discount": "Deal Price",
-    "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/dp/B0FNCPKFP6?tag=guru0906-21",
-    "expiry": "Limited Time",
-    "badge": "🔥 HOT",
-    "price": null,
-    "mrp": null,
-    "save": null,
-    "priceText": "Check live price on Amazon",
-    "linkType": "product",
-    "asin": "B0FNCPKFP6",
-    "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0FNCPKFP6&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21"
-  },
-  {
-    "id": 44,
-    "store": "Amazon IN",
-    "category": "Electronics",
-    "title": "Noise ColorFit Smartwatch",
-    "discount": "Check Deal",
-    "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/s?k=Noise+ColorFit+Smartwatch&tag=guru0906-21",
-    "expiry": "2026-07-06",
-    "badge": "⚡ SELLING FAST",
-    "price": null,
-    "mrp": null,
-    "save": null,
-    "priceText": "Check live price on Amazon",
-    "linkType": "search"
-  },
-  {
-    "id": 45,
-    "store": "Amazon IN",
-    "category": "Electronics",
-    "title": "Apple AirPods",
-    "discount": "Deal Price",
-    "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/s?k=Apple+AirPods&tag=guru0906-21",
-    "expiry": "Limited Time",
-    "badge": "🔥 HOT",
-    "price": null,
-    "mrp": null,
-    "save": null,
-    "priceText": "Check live price on Amazon",
-    "linkType": "search"
-  },
-  {
-    "id": 46,
-    "store": "Amazon IN",
-    "category": "Electronics",
-    "title": "Dell Inspiron Laptop",
-    "discount": "Deal Price",
-    "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/s?k=Dell+Inspiron+Laptop&tag=guru0906-21",
-    "expiry": "Limited Time",
-    "badge": "⏳ LIMITED STOCK",
-    "price": null,
-    "mrp": null,
-    "save": null,
-    "priceText": "Check live price on Amazon",
-    "linkType": "search"
-  },
-  {
-    "id": 47,
-    "store": "Amazon IN",
-    "category": "Electronics",
-    "title": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo",
-    "discount": "24% OFF",
-    "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/dp/B01N4EV2TL?tag=guru0906-21",
-    "expiry": "Limited Time",
-    "badge": "🔥 HOT",
-    "price": 1595,
-    "mrp": 2095,
-    "save": 500,
-    "priceText": "₹1,595",
-    "linkType": "product",
-    "asin": "B01N4EV2TL",
-    "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B01N4EV2TL&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21"
-  },
-  {
-    "id": 48,
-    "store": "Amazon IN",
-    "category": "Mobiles",
-    "title": "REDMI Note 15 5G (Glacier Blue, 8GB RAM, 128GB Storage)",
-    "discount": "Deal Price",
-    "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/dp/B0G5G7LCJQ?tag=guru0906-21",
-    "expiry": "Limited Time",
-    "badge": "⏳ LIMITED STOCK",
-    "price": 26999,
-    "mrp": 26999,
-    "save": 0,
-    "priceText": "₹26,999",
-    "linkType": "product",
-    "asin": "B0G5G7LCJQ",
-    "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0G5G7LCJQ&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21"
-  },
-  {
-    "id": 49,
-    "store": "Amazon IN",
-    "category": "Electronics",
-    "title": "JBL Tune 510BT Headphones",
-    "discount": "Deal Price",
-    "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/s?k=JBL+Tune+510BT+Headphones&tag=guru0906-21",
-    "expiry": "Limited Time",
-    "badge": "🔥 HOT",
     "price": null,
     "mrp": null,
     "save": null,
@@ -924,31 +738,27 @@
   {
     "id": 50,
     "store": "Amazon IN",
-    "category": "Electronics",
-    "title": "HP H120 Wired Headset with Microphone, Noise Cancelling Mic, Adjustable Headband, 3.5mm Jack",
-    "discount": "Deal Price",
+    "category": "Home",
+    "title": "Cello Water Bottle Set",
+    "discount": "Limited Time Deal",
     "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/dp/B0D73SQRM1?tag=guru0906-21",
-    "expiry": "Limited Time",
-    "badge": "📈 TRENDING",
+    "link": "https://www.amazon.in/s?k=Cello+Water+Bottle+Set&tag=guru0906-21",
+    "expiry": "06 Jul 2026",
     "price": null,
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "product",
-    "asin": "B0D73SQRM1",
-    "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0D73SQRM1&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21"
+    "linkType": "search"
   },
   {
     "id": 51,
     "store": "Amazon IN",
-    "category": "Electronics",
-    "title": "typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023, 7-Color Backlit with Touchpad",
-    "discount": "Deal Price",
+    "category": "Home",
+    "title": "Bajaj Ceiling Fan",
+    "discount": "Check Deal",
     "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/s?k=typecase+Keyboard+Case+for+Samsung+Galaxy+Tab+A11%2B+%2F+A11+Plus+2025+%26+A9%2B+%2F+A9+Plus+2023%2C+7-Color+Backlit+with+&tag=guru0906-21",
-    "expiry": "Limited Time",
-    "badge": "🔥 HOT",
+    "link": "https://www.amazon.in/s?k=Bajaj+Ceiling+Fan&tag=guru0906-21",
+    "expiry": "11 Jul 2026",
     "price": null,
     "mrp": null,
     "save": null,
@@ -958,29 +768,29 @@
   {
     "id": 52,
     "store": "Amazon IN",
-    "category": "Home",
-    "title": "Encasify Telescope Cover, Waterproof Dustproof Sunproof Outdoor Protective Cover with Zipper and Durable Closure",
-    "discount": "Deal for Prime Members",
+    "category": "Electronics",
+    "title": "Noise Smartwatch with Bluetooth Calling, AMOLED Display, Stainless Steel Design, Emergency SOS & Smart Connectivity",
+    "discount": "Deal Price",
     "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/s?k=Encasify+Telescope+Cover%2C+Waterproof+Dustproof+Sunproof+Outdoor+Protective+Cover+with+Zipper+and+Durable+Closu&tag=guru0906-21",
+    "link": "https://www.amazon.in/dp/B0FNCPKFP6?tag=guru0906-21",
     "expiry": "Limited Time",
-    "badge": "📈 TRENDING",
     "price": null,
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "product",
+    "asin": "B0FNCPKFP6",
+    "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0FNCPKFP6&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21"
   },
   {
     "id": 53,
     "store": "Amazon IN",
-    "category": "Office Supplies",
-    "title": "Hauser Fizzy Gel Pen Jar, Transparent Lightweight Body, Comfortable Grip, Smooth Ink Flow, Blue Ink Pack of 25 Pens",
-    "discount": "Budget Friendly",
+    "category": "Electronics",
+    "title": "Noise ColorFit Smartwatch",
+    "discount": "Check Deal",
     "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/s?k=Hauser+Fizzy+Gel+Pen+Jar%2C+Transparent+Lightweight+Body%2C+Comfortable+Grip%2C+Smooth+Ink+Flow%2C+Blue+Ink+Pack+of+25&tag=guru0906-21",
-    "expiry": "Limited Time",
-    "badge": "🆕 NEW",
+    "link": "https://www.amazon.in/s?k=Noise+ColorFit+Smartwatch&tag=guru0906-21",
+    "expiry": "2026-07-06",
     "price": null,
     "mrp": null,
     "save": null,
@@ -990,13 +800,12 @@
   {
     "id": 54,
     "store": "Amazon IN",
-    "category": "Toys",
-    "title": "Wembley Hover Football for Kids, Electric Floating Soccer Ball, Rechargeable Indoor Game, Birthday Gift for Boys",
+    "category": "Electronics",
+    "title": "Apple AirPods",
     "discount": "Deal Price",
     "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/s?k=Wembley+Hover+Football+for+Kids%2C+Electric+Floating+Soccer+Ball%2C+Rechargeable+Indoor+Game%2C+Birthday+Gift+for+Bo&tag=guru0906-21",
+    "link": "https://www.amazon.in/s?k=Apple+AirPods&tag=guru0906-21",
     "expiry": "Limited Time",
-    "badge": "🔥 HOT",
     "price": null,
     "mrp": null,
     "save": null,
@@ -1006,13 +815,12 @@
   {
     "id": 55,
     "store": "Amazon IN",
-    "category": "Industrial",
-    "title": "Chair Bush Black Colour 10 Pcs, ID 15mm OD 20mm, Round Shape",
+    "category": "Electronics",
+    "title": "Dell Inspiron Laptop",
     "discount": "Deal Price",
     "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/s?k=Chair+Bush+Black+Colour+10+Pcs%2C+ID+15mm+OD+20mm%2C+Round+Shape&tag=guru0906-21",
+    "link": "https://www.amazon.in/s?k=Dell+Inspiron+Laptop&tag=guru0906-21",
     "expiry": "Limited Time",
-    "badge": "🆕 NEW",
     "price": null,
     "mrp": null,
     "save": null,
@@ -1022,13 +830,46 @@
   {
     "id": 56,
     "store": "Amazon IN",
-    "category": "Home",
-    "title": "Drivanto Washing Machine Stand Multi-Functional Movable Adjustable Base with Locking Wheels for Washing Machine, Refrigerator and Furniture",
+    "category": "Electronics",
+    "title": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo",
+    "discount": "24% OFF",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/dp/B01N4EV2TL?tag=guru0906-21",
+    "expiry": "Limited Time",
+    "price": 1595,
+    "mrp": 2095,
+    "save": 500,
+    "priceText": "₹1,595",
+    "linkType": "product",
+    "asin": "B01N4EV2TL",
+    "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B01N4EV2TL&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21"
+  },
+  {
+    "id": 57,
+    "store": "Amazon IN",
+    "category": "Mobiles",
+    "title": "REDMI Note 15 5G (Glacier Blue, 8GB RAM, 128GB Storage)",
     "discount": "Deal Price",
     "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/s?k=Drivanto+Washing+Machine+Stand+Multi-Functional+Movable+Adjustable+Base+with+Locking+Wheels+for+Washing+Machin&tag=guru0906-21",
+    "link": "https://www.amazon.in/dp/B0G5G7LCJQ?tag=guru0906-21",
     "expiry": "Limited Time",
-    "badge": "📈 TRENDING",
+    "price": 26999,
+    "mrp": 26999,
+    "save": 0,
+    "priceText": "₹26,999",
+    "linkType": "product",
+    "asin": "B0G5G7LCJQ",
+    "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0G5G7LCJQ&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21"
+  },
+  {
+    "id": 58,
+    "store": "Amazon IN",
+    "category": "Electronics",
+    "title": "JBL Tune 510BT Headphones",
+    "discount": "Deal Price",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/s?k=JBL+Tune+510BT+Headphones&tag=guru0906-21",
+    "expiry": "Limited Time",
     "price": null,
     "mrp": null,
     "save": null,
@@ -1036,7 +877,114 @@
     "linkType": "search"
   },
   {
-    "id": 57,
+    "id": 59,
+    "store": "Amazon IN",
+    "category": "Electronics",
+    "title": "HP H120 Wired Headset with Microphone, Noise Cancelling Mic, Adjustable Headband, 3.5mm Jack",
+    "discount": "Deal Price",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/dp/B0D73SQRM1?tag=guru0906-21",
+    "expiry": "Limited Time",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "priceText": "Check live price on Amazon",
+    "linkType": "product",
+    "asin": "B0D73SQRM1",
+    "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0D73SQRM1&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21"
+  },
+  {
+    "id": 60,
+    "store": "Amazon IN",
+    "category": "Electronics",
+    "title": "typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023, 7-Color Backlit with Touchpad",
+    "discount": "Deal Price",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/s?k=typecase+Keyboard+Case+for+Samsung+Galaxy+Tab+A11%2B+%2F+A11+Plus+2025+%26+A9%2B+%2F+A9+Plus+2023%2C+7-Color+Backlit+with+&tag=guru0906-21",
+    "expiry": "Limited Time",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "priceText": "Check live price on Amazon",
+    "linkType": "search"
+  },
+  {
+    "id": 61,
+    "store": "Amazon IN",
+    "category": "Home",
+    "title": "Encasify Telescope Cover, Waterproof Dustproof Sunproof Outdoor Protective Cover with Zipper and Durable Closure",
+    "discount": "Deal for Prime Members",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/s?k=Encasify+Telescope+Cover%2C+Waterproof+Dustproof+Sunproof+Outdoor+Protective+Cover+with+Zipper+and+Durable+Closu&tag=guru0906-21",
+    "expiry": "Limited Time",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "priceText": "Check live price on Amazon",
+    "linkType": "search"
+  },
+  {
+    "id": 62,
+    "store": "Amazon IN",
+    "category": "Office Supplies",
+    "title": "Hauser Fizzy Gel Pen Jar, Transparent Lightweight Body, Comfortable Grip, Smooth Ink Flow, Blue Ink Pack of 25 Pens",
+    "discount": "Budget Friendly",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/s?k=Hauser+Fizzy+Gel+Pen+Jar%2C+Transparent+Lightweight+Body%2C+Comfortable+Grip%2C+Smooth+Ink+Flow%2C+Blue+Ink+Pack+of+25&tag=guru0906-21",
+    "expiry": "Limited Time",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "priceText": "Check live price on Amazon",
+    "linkType": "search"
+  },
+  {
+    "id": 63,
+    "store": "Amazon IN",
+    "category": "Toys",
+    "title": "Wembley Hover Football for Kids, Electric Floating Soccer Ball, Rechargeable Indoor Game, Birthday Gift for Boys",
+    "discount": "Deal Price",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/s?k=Wembley+Hover+Football+for+Kids%2C+Electric+Floating+Soccer+Ball%2C+Rechargeable+Indoor+Game%2C+Birthday+Gift+for+Bo&tag=guru0906-21",
+    "expiry": "Limited Time",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "priceText": "Check live price on Amazon",
+    "linkType": "search"
+  },
+  {
+    "id": 64,
+    "store": "Amazon IN",
+    "category": "Industrial",
+    "title": "Chair Bush Black Colour 10 Pcs, ID 15mm OD 20mm, Round Shape",
+    "discount": "Deal Price",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/s?k=Chair+Bush+Black+Colour+10+Pcs%2C+ID+15mm+OD+20mm%2C+Round+Shape&tag=guru0906-21",
+    "expiry": "Limited Time",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "priceText": "Check live price on Amazon",
+    "linkType": "search"
+  },
+  {
+    "id": 65,
+    "store": "Amazon IN",
+    "category": "Home",
+    "title": "Drivanto Washing Machine Stand Multi-Functional Movable Adjustable Base with Locking Wheels for Washing Machine, Refrigerator and Furniture",
+    "discount": "Deal Price",
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/s?k=Drivanto+Washing+Machine+Stand+Multi-Functional+Movable+Adjustable+Base+with+Locking+Wheels+for+Washing+Machin&tag=guru0906-21",
+    "expiry": "Limited Time",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "priceText": "Check live price on Amazon",
+    "linkType": "search"
+  },
+  {
+    "id": 66,
     "store": "Amazon IN",
     "category": "Home",
     "title": "UGAOO Combo of 3 Indoor Plants with Ibiza Pot, Money Plant Golden, Jade Plant and Peace Lily for Home and Office Decor",
@@ -1044,7 +992,6 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=UGAOO+Combo+of+3+Indoor+Plants+with+Ibiza+Pot%2C+Money+Plant+Golden%2C+Jade+Plant+and+Peace+Lily+for+Home+and+Offi&tag=guru0906-21",
     "expiry": "Limited Time",
-    "badge": "🔥 HOT",
     "price": null,
     "mrp": null,
     "save": null,
@@ -1052,7 +999,7 @@
     "linkType": "search"
   },
   {
-    "id": 58,
+    "id": 67,
     "store": "Amazon IN",
     "category": "Home",
     "title": "Prestige Induction Cooktop",
@@ -1068,7 +1015,7 @@
     "linkType": "search"
   },
   {
-    "id": 59,
+    "id": 68,
     "store": "Amazon IN",
     "category": "Beauty",
     "title": "Lakme Makeup Kit",
@@ -1084,7 +1031,7 @@
     "linkType": "search"
   },
   {
-    "id": 60,
+    "id": 69,
     "store": "Amazon IN",
     "category": "Mobiles",
     "title": "Redmi Note 13 5G",
@@ -1100,7 +1047,7 @@
     "linkType": "search"
   },
   {
-    "id": 61,
+    "id": 70,
     "store": "Amazon IN",
     "category": "Home",
     "discount": "Check Deal",
