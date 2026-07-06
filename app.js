@@ -24,12 +24,7 @@ async function loadDeals() {
     renderFeaturedDeal();
     renderDeals();
   } catch (err) {
-    grid.innerHTML = `
-      <div class="state-card">
-        <strong>Unable to load deals</strong>
-        <span>Please check coupons.json file path and JSON validity.</span>
-      </div>
-    `;
+    grid.innerHTML = `<div class="state-card"><strong>Unable to load deals</strong><span>Check coupons.json file.</span></div>`;
     resultsCount.textContent = "No deals loaded";
   }
 }
@@ -52,6 +47,11 @@ function getSearchText(deal) {
   ].join(" ");
 }
 
+function extractNumber(value) {
+  const match = String(value || "").match(/\d+/);
+  return match ? Number(match[0]) : 0;
+}
+
 function getFilteredDeals() {
   const query = normalize(searchInput.value);
 
@@ -64,35 +64,25 @@ function getFilteredDeals() {
     return matchSearch && matchCategory;
   });
 
-  const sort = sortSelect.value;
-
-  if (sort === "az") {
-    deals.sort((a, b) => String(a.title || "").localeCompare(String(b.title || "")));
+  if (sortSelect.value === "latest") {
+    deals.sort((a, b) => Number(b.id || 0) - Number(a.id || 0));
   }
 
-  if (sort === "discount") {
+  if (sortSelect.value === "discount") {
     deals.sort((a, b) => extractNumber(b.discount) - extractNumber(a.discount));
   }
 
-  if (sort === "latest") {
-    deals.sort((a, b) => Number(b.id || 0) - Number(a.id || 0));
+  if (sortSelect.value === "az") {
+    deals.sort((a, b) => String(a.title || "").localeCompare(String(b.title || "")));
   }
 
   return deals;
 }
 
-function extractNumber(value) {
-  const match = String(value || "").match(/\d+/);
-  return match ? Number(match[0]) : 0;
-}
-
 function updateStats() {
   document.getElementById("statDeals").textContent = allDeals.length;
 
-  const categories = new Set(
-    allDeals.map(d => d.category).filter(Boolean)
-  );
-
+  const categories = new Set(allDeals.map(d => d.category).filter(Boolean));
   document.getElementById("statCategories").textContent = categories.size;
 }
 
@@ -100,8 +90,8 @@ function buildCategoryChips() {
   const categories = ["All", ...new Set(allDeals.map(d => d.category).filter(Boolean))];
 
   chipsBox.innerHTML = categories.map(cat => `
-    <button type="button" class="${cat === activeCategory ? "active" : ""}" data-category="${cat}">
-      ${cat}
+    <button type="button" class="chip ${cat === activeCategory ? "active" : ""}" data-category="${escapeHTML(cat)}">
+      ${escapeHTML(cat)}
     </button>
   `).join("");
 
@@ -124,9 +114,7 @@ function renderFeaturedDeal() {
     ${renderImage(deal, "spotlight-image")}
     <h2>${escapeHTML(deal.title || "Hot Deal")}</h2>
     <p>${escapeHTML(deal.discount || "Latest offer")} • ${escapeHTML(deal.category || "Deal")}</p>
-    <a href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">
-      View on Store
-    </a>
+    <a href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
   `;
 }
 
@@ -136,47 +124,43 @@ function renderDeals() {
   resultsCount.textContent = `${deals.length} deal${deals.length !== 1 ? "s" : ""} found`;
 
   if (!deals.length) {
-    grid.innerHTML = `
-      <div class="state-card">
-        <strong>No matching deals found</strong>
-        <span>Try another search or category.</span>
-      </div>
-    `;
+    grid.innerHTML = `<div class="state-card"><strong>No matching deals found</strong><span>Try another keyword or category.</span></div>`;
     return;
   }
 
-  grid.className = activeView === "compact" ? "deal-grid compact-view" : "deal-grid";
+  grid.className = activeView === "compact" ? "deal-grid compact" : "deal-grid";
 
   grid.innerHTML = deals.map(deal => `
     <article class="deal-card">
-      <div class="deal-image-wrap">
-        ${renderImage(deal, "deal-image")}
-        <span class="deal-badge">${escapeHTML(deal.discount || "Deal")}</span>
+      ${renderImage(deal, "deal-image")}
+
+      <div class="deal-meta">
+        <span class="store">${escapeHTML(deal.store || "Amazon IN")}</span>
+        <span class="category-pill">${escapeHTML(deal.category || "Deal")}</span>
       </div>
 
-      <div class="deal-body">
-        <div class="deal-meta">
-          <span>${escapeHTML(deal.store || "Amazon IN")}</span>
-          <span>${escapeHTML(deal.category || "Deal")}</span>
-        </div>
+      <h3 class="deal-title">${escapeHTML(deal.title || "Amazon Product Deal")}</h3>
 
-        <h3>${escapeHTML(deal.title || "Amazon Product Deal")}</h3>
+      <div class="discount">${escapeHTML(deal.discount || "Deal Price")}</div>
 
-        <div class="price-row">
-          ${deal.price ? `<strong>${escapeHTML(deal.price)}</strong>` : ""}
-          ${deal.mrp ? `<del>${escapeHTML(deal.mrp)}</del>` : ""}
-          ${deal.save ? `<small>${escapeHTML(deal.save)}</small>` : ""}
-        </div>
-
-        <div class="deal-extra">
-          <span>Code: ${escapeHTML(deal.code || "NO CODE NEEDED")}</span>
-          <span>${escapeHTML(deal.expiry || "Limited Time")}</span>
-        </div>
-
-        <a class="shop-btn" href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">
-          Shop Now →
-        </a>
+      <div class="price-row">
+        ${deal.price ? `<span class="price">${escapeHTML(deal.price)}</span>` : ""}
+        ${deal.mrp ? `<span class="mrp">${escapeHTML(deal.mrp)}</span>` : ""}
+        ${deal.save ? `<span class="save">${escapeHTML(deal.save)}</span>` : ""}
       </div>
+
+      <p class="description">${escapeHTML(deal.description || "Check latest price and offer on Amazon before buying.")}</p>
+
+      <div class="code-row">
+        <span>${escapeHTML(deal.code || "NO CODE NEEDED")}</span>
+        <span>${escapeHTML(deal.expiry || "Limited Time")}</span>
+      </div>
+
+      <a class="shop-button" href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">
+        Shop Now →
+      </a>
+
+      <div class="card-note">Affiliate link • Final price on Amazon may change</div>
     </article>
   `).join("");
 }
@@ -184,12 +168,18 @@ function renderDeals() {
 function renderImage(deal, className) {
   if (deal.image) {
     return `
-      <img class="${className}" src="${escapeHTML(deal.image)}" alt="${escapeHTML(deal.title || "Deal image")}" loading="lazy"
-      onerror="this.outerHTML='<div class=&quot;${className} placeholder-img&quot;>🛍️</div>'">
+      <div class="${className}">
+        <img src="${escapeHTML(deal.image)}" alt="${escapeHTML(deal.title || "Deal image")}" loading="lazy"
+        onerror="this.parentElement.innerHTML='<div class=&quot;placeholder&quot;>🛍️<small>Coupon World</small></div>'">
+      </div>
     `;
   }
 
-  return `<div class="${className} placeholder-img">🛍️</div>`;
+  return `
+    <div class="${className}">
+      <div class="placeholder">🛍️<small>Coupon World</small></div>
+    </div>
+  `;
 }
 
 function applySearch(value) {
@@ -214,24 +204,17 @@ function escapeHTML(value) {
 searchInput.addEventListener("input", renderDeals);
 sortSelect.addEventListener("change", renderDeals);
 
-heroSearchButton.addEventListener("click", () => {
-  applySearch(heroSearch.value);
-});
-
+heroSearchButton.addEventListener("click", () => applySearch(heroSearch.value));
 heroSearch.addEventListener("keydown", e => {
   if (e.key === "Enter") applySearch(heroSearch.value);
 });
 
 document.querySelectorAll("[data-search]").forEach(el => {
-  el.addEventListener("click", () => {
-    applySearch(el.dataset.search);
-  });
+  el.addEventListener("click", () => applySearch(el.dataset.search));
 });
 
 document.querySelectorAll("[data-quick]").forEach(el => {
-  el.addEventListener("click", () => {
-    applySearch(el.dataset.quick);
-  });
+  el.addEventListener("click", () => applySearch(el.dataset.quick));
 });
 
 document.querySelectorAll("[data-view]").forEach(btn => {
