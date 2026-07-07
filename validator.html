@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coupon World JSON Validator</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:#05070b;
+      color:#fff;
+      padding:24px;
+    }
+    .wrap{
+      max-width:1100px;
+      margin:auto;
+    }
+    h1{color:#ffd43b}
+    textarea{
+      width:100%;
+      min-height:330px;
+      background:#101820;
+      color:#fff;
+      border:1px solid #333;
+      border-radius:12px;
+      padding:15px;
+      box-sizing:border-box;
+      font-family:Consolas, monospace;
+    }
+    button{
+      margin:14px 8px 14px 0;
+      padding:13px 20px;
+      border:0;
+      border-radius:10px;
+      background:linear-gradient(135deg,#ff8a00,#ffd43b);
+      color:#211000;
+      font-weight:bold;
+      cursor:pointer;
+    }
+    .result{
+      background:#101820;
+      border:1px solid #333;
+      border-radius:12px;
+      padding:16px;
+      margin-top:14px;
+    }
+    .ok{color:#20e09f}
+    .bad{color:#ff5252}
+    .warn{color:#ffd43b}
+    li{margin:7px 0}
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    a{
+      color:#ffd43b;
+      text-decoration:none;
+      font-weight:bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <h1>Coupon World JSON Validator</h1>
+      <a href="/admin.html">← Back to Admin</a>
+    </div>
+
+    <p>Paste your full <b>coupons.json</b> below and click validate before uploading to GitHub.</p>
+
+    <textarea id="jsonInput" placeholder="Paste coupons.json here..."></textarea>
+
+    <br>
+
+    <button onclick="validateJSON()">Validate JSON</button>
+    <button onclick="clearBox()">Clear</button>
+
+    <div id="result" class="result">
+      Result will appear here.
+    </div>
+  </div>
+
+<script>
+function validateJSON(){
+  const input = document.getElementById("jsonInput").value.trim();
+  const result = document.getElementById("result");
+
+  if(!input){
+    result.innerHTML = "<p class='bad'>Please paste JSON first.</p>";
+    return;
+  }
+
+  let deals;
+
+  try{
+    deals = JSON.parse(input);
+  }catch(e){
+    result.innerHTML = `
+      <h2 class="bad">Invalid JSON</h2>
+      <p>${escapeHTML(e.message)}</p>
+    `;
+    return;
+  }
+
+  if(!Array.isArray(deals)){
+    result.innerHTML = "<p class='bad'>JSON must be an array of deal objects.</p>";
+    return;
+  }
+
+  const ids = new Map();
+  const asins = new Map();
+  const links = new Map();
+
+  let errors = [];
+  let warnings = [];
+
+  deals.forEach((deal, index) => {
+    const row = index + 1;
+
+    if(!deal.id){
+      errors.push(`Row ${row}: Missing id`);
+    }else{
+      if(ids.has(deal.id)){
+        errors.push(`Duplicate ID ${deal.id} found at rows ${ids.get(deal.id)} and ${row}`);
+      }
+      ids.set(deal.id, row);
+    }
+
+    if(!deal.title){
+      errors.push(`ID ${deal.id || row}: Missing title`);
+    }
+
+    if(!deal.store){
+      warnings.push(`ID ${deal.id || row}: Missing store`);
+    }
+
+    if(!deal.category){
+      warnings.push(`ID ${deal.id || row}: Missing category`);
+    }
+
+    if(!deal.link){
+      errors.push(`ID ${deal.id || row}: Missing link`);
+    }else{
+      if(!deal.link.includes("amazon.in") && !deal.link.includes("amzn.to")){
+        errors.push(`ID ${deal.id || row}: Link is not Amazon India`);
+      }
+
+      if(!deal.link.includes("tag=guru0906-21")){
+        errors.push(`ID ${deal.id || row}: Affiliate tag missing`);
+      }
+
+      if(links.has(deal.link)){
+        warnings.push(`Duplicate link found at rows ${links.get(deal.link)} and ${row}`);
+      }
+      links.set(deal.link, row);
+    }
+
+    if(deal.linkType === "product"){
+      if(!deal.asin){
+        warnings.push(`ID ${deal.id || row}: Product linkType but ASIN missing`);
+      }
+    }
+
+    if(deal.asin){
+      if(!/^[A-Z0-9]{10}$/.test(deal.asin)){
+        errors.push(`ID ${deal.id || row}: Invalid ASIN format`);
+      }
+
+      if(asins.has(deal.asin)){
+        warnings.push(`Duplicate ASIN ${deal.asin} at rows ${asins.get(deal.asin)} and ${row}`);
+      }
+      asins.set(deal.asin, row);
+    }
+
+    if(!deal.image){
+      warnings.push(`ID ${deal.id || row}: Missing image`);
+    }
+
+    if(!deal.description){
+      warnings.push(`ID ${deal.id || row}: Missing description`);
+    }
+
+    if(deal.price !== null && deal.price !== undefined && isNaN(Number(deal.price))){
+      errors.push(`ID ${deal.id || row}: price must be number or null`);
+    }
+
+    if(deal.mrp !== null && deal.mrp !== undefined && isNaN(Number(deal.mrp))){
+      errors.push(`ID ${deal.id || row}: mrp must be number or null`);
+    }
+
+    if(deal.save !== null && deal.save !== undefined && isNaN(Number(deal.save))){
+      errors.push(`ID ${deal.id || row}: save must be number or null`);
+    }
+  });
+
+  let html = `
+    <h2>Validation Report</h2>
+    <p><b>Total deals:</b> ${deals.length}</p>
+    <p><b>Unique IDs:</b> ${ids.size}</p>
+    <p><b>Unique ASINs:</b> ${asins.size}</p>
+  `;
+
+  if(errors.length === 0){
+    html += `<p class="ok">✅ No critical errors found.</p>`;
+  }else{
+    html += `<h3 class="bad">❌ Critical Errors (${errors.length})</h3><ul>`;
+    errors.forEach(e => html += `<li class="bad">${escapeHTML(e)}</li>`);
+    html += `</ul>`;
+  }
+
+  if(warnings.length === 0){
+    html += `<p class="ok">✅ No warnings found.</p>`;
+  }else{
+    html += `<h3 class="warn">⚠️ Warnings (${warnings.length})</h3><ul>`;
+    warnings.forEach(w => html += `<li class="warn">${escapeHTML(w)}</li>`);
+    html += `</ul>`;
+  }
+
+  if(errors.length === 0){
+    html += `<p class="ok"><b>Status:</b> Safe to upload if warnings are acceptable.</p>`;
+  }else{
+    html += `<p class="bad"><b>Status:</b> Fix critical errors before uploading.</p>`;
+  }
+
+  result.innerHTML = html;
+}
+
+function clearBox(){
+  document.getElementById("jsonInput").value = "";
+  document.getElementById("result").innerHTML = "Result will appear here.";
+}
+
+function escapeHTML(value){
+  return String(value || "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+</script>
+</body>
+</html>
