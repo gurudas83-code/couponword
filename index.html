@@ -1,343 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coupon World Admin Generator</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#05070b;color:white;padding:24px}
+.wrap{max-width:900px;margin:auto}
+h1{color:#ffd43b}
+label{display:block;color:#ffd43b;font-weight:bold;margin-top:14px}
+textarea,input,select{
+  width:100%;box-sizing:border-box;padding:14px;border-radius:10px;
+  border:1px solid #333;background:#101820;color:#fff;margin-top:7px
+}
+button{
+  margin-top:16px;margin-right:8px;padding:13px 18px;border:0;border-radius:10px;
+  background:linear-gradient(135deg,#ff8a00,#ffd43b);font-weight:bold;cursor:pointer
+}
+pre{background:#101820;border:1px solid #333;padding:16px;border-radius:12px;white-space:pre-wrap;overflow:auto}
+</style>
+</head>
+<body>
 
-  <title>Coupon World — Hot Amazon India Deals, Coupons & Price Drops</title>
-  <meta name="description" content="Coupon World helps you discover hot Amazon India deals, price drops, coupons and trending offers. Browse electronics, mobiles, fashion, home, kitchen and more." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://coupon-world.in/" />
+<div class="wrap">
+  <h1>Coupon World Admin Generator</h1>
+  <p>Paste Amazon URL and generate clean affiliate JSON.</p>
 
-  <meta property="og:title" content="Coupon World — Hot Amazon India Deals" />
-  <meta property="og:description" content="Browse trending Amazon India deals, coupons, price drops and hot offers." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://coupon-world.in/" />
+  <label>Amazon Product URL</label>
+  <textarea id="urlInput" rows="4">https://www.amazon.in/dp/B0B6NSDR2H</textarea>
 
-  <link rel="stylesheet" href="/style.css?v=6">
+  <label>Next ID</label>
+  <input id="idInput" type="number" value="74">
 
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebSite",
-    "name":"Coupon World",
-    "url":"https://coupon-world.in/",
-    "potentialAction":{
-      "@type":"SearchAction",
-      "target":"https://coupon-world.in/?q={search_term_string}",
-      "query-input":"required name=search_term_string"
+  <label>Category</label>
+  <select id="categoryInput">
+    <option>Fitness</option>
+    <option>Electronics</option>
+    <option>Mobiles</option>
+    <option>Fashion</option>
+    <option>Home</option>
+    <option>Kitchen</option>
+    <option>Toys</option>
+    <option>Beauty</option>
+    <option>Office Supplies</option>
+  </select>
+
+  <label>Product Title</label>
+  <input id="titleInput" value="Adjustable Doorway Pull-Up Bar">
+
+  <label>Description</label>
+  <input id="descInput" placeholder="Short product description">
+
+  <button type="button" onclick="generateJSON()">Generate JSON</button>
+  <button type="button" onclick="copyJSON()">Copy JSON</button>
+  <button type="button" onclick="clearAll()">Clear</button>
+
+  <h2>Output</h2>
+  <pre id="output">JSON will appear here...</pre>
+</div>
+
+<script>
+var AFFILIATE_TAG = "guru0906-21";
+
+function extractASIN(url) {
+  var patterns = [
+    /\/dp\/([A-Z0-9]{10})/i,
+    /\/gp\/product\/([A-Z0-9]{10})/i,
+    /pd_rd_i=([A-Z0-9]{10})/i,
+    /asin=([A-Z0-9]{10})/i
+  ];
+
+  for (var i = 0; i < patterns.length; i++) {
+    var match = url.match(patterns[i]);
+    if (match && match[1]) {
+      return match[1].toUpperCase();
     }
   }
-  </script>
-</head>
 
-<body>
-  <div class="page-glow page-glow-one"></div>
-  <div class="page-glow page-glow-two"></div>
+  return "";
+}
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="/" aria-label="Coupon World home">
-        <span class="brand-mark">CW</span>
-        <span>
-          Coupon World
-          <small>Hot Deals India</small>
-        </span>
-      </a>
+function generateJSON() {
+  var url = document.getElementById("urlInput").value.trim();
+  var id = Number(document.getElementById("idInput").value || 1);
+  var category = document.getElementById("categoryInput").value;
+  var title = document.getElementById("titleInput").value.trim();
+  var description = document.getElementById("descInput").value.trim();
 
-      <nav class="desktop-nav" aria-label="Main navigation">
-        <a href="#hot-deals">Hot Deals</a>
-        <a href="#categories">Categories</a>
-        <a href="#under-budget">Under Budget</a>
-        <a href="#why-us">Why Us</a>
-      </nav>
+  var asin = extractASIN(url);
 
-      <a class="header-action" href="#browse">Start Saving</a>
-    </div>
-  </header>
+  if (!asin) {
+    document.getElementById("output").textContent = "ASIN not found. Please paste a valid Amazon product URL.";
+    return;
+  }
 
-  <main>
-    <!-- HERO -->
-    <section class="hero" id="top">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <div class="live-badge">
-            <span></span>
-            Amazon India deals updated daily
-          </div>
+  if (!title) {
+    document.getElementById("output").textContent = "Please enter product title.";
+    return;
+  }
 
-          <h1>Shop smarter. <em>Find deals faster.</em></h1>
+  var cleanLink = "https://www.amazon.in/dp/" + asin + "?tag=" + AFFILIATE_TAG;
+  var image = "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=" + asin + "&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=" + AFFILIATE_TAG;
 
-          <p>
-            Coupon World turns ordinary affiliate links into a premium deal discovery wall.
-            Search, filter, compare and jump to Amazon with one click.
-          </p>
+  var deal = {
+    id: id,
+    store: "Amazon IN",
+    category: category,
+    title: title,
+    discount: "Deal Price",
+    code: "NO CODE NEEDED",
+    link: cleanLink,
+    expiry: "Limited Time",
+    price: null,
+    mrp: null,
+    save: null,
+    priceText: "Check live price on Amazon",
+    badge: null,
+    linkType: "product",
+    asin: asin,
+    image: image,
+    description: description || "Check latest price and offer on Amazon before buying."
+  };
 
-          <div class="hero-search">
-            <label for="heroSearch">Search deals</label>
-            <div class="hero-search-row">
-              <input id="heroSearch" type="search" placeholder="Search earbuds, mobile, kitchen, shoes..." autocomplete="off" />
-              <button id="heroSearchButton" type="button">Search</button>
-            </div>
-          </div>
+  document.getElementById("output").textContent = JSON.stringify(deal, null, 2);
+}
 
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#browse">🔥 Browse Hot Deals</a>
-            <a class="btn btn-ghost" href="#why-us">Why Coupon World?</a>
-          </div>
+function copyJSON() {
+  var text = document.getElementById("output").textContent;
+  navigator.clipboard.writeText(text).then(function(){
+    alert("JSON copied");
+  });
+}
 
-          <div class="hero-stats">
-            <div><strong id="statDeals">--</strong><span>Deals loaded</span></div>
-            <div><strong id="statCategories">--</strong><span>Categories</span></div>
-            <div><strong>100%</strong><span>Affiliate ready</span></div>
-          </div>
-        </div>
+function clearAll() {
+  document.getElementById("urlInput").value = "";
+  document.getElementById("titleInput").value = "";
+  document.getElementById("descInput").value = "";
+  document.getElementById("output").textContent = "JSON will appear here...";
+}
+</script>
 
-        <aside class="spotlight" aria-label="Featured deal">
-          <div class="spotlight-top">
-            <span>Live Deal Spotlight</span>
-            <b>Trending</b>
-          </div>
-          <div id="featuredDeal" class="spotlight-card">
-            <div class="spotlight-image placeholder-big">🛍️</div>
-            <h2>Loading featured deal...</h2>
-            <p>Fetching latest Coupon World deal.</p>
-            <a href="#browse">View Deals</a>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- QUICK VALUE STRIP -->
-    <section class="container">
-      <div class="value-strip">
-        <a href="#browse" data-quick="Electronics">
-          <span>⚡</span>
-          <b>Electronics</b>
-          <small>Earbuds, watches, gadgets</small>
-        </a>
-        <a href="#browse" data-quick="Mobiles">
-          <span>📱</span>
-          <b>Mobiles</b>
-          <small>Phones and accessories</small>
-        </a>
-        <a href="#browse" data-quick="Home">
-          <span>🏠</span>
-          <b>Home & Kitchen</b>
-          <small>Daily-use products</small>
-        </a>
-        <a href="#browse" data-quick="Fashion">
-          <span>👟</span>
-          <b>Fashion</b>
-          <small>Shoes, bags, clothing</small>
-        </a>
-      </div>
-    </section>
-
-    <!-- PRICE DROPS -->
-    <section class="container" id="hot-deals">
-      <div class="section-panel premium-panel">
-        <div class="section-heading">
-          <div>
-            <span class="section-kicker">🔥 Deal Discovery</span>
-            <h2>Today’s Biggest Price Drops</h2>
-            <p>Fast entry points that make visitors browse instead of leaving the homepage.</p>
-          </div>
-          <a href="#browse" class="small-action">View all deals →</a>
-        </div>
-
-        <div class="drop-grid">
-          <a href="#browse" class="drop-card hot" data-search="discount">
-            <span>🔥</span>
-            <b>Big Discount Deals</b>
-            <small>Sort by highest visible discount.</small>
-            <strong>Explore now</strong>
-          </a>
-          <a href="#browse" class="drop-card" data-search="Smartwatch">
-            <span>⌚</span>
-            <b>Smartwatch Zone</b>
-            <small>Noise, Fire-Boltt, boAt and more.</small>
-            <strong>Browse watches</strong>
-          </a>
-          <a href="#browse" class="drop-card" data-search="Telescope">
-            <span>🔭</span>
-            <b>Unique Finds</b>
-            <small>Telescope, gadgets, hobby products.</small>
-            <strong>Discover</strong>
-          </a>
-          <a href="#browse" class="drop-card" data-search="Kitchen">
-            <span>🍳</span>
-            <b>Kitchen Deals</b>
-            <small>Cooktop, bottles, organisers, appliances.</small>
-            <strong>Shop smart</strong>
-          </a>
-        </div>
-
-        <div class="trending-strip">
-          <span>Trending now:</span>
-          <button type="button" data-search="boAt">boAt</button>
-          <button type="button" data-search="Samsung">Samsung</button>
-          <button type="button" data-search="iPhone">iPhone</button>
-          <button type="button" data-search="Smartwatch">Smartwatch</button>
-          <button type="button" data-search="Shoes">Shoes</button>
-          <button type="button" data-search="Toys">Toys</button>
-          <button type="button" data-search="Home">Home</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- BROWSE -->
-    <section class="container" id="browse">
-      <div class="browse-shell">
-        <div class="browse-header">
-          <div>
-            <span class="section-kicker">🛒 Live Deal Wall</span>
-            <h2>Browse Hot Deals</h2>
-            <p id="resultsCount">Loading deals...</p>
-          </div>
-          <div class="view-switch">
-            <button type="button" class="active" data-view="grid">Grid</button>
-            <button type="button" data-view="compact">Compact</button>
-          </div>
-        </div>
-
-        <div class="filter-bar">
-          <div class="search-box">
-            <input id="searchInput" type="search" placeholder="Search products, brands, categories..." autocomplete="off" />
-          </div>
-
-          <select id="sortSelect" aria-label="Sort deals">
-            <option value="latest">Latest first</option>
-            <option value="discount">Biggest discount</option>
-            <option value="az">A–Z</option>
-          </select>
-        </div>
-
-        <div class="chips" id="categoryChips"></div>
-
-        <div class="deal-grid" id="dealsGrid">
-          <div class="state-card">
-            <strong>Loading deals...</strong>
-            <span>Fetching Coupon World deals.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CATEGORIES -->
-    <section class="container" id="categories">
-      <div class="section-heading standalone">
-        <div>
-          <span class="section-kicker">🧭 Browse by category</span>
-          <h2>Shop by Interest</h2>
-          <p>Clear browsing paths help visitors explore more pages and more offers.</p>
-        </div>
-      </div>
-
-      <div class="category-tiles">
-        <a href="#browse" data-quick="Electronics"><span>🎧</span><b>Electronics</b><small>Audio, gadgets, accessories</small></a>
-        <a href="#browse" data-quick="Mobiles"><span>📱</span><b>Mobiles</b><small>Phones and accessories</small></a>
-        <a href="#browse" data-quick="Fashion"><span>👟</span><b>Fashion</b><small>Shoes, bags, watches</small></a>
-        <a href="#browse" data-quick="Home"><span>🏠</span><b>Home</b><small>Home improvement and kitchen</small></a>
-        <a href="#browse" data-quick="Beauty"><span>💄</span><b>Beauty</b><small>Care and grooming</small></a>
-        <a href="#browse" data-quick="Toys"><span>🧸</span><b>Toys</b><small>Kids, games, gifts</small></a>
-      </div>
-    </section>
-
-    <!-- UNDER BUDGET -->
-    <section class="container" id="under-budget">
-      <div class="section-panel budget-panel">
-        <div class="section-heading">
-          <div>
-            <span class="section-kicker">💰 Budget browsing</span>
-            <h2>Quick Deal Paths</h2>
-            <p>Useful shortcuts for visitors who want to start browsing immediately.</p>
-          </div>
-        </div>
-
-        <div class="budget-grid">
-          <button type="button" data-search="Deal Price">Deals with price</button>
-          <button type="button" data-search="NO CODE NEEDED">No code needed</button>
-          <button type="button" data-search="Prime">Prime deals</button>
-          <button type="button" data-search="Limited Time">Limited time</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHY US -->
-    <section class="container" id="why-us">
-      <div class="why-grid">
-        <div class="why-card main-why">
-          <span class="section-kicker">Why Coupon World?</span>
-          <h2>A deal site people can actually browse.</h2>
-          <p>
-            Most coupon sites feel cluttered. Coupon World focuses on clean categories,
-            quick search, strong deal cards and simple store navigation.
-          </p>
-        </div>
-
-        <div class="why-card">
-          <b>✅ No fake claims</b>
-          <p>Prices, MRP and savings are displayed only when present in your data.</p>
-        </div>
-        <div class="why-card">
-          <b>⚡ Fast browsing</b>
-          <p>Search, category chips and trend shortcuts keep visitors moving.</p>
-        </div>
-        <div class="why-card">
-          <b>📱 Mobile-first</b>
-          <p>Designed for WhatsApp, Telegram and mobile deal traffic.</p>
-        </div>
-        <div class="why-card">
-          <b>🔗 Affiliate ready</b>
-          <p>Your Amazon links keep your tracking tag for commission tracking.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="container faq">
-      <div class="section-heading standalone">
-        <div>
-          <span class="section-kicker">FAQ</span>
-          <h2>Before You Shop</h2>
-        </div>
-      </div>
-
-      <details>
-        <summary>Are prices guaranteed?</summary>
-        <p>No. Amazon prices and offers may change anytime. Always check final price on Amazon before purchase.</p>
-      </details>
-      <details>
-        <summary>Does Coupon World use affiliate links?</summary>
-        <p>Yes. Coupon World may earn commission when users buy through affiliate links, at no extra cost to the buyer.</p>
-      </details>
-      <details>
-        <summary>Why do some product images not show?</summary>
-        <p>Some image URLs can be blocked by browsers or ad blockers. Coupon World shows branded placeholders when images fail.</p>
-      </details>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div>
-        <a class="brand footer-brand" href="/">
-          <span class="brand-mark">CW</span>
-          <span>Coupon World<small>Hot Deals India</small></span>
-        </a>
-        <p>Amazon prices and offers can change anytime. Always verify final price on the store page.</p>
-      </div>
-
-      <div class="footer-links">
-        <a href="#browse">Deals</a>
-        <a href="#categories">Categories</a>
-        <a href="#why-us">Disclosure</a>
-        <a href="#top">Back to top</a>
-      </div>
-    </div>
-  </footer>
-
-  <script src="/app.js?v=6"></script>
 </body>
 </html>
