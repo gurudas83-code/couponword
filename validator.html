@@ -147,7 +147,7 @@ function validateJSON(){
     if(!deal.link){
       errors.push(`ID ${deal.id || row}: Missing link`);
     }else{
-      if(!deal.link.includes("amazon.in") && !deal.link.includes("amzn.to")){
+      if(   !deal.link.includes("amazon.in") &&   !deal.link.includes("amzn.to") &&   !deal.link.includes("amzn.in") ){
         errors.push(`ID ${deal.id || row}: Link is not Amazon India`);
       }
 
