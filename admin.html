@@ -1,17 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coupon World Admin Generator</title>
+  <style>
+    body{
+      margin:0;
+      font-family:Arial,sans-serif;
+      background:#05070b;
+      color:#fff;
+      padding:30px;
+    }
+    .wrap{
+      max-width:900px;
+      margin:auto;
+    }
+    h1{color:#ffd43b}
+    textarea,input,select{
+      width:100%;
+      padding:14px;
+      border-radius:10px;
+      border:1px solid #333;
+      background:#101820;
+      color:#fff;
+      margin:8px 0 16px;
+      box-sizing:border-box;
+    }
+    button{
+      padding:13px 20px;
+      border:0;
+      border-radius:10px;
+      background:linear-gradient(135deg,#ff8a00,#ffd43b);
+      color:#211000;
+      font-weight:bold;
+      cursor:pointer;
+      margin-right:8px;
+    }
+    pre{
+      background:#101820;
+      border:1px solid #333;
+      padding:18px;
+      border-radius:12px;
+      overflow:auto;
+      white-space:pre-wrap;
+    }
+    label{font-weight:bold;color:#ffd43b}
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+    @media(max-width:700px){
+      .row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Coupon World Admin Generator</h1>
+    <p>Paste any Amazon product URL. This tool will create clean affiliate JSON.</p>
+
+    <label>Amazon Product URL</label>
+    <textarea id="urlInput" rows="4" placeholder="Paste Amazon URL here..."></textarea>
+
+    <div class="row">
+      <div>
+        <label>Next ID</label>
+        <input id="idInput" type="number" value="74">
+      </div>
+      <div>
+        <label>Category</label>
+        <select id="categoryInput">
+          <option>Electronics</option>
+          <option>Mobiles</option>
+          <option>Fashion</option>
+          <option>Home</option>
+          <option>Kitchen</option>
+          <option>Fitness</option>
+          <option>Toys</option>
+          <option>Beauty</option>
+          <option>Office Supplies</option>
+          <option>Industrial</option>
+        </select>
+      </div>
+    </div>
+
+    <label>Product Title</label>
+    <input id="titleInput" placeholder="Enter product title">
+
+    <label>Description</label>
+    <input id="descInput" placeholder="Short product description">
+
+    <button onclick="generateJSON()">Generate JSON</button>
+    <button onclick="copyJSON()">Copy JSON</button>
+    <button onclick="clearAll()">Clear</button>
+
+    <h2>Output</h2>
+    <pre id="output">JSON will appear here...</pre>
+  </div>
+
 <script>
 const AFFILIATE_TAG = "guru0906-21";
 
 function extractASIN(url){
   const patterns = [
-    /\/dp\/([A-Z0-9]{10})/i,
-    /\/gp\/product\/([A-Z0-9]{10})/i,
+    /\\/dp\\/([A-Z0-9]{10})/i,
+    /\\/gp\\/product\\/([A-Z0-9]{10})/i,
     /pd_rd_i=([A-Z0-9]{10})/i,
     /asin=([A-Z0-9]{10})/i
   ];
 
-  for (const pattern of patterns) {
+  for(const pattern of patterns){
     const match = url.match(pattern);
-    if (match) return match[1].toUpperCase();
+    if(match) return match[1].toUpperCase();
   }
 
   return "";
@@ -19,25 +121,25 @@ function extractASIN(url){
 
 function generateJSON(){
   const url = document.getElementById("urlInput").value.trim();
-  const id = Number(document.getElementById("idInput").value || 1);
+  const id = Number(document.getElementById("idInput").value);
   const category = document.getElementById("categoryInput").value;
   const title = document.getElementById("titleInput").value.trim();
   const description = document.getElementById("descInput").value.trim();
 
   const asin = extractASIN(url);
 
-  if (!asin) {
-    document.getElementById("output").textContent = "ASIN not found. Please paste a valid Amazon product URL.";
+  if(!asin){
+    alert("ASIN not found. Please check Amazon URL.");
     return;
   }
 
-  if (!title) {
-    document.getElementById("output").textContent = "Please enter product title.";
+  if(!title){
+    alert("Please enter product title.");
     return;
   }
 
-  const cleanLink = "https://www.amazon.in/dp/" + asin + "?tag=" + AFFILIATE_TAG;
-  const image = "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=" + asin + "&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=" + AFFILIATE_TAG;
+  const cleanLink = `https://www.amazon.in/dp/${asin}?tag=${AFFILIATE_TAG}`;
+  const image = `https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=${asin}&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=${AFFILIATE_TAG}`;
 
   const deal = {
     id: id,
@@ -64,15 +166,8 @@ function generateJSON(){
 
 function copyJSON(){
   const text = document.getElementById("output").textContent;
-
-  if (!text || text === "JSON will appear here...") {
-    alert("Generate JSON first.");
-    return;
-  }
-
-  navigator.clipboard.writeText(text)
-    .then(() => alert("JSON copied."))
-    .catch(() => alert("Copy failed. Please select and copy manually."));
+  navigator.clipboard.writeText(text);
+  alert("JSON copied.");
 }
 
 function clearAll(){
@@ -82,3 +177,5 @@ function clearAll(){
   document.getElementById("output").textContent = "JSON will appear here...";
 }
 </script>
+</body>
+</html>
