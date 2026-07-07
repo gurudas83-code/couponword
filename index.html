@@ -1,144 +1,248 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coupon World Admin Generator</title>
-<style>
-body{margin:0;font-family:Arial,sans-serif;background:#05070b;color:white;padding:24px}
-.wrap{max-width:900px;margin:auto}
-h1{color:#ffd43b}
-label{display:block;color:#ffd43b;font-weight:bold;margin-top:14px}
-textarea,input,select{
-  width:100%;box-sizing:border-box;padding:14px;border-radius:10px;
-  border:1px solid #333;background:#101820;color:#fff;margin-top:7px
+const DEALS_FILE = "/coupons.json?v=" + Date.now();
+
+let allDeals = [];
+let activeCategory = "All";
+let activeView = "grid";
+
+const grid = document.getElementById("dealsGrid");
+const searchInput = document.getElementById("searchInput");
+const heroSearch = document.getElementById("heroSearch");
+const heroSearchButton = document.getElementById("heroSearchButton");
+const sortSelect = document.getElementById("sortSelect");
+const chipsBox = document.getElementById("categoryChips");
+const resultsCount = document.getElementById("resultsCount");
+
+async function loadDeals() {
+  try {
+    const res = await fetch(DEALS_FILE);
+    if (!res.ok) throw new Error("coupons.json not found");
+
+    allDeals = await res.json();
+
+    updateStats();
+    buildCategoryChips();
+    renderFeaturedDeal();
+    renderDeals();
+  } catch (err) {
+    grid.innerHTML = `
+      <div class="state-card">
+        <strong>Unable to load deals</strong>
+        <span>Please check coupons.json file path and JSON validity.</span>
+      </div>
+    `;
+    resultsCount.textContent = "No deals loaded";
+  }
 }
-button{
-  margin-top:16px;margin-right:8px;padding:13px 18px;border:0;border-radius:10px;
-  background:linear-gradient(135deg,#ff8a00,#ffd43b);font-weight:bold;cursor:pointer
+
+function normalize(text) {
+  return String(text || "").toLowerCase().trim();
 }
-pre{background:#101820;border:1px solid #333;padding:16px;border-radius:12px;white-space:pre-wrap;overflow:auto}
-</style>
-</head>
-<body>
 
-<div class="wrap">
-  <h1>Coupon World Admin Generator</h1>
-  <p>Paste Amazon URL and generate clean affiliate JSON.</p>
+function getSearchText(deal) {
+  return [
+    deal.title,
+    deal.store,
+    deal.category,
+    deal.discount,
+    deal.code,
+    deal.price,
+    deal.mrp,
+    deal.save,
+    deal.expiry
+  ].join(" ");
+}
 
-  <label>Amazon Product URL</label>
-  <textarea id="urlInput" rows="4">https://www.amazon.in/dp/B0B6NSDR2H</textarea>
+function getFilteredDeals() {
+  const query = normalize(searchInput.value);
 
-  <label>Next ID</label>
-  <input id="idInput" type="number" value="74">
+  let deals = allDeals.filter(deal => {
+    const matchSearch = normalize(getSearchText(deal)).includes(query);
+    const matchCategory =
+      activeCategory === "All" ||
+      normalize(deal.category) === normalize(activeCategory);
 
-  <label>Category</label>
-  <select id="categoryInput">
-    <option>Fitness</option>
-    <option>Electronics</option>
-    <option>Mobiles</option>
-    <option>Fashion</option>
-    <option>Home</option>
-    <option>Kitchen</option>
-    <option>Toys</option>
-    <option>Beauty</option>
-    <option>Office Supplies</option>
-  </select>
+    return matchSearch && matchCategory;
+  });
 
-  <label>Product Title</label>
-  <input id="titleInput" value="Adjustable Doorway Pull-Up Bar">
+  const sort = sortSelect.value;
 
-  <label>Description</label>
-  <input id="descInput" placeholder="Short product description">
-
-  <button type="button" onclick="generateJSON()">Generate JSON</button>
-  <button type="button" onclick="copyJSON()">Copy JSON</button>
-  <button type="button" onclick="clearAll()">Clear</button>
-
-  <h2>Output</h2>
-  <pre id="output">JSON will appear here...</pre>
-</div>
-
-<script>
-var AFFILIATE_TAG = "guru0906-21";
-
-function extractASIN(url) {
-  var patterns = [
-    /\/dp\/([A-Z0-9]{10})/i,
-    /\/gp\/product\/([A-Z0-9]{10})/i,
-    /pd_rd_i=([A-Z0-9]{10})/i,
-    /asin=([A-Z0-9]{10})/i
-  ];
-
-  for (var i = 0; i < patterns.length; i++) {
-    var match = url.match(patterns[i]);
-    if (match && match[1]) {
-      return match[1].toUpperCase();
-    }
+  if (sort === "az") {
+    deals.sort((a, b) => String(a.title || "").localeCompare(String(b.title || "")));
   }
 
-  return "";
-}
-
-function generateJSON() {
-  var url = document.getElementById("urlInput").value.trim();
-  var id = Number(document.getElementById("idInput").value || 1);
-  var category = document.getElementById("categoryInput").value;
-  var title = document.getElementById("titleInput").value.trim();
-  var description = document.getElementById("descInput").value.trim();
-
-  var asin = extractASIN(url);
-
-  if (!asin) {
-    document.getElementById("output").textContent = "ASIN not found. Please paste a valid Amazon product URL.";
-    return;
+  if (sort === "discount") {
+    deals.sort((a, b) => extractNumber(b.discount) - extractNumber(a.discount));
   }
 
-  if (!title) {
-    document.getElementById("output").textContent = "Please enter product title.";
-    return;
+  if (sort === "latest") {
+    deals.sort((a, b) => Number(b.id || 0) - Number(a.id || 0));
   }
 
-  var cleanLink = "https://www.amazon.in/dp/" + asin + "?tag=" + AFFILIATE_TAG;
-  var image = "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=" + asin + "&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=" + AFFILIATE_TAG;
-
-  var deal = {
-    id: id,
-    store: "Amazon IN",
-    category: category,
-    title: title,
-    discount: "Deal Price",
-    code: "NO CODE NEEDED",
-    link: cleanLink,
-    expiry: "Limited Time",
-    price: null,
-    mrp: null,
-    save: null,
-    priceText: "Check live price on Amazon",
-    badge: null,
-    linkType: "product",
-    asin: asin,
-    image: image,
-    description: description || "Check latest price and offer on Amazon before buying."
-  };
-
-  document.getElementById("output").textContent = JSON.stringify(deal, null, 2);
+  return deals;
 }
 
-function copyJSON() {
-  var text = document.getElementById("output").textContent;
-  navigator.clipboard.writeText(text).then(function(){
-    alert("JSON copied");
+function extractNumber(value) {
+  const match = String(value || "").match(/\d+/);
+  return match ? Number(match[0]) : 0;
+}
+
+function updateStats() {
+  document.getElementById("statDeals").textContent = allDeals.length;
+
+  const categories = new Set(
+    allDeals.map(d => d.category).filter(Boolean)
+  );
+
+  document.getElementById("statCategories").textContent = categories.size;
+}
+
+function buildCategoryChips() {
+  const categories = ["All", ...new Set(allDeals.map(d => d.category).filter(Boolean))];
+
+  chipsBox.innerHTML = categories.map(cat => `
+    <button type="button" class="${cat === activeCategory ? "active" : ""}" data-category="${cat}">
+      ${cat}
+    </button>
+  `).join("");
+
+  chipsBox.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      activeCategory = btn.dataset.category;
+      buildCategoryChips();
+      renderDeals();
+    });
   });
 }
 
-function clearAll() {
-  document.getElementById("urlInput").value = "";
-  document.getElementById("titleInput").value = "";
-  document.getElementById("descInput").value = "";
-  document.getElementById("output").textContent = "JSON will appear here...";
-}
-</script>
+function renderFeaturedDeal() {
+  const box = document.getElementById("featuredDeal");
+  const deal = allDeals[0];
 
-</body>
-</html>
+  if (!deal) return;
+
+  box.innerHTML = `
+    ${renderImage(deal, "spotlight-image")}
+    <h2>${escapeHTML(deal.title || "Hot Deal")}</h2>
+    <p>${escapeHTML(deal.discount || "Latest offer")} • ${escapeHTML(deal.category || "Deal")}</p>
+    <a href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">
+      View on Store
+    </a>
+  `;
+}
+
+function renderDeals() {
+  const deals = getFilteredDeals();
+
+  resultsCount.textContent = `${deals.length} deal${deals.length !== 1 ? "s" : ""} found`;
+
+  if (!deals.length) {
+    grid.innerHTML = `
+      <div class="state-card">
+        <strong>No matching deals found</strong>
+        <span>Try another search or category.</span>
+      </div>
+    `;
+    return;
+  }
+
+  grid.className = activeView === "compact" ? "deal-grid compact-view" : "deal-grid";
+
+  grid.innerHTML = deals.map(deal => `
+    <article class="deal-card">
+      <div class="deal-image-wrap">
+        ${renderImage(deal, "deal-image")}
+        <span class="deal-badge">${escapeHTML(deal.discount || "Deal")}</span>
+      </div>
+
+      <div class="deal-body">
+        <div class="deal-meta">
+          <span>${escapeHTML(deal.store || "Amazon IN")}</span>
+          <span>${escapeHTML(deal.category || "Deal")}</span>
+        </div>
+
+        <h3>${escapeHTML(deal.title || "Amazon Product Deal")}</h3>
+
+        <div class="price-row">
+          ${deal.price ? `<strong>${escapeHTML(deal.price)}</strong>` : ""}
+          ${deal.mrp ? `<del>${escapeHTML(deal.mrp)}</del>` : ""}
+          ${deal.save ? `<small>${escapeHTML(deal.save)}</small>` : ""}
+        </div>
+
+        <div class="deal-extra">
+          <span>Code: ${escapeHTML(deal.code || "NO CODE NEEDED")}</span>
+          <span>${escapeHTML(deal.expiry || "Limited Time")}</span>
+        </div>
+
+        <a class="shop-btn" href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">
+          Shop Now →
+        </a>
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderImage(deal, className) {
+  if (deal.image) {
+    return `
+      <img class="${className}" src="${escapeHTML(deal.image)}" alt="${escapeHTML(deal.title || "Deal image")}" loading="lazy"
+      onerror="this.outerHTML='<div class=&quot;${className} placeholder-img&quot;>🛍️</div>'">
+    `;
+  }
+
+  return `<div class="${className} placeholder-img">🛍️</div>`;
+}
+
+function applySearch(value) {
+  searchInput.value = value || "";
+  document.getElementById("browse").scrollIntoView({ behavior: "smooth" });
+  renderDeals();
+}
+
+function safeLink(link) {
+  return link || "#";
+}
+
+function escapeHTML(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+searchInput.addEventListener("input", renderDeals);
+sortSelect.addEventListener("change", renderDeals);
+
+heroSearchButton.addEventListener("click", () => {
+  applySearch(heroSearch.value);
+});
+
+heroSearch.addEventListener("keydown", e => {
+  if (e.key === "Enter") applySearch(heroSearch.value);
+});
+
+document.querySelectorAll("[data-search]").forEach(el => {
+  el.addEventListener("click", () => {
+    applySearch(el.dataset.search);
+  });
+});
+
+document.querySelectorAll("[data-quick]").forEach(el => {
+  el.addEventListener("click", () => {
+    applySearch(el.dataset.quick);
+  });
+});
+
+document.querySelectorAll("[data-view]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    activeView = btn.dataset.view;
+
+    document.querySelectorAll("[data-view]").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    renderDeals();
+  });
+});
+
+loadDeals();
