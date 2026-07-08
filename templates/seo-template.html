@@ -1,26 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-{{HEAD}}
+  <title>{{TITLE}} | Coupon World</title>
+  <meta name="description" content="{{META_DESCRIPTION}}" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://coupon-world.in/seo/{{SLUG}}.html" />
 
+  <link rel="stylesheet" href="/style.css?v=7">
 </head>
 
 <body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark">CW</span>
+        <span>Coupon World<small>Hot Deals India</small></span>
+      </a>
+      <nav class="desktop-nav">
+        <a href="/">Home</a>
+        <a href="/#browse">Deals</a>
+        <a href="/#categories">Categories</a>
+      </nav>
+    </div>
+  </header>
 
-{{HEADER}}
+  <main class="container" style="padding:40px 18px;">
+    <section class="section-panel premium-panel">
+      <span class="section-kicker">{{INTENT}}</span>
+      <h1>{{TITLE}}</h1>
+      <p>{{META_DESCRIPTION}}</p>
+      <p><b>Main keyword:</b> {{KEYWORD}}</p>
+      <p><b>Category:</b> {{CATEGORY}}</p>
+    </section>
 
-{{CONTENT}}
+    <section class="section-panel" style="margin-top:24px;">
+      <h2>Top Recommendations</h2>
+      <p>
+        Coupon World helps you compare latest Amazon India deals, product features and buying options.
+        Prices may change anytime, so always verify the final price on Amazon before purchase.
+      </p>
+      <a class="small-action" href="/#browse">View Latest Deals →</a>
+    </section>
 
-{{SIDEBAR}}
+    <section class="section-panel" style="margin-top:24px;">
+      <h2>Buying Guide</h2>
+      <ul>
+        <li>Check brand reliability and warranty.</li>
+        <li>Compare features against your actual requirement.</li>
+        <li>Do not trust fake discount claims blindly.</li>
+        <li>Check final price and delivery on Amazon.</li>
+      </ul>
+    </section>
 
-{{FAQ}}
+    <section class="section-panel" style="margin-top:24px;">
+      <h2>FAQs</h2>
+      <details>
+        <summary>Are these prices fixed?</summary>
+        <p>No. Online prices change frequently. Always verify the final price on Amazon.</p>
+      </details>
+      <details>
+        <summary>Does Coupon World use affiliate links?</summary>
+        <p>Yes. Coupon World may earn commission when you buy through affiliate links, at no extra cost to you.</p>
+      </details>
+    </section>
+  </main>
 
-{{RELATED}}
-
-{{FOOTER}}
-
+  <footer class="footer">
+    <div class="container footer-grid">
+      <p>Coupon World may earn affiliate commission. Prices may change anytime.</p>
+    </div>
+  </footer>
 </body>
-
 </html>
