@@ -1,1 +1,26 @@
-print("Coupon World SEO Generator - setup ready")
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+{{HEAD}}
+
+</head>
+
+<body>
+
+{{HEADER}}
+
+{{CONTENT}}
+
+{{SIDEBAR}}
+
+{{FAQ}}
+
+{{RELATED}}
+
+{{FOOTER}}
+
+</body>
+
+</html>
