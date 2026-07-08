@@ -1,0 +1,43 @@
+{
+  "Earbuds": {
+    "requiredSpecs": [
+      "battery",
+      "bluetooth",
+      "noiseCancellation",
+      "waterResistance",
+      "driverSize"
+    ]
+  },
+
+  "Smartwatch": {
+    "requiredSpecs": [
+      "display",
+      "battery",
+      "calling",
+      "gps",
+      "waterResistance"
+    ]
+  },
+
+  "Mobiles": {
+    "requiredSpecs": [
+      "display",
+      "processor",
+      "ram",
+      "storage",
+      "camera",
+      "battery"
+    ]
+  },
+
+  "Laptop": {
+    "requiredSpecs": [
+      "processor",
+      "ram",
+      "storage",
+      "display",
+      "weight",
+      "battery"
+    ]
+  }
+}
