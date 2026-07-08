@@ -1,0 +1,44 @@
+{
+  "boAt": {
+    "categories": ["Earbuds", "Headphones", "Speakers", "Smartwatch"],
+    "positioning": "budget and mass-market audio brand",
+    "strengths": ["bass sound", "affordable pricing", "wide availability"],
+    "watchPoints": ["check model-specific reviews", "verify warranty and seller"]
+  },
+  "realme": {
+    "categories": ["Mobiles", "Earbuds", "Smartwatch"],
+    "positioning": "value-for-money electronics brand",
+    "strengths": ["competitive features", "good pricing", "youth-focused products"],
+    "watchPoints": ["compare current price", "check variant carefully"]
+  },
+  "Samsung": {
+    "categories": ["Mobiles", "Home Appliances", "Electronics"],
+    "positioning": "trusted mainstream electronics brand",
+    "strengths": ["brand trust", "display quality", "service network"],
+    "watchPoints": ["compare variant and storage", "check offer price"]
+  },
+  "Apple": {
+    "categories": ["Mobiles", "Earbuds", "Smartwatch", "Laptop"],
+    "positioning": "premium technology brand",
+    "strengths": ["ecosystem", "long-term software support", "premium build"],
+    "watchPoints": ["price varies by storage", "check authorised seller"]
+  },
+  "Noise": {
+    "categories": ["Smartwatch", "Earbuds"],
+    "positioning": "budget wearable and audio brand",
+    "strengths": ["affordable smartwatches", "feature-rich products", "frequent deals"],
+    "watchPoints": ["verify exact model", "check app compatibility"]
+  },
+  "Fire-Boltt": {
+    "categories": ["Smartwatch"],
+    "positioning": "budget smartwatch brand",
+    "strengths": ["large variety", "low pricing", "calling smartwatch options"],
+    "watchPoints": ["check display type", "verify warranty"]
+  },
+  "Redmi": {
+    "categories": ["Mobiles", "Electronics"],
+    "positioning": "value smartphone and electronics brand",
+    "strengths": ["good specs for price", "large user base", "budget options"],
+    "watchPoints": ["compare RAM/storage variant", "check software update policy"]
+  }
+}
