@@ -3,24 +3,30 @@
     "slug": "best-earbuds-under-2000",
     "keyword": "best earbuds under 2000",
     "title": "Best Earbuds Under ₹2000 in India",
+    "metaDescription": "Compare the best earbuds under ₹2000 in India with sound quality, battery life, calling performance and latest Amazon deals.",
     "category": "Earbuds",
     "intent": "Buying Guide",
-    "priority": 1
+    "priority": 1,
+    "status": "ready"
   },
   {
     "slug": "best-smartwatch-under-5000",
     "keyword": "best smartwatch under 5000",
     "title": "Best Smartwatch Under ₹5000 in India",
+    "metaDescription": "Find the best smartwatches under ₹5000 in India with calling, battery, display, fitness tracking and latest online deals.",
     "category": "Smartwatch",
     "intent": "Buying Guide",
-    "priority": 2
+    "priority": 2,
+    "status": "ready"
   },
   {
     "slug": "best-mobile-under-15000",
     "keyword": "best mobile under 15000",
     "title": "Best Mobile Under ₹15000 in India",
+    "metaDescription": "Explore the best mobiles under ₹15000 in India with camera, battery, processor, 5G support and latest Amazon deals.",
     "category": "Mobiles",
     "intent": "Buying Guide",
-    "priority": 3
+    "priority": 3,
+    "status": "ready"
   }
 ]
