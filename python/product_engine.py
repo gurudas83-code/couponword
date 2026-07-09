@@ -16,6 +16,32 @@ Author : Coupon World AI OS
 
 import json
 from pathlib import Path
+import json
+from pathlib import Path
+
+KNOWN_BRANDS = {
+    "boat": "boAt",
+    "apple": "Apple",
+    "samsung": "Samsung",
+    "redmi": "Redmi",
+    "realme": "realme",
+    "noise": "Noise",
+    "fire-boltt": "Fire-Boltt",
+    "fireboltt": "Fire-Boltt",
+    "oneplus": "OnePlus",
+    "oppo": "OPPO",
+    "vivo": "Vivo",
+    "xiaomi": "Xiaomi",
+    "hp": "HP",
+    "dell": "Dell",
+    "lenovo": "Lenovo",
+    "asus": "ASUS",
+    "acer": "Acer",
+    "sony": "Sony",
+    "jbl": "JBL",
+    "anker": "Anker",
+    "amazon": "Amazon"
+}
 
 # -------------------------------------------------------
 # FILE LOCATIONS
