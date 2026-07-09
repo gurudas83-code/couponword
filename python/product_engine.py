@@ -64,7 +64,19 @@ def load_json(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
+# -------------------------------------------------------
+# BRAND DETECTION
+# -------------------------------------------------------
 
+def detect_brand(title):
+
+    title = str(title).lower()
+
+    for key, brand in KNOWN_BRANDS.items():
+        if key in title:
+            return brand
+
+    return ""
 # -------------------------------------------------------
 # DATABASE HEALTH
 # -------------------------------------------------------
