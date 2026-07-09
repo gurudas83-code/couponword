@@ -1077,5 +1077,24 @@
   "asin": "B0GKFDM4JZ",
   "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0GKFDM4JZ&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21",
   "description": "ECOVACS Deebot N50 PRO Omni robotic vacuum cleaner with 25,000 Pa suction, self-emptying Omni Station, ZeroTangle 3.0 technology, hot-air drying and smart carpet detection."
+},
+  {
+  "id": 72,
+  "store": "Amazon IN",
+  "category": "Home & Kitchen",
+  "title": "ECOVACS Deebot T50 PRO Omni 2-in-1 Robotic Vacuum Cleaner & Mop",
+  "discount": "Deal Price",
+  "code": "NO CODE NEEDED",
+  "link": "https://www.amazon.in/ECOVACS-T50-PRO-Ultra-Thin-Zerotangle/dp/B0DRJPJLNQ/ref=ast_sto_dp_puis?th=1",
+  "expiry": "Limited Time",
+  "price": 69999,
+  "mrp": 199900,
+  "save": "65% OFF",
+  "priceText": "₹69,999",
+  "linkType": "product",
+  "asin": "B0DRJPJLNQ",
+  "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0DRJPJLNQ&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21",
+  "description": "ECOVACS Deebot T50 PRO Omni robotic vacuum cleaner with 15,000 Pa suction, 6400mAh battery, ZeroTangle 2.0 brush, AIVI 3.0 obstacle avoidance, and 10-in-1 Omni Station with auto wash/dry/refill."
 }
+
  ]
