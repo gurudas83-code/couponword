@@ -1,21 +1,5 @@
 #!/usr/bin/env python3
-"""
-=========================================================
-Coupon World AI OS
-Product Engine v1.0
-=========================================================
 
-Purpose:
-- Load Product Database
-- Validate Products
-- Calculate Database Health
-- Generate Product Intelligence Report
-
-Author : Coupon World AI OS
-"""
-
-import json
-from pathlib import Path
 import json
 from pathlib import Path
 
@@ -40,36 +24,22 @@ KNOWN_BRANDS = {
     "sony": "Sony",
     "jbl": "JBL",
     "anker": "Anker",
-    "amazon": "Amazon"
+    "amazon": "Amazon",
+    "ecovacs": "ECOVACS",
+    "yamaha": "Yamaha",
+    "logitech": "Logitech"
 }
 
-# -------------------------------------------------------
-# FILE LOCATIONS
-# -------------------------------------------------------
-
 ROOT = Path(__file__).resolve().parent.parent
-
 COUPONS_FILE = ROOT / "coupons.json"
 
-PRODUCT_SCHEMA = ROOT / "database" / "product-schema.json"
-CATEGORY_SCHEMA = ROOT / "database" / "category-schema.json"
-BRAND_SCHEMA = ROOT / "database" / "brand-schema.json"
-
-
-# -------------------------------------------------------
-# LOAD JSON
-# -------------------------------------------------------
 
 def load_json(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
-# -------------------------------------------------------
-# BRAND DETECTION
-# -------------------------------------------------------
 
 def detect_brand(title):
-
     title = str(title).lower()
 
     for key, brand in KNOWN_BRANDS.items():
@@ -77,15 +47,13 @@ def detect_brand(title):
             return brand
 
     return ""
-# -------------------------------------------------------
-# DATABASE HEALTH
-# -------------------------------------------------------
+
 
 def calculate_health(report):
+    if report["products"] == 0:
+        return 0
 
-    total_checks = (
-        report["products"] * 5
-    )
+    total_checks = report["products"] * 5
 
     failed = (
         report["missing_brand"]
@@ -95,17 +63,10 @@ def calculate_health(report):
         + report["missing_link"]
     )
 
-    score = max(0, round((1 - failed / total_checks) * 100))
+    return max(0, round((1 - failed / total_checks) * 100))
 
-    return score
-
-
-# -------------------------------------------------------
-# VALIDATION
-# -------------------------------------------------------
 
 def validate_products(products):
-
     report = {
         "products": len(products),
         "complete": 0,
@@ -118,17 +79,16 @@ def validate_products(products):
     }
 
     for product in products:
-
         complete = True
 
-brand = product.get("brand")
+        brand = product.get("brand")
 
-if not brand:
-    brand = detect_brand(product.get("title"))
+        if not brand:
+            brand = detect_brand(product.get("title"))
 
-if not brand:
-    report["missing_brand"] += 1
-    complete = False
+        if not brand:
+            report["missing_brand"] += 1
+            complete = False
 
         if not product.get("category"):
             report["missing_category"] += 1
@@ -152,48 +112,30 @@ if not brand:
             report["incomplete"] += 1
 
     report["health"] = calculate_health(report)
-
     return report
 
 
-# -------------------------------------------------------
-# MAIN
-# -------------------------------------------------------
-
 def main():
-
     print("=" * 55)
     print("Coupon World AI OS")
     print("Product Engine v1.0")
     print("=" * 55)
 
-    # Load schemas (used in future versions)
-    product_schema = load_json(PRODUCT_SCHEMA)
-    category_schema = load_json(CATEGORY_SCHEMA)
-    brand_schema = load_json(BRAND_SCHEMA)
-
     products = load_json(COUPONS_FILE)
-
     report = validate_products(products)
 
     print()
-
     print(f"Products Found      : {report['products']}")
     print(f"Complete Products   : {report['complete']}")
     print(f"Incomplete Products : {report['incomplete']}")
-
     print()
-
     print(f"Missing Brand       : {report['missing_brand']}")
     print(f"Missing Category    : {report['missing_category']}")
     print(f"Missing Image       : {report['missing_image']}")
     print(f"Missing Description : {report['missing_description']}")
     print(f"Missing Link        : {report['missing_link']}")
-
     print()
-
     print(f"Database Health     : {report['health']} %")
-
     print()
     print("=" * 55)
 
