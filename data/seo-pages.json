@@ -1,12 +1,72 @@
 [
   {
+    "slug": "best-earbuds-under-1000",
+    "keyword": "best earbuds under 1000",
+    "title": "Best Earbuds Under ₹1000 in India",
+    "metaDescription": "Find the best earbuds under ₹1000 in India with good sound, battery life, calling quality and latest online deals.",
+    "category": "Earbuds",
+    "intent": "Buying Guide",
+    "priority": 1,
+    "status": "ready"
+  },
+  {
+    "slug": "best-earbuds-under-1500",
+    "keyword": "best earbuds under 1500",
+    "title": "Best Earbuds Under ₹1500 in India",
+    "metaDescription": "Compare the best earbuds under ₹1500 in India for music, calls, battery backup and everyday use.",
+    "category": "Earbuds",
+    "intent": "Buying Guide",
+    "priority": 2,
+    "status": "ready"
+  },
+  {
     "slug": "best-earbuds-under-2000",
     "keyword": "best earbuds under 2000",
     "title": "Best Earbuds Under ₹2000 in India",
     "metaDescription": "Compare the best earbuds under ₹2000 in India with sound quality, battery life, calling performance and latest Amazon deals.",
     "category": "Earbuds",
     "intent": "Buying Guide",
-    "priority": 1,
+    "priority": 3,
+    "status": "ready"
+  },
+  {
+    "slug": "best-earbuds-under-3000",
+    "keyword": "best earbuds under 3000",
+    "title": "Best Earbuds Under ₹3000 in India",
+    "metaDescription": "Explore the best earbuds under ₹3000 in India with better battery, calling features, sound quality and deals.",
+    "category": "Earbuds",
+    "intent": "Buying Guide",
+    "priority": 4,
+    "status": "ready"
+  },
+  {
+    "slug": "best-earbuds-under-5000",
+    "keyword": "best earbuds under 5000",
+    "title": "Best Earbuds Under ₹5000 in India",
+    "metaDescription": "Find premium earbuds under ₹5000 in India with ANC, better sound, long battery life and latest offers.",
+    "category": "Earbuds",
+    "intent": "Buying Guide",
+    "priority": 5,
+    "status": "ready"
+  },
+  {
+    "slug": "best-smartwatch-under-2000",
+    "keyword": "best smartwatch under 2000",
+    "title": "Best Smartwatch Under ₹2000 in India",
+    "metaDescription": "Compare the best smartwatches under ₹2000 in India with calling, fitness tracking, battery life and online deals.",
+    "category": "Smartwatch",
+    "intent": "Buying Guide",
+    "priority": 6,
+    "status": "ready"
+  },
+  {
+    "slug": "best-smartwatch-under-3000",
+    "keyword": "best smartwatch under 3000",
+    "title": "Best Smartwatch Under ₹3000 in India",
+    "metaDescription": "Find the best smartwatches under ₹3000 in India with Bluetooth calling, health tracking and good battery backup.",
+    "category": "Smartwatch",
+    "intent": "Buying Guide",
+    "priority": 7,
     "status": "ready"
   },
   {
@@ -16,7 +76,27 @@
     "metaDescription": "Find the best smartwatches under ₹5000 in India with calling, battery, display, fitness tracking and latest online deals.",
     "category": "Smartwatch",
     "intent": "Buying Guide",
-    "priority": 2,
+    "priority": 8,
+    "status": "ready"
+  },
+  {
+    "slug": "best-amoled-smartwatch-under-5000",
+    "keyword": "best amoled smartwatch under 5000",
+    "title": "Best AMOLED Smartwatch Under ₹5000 in India",
+    "metaDescription": "Explore the best AMOLED smartwatches under ₹5000 in India with premium display, calling and fitness features.",
+    "category": "Smartwatch",
+    "intent": "Buying Guide",
+    "priority": 9,
+    "status": "ready"
+  },
+  {
+    "slug": "best-mobile-under-10000",
+    "keyword": "best mobile under 10000",
+    "title": "Best Mobile Under ₹10000 in India",
+    "metaDescription": "Compare the best mobiles under ₹10000 in India with good battery, camera, display and value-for-money features.",
+    "category": "Mobiles",
+    "intent": "Buying Guide",
+    "priority": 10,
     "status": "ready"
   },
   {
@@ -26,7 +106,97 @@
     "metaDescription": "Explore the best mobiles under ₹15000 in India with camera, battery, processor, 5G support and latest Amazon deals.",
     "category": "Mobiles",
     "intent": "Buying Guide",
-    "priority": 3,
+    "priority": 11,
+    "status": "ready"
+  },
+  {
+    "slug": "best-mobile-under-20000",
+    "keyword": "best mobile under 20000",
+    "title": "Best Mobile Under ₹20000 in India",
+    "metaDescription": "Find the best mobiles under ₹20000 in India with 5G, AMOLED display, good camera and strong battery life.",
+    "category": "Mobiles",
+    "intent": "Buying Guide",
+    "priority": 12,
+    "status": "ready"
+  },
+  {
+    "slug": "best-camera-phone-under-20000",
+    "keyword": "best camera phone under 20000",
+    "title": "Best Camera Phone Under ₹20000 in India",
+    "metaDescription": "Compare the best camera phones under ₹20000 in India for photos, videos, selfies and daily performance.",
+    "category": "Mobiles",
+    "intent": "Buying Guide",
+    "priority": 13,
+    "status": "ready"
+  },
+  {
+    "slug": "best-laptop-under-50000",
+    "keyword": "best laptop under 50000",
+    "title": "Best Laptop Under ₹50000 in India",
+    "metaDescription": "Find the best laptops under ₹50000 in India for students, office work, coding, browsing and entertainment.",
+    "category": "Laptop",
+    "intent": "Buying Guide",
+    "priority": 14,
+    "status": "ready"
+  },
+  {
+    "slug": "best-power-bank-under-1000",
+    "keyword": "best power bank under 1000",
+    "title": "Best Power Bank Under ₹1000 in India",
+    "metaDescription": "Compare the best power banks under ₹1000 in India for mobiles, travel, charging speed and battery capacity.",
+    "category": "Electronics",
+    "intent": "Buying Guide",
+    "priority": 15,
+    "status": "ready"
+  },
+  {
+    "slug": "best-bluetooth-speaker-under-3000",
+    "keyword": "best bluetooth speaker under 3000",
+    "title": "Best Bluetooth Speaker Under ₹3000 in India",
+    "metaDescription": "Explore the best Bluetooth speakers under ₹3000 in India with good bass, battery backup and portability.",
+    "category": "Electronics",
+    "intent": "Buying Guide",
+    "priority": 16,
+    "status": "ready"
+  },
+  {
+    "slug": "best-gaming-mouse-under-1000",
+    "keyword": "best gaming mouse under 1000",
+    "title": "Best Gaming Mouse Under ₹1000 in India",
+    "metaDescription": "Find the best gaming mouse under ₹1000 in India with good DPI, design, grip and value for budget gamers.",
+    "category": "Electronics",
+    "intent": "Buying Guide",
+    "priority": 17,
+    "status": "ready"
+  },
+  {
+    "slug": "best-telescope-for-beginners",
+    "keyword": "best telescope for beginners",
+    "title": "Best Telescope for Beginners in India",
+    "metaDescription": "Find the best telescope for beginners in India for moon viewing, astronomy learning and hobby use.",
+    "category": "Electronics",
+    "intent": "Buying Guide",
+    "priority": 18,
+    "status": "ready"
+  },
+  {
+    "slug": "best-home-gym-equipment",
+    "keyword": "best home gym equipment",
+    "title": "Best Home Gym Equipment in India",
+    "metaDescription": "Explore the best home gym equipment in India for strength training, fitness, weight loss and daily workouts.",
+    "category": "Fitness",
+    "intent": "Buying Guide",
+    "priority": 19,
+    "status": "ready"
+  },
+  {
+    "slug": "best-kitchen-appliances",
+    "keyword": "best kitchen appliances",
+    "title": "Best Kitchen Appliances in India",
+    "metaDescription": "Find the best kitchen appliances in India for daily cooking, home use, convenience and online deals.",
+    "category": "Kitchen",
+    "intent": "Buying Guide",
+    "priority": 20,
     "status": "ready"
   }
 ]
