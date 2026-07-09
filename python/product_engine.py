@@ -121,9 +121,14 @@ def validate_products(products):
 
         complete = True
 
-        if not product.get("brand"):
-            report["missing_brand"] += 1
-            complete = False
+brand = product.get("brand")
+
+if not brand:
+    brand = detect_brand(product.get("title"))
+
+if not brand:
+    report["missing_brand"] += 1
+    complete = False
 
         if not product.get("category"):
             report["missing_category"] += 1
