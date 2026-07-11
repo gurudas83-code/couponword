@@ -1,0 +1,5 @@
+
+# Coupon World local backups and Python cache
+backups/
+__pycache__/
+*.pyc
