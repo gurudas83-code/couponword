@@ -22,7 +22,7 @@ ASIN_PATTERNS = (
 
 def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Safely import one Amazon India product.")
-    parser.add_argument("url", help="Full Amazon India product URL")
+    parser.add_argument("url", nargs="?", default="", help="Full Amazon India product URL")
     parser.add_argument("--title", default="", help="Verified product title; required with --write")
     parser.add_argument("--category", default="", help="Known product category")
     parser.add_argument("--write", action="store_true", help="Write product to coupons.json")
@@ -125,8 +125,25 @@ def print_preview(product):
     print("=" * 60)
 
 
+def collect_interactive_input(args: argparse.Namespace) -> argparse.Namespace:
+    if args.url:
+        return args
+
+    print("\nCOUPON WORLD INTERACTIVE PRODUCT IMPORTER")
+    print("=" * 48)
+    args.url = input("Paste Amazon URL: ").strip()
+    args.title = input("Enter verified product title: ").strip()
+    args.category = input("Enter category (optional): ").strip()
+    return args
+
+
+def confirm_write() -> bool:
+    answer = input("\nWrite this product to coupons.json? [y/N]: ").strip().casefold()
+    return answer in {"y", "yes"}
+
+
 def main() -> int:
-    args = parse_arguments()
+    args = collect_interactive_input(parse_arguments())
     try:
         url = validate_url(args.url)
         asin = extract_asin(url)
@@ -146,10 +163,13 @@ def main() -> int:
         print_preview(product)
 
         if not args.write:
-            print("\nDRY RUN: coupons.json was not changed.")
-            if not product["title"]:
-                print("NEXT: rerun with a verified --title before using --write.")
-            return 0
+            if args.url and product["title"] and confirm_write():
+                args.write = True
+            else:
+                print("\nDRY RUN: coupons.json was not changed.")
+                if not product["title"]:
+                    print("NEXT: provide a verified title before writing.")
+                return 0
 
         if not product["title"]:
             raise ValueError("--write requires a real --title; the pipeline will not invent one.")
