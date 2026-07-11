@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Coupon World AI OS - Product Pipeline v0.1."""
+"""Coupon World AI OS - Product Pipeline v0.3 with Amazon data provider."""
 
 import argparse
 import re
 from typing import Any
 from urllib.parse import urlparse
 
+from amazon_data_provider import get_default_provider
 from product_engine import (
     COUPONS_FILE, clean_text, create_backup, detect_brand,
     generate_description, load_json, save_json,
@@ -87,26 +88,35 @@ def next_product_id(products: list[dict[str, Any]]) -> int:
 
 
 def build_record(products, asin, affiliate_url, title, category):
-    title = clean_text(title)
-    category = clean_text(category)
-    brand = detect_brand(title)
+    provider = get_default_provider()
+    data = provider.get_product(
+        asin,
+        title=clean_text(title),
+        category=clean_text(category),
+    )
+
+    brand = clean_text(data.brand) or detect_brand(data.title)
+
     product = {
         "id": next_product_id(products),
-        "asin": asin,
+        "asin": data.asin,
         "store": "Amazon IN",
-        "title": title,
+        "title": clean_text(data.title),
         "brand": brand,
-        "category": category,
-        "price": "",
-        "mrp": "",
+        "category": clean_text(data.category),
+        "price": clean_text(data.price),
+        "mrp": clean_text(data.mrp),
         "save": "",
-        "discount": "",
-        "image": "",
+        "discount": clean_text(data.discount),
+        "image": clean_text(data.image),
         "link": affiliate_url,
         "description": "",
+        "data_source": data.source,
     }
-    if title:
+
+    if product["title"]:
         product["description"] = generate_description(product, brand)
+
     return product
 
 
@@ -119,9 +129,10 @@ def print_preview(product):
     print(f"Title         : {product['title'] or '[NOT PROVIDED]'}")
     print(f"Brand         : {product['brand'] or '[UNKNOWN]'}")
     print(f"Category      : {product['category'] or '[NOT PROVIDED]'}")
+    print(f"Data source   : {product.get('data_source', 'manual')}")
     print(f"Affiliate URL : {product['link']}")
-    print("Price         : [NOT FETCHED]")
-    print("Image         : [NOT FETCHED]")
+    print(f"Price         : {product['price'] or '[NOT FETCHED]'}")
+    print(f"Image         : {product['image'] or '[NOT FETCHED]'}")
     print("=" * 60)
 
 
