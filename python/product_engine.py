@@ -181,12 +181,16 @@ def generate_description(product: dict[str, Any], brand: str) -> str:
 
     parts = [title]
 
+    article = "an" if brand and brand[0].casefold() in "aeiou" else "a"
+
     if brand and category:
         parts.append(
-            f"is a {brand} product listed in the {category} category on Coupon World."
+            f"is {article} {brand} product listed in the {category} category on Coupon World."
         )
     elif brand:
-        parts.append(f"is a {brand} product listed on Coupon World.")
+        parts.append(
+            f"is {article} {brand} product listed on Coupon World."
+        )
     elif category:
         parts.append(
             f"is listed in the {category} category on Coupon World."
@@ -236,7 +240,7 @@ def improve_products(
             changes.append(
                 {
                     "index": index,
-                    "id": product.get("id", ""),
+                    "id": product.get("id") or product.get("sl_no", ""),
                     "title": clean_text(product.get("title")),
                     "changes": product_changes,
                 }

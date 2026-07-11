@@ -7,7 +7,8 @@
     "code": "Prime Deal",
     "link": "https://amzn.in/d/04HOO2eq?tag=guru0906-21",
     "expiry": "30 Jul 2026",
-    "id": 1
+    "id": 1,
+    "description": "JIADA Space Astronaut Stationery Set for Boys - with Badge, Notebook and Pen - Birthday Return Gift/Rakhi Gift for Boys, Kids, Blue is listed in the Prime Deal - Toys & Stationery category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "store": "Amazon IN",
@@ -17,7 +18,9 @@
     "code": "Prime Deal",
     "link": "https://amzn.in/d/01dfFSgu?tag=guru0906-21",
     "expiry": "30 Jul 2026",
-    "id": 2
+    "id": 2,
+    "brand": "Samsung",
+    "description": "Keyboard Case for Samsung Galaxy Tab A11+ & Tab A9 Plus 11” Folio Cover SM-X230, SM-X236B, SM-X210, SM-X215 with Trackpad, 7 Color Backlit Magnetically Detachable Bluetooth Keyboard, Multi-Angle View is a Samsung product listed in the Prime Deal - Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "store": "Amazon IN",
@@ -27,7 +30,8 @@
     "code": "No code",
     "link": "https://amzn.in/d/06Ksbhq6?tag=guru0906-21",
     "expiry": "30 Jul 2026",
-    "id": 3
+    "id": 3,
+    "description": "TeeSlix NASA Cotton Boys t-Shirt, Teenagers | Soft, Premium Fabric | Regular Fit T-Shirt for Boys, Girls | Space Rocket Design | Blue,Black,RED | Age 8 to 17 Years is listed in the Clothing category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "store": "Amazon IN",
@@ -37,7 +41,8 @@
     "code": "No code",
     "link": "https://amzn.in/d/06XUsLAR?tag=guru0906-21",
     "expiry": "30 Jul 2026",
-    "id": 4
+    "id": 4,
+    "description": "Bausch + Lomb Fresh Multi-Purpose 500Ml Contact Lens Solution (Pack Of 1) is listed in the Health & Personal Care category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "store": "Amazon IN",
@@ -47,7 +52,8 @@
     "code": "No code",
     "link": "https://amzn.in/d/01GmFjs1?tag=guru0906-21",
     "expiry": "30 Jul 2026",
-    "id": 5
+    "id": 5,
+    "description": "AASONS Electric Drill Variable Angle Grinder Connecting Rod with 1pc Wood, Marble Cutting Blade, Flap Disk for Paint Remover, Sanding disc and Iron Grinding Wheel is listed in the Tools & Hardware category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "store": "Amazon IN",
@@ -57,7 +63,8 @@
     "code": "No code",
     "link": "https://amzn.in/d/0fkG5ElL?tag=guru0906-21",
     "expiry": "30 Jul 2026",
-    "id": 6
+    "id": 6,
+    "description": "Hebezon Expandable Appliance Roller Stand with Wheels Heavy Duty Mobile Dolly for Washing Machine, Refrigerator,Furniture Adjustable Moving Base for Home, Kitchen,Laundry Use is listed in the Home Improvement category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "store": "Amazon IN",
@@ -67,7 +74,9 @@
     "code": "No code",
     "link": "https://amzn.in/d/0b3TayvT?tag=guru0906-21",
     "expiry": "30 Jul 2026",
-    "id": 7
+    "id": 7,
+    "brand": "Campus",
+    "description": "Campus Women's OGL-4 Sneakers is a Campus product listed in the Footwear category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "store": "Amazon IN",
@@ -77,7 +86,8 @@
     "code": "Prime Deal",
     "link": "https://amzn.to/4eZdI1O?tag=guru0906-21",
     "expiry": "30 Jul 2026",
-    "id": 8
+    "id": 8,
+    "description": "HomeStrap Rectangular Set Of 3 Large Plastic Storage Organizers/Baskets With Lid For Kitchen, Clothes, Multipurpose Vegetables, Toys, Books, Office, Stationery, Wardrobe(Biscuit, Grey, Brown) is listed in the Home Improvement category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "store": "Amazon IN",
@@ -87,7 +97,9 @@
     "code": "Prime Day Deal",
     "link": "https://amzn.to/4v9I4o8?tag=guru0906-21",
     "expiry": "30 Jul 2026",
-    "id": 9
+    "id": 9,
+    "brand": "Amazon",
+    "description": "Amazon Basics 64 GB Micro SD Card with Adapter | Upto 120 MB/s | Class 10 | U1, C10, V10 Speed Classes is an Amazon product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 10,
@@ -106,7 +118,8 @@
     "linkType": "product",
     "asin": "B0F1N8B7Z4",
     "image": "",
-    "description": "Redmi 13 5G smartphone with 8GB RAM, 128GB storage, 100MP camera, Snapdragon processor, 120Hz display, and 5G connectivity."
+    "description": "Redmi 13 5G smartphone with 8GB RAM, 128GB storage, 100MP camera, Snapdragon processor, 120Hz display, and 5G connectivity.",
+    "brand": "Redmi"
   },
   {
     "id": 11,
@@ -124,7 +137,9 @@
     "priceText": "₹3,399",
     "linkType": "product",
     "asin": "B0GDQCTYFB",
-    "image": ""
+    "image": "",
+    "brand": "realme",
+    "description": "realme Buds Air 8, 11mm+6mm Dual Dynamic Bass Drivers, 58Hrs Playtime, 55dB ANC, 6 Mic ENC, 45ms Low Latency, 360° Spatial Audio, Hi-Res LHDC, IP55 Dust & Water Resistant, BT v5.4 (Master Gold) is a realme product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 12,
@@ -141,7 +156,9 @@
     "asin": "B0D3HKTL6K",
     "image": "",
     "expiry": "Limited Time",
-    "linkType": "product"
+    "linkType": "product",
+    "brand": "Nutrilite",
+    "description": "Amway Nutrilite Cal Mag D K2 (90 Tablets) is a Nutrilite product listed in the Health & Personal Care category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 13,
@@ -158,7 +175,9 @@
     "asin": "B08232VZ84",
     "image": "",
     "expiry": "Limited Time",
-    "linkType": "product"
+    "linkType": "product",
+    "brand": "Yamaha",
+    "description": "Yamaha PSS-E30 Remie Portable Mini Keyboard – 37 Keys, White, Built-in Songs, Sound Effects & Quiz Mode, Lightweight, Ideal for Kids & Early Learners is a Yamaha product listed in the Musical Instruments category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 14,
@@ -175,7 +194,9 @@
     "asin": "B0GQVL6STN",
     "image": "",
     "expiry": "Limited Time",
-    "linkType": "product"
+    "linkType": "product",
+    "brand": "Apple",
+    "description": "Apple iPhone 17e 256 GB (Black) – 15.40 cm (6.1″) Super Retina XDR Display, A19 Chip, All-Day Battery Life, 48MP Fusion Camera, 256GB Starting Storage is an Apple product listed in the Cell Phones & Accessories category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 15,
@@ -194,7 +215,8 @@
     "linkType": "product",
     "asin": "B0GQVHNX7R",
     "image": "",
-    "description": "Apple iPhone 17e with 512GB storage, A19 chip, 6.1-inch Super Retina XDR display, 48MP Fusion camera, USB-C, and all-day battery life."
+    "description": "Apple iPhone 17e with 512GB storage, A19 chip, 6.1-inch Super Retina XDR display, 48MP Fusion camera, USB-C, and all-day battery life.",
+    "brand": "Apple"
   },
   {
     "id": 16,
@@ -210,7 +232,8 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "description": "Mega 70%+ OFF Store is listed in the Offers category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 17,
@@ -226,7 +249,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Amazon",
+    "description": "Amazon IN Fashion Fest is an Amazon product listed in the Fashion category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 18,
@@ -244,7 +269,9 @@
     "priceText": "Check live price on Amazon",
     "linkType": "product",
     "asin": "B09MG7HSS9",
-    "image": ""
+    "image": "",
+    "brand": "STEMpedia",
+    "description": "STEMpedia Mechanical Construction Kit for Boys 7-14 Years is a STEMpedia product listed in the Toys category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 19,
@@ -262,7 +289,9 @@
     "priceText": "Check live price on Amazon",
     "linkType": "product",
     "asin": "B0D8YV6KQ5",
-    "image": ""
+    "image": "",
+    "brand": "ASUS",
+    "description": "Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon Saturn Planets is an ASUS product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 20,
@@ -280,7 +309,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "product",
     "asin": "B0F26CLKW9",
-    "image": ""
+    "image": "",
+    "description": "Audavibe 76700 Newtonian Reflector Telescope 235x Zoom for Moon & Planets is listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 21,
@@ -298,7 +328,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "product",
     "asin": "B0GKY4WMRV",
-    "image": ""
+    "image": "",
+    "description": "Gesto Galaxy Projector Pro Planetarium - 13 Film Discs Nebula Moon Lamp is listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 22,
@@ -316,7 +347,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "product",
     "asin": "B0CQK691XQ",
-    "image": ""
+    "image": "",
+    "description": "Popsugar Rechargeable Hand Gesture Control Car with Headlight, USB Charging RC Stunt Car for Kids is listed in the Toys category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 23,
@@ -334,7 +366,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "product",
     "asin": "B0H1QQ7ML1",
-    "image": ""
+    "image": "",
+    "description": "TEKCOOL Portable Air Cooler Fan with Ice Chamber, USB Rechargeable Mini Cooling Fan for Home Kitchen is listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 24,
@@ -350,7 +383,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Fire-Boltt",
+    "description": "Fire-Boltt Ninja Smartwatch is a Fire-Boltt product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 25,
@@ -366,7 +401,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Sony",
+    "description": "Sony Wireless Headphones is a Sony product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 26,
@@ -382,7 +419,8 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "description": "Echo Dot 5th Gen is listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 27,
@@ -398,7 +436,8 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "description": "Milton Thermosteel Bottle is listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 28,
@@ -414,7 +453,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "HP",
+    "description": "HP Wireless Mouse is a HP product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 29,
@@ -429,7 +470,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "boAt",
+    "description": "boAt Rockerz 450 Headphones is a boAt product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 30,
@@ -444,7 +487,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "OnePlus",
+    "description": "OnePlus Nord CE is an OnePlus product listed in the Mobiles category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 31,
@@ -460,7 +505,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Philips",
+    "description": "Philips Trimmer is a Philips product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 32,
@@ -476,7 +523,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "boAt",
+    "description": "boAt Airdopes 311 Pro TWS Earbuds is a boAt product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 33,
@@ -491,7 +540,8 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "description": "Boult Audio Bluetooth Speaker is listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 34,
@@ -506,7 +556,8 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "description": "Fire TV Stick 4K is listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 35,
@@ -522,7 +573,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Puma",
+    "description": "Puma Men's Running Shoes is a Puma product listed in the Fashion category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 36,
@@ -538,7 +591,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "boAt",
+    "description": "boAt Stone Bluetooth Speaker is a boAt product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 37,
@@ -553,7 +608,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Mi",
+    "description": "Mi Power Bank 10000mAh is a Mi product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 38,
@@ -568,7 +625,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Samsung",
+    "description": "Samsung Galaxy M16 5G is a Samsung product listed in the Mobiles category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 39,
@@ -583,7 +642,8 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "description": "Kindle Paperwhite is listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 40,
@@ -598,7 +658,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "American Tourister",
+    "description": "American Tourister Trolley Bag is an American Tourister product listed in the Fashion category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 41,
@@ -613,7 +675,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "ASUS",
+    "description": "ASUS Gaming Laptop is an ASUS product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 42,
@@ -628,7 +692,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "realme",
+    "description": "Realme Buds T100 is a realme product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 43,
@@ -644,7 +710,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Titan",
+    "description": "Titan Analog Watch is a Titan product listed in the Fashion category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 44,
@@ -659,7 +727,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Wildcraft",
+    "description": "Wildcraft Backpack 35L is a Wildcraft product listed in the Fashion category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 45,
@@ -674,7 +744,8 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "description": "Levi's Men's Jeans is listed in the Fashion category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 46,
@@ -690,7 +761,8 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "description": "Strauss Yoga Mat is listed in the Fitness category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 47,
@@ -706,7 +778,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Samsung",
+    "description": "Samsung 28L Microwave Oven is a Samsung product listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 48,
@@ -721,7 +795,8 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "description": "Mamaearth Skincare Combo is listed in the Beauty category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 49,
@@ -736,7 +811,8 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "description": "Kore Adjustable Dumbbells is listed in the Fitness category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 50,
@@ -751,7 +827,8 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "description": "Cello Water Bottle Set is listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 51,
@@ -766,7 +843,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Bajaj",
+    "description": "Bajaj Ceiling Fan is a Bajaj product listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 52,
@@ -783,7 +862,9 @@
     "priceText": "Check live price on Amazon",
     "linkType": "product",
     "asin": "B0FNCPKFP6",
-    "image": ""
+    "image": "",
+    "brand": "Noise",
+    "description": "Noise Smartwatch with Bluetooth Calling, AMOLED Display, Stainless Steel Design, Emergency SOS & Smart Connectivity is a Noise product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 53,
@@ -798,7 +879,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Noise",
+    "description": "Noise ColorFit Smartwatch is a Noise product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 54,
@@ -813,7 +896,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Apple",
+    "description": "Apple AirPods is an Apple product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 55,
@@ -828,7 +913,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Dell",
+    "description": "Dell Inspiron Laptop is a Dell product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 56,
@@ -845,7 +932,9 @@
     "priceText": "₹1,495",
     "linkType": "product",
     "asin": "B01N4EV2TL",
-    "image": ""
+    "image": "",
+    "brand": "Logitech",
+    "description": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo is a Logitech product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 57,
@@ -862,7 +951,9 @@
     "priceText": "₹26,999",
     "linkType": "product",
     "asin": "B0G5G7LCJQ",
-    "image": ""
+    "image": "",
+    "brand": "Redmi",
+    "description": "REDMI Note 15 5G (Glacier Blue, 8GB RAM, 128GB Storage) is a Redmi product listed in the Mobiles category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 58,
@@ -877,7 +968,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "JBL",
+    "description": "JBL Tune 510BT Headphones is a JBL product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 59,
@@ -894,7 +987,9 @@
     "priceText": "Check live price on Amazon",
     "linkType": "product",
     "asin": "B0D73SQRM1",
-    "image": ""
+    "image": "",
+    "brand": "Noise",
+    "description": "HP H120 Wired Headset with Microphone, Noise Cancelling Mic, Adjustable Headband, 3.5mm Jack is a Noise product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 60,
@@ -909,7 +1004,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Samsung",
+    "description": "typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023, 7-Color Backlit with Touchpad is a Samsung product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 61,
@@ -924,7 +1021,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Encasify",
+    "description": "Encasify Telescope Cover, Waterproof Dustproof Sunproof Outdoor Protective Cover with Zipper and Durable Closure is an Encasify product listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 62,
@@ -939,7 +1038,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Hauser",
+    "description": "Hauser Fizzy Gel Pen Jar, Transparent Lightweight Body, Comfortable Grip, Smooth Ink Flow, Blue Ink Pack of 25 Pens is a Hauser product listed in the Office Supplies category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 63,
@@ -954,7 +1055,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Wembley",
+    "description": "Wembley Hover Football for Kids, Electric Floating Soccer Ball, Rechargeable Indoor Game, Birthday Gift for Boys is a Wembley product listed in the Toys category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 64,
@@ -969,7 +1072,8 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "description": "Chair Bush Black Colour 10 Pcs, ID 15mm OD 20mm, Round Shape is listed in the Industrial category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 65,
@@ -984,7 +1088,8 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "description": "Drivanto Washing Machine Stand Multi-Functional Movable Adjustable Base with Locking Wheels for Washing Machine, Refrigerator and Furniture is listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 66,
@@ -999,7 +1104,8 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "description": "UGAOO Combo of 3 Indoor Plants with Ibiza Pot, Money Plant Golden, Jade Plant and Peace Lily for Home and Office Decor is listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 67,
@@ -1015,7 +1121,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Prestige",
+    "description": "Prestige Induction Cooktop is a Prestige product listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 68,
@@ -1031,7 +1139,8 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "description": "Lakme Makeup Kit is listed in the Beauty category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 69,
@@ -1047,7 +1156,9 @@
     "mrp": null,
     "save": null,
     "priceText": "Check live price on Amazon",
-    "linkType": "search"
+    "linkType": "search",
+    "brand": "Redmi",
+    "description": "Redmi Note 13 5G is a Redmi product listed in the Mobiles category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 70,
@@ -1058,7 +1169,9 @@
     "code": "NO CODE NEEDED",
     "link": "https://www.amazon.in/s?k=samsung+25l+microwave+oven&tag=guru0906-21",
     "expiry": "Limited Time",
-    "badge": null
+    "badge": null,
+    "brand": "Samsung",
+    "description": "Samsung 25L Microwave Oven is a Samsung product listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
   },
   {
     "id": 71,
@@ -1076,7 +1189,8 @@
     "linkType": "product",
     "asin": "B0GKFDM4JZ",
     "image": "",
-    "description": "ECOVACS Deebot N50 PRO Omni robotic vacuum cleaner with 25,000 Pa suction, self-emptying Omni Station, ZeroTangle 3.0 technology, hot-air drying and smart carpet detection."
+    "description": "ECOVACS Deebot N50 PRO Omni robotic vacuum cleaner with 25,000 Pa suction, self-emptying Omni Station, ZeroTangle 3.0 technology, hot-air drying and smart carpet detection.",
+    "brand": "ECOVACS"
   },
   {
     "id": 72,
@@ -1094,7 +1208,8 @@
     "linkType": "product",
     "asin": "B0DRJPJLNQ",
     "image": "",
-    "description": "ECOVACS Deebot T50 PRO Omni robotic vacuum cleaner with 15,000 Pa suction, 6400mAh battery, ZeroTangle 2.0 brush, AIVI 3.0 obstacle avoidance, and 10-in-1 Omni Station with auto wash/dry/refill."
+    "description": "ECOVACS Deebot T50 PRO Omni robotic vacuum cleaner with 15,000 Pa suction, 6400mAh battery, ZeroTangle 2.0 brush, AIVI 3.0 obstacle avoidance, and 10-in-1 Omni Station with auto wash/dry/refill.",
+    "brand": "ECOVACS"
   },
   {
     "id": 73,
