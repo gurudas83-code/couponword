@@ -1,4 +1,3 @@
-cat > python/product_engine.py <<'PY'
 #!/usr/bin/env python3
 """
 Coupon World AI OS
