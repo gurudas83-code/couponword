@@ -78,7 +78,30 @@ KNOWN_BRANDS = {
     "wembley": "Wembley",
     "encasify": "Encasify",
     "stempedia": "STEMpedia",
-    "ssea": "SSEA"
+    "ssea": "SSEA",
+    "jiada": "JIADA",
+    "teeslix": "TeeSlix",
+    "bausch + lomb": "Bausch + Lomb",
+    "aasons": "AASONS",
+    "hebezon": "Hebezon",
+    "homestrap": "HomeStrap",
+    "audavibe": "Audavibe",
+    "gesto": "Gesto",
+    "popsugar": "Popsugar",
+    "tekcool": "TEKCOOL",
+    "echo dot": "Amazon",
+    "milton": "Milton",
+    "boult audio": "Boult Audio",
+    "fire tv": "Amazon",
+    "kindle": "Amazon",
+    "levi's": "Levi's",
+    "strauss": "Strauss",
+    "mamaearth": "Mamaearth",
+    "kore": "Kore",
+    "cello": "Cello",
+    "drivanto": "Drivanto",
+    "ugaoo": "UGAOO",
+    "lakme": "Lakme"
 }
 
 
