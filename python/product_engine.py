@@ -101,7 +101,12 @@ KNOWN_BRANDS = {
     "cello": "Cello",
     "drivanto": "Drivanto",
     "ugaoo": "UGAOO",
-    "lakme": "Lakme"
+    "lakme": "Lakme",
+    "qubo": "Qubo",
+    "cp plus": "CP PLUS",
+    "countrycam": "COUNTRYCAM",
+    "trueview": "Trueview",
+    "manomay": "MANOMAY"
 }
 
 
