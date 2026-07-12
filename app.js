@@ -76,6 +76,12 @@ function getFilteredDeals() {
     deals.sort((a, b) => String(a.title || "").localeCompare(String(b.title || "")));
   }
 
+  deals.sort((a, b) => {
+    const aUnavailable = a.active === false ? 1 : 0;
+    const bUnavailable = b.active === false ? 1 : 0;
+    return aUnavailable - bUnavailable;
+  });
+
   return deals;
 }
 
@@ -106,7 +112,7 @@ function buildCategoryChips() {
 
 function renderFeaturedDeal() {
   const box = document.getElementById("featuredDeal");
-  const deal = allDeals[0];
+  const deal = allDeals.find(item => item.active !== false) || allDeals[0];
 
   if (!deal) return;
 
@@ -130,8 +136,12 @@ function renderDeals() {
 
   grid.className = activeView === "compact" ? "deal-grid compact" : "deal-grid";
 
-  grid.innerHTML = deals.map(deal => `
-    <article class="deal-card">
+  grid.innerHTML = deals.map(deal => {
+    const unavailable = deal.active === false ||
+      normalize(deal.availability) === "unavailable";
+
+    return `
+    <article class="deal-card ${unavailable ? "deal-card-unavailable" : ""}">
       ${renderImage(deal, "deal-image")}
 
       <div class="deal-meta">
@@ -141,7 +151,11 @@ function renderDeals() {
 
       <h3 class="deal-title">${escapeHTML(deal.title || "Amazon Product Deal")}</h3>
 
-      <div class="discount">${escapeHTML(deal.discount || "Deal Price")}</div>
+      <div class="discount">
+        ${unavailable
+          ? "Currently unavailable"
+          : escapeHTML(deal.discount || "Check latest price on Amazon")}
+      </div>
 
       <div class="price-row">
         ${deal.price ? `<span class="price">${escapeHTML(deal.price)}</span>` : ""}
@@ -156,13 +170,25 @@ function renderDeals() {
         <span>${escapeHTML(deal.expiry || "Limited Time")}</span>
       </div>
 
-      <a class="shop-button" href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">
-        Shop Now →
-      </a>
+      ${unavailable
+        ? `<span class="shop-button shop-button-disabled" aria-disabled="true">
+             Currently Unavailable
+           </span>`
+        : `<a class="shop-button" href="${safeLink(deal.link)}"
+              target="_blank"
+              rel="nofollow sponsored noopener">
+             Shop Now →
+           </a>`
+      }
 
-      <div class="card-note">Affiliate link • Final price on Amazon may change</div>
+      <div class="card-note">
+        ${unavailable
+          ? "Product currently unavailable on Amazon"
+          : "Affiliate link • Final price on Amazon may change"}
+      </div>
     </article>
-  `).join("");
+    `;
+  }).join("");
 }
 
 function renderImage(deal, className) {

@@ -373,3 +373,31 @@ img{max-width:100%;display:block}
   .footer-grid{grid-template-columns:1fr}
   .footer-links{justify-content:flex-start}
 }
+
+/* Unavailable Amazon products */
+.deal-card-unavailable {
+  opacity: 0.58;
+  filter: grayscale(0.65);
+  border-style: dashed;
+}
+
+.deal-card-unavailable .discount {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.shop-button-disabled {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: not-allowed;
+  pointer-events: none;
+  background: #d1d5db;
+  color: #6b7280;
+  box-shadow: none;
+}
+
+.deal-card-unavailable:hover {
+  transform: none;
+  box-shadow: none;
+}
