@@ -52,7 +52,7 @@ def main():
 
     if a.status == "unavailable":
         for k in ("price","mrp","save","discount"):
-            proposed[k] = ""
+            proposed[k] = None
     else:
         if a.price: proposed["price"] = num(a.price)
         if a.mrp: proposed["mrp"] = num(a.mrp)
