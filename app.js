@@ -124,6 +124,30 @@ function renderFeaturedDeal() {
   `;
 }
 
+function productSlug(value, maxLength = 70) {
+  let slug = normalize(value)
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  if (!slug) {
+    slug = "product";
+  }
+
+  if (slug.length > maxLength) {
+    slug = slug.slice(0, maxLength).replace(/-+$/g, "");
+  }
+
+  return slug;
+}
+
+function getProductPageLink(deal) {
+  const suffix = String(
+    deal.asin || deal.id || deal.sl_no || "item"
+  ).toLowerCase();
+
+  return `products/${productSlug(deal.title) + "-" + suffix}/`;
+}
+
 function renderDeals() {
   const deals = getFilteredDeals();
 
@@ -139,17 +163,24 @@ function renderDeals() {
   grid.innerHTML = deals.map(deal => {
     const unavailable = deal.active === false ||
       normalize(deal.availability) === "unavailable";
+    const productPage = getProductPageLink(deal);
 
     return `
     <article class="deal-card ${unavailable ? "deal-card-unavailable" : ""}">
-      ${renderImage(deal, "deal-image")}
+      <a class="product-media-link" href="${productPage}" aria-label="View ${escapeHTML(deal.title || "product")} details">
+        ${renderImage(deal, "deal-image")}
+      </a>
 
       <div class="deal-meta">
         <span class="store">${escapeHTML(deal.store || "Amazon IN")}</span>
         <span class="category-pill">${escapeHTML(deal.category || "Deal")}</span>
       </div>
 
-      <h3 class="deal-title">${escapeHTML(deal.title || "Amazon Product Deal")}</h3>
+      <h3 class="deal-title">
+        <a href="${productPage}">
+          ${escapeHTML(deal.title || "Amazon Product Deal")}
+        </a>
+      </h3>
 
       <div class="discount">
         ${unavailable
@@ -170,16 +201,22 @@ function renderDeals() {
         <span>${escapeHTML(deal.expiry || "Limited Time")}</span>
       </div>
 
-      ${unavailable
-        ? `<span class="shop-button shop-button-disabled" aria-disabled="true">
-             Currently Unavailable
-           </span>`
-        : `<a class="shop-button" href="${safeLink(deal.link)}"
-              target="_blank"
-              rel="nofollow sponsored noopener">
-             Shop Now →
-           </a>`
-      }
+      <div class="card-actions">
+        <a class="details-button" href="${productPage}">
+          View Details
+        </a>
+
+        ${unavailable
+          ? `<span class="shop-button shop-button-disabled" aria-disabled="true">
+               Currently Unavailable
+             </span>`
+          : `<a class="shop-button" href="${safeLink(deal.link)}"
+                target="_blank"
+                rel="nofollow sponsored noopener">
+               Shop Now →
+             </a>`
+        }
+      </div>
 
       <div class="card-note">
         ${unavailable

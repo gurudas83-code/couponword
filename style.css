@@ -401,3 +401,48 @@ img{max-width:100%;display:block}
   transform: none;
   box-shadow: none;
 }
+
+/* Internal product detail links */
+.product-media-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.deal-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.deal-title a:hover {
+  text-decoration: underline;
+}
+
+.card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.details-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 14px;
+  border: 1px solid #d9dde7;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #20242d;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.details-button:hover {
+  background: #f5f6f9;
+}
+
+@media (max-width: 520px) {
+  .card-actions {
+    grid-template-columns: 1fr;
+  }
+}

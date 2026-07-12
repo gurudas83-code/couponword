@@ -12,7 +12,8 @@
     "brand": "JIADA",
     "price": null,
     "mrp": null,
-    "save": null
+    "save": null,
+    "image": ""
   },
   {
     "store": "Amazon IN",
@@ -27,7 +28,8 @@
     "description": "Keyboard Case for Samsung Galaxy Tab A11+ & Tab A9 Plus 11” Folio Cover SM-X230, SM-X236B, SM-X210, SM-X215 with Trackpad, 7 Color Backlit Magnetically Detachable Bluetooth Keyboard, Multi-Angle View is a Samsung product listed in the Prime Deal - Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
     "price": null,
     "mrp": null,
-    "save": null
+    "save": null,
+    "image": ""
   },
   {
     "store": "Amazon IN",
@@ -42,7 +44,8 @@
     "brand": "TeeSlix",
     "price": null,
     "mrp": null,
-    "save": null
+    "save": null,
+    "image": ""
   },
   {
     "store": "Amazon IN",
@@ -57,7 +60,8 @@
     "brand": "Bausch + Lomb",
     "price": null,
     "mrp": null,
-    "save": null
+    "save": null,
+    "image": ""
   },
   {
     "store": "Amazon IN",
@@ -72,7 +76,8 @@
     "brand": "AASONS",
     "price": null,
     "mrp": null,
-    "save": null
+    "save": null,
+    "image": ""
   },
   {
     "store": "Amazon IN",
@@ -87,7 +92,8 @@
     "brand": "Hebezon",
     "price": null,
     "mrp": null,
-    "save": null
+    "save": null,
+    "image": ""
   },
   {
     "store": "Amazon IN",
@@ -102,7 +108,8 @@
     "description": "Campus Women's OGL-4 Sneakers is a Campus product listed in the Footwear category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
     "price": null,
     "mrp": null,
-    "save": null
+    "save": null,
+    "image": ""
   },
   {
     "store": "Amazon IN",
@@ -117,7 +124,8 @@
     "brand": "HomeStrap",
     "price": null,
     "mrp": null,
-    "save": null
+    "save": null,
+    "image": ""
   },
   {
     "store": "Amazon IN",
@@ -132,7 +140,8 @@
     "description": "Amazon Basics 64 GB Micro SD Card with Adapter | Upto 120 MB/s | Class 10 | U1, C10, V10 Speed Classes is an Amazon product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
     "price": null,
     "mrp": null,
-    "save": null
+    "save": null,
+    "image": ""
   },
   {
     "id": 10,
@@ -266,7 +275,8 @@
     "save": null,
     "priceText": "Check live price on Amazon",
     "linkType": "search",
-    "description": "Mega 70%+ OFF Store is listed in the Offers category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Mega 70%+ OFF Store is listed in the Offers category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 17,
@@ -284,7 +294,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Amazon",
-    "description": "Amazon IN Fashion Fest is an Amazon product listed in the Fashion category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Amazon IN Fashion Fest is an Amazon product listed in the Fashion category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 18,
@@ -425,7 +436,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Fire-Boltt",
-    "description": "Fire-Boltt Ninja Smartwatch is a Fire-Boltt product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Fire-Boltt Ninja Smartwatch is a Fire-Boltt product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 25,
@@ -443,7 +455,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Sony",
-    "description": "Sony Wireless Headphones is a Sony product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Sony Wireless Headphones is a Sony product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 26,
@@ -461,7 +474,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "description": "Echo Dot 5th Gen is listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
-    "brand": "Amazon"
+    "brand": "Amazon",
+    "image": ""
   },
   {
     "id": 27,
@@ -479,7 +493,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "description": "Milton Thermosteel Bottle is listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
-    "brand": "Milton"
+    "brand": "Milton",
+    "image": ""
   },
   {
     "id": 28,
@@ -497,7 +512,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "HP",
-    "description": "HP Wireless Mouse is a HP product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "HP Wireless Mouse is a HP product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 29,
@@ -514,7 +530,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "boAt",
-    "description": "boAt Rockerz 450 Headphones is a boAt product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "boAt Rockerz 450 Headphones is a boAt product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 30,
@@ -531,7 +548,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "OnePlus",
-    "description": "OnePlus Nord CE is an OnePlus product listed in the Mobiles category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "OnePlus Nord CE is an OnePlus product listed in the Mobiles category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 31,
@@ -549,7 +567,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Philips",
-    "description": "Philips Trimmer is a Philips product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Philips Trimmer is a Philips product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 32,
@@ -567,7 +586,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "boAt",
-    "description": "boAt Airdopes 311 Pro TWS Earbuds is a boAt product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "boAt Airdopes 311 Pro TWS Earbuds is a boAt product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 33,
@@ -584,7 +604,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "description": "Boult Audio Bluetooth Speaker is listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
-    "brand": "Boult Audio"
+    "brand": "Boult Audio",
+    "image": ""
   },
   {
     "id": 34,
@@ -601,7 +622,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "description": "Fire TV Stick 4K is listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
-    "brand": "Amazon"
+    "brand": "Amazon",
+    "image": ""
   },
   {
     "id": 35,
@@ -619,7 +641,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Puma",
-    "description": "Puma Men's Running Shoes is a Puma product listed in the Fashion category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Puma Men's Running Shoes is a Puma product listed in the Fashion category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 36,
@@ -637,7 +660,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "boAt",
-    "description": "boAt Stone Bluetooth Speaker is a boAt product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "boAt Stone Bluetooth Speaker is a boAt product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 37,
@@ -654,7 +678,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Mi",
-    "description": "Mi Power Bank 10000mAh is a Mi product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Mi Power Bank 10000mAh is a Mi product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 38,
@@ -671,7 +696,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Samsung",
-    "description": "Samsung Galaxy M16 5G is a Samsung product listed in the Mobiles category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Samsung Galaxy M16 5G is a Samsung product listed in the Mobiles category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 39,
@@ -688,7 +714,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "description": "Kindle Paperwhite is listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
-    "brand": "Amazon"
+    "brand": "Amazon",
+    "image": ""
   },
   {
     "id": 40,
@@ -705,7 +732,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "American Tourister",
-    "description": "American Tourister Trolley Bag is an American Tourister product listed in the Fashion category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "American Tourister Trolley Bag is an American Tourister product listed in the Fashion category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 41,
@@ -722,7 +750,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "ASUS",
-    "description": "ASUS Gaming Laptop is an ASUS product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "ASUS Gaming Laptop is an ASUS product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 42,
@@ -739,7 +768,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "realme",
-    "description": "Realme Buds T100 is a realme product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Realme Buds T100 is a realme product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 43,
@@ -757,7 +787,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Titan",
-    "description": "Titan Analog Watch is a Titan product listed in the Fashion category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Titan Analog Watch is a Titan product listed in the Fashion category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 44,
@@ -774,7 +805,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Wildcraft",
-    "description": "Wildcraft Backpack 35L is a Wildcraft product listed in the Fashion category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Wildcraft Backpack 35L is a Wildcraft product listed in the Fashion category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 45,
@@ -791,7 +823,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "description": "Levi's Men's Jeans is listed in the Fashion category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
-    "brand": "Levi's"
+    "brand": "Levi's",
+    "image": ""
   },
   {
     "id": 46,
@@ -809,7 +842,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "description": "Strauss Yoga Mat is listed in the Fitness category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
-    "brand": "Strauss"
+    "brand": "Strauss",
+    "image": ""
   },
   {
     "id": 47,
@@ -827,7 +861,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Samsung",
-    "description": "Samsung 28L Microwave Oven is a Samsung product listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Samsung 28L Microwave Oven is a Samsung product listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 48,
@@ -844,7 +879,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "description": "Mamaearth Skincare Combo is listed in the Beauty category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
-    "brand": "Mamaearth"
+    "brand": "Mamaearth",
+    "image": ""
   },
   {
     "id": 49,
@@ -861,7 +897,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "description": "Kore Adjustable Dumbbells is listed in the Fitness category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
-    "brand": "Kore"
+    "brand": "Kore",
+    "image": ""
   },
   {
     "id": 50,
@@ -878,7 +915,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "description": "Cello Water Bottle Set is listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
-    "brand": "Cello"
+    "brand": "Cello",
+    "image": ""
   },
   {
     "id": 51,
@@ -895,7 +933,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Bajaj",
-    "description": "Bajaj Ceiling Fan is a Bajaj product listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Bajaj Ceiling Fan is a Bajaj product listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 52,
@@ -931,7 +970,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Noise",
-    "description": "Noise ColorFit Smartwatch is a Noise product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Noise ColorFit Smartwatch is a Noise product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 54,
@@ -948,7 +988,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Apple",
-    "description": "Apple AirPods is an Apple product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Apple AirPods is an Apple product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 55,
@@ -965,7 +1006,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Dell",
-    "description": "Dell Inspiron Laptop is a Dell product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Dell Inspiron Laptop is a Dell product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 56,
@@ -1020,7 +1062,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "JBL",
-    "description": "JBL Tune 510BT Headphones is a JBL product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "JBL Tune 510BT Headphones is a JBL product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 59,
@@ -1056,7 +1099,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Samsung",
-    "description": "typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023, 7-Color Backlit with Touchpad is a Samsung product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023, 7-Color Backlit with Touchpad is a Samsung product listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 61,
@@ -1073,7 +1117,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Encasify",
-    "description": "Encasify Telescope Cover, Waterproof Dustproof Sunproof Outdoor Protective Cover with Zipper and Durable Closure is an Encasify product listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Encasify Telescope Cover, Waterproof Dustproof Sunproof Outdoor Protective Cover with Zipper and Durable Closure is an Encasify product listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 62,
@@ -1090,7 +1135,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Hauser",
-    "description": "Hauser Fizzy Gel Pen Jar, Transparent Lightweight Body, Comfortable Grip, Smooth Ink Flow, Blue Ink Pack of 25 Pens is a Hauser product listed in the Office Supplies category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Hauser Fizzy Gel Pen Jar, Transparent Lightweight Body, Comfortable Grip, Smooth Ink Flow, Blue Ink Pack of 25 Pens is a Hauser product listed in the Office Supplies category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 63,
@@ -1107,7 +1153,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Wembley",
-    "description": "Wembley Hover Football for Kids, Electric Floating Soccer Ball, Rechargeable Indoor Game, Birthday Gift for Boys is a Wembley product listed in the Toys category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Wembley Hover Football for Kids, Electric Floating Soccer Ball, Rechargeable Indoor Game, Birthday Gift for Boys is a Wembley product listed in the Toys category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 64,
@@ -1123,7 +1170,8 @@
     "save": null,
     "priceText": "Check live price on Amazon",
     "linkType": "search",
-    "description": "Chair Bush Black Colour 10 Pcs, ID 15mm OD 20mm, Round Shape is listed in the Industrial category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Chair Bush Black Colour 10 Pcs, ID 15mm OD 20mm, Round Shape is listed in the Industrial category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 65,
@@ -1140,7 +1188,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "description": "Drivanto Washing Machine Stand Multi-Functional Movable Adjustable Base with Locking Wheels for Washing Machine, Refrigerator and Furniture is listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
-    "brand": "Drivanto"
+    "brand": "Drivanto",
+    "image": ""
   },
   {
     "id": 66,
@@ -1157,7 +1206,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "description": "UGAOO Combo of 3 Indoor Plants with Ibiza Pot, Money Plant Golden, Jade Plant and Peace Lily for Home and Office Decor is listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
-    "brand": "UGAOO"
+    "brand": "UGAOO",
+    "image": ""
   },
   {
     "id": 67,
@@ -1175,7 +1225,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Prestige",
-    "description": "Prestige Induction Cooktop is a Prestige product listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Prestige Induction Cooktop is a Prestige product listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 68,
@@ -1193,7 +1244,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "description": "Lakme Makeup Kit is listed in the Beauty category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
-    "brand": "Lakme"
+    "brand": "Lakme",
+    "image": ""
   },
   {
     "id": 69,
@@ -1211,7 +1263,8 @@
     "priceText": "Check live price on Amazon",
     "linkType": "search",
     "brand": "Redmi",
-    "description": "Redmi Note 13 5G is a Redmi product listed in the Mobiles category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details."
+    "description": "Redmi Note 13 5G is a Redmi product listed in the Mobiles category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "image": ""
   },
   {
     "id": 70,
@@ -1227,7 +1280,8 @@
     "description": "Samsung 25L Microwave Oven is a Samsung product listed in the Home category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
     "price": null,
     "mrp": null,
-    "save": null
+    "save": null,
+    "image": ""
   },
   {
     "id": 71,
@@ -1435,10 +1489,10 @@
     "title": "boAt Nirvana Ion TWS Earbuds",
     "brand": "boAt",
     "category": "TWS Earbuds",
-    "price": "",
-    "mrp": "",
-    "save": "",
-    "discount": "",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "discount": null,
     "image": "",
     "link": "https://www.amazon.in/dp/B0BW8TXJJ2?tag=guru0906-21",
     "description": "boAt Nirvana Ion TWS Earbuds is a boAt product listed in the TWS Earbuds category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
@@ -1451,10 +1505,10 @@
     "title": "realme Buds T310 True Wireless Earbuds",
     "brand": "realme",
     "category": "TWS Earbuds",
-    "price": "",
-    "mrp": "",
-    "save": "",
-    "discount": "",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "discount": null,
     "image": "",
     "link": "https://www.amazon.in/dp/B0DBGNY4XP?tag=guru0906-21",
     "description": "realme Buds T310 True Wireless Earbuds is a realme product listed in the TWS Earbuds category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
@@ -1467,10 +1521,10 @@
     "title": "realme Buds T310 True Wireless Earbuds",
     "brand": "realme",
     "category": "TWS Earbuds",
-    "price": "",
-    "mrp": "",
-    "save": "",
-    "discount": "",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "discount": null,
     "image": "",
     "link": "https://www.amazon.in/dp/B0DBGP48NW?tag=guru0906-21",
     "description": "realme Buds T310 True Wireless Earbuds is a realme product listed in the TWS Earbuds category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
@@ -1483,10 +1537,10 @@
     "title": "JBL Wave Buds 2 Wireless Earbuds",
     "brand": "JBL",
     "category": "TWS Earbuds",
-    "price": "",
-    "mrp": "",
-    "save": "",
-    "discount": "",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "discount": null,
     "image": "",
     "link": "https://www.amazon.in/dp/B0DKJKTPWJ?tag=guru0906-21",
     "description": "JBL Wave Buds 2 Wireless Earbuds is a JBL product listed in the TWS Earbuds category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
@@ -1499,10 +1553,10 @@
     "title": "truke Mega 9 True Wireless Earbuds",
     "brand": "truke",
     "category": "TWS Earbuds",
-    "price": "",
-    "mrp": "",
-    "save": "",
-    "discount": "",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "discount": null,
     "image": "",
     "link": "https://www.amazon.in/dp/B0F1CYD5PS?tag=guru0906-21",
     "description": "truke Mega 9 True Wireless Earbuds is listed in the TWS Earbuds category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
@@ -1515,10 +1569,10 @@
     "title": "boAt Airdopes 219 TWS Earbuds",
     "brand": "boAt",
     "category": "TWS Earbuds",
-    "price": "",
-    "mrp": "",
-    "save": "",
-    "discount": "",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "discount": null,
     "image": "",
     "link": "https://www.amazon.in/dp/B0FC2YFSN4?tag=guru0906-21",
     "description": "boAt Airdopes 219 TWS Earbuds is a boAt product listed in the TWS Earbuds category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
@@ -1531,10 +1585,10 @@
     "title": "Samsung Galaxy Buds Core",
     "brand": "Samsung",
     "category": "TWS Earbuds",
-    "price": "",
-    "mrp": "",
-    "save": "",
-    "discount": "",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "discount": null,
     "image": "",
     "link": "https://www.amazon.in/dp/B0FDGVNSLH?tag=guru0906-21",
     "description": "Samsung Galaxy Buds Core is a Samsung product listed in the TWS Earbuds category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
@@ -1547,10 +1601,10 @@
     "title": "realme Buds Air 8 TWS Earbuds",
     "brand": "realme",
     "category": "TWS Earbuds",
-    "price": "",
-    "mrp": "",
-    "save": "",
-    "discount": "",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "discount": null,
     "image": "",
     "link": "https://www.amazon.in/dp/B0GDQ28DY5?tag=guru0906-21",
     "description": "realme Buds Air 8 TWS Earbuds is a realme product listed in the TWS Earbuds category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
@@ -1563,10 +1617,10 @@
     "title": "STADOR Wireless Bluetooth Earbuds",
     "brand": "STADOR",
     "category": "TWS Earbuds",
-    "price": "",
-    "mrp": "",
-    "save": "",
-    "discount": "",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "discount": null,
     "image": "",
     "link": "https://www.amazon.in/dp/B0GFH4C819?tag=guru0906-21",
     "description": "STADOR Wireless Bluetooth Earbuds is listed in the TWS Earbuds category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
@@ -1579,10 +1633,10 @@
     "title": "realme Wireless Earbuds",
     "brand": "realme",
     "category": "TWS Earbuds",
-    "price": "",
-    "mrp": "",
-    "save": "",
-    "discount": "",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "discount": null,
     "image": "",
     "link": "https://www.amazon.in/dp/B0GVZ7JJRP?tag=guru0906-21",
     "description": "realme Wireless Earbuds is a realme product listed in the TWS Earbuds category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
@@ -1595,10 +1649,10 @@
     "title": "BOLOXA Wireless Earbuds with Charging Case",
     "brand": "BOLOXA",
     "category": "TWS Earbuds",
-    "price": "",
-    "mrp": "",
-    "save": "",
-    "discount": "",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "discount": null,
     "image": "",
     "link": "https://www.amazon.in/dp/B0GWGPYZVQ?tag=guru0906-21",
     "description": "BOLOXA Wireless Earbuds with Charging Case is listed in the TWS Earbuds category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
@@ -1611,10 +1665,10 @@
     "title": "OFNEX Wireless Bluetooth Earbuds",
     "brand": "OFNEX",
     "category": "TWS Earbuds",
-    "price": "",
-    "mrp": "",
-    "save": "",
-    "discount": "",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "discount": null,
     "image": "",
     "link": "https://www.amazon.in/dp/B0GWXN43W4?tag=guru0906-21",
     "description": "OFNEX Wireless Bluetooth Earbuds is listed in the TWS Earbuds category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
@@ -1627,10 +1681,10 @@
     "title": "BOLOXA Wireless Bluetooth Earbuds",
     "brand": "BOLOXA",
     "category": "TWS Earbuds",
-    "price": "",
-    "mrp": "",
-    "save": "",
-    "discount": "",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "discount": null,
     "image": "",
     "link": "https://www.amazon.in/dp/B0GXBNPSCL?tag=guru0906-21",
     "description": "BOLOXA Wireless Bluetooth Earbuds is listed in the TWS Earbuds category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
@@ -1643,10 +1697,10 @@
     "title": "boAt Airdopes Stride TWS Earbuds",
     "brand": "boAt",
     "category": "TWS Earbuds",
-    "price": "",
-    "mrp": "",
-    "save": "",
-    "discount": "",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "discount": null,
     "image": "",
     "link": "https://www.amazon.in/dp/B0H4ZL6TGW?tag=guru0906-21",
     "description": "boAt Airdopes Stride TWS Earbuds is a boAt product listed in the TWS Earbuds category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
@@ -1659,10 +1713,10 @@
     "title": "Voods Nova Plus Bluetooth Earphones",
     "brand": "Voods",
     "category": "TWS Earbuds",
-    "price": "",
-    "mrp": "",
-    "save": "",
-    "discount": "",
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "discount": null,
     "image": "",
     "link": "https://www.amazon.in/dp/B0H5X1Q8R7?tag=guru0906-21",
     "description": "Voods Nova Plus Bluetooth Earphones is listed in the TWS Earbuds category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
