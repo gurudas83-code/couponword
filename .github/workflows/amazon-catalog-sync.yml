@@ -1,0 +1,32 @@
+name: Amazon Catalog Sync
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  catalog-sync-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate product database
+        run: python -m json.tool coupons.json > /dev/null
+
+      - name: Compile Amazon sync scripts
+        run: |
+          python -m py_compile \
+            python/amazon_data_provider.py \
+            python/amazon_catalog_sync.py
+
+      - name: Run Amazon catalog sync check
+        run: python python/amazon_catalog_sync.py
