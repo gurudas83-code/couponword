@@ -191,19 +191,99 @@ function renderDeals() {
   }).join("");
 }
 
+function getCategoryPlaceholder(deal) {
+  const category = normalize(deal.category);
+  const title = normalize(deal.title);
+
+  if (
+    category.includes("security camera") ||
+    title.includes("camera") ||
+    title.includes("cctv")
+  ) {
+    return "📹";
+  }
+
+  if (
+    title.includes("earbud") ||
+    title.includes("headphone") ||
+    title.includes("buds") ||
+    title.includes("tws")
+  ) {
+    return "🎧";
+  }
+
+  if (
+    category.includes("mobile") ||
+    title.includes("iphone") ||
+    title.includes("smartphone")
+  ) {
+    return "📱";
+  }
+
+  if (
+    category.includes("home") ||
+    category.includes("kitchen")
+  ) {
+    return "🏠";
+  }
+
+  if (
+    category.includes("beauty") ||
+    category.includes("personal care")
+  ) {
+    return "✨";
+  }
+
+  if (
+    category.includes("fashion") ||
+    category.includes("footwear") ||
+    title.includes("shoe")
+  ) {
+    return "👟";
+  }
+
+  if (
+    category.includes("toy") ||
+    title.includes("kids")
+  ) {
+    return "🧸";
+  }
+
+  if (
+    category.includes("electronics")
+  ) {
+    return "⚡";
+  }
+
+  return "🛍️";
+}
+
 function renderImage(deal, className) {
+  const placeholderIcon = getCategoryPlaceholder(deal);
+
   if (deal.image) {
     return `
       <div class="${className}">
-        <img src="${escapeHTML(deal.image)}" alt="${escapeHTML(deal.title || "Deal image")}" loading="lazy"
-        onerror="this.parentElement.innerHTML='<div class=&quot;placeholder&quot;>🛍️<small>Coupon World</small></div>'">
+        <img
+          src="${escapeHTML(deal.image)}"
+          alt="${escapeHTML(deal.title || "Deal image")}"
+          loading="lazy"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <div class="placeholder image-fallback" style="display:none">
+          ${placeholderIcon}
+          <small>${escapeHTML(deal.category || "Coupon World")}</small>
+        </div>
       </div>
     `;
   }
 
   return `
     <div class="${className}">
-      <div class="placeholder">🛍️<small>Coupon World</small></div>
+      <div class="placeholder">
+        ${placeholderIcon}
+        <small>${escapeHTML(deal.category || "Coupon World")}</small>
+      </div>
     </div>
   `;
 }
