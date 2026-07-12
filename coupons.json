@@ -387,6 +387,29 @@
     "brand": "Popsugar"
   },
   {
+    "id": 23,
+    "store": "Amazon IN",
+    "category": "Electronics",
+    "title": "TEKCOOL Portable Air Cooler Fan with Ice Chamber, USB Rechargeable Mini Cooling Fan for Home Kitchen",
+    "discount": null,
+    "code": "NO CODE NEEDED",
+    "link": "https://www.amazon.in/dp/B0H1QQ7ML1?tag=guru0906-21",
+    "expiry": "30 Nov 2026",
+    "badge": null,
+    "price": null,
+    "mrp": null,
+    "save": null,
+    "priceText": "Check live price on Amazon",
+    "linkType": "product",
+    "asin": "B0H1QQ7ML1",
+    "image": "",
+    "description": "TEKCOOL Portable Air Cooler Fan with Ice Chamber, USB Rechargeable Mini Cooling Fan for Home Kitchen is listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
+    "brand": "TEKCOOL",
+    "availability": "unavailable",
+    "active": false,
+    "amazon_checked_at": "2026-07-12T05:27:47+00:00"
+  },
+  {
     "id": 24,
     "store": "Amazon IN",
     "category": "Electronics",
@@ -1404,28 +1427,5 @@
     "link": "https://www.amazon.in/dp/B0FJSCCNX6?tag=guru0906-21",
     "description": "Qubo Smart 360° 3MP Baby Monitor Camera is listed in the Security Cameras category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
     "data_source": "manual"
-  },
-  {
-    "id": 23,
-    "store": "Amazon IN",
-    "category": "Electronics",
-    "title": "TEKCOOL Portable Air Cooler Fan with Ice Chamber, USB Rechargeable Mini Cooling Fan for Home Kitchen",
-    "discount": null,
-    "code": "NO CODE NEEDED",
-    "link": "https://www.amazon.in/dp/B0H1QQ7ML1?tag=guru0906-21",
-    "expiry": "30 Nov 2026",
-    "badge": null,
-    "price": null,
-    "mrp": null,
-    "save": null,
-    "priceText": "Check live price on Amazon",
-    "linkType": "product",
-    "asin": "B0H1QQ7ML1",
-    "image": "",
-    "description": "TEKCOOL Portable Air Cooler Fan with Ice Chamber, USB Rechargeable Mini Cooling Fan for Home Kitchen is listed in the Electronics category on Coupon World. Visit the Amazon IN product page to check the latest price, availability and offer details.",
-    "brand": "TEKCOOL",
-    "availability": "unavailable",
-    "active": false,
-    "amazon_checked_at": "2026-07-12T05:27:47+00:00"
   }
 ]
