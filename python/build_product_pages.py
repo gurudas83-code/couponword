@@ -188,15 +188,15 @@ footer{{padding:28px 0 40px;color:#68707d;font-size:14px}}
 {f'<span>ASIN: {html.escape(asin)}</span>' if asin else ''}
 <span>Status: {html.escape(availability)}</span>
 </div>
-<div class="status">{'Check latest price on Amazon' if active else 'Currently unavailable'}</div>
+<div class="status">{'Check latest price at retailer' if active else 'Currently unavailable'}</div>
 {cta}
-<div class="note">Affiliate link. Final price and availability are confirmed on Amazon.</div>
+<div class="note">Affiliate link. Final price and availability are confirmed on the retailer website.</div>
 </div>
 </article>
 <section><h2>About this product</h2><p>{html.escape(description)}</p></section>
 {related_html}
 </main>
-<footer><div class="wrap">Coupon World may earn a commission from qualifying purchases.</div></footer>
+<footer><div class="wrap">As an Amazon Associate I earn from qualifying purchases.</div></footer>
 </body>
 </html>
 """
