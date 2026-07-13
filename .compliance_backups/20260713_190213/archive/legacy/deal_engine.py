@@ -53,7 +53,7 @@ def main():
 
             deals.append({
                 "id": len(deals) + 1,
-                "store": clean(row.get("store")) or "Online Retailer",
+                "store": clean(row.get("store")) or "Amazon IN",
                 "title": title,
                 "category": clean(row.get("category")) or "Deals",
                 "discount": discount_text(price, mrp),

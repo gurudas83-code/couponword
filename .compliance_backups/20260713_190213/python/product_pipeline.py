@@ -100,7 +100,7 @@ def build_record(products, asin, affiliate_url, title, category):
     product = {
         "id": next_product_id(products),
         "asin": data.asin,
-        "store": "Online Retailer",
+        "store": "Amazon IN",
         "title": clean_text(data.title),
         "brand": brand,
         "category": clean_text(data.category),

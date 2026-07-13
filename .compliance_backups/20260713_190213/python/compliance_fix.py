@@ -6,7 +6,7 @@ Actions:
 - Creates a timestamped backup of coupons.json
 - Replaces Amazon-centric generic descriptions with retailer-neutral wording
 - Removes unsupported "Amazon's Choice" badges
-- Renames the generic "Online Retailer Fashion Fest" listing
+- Renames the generic "Amazon IN Fashion Fest" listing
 - Updates product_engine.py so future generated descriptions remain neutral
 - Writes JSON atomically
 """
@@ -26,7 +26,7 @@ BACKUPS = ROOT / "backups"
 PRODUCT_ENGINE = ROOT / "python" / "product_engine.py"
 
 OLD_SENTENCE = (
-    "Visit the Online Retailer product page to check the latest price, "
+    "Visit the Amazon IN product page to check the latest price, "
     "availability and offer details."
 )
 
@@ -38,7 +38,7 @@ NEW_SENTENCE = (
 OLD_PRICE_TEXT = "Check live price on Amazon"
 NEW_PRICE_TEXT = "Check latest price at retailer"
 
-OLD_STORE = "Online Retailer"
+OLD_STORE = "Amazon IN"
 NEUTRAL_STORE = "Online Retailer"
 
 
@@ -90,7 +90,7 @@ def update_products(products: list[dict[str, Any]]) -> dict[str, int]:
             product.pop("badge", None)
             stats["badges_removed"] += 1
 
-        if str(product.get("title") or "").strip() == "Online Retailer Fashion Fest":
+        if str(product.get("title") or "").strip() == "Amazon IN Fashion Fest":
             product["title"] = "Fashion Fest"
             stats["titles"] += 1
 
@@ -128,7 +128,7 @@ def update_future_generator() -> int:
 
     # Also handle split Python string fragments if the same wording exists.
     updated = updated.replace(
-        '"Visit the Online Retailer product page to check the latest price, "',
+        '"Visit the Amazon IN product page to check the latest price, "',
         '"Use the product link to check the latest price, availability "',
     ).replace(
         '"availability and offer details."',

@@ -146,7 +146,7 @@ def build_record(
     product: dict[str, Any] = {
         "id": next_product_id(products),
         "asin": data.asin,
-        "store": "Online Retailer",
+        "store": "Amazon IN",
         "title": clean_text(data.title),
         "brand": brand,
         "category": clean_text(data.category),

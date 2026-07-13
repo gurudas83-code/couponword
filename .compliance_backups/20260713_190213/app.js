@@ -120,7 +120,7 @@ function renderFeaturedDeal() {
     ${renderImage(deal, "spotlight-image")}
     <h2>${escapeHTML(deal.title || "Hot Deal")}</h2>
     <p>${escapeHTML(deal.discount || "Latest offer")} • ${escapeHTML(deal.category || "Deal")}</p>
-    <a href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">View Deal</a>
+    <a href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
   `;
 }
 
@@ -172,7 +172,7 @@ function renderDeals() {
       </a>
 
       <div class="deal-meta">
-        <span class="store">${escapeHTML(deal.store || "Online Retailer")}</span>
+        <span class="store">${escapeHTML(deal.store || "Amazon IN")}</span>
         <span class="category-pill">${escapeHTML(deal.category || "Deal")}</span>
       </div>
 
@@ -185,7 +185,7 @@ function renderDeals() {
       <div class="discount">
         ${unavailable
           ? "Currently unavailable"
-          : escapeHTML(deal.discount || "Check Latest Price")}
+          : escapeHTML(deal.discount || "Check latest price on Amazon")}
       </div>
 
       <div class="price-row">
@@ -221,7 +221,7 @@ function renderDeals() {
       <div class="card-note">
         ${unavailable
           ? "Product currently unavailable on Amazon"
-          : "Affiliate link • Final price and availability may change on the retailer's product page"}
+          : "Affiliate link • Final price on Amazon may change"}
       </div>
     </article>
     `;

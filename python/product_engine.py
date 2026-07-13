@@ -229,12 +229,12 @@ def generate_description(product: dict[str, Any], brand: str) -> str:
     if store:
         parts.append(
             f"Visit the {store} product page to check the latest price, "
-            "availability and offer details."
+            "and current offers from the retailer."
         )
     else:
         parts.append(
             "Open the product page to check the latest price, "
-            "availability and offer details."
+            "and current offers from the retailer."
         )
 
     return " ".join(parts)

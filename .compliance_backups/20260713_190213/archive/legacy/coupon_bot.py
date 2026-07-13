@@ -55,7 +55,7 @@ def main():
 
         deals.append({
             "id": next_id,
-            "store": "Online Retailer",
+            "store": "Amazon IN",
             "category": category,
             "discount": "Check Price",
             "title": title,
