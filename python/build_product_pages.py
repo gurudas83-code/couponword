@@ -188,7 +188,7 @@ footer{{padding:28px 0 40px;color:#68707d;font-size:14px}}
 {f'<span>ASIN: {html.escape(asin)}</span>' if asin else ''}
 <span>Status: {html.escape(availability)}</span>
 </div>
-<div class="status">{'Check latest price on Amazon' if active else 'Currently unavailable'}</div>
+<div class="status">{'Check Latest Offer' if active else 'Currently unavailable'}</div>
 {cta}
 <div class="note">Affiliate link. Final price and availability are confirmed on Amazon.</div>
 </div>

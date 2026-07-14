@@ -114,7 +114,7 @@ function renderFeaturedDeal() {
     ${renderImage(deal, "spotlight-image")}
     <h2>${escapeHTML(deal.title || "Hot Deal")}</h2>
     <p>${escapeHTML(deal.discount || "Latest offer")} • ${escapeHTML(deal.category || "Deal")}</p>
-    <a href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">View Deal</a>
+    <a href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
   `;
 }
 
@@ -135,7 +135,7 @@ function renderDeals() {
       ${renderImage(deal, "deal-image")}
 
       <div class="deal-meta">
-        <span class="store">${escapeHTML(deal.store || "Online Store")}</span>
+        <span class="store">${escapeHTML(deal.store || "Amazon IN")}</span>
         <span class="category-pill">${escapeHTML(deal.category || "Deal")}</span>
       </div>
 
@@ -157,10 +157,10 @@ function renderDeals() {
       </div>
 
       <a class="shop-button" href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">
-        Get Deal →
+        Shop Now →
       </a>
 
-      <div class="card-note">Affiliate link • Final price on the retailer site may change</div>
+      <div class="card-note">Affiliate link • Final price on Amazon may change</div>
     </article>
   `).join("");
 }
