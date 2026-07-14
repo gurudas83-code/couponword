@@ -149,7 +149,7 @@ function renderDeals() {
         ${deal.save ? `<span class="save">${escapeHTML(deal.save)}</span>` : ""}
       </div>
 
-      <p class="description">${escapeHTML(deal.description || "Check latest price and offer on Amazon before buying.")}</p>
+      <p class="description">${escapeHTML(deal.description || "Check the latest price, availability and offer on the retailer site before buying.")}</p>
 
       <div class="code-row">
         <span>${escapeHTML(deal.code || "NO CODE NEEDED")}</span>
@@ -160,7 +160,7 @@ function renderDeals() {
         Get Deal →
       </a>
 
-      <div class="card-note">Affiliate link • Final price on the retailer site may change</div>
+      <div class="card-note">Price and availability may change on the retailer site</div>
     </article>
   `).join("");
 }

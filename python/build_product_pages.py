@@ -190,7 +190,7 @@ footer{{padding:28px 0 40px;color:#68707d;font-size:14px}}
 </div>
 <div class="status">{'Check Latest Offer' if active else 'Currently unavailable'}</div>
 {cta}
-<div class="note">Affiliate link. Final price and availability are confirmed on Amazon.</div>
+<div class="note">Price and availability are confirmed on the retailer site.</div>
 </div>
 </article>
 <section><h2>About this product</h2><p>{html.escape(description)}</p></section>
