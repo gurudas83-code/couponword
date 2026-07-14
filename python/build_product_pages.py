@@ -23,6 +23,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "coupons.json"
 OUT = ROOT / "products"
+
+# Preserve already-published product URLs when titles change.
+LEGACY_PRODUCT_PATHS = {
+    "17": "amazon-in-fashion-fest-17",
+}
 SITE = "https://coupon-word.in"
 
 
@@ -49,6 +54,18 @@ def load_products():
 
 
 def page_dir(product):
+    identity = str(
+        product.get("id")
+        or product.get("sl_no")
+        or product.get("asin")
+        or ""
+    )
+
+    legacy_path = LEGACY_PRODUCT_PATHS.get(identity)
+
+    if legacy_path:
+        return OUT / legacy_path
+
     asin = clean(product.get("asin")).lower()
     suffix = asin or str(product.get("id") or product.get("sl_no") or "item")
     return OUT / f"{slugify(product.get('title'))}-{suffix}"

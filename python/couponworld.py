@@ -25,6 +25,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
 import sys
 import xml.etree.ElementTree as ET
 from collections import Counter
@@ -469,6 +470,160 @@ def check_command() -> int:
     return 0
 
 
+
+def run_command(command: list[str]) -> int:
+    print()
+    print("$", " ".join(command))
+
+    result = subprocess.run(
+        command,
+        cwd=ROOT,
+    )
+
+    return result.returncode
+
+
+def validate_build_source() -> int:
+    print_section("BUILD SOURCE VALIDATION")
+
+    try:
+        products = load_products()
+    except (
+        FileNotFoundError,
+        ValueError,
+        json.JSONDecodeError,
+    ) as exc:
+        print(f"FAIL: {exc}")
+        return 1
+
+    identities: list[str] = []
+    links: list[str] = []
+    failures: list[str] = []
+
+    for index, product in enumerate(products, start=1):
+        identity = product_identity(product, index)
+        identities.append(identity)
+
+        title = product.get("title")
+        category = product.get("category")
+        link = product_link(product)
+
+        if not title:
+            failures.append(
+                f"Product {identity} missing title"
+            )
+
+        if not category:
+            failures.append(
+                f"Product {identity} missing category"
+            )
+
+        if not link:
+            failures.append(
+                f"Product {identity} missing link"
+            )
+            continue
+
+        links.append(link)
+
+        tag = parse_qs(
+            urlparse(link).query
+        ).get("tag", [None])[0]
+
+        if tag != CORRECT_AFFILIATE_TAG:
+            failures.append(
+                f"Product {identity} has invalid affiliate tag"
+            )
+
+    duplicate_ids = [
+        value
+        for value, count in Counter(identities).items()
+        if count > 1
+    ]
+
+    duplicate_links = [
+        value
+        for value, count in Counter(links).items()
+        if count > 1
+    ]
+
+    if duplicate_ids:
+        failures.append(
+            "Duplicate product IDs: "
+            + ", ".join(duplicate_ids)
+        )
+
+    if duplicate_links:
+        failures.append(
+            f"Duplicate product links found: {len(duplicate_links)}"
+        )
+
+    print("Products loaded          :", len(products))
+    print("Duplicate IDs            :", len(duplicate_ids))
+    print("Duplicate links          :", len(duplicate_links))
+
+    if failures:
+        print()
+        for failure in failures:
+            print("FAIL:", failure)
+
+        print_section("BUILD SOURCE STATUS: FAIL")
+        return 1
+
+    print_section("BUILD SOURCE STATUS: PASS")
+    return 0
+
+
+def build_command() -> int:
+    print_section("COUPON WORLD CONTROL CENTER — BUILD")
+
+    if validate_build_source() != 0:
+        print("BUILD ABORTED: source validation failed")
+        return 1
+
+    print_section("STEP 1 — BUILD PRODUCT PAGES")
+
+    code = run_command(
+        [
+            sys.executable,
+            "python/build_product_pages.py",
+            "--write",
+            "--clean",
+        ]
+    )
+
+    if code != 0:
+        print("BUILD FAILED: product page generation failed")
+        return code
+
+    print_section("STEP 2 — BUILD SITEMAP")
+
+    code = run_command(
+        [
+            sys.executable,
+            "python/build_sitemap.py",
+        ]
+    )
+
+    if code != 0:
+        print("BUILD FAILED: sitemap generation failed")
+        return code
+
+    print_section("STEP 3 — POST-BUILD CHECK")
+
+    code = check_command()
+
+    if code != 0:
+        print_section("BUILD STATUS: FAIL")
+        print("Generated site failed final validation.")
+        return code
+
+    print_section("BUILD STATUS: PASS")
+    print("Product pages and sitemap rebuilt successfully.")
+    print("Final site validation passed.")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Coupon World Control Center"
@@ -484,6 +639,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Run read-only foundation checks",
     )
 
+    subparsers.add_parser(
+        "build",
+        help="Rebuild product pages and sitemap safely",
+    )
+
     return parser
 
 
@@ -493,6 +653,9 @@ def main() -> int:
 
     if args.command == "check":
         return check_command()
+
+    if args.command == "build":
+        return build_command()
 
     parser.error("Unknown command")
     return 2
