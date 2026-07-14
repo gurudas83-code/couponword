@@ -4,7 +4,7 @@ import re
 from datetime import datetime
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 
-AMAZON_TAG = "guru07cc-21"
+AMAZON_TAG = "guru0906-21"
 INPUT_FILE = "deals.csv"
 OUTPUT_FILE = "coupons.json"
 

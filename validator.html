@@ -148,7 +148,7 @@ function validateJSON(){
       errors.push(`ID ${deal.id || row}: Missing link`);
     }else{
       if(   !deal.link.includes("amazon.in") &&   !deal.link.includes("amzn.to") &&   !deal.link.includes("amzn.in") ){
-        errors.push(`ID ${deal.id || row}: Link is not Amazon India`);
+        errors.push(`ID ${deal.id || row}: Link is not from an approved retailer`);
       }
 
       if(!deal.link.includes("tag=guru0906-21")){
