@@ -625,6 +625,38 @@ def build_command() -> int:
 
 
 
+
+def intake_products(
+    input_file: str,
+    output_csv: str = "data/products_import.csv",
+) -> int:
+    print_section("COUPON WORLD CONTROL CENTER — INTAKE")
+
+    input_path = Path(input_file)
+    if not input_path.is_absolute():
+        input_path = ROOT / input_path
+
+    output_path = Path(output_csv)
+    if not output_path.is_absolute():
+        output_path = ROOT / output_path
+
+    if not input_path.exists():
+        print(f"FAIL: Product URL file not found: {input_path}")
+        return 1
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    return run_command(
+        [
+            sys.executable,
+            "python/batch_product_importer.py",
+            "prepare",
+            str(input_path),
+            str(output_path),
+        ]
+    )
+
+
 def import_products(csv_file: str, write: bool = False) -> int:
     print_section("COUPON WORLD CONTROL CENTER — IMPORT")
 
@@ -668,6 +700,22 @@ def build_parser() -> argparse.ArgumentParser:
         help="Rebuild product pages and sitemap safely",
     )
 
+    intake_parser = subparsers.add_parser(
+        "intake",
+        help="Prepare product import CSV from URL list",
+    )
+
+    intake_parser.add_argument(
+        "input_file",
+        help="Text file with one product URL per line",
+    )
+
+    intake_parser.add_argument(
+        "--output",
+        default="data/products_import.csv",
+        help="Output CSV path",
+    )
+
     import_parser = subparsers.add_parser(
         "import",
         help="Validate or import products from CSV",
@@ -696,6 +744,12 @@ def main() -> int:
 
     if args.command == "build":
         return build_command()
+
+    if args.command == "intake":
+        return intake_products(
+            args.input_file,
+            args.output,
+        )
 
     if args.command == "import":
         return import_products(
