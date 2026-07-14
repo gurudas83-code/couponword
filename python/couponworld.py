@@ -682,6 +682,28 @@ def import_products(csv_file: str, write: bool = False) -> int:
 
 
 
+
+def adapt_source(input_csv: str, output_csv: str) -> int:
+    print_section("COUPON WORLD CONTROL CENTER — ADAPT")
+
+    input_path = Path(input_csv)
+    if not input_path.is_absolute():
+        input_path = ROOT / input_path
+
+    output_path = Path(output_csv)
+    if not output_path.is_absolute():
+        output_path = ROOT / output_path
+
+    return run_command(
+        [
+            sys.executable,
+            "python/product_source_adapter.py",
+            str(input_path),
+            str(output_path),
+        ]
+    )
+
+
 def intelligence_report() -> int:
     print_section("COUPON WORLD CONTROL CENTER — REPORT")
 
@@ -779,6 +801,21 @@ def build_parser() -> argparse.ArgumentParser:
         help="Rebuild product pages and sitemap safely",
     )
 
+    adapt_parser = subparsers.add_parser(
+        "adapt",
+        help="Convert an approved product feed into Coupon World CSV",
+    )
+
+    adapt_parser.add_argument(
+        "input_csv",
+        help="Approved source CSV",
+    )
+
+    adapt_parser.add_argument(
+        "output_csv",
+        help="Coupon World formatted CSV",
+    )
+
     subparsers.add_parser(
         "report",
         help="Show product quality and next best action",
@@ -845,6 +882,12 @@ def main() -> int:
 
     if args.command == "build":
         return build_command()
+
+    if args.command == "adapt":
+        return adapt_source(
+            args.input_csv,
+            args.output_csv,
+        )
 
     if args.command == "report":
         return intelligence_report()
