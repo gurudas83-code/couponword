@@ -624,6 +624,30 @@ def build_command() -> int:
     return 0
 
 
+
+def import_products(csv_file: str, write: bool = False) -> int:
+    print_section("COUPON WORLD CONTROL CENTER — IMPORT")
+
+    csv_path = Path(csv_file)
+
+    if not csv_path.is_absolute():
+        csv_path = ROOT / csv_path
+
+    if not csv_path.exists():
+        print(f"FAIL: CSV file not found: {csv_path}")
+        return 1
+
+    command = [
+        sys.executable,
+        "python/import_products.py",
+        str(csv_path),
+    ]
+
+    command.append("--write" if write else "--preview")
+
+    return run_command(command)
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Coupon World Control Center"
@@ -644,6 +668,22 @@ def build_parser() -> argparse.ArgumentParser:
         help="Rebuild product pages and sitemap safely",
     )
 
+    import_parser = subparsers.add_parser(
+        "import",
+        help="Validate or import products from CSV",
+    )
+
+    import_parser.add_argument(
+        "csv_file",
+        help="CSV file containing products",
+    )
+
+    import_parser.add_argument(
+        "--write",
+        action="store_true",
+        help="Write products and rebuild the site",
+    )
+
     return parser
 
 
@@ -656,6 +696,12 @@ def main() -> int:
 
     if args.command == "build":
         return build_command()
+
+    if args.command == "import":
+        return import_products(
+            args.csv_file,
+            args.write,
+        )
 
     parser.error("Unknown command")
     return 2
