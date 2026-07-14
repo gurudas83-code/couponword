@@ -680,6 +680,73 @@ def import_products(csv_file: str, write: bool = False) -> int:
     return run_command(command)
 
 
+
+def run_workflow(
+    input_file: str = "",
+    output_csv: str = "data/products_import.csv",
+) -> int:
+    print_section("COUPON WORLD MASTER WORKFLOW")
+
+    print("Mode        : SAFE")
+    print("Auto-write  : NO")
+    print("Auto-push   : NO")
+    print("Discovery   : External source required")
+
+    print_section("STEP 1 — FOUNDATION CHECK")
+
+    check_code = check_command()
+
+    if check_code != 0:
+        print_section("MASTER WORKFLOW STATUS: FAIL")
+        print("Foundation check failed. Workflow stopped.")
+        return check_code
+
+    if input_file:
+        print_section("STEP 2 — PRODUCT INTAKE")
+
+        intake_code = intake_products(
+            input_file,
+            output_csv,
+        )
+
+        if intake_code != 0:
+            print_section("MASTER WORKFLOW STATUS: FAIL")
+            print("Product intake failed. Workflow stopped.")
+            return intake_code
+
+        print_section("STEP 3 — IMPORT PREVIEW")
+
+        import_code = import_products(
+            output_csv,
+            write=False,
+        )
+
+        if import_code != 0:
+            print_section("MASTER WORKFLOW STATUS: REVIEW")
+            print("Import preview requires review.")
+            return import_code
+    else:
+        print_section("STEP 2 — PRODUCT INTAKE")
+        print("SKIPPED: No input URL file supplied.")
+
+    print_section("STEP 4 — CONTROLLED BUILD")
+
+    build_code = build_command()
+
+    if build_code != 0:
+        print_section("MASTER WORKFLOW STATUS: FAIL")
+        print("Controlled build failed.")
+        return build_code
+
+    print_section("MASTER WORKFLOW STATUS: PASS")
+    print("Foundation             : PASS")
+    print("Product intake         :", "PREVIEWED" if input_file else "SKIPPED")
+    print("Database modification  : NO")
+    print("Site build             : PASS")
+    print("Git commit/push        : NOT PERFORMED")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Coupon World Control Center"
@@ -698,6 +765,23 @@ def build_parser() -> argparse.ArgumentParser:
     subparsers.add_parser(
         "build",
         help="Rebuild product pages and sitemap safely",
+    )
+
+    run_parser = subparsers.add_parser(
+        "run",
+        help="Run the safe Coupon World master workflow",
+    )
+
+    run_parser.add_argument(
+        "--input",
+        default="",
+        help="Optional text file containing product URLs",
+    )
+
+    run_parser.add_argument(
+        "--output",
+        default="data/products_import.csv",
+        help="Prepared CSV output path",
     )
 
     intake_parser = subparsers.add_parser(
@@ -744,6 +828,12 @@ def main() -> int:
 
     if args.command == "build":
         return build_command()
+
+    if args.command == "run":
+        return run_workflow(
+            args.input,
+            args.output,
+        )
 
     if args.command == "intake":
         return intake_products(
