@@ -213,7 +213,8 @@ footer{{padding:28px 0 40px;color:#68707d;font-size:14px}}
 <section><h2>About this product</h2><p>{html.escape(description)}</p></section>
 {related_html}
 </main>
-<footer><div class="wrap">Coupon World may earn a commission from qualifying purchases.</div></footer>
+<footer><div class="wrap">Coupon World may earn a commission from qualifying purchases.</div><p class="affiliate-disclosure">As an Amazon Associate I earn from qualifying purchases.</p>
+</footer>
 </body>
 </html>
 """
