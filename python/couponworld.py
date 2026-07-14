@@ -681,6 +681,18 @@ def import_products(csv_file: str, write: bool = False) -> int:
 
 
 
+
+def intelligence_report() -> int:
+    print_section("COUPON WORLD CONTROL CENTER — REPORT")
+
+    return run_command(
+        [
+            sys.executable,
+            "python/site_intelligence.py",
+        ]
+    )
+
+
 def run_workflow(
     input_file: str = "",
     output_csv: str = "data/products_import.csv",
@@ -767,6 +779,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Rebuild product pages and sitemap safely",
     )
 
+    subparsers.add_parser(
+        "report",
+        help="Show product quality and next best action",
+    )
+
     run_parser = subparsers.add_parser(
         "run",
         help="Run the safe Coupon World master workflow",
@@ -828,6 +845,9 @@ def main() -> int:
 
     if args.command == "build":
         return build_command()
+
+    if args.command == "report":
+        return intelligence_report()
 
     if args.command == "run":
         return run_workflow(
