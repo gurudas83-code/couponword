@@ -321,7 +321,30 @@ def check_command() -> int:
     print(f"Stale product pages      : {len(stale_page_dirs)}")
     print(f"Public wording findings  : {len(public_findings)}")
 
-    expected_sitemap_count = len(products) + 1
+    indexable_extra_pages = []
+
+    for root_name in ("guides", "seo"):
+        root_dir = ROOT / root_name
+
+        if not root_dir.exists():
+            continue
+
+        for page in root_dir.rglob("*.html"):
+            text = page.read_text(
+                encoding="utf-8",
+                errors="ignore",
+            )
+
+            if 'name="robots"' in text.lower() and "noindex" in text.lower():
+                continue
+
+            indexable_extra_pages.append(page)
+
+    expected_sitemap_count = (
+        len(products)
+        + 1
+        + len(indexable_extra_pages)
+    )
 
     if len(actual_page_dirs) != len(products):
         failures.append(
@@ -330,7 +353,8 @@ def check_command() -> int:
 
     if len(urls) != expected_sitemap_count:
         failures.append(
-            f"Sitemap should contain {expected_sitemap_count} URLs"
+            "Sitemap URL count mismatch: "
+            f"expected {expected_sitemap_count}, found {len(urls)}"
         )
 
     if wrong_tags:

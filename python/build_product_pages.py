@@ -411,6 +411,27 @@ def render(product, products):
             '</a>'
         )
 
+
+    guide_html = ""
+
+    family = detect_family(product)
+
+    if family in {
+        "earbuds",
+        "headphones",
+        "speakers",
+    }:
+        guide_html = (
+            '<section>'
+            '<h2>Wireless audio buying guide</h2>'
+            '<p>Compare earbuds, headphones and Bluetooth speakers '
+            'before choosing the format that fits your needs.</p>'
+            '<p><a href="../../guides/wireless-audio-buying-guide/">'
+            'Read the wireless audio buying guide'
+            '</a></p>'
+            '</section>'
+        )
+
     related_html = ""
     if cards:
         related_html = (
@@ -474,6 +495,7 @@ footer{{padding:28px 0 40px;color:#68707d;font-size:14px}}
 </div>
 </article>
 <section><h2>About this product</h2><p>{html.escape(description)}</p></section>
+{guide_html}
 {related_html}
 </main>
 <footer><div class="wrap">Coupon World may earn a commission from qualifying purchases.</div><p class="affiliate-disclosure">As an Amazon Associate I earn from qualifying purchases.</p>
