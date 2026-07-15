@@ -432,6 +432,18 @@ def render(product, products):
             '</section>'
         )
 
+    elif family == "smartphones":
+        guide_html = (
+            '<section>'
+            '<h2>Smartphone buying guide</h2>'
+            '<p>Review storage, memory, display, battery, camera and '
+            'connectivity information before choosing a phone.</p>'
+            '<p><a href="../../guides/smartphone-buying-guide/">'
+            'Read the smartphone buying guide'
+            '</a></p>'
+            '</section>'
+        )
+
     related_html = ""
     if cards:
         related_html = (
