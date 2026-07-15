@@ -81,15 +81,278 @@ def excerpt(text, limit=160):
     return text if len(text) <= limit else text[: limit - 1].rstrip() + "…"
 
 
+
+
+PRODUCT_FAMILIES = {
+    "earbuds": (
+        "earbud",
+        "earbuds",
+        "tws",
+        "buds air",
+        "airpods",
+    ),
+    "headphones": (
+        "headphone",
+        "headphones",
+        "headset",
+        "rockerz",
+    ),
+    "smartphones": (
+        "iphone",
+        "smartphone",
+        "galaxy m",
+        "redmi note",
+        "redmi 13",
+        "nord ce",
+        "5g phone",
+        "mobile phone",
+    ),
+    "phone-accessories": (
+        "phone case",
+        "mobile case",
+        "screen protector",
+        "charger",
+        "charging cable",
+        "power bank",
+    ),
+    "tablet-accessories": (
+        "keyboard case",
+        "folio cover",
+        "tablet case",
+        "tab a",
+    ),
+    "smartwatches": (
+        "smartwatch",
+        "smart watch",
+    ),
+    "telescope-accessories": (
+        "telescope cover",
+        "telescope case",
+        "telescope bag",
+    ),
+    "telescopes": (
+        "newtonian reflector",
+        "reflector telescope",
+        "telescope 235x",
+        "76700 telescope",
+    ),
+    "projectors": (
+        "projector",
+        "planetarium",
+        "nebula lamp",
+    ),
+    "storage-media": (
+        "micro sd",
+        "microsd",
+        "memory card",
+        "sd card",
+    ),
+    "musical-keyboards": (
+        "musical keyboard",
+        "mini keyboard",
+        "37 keys",
+        "61 keys",
+        "electronic keyboard",
+    ),
+    "computer-keyboards": (
+        "wireless usb keyboard",
+        "keyboard and mouse combo",
+        "computer keyboard",
+        "gaming keyboard",
+    ),
+    "stationery": (
+        "stationery",
+        "notebook",
+        "gel pen",
+        "pens",
+    ),
+    "tshirts": (
+        "t-shirt",
+        "t shirt",
+        "tee",
+    ),
+    "shoes": (
+        "sneaker",
+        "sneakers",
+        "running shoe",
+        "shoes",
+        "footwear",
+    ),
+    "bottles": (
+        "bottle",
+        "thermosteel",
+        "water bottle",
+    ),
+    "storage-organizers": (
+        "storage organizer",
+        "storage organisers",
+        "storage basket",
+        "storage baskets",
+        "organizer",
+        "organiser",
+    ),
+    "appliance-stands": (
+        "appliance roller",
+        "washing machine stand",
+        "refrigerator stand",
+        "moving base",
+        "mobile dolly",
+    ),
+    "tools": (
+        "electric drill",
+        "angle grinder",
+        "grinding wheel",
+        "cutting blade",
+        "tool kit",
+    ),
+    "supplements": (
+        "tablets",
+        "supplement",
+        "cal mag",
+        "nutrilite",
+        "vitamin",
+    ),
+    "contact-lens-care": (
+        "contact lens solution",
+        "lens solution",
+    ),
+    "dumbbells": (
+        "dumbbell",
+        "dumbbells",
+        "weights",
+    ),
+    "fitness-equipment": (
+        "pull up bar",
+        "resistance band",
+        "fitness equipment",
+        "exercise equipment",
+    ),
+    "backpacks": (
+        "backpack",
+        "rucksack",
+    ),
+    "trolley-bags": (
+        "trolley bag",
+        "luggage",
+        "suitcase",
+    ),
+    "watches": (
+        "analog watch",
+        "wrist watch",
+    ),
+    "skincare": (
+        "skincare",
+        "skin care",
+        "face wash",
+        "moisturizer",
+        "serum",
+    ),
+    "makeup": (
+        "makeup",
+        "lipstick",
+        "foundation",
+        "mascara",
+    ),
+    "microwave-ovens": (
+        "microwave oven",
+        "microwave",
+    ),
+    "induction-cooktops": (
+        "induction cooktop",
+        "induction stove",
+    ),
+    "ceiling-fans": (
+        "ceiling fan",
+    ),
+    "trimmers": (
+        "trimmer",
+        "grooming kit",
+    ),
+    "computer-mice": (
+        "wireless mouse",
+        "computer mouse",
+    ),
+    "speakers": (
+        "bluetooth speaker",
+        "speaker",
+        "echo dot",
+    ),
+    "cameras": (
+        "camera",
+        "cctv",
+        "security camera",
+        "baby monitor",
+    ),
+}
+
+
+def searchable_text(product):
+    return " ".join(
+        [
+            clean(product.get("title")),
+            clean(product.get("category")),
+        ]
+    ).lower()
+
+
+def detect_family(product):
+    text = searchable_text(product)
+
+    best_family = ""
+    best_score = 0
+
+    for family, phrases in PRODUCT_FAMILIES.items():
+        score = 0
+
+        for phrase in phrases:
+            phrase = phrase.lower()
+
+            if phrase in text:
+                score += len(phrase.split()) * 10
+                score += len(phrase)
+
+        if score > best_score:
+            best_family = family
+            best_score = score
+
+    return best_family
+
+
 def related(product, products, limit=4):
-    category = clean(product.get("category")).lower()
-    asin = clean(product.get("asin")).upper()
-    return [
-        p for p in products
-        if clean(p.get("asin")).upper() != asin
-        and clean(p.get("category")).lower() == category
-        and p.get("active") is not False
-    ][:limit]
+    current_id = str(
+        product.get("id")
+        or product.get("sl_no")
+        or product.get("asin")
+        or ""
+    )
+
+    family = detect_family(product)
+
+    if not family:
+        return []
+
+    candidates = []
+
+    for candidate in products:
+        candidate_id = str(
+            candidate.get("id")
+            or candidate.get("sl_no")
+            or candidate.get("asin")
+            or ""
+        )
+
+        if candidate_id == current_id:
+            continue
+
+        if candidate.get("active") is False:
+            continue
+
+        if detect_family(candidate) != family:
+            continue
+
+        candidates.append(candidate)
+
+    return candidates[:limit]
 
 
 def render(product, products):
