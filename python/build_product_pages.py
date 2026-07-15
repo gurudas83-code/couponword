@@ -28,7 +28,7 @@ OUT = ROOT / "products"
 LEGACY_PRODUCT_PATHS = {
     "17": "amazon-in-fashion-fest-17",
 }
-SITE = "https://coupon-word.in"
+SITE = "https://coupon-world.in"
 
 
 def clean(value):
