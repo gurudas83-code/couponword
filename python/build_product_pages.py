@@ -396,7 +396,7 @@ def render(product, products):
 
     cta = (
         f'<a class="cta" href="{html.escape(link)}" target="_blank" '
-        'rel="nofollow sponsored noopener">Check on Amazon →</a>'
+        'rel="nofollow sponsored noopener">Check Latest Offer →</a>'
         if active and link else
         '<span class="cta disabled">Currently unavailable</span>'
     )

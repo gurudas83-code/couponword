@@ -695,11 +695,13 @@ def import_products(csv_file: str, write: bool = False) -> int:
 
     command = [
         sys.executable,
-        "python/import_products.py",
+        "python/batch_product_importer.py",
+        "import",
         str(csv_path),
     ]
 
-    command.append("--write" if write else "--preview")
+    if write:
+        command.append("--write")
 
     return run_command(command)
 
