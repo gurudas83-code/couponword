@@ -14,6 +14,7 @@ Features:
 
 import argparse
 import json
+import re
 import shutil
 from datetime import datetime
 from pathlib import Path
@@ -190,11 +191,37 @@ def detect_brand(title: Any) -> str:
 
     for keyword, brand in sorted(
         KNOWN_BRANDS.items(),
-        key=lambda item: len(item[0]),
+        key=lambda item: len(item[0].strip()),
         reverse=True,
     ):
-        if keyword.casefold() in normalized_title:
-            return brand
+        normalized_keyword = keyword.casefold().strip()
+
+        pattern = (
+            r"(?<![a-z0-9])"
+            + re.escape(normalized_keyword)
+            + r"(?![a-z0-9])"
+        )
+
+        match = re.search(pattern, normalized_title)
+
+        if not match:
+            continue
+
+        prefix = normalized_title[max(0, match.start() - 30):match.start()]
+
+        compatibility_phrases = (
+            "for ",
+            "compatible with ",
+            "case for ",
+            "cover for ",
+            "designed for ",
+            "suitable for ",
+        )
+
+        if any(prefix.endswith(phrase) for phrase in compatibility_phrases):
+            continue
+
+        return brand
 
     return ""
 

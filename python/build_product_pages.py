@@ -356,11 +356,11 @@ def related(product, products, limit=4):
 
 
 def render(product, products):
-    title = clean(product.get("title")) or "Amazon Product"
+    title = clean(product.get("title")) or "Product"
     brand = clean(product.get("brand"))
     category = clean(product.get("category")) or "Deals"
     description = clean(product.get("description")) or (
-        f"{title} is listed on Coupon World. Check latest details on Amazon."
+        f"{title} is listed on Coupon World. Check the retailer site for current details."
     )
     asin = clean(product.get("asin")).upper()
     image = clean(product.get("image"))
