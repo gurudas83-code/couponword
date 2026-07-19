@@ -165,19 +165,47 @@ function renderDeals() {
   `).join("");
 }
 
+function categoryPlaceholder(category) {
+  const key = String(category || "").toLowerCase().trim();
+
+  const placeholders = {
+    "mobiles": "mobiles.svg",
+    "mobile": "mobiles.svg",
+    "smartphones": "mobiles.svg",
+    "cell phones & accessories": "mobiles.svg",
+    "electronics": "electronics.svg",
+    "laptops": "laptops.svg",
+    "computers": "laptops.svg",
+    "audio": "audio.svg",
+    "headphones": "audio.svg",
+    "speakers": "audio.svg",
+    "fashion": "fashion.svg",
+    "clothing": "fashion.svg",
+    "footwear": "fashion.svg",
+    "home": "home-kitchen.svg",
+    "home & kitchen": "home-kitchen.svg",
+    "home improvement": "home-kitchen.svg",
+    "beauty": "beauty.svg",
+    "health & personal care": "beauty.svg",
+    "grocery": "grocery.svg",
+    "appliances": "appliances.svg"
+  };
+
+  return `assets/images/categories/${placeholders[key] || "default.svg"}`;
+}
+
 function renderImage(deal, className) {
-  if (deal.image) {
-    return `
-      <div class="${className}">
-        <img src="${escapeHTML(deal.image)}" alt="${escapeHTML(deal.title || "Deal image")}" loading="lazy"
-        onerror="this.parentElement.innerHTML='<div class=&quot;placeholder&quot;>🛍️<small>Coupon World</small></div>'">
-      </div>
-    `;
-  }
+  const fallbackImage = categoryPlaceholder(deal.category);
+  const displayImage = deal.image || fallbackImage;
 
   return `
     <div class="${className}">
-      <div class="placeholder">🛍️<small>Coupon World</small></div>
+      <img
+        src="${escapeHTML(displayImage)}"
+        alt="${escapeHTML(deal.title || "Deal image")}"
+        loading="lazy"
+        decoding="async"
+        onerror="this.onerror=null;this.src='${escapeHTML(fallbackImage)}'">
     </div>
   `;
 }

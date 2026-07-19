@@ -365,6 +365,32 @@ def render(product, products):
     asin = clean(product.get("asin")).upper()
     image = clean(product.get("image"))
     link = clean(product.get("link"))
+
+    category_key = category.lower().strip()
+    category_placeholders = {
+        "mobiles": "mobiles.svg",
+        "mobile": "mobiles.svg",
+        "smartphones": "mobiles.svg",
+        "electronics": "electronics.svg",
+        "laptops": "laptops.svg",
+        "computers": "laptops.svg",
+        "audio": "audio.svg",
+        "headphones": "audio.svg",
+        "speakers": "audio.svg",
+        "fashion": "fashion.svg",
+        "home & kitchen": "home-kitchen.svg",
+        "home and kitchen": "home-kitchen.svg",
+        "beauty": "beauty.svg",
+        "grocery": "grocery.svg",
+        "appliances": "appliances.svg",
+    }
+    placeholder_file = category_placeholders.get(
+        category_key,
+        "default.svg",
+    )
+    placeholder_image = (
+        f"../../assets/images/categories/{placeholder_file}"
+    )
     active = product.get("active") is not False
     availability = clean(product.get("availability")) or (
         "available" if active else "unavailable"
@@ -388,10 +414,12 @@ def render(product, products):
     if image:
         schema["image"] = image
 
+    display_image = image or placeholder_image
+
     media = (
-        f'<img src="{html.escape(image)}" alt="{html.escape(title)}">'
-        if image else
-        f'<div class="placeholder">🛍️<small>{html.escape(category)}</small></div>'
+        f'<img src="{html.escape(display_image)}" '
+        f'alt="{html.escape(title)}" '
+        'loading="lazy" decoding="async">'
     )
 
     cta = (
