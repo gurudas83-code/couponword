@@ -1,0 +1,2249 @@
+{
+  "engine": {
+    "name": "Coupon World Product Feature Engine",
+    "version": "1.0",
+    "generated_at": "2026-07-20T18:26:07.549896+00:00",
+    "mode": "explicit-extraction-only",
+    "external_lookup": false,
+    "manufacturer_verified": false,
+    "source_files": [
+      "coupons.json",
+      "data/intelligence/product_identity.json"
+    ]
+  },
+  "summary": {
+    "total_products": 74,
+    "products_with_features": 31,
+    "products_without_features": 43,
+    "total_features_extracted": 68,
+    "average_features_per_product": 0.92,
+    "confidence": {
+      "high": 4,
+      "medium": 24,
+      "low": 46
+    },
+    "feature_coverage": {
+      "color": 13,
+      "connectivity": 9,
+      "capacity": 9,
+      "storage": 8,
+      "material": 5,
+      "pack_quantity": 5,
+      "ram": 5,
+      "camera": 3,
+      "audio_features": 3,
+      "display_size": 2,
+      "model_codes": 1,
+      "refresh_rate": 1,
+      "processor": 1,
+      "playback_time": 1,
+      "display_resolution": 1,
+      "battery": 1
+    }
+  },
+  "products": [
+    {
+      "product_id": "1",
+      "source_index": 1,
+      "title": "JIADA Space Astronaut Stationery Set for Boys - with Badge, Notebook and Pen - Birthday Return Gift/Rakhi Gift for Boys, Kids, Blue",
+      "brand": "JIADA",
+      "category": "Toys & Stationery",
+      "subcategory": "stationery",
+      "asin": null,
+      "features": {
+        "color": {
+          "value": "Blue",
+          "raw_value": "Blue",
+          "source": "product_identity",
+          "confidence": "medium",
+          "verified": false
+        }
+      },
+      "feature_count": 1,
+      "feature_confidence": {
+        "score": 35,
+        "level": "low"
+      },
+      "evidence": [
+        "color inherited from product identity"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "2",
+      "source_index": 2,
+      "title": "Keyboard Case for Samsung Galaxy Tab A11+ & Tab A9 Plus 11\" Folio Cover SM-X230, SM-X236B, SM-X210, SM-X215 with Trackpad, 7 Color Backlit Magnetically Detachable Bluetooth Keyboard, Multi-Angle View",
+      "brand": "Samsung",
+      "category": "Electronics",
+      "subcategory": "keyboard and mouse",
+      "asin": null,
+      "features": {
+        "display_size": {
+          "value": {
+            "amount": 11.0,
+            "unit": "inch"
+          },
+          "raw_value": "11\"",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "connectivity": {
+          "value": [
+            "Bluetooth"
+          ],
+          "raw_value": "Bluetooth",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "model_codes": {
+          "value": [
+            "SM-X230",
+            "SM-X236B",
+            "SM-X210",
+            "SM-X215"
+          ],
+          "raw_value": "SM-X230, SM-X236B, SM-X210, SM-X215",
+          "source": "product_title",
+          "confidence": "medium",
+          "verified": false
+        }
+      },
+      "feature_count": 3,
+      "feature_confidence": {
+        "score": 71,
+        "level": "medium"
+      },
+      "evidence": [
+        "display_size extracted from product_title",
+        "connectivity extracted from product_title",
+        "model_codes extracted from product_title"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "3",
+      "source_index": 3,
+      "title": "TeeSlix NASA Cotton Boys t-Shirt, Teenagers | Soft, Premium Fabric | Regular Fit T-Shirt for Boys, Girls | Space Rocket Design | Blue,Black,RED | Age 8 to 17 Years",
+      "brand": "TeeSlix",
+      "category": "Fashion",
+      "subcategory": "t-shirt",
+      "asin": null,
+      "features": {
+        "material": {
+          "value": [
+            "Cotton"
+          ],
+          "raw_value": "Cotton",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "color": {
+          "value": "Black",
+          "raw_value": "Black",
+          "source": "product_identity",
+          "confidence": "medium",
+          "verified": false
+        }
+      },
+      "feature_count": 2,
+      "feature_confidence": {
+        "score": 53,
+        "level": "medium"
+      },
+      "evidence": [
+        "material extracted from product_title",
+        "color inherited from product identity"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "4",
+      "source_index": 4,
+      "title": "Bausch + Lomb Fresh Multi-Purpose 500Ml Contact Lens Solution (Pack Of 1)",
+      "brand": "Bausch + Lomb",
+      "category": "Beauty & Personal Care",
+      "subcategory": null,
+      "asin": null,
+      "features": {
+        "capacity": {
+          "value": {
+            "amount": 500,
+            "unit": "ml"
+          },
+          "raw_value": "500Ml",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "pack_quantity": {
+          "value": {
+            "quantity": 1,
+            "unit": "pieces"
+          },
+          "raw_value": "Pack Of 1",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        }
+      },
+      "feature_count": 2,
+      "feature_confidence": {
+        "score": 61,
+        "level": "medium"
+      },
+      "evidence": [
+        "capacity extracted from product_title",
+        "pack_quantity extracted from product_title"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "5",
+      "source_index": 5,
+      "title": "AASONS Electric Drill Variable Angle Grinder Connecting Rod with 1pc Wood, Marble Cutting Blade, Flap Disk for Paint Remover, Sanding disc and Iron Grinding Wheel",
+      "brand": "AASONS",
+      "category": "Tools & Hardware",
+      "subcategory": null,
+      "asin": null,
+      "features": {
+        "material": {
+          "value": [
+            "Wood"
+          ],
+          "raw_value": "Wood",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "pack_quantity": {
+          "value": {
+            "quantity": 1,
+            "unit": "pieces"
+          },
+          "raw_value": "1pc",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        }
+      },
+      "feature_count": 2,
+      "feature_confidence": {
+        "score": 61,
+        "level": "medium"
+      },
+      "evidence": [
+        "material extracted from product_title",
+        "pack_quantity extracted from product_title"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "6",
+      "source_index": 6,
+      "title": "Hebezon Expandable Appliance Roller Stand with Wheels Heavy Duty Mobile Dolly for Washing Machine, Refrigerator,Furniture Adjustable Moving Base for Home, Kitchen,Laundry Use",
+      "brand": "Hebezon",
+      "category": "Home & Kitchen",
+      "subcategory": null,
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "7",
+      "source_index": 7,
+      "title": "Campus Women's OGL-4 Sneakers",
+      "brand": "Campus",
+      "category": "Fashion",
+      "subcategory": "running shoes",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "8",
+      "source_index": 8,
+      "title": "HomeStrap Rectangular Set Of 3 Large Plastic Storage Organizers/Baskets With Lid For Kitchen, Clothes, Multipurpose Vegetables, Toys, Books, Office, Stationery, Wardrobe(Biscuit, Grey, Brown)",
+      "brand": "HomeStrap",
+      "category": "Home & Kitchen",
+      "subcategory": "stationery",
+      "asin": null,
+      "features": {
+        "material": {
+          "value": [
+            "Plastic"
+          ],
+          "raw_value": "Plastic",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "pack_quantity": {
+          "value": {
+            "quantity": 3,
+            "unit": "pieces"
+          },
+          "raw_value": "Set Of 3",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "color": {
+          "value": "Grey",
+          "raw_value": "Grey",
+          "source": "product_identity",
+          "confidence": "medium",
+          "verified": false
+        }
+      },
+      "feature_count": 3,
+      "feature_confidence": {
+        "score": 71,
+        "level": "medium"
+      },
+      "evidence": [
+        "material extracted from product_title",
+        "pack_quantity extracted from product_title",
+        "color inherited from product identity"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "9",
+      "source_index": 9,
+      "title": "Amazon Basics 64 GB Micro SD Card with Adapter | Upto 120 MB/s | Class 10 | U1, C10, V10 Speed Classes",
+      "brand": "Amazon",
+      "category": "Electronics",
+      "subcategory": null,
+      "asin": null,
+      "features": {
+        "storage": {
+          "value": "64 GB",
+          "raw_value": "64 GB",
+          "source": "product_identity",
+          "confidence": "medium",
+          "verified": false
+        }
+      },
+      "feature_count": 1,
+      "feature_confidence": {
+        "score": 35,
+        "level": "low"
+      },
+      "evidence": [
+        "storage inherited from product identity"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "10",
+      "source_index": 10,
+      "title": "Redmi 13 5G Hawaiian Blue (8GB RAM, 128GB Storage)",
+      "brand": "Redmi",
+      "category": "Mobiles",
+      "subcategory": null,
+      "asin": "B0F1N8B7Z4",
+      "features": {
+        "ram": {
+          "value": {
+            "amount": 8,
+            "unit": "GB"
+          },
+          "raw_value": "8GB RAM",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "storage": {
+          "value": {
+            "amount": 128,
+            "unit": "GB",
+            "type": null
+          },
+          "raw_value": "128GB Storage",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "connectivity": {
+          "value": [
+            "5G"
+          ],
+          "raw_value": "5G",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "capacity": {
+          "value": {
+            "amount": 5,
+            "unit": "g"
+          },
+          "raw_value": "5G",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "refresh_rate": {
+          "value": {
+            "amount": 120,
+            "unit": "Hz"
+          },
+          "raw_value": "120Hz",
+          "source": "product_description",
+          "confidence": "high",
+          "verified": false
+        },
+        "camera": {
+          "value": {
+            "megapixels": [
+              100
+            ],
+            "highest_mp": 100
+          },
+          "raw_value": "100MP",
+          "source": "product_description",
+          "confidence": "high",
+          "verified": false
+        },
+        "processor": {
+          "value": "Snapdragon processor",
+          "raw_value": "Snapdragon processor",
+          "source": "product_description",
+          "confidence": "high",
+          "verified": false
+        },
+        "color": {
+          "value": "Hawaiian Blue",
+          "raw_value": "Hawaiian Blue",
+          "source": "product_identity",
+          "confidence": "medium",
+          "verified": false
+        }
+      },
+      "feature_count": 8,
+      "feature_confidence": {
+        "score": 100,
+        "level": "high"
+      },
+      "evidence": [
+        "ram extracted from product_title",
+        "storage extracted from product_title",
+        "connectivity extracted from product_title",
+        "capacity extracted from product_title",
+        "refresh_rate extracted from product_description",
+        "camera extracted from product_description",
+        "processor extracted from product_description",
+        "color inherited from product identity"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "11",
+      "source_index": 11,
+      "title": "realme Buds Air 8, 11mm+6mm Dual Dynamic Bass Drivers, 58Hrs Playtime, 55dB ANC, 6 Mic ENC, 45ms Low Latency, 360° Spatial Audio, Hi-Res LHDC, IP55 Dust & Water Resistant, BT v5.4 (Master Gold)",
+      "brand": "realme",
+      "category": "Electronics",
+      "subcategory": "earbuds",
+      "asin": "B0GDQCTYFB",
+      "features": {
+        "audio_features": {
+          "value": [
+            "ANC",
+            "ENC",
+            "Spatial Audio"
+          ],
+          "raw_value": "ANC, ENC, Spatial Audio",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "playback_time": {
+          "value": {
+            "amount": 58,
+            "unit": "hours"
+          },
+          "raw_value": "58Hrs Playtime",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "color": {
+          "value": "Gold",
+          "raw_value": "Gold",
+          "source": "product_identity",
+          "confidence": "medium",
+          "verified": false
+        }
+      },
+      "feature_count": 3,
+      "feature_confidence": {
+        "score": 71,
+        "level": "medium"
+      },
+      "evidence": [
+        "audio_features extracted from product_title",
+        "playback_time extracted from product_title",
+        "color inherited from product identity"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "12",
+      "source_index": 12,
+      "title": "Amway Nutrilite Cal Mag D K2 (90 Tablets)",
+      "brand": "Nutrilite",
+      "category": "Beauty & Personal Care",
+      "subcategory": null,
+      "asin": "B0D3HKTL6K",
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "13",
+      "source_index": 13,
+      "title": "Yamaha PSS-E30 Remie Portable Mini Keyboard - 37 Keys, White, Built-in Songs, Sound Effects & Quiz Mode, Lightweight, Ideal for Kids & Early Learners",
+      "brand": "Yamaha",
+      "category": "Musical Instruments",
+      "subcategory": "keyboard and mouse",
+      "asin": "B08232VZ84",
+      "features": {
+        "color": {
+          "value": "White",
+          "raw_value": "White",
+          "source": "product_identity",
+          "confidence": "medium",
+          "verified": false
+        }
+      },
+      "feature_count": 1,
+      "feature_confidence": {
+        "score": 35,
+        "level": "low"
+      },
+      "evidence": [
+        "color inherited from product identity"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "14",
+      "source_index": 14,
+      "title": "Apple iPhone 17e 256 GB (Black) - 15.40 cm (6.1″) Super Retina XDR Display, A19 Chip, All-Day Battery Life, 48MP Fusion Camera, 256GB Starting Storage",
+      "brand": "Apple",
+      "category": "Mobiles",
+      "subcategory": "smartphone",
+      "asin": "B0GQVL6STN",
+      "features": {
+        "camera": {
+          "value": {
+            "megapixels": [
+              48
+            ],
+            "highest_mp": 48
+          },
+          "raw_value": "48MP",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "color": {
+          "value": "Black",
+          "raw_value": "Black",
+          "source": "product_identity",
+          "confidence": "medium",
+          "verified": false
+        },
+        "storage": {
+          "value": "256 GB",
+          "raw_value": "256 GB",
+          "source": "product_identity",
+          "confidence": "medium",
+          "verified": false
+        }
+      },
+      "feature_count": 3,
+      "feature_confidence": {
+        "score": 63,
+        "level": "medium"
+      },
+      "evidence": [
+        "camera extracted from product_title",
+        "color inherited from product identity",
+        "storage inherited from product identity"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "15",
+      "source_index": 15,
+      "title": "Apple iPhone 17e 512GB",
+      "brand": "Apple",
+      "category": "Mobiles",
+      "subcategory": "smartphone",
+      "asin": "B0GQVHNX7R",
+      "features": {
+        "storage": {
+          "value": {
+            "amount": 512,
+            "unit": "GB",
+            "type": null
+          },
+          "raw_value": "512GB storage",
+          "source": "product_description",
+          "confidence": "high",
+          "verified": false
+        },
+        "display_size": {
+          "value": {
+            "amount": 6.1,
+            "unit": "inch"
+          },
+          "raw_value": "6.1-inch",
+          "source": "product_description",
+          "confidence": "high",
+          "verified": false
+        },
+        "camera": {
+          "value": {
+            "megapixels": [
+              48
+            ],
+            "highest_mp": 48
+          },
+          "raw_value": "48MP",
+          "source": "product_description",
+          "confidence": "high",
+          "verified": false
+        }
+      },
+      "feature_count": 3,
+      "feature_confidence": {
+        "score": 79,
+        "level": "high"
+      },
+      "evidence": [
+        "storage extracted from product_description",
+        "display_size extracted from product_description",
+        "camera extracted from product_description"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "16",
+      "source_index": 16,
+      "title": "Mega 70%+ OFF Store",
+      "brand": null,
+      "category": "Offers",
+      "subcategory": null,
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "17",
+      "source_index": 17,
+      "title": "Online Store Fashion Fest",
+      "brand": null,
+      "category": "Fashion",
+      "subcategory": null,
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "18",
+      "source_index": 18,
+      "title": "STEMpedia Mechanical Construction Kit for Boys 7-14 Years",
+      "brand": "STEMpedia",
+      "category": "Toys & Stationery",
+      "subcategory": null,
+      "asin": "B09MG7HSS9",
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "19",
+      "source_index": 19,
+      "title": "Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon Saturn Planets",
+      "brand": null,
+      "category": "Electronics",
+      "subcategory": "telescope",
+      "asin": "B0D8YV6KQ5",
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "20",
+      "source_index": 20,
+      "title": "Audavibe 76700 Newtonian Reflector Telescope 235x Zoom for Moon & Planets",
+      "brand": "Audavibe",
+      "category": "Electronics",
+      "subcategory": "telescope",
+      "asin": "B0F26CLKW9",
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "21",
+      "source_index": 21,
+      "title": "Gesto Galaxy Projector Pro Planetarium - 13 Film Discs Nebula Moon Lamp",
+      "brand": "Gesto",
+      "category": "Electronics",
+      "subcategory": null,
+      "asin": "B0GKY4WMRV",
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "22",
+      "source_index": 22,
+      "title": "Popsugar Rechargeable Hand Gesture Control Car with Headlight, USB Charging RC Stunt Car for Kids",
+      "brand": "Popsugar",
+      "category": "Toys & Stationery",
+      "subcategory": "toy",
+      "asin": "B0CQK691XQ",
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "23",
+      "source_index": 23,
+      "title": "TEKCOOL Portable Air Cooler Fan with Ice Chamber, USB Rechargeable Mini Cooling Fan for Home Kitchen",
+      "brand": "TEKCOOL",
+      "category": "Electronics",
+      "subcategory": "air cooler",
+      "asin": "B0H1QQ7ML1",
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "24",
+      "source_index": 24,
+      "title": "Fire-Boltt Ninja Smartwatch",
+      "brand": "Fire-Boltt",
+      "category": "Electronics",
+      "subcategory": "smartwatch",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "25",
+      "source_index": 25,
+      "title": "Sony Wireless Headphones",
+      "brand": "Sony",
+      "category": "Electronics",
+      "subcategory": "headphones",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "26",
+      "source_index": 26,
+      "title": "Echo Dot 5th Gen",
+      "brand": "Amazon",
+      "category": "Electronics",
+      "subcategory": null,
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "27",
+      "source_index": 27,
+      "title": "Milton Thermosteel Bottle",
+      "brand": "Milton",
+      "category": "Home & Kitchen",
+      "subcategory": "water bottle",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "28",
+      "source_index": 28,
+      "title": "HP Wireless Mouse",
+      "brand": "HP",
+      "category": "Electronics",
+      "subcategory": null,
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "29",
+      "source_index": 29,
+      "title": "boAt Rockerz 450 Headphones",
+      "brand": "boAt",
+      "category": "Electronics",
+      "subcategory": "headphones",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "30",
+      "source_index": 30,
+      "title": "OnePlus Nord CE",
+      "brand": "OnePlus",
+      "category": "Mobiles",
+      "subcategory": "smartphone",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "31",
+      "source_index": 31,
+      "title": "Philips Trimmer",
+      "brand": "Philips",
+      "category": "Electronics",
+      "subcategory": "trimmer",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "32",
+      "source_index": 32,
+      "title": "boAt Airdopes 311 Pro TWS Earbuds",
+      "brand": "boAt",
+      "category": "Electronics",
+      "subcategory": "earbuds",
+      "asin": null,
+      "features": {
+        "audio_features": {
+          "value": [
+            "TWS"
+          ],
+          "raw_value": "TWS",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        }
+      },
+      "feature_count": 1,
+      "feature_confidence": {
+        "score": 43,
+        "level": "medium"
+      },
+      "evidence": [
+        "audio_features extracted from product_title"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "33",
+      "source_index": 33,
+      "title": "Boult Audio Bluetooth Speaker",
+      "brand": "Boult Audio",
+      "category": "Electronics",
+      "subcategory": "bluetooth speaker",
+      "asin": null,
+      "features": {
+        "connectivity": {
+          "value": [
+            "Bluetooth"
+          ],
+          "raw_value": "Bluetooth",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        }
+      },
+      "feature_count": 1,
+      "feature_confidence": {
+        "score": 43,
+        "level": "medium"
+      },
+      "evidence": [
+        "connectivity extracted from product_title"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "34",
+      "source_index": 34,
+      "title": "Fire TV Stick 4K",
+      "brand": "Amazon",
+      "category": "Electronics",
+      "subcategory": null,
+      "asin": null,
+      "features": {
+        "display_resolution": {
+          "value": "4K",
+          "raw_value": "4K",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        }
+      },
+      "feature_count": 1,
+      "feature_confidence": {
+        "score": 43,
+        "level": "medium"
+      },
+      "evidence": [
+        "display_resolution extracted from product_title"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "35",
+      "source_index": 35,
+      "title": "Puma Men's Running Shoes",
+      "brand": "Puma",
+      "category": "Fashion",
+      "subcategory": "running shoes",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "36",
+      "source_index": 36,
+      "title": "boAt Stone Bluetooth Speaker",
+      "brand": "boAt",
+      "category": "Electronics",
+      "subcategory": "bluetooth speaker",
+      "asin": null,
+      "features": {
+        "connectivity": {
+          "value": [
+            "Bluetooth"
+          ],
+          "raw_value": "Bluetooth",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        }
+      },
+      "feature_count": 1,
+      "feature_confidence": {
+        "score": 43,
+        "level": "medium"
+      },
+      "evidence": [
+        "connectivity extracted from product_title"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "37",
+      "source_index": 37,
+      "title": "Mi Power Bank 10000mAh",
+      "brand": "Mi",
+      "category": "Electronics",
+      "subcategory": "power bank",
+      "asin": null,
+      "features": {
+        "battery": {
+          "value": {
+            "amount": 10000,
+            "unit": "mAh"
+          },
+          "raw_value": "10000mAh",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        }
+      },
+      "feature_count": 1,
+      "feature_confidence": {
+        "score": 43,
+        "level": "medium"
+      },
+      "evidence": [
+        "battery extracted from product_title"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "38",
+      "source_index": 38,
+      "title": "Samsung Galaxy M16 5G",
+      "brand": "Samsung",
+      "category": "Mobiles",
+      "subcategory": "smartphone",
+      "asin": null,
+      "features": {
+        "connectivity": {
+          "value": [
+            "5G"
+          ],
+          "raw_value": "5G",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "capacity": {
+          "value": {
+            "amount": 5,
+            "unit": "g"
+          },
+          "raw_value": "5G",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        }
+      },
+      "feature_count": 2,
+      "feature_confidence": {
+        "score": 61,
+        "level": "medium"
+      },
+      "evidence": [
+        "connectivity extracted from product_title",
+        "capacity extracted from product_title"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "39",
+      "source_index": 39,
+      "title": "Kindle Paperwhite",
+      "brand": "Amazon",
+      "category": "Electronics",
+      "subcategory": null,
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "40",
+      "source_index": 40,
+      "title": "American Tourister Trolley Bag",
+      "brand": "American Tourister",
+      "category": "Fashion",
+      "subcategory": "trolley bag",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "41",
+      "source_index": 41,
+      "title": "ASUS Gaming Laptop",
+      "brand": "ASUS",
+      "category": "Electronics",
+      "subcategory": "laptop",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "42",
+      "source_index": 42,
+      "title": "Realme Buds T100",
+      "brand": "realme",
+      "category": "Electronics",
+      "subcategory": "earbuds",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "43",
+      "source_index": 43,
+      "title": "Titan Analog Watch",
+      "brand": "Titan",
+      "category": "Fashion",
+      "subcategory": null,
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "44",
+      "source_index": 44,
+      "title": "Wildcraft Backpack 35L",
+      "brand": "Wildcraft",
+      "category": "Fashion",
+      "subcategory": "backpack",
+      "asin": null,
+      "features": {
+        "capacity": {
+          "value": {
+            "amount": 35,
+            "unit": "L"
+          },
+          "raw_value": "35L",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        }
+      },
+      "feature_count": 1,
+      "feature_confidence": {
+        "score": 43,
+        "level": "medium"
+      },
+      "evidence": [
+        "capacity extracted from product_title"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "45",
+      "source_index": 45,
+      "title": "Levi's Men's Jeans",
+      "brand": "Levi's",
+      "category": "Fashion",
+      "subcategory": "jeans",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "46",
+      "source_index": 46,
+      "title": "Strauss Yoga Mat",
+      "brand": "Strauss",
+      "category": "Fitness",
+      "subcategory": "yoga mat",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "47",
+      "source_index": 47,
+      "title": "Samsung 28L Microwave Oven",
+      "brand": "Samsung",
+      "category": "Home & Kitchen",
+      "subcategory": "microwave oven",
+      "asin": null,
+      "features": {
+        "capacity": {
+          "value": {
+            "amount": 28,
+            "unit": "L"
+          },
+          "raw_value": "28L",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        }
+      },
+      "feature_count": 1,
+      "feature_confidence": {
+        "score": 43,
+        "level": "medium"
+      },
+      "evidence": [
+        "capacity extracted from product_title"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "48",
+      "source_index": 48,
+      "title": "Mamaearth Skincare Combo",
+      "brand": "Mamaearth",
+      "category": "Beauty & Personal Care",
+      "subcategory": null,
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "49",
+      "source_index": 49,
+      "title": "Kore Adjustable Dumbbells",
+      "brand": "Kore",
+      "category": "Fitness",
+      "subcategory": "dumbbells",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "50",
+      "source_index": 50,
+      "title": "Cello Water Bottle Set",
+      "brand": "Cello",
+      "category": "Home & Kitchen",
+      "subcategory": "water bottle",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "51",
+      "source_index": 51,
+      "title": "Bajaj Ceiling Fan",
+      "brand": "Bajaj",
+      "category": "Home & Kitchen",
+      "subcategory": "ceiling fan",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "52",
+      "source_index": 52,
+      "title": "Noise Smartwatch with Bluetooth Calling, AMOLED Display, Stainless Steel Design, Emergency SOS & Smart Connectivity",
+      "brand": "Noise",
+      "category": "Electronics",
+      "subcategory": "smartwatch",
+      "asin": "B0FNCPKFP6",
+      "features": {
+        "connectivity": {
+          "value": [
+            "Bluetooth"
+          ],
+          "raw_value": "Bluetooth",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "material": {
+          "value": [
+            "Stainless Steel"
+          ],
+          "raw_value": "Stainless Steel",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        }
+      },
+      "feature_count": 2,
+      "feature_confidence": {
+        "score": 61,
+        "level": "medium"
+      },
+      "evidence": [
+        "connectivity extracted from product_title",
+        "material extracted from product_title"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "53",
+      "source_index": 53,
+      "title": "Noise ColorFit Smartwatch",
+      "brand": "Noise",
+      "category": "Electronics",
+      "subcategory": "smartwatch",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "54",
+      "source_index": 54,
+      "title": "Apple AirPods",
+      "brand": "Apple",
+      "category": "Electronics",
+      "subcategory": null,
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "55",
+      "source_index": 55,
+      "title": "Dell Inspiron Laptop",
+      "brand": "Dell",
+      "category": "Electronics",
+      "subcategory": "laptop",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "56",
+      "source_index": 56,
+      "title": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo",
+      "brand": "Logitech",
+      "category": "Electronics",
+      "subcategory": "keyboard and mouse",
+      "asin": "B01N4EV2TL",
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "57",
+      "source_index": 57,
+      "title": "REDMI Note 15 5G (Glacier Blue, 8GB RAM, 128GB Storage)",
+      "brand": "Redmi",
+      "category": "Mobiles",
+      "subcategory": "smartphone",
+      "asin": "B0G5G7LCJQ",
+      "features": {
+        "ram": {
+          "value": {
+            "amount": 8,
+            "unit": "GB"
+          },
+          "raw_value": "8GB RAM",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "storage": {
+          "value": {
+            "amount": 128,
+            "unit": "GB",
+            "type": null
+          },
+          "raw_value": "128GB Storage",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "connectivity": {
+          "value": [
+            "5G"
+          ],
+          "raw_value": "5G",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "capacity": {
+          "value": {
+            "amount": 5,
+            "unit": "g"
+          },
+          "raw_value": "5G",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "color": {
+          "value": "Glacier Blue",
+          "raw_value": "Glacier Blue",
+          "source": "product_identity",
+          "confidence": "medium",
+          "verified": false
+        }
+      },
+      "feature_count": 5,
+      "feature_confidence": {
+        "score": 100,
+        "level": "high"
+      },
+      "evidence": [
+        "ram extracted from product_title",
+        "storage extracted from product_title",
+        "connectivity extracted from product_title",
+        "capacity extracted from product_title",
+        "color inherited from product identity"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "58",
+      "source_index": 58,
+      "title": "JBL Tune 510BT Headphones",
+      "brand": "JBL",
+      "category": "Electronics",
+      "subcategory": "headphones",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "59",
+      "source_index": 59,
+      "title": "HP H120 Wired Headset with Microphone, Noise Cancelling Mic, Adjustable Headband, 3.5mm Jack",
+      "brand": "Noise",
+      "category": "Electronics",
+      "subcategory": "headphones",
+      "asin": "B0D73SQRM1",
+      "features": {
+        "audio_features": {
+          "value": [
+            "Wired"
+          ],
+          "raw_value": "Wired",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        }
+      },
+      "feature_count": 1,
+      "feature_confidence": {
+        "score": 43,
+        "level": "medium"
+      },
+      "evidence": [
+        "audio_features extracted from product_title"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "60",
+      "source_index": 60,
+      "title": "typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023, 7-Color Backlit with Touchpad",
+      "brand": "Typecase",
+      "category": "Electronics",
+      "subcategory": "keyboard and mouse",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "61",
+      "source_index": 61,
+      "title": "Encasify Telescope Cover, Waterproof Dustproof Sunproof Outdoor Protective Cover with Zipper and Durable Closure",
+      "brand": "Encasify",
+      "category": "Home & Kitchen",
+      "subcategory": "telescope",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "62",
+      "source_index": 62,
+      "title": "Hauser Fizzy Gel Pen Jar, Transparent Lightweight Body, Comfortable Grip, Smooth Ink Flow, Blue Ink Pack of 25 Pens",
+      "brand": "Hauser",
+      "category": "Toys & Stationery",
+      "subcategory": "stationery",
+      "asin": null,
+      "features": {
+        "pack_quantity": {
+          "value": {
+            "quantity": 25,
+            "unit": "pieces"
+          },
+          "raw_value": "Pack of 25",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "color": {
+          "value": "Blue",
+          "raw_value": "Blue",
+          "source": "product_identity",
+          "confidence": "medium",
+          "verified": false
+        }
+      },
+      "feature_count": 2,
+      "feature_confidence": {
+        "score": 53,
+        "level": "medium"
+      },
+      "evidence": [
+        "pack_quantity extracted from product_title",
+        "color inherited from product identity"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "63",
+      "source_index": 63,
+      "title": "Wembley Hover Football for Kids, Electric Floating Soccer Ball, Rechargeable Indoor Game, Birthday Gift for Boys",
+      "brand": "Wembley",
+      "category": "Toys & Stationery",
+      "subcategory": "toy",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "64",
+      "source_index": 64,
+      "title": "Chair Bush Black Colour 10 Pcs, ID 15mm OD 20mm, Round Shape",
+      "brand": null,
+      "category": "Home & Kitchen",
+      "subcategory": null,
+      "asin": null,
+      "features": {
+        "pack_quantity": {
+          "value": {
+            "quantity": 10,
+            "unit": "pieces"
+          },
+          "raw_value": "10 Pcs",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "color": {
+          "value": "Black",
+          "raw_value": "Black",
+          "source": "product_identity",
+          "confidence": "medium",
+          "verified": false
+        }
+      },
+      "feature_count": 2,
+      "feature_confidence": {
+        "score": 53,
+        "level": "medium"
+      },
+      "evidence": [
+        "pack_quantity extracted from product_title",
+        "color inherited from product identity"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "65",
+      "source_index": 65,
+      "title": "Drivanto Washing Machine Stand Multi-Functional Movable Adjustable Base with Locking Wheels for Washing Machine, Refrigerator and Furniture",
+      "brand": "Drivanto",
+      "category": "Home & Kitchen",
+      "subcategory": null,
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "66",
+      "source_index": 66,
+      "title": "UGAOO Combo of 3 Indoor Plants with Ibiza Pot, Money Plant Golden, Jade Plant and Peace Lily for Home and Office Decor",
+      "brand": "UGAOO",
+      "category": "Home & Kitchen",
+      "subcategory": "plant",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "67",
+      "source_index": 67,
+      "title": "Prestige Induction Cooktop",
+      "brand": "Prestige",
+      "category": "Home & Kitchen",
+      "subcategory": "induction cooktop",
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "68",
+      "source_index": 68,
+      "title": "Lakme Makeup Kit",
+      "brand": "Lakme",
+      "category": "Beauty & Personal Care",
+      "subcategory": null,
+      "asin": null,
+      "features": {},
+      "feature_count": 0,
+      "feature_confidence": {
+        "score": 0,
+        "level": "low"
+      },
+      "evidence": [],
+      "warnings": [
+        "no explicit technical feature found",
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "69",
+      "source_index": 69,
+      "title": "Redmi Note 13 5G",
+      "brand": "Redmi",
+      "category": "Mobiles",
+      "subcategory": "smartphone",
+      "asin": null,
+      "features": {
+        "connectivity": {
+          "value": [
+            "5G"
+          ],
+          "raw_value": "5G",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "capacity": {
+          "value": {
+            "amount": 5,
+            "unit": "g"
+          },
+          "raw_value": "5G",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        }
+      },
+      "feature_count": 2,
+      "feature_confidence": {
+        "score": 61,
+        "level": "medium"
+      },
+      "evidence": [
+        "connectivity extracted from product_title",
+        "capacity extracted from product_title"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "70",
+      "source_index": 70,
+      "title": "Samsung 25L Microwave Oven",
+      "brand": "Samsung",
+      "category": "Home & Kitchen",
+      "subcategory": "microwave oven",
+      "asin": null,
+      "features": {
+        "capacity": {
+          "value": {
+            "amount": 25,
+            "unit": "L"
+          },
+          "raw_value": "25L",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        }
+      },
+      "feature_count": 1,
+      "feature_confidence": {
+        "score": 43,
+        "level": "medium"
+      },
+      "evidence": [
+        "capacity extracted from product_title"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "71",
+      "source_index": 71,
+      "title": "Adjustable Doorway Pull-Up Bar with Rubber Grip, No-Drill Installation",
+      "brand": null,
+      "category": "Fitness",
+      "subcategory": "pull-up bar",
+      "asin": "B0B6NSDR2H",
+      "features": {
+        "material": {
+          "value": [
+            "Rubber"
+          ],
+          "raw_value": "Rubber",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        }
+      },
+      "feature_count": 1,
+      "feature_confidence": {
+        "score": 43,
+        "level": "medium"
+      },
+      "evidence": [
+        "material extracted from product_title"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "72",
+      "source_index": 72,
+      "title": "Samsung Galaxy M36 5G Mobile (Velvet Black, 6GB RAM, 128GB Storage)",
+      "brand": "Samsung",
+      "category": "Mobiles",
+      "subcategory": "smartphone",
+      "asin": "B0FDBB2VRC",
+      "features": {
+        "ram": {
+          "value": {
+            "amount": 6,
+            "unit": "GB"
+          },
+          "raw_value": "6GB RAM",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "storage": {
+          "value": {
+            "amount": 128,
+            "unit": "GB",
+            "type": null
+          },
+          "raw_value": "128GB Storage",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "connectivity": {
+          "value": [
+            "5G"
+          ],
+          "raw_value": "5G",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "capacity": {
+          "value": {
+            "amount": 5,
+            "unit": "g"
+          },
+          "raw_value": "5G",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "color": {
+          "value": "Velvet Black",
+          "raw_value": "Velvet Black",
+          "source": "product_identity",
+          "confidence": "medium",
+          "verified": false
+        }
+      },
+      "feature_count": 5,
+      "feature_confidence": {
+        "score": 100,
+        "level": "high"
+      },
+      "evidence": [
+        "ram extracted from product_title",
+        "storage extracted from product_title",
+        "connectivity extracted from product_title",
+        "capacity extracted from product_title",
+        "color inherited from product identity"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "73",
+      "source_index": 73,
+      "title": "Nothing Phone (3a) Lite (White, 128 GB, 8 GB RAM)",
+      "brand": "Nothing",
+      "category": "Mobiles",
+      "subcategory": "smartphone",
+      "asin": "B0G47YZJH6",
+      "features": {
+        "ram": {
+          "value": {
+            "amount": 8,
+            "unit": "GB"
+          },
+          "raw_value": "8 GB RAM",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "color": {
+          "value": "White",
+          "raw_value": "White",
+          "source": "product_identity",
+          "confidence": "medium",
+          "verified": false
+        },
+        "storage": {
+          "value": "128 GB",
+          "raw_value": "128 GB",
+          "source": "product_identity",
+          "confidence": "medium",
+          "verified": false
+        }
+      },
+      "feature_count": 3,
+      "feature_confidence": {
+        "score": 63,
+        "level": "medium"
+      },
+      "evidence": [
+        "ram extracted from product_title",
+        "color inherited from product identity",
+        "storage inherited from product identity"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    },
+    {
+      "product_id": "74",
+      "source_index": 74,
+      "title": "Nothing Phone (3) (Black, 12GB RAM, 256GB Storage)",
+      "brand": "Nothing",
+      "category": "Mobiles",
+      "subcategory": "smartphone",
+      "asin": "B0F7R6V1LM",
+      "features": {
+        "ram": {
+          "value": {
+            "amount": 12,
+            "unit": "GB"
+          },
+          "raw_value": "12GB RAM",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "storage": {
+          "value": {
+            "amount": 256,
+            "unit": "GB",
+            "type": null
+          },
+          "raw_value": "256GB Storage",
+          "source": "product_title",
+          "confidence": "high",
+          "verified": false
+        },
+        "color": {
+          "value": "Black",
+          "raw_value": "Black",
+          "source": "product_identity",
+          "confidence": "medium",
+          "verified": false
+        }
+      },
+      "feature_count": 3,
+      "feature_confidence": {
+        "score": 71,
+        "level": "medium"
+      },
+      "evidence": [
+        "ram extracted from product_title",
+        "storage extracted from product_title",
+        "color inherited from product identity"
+      ],
+      "warnings": [
+        "features are extracted from existing product data and are not manufacturer-verified"
+      ]
+    }
+  ]
+}
