@@ -1,0 +1,2506 @@
+{
+  "engine": {
+    "name": "Coupon World Product Identity Engine",
+    "module": 1,
+    "version": "1.0.0",
+    "generated_at": "2026-07-22T15:03:06.386803+00:00",
+    "source_file": "coupons.json",
+    "fabricated_fields_allowed": false
+  },
+  "summary": {
+    "total_products": 74,
+    "with_asin": 20,
+    "with_brand": 69,
+    "with_subcategory": 54,
+    "with_model": 0,
+    "unclassified": 0,
+    "confidence": {
+      "high": 18,
+      "low": 3,
+      "medium": 53
+    },
+    "categories": {
+      "Beauty & Personal Care": 4,
+      "Electronics": 29,
+      "Fashion": 8,
+      "Fitness": 3,
+      "Home & Kitchen": 12,
+      "Mobiles": 10,
+      "Musical Instruments": 1,
+      "Offers": 1,
+      "Tools & Hardware": 1,
+      "Toys & Stationery": 5
+    }
+  },
+  "products": [
+    {
+      "product_id": "1",
+      "canonical_id": "jiada-space-astronaut-stationery-set-for-boys-with-badge-notebook-and-pen-birthday-return-gift-rakhi-gift-for-boys-kids-blue",
+      "source_index": 1,
+      "title": "JIADA Space Astronaut Stationery Set for Boys - with Badge, Notebook and Pen - Birthday Return Gift/Rakhi Gift for Boys, Kids, Blue",
+      "normalized_title": "jiada space astronaut stationery set for boys - with badge, notebook and pen - birthday return gift/rakhi gift for boys, kids, blue",
+      "asin": null,
+      "brand": "JIADA",
+      "model": null,
+      "category": "Toys & Stationery",
+      "source_category": "Prime Deal - Toys & Stationery",
+      "subcategory": "stationery",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": "Blue"
+      },
+      "launch_year": null,
+      "source_link": "https://amzn.in/d/04HOO2eq?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords",
+        "color extracted from title"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "2",
+      "canonical_id": "samsung-keyboard-case-for-galaxy-tab-a11-tab-a9-plus-11-folio-cover-sm-x230-sm-x236b-sm-x210-sm-x215-with-trackpad-7-color-backlit-magnetically-detachable-bluetooth-keyboard-multi-angle-view",
+      "source_index": 2,
+      "title": "Keyboard Case for Samsung Galaxy Tab A11+ & Tab A9 Plus 11” Folio Cover SM-X230, SM-X236B, SM-X210, SM-X215 with Trackpad, 7 Color Backlit Magnetically Detachable Bluetooth Keyboard, Multi-Angle View",
+      "normalized_title": "keyboard case for samsung galaxy tab a11+ & tab a9 plus 11” folio cover sm-x230, sm-x236b, sm-x210, sm-x215 with trackpad, 7 color backlit magnetically detachable bluetooth keyboard, multi-angle view",
+      "asin": null,
+      "brand": "Samsung",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Prime Deal - Electronics",
+      "subcategory": "keyboard and mouse",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://amzn.in/d/01dfFSgu?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "brand matched from title",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "3",
+      "canonical_id": "teeslix-nasa-cotton-boys-t-shirt-teenagers-soft-premium-fabric-regular-fit-t-shirt-for-boys-girls-space-rocket-design-blue-red-age-8-to-17-years-black",
+      "source_index": 3,
+      "title": "TeeSlix NASA Cotton Boys t-Shirt, Teenagers | Soft, Premium Fabric | Regular Fit T-Shirt for Boys, Girls | Space Rocket Design | Blue,Black,RED | Age 8 to 17 Years",
+      "normalized_title": "teeslix nasa cotton boys t-shirt, teenagers | soft, premium fabric | regular fit t-shirt for boys, girls | space rocket design | blue,black,red | age 8 to 17 years",
+      "asin": null,
+      "brand": "TeeSlix",
+      "model": null,
+      "category": "Fashion",
+      "source_category": "Clothing",
+      "subcategory": "t-shirt",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": "Black"
+      },
+      "launch_year": null,
+      "source_link": "https://amzn.in/d/06Ksbhq6?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords",
+        "color extracted from title"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "4",
+      "canonical_id": "bausch-lomb-fresh-multi-purpose-500ml-contact-lens-solution-pack-of-1",
+      "source_index": 4,
+      "title": "Bausch + Lomb Fresh Multi-Purpose 500Ml Contact Lens Solution (Pack Of 1)",
+      "normalized_title": "bausch + lomb fresh multi-purpose 500ml contact lens solution (pack of 1)",
+      "asin": null,
+      "brand": "Bausch + Lomb",
+      "model": null,
+      "category": "Beauty & Personal Care",
+      "source_category": "Health & Personal Care",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://amzn.in/d/06XUsLAR?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 60,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "5",
+      "canonical_id": "aasons-electric-drill-variable-angle-grinder-connecting-rod-with-1pc-wood-marble-cutting-blade-flap-disk-for-paint-remover-sanding-disc-and-iron-grinding-wheel",
+      "source_index": 5,
+      "title": "AASONS Electric Drill Variable Angle Grinder Connecting Rod with 1pc Wood, Marble Cutting Blade, Flap Disk for Paint Remover, Sanding disc and Iron Grinding Wheel",
+      "normalized_title": "aasons electric drill variable angle grinder connecting rod with 1pc wood, marble cutting blade, flap disk for paint remover, sanding disc and iron grinding wheel",
+      "asin": null,
+      "brand": "AASONS",
+      "model": null,
+      "category": "Tools & Hardware",
+      "source_category": "Tools & Hardware",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://amzn.in/d/01GmFjs1?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 60,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "6",
+      "canonical_id": "hebezon-expandable-appliance-roller-stand-with-wheels-heavy-duty-mobile-dolly-for-washing-machine-refrigerator-furniture-adjustable-moving-base-for-home-kitchen-laundry-use",
+      "source_index": 6,
+      "title": "Hebezon Expandable Appliance Roller Stand with Wheels Heavy Duty Mobile Dolly for Washing Machine, Refrigerator,Furniture Adjustable Moving Base for Home, Kitchen,Laundry Use",
+      "normalized_title": "hebezon expandable appliance roller stand with wheels heavy duty mobile dolly for washing machine, refrigerator,furniture adjustable moving base for home, kitchen,laundry use",
+      "asin": null,
+      "brand": "Hebezon",
+      "model": null,
+      "category": "Home & Kitchen",
+      "source_category": "Home Improvement",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://amzn.in/d/0fkG5ElL?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 60,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "7",
+      "canonical_id": "campus-women-s-ogl-4-sneakers",
+      "source_index": 7,
+      "title": "Campus Women's OGL-4 Sneakers",
+      "normalized_title": "campus women's ogl-4 sneakers",
+      "asin": null,
+      "brand": "Campus",
+      "model": null,
+      "category": "Fashion",
+      "source_category": "Footwear",
+      "subcategory": "running shoes",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://amzn.in/d/0b3TayvT?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "8",
+      "canonical_id": "homestrap-rectangular-set-of-3-large-plastic-storage-organizers-baskets-with-lid-for-kitchen-clothes-multipurpose-vegetables-toys-books-office-stationery-wardrobe-biscuit-brown-grey",
+      "source_index": 8,
+      "title": "HomeStrap Rectangular Set Of 3 Large Plastic Storage Organizers/Baskets With Lid For Kitchen, Clothes, Multipurpose Vegetables, Toys, Books, Office, Stationery, Wardrobe(Biscuit, Grey, Brown)",
+      "normalized_title": "homestrap rectangular set of 3 large plastic storage organizers/baskets with lid for kitchen, clothes, multipurpose vegetables, toys, books, office, stationery, wardrobe(biscuit, grey, brown)",
+      "asin": null,
+      "brand": "HomeStrap",
+      "model": null,
+      "category": "Home & Kitchen",
+      "source_category": "Home Improvement",
+      "subcategory": "stationery",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": "Grey"
+      },
+      "launch_year": null,
+      "source_link": "https://amzn.to/4eZdI1O?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords",
+        "color extracted from title"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "9",
+      "canonical_id": "amazon-basics-micro-sd-card-with-adapter-upto-120-mb-s-class-10-u1-c10-v10-speed-classes-64-gb",
+      "source_index": 9,
+      "title": "Amazon Basics 64 GB Micro SD Card with Adapter | Upto 120 MB/s | Class 10 | U1, C10, V10 Speed Classes",
+      "normalized_title": "amazon basics 64 gb micro sd card with adapter | upto 120 mb/s | class 10 | u1, c10, v10 speed classes",
+      "asin": null,
+      "brand": "Amazon",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": "64 GB",
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://amzn.to/4v9I4o8?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 60,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "storage extracted from title"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "10",
+      "canonical_id": "redmi-13-5g-8gb-ram-128gb-storage-128-gb-hawaiian-blue",
+      "source_index": 10,
+      "title": "Redmi 13 5G Hawaiian Blue (8GB RAM, 128GB Storage)",
+      "normalized_title": "redmi 13 5g hawaiian blue (8gb ram, 128gb storage)",
+      "asin": "B0F1N8B7Z4",
+      "brand": "Redmi",
+      "model": null,
+      "category": "Mobiles",
+      "source_category": "Mobiles",
+      "subcategory": null,
+      "variant": {
+        "ram": "8 GB",
+        "storage": "128 GB",
+        "color": "Hawaiian Blue"
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B0F1N8B7Z4?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 85,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized",
+        "RAM extracted from title",
+        "storage extracted from title",
+        "color extracted from title"
+      ],
+      "warnings": [
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "11",
+      "canonical_id": "realme-buds-air-8-11mm-6mm-dual-dynamic-bass-drivers-58hrs-playtime-55db-anc-6-mic-enc-45ms-low-latency-360-spatial-audio-hi-res-lhdc-ip55-dust-water-resistant-bt-v5-4-master-gold",
+      "source_index": 11,
+      "title": "realme Buds Air 8, 11mm+6mm Dual Dynamic Bass Drivers, 58Hrs Playtime, 55dB ANC, 6 Mic ENC, 45ms Low Latency, 360° Spatial Audio, Hi-Res LHDC, IP55 Dust & Water Resistant, BT v5.4 (Master Gold)",
+      "normalized_title": "realme buds air 8, 11mm+6mm dual dynamic bass drivers, 58hrs playtime, 55db anc, 6 mic enc, 45ms low latency, 360° spatial audio, hi-res lhdc, ip55 dust & water resistant, bt v5.4 (master gold)",
+      "asin": "B0GDQCTYFB",
+      "brand": "realme",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "earbuds",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": "Gold"
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B0GDQCTYFB?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords",
+        "color extracted from title"
+      ],
+      "warnings": [
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "12",
+      "canonical_id": "nutrilite-amway-cal-mag-d-k2-90-tablets",
+      "source_index": 12,
+      "title": "Amway Nutrilite Cal Mag D K2 (90 Tablets)",
+      "normalized_title": "amway nutrilite cal mag d k2 (90 tablets)",
+      "asin": "B0D3HKTL6K",
+      "brand": "Nutrilite",
+      "model": null,
+      "category": "Beauty & Personal Care",
+      "source_category": "Health & Personal Care",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B0D3HKTL6K?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 85,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized"
+      ],
+      "warnings": [
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "13",
+      "canonical_id": "yamaha-pss-e30-remie-portable-mini-keyboard-37-keys-built-in-songs-sound-effects-quiz-mode-lightweight-ideal-for-kids-early-learners-white",
+      "source_index": 13,
+      "title": "Yamaha PSS-E30 Remie Portable Mini Keyboard – 37 Keys, White, Built-in Songs, Sound Effects & Quiz Mode, Lightweight, Ideal for Kids & Early Learners",
+      "normalized_title": "yamaha pss-e30 remie portable mini keyboard – 37 keys, white, built-in songs, sound effects & quiz mode, lightweight, ideal for kids & early learners",
+      "asin": "B08232VZ84",
+      "brand": "Yamaha",
+      "model": null,
+      "category": "Musical Instruments",
+      "source_category": "Musical Instruments",
+      "subcategory": "keyboard and mouse",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": "White"
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B08232VZ84?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords",
+        "color extracted from title"
+      ],
+      "warnings": [
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "14",
+      "canonical_id": "apple-iphone-17e-15-40-cm-6-1-super-retina-xdr-display-a19-chip-all-day-battery-life-48mp-fusion-camera-256gb-starting-storage-256-gb-black",
+      "source_index": 14,
+      "title": "Apple iPhone 17e 256 GB (Black) – 15.40 cm (6.1″) Super Retina XDR Display, A19 Chip, All-Day Battery Life, 48MP Fusion Camera, 256GB Starting Storage",
+      "normalized_title": "apple iphone 17e 256 gb (black) – 15.40 cm (6.1″) super retina xdr display, a19 chip, all-day battery life, 48mp fusion camera, 256gb starting storage",
+      "asin": "B0GQVL6STN",
+      "brand": "Apple",
+      "model": null,
+      "category": "Mobiles",
+      "source_category": "Cell Phones & Accessories",
+      "subcategory": "smartphone",
+      "variant": {
+        "ram": null,
+        "storage": "256 GB",
+        "color": "Black"
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B0GQVL6STN?tag=guru0906-21&th=1",
+      "identity_confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords",
+        "storage extracted from title",
+        "color extracted from title"
+      ],
+      "warnings": [
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "15",
+      "canonical_id": "apple-iphone-17e-512gb-512-gb",
+      "source_index": 15,
+      "title": "Apple iPhone 17e 512GB",
+      "normalized_title": "apple iphone 17e 512gb",
+      "asin": "B0GQVHNX7R",
+      "brand": "Apple",
+      "model": null,
+      "category": "Mobiles",
+      "source_category": "Mobiles",
+      "subcategory": "smartphone",
+      "variant": {
+        "ram": null,
+        "storage": "512 GB",
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B0GQVHNX7R?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords",
+        "storage extracted from title"
+      ],
+      "warnings": [
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "16",
+      "canonical_id": "mega-70-off-store",
+      "source_index": 16,
+      "title": "Mega 70%+ OFF Store",
+      "normalized_title": "mega 70%+ off store",
+      "asin": null,
+      "brand": null,
+      "model": null,
+      "category": "Offers",
+      "source_category": "Offers",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Mega+70%25%2B+OFF+Store&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 40,
+        "level": "low"
+      },
+      "evidence": [
+        "existing category normalized"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "brand unavailable",
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "17",
+      "canonical_id": "online-store-fashion-fest",
+      "source_index": 17,
+      "title": "Online Store Fashion Fest",
+      "normalized_title": "online store fashion fest",
+      "asin": null,
+      "brand": null,
+      "model": null,
+      "category": "Fashion",
+      "source_category": "Fashion",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Amazon+IN+Fashion+Fest&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 40,
+        "level": "low"
+      },
+      "evidence": [
+        "existing category normalized"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "brand unavailable",
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "18",
+      "canonical_id": "stempedia-mechanical-construction-kit-for-boys-7-14-years",
+      "source_index": 18,
+      "title": "STEMpedia Mechanical Construction Kit for Boys 7-14 Years",
+      "normalized_title": "stempedia mechanical construction kit for boys 7-14 years",
+      "asin": "B09MG7HSS9",
+      "brand": "STEMpedia",
+      "model": null,
+      "category": "Toys & Stationery",
+      "source_category": "Toys",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B09MG7HSS9?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 85,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized"
+      ],
+      "warnings": [
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "19",
+      "canonical_id": "pie-matrix-pegasus-76700-telescope-235x-zoom-for-moon-saturn-planets",
+      "source_index": 19,
+      "title": "Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon Saturn Planets",
+      "normalized_title": "pie matrix pegasus 76700 telescope 235x zoom for moon saturn planets",
+      "asin": "B0D8YV6KQ5",
+      "brand": null,
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "telescope",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B0D8YV6KQ5?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 75,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "brand unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "20",
+      "canonical_id": "audavibe-76700-newtonian-reflector-telescope-235x-zoom-for-moon-planets",
+      "source_index": 20,
+      "title": "Audavibe 76700 Newtonian Reflector Telescope 235x Zoom for Moon & Planets",
+      "normalized_title": "audavibe 76700 newtonian reflector telescope 235x zoom for moon & planets",
+      "asin": "B0F26CLKW9",
+      "brand": "Audavibe",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "telescope",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B0F26CLKW9?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "21",
+      "canonical_id": "gesto-galaxy-projector-pro-planetarium-13-film-discs-nebula-moon-lamp",
+      "source_index": 21,
+      "title": "Gesto Galaxy Projector Pro Planetarium - 13 Film Discs Nebula Moon Lamp",
+      "normalized_title": "gesto galaxy projector pro planetarium - 13 film discs nebula moon lamp",
+      "asin": "B0GKY4WMRV",
+      "brand": "Gesto",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B0GKY4WMRV?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 85,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized"
+      ],
+      "warnings": [
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "22",
+      "canonical_id": "popsugar-rechargeable-hand-gesture-control-car-with-headlight-usb-charging-rc-stunt-car-for-kids",
+      "source_index": 22,
+      "title": "Popsugar Rechargeable Hand Gesture Control Car with Headlight, USB Charging RC Stunt Car for Kids",
+      "normalized_title": "popsugar rechargeable hand gesture control car with headlight, usb charging rc stunt car for kids",
+      "asin": "B0CQK691XQ",
+      "brand": "Popsugar",
+      "model": null,
+      "category": "Toys & Stationery",
+      "source_category": "Toys",
+      "subcategory": "toy",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B0CQK691XQ?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "23",
+      "canonical_id": "tekcool-portable-air-cooler-fan-with-ice-chamber-usb-rechargeable-mini-cooling-fan-for-home-kitchen",
+      "source_index": 23,
+      "title": "TEKCOOL Portable Air Cooler Fan with Ice Chamber, USB Rechargeable Mini Cooling Fan for Home Kitchen",
+      "normalized_title": "tekcool portable air cooler fan with ice chamber, usb rechargeable mini cooling fan for home kitchen",
+      "asin": "B0H1QQ7ML1",
+      "brand": "TEKCOOL",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "air cooler",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B0H1QQ7ML1?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "24",
+      "canonical_id": "fire-boltt-ninja-smartwatch",
+      "source_index": 24,
+      "title": "Fire-Boltt Ninja Smartwatch",
+      "normalized_title": "fire-boltt ninja smartwatch",
+      "asin": null,
+      "brand": "Fire-Boltt",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "smartwatch",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Fire-Boltt+Ninja+Smartwatch&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "25",
+      "canonical_id": "sony-wireless-headphones",
+      "source_index": 25,
+      "title": "Sony Wireless Headphones",
+      "normalized_title": "sony wireless headphones",
+      "asin": null,
+      "brand": "Sony",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "headphones",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Sony+Wireless+Headphones&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "26",
+      "canonical_id": "amazon-echo-dot-5th-gen",
+      "source_index": 26,
+      "title": "Echo Dot 5th Gen",
+      "normalized_title": "echo dot 5th gen",
+      "asin": null,
+      "brand": "Amazon",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Echo+Dot+5th+Gen&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 60,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "27",
+      "canonical_id": "milton-thermosteel-bottle",
+      "source_index": 27,
+      "title": "Milton Thermosteel Bottle",
+      "normalized_title": "milton thermosteel bottle",
+      "asin": null,
+      "brand": "Milton",
+      "model": null,
+      "category": "Home & Kitchen",
+      "source_category": "Home",
+      "subcategory": "water bottle",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Milton+Thermosteel+Bottle&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "28",
+      "canonical_id": "hp-wireless-mouse",
+      "source_index": 28,
+      "title": "HP Wireless Mouse",
+      "normalized_title": "hp wireless mouse",
+      "asin": null,
+      "brand": "HP",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=HP+Wireless+Mouse&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 60,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "29",
+      "canonical_id": "boat-rockerz-450-headphones",
+      "source_index": 29,
+      "title": "boAt Rockerz 450 Headphones",
+      "normalized_title": "boat rockerz 450 headphones",
+      "asin": null,
+      "brand": "boAt",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "headphones",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=boAt+Rockerz+450+Headphones&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "30",
+      "canonical_id": "oneplus-nord-ce",
+      "source_index": 30,
+      "title": "OnePlus Nord CE",
+      "normalized_title": "oneplus nord ce",
+      "asin": null,
+      "brand": "OnePlus",
+      "model": null,
+      "category": "Mobiles",
+      "source_category": "Mobiles",
+      "subcategory": "smartphone",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=OnePlus+Nord+CE&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "31",
+      "canonical_id": "philips-trimmer",
+      "source_index": 31,
+      "title": "Philips Trimmer",
+      "normalized_title": "philips trimmer",
+      "asin": null,
+      "brand": "Philips",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "trimmer",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Philips+Trimmer&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "32",
+      "canonical_id": "boat-airdopes-311-pro-tws-earbuds",
+      "source_index": 32,
+      "title": "boAt Airdopes 311 Pro TWS Earbuds",
+      "normalized_title": "boat airdopes 311 pro tws earbuds",
+      "asin": null,
+      "brand": "boAt",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "earbuds",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=boAt+Airdopes+311+Pro+TWS+Earbuds&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "33",
+      "canonical_id": "boult-audio-bluetooth-speaker",
+      "source_index": 33,
+      "title": "Boult Audio Bluetooth Speaker",
+      "normalized_title": "boult audio bluetooth speaker",
+      "asin": null,
+      "brand": "Boult Audio",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "bluetooth speaker",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Boult+Audio+Bluetooth+Speaker&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "34",
+      "canonical_id": "amazon-fire-tv-stick-4k",
+      "source_index": 34,
+      "title": "Fire TV Stick 4K",
+      "normalized_title": "fire tv stick 4k",
+      "asin": null,
+      "brand": "Amazon",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Fire+TV+Stick+4K&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 60,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "35",
+      "canonical_id": "puma-men-s-running-shoes",
+      "source_index": 35,
+      "title": "Puma Men's Running Shoes",
+      "normalized_title": "puma men's running shoes",
+      "asin": null,
+      "brand": "Puma",
+      "model": null,
+      "category": "Fashion",
+      "source_category": "Fashion",
+      "subcategory": "running shoes",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Puma+Men%27s+Running+Shoes&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "36",
+      "canonical_id": "boat-stone-bluetooth-speaker",
+      "source_index": 36,
+      "title": "boAt Stone Bluetooth Speaker",
+      "normalized_title": "boat stone bluetooth speaker",
+      "asin": null,
+      "brand": "boAt",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "bluetooth speaker",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=boAt+Stone+Bluetooth+Speaker&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "37",
+      "canonical_id": "mi-power-bank-10000mah",
+      "source_index": 37,
+      "title": "Mi Power Bank 10000mAh",
+      "normalized_title": "mi power bank 10000mah",
+      "asin": null,
+      "brand": "Mi",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "power bank",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Mi+Power+Bank+10000mAh&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "38",
+      "canonical_id": "samsung-galaxy-m16-5g",
+      "source_index": 38,
+      "title": "Samsung Galaxy M16 5G",
+      "normalized_title": "samsung galaxy m16 5g",
+      "asin": null,
+      "brand": "Samsung",
+      "model": null,
+      "category": "Mobiles",
+      "source_category": "Mobiles",
+      "subcategory": "smartphone",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Samsung+Galaxy+M16+5G&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "39",
+      "canonical_id": "amazon-kindle-paperwhite",
+      "source_index": 39,
+      "title": "Kindle Paperwhite",
+      "normalized_title": "kindle paperwhite",
+      "asin": null,
+      "brand": "Amazon",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Kindle+Paperwhite&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 60,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "40",
+      "canonical_id": "american-tourister-trolley-bag",
+      "source_index": 40,
+      "title": "American Tourister Trolley Bag",
+      "normalized_title": "american tourister trolley bag",
+      "asin": null,
+      "brand": "American Tourister",
+      "model": null,
+      "category": "Fashion",
+      "source_category": "Fashion",
+      "subcategory": "trolley bag",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=American+Tourister+Trolley+Bag&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "41",
+      "canonical_id": "asus-gaming-laptop",
+      "source_index": 41,
+      "title": "ASUS Gaming Laptop",
+      "normalized_title": "asus gaming laptop",
+      "asin": null,
+      "brand": "ASUS",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "laptop",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=ASUS+Gaming+Laptop&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "42",
+      "canonical_id": "realme-buds-t100",
+      "source_index": 42,
+      "title": "Realme Buds T100",
+      "normalized_title": "realme buds t100",
+      "asin": null,
+      "brand": "realme",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "earbuds",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Realme+Buds+T100&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "43",
+      "canonical_id": "titan-analog-watch",
+      "source_index": 43,
+      "title": "Titan Analog Watch",
+      "normalized_title": "titan analog watch",
+      "asin": null,
+      "brand": "Titan",
+      "model": null,
+      "category": "Fashion",
+      "source_category": "Fashion",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Titan+Analog+Watch&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 60,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "44",
+      "canonical_id": "wildcraft-backpack-35l",
+      "source_index": 44,
+      "title": "Wildcraft Backpack 35L",
+      "normalized_title": "wildcraft backpack 35l",
+      "asin": null,
+      "brand": "Wildcraft",
+      "model": null,
+      "category": "Fashion",
+      "source_category": "Fashion",
+      "subcategory": "backpack",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Wildcraft+Backpack+35L&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "45",
+      "canonical_id": "levi-s-men-s-jeans",
+      "source_index": 45,
+      "title": "Levi's Men's Jeans",
+      "normalized_title": "levi's men's jeans",
+      "asin": null,
+      "brand": "Levi's",
+      "model": null,
+      "category": "Fashion",
+      "source_category": "Fashion",
+      "subcategory": "jeans",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Levi%27s+Men%27s+Jeans&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "46",
+      "canonical_id": "strauss-yoga-mat",
+      "source_index": 46,
+      "title": "Strauss Yoga Mat",
+      "normalized_title": "strauss yoga mat",
+      "asin": null,
+      "brand": "Strauss",
+      "model": null,
+      "category": "Fitness",
+      "source_category": "Fitness",
+      "subcategory": "yoga mat",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Strauss+Yoga+Mat&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "47",
+      "canonical_id": "samsung-28l-microwave-oven",
+      "source_index": 47,
+      "title": "Samsung 28L Microwave Oven",
+      "normalized_title": "samsung 28l microwave oven",
+      "asin": null,
+      "brand": "Samsung",
+      "model": null,
+      "category": "Home & Kitchen",
+      "source_category": "Home",
+      "subcategory": "microwave oven",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Samsung+28L+Microwave+Oven&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "48",
+      "canonical_id": "mamaearth-skincare-combo",
+      "source_index": 48,
+      "title": "Mamaearth Skincare Combo",
+      "normalized_title": "mamaearth skincare combo",
+      "asin": null,
+      "brand": "Mamaearth",
+      "model": null,
+      "category": "Beauty & Personal Care",
+      "source_category": "Beauty",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Mamaearth+Skincare+Combo&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 60,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "49",
+      "canonical_id": "kore-adjustable-dumbbells",
+      "source_index": 49,
+      "title": "Kore Adjustable Dumbbells",
+      "normalized_title": "kore adjustable dumbbells",
+      "asin": null,
+      "brand": "Kore",
+      "model": null,
+      "category": "Fitness",
+      "source_category": "Fitness",
+      "subcategory": "dumbbells",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Kore+Adjustable+Dumbbells&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "50",
+      "canonical_id": "cello-water-bottle-set",
+      "source_index": 50,
+      "title": "Cello Water Bottle Set",
+      "normalized_title": "cello water bottle set",
+      "asin": null,
+      "brand": "Cello",
+      "model": null,
+      "category": "Home & Kitchen",
+      "source_category": "Home",
+      "subcategory": "water bottle",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Cello+Water+Bottle+Set&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "51",
+      "canonical_id": "bajaj-ceiling-fan",
+      "source_index": 51,
+      "title": "Bajaj Ceiling Fan",
+      "normalized_title": "bajaj ceiling fan",
+      "asin": null,
+      "brand": "Bajaj",
+      "model": null,
+      "category": "Home & Kitchen",
+      "source_category": "Home",
+      "subcategory": "ceiling fan",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Bajaj+Ceiling+Fan&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "52",
+      "canonical_id": "noise-smartwatch-with-bluetooth-calling-amoled-display-stainless-steel-design-emergency-sos-smart-connectivity",
+      "source_index": 52,
+      "title": "Noise Smartwatch with Bluetooth Calling, AMOLED Display, Stainless Steel Design, Emergency SOS & Smart Connectivity",
+      "normalized_title": "noise smartwatch with bluetooth calling, amoled display, stainless steel design, emergency sos & smart connectivity",
+      "asin": "B0FNCPKFP6",
+      "brand": "Noise",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "smartwatch",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B0FNCPKFP6?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "53",
+      "canonical_id": "noise-colorfit-smartwatch",
+      "source_index": 53,
+      "title": "Noise ColorFit Smartwatch",
+      "normalized_title": "noise colorfit smartwatch",
+      "asin": null,
+      "brand": "Noise",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "smartwatch",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Noise+ColorFit+Smartwatch&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "54",
+      "canonical_id": "apple-airpods",
+      "source_index": 54,
+      "title": "Apple AirPods",
+      "normalized_title": "apple airpods",
+      "asin": null,
+      "brand": "Apple",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Apple+AirPods&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 60,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "55",
+      "canonical_id": "dell-inspiron-laptop",
+      "source_index": 55,
+      "title": "Dell Inspiron Laptop",
+      "normalized_title": "dell inspiron laptop",
+      "asin": null,
+      "brand": "Dell",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "laptop",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Dell+Inspiron+Laptop&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "56",
+      "canonical_id": "logitech-mk240-nano-wireless-usb-keyboard-and-mouse-combo",
+      "source_index": 56,
+      "title": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo",
+      "normalized_title": "logitech mk240 nano wireless usb keyboard and mouse combo",
+      "asin": "B01N4EV2TL",
+      "brand": "Logitech",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "keyboard and mouse",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B01N4EV2TL?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "57",
+      "canonical_id": "redmi-note-15-5g-8gb-ram-128gb-storage-128-gb-glacier-blue",
+      "source_index": 57,
+      "title": "REDMI Note 15 5G (Glacier Blue, 8GB RAM, 128GB Storage)",
+      "normalized_title": "redmi note 15 5g (glacier blue, 8gb ram, 128gb storage)",
+      "asin": "B0G5G7LCJQ",
+      "brand": "Redmi",
+      "model": null,
+      "category": "Mobiles",
+      "source_category": "Mobiles",
+      "subcategory": "smartphone",
+      "variant": {
+        "ram": "8 GB",
+        "storage": "128 GB",
+        "color": "Glacier Blue"
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B0G5G7LCJQ?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords",
+        "RAM extracted from title",
+        "storage extracted from title",
+        "color extracted from title"
+      ],
+      "warnings": [
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "58",
+      "canonical_id": "jbl-tune-510bt-headphones",
+      "source_index": 58,
+      "title": "JBL Tune 510BT Headphones",
+      "normalized_title": "jbl tune 510bt headphones",
+      "asin": null,
+      "brand": "JBL",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "headphones",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=JBL+Tune+510BT+Headphones&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "59",
+      "canonical_id": "noise-hp-h120-wired-headset-with-microphone-cancelling-mic-adjustable-headband-3-5mm-jack",
+      "source_index": 59,
+      "title": "HP H120 Wired Headset with Microphone, Noise Cancelling Mic, Adjustable Headband, 3.5mm Jack",
+      "normalized_title": "hp h120 wired headset with microphone, noise cancelling mic, adjustable headband, 3.5mm jack",
+      "asin": "B0D73SQRM1",
+      "brand": "Noise",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "headphones",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B0D73SQRM1?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "60",
+      "canonical_id": "typecase-keyboard-case-for-samsung-galaxy-tab-a11-a11-plus-2025-a9-a9-plus-2023-7-color-backlit-with-touchpad",
+      "source_index": 60,
+      "title": "typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023, 7-Color Backlit with Touchpad",
+      "normalized_title": "typecase keyboard case for samsung galaxy tab a11+ / a11 plus 2025 & a9+ / a9 plus 2023, 7-color backlit with touchpad",
+      "asin": null,
+      "brand": "Typecase",
+      "model": null,
+      "category": "Electronics",
+      "source_category": "Electronics",
+      "subcategory": "keyboard and mouse",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": 2023,
+      "source_link": "https://www.amazon.in/s?k=typecase+Keyboard+Case+for+Samsung+Galaxy+Tab+A11%2B+%2F+A11+Plus+2025+%26+A9%2B+%2F+A9+Plus+2023%2C+7-Color+Backlit+with+&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "brand matched from title",
+        "existing category normalized",
+        "subcategory inferred from title keywords",
+        "launch year found in title"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "61",
+      "canonical_id": "encasify-telescope-cover-waterproof-dustproof-sunproof-outdoor-protective-cover-with-zipper-and-durable-closure",
+      "source_index": 61,
+      "title": "Encasify Telescope Cover, Waterproof Dustproof Sunproof Outdoor Protective Cover with Zipper and Durable Closure",
+      "normalized_title": "encasify telescope cover, waterproof dustproof sunproof outdoor protective cover with zipper and durable closure",
+      "asin": null,
+      "brand": "Encasify",
+      "model": null,
+      "category": "Home & Kitchen",
+      "source_category": "Home",
+      "subcategory": "telescope",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Encasify+Telescope+Cover%2C+Waterproof+Dustproof+Sunproof+Outdoor+Protective+Cover+with+Zipper+and+Durable+Closu&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "62",
+      "canonical_id": "hauser-fizzy-gel-pen-jar-transparent-lightweight-body-comfortable-grip-smooth-ink-flow-ink-pack-of-25-pens-blue",
+      "source_index": 62,
+      "title": "Hauser Fizzy Gel Pen Jar, Transparent Lightweight Body, Comfortable Grip, Smooth Ink Flow, Blue Ink Pack of 25 Pens",
+      "normalized_title": "hauser fizzy gel pen jar, transparent lightweight body, comfortable grip, smooth ink flow, blue ink pack of 25 pens",
+      "asin": null,
+      "brand": "Hauser",
+      "model": null,
+      "category": "Toys & Stationery",
+      "source_category": "Office Supplies",
+      "subcategory": "stationery",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": "Blue"
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Hauser+Fizzy+Gel+Pen+Jar%2C+Transparent+Lightweight+Body%2C+Comfortable+Grip%2C+Smooth+Ink+Flow%2C+Blue+Ink+Pack+of+25&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "category inferred from title keywords",
+        "subcategory inferred from title keywords",
+        "color extracted from title"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "63",
+      "canonical_id": "wembley-hover-football-for-kids-electric-floating-soccer-ball-rechargeable-indoor-game-birthday-gift-for-boys",
+      "source_index": 63,
+      "title": "Wembley Hover Football for Kids, Electric Floating Soccer Ball, Rechargeable Indoor Game, Birthday Gift for Boys",
+      "normalized_title": "wembley hover football for kids, electric floating soccer ball, rechargeable indoor game, birthday gift for boys",
+      "asin": null,
+      "brand": "Wembley",
+      "model": null,
+      "category": "Toys & Stationery",
+      "source_category": "Toys",
+      "subcategory": "toy",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Wembley+Hover+Football+for+Kids%2C+Electric+Floating+Soccer+Ball%2C+Rechargeable+Indoor+Game%2C+Birthday+Gift+for+Bo&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "64",
+      "canonical_id": "chair-bush-colour-10-pcs-id-15mm-od-20mm-round-shape-black",
+      "source_index": 64,
+      "title": "Chair Bush Black Colour 10 Pcs, ID 15mm OD 20mm, Round Shape",
+      "normalized_title": "chair bush black colour 10 pcs, id 15mm od 20mm, round shape",
+      "asin": null,
+      "brand": null,
+      "model": null,
+      "category": "Home & Kitchen",
+      "source_category": "Industrial",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": "Black"
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Chair+Bush+Black+Colour+10+Pcs%2C+ID+15mm+OD+20mm%2C+Round+Shape&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 40,
+        "level": "low"
+      },
+      "evidence": [
+        "category inferred from title keywords",
+        "color extracted from title"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "brand unavailable",
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "65",
+      "canonical_id": "drivanto-washing-machine-stand-multi-functional-movable-adjustable-base-with-locking-wheels-for-washing-machine-refrigerator-and-furniture",
+      "source_index": 65,
+      "title": "Drivanto Washing Machine Stand Multi-Functional Movable Adjustable Base with Locking Wheels for Washing Machine, Refrigerator and Furniture",
+      "normalized_title": "drivanto washing machine stand multi-functional movable adjustable base with locking wheels for washing machine, refrigerator and furniture",
+      "asin": null,
+      "brand": "Drivanto",
+      "model": null,
+      "category": "Home & Kitchen",
+      "source_category": "Home",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Drivanto+Washing+Machine+Stand+Multi-Functional+Movable+Adjustable+Base+with+Locking+Wheels+for+Washing+Machin&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 60,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "66",
+      "canonical_id": "ugaoo-combo-of-3-indoor-plants-with-ibiza-pot-money-plant-golden-jade-plant-and-peace-lily-for-home-and-office-decor",
+      "source_index": 66,
+      "title": "UGAOO Combo of 3 Indoor Plants with Ibiza Pot, Money Plant Golden, Jade Plant and Peace Lily for Home and Office Decor",
+      "normalized_title": "ugaoo combo of 3 indoor plants with ibiza pot, money plant golden, jade plant and peace lily for home and office decor",
+      "asin": null,
+      "brand": "UGAOO",
+      "model": null,
+      "category": "Home & Kitchen",
+      "source_category": "Home",
+      "subcategory": "plant",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=UGAOO+Combo+of+3+Indoor+Plants+with+Ibiza+Pot%2C+Money+Plant+Golden%2C+Jade+Plant+and+Peace+Lily+for+Home+and+Offi&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "67",
+      "canonical_id": "prestige-induction-cooktop",
+      "source_index": 67,
+      "title": "Prestige Induction Cooktop",
+      "normalized_title": "prestige induction cooktop",
+      "asin": null,
+      "brand": "Prestige",
+      "model": null,
+      "category": "Home & Kitchen",
+      "source_category": "Home",
+      "subcategory": "induction cooktop",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Prestige+Induction+Cooktop&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "68",
+      "canonical_id": "lakme-makeup-kit",
+      "source_index": 68,
+      "title": "Lakme Makeup Kit",
+      "normalized_title": "lakme makeup kit",
+      "asin": null,
+      "brand": "Lakme",
+      "model": null,
+      "category": "Beauty & Personal Care",
+      "source_category": "Beauty",
+      "subcategory": null,
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Lakme+Makeup+Kit&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 60,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "subcategory unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "69",
+      "canonical_id": "redmi-note-13-5g",
+      "source_index": 69,
+      "title": "Redmi Note 13 5G",
+      "normalized_title": "redmi note 13 5g",
+      "asin": null,
+      "brand": "Redmi",
+      "model": null,
+      "category": "Mobiles",
+      "source_category": "Mobiles",
+      "subcategory": "smartphone",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=Redmi+Note+13+5G&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "70",
+      "canonical_id": "samsung-25l-microwave-oven",
+      "source_index": 70,
+      "title": "Samsung 25L Microwave Oven",
+      "normalized_title": "samsung 25l microwave oven",
+      "asin": null,
+      "brand": "Samsung",
+      "model": null,
+      "category": "Home & Kitchen",
+      "source_category": "Home",
+      "subcategory": "microwave oven",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/s?k=samsung+25l+microwave+oven&tag=guru0906-21",
+      "identity_confidence": {
+        "score": 70,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "asin unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "71",
+      "canonical_id": "adjustable-doorway-pull-up-bar-with-rubber-grip-no-drill-installation",
+      "source_index": 71,
+      "title": "Adjustable Doorway Pull-Up Bar with Rubber Grip, No-Drill Installation",
+      "normalized_title": "adjustable doorway pull-up bar with rubber grip, no-drill installation",
+      "asin": "B0B6NSDR2H",
+      "brand": null,
+      "model": null,
+      "category": "Fitness",
+      "source_category": "Fitness",
+      "subcategory": "pull-up bar",
+      "variant": {
+        "ram": null,
+        "storage": null,
+        "color": null
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B0B6NSDR2H?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 75,
+        "level": "medium"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing category normalized",
+        "subcategory inferred from title keywords"
+      ],
+      "warnings": [
+        "brand unavailable",
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "72",
+      "canonical_id": "samsung-galaxy-m36-5g-mobile-6gb-ram-128gb-storage-128-gb-velvet-black",
+      "source_index": 72,
+      "title": "Samsung Galaxy M36 5G Mobile (Velvet Black, 6GB RAM, 128GB Storage)",
+      "normalized_title": "samsung galaxy m36 5g mobile (velvet black, 6gb ram, 128gb storage)",
+      "asin": "B0FDBB2VRC",
+      "brand": "Samsung",
+      "model": null,
+      "category": "Mobiles",
+      "source_category": "Mobiles",
+      "subcategory": "smartphone",
+      "variant": {
+        "ram": "6 GB",
+        "storage": "128 GB",
+        "color": "Velvet Black"
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B0FDBB2VRC?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords",
+        "RAM extracted from title",
+        "storage extracted from title",
+        "color extracted from title"
+      ],
+      "warnings": [
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "73",
+      "canonical_id": "nothing-phone-3a-lite-8-gb-ram-128-gb-white",
+      "source_index": 73,
+      "title": "Nothing Phone (3a) Lite (White, 128 GB, 8 GB RAM)",
+      "normalized_title": "nothing phone (3a) lite (white, 128 gb, 8 gb ram)",
+      "asin": "B0G47YZJH6",
+      "brand": "Nothing",
+      "model": null,
+      "category": "Mobiles",
+      "source_category": "Mobiles",
+      "subcategory": "smartphone",
+      "variant": {
+        "ram": "8 GB",
+        "storage": "128 GB",
+        "color": "White"
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B0G47YZJH6?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords",
+        "RAM extracted from title",
+        "storage extracted from title",
+        "color extracted from title"
+      ],
+      "warnings": [
+        "model not explicitly available"
+      ]
+    },
+    {
+      "product_id": "74",
+      "canonical_id": "nothing-phone-3-12gb-ram-256gb-storage-256-gb-black",
+      "source_index": 74,
+      "title": "Nothing Phone (3) (Black, 12GB RAM, 256GB Storage)",
+      "normalized_title": "nothing phone (3) (black, 12gb ram, 256gb storage)",
+      "asin": "B0F7R6V1LM",
+      "brand": "Nothing",
+      "model": null,
+      "category": "Mobiles",
+      "source_category": "Mobiles",
+      "subcategory": "smartphone",
+      "variant": {
+        "ram": "12 GB",
+        "storage": "256 GB",
+        "color": "Black"
+      },
+      "launch_year": null,
+      "source_link": "https://www.amazon.in/dp/B0F7R6V1LM?tag=guru0906-21",
+      "identity_confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "evidence": [
+        "existing asin field",
+        "existing brand field",
+        "existing category normalized",
+        "subcategory inferred from title keywords",
+        "RAM extracted from title",
+        "storage extracted from title",
+        "color extracted from title"
+      ],
+      "warnings": [
+        "model not explicitly available"
+      ]
+    }
+  ]
+}
