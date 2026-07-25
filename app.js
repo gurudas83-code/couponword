@@ -257,3 +257,27 @@ document.querySelectorAll("[data-view]").forEach(btn => {
 });
 
 loadDeals();
+// Hide unverified discount labels from all product cards.
+function removeUnverifiedDiscounts() {
+  const discountPattern = /^\s*\d+(?:\.\d+)?\s*%\s*OFF\s*$/i;
+
+  document
+    .querySelectorAll(
+      ".discount, .discount-badge, .discount-text, .product-discount, .deal-discount, [data-discount]"
+    )
+    .forEach((element) => element.remove());
+
+  document.querySelectorAll("body *").forEach((element) => {
+    const hasChildElements = element.children.length > 0;
+    const text = element.textContent?.trim() || "";
+
+    if (!hasChildElements && discountPattern.test(text)) {
+      element.remove();
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", removeUnverifiedDiscounts);
+
+// Also run after dynamically rendered products.
+setTimeout(removeUnverifiedDiscounts, 300);
