@@ -366,6 +366,47 @@ def render(product, products):
     image = clean(product.get("image"))
     link = clean(product.get("link"))
 
+    def valid_number(value):
+        try:
+            number = float(value)
+            return number if number > 0 else None
+        except (TypeError, ValueError):
+            return None
+
+    price = valid_number(product.get("price"))
+    mrp = valid_number(product.get("mrp"))
+
+    discount_percent = None
+    if price is not None and mrp is not None and mrp > price:
+        discount_percent = round(((mrp - price) / mrp) * 100)
+
+    if price is not None:
+        price_parts = [
+            f'<span class="current-price">{price:,.0f}</span>'
+        ]
+
+        if mrp is not None and mrp > price:
+            price_parts.append(
+                f'<span class="mrp">MRP {mrp:,.0f}</span>'
+            )
+
+        if discount_percent is not None:
+            price_parts.append(
+                f'<span class="discount">{discount_percent}% off</span>'
+            )
+
+        price_html = (
+            '<div class="price-box">'
+            + "".join(price_parts)
+            + '</div>'
+        )
+    else:
+        price_html = (
+            '<div class="price-unavailable">'
+            'Price currently unavailable'
+            '</div>'
+        )
+
     category_key = category.lower().strip()
     category_placeholders = {
         "mobiles": "mobiles.svg",
@@ -413,6 +454,15 @@ def render(product, products):
         schema["brand"] = {"@type": "Brand", "name": brand}
     if image:
         schema["image"] = image
+
+    if price is not None and active and link:
+        schema["offers"] = {
+            "@type": "Offer",
+            "priceCurrency": "INR",
+            "price": f"{price:.2f}",
+            "availability": "https://schema.org/InStock",
+            "url": link,
+        }
 
     display_image = image or placeholder_image
 
@@ -523,7 +573,12 @@ header a{{color:#fff;text-decoration:none;font-weight:800}}
 .badge{{display:inline-block;padding:6px 10px;background:#fff1e8;color:#b54717;border-radius:999px;font-weight:700}}
 h1{{font-size:clamp(30px,5vw,50px);line-height:1.08;margin:16px 0}}
 .meta{{display:flex;flex-wrap:wrap;gap:12px;color:#68707d}}
-.status{{font-size:21px;font-weight:800;margin:22px 0}}
+.status{{font-size:21px;font-weight:800;margin:18px 0}}
+.price-box{{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:22px 0 8px}}
+.current-price{{font-size:34px;font-weight:900;color:#111827}}
+.mrp{{font-size:17px;color:#68707d;text-decoration:line-through}}
+.discount{{font-size:15px;font-weight:800;color:#067647;background:#ecfdf3;padding:6px 10px;border-radius:999px}}
+.price-unavailable{{font-size:18px;font-weight:700;color:#68707d;margin:22px 0 8px}}
 .cta{{display:inline-flex;padding:14px 22px;border-radius:12px;background:#ff6b2c;color:#fff;text-decoration:none;font-weight:800}}
 .cta.disabled{{background:#cfd4dc;color:#667085}}
 section{{margin:28px 0;background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:25px}}
@@ -549,9 +604,10 @@ footer{{padding:28px 0 40px;color:#68707d;font-size:14px}}
 {f'<span>ASIN: {html.escape(asin)}</span>' if asin else ''}
 <span>Status: {html.escape(availability)}</span>
 </div>
+{price_html}
 <div class="status">{'Check Latest Offer' if active else 'Currently unavailable'}</div>
 {cta}
-<div class="note">Price and availability are confirmed on the retailer site.</div>
+<div class="note">Displayed price is based on the latest verified data available to Coupon World. Final price and availability are confirmed on the retailer site.</div>
 </div>
 </article>
 <section><h2>About this product</h2><p>{html.escape(description)}</p></section>
