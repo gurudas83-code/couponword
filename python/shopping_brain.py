@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """
 Coupon World AI OS
-Shopping Brain v0.2
+Shopping Brain v0.3
 
 Purpose:
 - Accept a shopping query
 - Parse shopping intent
 - Load products from coupons.json
 - Filter matching products
-- Score and rank matching products
+- Score and rank products
+- Explain why each product is recommended
 """
 
 from __future__ import annotations
@@ -18,6 +19,7 @@ from pathlib import Path
 
 from intent_engine import parse_query
 from product_scoring import score_product
+from recommendation_engine import explain_product
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -80,6 +82,8 @@ def match_products(products: list[dict], intent: dict) -> list[dict]:
 
         ranked_product = product.copy()
         ranked_product["score"] = score_product(ranked_product, intent)
+        ranked_product["reasons"] = explain_product(ranked_product, intent)
+
         matches.append(ranked_product)
 
     matches.sort(
@@ -120,22 +124,24 @@ def main() -> int:
         print("No matching products found.")
         return 0
 
-    print("-" * 64)
-
     for position, product in enumerate(matches[:10], start=1):
+        print("\n" + "-" * 64)
+        print(f"RECOMMENDATION #{position}")
+        print("-" * 64)
+
+        print("Title :", product.get("title") or "Untitled product")
         print(
-            f"{position}.",
-            "Score:",
-            product.get("score", 0),
-            "|",
+            "ID    :",
             product.get("id") or product.get("sl_no") or "No ID",
-            "|",
-            product.get("title") or "Untitled product",
-            "|",
-            product.get("brand") or "Unknown brand",
-            "|",
-            product.get("price") or "Price unavailable",
         )
+        print("Brand :", product.get("brand") or "Unknown brand")
+        print("Price :", product.get("price") or "Price unavailable")
+        print("Score :", product.get("score", 0))
+
+        print("Why this product?")
+
+        for reason in product.get("reasons", []):
+            print(" ", reason)
 
     return 0
 
