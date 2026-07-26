@@ -6,3 +6,5 @@ __pycache__/
 
 .integration_backups/
 .price_backups/
+
+price_updates.csv
