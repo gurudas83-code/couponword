@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """
 Coupon World AI OS
-Shopping Brain v0.1
+Shopping Brain v0.2
 
 Purpose:
 - Accept a shopping query
-- Parse intent
-- Load coupons.json
-- Find basic matching products
+- Parse shopping intent
+- Load products from coupons.json
+- Filter matching products
+- Score and rank matching products
 """
 
 from __future__ import annotations
@@ -16,6 +17,7 @@ import json
 from pathlib import Path
 
 from intent_engine import parse_query
+from product_scoring import score_product
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -76,7 +78,14 @@ def match_products(products: list[dict], intent: dict) -> list[dict]:
             if numeric_price > budget_max:
                 continue
 
-        matches.append(product)
+        ranked_product = product.copy()
+        ranked_product["score"] = score_product(ranked_product, intent)
+        matches.append(ranked_product)
+
+    matches.sort(
+        key=lambda product: product.get("score", 0),
+        reverse=True,
+    )
 
     return matches
 
@@ -98,19 +107,30 @@ def main() -> int:
 
     print("Intent          :", intent.get("intent"))
     print("Category        :", intent.get("category"))
+    print("Budget minimum  :", intent.get("budget_min"))
     print("Budget maximum  :", intent.get("budget_max"))
+    print("Features        :", ", ".join(intent.get("features", [])) or "Any")
     print("Brands          :", ", ".join(intent.get("brands", [])) or "Any")
 
     print("-" * 64)
     print("Products loaded :", len(products))
     print("Matches found   :", len(matches))
 
-    for product in matches[:10]:
+    if not matches:
+        print("No matching products found.")
+        return 0
+
+    print("-" * 64)
+
+    for position, product in enumerate(matches[:10], start=1):
         print(
-            "MATCH |",
-            product.get("id"),
+            f"{position}.",
+            "Score:",
+            product.get("score", 0),
             "|",
-            product.get("title"),
+            product.get("id") or product.get("sl_no") or "No ID",
+            "|",
+            product.get("title") or "Untitled product",
             "|",
             product.get("brand") or "Unknown brand",
             "|",
