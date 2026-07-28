@@ -1,0 +1,6774 @@
+==================== python\amazon_data_provider.py ====================
+#!/usr/bin/env python3
+"""
+Coupon World AI OS
+Amazon Data Provider v0.1
+
+Purpose:
+- Keep Amazon data-source logic separate from product_pipeline.py
+- Support safe manual metadata today
+- Provide a clean integration point for Creators API / PA API later
+
+This module never fabricates price, image, rating, reviews, stock,
+discount, or availability.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Protocol
+
+
+@dataclass(slots=True)
+class AmazonProductData:
+    asin: str
+    title: str = ""
+    brand: str = ""
+    category: str = ""
+    image: str = ""
+    price: str = ""
+    mrp: str = ""
+    discount: str = ""
+    source: str = "manual"
+
+
+class AmazonDataProvider(Protocol):
+    name: str
+    api_available: bool
+
+    def get_product(
+        self,
+        asin: str,
+        *,
+        title: str = "",
+        brand: str = "",
+        category: str = "",
+    ) -> AmazonProductData:
+        ...
+
+
+class ManualAmazonProvider:
+    """Uses only verified values supplied by the operator."""
+
+    name = "manual"
+    api_available = False
+
+    def get_product(
+        self,
+        asin: str,
+        *,
+        title: str = "",
+        brand: str = "",
+        category: str = "",
+    ) -> AmazonProductData:
+        return AmazonProductData(
+            asin=asin,
+            title=title.strip(),
+            brand=brand.strip(),
+            category=category.strip(),
+            source=self.name,
+        )
+
+
+class UnavailableAmazonApiProvider:
+    """Placeholder until Creators API / PA API access is approved."""
+
+    name = "amazon-api"
+    api_available = False
+
+    def get_product(
+        self,
+        asin: str,
+        *,
+        title: str = "",
+        brand: str = "",
+        category: str = "",
+    ) -> AmazonProductData:
+        raise RuntimeError(
+            "Amazon API access is not available yet. "
+            "Use ManualAmazonProvider until Creators API / PA API access is approved."
+        )
+
+
+def get_default_provider() -> AmazonDataProvider:
+    return ManualAmazonProvider()
+
+
+if __name__ == "__main__":
+    provider = get_default_provider()
+    sample = provider.get_product(
+        "B0FMDL81GS",
+        title="OnePlus Nord Buds 3r TWS Earbuds",
+        brand="OnePlus",
+        category="Electronics",
+    )
+
+    print(f"ASIN          : {sample.asin}")
+    print(f"Provider      : {provider.name}")
+    print(f"API available : {'yes' if provider.api_available else 'no'}")
+    print("Safe fallback : yes")
+
+==================== python\amazon_catalog_sync.py ====================
+#!/usr/bin/env python3
+"""
+Coupon World AI OS
+Amazon Catalog Sync v0.1
+
+Dry-run by default.
+Today it exits safely because the configured provider has no API access.
+Later a CreatorsApiProvider can supply image, price, MRP and availability,
+and this same command can run on a schedule.
+"""
+
+import argparse
+import json
+import shutil
+from datetime import datetime, timezone
+from pathlib import Path
+
+from amazon_data_provider import get_default_provider
+
+ROOT = Path(__file__).resolve().parent.parent
+DB = ROOT / "coupons.json"
+BACKUPS = ROOT / "backups"
+
+
+def load_products():
+    data = json.loads(DB.read_text(encoding="utf-8"))
+    if not isinstance(data, list):
+        raise ValueError("coupons.json must contain a list")
+    return data
+
+
+def backup():
+    BACKUPS.mkdir(parents=True, exist_ok=True)
+    p = BACKUPS / f"coupons-before-amazon-sync-{datetime.now().strftime('%Y%m%d-%H%M%S')}.json"
+    shutil.copy2(DB, p)
+    return p
+
+
+def save(products):
+    tmp = DB.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(products, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    tmp.replace(DB)
+
+
+def calculate(price, mrp):
+    if price in (None, "") or mrp in (None, ""):
+        return None, None
+    price = float(price)
+    mrp = float(mrp)
+    if price <= 0 or mrp < price:
+        return None, None
+    saving = mrp - price
+    saving = int(saving) if saving.is_integer() else round(saving, 2)
+    discount = round((saving / mrp) * 100)
+    return saving, f"{discount}% OFF" if discount else None
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--write", action="store_true")
+    parser.add_argument("--limit", type=int, default=0)
+    args = parser.parse_args()
+
+    provider = get_default_provider()
+    products = load_products()
+
+    print("=" * 64)
+    print("AMAZON CATALOG SYNC")
+    print("=" * 64)
+    print("Provider      :", getattr(provider, "name", "unknown"))
+    print("API available :", "YES" if getattr(provider, "api_available", False) else "NO")
+
+    if not getattr(provider, "api_available", False):
+        print("Database      : NOT CHANGED")
+        print("Status        : Ready for future Creators API connection")
+        return 0
+
+    selected = products[:args.limit] if args.limit else products
+    changes = []
+
+    for index, product in enumerate(selected):
+        asin = str(product.get("asin", "")).strip().upper()
+        if not asin:
+            continue
+
+        live = provider.get_product(
+            asin,
+            title=str(product.get("title", "") or ""),
+            brand=str(product.get("brand", "") or ""),
+            category=str(product.get("category", "") or ""),
+        )
+
+        proposed = dict(product)
+        changed = []
+
+        for field in ("title", "brand", "category", "image"):
+            value = getattr(live, field, "")
+            if value and proposed.get(field) != value:
+                proposed[field] = value
+                changed.append(field)
+
+        availability = str(getattr(live, "availability", "") or "").lower()
+
+        if availability in {"available", "in_stock", "instock"}:
+            for field, value in (("availability", "available"), ("active", True)):
+                if proposed.get(field) != value:
+                    proposed[field] = value
+                    changed.append(field)
+
+            for field in ("price", "mrp"):
+                value = getattr(live, field, None)
+                if value not in (None, "") and proposed.get(field) != value:
+                    proposed[field] = value
+                    changed.append(field)
+
+            saving, discount = calculate(proposed.get("price"), proposed.get("mrp"))
+            if proposed.get("save") != saving:
+                proposed["save"] = saving
+                changed.append("save")
+            if proposed.get("discount") != discount:
+                proposed["discount"] = discount
+                changed.append("discount")
+
+        elif availability in {"unavailable", "out_of_stock", "outofstock"}:
+            for field, value in (("availability", "unavailable"), ("active", False)):
+                if proposed.get(field) != value:
+                    proposed[field] = value
+                    changed.append(field)
+            for field in ("price", "mrp", "save", "discount"):
+                if proposed.get(field) is not None:
+                    proposed[field] = None
+                    changed.append(field)
+
+        if changed:
+            proposed["amazon_checked_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+            changes.append((index, proposed, changed))
+
+    print("Products checked :", len(selected))
+    print("Products changed :", len(changes))
+    print("Write mode       :", "YES" if args.write else "NO")
+
+    for _, product, fields in changes:
+        print("UPDATE |", product.get("asin"), "|", ", ".join(fields))
+
+    if not args.write:
+        print("DRY RUN: coupons.json was not changed.")
+        return 0
+
+    if not changes:
+        print("No verified changes available.")
+        return 0
+
+    b = backup()
+    for index, proposed, _ in changes:
+        products[index] = proposed
+    save(products)
+
+    print("SYNC COMPLETE")
+    print("Backup created:", b.relative_to(ROOT))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+==================== python\product_source_adapter.py ====================
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import csv
+from pathlib import Path
+from urllib.parse import parse_qs, urlencode, urlparse, urlunparse
+
+AFFILIATE_TAG = "guru0906-21"
+
+OUTPUT_FIELDS = [
+    "title",
+    "category",
+    "link",
+    "store",
+    "discount",
+    "code",
+    "expiry",
+    "badge",
+    "price",
+    "mrp",
+    "save",
+    "priceText",
+    "linkType",
+    "asin",
+    "image",
+    "description",
+]
+
+
+def clean(value: object) -> str:
+    return str(value or "").strip()
+
+
+def add_affiliate_tag(url: str) -> str:
+    url = clean(url)
+
+    if not url:
+        return ""
+
+    parsed = urlparse(url)
+    host = (parsed.hostname or "").lower()
+
+    if host not in {
+        "amazon.in",
+        "www.amazon.in",
+        "amzn.in",
+        "www.amzn.in",
+    }:
+        return url
+
+    query = parse_qs(parsed.query, keep_blank_values=True)
+    query["tag"] = [AFFILIATE_TAG]
+
+    return urlunparse(
+        parsed._replace(
+            query=urlencode(query, doseq=True)
+        )
+    )
+
+
+def normalize_price(value: object) -> str:
+    text = clean(value)
+
+    if not text:
+        return ""
+
+    text = (
+        text.replace("₹", "")
+        .replace(",", "")
+        .strip()
+    )
+
+    try:
+        number = float(text)
+    except ValueError:
+        return ""
+
+    if number <= 0:
+        return ""
+
+    return str(int(number)) if number.is_integer() else str(number)
+
+
+def detect_link_type(url: str) -> str:
+    lowered = clean(url).lower()
+
+    if any(token in lowered for token in ("/dp/", "/gp/product/", "amzn.in/d/")):
+        return "product"
+
+    if "/s?" in lowered or "?k=" in lowered:
+        return "search"
+
+    return ""
+
+
+def normalize_row(row: dict[str, str]) -> dict[str, str]:
+    title = clean(
+        row.get("title")
+        or row.get("product_name")
+        or row.get("name")
+    )
+
+    category = clean(
+        row.get("category")
+        or row.get("product_category")
+    )
+
+    link = add_affiliate_tag(
+        row.get("link")
+        or row.get("url")
+        or row.get("product_url")
+        or row.get("affiliate_url")
+        or ""
+    )
+
+    price = normalize_price(
+        row.get("price")
+        or row.get("current_price")
+        or row.get("sale_price")
+    )
+
+    mrp = normalize_price(
+        row.get("mrp")
+        or row.get("original_price")
+        or row.get("list_price")
+    )
+
+    return {
+        "title": title,
+        "category": category,
+        "link": link,
+        "store": clean(row.get("store")) or "Online Store",
+        "discount": clean(row.get("discount")) or "Check Deal",
+        "code": clean(row.get("code")) or "No code",
+        "expiry": clean(row.get("expiry")),
+        "badge": clean(row.get("badge")),
+        "price": price,
+        "mrp": mrp,
+        "save": normalize_price(row.get("save")),
+        "priceText": clean(row.get("priceText")),
+        "linkType": clean(row.get("linkType")) or detect_link_type(link),
+        "asin": clean(row.get("asin")).upper(),
+        "image": clean(
+            row.get("image")
+            or row.get("image_url")
+        ),
+        "description": clean(row.get("description")),
+    }
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Convert an approved product feed to Coupon World CSV format"
+    )
+
+    parser.add_argument("input_csv")
+    parser.add_argument("output_csv")
+    args = parser.parse_args()
+
+    input_path = Path(args.input_csv)
+    output_path = Path(args.output_csv)
+
+    if not input_path.exists():
+        print(f"FAIL: Input file not found: {input_path}")
+        return 1
+
+    with input_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+
+        if not reader.fieldnames:
+            print("FAIL: Input CSV header missing")
+            return 1
+
+        rows = [
+            normalize_row(row)
+            for row in reader
+        ]
+
+    valid = [
+        row
+        for row in rows
+        if row["title"] and row["category"] and row["link"]
+    ]
+
+    rejected = len(rows) - len(valid)
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with output_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=OUTPUT_FIELDS,
+        )
+
+        writer.writeheader()
+        writer.writerows(valid)
+
+    print("=" * 68)
+    print("COUPON WORLD PRODUCT SOURCE ADAPTER")
+    print("=" * 68)
+    print("Input rows     :", len(rows))
+    print("Accepted rows  :", len(valid))
+    print("Rejected rows  :", rejected)
+    print("Output file    :", output_path)
+    print("Database change: NO")
+    print("ADAPTER STATUS : PASS")
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+==================== python\product_pipeline.py ====================
+#!/usr/bin/env python3
+"""Coupon World AI OS - Product Pipeline v0.3 with Amazon data provider."""
+
+import argparse
+import re
+from typing import Any
+from urllib.parse import urlparse
+
+from amazon_data_provider import get_default_provider
+from product_engine import (
+    COUPONS_FILE, clean_text, create_backup, detect_brand,
+    generate_description, load_json, save_json,
+)
+
+AFFILIATE_TAG = "guru0906-21"
+SUPPORTED_HOSTS = {"amazon.in", "www.amazon.in"}
+ASIN_PATTERNS = (
+    re.compile(r"/dp/([A-Z0-9]{10})(?:[/?]|$)", re.I),
+    re.compile(r"/gp/product/([A-Z0-9]{10})(?:[/?]|$)", re.I),
+    re.compile(r"/gp/aw/d/([A-Z0-9]{10})(?:[/?]|$)", re.I),
+)
+
+
+def parse_arguments() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Safely import one Amazon India product.")
+    parser.add_argument("url", nargs="?", default="", help="Full Amazon India product URL")
+    parser.add_argument("--title", default="", help="Verified product title; required with --write")
+    parser.add_argument("--category", default="", help="Known product category")
+    parser.add_argument("--write", action="store_true", help="Write product to coupons.json")
+    return parser.parse_args()
+
+
+def validate_url(url: str) -> str:
+    url = clean_text(url)
+    parsed = urlparse(url)
+    if parsed.scheme not in {"http", "https"}:
+        raise ValueError("URL must start with http:// or https://.")
+    host = (parsed.hostname or "").casefold()
+    if host not in SUPPORTED_HOSTS:
+        raise ValueError(f"Unsupported host: {host or 'missing host'}. Use amazon.in.")
+    return url
+
+
+def extract_asin(url: str) -> str:
+    path = urlparse(url).path
+    for pattern in ASIN_PATTERNS:
+        match = pattern.search(path)
+        if match:
+            return match.group(1).upper()
+    raise ValueError("Could not extract a 10-character ASIN from the Amazon URL.")
+
+
+def build_affiliate_url(asin: str) -> str:
+    return f"https://www.amazon.in/dp/{asin}?tag={AFFILIATE_TAG}"
+
+
+def existing_asin(product: dict[str, Any]) -> str:
+    asin = clean_text(product.get("asin")).upper()
+    if re.fullmatch(r"[A-Z0-9]{10}", asin):
+        return asin
+    link = clean_text(product.get("link"))
+    if link:
+        try:
+            return extract_asin(link)
+        except ValueError:
+            pass
+    return ""
+
+
+def find_duplicate(products: list[dict[str, Any]], asin: str) -> dict[str, Any] | None:
+    for product in products:
+        if existing_asin(product) == asin:
+            return product
+    return None
+
+
+def next_product_id(products: list[dict[str, Any]]) -> int:
+    ids = []
+    for product in products:
+        value = product.get("id")
+        if value is None:
+            value = product.get("sl_no")
+        try:
+            ids.append(int(value))
+        except (TypeError, ValueError):
+            pass
+    return max(ids, default=0) + 1
+
+
+def build_record(products, asin, affiliate_url, title, category):
+    provider = get_default_provider()
+    data = provider.get_product(
+        asin,
+        title=clean_text(title),
+        category=clean_text(category),
+    )
+
+    brand = clean_text(data.brand) or detect_brand(data.title)
+
+    product = {
+        "id": next_product_id(products),
+        "asin": data.asin,
+        "store": "Amazon IN",
+        "title": clean_text(data.title),
+        "brand": brand,
+        "category": clean_text(data.category),
+        "price": clean_text(data.price),
+        "mrp": clean_text(data.mrp),
+        "save": "",
+        "discount": clean_text(data.discount),
+        "image": clean_text(data.image),
+        "link": affiliate_url,
+        "description": "",
+        "data_source": data.source,
+    }
+
+    if product["title"]:
+        product["description"] = generate_description(product, brand)
+
+    return product
+
+
+def print_preview(product):
+    print("\n" + "=" * 60)
+    print("COUPON WORLD PRODUCT PIPELINE - PREVIEW")
+    print("=" * 60)
+    print(f"ID            : {product['id']}")
+    print(f"ASIN          : {product['asin']}")
+    print(f"Title         : {product['title'] or '[NOT PROVIDED]'}")
+    print(f"Brand         : {product['brand'] or '[UNKNOWN]'}")
+    print(f"Category      : {product['category'] or '[NOT PROVIDED]'}")
+    print(f"Data source   : {product.get('data_source', 'manual')}")
+    print(f"Affiliate URL : {product['link']}")
+    print(f"Price         : {product['price'] or '[NOT FETCHED]'}")
+    print(f"Image         : {product['image'] or '[NOT FETCHED]'}")
+    print("=" * 60)
+
+
+def collect_interactive_input(args: argparse.Namespace) -> argparse.Namespace:
+    if args.url:
+        return args
+
+    print("\nCOUPON WORLD INTERACTIVE PRODUCT IMPORTER")
+    print("=" * 48)
+    args.url = input("Paste Amazon URL: ").strip()
+    args.title = input("Enter verified product title: ").strip()
+    args.category = input("Enter category (optional): ").strip()
+    return args
+
+
+def confirm_write() -> bool:
+    answer = input("\nWrite this product to coupons.json? [y/N]: ").strip().casefold()
+    return answer in {"y", "yes"}
+
+
+def main() -> int:
+    args = collect_interactive_input(parse_arguments())
+    try:
+        url = validate_url(args.url)
+        asin = extract_asin(url)
+        affiliate_url = build_affiliate_url(asin)
+        products = load_json(COUPONS_FILE)
+
+        duplicate = find_duplicate(products, asin)
+        if duplicate:
+            print("\nDUPLICATE PRODUCT FOUND")
+            print(f"Product ID       : {duplicate.get('id') or duplicate.get('sl_no') or 'UNKNOWN'}")
+            print(f"ASIN             : {asin}")
+            print(f"Title            : {clean_text(duplicate.get('title')) or '[NO TITLE]'}")
+            print("Database changed : NO")
+            return 2
+
+        product = build_record(products, asin, affiliate_url, args.title, args.category)
+        print_preview(product)
+
+        if not args.write:
+            if args.url and product["title"] and confirm_write():
+                args.write = True
+            else:
+                print("\nDRY RUN: coupons.json was not changed.")
+                if not product["title"]:
+                    print("NEXT: provide a verified title before writing.")
+                return 0
+
+        if not product["title"]:
+            raise ValueError("--write requires a real --title; the pipeline will not invent one.")
+
+        backup_file = create_backup(COUPONS_FILE)
+        products.append(product)
+        save_json(COUPONS_FILE, products)
+        print("\nPRODUCT IMPORTED")
+        print(f"Backup created   : {backup_file.relative_to(COUPONS_FILE.parent)}")
+        print(f"Products after   : {len(products)}")
+        print(f"New product ID   : {product['id']}")
+        print("Database changed : YES")
+        return 0
+    except (FileNotFoundError, ValueError) as error:
+        print(f"\nERROR: {error}")
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+==================== python\product_identity_engine.py ====================
+#!/usr/bin/env python3
+"""
+Coupon World Product Intelligence Engine
+Module 1: Product Identity Engine
+
+Purpose:
+- Read products from coupons.json
+- Establish a reliable identity record for each product
+- Normalize categories
+- Extract safe identity signals from existing data
+- Never fabricate missing product information
+- Write results separately from the main product database
+
+Default mode: DRY RUN
+Write mode  : --write
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import unicodedata
+import shutil
+import sys
+from collections import Counter
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+from urllib.parse import parse_qs, urlparse
+
+
+ROOT = Path(__file__).resolve().parent.parent
+SOURCE_FILE = ROOT / "coupons.json"
+OUTPUT_DIR = ROOT / "data" / "intelligence"
+OUTPUT_FILE = OUTPUT_DIR / "product_identity.json"
+BACKUP_DIR = ROOT / ".identity_backups"
+
+
+ASIN_PATTERN = re.compile(r"\b(B0[A-Z0-9]{8}|[A-Z0-9]{10})\b", re.IGNORECASE)
+YEAR_PATTERN = re.compile(r"\b(20(?:1[5-9]|2[0-9]))\b")
+RAM_PATTERN = re.compile(r"\b(\d{1,3})\s*GB\s*RAM\b", re.IGNORECASE)
+STORAGE_PATTERN = re.compile(
+    r"\b(\d{1,4})\s*(GB|TB)\s*(?:storage|ssd|rom)?\b",
+    re.IGNORECASE,
+)
+
+KNOWN_BRANDS = {
+    "amazon basics": "Amazon Basics",
+    "american tourister": "American Tourister",
+    "apple": "Apple",
+    "asus": "ASUS",
+    "bajaj": "Bajaj",
+    "bausch lomb": "Bausch + Lomb",
+    "boat": "boAt",
+    "boult": "Boult",
+    "campus": "Campus",
+    "cello": "Cello",
+    "dell": "Dell",
+    "drivanto": "Drivanto",
+    "ecovacs": "ECOVACS",
+    "fire-boltt": "Fire-Boltt",
+    "fire boltt": "Fire-Boltt",
+    "gesto": "Gesto",
+    "hauser": "Hauser",
+    "hebezon": "Hebezon",
+    "homestrap": "HomeStrap",
+    "hp": "HP",
+    "jbl": "JBL",
+    "jiada": "Jiada",
+    "kindle": "Kindle",
+    "kore": "Kore",
+    "lakme": "Lakmé",
+    "levi's": "Levi's",
+    "levis": "Levi's",
+    "logitech": "Logitech",
+    "mamaearth": "Mamaearth",
+    "mi": "Mi",
+    "milton": "Milton",
+    "noise": "Noise",
+    "nothing": "Nothing",
+    "oneplus": "OnePlus",
+    "philips": "Philips",
+    "popsugar": "Popsugar",
+    "prestige": "Prestige",
+    "puma": "Puma",
+    "realme": "realme",
+    "redmi": "Redmi",
+    "samsung": "Samsung",
+    "sony": "Sony",
+    "stempedia": "STEMpedia",
+    "strauss": "Strauss",
+    "tekcool": "Tekcool",
+    "titan": "Titan",
+    "typecase": "Typecase",
+    "ugaoo": "Ugaoo",
+    "wembley": "Wembley",
+    "wildcraft": "Wildcraft",
+    "yamaha": "Yamaha",
+}
+
+CATEGORY_RULES = {
+    "mobile": "Mobiles",
+    "mobiles": "Mobiles",
+    "smartphone": "Mobiles",
+    "smartphones": "Mobiles",
+    "cell phones & accessories": "Mobiles",
+    "electronics": "Electronics",
+    "prime deal - electronics": "Electronics",
+    "laptop": "Computers & Laptops",
+    "laptops": "Computers & Laptops",
+    "computer": "Computers & Laptops",
+    "computers": "Computers & Laptops",
+    "audio": "Audio",
+    "headphones": "Audio",
+    "earbuds": "Audio",
+    "speakers": "Audio",
+    "fashion": "Fashion",
+    "clothing": "Fashion",
+    "footwear": "Fashion",
+    "beauty": "Beauty & Personal Care",
+    "health & personal care": "Beauty & Personal Care",
+    "home": "Home & Kitchen",
+    "home & kitchen": "Home & Kitchen",
+    "home improvement": "Home & Kitchen",
+    "tools & hardware": "Tools & Hardware",
+    "fitness": "Fitness",
+    "sports": "Fitness",
+    "toys": "Toys & Stationery",
+    "prime deal - toys & stationery": "Toys & Stationery",
+    "musical instruments": "Musical Instruments",
+    "grocery": "Grocery",
+    "appliances": "Appliances",
+    "offers": "Offers",
+}
+
+SUBCATEGORY_KEYWORDS = (
+    ("smartphone", ("smartphone", "iphone", "galaxy m", "redmi note", "nothing phone", "oneplus nord")),
+    ("earbuds", ("earbuds", "airdopes", "buds", "tws")),
+    ("headphones", ("headphone", "headset", "rockerz")),
+    ("bluetooth speaker", ("bluetooth speaker", "speaker")),
+    ("smartwatch", ("smartwatch", "smart watch", "colorfit")),
+    ("laptop", ("laptop", "inspiron", "vivobook")),
+    ("keyboard and mouse", ("keyboard", "mouse combo")),
+    ("power bank", ("power bank", "powerbank")),
+    ("microwave oven", ("microwave",)),
+    ("induction cooktop", ("induction cooktop",)),
+    ("water bottle", ("water bottle", "thermosteel", "bottle set")),
+    ("trimmer", ("trimmer",)),
+    ("running shoes", ("running shoes", "sneakers", "footwear")),
+    ("t-shirt", ("t-shirt", "t shirt")),
+    ("jeans", ("jeans",)),
+    ("backpack", ("backpack",)),
+    ("trolley bag", ("trolley", "luggage")),
+    ("yoga mat", ("yoga mat",)),
+    ("dumbbells", ("dumbbell",)),
+    ("pull-up bar", ("pull-up bar", "pull up bar")),
+    ("telescope", ("telescope",)),
+    ("stationery", ("stationery", "gel pen", "notebook")),
+    ("toy", ("toy", "hover football", "gesture control car")),
+    ("plant", ("plant",)),
+    ("ceiling fan", ("ceiling fan",)),
+    ("air cooler", ("air cooler",)),
+    ("gaming accessory", ("gaming",)),
+)
+
+COLOR_WORDS = (
+    "black",
+    "white",
+    "blue",
+    "red",
+    "green",
+    "grey",
+    "gray",
+    "silver",
+    "gold",
+    "pink",
+    "purple",
+    "orange",
+    "yellow",
+    "velvet black",
+    "glacier blue",
+    "hawaiian blue",
+)
+
+
+def clean_text(value: Any) -> str:
+    if value is None:
+        return ""
+    return " ".join(str(value).strip().split())
+
+
+def load_products() -> list[dict[str, Any]]:
+    if not SOURCE_FILE.exists():
+        raise FileNotFoundError(f"Source file not found: {SOURCE_FILE}")
+
+    data = json.loads(SOURCE_FILE.read_text(encoding="utf-8"))
+
+    if isinstance(data, list):
+        products = data
+    elif isinstance(data, dict) and isinstance(data.get("products"), list):
+        products = data["products"]
+    else:
+        raise ValueError(
+            "coupons.json must contain a product list or a {'products': [...]} object."
+        )
+
+    return [item for item in products if isinstance(item, dict)]
+
+
+def extract_asin(product: dict[str, Any]) -> tuple[str | None, list[str]]:
+    evidence: list[str] = []
+
+    existing = clean_text(product.get("asin")).upper()
+    if ASIN_PATTERN.fullmatch(existing):
+        evidence.append("existing asin field")
+        return existing, evidence
+
+    link = clean_text(product.get("link"))
+    if link:
+        parsed = urlparse(link)
+
+        query_asin = parse_qs(parsed.query).get("asin", [])
+        if query_asin:
+            candidate = clean_text(query_asin[0]).upper()
+            if ASIN_PATTERN.fullmatch(candidate):
+                evidence.append("asin query parameter")
+                return candidate, evidence
+
+        path_patterns = (
+            r"/dp/([A-Z0-9]{10})(?:[/?]|$)",
+            r"/gp/product/([A-Z0-9]{10})(?:[/?]|$)",
+            r"/product/([A-Z0-9]{10})(?:[/?]|$)",
+        )
+
+        for pattern in path_patterns:
+            match = re.search(pattern, parsed.path, re.IGNORECASE)
+            if match:
+                evidence.append("retailer URL path")
+                return match.group(1).upper(), evidence
+
+    title = clean_text(product.get("title"))
+    match = ASIN_PATTERN.search(title)
+    if match and match.group(1).upper().startswith("B0"):
+        evidence.append("title identifier")
+        return match.group(1).upper(), evidence
+
+    return None, evidence
+
+
+def detect_brand(product: dict[str, Any]) -> tuple[str | None, list[str]]:
+    evidence: list[str] = []
+
+    existing = clean_text(product.get("brand"))
+    if existing:
+        evidence.append("existing brand field")
+        return existing, evidence
+
+    title = clean_text(product.get("title"))
+    normalized_title = title.lower()
+
+    for key in sorted(KNOWN_BRANDS, key=len, reverse=True):
+        if re.search(rf"(?<![a-z0-9]){re.escape(key)}(?![a-z0-9])", normalized_title):
+            evidence.append("brand matched from title")
+            return KNOWN_BRANDS[key], evidence
+
+    return None, evidence
+
+
+def normalize_category(product: dict[str, Any]) -> tuple[str, list[str]]:
+    evidence: list[str] = []
+
+    raw_category = clean_text(product.get("category"))
+    key = raw_category.lower()
+
+    if key in CATEGORY_RULES:
+        evidence.append("existing category normalized")
+        return CATEGORY_RULES[key], evidence
+
+    title = clean_text(product.get("title")).lower()
+
+    category_keywords = (
+        ("Mobiles", ("smartphone", "iphone", "mobile phone", "galaxy m", "redmi note", "nothing phone")),
+        ("Computers & Laptops", ("laptop", "keyboard", "mouse", "ssd")),
+        ("Audio", ("earbuds", "headphone", "headset", "speaker", "airdopes", "buds")),
+        ("Electronics", ("smartwatch", "power bank", "fire tv", "kindle")),
+        ("Fashion", ("t-shirt", "jeans", "shoes", "sneakers", "watch", "backpack", "trolley")),
+        ("Beauty & Personal Care", ("makeup", "skincare", "trimmer", "contact lens")),
+        ("Home & Kitchen", ("bottle", "storage organizer", "plant", "chair bush")),
+        ("Appliances", ("microwave", "induction", "fan", "air cooler", "washing machine")),
+        ("Fitness", ("dumbbell", "yoga mat", "pull-up bar", "pull up bar")),
+        ("Toys & Stationery", ("toy", "stationery", "gel pen", "construction kit")),
+        ("Musical Instruments", ("keyboard 37 keys", "musical keyboard")),
+        ("Tools & Hardware", ("electric drill", "angle grinder", "tools")),
+    )
+
+    for category, keywords in category_keywords:
+        if any(keyword in title for keyword in keywords):
+            evidence.append("category inferred from title keywords")
+            return category, evidence
+
+    if raw_category:
+        evidence.append("existing category retained without normalization")
+        return raw_category, evidence
+
+    return "Unclassified", evidence
+
+
+def detect_subcategory(title: str) -> tuple[str | None, list[str]]:
+    normalized = title.lower()
+
+    for subcategory, keywords in SUBCATEGORY_KEYWORDS:
+        if any(keyword in normalized for keyword in keywords):
+            return subcategory, ["subcategory inferred from title keywords"]
+
+    return None, []
+
+
+def extract_launch_year(product: dict[str, Any]) -> tuple[int | None, list[str]]:
+    existing = product.get("launch_year")
+
+    if isinstance(existing, int) and 2015 <= existing <= 2029:
+        return existing, ["existing launch_year field"]
+
+    title = clean_text(product.get("title"))
+    matches = YEAR_PATTERN.findall(title)
+
+    if matches:
+        return int(matches[-1]), ["launch year found in title"]
+
+    return None, []
+
+
+def extract_variant(title: str) -> tuple[dict[str, Any], list[str]]:
+    variant: dict[str, Any] = {
+        "ram": None,
+        "storage": None,
+        "color": None,
+    }
+    evidence: list[str] = []
+
+    ram_match = RAM_PATTERN.search(title)
+    if ram_match:
+        variant["ram"] = f"{ram_match.group(1)} GB"
+        evidence.append("RAM extracted from title")
+
+    storage_candidates = STORAGE_PATTERN.findall(title)
+    if storage_candidates:
+        values = [
+            f"{amount.upper()} {unit.upper()}"
+            for amount, unit in storage_candidates
+        ]
+
+        ram_value = variant["ram"]
+        for value in values:
+            if ram_value and value == ram_value:
+                continue
+            variant["storage"] = value
+            evidence.append("storage extracted from title")
+            break
+
+    normalized_title = title.lower()
+    for color in sorted(COLOR_WORDS, key=len, reverse=True):
+        if re.search(rf"\b{re.escape(color)}\b", normalized_title):
+            variant["color"] = color.title()
+            evidence.append("color extracted from title")
+            break
+
+    return variant, evidence
+
+
+def detect_model(
+    product: dict[str, Any],
+    brand: str | None,
+) -> tuple[str | None, list[str]]:
+    existing = clean_text(product.get("model"))
+
+    if existing:
+        return existing, ["existing model field"]
+
+    # Deliberately conservative:
+    # A title is not automatically treated as a model number.
+    return None, []
+
+
+def identity_confidence(
+    asin: str | None,
+    brand: str | None,
+    category: str,
+    subcategory: str | None,
+    model: str | None,
+    title: str,
+) -> tuple[int, str]:
+    score = 0
+
+    if title:
+        score += 20
+    if asin:
+        score += 25
+    if brand:
+        score += 20
+    if category and category != "Unclassified":
+        score += 20
+    if subcategory:
+        score += 10
+    if model:
+        score += 5
+
+    score = min(score, 100)
+
+    if score >= 85:
+        level = "high"
+    elif score >= 60:
+        level = "medium"
+    else:
+        level = "low"
+
+    return score, level
+def slugify(text: str) -> str:
+    text = unicodedata.normalize("NFKD", text)
+    text = text.encode("ascii", "ignore").decode("ascii")
+    text = text.lower()
+    text = re.sub(r"[^a-z0-9]+", "-", text)
+    return text.strip("-")
+
+
+def canonical_product_id(
+    brand: str | None,
+    title: str,
+    model: str | None,
+    variant: dict[str, Any],
+) -> str:
+    base_text = model or title
+
+    if brand:
+        base_text = re.sub(
+            rf"(?<![a-z0-9]){re.escape(brand)}(?![a-z0-9])",
+            " ",
+            base_text,
+            flags=re.IGNORECASE,
+        )
+
+    for value in (variant.get("storage"), variant.get("color")):
+        if value:
+            base_text = re.sub(
+                rf"(?<![a-z0-9]){re.escape(str(value))}(?![a-z0-9])",
+                " ",
+                base_text,
+                flags=re.IGNORECASE,
+            )
+
+    parts = []
+
+    if brand:
+        parts.append(brand)
+
+    parts.append(base_text)
+
+    if variant.get("storage"):
+        parts.append(str(variant["storage"]))
+
+    if variant.get("color"):
+        parts.append(str(variant["color"]))
+
+    return slugify(" ".join(parts))
+    
+
+def product_identifier(product: dict[str, Any], index: int) -> str:
+    for field in ("id", "sl_no", "asin"):
+        value = clean_text(product.get(field))
+        if value:
+            return value
+
+    return str(index)
+
+
+def build_identity(product: dict[str, Any], index: int) -> dict[str, Any]:
+    title = clean_text(product.get("title"))
+
+    asin, asin_evidence = extract_asin(product)
+    brand, brand_evidence = detect_brand(product)
+    category, category_evidence = normalize_category(product)
+    subcategory, subcategory_evidence = detect_subcategory(title)
+    launch_year, year_evidence = extract_launch_year(product)
+    variant, variant_evidence = extract_variant(title)
+    model, model_evidence = detect_model(product, brand)
+
+    warnings: list[str] = []
+
+    if not title:
+        warnings.append("missing title")
+    if not asin:
+        warnings.append("asin unavailable")
+    if not brand:
+        warnings.append("brand unavailable")
+    if category == "Unclassified":
+        warnings.append("category unclassified")
+    if not subcategory:
+        warnings.append("subcategory unavailable")
+    if not model:
+        warnings.append("model not explicitly available")
+
+    score, level = identity_confidence(
+        asin=asin,
+        brand=brand,
+        category=category,
+        subcategory=subcategory,
+        model=model,
+        title=title,
+    )
+
+    source_category = clean_text(product.get("category")) or None
+    source_link = clean_text(product.get("link")) or None
+
+    return {
+        "product_id": product_identifier(product, index),
+                "canonical_id": canonical_product_id(
+            brand=brand,
+            title=title,
+            model=model,
+            variant=variant,
+        ),
+        "source_index": index,
+        "title": title or None,
+        "normalized_title": title.casefold() if title else None,
+        "asin": asin,
+        "brand": brand,
+        "model": model,
+        "category": category,
+        "source_category": source_category,
+        "subcategory": subcategory,
+        "variant": variant,
+        "launch_year": launch_year,
+        "source_link": source_link,
+        "identity_confidence": {
+            "score": score,
+            "level": level,
+        },
+        "evidence": list(
+            dict.fromkeys(
+                asin_evidence
+                + brand_evidence
+                + category_evidence
+                + subcategory_evidence
+                + model_evidence
+                + year_evidence
+                + variant_evidence
+            )
+        ),
+        "warnings": warnings,
+    }
+
+
+def create_payload(identities: list[dict[str, Any]]) -> dict[str, Any]:
+    generated_at = datetime.now(timezone.utc).isoformat()
+
+    confidence_counts = Counter(
+        item["identity_confidence"]["level"] for item in identities
+    )
+    category_counts = Counter(item["category"] for item in identities)
+
+    return {
+        "engine": {
+            "name": "Coupon World Product Identity Engine",
+            "module": 1,
+            "version": "1.0.0",
+            "generated_at": generated_at,
+            "source_file": SOURCE_FILE.name,
+            "fabricated_fields_allowed": False,
+        },
+        "summary": {
+            "total_products": len(identities),
+            "with_asin": sum(bool(item["asin"]) for item in identities),
+            "with_brand": sum(bool(item["brand"]) for item in identities),
+            "with_subcategory": sum(bool(item["subcategory"]) for item in identities),
+            "with_model": sum(bool(item["model"]) for item in identities),
+            "unclassified": sum(
+                item["category"] == "Unclassified" for item in identities
+            ),
+            "confidence": dict(sorted(confidence_counts.items())),
+            "categories": dict(sorted(category_counts.items())),
+        },
+        "products": identities,
+    }
+
+
+def write_output(payload: dict[str, Any]) -> Path | None:
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    backup_path: Path | None = None
+
+    if OUTPUT_FILE.exists():
+        BACKUP_DIR.mkdir(parents=True, exist_ok=True)
+        timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+        backup_path = BACKUP_DIR / f"product_identity-{timestamp}.json"
+        shutil.copy2(OUTPUT_FILE, backup_path)
+
+    temporary_file = OUTPUT_FILE.with_suffix(".json.tmp")
+    temporary_file.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    temporary_file.replace(OUTPUT_FILE)
+
+    return backup_path
+
+
+def print_report(payload: dict[str, Any], write_mode: bool) -> None:
+    summary = payload["summary"]
+
+    print()
+    print("=" * 62)
+    print("COUPON WORLD PRODUCT IDENTITY ENGINE — MODULE 1")
+    print("=" * 62)
+    print(f"Source file          : {SOURCE_FILE.name}")
+    print(f"Products processed   : {summary['total_products']}")
+    print(f"Products with ASIN   : {summary['with_asin']}")
+    print(f"Products with brand  : {summary['with_brand']}")
+    print(f"With subcategory     : {summary['with_subcategory']}")
+    print(f"With explicit model  : {summary['with_model']}")
+    print(f"Unclassified         : {summary['unclassified']}")
+    print(f"Write mode           : {'YES' if write_mode else 'NO — DRY RUN'}")
+    print(f"Output file          : {OUTPUT_FILE.relative_to(ROOT)}")
+    print("-" * 62)
+
+    confidence = summary["confidence"]
+
+    print(
+        "Confidence           : "
+        f"High {confidence.get('high', 0)} | "
+        f"Medium {confidence.get('medium', 0)} | "
+        f"Low {confidence.get('low', 0)}"
+    )
+
+    print("-" * 62)
+    print("CATEGORY DISTRIBUTION")
+
+    for category, count in summary["categories"].items():
+        print(f"  {category:<28} {count}")
+
+    print("=" * 62)
+
+    if not write_mode:
+        print("DRY RUN COMPLETE")
+        print("No files were changed.")
+        print()
+        print("To generate the identity database, run:")
+        print("python python/product_identity_engine.py --write")
+    else:
+        print("PRODUCT IDENTITY DATABASE GENERATED")
+        print(f"Saved to: {OUTPUT_FILE.relative_to(ROOT)}")
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Build the Coupon World product identity database."
+    )
+    parser.add_argument(
+        "--write",
+        action="store_true",
+        help="Write data/intelligence/product_identity.json",
+    )
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+
+    try:
+        products = load_products()
+        identities = [
+            build_identity(product, index)
+            for index, product in enumerate(products, start=1)
+        ]
+        payload = create_payload(identities)
+
+        if args.write:
+            backup_path = write_output(payload)
+            if backup_path:
+                print(
+                    f"Existing identity database backed up to: "
+                    f"{backup_path.relative_to(ROOT)}"
+                )
+
+        print_report(payload, write_mode=args.write)
+        return 0
+
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+==================== python\product_intelligence.py ====================
+#!/usr/bin/env python3
+
+"""
+Coupon World Product Intelligence Engine v2
+
+Purpose:
+- Measure product database health
+- Report field coverage and category distribution
+- Detect duplicate IDs, links, ASINs and titles
+- Identify products needing enrichment
+- Preview cautious brand and description proposals
+
+READ-ONLY:
+- Does not modify coupons.json
+- Does not invent prices, ratings, reviews or availability
+- Does not claim that a product is "best"
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+from collections import Counter
+from pathlib import Path
+from urllib.parse import urlparse
+
+
+ROOT = Path(__file__).resolve().parent.parent
+DB = ROOT / "coupons.json"
+
+
+KNOWN_BRANDS = {
+    "amazon basics": "Amazon Basics",
+    "american tourister": "American Tourister",
+    "apple": "Apple",
+    "asus": "ASUS",
+    "bajaj": "Bajaj",
+    "bausch lomb": "Bausch + Lomb",
+    "boat": "boAt",
+    "boult": "Boult",
+    "campus": "Campus",
+    "cello": "Cello",
+    "dell": "Dell",
+    "encasify": "Encasify",
+    "fire-boltt": "Fire-Boltt",
+    "fire boltt": "Fire-Boltt",
+    "hauser": "Hauser",
+    "homestrap": "HomeStrap",
+    "hp": "HP",
+    "jbl": "JBL",
+    "jiada": "JIADA",
+    "kore": "KORE",
+    "lakme": "Lakmé",
+    "levi": "Levi's",
+    "logitech": "Logitech",
+    "mamaearth": "Mamaearth",
+    "mi": "Mi",
+    "milton": "Milton",
+    "noise": "Noise",
+    "oneplus": "OnePlus",
+    "philips": "Philips",
+    "prestige": "Prestige",
+    "puma": "Puma",
+    "realme": "realme",
+    "redmi": "Redmi",
+    "samsung": "Samsung",
+    "sony": "Sony",
+    "strauss": "Strauss",
+    "teeslix": "TeeSlix",
+    "titan": "Titan",
+    "ugaoo": "Ugaoo",
+    "wildcraft": "Wildcraft",
+    "yamaha": "Yamaha",
+}
+
+
+REQUIRED_FIELDS = (
+    "title",
+    "category",
+    "link",
+)
+
+QUALITY_FIELDS = (
+    "brand",
+    "description",
+    "asin",
+    "image",
+    "price",
+)
+
+
+def clean(value: object) -> str:
+    return re.sub(
+        r"\s+",
+        " ",
+        str(value or ""),
+    ).strip()
+
+
+def normalize_text(value: object) -> str:
+    return re.sub(
+        r"[^a-z0-9]+",
+        " ",
+        clean(value).lower(),
+    ).strip()
+
+
+def product_identity(
+    product: dict,
+    index: int,
+) -> str:
+    return str(
+        product.get("id")
+        or product.get("sl_no")
+        or product.get("asin")
+        or index
+    )
+
+
+def has_value(product: dict, field: str) -> bool:
+    value = product.get(field)
+
+    if field == "price":
+        if value in (None, ""):
+            return False
+
+        try:
+            return float(value) > 0
+        except (TypeError, ValueError):
+            return False
+
+    return clean(value) != ""
+
+
+def detect_brand(title: str) -> tuple[str, str]:
+    """
+    Return:
+        (brand, confidence)
+
+    HIGH:
+        title starts with a known brand
+
+    MEDIUM:
+        brand appears naturally before compatibility wording
+
+    LOW:
+        no safe brand evidence
+    """
+
+    title = clean(title)
+    normalized = normalize_text(title)
+
+    if not normalized:
+        return "", "LOW"
+
+    compatibility_markers = (
+        " for ",
+        " compatible with ",
+        " works with ",
+        " fit for ",
+        " suitable for ",
+    )
+
+    title_lower = f" {title.lower()} "
+
+    earliest_marker = None
+
+    for marker in compatibility_markers:
+        position = title_lower.find(marker)
+
+        if position != -1:
+            if (
+                earliest_marker is None
+                or position < earliest_marker
+            ):
+                earliest_marker = position
+
+    evidence_text = title
+
+    if earliest_marker is not None:
+        evidence_text = title_lower[:earliest_marker].strip()
+
+    normalized_evidence = normalize_text(evidence_text)
+
+    matches: list[tuple[int, str, str]] = []
+
+    for token, brand in KNOWN_BRANDS.items():
+        normalized_token = normalize_text(token)
+
+        if not normalized_token:
+            continue
+
+        if re.search(
+            rf"\b{re.escape(normalized_token)}\b",
+            normalized_evidence,
+        ):
+            matches.append(
+                (
+                    len(normalized_token),
+                    normalized_token,
+                    brand,
+                )
+            )
+
+    if not matches:
+        return "", "LOW"
+
+    matches.sort(reverse=True)
+
+    _, token, brand = matches[0]
+
+    if normalized.startswith(token):
+        return brand, "HIGH"
+
+    return brand, "MEDIUM"
+
+
+def build_description(
+    title: str,
+    category: str,
+    brand: str,
+) -> str:
+    if not title:
+        return ""
+
+    if brand and category:
+        return (
+            f"{title} is listed as a {category.lower()} product "
+            f"from {brand}. Check the retailer page for current "
+            "specifications, price and availability before purchasing."
+        )
+
+    if category:
+        return (
+            f"{title} is listed in the {category} category. "
+            "Check the retailer page for current specifications, "
+            "price and availability before purchasing."
+        )
+
+    return (
+        f"{title}. Check the retailer page for current specifications, "
+        "price and availability before purchasing."
+    )
+
+
+def product_completeness(product: dict) -> int:
+    fields = REQUIRED_FIELDS + QUALITY_FIELDS
+
+    completed = sum(
+        1
+        for field in fields
+        if has_value(product, field)
+    )
+
+    return round(
+        completed / len(fields) * 100
+    )
+
+
+def product_missing_fields(product: dict) -> list[str]:
+    return [
+        field
+        for field in REQUIRED_FIELDS + QUALITY_FIELDS
+        if not has_value(product, field)
+    ]
+
+
+def database_health(products: list[dict]) -> int:
+    if not products:
+        return 0
+
+    scores = [
+        product_completeness(product)
+        for product in products
+    ]
+
+    return round(
+        sum(scores) / len(scores)
+    )
+
+
+def duplicate_values(
+    products: list[dict],
+    field: str,
+    normalize: bool = False,
+) -> dict[str, int]:
+    counter = Counter()
+
+    for product in products:
+        value = product.get(field)
+
+        if value in (None, ""):
+            continue
+
+        key = (
+            normalize_text(value)
+            if normalize
+            else clean(value)
+        )
+
+        if key:
+            counter[key] += 1
+
+    return {
+        value: count
+        for value, count in counter.items()
+        if count > 1
+    }
+
+
+def link_type(product: dict) -> str:
+    explicit = clean(product.get("linkType")).lower()
+
+    if explicit:
+        return explicit
+
+    link = clean(product.get("link"))
+
+    if not link:
+        return "missing"
+
+    parsed = urlparse(link)
+
+    if "/dp/" in parsed.path or "/d/" in parsed.path:
+        return "product"
+
+    if "/s" in parsed.path or "k=" in parsed.query:
+        return "search"
+
+    return "other"
+
+
+def enrichment_score(product: dict) -> int:
+    weights = {
+        "brand": 15,
+        "description": 20,
+        "asin": 15,
+        "image": 25,
+        "price": 25,
+    }
+
+    return sum(
+        weight
+        for field, weight in weights.items()
+        if not has_value(product, field)
+    )
+
+
+def proposal_confidence(
+    product: dict,
+    brand_confidence: str,
+) -> str:
+    evidence = 0
+
+    if has_value(product, "title"):
+        evidence += 1
+
+    if has_value(product, "category"):
+        evidence += 1
+
+    if has_value(product, "asin"):
+        evidence += 1
+
+    if has_value(product, "image"):
+        evidence += 1
+
+    if has_value(product, "price"):
+        evidence += 1
+
+    if brand_confidence == "HIGH":
+        evidence += 2
+    elif brand_confidence == "MEDIUM":
+        evidence += 1
+
+    if evidence >= 5:
+        return "HIGH"
+
+    if evidence >= 3:
+        return "MEDIUM"
+
+    return "LOW"
+
+
+def print_section(title: str) -> None:
+    print()
+    print("=" * 76)
+    print(title)
+    print("=" * 76)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Coupon World read-only product health "
+            "and intelligence dashboard"
+        )
+    )
+
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=10,
+        help="Maximum proposals and priority products to display",
+    )
+
+    args = parser.parse_args()
+
+    try:
+        raw_products = json.loads(
+            DB.read_text(
+                encoding="utf-8"
+            )
+        )
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f"FAIL: {exc}")
+        return 1
+
+    if not isinstance(raw_products, list):
+        print("FAIL: coupons.json must contain a JSON list")
+        return 1
+
+    products = [
+        product
+        for product in raw_products
+        if isinstance(product, dict)
+    ]
+
+    field_coverage = {
+        field: sum(
+            1
+            for product in products
+            if has_value(product, field)
+        )
+        for field in REQUIRED_FIELDS + QUALITY_FIELDS
+    }
+
+    complete_products = [
+        product
+        for product in products
+        if not product_missing_fields(product)
+    ]
+
+    incomplete_products = [
+        product
+        for product in products
+        if product_missing_fields(product)
+    ]
+
+    categories = Counter(
+        clean(product.get("category"))
+        or "[MISSING]"
+        for product in products
+    )
+
+    stores = Counter(
+        clean(product.get("store"))
+        or "[MISSING]"
+        for product in products
+    )
+
+    link_types = Counter(
+        link_type(product)
+        for product in products
+    )
+
+    duplicate_ids = duplicate_values(
+        products,
+        "id",
+    )
+
+    duplicate_links = duplicate_values(
+        products,
+        "link",
+    )
+
+    duplicate_asins = duplicate_values(
+        products,
+        "asin",
+    )
+
+    duplicate_titles = duplicate_values(
+        products,
+        "title",
+        normalize=True,
+    )
+
+    priority_products = sorted(
+        enumerate(
+            products,
+            start=1,
+        ),
+        key=lambda item: (
+            enrichment_score(item[1]),
+            -product_completeness(item[1]),
+        ),
+        reverse=True,
+    )
+
+    proposals = []
+
+    for index, product in enumerate(
+        products,
+        start=1,
+    ):
+        title = clean(product.get("title"))
+        category = clean(product.get("category"))
+        existing_brand = clean(product.get("brand"))
+        existing_description = clean(
+            product.get("description")
+        )
+
+        if existing_brand:
+            proposed_brand = existing_brand
+            brand_confidence = "HIGH"
+        else:
+            proposed_brand, brand_confidence = detect_brand(
+                title
+            )
+
+        proposed_description = (
+            existing_description
+            or build_description(
+                title,
+                category,
+                proposed_brand,
+            )
+        )
+
+        changes = []
+
+        if not existing_brand and proposed_brand:
+            changes.append("brand")
+
+        if (
+            not existing_description
+            and proposed_description
+        ):
+            changes.append("description")
+
+        if not changes:
+            continue
+
+        proposals.append(
+            {
+                "id": product_identity(
+                    product,
+                    index,
+                ),
+                "title": title,
+                "brand": proposed_brand,
+                "brand_confidence": brand_confidence,
+                "description": proposed_description,
+                "changes": changes,
+                "confidence": proposal_confidence(
+                    product,
+                    brand_confidence,
+                ),
+                "missing": product_missing_fields(
+                    product
+                ),
+            }
+        )
+
+    print_section(
+        "COUPON WORLD PRODUCT INTELLIGENCE DASHBOARD v2"
+    )
+
+    print(f"Products                    : {len(products)}")
+    print(f"Complete products           : {len(complete_products)}")
+    print(f"Incomplete products         : {len(incomplete_products)}")
+    print(f"Database health             : {database_health(products)}%")
+    print("Database changed            : NO")
+
+    print_section("FIELD COVERAGE")
+
+    for field in REQUIRED_FIELDS + QUALITY_FIELDS:
+        covered = field_coverage[field]
+
+        percentage = (
+            round(
+                covered / len(products) * 100,
+                1,
+            )
+            if products
+            else 0
+        )
+
+        print(
+            f"{field.title():<28}: "
+            f"{covered:>3}/{len(products)} "
+            f"({percentage:>5.1f}%)"
+        )
+
+    print_section("CATEGORY DISTRIBUTION")
+
+    for category, count in categories.most_common():
+        status = (
+            "OK"
+            if count >= 3
+            else "WEAK"
+        )
+
+        print(
+            f"{count:>3} | {status:<4} | {category}"
+        )
+
+    print_section("STORE DISTRIBUTION")
+
+    for store, count in stores.most_common():
+        print(
+            f"{count:>3} | {store}"
+        )
+
+    print_section("LINK TYPE DISTRIBUTION")
+
+    for name, count in link_types.most_common():
+        print(
+            f"{count:>3} | {name}"
+        )
+
+    print_section("DUPLICATE CHECKS")
+
+    print(
+        "Duplicate IDs              :",
+        len(duplicate_ids),
+    )
+    print(
+        "Duplicate links            :",
+        len(duplicate_links),
+    )
+    print(
+        "Duplicate ASINs            :",
+        len(duplicate_asins),
+    )
+    print(
+        "Duplicate titles           :",
+        len(duplicate_titles),
+    )
+
+    print_section("TOP PRODUCTS NEEDING ENRICHMENT")
+
+    for index, product in priority_products[: args.limit]:
+        missing = product_missing_fields(product)
+
+        print(
+            f"ID {product_identity(product, index):<5} | "
+            f"Score {product_completeness(product):>3}% | "
+            f"Priority {enrichment_score(product):>3} | "
+            f"{clean(product.get('title'))}"
+        )
+
+        print(
+            "Missing:",
+            ", ".join(missing)
+            or "none",
+        )
+
+        print("-" * 76)
+
+    print_section("SAFE INTELLIGENCE PROPOSALS")
+
+    print(
+        "Products with proposals    :",
+        len(proposals),
+    )
+
+    for proposal in proposals[: args.limit]:
+        print(
+            f"ID {proposal['id']} | "
+            f"Confidence {proposal['confidence']} | "
+            f"Changes: {', '.join(proposal['changes'])}"
+        )
+
+        print(
+            "Title       :",
+            proposal["title"],
+        )
+
+        print(
+            "Brand       :",
+            proposal["brand"]
+            or "[NOT VERIFIED]",
+        )
+
+        print(
+            "Brand proof :",
+            proposal["brand_confidence"],
+        )
+
+        print(
+            "Description :",
+            proposal["description"],
+        )
+
+        print(
+            "Still missing:",
+            ", ".join(proposal["missing"])
+            or "none",
+        )
+
+        print("-" * 76)
+
+    print_section("NEXT BEST ACTION")
+
+    missing_counts = {
+        field: (
+            len(products)
+            - field_coverage[field]
+        )
+        for field in QUALITY_FIELDS
+    }
+
+    ordered_actions = sorted(
+        missing_counts.items(),
+        key=lambda item: item[1],
+        reverse=True,
+    )
+
+    for number, (field, count) in enumerate(
+        ordered_actions,
+        start=1,
+    ):
+        print(
+            f"{number}. Improve {field} coverage "
+            f"({count} products missing)"
+        )
+
+    print()
+    print("SAFETY RULES")
+    print("-" * 76)
+    print("No features invented.")
+    print("No prices invented.")
+    print("No ratings or reviews invented.")
+    print("No 'best product' claims generated.")
+    print("No files modified.")
+
+    print()
+    print("PRODUCT INTELLIGENCE STATUS: PASS")
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+==================== python\price_engine.py ====================
+#!/usr/bin/env python3
+"""
+Coupon World AI OS
+Price Engine v0.1
+
+Purpose:
+- Read product price safely
+- Normalize price values
+- Check budget match
+- Calculate discount when MRP is available
+- Return price intelligence
+"""
+
+from __future__ import annotations
+
+import re
+
+
+def normalize_price(value: object) -> float | None:
+    if value in (None, ""):
+        return None
+
+    if isinstance(value, (int, float)):
+        return float(value)
+
+    text = str(value).strip()
+
+    if not text:
+        return None
+
+    text = text.replace(",", "")
+    text = text.replace("₹", "")
+    text = re.sub(r"[^\d.]", "", text)
+
+    if not text:
+        return None
+
+    try:
+        return float(text)
+    except ValueError:
+        return None
+
+
+def calculate_discount(
+    price: float | None,
+    mrp: float | None,
+) -> float | None:
+    if price is None or mrp is None:
+        return None
+
+    if mrp <= 0 or price > mrp:
+        return None
+
+    discount = ((mrp - price) / mrp) * 100
+
+    return round(discount, 2)
+
+
+def check_budget(
+    price: float | None,
+    budget_min: int | None,
+    budget_max: int | None,
+) -> bool | None:
+    if price is None:
+        return None
+
+    if budget_min is not None and price < budget_min:
+        return False
+
+    if budget_max is not None and price > budget_max:
+        return False
+
+    return True
+
+
+def analyze_price(product: dict, intent: dict) -> dict:
+    price = normalize_price(product.get("price"))
+    mrp = normalize_price(product.get("mrp"))
+
+    budget_min = intent.get("budget_min")
+    budget_max = intent.get("budget_max")
+
+    return {
+        "price": price,
+        "mrp": mrp,
+        "discount_percent": calculate_discount(price, mrp),
+        "within_budget": check_budget(
+            price,
+            budget_min,
+            budget_max,
+        ),
+        "price_available": price is not None,
+    }
+
+
+if __name__ == "__main__":
+    sample_product = {
+        "title": "boAt Airdopes 311 Pro TWS Earbuds",
+        "price": "₹1,799",
+        "mrp": "₹4,990",
+    }
+
+    sample_intent = {
+        "budget_min": None,
+        "budget_max": 2000,
+    }
+
+    print(analyze_price(sample_product, sample_intent))
+
+==================== python\shopping_brain.py ====================
+#!/usr/bin/env python3
+"""
+Coupon World AI OS
+Shopping Brain v1.0
+
+Purpose:
+- Accept a shopping query
+- Parse shopping intent
+- Load products
+- Match products
+- Score products
+- Explain recommendations
+- Show price intelligence
+"""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from intent_engine import parse_query
+from product_scoring import score_product
+from recommendation_engine import explain_product
+from price_engine import analyze_price
+
+
+ROOT = Path(__file__).resolve().parent.parent
+DB = ROOT / "coupons.json"
+
+
+def load_products() -> list[dict]:
+    data = json.loads(DB.read_text(encoding="utf-8"))
+
+    if not isinstance(data, list):
+        raise ValueError("coupons.json must contain a list")
+
+    return data
+
+
+def match_products(products: list[dict], intent: dict) -> list[dict]:
+    matches = []
+
+    category = intent.get("category")
+    brands = [brand.lower() for brand in intent.get("brands", [])]
+    budget_max = intent.get("budget_max")
+
+    for product in products:
+
+        if product.get("active") is False:
+            continue
+
+        product_category = str(product.get("category", "")).lower()
+        product_brand = str(product.get("brand", "")).lower()
+        product_title = str(product.get("title", "")).lower()
+
+        if category:
+            category_text = category.lower()
+
+            if (
+                category_text not in product_category
+                and category_text not in product_title
+            ):
+                continue
+
+        if brands:
+            if not any(
+                brand in product_brand or brand in product_title
+                for brand in brands
+            ):
+                continue
+
+        if budget_max is not None:
+
+            price = product.get("price")
+
+            if price not in (None, ""):
+                try:
+                    if float(price) > budget_max:
+                        continue
+                except (TypeError, ValueError):
+                    pass
+
+        ranked_product = product.copy()
+
+        ranked_product["score"] = score_product(
+            ranked_product,
+            intent,
+        )
+
+        ranked_product["reasons"] = explain_product(
+            ranked_product,
+            intent,
+        )
+
+        ranked_product["price_info"] = analyze_price(
+            ranked_product,
+            intent,
+        )
+
+        matches.append(ranked_product)
+
+    matches.sort(
+        key=lambda product: product.get("score", 0),
+        reverse=True,
+    )
+
+    return matches
+
+
+def main() -> int:
+
+    query = input("Shopping Query > ").strip()
+
+    if not query:
+        print("ERROR: Shopping query is required.")
+        return 1
+
+    intent = parse_query(query)
+
+    products = load_products()
+
+    matches = match_products(
+        products,
+        intent,
+    )
+
+    print("\n" + "=" * 64)
+    print("COUPON WORLD SHOPPING BRAIN v1.0")
+    print("=" * 64)
+
+    print("Intent          :", intent.get("intent"))
+    print("Category        :", intent.get("category"))
+    print("Budget minimum  :", intent.get("budget_min"))
+    print("Budget maximum  :", intent.get("budget_max"))
+    print("Features        :", ", ".join(intent.get("features", [])) or "Any")
+    print("Brands          :", ", ".join(intent.get("brands", [])) or "Any")
+
+    print("-" * 64)
+
+    print("Products loaded :", len(products))
+    print("Matches found   :", len(matches))
+
+    if not matches:
+        print("\nNo matching products found.")
+        return 0
+
+    for position, product in enumerate(matches[:10], start=1):
+
+        print("\n" + "=" * 64)
+        print(f"RECOMMENDATION #{position}")
+        print("=" * 64)
+
+        print("Title      :", product.get("title") or "Untitled product")
+        print("ID         :", product.get("id") or product.get("sl_no") or "No ID")
+        print("Brand      :", product.get("brand") or "Unknown")
+
+        price_info = product.get("price_info", {})
+
+        if price_info.get("price_available"):
+            print(f"Price      : ₹{price_info['price']:.2f}")
+        else:
+            print("Price      : Price unavailable")
+
+        if price_info.get("mrp") is not None:
+            print(f"MRP        : ₹{price_info['mrp']:.2f}")
+
+        if price_info.get("discount_percent") is not None:
+            print(
+                f"Discount   : {price_info['discount_percent']}%"
+            )
+
+        if price_info.get("within_budget") is True:
+            print("Budget     : Within budget")
+
+        elif price_info.get("within_budget") is False:
+            print("Budget     : Above budget")
+
+        print("Score      :", product.get("score", 0))
+
+        print("\nWhy this product?")
+
+        for reason in product.get("reasons", []):
+            print("  ", reason)
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+==================== python\couponworld.py ====================
+#!/usr/bin/env python3
+
+"""
+Coupon World Control Center v1
+
+Current command:
+    python python/couponworld.py check
+
+Purpose:
+- Validate coupons.json
+- Verify product/page/sitemap counts
+- Verify affiliate tags
+- Detect duplicate products and links
+- Detect missing required fields
+- Detect stale or missing generated product pages
+- Detect unwanted public-facing retailer wording
+- Return PASS or FAIL with proper exit code
+
+READ-ONLY:
+This script does not modify the website.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import subprocess
+import sys
+import xml.etree.ElementTree as ET
+from collections import Counter
+from pathlib import Path
+from urllib.parse import parse_qs, urlparse
+
+
+ROOT = Path(__file__).resolve().parent.parent
+COUPONS_FILE = ROOT / "coupons.json"
+PRODUCTS_DIR = ROOT / "products"
+SITEMAP_FILE = ROOT / "sitemap.xml"
+
+CORRECT_AFFILIATE_TAG = "guru0906-21"
+WRONG_AFFILIATE_TAGS = {"guru07cc-21"}
+
+# Preserve previously published URLs when titles change.
+LEGACY_PRODUCT_PATHS = {
+    "17": "amazon-in-fashion-fest-17",
+}
+
+PUBLIC_FILES = [
+    ROOT / "index.html",
+    ROOT / "app.js",
+    ROOT / "validator.html",
+    ROOT / "global_coupon_website.html",
+    ROOT / "templates" / "seo-template.html",
+]
+
+PUBLIC_DIRS = [
+    ROOT / "products",
+    ROOT / "seo",
+]
+
+UNWANTED_PUBLIC_TERMS = [
+    "Amazon India",
+    "Amazon IN",
+    "View on Amazon",
+    "Check latest price on Amazon",
+    "Check price on Amazon",
+    "latest Amazon deals",
+]
+
+LINK_KEYS = (
+    "link",
+    "url",
+    "affiliate_link",
+    "affiliate_url",
+    "product_url",
+)
+
+
+def slugify(value: object, max_length: int = 70) -> str:
+    text = str(value or "").strip().lower()
+    text = re.sub(r"[^a-z0-9]+", "-", text)
+    return text.strip("-")[:max_length].rstrip("-")
+
+
+def load_products() -> list[dict]:
+    if not COUPONS_FILE.exists():
+        raise FileNotFoundError("coupons.json not found")
+
+    data = json.loads(COUPONS_FILE.read_text(encoding="utf-8"))
+
+    if not isinstance(data, list):
+        raise ValueError("coupons.json must contain a JSON list")
+
+    invalid_rows = [
+        index
+        for index, item in enumerate(data, start=1)
+        if not isinstance(item, dict)
+    ]
+
+    if invalid_rows:
+        raise ValueError(
+            "Non-object product rows found at positions: "
+            + ", ".join(map(str, invalid_rows))
+        )
+
+    return data
+
+
+def product_identity(product: dict, index: int) -> str:
+    return str(
+        product.get("id")
+        or product.get("sl_no")
+        or product.get("asin")
+        or f"row-{index}"
+    )
+
+
+def product_link(product: dict) -> str:
+    for key in LINK_KEYS:
+        value = product.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+
+    return ""
+
+
+def page_directory(product: dict) -> Path:
+    identity = str(
+        product.get("id")
+        or product.get("sl_no")
+        or product.get("asin")
+        or ""
+    )
+
+    legacy_path = LEGACY_PRODUCT_PATHS.get(identity)
+
+    if legacy_path:
+        return PRODUCTS_DIR / legacy_path
+
+    title_slug = slugify(product.get("title"))
+    suffix = (
+        product.get("asin")
+        or product.get("id")
+        or product.get("sl_no")
+    )
+
+    return PRODUCTS_DIR / f"{title_slug}-{slugify(suffix)}"
+
+
+def sitemap_urls() -> list[str]:
+    if not SITEMAP_FILE.exists():
+        return []
+
+    root = ET.parse(SITEMAP_FILE).getroot()
+
+    return [
+        node.text.strip()
+        for node in root.iter()
+        if node.tag.endswith("loc") and node.text
+    ]
+
+
+def public_files() -> list[Path]:
+    found: list[Path] = []
+    seen: set[Path] = set()
+
+    for path in PUBLIC_FILES:
+        if path.exists() and path.is_file():
+            resolved = path.resolve()
+            if resolved not in seen:
+                found.append(path)
+                seen.add(resolved)
+
+    for directory in PUBLIC_DIRS:
+        if not directory.exists():
+            continue
+
+        for path in sorted(directory.rglob("*")):
+            if not path.is_file():
+                continue
+
+            if path.suffix.lower() not in {".html", ".js", ".json"}:
+                continue
+
+            resolved = path.resolve()
+
+            if resolved not in seen:
+                found.append(path)
+                seen.add(resolved)
+
+    return found
+
+
+def print_section(title: str) -> None:
+    print()
+    print("=" * 68)
+    print(title)
+    print("=" * 68)
+
+
+def check_command() -> int:
+    failures: list[str] = []
+    warnings: list[str] = []
+
+    print_section("COUPON WORLD CONTROL CENTER — CHECK")
+
+    try:
+        products = load_products()
+        print("PASS: coupons.json valid")
+    except (FileNotFoundError, ValueError, json.JSONDecodeError) as exc:
+        print(f"FAIL: {exc}")
+        return 1
+
+    identities: list[str] = []
+    links: list[str] = []
+
+    missing_titles: list[str] = []
+    missing_categories: list[str] = []
+    missing_links: list[str] = []
+
+    correct_tags: list[str] = []
+    wrong_tags: list[tuple[str, str]] = []
+    missing_tags: list[str] = []
+
+    expected_pages: set[str] = set()
+
+    for index, product in enumerate(products, start=1):
+        identity = product_identity(product, index)
+        identities.append(identity)
+
+        title = product.get("title")
+        category = product.get("category")
+        link = product_link(product)
+
+        if not title:
+            missing_titles.append(identity)
+
+        if not category:
+            missing_categories.append(identity)
+
+        if not link:
+            missing_links.append(identity)
+        else:
+            links.append(link)
+
+            tag = parse_qs(
+                urlparse(link).query
+            ).get("tag", [None])[0]
+
+            if tag == CORRECT_AFFILIATE_TAG:
+                correct_tags.append(identity)
+            elif tag:
+                wrong_tags.append((identity, tag))
+            else:
+                missing_tags.append(identity)
+
+        expected_pages.add(
+            str(page_directory(product).relative_to(ROOT))
+        )
+
+    duplicate_ids = [
+        value
+        for value, count in Counter(identities).items()
+        if count > 1
+    ]
+
+    duplicate_links = [
+        value
+        for value, count in Counter(links).items()
+        if count > 1
+    ]
+
+    actual_page_dirs = {
+        str(path.parent.relative_to(ROOT))
+        for path in PRODUCTS_DIR.rglob("index.html")
+    } if PRODUCTS_DIR.exists() else set()
+
+    missing_page_dirs = sorted(expected_pages - actual_page_dirs)
+    stale_page_dirs = sorted(actual_page_dirs - expected_pages)
+
+    urls = sitemap_urls()
+
+    public_findings: list[tuple[str, int, str]] = []
+
+    for path in public_files():
+        text = path.read_text(
+            encoding="utf-8",
+            errors="ignore",
+        )
+
+        for line_number, line in enumerate(
+            text.splitlines(),
+            start=1,
+        ):
+            lowered = line.lower()
+
+            for term in UNWANTED_PUBLIC_TERMS:
+                if term.lower() in lowered:
+                    public_findings.append(
+                        (
+                            str(path.relative_to(ROOT)),
+                            line_number,
+                            term,
+                        )
+                    )
+                    break
+
+    print(f"Products                 : {len(products)}")
+    print(f"Product pages            : {len(actual_page_dirs)}")
+    print(f"Sitemap URLs             : {len(urls)}")
+    print(f"Correct affiliate tags   : {len(correct_tags)}")
+    print(f"Wrong affiliate tags     : {len(wrong_tags)}")
+    print(f"Missing affiliate tags   : {len(missing_tags)}")
+    print(f"Duplicate IDs            : {len(duplicate_ids)}")
+    print(f"Duplicate links          : {len(duplicate_links)}")
+    print(f"Missing titles           : {len(missing_titles)}")
+    print(f"Missing categories       : {len(missing_categories)}")
+    print(f"Missing links            : {len(missing_links)}")
+    print(f"Missing product pages    : {len(missing_page_dirs)}")
+    print(f"Stale product pages      : {len(stale_page_dirs)}")
+    print(f"Public wording findings  : {len(public_findings)}")
+
+    indexable_extra_pages = []
+
+    for root_name in ("guides", "seo"):
+        root_dir = ROOT / root_name
+
+        if not root_dir.exists():
+            continue
+
+        for page in root_dir.rglob("*.html"):
+            text = page.read_text(
+                encoding="utf-8",
+                errors="ignore",
+            )
+
+            if 'name="robots"' in text.lower() and "noindex" in text.lower():
+                continue
+
+            indexable_extra_pages.append(page)
+
+    expected_sitemap_count = (
+        len(products)
+        + 1
+        + len(indexable_extra_pages)
+    )
+
+    if len(actual_page_dirs) != len(products):
+        failures.append(
+            "Product page count does not match product count"
+        )
+
+    if len(urls) != expected_sitemap_count:
+        failures.append(
+            "Sitemap URL count mismatch: "
+            f"expected {expected_sitemap_count}, found {len(urls)}"
+        )
+
+    if wrong_tags:
+        failures.append("Wrong affiliate tags found")
+
+    if missing_tags:
+        failures.append("Missing affiliate tags found")
+
+    if duplicate_ids:
+        failures.append("Duplicate product IDs found")
+
+    if duplicate_links:
+        failures.append("Duplicate product links found")
+
+    if missing_titles:
+        failures.append("Products missing titles")
+
+    if missing_categories:
+        failures.append("Products missing categories")
+
+    if missing_links:
+        failures.append("Products missing links")
+
+    if missing_page_dirs:
+        failures.append("Expected product pages are missing")
+
+    if stale_page_dirs:
+        failures.append("Stale product pages found")
+
+    if public_findings:
+        failures.append(
+            "Unwanted public-facing retailer wording found"
+        )
+
+    wrong_tag_files: list[str] = []
+
+    for path in ROOT.rglob("*"):
+        if not path.is_file():
+            continue
+
+        if ".git" in path.parts:
+            continue
+
+        # Do not report the checker’s own blocked-tag definitions.
+        if path.resolve() == Path(__file__).resolve():
+            continue
+
+        if any(
+            folder in path.parts
+            for folder in (
+                ".branding_backups",
+                ".compliance_backups",
+            )
+        ):
+            continue
+
+        if path.suffix.lower() not in {
+            ".py",
+            ".json",
+            ".html",
+            ".js",
+            ".md",
+            ".txt",
+        }:
+            continue
+
+        text = path.read_text(
+            encoding="utf-8",
+            errors="ignore",
+        )
+
+        for wrong_tag in WRONG_AFFILIATE_TAGS:
+            if wrong_tag in text:
+                wrong_tag_files.append(
+                    str(path.relative_to(ROOT))
+                )
+
+    if wrong_tag_files:
+        failures.append(
+            "Old wrong affiliate tag still exists in repository"
+        )
+
+    if failures:
+        print_section("FAILURES")
+
+        for item in failures:
+            print("FAIL:", item)
+
+        if wrong_tags:
+            print()
+            print("Wrong product tags:")
+            for identity, tag in wrong_tags:
+                print(f"  {identity}: {tag}")
+
+        if missing_tags:
+            print()
+            print("Missing product tags:")
+            for identity in missing_tags:
+                print(f"  {identity}")
+
+        if missing_page_dirs:
+            print()
+            print("Missing pages:")
+            for path in missing_page_dirs[:20]:
+                print(f"  {path}")
+
+        if stale_page_dirs:
+            print()
+            print("Stale pages:")
+            for path in stale_page_dirs[:20]:
+                print(f"  {path}")
+
+        if public_findings:
+            print()
+            print("Public wording findings:")
+            for file_name, line_number, term in public_findings:
+                print(
+                    f"  {file_name}:{line_number}: {term}"
+                )
+
+        if wrong_tag_files:
+            print()
+            print("Files containing old wrong tag:")
+            for file_name in sorted(set(wrong_tag_files)):
+                print(f"  {file_name}")
+
+        print_section("SITE STATUS: FAIL")
+        return 1
+
+    if warnings:
+        print_section("WARNINGS")
+        for item in warnings:
+            print("WARNING:", item)
+
+    print_section("SITE STATUS: PASS")
+    print("Safe to continue with the next controlled step.")
+    return 0
+
+
+
+def run_command(command: list[str]) -> int:
+    print()
+    print("$", " ".join(command))
+
+    result = subprocess.run(
+        command,
+        cwd=ROOT,
+    )
+
+    return result.returncode
+
+
+def validate_build_source() -> int:
+    print_section("BUILD SOURCE VALIDATION")
+
+    try:
+        products = load_products()
+    except (
+        FileNotFoundError,
+        ValueError,
+        json.JSONDecodeError,
+    ) as exc:
+        print(f"FAIL: {exc}")
+        return 1
+
+    identities: list[str] = []
+    links: list[str] = []
+    failures: list[str] = []
+
+    for index, product in enumerate(products, start=1):
+        identity = product_identity(product, index)
+        identities.append(identity)
+
+        title = product.get("title")
+        category = product.get("category")
+        link = product_link(product)
+
+        if not title:
+            failures.append(
+                f"Product {identity} missing title"
+            )
+
+        if not category:
+            failures.append(
+                f"Product {identity} missing category"
+            )
+
+        if not link:
+            failures.append(
+                f"Product {identity} missing link"
+            )
+            continue
+
+        links.append(link)
+
+        tag = parse_qs(
+            urlparse(link).query
+        ).get("tag", [None])[0]
+
+        if tag != CORRECT_AFFILIATE_TAG:
+            failures.append(
+                f"Product {identity} has invalid affiliate tag"
+            )
+
+    duplicate_ids = [
+        value
+        for value, count in Counter(identities).items()
+        if count > 1
+    ]
+
+    duplicate_links = [
+        value
+        for value, count in Counter(links).items()
+        if count > 1
+    ]
+
+    if duplicate_ids:
+        failures.append(
+            "Duplicate product IDs: "
+            + ", ".join(duplicate_ids)
+        )
+
+    if duplicate_links:
+        failures.append(
+            f"Duplicate product links found: {len(duplicate_links)}"
+        )
+
+    print("Products loaded          :", len(products))
+    print("Duplicate IDs            :", len(duplicate_ids))
+    print("Duplicate links          :", len(duplicate_links))
+
+    if failures:
+        print()
+        for failure in failures:
+            print("FAIL:", failure)
+
+        print_section("BUILD SOURCE STATUS: FAIL")
+        return 1
+
+    print_section("BUILD SOURCE STATUS: PASS")
+    return 0
+
+
+def build_command() -> int:
+    print_section("COUPON WORLD CONTROL CENTER — BUILD")
+
+    if validate_build_source() != 0:
+        print("BUILD ABORTED: source validation failed")
+        return 1
+
+    print_section("STEP 1 — BUILD PRODUCT PAGES")
+
+    code = run_command(
+        [
+            sys.executable,
+            "python/build_product_pages.py",
+            "--write",
+            "--clean",
+        ]
+    )
+
+    if code != 0:
+        print("BUILD FAILED: product page generation failed")
+        return code
+
+    print_section("STEP 2 — BUILD SITEMAP")
+
+    code = run_command(
+        [
+            sys.executable,
+            "python/build_sitemap.py",
+        ]
+    )
+
+    if code != 0:
+        print("BUILD FAILED: sitemap generation failed")
+        return code
+
+    print_section("STEP 3 — POST-BUILD CHECK")
+
+    code = check_command()
+
+    if code != 0:
+        print_section("BUILD STATUS: FAIL")
+        print("Generated site failed final validation.")
+        return code
+
+    print_section("BUILD STATUS: PASS")
+    print("Product pages and sitemap rebuilt successfully.")
+    print("Final site validation passed.")
+    return 0
+
+
+
+
+def intake_products(
+    input_file: str,
+    output_csv: str = "data/products_import.csv",
+) -> int:
+    print_section("COUPON WORLD CONTROL CENTER — INTAKE")
+
+    input_path = Path(input_file)
+    if not input_path.is_absolute():
+        input_path = ROOT / input_path
+
+    output_path = Path(output_csv)
+    if not output_path.is_absolute():
+        output_path = ROOT / output_path
+
+    if not input_path.exists():
+        print(f"FAIL: Product URL file not found: {input_path}")
+        return 1
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    return run_command(
+        [
+            sys.executable,
+            "python/batch_product_importer.py",
+            "prepare",
+            str(input_path),
+            str(output_path),
+        ]
+    )
+
+
+def import_products(csv_file: str, write: bool = False) -> int:
+    print_section("COUPON WORLD CONTROL CENTER — IMPORT")
+
+    csv_path = Path(csv_file)
+
+    if not csv_path.is_absolute():
+        csv_path = ROOT / csv_path
+
+    if not csv_path.exists():
+        print(f"FAIL: CSV file not found: {csv_path}")
+        return 1
+
+    command = [
+        sys.executable,
+        "python/batch_product_importer.py",
+        "import",
+        str(csv_path),
+    ]
+
+    if write:
+        command.append("--write")
+
+    return run_command(command)
+
+
+
+
+
+def adapt_source(input_csv: str, output_csv: str) -> int:
+    print_section("COUPON WORLD CONTROL CENTER — ADAPT")
+
+    input_path = Path(input_csv)
+    if not input_path.is_absolute():
+        input_path = ROOT / input_path
+
+    output_path = Path(output_csv)
+    if not output_path.is_absolute():
+        output_path = ROOT / output_path
+
+    return run_command(
+        [
+            sys.executable,
+            "python/product_source_adapter.py",
+            str(input_path),
+            str(output_path),
+        ]
+    )
+
+
+def intelligence_report() -> int:
+    print_section("COUPON WORLD CONTROL CENTER — REPORT")
+
+    return run_command(
+        [
+            sys.executable,
+            "python/site_intelligence.py",
+        ]
+    )
+
+
+def run_workflow(
+    input_file: str = "",
+    output_csv: str = "data/products_import.csv",
+) -> int:
+    print_section("COUPON WORLD MASTER WORKFLOW")
+
+    print("Mode        : SAFE")
+    print("Auto-write  : NO")
+    print("Auto-push   : NO")
+    print("Discovery   : External source required")
+
+    print_section("STEP 1 — FOUNDATION CHECK")
+
+    check_code = check_command()
+
+    if check_code != 0:
+        print_section("MASTER WORKFLOW STATUS: FAIL")
+        print("Foundation check failed. Workflow stopped.")
+        return check_code
+
+    if input_file:
+        print_section("STEP 2 — PRODUCT INTAKE")
+
+        intake_code = intake_products(
+            input_file,
+            output_csv,
+        )
+
+        if intake_code != 0:
+            print_section("MASTER WORKFLOW STATUS: FAIL")
+            print("Product intake failed. Workflow stopped.")
+            return intake_code
+
+        print_section("STEP 3 — IMPORT PREVIEW")
+
+        import_code = import_products(
+            output_csv,
+            write=False,
+        )
+
+        if import_code != 0:
+            print_section("MASTER WORKFLOW STATUS: REVIEW")
+            print("Import preview requires review.")
+            return import_code
+    else:
+        print_section("STEP 2 — PRODUCT INTAKE")
+        print("SKIPPED: No input URL file supplied.")
+
+    print_section("STEP 4 — CONTROLLED BUILD")
+
+    build_code = build_command()
+
+    if build_code != 0:
+        print_section("MASTER WORKFLOW STATUS: FAIL")
+        print("Controlled build failed.")
+        return build_code
+
+    print_section("MASTER WORKFLOW STATUS: PASS")
+    print("Foundation             : PASS")
+    print("Product intake         :", "PREVIEWED" if input_file else "SKIPPED")
+    print("Database modification  : NO")
+    print("Site build             : PASS")
+    print("Git commit/push        : NOT PERFORMED")
+    return 0
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Coupon World Control Center"
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    subparsers.add_parser(
+        "check",
+        help="Run read-only foundation checks",
+    )
+
+    subparsers.add_parser(
+        "build",
+        help="Rebuild product pages and sitemap safely",
+    )
+
+    adapt_parser = subparsers.add_parser(
+        "adapt",
+        help="Convert an approved product feed into Coupon World CSV",
+    )
+
+    adapt_parser.add_argument(
+        "input_csv",
+        help="Approved source CSV",
+    )
+
+    adapt_parser.add_argument(
+        "output_csv",
+        help="Coupon World formatted CSV",
+    )
+
+    subparsers.add_parser(
+        "report",
+        help="Show product quality and next best action",
+    )
+
+    run_parser = subparsers.add_parser(
+        "run",
+        help="Run the safe Coupon World master workflow",
+    )
+
+    run_parser.add_argument(
+        "--input",
+        default="",
+        help="Optional text file containing product URLs",
+    )
+
+    run_parser.add_argument(
+        "--output",
+        default="data/products_import.csv",
+        help="Prepared CSV output path",
+    )
+
+    intake_parser = subparsers.add_parser(
+        "intake",
+        help="Prepare product import CSV from URL list",
+    )
+
+    intake_parser.add_argument(
+        "input_file",
+        help="Text file with one product URL per line",
+    )
+
+    intake_parser.add_argument(
+        "--output",
+        default="data/products_import.csv",
+        help="Output CSV path",
+    )
+
+    import_parser = subparsers.add_parser(
+        "import",
+        help="Validate or import products from CSV",
+    )
+
+    import_parser.add_argument(
+        "csv_file",
+        help="CSV file containing products",
+    )
+
+    import_parser.add_argument(
+        "--write",
+        action="store_true",
+        help="Write products and rebuild the site",
+    )
+
+    return parser
+
+
+def main() -> int:
+    parser = build_parser()
+    args = parser.parse_args()
+
+    if args.command == "check":
+        return check_command()
+
+    if args.command == "build":
+        return build_command()
+
+    if args.command == "adapt":
+        return adapt_source(
+            args.input_csv,
+            args.output_csv,
+        )
+
+    if args.command == "report":
+        return intelligence_report()
+
+    if args.command == "run":
+        return run_workflow(
+            args.input,
+            args.output,
+        )
+
+    if args.command == "intake":
+        return intake_products(
+            args.input_file,
+            args.output,
+        )
+
+    if args.command == "import":
+        return import_products(
+            args.csv_file,
+            args.write,
+        )
+
+    parser.error("Unknown command")
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+==================== python\amazon_data_provider.py ====================
+#!/usr/bin/env python3
+"""
+Coupon World AI OS
+Amazon Data Provider v0.1
+
+Purpose:
+- Keep Amazon data-source logic separate from product_pipeline.py
+- Support safe manual metadata today
+- Provide a clean integration point for Creators API / PA API later
+
+This module never fabricates price, image, rating, reviews, stock,
+discount, or availability.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Protocol
+
+
+@dataclass(slots=True)
+class AmazonProductData:
+    asin: str
+    title: str = ""
+    brand: str = ""
+    category: str = ""
+    image: str = ""
+    price: str = ""
+    mrp: str = ""
+    discount: str = ""
+    source: str = "manual"
+
+
+class AmazonDataProvider(Protocol):
+    name: str
+    api_available: bool
+
+    def get_product(
+        self,
+        asin: str,
+        *,
+        title: str = "",
+        brand: str = "",
+        category: str = "",
+    ) -> AmazonProductData:
+        ...
+
+
+class ManualAmazonProvider:
+    """Uses only verified values supplied by the operator."""
+
+    name = "manual"
+    api_available = False
+
+    def get_product(
+        self,
+        asin: str,
+        *,
+        title: str = "",
+        brand: str = "",
+        category: str = "",
+    ) -> AmazonProductData:
+        return AmazonProductData(
+            asin=asin,
+            title=title.strip(),
+            brand=brand.strip(),
+            category=category.strip(),
+            source=self.name,
+        )
+
+
+class UnavailableAmazonApiProvider:
+    """Placeholder until Creators API / PA API access is approved."""
+
+    name = "amazon-api"
+    api_available = False
+
+    def get_product(
+        self,
+        asin: str,
+        *,
+        title: str = "",
+        brand: str = "",
+        category: str = "",
+    ) -> AmazonProductData:
+        raise RuntimeError(
+            "Amazon API access is not available yet. "
+            "Use ManualAmazonProvider until Creators API / PA API access is approved."
+        )
+
+
+def get_default_provider() -> AmazonDataProvider:
+    return ManualAmazonProvider()
+
+
+if __name__ == "__main__":
+    provider = get_default_provider()
+    sample = provider.get_product(
+        "B0FMDL81GS",
+        title="OnePlus Nord Buds 3r TWS Earbuds",
+        brand="OnePlus",
+        category="Electronics",
+    )
+
+    print(f"ASIN          : {sample.asin}")
+    print(f"Provider      : {provider.name}")
+    print(f"API available : {'yes' if provider.api_available else 'no'}")
+    print("Safe fallback : yes")
+
+==================== python\amazon_catalog_sync.py ====================
+#!/usr/bin/env python3
+"""
+Coupon World AI OS
+Amazon Catalog Sync v0.1
+
+Dry-run by default.
+Today it exits safely because the configured provider has no API access.
+Later a CreatorsApiProvider can supply image, price, MRP and availability,
+and this same command can run on a schedule.
+"""
+
+import argparse
+import json
+import shutil
+from datetime import datetime, timezone
+from pathlib import Path
+
+from amazon_data_provider import get_default_provider
+
+ROOT = Path(__file__).resolve().parent.parent
+DB = ROOT / "coupons.json"
+BACKUPS = ROOT / "backups"
+
+
+def load_products():
+    data = json.loads(DB.read_text(encoding="utf-8"))
+    if not isinstance(data, list):
+        raise ValueError("coupons.json must contain a list")
+    return data
+
+
+def backup():
+    BACKUPS.mkdir(parents=True, exist_ok=True)
+    p = BACKUPS / f"coupons-before-amazon-sync-{datetime.now().strftime('%Y%m%d-%H%M%S')}.json"
+    shutil.copy2(DB, p)
+    return p
+
+
+def save(products):
+    tmp = DB.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(products, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    tmp.replace(DB)
+
+
+def calculate(price, mrp):
+    if price in (None, "") or mrp in (None, ""):
+        return None, None
+    price = float(price)
+    mrp = float(mrp)
+    if price <= 0 or mrp < price:
+        return None, None
+    saving = mrp - price
+    saving = int(saving) if saving.is_integer() else round(saving, 2)
+    discount = round((saving / mrp) * 100)
+    return saving, f"{discount}% OFF" if discount else None
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--write", action="store_true")
+    parser.add_argument("--limit", type=int, default=0)
+    args = parser.parse_args()
+
+    provider = get_default_provider()
+    products = load_products()
+
+    print("=" * 64)
+    print("AMAZON CATALOG SYNC")
+    print("=" * 64)
+    print("Provider      :", getattr(provider, "name", "unknown"))
+    print("API available :", "YES" if getattr(provider, "api_available", False) else "NO")
+
+    if not getattr(provider, "api_available", False):
+        print("Database      : NOT CHANGED")
+        print("Status        : Ready for future Creators API connection")
+        return 0
+
+    selected = products[:args.limit] if args.limit else products
+    changes = []
+
+    for index, product in enumerate(selected):
+        asin = str(product.get("asin", "")).strip().upper()
+        if not asin:
+            continue
+
+        live = provider.get_product(
+            asin,
+            title=str(product.get("title", "") or ""),
+            brand=str(product.get("brand", "") or ""),
+            category=str(product.get("category", "") or ""),
+        )
+
+        proposed = dict(product)
+        changed = []
+
+        for field in ("title", "brand", "category", "image"):
+            value = getattr(live, field, "")
+            if value and proposed.get(field) != value:
+                proposed[field] = value
+                changed.append(field)
+
+        availability = str(getattr(live, "availability", "") or "").lower()
+
+        if availability in {"available", "in_stock", "instock"}:
+            for field, value in (("availability", "available"), ("active", True)):
+                if proposed.get(field) != value:
+                    proposed[field] = value
+                    changed.append(field)
+
+            for field in ("price", "mrp"):
+                value = getattr(live, field, None)
+                if value not in (None, "") and proposed.get(field) != value:
+                    proposed[field] = value
+                    changed.append(field)
+
+            saving, discount = calculate(proposed.get("price"), proposed.get("mrp"))
+            if proposed.get("save") != saving:
+                proposed["save"] = saving
+                changed.append("save")
+            if proposed.get("discount") != discount:
+                proposed["discount"] = discount
+                changed.append("discount")
+
+        elif availability in {"unavailable", "out_of_stock", "outofstock"}:
+            for field, value in (("availability", "unavailable"), ("active", False)):
+                if proposed.get(field) != value:
+                    proposed[field] = value
+                    changed.append(field)
+            for field in ("price", "mrp", "save", "discount"):
+                if proposed.get(field) is not None:
+                    proposed[field] = None
+                    changed.append(field)
+
+        if changed:
+            proposed["amazon_checked_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+            changes.append((index, proposed, changed))
+
+    print("Products checked :", len(selected))
+    print("Products changed :", len(changes))
+    print("Write mode       :", "YES" if args.write else "NO")
+
+    for _, product, fields in changes:
+        print("UPDATE |", product.get("asin"), "|", ", ".join(fields))
+
+    if not args.write:
+        print("DRY RUN: coupons.json was not changed.")
+        return 0
+
+    if not changes:
+        print("No verified changes available.")
+        return 0
+
+    b = backup()
+    for index, proposed, _ in changes:
+        products[index] = proposed
+    save(products)
+
+    print("SYNC COMPLETE")
+    print("Backup created:", b.relative_to(ROOT))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+==================== python\product_source_adapter.py ====================
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import csv
+from pathlib import Path
+from urllib.parse import parse_qs, urlencode, urlparse, urlunparse
+
+AFFILIATE_TAG = "guru0906-21"
+
+OUTPUT_FIELDS = [
+    "title",
+    "category",
+    "link",
+    "store",
+    "discount",
+    "code",
+    "expiry",
+    "badge",
+    "price",
+    "mrp",
+    "save",
+    "priceText",
+    "linkType",
+    "asin",
+    "image",
+    "description",
+]
+
+
+def clean(value: object) -> str:
+    return str(value or "").strip()
+
+
+def add_affiliate_tag(url: str) -> str:
+    url = clean(url)
+
+    if not url:
+        return ""
+
+    parsed = urlparse(url)
+    host = (parsed.hostname or "").lower()
+
+    if host not in {
+        "amazon.in",
+        "www.amazon.in",
+        "amzn.in",
+        "www.amzn.in",
+    }:
+        return url
+
+    query = parse_qs(parsed.query, keep_blank_values=True)
+    query["tag"] = [AFFILIATE_TAG]
+
+    return urlunparse(
+        parsed._replace(
+            query=urlencode(query, doseq=True)
+        )
+    )
+
+
+def normalize_price(value: object) -> str:
+    text = clean(value)
+
+    if not text:
+        return ""
+
+    text = (
+        text.replace("₹", "")
+        .replace(",", "")
+        .strip()
+    )
+
+    try:
+        number = float(text)
+    except ValueError:
+        return ""
+
+    if number <= 0:
+        return ""
+
+    return str(int(number)) if number.is_integer() else str(number)
+
+
+def detect_link_type(url: str) -> str:
+    lowered = clean(url).lower()
+
+    if any(token in lowered for token in ("/dp/", "/gp/product/", "amzn.in/d/")):
+        return "product"
+
+    if "/s?" in lowered or "?k=" in lowered:
+        return "search"
+
+    return ""
+
+
+def normalize_row(row: dict[str, str]) -> dict[str, str]:
+    title = clean(
+        row.get("title")
+        or row.get("product_name")
+        or row.get("name")
+    )
+
+    category = clean(
+        row.get("category")
+        or row.get("product_category")
+    )
+
+    link = add_affiliate_tag(
+        row.get("link")
+        or row.get("url")
+        or row.get("product_url")
+        or row.get("affiliate_url")
+        or ""
+    )
+
+    price = normalize_price(
+        row.get("price")
+        or row.get("current_price")
+        or row.get("sale_price")
+    )
+
+    mrp = normalize_price(
+        row.get("mrp")
+        or row.get("original_price")
+        or row.get("list_price")
+    )
+
+    return {
+        "title": title,
+        "category": category,
+        "link": link,
+        "store": clean(row.get("store")) or "Online Store",
+        "discount": clean(row.get("discount")) or "Check Deal",
+        "code": clean(row.get("code")) or "No code",
+        "expiry": clean(row.get("expiry")),
+        "badge": clean(row.get("badge")),
+        "price": price,
+        "mrp": mrp,
+        "save": normalize_price(row.get("save")),
+        "priceText": clean(row.get("priceText")),
+        "linkType": clean(row.get("linkType")) or detect_link_type(link),
+        "asin": clean(row.get("asin")).upper(),
+        "image": clean(
+            row.get("image")
+            or row.get("image_url")
+        ),
+        "description": clean(row.get("description")),
+    }
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Convert an approved product feed to Coupon World CSV format"
+    )
+
+    parser.add_argument("input_csv")
+    parser.add_argument("output_csv")
+    args = parser.parse_args()
+
+    input_path = Path(args.input_csv)
+    output_path = Path(args.output_csv)
+
+    if not input_path.exists():
+        print(f"FAIL: Input file not found: {input_path}")
+        return 1
+
+    with input_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+
+        if not reader.fieldnames:
+            print("FAIL: Input CSV header missing")
+            return 1
+
+        rows = [
+            normalize_row(row)
+            for row in reader
+        ]
+
+    valid = [
+        row
+        for row in rows
+        if row["title"] and row["category"] and row["link"]
+    ]
+
+    rejected = len(rows) - len(valid)
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with output_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=OUTPUT_FIELDS,
+        )
+
+        writer.writeheader()
+        writer.writerows(valid)
+
+    print("=" * 68)
+    print("COUPON WORLD PRODUCT SOURCE ADAPTER")
+    print("=" * 68)
+    print("Input rows     :", len(rows))
+    print("Accepted rows  :", len(valid))
+    print("Rejected rows  :", rejected)
+    print("Output file    :", output_path)
+    print("Database change: NO")
+    print("ADAPTER STATUS : PASS")
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+==================== python\product_pipeline.py ====================
+#!/usr/bin/env python3
+"""Coupon World AI OS - Product Pipeline v0.3 with Amazon data provider."""
+
+import argparse
+import re
+from typing import Any
+from urllib.parse import urlparse
+
+from amazon_data_provider import get_default_provider
+from product_engine import (
+    COUPONS_FILE, clean_text, create_backup, detect_brand,
+    generate_description, load_json, save_json,
+)
+
+AFFILIATE_TAG = "guru0906-21"
+SUPPORTED_HOSTS = {"amazon.in", "www.amazon.in"}
+ASIN_PATTERNS = (
+    re.compile(r"/dp/([A-Z0-9]{10})(?:[/?]|$)", re.I),
+    re.compile(r"/gp/product/([A-Z0-9]{10})(?:[/?]|$)", re.I),
+    re.compile(r"/gp/aw/d/([A-Z0-9]{10})(?:[/?]|$)", re.I),
+)
+
+
+def parse_arguments() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Safely import one Amazon India product.")
+    parser.add_argument("url", nargs="?", default="", help="Full Amazon India product URL")
+    parser.add_argument("--title", default="", help="Verified product title; required with --write")
+    parser.add_argument("--category", default="", help="Known product category")
+    parser.add_argument("--write", action="store_true", help="Write product to coupons.json")
+    return parser.parse_args()
+
+
+def validate_url(url: str) -> str:
+    url = clean_text(url)
+    parsed = urlparse(url)
+    if parsed.scheme not in {"http", "https"}:
+        raise ValueError("URL must start with http:// or https://.")
+    host = (parsed.hostname or "").casefold()
+    if host not in SUPPORTED_HOSTS:
+        raise ValueError(f"Unsupported host: {host or 'missing host'}. Use amazon.in.")
+    return url
+
+
+def extract_asin(url: str) -> str:
+    path = urlparse(url).path
+    for pattern in ASIN_PATTERNS:
+        match = pattern.search(path)
+        if match:
+            return match.group(1).upper()
+    raise ValueError("Could not extract a 10-character ASIN from the Amazon URL.")
+
+
+def build_affiliate_url(asin: str) -> str:
+    return f"https://www.amazon.in/dp/{asin}?tag={AFFILIATE_TAG}"
+
+
+def existing_asin(product: dict[str, Any]) -> str:
+    asin = clean_text(product.get("asin")).upper()
+    if re.fullmatch(r"[A-Z0-9]{10}", asin):
+        return asin
+    link = clean_text(product.get("link"))
+    if link:
+        try:
+            return extract_asin(link)
+        except ValueError:
+            pass
+    return ""
+
+
+def find_duplicate(products: list[dict[str, Any]], asin: str) -> dict[str, Any] | None:
+    for product in products:
+        if existing_asin(product) == asin:
+            return product
+    return None
+
+
+def next_product_id(products: list[dict[str, Any]]) -> int:
+    ids = []
+    for product in products:
+        value = product.get("id")
+        if value is None:
+            value = product.get("sl_no")
+        try:
+            ids.append(int(value))
+        except (TypeError, ValueError):
+            pass
+    return max(ids, default=0) + 1
+
+
+def build_record(products, asin, affiliate_url, title, category):
+    provider = get_default_provider()
+    data = provider.get_product(
+        asin,
+        title=clean_text(title),
+        category=clean_text(category),
+    )
+
+    brand = clean_text(data.brand) or detect_brand(data.title)
+
+    product = {
+        "id": next_product_id(products),
+        "asin": data.asin,
+        "store": "Amazon IN",
+        "title": clean_text(data.title),
+        "brand": brand,
+        "category": clean_text(data.category),
+        "price": clean_text(data.price),
+        "mrp": clean_text(data.mrp),
+        "save": "",
+        "discount": clean_text(data.discount),
+        "image": clean_text(data.image),
+        "link": affiliate_url,
+        "description": "",
+        "data_source": data.source,
+    }
+
+    if product["title"]:
+        product["description"] = generate_description(product, brand)
+
+    return product
+
+
+def print_preview(product):
+    print("\n" + "=" * 60)
+    print("COUPON WORLD PRODUCT PIPELINE - PREVIEW")
+    print("=" * 60)
+    print(f"ID            : {product['id']}")
+    print(f"ASIN          : {product['asin']}")
+    print(f"Title         : {product['title'] or '[NOT PROVIDED]'}")
+    print(f"Brand         : {product['brand'] or '[UNKNOWN]'}")
+    print(f"Category      : {product['category'] or '[NOT PROVIDED]'}")
+    print(f"Data source   : {product.get('data_source', 'manual')}")
+    print(f"Affiliate URL : {product['link']}")
+    print(f"Price         : {product['price'] or '[NOT FETCHED]'}")
+    print(f"Image         : {product['image'] or '[NOT FETCHED]'}")
+    print("=" * 60)
+
+
+def collect_interactive_input(args: argparse.Namespace) -> argparse.Namespace:
+    if args.url:
+        return args
+
+    print("\nCOUPON WORLD INTERACTIVE PRODUCT IMPORTER")
+    print("=" * 48)
+    args.url = input("Paste Amazon URL: ").strip()
+    args.title = input("Enter verified product title: ").strip()
+    args.category = input("Enter category (optional): ").strip()
+    return args
+
+
+def confirm_write() -> bool:
+    answer = input("\nWrite this product to coupons.json? [y/N]: ").strip().casefold()
+    return answer in {"y", "yes"}
+
+
+def main() -> int:
+    args = collect_interactive_input(parse_arguments())
+    try:
+        url = validate_url(args.url)
+        asin = extract_asin(url)
+        affiliate_url = build_affiliate_url(asin)
+        products = load_json(COUPONS_FILE)
+
+        duplicate = find_duplicate(products, asin)
+        if duplicate:
+            print("\nDUPLICATE PRODUCT FOUND")
+            print(f"Product ID       : {duplicate.get('id') or duplicate.get('sl_no') or 'UNKNOWN'}")
+            print(f"ASIN             : {asin}")
+            print(f"Title            : {clean_text(duplicate.get('title')) or '[NO TITLE]'}")
+            print("Database changed : NO")
+            return 2
+
+        product = build_record(products, asin, affiliate_url, args.title, args.category)
+        print_preview(product)
+
+        if not args.write:
+            if args.url and product["title"] and confirm_write():
+                args.write = True
+            else:
+                print("\nDRY RUN: coupons.json was not changed.")
+                if not product["title"]:
+                    print("NEXT: provide a verified title before writing.")
+                return 0
+
+        if not product["title"]:
+            raise ValueError("--write requires a real --title; the pipeline will not invent one.")
+
+        backup_file = create_backup(COUPONS_FILE)
+        products.append(product)
+        save_json(COUPONS_FILE, products)
+        print("\nPRODUCT IMPORTED")
+        print(f"Backup created   : {backup_file.relative_to(COUPONS_FILE.parent)}")
+        print(f"Products after   : {len(products)}")
+        print(f"New product ID   : {product['id']}")
+        print("Database changed : YES")
+        return 0
+    except (FileNotFoundError, ValueError) as error:
+        print(f"\nERROR: {error}")
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+==================== python\product_identity_engine.py ====================
+#!/usr/bin/env python3
+"""
+Coupon World Product Intelligence Engine
+Module 1: Product Identity Engine
+
+Purpose:
+- Read products from coupons.json
+- Establish a reliable identity record for each product
+- Normalize categories
+- Extract safe identity signals from existing data
+- Never fabricate missing product information
+- Write results separately from the main product database
+
+Default mode: DRY RUN
+Write mode  : --write
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import unicodedata
+import shutil
+import sys
+from collections import Counter
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+from urllib.parse import parse_qs, urlparse
+
+
+ROOT = Path(__file__).resolve().parent.parent
+SOURCE_FILE = ROOT / "coupons.json"
+OUTPUT_DIR = ROOT / "data" / "intelligence"
+OUTPUT_FILE = OUTPUT_DIR / "product_identity.json"
+BACKUP_DIR = ROOT / ".identity_backups"
+
+
+ASIN_PATTERN = re.compile(r"\b(B0[A-Z0-9]{8}|[A-Z0-9]{10})\b", re.IGNORECASE)
+YEAR_PATTERN = re.compile(r"\b(20(?:1[5-9]|2[0-9]))\b")
+RAM_PATTERN = re.compile(r"\b(\d{1,3})\s*GB\s*RAM\b", re.IGNORECASE)
+STORAGE_PATTERN = re.compile(
+    r"\b(\d{1,4})\s*(GB|TB)\s*(?:storage|ssd|rom)?\b",
+    re.IGNORECASE,
+)
+
+KNOWN_BRANDS = {
+    "amazon basics": "Amazon Basics",
+    "american tourister": "American Tourister",
+    "apple": "Apple",
+    "asus": "ASUS",
+    "bajaj": "Bajaj",
+    "bausch lomb": "Bausch + Lomb",
+    "boat": "boAt",
+    "boult": "Boult",
+    "campus": "Campus",
+    "cello": "Cello",
+    "dell": "Dell",
+    "drivanto": "Drivanto",
+    "ecovacs": "ECOVACS",
+    "fire-boltt": "Fire-Boltt",
+    "fire boltt": "Fire-Boltt",
+    "gesto": "Gesto",
+    "hauser": "Hauser",
+    "hebezon": "Hebezon",
+    "homestrap": "HomeStrap",
+    "hp": "HP",
+    "jbl": "JBL",
+    "jiada": "Jiada",
+    "kindle": "Kindle",
+    "kore": "Kore",
+    "lakme": "Lakmé",
+    "levi's": "Levi's",
+    "levis": "Levi's",
+    "logitech": "Logitech",
+    "mamaearth": "Mamaearth",
+    "mi": "Mi",
+    "milton": "Milton",
+    "noise": "Noise",
+    "nothing": "Nothing",
+    "oneplus": "OnePlus",
+    "philips": "Philips",
+    "popsugar": "Popsugar",
+    "prestige": "Prestige",
+    "puma": "Puma",
+    "realme": "realme",
+    "redmi": "Redmi",
+    "samsung": "Samsung",
+    "sony": "Sony",
+    "stempedia": "STEMpedia",
+    "strauss": "Strauss",
+    "tekcool": "Tekcool",
+    "titan": "Titan",
+    "typecase": "Typecase",
+    "ugaoo": "Ugaoo",
+    "wembley": "Wembley",
+    "wildcraft": "Wildcraft",
+    "yamaha": "Yamaha",
+}
+
+CATEGORY_RULES = {
+    "mobile": "Mobiles",
+    "mobiles": "Mobiles",
+    "smartphone": "Mobiles",
+    "smartphones": "Mobiles",
+    "cell phones & accessories": "Mobiles",
+    "electronics": "Electronics",
+    "prime deal - electronics": "Electronics",
+    "laptop": "Computers & Laptops",
+    "laptops": "Computers & Laptops",
+    "computer": "Computers & Laptops",
+    "computers": "Computers & Laptops",
+    "audio": "Audio",
+    "headphones": "Audio",
+    "earbuds": "Audio",
+    "speakers": "Audio",
+    "fashion": "Fashion",
+    "clothing": "Fashion",
+    "footwear": "Fashion",
+    "beauty": "Beauty & Personal Care",
+    "health & personal care": "Beauty & Personal Care",
+    "home": "Home & Kitchen",
+    "home & kitchen": "Home & Kitchen",
+    "home improvement": "Home & Kitchen",
+    "tools & hardware": "Tools & Hardware",
+    "fitness": "Fitness",
+    "sports": "Fitness",
+    "toys": "Toys & Stationery",
+    "prime deal - toys & stationery": "Toys & Stationery",
+    "musical instruments": "Musical Instruments",
+    "grocery": "Grocery",
+    "appliances": "Appliances",
+    "offers": "Offers",
+}
+
+SUBCATEGORY_KEYWORDS = (
+    ("smartphone", ("smartphone", "iphone", "galaxy m", "redmi note", "nothing phone", "oneplus nord")),
+    ("earbuds", ("earbuds", "airdopes", "buds", "tws")),
+    ("headphones", ("headphone", "headset", "rockerz")),
+    ("bluetooth speaker", ("bluetooth speaker", "speaker")),
+    ("smartwatch", ("smartwatch", "smart watch", "colorfit")),
+    ("laptop", ("laptop", "inspiron", "vivobook")),
+    ("keyboard and mouse", ("keyboard", "mouse combo")),
+    ("power bank", ("power bank", "powerbank")),
+    ("microwave oven", ("microwave",)),
+    ("induction cooktop", ("induction cooktop",)),
+    ("water bottle", ("water bottle", "thermosteel", "bottle set")),
+    ("trimmer", ("trimmer",)),
+    ("running shoes", ("running shoes", "sneakers", "footwear")),
+    ("t-shirt", ("t-shirt", "t shirt")),
+    ("jeans", ("jeans",)),
+    ("backpack", ("backpack",)),
+    ("trolley bag", ("trolley", "luggage")),
+    ("yoga mat", ("yoga mat",)),
+    ("dumbbells", ("dumbbell",)),
+    ("pull-up bar", ("pull-up bar", "pull up bar")),
+    ("telescope", ("telescope",)),
+    ("stationery", ("stationery", "gel pen", "notebook")),
+    ("toy", ("toy", "hover football", "gesture control car")),
+    ("plant", ("plant",)),
+    ("ceiling fan", ("ceiling fan",)),
+    ("air cooler", ("air cooler",)),
+    ("gaming accessory", ("gaming",)),
+)
+
+COLOR_WORDS = (
+    "black",
+    "white",
+    "blue",
+    "red",
+    "green",
+    "grey",
+    "gray",
+    "silver",
+    "gold",
+    "pink",
+    "purple",
+    "orange",
+    "yellow",
+    "velvet black",
+    "glacier blue",
+    "hawaiian blue",
+)
+
+
+def clean_text(value: Any) -> str:
+    if value is None:
+        return ""
+    return " ".join(str(value).strip().split())
+
+
+def load_products() -> list[dict[str, Any]]:
+    if not SOURCE_FILE.exists():
+        raise FileNotFoundError(f"Source file not found: {SOURCE_FILE}")
+
+    data = json.loads(SOURCE_FILE.read_text(encoding="utf-8"))
+
+    if isinstance(data, list):
+        products = data
+    elif isinstance(data, dict) and isinstance(data.get("products"), list):
+        products = data["products"]
+    else:
+        raise ValueError(
+            "coupons.json must contain a product list or a {'products': [...]} object."
+        )
+
+    return [item for item in products if isinstance(item, dict)]
+
+
+def extract_asin(product: dict[str, Any]) -> tuple[str | None, list[str]]:
+    evidence: list[str] = []
+
+    existing = clean_text(product.get("asin")).upper()
+    if ASIN_PATTERN.fullmatch(existing):
+        evidence.append("existing asin field")
+        return existing, evidence
+
+    link = clean_text(product.get("link"))
+    if link:
+        parsed = urlparse(link)
+
+        query_asin = parse_qs(parsed.query).get("asin", [])
+        if query_asin:
+            candidate = clean_text(query_asin[0]).upper()
+            if ASIN_PATTERN.fullmatch(candidate):
+                evidence.append("asin query parameter")
+                return candidate, evidence
+
+        path_patterns = (
+            r"/dp/([A-Z0-9]{10})(?:[/?]|$)",
+            r"/gp/product/([A-Z0-9]{10})(?:[/?]|$)",
+            r"/product/([A-Z0-9]{10})(?:[/?]|$)",
+        )
+
+        for pattern in path_patterns:
+            match = re.search(pattern, parsed.path, re.IGNORECASE)
+            if match:
+                evidence.append("retailer URL path")
+                return match.group(1).upper(), evidence
+
+    title = clean_text(product.get("title"))
+    match = ASIN_PATTERN.search(title)
+    if match and match.group(1).upper().startswith("B0"):
+        evidence.append("title identifier")
+        return match.group(1).upper(), evidence
+
+    return None, evidence
+
+
+def detect_brand(product: dict[str, Any]) -> tuple[str | None, list[str]]:
+    evidence: list[str] = []
+
+    existing = clean_text(product.get("brand"))
+    if existing:
+        evidence.append("existing brand field")
+        return existing, evidence
+
+    title = clean_text(product.get("title"))
+    normalized_title = title.lower()
+
+    for key in sorted(KNOWN_BRANDS, key=len, reverse=True):
+        if re.search(rf"(?<![a-z0-9]){re.escape(key)}(?![a-z0-9])", normalized_title):
+            evidence.append("brand matched from title")
+            return KNOWN_BRANDS[key], evidence
+
+    return None, evidence
+
+
+def normalize_category(product: dict[str, Any]) -> tuple[str, list[str]]:
+    evidence: list[str] = []
+
+    raw_category = clean_text(product.get("category"))
+    key = raw_category.lower()
+
+    if key in CATEGORY_RULES:
+        evidence.append("existing category normalized")
+        return CATEGORY_RULES[key], evidence
+
+    title = clean_text(product.get("title")).lower()
+
+    category_keywords = (
+        ("Mobiles", ("smartphone", "iphone", "mobile phone", "galaxy m", "redmi note", "nothing phone")),
+        ("Computers & Laptops", ("laptop", "keyboard", "mouse", "ssd")),
+        ("Audio", ("earbuds", "headphone", "headset", "speaker", "airdopes", "buds")),
+        ("Electronics", ("smartwatch", "power bank", "fire tv", "kindle")),
+        ("Fashion", ("t-shirt", "jeans", "shoes", "sneakers", "watch", "backpack", "trolley")),
+        ("Beauty & Personal Care", ("makeup", "skincare", "trimmer", "contact lens")),
+        ("Home & Kitchen", ("bottle", "storage organizer", "plant", "chair bush")),
+        ("Appliances", ("microwave", "induction", "fan", "air cooler", "washing machine")),
+        ("Fitness", ("dumbbell", "yoga mat", "pull-up bar", "pull up bar")),
+        ("Toys & Stationery", ("toy", "stationery", "gel pen", "construction kit")),
+        ("Musical Instruments", ("keyboard 37 keys", "musical keyboard")),
+        ("Tools & Hardware", ("electric drill", "angle grinder", "tools")),
+    )
+
+    for category, keywords in category_keywords:
+        if any(keyword in title for keyword in keywords):
+            evidence.append("category inferred from title keywords")
+            return category, evidence
+
+    if raw_category:
+        evidence.append("existing category retained without normalization")
+        return raw_category, evidence
+
+    return "Unclassified", evidence
+
+
+def detect_subcategory(title: str) -> tuple[str | None, list[str]]:
+    normalized = title.lower()
+
+    for subcategory, keywords in SUBCATEGORY_KEYWORDS:
+        if any(keyword in normalized for keyword in keywords):
+            return subcategory, ["subcategory inferred from title keywords"]
+
+    return None, []
+
+
+def extract_launch_year(product: dict[str, Any]) -> tuple[int | None, list[str]]:
+    existing = product.get("launch_year")
+
+    if isinstance(existing, int) and 2015 <= existing <= 2029:
+        return existing, ["existing launch_year field"]
+
+    title = clean_text(product.get("title"))
+    matches = YEAR_PATTERN.findall(title)
+
+    if matches:
+        return int(matches[-1]), ["launch year found in title"]
+
+    return None, []
+
+
+def extract_variant(title: str) -> tuple[dict[str, Any], list[str]]:
+    variant: dict[str, Any] = {
+        "ram": None,
+        "storage": None,
+        "color": None,
+    }
+    evidence: list[str] = []
+
+    ram_match = RAM_PATTERN.search(title)
+    if ram_match:
+        variant["ram"] = f"{ram_match.group(1)} GB"
+        evidence.append("RAM extracted from title")
+
+    storage_candidates = STORAGE_PATTERN.findall(title)
+    if storage_candidates:
+        values = [
+            f"{amount.upper()} {unit.upper()}"
+            for amount, unit in storage_candidates
+        ]
+
+        ram_value = variant["ram"]
+        for value in values:
+            if ram_value and value == ram_value:
+                continue
+            variant["storage"] = value
+            evidence.append("storage extracted from title")
+            break
+
+    normalized_title = title.lower()
+    for color in sorted(COLOR_WORDS, key=len, reverse=True):
+        if re.search(rf"\b{re.escape(color)}\b", normalized_title):
+            variant["color"] = color.title()
+            evidence.append("color extracted from title")
+            break
+
+    return variant, evidence
+
+
+def detect_model(
+    product: dict[str, Any],
+    brand: str | None,
+) -> tuple[str | None, list[str]]:
+    existing = clean_text(product.get("model"))
+
+    if existing:
+        return existing, ["existing model field"]
+
+    # Deliberately conservative:
+    # A title is not automatically treated as a model number.
+    return None, []
+
+
+def identity_confidence(
+    asin: str | None,
+    brand: str | None,
+    category: str,
+    subcategory: str | None,
+    model: str | None,
+    title: str,
+) -> tuple[int, str]:
+    score = 0
+
+    if title:
+        score += 20
+    if asin:
+        score += 25
+    if brand:
+        score += 20
+    if category and category != "Unclassified":
+        score += 20
+    if subcategory:
+        score += 10
+    if model:
+        score += 5
+
+    score = min(score, 100)
+
+    if score >= 85:
+        level = "high"
+    elif score >= 60:
+        level = "medium"
+    else:
+        level = "low"
+
+    return score, level
+def slugify(text: str) -> str:
+    text = unicodedata.normalize("NFKD", text)
+    text = text.encode("ascii", "ignore").decode("ascii")
+    text = text.lower()
+    text = re.sub(r"[^a-z0-9]+", "-", text)
+    return text.strip("-")
+
+
+def canonical_product_id(
+    brand: str | None,
+    title: str,
+    model: str | None,
+    variant: dict[str, Any],
+) -> str:
+    base_text = model or title
+
+    if brand:
+        base_text = re.sub(
+            rf"(?<![a-z0-9]){re.escape(brand)}(?![a-z0-9])",
+            " ",
+            base_text,
+            flags=re.IGNORECASE,
+        )
+
+    for value in (variant.get("storage"), variant.get("color")):
+        if value:
+            base_text = re.sub(
+                rf"(?<![a-z0-9]){re.escape(str(value))}(?![a-z0-9])",
+                " ",
+                base_text,
+                flags=re.IGNORECASE,
+            )
+
+    parts = []
+
+    if brand:
+        parts.append(brand)
+
+    parts.append(base_text)
+
+    if variant.get("storage"):
+        parts.append(str(variant["storage"]))
+
+    if variant.get("color"):
+        parts.append(str(variant["color"]))
+
+    return slugify(" ".join(parts))
+    
+
+def product_identifier(product: dict[str, Any], index: int) -> str:
+    for field in ("id", "sl_no", "asin"):
+        value = clean_text(product.get(field))
+        if value:
+            return value
+
+    return str(index)
+
+
+def build_identity(product: dict[str, Any], index: int) -> dict[str, Any]:
+    title = clean_text(product.get("title"))
+
+    asin, asin_evidence = extract_asin(product)
+    brand, brand_evidence = detect_brand(product)
+    category, category_evidence = normalize_category(product)
+    subcategory, subcategory_evidence = detect_subcategory(title)
+    launch_year, year_evidence = extract_launch_year(product)
+    variant, variant_evidence = extract_variant(title)
+    model, model_evidence = detect_model(product, brand)
+
+    warnings: list[str] = []
+
+    if not title:
+        warnings.append("missing title")
+    if not asin:
+        warnings.append("asin unavailable")
+    if not brand:
+        warnings.append("brand unavailable")
+    if category == "Unclassified":
+        warnings.append("category unclassified")
+    if not subcategory:
+        warnings.append("subcategory unavailable")
+    if not model:
+        warnings.append("model not explicitly available")
+
+    score, level = identity_confidence(
+        asin=asin,
+        brand=brand,
+        category=category,
+        subcategory=subcategory,
+        model=model,
+        title=title,
+    )
+
+    source_category = clean_text(product.get("category")) or None
+    source_link = clean_text(product.get("link")) or None
+
+    return {
+        "product_id": product_identifier(product, index),
+                "canonical_id": canonical_product_id(
+            brand=brand,
+            title=title,
+            model=model,
+            variant=variant,
+        ),
+        "source_index": index,
+        "title": title or None,
+        "normalized_title": title.casefold() if title else None,
+        "asin": asin,
+        "brand": brand,
+        "model": model,
+        "category": category,
+        "source_category": source_category,
+        "subcategory": subcategory,
+        "variant": variant,
+        "launch_year": launch_year,
+        "source_link": source_link,
+        "identity_confidence": {
+            "score": score,
+            "level": level,
+        },
+        "evidence": list(
+            dict.fromkeys(
+                asin_evidence
+                + brand_evidence
+                + category_evidence
+                + subcategory_evidence
+                + model_evidence
+                + year_evidence
+                + variant_evidence
+            )
+        ),
+        "warnings": warnings,
+    }
+
+
+def create_payload(identities: list[dict[str, Any]]) -> dict[str, Any]:
+    generated_at = datetime.now(timezone.utc).isoformat()
+
+    confidence_counts = Counter(
+        item["identity_confidence"]["level"] for item in identities
+    )
+    category_counts = Counter(item["category"] for item in identities)
+
+    return {
+        "engine": {
+            "name": "Coupon World Product Identity Engine",
+            "module": 1,
+            "version": "1.0.0",
+            "generated_at": generated_at,
+            "source_file": SOURCE_FILE.name,
+            "fabricated_fields_allowed": False,
+        },
+        "summary": {
+            "total_products": len(identities),
+            "with_asin": sum(bool(item["asin"]) for item in identities),
+            "with_brand": sum(bool(item["brand"]) for item in identities),
+            "with_subcategory": sum(bool(item["subcategory"]) for item in identities),
+            "with_model": sum(bool(item["model"]) for item in identities),
+            "unclassified": sum(
+                item["category"] == "Unclassified" for item in identities
+            ),
+            "confidence": dict(sorted(confidence_counts.items())),
+            "categories": dict(sorted(category_counts.items())),
+        },
+        "products": identities,
+    }
+
+
+def write_output(payload: dict[str, Any]) -> Path | None:
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    backup_path: Path | None = None
+
+    if OUTPUT_FILE.exists():
+        BACKUP_DIR.mkdir(parents=True, exist_ok=True)
+        timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+        backup_path = BACKUP_DIR / f"product_identity-{timestamp}.json"
+        shutil.copy2(OUTPUT_FILE, backup_path)
+
+    temporary_file = OUTPUT_FILE.with_suffix(".json.tmp")
+    temporary_file.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    temporary_file.replace(OUTPUT_FILE)
+
+    return backup_path
+
+
+def print_report(payload: dict[str, Any], write_mode: bool) -> None:
+    summary = payload["summary"]
+
+    print()
+    print("=" * 62)
+    print("COUPON WORLD PRODUCT IDENTITY ENGINE — MODULE 1")
+    print("=" * 62)
+    print(f"Source file          : {SOURCE_FILE.name}")
+    print(f"Products processed   : {summary['total_products']}")
+    print(f"Products with ASIN   : {summary['with_asin']}")
+    print(f"Products with brand  : {summary['with_brand']}")
+    print(f"With subcategory     : {summary['with_subcategory']}")
+    print(f"With explicit model  : {summary['with_model']}")
+    print(f"Unclassified         : {summary['unclassified']}")
+    print(f"Write mode           : {'YES' if write_mode else 'NO — DRY RUN'}")
+    print(f"Output file          : {OUTPUT_FILE.relative_to(ROOT)}")
+    print("-" * 62)
+
+    confidence = summary["confidence"]
+
+    print(
+        "Confidence           : "
+        f"High {confidence.get('high', 0)} | "
+        f"Medium {confidence.get('medium', 0)} | "
+        f"Low {confidence.get('low', 0)}"
+    )
+
+    print("-" * 62)
+    print("CATEGORY DISTRIBUTION")
+
+    for category, count in summary["categories"].items():
+        print(f"  {category:<28} {count}")
+
+    print("=" * 62)
+
+    if not write_mode:
+        print("DRY RUN COMPLETE")
+        print("No files were changed.")
+        print()
+        print("To generate the identity database, run:")
+        print("python python/product_identity_engine.py --write")
+    else:
+        print("PRODUCT IDENTITY DATABASE GENERATED")
+        print(f"Saved to: {OUTPUT_FILE.relative_to(ROOT)}")
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Build the Coupon World product identity database."
+    )
+    parser.add_argument(
+        "--write",
+        action="store_true",
+        help="Write data/intelligence/product_identity.json",
+    )
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+
+    try:
+        products = load_products()
+        identities = [
+            build_identity(product, index)
+            for index, product in enumerate(products, start=1)
+        ]
+        payload = create_payload(identities)
+
+        if args.write:
+            backup_path = write_output(payload)
+            if backup_path:
+                print(
+                    f"Existing identity database backed up to: "
+                    f"{backup_path.relative_to(ROOT)}"
+                )
+
+        print_report(payload, write_mode=args.write)
+        return 0
+
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+==================== python\product_intelligence.py ====================
+#!/usr/bin/env python3
+
+"""
+Coupon World Product Intelligence Engine v2
+
+Purpose:
+- Measure product database health
+- Report field coverage and category distribution
+- Detect duplicate IDs, links, ASINs and titles
+- Identify products needing enrichment
+- Preview cautious brand and description proposals
+
+READ-ONLY:
+- Does not modify coupons.json
+- Does not invent prices, ratings, reviews or availability
+- Does not claim that a product is "best"
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+from collections import Counter
+from pathlib import Path
+from urllib.parse import urlparse
+
+
+ROOT = Path(__file__).resolve().parent.parent
+DB = ROOT / "coupons.json"
+
+
+KNOWN_BRANDS = {
+    "amazon basics": "Amazon Basics",
+    "american tourister": "American Tourister",
+    "apple": "Apple",
+    "asus": "ASUS",
+    "bajaj": "Bajaj",
+    "bausch lomb": "Bausch + Lomb",
+    "boat": "boAt",
+    "boult": "Boult",
+    "campus": "Campus",
+    "cello": "Cello",
+    "dell": "Dell",
+    "encasify": "Encasify",
+    "fire-boltt": "Fire-Boltt",
+    "fire boltt": "Fire-Boltt",
+    "hauser": "Hauser",
+    "homestrap": "HomeStrap",
+    "hp": "HP",
+    "jbl": "JBL",
+    "jiada": "JIADA",
+    "kore": "KORE",
+    "lakme": "Lakmé",
+    "levi": "Levi's",
+    "logitech": "Logitech",
+    "mamaearth": "Mamaearth",
+    "mi": "Mi",
+    "milton": "Milton",
+    "noise": "Noise",
+    "oneplus": "OnePlus",
+    "philips": "Philips",
+    "prestige": "Prestige",
+    "puma": "Puma",
+    "realme": "realme",
+    "redmi": "Redmi",
+    "samsung": "Samsung",
+    "sony": "Sony",
+    "strauss": "Strauss",
+    "teeslix": "TeeSlix",
+    "titan": "Titan",
+    "ugaoo": "Ugaoo",
+    "wildcraft": "Wildcraft",
+    "yamaha": "Yamaha",
+}
+
+
+REQUIRED_FIELDS = (
+    "title",
+    "category",
+    "link",
+)
+
+QUALITY_FIELDS = (
+    "brand",
+    "description",
+    "asin",
+    "image",
+    "price",
+)
+
+
+def clean(value: object) -> str:
+    return re.sub(
+        r"\s+",
+        " ",
+        str(value or ""),
+    ).strip()
+
+
+def normalize_text(value: object) -> str:
+    return re.sub(
+        r"[^a-z0-9]+",
+        " ",
+        clean(value).lower(),
+    ).strip()
+
+
+def product_identity(
+    product: dict,
+    index: int,
+) -> str:
+    return str(
+        product.get("id")
+        or product.get("sl_no")
+        or product.get("asin")
+        or index
+    )
+
+
+def has_value(product: dict, field: str) -> bool:
+    value = product.get(field)
+
+    if field == "price":
+        if value in (None, ""):
+            return False
+
+        try:
+            return float(value) > 0
+        except (TypeError, ValueError):
+            return False
+
+    return clean(value) != ""
+
+
+def detect_brand(title: str) -> tuple[str, str]:
+    """
+    Return:
+        (brand, confidence)
+
+    HIGH:
+        title starts with a known brand
+
+    MEDIUM:
+        brand appears naturally before compatibility wording
+
+    LOW:
+        no safe brand evidence
+    """
+
+    title = clean(title)
+    normalized = normalize_text(title)
+
+    if not normalized:
+        return "", "LOW"
+
+    compatibility_markers = (
+        " for ",
+        " compatible with ",
+        " works with ",
+        " fit for ",
+        " suitable for ",
+    )
+
+    title_lower = f" {title.lower()} "
+
+    earliest_marker = None
+
+    for marker in compatibility_markers:
+        position = title_lower.find(marker)
+
+        if position != -1:
+            if (
+                earliest_marker is None
+                or position < earliest_marker
+            ):
+                earliest_marker = position
+
+    evidence_text = title
+
+    if earliest_marker is not None:
+        evidence_text = title_lower[:earliest_marker].strip()
+
+    normalized_evidence = normalize_text(evidence_text)
+
+    matches: list[tuple[int, str, str]] = []
+
+    for token, brand in KNOWN_BRANDS.items():
+        normalized_token = normalize_text(token)
+
+        if not normalized_token:
+            continue
+
+        if re.search(
+            rf"\b{re.escape(normalized_token)}\b",
+            normalized_evidence,
+        ):
+            matches.append(
+                (
+                    len(normalized_token),
+                    normalized_token,
+                    brand,
+                )
+            )
+
+    if not matches:
+        return "", "LOW"
+
+    matches.sort(reverse=True)
+
+    _, token, brand = matches[0]
+
+    if normalized.startswith(token):
+        return brand, "HIGH"
+
+    return brand, "MEDIUM"
+
+
+def build_description(
+    title: str,
+    category: str,
+    brand: str,
+) -> str:
+    if not title:
+        return ""
+
+    if brand and category:
+        return (
+            f"{title} is listed as a {category.lower()} product "
+            f"from {brand}. Check the retailer page for current "
+            "specifications, price and availability before purchasing."
+        )
+
+    if category:
+        return (
+            f"{title} is listed in the {category} category. "
+            "Check the retailer page for current specifications, "
+            "price and availability before purchasing."
+        )
+
+    return (
+        f"{title}. Check the retailer page for current specifications, "
+        "price and availability before purchasing."
+    )
+
+
+def product_completeness(product: dict) -> int:
+    fields = REQUIRED_FIELDS + QUALITY_FIELDS
+
+    completed = sum(
+        1
+        for field in fields
+        if has_value(product, field)
+    )
+
+    return round(
+        completed / len(fields) * 100
+    )
+
+
+def product_missing_fields(product: dict) -> list[str]:
+    return [
+        field
+        for field in REQUIRED_FIELDS + QUALITY_FIELDS
+        if not has_value(product, field)
+    ]
+
+
+def database_health(products: list[dict]) -> int:
+    if not products:
+        return 0
+
+    scores = [
+        product_completeness(product)
+        for product in products
+    ]
+
+    return round(
+        sum(scores) / len(scores)
+    )
+
+
+def duplicate_values(
+    products: list[dict],
+    field: str,
+    normalize: bool = False,
+) -> dict[str, int]:
+    counter = Counter()
+
+    for product in products:
+        value = product.get(field)
+
+        if value in (None, ""):
+            continue
+
+        key = (
+            normalize_text(value)
+            if normalize
+            else clean(value)
+        )
+
+        if key:
+            counter[key] += 1
+
+    return {
+        value: count
+        for value, count in counter.items()
+        if count > 1
+    }
+
+
+def link_type(product: dict) -> str:
+    explicit = clean(product.get("linkType")).lower()
+
+    if explicit:
+        return explicit
+
+    link = clean(product.get("link"))
+
+    if not link:
+        return "missing"
+
+    parsed = urlparse(link)
+
+    if "/dp/" in parsed.path or "/d/" in parsed.path:
+        return "product"
+
+    if "/s" in parsed.path or "k=" in parsed.query:
+        return "search"
+
+    return "other"
+
+
+def enrichment_score(product: dict) -> int:
+    weights = {
+        "brand": 15,
+        "description": 20,
+        "asin": 15,
+        "image": 25,
+        "price": 25,
+    }
+
+    return sum(
+        weight
+        for field, weight in weights.items()
+        if not has_value(product, field)
+    )
+
+
+def proposal_confidence(
+    product: dict,
+    brand_confidence: str,
+) -> str:
+    evidence = 0
+
+    if has_value(product, "title"):
+        evidence += 1
+
+    if has_value(product, "category"):
+        evidence += 1
+
+    if has_value(product, "asin"):
+        evidence += 1
+
+    if has_value(product, "image"):
+        evidence += 1
+
+    if has_value(product, "price"):
+        evidence += 1
+
+    if brand_confidence == "HIGH":
+        evidence += 2
+    elif brand_confidence == "MEDIUM":
+        evidence += 1
+
+    if evidence >= 5:
+        return "HIGH"
+
+    if evidence >= 3:
+        return "MEDIUM"
+
+    return "LOW"
+
+
+def print_section(title: str) -> None:
+    print()
+    print("=" * 76)
+    print(title)
+    print("=" * 76)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Coupon World read-only product health "
+            "and intelligence dashboard"
+        )
+    )
+
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=10,
+        help="Maximum proposals and priority products to display",
+    )
+
+    args = parser.parse_args()
+
+    try:
+        raw_products = json.loads(
+            DB.read_text(
+                encoding="utf-8"
+            )
+        )
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f"FAIL: {exc}")
+        return 1
+
+    if not isinstance(raw_products, list):
+        print("FAIL: coupons.json must contain a JSON list")
+        return 1
+
+    products = [
+        product
+        for product in raw_products
+        if isinstance(product, dict)
+    ]
+
+    field_coverage = {
+        field: sum(
+            1
+            for product in products
+            if has_value(product, field)
+        )
+        for field in REQUIRED_FIELDS + QUALITY_FIELDS
+    }
+
+    complete_products = [
+        product
+        for product in products
+        if not product_missing_fields(product)
+    ]
+
+    incomplete_products = [
+        product
+        for product in products
+        if product_missing_fields(product)
+    ]
+
+    categories = Counter(
+        clean(product.get("category"))
+        or "[MISSING]"
+        for product in products
+    )
+
+    stores = Counter(
+        clean(product.get("store"))
+        or "[MISSING]"
+        for product in products
+    )
+
+    link_types = Counter(
+        link_type(product)
+        for product in products
+    )
+
+    duplicate_ids = duplicate_values(
+        products,
+        "id",
+    )
+
+    duplicate_links = duplicate_values(
+        products,
+        "link",
+    )
+
+    duplicate_asins = duplicate_values(
+        products,
+        "asin",
+    )
+
+    duplicate_titles = duplicate_values(
+        products,
+        "title",
+        normalize=True,
+    )
+
+    priority_products = sorted(
+        enumerate(
+            products,
+            start=1,
+        ),
+        key=lambda item: (
+            enrichment_score(item[1]),
+            -product_completeness(item[1]),
+        ),
+        reverse=True,
+    )
+
+    proposals = []
+
+    for index, product in enumerate(
+        products,
+        start=1,
+    ):
+        title = clean(product.get("title"))
+        category = clean(product.get("category"))
+        existing_brand = clean(product.get("brand"))
+        existing_description = clean(
+            product.get("description")
+        )
+
+        if existing_brand:
+            proposed_brand = existing_brand
+            brand_confidence = "HIGH"
+        else:
+            proposed_brand, brand_confidence = detect_brand(
+                title
+            )
+
+        proposed_description = (
+            existing_description
+            or build_description(
+                title,
+                category,
+                proposed_brand,
+            )
+        )
+
+        changes = []
+
+        if not existing_brand and proposed_brand:
+            changes.append("brand")
+
+        if (
+            not existing_description
+            and proposed_description
+        ):
+            changes.append("description")
+
+        if not changes:
+            continue
+
+        proposals.append(
+            {
+                "id": product_identity(
+                    product,
+                    index,
+                ),
+                "title": title,
+                "brand": proposed_brand,
+                "brand_confidence": brand_confidence,
+                "description": proposed_description,
+                "changes": changes,
+                "confidence": proposal_confidence(
+                    product,
+                    brand_confidence,
+                ),
+                "missing": product_missing_fields(
+                    product
+                ),
+            }
+        )
+
+    print_section(
+        "COUPON WORLD PRODUCT INTELLIGENCE DASHBOARD v2"
+    )
+
+    print(f"Products                    : {len(products)}")
+    print(f"Complete products           : {len(complete_products)}")
+    print(f"Incomplete products         : {len(incomplete_products)}")
+    print(f"Database health             : {database_health(products)}%")
+    print("Database changed            : NO")
+
+    print_section("FIELD COVERAGE")
+
+    for field in REQUIRED_FIELDS + QUALITY_FIELDS:
+        covered = field_coverage[field]
+
+        percentage = (
+            round(
+                covered / len(products) * 100,
+                1,
+            )
+            if products
+            else 0
+        )
+
+        print(
+            f"{field.title():<28}: "
+            f"{covered:>3}/{len(products)} "
+            f"({percentage:>5.1f}%)"
+        )
+
+    print_section("CATEGORY DISTRIBUTION")
+
+    for category, count in categories.most_common():
+        status = (
+            "OK"
+            if count >= 3
+            else "WEAK"
+        )
+
+        print(
+            f"{count:>3} | {status:<4} | {category}"
+        )
+
+    print_section("STORE DISTRIBUTION")
+
+    for store, count in stores.most_common():
+        print(
+            f"{count:>3} | {store}"
+        )
+
+    print_section("LINK TYPE DISTRIBUTION")
+
+    for name, count in link_types.most_common():
+        print(
+            f"{count:>3} | {name}"
+        )
+
+    print_section("DUPLICATE CHECKS")
+
+    print(
+        "Duplicate IDs              :",
+        len(duplicate_ids),
+    )
+    print(
+        "Duplicate links            :",
+        len(duplicate_links),
+    )
+    print(
+        "Duplicate ASINs            :",
+        len(duplicate_asins),
+    )
+    print(
+        "Duplicate titles           :",
+        len(duplicate_titles),
+    )
+
+    print_section("TOP PRODUCTS NEEDING ENRICHMENT")
+
+    for index, product in priority_products[: args.limit]:
+        missing = product_missing_fields(product)
+
+        print(
+            f"ID {product_identity(product, index):<5} | "
+            f"Score {product_completeness(product):>3}% | "
+            f"Priority {enrichment_score(product):>3} | "
+            f"{clean(product.get('title'))}"
+        )
+
+        print(
+            "Missing:",
+            ", ".join(missing)
+            or "none",
+        )
+
+        print("-" * 76)
+
+    print_section("SAFE INTELLIGENCE PROPOSALS")
+
+    print(
+        "Products with proposals    :",
+        len(proposals),
+    )
+
+    for proposal in proposals[: args.limit]:
+        print(
+            f"ID {proposal['id']} | "
+            f"Confidence {proposal['confidence']} | "
+            f"Changes: {', '.join(proposal['changes'])}"
+        )
+
+        print(
+            "Title       :",
+            proposal["title"],
+        )
+
+        print(
+            "Brand       :",
+            proposal["brand"]
+            or "[NOT VERIFIED]",
+        )
+
+        print(
+            "Brand proof :",
+            proposal["brand_confidence"],
+        )
+
+        print(
+            "Description :",
+            proposal["description"],
+        )
+
+        print(
+            "Still missing:",
+            ", ".join(proposal["missing"])
+            or "none",
+        )
+
+        print("-" * 76)
+
+    print_section("NEXT BEST ACTION")
+
+    missing_counts = {
+        field: (
+            len(products)
+            - field_coverage[field]
+        )
+        for field in QUALITY_FIELDS
+    }
+
+    ordered_actions = sorted(
+        missing_counts.items(),
+        key=lambda item: item[1],
+        reverse=True,
+    )
+
+    for number, (field, count) in enumerate(
+        ordered_actions,
+        start=1,
+    ):
+        print(
+            f"{number}. Improve {field} coverage "
+            f"({count} products missing)"
+        )
+
+    print()
+    print("SAFETY RULES")
+    print("-" * 76)
+    print("No features invented.")
+    print("No prices invented.")
+    print("No ratings or reviews invented.")
+    print("No 'best product' claims generated.")
+    print("No files modified.")
+
+    print()
+    print("PRODUCT INTELLIGENCE STATUS: PASS")
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+==================== python\price_engine.py ====================
+#!/usr/bin/env python3
+"""
+Coupon World AI OS
+Price Engine v0.1
+
+Purpose:
+- Read product price safely
+- Normalize price values
+- Check budget match
+- Calculate discount when MRP is available
+- Return price intelligence
+"""
+
+from __future__ import annotations
+
+import re
+
+
+def normalize_price(value: object) -> float | None:
+    if value in (None, ""):
+        return None
+
+    if isinstance(value, (int, float)):
+        return float(value)
+
+    text = str(value).strip()
+
+    if not text:
+        return None
+
+    text = text.replace(",", "")
+    text = text.replace("₹", "")
+    text = re.sub(r"[^\d.]", "", text)
+
+    if not text:
+        return None
+
+    try:
+        return float(text)
+    except ValueError:
+        return None
+
+
+def calculate_discount(
+    price: float | None,
+    mrp: float | None,
+) -> float | None:
+    if price is None or mrp is None:
+        return None
+
+    if mrp <= 0 or price > mrp:
+        return None
+
+    discount = ((mrp - price) / mrp) * 100
+
+    return round(discount, 2)
+
+
+def check_budget(
+    price: float | None,
+    budget_min: int | None,
+    budget_max: int | None,
+) -> bool | None:
+    if price is None:
+        return None
+
+    if budget_min is not None and price < budget_min:
+        return False
+
+    if budget_max is not None and price > budget_max:
+        return False
+
+    return True
+
+
+def analyze_price(product: dict, intent: dict) -> dict:
+    price = normalize_price(product.get("price"))
+    mrp = normalize_price(product.get("mrp"))
+
+    budget_min = intent.get("budget_min")
+    budget_max = intent.get("budget_max")
+
+    return {
+        "price": price,
+        "mrp": mrp,
+        "discount_percent": calculate_discount(price, mrp),
+        "within_budget": check_budget(
+            price,
+            budget_min,
+            budget_max,
+        ),
+        "price_available": price is not None,
+    }
+
+
+if __name__ == "__main__":
+    sample_product = {
+        "title": "boAt Airdopes 311 Pro TWS Earbuds",
+        "price": "₹1,799",
+        "mrp": "₹4,990",
+    }
+
+    sample_intent = {
+        "budget_min": None,
+        "budget_max": 2000,
+    }
+
+    print(analyze_price(sample_product, sample_intent))
+
+==================== python\shopping_brain.py ====================
+#!/usr/bin/env python3
+"""
+Coupon World AI OS
+Shopping Brain v1.0
+
+Purpose:
+- Accept a shopping query
+- Parse shopping intent
+- Load products
+- Match products
+- Score products
+- Explain recommendations
+- Show price intelligence
+"""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from intent_engine import parse_query
+from product_scoring import score_product
+from recommendation_engine import explain_product
+from price_engine import analyze_price
+
+
+ROOT = Path(__file__).resolve().parent.parent
+DB = ROOT / "coupons.json"
+
+
+def load_products() -> list[dict]:
+    data = json.loads(DB.read_text(encoding="utf-8"))
+
+    if not isinstance(data, list):
+        raise ValueError("coupons.json must contain a list")
+
+    return data
+
+
+def match_products(products: list[dict], intent: dict) -> list[dict]:
+    matches = []
+
+    category = intent.get("category")
+    brands = [brand.lower() for brand in intent.get("brands", [])]
+    budget_max = intent.get("budget_max")
+
+    for product in products:
+
+        if product.get("active") is False:
+            continue
+
+        product_category = str(product.get("category", "")).lower()
+        product_brand = str(product.get("brand", "")).lower()
+        product_title = str(product.get("title", "")).lower()
+
+        if category:
+            category_text = category.lower()
+
+            if (
+                category_text not in product_category
+                and category_text not in product_title
+            ):
+                continue
+
+        if brands:
+            if not any(
+                brand in product_brand or brand in product_title
+                for brand in brands
+            ):
+                continue
+
+        if budget_max is not None:
+
+            price = product.get("price")
+
+            if price not in (None, ""):
+                try:
+                    if float(price) > budget_max:
+                        continue
+                except (TypeError, ValueError):
+                    pass
+
+        ranked_product = product.copy()
+
+        ranked_product["score"] = score_product(
+            ranked_product,
+            intent,
+        )
+
+        ranked_product["reasons"] = explain_product(
+            ranked_product,
+            intent,
+        )
+
+        ranked_product["price_info"] = analyze_price(
+            ranked_product,
+            intent,
+        )
+
+        matches.append(ranked_product)
+
+    matches.sort(
+        key=lambda product: product.get("score", 0),
+        reverse=True,
+    )
+
+    return matches
+
+
+def main() -> int:
+
+    query = input("Shopping Query > ").strip()
+
+    if not query:
+        print("ERROR: Shopping query is required.")
+        return 1
+
+    intent = parse_query(query)
+
+    products = load_products()
+
+    matches = match_products(
+        products,
+        intent,
+    )
+
+    print("\n" + "=" * 64)
+    print("COUPON WORLD SHOPPING BRAIN v1.0")
+    print("=" * 64)
+
+    print("Intent          :", intent.get("intent"))
+    print("Category        :", intent.get("category"))
+    print("Budget minimum  :", intent.get("budget_min"))
+    print("Budget maximum  :", intent.get("budget_max"))
+    print("Features        :", ", ".join(intent.get("features", [])) or "Any")
+    print("Brands          :", ", ".join(intent.get("brands", [])) or "Any")
+
+    print("-" * 64)
+
+    print("Products loaded :", len(products))
+    print("Matches found   :", len(matches))
+
+    if not matches:
+        print("\nNo matching products found.")
+        return 0
+
+    for position, product in enumerate(matches[:10], start=1):
+
+        print("\n" + "=" * 64)
+        print(f"RECOMMENDATION #{position}")
+        print("=" * 64)
+
+        print("Title      :", product.get("title") or "Untitled product")
+        print("ID         :", product.get("id") or product.get("sl_no") or "No ID")
+        print("Brand      :", product.get("brand") or "Unknown")
+
+        price_info = product.get("price_info", {})
+
+        if price_info.get("price_available"):
+            print(f"Price      : ₹{price_info['price']:.2f}")
+        else:
+            print("Price      : Price unavailable")
+
+        if price_info.get("mrp") is not None:
+            print(f"MRP        : ₹{price_info['mrp']:.2f}")
+
+        if price_info.get("discount_percent") is not None:
+            print(
+                f"Discount   : {price_info['discount_percent']}%"
+            )
+
+        if price_info.get("within_budget") is True:
+            print("Budget     : Within budget")
+
+        elif price_info.get("within_budget") is False:
+            print("Budget     : Above budget")
+
+        print("Score      :", product.get("score", 0))
+
+        print("\nWhy this product?")
+
+        for reason in product.get("reasons", []):
+            print("  ", reason)
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+==================== python\couponworld.py ====================
+#!/usr/bin/env python3
+
+"""
+Coupon World Control Center v1
+
+Current command:
+    python python/couponworld.py check
+
+Purpose:
+- Validate coupons.json
+- Verify product/page/sitemap counts
+- Verify affiliate tags
+- Detect duplicate products and links
+- Detect missing required fields
+- Detect stale or missing generated product pages
+- Detect unwanted public-facing retailer wording
+- Return PASS or FAIL with proper exit code
+
+READ-ONLY:
+This script does not modify the website.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import subprocess
+import sys
+import xml.etree.ElementTree as ET
+from collections import Counter
+from pathlib import Path
+from urllib.parse import parse_qs, urlparse
+
+
+ROOT = Path(__file__).resolve().parent.parent
+COUPONS_FILE = ROOT / "coupons.json"
+PRODUCTS_DIR = ROOT / "products"
+SITEMAP_FILE = ROOT / "sitemap.xml"
+
+CORRECT_AFFILIATE_TAG = "guru0906-21"
+WRONG_AFFILIATE_TAGS = {"guru07cc-21"}
+
+# Preserve previously published URLs when titles change.
+LEGACY_PRODUCT_PATHS = {
+    "17": "amazon-in-fashion-fest-17",
+}
+
+PUBLIC_FILES = [
+    ROOT / "index.html",
+    ROOT / "app.js",
+    ROOT / "validator.html",
+    ROOT / "global_coupon_website.html",
+    ROOT / "templates" / "seo-template.html",
+]
+
+PUBLIC_DIRS = [
+    ROOT / "products",
+    ROOT / "seo",
+]
+
+UNWANTED_PUBLIC_TERMS = [
+    "Amazon India",
+    "Amazon IN",
+    "View on Amazon",
+    "Check latest price on Amazon",
+    "Check price on Amazon",
+    "latest Amazon deals",
+]
+
+LINK_KEYS = (
+    "link",
+    "url",
+    "affiliate_link",
+    "affiliate_url",
+    "product_url",
+)
+
+
+def slugify(value: object, max_length: int = 70) -> str:
+    text = str(value or "").strip().lower()
+    text = re.sub(r"[^a-z0-9]+", "-", text)
+    return text.strip("-")[:max_length].rstrip("-")
+
+
+def load_products() -> list[dict]:
+    if not COUPONS_FILE.exists():
+        raise FileNotFoundError("coupons.json not found")
+
+    data = json.loads(COUPONS_FILE.read_text(encoding="utf-8"))
+
+    if not isinstance(data, list):
+        raise ValueError("coupons.json must contain a JSON list")
+
+    invalid_rows = [
+        index
+        for index, item in enumerate(data, start=1)
+        if not isinstance(item, dict)
+    ]
+
+    if invalid_rows:
+        raise ValueError(
+            "Non-object product rows found at positions: "
+            + ", ".join(map(str, invalid_rows))
+        )
+
+    return data
+
+
+def product_identity(product: dict, index: int) -> str:
+    return str(
+        product.get("id")
+        or product.get("sl_no")
+        or product.get("asin")
+        or f"row-{index}"
+    )
+
+
+def product_link(product: dict) -> str:
+    for key in LINK_KEYS:
+        value = product.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+
+    return ""
+
+
+def page_directory(product: dict) -> Path:
+    identity = str(
+        product.get("id")
+        or product.get("sl_no")
+        or product.get("asin")
+        or ""
+    )
+
+    legacy_path = LEGACY_PRODUCT_PATHS.get(identity)
+
+    if legacy_path:
+        return PRODUCTS_DIR / legacy_path
+
+    title_slug = slugify(product.get("title"))
+    suffix = (
+        product.get("asin")
+        or product.get("id")
+        or product.get("sl_no")
+    )
+
+    return PRODUCTS_DIR / f"{title_slug}-{slugify(suffix)}"
+
+
+def sitemap_urls() -> list[str]:
+    if not SITEMAP_FILE.exists():
+        return []
+
+    root = ET.parse(SITEMAP_FILE).getroot()
+
+    return [
+        node.text.strip()
+        for node in root.iter()
+        if node.tag.endswith("loc") and node.text
+    ]
+
+
+def public_files() -> list[Path]:
+    found: list[Path] = []
+    seen: set[Path] = set()
+
+    for path in PUBLIC_FILES:
+        if path.exists() and path.is_file():
+            resolved = path.resolve()
+            if resolved not in seen:
+                found.append(path)
+                seen.add(resolved)
+
+    for directory in PUBLIC_DIRS:
+        if not directory.exists():
+            continue
+
+        for path in sorted(directory.rglob("*")):
+            if not path.is_file():
+                continue
+
+            if path.suffix.lower() not in {".html", ".js", ".json"}:
+                continue
+
+            resolved = path.resolve()
+
+            if resolved not in seen:
+                found.append(path)
+                seen.add(resolved)
+
+    return found
+
+
+def print_section(title: str) -> None:
+    print()
+    print("=" * 68)
+    print(title)
+    print("=" * 68)
+
+
+def check_command() -> int:
+    failures: list[str] = []
+    warnings: list[str] = []
+
+    print_section("COUPON WORLD CONTROL CENTER — CHECK")
+
+    try:
+        products = load_products()
+        print("PASS: coupons.json valid")
+    except (FileNotFoundError, ValueError, json.JSONDecodeError) as exc:
+        print(f"FAIL: {exc}")
+        return 1
+
+    identities: list[str] = []
+    links: list[str] = []
+
+    missing_titles: list[str] = []
+    missing_categories: list[str] = []
+    missing_links: list[str] = []
+
+    correct_tags: list[str] = []
+    wrong_tags: list[tuple[str, str]] = []
+    missing_tags: list[str] = []
+
+    expected_pages: set[str] = set()
+
+    for index, product in enumerate(products, start=1):
+        identity = product_identity(product, index)
+        identities.append(identity)
+
+        title = product.get("title")
+        category = product.get("category")
+        link = product_link(product)
+
+        if not title:
+            missing_titles.append(identity)
+
+        if not category:
+            missing_categories.append(identity)
+
+        if not link:
+            missing_links.append(identity)
+        else:
+            links.append(link)
+
+            tag = parse_qs(
+                urlparse(link).query
+            ).get("tag", [None])[0]
+
+            if tag == CORRECT_AFFILIATE_TAG:
+                correct_tags.append(identity)
+            elif tag:
+                wrong_tags.append((identity, tag))
+            else:
+                missing_tags.append(identity)
+
+        expected_pages.add(
+            str(page_directory(product).relative_to(ROOT))
+        )
+
+    duplicate_ids = [
+        value
+        for value, count in Counter(identities).items()
+        if count > 1
+    ]
+
+    duplicate_links = [
+        value
+        for value, count in Counter(links).items()
+        if count > 1
+    ]
+
+    actual_page_dirs = {
+        str(path.parent.relative_to(ROOT))
+        for path in PRODUCTS_DIR.rglob("index.html")
+    } if PRODUCTS_DIR.exists() else set()
+
+    missing_page_dirs = sorted(expected_pages - actual_page_dirs)
+    stale_page_dirs = sorted(actual_page_dirs - expected_pages)
+
+    urls = sitemap_urls()
+
+    public_findings: list[tuple[str, int, str]] = []
+
+    for path in public_files():
+        text = path.read_text(
+            encoding="utf-8",
+            errors="ignore",
+        )
+
+        for line_number, line in enumerate(
+            text.splitlines(),
+            start=1,
+        ):
+            lowered = line.lower()
+
+            for term in UNWANTED_PUBLIC_TERMS:
+                if term.lower() in lowered:
+                    public_findings.append(
+                        (
+                            str(path.relative_to(ROOT)),
+                            line_number,
+                            term,
+                        )
+                    )
+                    break
+
+    print(f"Products                 : {len(products)}")
+    print(f"Product pages            : {len(actual_page_dirs)}")
+    print(f"Sitemap URLs             : {len(urls)}")
+    print(f"Correct affiliate tags   : {len(correct_tags)}")
+    print(f"Wrong affiliate tags     : {len(wrong_tags)}")
+    print(f"Missing affiliate tags   : {len(missing_tags)}")
+    print(f"Duplicate IDs            : {len(duplicate_ids)}")
+    print(f"Duplicate links          : {len(duplicate_links)}")
+    print(f"Missing titles           : {len(missing_titles)}")
+    print(f"Missing categories       : {len(missing_categories)}")
+    print(f"Missing links            : {len(missing_links)}")
+    print(f"Missing product pages    : {len(missing_page_dirs)}")
+    print(f"Stale product pages      : {len(stale_page_dirs)}")
+    print(f"Public wording findings  : {len(public_findings)}")
+
+    indexable_extra_pages = []
+
+    for root_name in ("guides", "seo"):
+        root_dir = ROOT / root_name
+
+        if not root_dir.exists():
+            continue
+
+        for page in root_dir.rglob("*.html"):
+            text = page.read_text(
+                encoding="utf-8",
+                errors="ignore",
+            )
+
+            if 'name="robots"' in text.lower() and "noindex" in text.lower():
+                continue
+
+            indexable_extra_pages.append(page)
+
+    expected_sitemap_count = (
+        len(products)
+        + 1
+        + len(indexable_extra_pages)
+    )
+
+    if len(actual_page_dirs) != len(products):
+        failures.append(
+            "Product page count does not match product count"
+        )
+
+    if len(urls) != expected_sitemap_count:
+        failures.append(
+            "Sitemap URL count mismatch: "
+            f"expected {expected_sitemap_count}, found {len(urls)}"
+        )
+
+    if wrong_tags:
+        failures.append("Wrong affiliate tags found")
+
+    if missing_tags:
+        failures.append("Missing affiliate tags found")
+
+    if duplicate_ids:
+        failures.append("Duplicate product IDs found")
+
+    if duplicate_links:
+        failures.append("Duplicate product links found")
+
+    if missing_titles:
+        failures.append("Products missing titles")
+
+    if missing_categories:
+        failures.append("Products missing categories")
+
+    if missing_links:
+        failures.append("Products missing links")
+
+    if missing_page_dirs:
+        failures.append("Expected product pages are missing")
+
+    if stale_page_dirs:
+        failures.append("Stale product pages found")
+
+    if public_findings:
+        failures.append(
+            "Unwanted public-facing retailer wording found"
+        )
+
+    wrong_tag_files: list[str] = []
+
+    for path in ROOT.rglob("*"):
+        if not path.is_file():
+            continue
+
+        if ".git" in path.parts:
+            continue
+
+        # Do not report the checker’s own blocked-tag definitions.
+        if path.resolve() == Path(__file__).resolve():
+            continue
+
+        if any(
+            folder in path.parts
+            for folder in (
+                ".branding_backups",
+                ".compliance_backups",
+            )
+        ):
+            continue
+
+        if path.suffix.lower() not in {
+            ".py",
+            ".json",
+            ".html",
+            ".js",
+            ".md",
+            ".txt",
+        }:
+            continue
+
+        text = path.read_text(
+            encoding="utf-8",
+            errors="ignore",
+        )
+
+        for wrong_tag in WRONG_AFFILIATE_TAGS:
+            if wrong_tag in text:
+                wrong_tag_files.append(
+                    str(path.relative_to(ROOT))
+                )
+
+    if wrong_tag_files:
+        failures.append(
+            "Old wrong affiliate tag still exists in repository"
+        )
+
+    if failures:
+        print_section("FAILURES")
+
+        for item in failures:
+            print("FAIL:", item)
+
+        if wrong_tags:
+            print()
+            print("Wrong product tags:")
+            for identity, tag in wrong_tags:
+                print(f"  {identity}: {tag}")
+
+        if missing_tags:
+            print()
+            print("Missing product tags:")
+            for identity in missing_tags:
+                print(f"  {identity}")
+
+        if missing_page_dirs:
+            print()
+            print("Missing pages:")
+            for path in missing_page_dirs[:20]:
+                print(f"  {path}")
+
+        if stale_page_dirs:
+            print()
+            print("Stale pages:")
+            for path in stale_page_dirs[:20]:
+                print(f"  {path}")
+
+        if public_findings:
+            print()
+            print("Public wording findings:")
+            for file_name, line_number, term in public_findings:
+                print(
+                    f"  {file_name}:{line_number}: {term}"
+                )
+
+        if wrong_tag_files:
+            print()
+            print("Files containing old wrong tag:")
+            for file_name in sorted(set(wrong_tag_files)):
+                print(f"  {file_name}")
+
+        print_section("SITE STATUS: FAIL")
+        return 1
+
+    if warnings:
+        print_section("WARNINGS")
+        for item in warnings:
+            print("WARNING:", item)
+
+    print_section("SITE STATUS: PASS")
+    print("Safe to continue with the next controlled step.")
+    return 0
+
+
+
+def run_command(command: list[str]) -> int:
+    print()
+    print("$", " ".join(command))
+
+    result = subprocess.run(
+        command,
+        cwd=ROOT,
+    )
+
+    return result.returncode
+
+
+def validate_build_source() -> int:
+    print_section("BUILD SOURCE VALIDATION")
+
+    try:
+        products = load_products()
+    except (
+        FileNotFoundError,
+        ValueError,
+        json.JSONDecodeError,
+    ) as exc:
+        print(f"FAIL: {exc}")
+        return 1
+
+    identities: list[str] = []
+    links: list[str] = []
+    failures: list[str] = []
+
+    for index, product in enumerate(products, start=1):
+        identity = product_identity(product, index)
+        identities.append(identity)
+
+        title = product.get("title")
+        category = product.get("category")
+        link = product_link(product)
+
+        if not title:
+            failures.append(
+                f"Product {identity} missing title"
+            )
+
+        if not category:
+            failures.append(
+                f"Product {identity} missing category"
+            )
+
+        if not link:
+            failures.append(
+                f"Product {identity} missing link"
+            )
+            continue
+
+        links.append(link)
+
+        tag = parse_qs(
+            urlparse(link).query
+        ).get("tag", [None])[0]
+
+        if tag != CORRECT_AFFILIATE_TAG:
+            failures.append(
+                f"Product {identity} has invalid affiliate tag"
+            )
+
+    duplicate_ids = [
+        value
+        for value, count in Counter(identities).items()
+        if count > 1
+    ]
+
+    duplicate_links = [
+        value
+        for value, count in Counter(links).items()
+        if count > 1
+    ]
+
+    if duplicate_ids:
+        failures.append(
+            "Duplicate product IDs: "
+            + ", ".join(duplicate_ids)
+        )
+
+    if duplicate_links:
+        failures.append(
+            f"Duplicate product links found: {len(duplicate_links)}"
+        )
+
+    print("Products loaded          :", len(products))
+    print("Duplicate IDs            :", len(duplicate_ids))
+    print("Duplicate links          :", len(duplicate_links))
+
+    if failures:
+        print()
+        for failure in failures:
+            print("FAIL:", failure)
+
+        print_section("BUILD SOURCE STATUS: FAIL")
+        return 1
+
+    print_section("BUILD SOURCE STATUS: PASS")
+    return 0
+
+
+def build_command() -> int:
+    print_section("COUPON WORLD CONTROL CENTER — BUILD")
+
+    if validate_build_source() != 0:
+        print("BUILD ABORTED: source validation failed")
+        return 1
+
+    print_section("STEP 1 — BUILD PRODUCT PAGES")
+
+    code = run_command(
+        [
+            sys.executable,
+            "python/build_product_pages.py",
+            "--write",
+            "--clean",
+        ]
+    )
+
+    if code != 0:
+        print("BUILD FAILED: product page generation failed")
+        return code
+
+    print_section("STEP 2 — BUILD SITEMAP")
+
+    code = run_command(
+        [
+            sys.executable,
+            "python/build_sitemap.py",
+        ]
+    )
+
+    if code != 0:
+        print("BUILD FAILED: sitemap generation failed")
+        return code
+
+    print_section("STEP 3 — POST-BUILD CHECK")
+
+    code = check_command()
+
+    if code != 0:
+        print_section("BUILD STATUS: FAIL")
+        print("Generated site failed final validation.")
+        return code
+
+    print_section("BUILD STATUS: PASS")
+    print("Product pages and sitemap rebuilt successfully.")
+    print("Final site validation passed.")
+    return 0
+
+
+
+
+def intake_products(
+    input_file: str,
+    output_csv: str = "data/products_import.csv",
+) -> int:
+    print_section("COUPON WORLD CONTROL CENTER — INTAKE")
+
+    input_path = Path(input_file)
+    if not input_path.is_absolute():
+        input_path = ROOT / input_path
+
+    output_path = Path(output_csv)
+    if not output_path.is_absolute():
+        output_path = ROOT / output_path
+
+    if not input_path.exists():
+        print(f"FAIL: Product URL file not found: {input_path}")
+        return 1
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    return run_command(
+        [
+            sys.executable,
+            "python/batch_product_importer.py",
+            "prepare",
+            str(input_path),
+            str(output_path),
+        ]
+    )
+
+
+def import_products(csv_file: str, write: bool = False) -> int:
+    print_section("COUPON WORLD CONTROL CENTER — IMPORT")
+
+    csv_path = Path(csv_file)
+
+    if not csv_path.is_absolute():
+        csv_path = ROOT / csv_path
+
+    if not csv_path.exists():
+        print(f"FAIL: CSV file not found: {csv_path}")
+        return 1
+
+    command = [
+        sys.executable,
+        "python/batch_product_importer.py",
+        "import",
+        str(csv_path),
+    ]
+
+    if write:
+        command.append("--write")
+
+    return run_command(command)
+
+
+
+
+
+def adapt_source(input_csv: str, output_csv: str) -> int:
+    print_section("COUPON WORLD CONTROL CENTER — ADAPT")
+
+    input_path = Path(input_csv)
+    if not input_path.is_absolute():
+        input_path = ROOT / input_path
+
+    output_path = Path(output_csv)
+    if not output_path.is_absolute():
+        output_path = ROOT / output_path
+
+    return run_command(
+        [
+            sys.executable,
+            "python/product_source_adapter.py",
+            str(input_path),
+            str(output_path),
+        ]
+    )
+
+
+def intelligence_report() -> int:
+    print_section("COUPON WORLD CONTROL CENTER — REPORT")
+
+    return run_command(
+        [
+            sys.executable,
+            "python/site_intelligence.py",
+        ]
+    )
+
+
+def run_workflow(
+    input_file: str = "",
+    output_csv: str = "data/products_import.csv",
+) -> int:
+    print_section("COUPON WORLD MASTER WORKFLOW")
+
+    print("Mode        : SAFE")
+    print("Auto-write  : NO")
+    print("Auto-push   : NO")
+    print("Discovery   : External source required")
+
+    print_section("STEP 1 — FOUNDATION CHECK")
+
+    check_code = check_command()
+
+    if check_code != 0:
+        print_section("MASTER WORKFLOW STATUS: FAIL")
+        print("Foundation check failed. Workflow stopped.")
+        return check_code
+
+    if input_file:
+        print_section("STEP 2 — PRODUCT INTAKE")
+
+        intake_code = intake_products(
+            input_file,
+            output_csv,
+        )
+
+        if intake_code != 0:
+            print_section("MASTER WORKFLOW STATUS: FAIL")
+            print("Product intake failed. Workflow stopped.")
+            return intake_code
+
+        print_section("STEP 3 — IMPORT PREVIEW")
+
+        import_code = import_products(
+            output_csv,
+            write=False,
+        )
+
+        if import_code != 0:
+            print_section("MASTER WORKFLOW STATUS: REVIEW")
+            print("Import preview requires review.")
+            return import_code
+    else:
+        print_section("STEP 2 — PRODUCT INTAKE")
+        print("SKIPPED: No input URL file supplied.")
+
+    print_section("STEP 4 — CONTROLLED BUILD")
+
+    build_code = build_command()
+
+    if build_code != 0:
+        print_section("MASTER WORKFLOW STATUS: FAIL")
+        print("Controlled build failed.")
+        return build_code
+
+    print_section("MASTER WORKFLOW STATUS: PASS")
+    print("Foundation             : PASS")
+    print("Product intake         :", "PREVIEWED" if input_file else "SKIPPED")
+    print("Database modification  : NO")
+    print("Site build             : PASS")
+    print("Git commit/push        : NOT PERFORMED")
+    return 0
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Coupon World Control Center"
+    )
+
+    subparsers = parser.add_subparsers(
+        dest="command",
+        required=True,
+    )
+
+    subparsers.add_parser(
+        "check",
+        help="Run read-only foundation checks",
+    )
+
+    subparsers.add_parser(
+        "build",
+        help="Rebuild product pages and sitemap safely",
+    )
+
+    adapt_parser = subparsers.add_parser(
+        "adapt",
+        help="Convert an approved product feed into Coupon World CSV",
+    )
+
+    adapt_parser.add_argument(
+        "input_csv",
+        help="Approved source CSV",
+    )
+
+    adapt_parser.add_argument(
+        "output_csv",
+        help="Coupon World formatted CSV",
+    )
+
+    subparsers.add_parser(
+        "report",
+        help="Show product quality and next best action",
+    )
+
+    run_parser = subparsers.add_parser(
+        "run",
+        help="Run the safe Coupon World master workflow",
+    )
+
+    run_parser.add_argument(
+        "--input",
+        default="",
+        help="Optional text file containing product URLs",
+    )
+
+    run_parser.add_argument(
+        "--output",
+        default="data/products_import.csv",
+        help="Prepared CSV output path",
+    )
+
+    intake_parser = subparsers.add_parser(
+        "intake",
+        help="Prepare product import CSV from URL list",
+    )
+
+    intake_parser.add_argument(
+        "input_file",
+        help="Text file with one product URL per line",
+    )
+
+    intake_parser.add_argument(
+        "--output",
+        default="data/products_import.csv",
+        help="Output CSV path",
+    )
+
+    import_parser = subparsers.add_parser(
+        "import",
+        help="Validate or import products from CSV",
+    )
+
+    import_parser.add_argument(
+        "csv_file",
+        help="CSV file containing products",
+    )
+
+    import_parser.add_argument(
+        "--write",
+        action="store_true",
+        help="Write products and rebuild the site",
+    )
+
+    return parser
+
+
+def main() -> int:
+    parser = build_parser()
+    args = parser.parse_args()
+
+    if args.command == "check":
+        return check_command()
+
+    if args.command == "build":
+        return build_command()
+
+    if args.command == "adapt":
+        return adapt_source(
+            args.input_csv,
+            args.output_csv,
+        )
+
+    if args.command == "report":
+        return intelligence_report()
+
+    if args.command == "run":
+        return run_workflow(
+            args.input,
+            args.output,
+        )
+
+    if args.command == "intake":
+        return intake_products(
+            args.input_file,
+            args.output,
+        )
+
+    if args.command == "import":
+        return import_products(
+            args.csv_file,
+            args.write,
+        )
+
+    parser.error("Unknown command")
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
