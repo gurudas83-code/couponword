@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Coupon World AI OS
 Shopping Brain v1.0
@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Any
 
 from intent_engine import parse_query
 from product_scoring import score_product
@@ -27,6 +28,33 @@ from price_engine import analyze_price
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "coupons.json"
 
+INTELLIGENCE_DIR = ROOT / "data" / "intelligence"
+IDENTITY_DB = INTELLIGENCE_DIR / "product_identity.json"
+FEATURE_DB = INTELLIGENCE_DIR / "product_features.json"
+
+
+def _load_database(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {}
+
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+    if isinstance(data, dict):
+        return data
+
+    return {}
+
+
+def load_identity_database() -> dict[str, Any]:
+    return _load_database(IDENTITY_DB)
+
+
+def load_feature_database() -> dict[str, Any]:
+    return _load_database(FEATURE_DB)
+
 
 def load_products() -> list[dict]:
     data = json.loads(DB.read_text(encoding="utf-8"))
@@ -35,6 +63,51 @@ def load_products() -> list[dict]:
         raise ValueError("coupons.json must contain a list")
 
     return data
+
+
+def _index_by_product_id(payload: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    index: dict[str, dict[str, Any]] = {}
+
+    for item in payload.get("products", []):
+        if not isinstance(item, dict):
+            continue
+
+        product_id = item.get("product_id")
+
+        if product_id not in (None, ""):
+            index[str(product_id)] = item
+
+    return index
+
+
+def merge_intelligence(
+    products: list[dict],
+    identity_payload: dict[str, Any],
+    feature_payload: dict[str, Any],
+) -> list[dict]:
+    identity_index = _index_by_product_id(identity_payload)
+    feature_index = _index_by_product_id(feature_payload)
+
+    merged_products: list[dict] = []
+
+    for position, product in enumerate(products, start=1):
+        merged = product.copy()
+
+        product_id = (
+            product.get("id")
+            or product.get("sl_no")
+            or product.get("asin")
+            or position
+        )
+
+        product_key = str(product_id)
+
+        merged["identity"] = identity_index.get(product_key, {})
+        merged["features"] = feature_index.get(product_key, {})
+
+        merged_products.append(merged)
+
+    return merged_products
 
 
 def match_products(products: list[dict], intent: dict) -> list[dict]:
@@ -119,6 +192,15 @@ def main() -> int:
 
     products = load_products()
 
+    identity_payload = load_identity_database()
+    feature_payload = load_feature_database()
+
+    products = merge_intelligence(
+        products,
+        identity_payload,
+        feature_payload,
+    )
+
     matches = match_products(
         products,
         intent,
@@ -157,12 +239,12 @@ def main() -> int:
         price_info = product.get("price_info", {})
 
         if price_info.get("price_available"):
-            print(f"Price      : ₹{price_info['price']:.2f}")
+            print(f"Price      : {price_info['price']:.2f}")
         else:
             print("Price      : Price unavailable")
 
         if price_info.get("mrp") is not None:
-            print(f"MRP        : ₹{price_info['mrp']:.2f}")
+            print(f"MRP        : {price_info['mrp']:.2f}")
 
         if price_info.get("discount_percent") is not None:
             print(
@@ -187,3 +269,12 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+
+
+
+
+
+
+
