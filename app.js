@@ -300,7 +300,11 @@ const p = data.matches[0];
 
 card.innerHTML = `
     <h3>${p.title}</h3>
-    <p><strong>Price:</strong> ₹${p.price ?? "-"}</p>
+    ${
+    p.price != null
+        ? `<p><strong>Price:</strong> ₹${p.price}</p>`
+        : `<p><strong>Price:</strong> Check latest price on retailer</p>`
+}
     <p><strong>Brand:</strong> ${p.brand ?? "Unknown"}</p>
     <p><strong>Score:</strong> ${p.score}</p>
 

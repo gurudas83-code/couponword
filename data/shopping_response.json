@@ -21,16 +21,20 @@
       "id": 32,
       "title": "boAt Airdopes 311 Pro TWS Earbuds",
       "brand": "boAt",
-      "price": 1799.0,
-      "mrp": 4990.0,
-      "discount": 63.95,
+      "price": null,
+      "mrp": null,
+      "discount": null,
       "score": 65,
       "reasons": [
         "✓ Category matched",
         "✓ Within budget"
       ],
       "link": "https://www.amazon.in/s?k=boAt+Airdopes+311+Pro+TWS+Earbuds&tag=guru0906-21",
-      "category": "Electronics"
+      "category": "Electronics",
+      "save": null,
+      "expiry": null,
+      "priceText": "Check latest price on Amazon",
+      "availability": "Check retailer"
     }
   ]
 }
