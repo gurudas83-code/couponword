@@ -16,6 +16,7 @@ Purpose:
 from __future__ import annotations
 
 import json
+import argparse
 from pathlib import Path
 from typing import Any
 
@@ -180,9 +181,58 @@ def match_products(products: list[dict], intent: dict) -> list[dict]:
     return matches
 
 
-def main() -> int:
+def build_response(query: str, intent: dict, matches: list[dict]) -> dict:
+    """Return Shopping Brain results as a JSON-serializable dictionary."""
 
-    query = input("Shopping Query > ").strip()
+    response = {
+        "query": query,
+        "intent": intent,
+        "total_matches": len(matches),
+        "matches": [],
+    }
+
+    for product in matches[:10]:
+        price_info = product.get("price_info", {})
+
+        response["matches"].append({
+            "id": product.get("id"),
+            "title": product.get("title"),
+            "brand": product.get("brand"),
+            "price": price_info.get("price"),
+            "mrp": price_info.get("mrp"),
+            "discount": price_info.get("discount_percent"),
+            "score": product.get("score"),
+            "reasons": product.get("reasons", []),
+            "link": product.get("link"),
+            "category": product.get("category"),
+        })
+
+    return response
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Coupon World Shopping Brain"
+    )
+
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        help="Output JSON instead of formatted text",
+    )
+
+    parser.add_argument(
+        "query",
+        nargs="*",
+        help="Shopping query",
+    )
+
+    args = parser.parse_args()
+
+    if args.query:
+        query = " ".join(args.query).strip()
+    else:
+        query = input("Shopping Query > ").strip()
 
     if not query:
         print("ERROR: Shopping query is required.")
@@ -205,6 +255,16 @@ def main() -> int:
         products,
         intent,
     )
+
+    if args.json:
+        print(
+            json.dumps(
+                build_response(query, intent, matches),
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
+        return 0
 
     print("\n" + "=" * 64)
     print("COUPON WORLD SHOPPING BRAIN v1.0")

@@ -281,3 +281,40 @@ document.addEventListener("DOMContentLoaded", removeUnverifiedDiscounts);
 
 // Also run after dynamically rendered products.
 setTimeout(removeUnverifiedDiscounts, 300);
+async function loadShoppingRecommendation() {
+    try {
+        const response = await fetch("data/shopping_response.json");
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        console.log("Shopping Brain response:", data);
+const card = document.getElementById("shoppingBrainCard");
+
+if (!card) return;
+
+const p = data.matches[0];
+
+card.innerHTML = `
+    <h3>${p.title}</h3>
+    <p><strong>Price:</strong> ₹${p.price ?? "-"}</p>
+    <p><strong>Brand:</strong> ${p.brand ?? "Unknown"}</p>
+    <p><strong>Score:</strong> ${p.score}</p>
+
+    <a class="shop-button"
+   href="${p.link}"
+   target="_blank"
+   rel="nofollow sponsored noopener">
+   View Product →
+</a>
+`;
+
+    } catch (error) {
+        console.error("Unable to load Shopping Brain response:", error);
+    }
+}
+
+loadShoppingRecommendation();
