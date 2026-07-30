@@ -282,43 +282,90 @@ document.addEventListener("DOMContentLoaded", removeUnverifiedDiscounts);
 // Also run after dynamically rendered products.
 setTimeout(removeUnverifiedDiscounts, 300);
 async function loadShoppingRecommendation() {
-    try {
-        const response = await fetch("data/shopping_response.json?v=4");
+  const card = document.getElementById("shoppingBrainCard");
 
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
+  if (!card) {
+    console.error("shoppingBrainCard element not found");
+    return;
+  }
 
-        const data = await response.json();
+  try {
+    const response = await fetch(
+      `data/shopping_response.json?v=${Date.now()}`
+    );
 
-        console.log("Shopping Brain response:", data);
-const card = document.getElementById("shoppingBrainCard");
-
-if (!card) return;
-
-const p = data.matches[0];
-
-card.innerHTML = `
-    <h3>${p.title}</h3>
-    ${
-    p.price != null
-        ? `<p><strong>Price:</strong> ₹${p.price}</p>`
-        : `<p><strong>Price:</strong> Check latest price on retailer</p>`
-}
-    <p><strong>Brand:</strong> ${p.brand ?? "Unknown"}</p>
-    <p><strong>Score:</strong> ${p.score}</p>
-
-    <a class="shop-button"
-   href="${p.link}"
-   target="_blank"
-   rel="nofollow sponsored noopener">
-   View Product →
-</a>
-`;
-
-    } catch (error) {
-        console.error("Unable to load Shopping Brain response:", error);
+    if (!response.ok) {
+      throw new Error(`Recommendation file returned HTTP ${response.status}`);
     }
+
+    const data = await response.json();
+
+    console.log("Shopping Brain response:", data);
+
+    if (
+      !data ||
+      !Array.isArray(data.matches) ||
+      data.matches.length === 0
+    ) {
+      card.innerHTML = `
+        <h3>No recommendation available</h3>
+        <p>Shopping Brain did not find a suitable product.</p>
+      `;
+      return;
+    }
+
+    const p = data.matches[0];
+
+    const title = escapeHTML(p.title || "Recommended Product");
+    const brand = escapeHTML(p.brand || "Not available");
+    const score =
+      p.score != null ? escapeHTML(p.score) : "Not available";
+
+    const priceHTML =
+      p.price != null
+        ? `<p><strong>Price:</strong> ₹${escapeHTML(p.price)}</p>`
+        : `<p><strong>Price:</strong> Check latest price on retailer</p>`;
+
+    const productLink = safeLink(p.link);
+
+    card.innerHTML = `
+      <h3>${title}</h3>
+
+      ${priceHTML}
+
+      <p><strong>Brand:</strong> ${brand}</p>
+      <p><strong>Match Score:</strong> ${score}</p>
+
+      ${
+        productLink !== "#"
+          ? `
+            <a
+              class="shop-button"
+              href="${productLink}"
+              target="_blank"
+              rel="nofollow sponsored noopener"
+            >
+              View Product →
+            </a>
+          `
+          : `
+            <p class="card-note">
+              Product link is currently unavailable.
+            </p>
+          `
+      }
+    `;
+  } catch (error) {
+    console.error(
+      "Unable to load Shopping Brain response:",
+      error
+    );
+
+    card.innerHTML = `
+      <h3>Recommendation unavailable</h3>
+      <p>${escapeHTML(error.message || "Unable to load Shopping Brain data.")}</p>
+    `;
+  }
 }
 
 loadShoppingRecommendation();
