@@ -283,7 +283,7 @@ document.addEventListener("DOMContentLoaded", removeUnverifiedDiscounts);
 setTimeout(removeUnverifiedDiscounts, 300);
 async function loadShoppingRecommendation() {
     try {
-        const response = await fetch("data/shopping_response.json");
+        const response = await fetch("data/shopping_response.json?v=4");
 
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
