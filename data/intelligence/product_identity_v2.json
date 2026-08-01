@@ -1,0 +1,1042 @@
+{
+  "schema_version": "2.0",
+  "products_total": 74,
+  "identities": [
+    {
+      "product_id": "1",
+      "asin": null,
+      "original_title": "JIADA Space Astronaut Stationery Set for Boys - with Badge, Notebook and Pen - Birthday Return Gift/Rakhi Gift for Boys, Kids, Blue",
+      "brand": "JIADA",
+      "model": "Space Astronaut Stationery Set for Boys -",
+      "search_name": "JIADA Space Astronaut Stationery Set for Boys -",
+      "official_search_query": "JIADA Space Astronaut Stationery Set for Boys - official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "2",
+      "asin": null,
+      "original_title": "Keyboard Case for Samsung Galaxy Tab A11+ & Tab A9 Plus 11” Folio Cover SM-X230, SM-X236B, SM-X210, SM-X215 with Trackpad, 7 Color Backlit Magnetically Detachable Bluetooth Keyboard, Multi-Angle View",
+      "brand": "Samsung",
+      "model": "Keyboard Case for Samsung Galaxy Tab A11+ & Tab",
+      "search_name": "Samsung Keyboard Case for Samsung Galaxy Tab A11+ & Tab",
+      "official_search_query": "Samsung Keyboard Case for Samsung Galaxy Tab A11+ & Tab official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "3",
+      "asin": null,
+      "original_title": "TeeSlix NASA Cotton Boys t-Shirt, Teenagers | Soft, Premium Fabric | Regular Fit T-Shirt for Boys, Girls | Space Rocket Design | Blue,Black,RED | Age 8 to 17 Years",
+      "brand": "TeeSlix",
+      "model": "NASA Cotton Boys t-Shirt",
+      "search_name": "TeeSlix NASA Cotton Boys t-Shirt",
+      "official_search_query": "TeeSlix NASA Cotton Boys t-Shirt official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "4",
+      "asin": null,
+      "original_title": "Bausch + Lomb Fresh Multi-Purpose 500Ml Contact Lens Solution (Pack Of 1)",
+      "brand": "Bausch + Lomb",
+      "model": "Fresh Multi-Purpose 500Ml Contact Lens Solution",
+      "search_name": "Bausch + Lomb Fresh Multi-Purpose 500Ml Contact Lens Solution",
+      "official_search_query": "Bausch + Lomb Fresh Multi-Purpose 500Ml Contact Lens Solution official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "5",
+      "asin": null,
+      "original_title": "AASONS Electric Drill Variable Angle Grinder Connecting Rod with 1pc Wood, Marble Cutting Blade, Flap Disk for Paint Remover, Sanding disc and Iron Grinding Wheel",
+      "brand": "AASONS",
+      "model": "Electric Drill Variable Angle Grinder Connecting Rod",
+      "search_name": "AASONS Electric Drill Variable Angle Grinder Connecting Rod",
+      "official_search_query": "AASONS Electric Drill Variable Angle Grinder Connecting Rod official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "6",
+      "asin": null,
+      "original_title": "Hebezon Expandable Appliance Roller Stand with Wheels Heavy Duty Mobile Dolly for Washing Machine, Refrigerator,Furniture Adjustable Moving Base for Home, Kitchen,Laundry Use",
+      "brand": "Hebezon",
+      "model": "Expandable Appliance Roller Stand",
+      "search_name": "Hebezon Expandable Appliance Roller Stand",
+      "official_search_query": "Hebezon Expandable Appliance Roller Stand official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "7",
+      "asin": null,
+      "original_title": "Campus Women's OGL-4 Sneakers",
+      "brand": "Campus",
+      "model": "Women's OGL-4 Sneakers",
+      "search_name": "Campus Women's OGL-4 Sneakers",
+      "official_search_query": "Campus Women's OGL-4 Sneakers official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "8",
+      "asin": null,
+      "original_title": "HomeStrap Rectangular Set Of 3 Large Plastic Storage Organizers/Baskets With Lid For Kitchen, Clothes, Multipurpose Vegetables, Toys, Books, Office, Stationery, Wardrobe(Biscuit, Grey, Brown)",
+      "brand": "HomeStrap",
+      "model": "Rectangular Set Of 3 Large Plastic Storage Organizers/Baskets",
+      "search_name": "HomeStrap Rectangular Set Of 3 Large Plastic Storage Organizers/Baskets",
+      "official_search_query": "HomeStrap Rectangular Set Of 3 Large Plastic Storage Organizers/Baskets official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "9",
+      "asin": null,
+      "original_title": "Amazon Basics 64 GB Micro SD Card with Adapter | Upto 120 MB/s | Class 10 | U1, C10, V10 Speed Classes",
+      "brand": "Amazon",
+      "model": "Basics Micro SD Card",
+      "search_name": "Amazon Basics Micro SD Card",
+      "official_search_query": "Amazon Basics Micro SD Card official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "10",
+      "asin": "B0F1N8B7Z4",
+      "original_title": "Redmi 13 5G Hawaiian Blue (8GB RAM, 128GB Storage)",
+      "brand": "Redmi",
+      "model": "13 5G",
+      "search_name": "Redmi 13 5G",
+      "official_search_query": "Redmi 13 5G official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "11",
+      "asin": "B0GDQCTYFB",
+      "original_title": "realme Buds Air 8, 11mm+6mm Dual Dynamic Bass Drivers, 58Hrs Playtime, 55dB ANC, 6 Mic ENC, 45ms Low Latency, 360° Spatial Audio, Hi-Res LHDC, IP55 Dust & Water Resistant, BT v5.4 (Master Gold)",
+      "brand": "realme",
+      "model": "Buds Air 8",
+      "search_name": "realme Buds Air 8",
+      "official_search_query": "realme Buds Air 8 official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "12",
+      "asin": "B0D3HKTL6K",
+      "original_title": "Amway Nutrilite Cal Mag D K2 (90 Tablets)",
+      "brand": "Nutrilite",
+      "model": "Amway Nutrilite Cal Mag D K2",
+      "search_name": "Nutrilite Amway Nutrilite Cal Mag D K2",
+      "official_search_query": "Nutrilite Amway Nutrilite Cal Mag D K2 official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "13",
+      "asin": "B08232VZ84",
+      "original_title": "Yamaha PSS-E30 Remie Portable Mini Keyboard – 37 Keys, White, Built-in Songs, Sound Effects & Quiz Mode, Lightweight, Ideal for Kids & Early Learners",
+      "brand": "Yamaha",
+      "model": "PSS-E30 Remie Portable Mini Keyboard",
+      "search_name": "Yamaha PSS-E30 Remie Portable Mini Keyboard",
+      "official_search_query": "Yamaha PSS-E30 Remie Portable Mini Keyboard official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "14",
+      "asin": "B0GQVL6STN",
+      "original_title": "Apple iPhone 17e 256 GB (Black) – 15.40 cm (6.1″) Super Retina XDR Display, A19 Chip, All-Day Battery Life, 48MP Fusion Camera, 256GB Starting Storage",
+      "brand": "Apple",
+      "model": "iPhone 17e",
+      "search_name": "Apple iPhone 17e",
+      "official_search_query": "Apple iPhone 17e official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "15",
+      "asin": "B0GQVHNX7R",
+      "original_title": "Apple iPhone 17e 512GB",
+      "brand": "Apple",
+      "model": "iPhone 17e",
+      "search_name": "Apple iPhone 17e",
+      "official_search_query": "Apple iPhone 17e official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "16",
+      "asin": null,
+      "original_title": "Mega 70%+ OFF Store",
+      "brand": "Mega",
+      "model": "70%+ OFF Store",
+      "search_name": "Mega 70%+ OFF Store",
+      "official_search_query": "Mega 70%+ OFF Store official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "17",
+      "asin": null,
+      "original_title": "Online Store Fashion Fest",
+      "brand": "Online",
+      "model": "Store Fashion Fest",
+      "search_name": "Online Store Fashion Fest",
+      "official_search_query": "Online Store Fashion Fest official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "18",
+      "asin": "B09MG7HSS9",
+      "original_title": "STEMpedia Mechanical Construction Kit for Boys 7-14 Years",
+      "brand": "STEMpedia",
+      "model": "Mechanical Construction Kit for Boys 7-14 Years",
+      "search_name": "STEMpedia Mechanical Construction Kit for Boys 7-14 Years",
+      "official_search_query": "STEMpedia Mechanical Construction Kit for Boys 7-14 Years official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "19",
+      "asin": "B0D8YV6KQ5",
+      "original_title": "Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon Saturn Planets",
+      "brand": "ASUS",
+      "model": "Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon",
+      "search_name": "ASUS Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon",
+      "official_search_query": "ASUS Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "20",
+      "asin": "B0F26CLKW9",
+      "original_title": "Audavibe 76700 Newtonian Reflector Telescope 235x Zoom for Moon & Planets",
+      "brand": "Audavibe",
+      "model": "76700 Newtonian Reflector Telescope 235x Zoom for Moon &",
+      "search_name": "Audavibe 76700 Newtonian Reflector Telescope 235x Zoom for Moon &",
+      "official_search_query": "Audavibe 76700 Newtonian Reflector Telescope 235x Zoom for Moon & official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "21",
+      "asin": "B0GKY4WMRV",
+      "original_title": "Gesto Galaxy Projector Pro Planetarium - 13 Film Discs Nebula Moon Lamp",
+      "brand": "Gesto",
+      "model": "Galaxy Projector Pro Planetarium - 13 Film Discs Nebula",
+      "search_name": "Gesto Galaxy Projector Pro Planetarium - 13 Film Discs Nebula",
+      "official_search_query": "Gesto Galaxy Projector Pro Planetarium - 13 Film Discs Nebula official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "22",
+      "asin": "B0CQK691XQ",
+      "original_title": "Popsugar Rechargeable Hand Gesture Control Car with Headlight, USB Charging RC Stunt Car for Kids",
+      "brand": "Popsugar",
+      "model": "Rechargeable Hand Gesture Control Car",
+      "search_name": "Popsugar Rechargeable Hand Gesture Control Car",
+      "official_search_query": "Popsugar Rechargeable Hand Gesture Control Car official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "23",
+      "asin": "B0H1QQ7ML1",
+      "original_title": "TEKCOOL Portable Air Cooler Fan with Ice Chamber, USB Rechargeable Mini Cooling Fan for Home Kitchen",
+      "brand": "TEKCOOL",
+      "model": "Portable Air Cooler Fan",
+      "search_name": "TEKCOOL Portable Air Cooler Fan",
+      "official_search_query": "TEKCOOL Portable Air Cooler Fan official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "24",
+      "asin": null,
+      "original_title": "Fire-Boltt Ninja Smartwatch",
+      "brand": "Fire-Boltt",
+      "model": "Ninja Smartwatch",
+      "search_name": "Fire-Boltt Ninja Smartwatch",
+      "official_search_query": "Fire-Boltt Ninja Smartwatch official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "25",
+      "asin": null,
+      "original_title": "Sony Wireless Headphones",
+      "brand": "Sony",
+      "model": "Wireless Headphones",
+      "search_name": "Sony Wireless Headphones",
+      "official_search_query": "Sony Wireless Headphones official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "26",
+      "asin": null,
+      "original_title": "Echo Dot 5th Gen",
+      "brand": "Amazon",
+      "model": "Echo Dot 5th Gen",
+      "search_name": "Amazon Echo Dot 5th Gen",
+      "official_search_query": "Amazon Echo Dot 5th Gen official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "27",
+      "asin": null,
+      "original_title": "Milton Thermosteel Bottle",
+      "brand": "Milton",
+      "model": "Thermosteel Bottle",
+      "search_name": "Milton Thermosteel Bottle",
+      "official_search_query": "Milton Thermosteel Bottle official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "28",
+      "asin": null,
+      "original_title": "HP Wireless Mouse",
+      "brand": "HP",
+      "model": "Wireless Mouse",
+      "search_name": "HP Wireless Mouse",
+      "official_search_query": "HP Wireless Mouse official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "29",
+      "asin": null,
+      "original_title": "boAt Rockerz 450 Headphones",
+      "brand": "boAt",
+      "model": "Rockerz 450 Headphones",
+      "search_name": "boAt Rockerz 450 Headphones",
+      "official_search_query": "boAt Rockerz 450 Headphones official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "30",
+      "asin": null,
+      "original_title": "OnePlus Nord CE",
+      "brand": "OnePlus",
+      "model": "Nord CE",
+      "search_name": "OnePlus Nord CE",
+      "official_search_query": "OnePlus Nord CE official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "31",
+      "asin": null,
+      "original_title": "Philips Trimmer",
+      "brand": "Philips",
+      "model": "Trimmer",
+      "search_name": "Philips Trimmer",
+      "official_search_query": "Philips Trimmer official specifications",
+      "confidence": {
+        "score": 60,
+        "level": "medium"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "32",
+      "asin": null,
+      "original_title": "boAt Airdopes 311 Pro TWS Earbuds",
+      "brand": "boAt",
+      "model": "Airdopes 311 Pro TWS Earbuds",
+      "search_name": "boAt Airdopes 311 Pro TWS Earbuds",
+      "official_search_query": "boAt Airdopes 311 Pro TWS Earbuds official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "33",
+      "asin": null,
+      "original_title": "Boult Audio Bluetooth Speaker",
+      "brand": "Boult Audio",
+      "model": "Bluetooth Speaker",
+      "search_name": "Boult Audio Bluetooth Speaker",
+      "official_search_query": "Boult Audio Bluetooth Speaker official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "34",
+      "asin": null,
+      "original_title": "Fire TV Stick 4K",
+      "brand": "Amazon",
+      "model": "Fire TV Stick 4K",
+      "search_name": "Amazon Fire TV Stick 4K",
+      "official_search_query": "Amazon Fire TV Stick 4K official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "35",
+      "asin": null,
+      "original_title": "Puma Men's Running Shoes",
+      "brand": "Puma",
+      "model": "Men's Running Shoes",
+      "search_name": "Puma Men's Running Shoes",
+      "official_search_query": "Puma Men's Running Shoes official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "36",
+      "asin": null,
+      "original_title": "boAt Stone Bluetooth Speaker",
+      "brand": "boAt",
+      "model": "Stone Bluetooth Speaker",
+      "search_name": "boAt Stone Bluetooth Speaker",
+      "official_search_query": "boAt Stone Bluetooth Speaker official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "37",
+      "asin": null,
+      "original_title": "Mi Power Bank 10000mAh",
+      "brand": "Mi",
+      "model": "Power Bank 10000mAh",
+      "search_name": "Mi Power Bank 10000mAh",
+      "official_search_query": "Mi Power Bank 10000mAh official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "38",
+      "asin": null,
+      "original_title": "Samsung Galaxy M16 5G",
+      "brand": "Samsung",
+      "model": "Galaxy M16 5G",
+      "search_name": "Samsung Galaxy M16 5G",
+      "official_search_query": "Samsung Galaxy M16 5G official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "39",
+      "asin": null,
+      "original_title": "Kindle Paperwhite",
+      "brand": "Amazon",
+      "model": "Kindle Paperwhite",
+      "search_name": "Amazon Kindle Paperwhite",
+      "official_search_query": "Amazon Kindle Paperwhite official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "40",
+      "asin": null,
+      "original_title": "American Tourister Trolley Bag",
+      "brand": "American Tourister",
+      "model": "Trolley Bag",
+      "search_name": "American Tourister Trolley Bag",
+      "official_search_query": "American Tourister Trolley Bag official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "41",
+      "asin": null,
+      "original_title": "ASUS Gaming Laptop",
+      "brand": "ASUS",
+      "model": "Gaming Laptop",
+      "search_name": "ASUS Gaming Laptop",
+      "official_search_query": "ASUS Gaming Laptop official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "42",
+      "asin": null,
+      "original_title": "Realme Buds T100",
+      "brand": "realme",
+      "model": "Buds T100",
+      "search_name": "realme Buds T100",
+      "official_search_query": "realme Buds T100 official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "43",
+      "asin": null,
+      "original_title": "Titan Analog Watch",
+      "brand": "Titan",
+      "model": "Analog Watch",
+      "search_name": "Titan Analog Watch",
+      "official_search_query": "Titan Analog Watch official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "44",
+      "asin": null,
+      "original_title": "Wildcraft Backpack 35L",
+      "brand": "Wildcraft",
+      "model": "Backpack 35L",
+      "search_name": "Wildcraft Backpack 35L",
+      "official_search_query": "Wildcraft Backpack 35L official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "45",
+      "asin": null,
+      "original_title": "Levi's Men's Jeans",
+      "brand": "Levi's",
+      "model": "Men's Jeans",
+      "search_name": "Levi's Men's Jeans",
+      "official_search_query": "Levi's Men's Jeans official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "46",
+      "asin": null,
+      "original_title": "Strauss Yoga Mat",
+      "brand": "Strauss",
+      "model": "Yoga Mat",
+      "search_name": "Strauss Yoga Mat",
+      "official_search_query": "Strauss Yoga Mat official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "47",
+      "asin": null,
+      "original_title": "Samsung 28L Microwave Oven",
+      "brand": "Samsung",
+      "model": "28L Microwave Oven",
+      "search_name": "Samsung 28L Microwave Oven",
+      "official_search_query": "Samsung 28L Microwave Oven official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "48",
+      "asin": null,
+      "original_title": "Mamaearth Skincare Combo",
+      "brand": "Mamaearth",
+      "model": "Skincare Combo",
+      "search_name": "Mamaearth Skincare Combo",
+      "official_search_query": "Mamaearth Skincare Combo official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "49",
+      "asin": null,
+      "original_title": "Kore Adjustable Dumbbells",
+      "brand": "Kore",
+      "model": "Adjustable Dumbbells",
+      "search_name": "Kore Adjustable Dumbbells",
+      "official_search_query": "Kore Adjustable Dumbbells official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "50",
+      "asin": null,
+      "original_title": "Cello Water Bottle Set",
+      "brand": "Cello",
+      "model": "Water Bottle Set",
+      "search_name": "Cello Water Bottle Set",
+      "official_search_query": "Cello Water Bottle Set official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "51",
+      "asin": null,
+      "original_title": "Bajaj Ceiling Fan",
+      "brand": "Bajaj",
+      "model": "Ceiling Fan",
+      "search_name": "Bajaj Ceiling Fan",
+      "official_search_query": "Bajaj Ceiling Fan official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "52",
+      "asin": "B0FNCPKFP6",
+      "original_title": "Noise Smartwatch with Bluetooth Calling, AMOLED Display, Stainless Steel Design, Emergency SOS & Smart Connectivity",
+      "brand": "Noise",
+      "model": "Smartwatch",
+      "search_name": "Noise Smartwatch",
+      "official_search_query": "Noise Smartwatch official specifications",
+      "confidence": {
+        "score": 75,
+        "level": "medium"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "53",
+      "asin": null,
+      "original_title": "Noise ColorFit Smartwatch",
+      "brand": "Noise",
+      "model": "ColorFit Smartwatch",
+      "search_name": "Noise ColorFit Smartwatch",
+      "official_search_query": "Noise ColorFit Smartwatch official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "54",
+      "asin": null,
+      "original_title": "Apple AirPods",
+      "brand": "Apple",
+      "model": "AirPods",
+      "search_name": "Apple AirPods",
+      "official_search_query": "Apple AirPods official specifications",
+      "confidence": {
+        "score": 60,
+        "level": "medium"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "55",
+      "asin": null,
+      "original_title": "Dell Inspiron Laptop",
+      "brand": "Dell",
+      "model": "Inspiron Laptop",
+      "search_name": "Dell Inspiron Laptop",
+      "official_search_query": "Dell Inspiron Laptop official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "56",
+      "asin": "B01N4EV2TL",
+      "original_title": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo",
+      "brand": "Logitech",
+      "model": "MK240 Nano Wireless USB Keyboard and Mouse Combo",
+      "search_name": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo",
+      "official_search_query": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "57",
+      "asin": "B0G5G7LCJQ",
+      "original_title": "REDMI Note 15 5G (Glacier Blue, 8GB RAM, 128GB Storage)",
+      "brand": "Redmi",
+      "model": "Note 15 5G Glacier",
+      "search_name": "Redmi Note 15 5G Glacier",
+      "official_search_query": "Redmi Note 15 5G Glacier official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "58",
+      "asin": null,
+      "original_title": "JBL Tune 510BT Headphones",
+      "brand": "JBL",
+      "model": "Tune 510BT Headphones",
+      "search_name": "JBL Tune 510BT Headphones",
+      "official_search_query": "JBL Tune 510BT Headphones official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "59",
+      "asin": "B0D73SQRM1",
+      "original_title": "HP H120 Wired Headset with Microphone, Noise Cancelling Mic, Adjustable Headband, 3.5mm Jack",
+      "brand": "Noise",
+      "model": "HP H120 Wired Headset",
+      "search_name": "Noise HP H120 Wired Headset",
+      "official_search_query": "Noise HP H120 Wired Headset official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "60",
+      "asin": null,
+      "original_title": "typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023, 7-Color Backlit with Touchpad",
+      "brand": "Samsung",
+      "model": "typecase Keyboard Case for Samsung Galaxy Tab A11+ /",
+      "search_name": "Samsung typecase Keyboard Case for Samsung Galaxy Tab A11+ /",
+      "official_search_query": "Samsung typecase Keyboard Case for Samsung Galaxy Tab A11+ / official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "61",
+      "asin": null,
+      "original_title": "Encasify Telescope Cover, Waterproof Dustproof Sunproof Outdoor Protective Cover with Zipper and Durable Closure",
+      "brand": "Encasify",
+      "model": "Telescope Cover",
+      "search_name": "Encasify Telescope Cover",
+      "official_search_query": "Encasify Telescope Cover official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "62",
+      "asin": null,
+      "original_title": "Hauser Fizzy Gel Pen Jar, Transparent Lightweight Body, Comfortable Grip, Smooth Ink Flow, Blue Ink Pack of 25 Pens",
+      "brand": "Hauser",
+      "model": "Fizzy Gel Pen Jar",
+      "search_name": "Hauser Fizzy Gel Pen Jar",
+      "official_search_query": "Hauser Fizzy Gel Pen Jar official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "63",
+      "asin": null,
+      "original_title": "Wembley Hover Football for Kids, Electric Floating Soccer Ball, Rechargeable Indoor Game, Birthday Gift for Boys",
+      "brand": "Wembley",
+      "model": "Hover Football for Kids",
+      "search_name": "Wembley Hover Football for Kids",
+      "official_search_query": "Wembley Hover Football for Kids official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "64",
+      "asin": null,
+      "original_title": "Chair Bush Black Colour 10 Pcs, ID 15mm OD 20mm, Round Shape",
+      "brand": "Chair",
+      "model": "Bush Colour 10 Pcs",
+      "search_name": "Chair Bush Colour 10 Pcs",
+      "official_search_query": "Chair Bush Colour 10 Pcs official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "65",
+      "asin": null,
+      "original_title": "Drivanto Washing Machine Stand Multi-Functional Movable Adjustable Base with Locking Wheels for Washing Machine, Refrigerator and Furniture",
+      "brand": "Drivanto",
+      "model": "Washing Machine Stand Multi-Functional Movable Adjustable Base",
+      "search_name": "Drivanto Washing Machine Stand Multi-Functional Movable Adjustable Base",
+      "official_search_query": "Drivanto Washing Machine Stand Multi-Functional Movable Adjustable Base official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "66",
+      "asin": null,
+      "original_title": "UGAOO Combo of 3 Indoor Plants with Ibiza Pot, Money Plant Golden, Jade Plant and Peace Lily for Home and Office Decor",
+      "brand": "UGAOO",
+      "model": "Combo of 3 Indoor Plants",
+      "search_name": "UGAOO Combo of 3 Indoor Plants",
+      "official_search_query": "UGAOO Combo of 3 Indoor Plants official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "67",
+      "asin": null,
+      "original_title": "Prestige Induction Cooktop",
+      "brand": "Prestige",
+      "model": "Induction Cooktop",
+      "search_name": "Prestige Induction Cooktop",
+      "official_search_query": "Prestige Induction Cooktop official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "68",
+      "asin": null,
+      "original_title": "Lakme Makeup Kit",
+      "brand": "Lakme",
+      "model": "Makeup Kit",
+      "search_name": "Lakme Makeup Kit",
+      "official_search_query": "Lakme Makeup Kit official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "69",
+      "asin": null,
+      "original_title": "Redmi Note 13 5G",
+      "brand": "Redmi",
+      "model": "Note 13 5G",
+      "search_name": "Redmi Note 13 5G",
+      "official_search_query": "Redmi Note 13 5G official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "70",
+      "asin": null,
+      "original_title": "Samsung 25L Microwave Oven",
+      "brand": "Samsung",
+      "model": "25L Microwave Oven",
+      "search_name": "Samsung 25L Microwave Oven",
+      "official_search_query": "Samsung 25L Microwave Oven official specifications",
+      "confidence": {
+        "score": 80,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "71",
+      "asin": "B0B6NSDR2H",
+      "original_title": "Adjustable Doorway Pull-Up Bar with Rubber Grip, No-Drill Installation",
+      "brand": "Adjustable",
+      "model": "Doorway Pull-Up Bar",
+      "search_name": "Adjustable Doorway Pull-Up Bar",
+      "official_search_query": "Adjustable Doorway Pull-Up Bar official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "72",
+      "asin": "B0FDBB2VRC",
+      "original_title": "Samsung Galaxy M36 5G Mobile (Velvet Black, 6GB RAM, 128GB Storage)",
+      "brand": "Samsung",
+      "model": "Galaxy M36 5G Mobile Velvet",
+      "search_name": "Samsung Galaxy M36 5G Mobile Velvet",
+      "official_search_query": "Samsung Galaxy M36 5G Mobile Velvet official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "73",
+      "asin": "B0G47YZJH6",
+      "original_title": "Nothing Phone (3a) Lite (White, 128 GB, 8 GB RAM)",
+      "brand": "Nothing",
+      "model": "Phone Lite",
+      "search_name": "Nothing Phone Lite",
+      "official_search_query": "Nothing Phone Lite official specifications",
+      "confidence": {
+        "score": 95,
+        "level": "high"
+      },
+      "needs_review": false
+    },
+    {
+      "product_id": "74",
+      "asin": "B0F7R6V1LM",
+      "original_title": "Nothing Phone (3) (Black, 12GB RAM, 256GB Storage)",
+      "brand": "Nothing",
+      "model": "Phone",
+      "search_name": "Nothing Phone",
+      "official_search_query": "Nothing Phone official specifications",
+      "confidence": {
+        "score": 75,
+        "level": "medium"
+      },
+      "needs_review": false
+    }
+  ]
+}

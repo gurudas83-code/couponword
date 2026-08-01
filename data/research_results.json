@@ -1,0 +1,278 @@
+{
+  "schema_version": "2.0",
+  "mode": "pilot",
+  "products_requested": 5,
+  "products": [
+    {
+      "product_id": "10",
+      "title": "Redmi 13 5G Hawaiian Blue (8GB RAM, 128GB Storage)",
+      "brand": "Redmi",
+      "asin": "B0F1N8B7Z4",
+      "core_title": "Redmi 13 5G Hawaiian Blue (8GB RAM",
+      "allowed_domains": [
+        "mi.com",
+        "xiaomi.com"
+      ],
+      "query": "Redmi Redmi 13 5G Hawaiian Blue (8GB RAM official specifications",
+      "official_title": "Redmi 13 5g Prime Edition Specs, Features | Xiaomi India",
+      "official_url": "https://www.mi.com/in/product/redmi-13-5g-prime-edition/specs",
+      "match_score": 0.6537,
+      "verified": false,
+      "status": "manual_review",
+      "reason": "Official domain found but model match is not strong enough",
+      "candidates": [
+        {
+          "title": "Redmi 13 5g Prime Edition Specs, Features | Xiaomi India",
+          "url": "https://www.mi.com/in/product/redmi-13-5g-prime-edition/specs",
+          "model_score": 0.6,
+          "search_score": 0.8687,
+          "combined_score": 0.6537
+        },
+        {
+          "title": "Redmi 13 5G Specs, Features | Xiaomi India",
+          "url": "https://www.mi.com/in/product/redmi-13-5g/specs",
+          "model_score": 0.6,
+          "search_score": 0.8633,
+          "combined_score": 0.6527
+        },
+        {
+          "title": "Redmi 13 5G FAQs of specs, offers, and more | Xiaomi India",
+          "url": "https://www.mi.com/in/product/redmi-13-5g/faq",
+          "model_score": 0.6,
+          "search_score": 0.8259,
+          "combined_score": 0.6452
+        },
+        {
+          "title": "Redmi 13 5G | Xiaomi India | | All Specs, Features",
+          "url": "https://www.mi.com/in/product/redmi-13-5g",
+          "model_score": 0.6,
+          "search_score": 0.7821,
+          "combined_score": 0.6364
+        },
+        {
+          "title": "Redmi 13 5G | Xiaomi India | Best & Latest Price to Buy",
+          "url": "https://www.mi.com/in/product/redmi-13-5g/buy",
+          "model_score": 0.6,
+          "search_score": 0.7461,
+          "combined_score": 0.6292
+        }
+      ]
+    },
+    {
+      "product_id": "11",
+      "title": "realme Buds Air 8, 11mm+6mm Dual Dynamic Bass Drivers, 58Hrs Playtime, 55dB ANC, 6 Mic ENC, 45ms Low Latency, 360° Spatial Audio, Hi-Res LHDC, IP55 Dust & Water Resistant, BT v5.4 (Master Gold)",
+      "brand": "realme",
+      "asin": "B0GDQCTYFB",
+      "core_title": "realme Buds Air 8",
+      "allowed_domains": [
+        "realme.com"
+      ],
+      "query": "realme realme Buds Air 8 official specifications",
+      "official_title": "Noise Killer: The realme Buds Air 8",
+      "official_url": "https://c.realme.com/in/post-details/2027838664641376256",
+      "match_score": 0.9797,
+      "verified": true,
+      "status": "candidate_verified",
+      "reason": "Official domain and model tokens matched",
+      "candidates": [
+        {
+          "title": "Noise Killer: The realme Buds Air 8",
+          "url": "https://c.realme.com/in/post-details/2027838664641376256",
+          "model_score": 1.0,
+          "search_score": 0.8985,
+          "combined_score": 0.9797
+        },
+        {
+          "title": "realme Buds Air Full Specifications - realme (India)",
+          "url": "https://www.realme.com/in/realme-buds-air/specs",
+          "model_score": 1.0,
+          "search_score": 0.8283,
+          "combined_score": 0.9657
+        },
+        {
+          "title": "realme Buds Air Specifications",
+          "url": "https://www.realme.com/ph/realme-buds-air/specs",
+          "model_score": 1.0,
+          "search_score": 0.7728,
+          "combined_score": 0.9546
+        },
+        {
+          "title": "realme Buds Air - realme (India)",
+          "url": "https://www.realme.com/in/realme-buds-air",
+          "model_score": 1.0,
+          "search_score": 0.7263,
+          "combined_score": 0.9453
+        },
+        {
+          "title": "realme Buds Air Pro - realme (Global)",
+          "url": "https://www.realme.com/global/realme-buds-air-pro",
+          "model_score": 1.0,
+          "search_score": 0.6742,
+          "combined_score": 0.9348
+        }
+      ]
+    },
+    {
+      "product_id": "13",
+      "title": "Yamaha PSS-E30 Remie Portable Mini Keyboard – 37 Keys, White, Built-in Songs, Sound Effects & Quiz Mode, Lightweight, Ideal for Kids & Early Learners",
+      "brand": "Yamaha",
+      "asin": "B08232VZ84",
+      "core_title": "Yamaha PSS-E30 Remie Portable Mini Keyboard – 37 Keys",
+      "allowed_domains": [
+        "yamaha.com"
+      ],
+      "query": "Yamaha Yamaha PSS-E30 Remie Portable Mini Keyboard – 37 Keys official specifications",
+      "official_title": "Remie (PSS-E30) - Specs - Portable Keyboards - Keyboard Instruments - Musical Instruments - Products - Yamaha USA",
+      "official_url": "https://usa.yamaha.com/products/musical_instruments/keyboards/portable_keyboards/pss-e30/specs.html",
+      "match_score": 0.7207,
+      "verified": false,
+      "status": "manual_review",
+      "reason": "Official domain found but model match is not strong enough",
+      "candidates": [
+        {
+          "title": "Remie (PSS-E30) - Specs - Portable Keyboards - Keyboard Instruments - Musical Instruments - Products - Yamaha USA",
+          "url": "https://usa.yamaha.com/products/musical_instruments/keyboards/portable_keyboards/pss-e30/specs.html",
+          "model_score": 0.6667,
+          "search_score": 0.9369,
+          "combined_score": 0.7207
+        },
+        {
+          "title": "Yamaha PSS-E30 37-key Remie Keyboard",
+          "url": "https://shop.sg.yamaha.com/psse30.html",
+          "model_score": 0.6667,
+          "search_score": 0.9156,
+          "combined_score": 0.7165
+        },
+        {
+          "title": "Yamaha PSS-E30 37-keys Mobile Keyboard",
+          "url": "https://shop.sg.yamaha.com/psse30-bundle.html",
+          "model_score": 0.6667,
+          "search_score": 0.8758,
+          "combined_score": 0.7085
+        },
+        {
+          "title": "PSS-E30 | Yamaha Corporation.",
+          "url": "https://uk.yamaha.com/en/musical-instruments/keyboards/products/portable-keyboards/pss-e30/specs.html",
+          "model_score": 0.3333,
+          "search_score": 0.9071,
+          "combined_score": 0.4481
+        },
+        {
+          "title": "PSS-E30 | Yamaha Corporation.",
+          "url": "https://asia-oceania.yamaha.com/en/musical-instruments/keyboards/products/portable-keyboards/pss-e30/specs.html",
+          "model_score": 0.3333,
+          "search_score": 0.9071,
+          "combined_score": 0.4481
+        }
+      ]
+    },
+    {
+      "product_id": "14",
+      "title": "Apple iPhone 17e 256 GB (Black) – 15.40 cm (6.1″) Super Retina XDR Display, A19 Chip, All-Day Battery Life, 48MP Fusion Camera, 256GB Starting Storage",
+      "brand": "Apple",
+      "asin": "B0GQVL6STN",
+      "core_title": "Apple iPhone 17e 256 GB – 15.40 cm (6.1″) Super Retina XDR Display",
+      "allowed_domains": [
+        "apple.com"
+      ],
+      "query": "Apple Apple iPhone 17e 256 GB – 15.40 cm (6.1″) Super Retina XDR Display official specifications",
+      "official_title": "Buy iPhone 17e 256GB Black - Apple (IN)",
+      "official_url": "https://www.apple.com/in/shop/buy-iphone/iphone-17e/6.1%22-display-256gb-black",
+      "match_score": 0.3761,
+      "verified": false,
+      "status": "manual_review",
+      "reason": "Official domain found but model match is not strong enough",
+      "candidates": [
+        {
+          "title": "Buy iPhone 17e 256GB Black - Apple (IN)",
+          "url": "https://www.apple.com/in/shop/buy-iphone/iphone-17e/6.1%22-display-256gb-black",
+          "model_score": 0.25,
+          "search_score": 0.8806,
+          "combined_score": 0.3761
+        },
+        {
+          "title": "Buy iPhone 17e 256GB Soft Pink - Apple (IN)",
+          "url": "https://www.apple.com/in/shop/buy-iphone/iphone-17e/6.1%22-display-256gb-soft-pink",
+          "model_score": 0.25,
+          "search_score": 0.8766,
+          "combined_score": 0.3753
+        },
+        {
+          "title": "iPhone 17e - Technical Specifications - Apple (IN)",
+          "url": "https://www.apple.com/in/iphone-17e/specs",
+          "model_score": 0.25,
+          "search_score": 0.8539,
+          "combined_score": 0.3708
+        },
+        {
+          "title": "iPhone 17e - Apple (IN)",
+          "url": "https://www.apple.com/in/iphone-17e",
+          "model_score": 0.25,
+          "search_score": 0.8495,
+          "combined_score": 0.3699
+        },
+        {
+          "title": "Buy iPhone 17e - Apple (IN)",
+          "url": "https://www.apple.com/in/shop/buy-iphone/iphone-17e",
+          "model_score": 0.25,
+          "search_score": 0.8474,
+          "combined_score": 0.3695
+        }
+      ]
+    },
+    {
+      "product_id": "56",
+      "title": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo",
+      "brand": "Logitech",
+      "asin": "B01N4EV2TL",
+      "core_title": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo",
+      "allowed_domains": [
+        "logitech.com"
+      ],
+      "query": "Logitech Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo official specifications",
+      "official_title": "Logitech MK240 Minimalist Wireless Keyboard Mouse Combo",
+      "official_url": "https://www.logitech.com/en-in/shop/p/mk240-minimalist-keyboard-mouse",
+      "match_score": 0.761,
+      "verified": true,
+      "status": "candidate_verified",
+      "reason": "Official domain and model tokens matched",
+      "candidates": [
+        {
+          "title": "Logitech MK240 Minimalist Wireless Keyboard Mouse Combo",
+          "url": "https://www.logitech.com/en-in/shop/p/mk240-minimalist-keyboard-mouse",
+          "model_score": 0.75,
+          "search_score": 0.8048,
+          "combined_score": 0.761
+        },
+        {
+          "title": "Logitech MK235 Durable Wireless Keyboard and Mouse Combo",
+          "url": "https://www.logitech.com/en-us/shop/p/mk235-durable-keyboard-mouse",
+          "model_score": 0.625,
+          "search_score": 0.3944,
+          "combined_score": 0.5789
+        },
+        {
+          "title": "Startup Guide Logitech® Wireless Combo MK240",
+          "url": "https://www.logitech.com/assets/43136/4/mk240-quickstart-guide.pdf",
+          "model_score": 0.5,
+          "search_score": 0.8138,
+          "combined_score": 0.5628
+        },
+        {
+          "title": "Startup Guide Logitech® Wireless Combo MK240",
+          "url": "https://www.logitech.com/assets/43136/3/mk240-quickstart-guide.pdf",
+          "model_score": 0.5,
+          "search_score": 0.8037,
+          "combined_score": 0.5607
+        },
+        {
+          "title": "Logitech MK250 Bluetooth® Compact Keyboard Mouse Combo",
+          "url": "https://www.logitech.com/en-us/shop/p/mk250",
+          "model_score": 0.5,
+          "search_score": 0.4152,
+          "combined_score": 0.483
+        }
+      ]
+    }
+  ]
+}
