@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.0",
+  "schema_version": "3.0",
   "mode": "pilot",
   "products_requested": 5,
   "products": [
@@ -17,44 +17,92 @@
       "official_title": "Redmi 13 5g Prime Edition Specs, Features | Xiaomi India",
       "official_url": "https://www.mi.com/in/product/redmi-13-5g-prime-edition/specs",
       "match_score": 0.6537,
+      "identity_score": 90,
+      "identity_decision": "verified",
+      "identity_reasons": [
+        "Brand matched",
+        "All identity-bearing model tokens matched",
+        "Network generation matched",
+        "RAM mismatch"
+      ],
       "verified": false,
       "status": "manual_review",
-      "reason": "Official domain found but model match is not strong enough",
+      "reason": "Official candidate found, but identity requires manual review",
       "candidates": [
         {
           "title": "Redmi 13 5g Prime Edition Specs, Features | Xiaomi India",
           "url": "https://www.mi.com/in/product/redmi-13-5g-prime-edition/specs",
           "model_score": 0.6,
           "search_score": 0.8687,
-          "combined_score": 0.6537
+          "combined_score": 0.6537,
+          "identity_score": 90,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Network generation matched",
+            "RAM mismatch"
+          ]
         },
         {
           "title": "Redmi 13 5G Specs, Features | Xiaomi India",
           "url": "https://www.mi.com/in/product/redmi-13-5g/specs",
           "model_score": 0.6,
           "search_score": 0.8633,
-          "combined_score": 0.6527
+          "combined_score": 0.6527,
+          "identity_score": 90,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Network generation matched",
+            "RAM mismatch"
+          ]
         },
         {
           "title": "Redmi 13 5G FAQs of specs, offers, and more | Xiaomi India",
           "url": "https://www.mi.com/in/product/redmi-13-5g/faq",
           "model_score": 0.6,
           "search_score": 0.8259,
-          "combined_score": 0.6452
+          "combined_score": 0.6452,
+          "identity_score": 90,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Network generation matched",
+            "RAM mismatch"
+          ]
         },
         {
           "title": "Redmi 13 5G | Xiaomi India | | All Specs, Features",
           "url": "https://www.mi.com/in/product/redmi-13-5g",
           "model_score": 0.6,
           "search_score": 0.7821,
-          "combined_score": 0.6364
+          "combined_score": 0.6364,
+          "identity_score": 90,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Network generation matched",
+            "RAM mismatch"
+          ]
         },
         {
           "title": "Redmi 13 5G | Xiaomi India | Best & Latest Price to Buy",
           "url": "https://www.mi.com/in/product/redmi-13-5g/buy",
           "model_score": 0.6,
           "search_score": 0.7461,
-          "combined_score": 0.6292
+          "combined_score": 0.6292,
+          "identity_score": 90,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Network generation matched",
+            "RAM mismatch"
+          ]
         }
       ]
     },
@@ -68,49 +116,16 @@
         "realme.com"
       ],
       "query": "realme realme Buds Air 8 official specifications",
-      "official_title": "Noise Killer: The realme Buds Air 8",
-      "official_url": "https://c.realme.com/in/post-details/2027838664641376256",
-      "match_score": 0.9797,
-      "verified": true,
-      "status": "candidate_verified",
-      "reason": "Official domain and model tokens matched",
-      "candidates": [
-        {
-          "title": "Noise Killer: The realme Buds Air 8",
-          "url": "https://c.realme.com/in/post-details/2027838664641376256",
-          "model_score": 1.0,
-          "search_score": 0.8985,
-          "combined_score": 0.9797
-        },
-        {
-          "title": "realme Buds Air Full Specifications - realme (India)",
-          "url": "https://www.realme.com/in/realme-buds-air/specs",
-          "model_score": 1.0,
-          "search_score": 0.8283,
-          "combined_score": 0.9657
-        },
-        {
-          "title": "realme Buds Air Specifications",
-          "url": "https://www.realme.com/ph/realme-buds-air/specs",
-          "model_score": 1.0,
-          "search_score": 0.7728,
-          "combined_score": 0.9546
-        },
-        {
-          "title": "realme Buds Air - realme (India)",
-          "url": "https://www.realme.com/in/realme-buds-air",
-          "model_score": 1.0,
-          "search_score": 0.7263,
-          "combined_score": 0.9453
-        },
-        {
-          "title": "realme Buds Air Pro - realme (Global)",
-          "url": "https://www.realme.com/global/realme-buds-air-pro",
-          "model_score": 1.0,
-          "search_score": 0.6742,
-          "combined_score": 0.9348
-        }
-      ]
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": []
     },
     {
       "product_id": "13",
@@ -122,47 +137,50 @@
         "yamaha.com"
       ],
       "query": "Yamaha Yamaha PSS-E30 Remie Portable Mini Keyboard – 37 Keys official specifications",
-      "official_title": "Remie (PSS-E30) - Specs - Portable Keyboards - Keyboard Instruments - Musical Instruments - Products - Yamaha USA",
-      "official_url": "https://usa.yamaha.com/products/musical_instruments/keyboards/portable_keyboards/pss-e30/specs.html",
-      "match_score": 0.7207,
+      "official_title": "Yamaha PSS-E30 37-key Remie Keyboard",
+      "official_url": "https://shop.sg.yamaha.com/psse30.html",
+      "match_score": 0.7165,
+      "identity_score": 80,
+      "identity_decision": "manual_review",
+      "identity_reasons": [
+        "Brand matched",
+        "All identity-bearing model tokens matched",
+        "Supporting model/series token(s) matched: keyboard, pss, remie",
+        "Variant mismatch"
+      ],
       "verified": false,
       "status": "manual_review",
-      "reason": "Official domain found but model match is not strong enough",
+      "reason": "Official candidate found, but identity requires manual review",
       "candidates": [
-        {
-          "title": "Remie (PSS-E30) - Specs - Portable Keyboards - Keyboard Instruments - Musical Instruments - Products - Yamaha USA",
-          "url": "https://usa.yamaha.com/products/musical_instruments/keyboards/portable_keyboards/pss-e30/specs.html",
-          "model_score": 0.6667,
-          "search_score": 0.9369,
-          "combined_score": 0.7207
-        },
         {
           "title": "Yamaha PSS-E30 37-key Remie Keyboard",
           "url": "https://shop.sg.yamaha.com/psse30.html",
           "model_score": 0.6667,
           "search_score": 0.9156,
-          "combined_score": 0.7165
+          "combined_score": 0.7165,
+          "identity_score": 80,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: keyboard, pss, remie",
+            "Variant mismatch"
+          ]
         },
         {
           "title": "Yamaha PSS-E30 37-keys Mobile Keyboard",
           "url": "https://shop.sg.yamaha.com/psse30-bundle.html",
           "model_score": 0.6667,
           "search_score": 0.8758,
-          "combined_score": 0.7085
-        },
-        {
-          "title": "PSS-E30 | Yamaha Corporation.",
-          "url": "https://uk.yamaha.com/en/musical-instruments/keyboards/products/portable-keyboards/pss-e30/specs.html",
-          "model_score": 0.3333,
-          "search_score": 0.9071,
-          "combined_score": 0.4481
-        },
-        {
-          "title": "PSS-E30 | Yamaha Corporation.",
-          "url": "https://asia-oceania.yamaha.com/en/musical-instruments/keyboards/products/portable-keyboards/pss-e30/specs.html",
-          "model_score": 0.3333,
-          "search_score": 0.9071,
-          "combined_score": 0.4481
+          "combined_score": 0.7085,
+          "identity_score": 80,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: keyboard, keys, pss",
+            "Variant mismatch"
+          ]
         }
       ]
     },
@@ -176,49 +194,16 @@
         "apple.com"
       ],
       "query": "Apple Apple iPhone 17e 256 GB – 15.40 cm (6.1″) Super Retina XDR Display official specifications",
-      "official_title": "Buy iPhone 17e 256GB Black - Apple (IN)",
-      "official_url": "https://www.apple.com/in/shop/buy-iphone/iphone-17e/6.1%22-display-256gb-black",
-      "match_score": 0.3761,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
       "verified": false,
-      "status": "manual_review",
-      "reason": "Official domain found but model match is not strong enough",
-      "candidates": [
-        {
-          "title": "Buy iPhone 17e 256GB Black - Apple (IN)",
-          "url": "https://www.apple.com/in/shop/buy-iphone/iphone-17e/6.1%22-display-256gb-black",
-          "model_score": 0.25,
-          "search_score": 0.8806,
-          "combined_score": 0.3761
-        },
-        {
-          "title": "Buy iPhone 17e 256GB Soft Pink - Apple (IN)",
-          "url": "https://www.apple.com/in/shop/buy-iphone/iphone-17e/6.1%22-display-256gb-soft-pink",
-          "model_score": 0.25,
-          "search_score": 0.8766,
-          "combined_score": 0.3753
-        },
-        {
-          "title": "iPhone 17e - Technical Specifications - Apple (IN)",
-          "url": "https://www.apple.com/in/iphone-17e/specs",
-          "model_score": 0.25,
-          "search_score": 0.8539,
-          "combined_score": 0.3708
-        },
-        {
-          "title": "iPhone 17e - Apple (IN)",
-          "url": "https://www.apple.com/in/iphone-17e",
-          "model_score": 0.25,
-          "search_score": 0.8495,
-          "combined_score": 0.3699
-        },
-        {
-          "title": "Buy iPhone 17e - Apple (IN)",
-          "url": "https://www.apple.com/in/shop/buy-iphone/iphone-17e",
-          "model_score": 0.25,
-          "search_score": 0.8474,
-          "combined_score": 0.3695
-        }
-      ]
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": []
     },
     {
       "product_id": "56",
@@ -233,44 +218,77 @@
       "official_title": "Logitech MK240 Minimalist Wireless Keyboard Mouse Combo",
       "official_url": "https://www.logitech.com/en-in/shop/p/mk240-minimalist-keyboard-mouse",
       "match_score": 0.761,
-      "verified": true,
-      "status": "candidate_verified",
-      "reason": "Official domain and model tokens matched",
+      "identity_score": 80,
+      "identity_decision": "manual_review",
+      "identity_reasons": [
+        "Brand matched",
+        "All identity-bearing model tokens matched",
+        "Supporting model/series token(s) matched: combo, keyboard, mouse",
+        "Variant mismatch"
+      ],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "Official candidate found, but identity requires manual review",
       "candidates": [
         {
           "title": "Logitech MK240 Minimalist Wireless Keyboard Mouse Combo",
           "url": "https://www.logitech.com/en-in/shop/p/mk240-minimalist-keyboard-mouse",
           "model_score": 0.75,
           "search_score": 0.8048,
-          "combined_score": 0.761
+          "combined_score": 0.761,
+          "identity_score": 80,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: combo, keyboard, mouse",
+            "Variant mismatch"
+          ]
         },
         {
-          "title": "Logitech MK235 Durable Wireless Keyboard and Mouse Combo",
-          "url": "https://www.logitech.com/en-us/shop/p/mk235-durable-keyboard-mouse",
-          "model_score": 0.625,
-          "search_score": 0.3944,
-          "combined_score": 0.5789
+          "title": "Logitech MK240 Minimalist Wireless Keyboard Mouse Combo",
+          "url": "https://www.logitech.com/id-id/shop/p/mk240-minimalist-keyboard-mouse",
+          "model_score": 0.75,
+          "search_score": 0.8007,
+          "combined_score": 0.7601,
+          "identity_score": 80,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: combo, keyboard, mouse",
+            "Variant mismatch"
+          ]
         },
         {
           "title": "Startup Guide Logitech® Wireless Combo MK240",
           "url": "https://www.logitech.com/assets/43136/4/mk240-quickstart-guide.pdf",
           "model_score": 0.5,
           "search_score": 0.8138,
-          "combined_score": 0.5628
+          "combined_score": 0.5628,
+          "identity_score": 80,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: combo",
+            "Variant mismatch"
+          ]
         },
         {
           "title": "Startup Guide Logitech® Wireless Combo MK240",
           "url": "https://www.logitech.com/assets/43136/3/mk240-quickstart-guide.pdf",
           "model_score": 0.5,
           "search_score": 0.8037,
-          "combined_score": 0.5607
-        },
-        {
-          "title": "Logitech MK250 Bluetooth® Compact Keyboard Mouse Combo",
-          "url": "https://www.logitech.com/en-us/shop/p/mk250",
-          "model_score": 0.5,
-          "search_score": 0.4152,
-          "combined_score": 0.483
+          "combined_score": 0.5607,
+          "identity_score": 80,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: combo",
+            "Variant mismatch"
+          ]
         }
       ]
     }

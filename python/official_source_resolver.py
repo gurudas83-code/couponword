@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Coupon World Official Source Resolver v2.0
+Coupon World Official Source Resolver v3.0
 
 Safely finds candidate official manufacturer pages.
 It does not approve or publish product knowledge automatically.
@@ -16,6 +16,7 @@ from typing import Any
 from urllib.parse import urlparse
 
 from tavily import TavilyClient
+from resolver_engine import compare_identity
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -167,6 +168,33 @@ def hostname_matches(url: str, allowed_domains: list[str]) -> bool:
     )
 
 
+def is_unwanted_page(url: str) -> bool:
+    """
+    Reject pages that may be hosted on an official domain but are not
+    authoritative product/specification pages.
+    """
+
+    lowered = str(url or "").lower()
+
+    unwanted_fragments = (
+        "youtube.com",
+        "youtu.be",
+        "apps.apple.com",
+        "play.google.com",
+        "/newsroom/",
+        "/press-release",
+        "/blog/",
+        "/community/",
+        "/post-details/",
+        "c.realme.com/",
+    )
+
+    return any(
+        fragment in lowered
+        for fragment in unwanted_fragments
+    )
+
+
 def resolve_product(
     client: TavilyClient,
     product: dict[str, Any],
@@ -192,6 +220,9 @@ def resolve_product(
         "official_title": None,
         "official_url": None,
         "match_score": 0.0,
+        "identity_score": 0,
+        "identity_decision": None,
+        "identity_reasons": [],
         "verified": False,
         "status": "pending",
         "reason": None,
@@ -200,7 +231,9 @@ def resolve_product(
 
     if not allowed_domains:
         base_result["status"] = "manual_review"
-        base_result["reason"] = "No approved official-domain mapping for this brand"
+        base_result["reason"] = (
+            "No approved official-domain mapping for this brand"
+        )
         return base_result
 
     query = f"{brand} {core_title} official specifications"
@@ -219,18 +252,32 @@ def resolve_product(
         result_title = str(result.get("title") or "").strip()
         result_url = str(result.get("url") or "").strip()
 
-        # Tavily result must still pass our own strict hostname check.
         if not hostname_matches(result_url, allowed_domains):
             continue
 
-        model_score = token_match_score(core_title, result_title)
+        if is_unwanted_page(result_url):
+            continue
+
+        model_score = token_match_score(
+            core_title,
+            result_title,
+        )
         tavily_score = float(result.get("score") or 0)
 
-        # Model identity is more important than Tavily relevance.
         combined_score = round(
             (model_score * 0.8) + (tavily_score * 0.2),
             4,
         )
+
+        identity = compare_identity(
+            expected_text=core_title,
+            candidate_title=result_title,
+            candidate_url=result_url,
+            expected_brand=brand,
+        )
+
+        if identity.decision == "reject":
+            continue
 
         valid_candidates.append(
             {
@@ -239,11 +286,17 @@ def resolve_product(
                 "model_score": round(model_score, 4),
                 "search_score": round(tavily_score, 4),
                 "combined_score": combined_score,
+                "identity_score": identity.score,
+                "identity_decision": identity.decision,
+                "identity_reasons": identity.reasons,
             }
         )
 
     valid_candidates.sort(
-        key=lambda item: item["combined_score"],
+        key=lambda item: (
+            item.get("identity_score", 0),
+            item.get("combined_score", 0),
+        ),
         reverse=True,
     )
 
@@ -251,7 +304,9 @@ def resolve_product(
 
     if not valid_candidates:
         base_result["status"] = "not_found"
-        base_result["reason"] = "No result passed official-domain validation"
+        base_result["reason"] = (
+            "No result passed official-domain and identity validation"
+        )
         return base_result
 
     best = valid_candidates[0]
@@ -259,15 +314,24 @@ def resolve_product(
     base_result["official_title"] = best["title"]
     base_result["official_url"] = best["url"]
     base_result["match_score"] = best["combined_score"]
+    base_result["identity_score"] = best["identity_score"]
+    base_result["identity_decision"] = best["identity_decision"]
+    base_result["identity_reasons"] = best["identity_reasons"]
 
-    # Do not treat moderate or ambiguous candidates as verified.
-    if best["model_score"] >= 0.70 and best["combined_score"] >= 0.70:
+    if (
+        best["identity_decision"] == "verified"
+        and best["combined_score"] >= 0.70
+    ):
         base_result["verified"] = True
         base_result["status"] = "candidate_verified"
-        base_result["reason"] = "Official domain and model tokens matched"
+        base_result["reason"] = (
+            "Official domain, model identity and search relevance matched"
+        )
     else:
         base_result["status"] = "manual_review"
-        base_result["reason"] = "Official domain found but model match is not strong enough"
+        base_result["reason"] = (
+            "Official candidate found, but identity requires manual review"
+        )
 
     return base_result
 
@@ -322,12 +386,14 @@ def main() -> int:
 
         resolved_products.append(resolved)
 
-        print("Status :", resolved.get("status"))
-        print("URL    :", resolved.get("official_url"))
-        print("Score  :", resolved.get("match_score"))
+        print("Status   :", resolved.get("status"))
+        print("URL      :", resolved.get("official_url"))
+        print("Score    :", resolved.get("match_score"))
+        print("Identity :", resolved.get("identity_score"))
+        print("Decision :", resolved.get("identity_decision"))
 
     output = {
-        "schema_version": "2.0",
+        "schema_version": "3.0",
         "mode": "pilot",
         "products_requested": len(pilot_products),
         "products": resolved_products,
@@ -340,7 +406,7 @@ def main() -> int:
     )
 
     print("\n" + "=" * 64)
-    print("OFFICIAL SOURCE RESOLVER v2.0")
+    print("OFFICIAL SOURCE RESOLVER v3.0")
     print("=" * 64)
     print("Pilot products :", len(pilot_products))
     print("Verified       :", verified_count)
