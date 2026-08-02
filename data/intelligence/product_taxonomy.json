@@ -1,0 +1,2370 @@
+{
+  "schema_version": "1.1",
+  "generated_at": "2026-08-02T14:38:26.161661+00:00",
+  "source_file": "coupons.json",
+  "summary": {
+    "total_products": 74,
+    "classified": 72,
+    "manual_review": 0,
+    "excluded_non_product": 2,
+    "review_required": 2,
+    "unique_product_types": 47,
+    "unique_shopping_categories": 42
+  },
+  "product_type_counts": {
+    "smartphone": 10,
+    "earbuds": 4,
+    "headphones": 4,
+    "smartwatch": 3,
+    "tablet_keyboard_case": 2,
+    "clothing": 2,
+    "appliance_stand": 2,
+    "running_shoes": 2,
+    "promotional_listing": 2,
+    "telescope": 2,
+    "water_bottle": 2,
+    "bluetooth_speaker": 2,
+    "laptop": 2,
+    "microwave_oven": 2,
+    "stationery_set": 1,
+    "contact_lens_solution": 1,
+    "power_tool_accessory": 1,
+    "storage_organizer": 1,
+    "memory_card": 1,
+    "nutrition_supplement": 1,
+    "musical_keyboard": 1,
+    "construction_toy": 1,
+    "projector_lamp": 1,
+    "remote_control_toy": 1,
+    "air_cooler": 1,
+    "smart_speaker": 1,
+    "computer_mouse": 1,
+    "trimmer": 1,
+    "streaming_device": 1,
+    "power_bank": 1,
+    "e_reader": 1,
+    "trolley_bag": 1,
+    "analog_watch": 1,
+    "backpack": 1,
+    "yoga_mat": 1,
+    "skincare_set": 1,
+    "dumbbells": 1,
+    "ceiling_fan": 1,
+    "computer_keyboard": 1,
+    "telescope_cover": 1,
+    "gel_pens": 1,
+    "indoor_game": 1,
+    "furniture_hardware": 1,
+    "indoor_plants": 1,
+    "induction_cooktop": 1,
+    "makeup_kit": 1,
+    "pull_up_bar": 1
+  },
+  "shopping_category_counts": {
+    "Smartphones": 10,
+    "Audio": 10,
+    "Wearables": 3,
+    "Kitchen Appliances": 3,
+    "Computer & Mobile Accessories": 2,
+    "Clothing": 2,
+    "Appliance Accessories": 2,
+    "Footwear": 2,
+    "Promotions": 2,
+    "Optics & Astronomy": 2,
+    "Drinkware": 2,
+    "Computer Accessories": 2,
+    "Laptops": 2,
+    "Strength Training": 2,
+    "Stationery": 1,
+    "Eye Care": 1,
+    "Tools": 1,
+    "Home Storage": 1,
+    "Storage": 1,
+    "Nutrition": 1,
+    "Musical Instruments": 1,
+    "Educational Toys": 1,
+    "Decorative Lighting": 1,
+    "Remote Control Toys": 1,
+    "Cooling Appliances": 1,
+    "Smart Home": 1,
+    "Grooming": 1,
+    "TV & Streaming": 1,
+    "Mobile Accessories": 1,
+    "E-Readers": 1,
+    "Luggage": 1,
+    "Watches": 1,
+    "Bags": 1,
+    "Yoga": 1,
+    "Skin Care": 1,
+    "Fans": 1,
+    "Optics Accessories": 1,
+    "Writing Supplies": 1,
+    "Indoor Games": 1,
+    "Furniture Hardware": 1,
+    "Plants & Gardening": 1,
+    "Makeup": 1
+  },
+  "products": [
+    {
+      "product_id": "1",
+      "title": "JIADA Space Astronaut Stationery Set for Boys - with Badge, Notebook and Pen - Birthday Return Gift/Rakhi Gift for Boys, Kids, Blue",
+      "brand": "JIADA",
+      "current_category": "Prime Deal - Toys & Stationery",
+      "classification_status": "classified",
+      "product_type": "stationery_set",
+      "shopping_category": "Stationery",
+      "parent_category": "Office & School Supplies",
+      "tags": [
+        "stationery",
+        "gift"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "school",
+        "gifting"
+      ],
+      "matched_rule": "stationery_set",
+      "matched_phrases": [
+        "stationery set",
+        "notebook and pen",
+        "return gift"
+      ],
+      "candidate_types": [
+        "stationery_set"
+      ],
+      "confidence": 96,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "2",
+      "title": "Keyboard Case for Samsung Galaxy Tab A11+ & Tab A9 Plus 11” Folio Cover SM-X230, SM-X236B, SM-X210, SM-X215 with Trackpad, 7 Color Backlit Magnetically Detachable Bluetooth Keyboard, Multi-Angle View",
+      "brand": "",
+      "current_category": "Prime Deal - Electronics",
+      "classification_status": "classified",
+      "product_type": "tablet_keyboard_case",
+      "shopping_category": "Computer & Mobile Accessories",
+      "parent_category": "Electronics",
+      "tags": [
+        "keyboard",
+        "tablet accessory",
+        "case",
+        "bluetooth"
+      ],
+      "features": [
+        "wireless",
+        "bluetooth"
+      ],
+      "buyer_intents": [
+        "tablet productivity",
+        "portable typing"
+      ],
+      "matched_rule": "tablet_keyboard_case",
+      "matched_phrases": [
+        "keyboard case",
+        "folio cover",
+        "detachable bluetooth keyboard"
+      ],
+      "candidate_types": [
+        "smartphone",
+        "tablet_keyboard_case"
+      ],
+      "confidence": 82,
+      "review_required": true,
+      "reason": "Multiple taxonomy rules matched; strongest rule selected"
+    },
+    {
+      "product_id": "3",
+      "title": "TeeSlix NASA Cotton Boys t-Shirt, Teenagers | Soft, Premium Fabric | Regular Fit T-Shirt for Boys, Girls | Space Rocket Design | Blue,Black,RED | Age 8 to 17 Years",
+      "brand": "TeeSlix",
+      "current_category": "Clothing",
+      "classification_status": "classified",
+      "product_type": "clothing",
+      "shopping_category": "Clothing",
+      "parent_category": "Fashion",
+      "tags": [
+        "clothing",
+        "fashion"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "daily wear"
+      ],
+      "matched_rule": "clothing",
+      "matched_phrases": [
+        "t-shirt",
+        "shirt"
+      ],
+      "candidate_types": [
+        "clothing"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "4",
+      "title": "Bausch + Lomb Fresh Multi-Purpose 500Ml Contact Lens Solution (Pack Of 1)",
+      "brand": "Bausch + Lomb",
+      "current_category": "Health & Personal Care",
+      "classification_status": "classified",
+      "product_type": "contact_lens_solution",
+      "shopping_category": "Eye Care",
+      "parent_category": "Health & Personal Care",
+      "tags": [
+        "eye care",
+        "contact lens"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "lens cleaning"
+      ],
+      "matched_rule": "contact_lens_solution",
+      "matched_phrases": [
+        "contact lens solution",
+        "multi-purpose 500ml contact lens"
+      ],
+      "candidate_types": [
+        "contact_lens_solution"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "5",
+      "title": "AASONS Electric Drill Variable Angle Grinder Connecting Rod with 1pc Wood, Marble Cutting Blade, Flap Disk for Paint Remover, Sanding disc and Iron Grinding Wheel",
+      "brand": "AASONS",
+      "current_category": "Tools & Hardware",
+      "classification_status": "classified",
+      "product_type": "power_tool_accessory",
+      "shopping_category": "Tools",
+      "parent_category": "Home Improvement",
+      "tags": [
+        "tool",
+        "drill",
+        "grinder"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "repair",
+        "diy"
+      ],
+      "matched_rule": "power_tool_accessory",
+      "matched_phrases": [
+        "angle grinder connecting rod",
+        "cutting blade",
+        "grinding wheel",
+        "electric drill"
+      ],
+      "candidate_types": [
+        "power_tool_accessory"
+      ],
+      "confidence": 98,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "6",
+      "title": "Hebezon Expandable Appliance Roller Stand with Wheels Heavy Duty Mobile Dolly for Washing Machine, Refrigerator,Furniture Adjustable Moving Base for Home, Kitchen,Laundry Use",
+      "brand": "Hebezon",
+      "current_category": "Home Improvement",
+      "classification_status": "classified",
+      "product_type": "appliance_stand",
+      "shopping_category": "Appliance Accessories",
+      "parent_category": "Home Improvement",
+      "tags": [
+        "appliance stand",
+        "wheels",
+        "home utility"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "appliance mobility",
+        "floor protection"
+      ],
+      "matched_rule": "appliance_stand",
+      "matched_phrases": [
+        "appliance roller stand",
+        "mobile dolly",
+        "adjustable moving base"
+      ],
+      "candidate_types": [
+        "appliance_stand"
+      ],
+      "confidence": 96,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "7",
+      "title": "Campus Women's OGL-4 Sneakers",
+      "brand": "Campus",
+      "current_category": "Footwear",
+      "classification_status": "classified",
+      "product_type": "running_shoes",
+      "shopping_category": "Footwear",
+      "parent_category": "Fashion",
+      "tags": [
+        "shoes",
+        "footwear"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "running",
+        "daily wear"
+      ],
+      "matched_rule": "running_shoes",
+      "matched_phrases": [
+        "sneakers"
+      ],
+      "candidate_types": [
+        "running_shoes"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "8",
+      "title": "HomeStrap Rectangular Set Of 3 Large Plastic Storage Organizers/Baskets With Lid For Kitchen, Clothes, Multipurpose Vegetables, Toys, Books, Office, Stationery, Wardrobe(Biscuit, Grey, Brown)",
+      "brand": "HomeStrap",
+      "current_category": "Home Improvement",
+      "classification_status": "classified",
+      "product_type": "storage_organizer",
+      "shopping_category": "Home Storage",
+      "parent_category": "Home & Kitchen",
+      "tags": [
+        "storage",
+        "organizer"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "home organization"
+      ],
+      "matched_rule": "storage_organizer",
+      "matched_phrases": [
+        "storage organizer",
+        "plastic storage"
+      ],
+      "candidate_types": [
+        "storage_organizer"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "9",
+      "title": "Amazon Basics 64 GB Micro SD Card with Adapter | Upto 120 MB/s | Class 10 | U1, C10, V10 Speed Classes",
+      "brand": "Amazon",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "memory_card",
+      "shopping_category": "Storage",
+      "parent_category": "Electronics",
+      "tags": [
+        "storage",
+        "memory card"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "device storage"
+      ],
+      "matched_rule": "memory_card",
+      "matched_phrases": [
+        "micro sd",
+        "sd card"
+      ],
+      "candidate_types": [
+        "memory_card"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "10",
+      "title": "Redmi 13 5G Hawaiian Blue (8GB RAM, 128GB Storage)",
+      "brand": "Redmi",
+      "current_category": "Mobiles",
+      "classification_status": "classified",
+      "product_type": "smartphone",
+      "shopping_category": "Smartphones",
+      "parent_category": "Electronics",
+      "tags": [
+        "mobile",
+        "phone",
+        "smartphone"
+      ],
+      "features": [
+        "5g"
+      ],
+      "buyer_intents": [
+        "daily use",
+        "communication"
+      ],
+      "matched_rule": "smartphone",
+      "matched_phrases": [
+        "redmi 13",
+        "smartphone"
+      ],
+      "candidate_types": [
+        "smartphone"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "11",
+      "title": "realme Buds Air 8, 11mm+6mm Dual Dynamic Bass Drivers, 58Hrs Playtime, 55dB ANC, 6 Mic ENC, 45ms Low Latency, 360° Spatial Audio, Hi-Res LHDC, IP55 Dust & Water Resistant, BT v5.4 (Master Gold)",
+      "brand": "realme",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "earbuds",
+      "shopping_category": "Audio",
+      "parent_category": "Electronics",
+      "tags": [
+        "audio",
+        "earbuds",
+        "wireless"
+      ],
+      "features": [
+        "anc",
+        "enc",
+        "water_resistant",
+        "gaming"
+      ],
+      "buyer_intents": [
+        "music",
+        "calling",
+        "travel"
+      ],
+      "matched_rule": "earbuds",
+      "matched_phrases": [
+        "buds air"
+      ],
+      "candidate_types": [
+        "earbuds"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "12",
+      "title": "Amway Nutrilite Cal Mag D K2 (90 Tablets)",
+      "brand": "Nutrilite",
+      "current_category": "Health & Personal Care",
+      "classification_status": "classified",
+      "product_type": "nutrition_supplement",
+      "shopping_category": "Nutrition",
+      "parent_category": "Health & Personal Care",
+      "tags": [
+        "nutrition",
+        "supplement"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "daily nutrition"
+      ],
+      "matched_rule": "nutrition_supplement",
+      "matched_phrases": [
+        "nutrilite",
+        "cal mag",
+        "tablets"
+      ],
+      "candidate_types": [
+        "nutrition_supplement"
+      ],
+      "confidence": 96,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "13",
+      "title": "Yamaha PSS-E30 Remie Portable Mini Keyboard – 37 Keys, White, Built-in Songs, Sound Effects & Quiz Mode, Lightweight, Ideal for Kids & Early Learners",
+      "brand": "Yamaha",
+      "current_category": "Musical Instruments",
+      "classification_status": "classified",
+      "product_type": "musical_keyboard",
+      "shopping_category": "Musical Instruments",
+      "parent_category": "Hobbies & Entertainment",
+      "tags": [
+        "keyboard instrument",
+        "music",
+        "keys"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "music learning",
+        "kids music"
+      ],
+      "matched_rule": "musical_keyboard",
+      "matched_phrases": [
+        "portable mini keyboard",
+        "pss-e30",
+        "37 keys"
+      ],
+      "candidate_types": [
+        "musical_keyboard"
+      ],
+      "confidence": 96,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "14",
+      "title": "Apple iPhone 17e 256 GB (Black) – 15.40 cm (6.1″) Super Retina XDR Display, A19 Chip, All-Day Battery Life, 48MP Fusion Camera, 256GB Starting Storage",
+      "brand": "Apple",
+      "current_category": "Cell Phones & Accessories",
+      "classification_status": "classified",
+      "product_type": "smartphone",
+      "shopping_category": "Smartphones",
+      "parent_category": "Electronics",
+      "tags": [
+        "mobile",
+        "phone",
+        "smartphone"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "daily use",
+        "communication"
+      ],
+      "matched_rule": "smartphone",
+      "matched_phrases": [
+        "iphone"
+      ],
+      "candidate_types": [
+        "smartphone"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "15",
+      "title": "Apple iPhone 17e 512GB",
+      "brand": "Apple",
+      "current_category": "Mobiles",
+      "classification_status": "classified",
+      "product_type": "smartphone",
+      "shopping_category": "Smartphones",
+      "parent_category": "Electronics",
+      "tags": [
+        "mobile",
+        "phone",
+        "smartphone"
+      ],
+      "features": [
+        "usb_c"
+      ],
+      "buyer_intents": [
+        "daily use",
+        "communication"
+      ],
+      "matched_rule": "smartphone",
+      "matched_phrases": [
+        "iphone"
+      ],
+      "candidate_types": [
+        "smartphone"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "16",
+      "title": "Mega 70%+ OFF Store",
+      "brand": "",
+      "current_category": "Offers",
+      "classification_status": "excluded_non_product",
+      "product_type": "promotional_listing",
+      "shopping_category": "Promotions",
+      "parent_category": "Promotions",
+      "tags": [
+        "promotion"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "deal discovery"
+      ],
+      "matched_rule": "promotional_listing",
+      "matched_phrases": [],
+      "confidence": 100,
+      "review_required": false,
+      "reason": "Listing appears to represent a store promotion, not a product"
+    },
+    {
+      "product_id": "17",
+      "title": "Online Store Fashion Fest",
+      "brand": "",
+      "current_category": "Fashion",
+      "classification_status": "excluded_non_product",
+      "product_type": "promotional_listing",
+      "shopping_category": "Promotions",
+      "parent_category": "Promotions",
+      "tags": [
+        "promotion"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "deal discovery"
+      ],
+      "matched_rule": "promotional_listing",
+      "matched_phrases": [],
+      "confidence": 100,
+      "review_required": false,
+      "reason": "Listing appears to represent a store promotion, not a product"
+    },
+    {
+      "product_id": "18",
+      "title": "STEMpedia Mechanical Construction Kit for Boys 7-14 Years",
+      "brand": "STEMpedia",
+      "current_category": "Toys",
+      "classification_status": "classified",
+      "product_type": "construction_toy",
+      "shopping_category": "Educational Toys",
+      "parent_category": "Toys",
+      "tags": [
+        "toy",
+        "stem",
+        "educational"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "learning",
+        "gifting"
+      ],
+      "matched_rule": "construction_toy",
+      "matched_phrases": [
+        "mechanical construction kit",
+        "construction kit"
+      ],
+      "candidate_types": [
+        "construction_toy"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "19",
+      "title": "Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon Saturn Planets",
+      "brand": "",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "telescope",
+      "shopping_category": "Optics & Astronomy",
+      "parent_category": "Hobbies & Entertainment",
+      "tags": [
+        "telescope",
+        "astronomy"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "astronomy",
+        "hobby"
+      ],
+      "matched_rule": "telescope",
+      "matched_phrases": [
+        "telescope 235x"
+      ],
+      "candidate_types": [
+        "telescope"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "20",
+      "title": "Audavibe 76700 Newtonian Reflector Telescope 235x Zoom for Moon & Planets",
+      "brand": "Audavibe",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "telescope",
+      "shopping_category": "Optics & Astronomy",
+      "parent_category": "Hobbies & Entertainment",
+      "tags": [
+        "telescope",
+        "astronomy"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "astronomy",
+        "hobby"
+      ],
+      "matched_rule": "telescope",
+      "matched_phrases": [
+        "telescope 235x",
+        "reflector telescope"
+      ],
+      "candidate_types": [
+        "telescope"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "21",
+      "title": "Gesto Galaxy Projector Pro Planetarium - 13 Film Discs Nebula Moon Lamp",
+      "brand": "Gesto",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "projector_lamp",
+      "shopping_category": "Decorative Lighting",
+      "parent_category": "Home",
+      "tags": [
+        "projector lamp",
+        "decor",
+        "lighting"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "room decor",
+        "gifting"
+      ],
+      "matched_rule": "projector_lamp",
+      "matched_phrases": [
+        "galaxy projector",
+        "planetarium",
+        "nebula moon lamp"
+      ],
+      "candidate_types": [
+        "projector_lamp"
+      ],
+      "confidence": 96,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "22",
+      "title": "Popsugar Rechargeable Hand Gesture Control Car with Headlight, USB Charging RC Stunt Car for Kids",
+      "brand": "Popsugar",
+      "current_category": "Toys",
+      "classification_status": "classified",
+      "product_type": "remote_control_toy",
+      "shopping_category": "Remote Control Toys",
+      "parent_category": "Toys",
+      "tags": [
+        "toy",
+        "remote control"
+      ],
+      "features": [
+        "usb_c",
+        "rechargeable"
+      ],
+      "buyer_intents": [
+        "kids play",
+        "gifting"
+      ],
+      "matched_rule": "remote_control_toy",
+      "matched_phrases": [
+        "gesture control car",
+        "rc stunt car"
+      ],
+      "candidate_types": [
+        "remote_control_toy"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "23",
+      "title": "TEKCOOL Portable Air Cooler Fan with Ice Chamber, USB Rechargeable Mini Cooling Fan for Home Kitchen",
+      "brand": "TEKCOOL",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "air_cooler",
+      "shopping_category": "Cooling Appliances",
+      "parent_category": "Home Appliances",
+      "tags": [
+        "cooling",
+        "fan"
+      ],
+      "features": [
+        "rechargeable"
+      ],
+      "buyer_intents": [
+        "personal cooling"
+      ],
+      "matched_rule": "air_cooler",
+      "matched_phrases": [
+        "air cooler",
+        "cooling fan",
+        "mini cooling fan"
+      ],
+      "candidate_types": [
+        "air_cooler"
+      ],
+      "confidence": 96,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "24",
+      "title": "Fire-Boltt Ninja Smartwatch",
+      "brand": "Fire-Boltt",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "smartwatch",
+      "shopping_category": "Wearables",
+      "parent_category": "Electronics",
+      "tags": [
+        "smartwatch",
+        "wearable"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "fitness tracking",
+        "notifications"
+      ],
+      "matched_rule": "smartwatch",
+      "matched_phrases": [
+        "smartwatch"
+      ],
+      "candidate_types": [
+        "smartwatch"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "25",
+      "title": "Sony Wireless Headphones",
+      "brand": "Sony",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "headphones",
+      "shopping_category": "Audio",
+      "parent_category": "Electronics",
+      "tags": [
+        "audio",
+        "headphones"
+      ],
+      "features": [
+        "wireless"
+      ],
+      "buyer_intents": [
+        "music",
+        "calling",
+        "gaming"
+      ],
+      "matched_rule": "headphones",
+      "matched_phrases": [
+        "headphones",
+        "headphone"
+      ],
+      "candidate_types": [
+        "headphones"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "26",
+      "title": "Echo Dot 5th Gen",
+      "brand": "Amazon",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "smart_speaker",
+      "shopping_category": "Smart Home",
+      "parent_category": "Electronics",
+      "tags": [
+        "smart speaker",
+        "voice assistant"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "smart home",
+        "music"
+      ],
+      "matched_rule": "smart_speaker",
+      "matched_phrases": [
+        "echo dot"
+      ],
+      "candidate_types": [
+        "smart_speaker"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "27",
+      "title": "Milton Thermosteel Bottle",
+      "brand": "Milton",
+      "current_category": "Home",
+      "classification_status": "classified",
+      "product_type": "water_bottle",
+      "shopping_category": "Drinkware",
+      "parent_category": "Home & Kitchen",
+      "tags": [
+        "bottle",
+        "drinkware"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "hydration",
+        "travel"
+      ],
+      "matched_rule": "water_bottle",
+      "matched_phrases": [
+        "thermosteel bottle"
+      ],
+      "candidate_types": [
+        "water_bottle"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "28",
+      "title": "HP Wireless Mouse",
+      "brand": "HP",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "computer_mouse",
+      "shopping_category": "Computer Accessories",
+      "parent_category": "Electronics",
+      "tags": [
+        "mouse",
+        "computer accessory"
+      ],
+      "features": [
+        "wireless"
+      ],
+      "buyer_intents": [
+        "office productivity",
+        "computer use"
+      ],
+      "matched_rule": "computer_mouse",
+      "matched_phrases": [
+        "wireless mouse"
+      ],
+      "candidate_types": [
+        "computer_mouse"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "29",
+      "title": "boAt Rockerz 450 Headphones",
+      "brand": "boAt",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "headphones",
+      "shopping_category": "Audio",
+      "parent_category": "Electronics",
+      "tags": [
+        "audio",
+        "headphones"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "music",
+        "calling",
+        "gaming"
+      ],
+      "matched_rule": "headphones",
+      "matched_phrases": [
+        "headphones",
+        "headphone",
+        "rockerz"
+      ],
+      "candidate_types": [
+        "headphones"
+      ],
+      "confidence": 96,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "30",
+      "title": "OnePlus Nord CE",
+      "brand": "OnePlus",
+      "current_category": "Mobiles",
+      "classification_status": "classified",
+      "product_type": "smartphone",
+      "shopping_category": "Smartphones",
+      "parent_category": "Electronics",
+      "tags": [
+        "mobile",
+        "phone",
+        "smartphone"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "daily use",
+        "communication"
+      ],
+      "matched_rule": "smartphone",
+      "matched_phrases": [
+        "oneplus nord"
+      ],
+      "candidate_types": [
+        "smartphone"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "31",
+      "title": "Philips Trimmer",
+      "brand": "Philips",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "trimmer",
+      "shopping_category": "Grooming",
+      "parent_category": "Beauty & Personal Care",
+      "tags": [
+        "grooming",
+        "trimmer"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "personal grooming"
+      ],
+      "matched_rule": "trimmer",
+      "matched_phrases": [
+        "trimmer"
+      ],
+      "candidate_types": [
+        "trimmer"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "32",
+      "title": "boAt Airdopes 311 Pro TWS Earbuds",
+      "brand": "boAt",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "earbuds",
+      "shopping_category": "Audio",
+      "parent_category": "Electronics",
+      "tags": [
+        "audio",
+        "earbuds",
+        "wireless"
+      ],
+      "features": [
+        "wireless"
+      ],
+      "buyer_intents": [
+        "music",
+        "calling",
+        "travel"
+      ],
+      "matched_rule": "earbuds",
+      "matched_phrases": [
+        "earbuds",
+        "airdopes",
+        "tws"
+      ],
+      "candidate_types": [
+        "earbuds"
+      ],
+      "confidence": 96,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "33",
+      "title": "Boult Audio Bluetooth Speaker",
+      "brand": "Boult Audio",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "bluetooth_speaker",
+      "shopping_category": "Audio",
+      "parent_category": "Electronics",
+      "tags": [
+        "speaker",
+        "bluetooth",
+        "audio"
+      ],
+      "features": [
+        "wireless",
+        "bluetooth"
+      ],
+      "buyer_intents": [
+        "music",
+        "party",
+        "portable audio"
+      ],
+      "matched_rule": "bluetooth_speaker",
+      "matched_phrases": [
+        "bluetooth speaker"
+      ],
+      "candidate_types": [
+        "bluetooth_speaker"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "34",
+      "title": "Fire TV Stick 4K",
+      "brand": "Amazon",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "streaming_device",
+      "shopping_category": "TV & Streaming",
+      "parent_category": "Electronics",
+      "tags": [
+        "streaming",
+        "tv accessory"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "home entertainment"
+      ],
+      "matched_rule": "streaming_device",
+      "matched_phrases": [
+        "fire tv stick"
+      ],
+      "candidate_types": [
+        "streaming_device"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "35",
+      "title": "Puma Men's Running Shoes",
+      "brand": "Puma",
+      "current_category": "Fashion",
+      "classification_status": "classified",
+      "product_type": "running_shoes",
+      "shopping_category": "Footwear",
+      "parent_category": "Fashion",
+      "tags": [
+        "shoes",
+        "footwear"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "running",
+        "daily wear"
+      ],
+      "matched_rule": "running_shoes",
+      "matched_phrases": [
+        "running shoes"
+      ],
+      "candidate_types": [
+        "running_shoes"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "36",
+      "title": "boAt Stone Bluetooth Speaker",
+      "brand": "boAt",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "bluetooth_speaker",
+      "shopping_category": "Audio",
+      "parent_category": "Electronics",
+      "tags": [
+        "speaker",
+        "bluetooth",
+        "audio"
+      ],
+      "features": [
+        "wireless",
+        "bluetooth"
+      ],
+      "buyer_intents": [
+        "music",
+        "party",
+        "portable audio"
+      ],
+      "matched_rule": "bluetooth_speaker",
+      "matched_phrases": [
+        "bluetooth speaker",
+        "boat stone"
+      ],
+      "candidate_types": [
+        "bluetooth_speaker"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "37",
+      "title": "Mi Power Bank 10000mAh",
+      "brand": "Mi",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "power_bank",
+      "shopping_category": "Mobile Accessories",
+      "parent_category": "Electronics",
+      "tags": [
+        "charging",
+        "power bank",
+        "mobile accessory"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "travel charging",
+        "backup power"
+      ],
+      "matched_rule": "power_bank",
+      "matched_phrases": [
+        "power bank"
+      ],
+      "candidate_types": [
+        "power_bank"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "38",
+      "title": "Samsung Galaxy M16 5G",
+      "brand": "Samsung",
+      "current_category": "Mobiles",
+      "classification_status": "classified",
+      "product_type": "smartphone",
+      "shopping_category": "Smartphones",
+      "parent_category": "Electronics",
+      "tags": [
+        "mobile",
+        "phone",
+        "smartphone"
+      ],
+      "features": [
+        "5g"
+      ],
+      "buyer_intents": [
+        "daily use",
+        "communication"
+      ],
+      "matched_rule": "smartphone",
+      "matched_phrases": [
+        "samsung galaxy",
+        "galaxy m"
+      ],
+      "candidate_types": [
+        "smartphone"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "39",
+      "title": "Kindle Paperwhite",
+      "brand": "Amazon",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "e_reader",
+      "shopping_category": "E-Readers",
+      "parent_category": "Electronics",
+      "tags": [
+        "reading",
+        "e-reader"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "digital reading"
+      ],
+      "matched_rule": "e_reader",
+      "matched_phrases": [
+        "kindle"
+      ],
+      "candidate_types": [
+        "e_reader"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "40",
+      "title": "American Tourister Trolley Bag",
+      "brand": "American Tourister",
+      "current_category": "Fashion",
+      "classification_status": "classified",
+      "product_type": "trolley_bag",
+      "shopping_category": "Luggage",
+      "parent_category": "Fashion & Travel",
+      "tags": [
+        "luggage",
+        "travel"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "travel"
+      ],
+      "matched_rule": "trolley_bag",
+      "matched_phrases": [
+        "trolley bag"
+      ],
+      "candidate_types": [
+        "trolley_bag"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "41",
+      "title": "ASUS Gaming Laptop",
+      "brand": "ASUS",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "laptop",
+      "shopping_category": "Laptops",
+      "parent_category": "Electronics",
+      "tags": [
+        "laptop",
+        "computer"
+      ],
+      "features": [
+        "gaming"
+      ],
+      "buyer_intents": [
+        "work",
+        "study",
+        "gaming"
+      ],
+      "matched_rule": "laptop",
+      "matched_phrases": [
+        "gaming laptop",
+        "laptop"
+      ],
+      "candidate_types": [
+        "laptop"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "42",
+      "title": "Realme Buds T100",
+      "brand": "realme",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "earbuds",
+      "shopping_category": "Audio",
+      "parent_category": "Electronics",
+      "tags": [
+        "audio",
+        "earbuds",
+        "wireless"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "music",
+        "calling",
+        "travel"
+      ],
+      "matched_rule": "earbuds",
+      "matched_phrases": [
+        "buds t"
+      ],
+      "candidate_types": [
+        "earbuds"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "43",
+      "title": "Titan Analog Watch",
+      "brand": "Titan",
+      "current_category": "Fashion",
+      "classification_status": "classified",
+      "product_type": "analog_watch",
+      "shopping_category": "Watches",
+      "parent_category": "Fashion",
+      "tags": [
+        "watch",
+        "fashion accessory"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "daily wear",
+        "gifting"
+      ],
+      "matched_rule": "analog_watch",
+      "matched_phrases": [
+        "analog watch"
+      ],
+      "candidate_types": [
+        "analog_watch"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "44",
+      "title": "Wildcraft Backpack 35L",
+      "brand": "Wildcraft",
+      "current_category": "Fashion",
+      "classification_status": "classified",
+      "product_type": "backpack",
+      "shopping_category": "Bags",
+      "parent_category": "Fashion & Travel",
+      "tags": [
+        "bag",
+        "backpack"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "travel",
+        "school",
+        "office"
+      ],
+      "matched_rule": "backpack",
+      "matched_phrases": [
+        "backpack"
+      ],
+      "candidate_types": [
+        "backpack"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "45",
+      "title": "Levi's Men's Jeans",
+      "brand": "Levi's",
+      "current_category": "Fashion",
+      "classification_status": "classified",
+      "product_type": "clothing",
+      "shopping_category": "Clothing",
+      "parent_category": "Fashion",
+      "tags": [
+        "clothing",
+        "fashion"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "daily wear"
+      ],
+      "matched_rule": "clothing",
+      "matched_phrases": [
+        "jeans"
+      ],
+      "candidate_types": [
+        "clothing"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "46",
+      "title": "Strauss Yoga Mat",
+      "brand": "Strauss",
+      "current_category": "Fitness",
+      "classification_status": "classified",
+      "product_type": "yoga_mat",
+      "shopping_category": "Yoga",
+      "parent_category": "Fitness",
+      "tags": [
+        "fitness",
+        "yoga"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "yoga",
+        "exercise"
+      ],
+      "matched_rule": "yoga_mat",
+      "matched_phrases": [
+        "yoga mat"
+      ],
+      "candidate_types": [
+        "yoga_mat"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "47",
+      "title": "Samsung 28L Microwave Oven",
+      "brand": "Samsung",
+      "current_category": "Home",
+      "classification_status": "classified",
+      "product_type": "microwave_oven",
+      "shopping_category": "Kitchen Appliances",
+      "parent_category": "Home Appliances",
+      "tags": [
+        "microwave",
+        "kitchen appliance"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "cooking",
+        "reheating"
+      ],
+      "matched_rule": "microwave_oven",
+      "matched_phrases": [
+        "microwave oven",
+        "microwave"
+      ],
+      "candidate_types": [
+        "microwave_oven"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "48",
+      "title": "Mamaearth Skincare Combo",
+      "brand": "Mamaearth",
+      "current_category": "Beauty",
+      "classification_status": "classified",
+      "product_type": "skincare_set",
+      "shopping_category": "Skin Care",
+      "parent_category": "Beauty",
+      "tags": [
+        "skincare",
+        "beauty"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "skin care",
+        "gifting"
+      ],
+      "matched_rule": "skincare_set",
+      "matched_phrases": [
+        "skincare combo"
+      ],
+      "candidate_types": [
+        "skincare_set"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "49",
+      "title": "Kore Adjustable Dumbbells",
+      "brand": "Kore",
+      "current_category": "Fitness",
+      "classification_status": "classified",
+      "product_type": "dumbbells",
+      "shopping_category": "Strength Training",
+      "parent_category": "Fitness",
+      "tags": [
+        "fitness",
+        "weights"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "strength training",
+        "home workout"
+      ],
+      "matched_rule": "dumbbells",
+      "matched_phrases": [
+        "dumbbells",
+        "adjustable dumbbell"
+      ],
+      "candidate_types": [
+        "dumbbells"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "50",
+      "title": "Cello Water Bottle Set",
+      "brand": "Cello",
+      "current_category": "Home",
+      "classification_status": "classified",
+      "product_type": "water_bottle",
+      "shopping_category": "Drinkware",
+      "parent_category": "Home & Kitchen",
+      "tags": [
+        "bottle",
+        "drinkware"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "hydration",
+        "travel"
+      ],
+      "matched_rule": "water_bottle",
+      "matched_phrases": [
+        "water bottle set",
+        "water bottle"
+      ],
+      "candidate_types": [
+        "water_bottle"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "51",
+      "title": "Bajaj Ceiling Fan",
+      "brand": "Bajaj",
+      "current_category": "Home",
+      "classification_status": "classified",
+      "product_type": "ceiling_fan",
+      "shopping_category": "Fans",
+      "parent_category": "Home Appliances",
+      "tags": [
+        "fan",
+        "home appliance"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "home cooling"
+      ],
+      "matched_rule": "ceiling_fan",
+      "matched_phrases": [
+        "ceiling fan"
+      ],
+      "candidate_types": [
+        "ceiling_fan"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "52",
+      "title": "Noise Smartwatch with Bluetooth Calling, AMOLED Display, Stainless Steel Design, Emergency SOS & Smart Connectivity",
+      "brand": "Noise",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "smartwatch",
+      "shopping_category": "Wearables",
+      "parent_category": "Electronics",
+      "tags": [
+        "smartwatch",
+        "wearable"
+      ],
+      "features": [
+        "wireless",
+        "bluetooth",
+        "amoled"
+      ],
+      "buyer_intents": [
+        "fitness tracking",
+        "notifications"
+      ],
+      "matched_rule": "smartwatch",
+      "matched_phrases": [
+        "smartwatch"
+      ],
+      "candidate_types": [
+        "smartwatch"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "53",
+      "title": "Noise ColorFit Smartwatch",
+      "brand": "Noise",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "smartwatch",
+      "shopping_category": "Wearables",
+      "parent_category": "Electronics",
+      "tags": [
+        "smartwatch",
+        "wearable"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "fitness tracking",
+        "notifications"
+      ],
+      "matched_rule": "smartwatch",
+      "matched_phrases": [
+        "smartwatch",
+        "colorfit"
+      ],
+      "candidate_types": [
+        "smartwatch"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "54",
+      "title": "Apple AirPods",
+      "brand": "Apple",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "earbuds",
+      "shopping_category": "Audio",
+      "parent_category": "Electronics",
+      "tags": [
+        "audio",
+        "earbuds",
+        "wireless"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "music",
+        "calling",
+        "travel"
+      ],
+      "matched_rule": "earbuds",
+      "matched_phrases": [
+        "airpods"
+      ],
+      "candidate_types": [
+        "earbuds"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "55",
+      "title": "Dell Inspiron Laptop",
+      "brand": "Dell",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "laptop",
+      "shopping_category": "Laptops",
+      "parent_category": "Electronics",
+      "tags": [
+        "laptop",
+        "computer"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "work",
+        "study",
+        "gaming"
+      ],
+      "matched_rule": "laptop",
+      "matched_phrases": [
+        "inspiron laptop",
+        "laptop"
+      ],
+      "candidate_types": [
+        "laptop"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "56",
+      "title": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo",
+      "brand": "Logitech",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "computer_keyboard",
+      "shopping_category": "Computer Accessories",
+      "parent_category": "Electronics",
+      "tags": [
+        "keyboard",
+        "computer accessory"
+      ],
+      "features": [
+        "wireless"
+      ],
+      "buyer_intents": [
+        "office productivity",
+        "typing"
+      ],
+      "matched_rule": "computer_keyboard",
+      "matched_phrases": [
+        "keyboard and mouse combo",
+        "mk240"
+      ],
+      "candidate_types": [
+        "computer_keyboard"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "57",
+      "title": "REDMI Note 15 5G (Glacier Blue, 8GB RAM, 128GB Storage)",
+      "brand": "Redmi",
+      "current_category": "Mobiles",
+      "classification_status": "classified",
+      "product_type": "smartphone",
+      "shopping_category": "Smartphones",
+      "parent_category": "Electronics",
+      "tags": [
+        "mobile",
+        "phone",
+        "smartphone"
+      ],
+      "features": [
+        "5g"
+      ],
+      "buyer_intents": [
+        "daily use",
+        "communication"
+      ],
+      "matched_rule": "smartphone",
+      "matched_phrases": [
+        "redmi note"
+      ],
+      "candidate_types": [
+        "smartphone"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "58",
+      "title": "JBL Tune 510BT Headphones",
+      "brand": "JBL",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "headphones",
+      "shopping_category": "Audio",
+      "parent_category": "Electronics",
+      "tags": [
+        "audio",
+        "headphones"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "music",
+        "calling",
+        "gaming"
+      ],
+      "matched_rule": "headphones",
+      "matched_phrases": [
+        "headphones",
+        "headphone"
+      ],
+      "candidate_types": [
+        "headphones"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "59",
+      "title": "HP H120 Wired Headset with Microphone, Noise Cancelling Mic, Adjustable Headband, 3.5mm Jack",
+      "brand": "Noise",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "headphones",
+      "shopping_category": "Audio",
+      "parent_category": "Electronics",
+      "tags": [
+        "audio",
+        "headphones"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "music",
+        "calling",
+        "gaming"
+      ],
+      "matched_rule": "headphones",
+      "matched_phrases": [
+        "headset",
+        "wired headset"
+      ],
+      "candidate_types": [
+        "headphones"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "60",
+      "title": "typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023, 7-Color Backlit with Touchpad",
+      "brand": "",
+      "current_category": "Electronics",
+      "classification_status": "classified",
+      "product_type": "tablet_keyboard_case",
+      "shopping_category": "Computer & Mobile Accessories",
+      "parent_category": "Electronics",
+      "tags": [
+        "keyboard",
+        "tablet accessory",
+        "case",
+        "bluetooth"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "tablet productivity",
+        "portable typing"
+      ],
+      "matched_rule": "tablet_keyboard_case",
+      "matched_phrases": [
+        "keyboard case"
+      ],
+      "candidate_types": [
+        "smartphone",
+        "tablet_keyboard_case"
+      ],
+      "confidence": 82,
+      "review_required": true,
+      "reason": "Multiple taxonomy rules matched; strongest rule selected"
+    },
+    {
+      "product_id": "61",
+      "title": "Encasify Telescope Cover, Waterproof Dustproof Sunproof Outdoor Protective Cover with Zipper and Durable Closure",
+      "brand": "Encasify",
+      "current_category": "Home",
+      "classification_status": "classified",
+      "product_type": "telescope_cover",
+      "shopping_category": "Optics Accessories",
+      "parent_category": "Hobbies & Entertainment",
+      "tags": [
+        "telescope accessory",
+        "protective cover"
+      ],
+      "features": [
+        "enc",
+        "water_resistant"
+      ],
+      "buyer_intents": [
+        "equipment protection"
+      ],
+      "matched_rule": "telescope_cover",
+      "matched_phrases": [
+        "telescope cover"
+      ],
+      "candidate_types": [
+        "telescope_cover"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "62",
+      "title": "Hauser Fizzy Gel Pen Jar, Transparent Lightweight Body, Comfortable Grip, Smooth Ink Flow, Blue Ink Pack of 25 Pens",
+      "brand": "Hauser",
+      "current_category": "Office Supplies",
+      "classification_status": "classified",
+      "product_type": "gel_pens",
+      "shopping_category": "Writing Supplies",
+      "parent_category": "Office & School Supplies",
+      "tags": [
+        "pen",
+        "stationery"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "writing",
+        "school",
+        "office"
+      ],
+      "matched_rule": "gel_pens",
+      "matched_phrases": [
+        "gel pen",
+        "pens",
+        "pen jar"
+      ],
+      "candidate_types": [
+        "gel_pens"
+      ],
+      "confidence": 96,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "63",
+      "title": "Wembley Hover Football for Kids, Electric Floating Soccer Ball, Rechargeable Indoor Game, Birthday Gift for Boys",
+      "brand": "Wembley",
+      "current_category": "Toys",
+      "classification_status": "classified",
+      "product_type": "indoor_game",
+      "shopping_category": "Indoor Games",
+      "parent_category": "Toys",
+      "tags": [
+        "toy",
+        "indoor game"
+      ],
+      "features": [
+        "rechargeable"
+      ],
+      "buyer_intents": [
+        "kids play",
+        "gifting"
+      ],
+      "matched_rule": "indoor_game",
+      "matched_phrases": [
+        "hover football",
+        "floating soccer ball"
+      ],
+      "candidate_types": [
+        "indoor_game"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "64",
+      "title": "Chair Bush Black Colour 10 Pcs, ID 15mm OD 20mm, Round Shape",
+      "brand": "",
+      "current_category": "Industrial",
+      "classification_status": "classified",
+      "product_type": "furniture_hardware",
+      "shopping_category": "Furniture Hardware",
+      "parent_category": "Industrial & Hardware",
+      "tags": [
+        "hardware",
+        "furniture repair"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "repair"
+      ],
+      "matched_rule": "furniture_hardware",
+      "matched_phrases": [
+        "chair bush"
+      ],
+      "candidate_types": [
+        "furniture_hardware"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "65",
+      "title": "Drivanto Washing Machine Stand Multi-Functional Movable Adjustable Base with Locking Wheels for Washing Machine, Refrigerator and Furniture",
+      "brand": "Drivanto",
+      "current_category": "Home",
+      "classification_status": "classified",
+      "product_type": "appliance_stand",
+      "shopping_category": "Appliance Accessories",
+      "parent_category": "Home Improvement",
+      "tags": [
+        "appliance stand",
+        "wheels",
+        "home utility"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "appliance mobility",
+        "floor protection"
+      ],
+      "matched_rule": "appliance_stand",
+      "matched_phrases": [
+        "washing machine stand",
+        "movable adjustable base"
+      ],
+      "candidate_types": [
+        "appliance_stand"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "66",
+      "title": "UGAOO Combo of 3 Indoor Plants with Ibiza Pot, Money Plant Golden, Jade Plant and Peace Lily for Home and Office Decor",
+      "brand": "UGAOO",
+      "current_category": "Home",
+      "classification_status": "classified",
+      "product_type": "indoor_plants",
+      "shopping_category": "Plants & Gardening",
+      "parent_category": "Home & Garden",
+      "tags": [
+        "plants",
+        "home decor"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "home decor",
+        "gardening"
+      ],
+      "matched_rule": "indoor_plants",
+      "matched_phrases": [
+        "indoor plants",
+        "money plant",
+        "jade plant",
+        "peace lily"
+      ],
+      "candidate_types": [
+        "indoor_plants"
+      ],
+      "confidence": 98,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "67",
+      "title": "Prestige Induction Cooktop",
+      "brand": "Prestige",
+      "current_category": "Home",
+      "classification_status": "classified",
+      "product_type": "induction_cooktop",
+      "shopping_category": "Kitchen Appliances",
+      "parent_category": "Home Appliances",
+      "tags": [
+        "induction",
+        "cooktop"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "cooking"
+      ],
+      "matched_rule": "induction_cooktop",
+      "matched_phrases": [
+        "induction cooktop"
+      ],
+      "candidate_types": [
+        "induction_cooktop"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "68",
+      "title": "Lakme Makeup Kit",
+      "brand": "Lakme",
+      "current_category": "Beauty",
+      "classification_status": "classified",
+      "product_type": "makeup_kit",
+      "shopping_category": "Makeup",
+      "parent_category": "Beauty",
+      "tags": [
+        "makeup",
+        "beauty"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "makeup",
+        "gifting"
+      ],
+      "matched_rule": "makeup_kit",
+      "matched_phrases": [
+        "makeup kit"
+      ],
+      "candidate_types": [
+        "makeup_kit"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "69",
+      "title": "Redmi Note 13 5G",
+      "brand": "Redmi",
+      "current_category": "Mobiles",
+      "classification_status": "classified",
+      "product_type": "smartphone",
+      "shopping_category": "Smartphones",
+      "parent_category": "Electronics",
+      "tags": [
+        "mobile",
+        "phone",
+        "smartphone"
+      ],
+      "features": [
+        "5g"
+      ],
+      "buyer_intents": [
+        "daily use",
+        "communication"
+      ],
+      "matched_rule": "smartphone",
+      "matched_phrases": [
+        "redmi note"
+      ],
+      "candidate_types": [
+        "smartphone"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "70",
+      "title": "Samsung 25L Microwave Oven",
+      "brand": "Samsung",
+      "current_category": "Home",
+      "classification_status": "classified",
+      "product_type": "microwave_oven",
+      "shopping_category": "Kitchen Appliances",
+      "parent_category": "Home Appliances",
+      "tags": [
+        "microwave",
+        "kitchen appliance"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "cooking",
+        "reheating"
+      ],
+      "matched_rule": "microwave_oven",
+      "matched_phrases": [
+        "microwave oven",
+        "microwave"
+      ],
+      "candidate_types": [
+        "microwave_oven"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "71",
+      "title": "Adjustable Doorway Pull-Up Bar with Rubber Grip, No-Drill Installation",
+      "brand": "",
+      "current_category": "Fitness",
+      "classification_status": "classified",
+      "product_type": "pull_up_bar",
+      "shopping_category": "Strength Training",
+      "parent_category": "Fitness",
+      "tags": [
+        "fitness",
+        "pull-up bar"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "strength training",
+        "home workout"
+      ],
+      "matched_rule": "pull_up_bar",
+      "matched_phrases": [
+        "pull-up bar",
+        "doorway pull"
+      ],
+      "candidate_types": [
+        "pull_up_bar"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "72",
+      "title": "Samsung Galaxy M36 5G Mobile (Velvet Black, 6GB RAM, 128GB Storage)",
+      "brand": "Samsung",
+      "current_category": "Mobiles",
+      "classification_status": "classified",
+      "product_type": "smartphone",
+      "shopping_category": "Smartphones",
+      "parent_category": "Electronics",
+      "tags": [
+        "mobile",
+        "phone",
+        "smartphone"
+      ],
+      "features": [
+        "5g"
+      ],
+      "buyer_intents": [
+        "daily use",
+        "communication"
+      ],
+      "matched_rule": "smartphone",
+      "matched_phrases": [
+        "samsung galaxy",
+        "galaxy m"
+      ],
+      "candidate_types": [
+        "smartphone"
+      ],
+      "confidence": 89,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "73",
+      "title": "Nothing Phone (3a) Lite (White, 128 GB, 8 GB RAM)",
+      "brand": "Nothing",
+      "current_category": "Mobiles",
+      "classification_status": "classified",
+      "product_type": "smartphone",
+      "shopping_category": "Smartphones",
+      "parent_category": "Electronics",
+      "tags": [
+        "mobile",
+        "phone",
+        "smartphone"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "daily use",
+        "communication"
+      ],
+      "matched_rule": "smartphone",
+      "matched_phrases": [
+        "nothing phone"
+      ],
+      "candidate_types": [
+        "smartphone"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    },
+    {
+      "product_id": "74",
+      "title": "Nothing Phone (3) (Black, 12GB RAM, 256GB Storage)",
+      "brand": "Nothing",
+      "current_category": "Mobiles",
+      "classification_status": "classified",
+      "product_type": "smartphone",
+      "shopping_category": "Smartphones",
+      "parent_category": "Electronics",
+      "tags": [
+        "mobile",
+        "phone",
+        "smartphone"
+      ],
+      "features": [],
+      "buyer_intents": [
+        "daily use",
+        "communication"
+      ],
+      "matched_rule": "smartphone",
+      "matched_phrases": [
+        "nothing phone"
+      ],
+      "candidate_types": [
+        "smartphone"
+      ],
+      "confidence": 82,
+      "review_required": false,
+      "reason": "Matched deterministic product-title taxonomy rule"
+    }
+  ]
+}
