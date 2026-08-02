@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Coupon World Product Knowledge Builder v1.0
 
@@ -22,6 +22,8 @@ ROOT = Path(__file__).resolve().parent.parent
 PRODUCT_DB = ROOT / "coupons.json"
 KNOWLEDGE_DB = ROOT / "data" / "product_knowledge.json"
 REVIEW_DB = ROOT / "data" / "knowledge_review.json"
+RESEARCH_RESULTS_DB = ROOT / "data" / "research_results.json"
+OFFICIAL_SPECS_DB = ROOT / "data" / "official_specs.json"
 
 
 def load_json(path: Path, default: Any) -> Any:
@@ -160,6 +162,233 @@ def load_existing_drafts() -> list[dict[str, Any]]:
         if isinstance(product, dict)
     ]
 
+def load_research_results() -> dict[str, dict[str, Any]]:
+    payload = load_json(
+        RESEARCH_RESULTS_DB,
+        {"products": []},
+    )
+
+    if not isinstance(payload, dict):
+        return {}
+
+    products = payload.get("products", [])
+
+    if not isinstance(products, list):
+        return {}
+
+    index: dict[str, dict[str, Any]] = {}
+
+    for product in products:
+        if not isinstance(product, dict):
+            continue
+
+        product_id = product.get("product_id")
+
+        if product_id not in (None, ""):
+            index[str(product_id)] = product
+
+    return index
+
+
+def load_official_specs() -> dict[str, dict[str, Any]]:
+    """Load extracted official specifications and index them by product_id."""
+    payload = load_json(
+        OFFICIAL_SPECS_DB,
+        {"products": []},
+    )
+
+    if not isinstance(payload, dict):
+        return {}
+
+    products = payload.get("products", [])
+
+    if not isinstance(products, list):
+        return {}
+
+    index: dict[str, dict[str, Any]] = {}
+
+    for product in products:
+        if not isinstance(product, dict):
+            continue
+
+        product_id = product.get("product_id")
+
+        if product_id not in (None, ""):
+            index[str(product_id)] = product
+
+    return index
+
+def merge_research_into_draft(
+    draft: dict[str, Any],
+    research_result: dict[str, Any] | None,
+) -> dict[str, Any]:
+    if not research_result:
+        return draft
+
+    merged = draft.copy()
+
+    research = dict(merged.get("research", {}))
+
+    official_url = str(
+        research_result.get("official_url") or ""
+    ).strip()
+
+    status = str(
+        research_result.get("status") or ""
+    ).strip()
+
+    verified = research_result.get("verified") is True
+
+    research["official_product_url"] = official_url
+    research["source_checked"] = bool(official_url)
+    research["resolver_status"] = status
+    research["resolver_verified"] = verified
+    research["match_score"] = research_result.get(
+        "match_score"
+    )
+    research["checked_on"] = datetime.now(
+        timezone.utc
+    ).isoformat()
+
+    merged["research"] = research
+
+    if verified:
+        merged["status"] = "source_verified"
+    elif official_url:
+        merged["status"] = "source_review_required"
+
+    return merged
+
+
+def merge_official_specs_into_draft(
+    draft: dict[str, Any],
+    extracted: dict[str, Any] | None,
+) -> dict[str, Any]:
+    """
+    Merge extractor output into a review draft without auto-approving it.
+
+    Existing human-entered fields such as features, best_for, limitations,
+    and review notes are preserved. Extracted evidence is kept separately
+    until a reviewer approves it.
+    """
+    if not extracted:
+        return draft
+
+    merged = draft.copy()
+    research = dict(merged.get("research", {}))
+
+    fetch_status = str(extracted.get("fetch_status") or "").strip()
+    page_score = extracted.get("page_identity_score")
+    review_payload = extracted.get("review", {})
+    extractor_status = (
+        str(review_payload.get("status") or "").strip()
+        if isinstance(review_payload, dict)
+        else ""
+    )
+    extractor_reason = (
+        str(review_payload.get("reason") or "").strip()
+        if isinstance(review_payload, dict)
+        else ""
+    )
+
+    evidence_summary = extracted.get("evidence_summary", {})
+    specifications = extracted.get("specifications", {})
+    official_features = extracted.get("features", [])
+    meta = extracted.get("meta", {})
+
+    if not isinstance(evidence_summary, dict):
+        evidence_summary = {}
+
+    if not isinstance(specifications, dict):
+        specifications = {}
+
+    if not isinstance(official_features, list):
+        official_features = []
+
+    if not isinstance(meta, dict):
+        meta = {}
+
+    research["spec_extraction"] = {
+        "fetch_status": fetch_status,
+        "http_status": extracted.get("http_status"),
+        "page_identity_score": page_score,
+        "extractor_status": extractor_status,
+        "extractor_reason": extractor_reason,
+        "source_host": extracted.get("source_host"),
+        "extracted_at": extracted.get("extracted_at"),
+        "evidence_summary": evidence_summary,
+    }
+
+    canonical_url = str(meta.get("canonical_url") or "").strip()
+
+    if canonical_url:
+        research["canonical_product_url"] = canonical_url
+
+    merged["research"] = research
+    merged["official_specifications"] = specifications
+    merged["official_features"] = official_features
+    merged["official_page_meta"] = meta
+
+    specification_confidences = [
+        int(record.get("confidence") or 0)
+        for record in specifications.values()
+        if isinstance(record, dict)
+    ]
+
+    average_spec_confidence = (
+        round(
+            sum(specification_confidences)
+            / len(specification_confidences)
+        )
+        if specification_confidences
+        else 0
+    )
+
+    try:
+        numeric_page_score = float(page_score or 0)
+    except (TypeError, ValueError):
+        numeric_page_score = 0.0
+
+    confidence_score = round(
+        (numeric_page_score * 70)
+        + (average_spec_confidence * 0.30)
+    )
+    confidence_score = max(0, min(confidence_score, 95))
+
+    if extractor_status == "candidate_ready":
+        merged["status"] = "knowledge_review_ready"
+        confidence_level = "high" if confidence_score >= 75 else "medium"
+        confidence_reason = (
+            "Official page identity and extracted evidence are ready "
+            "for human review"
+        )
+    elif fetch_status == "success":
+        merged["status"] = "knowledge_review_required"
+        confidence_level = "medium" if confidence_score >= 50 else "low"
+        confidence_reason = (
+            "Official-page evidence was extracted but requires "
+            "manual verification"
+        )
+    elif fetch_status in {"error", "rejected", "skipped"}:
+        confidence_level = "low"
+        confidence_reason = (
+            extractor_reason
+            or "Official specification extraction was not successful"
+        )
+    else:
+        confidence_level = "unverified"
+        confidence_reason = (
+            "Official specification extraction has not been completed"
+        )
+
+    merged["confidence"] = {
+        "score": confidence_score,
+        "level": confidence_level,
+        "reason": confidence_reason,
+    }
+
+    return merged
+
 
 def build_approved_indexes(
     approved_products: list[dict[str, Any]],
@@ -239,6 +468,8 @@ def prepare_drafts() -> int:
     products = load_products()
     approved = load_approved_knowledge()
     existing_drafts = load_existing_drafts()
+    research_index = load_research_results()
+    official_specs_index = load_official_specs()
 
     approved_ids, approved_titles = build_approved_indexes(approved)
     draft_index = build_draft_index(existing_drafts)
@@ -264,17 +495,43 @@ def prepare_drafts() -> int:
             continue
 
         if product_id in draft_index:
-            final_drafts.append(draft_index[product_id])
+
+            existing = draft_index[product_id]
+
+            merged = merge_research_into_draft(
+                existing,
+                research_index.get(product_id),
+            )
+
+            merged = merge_official_specs_into_draft(
+                merged,
+                official_specs_index.get(product_id),
+            )
+
+            final_drafts.append(merged)
+
             preserved_drafts += 1
+
             continue
 
-        final_drafts.append(
-            create_draft(product, position)
+        draft = create_draft(product, position)
+
+        draft = merge_research_into_draft(
+            draft,
+            research_index.get(product_id),
         )
+
+        draft = merge_official_specs_into_draft(
+            draft,
+            official_specs_index.get(product_id),
+        )
+
+        final_drafts.append(draft)
+
         created += 1
 
     payload = {
-        "schema_version": "1.0",
+        "schema_version": "2.0",
         "generated_at": datetime.now(
             timezone.utc
         ).isoformat(),
@@ -283,6 +540,7 @@ def prepare_drafts() -> int:
             "Do not add specifications based only on assumptions.",
             "Set review.approved to true only after verification.",
             "Approved drafts can later be promoted to product_knowledge.json.",
+            "Official specifications remain review-only until explicitly approved.",
         ],
         "summary": {
             "products_in_database": len(products),
@@ -291,6 +549,16 @@ def prepare_drafts() -> int:
             "existing_drafts_preserved": preserved_drafts,
             "approved_products_skipped": skipped_approved,
             "total_pending_drafts": len(final_drafts),
+            "drafts_with_official_specs": sum(
+                1
+                for draft in final_drafts
+                if draft.get("official_specifications")
+            ),
+            "knowledge_review_ready": sum(
+                1
+                for draft in final_drafts
+                if draft.get("status") == "knowledge_review_ready"
+            ),
         },
         "products": final_drafts,
     }
@@ -306,6 +574,22 @@ def prepare_drafts() -> int:
     print("Existing drafts preserved :", preserved_drafts)
     print("Approved products skipped :", skipped_approved)
     print("Total pending drafts      :", len(final_drafts))
+    print(
+        "Drafts with official specs:",
+        sum(
+            1
+            for draft in final_drafts
+            if draft.get("official_specifications")
+        ),
+    )
+    print(
+        "Knowledge review ready    :",
+        sum(
+            1
+            for draft in final_drafts
+            if draft.get("status") == "knowledge_review_ready"
+        ),
+    )
     print("Review file               :", REVIEW_DB)
     print("=" * 64)
 

@@ -1,19 +1,22 @@
 {
-  "schema_version": "1.0",
-  "generated_at": "2026-07-30T18:25:05.942680+00:00",
+  "schema_version": "2.0",
+  "generated_at": "2026-08-02T13:21:54.463810+00:00",
   "instructions": [
     "Use official manufacturer sources wherever possible.",
     "Do not add specifications based only on assumptions.",
     "Set review.approved to true only after verification.",
-    "Approved drafts can later be promoted to product_knowledge.json."
+    "Approved drafts can later be promoted to product_knowledge.json.",
+    "Official specifications remain review-only until explicitly approved."
   ],
   "summary": {
     "products_in_database": 74,
     "approved_knowledge": 1,
-    "drafts_created_now": 73,
-    "existing_drafts_preserved": 0,
+    "drafts_created_now": 0,
+    "existing_drafts_preserved": 73,
     "approved_products_skipped": 1,
-    "total_pending_drafts": 73
+    "total_pending_drafts": 73,
+    "drafts_with_official_specs": 2,
+    "knowledge_review_ready": 0
   },
   "products": [
     {
@@ -283,13 +286,16 @@
       "title": "Redmi 13 5G Hawaiian Blue (8GB RAM, 128GB Storage)",
       "brand": "Redmi",
       "category": "Mobiles",
-      "status": "draft",
+      "status": "source_review_required",
       "research": {
-        "official_product_url": "",
+        "official_product_url": "https://www.mi.com/in/product/redmi-13-5g-prime-edition/specs",
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0F1N8B7Z4?tag=guru0906-21",
-        "source_checked": false,
-        "checked_on": ""
+        "source_checked": true,
+        "checked_on": "2026-08-02T13:21:54.463338+00:00",
+        "resolver_status": "manual_review",
+        "resolver_verified": false,
+        "match_score": 0.6537
       },
       "features": [],
       "best_for": [],
@@ -312,27 +318,258 @@
       "title": "realme Buds Air 8, 11mm+6mm Dual Dynamic Bass Drivers, 58Hrs Playtime, 55dB ANC, 6 Mic ENC, 45ms Low Latency, 360° Spatial Audio, Hi-Res LHDC, IP55 Dust & Water Resistant, BT v5.4 (Master Gold)",
       "brand": "realme",
       "category": "Electronics",
-      "status": "draft",
+      "status": "knowledge_review_required",
       "research": {
-        "official_product_url": "",
+        "official_product_url": "https://www.realme.com/in/realme-buds-air/specs",
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0GDQCTYFB?tag=guru0906-21",
-        "source_checked": false,
-        "checked_on": ""
+        "source_checked": true,
+        "checked_on": "2026-08-02T13:21:54.463384+00:00",
+        "resolver_status": "candidate_verified",
+        "resolver_verified": true,
+        "match_score": 0.9657,
+        "spec_extraction": {
+          "fetch_status": "success",
+          "http_status": 200,
+          "page_identity_score": 0.49,
+          "extractor_status": "rejected_candidate",
+          "extractor_reason": "Page does not match the expected product strongly enough",
+          "source_host": "www.realme.com",
+          "extracted_at": "2026-08-02T13:20:32.700821+00:00",
+          "evidence_summary": {
+            "parser": "lxml",
+            "json_ld_products": 0,
+            "json_ld_specifications": 0,
+            "table_specifications": 0,
+            "definition_list_specifications": 0,
+            "label_value_specifications": 5,
+            "total_specifications": 5,
+            "feature_items": 28,
+            "noise_filter_version": "2.0"
+          }
+        },
+        "canonical_product_url": "https://www.realme.com/in/realme-buds-air/specs"
       },
       "features": [],
       "best_for": [],
       "limitations": [],
       "confidence": {
-        "score": 0,
-        "level": "unverified",
-        "reason": "Official product information has not yet been verified"
+        "score": 58,
+        "level": "medium",
+        "reason": "Official-page evidence was extracted but requires manual verification"
       },
       "review": {
         "approved": false,
         "reviewed_by": "",
         "reviewed_on": "",
         "notes": ""
+      },
+      "official_specifications": {
+        "controls_support_touch_control_double_tap": {
+          "value": "Answer a call; play/pause music playback. Triple-tap: Skip to next song. Press and hold one side: Launch voice assistant; end/decline a call; Press and hold both sides: Enter/exit Gaming Mode.",
+          "label": "Controls Support Touch Control Double-tap",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "support_touch_control_double_tap": {
+          "value": "Answer a call; play/pause music playback. Triple-tap: Skip to next song. Press and hold one side: Launch voice assistant; end/decline a call; Press and hold both sides: Enter/exit Gaming Mode.",
+          "label": "Support Touch Control Double-tap",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "size_weight_height": {
+          "value": "51.3 mm Width: 45.3 mm Depth: 25.3 mm Weight: 42.3 g Type: Half-in Ear Weight: 4.2 g",
+          "label": "Size & Weight Height",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "height": {
+          "value": "51.3 mm Width: 45.3 mm Depth: 25.3 mm Weight: 42.3 g Type: Half-in Ear Weight: 4.2 g",
+          "label": "Height",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "type": {
+          "value": "Half-in Ear Weight: 4.2 g",
+          "label": "Type",
+          "source": "label_value_block",
+          "confidence": 78
+        }
+      },
+      "official_features": [
+        {
+          "text": "Height: 51.3 mm Width: 45.3 mm Depth: 25.3 mm Weight: 42.3 g",
+          "source": "li",
+          "confidence": 89,
+          "relevance_score": 5
+        },
+        {
+          "text": "Support Touch Control Double-tap: Answer a call; play/pause music playback. Triple-tap: Skip to next song. Press and hold one side: Launch voice assistant; end/decline a call; Press and hold both sides: Enter/exit Gaming Mode.",
+          "source": "li",
+          "confidence": 86,
+          "relevance_score": 4
+        },
+        {
+          "text": "Dual Mic ENC (Environment Noise Cancellation Technology)",
+          "source": "li",
+          "confidence": 83,
+          "relevance_score": 3
+        },
+        {
+          "text": "Support Qi Wireless Charging Support Type-C Charging",
+          "source": "li",
+          "confidence": 83,
+          "relevance_score": 3
+        },
+        {
+          "text": "Buds Wireless Charging Case Type-C Charging Cable Quick Guide Book",
+          "source": "li",
+          "confidence": 83,
+          "relevance_score": 3
+        },
+        {
+          "text": "ENC (Environment Noise Cancellation Technology)",
+          "source": "p",
+          "confidence": 77,
+          "relevance_score": 3
+        },
+        {
+          "text": "Bluetooth 5.0 GFP (Google Fast Pair Technology) 10 meters Effective Range",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Type: Half-in Ear Weight: 4.2 g",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Double-tap: Answer a call; play/pause music playback.",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Triple-tap: Skip to next song.",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Height: 51.3 mm",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Width: 45.3 mm",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Depth: 25.3 mm",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Weight: 42.3 g",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Weight: 4.2 g",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Support Qi Wireless Charging",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Support Type-C Charging",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Wireless Charging Case",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Type-C Charging Cable",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "R1 Headphone Chip",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Up to 17 Hours Playback",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Optical Sensor for Wear Detection",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Support Touch Control",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Press and hold one side: Launch voice assistant; end/decline a call;",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Press and hold both sides: Enter/exit Gaming Mode.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth 5.0",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "10 meters Effective Range",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Type: Half-in Ear",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "official_page_meta": {
+        "html_title": "realme Buds Air Full Specifications - realme (India)",
+        "description": "realme Buds Air - the latest realme earphone in India, discover the specifications includes Chip, Controls, Calling and Connectivity, Size and Weight, Charging Case, Battery, Sensors and Packing list. Learn about more features and price at the realme store.",
+        "canonical_url": "https://www.realme.com/in/realme-buds-air/specs"
       }
     },
     {
@@ -370,13 +607,16 @@
       "title": "Yamaha PSS-E30 Remie Portable Mini Keyboard – 37 Keys, White, Built-in Songs, Sound Effects & Quiz Mode, Lightweight, Ideal for Kids & Early Learners",
       "brand": "Yamaha",
       "category": "Musical Instruments",
-      "status": "draft",
+      "status": "source_review_required",
       "research": {
-        "official_product_url": "",
+        "official_product_url": "https://usa.yamaha.com/products/musical_instruments/keyboards/portable_keyboards/pss-e30/specs.html",
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B08232VZ84?tag=guru0906-21",
-        "source_checked": false,
-        "checked_on": ""
+        "source_checked": true,
+        "checked_on": "2026-08-02T13:21:54.463450+00:00",
+        "resolver_status": "manual_review",
+        "resolver_verified": false,
+        "match_score": 0.7207
       },
       "features": [],
       "best_for": [],
@@ -399,13 +639,16 @@
       "title": "Apple iPhone 17e 256 GB (Black) – 15.40 cm (6.1″) Super Retina XDR Display, A19 Chip, All-Day Battery Life, 48MP Fusion Camera, 256GB Starting Storage",
       "brand": "Apple",
       "category": "Cell Phones & Accessories",
-      "status": "draft",
+      "status": "source_review_required",
       "research": {
-        "official_product_url": "",
+        "official_product_url": "https://www.apple.com/in-edu/shop/buy-iphone/iphone-17e/6.1%22-display-256gb-white",
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0GQVL6STN?tag=guru0906-21&th=1",
-        "source_checked": false,
-        "checked_on": ""
+        "source_checked": true,
+        "checked_on": "2026-08-02T13:21:54.463474+00:00",
+        "resolver_status": "manual_review",
+        "resolver_verified": false,
+        "match_score": 0.3764
       },
       "features": [],
       "best_for": [],
@@ -1588,27 +1831,81 @@
       "title": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo",
       "brand": "Logitech",
       "category": "Electronics",
-      "status": "draft",
+      "status": "knowledge_review_required",
       "research": {
-        "official_product_url": "",
+        "official_product_url": "https://www.logitech.com/en-in/shop/p/mk240-minimalist-keyboard-mouse",
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B01N4EV2TL?tag=guru0906-21",
-        "source_checked": false,
-        "checked_on": ""
+        "source_checked": true,
+        "checked_on": "2026-08-02T13:21:54.463662+00:00",
+        "resolver_status": "candidate_verified",
+        "resolver_verified": true,
+        "match_score": 0.761,
+        "spec_extraction": {
+          "fetch_status": "success",
+          "http_status": 200,
+          "page_identity_score": 0.6667,
+          "extractor_status": "manual_review",
+          "extractor_reason": "Evidence was extracted, but page identity requires review",
+          "source_host": "www.logitech.com",
+          "extracted_at": "2026-08-02T13:20:34.472970+00:00",
+          "evidence_summary": {
+            "parser": "lxml",
+            "json_ld_products": 1,
+            "json_ld_specifications": 2,
+            "table_specifications": 0,
+            "definition_list_specifications": 0,
+            "label_value_specifications": 0,
+            "total_specifications": 2,
+            "feature_items": 1,
+            "noise_filter_version": "2.0"
+          }
+        },
+        "canonical_product_url": "https://www.logitech.com/en-in/shop/p/mk240-minimalist-keyboard-mouse"
       },
       "features": [],
       "best_for": [],
       "limitations": [],
       "confidence": {
-        "score": 0,
-        "level": "unverified",
-        "reason": "Official product information has not yet been verified"
+        "score": 74,
+        "level": "medium",
+        "reason": "Official-page evidence was extracted but requires manual verification"
       },
       "review": {
         "approved": false,
         "reviewed_by": "",
         "reviewed_on": "",
         "notes": ""
+      },
+      "official_specifications": {
+        "name": {
+          "value": "MK240 Wireless Keyboard and Mouse Combo",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "brand": {
+          "value": "Logitech",
+          "label": "brand",
+          "source": "json_ld",
+          "confidence": 90
+        }
+      },
+      "official_features": [
+        {
+          "text": "WIRELESS FREEDOM",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "official_page_meta": {
+        "html_title": "Logitech MK240 Minimalist Wireless Keyboard Mouse Combo",
+        "description": "Shop MK240 Combo. Features minimalist space-saving design with spill resistant keyboard. High definition optical tracking wireless mouse. Long battery life.",
+        "og_title": "Logitech MK240 Minimalist Wireless Keyboard Mouse Combo",
+        "og_description": "Shop MK240 Combo. Features minimalist space-saving design with spill resistant keyboard. High definition optical tracking wireless mouse. Long battery life.",
+        "canonical_url": "https://www.logitech.com/en-in/shop/p/mk240-minimalist-keyboard-mouse",
+        "h1": "MK240 Wireless Keyboard and Mouse Combo"
       }
     },
     {

@@ -1,0 +1,313 @@
+{
+  "schema_version": "2.0",
+  "generated_at": "2026-08-02T13:20:36.674943+00:00",
+  "source_file": "data\\research_results.json",
+  "mode": "resolver-verified-only",
+  "summary": {
+    "requested": 2,
+    "success": 2,
+    "errors": 0,
+    "candidate_ready": 0,
+    "manual_review": 1,
+    "rejected_candidate": 1
+  },
+  "products": [
+    {
+      "product_id": "11",
+      "brand": "realme",
+      "model": "Buds Air 8",
+      "search_name": "realme Buds Air 8",
+      "official_url": "https://www.realme.com/in/realme-buds-air/specs",
+      "source_host": "www.realme.com",
+      "resolver_status": "candidate_verified",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "http_status": 200,
+      "page_identity_score": 0.49,
+      "specifications": {
+        "controls_support_touch_control_double_tap": {
+          "value": "Answer a call; play/pause music playback. Triple-tap: Skip to next song. Press and hold one side: Launch voice assistant; end/decline a call; Press and hold both sides: Enter/exit Gaming Mode.",
+          "label": "Controls Support Touch Control Double-tap",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "support_touch_control_double_tap": {
+          "value": "Answer a call; play/pause music playback. Triple-tap: Skip to next song. Press and hold one side: Launch voice assistant; end/decline a call; Press and hold both sides: Enter/exit Gaming Mode.",
+          "label": "Support Touch Control Double-tap",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "size_weight_height": {
+          "value": "51.3 mm Width: 45.3 mm Depth: 25.3 mm Weight: 42.3 g Type: Half-in Ear Weight: 4.2 g",
+          "label": "Size & Weight Height",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "height": {
+          "value": "51.3 mm Width: 45.3 mm Depth: 25.3 mm Weight: 42.3 g Type: Half-in Ear Weight: 4.2 g",
+          "label": "Height",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "type": {
+          "value": "Half-in Ear Weight: 4.2 g",
+          "label": "Type",
+          "source": "label_value_block",
+          "confidence": 78
+        }
+      },
+      "features": [
+        {
+          "text": "Height: 51.3 mm Width: 45.3 mm Depth: 25.3 mm Weight: 42.3 g",
+          "source": "li",
+          "confidence": 89,
+          "relevance_score": 5
+        },
+        {
+          "text": "Support Touch Control Double-tap: Answer a call; play/pause music playback. Triple-tap: Skip to next song. Press and hold one side: Launch voice assistant; end/decline a call; Press and hold both sides: Enter/exit Gaming Mode.",
+          "source": "li",
+          "confidence": 86,
+          "relevance_score": 4
+        },
+        {
+          "text": "Dual Mic ENC (Environment Noise Cancellation Technology)",
+          "source": "li",
+          "confidence": 83,
+          "relevance_score": 3
+        },
+        {
+          "text": "Support Qi Wireless Charging Support Type-C Charging",
+          "source": "li",
+          "confidence": 83,
+          "relevance_score": 3
+        },
+        {
+          "text": "Buds Wireless Charging Case Type-C Charging Cable Quick Guide Book",
+          "source": "li",
+          "confidence": 83,
+          "relevance_score": 3
+        },
+        {
+          "text": "ENC (Environment Noise Cancellation Technology)",
+          "source": "p",
+          "confidence": 77,
+          "relevance_score": 3
+        },
+        {
+          "text": "Bluetooth 5.0 GFP (Google Fast Pair Technology) 10 meters Effective Range",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Type: Half-in Ear Weight: 4.2 g",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Double-tap: Answer a call; play/pause music playback.",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Triple-tap: Skip to next song.",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Height: 51.3 mm",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Width: 45.3 mm",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Depth: 25.3 mm",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Weight: 42.3 g",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Weight: 4.2 g",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Support Qi Wireless Charging",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Support Type-C Charging",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Wireless Charging Case",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Type-C Charging Cable",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "R1 Headphone Chip",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Up to 17 Hours Playback",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Optical Sensor for Wear Detection",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Support Touch Control",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Press and hold one side: Launch voice assistant; end/decline a call;",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Press and hold both sides: Enter/exit Gaming Mode.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth 5.0",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "10 meters Effective Range",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Type: Half-in Ear",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "meta": {
+        "html_title": "realme Buds Air Full Specifications - realme (India)",
+        "description": "realme Buds Air - the latest realme earphone in India, discover the specifications includes Chip, Controls, Calling and Connectivity, Size and Weight, Charging Case, Battery, Sensors and Packing list. Learn about more features and price at the realme store.",
+        "canonical_url": "https://www.realme.com/in/realme-buds-air/specs"
+      },
+      "evidence_summary": {
+        "parser": "lxml",
+        "json_ld_products": 0,
+        "json_ld_specifications": 0,
+        "table_specifications": 0,
+        "definition_list_specifications": 0,
+        "label_value_specifications": 5,
+        "total_specifications": 5,
+        "feature_items": 28,
+        "noise_filter_version": "2.0"
+      },
+      "review": {
+        "approved": false,
+        "status": "rejected_candidate",
+        "reason": "Page does not match the expected product strongly enough"
+      },
+      "extracted_at": "2026-08-02T13:20:32.700821+00:00"
+    },
+    {
+      "product_id": "56",
+      "brand": "Logitech",
+      "model": "MK240 Nano Wireless USB Keyboard and Mouse Combo",
+      "search_name": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo",
+      "official_url": "https://www.logitech.com/en-in/shop/p/mk240-minimalist-keyboard-mouse",
+      "source_host": "www.logitech.com",
+      "resolver_status": "candidate_verified",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "http_status": 200,
+      "page_identity_score": 0.6667,
+      "specifications": {
+        "name": {
+          "value": "MK240 Wireless Keyboard and Mouse Combo",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "brand": {
+          "value": "Logitech",
+          "label": "brand",
+          "source": "json_ld",
+          "confidence": 90
+        }
+      },
+      "features": [
+        {
+          "text": "WIRELESS FREEDOM",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "meta": {
+        "html_title": "Logitech MK240 Minimalist Wireless Keyboard Mouse Combo",
+        "description": "Shop MK240 Combo. Features minimalist space-saving design with spill resistant keyboard. High definition optical tracking wireless mouse. Long battery life.",
+        "og_title": "Logitech MK240 Minimalist Wireless Keyboard Mouse Combo",
+        "og_description": "Shop MK240 Combo. Features minimalist space-saving design with spill resistant keyboard. High definition optical tracking wireless mouse. Long battery life.",
+        "canonical_url": "https://www.logitech.com/en-in/shop/p/mk240-minimalist-keyboard-mouse",
+        "h1": "MK240 Wireless Keyboard and Mouse Combo"
+      },
+      "evidence_summary": {
+        "parser": "lxml",
+        "json_ld_products": 1,
+        "json_ld_specifications": 2,
+        "table_specifications": 0,
+        "definition_list_specifications": 0,
+        "label_value_specifications": 0,
+        "total_specifications": 2,
+        "feature_items": 1,
+        "noise_filter_version": "2.0"
+      },
+      "review": {
+        "approved": false,
+        "status": "manual_review",
+        "reason": "Evidence was extracted, but page identity requires review"
+      },
+      "extracted_at": "2026-08-02T13:20:34.472970+00:00"
+    }
+  ]
+}
