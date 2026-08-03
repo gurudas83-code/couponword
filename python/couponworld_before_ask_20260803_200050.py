@@ -741,24 +741,6 @@ def intelligence_report() -> int:
     )
 
 
-
-def ask_command(
-    query: str,
-    json_output: bool = False,
-) -> int:
-    """Run the existing Shopping Brain through the control center."""
-    command = [
-        sys.executable,
-        "python/shopping_brain.py",
-    ]
-
-    if json_output:
-        command.append("--json")
-
-    command.append(query)
-    return run_command(command)
-
-
 def run_workflow(
     input_file: str = "",
     output_csv: str = "data/products_import.csv",
@@ -865,23 +847,6 @@ def build_parser() -> argparse.ArgumentParser:
         help="Show product quality and next best action",
     )
 
-    ask_parser = subparsers.add_parser(
-        "ask",
-        help="Ask the Coupon World Shopping Brain",
-    )
-
-    ask_parser.add_argument(
-        "query",
-        nargs="+",
-        help="Shopping query",
-    )
-
-    ask_parser.add_argument(
-        "--json",
-        action="store_true",
-        help="Output JSON instead of formatted text",
-    )
-
     run_parser = subparsers.add_parser(
         "run",
         help="Run the safe Coupon World master workflow",
@@ -952,12 +917,6 @@ def main() -> int:
 
     if args.command == "report":
         return intelligence_report()
-
-    if args.command == "ask":
-        return ask_command(
-            " ".join(args.query).strip(),
-            args.json,
-        )
 
     if args.command == "run":
         return run_workflow(

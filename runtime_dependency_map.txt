@@ -1,0 +1,342 @@
+﻿======================================================================
+COUPON WORLD RUNTIME DEPENDENCY MAP
+======================================================================
+
+amazon_catalog_sync.py
+   -> amazon_data_provider
+   -> argparse
+   -> datetime
+   -> json
+   -> pathlib
+   -> shutil
+
+amazon_data_provider.py
+   -> __future__
+   -> dataclasses
+   -> typing
+
+batch_product_importer.py
+   -> __future__
+   -> amazon_data_provider
+   -> argparse
+   -> batch_product_queue
+   -> csv
+   -> pathlib
+   -> product_engine
+   -> product_pipeline
+   -> typing
+
+batch_product_queue.py
+   -> __future__
+   -> argparse
+   -> dataclasses
+   -> pathlib
+   -> product_engine
+   -> product_pipeline
+   -> typing
+
+build_product_knowledge.py
+   -> __future__
+   -> argparse
+   -> datetime
+   -> json
+   -> pathlib
+   -> re
+   -> typing
+
+build_product_pages.py
+   -> argparse
+   -> html
+   -> json
+   -> pathlib
+   -> re
+   -> shutil
+
+build_sitemap.py
+   -> html
+   -> json
+   -> pathlib
+   -> re
+   -> urllib.parse
+   -> xml.etree.ElementTree
+
+couponworld.py
+   -> __future__
+   -> argparse
+   -> collections
+   -> json
+   -> pathlib
+   -> re
+   -> subprocess
+   -> sys
+   -> urllib.parse
+   -> xml.etree.ElementTree
+
+google_discovery_audit.py
+   -> __future__
+   -> collections
+   -> json
+   -> pathlib
+   -> re
+   -> urllib.parse
+   -> xml.etree.ElementTree
+
+import_products.py
+   -> __future__
+   -> argparse
+   -> csv
+   -> datetime
+   -> json
+   -> pathlib
+   -> shutil
+   -> subprocess
+   -> sys
+   -> urllib.parse
+
+intent_engine.py
+   -> __future__
+   -> dataclasses
+   -> re
+
+internal_link_engine.py
+   -> __future__
+   -> collections
+   -> json
+   -> pathlib
+   -> re
+
+inventory_status_manager.py
+   -> argparse
+   -> datetime
+   -> json
+   -> pathlib
+   -> shutil
+
+knowledge_engine.py
+   -> json
+   -> pathlib
+
+migrate_product_schema.py
+   -> __future__
+   -> argparse
+   -> datetime
+   -> json
+   -> pathlib
+   -> shutil
+   -> typing
+
+official_source_resolver.py
+   -> __future__
+   -> json
+   -> os
+   -> pathlib
+   -> re
+   -> resolver_engine
+   -> tavily
+   -> typing
+   -> urllib.parse
+
+official_source_resolver_backup.py
+   -> __future__
+   -> json
+   -> os
+   -> pathlib
+   -> re
+   -> tavily
+   -> typing
+   -> urllib.parse
+
+official_source_resolver_v3.py
+
+official_spec_extractor.py
+   -> __future__
+   -> argparse
+   -> bs4
+   -> datetime
+   -> json
+   -> pathlib
+   -> re
+   -> requests
+   -> sys
+   -> time
+   -> typing
+   -> urllib.parse
+
+price_engine.py
+   -> __future__
+   -> re
+
+price_importer.py
+   -> __future__
+   -> argparse
+   -> csv
+   -> datetime
+   -> json
+   -> pathlib
+   -> shutil
+
+product_classifier.py
+   -> __future__
+   -> argparse
+   -> collections
+   -> datetime
+   -> json
+   -> pathlib
+   -> re
+   -> sys
+   -> typing
+
+product_engine.py
+   -> argparse
+   -> datetime
+   -> json
+   -> pathlib
+   -> re
+   -> shutil
+   -> typing
+
+product_feature_engine.py
+   -> __future__
+   -> argparse
+   -> collections
+   -> datetime
+   -> json
+   -> pathlib
+   -> re
+   -> sys
+   -> typing
+
+product_identity_engine.py
+   -> __future__
+   -> argparse
+   -> collections
+   -> datetime
+   -> json
+   -> pathlib
+   -> re
+   -> shutil
+   -> sys
+   -> typing
+   -> unicodedata
+   -> urllib.parse
+
+product_identity_v2.py
+   -> __future__
+   -> json
+   -> pathlib
+   -> re
+   -> typing
+
+product_intelligence.py
+   -> __future__
+   -> argparse
+   -> collections
+   -> json
+   -> pathlib
+   -> re
+   -> urllib.parse
+
+product_pipeline.py
+   -> amazon_data_provider
+   -> argparse
+   -> product_engine
+   -> re
+   -> typing
+   -> urllib.parse
+
+product_queue.py
+   -> __future__
+   -> argparse
+   -> collections
+   -> json
+   -> pathlib
+   -> urllib.parse
+
+product_scoring.py
+   -> __future__
+
+product_source_adapter.py
+   -> __future__
+   -> argparse
+   -> csv
+   -> pathlib
+   -> urllib.parse
+
+recommendation_engine.py
+   -> __future__
+
+remove_amazon_branding.py
+   -> datetime
+   -> json
+   -> pathlib
+   -> re
+   -> shutil
+
+research_agent.py
+   -> json
+   -> pathlib
+
+resolver_engine.py
+   -> __future__
+   -> dataclasses
+   -> re
+   -> typing
+   -> urllib.parse
+
+runtime_dependency_mapper.py
+   -> ast
+   -> pathlib
+
+seo_generator.py
+   -> html
+   -> json
+   -> pathlib
+
+shopping_brain.py
+   -> __future__
+   -> argparse
+   -> intent_engine
+   -> json
+   -> knowledge_engine
+   -> pathlib
+   -> price_engine
+   -> product_scoring
+   -> re
+   -> recommendation_engine
+   -> typing
+
+shopping_brain_backup.py
+   -> __future__
+   -> intent_engine
+   -> json
+   -> pathlib
+   -> price_engine
+   -> product_scoring
+   -> recommendation_engine
+   -> typing
+
+site_intelligence.py
+   -> __future__
+   -> collections
+   -> json
+   -> pathlib
+   -> urllib.parse
+
+system_audit_agent.py
+   -> __future__
+   -> argparse
+   -> ast
+   -> collections
+   -> dataclasses
+   -> datetime
+   -> hashlib
+   -> json
+   -> pathlib
+   -> re
+   -> subprocess
+   -> sys
+   -> typing
+
+tavily_test.py
+   -> os
+   -> tavily
