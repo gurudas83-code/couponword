@@ -26,7 +26,7 @@ from intent_engine import parse_query
 from knowledge_engine import load_product_knowledge
 from price_engine import analyze_price
 from product_scoring import score_product
-from recommendation_engine import build_requirement_assessment, explain_product
+from recommendation_engine import explain_product
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -556,10 +556,6 @@ def match_products(
             intent,
         )
 
-        ranked_product["requirement_assessment"] = (
-            build_requirement_assessment(ranked_product)
-        )
-
         matches.append(ranked_product)
 
     matches.sort(
@@ -588,11 +584,6 @@ def build_response(
         price_info = product.get("price_info", {})
         knowledge = product.get("product_knowledge", {})
 
-        assessment = product.get(
-            "requirement_assessment",
-            {},
-        )
-
         response["matches"].append(
             {
                 "id": product.get("id"),
@@ -604,27 +595,6 @@ def build_response(
                     "discount_percent"
                 ),
                 "score": product.get("score"),
-                "requirement_match_percent": assessment.get(
-                    "requirement_match_percent",
-                    0,
-                ),
-                "data_confidence_percent": assessment.get(
-                    "data_confidence_percent",
-                    0,
-                ),
-                "recommendation_confidence": assessment.get(
-                    "recommendation_confidence",
-                    "low",
-                ),
-                "ai_top_suggestion": len(response["matches"]) == 0,
-                "matched_requirements": assessment.get(
-                    "matched_requirements",
-                    [],
-                ),
-                "unverified_requirements": assessment.get(
-                    "unverified_requirements",
-                    [],
-                ),
                 "reasons": product.get("reasons", []),
                 "link": product.get("link"),
                 "category": product.get("category"),
@@ -746,32 +716,7 @@ def print_text_response(
         elif price_info.get("within_budget") is False:
             print("Budget     : Above budget")
 
-        assessment = product.get(
-            "requirement_assessment",
-            {},
-        )
-
-        if position == 1:
-            print("AI Suggestion: Top match for your current requirement")
-
         print("Score      :", product.get("score", 0))
-        print(
-            "Requirement match:",
-            f"{assessment.get('requirement_match_percent', 0)}%",
-        )
-        print(
-            "Data confidence  :",
-            f"{assessment.get('data_confidence_percent', 0)}%",
-        )
-        print(
-            "AI confidence    :",
-            str(
-                assessment.get(
-                    "recommendation_confidence",
-                    "low",
-                )
-            ).title(),
-        )
 
         taxonomy = product.get("taxonomy", {})
 
