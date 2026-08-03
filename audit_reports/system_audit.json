@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-07-26T16:46:04.068311+00:00",
-  "root": "C:\\Users\\HP\\Documents\\projects\\couponword",
+  "generated_at": "2026-08-03T14:05:33.691838+00:00",
+  "root": "D:\\Projects\\couponword",
   "summary": {
-    "python_files": 33,
-    "syntax_errors": 0,
-    "classes": 8,
-    "functions": 276,
-    "entrypoints": 27,
-    "duplicate_function_names": 31,
+    "python_files": 45,
+    "syntax_errors": 2,
+    "classes": 10,
+    "functions": 380,
+    "entrypoints": 32,
+    "duplicate_function_names": 42,
     "duplicate_files": 0,
-    "possible_orphans": 1
+    "possible_orphans": 6
   },
   "important_files": {
     "coupons.json": true,
@@ -26,6 +26,7 @@
       "python\\system_audit_agent.py"
     ],
     "Build System": [
+      "python\\build_product_knowledge.py",
       "python\\build_product_pages.py",
       "python\\build_sitemap.py"
     ],
@@ -48,11 +49,14 @@
       "python\\intelligence\\image_engine.py",
       "python\\intent_engine.py",
       "python\\internal_link_engine.py",
+      "python\\knowledge_engine.py",
       "python\\product_engine.py",
       "python\\product_feature_engine.py",
       "python\\product_identity_engine.py",
+      "python\\product_identity_v2.py",
       "python\\product_intelligence.py",
       "python\\recommendation_engine.py",
+      "python\\resolver_engine.py",
       "python\\site_intelligence.py"
     ],
     "SEO / Discovery": [
@@ -61,17 +65,25 @@
     ],
     "Shopping Intelligence": [
       "python\\product_scoring.py",
-      "python\\shopping_brain.py"
+      "python\\shopping_brain.py",
+      "python\\shopping_brain_backup.py"
     ],
     "Source / Data Adapter": [
       "python\\amazon_catalog_sync.py",
       "python\\amazon_data_provider.py",
+      "python\\official_source_resolver.py",
+      "python\\official_source_resolver_backup.py",
+      "python\\official_source_resolver_v3.py",
       "python\\product_source_adapter.py"
     ],
     "Utility / Other": [
       "coupon_bot.py",
+      "python\\official_spec_extractor.py",
+      "python\\product_classifier.py",
       "python\\product_pipeline.py",
-      "python\\remove_amazon_branding.py"
+      "python\\remove_amazon_branding.py",
+      "python\\research_agent.py",
+      "python\\tavily_test.py"
     ]
   },
   "modules": [
@@ -271,6 +283,51 @@
       "has_main": true,
       "category": "Import / Intake",
       "sha256": "9ace03fc7160cae3dda534056009f0e1e8ffc3b91bd5f7bf43c07526e796ab0d"
+    },
+    {
+      "path": "python\\build_product_knowledge.py",
+      "module": "build_product_knowledge",
+      "lines": 649,
+      "syntax_ok": true,
+      "syntax_error": null,
+      "imports": [
+        "__future__",
+        "argparse",
+        "datetime",
+        "json",
+        "pathlib",
+        "re",
+        "typing"
+      ],
+      "local_imports": [],
+      "classes": [],
+      "functions": [
+        "build_approved_indexes",
+        "build_draft_index",
+        "create_draft",
+        "get_brand",
+        "get_product_id",
+        "load_approved_knowledge",
+        "load_existing_drafts",
+        "load_json",
+        "load_official_specs",
+        "load_products",
+        "load_research_results",
+        "main",
+        "merge_official_specs_into_draft",
+        "merge_research_into_draft",
+        "normalize_text",
+        "prepare_drafts",
+        "save_json",
+        "show_status"
+      ],
+      "cli_commands": [
+        "prepare",
+        "status"
+      ],
+      "has_main": true,
+      "category": "Build System",
+      "sha256": "4da4c42ab4d6eb1334094d6f4aa2318cd52a09b6c2954b3e0265f4164900a617"
     },
     {
       "path": "python\\build_product_pages.py",
@@ -581,6 +638,26 @@
       "sha256": "aa8a7e4e9df078d6743e93fe371e8af8e535b48618d230e082d5fd6c2423ea8d"
     },
     {
+      "path": "python\\knowledge_engine.py",
+      "module": "knowledge_engine",
+      "lines": 26,
+      "syntax_ok": true,
+      "syntax_error": null,
+      "imports": [
+        "json",
+        "pathlib"
+      ],
+      "local_imports": [],
+      "classes": [],
+      "functions": [
+        "load_product_knowledge"
+      ],
+      "cli_commands": [],
+      "has_main": false,
+      "category": "Product Intelligence",
+      "sha256": "19169e2b564cd797a262c0c19f0e402aef886bb932b5b70c7d00ddc9ac4cbb21"
+    },
+    {
       "path": "python\\migrate_product_schema.py",
       "module": "migrate_product_schema",
       "lines": 215,
@@ -610,6 +687,152 @@
       "has_main": true,
       "category": "Import / Intake",
       "sha256": "723d7aa72804e879db3f2986c5564a931c19a9a25de28a88a93c90cf98ed4e63"
+    },
+    {
+      "path": "python\\official_source_resolver.py",
+      "module": "official_source_resolver",
+      "lines": 421,
+      "syntax_ok": true,
+      "syntax_error": null,
+      "imports": [
+        "__future__",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "resolver_engine",
+        "tavily",
+        "typing",
+        "urllib.parse"
+      ],
+      "local_imports": [
+        "resolver_engine"
+      ],
+      "classes": [],
+      "functions": [
+        "core_product_title",
+        "hostname_matches",
+        "is_unwanted_page",
+        "load_json",
+        "main",
+        "normalize_brand",
+        "normalize_text",
+        "resolve_product",
+        "save_json",
+        "significant_tokens",
+        "token_match_score"
+      ],
+      "cli_commands": [],
+      "has_main": true,
+      "category": "Source / Data Adapter",
+      "sha256": "3213498c856e06909852d61fee979246b38d46ab4cd92ea2fe40a035b1065cb3"
+    },
+    {
+      "path": "python\\official_source_resolver_backup.py",
+      "module": "official_source_resolver_backup",
+      "lines": 355,
+      "syntax_ok": true,
+      "syntax_error": null,
+      "imports": [
+        "__future__",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "tavily",
+        "typing",
+        "urllib.parse"
+      ],
+      "local_imports": [],
+      "classes": [],
+      "functions": [
+        "core_product_title",
+        "hostname_matches",
+        "load_json",
+        "main",
+        "normalize_brand",
+        "normalize_text",
+        "resolve_product",
+        "save_json",
+        "significant_tokens",
+        "token_match_score"
+      ],
+      "cli_commands": [],
+      "has_main": true,
+      "category": "Source / Data Adapter",
+      "sha256": "5ed9811a210dcc2155e9392c04425904f3fe554b5aaa74c15841818c80aa2026"
+    },
+    {
+      "path": "python\\official_source_resolver_v3.py",
+      "module": "official_source_resolver_v3",
+      "lines": 0,
+      "syntax_ok": true,
+      "syntax_error": null,
+      "imports": [],
+      "local_imports": [],
+      "classes": [],
+      "functions": [],
+      "cli_commands": [],
+      "has_main": false,
+      "category": "Source / Data Adapter",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "python\\official_spec_extractor.py",
+      "module": "official_spec_extractor",
+      "lines": 1093,
+      "syntax_ok": true,
+      "syntax_error": null,
+      "imports": [
+        "__future__",
+        "argparse",
+        "datetime",
+        "json",
+        "pathlib",
+        "re",
+        "sys",
+        "time",
+        "typing",
+        "urllib.parse"
+      ],
+      "local_imports": [],
+      "classes": [],
+      "functions": [
+        "add_specification",
+        "build_output",
+        "clean_text",
+        "extract_definition_lists",
+        "extract_features",
+        "extract_json_ld_specs",
+        "extract_label_value_blocks",
+        "extract_meta",
+        "extract_one",
+        "extract_tables",
+        "feature_relevance_score",
+        "feature_scope",
+        "fetch_page",
+        "hostname",
+        "identity_tokens",
+        "is_noise_feature",
+        "is_unwanted_url",
+        "load_identity_index",
+        "load_json",
+        "main",
+        "normalize_key",
+        "page_identity_score",
+        "parse_json_ld",
+        "print_status",
+        "remove_page_chrome",
+        "save_json",
+        "utc_now"
+      ],
+      "cli_commands": [
+        "extract",
+        "status"
+      ],
+      "has_main": true,
+      "category": "Utility / Other",
+      "sha256": "bcf44928f0eddf9178f6ccefb528709380141eb91a0f20c849fc765b408fde39"
     },
     {
       "path": "python\\price_engine.py",
@@ -665,6 +888,46 @@
       "has_main": true,
       "category": "Import / Intake",
       "sha256": "7855aef2d501364c53b375e112d99c5c7eccab49b976bcbd570e8aa2bccdf77f"
+    },
+    {
+      "path": "python\\product_classifier.py",
+      "module": "product_classifier",
+      "lines": 946,
+      "syntax_ok": true,
+      "syntax_error": null,
+      "imports": [
+        "__future__",
+        "argparse",
+        "collections",
+        "datetime",
+        "json",
+        "pathlib",
+        "re",
+        "sys",
+        "typing"
+      ],
+      "local_imports": [],
+      "classes": [],
+      "functions": [
+        "build_taxonomy",
+        "classify_product",
+        "derive_features",
+        "get_product_id",
+        "load_json",
+        "main",
+        "normalize",
+        "phrase_match",
+        "print_report",
+        "save_json",
+        "utc_now"
+      ],
+      "cli_commands": [
+        "build",
+        "status"
+      ],
+      "has_main": true,
+      "category": "Utility / Other",
+      "sha256": "42a1cc8e98cf3253c57e086c81aed8fd65e247c0d20d76ebf526644cc7135a6b"
     },
     {
       "path": "python\\product_engine.py",
@@ -812,6 +1075,21 @@
       "has_main": true,
       "category": "Product Intelligence",
       "sha256": "c166fb92dbbfdd34186d8c86dcab291afc2bd1ba4d447e1b4190258d38fcad1c"
+    },
+    {
+      "path": "python\\product_identity_v2.py",
+      "module": "product_identity_v2",
+      "lines": 358,
+      "syntax_ok": false,
+      "syntax_error": "Line 1: invalid non-printable character U+FEFF",
+      "imports": [],
+      "local_imports": [],
+      "classes": [],
+      "functions": [],
+      "cli_commands": [],
+      "has_main": false,
+      "category": "Product Intelligence",
+      "sha256": "e8a239082cdecd004312b6f52873e3089a24591c18b5b9bc560d07ef05e64672"
     },
     {
       "path": "python\\product_intelligence.py",
@@ -1019,6 +1297,61 @@
       "sha256": "73a184f25e7fdf6fdb9a7cd775bfbd79d2eb0bd6c3b7c9cc40b09a6812ce7b1a"
     },
     {
+      "path": "python\\research_agent.py",
+      "module": "research_agent",
+      "lines": 64,
+      "syntax_ok": true,
+      "syntax_error": null,
+      "imports": [
+        "json",
+        "pathlib"
+      ],
+      "local_imports": [],
+      "classes": [],
+      "functions": [],
+      "cli_commands": [],
+      "has_main": false,
+      "category": "Utility / Other",
+      "sha256": "79bae6475283aeb3f62cc3c1870560017c49cf6e7d7477c973c6c4668fc60773"
+    },
+    {
+      "path": "python\\resolver_engine.py",
+      "module": "resolver_engine",
+      "lines": 584,
+      "syntax_ok": true,
+      "syntax_error": null,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "re",
+        "typing",
+        "urllib.parse"
+      ],
+      "local_imports": [],
+      "classes": [
+        "ParsedIdentity",
+        "ResolverDecision"
+      ],
+      "functions": [
+        "compare_identity",
+        "equivalent_model",
+        "extract_brand",
+        "extract_color_tokens",
+        "extract_memory_tokens",
+        "infer_brand_from_url",
+        "model_score",
+        "normalize_text",
+        "parse_identity",
+        "subset_match",
+        "tokenize",
+        "validate_candidate"
+      ],
+      "cli_commands": [],
+      "has_main": false,
+      "category": "Product Intelligence",
+      "sha256": "88bd38c25c36eed898aca1833c8b5500d81eccbeb689aa3c4b39c0f6847d3d36"
+    },
+    {
       "path": "python\\seo_generator.py",
       "module": "seo_generator",
       "lines": 57,
@@ -1044,34 +1377,68 @@
     {
       "path": "python\\shopping_brain.py",
       "module": "shopping_brain",
-      "lines": 189,
+      "lines": 875,
       "syntax_ok": true,
       "syntax_error": null,
       "imports": [
         "__future__",
+        "argparse",
         "intent_engine",
         "json",
+        "knowledge_engine",
         "pathlib",
         "price_engine",
         "product_scoring",
-        "recommendation_engine"
+        "re",
+        "recommendation_engine",
+        "typing"
       ],
       "local_imports": [
         "intent_engine",
+        "knowledge_engine",
         "price_engine",
         "product_scoring",
         "recommendation_engine"
       ],
       "classes": [],
       "functions": [
+        "_index_by_product_id",
+        "_load_database",
+        "_normalize_query_text",
+        "build_response",
+        "infer_requested_product_types",
+        "load_feature_database",
+        "load_identity_database",
         "load_products",
+        "load_taxonomy_database",
         "main",
-        "match_products"
+        "match_products",
+        "merge_intelligence",
+        "merge_product_knowledge",
+        "merge_taxonomy",
+        "print_text_response",
+        "taxonomy_match_score",
+        "taxonomy_search_text"
       ],
       "cli_commands": [],
       "has_main": true,
       "category": "Shopping Intelligence",
-      "sha256": "3d6916c75dfdfa5c000499e4597f674c1f266266f29f5c81ae8570b8eaad669d"
+      "sha256": "745dd1f0fd72f84c3c89556e1d6d437bdbc1dd47e0883b1d5a735651b616721d"
+    },
+    {
+      "path": "python\\shopping_brain_backup.py",
+      "module": "shopping_brain_backup",
+      "lines": 280,
+      "syntax_ok": false,
+      "syntax_error": "Line 1: invalid non-printable character U+FEFF",
+      "imports": [],
+      "local_imports": [],
+      "classes": [],
+      "functions": [],
+      "cli_commands": [],
+      "has_main": false,
+      "category": "Shopping Intelligence",
+      "sha256": "687399344ac2b95bd41a85c63ddc183a10f5a710363b6c801f0adb481d556f28"
     },
     {
       "path": "python\\site_intelligence.py",
@@ -1146,6 +1513,24 @@
       "has_main": true,
       "category": "Audit / Monitoring",
       "sha256": "d88da9357e71ed7b94482a12eefb9b0b401a7ceff385421791e140d64a176c88"
+    },
+    {
+      "path": "python\\tavily_test.py",
+      "module": "tavily_test",
+      "lines": 23,
+      "syntax_ok": true,
+      "syntax_error": null,
+      "imports": [
+        "os",
+        "tavily"
+      ],
+      "local_imports": [],
+      "classes": [],
+      "functions": [],
+      "cli_commands": [],
+      "has_main": false,
+      "category": "Utility / Other",
+      "sha256": "0b3be8cdc5ef74d5f2d4e202383a841878790abc3c3424b1395e8d33d90c60d4"
     }
   ],
   "dependency_graph": {
@@ -1166,6 +1551,7 @@
       "product_engine",
       "product_pipeline"
     ],
+    "build_product_knowledge": [],
     "build_product_pages": [],
     "build_sitemap": [],
     "couponworld": [],
@@ -1175,12 +1561,21 @@
     "intent_engine": [],
     "internal_link_engine": [],
     "inventory_status_manager": [],
+    "knowledge_engine": [],
     "migrate_product_schema": [],
+    "official_source_resolver": [
+      "resolver_engine"
+    ],
+    "official_source_resolver_backup": [],
+    "official_source_resolver_v3": [],
+    "official_spec_extractor": [],
     "price_engine": [],
     "price_importer": [],
+    "product_classifier": [],
     "product_engine": [],
     "product_feature_engine": [],
     "product_identity_engine": [],
+    "product_identity_v2": [],
     "product_intelligence": [],
     "product_pipeline": [
       "amazon_data_provider",
@@ -1191,15 +1586,20 @@
     "product_source_adapter": [],
     "recommendation_engine": [],
     "remove_amazon_branding": [],
+    "research_agent": [],
+    "resolver_engine": [],
     "seo_generator": [],
     "shopping_brain": [
       "intent_engine",
+      "knowledge_engine",
       "price_engine",
       "product_scoring",
       "recommendation_engine"
     ],
+    "shopping_brain_backup": [],
     "site_intelligence": [],
-    "system_audit_agent": []
+    "system_audit_agent": [],
+    "tavily_test": []
   },
   "imported_by": {
     "amazon_data_provider": [
@@ -1211,6 +1611,9 @@
       "batch_product_importer"
     ],
     "intent_engine": [
+      "shopping_brain"
+    ],
+    "knowledge_engine": [
       "shopping_brain"
     ],
     "price_engine": [
@@ -1230,9 +1633,21 @@
     ],
     "recommendation_engine": [
       "shopping_brain"
+    ],
+    "resolver_engine": [
+      "official_source_resolver"
     ]
   },
-  "syntax_errors": [],
+  "syntax_errors": [
+    {
+      "path": "python\\product_identity_v2.py",
+      "error": "Line 1: invalid non-printable character U+FEFF"
+    },
+    {
+      "path": "python\\shopping_brain_backup.py",
+      "error": "Line 1: invalid non-printable character U+FEFF"
+    }
+  ],
   "missing_local_imports": [],
   "duplicate_function_names": {
     "load_existing": [
@@ -1243,6 +1658,7 @@
       "amazon_catalog_sync",
       "batch_product_importer",
       "batch_product_queue",
+      "build_product_knowledge",
       "build_product_pages",
       "build_sitemap",
       "coupon_bot",
@@ -1254,7 +1670,11 @@
       "internal_link_engine",
       "inventory_status_manager",
       "migrate_product_schema",
+      "official_source_resolver",
+      "official_source_resolver_backup",
+      "official_spec_extractor",
       "price_importer",
+      "product_classifier",
       "product_engine",
       "product_feature_engine",
       "product_identity_engine",
@@ -1270,7 +1690,8 @@
     ],
     "normalize": [
       "coupon_bot",
-      "intent_engine"
+      "intent_engine",
+      "product_classifier"
     ],
     "clean": [
       "build_product_pages",
@@ -1290,6 +1711,7 @@
     ],
     "load_products": [
       "amazon_catalog_sync",
+      "build_product_knowledge",
       "build_product_pages",
       "couponworld",
       "migrate_product_schema",
@@ -1314,9 +1736,38 @@
     ],
     "print_report": [
       "batch_product_queue",
+      "product_classifier",
       "product_engine",
       "product_feature_engine",
       "product_identity_engine"
+    ],
+    "get_product_id": [
+      "build_product_knowledge",
+      "product_classifier"
+    ],
+    "load_json": [
+      "build_product_knowledge",
+      "official_source_resolver",
+      "official_source_resolver_backup",
+      "official_spec_extractor",
+      "product_classifier",
+      "product_engine",
+      "product_feature_engine"
+    ],
+    "normalize_text": [
+      "build_product_knowledge",
+      "official_source_resolver",
+      "official_source_resolver_backup",
+      "product_intelligence",
+      "resolver_engine"
+    ],
+    "save_json": [
+      "build_product_knowledge",
+      "official_source_resolver",
+      "official_source_resolver_backup",
+      "official_spec_extractor",
+      "product_classifier",
+      "product_engine"
     ],
     "detect_family": [
       "build_product_pages",
@@ -1360,6 +1811,7 @@
     ],
     "clean_text": [
       "migrate_product_schema",
+      "official_spec_extractor",
       "product_engine",
       "product_feature_engine",
       "product_identity_engine",
@@ -1378,6 +1830,38 @@
       "migrate_product_schema",
       "price_importer"
     ],
+    "core_product_title": [
+      "official_source_resolver",
+      "official_source_resolver_backup"
+    ],
+    "hostname_matches": [
+      "official_source_resolver",
+      "official_source_resolver_backup"
+    ],
+    "normalize_brand": [
+      "official_source_resolver",
+      "official_source_resolver_backup"
+    ],
+    "resolve_product": [
+      "official_source_resolver",
+      "official_source_resolver_backup"
+    ],
+    "significant_tokens": [
+      "official_source_resolver",
+      "official_source_resolver_backup"
+    ],
+    "token_match_score": [
+      "official_source_resolver",
+      "official_source_resolver_backup"
+    ],
+    "build_output": [
+      "official_spec_extractor",
+      "product_feature_engine"
+    ],
+    "utc_now": [
+      "official_spec_extractor",
+      "product_classifier"
+    ],
     "normalize_price": [
       "price_engine",
       "price_importer",
@@ -1387,10 +1871,6 @@
       "product_engine",
       "product_identity_engine",
       "product_intelligence"
-    ],
-    "load_json": [
-      "product_engine",
-      "product_feature_engine"
     ],
     "print_preview": [
       "product_engine",
@@ -1419,7 +1899,12 @@
   },
   "duplicate_files": [],
   "possible_orphan_modules": [
-    "data.python.seo_generator"
+    "data.python.seo_generator",
+    "official_source_resolver_v3",
+    "product_identity_v2",
+    "research_agent",
+    "shopping_brain_backup",
+    "tavily_test"
   ],
   "coupon_data": {
     "exists": true,
@@ -1429,8 +1914,8 @@
     "missing": {
       "sl_no": 74,
       "image": 57,
-      "price": 73,
-      "mrp": 73,
+      "price": 74,
+      "mrp": 74,
       "brand": 7
     }
   },
@@ -1442,7 +1927,7 @@
     },
     "status": {
       "ok": true,
-      "stdout": "?? python/system_audit_agent.py\n?? system_core_audit.txt",
+      "stdout": "M audit_reports/system_audit.json\n M audit_reports/system_audit.md\n M data/shopping_response.json\n M python/shopping_brain.py\n?? .identity_backups/\n?? COUPON_WORLD_ARCHITECTURE.md\n?? python/official_source_resolver_backup.py\n?? python/official_source_resolver_v3.py\n?? python/shopping_brain_backup.py\n?? python/tavily_test.py\n?? python_function_map.txt\n?? repository_tree.txt",
       "stderr": ""
     }
   }

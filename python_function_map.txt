@@ -1,0 +1,577 @@
+﻿
+=================================================
+amazon_catalog_sync.py
+=================================================
+def load_products():
+def backup():
+def save(products):
+def calculate(price, mrp):
+def main():
+
+=================================================
+amazon_data_provider.py
+=================================================
+class AmazonProductData:
+class AmazonDataProvider(Protocol):
+def get_product(
+class ManualAmazonProvider:
+def get_product(
+class UnavailableAmazonApiProvider:
+def get_product(
+def get_default_provider() -> AmazonDataProvider:
+
+=================================================
+batch_product_importer.py
+=================================================
+def parse_arguments() -> argparse.Namespace:
+def prepare_csv(input_file: Path, output_csv: Path) -> int:
+def read_csv_rows(path: Path) -> list[dict[str, str]]:
+def build_record(
+def import_csv(input_csv: Path, write: bool) -> int:
+def main() -> int:
+
+=================================================
+batch_product_queue.py
+=================================================
+class QueueItem:
+def parse_arguments() -> argparse.Namespace:
+def read_urls(path: Path) -> list[tuple[int, str]]:
+def scan_urls(
+def print_report(results: list[QueueItem]) -> None:
+def main() -> int:
+
+=================================================
+build_product_knowledge.py
+=================================================
+def load_json(path: Path, default: Any) -> Any:
+def save_json(path: Path, payload: Any) -> None:
+def normalize_text(value: Any) -> str:
+def get_product_id(product: dict[str, Any], position: int) -> str:
+def get_brand(product: dict[str, Any]) -> str:
+def load_products() -> list[dict[str, Any]]:
+def load_approved_knowledge() -> list[dict[str, Any]]:
+def load_existing_drafts() -> list[dict[str, Any]]:
+def load_research_results() -> dict[str, dict[str, Any]]:
+def load_official_specs() -> dict[str, dict[str, Any]]:
+def merge_research_into_draft(
+def merge_official_specs_into_draft(
+def build_approved_indexes(
+def build_draft_index(
+def create_draft(
+def prepare_drafts() -> int:
+def show_status() -> int:
+def main() -> int:
+
+=================================================
+build_product_pages.py
+=================================================
+def clean(value):
+def slugify(value, max_length=70):
+def load_products():
+def page_dir(product):
+def page_url(product):
+def excerpt(text, limit=160):
+def searchable_text(product):
+def detect_family(product):
+def related(product, products, limit=4):
+def render(product, products):
+def valid_number(value):
+def main():
+
+=================================================
+build_sitemap.py
+=================================================
+def clean(value):
+def slugify(value, max_length=70):
+def product_identity(product):
+def product_path(product):
+def product_url(product):
+def canonical_url(page):
+def extra_page_urls():
+def add_url(urlset, location, changefreq, priority):
+def main():
+def add_unique(
+
+=================================================
+couponworld.py
+=================================================
+def slugify(value: object, max_length: int = 70) -> str:
+def load_products() -> list[dict]:
+def product_identity(product: dict, index: int) -> str:
+def product_link(product: dict) -> str:
+def page_directory(product: dict) -> Path:
+def sitemap_urls() -> list[str]:
+def public_files() -> list[Path]:
+def print_section(title: str) -> None:
+def check_command() -> int:
+def run_command(command: list[str]) -> int:
+def validate_build_source() -> int:
+def build_command() -> int:
+def intake_products(
+def import_products(csv_file: str, write: bool = False) -> int:
+def adapt_source(input_csv: str, output_csv: str) -> int:
+def intelligence_report() -> int:
+def run_workflow(
+def build_parser() -> argparse.ArgumentParser:
+def main() -> int:
+
+=================================================
+google_discovery_audit.py
+=================================================
+def clean(value: object) -> str:
+def page_url(path: Path) -> str:
+def extract_title(text: str) -> str:
+def extract_description(text: str) -> str:
+def extract_canonical(text: str) -> str:
+def has_h1(text: str) -> bool:
+def is_noindex(text: str) -> bool:
+def has_schema(text: str) -> bool:
+def has_disclosure(text: str) -> bool:
+def internal_href_to_url(
+def load_sitemap() -> tuple[list[str], list[str]]:
+def robots_audit() -> tuple[bool, list[str]]:
+def main() -> int:
+def show_records(
+
+=================================================
+import_products.py
+=================================================
+def load_existing() -> list[dict]:
+def clean(value: object) -> str:
+def parse_int(value: object) -> int | None:
+def get_tag(url: str) -> str | None:
+def normalize_row(row: dict[str, str]) -> dict:
+def read_csv(csv_path: Path) -> list[tuple[int, dict]]:
+def validate_rows(
+def next_id(existing: list[dict]) -> int:
+def write_atomic(products: list[dict]) -> None:
+def run_build() -> int:
+def main() -> int:
+
+=================================================
+intent_engine.py
+=================================================
+class ShoppingIntent:
+def normalize(text: str) -> str:
+def detect_category(text: str):
+def detect_budget(text: str):
+def detect_features(text: str) -> list[str]:
+def detect_brands(text: str) -> list[str]:
+def detect_intent(text: str) -> tuple[str, bool]:
+def parse_query(query: str) -> dict:
+
+=================================================
+internal_link_engine.py
+=================================================
+def clean(value: object) -> str:
+def slugify(value: object) -> str:
+def product_identity(product: dict) -> str:
+def page_directory(product: dict) -> Path:
+def page_url(product: dict) -> str:
+def searchable_text(product: dict) -> str:
+def detect_family(product: dict) -> str:
+def active_products(products: list[dict]) -> list[dict]:
+def related_products(
+def main() -> int:
+
+=================================================
+inventory_status_manager.py
+=================================================
+def load():
+def save(data):
+def backup():
+def num(v):
+def main():
+
+=================================================
+knowledge_engine.py
+=================================================
+def load_product_knowledge():
+
+=================================================
+migrate_product_schema.py
+=================================================
+def clean_text(value: Any) -> str:
+def normalize_number(value: Any) -> int | float | None:
+def load_products() -> list[dict[str, Any]]:
+def normalize_product(
+def create_backup() -> Path:
+def save_products(products: list[dict[str, Any]]) -> None:
+def main() -> int:
+
+=================================================
+official_source_resolver.py
+=================================================
+def load_json(path: Path) -> dict[str, Any]:
+def save_json(path: Path, payload: dict[str, Any]) -> None:
+def normalize_brand(value: Any) -> str:
+def normalize_text(value: Any) -> str:
+def core_product_title(title: str) -> str:
+def significant_tokens(value: str) -> set[str]:
+def token_match_score(expected: str, candidate: str) -> float:
+def hostname_matches(url: str, allowed_domains: list[str]) -> bool:
+def is_unwanted_page(url: str) -> bool:
+def resolve_product(
+def main() -> int:
+
+=================================================
+official_source_resolver_backup.py
+=================================================
+def load_json(path: Path) -> dict[str, Any]:
+def save_json(path: Path, payload: dict[str, Any]) -> None:
+def normalize_brand(value: Any) -> str:
+def normalize_text(value: Any) -> str:
+def core_product_title(title: str) -> str:
+def significant_tokens(value: str) -> set[str]:
+def token_match_score(expected: str, candidate: str) -> float:
+def hostname_matches(url: str, allowed_domains: list[str]) -> bool:
+def resolve_product(
+def main() -> int:
+
+=================================================
+official_source_resolver_v3.py
+=================================================
+
+=================================================
+official_spec_extractor.py
+=================================================
+def utc_now() -> str:
+def clean_text(value: Any) -> str:
+def normalize_key(value: Any) -> str:
+def load_json(path: Path, default: Any) -> Any:
+def save_json(path: Path, payload: Any) -> None:
+def load_identity_index() -> dict[str, dict[str, Any]]:
+def is_unwanted_url(url: str) -> bool:
+def hostname(url: str) -> str:
+def fetch_page(url: str) -> tuple[str | None, str | None, int | None]:
+def parse_json_ld(soup: BeautifulSoup) -> list[dict[str, Any]]:
+def extract_meta(soup: BeautifulSoup) -> dict[str, str]:
+def add_specification(
+def extract_tables(
+def extract_definition_lists(
+def extract_json_ld_specs(
+def extract_label_value_blocks(
+def remove_page_chrome(soup: BeautifulSoup) -> None:
+def is_noise_feature(text: str) -> bool:
+def feature_relevance_score(text: str) -> int:
+def feature_scope(soup: BeautifulSoup) -> list[Any]:
+def extract_features(soup: BeautifulSoup) -> list[dict[str, Any]]:
+def identity_tokens(value: Any) -> set[str]:
+def page_identity_score(
+def extract_one(
+def build_output(
+def print_status() -> int:
+def main() -> int:
+
+=================================================
+price_engine.py
+=================================================
+def normalize_price(value: object) -> float | None:
+def calculate_discount(
+def check_budget(
+def analyze_price(product: dict, intent: dict) -> dict:
+
+=================================================
+price_importer.py
+=================================================
+def normalize_price(value: object) -> float | None:
+def load_products() -> list[dict]:
+def load_updates(csv_path: Path) -> list[dict]:
+def find_product(products: list[dict], product_id: str) -> dict | None:
+def apply_updates(
+def create_backup() -> Path:
+def save_products(products: list[dict]) -> None:
+def main() -> int:
+
+=================================================
+product_classifier.py
+=================================================
+def utc_now() -> str:
+def normalize(value: Any) -> str:
+def load_json(path: Path, default: Any) -> Any:
+def save_json(path: Path, payload: Any) -> None:
+def get_product_id(product: dict[str, Any], position: int) -> str:
+def phrase_match(text: str, phrases: tuple[str, ...]) -> list[str]:
+def derive_features(text: str) -> list[str]:
+def classify_product(
+def build_taxonomy() -> dict[str, Any]:
+def print_report(payload: dict[str, Any]) -> None:
+def main() -> int:
+
+=================================================
+product_engine.py
+=================================================
+def parse_arguments() -> argparse.Namespace:
+def load_json(file_path: Path) -> list[dict[str, Any]]:
+def save_json(file_path: Path, products: list[dict[str, Any]]) -> None:
+def create_backup(file_path: Path) -> Path:
+def clean_text(value: Any) -> str:
+def detect_brand(title: Any) -> str:
+def generate_description(product: dict[str, Any], brand: str) -> str:
+def improve_products(
+def calculate_health(report: dict[str, int]) -> int:
+def validate_products(products: list[dict[str, Any]]) -> dict[str, int]:
+def print_report(title: str, report: dict[str, int]) -> None:
+def print_preview(
+def main() -> int:
+
+=================================================
+product_feature_engine.py
+=================================================
+def clean_text(value: Any) -> str:
+def normalized_text(value: Any) -> str:
+def feature_record(
+def first_match(
+def unique_list(values: list[Any]) -> list[Any]:
+def normalize_number(value: str) -> int | float:
+def source_texts(product: dict[str, Any]) -> list[tuple[str, str]]:
+def extract_ram(text: str, source: str) -> dict[str, Any] | None:
+def extract_storage(text: str, source: str) -> dict[str, Any] | None:
+def extract_battery(text: str, source: str) -> dict[str, Any] | None:
+def extract_charging(text: str, source: str) -> dict[str, Any] | None:
+def extract_display_size(text: str, source: str) -> dict[str, Any] | None:
+def extract_resolution(text: str, source: str) -> dict[str, Any] | None:
+def extract_refresh_rate(text: str, source: str) -> dict[str, Any] | None:
+def extract_camera(text: str, source: str) -> dict[str, Any] | None:
+def extract_processor(text: str, source: str) -> dict[str, Any] | None:
+def extract_network(text: str, source: str) -> dict[str, Any] | None:
+def extract_audio_features(text: str, source: str) -> dict[str, Any] | None:
+def extract_playback_time(text: str, source: str) -> dict[str, Any] | None:
+def extract_capacity(text: str, source: str) -> dict[str, Any] | None:
+def extract_power(text: str, source: str) -> dict[str, Any] | None:
+def extract_material(text: str, source: str) -> dict[str, Any] | None:
+def extract_pack_quantity(text: str, source: str) -> dict[str, Any] | None:
+def extract_dimensions(text: str, source: str) -> dict[str, Any] | None:
+def extract_color(identity: dict[str, Any]) -> dict[str, Any] | None:
+def extract_model_codes(text: str, source: str) -> dict[str, Any] | None:
+def extract_product_features(
+def load_json(path: Path) -> Any:
+def load_products() -> list[dict[str, Any]]:
+def load_identities() -> list[dict[str, Any]]:
+def identity_lookup(
+def build_output(
+def print_report(output: dict[str, Any], write_mode: bool) -> None:
+def atomic_write(path: Path, data: dict[str, Any]) -> None:
+def parse_args() -> argparse.Namespace:
+def main() -> None:
+
+=================================================
+product_identity_engine.py
+=================================================
+def clean_text(value: Any) -> str:
+def load_products() -> list[dict[str, Any]]:
+def extract_asin(product: dict[str, Any]) -> tuple[str | None, list[str]]:
+def detect_brand(product: dict[str, Any]) -> tuple[str | None, list[str]]:
+def normalize_category(product: dict[str, Any]) -> tuple[str, list[str]]:
+def detect_subcategory(title: str) -> tuple[str | None, list[str]]:
+def extract_launch_year(product: dict[str, Any]) -> tuple[int | None, list[str]]:
+def extract_variant(title: str) -> tuple[dict[str, Any], list[str]]:
+def detect_model(
+def identity_confidence(
+def slugify(text: str) -> str:
+def canonical_product_id(
+def product_identifier(product: dict[str, Any], index: int) -> str:
+def build_identity(product: dict[str, Any], index: int) -> dict[str, Any]:
+def create_payload(identities: list[dict[str, Any]]) -> dict[str, Any]:
+def write_output(payload: dict[str, Any]) -> Path | None:
+def print_report(payload: dict[str, Any], write_mode: bool) -> None:
+def parse_args() -> argparse.Namespace:
+def main() -> int:
+
+=================================================
+product_identity_v2.py
+=================================================
+def load_products() -> list[dict[str, Any]]:
+def normalize_spaces(value: Any) -> str:
+def detect_brand(product: dict[str, Any]) -> str:
+def remove_variant_text(value: str) -> str:
+def get_core_title(title: str) -> str:
+def remove_brand_prefix(core_title: str, brand: str) -> str:
+def trim_marketing_words(model_text: str) -> str:
+def build_identity(
+def main() -> int:
+
+=================================================
+product_intelligence.py
+=================================================
+def clean(value: object) -> str:
+def normalize_text(value: object) -> str:
+def product_identity(
+def has_value(product: dict, field: str) -> bool:
+def detect_brand(title: str) -> tuple[str, str]:
+def build_description(
+def product_completeness(product: dict) -> int:
+def product_missing_fields(product: dict) -> list[str]:
+def database_health(products: list[dict]) -> int:
+def duplicate_values(
+def link_type(product: dict) -> str:
+def enrichment_score(product: dict) -> int:
+def proposal_confidence(
+def print_section(title: str) -> None:
+def main() -> int:
+
+=================================================
+product_pipeline.py
+=================================================
+def parse_arguments() -> argparse.Namespace:
+def validate_url(url: str) -> str:
+def extract_asin(url: str) -> str:
+def build_affiliate_url(asin: str) -> str:
+def existing_asin(product: dict[str, Any]) -> str:
+def find_duplicate(products: list[dict[str, Any]], asin: str) -> dict[str, Any] | None:
+def next_product_id(products: list[dict[str, Any]]) -> int:
+def build_record(products, asin, affiliate_url, title, category):
+def print_preview(product):
+def collect_interactive_input(args: argparse.Namespace) -> argparse.Namespace:
+def confirm_write() -> bool:
+def main() -> int:
+
+=================================================
+product_queue.py
+=================================================
+def clean(value: object) -> str:
+def product_identity(
+def link_type(product: dict) -> str:
+def has_image(product: dict) -> bool:
+def has_price(product: dict) -> bool:
+def has_asin(product: dict) -> bool:
+def category_health(
+def priority_score(
+def allocate_batch(
+def print_section(title: str) -> None:
+def main() -> int:
+
+=================================================
+product_scoring.py
+=================================================
+def score_product(product: dict, intent: dict) -> int:
+
+=================================================
+product_source_adapter.py
+=================================================
+def clean(value: object) -> str:
+def add_affiliate_tag(url: str) -> str:
+def normalize_price(value: object) -> str:
+def detect_link_type(url: str) -> str:
+def normalize_row(row: dict[str, str]) -> dict[str, str]:
+def main() -> int:
+
+=================================================
+recommendation_engine.py
+=================================================
+def explain_product(product: dict, intent: dict) -> list[str]:
+
+=================================================
+remove_amazon_branding.py
+=================================================
+def backup_file(path: Path) -> None:
+def clean_text(text: str) -> str:
+def clean_json_value(value, key=""):
+def process_text_file(path: Path) -> bool:
+def process_json_file(path: Path) -> bool:
+def main():
+
+=================================================
+research_agent.py
+=================================================
+
+=================================================
+resolver_engine.py
+=================================================
+class ParsedIdentity:
+class ResolverDecision:
+def to_dict(self) -> dict[str, Any]:
+def normalize_text(value: Any) -> str:
+def tokenize(value: Any) -> list[str]:
+def extract_brand(tokens: list[str]) -> str:
+def infer_brand_from_url(url: Any) -> str:
+def extract_memory_tokens(tokens: list[str], kind: str) -> list[str]:
+def extract_color_tokens(tokens: list[str]) -> list[str]:
+def parse_identity(
+def equivalent_model(expected: str, candidate: str) -> bool:
+def subset_match(
+def model_score(
+def compare_identity(
+def validate_candidate(
+
+=================================================
+seo_generator.py
+=================================================
+def safe_text(value):
+def generate_page(template, page):
+def main():
+
+=================================================
+shopping_brain.py
+=================================================
+def _load_database(path: Path) -> dict[str, Any]:
+def load_identity_database() -> dict[str, Any]:
+def load_feature_database() -> dict[str, Any]:
+def load_taxonomy_database() -> dict[str, Any]:
+def load_products() -> list[dict]:
+def _index_by_product_id(
+def merge_intelligence(
+def merge_taxonomy(
+def _normalize_query_text(value: Any) -> str:
+def infer_requested_product_types(intent: dict) -> set[str]:
+def taxonomy_search_text(product: dict) -> str:
+def taxonomy_match_score(
+def merge_product_knowledge(
+def match_products(
+def build_response(
+def print_text_response(
+def main() -> int:
+
+=================================================
+shopping_brain_backup.py
+=================================================
+def _load_database(path: Path) -> dict[str, Any]:
+def load_identity_database() -> dict[str, Any]:
+def load_feature_database() -> dict[str, Any]:
+def load_products() -> list[dict]:
+def _index_by_product_id(payload: dict[str, Any]) -> dict[str, dict[str, Any]]:
+def merge_intelligence(
+def match_products(products: list[dict], intent: dict) -> list[dict]:
+def main() -> int:
+
+=================================================
+site_intelligence.py
+=================================================
+def clean(value: object) -> str:
+def has_price(product: dict) -> bool:
+def is_product_link(product: dict) -> bool:
+def identity(product: dict, index: int) -> str:
+def missing_fields(product: dict) -> list[str]:
+def priority_score(product: dict) -> int:
+def percentage(value: int, total: int) -> str:
+def determine_next_action(
+def main() -> int:
+
+=================================================
+system_audit_agent.py
+=================================================
+class ModuleInfo:
+def args() -> argparse.Namespace:
+def module_name(root: Path, path: Path) -> str:
+def category(path: Path) -> str:
+def py_files(root: Path) -> list[Path]:
+def cli_commands(tree: ast.AST) -> list[str]:
+def parse_module(root: Path, path: Path, known: set[str]) -> ModuleInfo:
+def git(root: Path, *cmd: str) -> dict[str, Any]:
+def coupons(root: Path) -> dict[str, Any]:
+def build(root: Path) -> dict[str, Any]:
+def markdown(a: dict[str, Any]) -> str:
+def main() -> int:
+
+=================================================
+tavily_test.py
+=================================================
+
+=================================================
+image_engine.py
+=================================================
+class ImageEngine:
+def __init__(self):
+def load_database(self):
+def analyze_images(self):
+def main():

@@ -1,7 +1,7 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Coupon World AI OS
-Shopping Brain v1.1
+Shopping Brain v1.2
 
 Purpose:
 - Accept a shopping query
@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -32,6 +33,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "coupons.json"
 
 INTELLIGENCE_DIR = ROOT / "data" / "intelligence"
+TAXONOMY_DB = INTELLIGENCE_DIR / "product_taxonomy.json"
 IDENTITY_DB = INTELLIGENCE_DIR / "product_identity.json"
 FEATURE_DB = INTELLIGENCE_DIR / "product_features.json"
 
@@ -59,6 +61,12 @@ def load_identity_database() -> dict[str, Any]:
 
 def load_feature_database() -> dict[str, Any]:
     return _load_database(FEATURE_DB)
+
+
+
+def load_taxonomy_database() -> dict[str, Any]:
+    """Load the generated product taxonomy database."""
+    return _load_database(TAXONOMY_DB)
 
 
 def load_products() -> list[dict]:
@@ -144,6 +152,262 @@ def merge_intelligence(
     return merged_products
 
 
+def merge_taxonomy(
+    products: list[dict],
+    taxonomy_payload: dict[str, Any],
+) -> list[dict]:
+    """Attach product taxonomy to every product using product_id."""
+    taxonomy_index = _index_by_product_id(taxonomy_payload)
+    merged_products: list[dict] = []
+
+    for position, product in enumerate(products, start=1):
+        merged = product.copy()
+
+        product_id = (
+            product.get("id")
+            or product.get("sl_no")
+            or product.get("product_id")
+            or product.get("asin")
+            or position
+        )
+
+        merged["taxonomy"] = taxonomy_index.get(
+            str(product_id),
+            {},
+        )
+        merged_products.append(merged)
+
+    return merged_products
+
+
+QUERY_TYPE_ALIASES: dict[str, tuple[str, ...]] = {
+    "computer_keyboard": (
+        "keyboard",
+        "wireless keyboard",
+        "computer keyboard",
+        "office keyboard",
+        "keyboard mouse combo",
+        "keyboard and mouse",
+    ),
+    "tablet_keyboard_case": (
+        "keyboard case",
+        "tablet keyboard",
+        "folio keyboard",
+    ),
+    "computer_mouse": (
+        "mouse",
+        "wireless mouse",
+        "office mouse",
+        "gaming mouse",
+    ),
+    "earbuds": (
+        "earbuds",
+        "ear buds",
+        "tws",
+        "airpods",
+        "airdopes",
+        "buds",
+    ),
+    "headphones": (
+        "headphones",
+        "headphone",
+        "headset",
+    ),
+    "smartphone": (
+        "phone",
+        "smartphone",
+        "mobile",
+        "iphone",
+        "android phone",
+        "5g phone",
+    ),
+    "laptop": (
+        "laptop",
+        "gaming laptop",
+        "notebook",
+    ),
+    "smartwatch": (
+        "smartwatch",
+        "smart watch",
+        "fitness watch",
+    ),
+    "bluetooth_speaker": (
+        "bluetooth speaker",
+        "wireless speaker",
+        "portable speaker",
+    ),
+    "memory_card": (
+        "memory card",
+        "micro sd",
+        "microsd",
+        "sd card",
+    ),
+    "power_bank": (
+        "power bank",
+        "powerbank",
+    ),
+    "telescope": (
+        "telescope",
+        "astronomy telescope",
+    ),
+    "running_shoes": (
+        "running shoes",
+        "shoes",
+        "sneakers",
+    ),
+    "microwave_oven": (
+        "microwave",
+        "microwave oven",
+    ),
+    "water_bottle": (
+        "water bottle",
+        "bottle",
+        "flask",
+    ),
+}
+
+
+def _normalize_query_text(value: Any) -> str:
+    text = str(value or "").lower()
+    text = re.sub(r"[^a-z0-9+\s.-]", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def infer_requested_product_types(intent: dict) -> set[str]:
+    """Infer precise product types even when Intent Engine category is None."""
+    query_text = _normalize_query_text(
+        " ".join(intent.get("keywords", []))
+    )
+    requested: set[str] = set()
+
+    for product_type, aliases in QUERY_TYPE_ALIASES.items():
+        if any(alias in query_text for alias in aliases):
+            requested.add(product_type)
+
+    category = _normalize_query_text(intent.get("category"))
+
+    if category:
+        for product_type, aliases in QUERY_TYPE_ALIASES.items():
+            if category == product_type or any(
+                category in alias or alias in category
+                for alias in aliases
+            ):
+                requested.add(product_type)
+
+    return requested
+
+
+def taxonomy_search_text(product: dict) -> str:
+    taxonomy = product.get("taxonomy", {})
+
+    if not isinstance(taxonomy, dict):
+        taxonomy = {}
+
+    values: list[str] = [
+        product.get("title", ""),
+        product.get("brand", ""),
+        product.get("category", ""),
+        taxonomy.get("product_type", ""),
+        taxonomy.get("shopping_category", ""),
+        taxonomy.get("parent_category", ""),
+    ]
+
+    for field in ("tags", "features", "buyer_intents"):
+        field_values = taxonomy.get(field, [])
+
+        if isinstance(field_values, list):
+            values.extend(str(value) for value in field_values)
+
+    return _normalize_query_text(" ".join(str(value) for value in values))
+
+
+def taxonomy_match_score(
+    product: dict,
+    intent: dict,
+    requested_types: set[str],
+) -> tuple[int, list[str]]:
+    taxonomy = product.get("taxonomy", {})
+
+    if not isinstance(taxonomy, dict):
+        return 0, []
+
+    score = 0
+    reasons: list[str] = []
+    product_type = str(taxonomy.get("product_type") or "")
+    taxonomy_features = {
+        _normalize_query_text(value)
+        for value in taxonomy.get("features", [])
+        if value
+    }
+    taxonomy_tags = {
+        _normalize_query_text(value)
+        for value in taxonomy.get("tags", [])
+        if value
+    }
+
+    if requested_types and product_type in requested_types:
+        score += 70
+        reasons.append(
+            f"Exact product type matched: {product_type.replace('_', ' ')}"
+        )
+
+    requested_features = {
+        _normalize_query_text(value)
+        for value in intent.get("features", [])
+        if value
+    }
+
+    query_text = _normalize_query_text(
+        " ".join(intent.get("keywords", []))
+    )
+
+    for feature in (
+        "wireless",
+        "bluetooth",
+        "gaming",
+        "anc",
+        "enc",
+        "5g",
+        "amoled",
+        "rechargeable",
+        "usb_c",
+    ):
+        if feature.replace("_", " ") in query_text:
+            requested_features.add(feature)
+
+    matched_features = requested_features.intersection(
+        taxonomy_features.union(taxonomy_tags)
+    )
+
+    if matched_features:
+        score += min(20, 10 * len(matched_features))
+        reasons.append(
+            "Feature matched: "
+            + ", ".join(sorted(matched_features))
+        )
+
+    brands = {
+        _normalize_query_text(value)
+        for value in intent.get("brands", [])
+        if value
+    }
+    product_brand = _normalize_query_text(product.get("brand"))
+
+    if brands and any(
+        brand in product_brand or product_brand in brand
+        for brand in brands
+    ):
+        score += 10
+        reasons.append("Preferred brand matched")
+
+    taxonomy_confidence = int(taxonomy.get("confidence") or 0)
+
+    if taxonomy_confidence >= 80:
+        score += 5
+
+    return score, reasons
+
+
 def merge_product_knowledge(
     products: list[dict],
     knowledge_db: dict[str, dict],
@@ -188,42 +452,54 @@ def match_products(
     products: list[dict],
     intent: dict,
 ) -> list[dict]:
-    """Filter, score and rank products against parsed intent."""
-
+    """Filter, score and rank products using taxonomy and parsed intent."""
     matches: list[dict] = []
-
     category = intent.get("category")
+    requested_types = infer_requested_product_types(intent)
 
     brands = [
         str(brand).lower()
         for brand in intent.get("brands", [])
         if brand
     ]
-
     budget_max = intent.get("budget_max")
 
     for product in products:
         if product.get("active") is False:
             continue
 
+        taxonomy = product.get("taxonomy", {})
+
+        if not isinstance(taxonomy, dict):
+            taxonomy = {}
+
+        if taxonomy.get("classification_status") == "excluded_non_product":
+            continue
+
         product_category = str(
             product.get("category", "")
         ).lower()
-
         product_brand = str(
             product.get("brand", "")
         ).lower()
-
         product_title = str(
             product.get("title", "")
         ).lower()
+        product_type = str(
+            taxonomy.get("product_type", "")
+        )
+        searchable = taxonomy_search_text(product)
 
-        if category:
+        if requested_types:
+            if product_type not in requested_types:
+                continue
+        elif category:
             category_text = str(category).lower()
 
             if (
                 category_text not in product_category
                 and category_text not in product_title
+                and category_text not in searchable
             ):
                 continue
 
@@ -251,14 +527,28 @@ def match_products(
 
         ranked_product = product.copy()
 
-        ranked_product["score"] = score_product(
+        base_score = score_product(
+            ranked_product,
+            intent,
+        )
+        taxonomy_score, taxonomy_reasons = taxonomy_match_score(
+            ranked_product,
+            intent,
+            requested_types,
+        )
+
+        ranked_product["score"] = base_score + taxonomy_score
+
+        existing_reasons = explain_product(
             ranked_product,
             intent,
         )
 
-        ranked_product["reasons"] = explain_product(
-            ranked_product,
-            intent,
+        if not isinstance(existing_reasons, list):
+            existing_reasons = []
+
+        ranked_product["reasons"] = (
+            taxonomy_reasons + existing_reasons
         )
 
         ranked_product["price_info"] = analyze_price(
@@ -308,6 +598,7 @@ def build_response(
                 "reasons": product.get("reasons", []),
                 "link": product.get("link"),
                 "category": product.get("category"),
+                "taxonomy": product.get("taxonomy", {}),
                 "knowledge": {
                     "features": knowledge.get(
                         "features", []
@@ -336,7 +627,7 @@ def print_text_response(
     """Print Shopping Brain output in a readable terminal format."""
 
     print("\n" + "=" * 64)
-    print("COUPON WORLD SHOPPING BRAIN v1.1")
+    print("COUPON WORLD SHOPPING BRAIN v1.2")
     print("=" * 64)
 
     print("Intent          :", intent.get("intent"))
@@ -427,6 +718,18 @@ def print_text_response(
 
         print("Score      :", product.get("score", 0))
 
+        taxonomy = product.get("taxonomy", {})
+
+        if taxonomy:
+            print(
+                "Product type:",
+                taxonomy.get("product_type", "unclassified"),
+            )
+            print(
+                "Shopping cat:",
+                taxonomy.get("shopping_category", "unknown"),
+            )
+
         knowledge = product.get("product_knowledge", {})
 
         if knowledge:
@@ -510,11 +813,17 @@ def main() -> int:
 
         identity_payload = load_identity_database()
         feature_payload = load_feature_database()
+        taxonomy_payload = load_taxonomy_database()
 
         products = merge_intelligence(
             products,
             identity_payload,
             feature_payload,
+        )
+
+        products = merge_taxonomy(
+            products,
+            taxonomy_payload,
         )
 
         knowledge_db = load_product_knowledge()

@@ -1,37 +1,74 @@
-﻿{
-  "query": "best earbuds under 2000",
+{
+  "query": "best wireless keyboard",
   "intent": {
     "intent": "recommendation",
-    "category": "earbuds",
+    "category": null,
     "budget_min": null,
-    "budget_max": 2000,
+    "budget_max": null,
     "features": [],
     "brands": [],
     "compare": false,
     "keywords": [
       "best",
-      "earbuds",
-      "under",
-      "2000"
+      "wireless",
+      "keyboard"
     ]
   },
   "total_matches": 1,
   "matches": [
     {
-      "id": 32,
-      "title": "boAt Airdopes 311 Pro TWS Earbuds",
-      "brand": "boAt",
+      "id": 56,
+      "title": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo",
+      "brand": "Logitech",
       "price": null,
       "mrp": null,
       "discount": null,
-      "score": 50,
+      "score": 85,
       "reasons": [
-        "Γ£ô Category matched",
-        "Γ£ù Price unavailable"
+        "Exact product type matched: computer keyboard",
+        "Feature matched: wireless",
+        "No matching reason available"
       ],
-      "link": "https://www.amazon.in/s?k=boAt+Airdopes+311+Pro+TWS+Earbuds&tag=guru0906-21",
-      "category": "Electronics"
+      "link": "https://www.amazon.in/dp/B01N4EV2TL?tag=guru0906-21",
+      "category": "Electronics",
+      "taxonomy": {
+        "product_id": "56",
+        "title": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo",
+        "brand": "Logitech",
+        "current_category": "Electronics",
+        "classification_status": "classified",
+        "product_type": "computer_keyboard",
+        "shopping_category": "Computer Accessories",
+        "parent_category": "Electronics",
+        "tags": [
+          "keyboard",
+          "computer accessory"
+        ],
+        "features": [
+          "wireless"
+        ],
+        "buyer_intents": [
+          "office productivity",
+          "typing"
+        ],
+        "matched_rule": "computer_keyboard",
+        "matched_phrases": [
+          "keyboard and mouse combo",
+          "mk240"
+        ],
+        "candidate_types": [
+          "computer_keyboard"
+        ],
+        "confidence": 89,
+        "review_required": false,
+        "reason": "Matched deterministic product-title taxonomy rule"
+      },
+      "knowledge": {
+        "features": [],
+        "best_for": [],
+        "limitations": [],
+        "confidence": {}
+      }
     }
   ]
 }
-
