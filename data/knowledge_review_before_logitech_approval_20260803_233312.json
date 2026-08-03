@@ -14,7 +14,7 @@
     "drafts_created_now": 0,
     "existing_drafts_preserved": 73,
     "approved_products_skipped": 1,
-    "total_pending_drafts": 72,
+    "total_pending_drafts": 73,
     "drafts_with_official_specs": 2,
     "knowledge_review_ready": 0
   },
@@ -1823,6 +1823,89 @@
         "reviewed_by": "",
         "reviewed_on": "",
         "notes": ""
+      }
+    },
+    {
+      "product_id": "56",
+      "asin": "B01N4EV2TL",
+      "title": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo",
+      "brand": "Logitech",
+      "category": "Electronics",
+      "status": "knowledge_review_required",
+      "research": {
+        "official_product_url": "https://www.logitech.com/en-in/shop/p/mk240-minimalist-keyboard-mouse",
+        "official_brand_url": "",
+        "retailer_url": "https://www.amazon.in/dp/B01N4EV2TL?tag=guru0906-21",
+        "source_checked": true,
+        "checked_on": "2026-08-02T13:21:54.463662+00:00",
+        "resolver_status": "candidate_verified",
+        "resolver_verified": true,
+        "match_score": 0.761,
+        "spec_extraction": {
+          "fetch_status": "success",
+          "http_status": 200,
+          "page_identity_score": 0.6667,
+          "extractor_status": "manual_review",
+          "extractor_reason": "Evidence was extracted, but page identity requires review",
+          "source_host": "www.logitech.com",
+          "extracted_at": "2026-08-02T13:20:34.472970+00:00",
+          "evidence_summary": {
+            "parser": "lxml",
+            "json_ld_products": 1,
+            "json_ld_specifications": 2,
+            "table_specifications": 0,
+            "definition_list_specifications": 0,
+            "label_value_specifications": 0,
+            "total_specifications": 2,
+            "feature_items": 1,
+            "noise_filter_version": "2.0"
+          }
+        },
+        "canonical_product_url": "https://www.logitech.com/en-in/shop/p/mk240-minimalist-keyboard-mouse"
+      },
+      "features": [],
+      "best_for": [],
+      "limitations": [],
+      "confidence": {
+        "score": 74,
+        "level": "medium",
+        "reason": "Official-page evidence was extracted but requires manual verification"
+      },
+      "review": {
+        "approved": false,
+        "reviewed_by": "",
+        "reviewed_on": "",
+        "notes": ""
+      },
+      "official_specifications": {
+        "name": {
+          "value": "MK240 Wireless Keyboard and Mouse Combo",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "brand": {
+          "value": "Logitech",
+          "label": "brand",
+          "source": "json_ld",
+          "confidence": 90
+        }
+      },
+      "official_features": [
+        {
+          "text": "WIRELESS FREEDOM",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "official_page_meta": {
+        "html_title": "Logitech MK240 Minimalist Wireless Keyboard Mouse Combo",
+        "description": "Shop MK240 Combo. Features minimalist space-saving design with spill resistant keyboard. High definition optical tracking wireless mouse. Long battery life.",
+        "og_title": "Logitech MK240 Minimalist Wireless Keyboard Mouse Combo",
+        "og_description": "Shop MK240 Combo. Features minimalist space-saving design with spill resistant keyboard. High definition optical tracking wireless mouse. Long battery life.",
+        "canonical_url": "https://www.logitech.com/en-in/shop/p/mk240-minimalist-keyboard-mouse",
+        "h1": "MK240 Wireless Keyboard and Mouse Combo"
       }
     },
     {

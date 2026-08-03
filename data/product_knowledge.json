@@ -24,6 +24,39 @@
         "level": "low",
         "reason": "Profile created from limited existing product data"
       }
+    },
+    {
+      "product_id": "56",
+      "asin": "B01N4EV2TL",
+      "title": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo",
+      "brand": "Logitech",
+      "category": "Electronics",
+      "features": [
+        "Wireless keyboard and mouse combo",
+        "Minimalist space-saving design",
+        "Spill-resistant keyboard",
+        "High-definition optical tracking mouse",
+        "Long battery life"
+      ],
+      "best_for": [
+        "Everyday office work",
+        "Home computer use",
+        "Students and general typing",
+        "Users who prefer a compact wireless keyboard and mouse combo"
+      ],
+      "limitations": [
+        "Current price is not verified",
+        "Detailed technical specifications are limited on the extracted official page",
+        "Suitability for gaming or specialist use has not been verified"
+      ],
+      "confidence": {
+        "score": 82,
+        "level": "high",
+        "reason": "Official Logitech product page, canonical URL, product identity, brand and key product features were verified."
+      },
+      "official_product_url": "https://www.logitech.com/en-in/shop/p/mk240-minimalist-keyboard-mouse",
+      "published_on": "2026-08-03T18:06:15.470143+00:00"
     }
-  ]
+  ],
+  "updated_at": "2026-08-03T18:06:15.470215+00:00"
 }

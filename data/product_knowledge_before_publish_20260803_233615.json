@@ -1,0 +1,29 @@
+{
+  "products": [
+    {
+      "product_id": "boat-airdopes-311-pro",
+      "title": "boAt Airdopes 311 Pro TWS Earbuds",
+      "brand": "boAt",
+      "category": "earbuds",
+      "features": [
+        "True wireless earbuds",
+        "Bluetooth connectivity",
+        "Designed for everyday audio use"
+      ],
+      "best_for": [
+        "Casual music listening",
+        "Calls",
+        "Daily use"
+      ],
+      "limitations": [
+        "Current price is not verified",
+        "Detailed specifications are not yet verified"
+      ],
+      "confidence": {
+        "score": 40,
+        "level": "low",
+        "reason": "Profile created from limited existing product data"
+      }
+    }
+  ]
+}
