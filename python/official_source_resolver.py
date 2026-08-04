@@ -8,9 +8,11 @@ It does not approve or publish product knowledge automatically.
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import re
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
@@ -336,12 +338,146 @@ def resolve_product(
     return base_result
 
 
-def main() -> int:
-    api_key = os.getenv("TAVILY_API_KEY")
 
-    if not api_key:
-        print("ERROR: TAVILY_API_KEY is not configured")
-        return 1
+def load_existing_results() -> dict[str, dict[str, Any]]:
+    if not OUTPUT_FILE.exists():
+        return {}
+
+    try:
+        payload = load_json(OUTPUT_FILE)
+    except (FileNotFoundError, ValueError, OSError):
+        return {}
+
+    products = payload.get("products", [])
+
+    if not isinstance(products, list):
+        return {}
+
+    return {
+        str(item.get("product_id")): item
+        for item in products
+        if isinstance(item, dict)
+        and item.get("product_id") not in (None, "")
+    }
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Resolve official product sources from the research queue"
+    )
+
+    parser.add_argument(
+        "command",
+        nargs="?",
+        choices=("run", "status"),
+        default="status",
+        help="Show status or run a controlled resolver batch",
+    )
+
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=0,
+        help="Maximum number of selected products to process",
+    )
+
+    parser.add_argument(
+        "--product-id",
+        action="append",
+        default=[],
+        help="Process a specific product ID; may be repeated",
+    )
+
+    parser.add_argument(
+        "--pending",
+        action="store_true",
+        help="Process pending queue products not already resolved",
+    )
+
+    return parser
+
+
+def show_status(
+    queue_products: list[dict[str, Any]],
+    existing_results: dict[str, dict[str, Any]],
+) -> int:
+    from collections import Counter
+
+    queue_statuses = Counter(
+        str(item.get("status") or "missing")
+        for item in queue_products
+        if isinstance(item, dict)
+    )
+
+    result_statuses = Counter(
+        str(item.get("status") or "missing")
+        for item in existing_results.values()
+    )
+
+    pending_unresolved = sum(
+        1
+        for item in queue_products
+        if isinstance(item, dict)
+        and str(item.get("status") or "pending") == "pending"
+        and str(item.get("product_id")) not in existing_results
+    )
+
+    print("=" * 64)
+    print("OFFICIAL SOURCE RESOLVER v4.0 - STATUS")
+    print("=" * 64)
+    print("Queue products       :", len(queue_products))
+    print("Existing results     :", len(existing_results))
+    print("Pending unresolved   :", pending_unresolved)
+    print("Queue statuses       :", dict(queue_statuses))
+    print("Result statuses      :", dict(result_statuses))
+    print("=" * 64)
+    return 0
+
+
+def select_products(
+    queue_products: list[dict[str, Any]],
+    existing_results: dict[str, dict[str, Any]],
+    product_ids: list[str],
+    pending: bool,
+    limit: int,
+) -> list[dict[str, Any]]:
+    requested_ids = {
+        str(product_id).strip()
+        for product_id in product_ids
+        if str(product_id).strip()
+    }
+
+    selected: list[dict[str, Any]] = []
+
+    for product in queue_products:
+        if not isinstance(product, dict):
+            continue
+
+        product_id = str(product.get("product_id") or "").strip()
+
+        if requested_ids:
+            if product_id not in requested_ids:
+                continue
+        elif pending:
+            if str(product.get("status") or "pending") != "pending":
+                continue
+
+            if product_id in existing_results:
+                continue
+        else:
+            continue
+
+        selected.append(product)
+
+    if limit > 0:
+        selected = selected[:limit]
+
+    return selected
+
+
+def main() -> int:
+    parser = build_parser()
+    args = parser.parse_args()
 
     try:
         queue_payload = load_json(QUEUE_FILE)
@@ -355,36 +491,63 @@ def main() -> int:
         print("ERROR: research_queue.json products must be a list")
         return 1
 
-    pilot_products = [
-        product
-        for product in queue_products
-        if (
-            isinstance(product, dict)
-            and str(product.get("product_id")) in PILOT_PRODUCT_IDS
-        )
-    ]
+    existing_results = load_existing_results()
+
+    if args.command == "status":
+        return show_status(queue_products, existing_results)
+
+    selected_products = select_products(
+        queue_products,
+        existing_results,
+        args.product_id,
+        args.pending,
+        args.limit,
+    )
+
+    if not selected_products:
+        print("No products selected.")
+        print("Use --product-id ID or --pending with an optional --limit.")
+        return 0
+
+    api_key = os.getenv("TAVILY_API_KEY")
+
+    if not api_key:
+        print("ERROR: TAVILY_API_KEY is not configured")
+        return 1
 
     client = TavilyClient(api_key=api_key)
+    updated_results = dict(existing_results)
 
-    resolved_products: list[dict[str, Any]] = []
+    print("=" * 64)
+    print("OFFICIAL SOURCE RESOLVER v4.0")
+    print("=" * 64)
+    print("Selected products :", len(selected_products))
+    print("Existing results  :", len(existing_results))
+    print("=" * 64)
 
-    for product in pilot_products:
-        print("\n" + "=" * 64)
-        print("Researching:", product.get("title"))
-        print("=" * 64)
+    for position, product in enumerate(selected_products, start=1):
+        product_id = str(product.get("product_id") or "")
+        title = product.get("title")
+
+        print()
+        print(f"[{position}/{len(selected_products)}] {product_id} | {title}")
 
         try:
             resolved = resolve_product(client, product)
         except Exception as error:
             resolved = {
-                "product_id": str(product.get("product_id") or ""),
-                "title": product.get("title"),
+                "product_id": product_id,
+                "title": title,
                 "verified": False,
                 "status": "error",
                 "reason": str(error),
             }
 
-        resolved_products.append(resolved)
+        resolved["resolved_at"] = datetime.now(
+            timezone.utc
+        ).isoformat()
+
+        updated_results[product_id] = resolved
 
         print("Status   :", resolved.get("status"))
         print("URL      :", resolved.get("official_url"))
@@ -392,26 +555,37 @@ def main() -> int:
         print("Identity :", resolved.get("identity_score"))
         print("Decision :", resolved.get("identity_decision"))
 
+    final_products = list(updated_results.values())
+
     output = {
-        "schema_version": "3.0",
-        "mode": "pilot",
-        "products_requested": len(pilot_products),
-        "products": resolved_products,
+        "schema_version": "4.0",
+        "mode": "incremental",
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+        "products_requested": len(selected_products),
+        "total_results": len(final_products),
+        "products": final_products,
     }
 
     save_json(OUTPUT_FILE, output)
 
     verified_count = sum(
-        1 for item in resolved_products if item.get("verified") is True
+        1
+        for item in selected_products
+        if updated_results.get(
+            str(item.get("product_id")),
+            {},
+        ).get("verified") is True
     )
 
-    print("\n" + "=" * 64)
-    print("OFFICIAL SOURCE RESOLVER v3.0")
+    print()
     print("=" * 64)
-    print("Pilot products :", len(pilot_products))
-    print("Verified       :", verified_count)
-    print("Manual review  :", len(pilot_products) - verified_count)
-    print("Output         :", OUTPUT_FILE)
+    print("RESOLVER BATCH COMPLETE")
+    print("=" * 64)
+    print("Processed       :", len(selected_products))
+    print("Verified        :", verified_count)
+    print("Needs review    :", len(selected_products) - verified_count)
+    print("Total results   :", len(final_products))
+    print("Output          :", OUTPUT_FILE)
     print("=" * 64)
 
     return 0

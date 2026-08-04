@@ -318,7 +318,7 @@
       "title": "realme Buds Air 8, 11mm+6mm Dual Dynamic Bass Drivers, 58Hrs Playtime, 55dB ANC, 6 Mic ENC, 45ms Low Latency, 360° Spatial Audio, Hi-Res LHDC, IP55 Dust & Water Resistant, BT v5.4 (Master Gold)",
       "brand": "realme",
       "category": "Electronics",
-      "status": "knowledge_review_required",
+      "status": "source_mismatch",
       "research": {
         "official_product_url": "https://www.realme.com/in/realme-buds-air/specs",
         "official_brand_url": "",
@@ -354,15 +354,15 @@
       "best_for": [],
       "limitations": [],
       "confidence": {
-        "score": 58,
-        "level": "medium",
-        "reason": "Official-page evidence was extracted but requires manual verification"
+        "score": 0,
+        "level": "rejected",
+        "reason": "Official source does not match the expected product model."
       },
       "review": {
         "approved": false,
-        "reviewed_by": "",
-        "reviewed_on": "",
-        "notes": ""
+        "reviewed_by": "Guru Das",
+        "reviewed_on": "2026-08-03T18:24:27.709310+00:00",
+        "notes": "Rejected for publishing. The official page is for realme Buds Air, while the catalogue product is realme Buds Air 8. Extracted Bluetooth, battery, design and feature data do not match the listed product."
       },
       "official_specifications": {
         "controls_support_touch_control_double_tap": {

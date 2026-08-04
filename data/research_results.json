@@ -1,7 +1,9 @@
 {
-  "schema_version": "3.0",
-  "mode": "pilot",
-  "products_requested": 5,
+  "schema_version": "4.0",
+  "mode": "incremental",
+  "updated_at": "2026-08-04T16:36:41.370012+00:00",
+  "products_requested": 3,
+  "total_results": 9,
   "products": [
     {
       "product_id": "10",
@@ -88,21 +90,6 @@
             "Network generation matched",
             "RAM mismatch"
           ]
-        },
-        {
-          "title": "Redmi 13 5G | Xiaomi India | Best & Latest Price to Buy",
-          "url": "https://www.mi.com/in/product/redmi-13-5g/buy",
-          "model_score": 0.6,
-          "search_score": 0.7461,
-          "combined_score": 0.6292,
-          "identity_score": 90,
-          "identity_decision": "verified",
-          "identity_reasons": [
-            "Brand matched",
-            "All identity-bearing model tokens matched",
-            "Network generation matched",
-            "RAM mismatch"
-          ]
         }
       ]
     },
@@ -116,16 +103,37 @@
         "realme.com"
       ],
       "query": "realme realme Buds Air 8 official specifications",
-      "official_title": null,
-      "official_url": null,
-      "match_score": 0.0,
-      "identity_score": 0,
-      "identity_decision": null,
-      "identity_reasons": [],
+      "official_title": "realme Buds Air8 - 55dB Noise Cancellation | realme Indonesia",
+      "official_url": "https://www.realme.com/id/more-products/realme-buds-air-8",
+      "match_score": 0.6581,
+      "identity_score": 85,
+      "identity_decision": "verified",
+      "identity_reasons": [
+        "Brand matched",
+        "All identity-bearing model tokens matched",
+        "Supporting model/series token(s) matched: buds",
+        "Variant matched"
+      ],
       "verified": false,
-      "status": "not_found",
-      "reason": "No result passed official-domain and identity validation",
-      "candidates": []
+      "status": "manual_review",
+      "reason": "Official candidate found, but identity requires manual review",
+      "candidates": [
+        {
+          "title": "realme Buds Air8 - 55dB Noise Cancellation | realme Indonesia",
+          "url": "https://www.realme.com/id/more-products/realme-buds-air-8",
+          "model_score": 0.6667,
+          "search_score": 0.6239,
+          "combined_score": 0.6581,
+          "identity_score": 85,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: buds",
+            "Variant matched"
+          ]
+        }
+      ]
     },
     {
       "product_id": "13",
@@ -137,52 +145,16 @@
         "yamaha.com"
       ],
       "query": "Yamaha Yamaha PSS-E30 Remie Portable Mini Keyboard – 37 Keys official specifications",
-      "official_title": "Yamaha PSS-E30 37-key Remie Keyboard",
-      "official_url": "https://shop.sg.yamaha.com/psse30.html",
-      "match_score": 0.7165,
-      "identity_score": 80,
-      "identity_decision": "manual_review",
-      "identity_reasons": [
-        "Brand matched",
-        "All identity-bearing model tokens matched",
-        "Supporting model/series token(s) matched: keyboard, pss, remie",
-        "Variant mismatch"
-      ],
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
       "verified": false,
-      "status": "manual_review",
-      "reason": "Official candidate found, but identity requires manual review",
-      "candidates": [
-        {
-          "title": "Yamaha PSS-E30 37-key Remie Keyboard",
-          "url": "https://shop.sg.yamaha.com/psse30.html",
-          "model_score": 0.6667,
-          "search_score": 0.9156,
-          "combined_score": 0.7165,
-          "identity_score": 80,
-          "identity_decision": "manual_review",
-          "identity_reasons": [
-            "Brand matched",
-            "All identity-bearing model tokens matched",
-            "Supporting model/series token(s) matched: keyboard, pss, remie",
-            "Variant mismatch"
-          ]
-        },
-        {
-          "title": "Yamaha PSS-E30 37-keys Mobile Keyboard",
-          "url": "https://shop.sg.yamaha.com/psse30-bundle.html",
-          "model_score": 0.6667,
-          "search_score": 0.8758,
-          "combined_score": 0.7085,
-          "identity_score": 80,
-          "identity_decision": "manual_review",
-          "identity_reasons": [
-            "Brand matched",
-            "All identity-bearing model tokens matched",
-            "Supporting model/series token(s) matched: keyboard, keys, pss",
-            "Variant mismatch"
-          ]
-        }
-      ]
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": []
     },
     {
       "product_id": "14",
@@ -215,82 +187,98 @@
         "logitech.com"
       ],
       "query": "Logitech Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo official specifications",
-      "official_title": "Logitech MK240 Minimalist Wireless Keyboard Mouse Combo",
-      "official_url": "https://www.logitech.com/en-in/shop/p/mk240-minimalist-keyboard-mouse",
-      "match_score": 0.761,
-      "identity_score": 80,
-      "identity_decision": "manual_review",
-      "identity_reasons": [
-        "Brand matched",
-        "All identity-bearing model tokens matched",
-        "Supporting model/series token(s) matched: combo, keyboard, mouse",
-        "Variant mismatch"
-      ],
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": []
+    },
+    {
+      "product_id": "1",
+      "title": "JIADA Space Astronaut Stationery Set for Boys - with Badge, Notebook and Pen - Birthday Return Gift/Rakhi Gift for Boys, Kids, Blue",
+      "brand": "JIADA",
+      "asin": "",
+      "core_title": "JIADA Space Astronaut Stationery Set for Boys - with Badge",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
       "verified": false,
       "status": "manual_review",
-      "reason": "Official candidate found, but identity requires manual review",
-      "candidates": [
-        {
-          "title": "Logitech MK240 Minimalist Wireless Keyboard Mouse Combo",
-          "url": "https://www.logitech.com/en-in/shop/p/mk240-minimalist-keyboard-mouse",
-          "model_score": 0.75,
-          "search_score": 0.8048,
-          "combined_score": 0.761,
-          "identity_score": 80,
-          "identity_decision": "manual_review",
-          "identity_reasons": [
-            "Brand matched",
-            "All identity-bearing model tokens matched",
-            "Supporting model/series token(s) matched: combo, keyboard, mouse",
-            "Variant mismatch"
-          ]
-        },
-        {
-          "title": "Logitech MK240 Minimalist Wireless Keyboard Mouse Combo",
-          "url": "https://www.logitech.com/id-id/shop/p/mk240-minimalist-keyboard-mouse",
-          "model_score": 0.75,
-          "search_score": 0.8007,
-          "combined_score": 0.7601,
-          "identity_score": 80,
-          "identity_decision": "manual_review",
-          "identity_reasons": [
-            "Brand matched",
-            "All identity-bearing model tokens matched",
-            "Supporting model/series token(s) matched: combo, keyboard, mouse",
-            "Variant mismatch"
-          ]
-        },
-        {
-          "title": "Startup Guide Logitech® Wireless Combo MK240",
-          "url": "https://www.logitech.com/assets/43136/4/mk240-quickstart-guide.pdf",
-          "model_score": 0.5,
-          "search_score": 0.8138,
-          "combined_score": 0.5628,
-          "identity_score": 80,
-          "identity_decision": "manual_review",
-          "identity_reasons": [
-            "Brand matched",
-            "All identity-bearing model tokens matched",
-            "Supporting model/series token(s) matched: combo",
-            "Variant mismatch"
-          ]
-        },
-        {
-          "title": "Startup Guide Logitech® Wireless Combo MK240",
-          "url": "https://www.logitech.com/assets/43136/3/mk240-quickstart-guide.pdf",
-          "model_score": 0.5,
-          "search_score": 0.8037,
-          "combined_score": 0.5607,
-          "identity_score": 80,
-          "identity_decision": "manual_review",
-          "identity_reasons": [
-            "Brand matched",
-            "All identity-bearing model tokens matched",
-            "Supporting model/series token(s) matched: combo",
-            "Variant mismatch"
-          ]
-        }
-      ]
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-04T16:35:07.840895+00:00"
+    },
+    {
+      "product_id": "2",
+      "title": "Keyboard Case for Samsung Galaxy Tab A11+ & Tab A9 Plus 11” Folio Cover SM-X230, SM-X236B, SM-X210, SM-X215 with Trackpad, 7 Color Backlit Magnetically Detachable Bluetooth Keyboard, Multi-Angle View",
+      "brand": "Samsung",
+      "asin": "",
+      "core_title": "Keyboard Case for Samsung Galaxy Tab A11+ & Tab A9 Plus 11” Folio Cover SM-X230",
+      "allowed_domains": [
+        "samsung.com"
+      ],
+      "query": "Samsung Keyboard Case for Samsung Galaxy Tab A11+ & Tab A9 Plus 11” Folio Cover SM-X230 official specifications",
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": [],
+      "resolved_at": "2026-08-04T16:36:41.338682+00:00"
+    },
+    {
+      "product_id": "3",
+      "title": "TeeSlix NASA Cotton Boys t-Shirt, Teenagers | Soft, Premium Fabric | Regular Fit T-Shirt for Boys, Girls | Space Rocket Design | Blue,Black,RED | Age 8 to 17 Years",
+      "brand": "TeeSlix",
+      "asin": "",
+      "core_title": "TeeSlix NASA Cotton Boys t-Shirt",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-04T16:36:41.362685+00:00"
+    },
+    {
+      "product_id": "4",
+      "title": "Bausch + Lomb Fresh Multi-Purpose 500Ml Contact Lens Solution (Pack Of 1)",
+      "brand": "Bausch + Lomb",
+      "asin": "",
+      "core_title": "Bausch + Lomb Fresh Multi-Purpose 500Ml Contact Lens Solution (Pack Of 1)",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-04T16:36:41.366331+00:00"
     }
   ]
 }
