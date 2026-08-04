@@ -8,3 +8,15 @@ __pycache__/
 .price_backups/
 
 price_updates.csv
+
+# Temporary upgrade/review scripts
+upgrade_*.py
+reject_product_*_knowledge.py
+approve_*_knowledge.py
+add_*_command.py
+finish_*_v*.py
+apply_*_v*.py
+
+# Timestamped development backups
+python/*_before_*.py
+data/*_before_*.json
