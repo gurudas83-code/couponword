@@ -14,6 +14,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import shutil
 import sys
 import time
 from datetime import datetime, timezone
@@ -884,15 +885,94 @@ def extract_one(
     return output
 
 
+def load_existing_output() -> dict[str, dict[str, Any]]:
+    payload = load_json(OUTPUT_DB, {"products": []})
+
+    products = (
+        payload.get("products", [])
+        if isinstance(payload, dict)
+        else []
+    )
+
+    if not isinstance(products, list):
+        return {}
+
+    return {
+        str(item.get("product_id")): item
+        for item in products
+        if isinstance(item, dict)
+        and item.get("product_id") not in (None, "")
+    }
+
+
+def backup_output() -> Path | None:
+    if not OUTPUT_DB.exists():
+        return None
+
+    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    destination = OUTPUT_DB.with_name(
+        f"{OUTPUT_DB.stem}_before_incremental_{stamp}{OUTPUT_DB.suffix}"
+    )
+
+    shutil.copy2(OUTPUT_DB, destination)
+    return destination
+
+
+def select_research_results(
+    products: list[dict[str, Any]],
+    existing: dict[str, dict[str, Any]],
+    only_verified: bool,
+    pending: bool,
+    product_ids: list[str],
+    limit: int | None,
+) -> list[dict[str, Any]]:
+    requested_ids = {
+        str(product_id).strip()
+        for product_id in product_ids
+        if str(product_id).strip()
+    }
+
+    selected: list[dict[str, Any]] = []
+
+    for product in products:
+        if not isinstance(product, dict):
+            continue
+
+        product_id = str(product.get("product_id") or "").strip()
+
+        if not product.get("official_url"):
+            continue
+
+        if only_verified and product.get("verified") is not True:
+            continue
+
+        if requested_ids:
+            if product_id not in requested_ids:
+                continue
+        elif pending:
+            if product_id in existing:
+                continue
+
+        selected.append(product)
+
+    if limit is not None and limit >= 0:
+        selected = selected[:limit]
+
+    return selected
+
+
 def build_output(
     limit: int | None,
     only_verified: bool,
+    pending: bool = False,
+    product_ids: list[str] | None = None,
 ) -> dict[str, Any]:
     research_payload = load_json(
         RESEARCH_RESULTS_DB,
         {"products": []},
     )
     identity_index = load_identity_index()
+    existing = load_existing_output()
 
     products = (
         research_payload.get("products", [])
@@ -903,21 +983,17 @@ def build_output(
     if not isinstance(products, list):
         raise ValueError("research_results.json products must be a list")
 
-    selected = [
-        product
-        for product in products
-        if isinstance(product, dict)
-        and product.get("official_url")
-        and (
-            not only_verified
-            or product.get("verified") is True
-        )
-    ]
+    selected = select_research_results(
+        products=products,
+        existing=existing,
+        only_verified=only_verified,
+        pending=pending,
+        product_ids=product_ids or [],
+        limit=limit,
+    )
 
-    if limit is not None:
-        selected = selected[:limit]
-
-    output_products: list[dict[str, Any]] = []
+    updated = dict(existing)
+    processed_results: list[dict[str, Any]] = []
 
     for position, research_result in enumerate(selected, start=1):
         product_id = str(research_result.get("product_id") or "")
@@ -931,8 +1007,31 @@ def build_output(
         )
         print("URL:", research_result.get("official_url"))
 
-        result = extract_one(research_result, identity)
-        output_products.append(result)
+        try:
+            result = extract_one(research_result, identity)
+        except Exception as error:
+            result = {
+                "product_id": product_id,
+                "official_url": research_result.get("official_url"),
+                "resolver_status": research_result.get("status"),
+                "resolver_verified": research_result.get("verified") is True,
+                "fetch_status": "error",
+                "http_status": None,
+                "page_identity_score": 0.0,
+                "specifications": {},
+                "features": [],
+                "meta": {},
+                "evidence_summary": {},
+                "review": {
+                    "approved": False,
+                    "status": "manual_review",
+                    "reason": str(error),
+                },
+                "extracted_at": utc_now(),
+            }
+
+        updated[product_id] = result
+        processed_results.append(result)
 
         print("Fetch status :", result.get("fetch_status"))
         print("Page match   :", result.get("page_identity_score"))
@@ -950,83 +1049,158 @@ def build_output(
 
         time.sleep(DELAY_SECONDS)
 
-    summary = {
+    final_products = list(updated.values())
+
+    batch_summary = {
         "requested": len(selected),
         "success": sum(
-            1
-            for item in output_products
+            1 for item in processed_results
             if item.get("fetch_status") == "success"
         ),
         "errors": sum(
-            1
-            for item in output_products
+            1 for item in processed_results
             if item.get("fetch_status") == "error"
         ),
         "candidate_ready": sum(
-            1
-            for item in output_products
+            1 for item in processed_results
             if item.get("review", {}).get("status") == "candidate_ready"
         ),
         "manual_review": sum(
-            1
-            for item in output_products
+            1 for item in processed_results
             if item.get("review", {}).get("status") == "manual_review"
         ),
         "rejected_candidate": sum(
-            1
-            for item in output_products
+            1 for item in processed_results
+            if item.get("review", {}).get("status") == "rejected_candidate"
+        ),
+    }
+
+    total_summary = {
+        "products": len(final_products),
+        "successful_fetch": sum(
+            1 for item in final_products
+            if item.get("fetch_status") == "success"
+        ),
+        "candidate_ready": sum(
+            1 for item in final_products
+            if item.get("review", {}).get("status") == "candidate_ready"
+        ),
+        "manual_review": sum(
+            1 for item in final_products
+            if item.get("review", {}).get("status") == "manual_review"
+        ),
+        "rejected_candidate": sum(
+            1 for item in final_products
             if item.get("review", {}).get("status") == "rejected_candidate"
         ),
     }
 
     return {
-        "schema_version": "2.0",
+        "schema_version": "5.0",
         "generated_at": utc_now(),
         "source_file": str(RESEARCH_RESULTS_DB.relative_to(ROOT)),
-        "mode": (
-            "resolver-verified-only"
-            if only_verified
-            else "all-official-url-candidates"
-        ),
-        "summary": summary,
-        "products": output_products,
+        "mode": "incremental",
+        "selection": {
+            "only_verified": only_verified,
+            "pending": pending,
+            "product_ids": product_ids or [],
+            "limit": limit,
+        },
+        "batch_summary": batch_summary,
+        "summary": total_summary,
+        "products": final_products,
     }
 
 
 def print_status() -> int:
-    payload = load_json(OUTPUT_DB, {"products": []})
-    products = payload.get("products", []) if isinstance(payload, dict) else []
+    output_payload = load_json(OUTPUT_DB, {"products": []})
+    research_payload = load_json(
+        RESEARCH_RESULTS_DB,
+        {"products": []},
+    )
 
-    if not isinstance(products, list):
-        products = []
+    output_products = (
+        output_payload.get("products", [])
+        if isinstance(output_payload, dict)
+        else []
+    )
+    research_products = (
+        research_payload.get("products", [])
+        if isinstance(research_payload, dict)
+        else []
+    )
+
+    if not isinstance(output_products, list):
+        output_products = []
+
+    if not isinstance(research_products, list):
+        research_products = []
+
+    extracted_ids = {
+        str(item.get("product_id"))
+        for item in output_products
+        if isinstance(item, dict)
+        and item.get("product_id") not in (None, "")
+    }
+
+    verified_eligible = [
+        item
+        for item in research_products
+        if isinstance(item, dict)
+        and item.get("official_url")
+        and item.get("verified") is True
+    ]
+
+    all_url_candidates = [
+        item
+        for item in research_products
+        if isinstance(item, dict)
+        and item.get("official_url")
+    ]
+
+    pending_verified = sum(
+        1
+        for item in verified_eligible
+        if str(item.get("product_id")) not in extracted_ids
+    )
 
     print("\n" + "=" * 68)
-    print("OFFICIAL SPECIFICATION EXTRACTOR STATUS")
+    print("OFFICIAL SPECIFICATION EXTRACTOR v5.0 - STATUS")
     print("=" * 68)
-    print("Output file      :", OUTPUT_DB)
-    print("Products         :", len(products))
+    print("Research results        :", len(research_products))
+    print("Official URL candidates :", len(all_url_candidates))
+    print("Verified eligible       :", len(verified_eligible))
+    print("Extracted products      :", len(output_products))
+    print("Pending verified        :", pending_verified)
     print(
-        "Successful fetch:",
-        sum(1 for item in products if item.get("fetch_status") == "success"),
+        "Successful fetch        :",
+        sum(
+            1 for item in output_products
+            if item.get("fetch_status") == "success"
+        ),
     )
     print(
-        "Candidate ready :",
+        "Candidate ready         :",
         sum(
-            1
-            for item in products
+            1 for item in output_products
             if item.get("review", {}).get("status") == "candidate_ready"
         ),
     )
     print(
-        "Manual review   :",
+        "Manual review           :",
         sum(
-            1
-            for item in products
+            1 for item in output_products
             if item.get("review", {}).get("status") == "manual_review"
         ),
     )
+    print(
+        "Rejected candidate      :",
+        sum(
+            1 for item in output_products
+            if item.get("review", {}).get("status") == "rejected_candidate"
+        ),
+    )
     print("=" * 68)
-
     return 0
 
 
@@ -1036,18 +1210,21 @@ def main() -> int:
             "Extract review-ready product specifications from official pages"
         )
     )
+
     parser.add_argument(
         "command",
         nargs="?",
         choices=("extract", "status"),
-        default="extract",
+        default="status",
     )
+
     parser.add_argument(
         "--limit",
         type=int,
         default=None,
-        help="Process only the first N eligible products",
+        help="Maximum number of selected products to process",
     )
+
     parser.add_argument(
         "--all-candidates",
         action="store_true",
@@ -1055,6 +1232,19 @@ def main() -> int:
             "Include manual-review resolver results. "
             "Default processes resolver-verified products only."
         ),
+    )
+
+    parser.add_argument(
+        "--pending",
+        action="store_true",
+        help="Process only eligible products not already extracted",
+    )
+
+    parser.add_argument(
+        "--product-id",
+        action="append",
+        default=[],
+        help="Extract a specific product ID; may be repeated",
     )
 
     args = parser.parse_args()
@@ -1066,16 +1256,20 @@ def main() -> int:
         output = build_output(
             limit=args.limit,
             only_verified=not args.all_candidates,
+            pending=args.pending,
+            product_ids=args.product_id,
         )
+
+        backup = backup_output()
         save_json(OUTPUT_DB, output)
     except (OSError, ValueError) as error:
         print(f"ERROR: {error}", file=sys.stderr)
         return 1
 
-    summary = output["summary"]
+    summary = output["batch_summary"]
 
     print("\n" + "=" * 68)
-    print("COUPON WORLD OFFICIAL SPECIFICATION EXTRACTOR")
+    print("COUPON WORLD OFFICIAL SPECIFICATION EXTRACTOR v5.0")
     print("=" * 68)
     print("Requested         :", summary["requested"])
     print("Successful fetch  :", summary["success"])
@@ -1083,6 +1277,8 @@ def main() -> int:
     print("Manual review     :", summary["manual_review"])
     print("Rejected candidate:", summary["rejected_candidate"])
     print("Errors            :", summary["errors"])
+    print("Total stored      :", len(output.get("products", [])))
+    print("Backup            :", backup)
     print("Output            :", OUTPUT_DB)
     print("=" * 68)
 

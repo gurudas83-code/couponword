@@ -1,14 +1,29 @@
 {
-  "schema_version": "2.0",
-  "generated_at": "2026-08-02T13:20:36.674943+00:00",
+  "schema_version": "5.0",
+  "generated_at": "2026-08-04T16:48:46.431646+00:00",
   "source_file": "data\\research_results.json",
-  "mode": "resolver-verified-only",
-  "summary": {
-    "requested": 2,
-    "success": 2,
-    "errors": 0,
+  "mode": "incremental",
+  "selection": {
+    "only_verified": false,
+    "pending": false,
+    "product_ids": [
+      "10"
+    ],
+    "limit": null
+  },
+  "batch_summary": {
+    "requested": 1,
+    "success": 0,
+    "errors": 1,
     "candidate_ready": 0,
     "manual_review": 1,
+    "rejected_candidate": 0
+  },
+  "summary": {
+    "products": 3,
+    "successful_fetch": 2,
+    "candidate_ready": 0,
+    "manual_review": 2,
     "rejected_candidate": 1
   },
   "products": [
@@ -308,6 +323,29 @@
         "reason": "Evidence was extracted, but page identity requires review"
       },
       "extracted_at": "2026-08-02T13:20:34.472970+00:00"
+    },
+    {
+      "product_id": "10",
+      "brand": "Redmi",
+      "model": "13 5G",
+      "search_name": "Redmi 13 5G",
+      "official_url": "https://www.mi.com/in/product/redmi-13-5g-prime-edition/specs",
+      "source_host": "www.mi.com",
+      "resolver_status": "manual_review",
+      "resolver_verified": false,
+      "fetch_status": "error",
+      "http_status": null,
+      "page_identity_score": 0.0,
+      "specifications": {},
+      "features": [],
+      "meta": {},
+      "evidence_summary": {},
+      "review": {
+        "approved": false,
+        "status": "manual_review",
+        "reason": "HTTP 403"
+      },
+      "extracted_at": "2026-08-04T16:48:44.987154+00:00"
     }
   ]
 }
