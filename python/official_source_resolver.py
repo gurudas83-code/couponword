@@ -211,30 +211,36 @@ def is_unwanted_page(url: str) -> bool:
 
 def page_type_score(url: str) -> int:
     """
-    Prefer canonical product/specification pages over support articles.
+    Prefer technical specification and canonical product pages over
+    buy/configuration and support pages.
     """
 
     lowered = str(url or "").lower()
 
+    if (
+        "/specs" in lowered
+        or "/specifications" in lowered
+        or "/technical-specifications" in lowered
+        or "/tech-specs" in lowered
+    ):
+        return 100
+
     if "/products/" in lowered:
-        return 40
+        return 90
 
     if "/product/" in lowered:
-        return 35
+        return 80
 
-    if "/specs" in lowered or "/specifications" in lowered:
+    if "/shop/" in lowered or "/buy-" in lowered:
         return 30
 
-    if "/shop/" in lowered:
-        return 25
-
     if "/support/" in lowered or "support." in lowered:
-        return 10
+        return 20
 
     if "/hc/" in lowered:
-        return 5
+        return 10
 
-    return 15
+    return 40
 
 
 def resolve_product(
@@ -374,8 +380,8 @@ def resolve_product(
 
     valid_candidates.sort(
         key=lambda item: (
-            item.get("identity_score", 0),
             item.get("page_type_score", 0),
+            item.get("identity_score", 0),
             item.get("combined_score", 0),
         ),
         reverse=True,

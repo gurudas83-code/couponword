@@ -825,6 +825,148 @@ def run_workflow(
     return 0
 
 
+
+def knowledge_command(action: str, limit: int) -> int:
+    """
+    Run the controlled Coupon World knowledge pipeline.
+
+    The update action resolves a limited pending batch, extracts newly
+    verified official specifications, prepares review drafts, and then
+    prints pipeline status. It does not auto-approve or auto-publish.
+    """
+
+    import subprocess
+
+    scripts = {
+        "resolver": ROOT / "python" / "official_source_resolver.py",
+        "extractor": ROOT / "python" / "official_spec_extractor.py",
+        "builder": ROOT / "python" / "build_product_knowledge.py",
+    }
+
+    missing = [
+        str(path)
+        for path in scripts.values()
+        if not path.exists()
+    ]
+
+    if missing:
+        print("ERROR: Missing knowledge pipeline file(s):")
+        for path in missing:
+            print(" -", path)
+        return 1
+
+    def run_step(label: str, command: list[str]) -> int:
+        print()
+        print("=" * 72)
+        print(label)
+        print("=" * 72)
+        print("$", " ".join(command))
+
+        result = subprocess.run(
+            command,
+            cwd=ROOT,
+            check=False,
+        )
+
+        if result.returncode != 0:
+            print(
+                f"ERROR: {label} failed with exit code "
+                f"{result.returncode}"
+            )
+
+        return result.returncode
+
+    python_executable = sys.executable
+
+    if action == "status":
+        steps = [
+            (
+                "OFFICIAL SOURCE RESOLVER STATUS",
+                [
+                    python_executable,
+                    str(scripts["resolver"]),
+                    "status",
+                ],
+            ),
+            (
+                "OFFICIAL SPEC EXTRACTOR STATUS",
+                [
+                    python_executable,
+                    str(scripts["extractor"]),
+                    "status",
+                ],
+            ),
+            (
+                "PRODUCT KNOWLEDGE STATUS",
+                [
+                    python_executable,
+                    str(scripts["builder"]),
+                    "status",
+                ],
+            ),
+        ]
+    else:
+        safe_limit = max(1, int(limit))
+
+        steps = [
+            (
+                "STEP 1/4 - RESOLVE PENDING OFFICIAL SOURCES",
+                [
+                    python_executable,
+                    str(scripts["resolver"]),
+                    "run",
+                    "--pending",
+                    "--limit",
+                    str(safe_limit),
+                ],
+            ),
+            (
+                "STEP 2/4 - EXTRACT NEW VERIFIED SPECIFICATIONS",
+                [
+                    python_executable,
+                    str(scripts["extractor"]),
+                    "extract",
+                    "--pending",
+                ],
+            ),
+            (
+                "STEP 3/4 - PREPARE KNOWLEDGE REVIEW DRAFTS",
+                [
+                    python_executable,
+                    str(scripts["builder"]),
+                    "prepare",
+                ],
+            ),
+            (
+                "STEP 4/4 - SHOW KNOWLEDGE STATUS",
+                [
+                    python_executable,
+                    str(scripts["builder"]),
+                    "status",
+                ],
+            ),
+        ]
+
+    for label, command in steps:
+        return_code = run_step(label, command)
+
+        if return_code != 0:
+            return return_code
+
+    print()
+    print("=" * 72)
+    print("KNOWLEDGE PIPELINE COMPLETE")
+    print("=" * 72)
+
+    if action == "update":
+        print(
+            "Review-ready drafts, if any, remain pending for "
+            "human approval."
+        )
+
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Coupon World Control Center"
@@ -863,6 +1005,24 @@ def build_parser() -> argparse.ArgumentParser:
     subparsers.add_parser(
         "report",
         help="Show product quality and next best action",
+    )
+
+    knowledge_parser = subparsers.add_parser(
+        "knowledge",
+        help="Run or inspect the verified knowledge pipeline",
+    )
+
+    knowledge_parser.add_argument(
+        "action",
+        choices=("update", "status"),
+        help="Update a controlled batch or show pipeline status",
+    )
+
+    knowledge_parser.add_argument(
+        "--limit",
+        type=int,
+        default=5,
+        help="Maximum pending products to resolve during update",
     )
 
     ask_parser = subparsers.add_parser(
@@ -952,6 +1112,12 @@ def main() -> int:
 
     if args.command == "report":
         return intelligence_report()
+
+    if args.command == "knowledge":
+        return knowledge_command(
+            args.action,
+            args.limit,
+        )
 
     if args.command == "ask":
         return ask_command(

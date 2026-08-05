@@ -719,6 +719,234 @@ def identity_tokens(value: Any) -> set[str]:
 
 
 
+
+def extract_apple_techspecs(
+    soup: BeautifulSoup,
+    specifications: dict[str, dict[str, Any]],
+    official_url: str,
+) -> int:
+    """
+    Extract structured specifications from Apple technical-specification
+    pages that use techspecs-row / techspecs-rowheader markup.
+    """
+
+    if "apple.com" not in str(official_url or "").lower():
+        return 0
+
+    rows = soup.select(".techspecs-row")
+
+    if not rows:
+        return 0
+
+    before = len(specifications)
+
+    section_key_map = {
+        "finish": ("finish", "Finish"),
+        "capacity": ("storage_capacity", "Storage capacity"),
+        "size and weight": ("size_and_weight", "Size and weight"),
+        "display": ("display", "Display"),
+        "splash water and dust resistant": (
+            "ip_rating",
+            "Splash, water and dust resistance",
+        ),
+        "splash water and dust resistance": (
+            "ip_rating",
+            "Splash, water and dust resistance",
+        ),
+        "chip": ("processor", "Processor"),
+        "camera": ("camera", "Camera"),
+        "true depth camera": ("front_camera", "Front camera"),
+        "truedepth camera": ("front_camera", "Front camera"),
+        "video recording": ("video_recording", "Video recording"),
+        "power and battery": ("battery", "Power and battery"),
+        "charging and expansion": (
+            "charging_and_connector",
+            "Charging and connector",
+        ),
+        "external buttons and connectors": (
+            "external_connectors",
+            "External buttons and connectors",
+        ),
+        "cellular and wireless": (
+            "connectivity",
+            "Cellular and wireless",
+        ),
+        "sim card": ("sim", "SIM"),
+        "operating system": ("operating_system", "Operating system"),
+        "audio playback": ("audio", "Audio playback"),
+        "video playback": ("video_playback", "Video playback"),
+        "accessibility": ("accessibility", "Accessibility"),
+        "environmental requirements": (
+            "environmental_requirements",
+            "Environmental requirements",
+        ),
+    }
+
+    for row in rows:
+        header = row.select_one(".techspecs-rowheader")
+
+        if header is None:
+            continue
+
+        raw_label = clean_text(header.get_text(" ", strip=True))
+
+        if not raw_label:
+            continue
+
+        label_without_footnote = re.sub(
+            r"\s+\d+\s*$",
+            "",
+            raw_label,
+        ).strip()
+
+        normalized_label = re.sub(
+            r"[^a-z0-9]+",
+            " ",
+            label_without_footnote.lower(),
+        ).strip()
+
+        row_copy = BeautifulSoup(str(row), "lxml")
+        copied_header = row_copy.select_one(".techspecs-rowheader")
+
+        if copied_header is not None:
+            copied_header.decompose()
+
+        value = clean_text(
+            row_copy.get_text(" ", strip=True)
+        )
+
+        if not value or len(value) < 2:
+            continue
+
+        key, label = section_key_map.get(
+            normalized_label,
+            (
+                re.sub(
+                    r"[^a-z0-9]+",
+                    "_",
+                    normalized_label,
+                ).strip("_"),
+                label_without_footnote,
+            ),
+        )
+
+        if not key:
+            continue
+
+        add_specification(
+            specifications,
+            label,
+            value,
+            "apple_techspecs",
+            94,
+        )
+
+        lowered_value = value.lower()
+
+        if "ip68" in lowered_value:
+            add_specification(
+                specifications,
+                "Ingress protection",
+                "IP68",
+                "apple_techspecs",
+                96,
+            )
+
+        chip_match = re.search(
+            r"\bA\d{1,2}(?:\s+Pro)?\s+chip\b",
+            value,
+            flags=re.I,
+        )
+
+        if chip_match:
+            add_specification(
+                specifications,
+                "Processor",
+                clean_text(chip_match.group(0)),
+                "apple_techspecs",
+                96,
+            )
+
+        display_match = re.search(
+            r"\b\d+(?:\.\d+)?[‑-]inch[^.]{0,180}?"
+            r"(?:OLED|LCD)\s+display\b",
+            value,
+            flags=re.I,
+        )
+
+        if display_match:
+            add_specification(
+                specifications,
+                "Display",
+                clean_text(display_match.group(0)),
+                "apple_techspecs",
+                95,
+            )
+
+        camera_match = re.search(
+            r"\b\d{1,3}MP[^.]{0,120}?"
+            r"(?:camera system|camera)\b",
+            value,
+            flags=re.I,
+        )
+
+        if camera_match:
+            add_specification(
+                specifications,
+                "Main camera",
+                clean_text(camera_match.group(0)),
+                "apple_techspecs",
+                95,
+            )
+
+        battery_match = re.search(
+            r"Video playback\s+Up to\s+\d+\s+hours",
+            value,
+            flags=re.I,
+        )
+
+        if battery_match:
+            add_specification(
+                specifications,
+                "Video playback",
+                clean_text(battery_match.group(0)),
+                "apple_techspecs",
+                94,
+            )
+
+        fast_charge_match = re.search(
+            r"Up to\s+50%\s+charge\s+in\s+\d+\s+minutes",
+            value,
+            flags=re.I,
+        )
+
+        if fast_charge_match:
+            add_specification(
+                specifications,
+                "Fast charging",
+                clean_text(fast_charge_match.group(0)),
+                "apple_techspecs",
+                94,
+            )
+
+        storage_values = re.findall(
+            r"\b(?:128|256|512)GB\b|\b[12]TB\b",
+            value,
+            flags=re.I,
+        )
+
+        if normalized_label == "capacity" and storage_values:
+            add_specification(
+                specifications,
+                "Storage options",
+                ", ".join(dict.fromkeys(storage_values)),
+                "apple_techspecs",
+                95,
+            )
+
+    return len(specifications) - before
+
+
 def decode_shopify_oxygen_stream(html: str) -> str:
     """
     Return a searchable text view of Shopify Hydrogen/Oxygen
@@ -1039,6 +1267,11 @@ def extract_one(
         html,
         specifications,
     )
+    apple_techspecs_count = extract_apple_techspecs(
+        soup,
+        specifications,
+        official_url,
+    )
 
     if len(specifications) > MAX_SPECS:
         specifications = dict(list(specifications.items())[:MAX_SPECS])
@@ -1070,6 +1303,7 @@ def extract_one(
         "definition_list_specifications": definition_count,
         "label_value_specifications": block_count,
         "shopify_oxygen_specifications": shopify_oxygen_count,
+        "apple_techspecs_specifications": apple_techspecs_count,
         "total_specifications": len(specifications),
         "feature_items": len(features),
         "noise_filter_version": "2.0",
@@ -1079,7 +1313,13 @@ def extract_one(
 
     if (
         output["resolver_verified"] is True
-        and match_score >= 0.80
+        and (
+            match_score >= 0.80
+            or (
+                apple_techspecs_count >= 5
+                and match_score >= 0.70
+            )
+        )
         and evidence_count >= 3
     ):
         output["review"]["status"] = "candidate_ready"

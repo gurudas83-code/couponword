@@ -97,7 +97,752 @@
       },
       "official_product_url": "https://us.nothing.tech/products/phone-3",
       "published_on": "2026-08-04T18:13:32.824785+00:00"
+    },
+    {
+      "product_id": "15",
+      "asin": "B0GQVHNX7R",
+      "title": "Apple iPhone 17e 512GB",
+      "brand": "Apple",
+      "category": "Mobiles",
+      "status": "published",
+      "research": {
+        "official_product_url": "https://www.apple.com/iphone-17e/specs",
+        "official_brand_url": "",
+        "retailer_url": "https://www.amazon.in/dp/B0GQVHNX7R?tag=guru0906-21",
+        "source_checked": true,
+        "checked_on": "2026-08-05T17:56:43.759734+00:00",
+        "resolver_status": "candidate_verified",
+        "resolver_verified": true,
+        "match_score": 0.7632,
+        "spec_extraction": {
+          "fetch_status": "success",
+          "http_status": 200,
+          "page_identity_score": 0.75,
+          "extractor_status": "candidate_ready",
+          "extractor_reason": "Page identity and extracted evidence are strong enough for review",
+          "source_host": "www.apple.com",
+          "extracted_at": "2026-08-05T17:50:11.537672+00:00",
+          "evidence_summary": {
+            "parser": "lxml",
+            "json_ld_products": 1,
+            "json_ld_specifications": 2,
+            "table_specifications": 0,
+            "definition_list_specifications": 0,
+            "label_value_specifications": 6,
+            "shopify_oxygen_specifications": 0,
+            "apple_techspecs_specifications": 35,
+            "total_specifications": 43,
+            "feature_items": 66,
+            "noise_filter_version": "2.0"
+          }
+        },
+        "canonical_product_url": "https://www.apple.com/iphone-17e/specs/"
+      },
+      "features": [
+        "A19 chip",
+        "6.1-inch all-screen OLED display",
+        "IP68 splash, water and dust resistance",
+        "48MP Fusion camera system",
+        "Up to 26 hours video playback",
+        "Fast charging up to 50% in 30 minutes",
+        "MagSafe and Qi2 wireless charging up to 15W",
+        "USB-C connector",
+        "Dual eSIM support",
+        "iOS 26"
+      ],
+      "best_for": [
+        "Users who want a compact premium iPhone",
+        "Users seeking strong performance with the A19 chip",
+        "Users who value an OLED display and IP68 protection",
+        "Users who prefer the Apple ecosystem and long-term software support",
+        "Users who want MagSafe and Qi2 wireless charging"
+      ],
+      "limitations": [
+        "Current selling price and stock availability are not verified",
+        "The official technical page lists eSIM only and no physical SIM compatibility",
+        "The charger is not listed as included in the box",
+        "Extracted specifications should be rechecked if Apple changes the official page"
+      ],
+      "confidence": {
+        "score": 80,
+        "level": "high",
+        "reason": "Official page identity and extracted evidence are ready for human review"
+      },
+      "review": {
+        "approved": true,
+        "reviewed_by": "Guru Das",
+        "reviewed_on": "2026-08-05T18:00:31.991388+00:00",
+        "notes": "Approved after review of Apple official technical specifications page and structured Apple TechSpecs extraction."
+      },
+      "official_specifications": {
+        "name": {
+          "value": "iPhone 17e",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "description": {
+          "value": "View all technical specifications for iPhone 17e.",
+          "label": "description",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "size_and_weight_2_width": {
+          "value": "2.82 inches (71.5 mm) Height: 5.78 inches (146.7 mm) Depth: 0.31 inch (7.80 mm) Weight: 5.96 ounces (169 grams)",
+          "label": "Size and Weight 2 Width",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "width": {
+          "value": "2.82 inches (71.5 mm) Height: 5.78 inches (146.7 mm) Depth: 0.31 inch (7.80 mm) Weight: 5.96 ounces (169 grams)",
+          "label": "Width",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "charging_and_expansion_usb_c_connector_with_support_for": {
+          "value": "Charging USB 2 (up to 480Mb/s)",
+          "label": "Charging and Expansion USB-C connector with support for",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "usb_c_connector_with_support_for": {
+          "value": "Charging USB 2 (up to 480Mb/s)",
+          "label": "USB-C connector with support for",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "environmental_requirements_operating_ambient_temperature": {
+          "value": "32° to 95° F (0° to 35° C) Nonoperating temperature: −4° to 113° F (−20° to 45° C) Relative humidity: 5% to 95% noncondensing Operating altitude: tested up to 10,000 feet (3000 m)",
+          "label": "Environmental Requirements Operating ambient temperature",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "operating_ambient_temperature": {
+          "value": "32° to 95° F (0° to 35° C) Nonoperating temperature: −4° to 113° F (−20° to 45° C) Relative humidity: 5% to 95% noncondensing Operating altitude: tested up to 10,000 feet (3000 m)",
+          "label": "Operating ambient temperature",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "finish": {
+          "value": "Black, White, Soft Pink Aluminum design Ceramic Shield 2 front Glass back",
+          "label": "Finish",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "storage_capacity": {
+          "value": "256GB 512GB",
+          "label": "Storage capacity",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "storage_options": {
+          "value": "256GB, 512GB",
+          "label": "Storage options",
+          "source": "apple_techspecs",
+          "confidence": 95
+        },
+        "size_and_weight": {
+          "value": "Width: 2.82 inches (71.5 mm) Height: 5.78 inches (146.7 mm) Depth: 0.31 inch (7.80 mm) Weight: 5.96 ounces (169 grams)",
+          "label": "Size and weight",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "display": {
+          "value": "6.1‑inch (diagonal) all‑screen OLED display",
+          "label": "Display",
+          "source": "apple_techspecs",
+          "confidence": 95
+        },
+        "splash_water_and_dust_resistance": {
+          "value": "Rated IP68 (maximum depth of 6 meters up to 30 minutes) under IEC standard 60529",
+          "label": "Splash, water and dust resistance",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "ingress_protection": {
+          "value": "IP68",
+          "label": "Ingress protection",
+          "source": "apple_techspecs",
+          "confidence": 96
+        },
+        "apple_intelligence": {
+          "value": "Apple Intelligence is integrated across your apps and experiences to help you communicate, express yourself, and get things done effortlessly. With groundbreaking privacy protections, it gives you peace of mind that no one else can access your data — not even Apple. 4 Learn more about Apple Intelligence",
+          "label": "Apple Intelligence",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "processor": {
+          "value": "A19 chip",
+          "label": "Processor",
+          "source": "apple_techspecs",
+          "confidence": 96
+        },
+        "main_camera": {
+          "value": "48MP Fusion camera system",
+          "label": "Main camera",
+          "source": "apple_techspecs",
+          "confidence": 95
+        },
+        "power_and_battery": {
+          "value": "Video playback Up to 26 hours Video playback (streamed) Up to 21 hours Fast-charge capable Up to 50% charge in 30 minutes 6 with 20W adapter or higher (available separately) paired with USB‑C charging cable Built-in rechargeable lithium-ion battery",
+          "label": "Power and battery",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "video_playback": {
+          "value": "Video playback Up to 26 hours",
+          "label": "Video playback",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "charging": {
+          "value": "Up to 50% charge in 30 minutes",
+          "label": "Fast charging",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "face_id": {
+          "value": "Enabled by TrueDepth camera for facial recognition",
+          "label": "Face ID",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "peace_of_mind": {
+          "value": "Emergency SOS via satellite 7 Crash Detection 8 Roadside Assistance via satellite 7 Messages via satellite 7 Find My via satellite 7",
+          "label": "Peace of Mind",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "location": {
+          "value": "GPS, GLONASS, Galileo, QZSS, BeiDou, and NavIC Digital compass Wi‑Fi Cellular iBeacon microlocation",
+          "label": "Location",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "external_buttons_and_connectors": {
+          "value": "Volume up/down Action button Side button Built‑in stereo speaker Built‑in microphone USB-C connector Built‑in microphones Built‑in stereo speaker",
+          "label": "External buttons and connectors",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "charging_and_connector": {
+          "value": "USB-C connector with support for: Charging USB 2 (up to 480Mb/s)",
+          "label": "Charging and connector",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "magsafe_and_wireless_charging": {
+          "value": "MagSafe wireless charging up to 15W 11 Qi2 wireless charging up to 15W 11 Magnet array Alignment magnet Accessory Identification NFC Magnetometer",
+          "label": "MagSafe and Wireless Charging",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "sensors": {
+          "value": "Face ID Barometer High dynamic range gyro High-g accelerometer Proximity sensor Dual ambient light sensors",
+          "label": "Sensors",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "sim": {
+          "value": "Dual eSIM (two active eSIMs; stores eight or more eSIMs) 12 iPhone 17e uses advanced eSIM technology for more convenience and security (not compatible with physical SIM cards). Learn more about eSIM Learn more about traveling with eSIM",
+          "label": "SIM",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "apple_pay": {
+          "value": "Pay with your iPhone using Face ID in stores, within apps, and on the web Send and receive money in Messages with Apple Cash 13 Complete purchases made with Apple Pay on your Mac Pay for your ride using Express Transit 14 Learn more about Apple Pay Learn more about Apple Cash",
+          "label": "Apple Pay",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "apple_card": {
+          "value": "Credit card created by Apple, designed for iPhone Get unlimited 3% Daily Cash at Apple and select merchants when you use Apple Pay, 15 2% with Apple Pay, and 1% everywhere else Use the Wallet app to apply for, manage, and use Apple Card Titanium, laser‑etched physical credit card for use where Apple Pay is not accepted yet Share with up to five people, 13 years or older, in your Family Sharing group 16 to track expenses and manage spending Learn more about Apple Card",
+          "label": "Apple Card",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "video_calling": {
+          "value": "FaceTime video calling over cellular or Wi‑Fi FaceTime HD (1080p) video calling over 5G or Wi-Fi SharePlay Screen sharing Portrait mode in FaceTime video Spatial Audio Voice Isolation and Wide Spectrum microphone modes Zoom with rear-facing camera",
+          "label": "Video Calling",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "audio_calling": {
+          "value": "FaceTime audio Voice over LTE (VoLTE) 9 Wi‑Fi calling 9 SharePlay Screen sharing Spatial Audio Voice Isolation and Wide Spectrum microphone modes",
+          "label": "Audio Calling",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "audio_playback": {
+          "value": "Supported formats include AAC, MP3, Apple Lossless, FLAC, Dolby Digital, Dolby Digital Plus, and Dolby Atmos Spatial Audio playback User‑configurable maximum volume limit",
+          "label": "Audio playback",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "siri": {
+          "value": "Get help with everyday tasks like sending messages, setting reminders, and more Activate hands‑free with only your voice using “Siri” or “Hey Siri,” or use Type to Siri Protected by the strongest privacy of any intelligent assistant Powered by Apple Intelligence, Siri is more natural and helpful 4 Learn more about Siri",
+          "label": "Siri",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "operating_system": {
+          "value": "iOS 26 iOS is the world’s most personal and secure mobile operating system, packed with powerful features and designed to protect your privacy.",
+          "label": "Operating system",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "privacy": {
+          "value": "iPhone is built from the ground up to protect your personal information. Every iPhone has secure facial authentication. Apps need your permission to track your activity across other companies’ apps or websites. Your iMessages and FaceTime video calls are encrypted end‑to‑end. And much more. Learn more about privacy features",
+          "label": "Privacy",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "accessibility": {
+          "value": "Built-in accessibility features supporting vision, mobility, hearing, speech, and cognitive needs help you get the most out of your iPhone — in the ways that work best for you. Learn more Features include: VoiceOver Zoom Magnifier Voice Control Switch Control AssistiveTouch Eye Tracking RTT and TTY support Closed Captions Live Captions Personal Voice Live Speech Type to Siri Vocal Shortcuts Spoken Content",
+          "label": "Accessibility",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "built_in_apps": {
+          "value": "App Store Books Calculator Calendar Camera Clock Compass Contacts FaceTime Files Find My Fitness Freeform Games GarageBand Health Home iMovie iTunes Store Journal Keynote Magnifier Mail Maps Measure Messages Music News Notes Numbers Pages Passwords Phone Photos Podcasts Preview Reminders Safari Settings Shortcuts Stocks Tips Translate TV Voice Memos Wallet Watch Weather For a complete list of Apple apps available on iPhone, see apple.com/apps .",
+          "label": "Built-in Apps",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "rating_for_hearing_aids": {
+          "value": "Hearing Aid Compatible",
+          "label": "Rating for Hearing Aids",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "compatibility": {
+          "value": "Apple Account (required for some features) Internet access 19 Syncing to a Mac or PC requires: macOS Catalina 10.15 or later using the Finder macOS High Sierra 10.13 through macOS Mojave 10.14.6 using iTunes 12.8 or later Windows 10 or later using iTunes 12.12.10 or later (free download from apple.com/itunes/download )",
+          "label": "System Requirements",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "environmental_requirements": {
+          "value": "Operating ambient temperature: 32° to 95° F (0° to 35° C) Nonoperating temperature: −4° to 113° F (−20° to 45° C) Relative humidity: 5% to 95% noncondensing Operating altitude: tested up to 10,000 feet (3000 m)",
+          "label": "Environmental requirements",
+          "source": "apple_techspecs",
+          "confidence": 94
+        },
+        "in_the_box": {
+          "value": "iPhone with iOS 26 USB-C Charge Cable (1 m) Documentation",
+          "label": "In the Box",
+          "source": "apple_techspecs",
+          "confidence": 94
+        }
+      },
+      "official_features": [
+        {
+          "text": "iPhone 17e uses advanced eSIM technology for more convenience and security (not compatible with physical SIM cards).",
+          "source": "li",
+          "confidence": 86,
+          "relevance_score": 4
+        },
+        {
+          "text": "Support for display of multiple languages and characters simultaneously",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "6‑core CPU with 2 performance and 4 efficiency cores",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "48MP Fusion Main: 26 mm, ƒ/1.6 aperture, optical image stabilization, Hybrid Focus Pixels, super-high-resolution photos (24MP and 48MP)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "12MP TrueDepth camera",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Enabled by TrueDepth camera for facial recognition",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "USB-C connector with support for:",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "MagSafe wireless charging up to 15W 11",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Qi2 wireless charging up to 15W 11",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "iPhone is built from the ground up to protect your personal information. Every iPhone has secure facial authentication. Apps need your permission to track your activity across other companies’ apps or websites. Your iMessages and FaceTime video calls are encrypted end‑to‑end. And much more.",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "The iPhone 17e display has rounded corners that follow a beautiful curved design, and these corners are within a standard rectangle. When measured as a standard rectangular shape, the screen is 6.06 inches diagonally (actual viewable area is less).",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rated IP68 (maximum depth of 6 meters up to 30 minutes) under IEC standard 60529",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Fast-charge capable Up to 50% charge in 30 minutes 6 with 20W adapter or higher (available separately) paired with USB‑C charging cable",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Silent Mode, Focus, Camera, Visual Intelligence, 10 Flashlight, Voice Memo, Recognize Music, Translate, Magnifier, Controls, Shortcut, or Accessibility",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "iPhone 17e is designed to reduce environmental impact: 20",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "iPhone 17e is made with 30% recycled content, 21 including:",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Join the iPhone Upgrade Program to get the latest iPhone every year, low monthly payments, and AppleCare+. 27",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Learn more about iphone upgrade program",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Ceramic Shield 2 front",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Super Retina XDR display",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "6.1‑inch (diagonal) all‑screen OLED display",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "2532‑by‑1170-pixel resolution at 460 ppi",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "2,000,000:1 contrast ratio (typical)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "48MP Fusion camera system",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Also enables 12MP 2x Telephoto: 52 mm, ƒ/1.6 aperture, optical image stabilization, Hybrid Focus Pixels",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Next-generation portraits with Focus and Depth Control",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Panorama (up to 63MP)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Advanced red‑eye correction",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Image formats captured: HEIF and JPEG",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Playback zoom",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video formats recorded: HEVC and H.264",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Emergency SOS via satellite 7",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Roadside Assistance via satellite 7",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth 5.3",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB 2 (up to 480Mb/s)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "High dynamic range gyro",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Proximity sensor",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dual ambient light sensors",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Pay with your iPhone using Face ID in stores, within apps, and on the web",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Credit card created by Apple, designed for iPhone",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Voice Isolation and Wide Spectrum microphone modes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Zoom with rear-facing camera",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Spatial Audio playback",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Powered by Apple Intelligence, Siri is more natural and helpful 4",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Syncing to a Mac or PC requires:",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "iPhone with iOS 26",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB-C Charge Cable (1 m)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "85% recycled aluminum in the enclosure",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "100% recycled cobalt and 95% recycled lithium in the battery",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "55% of manufacturing electricity for iPhone 17e is sourced from renewable electricity 22",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "No established final assembly sites generate waste sent to landfill as part of Apple’s Zero Waste Program 24",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "5.96 ounces (169 grams)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Apple Intelligence is integrated across your apps and experiences to help you communicate, express yourself, and get things done effortlessly. With groundbreaking privacy protections, it gives you peace of mind that no one else can access your data — not even Apple. 4",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Learn more about Apple Intelligence",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video playback Up to 26 hours",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video playback (streamed) Up to 21 hours",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Built-in rechargeable lithium-ion battery",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Built‑in stereo speaker Built‑in microphone",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB-C connector",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Built‑in microphones",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Built-in accessibility features supporting vision, mobility, hearing, speech, and cognitive needs help you get the most out of your iPhone — in the ways that work best for you.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Hearing Aid Compatible",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "See the iPhone 17e Product Environmental Report (PDF)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "With Apple Trade In, you can get credit toward a new iPhone when you trade in an eligible smartphone. 26 It’s good for you and the planet.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "You won’t find a better place to buy iPhone. We know about carriers, payment options, and more. And we make it easy to understand.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Learn more about buying iPhone",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "official_page_meta": {
+        "html_title": "iPhone 17e - Technical Specifications - Apple",
+        "og_title": "iPhone 17e - Technical Specifications",
+        "og_description": "View all technical specifications for iPhone 17e.",
+        "canonical_url": "https://www.apple.com/iphone-17e/specs/",
+        "h1": "iPhone 17e Technical Specifications"
+      },
+      "published_on": "2026-08-05T18:09:21.790118+00:00",
+      "published_by": "Guru Das"
     }
   ],
-  "updated_at": "2026-08-04T18:13:32.824834+00:00"
+  "updated_at": "2026-08-05T18:09:21.790118+00:00",
+  "schema_version": "1.0"
 }

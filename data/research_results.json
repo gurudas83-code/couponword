@@ -1,9 +1,9 @@
 {
   "schema_version": "4.0",
   "mode": "incremental",
-  "updated_at": "2026-08-04T18:18:55.953949+00:00",
-  "products_requested": 5,
-  "total_results": 17,
+  "updated_at": "2026-08-05T17:36:48.112861+00:00",
+  "products_requested": 1,
+  "total_results": 22,
   "products": [
     {
       "product_id": "10",
@@ -499,6 +499,189 @@
       "reason": "No approved official-domain mapping for this brand",
       "candidates": [],
       "resolved_at": "2026-08-04T18:18:55.953716+00:00"
+    },
+    {
+      "product_id": "12",
+      "title": "Amway Nutrilite Cal Mag D K2 (90 Tablets)",
+      "brand": "Nutrilite",
+      "asin": "B0D3HKTL6K",
+      "core_title": "Amway Nutrilite Cal Mag D K2 (90 Tablets)",
+      "allowed_domains": [
+        "amway.in",
+        "amway.com"
+      ],
+      "query": "Nutrilite Amway Nutrilite Cal Mag D K2 (90 Tablets) official specifications",
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": [],
+      "query_variants": [
+        "Nutrilite Amway Nutrilite Cal Mag D K2 (90 Tablets) official specifications",
+        "Nutrilite Amway Nutrilite Cal Mag D K2 (90 Tablets) official"
+      ],
+      "resolved_at": "2026-08-05T17:28:59.158517+00:00"
+    },
+    {
+      "product_id": "15",
+      "title": "Apple iPhone 17e 512GB",
+      "brand": "Apple",
+      "asin": "B0GQVHNX7R",
+      "core_title": "Apple iPhone 17e 512GB",
+      "allowed_domains": [
+        "apple.com"
+      ],
+      "query": "Apple iPhone 17e 512GB official specifications",
+      "official_title": "iPhone 17e - Technical Specifications - Apple",
+      "official_url": "https://www.apple.com/iphone-17e/specs",
+      "match_score": 0.7632,
+      "identity_score": 80,
+      "identity_decision": "verified",
+      "identity_reasons": [
+        "Brand matched",
+        "All identity-bearing model tokens matched",
+        "Supporting model/series token(s) matched: iphone",
+        "Storage mismatch"
+      ],
+      "verified": true,
+      "status": "candidate_verified",
+      "reason": "Official domain, model identity and search relevance matched",
+      "candidates": [
+        {
+          "title": "iPhone 17e - Technical Specifications - Apple",
+          "url": "https://www.apple.com/iphone-17e/specs",
+          "model_score": 0.75,
+          "search_score": 0.816,
+          "combined_score": 0.7632,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: iphone",
+            "Storage mismatch"
+          ],
+          "page_type_score": 100
+        },
+        {
+          "title": "Buy iPhone 17e 512GB White - Apple",
+          "url": "https://www.apple.com/shop/buy-iphone/iphone-17e/6.1-inch-display-512gb-white-unlocked",
+          "model_score": 1.0,
+          "search_score": 0.799,
+          "combined_score": 0.9598,
+          "identity_score": 83,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: iphone",
+            "Storage matched"
+          ],
+          "page_type_score": 30
+        },
+        {
+          "title": "Buy iPhone 17e 512GB Soft Pink - Apple",
+          "url": "https://www.apple.com/shop/buy-iphone/iphone-17e/6.1-inch-display-512gb-soft-pink-unlocked",
+          "model_score": 1.0,
+          "search_score": 0.7891,
+          "combined_score": 0.9578,
+          "identity_score": 83,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: iphone",
+            "Storage matched"
+          ],
+          "page_type_score": 30
+        },
+        {
+          "title": "iPhone 17e - Tech Specs - Apple Support (HK)",
+          "url": "https://support.apple.com/en-hk/126470",
+          "model_score": 0.75,
+          "search_score": 0.8194,
+          "combined_score": 0.7639,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: iphone",
+            "Storage mismatch"
+          ],
+          "page_type_score": 20
+        }
+      ],
+      "query_variants": [
+        "Apple iPhone 17e 512GB official specifications",
+        "Apple iPhone 17e 512GB official"
+      ],
+      "resolved_at": "2026-08-05T17:36:48.112547+00:00"
+    },
+    {
+      "product_id": "16",
+      "title": "Mega 70%+ OFF Store",
+      "brand": "",
+      "asin": "",
+      "core_title": "Mega 70%+ OFF Store",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-05T17:29:02.981187+00:00"
+    },
+    {
+      "product_id": "17",
+      "title": "Online Store Fashion Fest",
+      "brand": "",
+      "asin": "",
+      "core_title": "Online Store Fashion Fest",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-05T17:29:02.982654+00:00"
+    },
+    {
+      "product_id": "18",
+      "title": "STEMpedia Mechanical Construction Kit for Boys 7-14 Years",
+      "brand": "STEMpedia",
+      "asin": "B09MG7HSS9",
+      "core_title": "STEMpedia Mechanical Construction Kit for Boys 7-14 Years",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-05T17:29:02.984116+00:00"
     }
   ]
 }

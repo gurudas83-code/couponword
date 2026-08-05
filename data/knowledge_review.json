@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0",
-  "generated_at": "2026-08-04T18:19:21.329000+00:00",
+  "generated_at": "2026-08-05T17:56:43.760151+00:00",
   "instructions": [
     "Use official manufacturer sources wherever possible.",
     "Do not add specifications based only on assumptions.",
@@ -10,12 +10,12 @@
   ],
   "summary": {
     "products_in_database": 74,
-    "approved_knowledge": 3,
+    "approved_knowledge": 4,
     "drafts_created_now": 0,
     "existing_drafts_preserved": 71,
     "approved_products_skipped": 3,
-    "total_pending_drafts": 71,
-    "drafts_with_official_specs": 1,
+    "total_pending_drafts": 70,
+    "drafts_with_official_specs": 2,
     "knowledge_review_ready": 0
   },
   "products": [
@@ -31,7 +31,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.in/d/04HOO2eq?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-04T18:19:21.327807+00:00",
+        "checked_on": "2026-08-05T17:56:43.759391+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -63,7 +63,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.in/d/01dfFSgu?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-04T18:19:21.327889+00:00",
+        "checked_on": "2026-08-05T17:56:43.759447+00:00",
         "resolver_status": "not_found",
         "resolver_verified": false,
         "match_score": 0.0
@@ -95,7 +95,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.in/d/06Ksbhq6?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-04T18:19:21.327934+00:00",
+        "checked_on": "2026-08-05T17:56:43.759475+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -127,7 +127,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.in/d/06XUsLAR?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-04T18:19:21.327961+00:00",
+        "checked_on": "2026-08-05T17:56:43.759490+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -159,7 +159,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.in/d/01GmFjs1?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-04T18:19:21.327997+00:00",
+        "checked_on": "2026-08-05T17:56:43.759511+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -191,7 +191,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.in/d/0fkG5ElL?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-04T18:19:21.328031+00:00",
+        "checked_on": "2026-08-05T17:56:43.759531+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -223,7 +223,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.in/d/0b3TayvT?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-04T18:19:21.328053+00:00",
+        "checked_on": "2026-08-05T17:56:43.759541+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -255,7 +255,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.to/4eZdI1O?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-04T18:19:21.328092+00:00",
+        "checked_on": "2026-08-05T17:56:43.759560+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -287,7 +287,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.to/4v9I4o8?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-04T18:19:21.328124+00:00",
+        "checked_on": "2026-08-05T17:56:43.759578+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -319,7 +319,7 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0F1N8B7Z4?tag=guru0906-21",
         "source_checked": true,
-        "checked_on": "2026-08-04T18:19:21.328146+00:00",
+        "checked_on": "2026-08-05T17:56:43.759594+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.6537,
@@ -364,7 +364,7 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0GDQCTYFB?tag=guru0906-21",
         "source_checked": true,
-        "checked_on": "2026-08-04T18:19:21.328222+00:00",
+        "checked_on": "2026-08-05T17:56:43.759644+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.6581,
@@ -624,7 +624,10 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0D3HKTL6K?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": ""
+        "checked_on": "2026-08-05T17:56:43.759675+00:00",
+        "resolver_status": "not_found",
+        "resolver_verified": false,
+        "match_score": 0.0
       },
       "features": [],
       "best_for": [],
@@ -653,7 +656,7 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B08232VZ84?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-04T18:19:21.328307+00:00",
+        "checked_on": "2026-08-05T17:56:43.759702+00:00",
         "resolver_status": "not_found",
         "resolver_verified": false,
         "match_score": 0.0
@@ -685,39 +688,10 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0GQVL6STN?tag=guru0906-21&th=1",
         "source_checked": false,
-        "checked_on": "2026-08-04T18:19:21.328347+00:00",
+        "checked_on": "2026-08-05T17:56:43.759725+00:00",
         "resolver_status": "not_found",
         "resolver_verified": false,
         "match_score": 0.0
-      },
-      "features": [],
-      "best_for": [],
-      "limitations": [],
-      "confidence": {
-        "score": 0,
-        "level": "unverified",
-        "reason": "Official product information has not yet been verified"
-      },
-      "review": {
-        "approved": false,
-        "reviewed_by": "",
-        "reviewed_on": "",
-        "notes": ""
-      }
-    },
-    {
-      "product_id": "15",
-      "asin": "B0GQVHNX7R",
-      "title": "Apple iPhone 17e 512GB",
-      "brand": "Apple",
-      "category": "Mobiles",
-      "status": "draft",
-      "research": {
-        "official_product_url": "",
-        "official_brand_url": "",
-        "retailer_url": "https://www.amazon.in/dp/B0GQVHNX7R?tag=guru0906-21",
-        "source_checked": false,
-        "checked_on": ""
       },
       "features": [],
       "best_for": [],
@@ -746,7 +720,10 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/s?k=Mega+70%25%2B+OFF+Store&tag=guru0906-21",
         "source_checked": false,
-        "checked_on": ""
+        "checked_on": "2026-08-05T17:56:43.759763+00:00",
+        "resolver_status": "manual_review",
+        "resolver_verified": false,
+        "match_score": 0.0
       },
       "features": [],
       "best_for": [],
@@ -775,7 +752,10 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/s?k=Amazon+IN+Fashion+Fest&tag=guru0906-21",
         "source_checked": false,
-        "checked_on": ""
+        "checked_on": "2026-08-05T17:56:43.759773+00:00",
+        "resolver_status": "manual_review",
+        "resolver_verified": false,
+        "match_score": 0.0
       },
       "features": [],
       "best_for": [],
@@ -804,7 +784,10 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B09MG7HSS9?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": ""
+        "checked_on": "2026-08-05T17:56:43.759784+00:00",
+        "resolver_status": "manual_review",
+        "resolver_verified": false,
+        "match_score": 0.0
       },
       "features": [],
       "best_for": [],
@@ -862,7 +845,7 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0F26CLKW9?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-04T18:19:21.328418+00:00",
+        "checked_on": "2026-08-05T17:56:43.759805+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -2344,7 +2327,7 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0G47YZJH6?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-04T18:19:21.328974+00:00",
+        "checked_on": "2026-08-05T17:56:43.760128+00:00",
         "resolver_status": "not_found",
         "resolver_verified": false,
         "match_score": 0.0
@@ -2364,5 +2347,6 @@
         "notes": ""
       }
     }
-  ]
+  ],
+  "updated_at": "2026-08-05T18:09:21.790118+00:00"
 }

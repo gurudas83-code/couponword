@@ -64,24 +64,48 @@ def detect_budget(text: str):
     return None, None
 
 def detect_features(text: str) -> list[str]:
-    features = [
-        "anc",
-        "enc",
-        "amoled",
-        "oled",
-        "5g",
-        "gaming",
-        "ssd",
-        "rgb",
-        "ip68",
-        "fast charging",
+    feature_patterns = [
+        ("a19 pro", "A19 Pro"),
+        ("a19", "A19"),
+        ("snapdragon 8 elite", "Snapdragon 8 Elite"),
+        ("snapdragon 8s gen 4", "Snapdragon 8s Gen 4"),
+        ("snapdragon", "Snapdragon"),
+        ("dimensity 9400", "Dimensity 9400"),
+        ("dimensity", "Dimensity"),
+        ("tensor g5", "Tensor G5"),
+        ("tensor", "Tensor"),
+        ("exynos 2500", "Exynos 2500"),
+        ("exynos", "Exynos"),
+        ("lpddr5x", "LPDDR5X"),
+        ("lpddr5", "LPDDR5"),
+        ("ufs 4.0", "UFS 4.0"),
+        ("ufs 3.1", "UFS 3.1"),
+        ("wi fi 7", "Wi-Fi 7"),
+        ("wifi 7", "Wi-Fi 7"),
+        ("wi fi 6", "Wi-Fi 6"),
+        ("wifi 6", "Wi-Fi 6"),
+        ("bluetooth 5.4", "Bluetooth 5.4"),
+        ("bluetooth 5.3", "Bluetooth 5.3"),
+        ("usb c", "USB-C"),
+        ("qi2", "Qi2"),
+        ("wireless charging", "Wireless Charging"),
+        ("fast charging", "Fast Charging"),
+        ("amoled", "AMOLED"),
+        ("oled", "OLED"),
+        ("ip68", "IP68"),
+        ("anc", "ANC"),
+        ("enc", "ENC"),
+        ("5g", "5G"),
+        ("gaming", "Gaming"),
+        ("ssd", "SSD"),
+        ("rgb", "RGB"),
     ]
 
-    found = []
+    found: list[str] = []
 
-    for feature in features:
-        if feature in text:
-            found.append(feature.upper())
+    for pattern, label in feature_patterns:
+        if pattern in text and label not in found:
+            found.append(label)
 
     return found
 def detect_brands(text: str) -> list[str]:
