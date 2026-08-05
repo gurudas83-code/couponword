@@ -408,6 +408,118 @@ def taxonomy_match_score(
     return score, reasons
 
 
+
+def knowledge_match_score(
+    product: dict,
+    intent: dict,
+) -> tuple[int, list[str]]:
+    """Score verified product knowledge against requested features."""
+
+    knowledge = product.get("product_knowledge", {})
+
+    if not isinstance(knowledge, dict) or not knowledge:
+        return 0, []
+
+    values: list[str] = []
+
+    for field in ("features", "best_for"):
+        field_values = knowledge.get(field, [])
+
+        if isinstance(field_values, list):
+            values.extend(
+                str(value)
+                for value in field_values
+                if value
+            )
+
+    knowledge_text = _normalize_query_text(" ".join(values))
+
+    requested_terms = {
+        _normalize_query_text(value)
+        for value in intent.get("features", [])
+        if value
+    }
+
+    query_text = _normalize_query_text(
+        " ".join(intent.get("keywords", []))
+    )
+
+    aliases = {
+        "amoled": ("amoled", "oled"),
+        "oled": ("amoled", "oled"),
+        "ip68": ("ip68",),
+        "wireless charging": (
+            "wireless charging",
+            "reverse wireless charging",
+        ),
+        "wireless": ("wireless", "wireless charging"),
+        "snapdragon": ("snapdragon",),
+        "gaming": (
+            "gaming",
+            "snapdragon",
+            "120hz",
+            "high refresh",
+            "lpddr",
+            "ufs",
+        ),
+        "battery": ("battery", "mah"),
+        "fast charging": (
+            "fast charging",
+            "wired charging",
+        ),
+        "bluetooth": ("bluetooth",),
+        "wifi": ("wi fi", "wifi"),
+        "office": ("office", "typing", "work"),
+    }
+
+    for requested in aliases:
+        if requested in query_text:
+            requested_terms.add(requested)
+
+    score = 0
+    reasons: list[str] = []
+
+    for requested in sorted(requested_terms):
+        variants = aliases.get(requested, (requested,))
+
+        if not any(
+            variant in knowledge_text
+            for variant in variants
+        ):
+            continue
+
+        if requested in {"amoled", "oled", "ip68"}:
+            bonus = 25
+        elif requested in {
+            "wireless charging",
+            "snapdragon",
+            "gaming",
+        }:
+            bonus = 20
+        else:
+            bonus = 15
+
+        score += bonus
+        reasons.append(
+            f"Verified knowledge matched: {requested}"
+        )
+
+    confidence = knowledge.get("confidence", {})
+
+    if isinstance(confidence, dict):
+        confidence_level = str(
+            confidence.get("level") or ""
+        ).lower()
+
+        if confidence_level == "high" and reasons:
+            score += 10
+            reasons.append(
+                "High-confidence official product knowledge"
+            )
+
+    return score, reasons
+
+
 def merge_product_knowledge(
     products: list[dict],
     knowledge_db: dict[str, dict],
@@ -536,8 +648,16 @@ def match_products(
             intent,
             requested_types,
         )
+        knowledge_score, knowledge_reasons = knowledge_match_score(
+            ranked_product,
+            intent,
+        )
 
-        ranked_product["score"] = base_score + taxonomy_score
+        ranked_product["score"] = (
+            base_score
+            + taxonomy_score
+            + knowledge_score
+        )
 
         existing_reasons = explain_product(
             ranked_product,
@@ -548,7 +668,9 @@ def match_products(
             existing_reasons = []
 
         ranked_product["reasons"] = (
-            taxonomy_reasons + existing_reasons
+            taxonomy_reasons
+            + knowledge_reasons
+            + existing_reasons
         )
 
         ranked_product["price_info"] = analyze_price(

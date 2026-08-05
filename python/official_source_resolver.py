@@ -24,6 +24,7 @@ from resolver_engine import compare_identity
 ROOT = Path(__file__).resolve().parent.parent
 QUEUE_FILE = ROOT / "data" / "research_queue.json"
 OUTPUT_FILE = ROOT / "data" / "research_results.json"
+MIN_MODEL_SCORE = 0.70
 
 
 BRAND_DOMAINS: dict[str, list[str]] = {
@@ -39,6 +40,14 @@ BRAND_DOMAINS: dict[str, list[str]] = {
     "yamaha": ["yamaha.com"],
     "nutrilite": ["amway.in", "amway.com"],
     "amway": ["amway.in", "amway.com"],
+    "nothing": ["in.nothing.tech", "nothing.tech"],
+    "asus": ["asus.com"],
+    "sony": ["sony.co.in", "sony.com"],
+    "dell": ["dell.com"],
+    "jbl": ["in.jbl.com", "jbl.com"],
+    "philips": ["philips.co.in", "philips.com"],
+    "puma": ["in.puma.com", "puma.com"],
+    "mi": ["mi.com", "xiaomi.com"],
 }
 
 
@@ -188,6 +197,9 @@ def is_unwanted_page(url: str) -> bool:
         "/blog/",
         "/community/",
         "/post-details/",
+        "/terms",
+        "/pre-order-offer",
+        "/pages/pre-order",
         "c.realme.com/",
     )
 
@@ -195,6 +207,34 @@ def is_unwanted_page(url: str) -> bool:
         fragment in lowered
         for fragment in unwanted_fragments
     )
+
+
+def page_type_score(url: str) -> int:
+    """
+    Prefer canonical product/specification pages over support articles.
+    """
+
+    lowered = str(url or "").lower()
+
+    if "/products/" in lowered:
+        return 40
+
+    if "/product/" in lowered:
+        return 35
+
+    if "/specs" in lowered or "/specifications" in lowered:
+        return 30
+
+    if "/shop/" in lowered:
+        return 25
+
+    if "/support/" in lowered or "support." in lowered:
+        return 10
+
+    if "/hc/" in lowered:
+        return 5
+
+    return 15
 
 
 def resolve_product(
@@ -238,19 +278,50 @@ def resolve_product(
         )
         return base_result
 
-    query = f"{brand} {core_title} official specifications"
-    base_result["query"] = query
+    query_core = core_title
 
-    response = client.search(
-        query=query,
-        search_depth="basic",
-        max_results=7,
-        include_domains=allowed_domains,
-    )
+    normalized_core = normalize_brand(core_title)
+
+    if brand_key and normalized_core.startswith(brand_key):
+        query_core = re.sub(
+            rf"^\s*{re.escape(brand)}\s*",
+            "",
+            core_title,
+            count=1,
+            flags=re.I,
+        ).strip()
+
+    query_variants = [
+        f"{brand} {query_core} official specifications".strip(),
+        f"{brand} {query_core} official".strip(),
+    ]
+
+    base_result["query"] = query_variants[0]
+    base_result["query_variants"] = query_variants
+
+    merged_results: list[dict[str, Any]] = []
+    seen_urls: set[str] = set()
+
+    for query in query_variants:
+        response = client.search(
+            query=query,
+            search_depth="basic",
+            max_results=7,
+            include_domains=allowed_domains,
+        )
+
+        for result in response.get("results", []):
+            result_url = str(result.get("url") or "").strip()
+
+            if not result_url or result_url in seen_urls:
+                continue
+
+            seen_urls.add(result_url)
+            merged_results.append(result)
 
     valid_candidates: list[dict[str, Any]] = []
 
-    for result in response.get("results", []):
+    for result in merged_results:
         result_title = str(result.get("title") or "").strip()
         result_url = str(result.get("url") or "").strip()
 
@@ -264,6 +335,12 @@ def resolve_product(
             core_title,
             result_title,
         )
+
+        # Reject pages that match only a generic number or weak series token.
+        # Example: Nothing Ear (3) must not match Nothing Phone (3).
+        if model_score < MIN_MODEL_SCORE:
+            continue
+
         tavily_score = float(result.get("score") or 0)
 
         combined_score = round(
@@ -291,12 +368,14 @@ def resolve_product(
                 "identity_score": identity.score,
                 "identity_decision": identity.decision,
                 "identity_reasons": identity.reasons,
+                "page_type_score": page_type_score(result_url),
             }
         )
 
     valid_candidates.sort(
         key=lambda item: (
             item.get("identity_score", 0),
+            item.get("page_type_score", 0),
             item.get("combined_score", 0),
         ),
         reverse=True,

@@ -1,28 +1,26 @@
 {
   "schema_version": "5.0",
-  "generated_at": "2026-08-04T16:48:46.431646+00:00",
+  "generated_at": "2026-08-04T18:17:21.669213+00:00",
   "source_file": "data\\research_results.json",
   "mode": "incremental",
   "selection": {
-    "only_verified": false,
+    "only_verified": true,
     "pending": false,
-    "product_ids": [
-      "10"
-    ],
+    "product_ids": [],
     "limit": null
   },
   "batch_summary": {
     "requested": 1,
-    "success": 0,
-    "errors": 1,
-    "candidate_ready": 0,
-    "manual_review": 1,
+    "success": 1,
+    "errors": 0,
+    "candidate_ready": 1,
+    "manual_review": 0,
     "rejected_candidate": 0
   },
   "summary": {
-    "products": 3,
-    "successful_fetch": 2,
-    "candidate_ready": 0,
+    "products": 4,
+    "successful_fetch": 3,
+    "candidate_ready": 1,
     "manual_review": 2,
     "rejected_candidate": 1
   },
@@ -346,6 +344,156 @@
         "reason": "HTTP 403"
       },
       "extracted_at": "2026-08-04T16:48:44.987154+00:00"
+    },
+    {
+      "product_id": "74",
+      "brand": "Nothing",
+      "model": "Phone",
+      "search_name": "Nothing Phone (3)",
+      "official_url": "https://us.nothing.tech/products/phone-3",
+      "source_host": "us.nothing.tech",
+      "resolver_status": "candidate_verified",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "http_status": 200,
+      "page_identity_score": 1.0,
+      "specifications": {
+        "processor": {
+          "value": "Snapdragon 8s Gen 4",
+          "label": "Processor",
+          "source": "shopify_oxygen_stream",
+          "confidence": 88
+        },
+        "memory_type": {
+          "value": "LPDDR5X",
+          "label": "Memory type",
+          "source": "shopify_oxygen_stream",
+          "confidence": 86
+        },
+        "storage_type": {
+          "value": "UFS 4.0",
+          "label": "Storage type",
+          "source": "shopify_oxygen_stream",
+          "confidence": 86
+        },
+        "display_size_refresh": {
+          "value": "6.67\\\" flexible AMOLED display",
+          "label": "Display",
+          "source": "shopify_oxygen_stream",
+          "confidence": 86
+        },
+        "refresh_rate": {
+          "value": "120Hz",
+          "label": "Refresh rate",
+          "source": "shopify_oxygen_stream",
+          "confidence": 82
+        },
+        "peak_brightness": {
+          "value": "4500 nits",
+          "label": "Peak brightness",
+          "source": "shopify_oxygen_stream",
+          "confidence": 82
+        },
+        "pixel_density": {
+          "value": "460 ppi",
+          "label": "Pixel density",
+          "source": "shopify_oxygen_stream",
+          "confidence": 82
+        },
+        "battery_capacity": {
+          "value": "5500mAh",
+          "label": "Battery capacity",
+          "source": "shopify_oxygen_stream",
+          "confidence": 88
+        },
+        "wired_charging": {
+          "value": "65 W fast charging",
+          "label": "Wired charging",
+          "source": "shopify_oxygen_stream",
+          "confidence": 86
+        },
+        "wireless_charging": {
+          "value": "15W wireless charging",
+          "label": "Wireless charging",
+          "source": "shopify_oxygen_stream",
+          "confidence": 84
+        },
+        "reverse_wireless_charging": {
+          "value": "5 W reverse wireless charging",
+          "label": "Reverse wireless charging",
+          "source": "shopify_oxygen_stream",
+          "confidence": 84
+        },
+        "reverse_wired_charging": {
+          "value": "7.5 W reverse wired charging",
+          "label": "Reverse wired charging",
+          "source": "shopify_oxygen_stream",
+          "confidence": 84
+        },
+        "ip_rating": {
+          "value": "IP68",
+          "label": "Ingress protection",
+          "source": "shopify_oxygen_stream",
+          "confidence": 88
+        },
+        "operating_system": {
+          "value": "Nothing OS 4 powered by Android 16",
+          "label": "Operating system",
+          "source": "shopify_oxygen_stream",
+          "confidence": 86
+        },
+        "android_updates": {
+          "value": "5 years of Android updates",
+          "label": "Android updates",
+          "source": "shopify_oxygen_stream",
+          "confidence": 82
+        },
+        "security_updates": {
+          "value": "7 years of security patches",
+          "label": "Security updates",
+          "source": "shopify_oxygen_stream",
+          "confidence": 82
+        },
+        "bluetooth": {
+          "value": "Bluetooth 5.3",
+          "label": "Bluetooth",
+          "source": "shopify_oxygen_stream",
+          "confidence": 80
+        },
+        "wifi": {
+          "value": "Wi-Fi 6",
+          "label": "Wi-Fi",
+          "source": "shopify_oxygen_stream",
+          "confidence": 80
+        }
+      },
+      "features": [],
+      "meta": {
+        "html_title": "Phone (3) | Phones | Nothing | US",
+        "description": "Phone (3) combines elegantly bold and playful design with a new kind of experience — one that’s more playful, personal, and intuitive with every use. It’s a phone with a soul, that doesn’t just perform — it understands you, evolves with you, and helps you stay in flow.",
+        "og_title": "Phone (3) | Phones",
+        "og_description": "Phone (3) combines elegantly bold and playful design with a new kind of experience — one that’s more playful, personal, and intuitive with every use. It’s a phone with a soul, that doesn’t just perform — it understands you, evolves with you, and helps you stay in flow.",
+        "canonical_url": "https://us.nothing.tech/products/phone-3",
+        "h1": "Nothing (R)"
+      },
+      "evidence_summary": {
+        "parser": "lxml",
+        "json_ld_products": 0,
+        "json_ld_specifications": 0,
+        "table_specifications": 0,
+        "definition_list_specifications": 0,
+        "label_value_specifications": 0,
+        "shopify_oxygen_specifications": 18,
+        "total_specifications": 18,
+        "feature_items": 0,
+        "noise_filter_version": "2.0"
+      },
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "extracted_at": "2026-08-04T18:17:19.290987+00:00"
     }
   ]
 }

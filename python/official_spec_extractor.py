@@ -718,6 +718,215 @@ def identity_tokens(value: Any) -> set[str]:
     }
 
 
+
+def decode_shopify_oxygen_stream(html: str) -> str:
+    """
+    Return a searchable text view of Shopify Hydrogen/Oxygen
+    React Router stream payloads embedded in script tags.
+    """
+
+    if "__reactRouterContext.streamController.enqueue" not in html:
+        return ""
+
+    chunks = re.findall(
+        r'window\.__reactRouterContext\.streamController\.enqueue\("((?:\\.|[^"\\])*)"\)',
+        html,
+        flags=re.S,
+    )
+
+    if not chunks:
+        return ""
+
+    decoded_chunks: list[str] = []
+
+    for chunk in chunks:
+        try:
+            decoded = bytes(chunk, "utf-8").decode("unicode_escape")
+        except UnicodeDecodeError:
+            decoded = chunk
+
+        decoded = (
+            decoded
+            .replace("\\/", "/")
+            .replace("\\u0026", "&")
+            .replace("\\u003c", "<")
+            .replace("\\u003e", ">")
+        )
+
+        decoded_chunks.append(decoded)
+
+    return re.sub(r"\s+", " ", " ".join(decoded_chunks)).strip()
+
+
+def add_stream_spec(
+    specifications: dict[str, dict[str, Any]],
+    key: str,
+    label: str,
+    value: str,
+    confidence: int = 82,
+) -> bool:
+    value = clean_text(value)
+
+    if not value or key in specifications:
+        return False
+
+    specifications[key] = {
+        "value": value,
+        "label": label,
+        "source": "shopify_oxygen_stream",
+        "confidence": confidence,
+    }
+
+    return True
+
+
+def extract_shopify_oxygen_specs(
+    html: str,
+    specifications: dict[str, dict[str, Any]],
+) -> int:
+    """
+    Extract high-confidence specifications from Shopify Hydrogen/Oxygen
+    React Router stream data. This is intentionally conservative.
+    """
+
+    text = decode_shopify_oxygen_stream(html)
+
+    if not text:
+        return 0
+
+    extracted = 0
+
+    patterns: list[tuple[str, str, str, int]] = [
+        (
+            "processor",
+            "Processor",
+            r"\b(?:Qualcomm\s+)?Snapdragon\s+[0-9A-Za-z+\- ]{2,40}?(?=\\|\"|,|\[|\{|\.|mobile platform)",
+            88,
+        ),
+        (
+            "memory_type",
+            "Memory type",
+            r"\bLPDDR(?:4X|5|5X)\b",
+            86,
+        ),
+        (
+            "storage_type",
+            "Storage type",
+            r"\bUFS\s*\d+(?:\.\d+)?\b",
+            86,
+        ),
+        (
+            "display_size_refresh",
+            "Display",
+            r"\b\d+(?:\.\d+)?\\?\"\s*(?:flexible\s+)?AMOLED\s+display\b",
+            86,
+        ),
+        (
+            "refresh_rate",
+            "Refresh rate",
+            r"\b(?:up to\s+)?\d{2,3}\s*Hz\b",
+            82,
+        ),
+        (
+            "peak_brightness",
+            "Peak brightness",
+            r"\b\d{3,5}\s*nits\b",
+            82,
+        ),
+        (
+            "pixel_density",
+            "Pixel density",
+            r"\b\d{3,4}\s*ppi\b",
+            82,
+        ),
+        (
+            "battery_capacity",
+            "Battery capacity",
+            r"\b\d{4,5}\s*mAh\b",
+            88,
+        ),
+        (
+            "wired_charging",
+            "Wired charging",
+            r"\b\d{2,3}\s*W\s*fast charging\b",
+            86,
+        ),
+        (
+            "wireless_charging",
+            "Wireless charging",
+            r"\b\d{1,3}\s*W\s*wireless charging\b",
+            84,
+        ),
+        (
+            "reverse_wireless_charging",
+            "Reverse wireless charging",
+            r"\b\d{1,3}\s*W\s*reverse wireless charging\b",
+            84,
+        ),
+        (
+            "reverse_wired_charging",
+            "Reverse wired charging",
+            r"\b\d{1,3}(?:\.\d+)?\s*W\s*reverse wired charging\b",
+            84,
+        ),
+        (
+            "ip_rating",
+            "Ingress protection",
+            r"\bIP\d{2}\b",
+            88,
+        ),
+        (
+            "operating_system",
+            "Operating system",
+            r"\bNothing OS\s*\d+(?:\.\d+)?\s*(?:powered by|based on)?\s*Android\s*\d+\b",
+            86,
+        ),
+        (
+            "android_updates",
+            "Android updates",
+            r"\b\d+\s+years?\s+of\s+Android updates\b",
+            82,
+        ),
+        (
+            "security_updates",
+            "Security updates",
+            r"\b\d+\s+years?\s+of\s+security (?:patches|updates)\b",
+            82,
+        ),
+        (
+            "bluetooth",
+            "Bluetooth",
+            r"\bBluetooth\s*\d+(?:\.\d+)?\b",
+            80,
+        ),
+        (
+            "wifi",
+            "Wi-Fi",
+            r"\bWi-?Fi\s*\d\b",
+            80,
+        ),
+    ]
+
+    for key, label, pattern, confidence in patterns:
+        match = re.search(pattern, text, flags=re.I)
+
+        if not match:
+            continue
+
+        value = match.group(0).strip(" ,.;:-")
+
+        if add_stream_spec(
+            specifications,
+            key,
+            label,
+            value,
+            confidence,
+        ):
+            extracted += 1
+
+    return extracted
+
+
 def page_identity_score(
     expected_name: str,
     page_title: str,
@@ -756,7 +965,8 @@ def extract_one(
     product_id = str(research_result.get("product_id") or "")
     official_url = clean_text(research_result.get("official_url"))
     expected_name = clean_text(
-        identity.get("search_name")
+        research_result.get("core_title")
+        or identity.get("search_name")
         or research_result.get("title")
     )
 
@@ -825,15 +1035,19 @@ def extract_one(
     table_count = extract_tables(soup, specifications)
     definition_count = extract_definition_lists(soup, specifications)
     block_count = extract_label_value_blocks(soup, specifications)
+    shopify_oxygen_count = extract_shopify_oxygen_specs(
+        html,
+        specifications,
+    )
 
     if len(specifications) > MAX_SPECS:
         specifications = dict(list(specifications.items())[:MAX_SPECS])
 
     features = extract_features(soup)
     page_title = (
-        meta.get("h1")
+        meta.get("html_title")
         or meta.get("og_title")
-        or meta.get("html_title")
+        or meta.get("h1")
         or ""
     )
     canonical_url = meta.get("canonical_url") or official_url
@@ -855,6 +1069,7 @@ def extract_one(
         "table_specifications": table_count,
         "definition_list_specifications": definition_count,
         "label_value_specifications": block_count,
+        "shopify_oxygen_specifications": shopify_oxygen_count,
         "total_specifications": len(specifications),
         "feature_items": len(features),
         "noise_filter_version": "2.0",

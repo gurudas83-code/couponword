@@ -56,7 +56,48 @@
       },
       "official_product_url": "https://www.logitech.com/en-in/shop/p/mk240-minimalist-keyboard-mouse",
       "published_on": "2026-08-03T18:06:15.470143+00:00"
+    },
+    {
+      "product_id": "74",
+      "asin": "B0F7R6V1LM",
+      "title": "Nothing Phone (3) (Black, 12GB RAM, 256GB Storage)",
+      "brand": "Nothing",
+      "category": "Mobiles",
+      "features": [
+        "Snapdragon 8s Gen 4 processor",
+        "LPDDR5X memory and UFS 4.0 storage",
+        "6.67-inch flexible AMOLED display with 120Hz refresh rate",
+        "4500-nit peak brightness and 460 ppi pixel density",
+        "5500mAh battery for the India variant",
+        "65W fast wired charging",
+        "15W wireless charging",
+        "5W reverse wireless charging",
+        "IP68 dust and water resistance",
+        "Nothing OS 4 powered by Android 16",
+        "Five years of Android updates",
+        "Seven years of security patches"
+      ],
+      "best_for": [
+        "Users seeking a performance-focused premium smartphone",
+        "Users who value a bright high-refresh AMOLED display",
+        "Users who want wireless and reverse wireless charging",
+        "Users who value long-term Android and security support",
+        "Users who require IP68 dust and water resistance"
+      ],
+      "limitations": [
+        "The 5500mAh battery specification is stated for the India variant",
+        "Current selling price and stock availability are not verified",
+        "Camera specifications have not yet been added to the published knowledge",
+        "Extracted specifications should be rechecked if the official product page changes"
+      ],
+      "confidence": {
+        "score": 95,
+        "level": "high",
+        "reason": "Official Nothing product page identity matched completely and 18 specifications were extracted from the embedded Shopify Oxygen product data."
+      },
+      "official_product_url": "https://us.nothing.tech/products/phone-3",
+      "published_on": "2026-08-04T18:13:32.824785+00:00"
     }
   ],
-  "updated_at": "2026-08-03T18:06:15.470215+00:00"
+  "updated_at": "2026-08-04T18:13:32.824834+00:00"
 }

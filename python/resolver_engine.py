@@ -93,6 +93,7 @@ DOMAIN_BRANDS = {
     "boat-lifestyle.com": "boat",
     "oneplus.com": "oneplus",
     "oneplus.in": "oneplus",
+    "nothing.tech": "nothing",
 }
 
 
