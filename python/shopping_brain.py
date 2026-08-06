@@ -520,6 +520,163 @@ def knowledge_match_score(
     return score, reasons
 
 
+
+
+def knowledge_gate_adjustment(
+    product: dict,
+    intent: dict,
+    knowledge_reasons: list[str],
+) -> tuple[int, list[str]]:
+    """
+    Penalize products whose published verified knowledge does not support
+    the user's explicitly requested features.
+
+    Products without published knowledge are not rejected here because their
+    feature status is unknown rather than disproved.
+    """
+
+    requested = [
+        _normalize_query_text(value)
+        for value in intent.get("features", [])
+        if value
+    ]
+
+    if not requested:
+        return 0, []
+
+    knowledge = product.get("product_knowledge", {})
+
+    if not isinstance(knowledge, dict) or not knowledge:
+        return 0, []
+
+    matched = {
+        reason.split(":", 1)[1].strip()
+        for reason in knowledge_reasons
+        if isinstance(reason, str)
+        and reason.lower().startswith("verified knowledge matched:")
+        and ":" in reason
+    }
+
+    requested_set = set(requested)
+    matched_count = len(requested_set & matched)
+
+    if matched_count == len(requested_set):
+        return 0, []
+
+    missing_count = len(requested_set) - matched_count
+
+    if matched_count == 0:
+        penalty = -40
+        message = (
+            "Verified knowledge does not support the requested feature"
+        )
+    else:
+        penalty = -15 * missing_count
+        message = (
+            f"Verified knowledge is missing {missing_count} "
+            "requested feature(s)"
+        )
+
+    return penalty, [message]
+
+
+def build_decision_summary(product: dict) -> dict[str, list[str]]:
+    """Build a concise user-facing recommendation explanation."""
+
+    knowledge = product.get("product_knowledge", {})
+    assessment = product.get("requirement_assessment", {})
+    reasons = product.get("reasons", [])
+
+    if not isinstance(knowledge, dict):
+        knowledge = {}
+
+    if not isinstance(assessment, dict):
+        assessment = {}
+
+    if not isinstance(reasons, list):
+        reasons = []
+
+    features = knowledge.get("features", [])
+    best_for = knowledge.get("best_for", [])
+    limitations = knowledge.get("limitations", [])
+    confidence = knowledge.get("confidence", {})
+
+    if not isinstance(features, list):
+        features = []
+
+    if not isinstance(best_for, list):
+        best_for = []
+
+    if not isinstance(limitations, list):
+        limitations = []
+
+    recommended_because: list[str] = []
+
+    for reason in reasons:
+        text = str(reason or "").strip()
+
+        if not text:
+            continue
+
+        lowered = text.lower()
+
+        if lowered.startswith("verified knowledge matched:"):
+            matched = text.split(":", 1)[1].strip()
+            recommended_because.append(
+                f"Verified requirement matched: {matched}"
+            )
+        elif lowered == "high-confidence official product knowledge":
+            recommended_because.append(
+                "High-confidence official product knowledge"
+            )
+
+    for feature in features:
+        text = str(feature or "").strip()
+
+        if text and text not in recommended_because:
+            recommended_because.append(text)
+
+        if len(recommended_because) >= 6:
+            break
+
+    if isinstance(confidence, dict):
+        confidence_level = str(
+            confidence.get("level") or ""
+        ).strip().lower()
+
+        if confidence_level == "high":
+            verified_text = (
+                "Official specifications verified with high confidence"
+            )
+
+            if verified_text not in recommended_because:
+                recommended_because.append(verified_text)
+
+    requirement_match = int(
+        assessment.get("requirement_match_percent") or 0
+    )
+
+    if requirement_match >= 100:
+        match_text = "All stated requirements matched"
+
+        if match_text not in recommended_because:
+            recommended_because.insert(0, match_text)
+
+    return {
+        "recommended_because": recommended_because[:7],
+        "best_suited_for": [
+            str(item).strip()
+            for item in best_for[:5]
+            if str(item or "").strip()
+        ],
+        "keep_in_mind": [
+            str(item).strip()
+            for item in limitations[:4]
+            if str(item or "").strip()
+        ],
+    }
+
+
 def merge_product_knowledge(
     products: list[dict],
     knowledge_db: dict[str, dict],
@@ -652,11 +809,17 @@ def match_products(
             ranked_product,
             intent,
         )
+        gate_score, gate_reasons = knowledge_gate_adjustment(
+            ranked_product,
+            intent,
+            knowledge_reasons,
+        )
 
         ranked_product["score"] = (
             base_score
             + taxonomy_score
             + knowledge_score
+            + gate_score
         )
 
         existing_reasons = explain_product(
@@ -670,6 +833,7 @@ def match_products(
         ranked_product["reasons"] = (
             taxonomy_reasons
             + knowledge_reasons
+            + gate_reasons
             + existing_reasons
         )
 
@@ -680,6 +844,9 @@ def match_products(
 
         ranked_product["requirement_assessment"] = (
             build_requirement_assessment(ranked_product)
+        )
+        ranked_product["decision_summary"] = build_decision_summary(
+            ranked_product
         )
 
         matches.append(ranked_product)
@@ -748,6 +915,10 @@ def build_response(
                     [],
                 ),
                 "reasons": product.get("reasons", []),
+                "decision_summary": product.get(
+                    "decision_summary",
+                    {},
+                ),
                 "link": product.get("link"),
                 "category": product.get("category"),
                 "taxonomy": product.get("taxonomy", {}),
@@ -943,6 +1114,43 @@ def print_text_response(
 
                 for limitation in limitations:
                     print("  -", limitation)
+
+        decision = product.get(
+            "decision_summary",
+            {},
+        )
+
+        if isinstance(decision, dict):
+            recommended = decision.get(
+                "recommended_because",
+                [],
+            )
+            suited = decision.get(
+                "best_suited_for",
+                [],
+            )
+            cautions = decision.get(
+                "keep_in_mind",
+                [],
+            )
+
+            if recommended:
+                print("\nRecommended because:")
+
+                for item in recommended:
+                    print("  ✓", item)
+
+            if suited:
+                print("\nBest suited for:")
+
+                for item in suited:
+                    print("  ✓", item)
+
+            if cautions:
+                print("\nKeep in mind:")
+
+                for item in cautions:
+                    print("  •", item)
 
         print("\nWhy this product?")
 
