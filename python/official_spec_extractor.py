@@ -2669,6 +2669,832 @@ def save_vision_job_payload(
     return destination
 
 
+
+def normalize_imported_vision_claim(
+    claim: dict[str, Any],
+    evidence_id: str,
+    source_image: str,
+    source_language: str,
+) -> dict[str, Any]:
+    """
+    Normalize a provider-produced claim into the canonical vision schema.
+
+    Imported claims remain unverified and cannot be auto-published.
+    """
+
+    if not isinstance(claim, dict):
+        claim = {}
+
+    confidence_raw = claim.get("confidence", 0)
+
+    try:
+        confidence = int(float(confidence_raw))
+    except (TypeError, ValueError):
+        confidence = 0
+
+    confidence = max(0, min(confidence, 100))
+
+    return {
+        "claim_id": clean_text(
+            claim.get("claim_id")
+        ) or f"{evidence_id}_claim",
+        "claim_type": clean_text(
+            claim.get("claim_type")
+        ),
+        "original_text": clean_text(
+            claim.get("original_text")
+        ),
+        "english_text": clean_text(
+            claim.get("english_text")
+        ),
+        "value": claim.get("value"),
+        "unit": clean_text(
+            claim.get("unit")
+        ),
+        "confidence": confidence,
+        "source_image": source_image,
+        "source_language": clean_text(
+            claim.get("source_language")
+        ) or source_language or "auto_detect",
+        "evidence_status": "unverified",
+        "product_identity_supported": bool(
+            claim.get("product_identity_supported")
+        ),
+        "publish_allowed": False,
+    }
+
+
+def import_vision_result_payload(
+    product_output: dict[str, Any],
+    result_payload: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Merge provider-neutral vision results into the queued media evidence.
+
+    Safety rules:
+    - evidence IDs must already exist in the queue,
+    - imported claims remain unverified,
+    - images remain non-publishable,
+    - claims are never auto-promoted into specifications.
+    """
+
+    if not isinstance(product_output, dict):
+        return product_output
+
+    if not isinstance(result_payload, dict):
+        return product_output
+
+    media = product_output.get("media_evidence", {})
+
+    if not isinstance(media, dict):
+        return product_output
+
+    queue = media.get("vision_evidence_queue", [])
+
+    if not isinstance(queue, list):
+        return product_output
+
+    queue_index = {
+        clean_text(item.get("evidence_id")): item
+        for item in queue
+        if isinstance(item, dict)
+        and clean_text(item.get("evidence_id"))
+    }
+
+    results = result_payload.get("results", [])
+
+    if not isinstance(results, list):
+        results = []
+
+    imported_results = 0
+    imported_claims = 0
+    skipped_results = 0
+
+    for result in results:
+        if not isinstance(result, dict):
+            skipped_results += 1
+            continue
+
+        evidence_id = clean_text(
+            result.get("evidence_id")
+        )
+
+        queue_item = queue_index.get(evidence_id)
+
+        if queue_item is None:
+            skipped_results += 1
+            continue
+
+        source_image = clean_text(
+            queue_item.get("image_url")
+        )
+
+        source_language = clean_text(
+            result.get("source_language")
+        ) or clean_text(
+            queue_item.get("source_language")
+        ) or "auto_detect"
+
+        provider = clean_text(
+            result.get("provider")
+        ) or clean_text(
+            result_payload.get("provider")
+        ) or "unknown"
+
+        raw_text = clean_text(
+            result.get("raw_text")
+        )
+
+        raw_claims = result.get("claims", [])
+
+        if not isinstance(raw_claims, list):
+            raw_claims = []
+
+        normalized_claims: list[dict[str, Any]] = []
+
+        for index, claim in enumerate(raw_claims, 1):
+            normalized = normalize_imported_vision_claim(
+                claim=claim,
+                evidence_id=f"{evidence_id}_{index:02d}",
+                source_image=source_image,
+                source_language=source_language,
+            )
+
+            if not (
+                normalized.get("original_text")
+                or normalized.get("english_text")
+                or normalized.get("claim_type")
+            ):
+                continue
+
+            normalized_claims.append(normalized)
+
+        queue_item["source_language"] = source_language
+        queue_item["analysis_status"] = (
+            "completed"
+            if normalized_claims or raw_text
+            else "no_evidence"
+        )
+        queue_item["claim_status"] = (
+            "extracted_unverified"
+            if normalized_claims
+            else "not_extracted"
+        )
+        queue_item["claims"] = normalized_claims
+        queue_item["publish_image"] = False
+        queue_item["vision_provider"] = provider
+        queue_item["vision_analysis"] = {
+            "status": queue_item["analysis_status"],
+            "provider": provider,
+            "source_language": source_language,
+            "target_language": "en",
+            "raw_text": raw_text,
+            "claim_count": len(normalized_claims),
+        }
+
+        imported_results += 1
+        imported_claims += len(normalized_claims)
+
+    media["vision_import_status"] = "completed"
+    media["vision_imported_results"] = imported_results
+    media["vision_imported_claims"] = imported_claims
+    media["vision_skipped_results"] = skipped_results
+
+    product_output["media_evidence"] = media
+
+    evidence_summary = product_output.get("evidence_summary", {})
+
+    if not isinstance(evidence_summary, dict):
+        evidence_summary = {}
+
+    evidence_summary["vision_import_status"] = (
+        media.get("vision_import_status")
+    )
+    evidence_summary["vision_imported_results"] = imported_results
+    evidence_summary["vision_imported_claims"] = imported_claims
+    evidence_summary["vision_skipped_results"] = skipped_results
+
+    product_output["evidence_summary"] = evidence_summary
+
+    return product_output
+
+
+def load_vision_result_payload(
+    path: Path,
+) -> dict[str, Any]:
+    """
+    Load a provider-neutral vision result JSON file.
+    """
+
+    payload = json.loads(
+        path.read_text(encoding="utf-8")
+    )
+
+    if not isinstance(payload, dict):
+        raise ValueError(
+            "Vision result file must contain a JSON object"
+        )
+
+    return payload
+
+
+
+VISION_CLAIM_MIN_CONFIDENCE = 80
+
+
+def validate_vision_claim(
+    claim: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Validate one imported vision claim conservatively.
+
+    A passing claim becomes review_ready, never auto-published.
+    """
+
+    if not isinstance(claim, dict):
+        return {
+            "status": "rejected",
+            "reasons": ["Claim is not an object"],
+        }
+
+    reasons: list[str] = []
+
+    claim_type = clean_text(
+        claim.get("claim_type")
+    )
+    original_text = clean_text(
+        claim.get("original_text")
+    )
+    english_text = clean_text(
+        claim.get("english_text")
+    )
+    unit = clean_text(
+        claim.get("unit")
+    )
+
+    try:
+        confidence = int(
+            float(claim.get("confidence") or 0)
+        )
+    except (TypeError, ValueError):
+        confidence = 0
+
+    if not claim_type:
+        reasons.append("Missing claim type")
+
+    if not original_text and not english_text:
+        reasons.append("Missing claim text")
+
+    if confidence < VISION_CLAIM_MIN_CONFIDENCE:
+        reasons.append(
+            f"Confidence below {VISION_CLAIM_MIN_CONFIDENCE}"
+        )
+
+    if claim.get("product_identity_supported") is not True:
+        reasons.append("Product identity not supported")
+
+    value = claim.get("value")
+
+    if isinstance(value, (int, float)) and value < 0:
+        reasons.append("Negative numeric value is not allowed")
+
+    if unit and len(unit) > 20:
+        reasons.append("Unit looks invalid")
+
+    if english_text and len(english_text) > 500:
+        reasons.append("English normalized text is too long")
+
+    status = (
+        "review_ready"
+        if not reasons
+        else "rejected"
+    )
+
+    return {
+        "status": status,
+        "reasons": reasons,
+    }
+
+
+def validate_vision_claims(
+    product_output: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Validate all imported vision claims in the media evidence queue.
+
+    Duplicate claims are suppressed by normalized type/text/value/unit.
+    Conflicting claims are flagged for manual review.
+    """
+
+    if not isinstance(product_output, dict):
+        return product_output
+
+    media = product_output.get("media_evidence", {})
+
+    if not isinstance(media, dict):
+        return product_output
+
+    queue = media.get("vision_evidence_queue", [])
+
+    if not isinstance(queue, list):
+        return product_output
+
+    seen_keys: dict[
+        tuple[str, str, str, str],
+        dict[str, Any],
+    ] = {}
+
+    ready_count = 0
+    rejected_count = 0
+    duplicate_count = 0
+    conflict_count = 0
+
+    by_type_values: dict[str, set[str]] = {}
+
+    for item in queue:
+        if not isinstance(item, dict):
+            continue
+
+        claims = item.get("claims", [])
+
+        if not isinstance(claims, list):
+            continue
+
+        validated_claims: list[dict[str, Any]] = []
+
+        for claim in claims:
+            if not isinstance(claim, dict):
+                continue
+
+            validation = validate_vision_claim(claim)
+
+            claim["validation"] = validation
+            claim["publish_allowed"] = False
+
+            claim_type = clean_text(
+                claim.get("claim_type")
+            ).lower()
+
+            english_text = clean_text(
+                claim.get("english_text")
+            ).lower()
+
+            value_text = clean_text(
+                claim.get("value")
+            ).lower()
+
+            unit_text = clean_text(
+                claim.get("unit")
+            ).lower()
+
+            dedupe_key = (
+                claim_type,
+                english_text,
+                value_text,
+                unit_text,
+            )
+
+            if dedupe_key in seen_keys:
+                claim["validation"] = {
+                    "status": "duplicate",
+                    "reasons": [
+                        "Duplicate of an already imported claim"
+                    ],
+                }
+                duplicate_count += 1
+                validated_claims.append(claim)
+                continue
+
+            seen_keys[dedupe_key] = claim
+
+            if (
+                claim_type
+                and value_text
+            ):
+                by_type_values.setdefault(
+                    claim_type,
+                    set(),
+                ).add(
+                    f"{value_text}|{unit_text}"
+                )
+
+            if validation["status"] == "review_ready":
+                claim["evidence_status"] = "review_ready"
+                ready_count += 1
+            else:
+                claim["evidence_status"] = "rejected"
+                rejected_count += 1
+
+            validated_claims.append(claim)
+
+        item["claims"] = validated_claims
+
+        statuses = {
+            clean_text(
+                claim.get("evidence_status")
+            )
+            for claim in validated_claims
+            if isinstance(claim, dict)
+        }
+
+        if "review_ready" in statuses:
+            item["claim_status"] = "review_ready"
+        elif validated_claims:
+            item["claim_status"] = "rejected"
+        else:
+            item["claim_status"] = "not_extracted"
+
+    conflicting_types = {
+        claim_type
+        for claim_type, values in by_type_values.items()
+        if len(values) > 1
+    }
+
+    if conflicting_types:
+        for item in queue:
+            if not isinstance(item, dict):
+                continue
+
+            claims = item.get("claims", [])
+
+            if not isinstance(claims, list):
+                continue
+
+            for claim in claims:
+                if not isinstance(claim, dict):
+                    continue
+
+                claim_type = clean_text(
+                    claim.get("claim_type")
+                ).lower()
+
+                if claim_type not in conflicting_types:
+                    continue
+
+                validation = claim.get("validation", {})
+
+                if not isinstance(validation, dict):
+                    validation = {}
+
+                reasons = validation.get("reasons", [])
+
+                if not isinstance(reasons, list):
+                    reasons = []
+
+                if "Conflicting values found for same claim type" not in reasons:
+                    reasons.append(
+                        "Conflicting values found for same claim type"
+                    )
+
+                validation["reasons"] = reasons
+
+                if validation.get("status") == "review_ready":
+                    validation["status"] = "manual_review"
+                    claim["evidence_status"] = "manual_review"
+                    ready_count = max(0, ready_count - 1)
+                    conflict_count += 1
+
+                claim["validation"] = validation
+
+    media["vision_validation_status"] = "completed"
+    media["vision_review_ready_claims"] = ready_count
+    media["vision_rejected_claims"] = rejected_count
+    media["vision_duplicate_claims"] = duplicate_count
+    media["vision_conflicting_claims"] = conflict_count
+
+    product_output["media_evidence"] = media
+
+    summary = product_output.get("evidence_summary", {})
+
+    if not isinstance(summary, dict):
+        summary = {}
+
+    summary["vision_validation_status"] = (
+        media.get("vision_validation_status")
+    )
+    summary["vision_review_ready_claims"] = ready_count
+    summary["vision_rejected_claims"] = rejected_count
+    summary["vision_duplicate_claims"] = duplicate_count
+    summary["vision_conflicting_claims"] = conflict_count
+
+    product_output["evidence_summary"] = summary
+
+    return product_output
+
+
+
+def promote_reviewed_vision_claims(
+    product_output: dict[str, Any],
+    approved_claim_ids: list[str] | set[str] | tuple[str, ...],
+) -> dict[str, Any]:
+    # Promote only explicitly approved, review-ready claims.
+    # Source images remain internal evidence and are never made publishable here.
+
+    if not isinstance(product_output, dict):
+        return product_output
+
+    approved_ids = {
+        clean_text(value)
+        for value in approved_claim_ids
+        if clean_text(value)
+    }
+
+    media = product_output.get("media_evidence", {})
+
+    if not isinstance(media, dict):
+        return product_output
+
+    queue = media.get("vision_evidence_queue", [])
+
+    if not isinstance(queue, list):
+        return product_output
+
+    promoted = 0
+    blocked = 0
+
+    for item in queue:
+        if not isinstance(item, dict):
+            continue
+
+        item["publish_image"] = False
+
+        claims = item.get("claims", [])
+
+        if not isinstance(claims, list):
+            continue
+
+        for claim in claims:
+            if not isinstance(claim, dict):
+                continue
+
+            claim_id = clean_text(claim.get("claim_id"))
+            validation = claim.get("validation", {})
+
+            validation_status = (
+                clean_text(validation.get("status"))
+                if isinstance(validation, dict)
+                else ""
+            )
+
+            eligible = (
+                claim_id in approved_ids
+                and validation_status == "review_ready"
+                and claim.get("product_identity_supported") is True
+                and bool(clean_text(claim.get("english_text")))
+            )
+
+            if eligible:
+                claim["evidence_status"] = "approved_for_knowledge"
+                claim["publish_allowed"] = True
+                claim["promotion_status"] = "approved"
+                claim["promotion_reason"] = (
+                    "Explicit approval after successful vision claim validation"
+                )
+                promoted += 1
+            else:
+                claim["publish_allowed"] = False
+
+                if claim_id in approved_ids:
+                    claim["promotion_status"] = "blocked"
+                    claim["promotion_reason"] = (
+                        "Claim did not satisfy promotion gate requirements"
+                    )
+                    blocked += 1
+
+        statuses = {
+            clean_text(claim.get("evidence_status"))
+            for claim in claims
+            if isinstance(claim, dict)
+        }
+
+        if "approved_for_knowledge" in statuses:
+            item["claim_status"] = "approved_for_knowledge"
+
+    media["vision_promotion_status"] = "completed"
+    media["vision_promoted_claims"] = promoted
+    media["vision_blocked_promotions"] = blocked
+    media["vision_images_publishable"] = False
+
+    product_output["media_evidence"] = media
+
+    summary = product_output.get("evidence_summary", {})
+
+    if not isinstance(summary, dict):
+        summary = {}
+
+    summary["vision_promotion_status"] = "completed"
+    summary["vision_promoted_claims"] = promoted
+    summary["vision_blocked_promotions"] = blocked
+    summary["vision_images_publishable"] = False
+
+    product_output["evidence_summary"] = summary
+
+    return product_output
+
+
+
+def build_vision_knowledge_candidates(
+    product_output: dict[str, Any],
+) -> dict[str, Any]:
+    # Convert explicitly promoted vision claims into knowledge candidates.
+    # This function does not publish source images and does not write to the
+    # final verified knowledge database.
+
+    if not isinstance(product_output, dict):
+        return product_output
+
+    media = product_output.get("media_evidence", {})
+
+    if not isinstance(media, dict):
+        return product_output
+
+    queue = media.get("vision_evidence_queue", [])
+
+    if not isinstance(queue, list):
+        return product_output
+
+    candidates: list[dict[str, Any]] = []
+    seen: set[tuple[str, str, str, str]] = set()
+
+    for item in queue:
+        if not isinstance(item, dict):
+            continue
+
+        evidence_id = clean_text(item.get("evidence_id"))
+        image_url = clean_text(item.get("image_url"))
+        claims = item.get("claims", [])
+
+        if not isinstance(claims, list):
+            continue
+
+        for claim in claims:
+            if not isinstance(claim, dict):
+                continue
+
+            if claim.get("evidence_status") != "approved_for_knowledge":
+                continue
+
+            if claim.get("publish_allowed") is not True:
+                continue
+
+            claim_type = clean_text(claim.get("claim_type"))
+            english_text = clean_text(claim.get("english_text"))
+            unit = clean_text(claim.get("unit"))
+            value = claim.get("value")
+
+            if not claim_type or not english_text:
+                continue
+
+            dedupe_key = (
+                claim_type.lower(),
+                english_text.lower(),
+                clean_text(value).lower(),
+                unit.lower(),
+            )
+
+            if dedupe_key in seen:
+                continue
+
+            seen.add(dedupe_key)
+
+            candidates.append(
+                {
+                    "knowledge_id": clean_text(
+                        claim.get("claim_id")
+                    ),
+                    "claim_type": claim_type,
+                    "text": english_text,
+                    "value": value,
+                    "unit": unit,
+                    "confidence": int(
+                        claim.get("confidence") or 0
+                    ),
+                    "source_type": "official_image_evidence",
+                    "source_page": clean_text(
+                        product_output.get("official_url")
+                    ),
+                    "source_image": image_url,
+                    "source_evidence_id": evidence_id,
+                    "source_language": clean_text(
+                        claim.get("source_language")
+                    ) or "auto_detect",
+                    "product_identity_supported": (
+                        claim.get("product_identity_supported") is True
+                    ),
+                    "knowledge_status": "candidate",
+                    "requires_final_review": True,
+                    "publish_source_image": False,
+                }
+            )
+
+    media["vision_knowledge_bridge_status"] = "completed"
+    media["vision_knowledge_candidates"] = candidates
+    media["vision_knowledge_candidate_count"] = len(candidates)
+
+    product_output["media_evidence"] = media
+
+    summary = product_output.get("evidence_summary", {})
+
+    if not isinstance(summary, dict):
+        summary = {}
+
+    summary["vision_knowledge_bridge_status"] = "completed"
+    summary["vision_knowledge_candidate_count"] = len(candidates)
+
+    product_output["evidence_summary"] = summary
+
+    return product_output
+
+
+
+def finalize_vision_knowledge_candidates(
+    product_output: dict[str, Any],
+    approved_knowledge_ids: list[str] | set[str] | tuple[str, ...],
+) -> dict[str, Any]:
+    # Final manual review gate for vision-derived knowledge candidates.
+    # Passing this gate makes a candidate eligible for knowledge ingestion,
+    # but does not itself write to the final knowledge database.
+
+    if not isinstance(product_output, dict):
+        return product_output
+
+    approved_ids = {
+        clean_text(value)
+        for value in approved_knowledge_ids
+        if clean_text(value)
+    }
+
+    media = product_output.get("media_evidence", {})
+
+    if not isinstance(media, dict):
+        return product_output
+
+    candidates = media.get("vision_knowledge_candidates", [])
+
+    if not isinstance(candidates, list):
+        return product_output
+
+    verified = 0
+    blocked = 0
+
+    for candidate in candidates:
+        if not isinstance(candidate, dict):
+            continue
+
+        knowledge_id = clean_text(
+            candidate.get("knowledge_id")
+        )
+
+        eligible = (
+            knowledge_id in approved_ids
+            and candidate.get("knowledge_status") == "candidate"
+            and candidate.get("requires_final_review") is True
+            and candidate.get("product_identity_supported") is True
+            and bool(clean_text(candidate.get("text")))
+            and int(candidate.get("confidence") or 0) >= 80
+        )
+
+        candidate["publish_source_image"] = False
+
+        if eligible:
+            candidate["knowledge_status"] = (
+                "verified_for_knowledge_ingestion"
+            )
+            candidate["requires_final_review"] = False
+            candidate["final_review_status"] = "approved"
+            candidate["final_review_reason"] = (
+                "Explicit final approval after vision evidence validation"
+            )
+            verified += 1
+        elif knowledge_id in approved_ids:
+            candidate["final_review_status"] = "blocked"
+            candidate["final_review_reason"] = (
+                "Candidate did not satisfy final knowledge review requirements"
+            )
+            blocked += 1
+
+    media["vision_final_review_status"] = "completed"
+    media["vision_verified_knowledge_candidates"] = verified
+    media["vision_blocked_knowledge_candidates"] = blocked
+    media["vision_images_publishable"] = False
+
+    product_output["media_evidence"] = media
+
+    summary = product_output.get("evidence_summary", {})
+
+    if not isinstance(summary, dict):
+        summary = {}
+
+    summary["vision_final_review_status"] = "completed"
+    summary["vision_verified_knowledge_candidates"] = verified
+    summary["vision_blocked_knowledge_candidates"] = blocked
+    summary["vision_images_publishable"] = False
+
+    product_output["evidence_summary"] = summary
+
+    return product_output
+
+
 def extract_one(
     research_result: dict[str, Any],
     identity: dict[str, Any],
