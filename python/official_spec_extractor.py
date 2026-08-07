@@ -2982,8 +2982,9 @@ def validate_vision_claims(
     """
     Validate all imported vision claims in the media evidence queue.
 
-    Duplicate claims are suppressed by normalized type/text/value/unit.
-    Conflicting claims are flagged for manual review.
+    Identity may inherit from a sufficiently matched official product page.
+    Duplicate claims are suppressed.
+    Conflicts are evaluated at semantic attribute level.
     """
 
     if not isinstance(product_output, dict):
@@ -3009,7 +3010,61 @@ def validate_vision_claims(
     duplicate_count = 0
     conflict_count = 0
 
-    by_type_values: dict[str, set[str]] = {}
+    official_url = clean_text(
+        product_output.get("official_url")
+    )
+    source_host = clean_text(
+        product_output.get("source_host")
+    )
+    fetch_status = clean_text(
+        product_output.get("fetch_status")
+    ).lower()
+
+    try:
+        page_identity_score = float(
+            product_output.get("page_identity_score") or 0.0
+        )
+    except (TypeError, ValueError):
+        page_identity_score = 0.0
+
+    official_media_context_supported = bool(
+        official_url
+        and source_host
+        and fetch_status == "success"
+        and page_identity_score >= 0.60
+    )
+
+    additive_claim_types = {
+        "color_variant",
+        "noise_cancellation_modes",
+        "microphone_type",
+        "supported_language",
+        "supported_languages",
+    }
+
+    by_semantic_values: dict[str, set[str]] = {}
+    semantic_claims: dict[str, list[dict[str, Any]]] = {}
+
+    def conflict_key(
+        claim_type: str,
+        english_text: str,
+    ) -> str:
+        if claim_type in additive_claim_types:
+            return ""
+
+        if ":" in english_text:
+            label = english_text.split(":", 1)[0]
+            label = clean_text(label).lower()
+            label = re.sub(
+                r"[^a-z0-9]+",
+                "_",
+                label,
+            ).strip("_")
+
+            if label:
+                return f"{claim_type}::{label}"
+
+        return claim_type
 
     for item in queue:
         if not isinstance(item, dict):
@@ -3025,6 +3080,27 @@ def validate_vision_claims(
         for claim in claims:
             if not isinstance(claim, dict):
                 continue
+
+            model_identity_supported = (
+                claim.get("product_identity_supported") is True
+            )
+
+            claim["vision_model_identity_supported"] = (
+                model_identity_supported
+            )
+
+            if (
+                not model_identity_supported
+                and official_media_context_supported
+            ):
+                claim["product_identity_supported"] = True
+                claim["product_identity_support_source"] = (
+                    "official_page_media_context"
+                )
+            elif model_identity_supported:
+                claim["product_identity_support_source"] = (
+                    "vision_model"
+                )
 
             validation = validate_vision_claim(claim)
 
@@ -3061,22 +3137,12 @@ def validate_vision_claims(
                         "Duplicate of an already imported claim"
                     ],
                 }
+                claim["evidence_status"] = "duplicate"
                 duplicate_count += 1
                 validated_claims.append(claim)
                 continue
 
             seen_keys[dedupe_key] = claim
-
-            if (
-                claim_type
-                and value_text
-            ):
-                by_type_values.setdefault(
-                    claim_type,
-                    set(),
-                ).add(
-                    f"{value_text}|{unit_text}"
-                )
 
             if validation["status"] == "review_ready":
                 claim["evidence_status"] = "review_ready"
@@ -3085,82 +3151,102 @@ def validate_vision_claims(
                 claim["evidence_status"] = "rejected"
                 rejected_count += 1
 
+            current_key = conflict_key(
+                claim_type,
+                english_text,
+            )
+
+            if (
+                validation["status"] == "review_ready"
+                and current_key
+                and value_text
+            ):
+                by_semantic_values.setdefault(
+                    current_key,
+                    set(),
+                ).add(
+                    f"{value_text}|{unit_text}"
+                )
+                semantic_claims.setdefault(
+                    current_key,
+                    [],
+                ).append(claim)
+
             validated_claims.append(claim)
 
         item["claims"] = validated_claims
 
-        statuses = {
-            clean_text(
-                claim.get("evidence_status")
-            )
-            for claim in validated_claims
-            if isinstance(claim, dict)
-        }
-
-        if "review_ready" in statuses:
-            item["claim_status"] = "review_ready"
-        elif validated_claims:
-            item["claim_status"] = "rejected"
-        else:
-            item["claim_status"] = "not_extracted"
-
-    conflicting_types = {
-        claim_type
-        for claim_type, values in by_type_values.items()
+    conflicting_keys = {
+        key
+        for key, values in by_semantic_values.items()
         if len(values) > 1
     }
 
-    if conflicting_types:
-        for item in queue:
-            if not isinstance(item, dict):
-                continue
-
-            claims = item.get("claims", [])
-
-            if not isinstance(claims, list):
-                continue
-
-            for claim in claims:
-                if not isinstance(claim, dict):
-                    continue
-
-                claim_type = clean_text(
-                    claim.get("claim_type")
-                ).lower()
-
-                if claim_type not in conflicting_types:
-                    continue
-
+    if conflicting_keys:
+        for key in conflicting_keys:
+            for claim in semantic_claims.get(key, []):
                 validation = claim.get("validation", {})
 
                 if not isinstance(validation, dict):
                     validation = {}
+
+                if validation.get("status") != "review_ready":
+                    continue
 
                 reasons = validation.get("reasons", [])
 
                 if not isinstance(reasons, list):
                     reasons = []
 
-                if "Conflicting values found for same claim type" not in reasons:
-                    reasons.append(
-                        "Conflicting values found for same claim type"
-                    )
+                reasons.append(
+                    "Conflicting values found for same semantic attribute"
+                )
 
+                validation["status"] = "manual_review"
                 validation["reasons"] = reasons
 
-                if validation.get("status") == "review_ready":
-                    validation["status"] = "manual_review"
-                    claim["evidence_status"] = "manual_review"
-                    ready_count = max(0, ready_count - 1)
-                    conflict_count += 1
-
                 claim["validation"] = validation
+                claim["evidence_status"] = "manual_review"
+
+                ready_count = max(0, ready_count - 1)
+                conflict_count += 1
+
+    for item in queue:
+        if not isinstance(item, dict):
+            continue
+
+        claims = item.get("claims", [])
+
+        if not isinstance(claims, list):
+            continue
+
+        statuses = {
+            clean_text(
+                claim.get("evidence_status")
+            )
+            for claim in claims
+            if isinstance(claim, dict)
+        }
+
+        if "review_ready" in statuses:
+            item["claim_status"] = "review_ready"
+        elif "manual_review" in statuses:
+            item["claim_status"] = "manual_review"
+        elif "duplicate" in statuses and len(statuses) == 1:
+            item["claim_status"] = "duplicate"
+        elif claims:
+            item["claim_status"] = "rejected"
+        else:
+            item["claim_status"] = "not_extracted"
 
     media["vision_validation_status"] = "completed"
     media["vision_review_ready_claims"] = ready_count
     media["vision_rejected_claims"] = rejected_count
     media["vision_duplicate_claims"] = duplicate_count
     media["vision_conflicting_claims"] = conflict_count
+    media["vision_identity_context_inheritance"] = (
+        official_media_context_supported
+    )
 
     product_output["media_evidence"] = media
 
@@ -3176,11 +3262,13 @@ def validate_vision_claims(
     summary["vision_rejected_claims"] = rejected_count
     summary["vision_duplicate_claims"] = duplicate_count
     summary["vision_conflicting_claims"] = conflict_count
+    summary["vision_identity_context_inheritance"] = (
+        official_media_context_supported
+    )
 
     product_output["evidence_summary"] = summary
 
     return product_output
-
 
 
 def promote_reviewed_vision_claims(
