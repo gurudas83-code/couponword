@@ -720,6 +720,150 @@ def identity_tokens(value: Any) -> set[str]:
 
 
 
+
+def extract_structured_sections(
+    soup: BeautifulSoup,
+    specifications: dict[str, dict[str, Any]],
+) -> int:
+    """
+    Extract specifications from generic heading/content sections.
+
+    This reader is brand-agnostic. It looks for technical headings inside
+    section-like containers and stores nearby content through the common
+    add_specification() path.
+    """
+
+    before = len(specifications)
+    seen_pairs: set[tuple[str, str]] = set()
+
+    heading_selectors = (
+        "h2",
+        "h3",
+        "h4",
+        "[role='heading']",
+        "summary",
+    )
+
+    technical_container_hints = (
+        "spec",
+        "tech",
+        "detail",
+        "feature",
+        "attribute",
+        "accordion",
+        "product-info",
+        "product_info",
+        "characteristic",
+        "configuration",
+    )
+
+    for heading in soup.select(", ".join(heading_selectors)):
+        raw_label = clean_text(heading.get_text(" ", strip=True))
+
+        if not raw_label:
+            continue
+
+        if len(raw_label) < 2 or len(raw_label) > 90:
+            continue
+
+        if is_noise_feature(raw_label):
+            continue
+
+        container = heading.find_parent(["section", "article", "li"])
+
+        if container is None:
+            parent = heading.parent
+
+            while parent is not None and parent.name not in {"body", "html"}:
+                class_text = " ".join(parent.get("class", []))
+                id_text = str(parent.get("id") or "")
+                signature = f"{class_text} {id_text}".lower()
+
+                if any(
+                    hint in signature
+                    for hint in technical_container_hints
+                ):
+                    container = parent
+                    break
+
+                parent = parent.parent
+
+        if container is None:
+            container = heading.parent
+
+        if container is None:
+            continue
+
+        container_copy = BeautifulSoup(str(container), "lxml")
+        copied_heading = container_copy.select_one(
+            ", ".join(heading_selectors)
+        )
+
+        if copied_heading is not None:
+            copied_heading.decompose()
+
+        for node in container_copy.select(
+            "script, style, noscript, svg, img, button, nav, footer, "
+            "[class*='price'], [class*='buy'], [class*='cart']"
+        ):
+            node.decompose()
+
+        value = clean_text(
+            container_copy.get_text(" ", strip=True)
+        )
+
+        if not value:
+            continue
+
+        if len(value) < 2 or len(value) > 500:
+            continue
+
+        if is_noise_feature(value):
+            continue
+
+        normalized_label = normalize_key(raw_label)
+
+        label_is_known = (
+            normalized_label in set(ALIASES.values())
+            or clean_text(raw_label).lower() in ALIASES
+        )
+
+        combined_text = f"{raw_label} {value}".lower()
+        relevance = sum(
+            1
+            for hint in FEATURE_HINTS
+            if hint in combined_text
+        )
+
+        if not label_is_known and relevance <= 0:
+            continue
+
+        pair = (
+            clean_text(raw_label).lower(),
+            clean_text(value).lower(),
+        )
+
+        if pair in seen_pairs:
+            continue
+
+        seen_pairs.add(pair)
+
+        confidence = min(
+            92,
+            82 + min(10, relevance * 2),
+        )
+
+        add_specification(
+            specifications,
+            raw_label,
+            value,
+            "structured_section",
+            confidence,
+        )
+
+    return len(specifications) - before
+
+
 def extract_apple_techspecs(
     soup: BeautifulSoup,
     specifications: dict[str, dict[str, Any]],
@@ -1155,6 +1299,374 @@ def extract_shopify_oxygen_specs(
     return extracted
 
 
+
+EMBEDDED_STATE_KEY_HINTS = (
+    "spec",
+    "specification",
+    "processor",
+    "chip",
+    "cpu",
+    "gpu",
+    "memory",
+    "ram",
+    "storage",
+    "capacity",
+    "display",
+    "screen",
+    "resolution",
+    "refresh",
+    "brightness",
+    "camera",
+    "battery",
+    "charging",
+    "bluetooth",
+    "wifi",
+    "wireless",
+    "connectivity",
+    "driver",
+    "microphone",
+    "latency",
+    "codec",
+    "audio",
+    "water",
+    "dust",
+    "ip",
+    "weight",
+    "height",
+    "width",
+    "depth",
+    "dimension",
+    "operating system",
+    "os",
+    "material",
+    "color",
+    "colour",
+)
+
+EMBEDDED_STATE_VALUE_HINTS = (
+    "mah",
+    "hz",
+    "khz",
+    "mp",
+    "gb",
+    "tb",
+    "w ",
+    " watt",
+    "bluetooth",
+    "wi-fi",
+    "wifi",
+    "ip5",
+    "ip6",
+    "ipx",
+    "oled",
+    "amoled",
+    "lcd",
+    "snapdragon",
+    "mediatek",
+    "dimensity",
+    "android",
+    "ios",
+    "playback",
+    "charging",
+    "noise cancellation",
+    "anc",
+    "enc",
+    "driver",
+    "latency",
+    "codec",
+    "mm",
+    "grams",
+    " gram",
+)
+
+
+def decode_indexed_state_graph(payload: Any) -> Any:
+    """
+    Decode reference-indexed application-state payloads conservatively.
+    """
+
+    if not isinstance(payload, list) or not payload:
+        return payload
+
+    looks_indexed = (
+        payload[0] == "Reactive"
+        or any(
+            isinstance(item, dict)
+            and any(
+                isinstance(value, int)
+                and 0 <= value < len(payload)
+                for value in item.values()
+            )
+            for item in payload[:8]
+        )
+    )
+
+    if not looks_indexed:
+        return payload
+
+    def decode(
+        value: Any,
+        depth: int = 0,
+        seen: set[int] | None = None,
+    ) -> Any:
+        if seen is None:
+            seen = set()
+
+        if depth > 30:
+            return None
+
+        if isinstance(value, int):
+            if value < 0 or value >= len(payload):
+                return value
+
+            if value in seen:
+                return None
+
+            next_seen = set(seen)
+            next_seen.add(value)
+
+            return decode(
+                payload[value],
+                depth + 1,
+                next_seen,
+            )
+
+        if isinstance(value, list):
+            return [
+                decode(item, depth + 1, seen)
+                for item in value
+            ]
+
+        if isinstance(value, dict):
+            return {
+                str(key): decode(item, depth + 1, seen)
+                for key, item in value.items()
+            }
+
+        return value
+
+    return decode(0)
+
+
+def embedded_value_is_useful(key: str, value: str) -> bool:
+    key_text = clean_text(key).lower()
+    value_text = clean_text(value).lower()
+
+    if not key_text or not value_text:
+        return False
+
+    if len(value_text) < 2 or len(value_text) > 500:
+        return False
+
+    # Reject common hydration sentinels / internal state markers.
+    if value_text in {
+        "-1",
+        "0",
+        "1",
+        "true",
+        "false",
+        "none",
+        "null",
+        "undefined",
+    }:
+        return False
+
+    if value_text.startswith(
+        ("http://", "https://", "data:image/", "<ref:")
+    ):
+        return False
+
+    if is_noise_feature(f"{key_text} {value_text}"):
+        return False
+
+    # Token-aware key matching prevents short hints such as "os"
+    # from matching unrelated keys such as "svideos".
+    key_tokens = set(
+        re.findall(r"[a-z0-9]+", key_text)
+    )
+
+    normalized_key = re.sub(
+        r"[^a-z0-9]+",
+        " ",
+        key_text,
+    ).strip()
+
+    key_match = False
+
+    for hint in EMBEDDED_STATE_KEY_HINTS:
+        normalized_hint = re.sub(
+            r"[^a-z0-9]+",
+            " ",
+            hint.lower(),
+        ).strip()
+
+        hint_tokens = set(normalized_hint.split())
+
+        if not hint_tokens:
+            continue
+
+        if len(hint_tokens) == 1:
+            token = next(iter(hint_tokens))
+
+            if token in key_tokens:
+                key_match = True
+                break
+        elif normalized_hint in normalized_key:
+            key_match = True
+            break
+
+    if not key_match:
+        return False
+
+    value_match = any(
+        hint in value_text
+        for hint in EMBEDDED_STATE_VALUE_HINTS
+    )
+
+    numeric_value = bool(
+        re.search(
+            r"\b\d+(?:\.\d+)?\s*"
+            r"(?:mah|hz|khz|mp|gb|tb|w|mm|cm|g|kg|hours?|hrs?|ms|db)\b",
+            value_text,
+            flags=re.I,
+        )
+    )
+
+    return value_match or numeric_value
+
+
+def extract_embedded_state_specs(
+    html: str,
+    specifications: dict[str, dict[str, Any]],
+) -> int:
+    """
+    Extract conservative specification evidence from embedded application
+    state such as application/json, Next.js data, Nuxt data and hydration
+    payloads.
+    """
+
+    before = len(specifications)
+
+    try:
+        soup = BeautifulSoup(html, "lxml")
+    except Exception:
+        soup = BeautifulSoup(html, "html.parser")
+
+    payloads: list[tuple[str, Any]] = []
+
+    for script in soup.find_all("script"):
+        script_type = str(script.get("type") or "").lower()
+        script_id = str(script.get("id") or "")
+        raw = script.string or script.get_text("", strip=False)
+
+        if not raw:
+            continue
+
+        is_json_script = (
+            "application/json" in script_type
+            or script_id in {
+                "__NEXT_DATA__",
+                "__NUXT_DATA__",
+            }
+        )
+
+        if not is_json_script:
+            continue
+
+        try:
+            payload = json.loads(raw)
+        except (json.JSONDecodeError, TypeError, ValueError):
+            continue
+
+        decoded = decode_indexed_state_graph(payload)
+
+        source_name = "embedded_application_state"
+
+        if script_id == "__NEXT_DATA__":
+            source_name = "embedded_next_state"
+        elif script_id == "__NUXT_DATA__":
+            source_name = "embedded_indexed_state"
+
+        payloads.append((source_name, decoded))
+
+    seen_pairs: set[tuple[str, str]] = set()
+
+    def walk(
+        value: Any,
+        source_name: str,
+        depth: int = 0,
+    ) -> None:
+        if depth > 20:
+            return
+
+        if isinstance(value, dict):
+            for key, item in value.items():
+                key_text = clean_text(key)
+
+                if isinstance(item, (str, int, float, bool)):
+                    item_text = clean_text(item)
+
+                    if embedded_value_is_useful(
+                        key_text,
+                        item_text,
+                    ):
+                        pair = (
+                            key_text.lower(),
+                            item_text.lower(),
+                        )
+
+                        if pair not in seen_pairs:
+                            seen_pairs.add(pair)
+
+                            confidence = 86
+
+                            if any(
+                                token in key_text.lower()
+                                for token in (
+                                    "spec",
+                                    "processor",
+                                    "battery",
+                                    "display",
+                                    "camera",
+                                    "bluetooth",
+                                    "charging",
+                                    "driver",
+                                    "ip",
+                                )
+                            ):
+                                confidence = 90
+
+                            add_specification(
+                                specifications,
+                                key_text,
+                                item_text,
+                                source_name,
+                                confidence,
+                            )
+
+                walk(
+                    item,
+                    source_name,
+                    depth + 1,
+                )
+
+        elif isinstance(value, list):
+            for item in value:
+                walk(
+                    item,
+                    source_name,
+                    depth + 1,
+                )
+
+    for source_name, payload in payloads:
+        walk(
+            payload,
+            source_name,
+        )
+
+    return len(specifications) - before
+
+
 def page_identity_score(
     expected_name: str,
     page_title: str,
@@ -1184,6 +1696,977 @@ def page_identity_score(
         score = min(score, 0.49)
 
     return round(score, 4)
+
+
+
+def collect_official_source_urls(
+    research_result: dict[str, Any],
+) -> list[dict[str, str]]:
+    """Collect unique official source candidates in resolver-ranked order."""
+
+    collected: list[dict[str, str]] = []
+    seen: set[str] = set()
+
+    def add(url: Any, source_type: Any = "official_page") -> None:
+        clean_url = clean_text(url)
+
+        if not clean_url or clean_url in seen:
+            return
+
+        seen.add(clean_url)
+        collected.append(
+            {
+                "url": clean_url,
+                "source_type": clean_text(source_type) or "official_page",
+            }
+        )
+
+    add(
+        research_result.get("official_url"),
+        research_result.get("primary_source_type") or "primary",
+    )
+
+    for candidate in research_result.get("candidates", []):
+        if not isinstance(candidate, dict):
+            continue
+
+        add(
+            candidate.get("url"),
+            candidate.get("source_type"),
+        )
+
+    source_groups = research_result.get("source_candidates", {})
+
+    if isinstance(source_groups, dict):
+        for source_type, candidates in source_groups.items():
+            if not isinstance(candidates, list):
+                continue
+
+            for candidate in candidates:
+                if not isinstance(candidate, dict):
+                    continue
+
+                add(
+                    candidate.get("url"),
+                    candidate.get("source_type") or source_type,
+                )
+
+    return collected
+
+
+def merge_evidence_records(
+    base: dict[str, Any],
+    extra: dict[str, Any],
+) -> dict[str, Any]:
+    """Merge a second official-source extraction into the primary result."""
+
+    base_specs = base.setdefault("specifications", {})
+    extra_specs = extra.get("specifications", {})
+
+    if isinstance(base_specs, dict) and isinstance(extra_specs, dict):
+        for key, record in extra_specs.items():
+            if not isinstance(record, dict):
+                continue
+
+            existing = base_specs.get(key)
+            incoming_confidence = int(record.get("confidence") or 0)
+            existing_confidence = (
+                int(existing.get("confidence") or 0)
+                if isinstance(existing, dict)
+                else -1
+            )
+
+            if existing is None or incoming_confidence > existing_confidence:
+                merged_record = dict(record)
+                merged_record["source_url"] = extra.get("official_url")
+                base_specs[key] = merged_record
+
+    base_features = base.setdefault("features", [])
+    extra_features = extra.get("features", [])
+
+    if isinstance(base_features, list) and isinstance(extra_features, list):
+        seen_features = {
+            clean_text(item.get("text")).lower()
+            for item in base_features
+            if isinstance(item, dict) and clean_text(item.get("text"))
+        }
+
+        for item in extra_features:
+            if not isinstance(item, dict):
+                continue
+
+            text = clean_text(item.get("text"))
+            lowered = text.lower()
+
+            if not text or lowered in seen_features:
+                continue
+
+            merged_item = dict(item)
+            merged_item["source_url"] = extra.get("official_url")
+            base_features.append(merged_item)
+            seen_features.add(lowered)
+
+    return base
+
+
+def apply_review_decision(
+    output: dict[str, Any],
+) -> None:
+    """Apply the standard review decision after evidence has been merged."""
+
+    specifications = output.get("specifications", {})
+    features = output.get("features", [])
+    summary = output.get("evidence_summary", {})
+
+    evidence_count = (
+        len(specifications) if isinstance(specifications, dict) else 0
+    ) + (
+        len(features) if isinstance(features, list) else 0
+    )
+
+    match_score = float(output.get("page_identity_score") or 0)
+    structured_count = int(
+        summary.get("structured_section_specifications") or 0
+    )
+    apple_count = int(
+        summary.get("apple_techspecs_specifications") or 0
+    )
+
+    if (
+        output.get("resolver_verified") is True
+        and (
+            match_score >= 0.80
+            or (
+                structured_count + apple_count >= 5
+                and match_score >= 0.70
+            )
+        )
+        and evidence_count >= 3
+    ):
+        output["review"]["status"] = "candidate_ready"
+        output["review"]["reason"] = (
+            "Page identity and extracted evidence are strong enough for review"
+        )
+    elif match_score >= 0.50 and evidence_count >= 1:
+        output["review"]["status"] = "manual_review"
+        output["review"]["reason"] = (
+            "Evidence was extracted, but page identity requires review"
+        )
+    else:
+        output["review"]["status"] = "rejected_candidate"
+        output["review"]["reason"] = (
+            "Page does not match the expected product strongly enough"
+        )
+
+
+
+MEDIA_IMAGE_EXTENSIONS = (
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".webp",
+)
+
+
+def collect_embedded_media_evidence(
+    html: str,
+) -> dict[str, Any]:
+    """
+    Collect image evidence from embedded application state.
+
+    This is intentionally evidence-only: image URLs are never promoted
+    directly into verified specifications.
+    """
+
+    try:
+        soup = BeautifulSoup(html, "lxml")
+    except Exception:
+        soup = BeautifulSoup(html, "html.parser")
+
+    payloads: list[Any] = []
+
+    for script in soup.find_all("script"):
+        script_type = str(script.get("type") or "").lower()
+        script_id = str(script.get("id") or "")
+        raw = script.string or script.get_text("", strip=False)
+
+        if not raw:
+            continue
+
+        if not (
+            "application/json" in script_type
+            or script_id in {
+                "__NEXT_DATA__",
+                "__NUXT_DATA__",
+            }
+        ):
+            continue
+
+        try:
+            payload = json.loads(raw)
+        except (json.JSONDecodeError, TypeError, ValueError):
+            continue
+
+        payloads.append(
+            decode_indexed_state_graph(payload)
+        )
+
+    items: list[dict[str, str]] = []
+    seen_urls: set[str] = set()
+
+    def classify_path(path: str) -> str:
+        lowered = path.lower()
+
+        if any(
+            token in lowered
+            for token in (
+                ".icon",
+                ".icons",
+                ".logo",
+                ".logos",
+                ".avatar",
+                ".badge",
+                ".dialog",
+                ".navbar",
+                ".footer",
+            )
+        ):
+            return "ui_asset"
+
+        if any(
+            token in lowered
+            for token in (
+                ".mobile",
+                "[mobile]",
+                "_mobile",
+            )
+        ):
+            return "product_mobile"
+
+        if any(
+            token in lowered
+            for token in (
+                ".desktop",
+                "[desktop]",
+                ".pc",
+                "[pc]",
+            )
+        ):
+            return "product_desktop"
+
+        return "product_candidate"
+
+    def walk(
+        value: Any,
+        path: str = "root",
+        depth: int = 0,
+    ) -> None:
+        if depth > 25:
+            return
+
+        if isinstance(value, dict):
+            for key, item in value.items():
+                walk(
+                    item,
+                    f"{path}.{key}",
+                    depth + 1,
+                )
+
+        elif isinstance(value, list):
+            for index, item in enumerate(value):
+                walk(
+                    item,
+                    f"{path}[{index}]",
+                    depth + 1,
+                )
+
+        elif isinstance(value, str):
+            url = value.strip()
+
+            if not url.lower().startswith(
+                ("http://", "https://")
+            ):
+                return
+
+            try:
+                parsed_path = urlparse(url).path.lower()
+            except ValueError:
+                return
+
+            if not parsed_path.endswith(
+                MEDIA_IMAGE_EXTENSIONS
+            ):
+                return
+
+            if url in seen_urls:
+                return
+
+            seen_urls.add(url)
+
+            items.append(
+                {
+                    "url": url,
+                    "path": path,
+                    "role": classify_path(path),
+                }
+            )
+
+    for payload in payloads:
+        walk(payload)
+
+    product_items = [
+        item
+        for item in items
+        if item.get("role") != "ui_asset"
+    ]
+
+    ui_items = [
+        item
+        for item in items
+        if item.get("role") == "ui_asset"
+    ]
+
+    desktop_count = sum(
+        1
+        for item in product_items
+        if item.get("role") == "product_desktop"
+    )
+
+    mobile_count = sum(
+        1
+        for item in product_items
+        if item.get("role") == "product_mobile"
+    )
+
+    generic_count = sum(
+        1
+        for item in product_items
+        if item.get("role") == "product_candidate"
+    )
+
+    return {
+        "collector": "embedded_application_state",
+        "total_images": len(items),
+        "product_image_count": len(product_items),
+        "desktop_count": desktop_count,
+        "mobile_count": mobile_count,
+        "generic_candidate_count": generic_count,
+        "excluded_ui_assets": len(ui_items),
+        "product_images": product_items[:80],
+        "ui_assets": ui_items[:30],
+        "ocr_status": "not_run",
+        "vision_status": "not_run",
+    }
+
+
+
+def rank_media_evidence(
+    media_evidence: dict[str, Any],
+    max_scan: int = 20,
+    top_n: int = 8,
+) -> dict[str, Any]:
+    """
+    Rank product-image evidence for later vision/OCR review.
+
+    This function is evidence-only. It does not publish, copy, or promote
+    image content into verified specifications.
+    """
+
+    if not isinstance(media_evidence, dict):
+        return media_evidence
+
+    product_images = media_evidence.get("product_images", [])
+
+    if not isinstance(product_images, list) or not product_images:
+        media_evidence["ranker_status"] = "no_images"
+        media_evidence["vision_candidates"] = []
+        return media_evidence
+
+    try:
+        from io import BytesIO
+        from PIL import Image, ImageFilter, ImageStat
+    except ImportError:
+        media_evidence["ranker_status"] = "dependency_missing"
+        media_evidence["ranker_reason"] = "Pillow is not installed"
+        media_evidence["vision_candidates"] = []
+        return media_evidence
+
+    desktop = [
+        item
+        for item in product_images
+        if isinstance(item, dict)
+        and item.get("role") == "product_desktop"
+    ]
+
+    mobile = [
+        item
+        for item in product_images
+        if isinstance(item, dict)
+        and item.get("role") == "product_mobile"
+    ]
+
+    generic = [
+        item
+        for item in product_images
+        if isinstance(item, dict)
+        and item.get("role") == "product_candidate"
+    ]
+
+    scan_items = (
+        desktop
+        if desktop
+        else mobile
+        if mobile
+        else generic
+    )[:max_scan]
+
+    def dhash(image: Any, hash_size: int = 8) -> int:
+        gray = image.convert("L").resize(
+            (hash_size + 1, hash_size)
+        )
+
+        pixels = list(gray.get_flattened_data())
+
+        bits: list[bool] = []
+
+        for row in range(hash_size):
+            start = row * (hash_size + 1)
+
+            for col in range(hash_size):
+                bits.append(
+                    pixels[start + col]
+                    > pixels[start + col + 1]
+                )
+
+        value = 0
+
+        for bit in bits:
+            value = (value << 1) | int(bit)
+
+        return value
+
+    def complexity(image: Any) -> tuple[float, float]:
+        sample = image.convert("L")
+        sample.thumbnail((600, 600))
+
+        edges = sample.filter(ImageFilter.FIND_EDGES)
+        stat = ImageStat.Stat(edges)
+        mean_edge = float(stat.mean[0])
+
+        histogram = edges.histogram()
+        total = sum(histogram)
+        strong = sum(histogram[80:])
+
+        strong_ratio = (
+            strong / total
+            if total
+            else 0.0
+        )
+
+        return mean_edge, strong_ratio
+
+    records: list[dict[str, Any]] = []
+
+    for item in scan_items:
+        url = clean_text(item.get("url"))
+
+        if not url:
+            continue
+
+        try:
+            response = requests.get(
+                url,
+                headers={"User-Agent": USER_AGENT},
+                timeout=TIMEOUT,
+            )
+            response.raise_for_status()
+
+            with Image.open(BytesIO(response.content)) as image:
+                image = image.convert("RGB")
+                width, height = image.size
+                hash_value = dhash(image)
+                mean_edge, strong_ratio = complexity(image)
+
+            score = 0
+
+            role = clean_text(item.get("role"))
+
+            if role == "product_desktop":
+                score += 25
+
+            if height >= 1800:
+                score += 15
+
+            if height >= 2500:
+                score += 10
+
+            size_kb = len(response.content) // 1024
+
+            if size_kb >= 1200:
+                score += 10
+
+            if strong_ratio >= 0.08:
+                score += 20
+            elif strong_ratio >= 0.04:
+                score += 10
+
+            if mean_edge >= 20:
+                score += 15
+            elif mean_edge >= 12:
+                score += 8
+
+            record = dict(item)
+            record.update(
+                {
+                    "width": width,
+                    "height": height,
+                    "size_kb": size_kb,
+                    "mean_edge": round(mean_edge, 4),
+                    "strong_edge_ratio": round(strong_ratio, 6),
+                    "perceptual_hash": str(hash_value),
+                    "rank_score": score,
+                }
+            )
+
+            records.append(record)
+
+        except Exception as error:
+            record = dict(item)
+            record.update(
+                {
+                    "rank_score": 0,
+                    "rank_error": clean_text(error),
+                }
+            )
+            records.append(record)
+
+    records.sort(
+        key=lambda item: (
+            int(item.get("rank_score") or 0),
+            float(item.get("strong_edge_ratio") or 0),
+            int(item.get("height") or 0),
+        ),
+        reverse=True,
+    )
+
+    # Conservative duplicate suppression using perceptual hash.
+    selected: list[dict[str, Any]] = []
+    selected_hashes: list[int] = []
+
+    for item in records:
+        hash_text = item.get("perceptual_hash")
+
+        if hash_text in (None, ""):
+            continue
+
+        try:
+            current_hash = int(hash_text)
+        except (TypeError, ValueError):
+            continue
+
+        is_near_duplicate = any(
+            (current_hash ^ existing_hash).bit_count() <= 6
+            for existing_hash in selected_hashes
+        )
+
+        if is_near_duplicate:
+            continue
+
+        selected.append(item)
+        selected_hashes.append(current_hash)
+
+        if len(selected) >= top_n:
+            break
+
+    media_evidence["ranker_status"] = "success"
+    media_evidence["ranker_scanned"] = len(records)
+    media_evidence["ranked_images"] = records
+    media_evidence["vision_candidates"] = selected
+    media_evidence["vision_candidate_count"] = len(selected)
+
+    return media_evidence
+
+
+
+def prepare_vision_evidence_queue(
+    media_evidence: dict[str, Any],
+    expected_name: str,
+    official_url: str,
+) -> dict[str, Any]:
+    """
+    Prepare ranked image evidence for later multimodal extraction.
+
+    This queue is evidence-only:
+    - no image is published,
+    - no extracted claim is treated as verified automatically,
+    - target text language is normalized to English in a later stage.
+    """
+
+    if not isinstance(media_evidence, dict):
+        return media_evidence
+
+    candidates = media_evidence.get("vision_candidates", [])
+
+    if not isinstance(candidates, list) or not candidates:
+        media_evidence["vision_queue_status"] = "no_candidates"
+        media_evidence["vision_evidence_queue"] = []
+        return media_evidence
+
+    queue: list[dict[str, Any]] = []
+
+    for index, item in enumerate(candidates, 1):
+        if not isinstance(item, dict):
+            continue
+
+        url = clean_text(item.get("url"))
+
+        if not url:
+            continue
+
+        queue.append(
+            {
+                "evidence_id": f"media_{index:02d}",
+                "product_name": expected_name,
+                "official_page": official_url,
+                "image_url": url,
+                "image_path": clean_text(item.get("path")),
+                "image_role": clean_text(item.get("role")),
+                "rank_score": int(item.get("rank_score") or 0),
+                "width": item.get("width"),
+                "height": item.get("height"),
+                "size_kb": item.get("size_kb"),
+                "source_language": "auto_detect",
+                "target_language": "en",
+                "analysis_status": "pending",
+                "claim_status": "not_extracted",
+                "claims": [],
+                "publish_image": False,
+                "usage_mode": "internal_evidence_only",
+            }
+        )
+
+    media_evidence["vision_queue_status"] = (
+        "ready"
+        if queue
+        else "no_candidates"
+    )
+    media_evidence["vision_evidence_queue"] = queue
+    media_evidence["vision_evidence_count"] = len(queue)
+
+    return media_evidence
+
+
+
+def empty_vision_claim(
+    claim_id: str,
+    source_image: str,
+    source_language: str = "auto_detect",
+) -> dict[str, Any]:
+    """
+    Return the canonical schema for a vision-derived evidence claim.
+
+    Claims remain unverified until a later validation stage.
+    """
+
+    return {
+        "claim_id": claim_id,
+        "claim_type": "",
+        "original_text": "",
+        "english_text": "",
+        "value": None,
+        "unit": "",
+        "confidence": 0,
+        "source_image": source_image,
+        "source_language": source_language,
+        "evidence_status": "unverified",
+        "product_identity_supported": False,
+        "publish_allowed": False,
+    }
+
+
+def initialize_vision_claim_slots(
+    media_evidence: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Initialize claim containers for queued vision evidence.
+
+    This does not perform OCR, translation, or verification.
+    """
+
+    if not isinstance(media_evidence, dict):
+        return media_evidence
+
+    queue = media_evidence.get("vision_evidence_queue", [])
+
+    if not isinstance(queue, list):
+        return media_evidence
+
+    initialized = 0
+
+    for item in queue:
+        if not isinstance(item, dict):
+            continue
+
+        evidence_id = clean_text(item.get("evidence_id"))
+        image_url = clean_text(item.get("image_url"))
+
+        if not evidence_id or not image_url:
+            continue
+
+        if not isinstance(item.get("claims"), list):
+            item["claims"] = []
+
+        item["claim_schema_version"] = "1.0"
+        item["claim_template"] = empty_vision_claim(
+            claim_id=f"{evidence_id}_claim_01",
+            source_image=image_url,
+            source_language=clean_text(
+                item.get("source_language")
+            ) or "auto_detect",
+        )
+        initialized += 1
+
+    media_evidence["vision_claim_schema_version"] = "1.0"
+    media_evidence["vision_claim_slots_initialized"] = initialized
+
+    return media_evidence
+
+
+
+VISION_PROVIDER_NAMES = {
+    "none",
+    "local_ocr",
+    "openai",
+    "gemini",
+    "custom",
+}
+
+
+def build_vision_provider_config(
+    provider: str = "none",
+) -> dict[str, Any]:
+    """
+    Return provider-neutral vision configuration.
+
+    No network call is made here. Provider adapters may be added later
+    without changing the evidence schema.
+    """
+
+    normalized = clean_text(provider).lower() or "none"
+
+    if normalized not in VISION_PROVIDER_NAMES:
+        normalized = "custom"
+
+    return {
+        "provider": normalized,
+        "enabled": normalized != "none",
+        "mode": "evidence_only",
+        "target_language": "en",
+        "auto_publish_claims": False,
+        "publish_images": False,
+        "requires_review": True,
+    }
+
+
+def vision_provider_analyze(
+    evidence_item: dict[str, Any],
+    provider_config: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Provider-neutral vision adapter entry point.
+
+    Version 1 is intentionally a no-op adapter. It defines the contract
+    that local OCR or external multimodal providers must follow.
+    """
+
+    result = {
+        "status": "not_run",
+        "provider": clean_text(
+            provider_config.get("provider")
+        ) or "none",
+        "source_language": "auto_detect",
+        "target_language": clean_text(
+            provider_config.get("target_language")
+        ) or "en",
+        "raw_text": "",
+        "claims": [],
+        "error": "",
+    }
+
+    if not isinstance(evidence_item, dict):
+        result["status"] = "invalid_evidence"
+        result["error"] = "Evidence item must be an object"
+        return result
+
+    if provider_config.get("enabled") is not True:
+        result["status"] = "provider_disabled"
+        return result
+
+    result["status"] = "adapter_not_implemented"
+    result["error"] = (
+        "Selected vision provider adapter has not been implemented yet"
+    )
+
+    return result
+
+
+def attach_vision_provider_state(
+    media_evidence: dict[str, Any],
+    provider: str = "none",
+) -> dict[str, Any]:
+    """
+    Attach provider configuration to the vision evidence queue without
+    executing OCR or external AI calls.
+    """
+
+    if not isinstance(media_evidence, dict):
+        return media_evidence
+
+    config = build_vision_provider_config(provider)
+
+    media_evidence["vision_provider"] = config
+
+    queue = media_evidence.get("vision_evidence_queue", [])
+
+    if isinstance(queue, list):
+        for item in queue:
+            if not isinstance(item, dict):
+                continue
+
+            item["vision_provider"] = config.get("provider")
+            item["vision_analysis"] = {
+                "status": "not_run",
+                "provider": config.get("provider"),
+                "claims": [],
+                "raw_text": "",
+            }
+
+    return media_evidence
+
+
+
+def build_vision_job_payload(
+    product_output: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Build a provider-neutral vision analysis job payload.
+
+    The payload is evidence-only and contains no authorization to publish
+    source images or automatically approve claims.
+    """
+
+    media = product_output.get("media_evidence", {})
+
+    if not isinstance(media, dict):
+        media = {}
+
+    queue = media.get("vision_evidence_queue", [])
+
+    if not isinstance(queue, list):
+        queue = []
+
+    jobs: list[dict[str, Any]] = []
+
+    for item in queue:
+        if not isinstance(item, dict):
+            continue
+
+        jobs.append(
+            {
+                "evidence_id": clean_text(
+                    item.get("evidence_id")
+                ),
+                "product_name": clean_text(
+                    item.get("product_name")
+                ),
+                "official_page": clean_text(
+                    item.get("official_page")
+                ),
+                "image_url": clean_text(
+                    item.get("image_url")
+                ),
+                "rank_score": int(
+                    item.get("rank_score") or 0
+                ),
+                "source_language": clean_text(
+                    item.get("source_language")
+                ) or "auto_detect",
+                "target_language": clean_text(
+                    item.get("target_language")
+                ) or "en",
+                "analysis_status": clean_text(
+                    item.get("analysis_status")
+                ) or "pending",
+                "claim_schema_version": clean_text(
+                    item.get("claim_schema_version")
+                ) or "1.0",
+                "claim_template": item.get(
+                    "claim_template",
+                    {},
+                ),
+                "publish_image": False,
+                "auto_publish_claims": False,
+                "usage_mode": "internal_evidence_only",
+            }
+        )
+
+    return {
+        "schema_version": "1.0",
+        "job_type": "vision_evidence_extraction",
+        "product_id": clean_text(
+            product_output.get("product_id")
+        ),
+        "product_name": clean_text(
+            product_output.get("search_name")
+        ),
+        "official_url": clean_text(
+            product_output.get("official_url")
+        ),
+        "provider": (
+            media.get("vision_provider", {})
+            .get("provider", "none")
+            if isinstance(
+                media.get("vision_provider", {}),
+                dict,
+            )
+            else "none"
+        ),
+        "target_language": "en",
+        "requires_review": True,
+        "publish_images": False,
+        "auto_publish_claims": False,
+        "jobs": jobs,
+        "job_count": len(jobs),
+    }
+
+
+def save_vision_job_payload(
+    product_output: dict[str, Any],
+    destination: Path,
+) -> Path:
+    """
+    Save a provider-neutral vision job JSON file.
+    """
+
+    payload = build_vision_job_payload(
+        product_output
+    )
+
+    destination.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    destination.write_text(
+        json.dumps(
+            payload,
+            indent=2,
+            ensure_ascii=False,
+        ) + "\n",
+        encoding="utf-8",
+    )
+
+    return destination
 
 
 def extract_one(
@@ -1217,6 +2700,19 @@ def extract_one(
         "features": [],
         "meta": {},
         "evidence_summary": {},
+        "media_evidence": {
+            "collector": "",
+            "total_images": 0,
+            "product_image_count": 0,
+            "desktop_count": 0,
+            "mobile_count": 0,
+            "generic_candidate_count": 0,
+            "excluded_ui_assets": 0,
+            "product_images": [],
+            "ui_assets": [],
+            "ocr_status": "not_run",
+            "vision_status": "not_run",
+        },
         "review": {
             "approved": False,
             "status": "manual_review",
@@ -1243,6 +2739,10 @@ def extract_one(
         output["review"]["reason"] = error or "Unable to fetch page"
         return output
 
+    output["media_evidence"] = collect_embedded_media_evidence(
+        html
+    )
+
     try:
         soup = BeautifulSoup(html, "lxml")
         parser_name = "lxml"
@@ -1263,6 +2763,14 @@ def extract_one(
     table_count = extract_tables(soup, specifications)
     definition_count = extract_definition_lists(soup, specifications)
     block_count = extract_label_value_blocks(soup, specifications)
+    structured_section_count = extract_structured_sections(
+        soup,
+        specifications,
+    )
+    embedded_state_count = extract_embedded_state_specs(
+        html,
+        specifications,
+    )
     shopify_oxygen_count = extract_shopify_oxygen_specs(
         html,
         specifications,
@@ -1302,21 +2810,97 @@ def extract_one(
         "table_specifications": table_count,
         "definition_list_specifications": definition_count,
         "label_value_specifications": block_count,
+        "structured_section_specifications": structured_section_count,
+        "embedded_state_specifications": embedded_state_count,
         "shopify_oxygen_specifications": shopify_oxygen_count,
         "apple_techspecs_specifications": apple_techspecs_count,
         "total_specifications": len(specifications),
         "feature_items": len(features),
+        "media_product_images": output.get(
+            "media_evidence",
+            {},
+        ).get("product_image_count", 0),
+        "media_ui_assets": output.get(
+            "media_evidence",
+            {},
+        ).get("excluded_ui_assets", 0),
         "noise_filter_version": "2.0",
     }
 
     evidence_count = len(specifications) + len(features)
 
     if (
+        evidence_count < 3
+        and output.get("media_evidence", {}).get(
+            "product_image_count",
+            0,
+        ) > 0
+    ):
+        output["media_evidence"] = rank_media_evidence(
+            output.get("media_evidence", {}),
+        )
+
+        output["media_evidence"] = prepare_vision_evidence_queue(
+            output.get("media_evidence", {}),
+            expected_name,
+            official_url,
+        )
+
+        output["media_evidence"] = initialize_vision_claim_slots(
+            output.get("media_evidence", {}),
+        )
+
+        output["media_evidence"] = attach_vision_provider_state(
+            output.get("media_evidence", {}),
+            provider="none",
+        )
+
+        output["evidence_summary"]["media_ranker_status"] = (
+            output.get("media_evidence", {}).get("ranker_status")
+        )
+        output["evidence_summary"]["vision_candidate_count"] = (
+            output.get("media_evidence", {}).get(
+                "vision_candidate_count",
+                0,
+            )
+        )
+        output["evidence_summary"]["vision_queue_status"] = (
+            output.get("media_evidence", {}).get(
+                "vision_queue_status"
+            )
+        )
+        output["evidence_summary"]["vision_evidence_count"] = (
+            output.get("media_evidence", {}).get(
+                "vision_evidence_count",
+                0,
+            )
+        )
+        output["evidence_summary"]["vision_claim_schema_version"] = (
+            output.get("media_evidence", {}).get(
+                "vision_claim_schema_version"
+            )
+        )
+        output["evidence_summary"]["vision_claim_slots_initialized"] = (
+            output.get("media_evidence", {}).get(
+                "vision_claim_slots_initialized",
+                0,
+            )
+        )
+        output["evidence_summary"]["vision_provider"] = (
+            output.get("media_evidence", {})
+            .get("vision_provider", {})
+            .get("provider")
+        )
+
+    if (
         output["resolver_verified"] is True
         and (
             match_score >= 0.80
             or (
-                apple_techspecs_count >= 5
+                (
+                    structured_section_count
+                    + apple_techspecs_count
+                ) >= 5
                 and match_score >= 0.70
             )
         )
@@ -1336,6 +2920,79 @@ def extract_one(
         output["review"]["reason"] = (
             "Page does not match the expected product strongly enough"
         )
+
+    if not research_result.get("_single_source_only"):
+        source_attempts: list[dict[str, Any]] = []
+        current_url = clean_text(output.get("official_url"))
+        current_evidence = (
+            len(output.get("specifications", {}))
+            + len(output.get("features", []))
+        )
+
+        if current_evidence < 3:
+            for source in collect_official_source_urls(research_result):
+                source_url = clean_text(source.get("url"))
+
+                if not source_url or source_url == current_url:
+                    continue
+
+                alternate_result_input = dict(research_result)
+                alternate_result_input["official_url"] = source_url
+                alternate_result_input["_single_source_only"] = True
+
+                alternate = extract_one(
+                    alternate_result_input,
+                    identity,
+                )
+
+                source_attempts.append(
+                    {
+                        "url": source_url,
+                        "source_type": source.get("source_type"),
+                        "fetch_status": alternate.get("fetch_status"),
+                        "page_identity_score": alternate.get(
+                            "page_identity_score"
+                        ),
+                        "specification_count": len(
+                            alternate.get("specifications", {})
+                        ),
+                        "feature_count": len(
+                            alternate.get("features", [])
+                        ),
+                        "review_status": alternate.get(
+                            "review",
+                            {},
+                        ).get("status"),
+                    }
+                )
+
+                merge_evidence_records(
+                    output,
+                    alternate,
+                )
+
+                output["page_identity_score"] = max(
+                    float(output.get("page_identity_score") or 0),
+                    float(alternate.get("page_identity_score") or 0),
+                )
+
+                if (
+                    len(output.get("specifications", {}))
+                    + len(output.get("features", []))
+                ) >= 3:
+                    break
+
+        summary = output.setdefault("evidence_summary", {})
+        summary["source_attempts"] = source_attempts
+        summary["sources_attempted"] = 1 + len(source_attempts)
+        summary["total_specifications"] = len(
+            output.get("specifications", {})
+        )
+        summary["feature_items"] = len(
+            output.get("features", [])
+        )
+
+        apply_review_decision(output)
 
     return output
 

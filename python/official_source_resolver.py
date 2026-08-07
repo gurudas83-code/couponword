@@ -140,6 +140,74 @@ def core_product_title(title: str) -> str:
     return re.sub(r"\s+", " ", core)
 
 
+
+MODEL_MODIFIERS = {
+    "pro",
+    "plus",
+    "ultra",
+    "lite",
+    "max",
+    "mini",
+    "neo",
+    "se",
+    "fe",
+    "prime",
+    "advance",
+    "advanced",
+}
+
+
+def normalized_model_tokens(value: str) -> set[str]:
+    """
+    Return comparable model tokens across joined and spaced forms.
+
+    Examples:
+    Air8   -> {"air", "8"}
+    Air 8  -> {"air", "8"}
+    MK240  -> {"mk", "240"}
+    17e    -> {"17", "e"}
+    """
+
+    text = normalize_text(value)
+
+    # Split letter-number and number-letter boundaries.
+    text = re.sub(r"(?<=[a-z])(?=[0-9])", " ", text)
+    text = re.sub(r"(?<=[0-9])(?=[a-z])", " ", text)
+
+    tokens = re.findall(r"[a-z0-9]+", text)
+
+    return {
+        token
+        for token in tokens
+        if (
+            token not in STOP_WORDS
+            and (
+                len(token) >= 2
+                or token.isdigit()
+                or token in {"x", "s", "e"}
+            )
+        )
+    }
+
+
+def has_extra_model_modifier(
+    expected: str,
+    candidate: str,
+) -> bool:
+    """Reject candidate-only model modifiers such as Pro, Lite or Ultra."""
+
+    expected_tokens = normalized_model_tokens(expected)
+    candidate_tokens = normalized_model_tokens(candidate)
+
+    extra_modifiers = (
+        candidate_tokens
+        .difference(expected_tokens)
+        .intersection(MODEL_MODIFIERS)
+    )
+
+    return bool(extra_modifiers)
+
+
 def significant_tokens(value: str) -> set[str]:
     tokens = re.findall(r"[a-z0-9]+", normalize_text(value))
 
@@ -151,10 +219,13 @@ def significant_tokens(value: str) -> set[str]:
 
 
 def token_match_score(expected: str, candidate: str) -> float:
-    expected_tokens = significant_tokens(expected)
-    candidate_tokens = significant_tokens(candidate)
+    expected_tokens = normalized_model_tokens(expected)
+    candidate_tokens = normalized_model_tokens(candidate)
 
     if not expected_tokens or not candidate_tokens:
+        return 0.0
+
+    if has_extra_model_modifier(expected, candidate):
         return 0.0
 
     matched = expected_tokens.intersection(candidate_tokens)
@@ -243,6 +314,107 @@ def page_type_score(url: str) -> int:
     return 40
 
 
+
+def classify_source_type(url: str) -> str:
+    """Classify an official source by URL pattern."""
+
+    lowered = str(url or "").lower()
+
+    if lowered.endswith(".pdf") or ".pdf?" in lowered:
+        return "pdf"
+
+    if any(
+        token in lowered
+        for token in (
+            "/manual",
+            "/manuals",
+            "/user-guide",
+            "/user-guides",
+            "/guide/",
+            "/guides/",
+        )
+    ):
+        return "manual"
+
+    if any(
+        token in lowered
+        for token in (
+            "/specs",
+            "/specifications",
+            "/technical-specifications",
+            "/tech-specs",
+        )
+    ):
+        return "specifications"
+
+    if any(
+        token in lowered
+        for token in (
+            "/support/",
+            "support.",
+            "/hc/",
+            "/help/",
+        )
+    ):
+        return "support"
+
+    if any(
+        token in lowered
+        for token in (
+            "/download",
+            "/downloads",
+            "/drivers",
+            "/software",
+        )
+    ):
+        return "downloads"
+
+    if any(
+        token in lowered
+        for token in (
+            "/products/",
+            "/product/",
+            "/shop/",
+            "/buy-",
+            "/more-products/",
+        )
+    ):
+        return "product"
+
+    return "official_page"
+
+
+def build_source_queries(
+    brand: str,
+    query_core: str,
+) -> list[str]:
+    """Build brand-agnostic official source discovery queries."""
+
+    base = f"{brand} {query_core}".strip()
+
+    queries = [
+        f"{base} official specifications",
+        f"{base} official technical specifications",
+        f"{base} official product page",
+        f"{base} official support",
+        f"{base} official manual pdf",
+        f"{base} official downloads",
+        f"{base} official",
+    ]
+
+    seen: set[str] = set()
+    unique: list[str] = []
+
+    for query in queries:
+        normalized = " ".join(query.split())
+
+        if normalized and normalized.lower() not in seen:
+            seen.add(normalized.lower())
+            unique.append(normalized)
+
+    return unique
+
+
 def resolve_product(
     client: TavilyClient,
     product: dict[str, Any],
@@ -297,10 +469,10 @@ def resolve_product(
             flags=re.I,
         ).strip()
 
-    query_variants = [
-        f"{brand} {query_core} official specifications".strip(),
-        f"{brand} {query_core} official".strip(),
-    ]
+    query_variants = build_source_queries(
+        brand,
+        query_core,
+    )
 
     base_result["query"] = query_variants[0]
     base_result["query_variants"] = query_variants
@@ -375,6 +547,7 @@ def resolve_product(
                 "identity_decision": identity.decision,
                 "identity_reasons": identity.reasons,
                 "page_type_score": page_type_score(result_url),
+                "source_type": classify_source_type(result_url),
             }
         )
 
@@ -387,7 +560,27 @@ def resolve_product(
         reverse=True,
     )
 
-    base_result["candidates"] = valid_candidates[:5]
+    base_result["candidates"] = valid_candidates[:10]
+    base_result["source_candidates"] = {
+        source_type: [
+            candidate
+            for candidate in valid_candidates
+            if candidate.get("source_type") == source_type
+        ][:5]
+        for source_type in (
+            "specifications",
+            "product",
+            "support",
+            "manual",
+            "pdf",
+            "downloads",
+            "official_page",
+        )
+        if any(
+            candidate.get("source_type") == source_type
+            for candidate in valid_candidates
+        )
+    }
 
     if not valid_candidates:
         base_result["status"] = "not_found"
@@ -396,7 +589,27 @@ def resolve_product(
         )
         return base_result
 
-    best = valid_candidates[0]
+    preferred_order = {
+        "specifications": 7,
+        "product": 6,
+        "manual": 5,
+        "pdf": 5,
+        "support": 4,
+        "downloads": 3,
+        "official_page": 2,
+    }
+
+    best = max(
+        valid_candidates,
+        key=lambda item: (
+            preferred_order.get(
+                str(item.get("source_type") or ""),
+                0,
+            ),
+            item.get("identity_score", 0),
+            item.get("combined_score", 0),
+        ),
+    )
 
     base_result["official_title"] = best["title"]
     base_result["official_url"] = best["url"]
