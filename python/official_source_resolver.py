@@ -48,6 +48,12 @@ BRAND_DOMAINS: dict[str, list[str]] = {
     "philips": ["philips.co.in", "philips.com"],
     "puma": ["in.puma.com", "puma.com"],
     "mi": ["mi.com", "xiaomi.com"],
+    "fire-boltt": ["fireboltt.com"],
+    "fireboltt": ["fireboltt.com"],
+    "milton": ["milton.in"],
+    "hp": ["hp.com"],
+    "amazon": ["amazon.in", "amazon.com"],
+    "echo": ["amazon.in", "amazon.com"],
 }
 
 

@@ -975,6 +975,72 @@ def knowledge_command(action: str, limit: int) -> int:
 
 
 
+def freeze_pending_intelligence_ids(
+    limit: int,
+) -> list[str]:
+    queue_path = ROOT / "data" / "research_queue.json"
+    results_path = ROOT / "data" / "research_results.json"
+
+    if not queue_path.exists():
+        raise FileNotFoundError(
+            f"Missing research queue: {queue_path}"
+        )
+
+    queue_payload = json.loads(
+        queue_path.read_text(encoding="utf-8")
+    )
+    queue_products = queue_payload.get("products", [])
+
+    if not isinstance(queue_products, list):
+        raise ValueError(
+            "research_queue.json products must be a list"
+        )
+
+    existing_ids: set[str] = set()
+
+    if results_path.exists():
+        results_payload = json.loads(
+            results_path.read_text(encoding="utf-8")
+        )
+        result_products = results_payload.get("products", [])
+
+        if isinstance(result_products, list):
+            existing_ids = {
+                str(item.get("product_id") or "").strip()
+                for item in result_products
+                if isinstance(item, dict)
+                and str(item.get("product_id") or "").strip()
+            }
+
+    frozen_ids: list[str] = []
+
+    for product in queue_products:
+        if not isinstance(product, dict):
+            continue
+
+        product_id = str(
+            product.get("product_id") or ""
+        ).strip()
+
+        if not product_id:
+            continue
+
+        if str(
+            product.get("status") or "pending"
+        ) != "pending":
+            continue
+
+        if product_id in existing_ids:
+            continue
+
+        frozen_ids.append(product_id)
+
+        if len(frozen_ids) >= max(1, int(limit)):
+            break
+
+    return frozen_ids
+
+
 def intelligence_command(
     product_ids: list[str],
     limit: int = 1,
@@ -1019,6 +1085,27 @@ def intelligence_command(
         for value in product_ids
         if str(value).strip()
     ]
+
+    if not selected_ids:
+        try:
+            selected_ids = freeze_pending_intelligence_ids(
+                safe_limit
+            )
+        except (OSError, ValueError) as error:
+            print(
+                "ERROR: Could not freeze pending intelligence batch:",
+                error,
+            )
+            return 1
+
+        if not selected_ids:
+            print("No pending unresolved products available.")
+            return 0
+
+        print(
+            "Frozen batch IDs:",
+            ", ".join(selected_ids),
+        )
 
     def add_product_ids(command: list[str]) -> list[str]:
         for product_id in selected_ids:
@@ -1191,8 +1278,133 @@ def intelligence_command(
     print("Review gate : REQUIRED")
 
     vision_soft_failures = 0
+    resolver_ineligible_ids: list[str] = []
+    verified_downstream_ids: list[str] = list(selected_ids)
 
     for label, command, allow_failure in steps:
+        if label.startswith("STEP 2"):
+            try:
+                results_path = ROOT / "data" / "research_results.json"
+
+                if results_path.exists():
+                    resolver_db = json.loads(
+                        results_path.read_text(encoding="utf-8")
+                    )
+                    resolver_products = resolver_db.get("products", [])
+
+                    resolver_index = {
+                        str(item.get("product_id") or "").strip(): item
+                        for item in resolver_products
+                        if isinstance(item, dict)
+                        and str(item.get("product_id") or "").strip()
+                    }
+
+                    verified_downstream_ids = [
+                        product_id
+                        for product_id in selected_ids
+                        if (
+                            resolver_index.get(product_id, {}).get("verified")
+                            is True
+                            and str(
+                                resolver_index.get(product_id, {}).get("status")
+                                or ""
+                            ) == "candidate_verified"
+                        )
+                    ]
+
+                    resolver_ineligible_ids = [
+                        product_id
+                        for product_id in selected_ids
+                        if product_id not in verified_downstream_ids
+                    ]
+
+                    print()
+                    print(
+                        "Verified downstream IDs:",
+                        ", ".join(verified_downstream_ids)
+                        if verified_downstream_ids
+                        else "NONE",
+                    )
+
+                    if resolver_ineligible_ids:
+                        print(
+                            "Resolver review/not-found IDs:",
+                            ", ".join(resolver_ineligible_ids),
+                        )
+
+            except (OSError, ValueError, TypeError) as error:
+                print(
+                    "ERROR: Could not evaluate resolver eligibility:",
+                    str(error)[:250],
+                )
+                return 1
+
+        if (
+            (label.startswith("STEP 2") or label.startswith("STEP 4"))
+            and not verified_downstream_ids
+        ):
+            print()
+            print("=" * 72)
+            print(label)
+            print("=" * 72)
+            print("SKIP: No resolver-verified products eligible.")
+            continue
+
+        if label.startswith("STEP 3."):
+            vision_product_id = ""
+
+            if "--product-id" in command:
+                try:
+                    vision_product_id = command[
+                        command.index("--product-id") + 1
+                    ]
+                except (ValueError, IndexError):
+                    vision_product_id = ""
+
+            if vision_product_id not in verified_downstream_ids:
+                print()
+                print("=" * 72)
+                print(label)
+                print("=" * 72)
+                print(
+                    "SKIP: Product",
+                    vision_product_id or "unknown",
+                    "has no verified official source.",
+                )
+                continue
+
+        if (
+            verified_downstream_ids
+            and (
+                label.startswith("STEP 2")
+                or label.startswith("STEP 4")
+            )
+        ):
+            filtered_command: list[str] = []
+            index = 0
+
+            while index < len(command):
+                token = command[index]
+
+                if (
+                    token == "--product-id"
+                    and index + 1 < len(command)
+                ):
+                    product_id = command[index + 1]
+
+                    if product_id in verified_downstream_ids:
+                        filtered_command.extend(
+                            ["--product-id", product_id]
+                        )
+
+                    index += 2
+                    continue
+
+                filtered_command.append(token)
+                index += 1
+
+            command = filtered_command
+
         return_code = run_step(
             label,
             command,
@@ -1280,7 +1492,11 @@ def intelligence_command(
     print()
     print("=" * 72)
 
-    if partial_products:
+    if (
+        partial_products
+        or resolver_ineligible_ids
+        or vision_soft_failures
+    ):
         print("INTELLIGENCE WORKFLOW STATUS: PARTIAL_REVIEW")
     else:
         print("INTELLIGENCE WORKFLOW STATUS: PASS")
@@ -1291,7 +1507,14 @@ def intelligence_command(
     print("Semantic consolidation: PROCESSED")
     print("Knowledge drafts      : PREPARED/REVIEWED")
 
-    if partial_products:
+    if resolver_ineligible_ids:
+        print("Resolver eligibility  : PARTIAL")
+        print(
+            "  Review/not-found    :",
+            ", ".join(resolver_ineligible_ids),
+        )
+
+    if partial_products or vision_soft_failures:
         print("Vision evidence       : PARTIAL")
         for product_id, mismatches, skipped in partial_products:
             print(
@@ -1299,12 +1522,21 @@ def intelligence_command(
                 f"provenance_mismatches={mismatches}, "
                 f"skipped_results={skipped}"
             )
+
+        if vision_soft_failures:
+            print(
+                "  Provider soft fails :",
+                vision_soft_failures,
+            )
+
         print(
             "Action                : Retry pending vision evidence when "
             "provider quota is available"
         )
-    else:
+    elif verified_downstream_ids:
         print("Vision evidence       : COMPLETE/NO BLOCKER")
+    else:
+        print("Vision evidence       : NOT RUN - NO VERIFIED SOURCE")
 
     print("Auto-publish          : NO")
     print("Human review          : REQUIRED")

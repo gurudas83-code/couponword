@@ -79,6 +79,12 @@ BRAND_ALIASES = {
     "samsung": {"samsung"},
     "boat": {"boat", "boatlifestyle"},
     "oneplus": {"oneplus"},
+    "amazon": {"amazon", "echo"},
+    "echo": {"amazon", "echo"},
+    "hp": {"hp"},
+    "milton": {"milton"},
+    "fire-boltt": {"fire-boltt", "fireboltt"},
+    "fireboltt": {"fire-boltt", "fireboltt"},
 }
 
 
@@ -94,6 +100,11 @@ DOMAIN_BRANDS = {
     "oneplus.com": "oneplus",
     "oneplus.in": "oneplus",
     "nothing.tech": "nothing",
+    "amazon.com": "amazon",
+    "amazon.in": "amazon",
+    "hp.com": "hp",
+    "milton.in": "milton",
+    "fireboltt.com": "fireboltt",
 }
 
 
