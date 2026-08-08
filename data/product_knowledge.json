@@ -841,8 +841,43 @@
       },
       "published_on": "2026-08-05T18:09:21.790118+00:00",
       "published_by": "Guru Das"
+    },
+    {
+      "product_id": "11",
+      "asin": "B0GDQCTYFB",
+      "title": "realme Buds Air 8, 11mm+6mm Dual Dynamic Bass Drivers, 58Hrs Playtime, 55dB ANC, 6 Mic ENC, 45ms Low Latency, 360° Spatial Audio, Hi-Res LHDC, IP55 Dust & Water Resistant, BT v5.4 (Master Gold)",
+      "brand": "realme",
+      "category": "Electronics",
+      "features": [
+        "11mm and 6mm dual audio drivers",
+        "N52 magnet on 6mm tweeter",
+        "100% high-purity diaphragm",
+        "6 microphones total (3 per earbud)",
+        "Live translation support for over 30 languages",
+        "Connects to up to 3 devices simultaneously",
+        "Supports SBC, AAC, and LHDC codecs",
+        "Hi-Res Audio Wireless certification",
+        "Bluetooth version 5.4",
+        "Effective Bluetooth operating range up to 10 meters",
+        "IP55 dust and water resistance rating",
+        "Earbud battery capacity of 62 mAh and charging case capacity of 530 mAh",
+        "14 hours standalone earbud playback; up to 58 hours total playback with charging case",
+        "Full charge time: 1 hour for earbuds, 2 hours for earbuds with charging case",
+        "Type-C charging port",
+        "Deep AI noise cancellation up to 55dB",
+        "Self-developed NextBass custom algorithm for low-frequency enhancement"
+      ],
+      "best_for": [],
+      "limitations": [],
+      "confidence": {
+        "score": 93,
+        "level": "high",
+        "reason": "18 canonical facts passed semantic schema validation with zero issues/conflicts; official product identity score is 1.0."
+      },
+      "official_product_url": "https://www.realme.com/id/more-products/realme-buds-air-8",
+      "published_on": "2026-08-08T19:14:14.541528+00:00"
     }
   ],
-  "updated_at": "2026-08-05T18:09:21.790118+00:00",
+  "updated_at": "2026-08-08T19:14:14.561511+00:00",
   "schema_version": "1.0"
 }
