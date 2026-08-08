@@ -50,3 +50,5 @@ test_universal_semantic_consolidator_v1_1.py
 test_universal_semantic_consolidator_v1_2.py
 test_universal_semantic_schema_validator_v1.py
 test_universal_semantic_schema_validator_v2.py
+
+approve_product_11_from_semantic_v1.py
