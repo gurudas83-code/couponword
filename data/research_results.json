@@ -1,9 +1,9 @@
 {
   "schema_version": "4.0",
   "mode": "incremental",
-  "updated_at": "2026-08-05T17:36:48.112861+00:00",
-  "products_requested": 1,
-  "total_results": 22,
+  "updated_at": "2026-08-08T17:45:52.510563+00:00",
+  "products_requested": 4,
+  "total_results": 31,
   "products": [
     {
       "product_id": "10",
@@ -102,10 +102,10 @@
       "allowed_domains": [
         "realme.com"
       ],
-      "query": "realme realme Buds Air 8 official specifications",
+      "query": "realme Buds Air 8 official specifications",
       "official_title": "realme Buds Air8 - 55dB Noise Cancellation | realme Indonesia",
       "official_url": "https://www.realme.com/id/more-products/realme-buds-air-8",
-      "match_score": 0.6581,
+      "match_score": 0.9226,
       "identity_score": 85,
       "identity_decision": "verified",
       "identity_reasons": [
@@ -114,16 +114,16 @@
         "Supporting model/series token(s) matched: buds",
         "Variant matched"
       ],
-      "verified": false,
-      "status": "manual_review",
-      "reason": "Official candidate found, but identity requires manual review",
+      "verified": true,
+      "status": "candidate_verified",
+      "reason": "Official domain, model identity and search relevance matched",
       "candidates": [
         {
           "title": "realme Buds Air8 - 55dB Noise Cancellation | realme Indonesia",
           "url": "https://www.realme.com/id/more-products/realme-buds-air-8",
-          "model_score": 0.6667,
-          "search_score": 0.6239,
-          "combined_score": 0.6581,
+          "model_score": 1.0,
+          "search_score": 0.6128,
+          "combined_score": 0.9226,
           "identity_score": 85,
           "identity_decision": "verified",
           "identity_reasons": [
@@ -131,9 +131,87 @@
             "All identity-bearing model tokens matched",
             "Supporting model/series token(s) matched: buds",
             "Variant matched"
-          ]
+          ],
+          "page_type_score": 40,
+          "source_type": "product"
+        },
+        {
+          "title": "realme Buds Air 8 - realme (India)",
+          "url": "https://www.realme.com/in/more-products/realme-buds-air-8",
+          "model_score": 1.0,
+          "search_score": 0.4533,
+          "combined_score": 0.8907,
+          "identity_score": 85,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: buds",
+            "Variant matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "product"
         }
-      ]
+      ],
+      "query_variants": [
+        "realme Buds Air 8 official specifications",
+        "realme Buds Air 8 official technical specifications",
+        "realme Buds Air 8 official product page",
+        "realme Buds Air 8 official support",
+        "realme Buds Air 8 official manual pdf",
+        "realme Buds Air 8 official downloads",
+        "realme Buds Air 8 official"
+      ],
+      "source_candidates": {
+        "product": [
+          {
+            "title": "realme Buds Air8 - 55dB Noise Cancellation | realme Indonesia",
+            "url": "https://www.realme.com/id/more-products/realme-buds-air-8",
+            "model_score": 1.0,
+            "search_score": 0.6128,
+            "combined_score": 0.9226,
+            "identity_score": 85,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: buds",
+              "Variant matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "product"
+          },
+          {
+            "title": "realme Buds Air 8 - realme (India)",
+            "url": "https://www.realme.com/in/more-products/realme-buds-air-8",
+            "model_score": 1.0,
+            "search_score": 0.4533,
+            "combined_score": 0.8907,
+            "identity_score": 85,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: buds",
+              "Variant matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "product"
+          }
+        ]
+      },
+      "resolved_at": "2026-08-08T08:27:00.686740+00:00",
+      "discovered_official_url": "https://www.realme.com/id/more-products/realme-buds-air-8",
+      "discovered_official_title": "realme Buds Air8 - 55dB Noise Cancellation | realme Indonesia",
+      "source_stability": {
+        "status": "retained_previous_verified_member",
+        "source_family": {
+          "hostname": "www.realme.com",
+          "normalized_path": "/more-products/realme-buds-air-8"
+        },
+        "previous_url": "https://www.realme.com/id/more-products/realme-buds-air-8",
+        "newly_discovered_url": "https://www.realme.com/id/more-products/realme-buds-air-8"
+      }
     },
     {
       "product_id": "13",
@@ -682,6 +760,1339 @@
       "reason": "No approved official-domain mapping for this brand",
       "candidates": [],
       "resolved_at": "2026-08-05T17:29:02.984116+00:00"
+    },
+    {
+      "product_id": "19",
+      "title": "Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon Saturn Planets",
+      "brand": "Asus",
+      "asin": "B0D8YV6KQ5",
+      "core_title": "Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon Saturn Planets",
+      "allowed_domains": [
+        "asus.com"
+      ],
+      "query": "Asus Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon Saturn Planets official specifications",
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": [],
+      "query_variants": [
+        "Asus Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon Saturn Planets official specifications",
+        "Asus Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon Saturn Planets official technical specifications",
+        "Asus Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon Saturn Planets official product page",
+        "Asus Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon Saturn Planets official support",
+        "Asus Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon Saturn Planets official manual pdf",
+        "Asus Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon Saturn Planets official downloads",
+        "Asus Pie Matrix Pegasus 76700 Telescope 235x Zoom for Moon Saturn Planets official"
+      ],
+      "source_candidates": {},
+      "resolved_at": "2026-08-08T08:48:42.192917+00:00"
+    },
+    {
+      "product_id": "21",
+      "title": "Gesto Galaxy Projector Pro Planetarium - 13 Film Discs Nebula Moon Lamp",
+      "brand": "Gesto",
+      "asin": "B0GKY4WMRV",
+      "core_title": "Gesto Galaxy Projector Pro Planetarium - 13 Film Discs Nebula Moon Lamp",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-08T08:48:42.194538+00:00"
+    },
+    {
+      "product_id": "22",
+      "title": "Popsugar Rechargeable Hand Gesture Control Car with Headlight, USB Charging RC Stunt Car for Kids",
+      "brand": "Popsugar",
+      "asin": "B0CQK691XQ",
+      "core_title": "Popsugar Rechargeable Hand Gesture Control Car with Headlight",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-08T10:41:38.186950+00:00"
+    },
+    {
+      "product_id": "23",
+      "title": "TEKCOOL Portable Air Cooler Fan with Ice Chamber, USB Rechargeable Mini Cooling Fan for Home Kitchen",
+      "brand": "TEKCOOL",
+      "asin": "B0H1QQ7ML1",
+      "core_title": "TEKCOOL Portable Air Cooler Fan with Ice Chamber",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-08T10:41:38.187849+00:00"
+    },
+    {
+      "product_id": "24",
+      "title": "Fire-Boltt Ninja Smartwatch",
+      "brand": "Fire-Boltt",
+      "asin": "",
+      "core_title": "Fire-Boltt Ninja Smartwatch",
+      "allowed_domains": [
+        "fireboltt.com"
+      ],
+      "query": "Fire-Boltt Ninja Smartwatch official specifications",
+      "official_title": "Ninja X Ring with (1.96 inch) Display and BT Calling – Fire-Boltt",
+      "official_url": "https://www.fireboltt.com/products/ninja-x-ring-black",
+      "match_score": 0.769,
+      "identity_score": 75,
+      "identity_decision": "manual_review",
+      "identity_reasons": [
+        "Brand matched",
+        "Most expected model tokens matched"
+      ],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "Official candidate found, but identity requires manual review",
+      "candidates": [
+        {
+          "title": "Ninja X Ring with (1.96 inch) Display and BT Calling – Fire-Boltt",
+          "url": "https://www.fireboltt.com/products/ninja-x-ring-black",
+          "model_score": 0.75,
+          "search_score": 0.8449,
+          "combined_score": 0.769,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "Ninja Blaze with a 51mm (1.83 inch) Display and BT Calling – Fire-Boltt",
+          "url": "https://www.fireboltt.com/products/ninja-blaze",
+          "model_score": 0.75,
+          "search_score": 0.8201,
+          "combined_score": 0.764,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "Smart Watches for Women & Men - No.1 Smartwatch Brand - Fire-Boltt",
+          "url": "https://www.fireboltt.com/collections/all-smart-watches",
+          "model_score": 0.75,
+          "search_score": 0.6615,
+          "combined_score": 0.7323,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "Quick Guide of How to use a smartwatch? - Fire-Boltt",
+          "url": "https://www.fireboltt.com/blogs/news/how-to-use-a-smartwatch",
+          "model_score": 0.75,
+          "search_score": 0.5343,
+          "combined_score": 0.7069,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "Exploring the Hidden Features of Your Smartwatch - Fire-Boltt",
+          "url": "https://www.fireboltt.com/blogs/news/beyond-notifications-exploring-the-hidden-features-of-your-smartwatch",
+          "model_score": 0.75,
+          "search_score": 0.5307,
+          "combined_score": 0.7061,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        }
+      ],
+      "query_variants": [
+        "Fire-Boltt Ninja Smartwatch official specifications",
+        "Fire-Boltt Ninja Smartwatch official technical specifications",
+        "Fire-Boltt Ninja Smartwatch official product page",
+        "Fire-Boltt Ninja Smartwatch official support",
+        "Fire-Boltt Ninja Smartwatch official manual pdf",
+        "Fire-Boltt Ninja Smartwatch official downloads",
+        "Fire-Boltt Ninja Smartwatch official"
+      ],
+      "source_candidates": {
+        "product": [
+          {
+            "title": "Ninja X Ring with (1.96 inch) Display and BT Calling – Fire-Boltt",
+            "url": "https://www.fireboltt.com/products/ninja-x-ring-black",
+            "model_score": 0.75,
+            "search_score": 0.8449,
+            "combined_score": 0.769,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 90,
+            "source_type": "product"
+          },
+          {
+            "title": "Ninja Blaze with a 51mm (1.83 inch) Display and BT Calling – Fire-Boltt",
+            "url": "https://www.fireboltt.com/products/ninja-blaze",
+            "model_score": 0.75,
+            "search_score": 0.8201,
+            "combined_score": 0.764,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 90,
+            "source_type": "product"
+          }
+        ],
+        "official_page": [
+          {
+            "title": "Smart Watches for Women & Men - No.1 Smartwatch Brand - Fire-Boltt",
+            "url": "https://www.fireboltt.com/collections/all-smart-watches",
+            "model_score": 0.75,
+            "search_score": 0.6615,
+            "combined_score": 0.7323,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "Quick Guide of How to use a smartwatch? - Fire-Boltt",
+            "url": "https://www.fireboltt.com/blogs/news/how-to-use-a-smartwatch",
+            "model_score": 0.75,
+            "search_score": 0.5343,
+            "combined_score": 0.7069,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "Exploring the Hidden Features of Your Smartwatch - Fire-Boltt",
+            "url": "https://www.fireboltt.com/blogs/news/beyond-notifications-exploring-the-hidden-features-of-your-smartwatch",
+            "model_score": 0.75,
+            "search_score": 0.5307,
+            "combined_score": 0.7061,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          }
+        ]
+      },
+      "resolved_at": "2026-08-08T17:45:03.466849+00:00"
+    },
+    {
+      "product_id": "25",
+      "title": "Sony Wireless Headphones",
+      "brand": "Sony",
+      "asin": "",
+      "core_title": "Sony Wireless Headphones",
+      "allowed_domains": [
+        "sony.co.in",
+        "sony.com"
+      ],
+      "query": "Sony Wireless Headphones official specifications",
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": [],
+      "query_variants": [
+        "Sony Wireless Headphones official specifications",
+        "Sony Wireless Headphones official technical specifications",
+        "Sony Wireless Headphones official product page",
+        "Sony Wireless Headphones official support",
+        "Sony Wireless Headphones official manual pdf",
+        "Sony Wireless Headphones official downloads",
+        "Sony Wireless Headphones official"
+      ],
+      "source_candidates": {},
+      "resolved_at": "2026-08-08T10:44:46.071756+00:00"
+    },
+    {
+      "product_id": "26",
+      "title": "Echo Dot 5th Gen",
+      "brand": "Amazon",
+      "asin": "",
+      "core_title": "Echo Dot 5th Gen",
+      "allowed_domains": [
+        "amazon.in",
+        "amazon.com"
+      ],
+      "query": "Amazon Echo Dot 5th Gen official specifications",
+      "official_title": "Safety and Compliance Information for Amazon Echo Dot (5th Generation)",
+      "official_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=TR7RlV0WehGNoLYxKM",
+      "match_score": 0.8158,
+      "identity_score": 80,
+      "identity_decision": "verified",
+      "identity_reasons": [
+        "Brand matched",
+        "All identity-bearing model tokens matched",
+        "Supporting model/series token(s) matched: dot"
+      ],
+      "verified": true,
+      "status": "candidate_verified",
+      "reason": "Official domain, model identity and search relevance matched",
+      "candidates": [
+        {
+          "title": "Amazon Official: All-New Echo Dot (5th Gen) Kids Owl with Echo Glow",
+          "url": "https://www.amazon.com/Amazon-release-including-Alexa-Access/dp/B0BF2KWMYY",
+          "model_score": 1.0,
+          "search_score": 0.8768,
+          "combined_score": 0.9754,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: dot, gen"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "Amazon Echo Dot (5th Gen): Alexa smart speaker with Bluetooth at best price",
+          "url": "https://www.amazon.in/Echo-Dot-5th-Gen-Alexa-smart-speaker/dp/B09B8XJDW5",
+          "model_score": 1.0,
+          "search_score": 0.8594,
+          "combined_score": 0.9719,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: dot, gen"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "2022 Echo Dot 5th Gen Smart Speaker | Deep Sea Blue | Amazon",
+          "url": "https://www.amazon.com/Amazon-Vibrant-sounding-speaker-bedrooms/dp/B09B93ZDG4",
+          "model_score": 1.0,
+          "search_score": 0.8428,
+          "combined_score": 0.9686,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: dot, gen"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "Amazon Echo Dot 5th Generation User Guide: The Most Updated and Complete Manual to Master the All-New Echo Dot (5th Gen) Hidden Features and Functions Including Alexa Troubleshooting Tips & Tricks: Easton, Denvey: 9798375831282: Amazon.com: Books",
+          "url": "https://www.amazon.com/Amazon-Echo-Generation-User-Guide/dp/B0BTQG6SBX",
+          "model_score": 1.0,
+          "search_score": 0.8253,
+          "combined_score": 0.9651,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: dot, gen"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "Amazon Echo Dot (5th Gen): Alexa smart speaker with Bluetooth at best price",
+          "url": "https://www.amazon.in/Echo-Dot-5th-Gen-Alexa-smart-speaker/dp/B09B8XJDW5/ref=cs_sr_dp_1?dib=eyJ2IjoiMSJ9.iakkEdMOP0EdXivA6LTL5Qepyp5QI7xR8OQ1JhtulXiC_4sa45D0cBvTc-sonVDhZuHhr_suvCvLdIi4L2ciQbSoEWGT8kudrQKHeftd60_iMAQz5NMJUQdh578CVbaaf4b3fnValEcZgGCSfQuYzLbuOTi5QT_ZtpVEbVXj_ovybeWioWSGmG8mGJftWY6TTTIjj0IAQKmrS29hDcY2oo8QDHSkuLGWR7FedH0ANrk.37KU2jH58VX0I9GAe3vankOzTFsrJv3iDfZFyTQB4v4&amp%3Bdib_tag=se&amp%3Bkeywords=Echo&amp%3BlinkCode=ur2&amp%3Bqid=1771272015&amp%3Bsr=8-1",
+          "model_score": 1.0,
+          "search_score": 0.8222,
+          "combined_score": 0.9644,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: dot, gen"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "Amazon.com : Echo Dot 5th Gen",
+          "url": "https://www.amazon.com/Echo-Dot-5th-Gen/s?k=Echo+Dot+5th+Gen",
+          "model_score": 1.0,
+          "search_score": 0.7933,
+          "combined_score": 0.9587,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: dot, gen"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "2022 Echo Dot 5th Gen Smart Speaker | Glacier White | Amazon",
+          "url": "https://www.amazon.com/Amazon-release-vibrant-helpful-routines/dp/B09B94RL1R",
+          "model_score": 1.0,
+          "search_score": 0.7716,
+          "combined_score": 0.9543,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: dot, gen"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "2022 Echo Dot 5th Gen Smart Speaker | Charcoal | Amazon",
+          "url": "https://www.amazon.com/Amazon-vibrant-helpful-routines-Charcoal/dp/B09B8V1LZ3",
+          "model_score": 1.0,
+          "search_score": 0.766,
+          "combined_score": 0.9532,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: dot, gen"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "Amazon Official: All-New Echo Dot (5th Gen) Kids Owl with Echo Glow",
+          "url": "https://www.amazon.com/All-New-Echo-Dot-Kids-Glow/dp/B0BF2KWMYY?linkCode=ll1&tag=gearbraincom-20&linkId=c85f8df2d0732e7ca0c78b534ac73ea0&language=en_US&ref_=as_li_ss_tl",
+          "model_score": 1.0,
+          "search_score": 0.7443,
+          "combined_score": 0.9489,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: dot, gen"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "Amazon Official: All-New Echo Dot (5th Gen) Kids Owl with Echo Glow",
+          "url": "https://www.amazon.com/dp/B0BF2KWMYY?tag=gearbraincom-20&linkCode=ogi&th=1&psc=1",
+          "model_score": 1.0,
+          "search_score": 0.7443,
+          "combined_score": 0.9489,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: dot, gen"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        }
+      ],
+      "query_variants": [
+        "Amazon Echo Dot 5th Gen official specifications",
+        "Amazon Echo Dot 5th Gen official technical specifications",
+        "Amazon Echo Dot 5th Gen official product page",
+        "Amazon Echo Dot 5th Gen official support",
+        "Amazon Echo Dot 5th Gen official manual pdf",
+        "Amazon Echo Dot 5th Gen official downloads",
+        "Amazon Echo Dot 5th Gen official"
+      ],
+      "source_candidates": {
+        "support": [
+          {
+            "title": "Safety and Compliance Information for Amazon Echo Dot (5th Generation)",
+            "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=TR7RlV0WehGNoLYxKM",
+            "model_score": 0.8,
+            "search_score": 0.8791,
+            "combined_score": 0.8158,
+            "identity_score": 80,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: dot"
+            ],
+            "page_type_score": 40,
+            "source_type": "support"
+          },
+          {
+            "title": "Safety and Compliance Information for Echo Dot (5th Generation) with clock",
+            "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=T19HBJBCPzUsGPa3gm",
+            "model_score": 0.8,
+            "search_score": 0.6315,
+            "combined_score": 0.7663,
+            "identity_score": 80,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: dot"
+            ],
+            "page_type_score": 40,
+            "source_type": "support"
+          },
+          {
+            "title": "How to Set Up Your Echo Dot (5th Generation) - Amazon.com",
+            "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=TdLI5SX5VhnxC6x6Ct",
+            "model_score": 0.8,
+            "search_score": 0.6016,
+            "combined_score": 0.7603,
+            "identity_score": 80,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: dot"
+            ],
+            "page_type_score": 40,
+            "source_type": "support"
+          }
+        ],
+        "official_page": [
+          {
+            "title": "Amazon Official: All-New Echo Dot (5th Gen) Kids Owl with Echo Glow",
+            "url": "https://www.amazon.com/Amazon-release-including-Alexa-Access/dp/B0BF2KWMYY",
+            "model_score": 1.0,
+            "search_score": 0.8768,
+            "combined_score": 0.9754,
+            "identity_score": 80,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: dot, gen"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "Amazon Echo Dot (5th Gen): Alexa smart speaker with Bluetooth at best price",
+            "url": "https://www.amazon.in/Echo-Dot-5th-Gen-Alexa-smart-speaker/dp/B09B8XJDW5",
+            "model_score": 1.0,
+            "search_score": 0.8594,
+            "combined_score": 0.9719,
+            "identity_score": 80,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: dot, gen"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "2022 Echo Dot 5th Gen Smart Speaker | Deep Sea Blue | Amazon",
+            "url": "https://www.amazon.com/Amazon-Vibrant-sounding-speaker-bedrooms/dp/B09B93ZDG4",
+            "model_score": 1.0,
+            "search_score": 0.8428,
+            "combined_score": 0.9686,
+            "identity_score": 80,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: dot, gen"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "Amazon Echo Dot 5th Generation User Guide: The Most Updated and Complete Manual to Master the All-New Echo Dot (5th Gen) Hidden Features and Functions Including Alexa Troubleshooting Tips & Tricks: Easton, Denvey: 9798375831282: Amazon.com: Books",
+            "url": "https://www.amazon.com/Amazon-Echo-Generation-User-Guide/dp/B0BTQG6SBX",
+            "model_score": 1.0,
+            "search_score": 0.8253,
+            "combined_score": 0.9651,
+            "identity_score": 80,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: dot, gen"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "Amazon Echo Dot (5th Gen): Alexa smart speaker with Bluetooth at best price",
+            "url": "https://www.amazon.in/Echo-Dot-5th-Gen-Alexa-smart-speaker/dp/B09B8XJDW5/ref=cs_sr_dp_1?dib=eyJ2IjoiMSJ9.iakkEdMOP0EdXivA6LTL5Qepyp5QI7xR8OQ1JhtulXiC_4sa45D0cBvTc-sonVDhZuHhr_suvCvLdIi4L2ciQbSoEWGT8kudrQKHeftd60_iMAQz5NMJUQdh578CVbaaf4b3fnValEcZgGCSfQuYzLbuOTi5QT_ZtpVEbVXj_ovybeWioWSGmG8mGJftWY6TTTIjj0IAQKmrS29hDcY2oo8QDHSkuLGWR7FedH0ANrk.37KU2jH58VX0I9GAe3vankOzTFsrJv3iDfZFyTQB4v4&amp%3Bdib_tag=se&amp%3Bkeywords=Echo&amp%3BlinkCode=ur2&amp%3Bqid=1771272015&amp%3Bsr=8-1",
+            "model_score": 1.0,
+            "search_score": 0.8222,
+            "combined_score": 0.9644,
+            "identity_score": 80,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: dot, gen"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          }
+        ]
+      },
+      "resolved_at": "2026-08-08T17:45:22.532223+00:00"
+    },
+    {
+      "product_id": "27",
+      "title": "Milton Thermosteel Bottle",
+      "brand": "Milton",
+      "asin": "",
+      "core_title": "Milton Thermosteel Bottle",
+      "allowed_domains": [
+        "milton.in"
+      ],
+      "query": "Milton Thermosteel Bottle official specifications",
+      "official_title": "Buy Fame Thermosteel Bottle Online at Best Price| Milton",
+      "official_url": "https://www.milton.in/products/fame-thermosteel-bottle",
+      "match_score": 0.9791,
+      "identity_score": 75,
+      "identity_decision": "manual_review",
+      "identity_reasons": [
+        "Brand matched",
+        "Most expected model tokens matched"
+      ],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "Official candidate found, but identity requires manual review",
+      "candidates": [
+        {
+          "title": "Buy Fame Thermosteel Bottle Online at Best Price| Milton",
+          "url": "https://www.milton.in/products/fame-thermosteel-bottle",
+          "model_score": 1.0,
+          "search_score": 0.8955,
+          "combined_score": 0.9791,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "Buy Shiny Thermosteel Bottle Online at Best Price | Milton",
+          "url": "https://www.milton.in/products/shiny-thermosteel-bottle-milton",
+          "model_score": 1.0,
+          "search_score": 0.8944,
+          "combined_score": 0.9789,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "Buy Personalized Crown Thermosteel Bottle Online | Milton",
+          "url": "https://www.milton.in/products/personalized-crown-thermosteel-bottle-milton",
+          "model_score": 1.0,
+          "search_score": 0.8896,
+          "combined_score": 0.9779,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "Buy Starlit Thermosteel Bottle Online at Best Price | Milton",
+          "url": "https://www.milton.in/products/starlit-thermosteel-bottle",
+          "model_score": 1.0,
+          "search_score": 0.884,
+          "combined_score": 0.9768,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "Buy Atlantis Thermosteel Water Bottle Online | Milton",
+          "url": "https://www.milton.in/products/atlantis-thermosteel-water-bottle",
+          "model_score": 1.0,
+          "search_score": 0.8761,
+          "combined_score": 0.9752,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "Buy Aura Thermosteel Bottle 500ML, 750ML, 1L Online - Milton",
+          "url": "https://www.milton.in/products/aura-thermosteel-bottle",
+          "model_score": 1.0,
+          "search_score": 0.874,
+          "combined_score": 0.9748,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "Buy Duke Thermosteel Water Bottle 500ML, 750ML, 1L Online - Milton",
+          "url": "https://www.milton.in/products/duke-thermosteel-bottle-milton",
+          "model_score": 1.0,
+          "search_score": 0.8706,
+          "combined_score": 0.9741,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "Buy Elfin Thermosteel Bottle Online - Milton",
+          "url": "https://www.milton.in/products/elfin-thermosteel-bottle",
+          "model_score": 1.0,
+          "search_score": 0.8332,
+          "combined_score": 0.9666,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "Buy Personalized Plain Lid Thermosteel Bottle Online | Milton",
+          "url": "https://www.milton.in/products/personalized-plain-lid-thermosteel-bottle-milton",
+          "model_score": 1.0,
+          "search_score": 0.7114,
+          "combined_score": 0.9423,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "TWINIQ Thermosteel Bottle (Milton)",
+          "url": "https://www.milton.in/products/twiniq-thermosteel-bottle-milton",
+          "model_score": 1.0,
+          "search_score": 0.6997,
+          "combined_score": 0.9399,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        }
+      ],
+      "query_variants": [
+        "Milton Thermosteel Bottle official specifications",
+        "Milton Thermosteel Bottle official technical specifications",
+        "Milton Thermosteel Bottle official product page",
+        "Milton Thermosteel Bottle official support",
+        "Milton Thermosteel Bottle official manual pdf",
+        "Milton Thermosteel Bottle official downloads",
+        "Milton Thermosteel Bottle official"
+      ],
+      "source_candidates": {
+        "product": [
+          {
+            "title": "Buy Fame Thermosteel Bottle Online at Best Price| Milton",
+            "url": "https://www.milton.in/products/fame-thermosteel-bottle",
+            "model_score": 1.0,
+            "search_score": 0.8955,
+            "combined_score": 0.9791,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 90,
+            "source_type": "product"
+          },
+          {
+            "title": "Buy Shiny Thermosteel Bottle Online at Best Price | Milton",
+            "url": "https://www.milton.in/products/shiny-thermosteel-bottle-milton",
+            "model_score": 1.0,
+            "search_score": 0.8944,
+            "combined_score": 0.9789,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 90,
+            "source_type": "product"
+          },
+          {
+            "title": "Buy Personalized Crown Thermosteel Bottle Online | Milton",
+            "url": "https://www.milton.in/products/personalized-crown-thermosteel-bottle-milton",
+            "model_score": 1.0,
+            "search_score": 0.8896,
+            "combined_score": 0.9779,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 90,
+            "source_type": "product"
+          },
+          {
+            "title": "Buy Starlit Thermosteel Bottle Online at Best Price | Milton",
+            "url": "https://www.milton.in/products/starlit-thermosteel-bottle",
+            "model_score": 1.0,
+            "search_score": 0.884,
+            "combined_score": 0.9768,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 90,
+            "source_type": "product"
+          },
+          {
+            "title": "Buy Atlantis Thermosteel Water Bottle Online | Milton",
+            "url": "https://www.milton.in/products/atlantis-thermosteel-water-bottle",
+            "model_score": 1.0,
+            "search_score": 0.8761,
+            "combined_score": 0.9752,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 90,
+            "source_type": "product"
+          }
+        ],
+        "official_page": [
+          {
+            "title": "What is Thermosteel Bottle? : Benefits & Caring Tips| Milton Blog",
+            "url": "https://www.milton.in/blogs/all/everything-you-need-to-know-about-thermosteel-bottles",
+            "model_score": 1.0,
+            "search_score": 0.7664,
+            "combined_score": 0.9533,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "Learn How Thermosteel Bottle Works & Tips for Maintenance | Milton",
+            "url": "https://www.milton.in/blogs/all/what-is-a-thermosteel-bottle-how-does-it-work",
+            "model_score": 1.0,
+            "search_score": 0.6554,
+            "combined_score": 0.9311,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          }
+        ]
+      },
+      "resolved_at": "2026-08-08T17:45:38.714306+00:00"
+    },
+    {
+      "product_id": "28",
+      "title": "HP Wireless Mouse",
+      "brand": "HP",
+      "asin": "",
+      "core_title": "HP Wireless Mouse",
+      "allowed_domains": [
+        "hp.com"
+      ],
+      "query": "HP Wireless Mouse official specifications",
+      "official_title": "HP 230 Wireless Mouse and Keyboard Combo | HP® Africa",
+      "official_url": "https://www.hp.com/emea_africa-en/products/accessories/product-details/product-specifications/38352315",
+      "match_score": 0.9508,
+      "identity_score": 75,
+      "identity_decision": "manual_review",
+      "identity_reasons": [
+        "Brand matched",
+        "Most expected model tokens matched"
+      ],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "Official candidate found, but identity requires manual review",
+      "candidates": [
+        {
+          "title": "HP 230 Wireless Mouse and Keyboard Combo | HP® Africa",
+          "url": "https://www.hp.com/emea_africa-en/products/accessories/product-details/product-specifications/38352315",
+          "model_score": 1.0,
+          "search_score": 0.7542,
+          "combined_score": 0.9508,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "[PDF] HP Wireless Optical Mobile Mouse",
+          "url": "https://h10032.www1.hp.com/ctg/Manual/c01439177.pdf",
+          "model_score": 1.0,
+          "search_score": 0.9055,
+          "combined_score": 0.9811,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "pdf"
+        },
+        {
+          "title": "[PDF] HP 2.4GHz Wireless Optical Mobile Mouse",
+          "url": "https://h10032.www1.hp.com/ctg/Manual/c02003863.pdf",
+          "model_score": 1.0,
+          "search_score": 0.8583,
+          "combined_score": 0.9717,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "pdf"
+        },
+        {
+          "title": "HP 280 Silent Wireless Mouse",
+          "url": "https://www.hp.com/content/dam/sites/garage-press/press/press-kits/2021/ces-2021/hp_280_silent_wireless_mouse_datasheet_us.pdf",
+          "model_score": 1.0,
+          "search_score": 0.7898,
+          "combined_score": 0.958,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "pdf"
+        },
+        {
+          "title": "HP Wireless Premium Mouse  | HP® Official Site",
+          "url": "https://www.hp.com/us-en/laptops/2-in-1s/elite-dragonfly-convertible/product-card/hp-wireless-premium-mouse.html",
+          "model_score": 1.0,
+          "search_score": 0.7666,
+          "combined_score": 0.9533,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "[PDF] HP 2.4GHz Wireless Laser Mobile Mouse",
+          "url": "https://h10032.www1.hp.com/ctg/Manual/c02003864.pdf",
+          "model_score": 1.0,
+          "search_score": 0.7463,
+          "combined_score": 0.9493,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "pdf"
+        },
+        {
+          "title": "Left clicker stopped working onboard wireless mouse - HP Community",
+          "url": "https://h30434.www3.hp.com/t5/Gaming-Accessories/Left-clicker-stopped-working-onboard-wireless-mouse/td-p/9526017",
+          "model_score": 1.0,
+          "search_score": 0.7207,
+          "combined_score": 0.9441,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "I have just bought an HP 400 Quiet wireless Mouse & want to ...",
+          "url": "https://h30434.www3.hp.com/t5/Gaming-Accessories/I-have-just-bought-an-HP-400-Quiet-wireless-Mouse-amp-want/td-p/9500925",
+          "model_score": 1.0,
+          "search_score": 0.5838,
+          "combined_score": 0.9168,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "Wireless Computer Mouse | HP® Store",
+          "url": "https://www.hp.com/us-en/shop/dlp/bluetooth-computer-mouse",
+          "model_score": 1.0,
+          "search_score": 0.5686,
+          "combined_score": 0.9137,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 30,
+          "source_type": "product"
+        },
+        {
+          "title": "HP 705 Rechargeable Wireless Mouse for business",
+          "url": "https://www.hp.com/us-en/shop/pdp/hp-705-rechargeable-wireless-mouse",
+          "model_score": 1.0,
+          "search_score": 0.484,
+          "combined_score": 0.8968,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 30,
+          "source_type": "product"
+        }
+      ],
+      "query_variants": [
+        "HP Wireless Mouse official specifications",
+        "HP Wireless Mouse official technical specifications",
+        "HP Wireless Mouse official product page",
+        "HP Wireless Mouse official support",
+        "HP Wireless Mouse official manual pdf",
+        "HP Wireless Mouse official downloads",
+        "HP Wireless Mouse official"
+      ],
+      "source_candidates": {
+        "product": [
+          {
+            "title": "HP 230 Wireless Mouse and Keyboard Combo | HP® Africa",
+            "url": "https://www.hp.com/emea_africa-en/products/accessories/product-details/product-specifications/38352315",
+            "model_score": 1.0,
+            "search_score": 0.7542,
+            "combined_score": 0.9508,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 90,
+            "source_type": "product"
+          },
+          {
+            "title": "Wireless Computer Mouse | HP® Store",
+            "url": "https://www.hp.com/us-en/shop/dlp/bluetooth-computer-mouse",
+            "model_score": 1.0,
+            "search_score": 0.5686,
+            "combined_score": 0.9137,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 30,
+            "source_type": "product"
+          },
+          {
+            "title": "HP 705 Rechargeable Wireless Mouse for business",
+            "url": "https://www.hp.com/us-en/shop/pdp/hp-705-rechargeable-wireless-mouse",
+            "model_score": 1.0,
+            "search_score": 0.484,
+            "combined_score": 0.8968,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 30,
+            "source_type": "product"
+          },
+          {
+            "title": "HP 690 Rechargeable Wireless Mouse",
+            "url": "https://www.hp.com/us-en/shop/pdp/hp-690-rechargeable-wireless-mouse",
+            "model_score": 1.0,
+            "search_score": 0.4449,
+            "combined_score": 0.889,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 30,
+            "source_type": "product"
+          }
+        ],
+        "support": [
+          {
+            "title": "HP 235 Slim Wireless Mouse specifications",
+            "url": "https://support.hp.com/hr-en/document/ish_4886091-4886156-16",
+            "model_score": 1.0,
+            "search_score": 0.8243,
+            "combined_score": 0.9649,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 20,
+            "source_type": "support"
+          },
+          {
+            "title": "HP UltraThin Wireless Mouse - Software & Drivers",
+            "url": "https://support.hp.com/hk-en/drivers/hp-ultrathin-wireless-mouse/7907732",
+            "model_score": 1.0,
+            "search_score": 0.7753,
+            "combined_score": 0.9551,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 20,
+            "source_type": "support"
+          }
+        ],
+        "pdf": [
+          {
+            "title": "[PDF] HP Wireless Optical Mobile Mouse",
+            "url": "https://h10032.www1.hp.com/ctg/Manual/c01439177.pdf",
+            "model_score": 1.0,
+            "search_score": 0.9055,
+            "combined_score": 0.9811,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "pdf"
+          },
+          {
+            "title": "[PDF] HP 2.4GHz Wireless Optical Mobile Mouse",
+            "url": "https://h10032.www1.hp.com/ctg/Manual/c02003863.pdf",
+            "model_score": 1.0,
+            "search_score": 0.8583,
+            "combined_score": 0.9717,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "pdf"
+          },
+          {
+            "title": "HP 280 Silent Wireless Mouse",
+            "url": "https://www.hp.com/content/dam/sites/garage-press/press/press-kits/2021/ces-2021/hp_280_silent_wireless_mouse_datasheet_us.pdf",
+            "model_score": 1.0,
+            "search_score": 0.7898,
+            "combined_score": 0.958,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "pdf"
+          },
+          {
+            "title": "[PDF] HP 2.4GHz Wireless Laser Mobile Mouse",
+            "url": "https://h10032.www1.hp.com/ctg/Manual/c02003864.pdf",
+            "model_score": 1.0,
+            "search_score": 0.7463,
+            "combined_score": 0.9493,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "pdf"
+          }
+        ],
+        "official_page": [
+          {
+            "title": "HP Wireless Premium Mouse  | HP® Official Site",
+            "url": "https://www.hp.com/us-en/laptops/2-in-1s/elite-dragonfly-convertible/product-card/hp-wireless-premium-mouse.html",
+            "model_score": 1.0,
+            "search_score": 0.7666,
+            "combined_score": 0.9533,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "Left clicker stopped working onboard wireless mouse - HP Community",
+            "url": "https://h30434.www3.hp.com/t5/Gaming-Accessories/Left-clicker-stopped-working-onboard-wireless-mouse/td-p/9526017",
+            "model_score": 1.0,
+            "search_score": 0.7207,
+            "combined_score": 0.9441,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "I have just bought an HP 400 Quiet wireless Mouse & want to ...",
+            "url": "https://h30434.www3.hp.com/t5/Gaming-Accessories/I-have-just-bought-an-HP-400-Quiet-wireless-Mouse-amp-want/td-p/9500925",
+            "model_score": 1.0,
+            "search_score": 0.5838,
+            "combined_score": 0.9168,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          }
+        ]
+      },
+      "resolved_at": "2026-08-08T17:45:52.509809+00:00"
     }
   ]
 }

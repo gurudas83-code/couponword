@@ -1,21 +1,22 @@
 {
   "schema_version": "5.0",
-  "generated_at": "2026-08-05T17:50:14.899076+00:00",
+  "generated_at": "2026-08-08T08:48:42.665981+00:00",
   "source_file": "data\\research_results.json",
   "mode": "incremental",
   "selection": {
     "only_verified": true,
     "pending": false,
     "product_ids": [
-      "15"
+      "19",
+      "21"
     ],
     "limit": null
   },
   "batch_summary": {
-    "requested": 1,
-    "success": 1,
+    "requested": 0,
+    "success": 0,
     "errors": 0,
-    "candidate_ready": 1,
+    "candidate_ready": 0,
     "manual_review": 0,
     "rejected_candidate": 0
   },
@@ -32,219 +33,19 @@
       "brand": "realme",
       "model": "Buds Air 8",
       "search_name": "realme Buds Air 8",
-      "official_url": "https://www.realme.com/in/realme-buds-air/specs",
+      "official_url": "https://www.realme.com/id/more-products/realme-buds-air-8",
       "source_host": "www.realme.com",
       "resolver_status": "candidate_verified",
       "resolver_verified": true,
       "fetch_status": "success",
       "http_status": 200,
-      "page_identity_score": 0.49,
-      "specifications": {
-        "controls_support_touch_control_double_tap": {
-          "value": "Answer a call; play/pause music playback. Triple-tap: Skip to next song. Press and hold one side: Launch voice assistant; end/decline a call; Press and hold both sides: Enter/exit Gaming Mode.",
-          "label": "Controls Support Touch Control Double-tap",
-          "source": "label_value_block",
-          "confidence": 78
-        },
-        "support_touch_control_double_tap": {
-          "value": "Answer a call; play/pause music playback. Triple-tap: Skip to next song. Press and hold one side: Launch voice assistant; end/decline a call; Press and hold both sides: Enter/exit Gaming Mode.",
-          "label": "Support Touch Control Double-tap",
-          "source": "label_value_block",
-          "confidence": 78
-        },
-        "size_weight_height": {
-          "value": "51.3 mm Width: 45.3 mm Depth: 25.3 mm Weight: 42.3 g Type: Half-in Ear Weight: 4.2 g",
-          "label": "Size & Weight Height",
-          "source": "label_value_block",
-          "confidence": 78
-        },
-        "height": {
-          "value": "51.3 mm Width: 45.3 mm Depth: 25.3 mm Weight: 42.3 g Type: Half-in Ear Weight: 4.2 g",
-          "label": "Height",
-          "source": "label_value_block",
-          "confidence": 78
-        },
-        "type": {
-          "value": "Half-in Ear Weight: 4.2 g",
-          "label": "Type",
-          "source": "label_value_block",
-          "confidence": 78
-        }
-      },
-      "features": [
-        {
-          "text": "Height: 51.3 mm Width: 45.3 mm Depth: 25.3 mm Weight: 42.3 g",
-          "source": "li",
-          "confidence": 89,
-          "relevance_score": 5
-        },
-        {
-          "text": "Support Touch Control Double-tap: Answer a call; play/pause music playback. Triple-tap: Skip to next song. Press and hold one side: Launch voice assistant; end/decline a call; Press and hold both sides: Enter/exit Gaming Mode.",
-          "source": "li",
-          "confidence": 86,
-          "relevance_score": 4
-        },
-        {
-          "text": "Dual Mic ENC (Environment Noise Cancellation Technology)",
-          "source": "li",
-          "confidence": 83,
-          "relevance_score": 3
-        },
-        {
-          "text": "Support Qi Wireless Charging Support Type-C Charging",
-          "source": "li",
-          "confidence": 83,
-          "relevance_score": 3
-        },
-        {
-          "text": "Buds Wireless Charging Case Type-C Charging Cable Quick Guide Book",
-          "source": "li",
-          "confidence": 83,
-          "relevance_score": 3
-        },
-        {
-          "text": "ENC (Environment Noise Cancellation Technology)",
-          "source": "p",
-          "confidence": 77,
-          "relevance_score": 3
-        },
-        {
-          "text": "Bluetooth 5.0 GFP (Google Fast Pair Technology) 10 meters Effective Range",
-          "source": "li",
-          "confidence": 80,
-          "relevance_score": 2
-        },
-        {
-          "text": "Type: Half-in Ear Weight: 4.2 g",
-          "source": "li",
-          "confidence": 80,
-          "relevance_score": 2
-        },
-        {
-          "text": "Double-tap: Answer a call; play/pause music playback.",
-          "source": "p",
-          "confidence": 74,
-          "relevance_score": 2
-        },
-        {
-          "text": "Triple-tap: Skip to next song.",
-          "source": "p",
-          "confidence": 74,
-          "relevance_score": 2
-        },
-        {
-          "text": "Height: 51.3 mm",
-          "source": "p",
-          "confidence": 74,
-          "relevance_score": 2
-        },
-        {
-          "text": "Width: 45.3 mm",
-          "source": "p",
-          "confidence": 74,
-          "relevance_score": 2
-        },
-        {
-          "text": "Depth: 25.3 mm",
-          "source": "p",
-          "confidence": 74,
-          "relevance_score": 2
-        },
-        {
-          "text": "Weight: 42.3 g",
-          "source": "p",
-          "confidence": 74,
-          "relevance_score": 2
-        },
-        {
-          "text": "Weight: 4.2 g",
-          "source": "p",
-          "confidence": 74,
-          "relevance_score": 2
-        },
-        {
-          "text": "Support Qi Wireless Charging",
-          "source": "p",
-          "confidence": 74,
-          "relevance_score": 2
-        },
-        {
-          "text": "Support Type-C Charging",
-          "source": "p",
-          "confidence": 74,
-          "relevance_score": 2
-        },
-        {
-          "text": "Wireless Charging Case",
-          "source": "p",
-          "confidence": 74,
-          "relevance_score": 2
-        },
-        {
-          "text": "Type-C Charging Cable",
-          "source": "p",
-          "confidence": 74,
-          "relevance_score": 2
-        },
-        {
-          "text": "R1 Headphone Chip",
-          "source": "li",
-          "confidence": 77,
-          "relevance_score": 1
-        },
-        {
-          "text": "Up to 17 Hours Playback",
-          "source": "li",
-          "confidence": 77,
-          "relevance_score": 1
-        },
-        {
-          "text": "Optical Sensor for Wear Detection",
-          "source": "li",
-          "confidence": 77,
-          "relevance_score": 1
-        },
-        {
-          "text": "Support Touch Control",
-          "source": "p",
-          "confidence": 71,
-          "relevance_score": 1
-        },
-        {
-          "text": "Press and hold one side: Launch voice assistant; end/decline a call;",
-          "source": "p",
-          "confidence": 71,
-          "relevance_score": 1
-        },
-        {
-          "text": "Press and hold both sides: Enter/exit Gaming Mode.",
-          "source": "p",
-          "confidence": 71,
-          "relevance_score": 1
-        },
-        {
-          "text": "Bluetooth 5.0",
-          "source": "p",
-          "confidence": 71,
-          "relevance_score": 1
-        },
-        {
-          "text": "10 meters Effective Range",
-          "source": "p",
-          "confidence": 71,
-          "relevance_score": 1
-        },
-        {
-          "text": "Type: Half-in Ear",
-          "source": "p",
-          "confidence": 71,
-          "relevance_score": 1
-        }
-      ],
+      "page_identity_score": 1.0,
+      "specifications": {},
+      "features": [],
       "meta": {
-        "html_title": "realme Buds Air Full Specifications - realme (India)",
-        "description": "realme Buds Air - the latest realme earphone in India, discover the specifications includes Chip, Controls, Calling and Connectivity, Size and Weight, Charging Case, Battery, Sensors and Packing list. Learn about more features and price at the realme store.",
-        "canonical_url": "https://www.realme.com/in/realme-buds-air/specs"
+        "html_title": "realme Buds Air8 - 55dB Noise Cancellation | realme Indonesia",
+        "description": "Jelajahi realme Buds Air8 dengan 55dB noise cancellation, 11+6mm Premier Dual Drivers, AI voice assistant, baterai hingga 58 jam dan IP55.",
+        "canonical_url": "https://www.realme.com/id/more-products/realme-buds-air-8"
       },
       "evidence_summary": {
         "parser": "lxml",
@@ -252,17 +53,2109 @@
         "json_ld_specifications": 0,
         "table_specifications": 0,
         "definition_list_specifications": 0,
-        "label_value_specifications": 5,
-        "total_specifications": 5,
-        "feature_items": 28,
-        "noise_filter_version": "2.0"
+        "label_value_specifications": 0,
+        "structured_section_specifications": 0,
+        "embedded_state_specifications": 0,
+        "shopify_oxygen_specifications": 0,
+        "apple_techspecs_specifications": 0,
+        "total_specifications": 0,
+        "feature_items": 0,
+        "media_product_images": 38,
+        "media_ui_assets": 6,
+        "noise_filter_version": "2.0",
+        "media_ranker_status": "success",
+        "vision_candidate_count": 8,
+        "vision_queue_status": "ready",
+        "vision_evidence_count": 8,
+        "vision_claim_schema_version": "1.0",
+        "vision_claim_slots_initialized": 8,
+        "vision_provider": "none",
+        "source_attempts": [
+          {
+            "url": "https://www.realme.com/in/more-products/realme-buds-air-8",
+            "source_type": "product",
+            "fetch_status": "success",
+            "page_identity_score": 1.0,
+            "specification_count": 0,
+            "feature_count": 0,
+            "review_status": "rejected_candidate"
+          }
+        ],
+        "sources_attempted": 2,
+        "vision_import_status": "completed",
+        "vision_imported_results": 8,
+        "vision_imported_claims": 35,
+        "vision_skipped_results": 0,
+        "vision_provenance_mismatches": 0,
+        "vision_validation_status": "completed",
+        "vision_review_ready_claims": 30,
+        "vision_rejected_claims": 1,
+        "vision_duplicate_claims": 1,
+        "vision_conflicting_claims": 3,
+        "vision_identity_context_inheritance": true,
+        "semantic_consolidation_status": "ready_for_review",
+        "semantic_fact_count": 18,
+        "semantic_validation_issues": 0
+      },
+      "media_evidence": {
+        "collector": "embedded_application_state",
+        "total_images": 44,
+        "product_image_count": 38,
+        "desktop_count": 17,
+        "mobile_count": 21,
+        "generic_candidate_count": 0,
+        "excluded_ui_assets": 6,
+        "product_images": [
+          {
+            "url": "https://image01.realme.net/general/20260224/17719275369678ce08d0aa87d4d14b2a9656634ce1cc8.jpg",
+            "path": "root[1].state.$sindex.pc[0]",
+            "role": "product_desktop"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927541122a2b562bf38d04f5ab4405bdea571775a.jpg",
+            "path": "root[1].state.$sindex.pc[1]",
+            "role": "product_desktop"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927542331fd4a21a4e79842028dd9e75891b7d329.jpg",
+            "path": "root[1].state.$sindex.pc[2]",
+            "role": "product_desktop"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927543301d597bd099b2e4b48a8a89cdef7442b1b.jpg",
+            "path": "root[1].state.$sindex.pc[3]",
+            "role": "product_desktop"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927544639ccdaee9d30524b148fb6219a5ada913a.jpg",
+            "path": "root[1].state.$sindex.pc[4]",
+            "role": "product_desktop"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927546038040cb470e439405a82da0955f0996364.jpg",
+            "path": "root[1].state.$sindex.pc[5]",
+            "role": "product_desktop"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927547560a751489cb3894f26ac0cd9c80123d505.jpg",
+            "path": "root[1].state.$sindex.pc[6]",
+            "role": "product_desktop"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/177192754879613d0b2c4598f4d34bca5a0b772b10c2f.jpg",
+            "path": "root[1].state.$sindex.pc[7]",
+            "role": "product_desktop"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/177192755005883347ece40da4f2d9a4a5faadfed5363.jpg",
+            "path": "root[1].state.$sindex.pc[8]",
+            "role": "product_desktop"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/177192755155447b1be946ca44cc69cdfd4570b18d46d.jpg",
+            "path": "root[1].state.$sindex.pc[9]",
+            "role": "product_desktop"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927553259196af3c7736f499086e13761e1d9c3c5.jpg",
+            "path": "root[1].state.$sindex.pc[10]",
+            "role": "product_desktop"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927554695f9fdd4bc21f04ae1b24067d7e1081505.jpg",
+            "path": "root[1].state.$sindex.pc[11]",
+            "role": "product_desktop"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927556620059c0c30f8bb44d2883bfc66ff418f05.jpg",
+            "path": "root[1].state.$sindex.pc[12]",
+            "role": "product_desktop"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927557462d63ab60bd86d4afdbbb957af38145019.jpg",
+            "path": "root[1].state.$sindex.pc[13]",
+            "role": "product_desktop"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/177192755916478c2465ea6fe4351907d16d34a9ce487.jpg",
+            "path": "root[1].state.$sindex.pc[14]",
+            "role": "product_desktop"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/17719275606254bfca9e14ff34b9e8d75d133d7e00e37.jpg",
+            "path": "root[1].state.$sindex.pc[15]",
+            "role": "product_desktop"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+            "path": "root[1].state.$sindex.pc[16]",
+            "role": "product_desktop"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927579369f8962cd26eae4bc3ad2129b52dacbcb1.jpg",
+            "path": "root[1].state.$sindex.mobile[0]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927580669ef70128f001d49fd95766c1a8c49747f.jpg",
+            "path": "root[1].state.$sindex.mobile[1]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/177192758239958cd07fee7ea408184fc754232ce4759.jpg",
+            "path": "root[1].state.$sindex.mobile[2]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927584066b17b17b4fd2a4ab682ff0550b66c65c9.jpg",
+            "path": "root[1].state.$sindex.mobile[3]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927585391e6632a01d65c4ee794258d8c5ddea10d.jpg",
+            "path": "root[1].state.$sindex.mobile[4]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/177192758678229fd2f53649f404d8a27e914b86b7cf1.jpg",
+            "path": "root[1].state.$sindex.mobile[5]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927588137f7b0cb36d4a740f0b8f7938066750596.jpg",
+            "path": "root[1].state.$sindex.mobile[6]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/177192758936168d964ffe8f54b98bf0191d1e394f05f.jpg",
+            "path": "root[1].state.$sindex.mobile[7]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/177192759096309b4e3c632d946a1bda82d38d2246ccb.jpg",
+            "path": "root[1].state.$sindex.mobile[8]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927592266e7bfa89ddacd4e67b3610bb4ea40b036.jpg",
+            "path": "root[1].state.$sindex.mobile[9]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927594130eab20a7893f8433b893fb5f161e3cb7e.jpg",
+            "path": "root[1].state.$sindex.mobile[10]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/17719275957591c9842b929824e9f87910b6b710a7217.jpg",
+            "path": "root[1].state.$sindex.mobile[11]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/17719275970640c0857efd43a4e878fcc3c09634a6da2.jpg",
+            "path": "root[1].state.$sindex.mobile[12]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927598277b2bdb36450444f05be51f012683971e4.jpg",
+            "path": "root[1].state.$sindex.mobile[13]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/17719276004243a36ca134467465aa2440a63dfd62362.jpg",
+            "path": "root[1].state.$sindex.mobile[14]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/177192760166152cbb6dbd0b44db99f01c0c07d68962a.jpg",
+            "path": "root[1].state.$sindex.mobile[15]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/17719276033627e443be63892401fad4b66e4b61f20ca.jpg",
+            "path": "root[1].state.$sindex.mobile[16]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927605180246328a0ea2c4bbcb6e6b7e9bd9e8f56.jpg",
+            "path": "root[1].state.$sindex.mobile[17]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/177192760804202eec59fe53e4c34bddfbd498339f974.jpg",
+            "path": "root[1].state.$sindex.mobile[18]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927610795af635834e1634e3b9ddc534d6081e709.jpg",
+            "path": "root[1].state.$sindex.mobile[19]",
+            "role": "product_mobile"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/177192761245083f644f24df244bcac85de046786464f.jpg",
+            "path": "root[1].state.$sindex.mobile[20]",
+            "role": "product_mobile"
+          }
+        ],
+        "ui_assets": [
+          {
+            "url": "https://image01.realme.net/general/20260308/1772975609159e9655ad7b15a4fb59dd36a2b43a8995f.png",
+            "path": "root[1].state.$snavbar.dialog.list[0].icon",
+            "role": "ui_asset"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260308/177297561962923e248a5f7964191a99f36e915d22571.png",
+            "path": "root[1].state.$snavbar.dialog.list[1].icon",
+            "role": "ui_asset"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260308/1772975629584d6ab6e84744d470589722c5590fb2375.png",
+            "path": "root[1].state.$snavbar.dialog.list[2].icon",
+            "role": "ui_asset"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260308/17729756396165776df1bfe8341fe853adcdc9b9fe5c8.png",
+            "path": "root[1].state.$snavbar.dialog.list[3].icon",
+            "role": "ui_asset"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260308/17729756484824c4b37417211484ebe40fd303ca680f9.png",
+            "path": "root[1].state.$snavbar.dialog.list[4].icon",
+            "role": "ui_asset"
+          },
+          {
+            "url": "https://image01.realme.net/general/20260308/1772975657652759c475f907848b09e6a7af139ede2eb.png",
+            "path": "root[1].state.$snavbar.dialog.list[5].icon",
+            "role": "ui_asset"
+          }
+        ],
+        "ocr_status": "not_run",
+        "vision_status": "not_run",
+        "ranker_status": "success",
+        "ranker_scanned": 17,
+        "ranked_images": [
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927556620059c0c30f8bb44d2883bfc66ff418f05.jpg",
+            "path": "root[1].state.$sindex.pc[12]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 4664,
+            "size_kb": 6461,
+            "mean_edge": 18.0477,
+            "strong_edge_ratio": 0.070439,
+            "perceptual_hash": "16198562601891965104",
+            "rank_score": 78
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927554695f9fdd4bc21f04ae1b24067d7e1081505.jpg",
+            "path": "root[1].state.$sindex.pc[11]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 3836,
+            "size_kb": 3197,
+            "mean_edge": 14.3558,
+            "strong_edge_ratio": 0.064549,
+            "perceptual_hash": "15340637902664118288",
+            "rank_score": 78
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927546038040cb470e439405a82da0955f0996364.jpg",
+            "path": "root[1].state.$sindex.pc[5]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 3138,
+            "size_kb": 5413,
+            "mean_edge": 12.688,
+            "strong_edge_ratio": 0.053141,
+            "perceptual_hash": "4611686142054589215",
+            "rank_score": 78
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+            "path": "root[1].state.$sindex.pc[16]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 4676,
+            "size_kb": 1980,
+            "mean_edge": 11.6207,
+            "strong_edge_ratio": 0.056647,
+            "perceptual_hash": "16782832067439280320",
+            "rank_score": 70
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927541122a2b562bf38d04f5ab4405bdea571775a.jpg",
+            "path": "root[1].state.$sindex.pc[1]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 2668,
+            "size_kb": 3862,
+            "mean_edge": 11.7029,
+            "strong_edge_ratio": 0.046,
+            "perceptual_hash": "13756991375835441286",
+            "rank_score": 70
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/177192755155447b1be946ca44cc69cdfd4570b18d46d.jpg",
+            "path": "root[1].state.$sindex.pc[9]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 2604,
+            "size_kb": 8088,
+            "mean_edge": 11.033,
+            "strong_edge_ratio": 0.040616,
+            "perceptual_hash": "1374201940752736864",
+            "rank_score": 70
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927544639ccdaee9d30524b148fb6219a5ada913a.jpg",
+            "path": "root[1].state.$sindex.pc[4]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 1964,
+            "size_kb": 2435,
+            "mean_edge": 12.2218,
+            "strong_edge_ratio": 0.050817,
+            "perceptual_hash": "17353165250598441548",
+            "rank_score": 68
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/177192754879613d0b2c4598f4d34bca5a0b772b10c2f.jpg",
+            "path": "root[1].state.$sindex.pc[7]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 2092,
+            "size_kb": 4527,
+            "mean_edge": 13.0224,
+            "strong_edge_ratio": 0.050572,
+            "perceptual_hash": "2192379739636548750",
+            "rank_score": 68
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927557462d63ab60bd86d4afdbbb957af38145019.jpg",
+            "path": "root[1].state.$sindex.pc[13]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 2330,
+            "size_kb": 2114,
+            "mean_edge": 9.2123,
+            "strong_edge_ratio": 0.042977,
+            "perceptual_hash": "9284409194046578784",
+            "rank_score": 60
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/17719275606254bfca9e14ff34b9e8d75d133d7e00e37.jpg",
+            "path": "root[1].state.$sindex.pc[15]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 1958,
+            "size_kb": 2067,
+            "mean_edge": 9.9412,
+            "strong_edge_ratio": 0.042578,
+            "perceptual_hash": "51435963927664128",
+            "rank_score": 60
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/177192755916478c2465ea6fe4351907d16d34a9ce487.jpg",
+            "path": "root[1].state.$sindex.pc[14]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 2834,
+            "size_kb": 2271,
+            "mean_edge": 7.4094,
+            "strong_edge_ratio": 0.030986,
+            "perceptual_hash": "7523378046161769493",
+            "rank_score": 60
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/177192755005883347ece40da4f2d9a4a5faadfed5363.jpg",
+            "path": "root[1].state.$sindex.pc[8]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 2616,
+            "size_kb": 2076,
+            "mean_edge": 7.0937,
+            "strong_edge_ratio": 0.027645,
+            "perceptual_hash": "11575582417526882816",
+            "rank_score": 60
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927553259196af3c7736f499086e13761e1d9c3c5.jpg",
+            "path": "root[1].state.$sindex.pc[10]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 2608,
+            "size_kb": 2481,
+            "mean_edge": 6.8655,
+            "strong_edge_ratio": 0.02439,
+            "perceptual_hash": "7016855475891265664",
+            "rank_score": 60
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927547560a751489cb3894f26ac0cd9c80123d505.jpg",
+            "path": "root[1].state.$sindex.pc[6]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 2458,
+            "size_kb": 2515,
+            "mean_edge": 6.4818,
+            "strong_edge_ratio": 0.02495,
+            "perceptual_hash": "9838316413087513340",
+            "rank_score": 50
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927542331fd4a21a4e79842028dd9e75891b7d329.jpg",
+            "path": "root[1].state.$sindex.pc[2]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 1876,
+            "size_kb": 3809,
+            "mean_edge": 6.4126,
+            "strong_edge_ratio": 0.023699,
+            "perceptual_hash": "217020846220232553",
+            "rank_score": 50
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927543301d597bd099b2e4b48a8a89cdef7442b1b.jpg",
+            "path": "root[1].state.$sindex.pc[3]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 2120,
+            "size_kb": 3841,
+            "mean_edge": 6.3763,
+            "strong_edge_ratio": 0.023643,
+            "perceptual_hash": "1916480327508834360",
+            "rank_score": 50
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/17719275369678ce08d0aa87d4d14b2a9656634ce1cc8.jpg",
+            "path": "root[1].state.$sindex.pc[0]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 1050,
+            "size_kb": 1060,
+            "mean_edge": 13.4979,
+            "strong_edge_ratio": 0.0565,
+            "perceptual_hash": "904252229332187923",
+            "rank_score": 43
+          }
+        ],
+        "vision_candidates": [
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927556620059c0c30f8bb44d2883bfc66ff418f05.jpg",
+            "path": "root[1].state.$sindex.pc[12]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 4664,
+            "size_kb": 6461,
+            "mean_edge": 18.0477,
+            "strong_edge_ratio": 0.070439,
+            "perceptual_hash": "16198562601891965104",
+            "rank_score": 78
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927554695f9fdd4bc21f04ae1b24067d7e1081505.jpg",
+            "path": "root[1].state.$sindex.pc[11]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 3836,
+            "size_kb": 3197,
+            "mean_edge": 14.3558,
+            "strong_edge_ratio": 0.064549,
+            "perceptual_hash": "15340637902664118288",
+            "rank_score": 78
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927546038040cb470e439405a82da0955f0996364.jpg",
+            "path": "root[1].state.$sindex.pc[5]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 3138,
+            "size_kb": 5413,
+            "mean_edge": 12.688,
+            "strong_edge_ratio": 0.053141,
+            "perceptual_hash": "4611686142054589215",
+            "rank_score": 78
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+            "path": "root[1].state.$sindex.pc[16]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 4676,
+            "size_kb": 1980,
+            "mean_edge": 11.6207,
+            "strong_edge_ratio": 0.056647,
+            "perceptual_hash": "16782832067439280320",
+            "rank_score": 70
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927541122a2b562bf38d04f5ab4405bdea571775a.jpg",
+            "path": "root[1].state.$sindex.pc[1]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 2668,
+            "size_kb": 3862,
+            "mean_edge": 11.7029,
+            "strong_edge_ratio": 0.046,
+            "perceptual_hash": "13756991375835441286",
+            "rank_score": 70
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/177192755155447b1be946ca44cc69cdfd4570b18d46d.jpg",
+            "path": "root[1].state.$sindex.pc[9]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 2604,
+            "size_kb": 8088,
+            "mean_edge": 11.033,
+            "strong_edge_ratio": 0.040616,
+            "perceptual_hash": "1374201940752736864",
+            "rank_score": 70
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/1771927544639ccdaee9d30524b148fb6219a5ada913a.jpg",
+            "path": "root[1].state.$sindex.pc[4]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 1964,
+            "size_kb": 2435,
+            "mean_edge": 12.2218,
+            "strong_edge_ratio": 0.050817,
+            "perceptual_hash": "17353165250598441548",
+            "rank_score": 68
+          },
+          {
+            "url": "https://image01.realme.net/general/20260224/177192754879613d0b2c4598f4d34bca5a0b772b10c2f.jpg",
+            "path": "root[1].state.$sindex.pc[7]",
+            "role": "product_desktop",
+            "width": 2624,
+            "height": 2092,
+            "size_kb": 4527,
+            "mean_edge": 13.0224,
+            "strong_edge_ratio": 0.050572,
+            "perceptual_hash": "2192379739636548750",
+            "rank_score": 68
+          }
+        ],
+        "vision_candidate_count": 8,
+        "vision_queue_status": "ready",
+        "vision_evidence_queue": [
+          {
+            "evidence_id": "media_01",
+            "product_name": "realme Buds Air 8",
+            "official_page": "https://www.realme.com/id/more-products/realme-buds-air-8",
+            "image_url": "https://image01.realme.net/general/20260224/1771927556620059c0c30f8bb44d2883bfc66ff418f05.jpg",
+            "image_path": "root[1].state.$sindex.pc[12]",
+            "image_role": "product_desktop",
+            "rank_score": 78,
+            "width": 2624,
+            "height": 4664,
+            "size_kb": 6461,
+            "source_language": "id",
+            "target_language": "en",
+            "analysis_status": "completed",
+            "claim_status": "review_ready",
+            "claims": [
+              {
+                "claim_id": "media_01_01_claim",
+                "claim_type": "translation_support",
+                "original_text": "Didukung Next AI dengan terjemahan langsung untuk lebih dari 30 bahasa",
+                "english_text": "Powered by Next AI with live translation for over 30 languages.",
+                "value": 30,
+                "unit": "languages",
+                "confidence": 95,
+                "source_image": "https://image01.realme.net/general/20260224/1771927556620059c0c30f8bb44d2883bfc66ff418f05.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_01_02_claim",
+                "claim_type": "feature",
+                "original_text": "AI Face to Face Translator",
+                "english_text": "Supports AI Face-to-Face Translator.",
+                "value": null,
+                "unit": "",
+                "confidence": 95,
+                "source_image": "https://image01.realme.net/general/20260224/1771927556620059c0c30f8bb44d2883bfc66ff418f05.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_01_03_claim",
+                "claim_type": "app_compatibility",
+                "original_text": "Fitur ini perlu diaktifkan melalui aplikasi realme Link.",
+                "english_text": "Requires activation via the realme Link app.",
+                "value": null,
+                "unit": "",
+                "confidence": 95,
+                "source_image": "https://image01.realme.net/general/20260224/1771927556620059c0c30f8bb44d2883bfc66ff418f05.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              }
+            ],
+            "publish_image": false,
+            "usage_mode": "internal_evidence_only",
+            "claim_schema_version": "1.0",
+            "claim_template": {
+              "claim_id": "media_01_claim_01",
+              "claim_type": "",
+              "original_text": "",
+              "english_text": "",
+              "value": null,
+              "unit": "",
+              "confidence": 0,
+              "source_image": "https://image01.realme.net/general/20260224/1771927556620059c0c30f8bb44d2883bfc66ff418f05.jpg",
+              "source_language": "auto_detect",
+              "evidence_status": "unverified",
+              "product_identity_supported": false,
+              "publish_allowed": false
+            },
+            "vision_provider": "gemini",
+            "vision_analysis": {
+              "status": "completed",
+              "provider": "gemini",
+              "source_language": "id",
+              "target_language": "en",
+              "raw_text": "TELINGA DENGAN ASISTEN AI AI Penerjemah Langsung AI Face to Face Translator Didukung Next AI dengan terjemahan langsung untuk lebih dari 30 bahasa, Air8 membuat setiap percakapan terasa lancar dan bebas batas, kapan pun dan di mana pun. *Fitur ini perlu diaktifkan melalui aplikasi realme Link.",
+              "claim_count": 3
+            }
+          },
+          {
+            "evidence_id": "media_02",
+            "product_name": "realme Buds Air 8",
+            "official_page": "https://www.realme.com/id/more-products/realme-buds-air-8",
+            "image_url": "https://image01.realme.net/general/20260224/1771927554695f9fdd4bc21f04ae1b24067d7e1081505.jpg",
+            "image_path": "root[1].state.$sindex.pc[11]",
+            "image_role": "product_desktop",
+            "rank_score": 78,
+            "width": 2624,
+            "height": 3836,
+            "size_kb": 3197,
+            "source_language": "id",
+            "target_language": "en",
+            "analysis_status": "completed",
+            "claim_status": "review_ready",
+            "claims": [
+              {
+                "claim_id": "media_02_01_claim",
+                "claim_type": "adaptive_noise_cancellation",
+                "original_text": "realme Buds Air8 menyesuaikan tingkat peredaman bising secara otomatis",
+                "english_text": "realme Buds Air8 automatically adjusts noise reduction levels.",
+                "value": null,
+                "unit": "",
+                "confidence": 95,
+                "source_image": "https://image01.realme.net/general/20260224/1771927554695f9fdd4bc21f04ae1b24067d7e1081505.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_02_02_claim",
+                "claim_type": "microphone_count",
+                "original_text": "Peredam Suara Dalam dengan 6 Mikrofon",
+                "english_text": "Features a 6-microphone system.",
+                "value": 6,
+                "unit": "microphones",
+                "confidence": 98,
+                "source_image": "https://image01.realme.net/general/20260224/1771927554695f9fdd4bc21f04ae1b24067d7e1081505.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_02_03_claim",
+                "claim_type": "microphones_per_earbud",
+                "original_text": "3 di tiap earbud",
+                "english_text": "Equipped with 3 microphones per earbud (FF MIC, FB MIC, TALK MIC).",
+                "value": 3,
+                "unit": "microphones per earbud",
+                "confidence": 98,
+                "source_image": "https://image01.realme.net/general/20260224/1771927554695f9fdd4bc21f04ae1b24067d7e1081505.jpg",
+                "source_language": "id",
+                "evidence_status": "rejected",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "rejected",
+                  "reasons": [
+                    "Unit looks invalid"
+                  ]
+                }
+              }
+            ],
+            "publish_image": false,
+            "usage_mode": "internal_evidence_only",
+            "claim_schema_version": "1.0",
+            "claim_template": {
+              "claim_id": "media_02_claim_01",
+              "claim_type": "",
+              "original_text": "",
+              "english_text": "",
+              "value": null,
+              "unit": "",
+              "confidence": 0,
+              "source_image": "https://image01.realme.net/general/20260224/1771927554695f9fdd4bc21f04ae1b24067d7e1081505.jpg",
+              "source_language": "auto_detect",
+              "evidence_status": "unverified",
+              "product_identity_supported": false,
+              "publish_allowed": false
+            },
+            "vision_provider": "gemini",
+            "vision_analysis": {
+              "status": "completed",
+              "provider": "gemini",
+              "source_language": "id",
+              "target_language": "en",
+              "raw_text": "Peredam Bising Adaptif Secara Langsung. realme Buds Air8 menyesuaikan tingkat peredaman bising secara otomatis. Deep noise reduction, Balanced noise reduction, Mild noise reduction. Peredam Suara Dalam dengan 6 Mikrofon. Dilengkapi sistem 6 mikrofon (3 di tiap earbud). FF MIC, FB MIC, TALK MIC.",
+              "claim_count": 3
+            }
+          },
+          {
+            "evidence_id": "media_03",
+            "product_name": "realme Buds Air 8",
+            "official_page": "https://www.realme.com/id/more-products/realme-buds-air-8",
+            "image_url": "https://image01.realme.net/general/20260224/1771927546038040cb470e439405a82da0955f0996364.jpg",
+            "image_path": "root[1].state.$sindex.pc[5]",
+            "image_role": "product_desktop",
+            "rank_score": 78,
+            "width": 2624,
+            "height": 3138,
+            "size_kb": 5413,
+            "source_language": "id",
+            "target_language": "en",
+            "analysis_status": "completed",
+            "claim_status": "review_ready",
+            "claims": [
+              {
+                "claim_id": "media_03_01_claim",
+                "claim_type": "audio_driver",
+                "original_text": "11+6mm Premier Dual Drivers",
+                "english_text": "11mm + 6mm dual drivers",
+                "value": null,
+                "unit": "mm",
+                "confidence": 95,
+                "source_image": "https://image01.realme.net/general/20260224/1771927546038040cb470e439405a82da0955f0996364.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": false,
+                "product_identity_support_source": "official_page_media_context",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_03_02_claim",
+                "claim_type": "magnet_type",
+                "original_text": "Magnet N52 pada tweeter 6mm",
+                "english_text": "N52 magnet on 6mm tweeter",
+                "value": "N52",
+                "unit": "",
+                "confidence": 95,
+                "source_image": "https://image01.realme.net/general/20260224/1771927546038040cb470e439405a82da0955f0996364.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": false,
+                "product_identity_support_source": "official_page_media_context",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_03_03_claim",
+                "claim_type": "diaphragm_purity",
+                "original_text": "Diafragma 100% Berkemurnian Tinggi",
+                "english_text": "100% high-purity diaphragm",
+                "value": 100,
+                "unit": "%",
+                "confidence": 95,
+                "source_image": "https://image01.realme.net/general/20260224/1771927546038040cb470e439405a82da0955f0996364.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": false,
+                "product_identity_support_source": "official_page_media_context",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              }
+            ],
+            "publish_image": false,
+            "usage_mode": "internal_evidence_only",
+            "claim_schema_version": "1.0",
+            "claim_template": {
+              "claim_id": "media_03_claim_01",
+              "claim_type": "",
+              "original_text": "",
+              "english_text": "",
+              "value": null,
+              "unit": "",
+              "confidence": 0,
+              "source_image": "https://image01.realme.net/general/20260224/1771927546038040cb470e439405a82da0955f0996364.jpg",
+              "source_language": "auto_detect",
+              "evidence_status": "unverified",
+              "product_identity_supported": false,
+              "publish_allowed": false
+            },
+            "vision_provider": "gemini",
+            "vision_analysis": {
+              "status": "completed",
+              "provider": "gemini",
+              "source_language": "id",
+              "target_language": "en",
+              "raw_text": "SOUND MASTER 11+6mm Premier Dual Drivers Suara Presisi, Lapisan Audio Mendalam. Earbud dual-driver unggulan di kelasnya. Nada tinggi terdengar jernih dan terang, sementara nada rendah dinamis dan dalam, menghadirkan pengalaman mendengarkan yang murni dan imersif. Magnet N52 pada tweeter 6mm independen menciptakan medan magnet lebih kuat, memastikan nada tinggi lebih jelas. Diafragma 100% Berkemurnian Tinggi meningkatkan kejernihan setiap nada yang terdengar di telingamu.",
+              "claim_count": 3
+            }
+          },
+          {
+            "evidence_id": "media_04",
+            "product_name": "realme Buds Air 8",
+            "official_page": "https://www.realme.com/id/more-products/realme-buds-air-8",
+            "image_url": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+            "image_path": "root[1].state.$sindex.pc[16]",
+            "image_role": "product_desktop",
+            "rank_score": 70,
+            "width": 2624,
+            "height": 4676,
+            "size_kb": 1980,
+            "source_language": "id",
+            "target_language": "en",
+            "analysis_status": "completed",
+            "claim_status": "review_ready",
+            "claims": [
+              {
+                "claim_id": "media_04_01_claim",
+                "claim_type": "product_identity",
+                "original_text": "realme Buds Air8",
+                "english_text": "realme Buds Air8",
+                "value": "realme Buds Air8",
+                "unit": "",
+                "confidence": 100,
+                "source_image": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_04_02_claim",
+                "claim_type": "microphone_count",
+                "original_text": "Jumlah Mikrofon: 3 buah per earbud",
+                "english_text": "Microphone count: 3 per earbud",
+                "value": 3,
+                "unit": "per earbud",
+                "confidence": 100,
+                "source_image": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_04_03_claim",
+                "claim_type": "bluetooth_codec",
+                "original_text": "Codec Bluetooth: SBC/AAC/LHDC",
+                "english_text": "Bluetooth codecs: SBC/AAC/LHDC",
+                "value": "SBC/AAC/LHDC",
+                "unit": "",
+                "confidence": 100,
+                "source_image": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_04_04_claim",
+                "claim_type": "bluetooth_version",
+                "original_text": "Versi Bluetooth: 5.4",
+                "english_text": "Bluetooth version: 5.4",
+                "value": 5.4,
+                "unit": "",
+                "confidence": 100,
+                "source_image": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_04_05_claim",
+                "claim_type": "bluetooth_range",
+                "original_text": "Jarak Efektif Bluetooth: <=10m",
+                "english_text": "Effective Bluetooth range: <=10m",
+                "value": 10,
+                "unit": "m",
+                "confidence": 100,
+                "source_image": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_04_06_claim",
+                "claim_type": "ip_rating",
+                "original_text": "Peringkat Tahan Debu & Air: IP55",
+                "english_text": "Dust & water resistance rating: IP55",
+                "value": "IP55",
+                "unit": "",
+                "confidence": 100,
+                "source_image": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_04_07_claim",
+                "claim_type": "battery_capacity",
+                "original_text": "62mAh (Earbuds)",
+                "english_text": "Earbud battery capacity: 62 mAh",
+                "value": 62,
+                "unit": "mAh",
+                "confidence": 100,
+                "source_image": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_04_08_claim",
+                "claim_type": "battery_capacity",
+                "original_text": "530 mAh (Casing Pengisi Daya)",
+                "english_text": "Charging case battery capacity: 530 mAh",
+                "value": 530,
+                "unit": "mAh",
+                "confidence": 100,
+                "source_image": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_04_09_claim",
+                "claim_type": "battery_life",
+                "original_text": "Earbuds: 14 jam",
+                "english_text": "Earbuds battery life: 14 hours",
+                "value": 14,
+                "unit": "hours",
+                "confidence": 100,
+                "source_image": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_04_10_claim",
+                "claim_type": "battery_life",
+                "original_text": "Earbuds + Casing Pengisi Daya: 58 jam",
+                "english_text": "Earbuds + Charging Case total battery life: 58 hours",
+                "value": 58,
+                "unit": "hours",
+                "confidence": 100,
+                "source_image": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_04_11_claim",
+                "claim_type": "charging_time",
+                "original_text": "Earbuds: 1 jam untuk pengisian penuh",
+                "english_text": "Earbuds full charge time: 1 hour",
+                "value": 1,
+                "unit": "hours",
+                "confidence": 100,
+                "source_image": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_04_12_claim",
+                "claim_type": "charging_time",
+                "original_text": "Earbuds + casing pengisi daya: 2 jam untuk pengisian penuh",
+                "english_text": "Earbuds + charging case full charge time: 2 hours",
+                "value": 2,
+                "unit": "hours",
+                "confidence": 100,
+                "source_image": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_04_13_claim",
+                "claim_type": "charging_port",
+                "original_text": "Tipe Port Pengisian: Type-C",
+                "english_text": "Charging port type: Type-C",
+                "value": "Type-C",
+                "unit": "",
+                "confidence": 100,
+                "source_image": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              }
+            ],
+            "publish_image": false,
+            "usage_mode": "internal_evidence_only",
+            "claim_schema_version": "1.0",
+            "claim_template": {
+              "claim_id": "media_04_claim_01",
+              "claim_type": "",
+              "original_text": "",
+              "english_text": "",
+              "value": null,
+              "unit": "",
+              "confidence": 0,
+              "source_image": "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg",
+              "source_language": "auto_detect",
+              "evidence_status": "unverified",
+              "product_identity_supported": false,
+              "publish_allowed": false
+            },
+            "vision_provider": "gemini",
+            "vision_analysis": {
+              "status": "completed",
+              "provider": "gemini",
+              "source_language": "id",
+              "target_language": "en",
+              "raw_text": "realme Buds Air8 Specs Nama Produk: realme Buds Air8 Jumlah Mikrofon: 3 buah per earbud Codec Bluetooth: SBC/AAC/LHDC Versi Bluetooth: 5.4 Jarak Efektif Bluetooth: <=10m Peringkat Tahan Debu & Air: IP55 Indikator Status: Merah,Putih, Hijau Kapasitas Baterai: 62mAh (Earbuds)/530 mAh (Casing Pengisi Daya) Daya Tahan Baterai (Pemutaran Musik, Volume 50%, Mode Normal): Earbuds: 14 jam Earbuds + Casing Pengisi Daya: 58 jam Waktu Pengisian: Earbuds: 1 jam untuk pengisian penuh Earbuds + casing pengisi daya: 2 jam untuk pengisian penuh Tipe Port Pengisian: Type-C Suhu Operasi: 0-45°C",
+              "claim_count": 13
+            }
+          },
+          {
+            "evidence_id": "media_05",
+            "product_name": "realme Buds Air 8",
+            "official_page": "https://www.realme.com/id/more-products/realme-buds-air-8",
+            "image_url": "https://image01.realme.net/general/20260224/1771927541122a2b562bf38d04f5ab4405bdea571775a.jpg",
+            "image_path": "root[1].state.$sindex.pc[1]",
+            "image_role": "product_desktop",
+            "rank_score": 70,
+            "width": 2624,
+            "height": 2668,
+            "size_kb": 3862,
+            "source_language": "id",
+            "target_language": "en",
+            "analysis_status": "completed",
+            "claim_status": "review_ready",
+            "claims": [
+              {
+                "claim_id": "media_05_01_claim",
+                "claim_type": "audio_driver",
+                "original_text": "11+6mm Premier Dual Drivers",
+                "english_text": "11+6mm premier dual drivers",
+                "value": "11+6",
+                "unit": "mm",
+                "confidence": 95,
+                "source_image": "https://image01.realme.net/general/20260224/1771927541122a2b562bf38d04f5ab4405bdea571775a.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": false,
+                "product_identity_support_source": "official_page_media_context",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_05_02_claim",
+                "claim_type": "noise_cancellation",
+                "original_text": "AI Peredam Suara Dalam hingga 55dB",
+                "english_text": "Deep AI noise cancellation up to 55dB",
+                "value": 55,
+                "unit": "dB",
+                "confidence": 95,
+                "source_image": "https://image01.realme.net/general/20260224/1771927541122a2b562bf38d04f5ab4405bdea571775a.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": false,
+                "product_identity_support_source": "official_page_media_context",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_05_03_claim",
+                "claim_type": "battery_life",
+                "original_text": "Tahan Hingga 58 Jam Pemutaran",
+                "english_text": "Up to 58 hours of playback time",
+                "value": 58,
+                "unit": "hours",
+                "confidence": 95,
+                "source_image": "https://image01.realme.net/general/20260224/1771927541122a2b562bf38d04f5ab4405bdea571775a.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": false,
+                "product_identity_support_source": "official_page_media_context",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_05_04_claim",
+                "claim_type": "durability",
+                "original_text": "Tahan Debu dan Air IP55",
+                "english_text": "IP55 dust and water resistance",
+                "value": "IP55",
+                "unit": "",
+                "confidence": 95,
+                "source_image": "https://image01.realme.net/general/20260224/1771927541122a2b562bf38d04f5ab4405bdea571775a.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": false,
+                "product_identity_support_source": "official_page_media_context",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_05_05_claim",
+                "claim_type": "connectivity",
+                "original_text": "Dapat Terhubung ke 3 Perangkat Sekaligus",
+                "english_text": "Can connect to 3 devices simultaneously",
+                "value": 3,
+                "unit": "devices",
+                "confidence": 95,
+                "source_image": "https://image01.realme.net/general/20260224/1771927541122a2b562bf38d04f5ab4405bdea571775a.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": false,
+                "product_identity_support_source": "official_page_media_context",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_05_06_claim",
+                "claim_type": "smart_features",
+                "original_text": "Telinga dengan Asisten AI",
+                "english_text": "In-ear with AI Assistant support",
+                "value": null,
+                "unit": "",
+                "confidence": 90,
+                "source_image": "https://image01.realme.net/general/20260224/1771927541122a2b562bf38d04f5ab4405bdea571775a.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": false,
+                "product_identity_support_source": "official_page_media_context",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_05_07_claim",
+                "claim_type": "audio_codec",
+                "original_text": "Hi-Res AUDIO WIRELESS LHDC",
+                "english_text": "Hi-Res Audio Wireless and LHDC support",
+                "value": null,
+                "unit": "",
+                "confidence": 95,
+                "source_image": "https://image01.realme.net/general/20260224/1771927541122a2b562bf38d04f5ab4405bdea571775a.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": false,
+                "product_identity_support_source": "official_page_media_context",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              }
+            ],
+            "publish_image": false,
+            "usage_mode": "internal_evidence_only",
+            "claim_schema_version": "1.0",
+            "claim_template": {
+              "claim_id": "media_05_claim_01",
+              "claim_type": "",
+              "original_text": "",
+              "english_text": "",
+              "value": null,
+              "unit": "",
+              "confidence": 0,
+              "source_image": "https://image01.realme.net/general/20260224/1771927541122a2b562bf38d04f5ab4405bdea571775a.jpg",
+              "source_language": "auto_detect",
+              "evidence_status": "unverified",
+              "product_identity_supported": false,
+              "publish_allowed": false
+            },
+            "vision_provider": "gemini",
+            "vision_analysis": {
+              "status": "completed",
+              "provider": "gemini",
+              "source_language": "id",
+              "target_language": "en",
+              "raw_text": "Master Design realme 11+6mm Premier Dual Drivers Hi-Res AUDIO WIRELESS LHDC AI Peredam Suara Dalam hingga 55dB Tahan Hingga 58 Jam Pemutaran 58 Hrs Tahan Debu dan Air IP55 IP55 Dapat Terhubung ke 3 Perangkat Sekaligus Telinga dengan Asisten AI",
+              "claim_count": 7
+            }
+          },
+          {
+            "evidence_id": "media_06",
+            "product_name": "realme Buds Air 8",
+            "official_page": "https://www.realme.com/id/more-products/realme-buds-air-8",
+            "image_url": "https://image01.realme.net/general/20260224/177192755155447b1be946ca44cc69cdfd4570b18d46d.jpg",
+            "image_path": "root[1].state.$sindex.pc[9]",
+            "image_role": "product_desktop",
+            "rank_score": 70,
+            "width": 2624,
+            "height": 2604,
+            "size_kb": 8088,
+            "source_language": "id",
+            "target_language": "en",
+            "analysis_status": "completed",
+            "claim_status": "duplicate",
+            "claims": [
+              {
+                "claim_id": "media_06_01_claim",
+                "claim_type": "noise_cancellation",
+                "original_text": "AI Peredam Suara Dalam hingga 55dB",
+                "english_text": "Deep AI noise cancellation up to 55dB",
+                "value": 55,
+                "unit": "dB",
+                "confidence": 95,
+                "source_image": "https://image01.realme.net/general/20260224/177192755155447b1be946ca44cc69cdfd4570b18d46d.jpg",
+                "source_language": "id",
+                "evidence_status": "duplicate",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": false,
+                "product_identity_support_source": "official_page_media_context",
+                "validation": {
+                  "status": "duplicate",
+                  "reasons": [
+                    "Duplicate of an already imported claim"
+                  ]
+                }
+              }
+            ],
+            "publish_image": false,
+            "usage_mode": "internal_evidence_only",
+            "claim_schema_version": "1.0",
+            "claim_template": {
+              "claim_id": "media_06_claim_01",
+              "claim_type": "",
+              "original_text": "",
+              "english_text": "",
+              "value": null,
+              "unit": "",
+              "confidence": 0,
+              "source_image": "https://image01.realme.net/general/20260224/177192755155447b1be946ca44cc69cdfd4570b18d46d.jpg",
+              "source_language": "auto_detect",
+              "evidence_status": "unverified",
+              "product_identity_supported": false,
+              "publish_allowed": false
+            },
+            "vision_provider": "gemini",
+            "vision_analysis": {
+              "status": "completed",
+              "provider": "gemini",
+              "source_language": "id",
+              "target_language": "en",
+              "raw_text": "ADAPTIVE SILENCE AI Peredam Suara Dalam hingga 55dB Ketenangan Maksimal di Setiap Situasi Sehari-hari. Kemampuan noise cancellation terbaik di kelasnya menghadirkan momen tenang di lingkungan bising seperti kereta bawah tanah, bandara, dan kantor yang ramai. *Data hingga 55 dB berasal dari realme Lab.",
+              "claim_count": 1
+            }
+          },
+          {
+            "evidence_id": "media_07",
+            "product_name": "realme Buds Air 8",
+            "official_page": "https://www.realme.com/id/more-products/realme-buds-air-8",
+            "image_url": "https://image01.realme.net/general/20260224/1771927544639ccdaee9d30524b148fb6219a5ada913a.jpg",
+            "image_path": "root[1].state.$sindex.pc[4]",
+            "image_role": "product_desktop",
+            "rank_score": 68,
+            "width": 2624,
+            "height": 1964,
+            "size_kb": 2435,
+            "source_language": "id",
+            "target_language": "en",
+            "analysis_status": "completed",
+            "claim_status": "manual_review",
+            "claims": [
+              {
+                "claim_id": "media_07_01_claim",
+                "claim_type": "color_options",
+                "original_text": "Master Gold",
+                "english_text": "Available in Master Gold color variant.",
+                "value": "Master Gold",
+                "unit": "",
+                "confidence": 100,
+                "source_image": "https://image01.realme.net/general/20260224/1771927544639ccdaee9d30524b148fb6219a5ada913a.jpg",
+                "source_language": "id",
+                "evidence_status": "manual_review",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "manual_review",
+                  "reasons": [
+                    "Conflicting values found for same semantic attribute"
+                  ]
+                }
+              },
+              {
+                "claim_id": "media_07_02_claim",
+                "claim_type": "color_options",
+                "original_text": "Master Purple",
+                "english_text": "Available in Master Purple color variant.",
+                "value": "Master Purple",
+                "unit": "",
+                "confidence": 100,
+                "source_image": "https://image01.realme.net/general/20260224/1771927544639ccdaee9d30524b148fb6219a5ada913a.jpg",
+                "source_language": "id",
+                "evidence_status": "manual_review",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "manual_review",
+                  "reasons": [
+                    "Conflicting values found for same semantic attribute"
+                  ]
+                }
+              },
+              {
+                "claim_id": "media_07_03_claim",
+                "claim_type": "color_options",
+                "original_text": "Master Grey",
+                "english_text": "Available in Master Grey color variant.",
+                "value": "Master Grey",
+                "unit": "",
+                "confidence": 100,
+                "source_image": "https://image01.realme.net/general/20260224/1771927544639ccdaee9d30524b148fb6219a5ada913a.jpg",
+                "source_language": "id",
+                "evidence_status": "manual_review",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": true,
+                "product_identity_support_source": "vision_model",
+                "validation": {
+                  "status": "manual_review",
+                  "reasons": [
+                    "Conflicting values found for same semantic attribute"
+                  ]
+                }
+              }
+            ],
+            "publish_image": false,
+            "usage_mode": "internal_evidence_only",
+            "claim_schema_version": "1.0",
+            "claim_template": {
+              "claim_id": "media_07_claim_01",
+              "claim_type": "",
+              "original_text": "",
+              "english_text": "",
+              "value": null,
+              "unit": "",
+              "confidence": 0,
+              "source_image": "https://image01.realme.net/general/20260224/1771927544639ccdaee9d30524b148fb6219a5ada913a.jpg",
+              "source_language": "auto_detect",
+              "evidence_status": "unverified",
+              "product_identity_supported": false,
+              "publish_allowed": false
+            },
+            "vision_provider": "gemini",
+            "vision_analysis": {
+              "status": "completed",
+              "provider": "gemini",
+              "source_language": "id",
+              "target_language": "en",
+              "raw_text": "Warna Terinspirasi dari Alam Dirancang dengan keahlian tinggi dan terinspirasi dari alam, warna realme Buds Air8 menampilkan keindahan yang murni dan elegan. Master Gold Master Purple Master Grey",
+              "claim_count": 3
+            }
+          },
+          {
+            "evidence_id": "media_08",
+            "product_name": "realme Buds Air 8",
+            "official_page": "https://www.realme.com/id/more-products/realme-buds-air-8",
+            "image_url": "https://image01.realme.net/general/20260224/177192754879613d0b2c4598f4d34bca5a0b772b10c2f.jpg",
+            "image_path": "root[1].state.$sindex.pc[7]",
+            "image_role": "product_desktop",
+            "rank_score": 68,
+            "width": 2624,
+            "height": 2092,
+            "size_kb": 4527,
+            "source_language": "id",
+            "target_language": "en",
+            "analysis_status": "completed",
+            "claim_status": "review_ready",
+            "claims": [
+              {
+                "claim_id": "media_08_01_claim",
+                "claim_type": "audio_technology",
+                "original_text": "Algoritma NextBass Hasil Pengembangan Sendiri",
+                "english_text": "Self-developed NextBass algorithm",
+                "value": null,
+                "unit": "",
+                "confidence": 95,
+                "source_image": "https://image01.realme.net/general/20260224/177192754879613d0b2c4598f4d34bca5a0b772b10c2f.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": false,
+                "product_identity_support_source": "official_page_media_context",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              },
+              {
+                "claim_id": "media_08_02_claim",
+                "claim_type": "audio_feature",
+                "original_text": "Algoritma khusus dari realme meningkatkan kekuatan frekuensi rendah",
+                "english_text": "Custom realme algorithm enhances low-frequency power",
+                "value": null,
+                "unit": "",
+                "confidence": 90,
+                "source_image": "https://image01.realme.net/general/20260224/177192754879613d0b2c4598f4d34bca5a0b772b10c2f.jpg",
+                "source_language": "id",
+                "evidence_status": "review_ready",
+                "product_identity_supported": true,
+                "publish_allowed": false,
+                "vision_model_identity_supported": false,
+                "product_identity_support_source": "official_page_media_context",
+                "validation": {
+                  "status": "review_ready",
+                  "reasons": []
+                }
+              }
+            ],
+            "publish_image": false,
+            "usage_mode": "internal_evidence_only",
+            "claim_schema_version": "1.0",
+            "claim_template": {
+              "claim_id": "media_08_claim_01",
+              "claim_type": "",
+              "original_text": "",
+              "english_text": "",
+              "value": null,
+              "unit": "",
+              "confidence": 0,
+              "source_image": "https://image01.realme.net/general/20260224/177192754879613d0b2c4598f4d34bca5a0b772b10c2f.jpg",
+              "source_language": "auto_detect",
+              "evidence_status": "unverified",
+              "product_identity_supported": false,
+              "publish_allowed": false
+            },
+            "vision_provider": "gemini",
+            "vision_analysis": {
+              "status": "completed",
+              "provider": "gemini",
+              "source_language": "id",
+              "target_language": "en",
+              "raw_text": "Algoritma NextBass Hasil Pengembangan Sendiri Bass Lebih Menggelegar, Membuat Setiap Gerakan Lebih Hidup Algoritma khusus dari realme meningkatkan kekuatan frekuensi rendah, menghadirkan pengalaman mendengarkan yang kaya dan dinamis.",
+              "claim_count": 2
+            }
+          }
+        ],
+        "vision_evidence_count": 8,
+        "vision_claim_schema_version": "1.0",
+        "vision_claim_slots_initialized": 8,
+        "vision_provider": {
+          "provider": "none",
+          "enabled": false,
+          "mode": "evidence_only",
+          "target_language": "en",
+          "auto_publish_claims": false,
+          "publish_images": false,
+          "requires_review": true
+        },
+        "vision_import_status": "completed",
+        "vision_imported_results": 8,
+        "vision_imported_claims": 35,
+        "vision_skipped_results": 0,
+        "vision_provenance_mismatches": 0,
+        "vision_validation_status": "completed",
+        "vision_review_ready_claims": 30,
+        "vision_rejected_claims": 1,
+        "vision_duplicate_claims": 1,
+        "vision_conflicting_claims": 3,
+        "vision_identity_context_inheritance": true
       },
       "review": {
         "approved": false,
         "status": "rejected_candidate",
         "reason": "Page does not match the expected product strongly enough"
       },
-      "extracted_at": "2026-08-02T13:20:32.700821+00:00"
+      "extracted_at": "2026-08-08T08:27:02.217499+00:00",
+      "semantic_consolidation": {
+        "schema_version": "1.3",
+        "status": "ready_for_review",
+        "validation": {
+          "status": "passed",
+          "issue_count": 0,
+          "issues": [],
+          "fact_count": 18,
+          "schema_version": "1.3"
+        },
+        "result": {
+          "schema_version": "1.3",
+          "product_name": "realme Buds Air 8",
+          "input_claim_count": 30,
+          "canonical_fact_count": 18,
+          "facts": [
+            {
+              "canonical_key": "product_name",
+              "fact_category": "identity",
+              "normalized_summary": "Product model name is realme Buds Air8",
+              "value": "realme Buds Air8",
+              "unit": "",
+              "operator": "",
+              "qualifier": "",
+              "values": [],
+              "structured_value": {},
+              "confidence": 100,
+              "evidence_ids": [
+                "media_04"
+              ],
+              "source_claim_ids": [
+                "media_04_01_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            },
+            {
+              "canonical_key": "driver_dimension",
+              "fact_category": "dimension",
+              "normalized_summary": "11mm and 6mm dual audio drivers",
+              "value": null,
+              "unit": "mm",
+              "operator": "",
+              "qualifier": "dual drivers",
+              "values": [
+                11,
+                6
+              ],
+              "structured_value": {
+                "woofer_diameter_mm": 11,
+                "tweeter_diameter_mm": 6
+              },
+              "confidence": 95,
+              "evidence_ids": [
+                "media_03",
+                "media_05"
+              ],
+              "source_claim_ids": [
+                "media_03_01_claim",
+                "media_05_01_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            },
+            {
+              "canonical_key": "tweeter_magnet_type",
+              "fact_category": "material_property",
+              "normalized_summary": "N52 magnet on 6mm tweeter",
+              "value": "N52",
+              "unit": "",
+              "operator": "",
+              "qualifier": "6mm tweeter",
+              "values": [],
+              "structured_value": {},
+              "confidence": 95,
+              "evidence_ids": [
+                "media_03"
+              ],
+              "source_claim_ids": [
+                "media_03_02_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            },
+            {
+              "canonical_key": "diaphragm_purity",
+              "fact_category": "material_property",
+              "normalized_summary": "100% high-purity diaphragm",
+              "value": 100,
+              "unit": "%",
+              "operator": "",
+              "qualifier": "diaphragm purity",
+              "values": [],
+              "structured_value": {},
+              "confidence": 95,
+              "evidence_ids": [
+                "media_03"
+              ],
+              "source_claim_ids": [
+                "media_03_03_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            },
+            {
+              "canonical_key": "microphone_count",
+              "fact_category": "count",
+              "normalized_summary": "6 microphones total (3 per earbud)",
+              "value": 6,
+              "unit": "microphones",
+              "operator": "",
+              "qualifier": "total system",
+              "values": [],
+              "structured_value": {
+                "total_count": 6,
+                "per_earbud": 3
+              },
+              "confidence": 99,
+              "evidence_ids": [
+                "media_02",
+                "media_04"
+              ],
+              "source_claim_ids": [
+                "media_02_02_claim",
+                "media_04_02_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            },
+            {
+              "canonical_key": "supported_translation_languages_count",
+              "fact_category": "count",
+              "normalized_summary": "Live translation support for over 30 languages",
+              "value": 30,
+              "unit": "languages",
+              "operator": "over",
+              "qualifier": "live translation",
+              "values": [],
+              "structured_value": {},
+              "confidence": 95,
+              "evidence_ids": [
+                "media_01"
+              ],
+              "source_claim_ids": [
+                "media_01_01_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            },
+            {
+              "canonical_key": "simultaneous_device_connection_count",
+              "fact_category": "count",
+              "normalized_summary": "Connects to up to 3 devices simultaneously",
+              "value": 3,
+              "unit": "devices",
+              "operator": "",
+              "qualifier": "simultaneous connection",
+              "values": [],
+              "structured_value": {},
+              "confidence": 95,
+              "evidence_ids": [
+                "media_05"
+              ],
+              "source_claim_ids": [
+                "media_05_05_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            },
+            {
+              "canonical_key": "audio_codecs",
+              "fact_category": "codec",
+              "normalized_summary": "Supports SBC, AAC, and LHDC codecs",
+              "value": null,
+              "unit": "",
+              "operator": "",
+              "qualifier": "",
+              "values": [
+                "SBC",
+                "AAC",
+                "LHDC"
+              ],
+              "structured_value": {},
+              "confidence": 98,
+              "evidence_ids": [
+                "media_04",
+                "media_05"
+              ],
+              "source_claim_ids": [
+                "media_04_03_claim",
+                "media_05_07_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            },
+            {
+              "canonical_key": "audio_certification",
+              "fact_category": "certification",
+              "normalized_summary": "Hi-Res Audio Wireless certification",
+              "value": "Hi-Res Audio Wireless",
+              "unit": "",
+              "operator": "",
+              "qualifier": "",
+              "values": [],
+              "structured_value": {},
+              "confidence": 95,
+              "evidence_ids": [
+                "media_05"
+              ],
+              "source_claim_ids": [
+                "media_05_07_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            },
+            {
+              "canonical_key": "bluetooth_version",
+              "fact_category": "version",
+              "normalized_summary": "Bluetooth version 5.4",
+              "value": 5.4,
+              "unit": "",
+              "operator": "",
+              "qualifier": "",
+              "values": [],
+              "structured_value": {},
+              "confidence": 100,
+              "evidence_ids": [
+                "media_04"
+              ],
+              "source_claim_ids": [
+                "media_04_04_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            },
+            {
+              "canonical_key": "bluetooth_operating_range",
+              "fact_category": "distance",
+              "normalized_summary": "Effective Bluetooth operating range up to 10 meters",
+              "value": 10,
+              "unit": "m",
+              "operator": "<=",
+              "qualifier": "effective range",
+              "values": [],
+              "structured_value": {},
+              "confidence": 100,
+              "evidence_ids": [
+                "media_04"
+              ],
+              "source_claim_ids": [
+                "media_04_05_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            },
+            {
+              "canonical_key": "ingress_protection_rating",
+              "fact_category": "rating",
+              "normalized_summary": "IP55 dust and water resistance rating",
+              "value": "IP55",
+              "unit": "",
+              "operator": "",
+              "qualifier": "",
+              "values": [],
+              "structured_value": {},
+              "confidence": 98,
+              "evidence_ids": [
+                "media_04",
+                "media_05"
+              ],
+              "source_claim_ids": [
+                "media_04_06_claim",
+                "media_05_04_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            },
+            {
+              "canonical_key": "battery_capacity",
+              "fact_category": "capacity",
+              "normalized_summary": "Earbud battery capacity of 62 mAh and charging case capacity of 530 mAh",
+              "value": null,
+              "unit": "mAh",
+              "operator": "",
+              "qualifier": "",
+              "values": [],
+              "structured_value": {
+                "earbud_capacity_mah": 62,
+                "charging_case_capacity_mah": 530
+              },
+              "confidence": 100,
+              "evidence_ids": [
+                "media_04"
+              ],
+              "source_claim_ids": [
+                "media_04_07_claim",
+                "media_04_08_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            },
+            {
+              "canonical_key": "battery_playback_duration",
+              "fact_category": "duration",
+              "normalized_summary": "14 hours standalone earbud playback; up to 58 hours total playback with charging case",
+              "value": null,
+              "unit": "hours",
+              "operator": "",
+              "qualifier": "",
+              "values": [],
+              "structured_value": {
+                "earbuds_standalone_hours": {
+                  "value": 14,
+                  "operator": ""
+                },
+                "total_with_case_hours": {
+                  "value": 58,
+                  "operator": "up to"
+                }
+              },
+              "confidence": 98,
+              "evidence_ids": [
+                "media_04",
+                "media_05"
+              ],
+              "source_claim_ids": [
+                "media_04_09_claim",
+                "media_04_10_claim",
+                "media_05_03_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            },
+            {
+              "canonical_key": "charging_duration",
+              "fact_category": "duration",
+              "normalized_summary": "Full charge time: 1 hour for earbuds, 2 hours for earbuds with charging case",
+              "value": null,
+              "unit": "hours",
+              "operator": "",
+              "qualifier": "",
+              "values": [],
+              "structured_value": {
+                "earbuds_full_charge_hours": 1,
+                "total_full_charge_hours": 2
+              },
+              "confidence": 100,
+              "evidence_ids": [
+                "media_04"
+              ],
+              "source_claim_ids": [
+                "media_04_11_claim",
+                "media_04_12_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            },
+            {
+              "canonical_key": "charging_interface",
+              "fact_category": "interface",
+              "normalized_summary": "Type-C charging port",
+              "value": "Type-C",
+              "unit": "",
+              "operator": "",
+              "qualifier": "",
+              "values": [],
+              "structured_value": {},
+              "confidence": 100,
+              "evidence_ids": [
+                "media_04"
+              ],
+              "source_claim_ids": [
+                "media_04_13_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            },
+            {
+              "canonical_key": "noise_cancellation_depth",
+              "fact_category": "performance",
+              "normalized_summary": "Deep AI noise cancellation up to 55dB",
+              "value": 55,
+              "unit": "dB",
+              "operator": "up to",
+              "qualifier": "noise cancellation depth",
+              "values": [],
+              "structured_value": {},
+              "confidence": 95,
+              "evidence_ids": [
+                "media_05"
+              ],
+              "source_claim_ids": [
+                "media_05_02_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            },
+            {
+              "canonical_key": "bass_enhancement_technology",
+              "fact_category": "technology",
+              "normalized_summary": "Self-developed NextBass custom algorithm for low-frequency enhancement",
+              "value": "NextBass algorithm",
+              "unit": "",
+              "operator": "",
+              "qualifier": "low-frequency enhancement",
+              "values": [],
+              "structured_value": {},
+              "confidence": 93,
+              "evidence_ids": [
+                "media_08"
+              ],
+              "source_claim_ids": [
+                "media_08_01_claim",
+                "media_08_02_claim"
+              ],
+              "conflict_status": "none",
+              "requires_review": false
+            }
+          ]
+        },
+        "auto_publish": false,
+        "requires_review": true
+      }
     },
     {
       "product_id": "56",
@@ -485,7 +2378,9 @@
         "table_specifications": 0,
         "definition_list_specifications": 0,
         "label_value_specifications": 0,
+        "structured_section_specifications": 0,
         "shopify_oxygen_specifications": 18,
+        "apple_techspecs_specifications": 0,
         "total_specifications": 18,
         "feature_items": 0,
         "noise_filter_version": "2.0"
@@ -495,7 +2390,7 @@
         "status": "candidate_ready",
         "reason": "Page identity and extracted evidence are strong enough for review"
       },
-      "extracted_at": "2026-08-04T18:17:19.290987+00:00"
+      "extracted_at": "2026-08-06T17:41:23.601623+00:00"
     },
     {
       "product_id": "15",
@@ -1181,6 +3076,7 @@
         "table_specifications": 0,
         "definition_list_specifications": 0,
         "label_value_specifications": 6,
+        "structured_section_specifications": 0,
         "shopify_oxygen_specifications": 0,
         "apple_techspecs_specifications": 35,
         "total_specifications": 43,
@@ -1192,7 +3088,7 @@
         "status": "candidate_ready",
         "reason": "Page identity and extracted evidence are strong enough for review"
       },
-      "extracted_at": "2026-08-05T17:50:11.537672+00:00"
+      "extracted_at": "2026-08-06T17:41:15.355244+00:00"
     }
   ]
 }
