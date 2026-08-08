@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Coupon World AI OS
 Static Product Page Generator v0.1
@@ -357,9 +357,36 @@ def related(product, products, limit=4):
 
 
 OFFICIAL_SPECS_FILE = ROOT / "data" / "official_specs.json"
+PRODUCT_KNOWLEDGE_FILE = ROOT / "data" / "product_knowledge.json"
+
+def load_published_product_ids() -> set[str]:
+    if not PRODUCT_KNOWLEDGE_FILE.exists():
+        return set()
+
+    try:
+        payload = json.loads(
+            PRODUCT_KNOWLEDGE_FILE.read_text(encoding="utf-8")
+        )
+    except Exception:
+        return set()
+
+    products = payload.get("products", [])
+    if not isinstance(products, list):
+        return set()
+
+    return {
+        str(item.get("product_id") or "").strip()
+        for item in products
+        if isinstance(item, dict)
+        and str(item.get("product_id") or "").strip()
+    }
 
 def load_verified_intelligence_index() -> dict[str, dict]:
     if not OFFICIAL_SPECS_FILE.exists():
+        return {}
+
+    published_ids = load_published_product_ids()
+    if not published_ids:
         return {}
     try:
         payload = json.loads(OFFICIAL_SPECS_FILE.read_text(encoding="utf-8"))
@@ -375,6 +402,8 @@ def load_verified_intelligence_index() -> dict[str, dict]:
         product_id = str(item.get("product_id") or "").strip()
         semantic = item.get("semantic_consolidation", {})
         if not product_id or not isinstance(semantic, dict):
+            continue
+        if product_id not in published_ids:
             continue
         if semantic.get("status") != "ready_for_review":
             continue
