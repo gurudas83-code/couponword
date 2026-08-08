@@ -20,3 +20,33 @@ apply_*_v*.py
 # Timestamped development backups
 python/*_before_*.py
 data/*_before_*.json
+
+# Generated AI intelligence artifacts
+data/semantic_results/
+data/vision_jobs/
+data/vision_results/
+tmp_media_review/
+
+# Local diagnostic dumps
+nothing_dump.txt
+
+# One-off development and patch scripts
+add_*.py
+diagnose_*.py
+fix_*.py
+improve_*.py
+install_*.py
+upgrade_*.py
+
+# Legacy/local media utilities
+download_media_candidates.py
+run_gemini_vision_batch_v1.py
+
+# Superseded/legacy local tests and duplicate publisher
+publish_approved_knowledge_v1.py
+test_gemini_vision_media01.py
+test_universal_semantic_consolidator_v1.py
+test_universal_semantic_consolidator_v1_1.py
+test_universal_semantic_consolidator_v1_2.py
+test_universal_semantic_schema_validator_v1.py
+test_universal_semantic_schema_validator_v2.py
