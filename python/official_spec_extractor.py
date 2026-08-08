@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Coupon World Official Specification Extractor v2.0
 
@@ -188,7 +188,7 @@ def clean_text(value: Any) -> str:
 
 def normalize_key(value: Any) -> str:
     key = clean_text(value).lower()
-    key = re.sub(r"[:：]+$", "", key)
+    key = re.sub(r"[:ï¼š]+$", "", key)
     key = re.sub(r"[^a-z0-9\s/+&-]", " ", key)
     key = re.sub(r"\s+", " ", key).strip()
 
@@ -513,7 +513,7 @@ def extract_label_value_blocks(
                 continue
 
             match = re.match(
-                r"^([A-Za-z][A-Za-z0-9 /+&()._-]{1,55})\s*[:：]\s*(.{2,300})$",
+                r"^([A-Za-z][A-Za-z0-9 /+&()._-]{1,55})\s*[:ï¼š]\s*(.{2,300})$",
                 text,
             )
 
@@ -1012,7 +1012,7 @@ def extract_apple_techspecs(
             )
 
         display_match = re.search(
-            r"\b\d+(?:\.\d+)?[‑-]inch[^.]{0,180}?"
+            r"\b\d+(?:\.\d+)?[â€‘-]inch[^.]{0,180}?"
             r"(?:OLED|LCD)\s+display\b",
             value,
             flags=re.I,
@@ -4560,6 +4560,261 @@ def print_status() -> int:
     return 0
 
 
+def run_universal_semantic_cli(
+    product_ids: list[str],
+    limit: int | None = None,
+) -> int:
+    """
+    Run universal semantic consolidation for selected stored products.
+
+    Gemini is only the current provider adapter. Semantic schema,
+    validation and attach logic remain provider-neutral.
+    """
+    import copy
+    import os
+
+    try:
+        from google import genai
+        from google.genai import types
+    except ImportError:
+        print(
+            "ERROR: Google GenAI package is not installed.",
+            file=sys.stderr,
+        )
+        return 1
+
+    api_key = os.environ.get("GEMINI_API_KEY")
+
+    if not api_key:
+        print(
+            "ERROR: GEMINI_API_KEY is not set.",
+            file=sys.stderr,
+        )
+        return 1
+
+    if not OUTPUT_DB.exists():
+        print(
+            f"ERROR: Missing official specs database: {OUTPUT_DB}",
+            file=sys.stderr,
+        )
+        return 1
+
+    try:
+        stored = load_json(OUTPUT_DB, {})
+    except (OSError, ValueError) as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        return 1
+
+    products = stored.get("products", [])
+
+    if not isinstance(products, list):
+        print("ERROR: Invalid products database.", file=sys.stderr)
+        return 1
+
+    selected_ids = {
+        clean_text(value)
+        for value in product_ids
+        if clean_text(value)
+    }
+
+    selected = []
+
+    for product in products:
+        if not isinstance(product, dict):
+            continue
+
+        product_id = clean_text(product.get("product_id"))
+
+        if selected_ids and product_id not in selected_ids:
+            continue
+
+        selected.append(product)
+
+    if limit is not None:
+        selected = selected[: max(0, int(limit))]
+
+    if not selected:
+        print("No eligible products selected for semantic consolidation.")
+        return 0
+
+    client = genai.Client(api_key=api_key)
+
+    semantic_dir = ROOT / "data" / "semantic_results"
+    vision_dir = ROOT / "data" / "vision_results"
+
+    semantic_dir.mkdir(parents=True, exist_ok=True)
+
+    processed = 0
+    passed = 0
+    failed = 0
+    skipped = 0
+
+    for product in selected:
+        product_id = clean_text(product.get("product_id"))
+        product_name = clean_text(
+            product.get("search_name")
+            or product.get("model")
+            or product.get("title")
+        )
+
+        print()
+        print("=" * 72)
+        print("SEMANTIC:", product_id, "|", product_name)
+        print("=" * 72)
+
+        working = copy.deepcopy(product)
+
+        combined = {
+            "provider": "gemini",
+            "results": [],
+        }
+
+        result_files = sorted(
+            vision_dir.glob(
+                f"product_{product_id}_media_*.json"
+            )
+        )
+
+        for path in result_files:
+            try:
+                payload = load_json(path, {})
+            except (OSError, ValueError) as error:
+                print(
+                    f"WARNING: Could not read {path}: {error}"
+                )
+                continue
+
+            results = payload.get("results", [])
+
+            if isinstance(results, list):
+                combined["results"].extend(results)
+
+        if combined["results"]:
+            working = import_vision_result_payload(
+                working,
+                combined,
+            )
+            working = validate_vision_claims(working)
+
+        semantic_input = build_universal_semantic_input(
+            working
+        )
+
+        claim_count = int(
+            semantic_input.get("input_claim_count", 0)
+            or 0
+        )
+
+        print("Validated claims :", claim_count)
+
+        if claim_count <= 0:
+            print(
+                "SKIP: No review-ready claims available."
+            )
+            skipped += 1
+            continue
+
+        prompt = build_universal_semantic_prompt()
+
+        try:
+            response = client.models.generate_content(
+                model="gemini-3.6-flash",
+                contents=[
+                    prompt,
+                    "\nINPUT CLAIMS:\n",
+                    json.dumps(
+                        semantic_input,
+                        ensure_ascii=False,
+                    ),
+                ],
+                config=types.GenerateContentConfig(
+                    temperature=0.1,
+                    response_mime_type="application/json",
+                ),
+            )
+
+            semantic_result = json.loads(response.text)
+
+        except Exception as error:
+            print(
+                "ERROR: Semantic provider failed:",
+                type(error).__name__,
+                str(error)[:300],
+            )
+            failed += 1
+            continue
+
+        validation = validate_universal_semantic_result(
+            semantic_result
+        )
+
+        out_path = (
+            semantic_dir
+            / f"product_{product_id}_semantic_v1_3.json"
+        )
+
+        save_json(out_path, semantic_result)
+
+        print(
+            "Canonical facts :",
+            validation.get("fact_count", 0),
+        )
+        print(
+            "Schema issues   :",
+            validation.get("issue_count", 0),
+        )
+        print(
+            "Validation      :",
+            validation.get("status"),
+        )
+        print("Saved           :", out_path)
+
+        product_index = products.index(product)
+
+        products[product_index] = (
+            attach_universal_semantic_result(
+                working,
+                semantic_result,
+            )
+        )
+
+        processed += 1
+
+        if validation.get("status") == "passed":
+            passed += 1
+        else:
+            failed += 1
+
+    stored["products"] = products
+
+    if processed:
+        try:
+            backup = backup_output()
+            save_json(OUTPUT_DB, stored)
+        except (OSError, ValueError) as error:
+            print(
+                f"ERROR: Could not save semantic results: {error}",
+                file=sys.stderr,
+            )
+            return 1
+
+        print()
+        print("Backup          :", backup)
+
+    print()
+    print("=" * 72)
+    print("UNIVERSAL SEMANTIC CONSOLIDATION COMPLETE")
+    print("=" * 72)
+    print("Processed :", processed)
+    print("Passed    :", passed)
+    print("Failed    :", failed)
+    print("Skipped   :", skipped)
+    print("Auto-publish: NO")
+    print("Review gate : REQUIRED")
+
+    return 0 if failed == 0 else 1
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description=(
@@ -4570,7 +4825,7 @@ def main() -> int:
     parser.add_argument(
         "command",
         nargs="?",
-        choices=("extract", "status"),
+        choices=("extract", "semantic", "status"),
         default="status",
     )
 
@@ -4608,6 +4863,12 @@ def main() -> int:
     if args.command == "status":
         return print_status()
 
+    if args.command == "semantic":
+        return run_universal_semantic_cli(
+            product_ids=args.product_id,
+            limit=args.limit,
+        )
+
     try:
         output = build_output(
             limit=args.limit,
@@ -4643,3 +4904,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
