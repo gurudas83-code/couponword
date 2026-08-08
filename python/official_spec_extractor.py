@@ -3271,6 +3271,336 @@ def validate_vision_claims(
     return product_output
 
 
+UNIVERSAL_SEMANTIC_SCHEMA_VERSION = "1.3"
+
+UNIVERSAL_SEMANTIC_ALLOWED_CATEGORIES = {
+    "identity",
+    "count",
+    "distance",
+    "duration",
+    "latency",
+    "capacity",
+    "rating",
+    "version",
+    "codec",
+    "certification",
+    "technology",
+    "feature",
+    "interface",
+    "variant",
+    "dimension",
+    "weight",
+    "power",
+    "performance",
+    "compatibility",
+    "material_property",
+    "other",
+}
+
+
+def build_universal_semantic_input(
+    product_output: dict[str, Any],
+) -> dict[str, Any]:
+    claims: list[dict[str, Any]] = []
+
+    media = product_output.get("media_evidence", {})
+
+    if isinstance(media, dict):
+        queue = media.get("vision_evidence_queue", [])
+
+        if isinstance(queue, list):
+            for item in queue:
+                if not isinstance(item, dict):
+                    continue
+
+                evidence_id = clean_text(item.get("evidence_id"))
+                item_claims = item.get("claims", [])
+
+                if not isinstance(item_claims, list):
+                    continue
+
+                for claim in item_claims:
+                    if not isinstance(claim, dict):
+                        continue
+
+                    if clean_text(claim.get("evidence_status")) != "review_ready":
+                        continue
+
+                    claims.append(
+                        {
+                            "claim_id": clean_text(claim.get("claim_id")),
+                            "evidence_id": evidence_id,
+                            "claim_type": clean_text(claim.get("claim_type")),
+                            "english_text": clean_text(claim.get("english_text")),
+                            "value": claim.get("value"),
+                            "unit": clean_text(claim.get("unit")),
+                            "confidence": claim.get("confidence"),
+                            "source_language": clean_text(claim.get("source_language")),
+                        }
+                    )
+
+    return {
+        "schema_version": UNIVERSAL_SEMANTIC_SCHEMA_VERSION,
+        "job_type": "universal_semantic_consolidation",
+        "product_id": clean_text(product_output.get("product_id")),
+        "product_name": clean_text(
+            product_output.get("search_name")
+            or product_output.get("model")
+        ),
+        "input_claim_count": len(claims),
+        "claims": claims,
+    }
+
+
+def build_universal_semantic_prompt() -> str:
+    categories = ", ".join(
+        sorted(UNIVERSAL_SEMANTIC_ALLOWED_CATEGORIES)
+    )
+
+    return f"""
+You are a UNIVERSAL product-fact semantic consolidator.
+
+Input: validated factual claims for one product from official evidence.
+
+Your output must work across many product categories and must NOT contain
+product-specific hard-coded rules.
+
+ALLOWED FACT CATEGORIES:
+{categories}
+
+STRICT SEMANTIC RULES:
+1. Group claims only when they represent the same underlying fact.
+2. Preserve all meaningful qualifiers and operators:
+   <, <=, >, >=, up to, over, more than, approximately, test conditions,
+   modes, per-unit scope, standalone scope, total scope, with-case scope.
+3. Never convert a bounded or qualified measurement into an exact value.
+4. Preserve compound facts in structured_value.
+5. Preserve additive values as arrays.
+6. Compatible relational facts are not conflicts.
+7. Genuine contradictions must be marked conflict_status="conflict".
+8. Do not invent missing facts.
+9. Keep all evidence_ids and source_claim_ids.
+10. Canonical keys must be generic, machine-friendly and brand/model independent.
+11. Separate codecs, certifications, technologies, interfaces and features.
+12. Source images remain evidence only.
+
+MANDATORY TAXONOMY RULES:
+- Product/model/name identity facts -> fact_category = "identity".
+- Physical operating/transmission range facts -> "distance".
+- Physical component sizes/dimensions -> "dimension".
+- Material composition/purity/property percentages -> "material_property".
+- Playback/charging/runtime measured in time -> "duration".
+- Signal/input/output delay measured in ms -> "latency".
+- Battery/storage capacities -> "capacity".
+- Counts of devices/microphones/languages/items -> "count".
+- Bluetooth/software/protocol revision numbers -> "version".
+- Audio/data codecs -> "codec".
+- Certification labels -> "certification".
+- IP/protection/performance grades -> "rating" when applicable.
+- Colors/finishes/options -> "variant".
+- Connector/port standards -> "interface".
+- Algorithms, driver systems and named technical mechanisms -> "technology".
+- Boolean capability/integration/support -> "feature".
+
+SOURCE OPERATOR FIDELITY:
+- Preserve the semantic operator actually stated by the source.
+- "up to X" -> operator "up to"; do not rewrite as "<=".
+- "<=X" -> operator "<="; do not rewrite as "up to".
+- "over X" / "more than X" -> preserve that meaning.
+- Never infer an operator from the numeric value alone.
+- If multiple equivalent evidence items use different wording, prefer the
+  most explicit operator from the strongest direct evidence.
+
+Return JSON only:
+{{
+  "schema_version": "1.3",
+  "product_name": "",
+  "input_claim_count": 0,
+  "canonical_fact_count": 0,
+  "facts": [
+    {{
+      "canonical_key": "",
+      "fact_category": "",
+      "normalized_summary": "",
+      "value": null,
+      "unit": "",
+      "operator": "",
+      "qualifier": "",
+      "values": [],
+      "structured_value": {{}},
+      "confidence": 0,
+      "evidence_ids": [],
+      "source_claim_ids": [],
+      "conflict_status": "none",
+      "requires_review": false
+    }}
+  ]
+}}
+""".strip()
+
+
+def validate_universal_semantic_result(
+    result: dict[str, Any],
+) -> dict[str, Any]:
+    issues: list[dict[str, Any]] = []
+
+    if not isinstance(result, dict):
+        return {
+            "status": "failed",
+            "issue_count": 1,
+            "issues": [{"canonical_key": "", "reasons": ["Semantic result is not a dictionary"]}],
+        }
+
+    facts = result.get("facts", [])
+
+    if not isinstance(facts, list):
+        return {
+            "status": "failed",
+            "issue_count": 1,
+            "issues": [{"canonical_key": "", "reasons": ["facts must be a list"]}],
+        }
+
+    for fact in facts:
+        if not isinstance(fact, dict):
+            issues.append({"canonical_key": "", "reasons": ["Fact entry is not an object"]})
+            continue
+
+        key = clean_text(fact.get("canonical_key")).lower()
+        category = clean_text(fact.get("fact_category")).lower()
+        unit = clean_text(fact.get("unit")).lower()
+        operator = clean_text(fact.get("operator")).lower()
+        structured_value = fact.get("structured_value")
+        evidence_ids = fact.get("evidence_ids")
+        source_claim_ids = fact.get("source_claim_ids")
+
+        reasons: list[str] = []
+
+        if not key:
+            reasons.append("canonical_key is empty")
+
+        if category not in UNIVERSAL_SEMANTIC_ALLOWED_CATEGORIES:
+            reasons.append(f"Unsupported fact category: {category}")
+
+        if structured_value is not None and not isinstance(structured_value, dict):
+            reasons.append("structured_value must be an object")
+
+        if not isinstance(evidence_ids, list) or not evidence_ids:
+            reasons.append("Missing supporting evidence_ids")
+
+        if not isinstance(source_claim_ids, list) or not source_claim_ids:
+            reasons.append("Missing source_claim_ids")
+
+        if key in {"product_name", "model_name"} or "identity" in key:
+            if category != "identity":
+                reasons.append("Identity fact must use identity category")
+
+        if (
+            any(token in key for token in {"range", "distance"})
+            and unit in {"mm", "cm", "m", "km"}
+            and category != "distance"
+        ):
+            reasons.append("Range/distance fact must use distance category")
+
+        if (
+            any(
+                token in key
+                for token in {
+                    "diameter",
+                    "width",
+                    "height",
+                    "length",
+                    "thickness",
+                    "size",
+                }
+            )
+            and unit in {"mm", "cm", "m"}
+            and category not in {"dimension", "distance"}
+        ):
+            reasons.append("Physical size fact must use dimension/distance category")
+
+        if "latency" in key and unit == "ms" and category != "latency":
+            reasons.append("Latency measured in ms must use latency category")
+
+        if unit in {"mah", "wh", "kwh"} and category != "capacity":
+            reasons.append("Capacity unit requires capacity category")
+
+        if "codec" in key and category != "codec":
+            reasons.append("Codec fact must use codec category")
+
+        if "certification" in key and category != "certification":
+            reasons.append("Certification fact must use certification category")
+
+        if "purity" in key and unit == "%" and category != "material_property":
+            reasons.append("Purity percentage must use material_property category")
+
+        allowed_operators = {
+            "",
+            "<",
+            "<=",
+            ">",
+            ">=",
+            "up to",
+            "over",
+            "more than",
+            "approximately",
+        }
+
+        if operator not in allowed_operators:
+            reasons.append(f"Unsupported operator: {operator}")
+
+        if reasons:
+            issues.append(
+                {
+                    "canonical_key": key,
+                    "reasons": reasons,
+                }
+            )
+
+    return {
+        "status": "passed" if not issues else "failed",
+        "issue_count": len(issues),
+        "issues": issues,
+        "fact_count": len(facts),
+        "schema_version": clean_text(result.get("schema_version")),
+    }
+
+
+def attach_universal_semantic_result(
+    product_output: dict[str, Any],
+    result: dict[str, Any],
+) -> dict[str, Any]:
+    validation = validate_universal_semantic_result(result)
+
+    product_output["semantic_consolidation"] = {
+        "schema_version": UNIVERSAL_SEMANTIC_SCHEMA_VERSION,
+        "status": (
+            "ready_for_review"
+            if validation.get("status") == "passed"
+            else "rejected"
+        ),
+        "validation": validation,
+        "result": result,
+        "auto_publish": False,
+        "requires_review": True,
+    }
+
+    summary = product_output.get("evidence_summary", {})
+
+    if not isinstance(summary, dict):
+        summary = {}
+
+    summary["semantic_consolidation_status"] = (
+        product_output["semantic_consolidation"]["status"]
+    )
+    summary["semantic_fact_count"] = validation.get("fact_count", 0)
+    summary["semantic_validation_issues"] = validation.get("issue_count", 0)
+
+    product_output["evidence_summary"] = summary
+
+    return product_output
+
+
+
 def promote_reviewed_vision_claims(
     product_output: dict[str, Any],
     approved_claim_ids: list[str] | set[str] | tuple[str, ...],
