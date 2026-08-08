@@ -840,6 +840,7 @@ def knowledge_command(action: str, limit: int) -> int:
     scripts = {
         "resolver": ROOT / "python" / "official_source_resolver.py",
         "extractor": ROOT / "python" / "official_spec_extractor.py",
+        "vision": ROOT / "run_gemini_vision_batch_v2.py",
         "builder": ROOT / "python" / "build_product_knowledge.py",
     }
 
@@ -869,10 +870,16 @@ def knowledge_command(action: str, limit: int) -> int:
         )
 
         if result.returncode != 0:
-            print(
-                f"ERROR: {label} failed with exit code "
-                f"{result.returncode}"
-            )
+            if allow_failure:
+                print(
+                    f"WARNING: {label} returned exit code "
+                    f"{result.returncode}; continuing in partial-review mode."
+                )
+            else:
+                print(
+                    f"ERROR: {label} failed with exit code "
+                    f"{result.returncode}"
+                )
 
         return result.returncode
 
@@ -989,6 +996,7 @@ def intelligence_command(
     scripts = {
         "resolver": ROOT / "python" / "official_source_resolver.py",
         "extractor": ROOT / "python" / "official_spec_extractor.py",
+        "vision": ROOT / "run_gemini_vision_batch_v2.py",
         "builder": ROOT / "python" / "build_product_knowledge.py",
     }
 
@@ -1025,6 +1033,7 @@ def intelligence_command(
     def run_step(
         label: str,
         command: list[str],
+        allow_failure: bool = False,
     ) -> int:
         print()
         print("=" * 72)
@@ -1072,6 +1081,16 @@ def intelligence_command(
                 "semantic",
             ]
         )
+
+        vision_commands = [
+            [
+                python_executable,
+                str(scripts["vision"]),
+                "--product-id",
+                product_id,
+            ]
+            for product_id in selected_ids
+        ]
     else:
         resolver_command = [
             python_executable,
@@ -1099,36 +1118,63 @@ def intelligence_command(
             str(safe_limit),
         ]
 
-    steps = [
+        vision_commands = []
+
+    steps: list[tuple[str, list[str], bool]] = [
         (
-            "STEP 1/5 - RESOLVE OFFICIAL PRODUCT SOURCE",
+            "STEP 1 - RESOLVE OFFICIAL PRODUCT SOURCE",
             resolver_command,
+            False,
         ),
         (
-            "STEP 2/5 - EXTRACT OFFICIAL PRODUCT EVIDENCE",
+            "STEP 2 - EXTRACT OFFICIAL PRODUCT EVIDENCE",
             extractor_command,
-        ),
-        (
-            "STEP 3/5 - CONSOLIDATE UNIVERSAL PRODUCT FACTS",
-            semantic_command,
-        ),
-        (
-            "STEP 4/5 - PREPARE KNOWLEDGE REVIEW DRAFTS",
-            [
-                python_executable,
-                str(scripts["builder"]),
-                "prepare",
-            ],
-        ),
-        (
-            "STEP 5/5 - SHOW KNOWLEDGE STATUS",
-            [
-                python_executable,
-                str(scripts["builder"]),
-                "status",
-            ],
+            False,
         ),
     ]
+
+    for index, vision_command in enumerate(vision_commands, start=1):
+        steps.append(
+            (
+                f"STEP 3.{index} - RUN PROVENANCE-SAFE VISION",
+                vision_command,
+                True,
+            )
+        )
+
+    if not vision_commands:
+        print(
+            "VISION NOTE: automatic Vision v2 currently runs when "
+            "--product-id is supplied explicitly."
+        )
+
+    steps.extend(
+        [
+            (
+                "STEP 4 - CONSOLIDATE UNIVERSAL PRODUCT FACTS",
+                semantic_command,
+                False,
+            ),
+            (
+                "STEP 5 - PREPARE KNOWLEDGE REVIEW DRAFTS",
+                [
+                    python_executable,
+                    str(scripts["builder"]),
+                    "prepare",
+                ],
+                False,
+            ),
+            (
+                "STEP 6 - SHOW KNOWLEDGE STATUS",
+                [
+                    python_executable,
+                    str(scripts["builder"]),
+                    "status",
+                ],
+                False,
+            ),
+        ]
+    )
 
     print()
     print("=" * 72)
@@ -1144,13 +1190,20 @@ def intelligence_command(
     print("Auto-push   : NO")
     print("Review gate : REQUIRED")
 
-    for label, command in steps:
+    vision_soft_failures = 0
+
+    for label, command, allow_failure in steps:
         return_code = run_step(
             label,
             command,
+            allow_failure=allow_failure,
         )
 
         if return_code != 0:
+            if allow_failure:
+                vision_soft_failures += 1
+                continue
+
             print()
             print("=" * 72)
             print("INTELLIGENCE WORKFLOW STATUS: FAIL")
@@ -1159,6 +1212,12 @@ def intelligence_command(
             return return_code
 
     partial_products: list[tuple[str, int, int]] = []
+
+    if vision_soft_failures:
+        print(
+            "VISION STATUS: partial provider execution; "
+            f"soft_failures={vision_soft_failures}"
+        )
 
     try:
         official_specs_path = ROOT / "data" / "official_specs.json"
