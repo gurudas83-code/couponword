@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Coupon World AI OS
 Static Product Page Generator v0.1
@@ -78,7 +78,7 @@ def page_url(product):
 
 def excerpt(text, limit=160):
     text = clean(text)
-    return text if len(text) <= limit else text[: limit - 1].rstrip() + "…"
+    return text if len(text) <= limit else text[: limit - 1].rstrip() + "â€¦"
 
 
 
@@ -355,6 +355,104 @@ def related(product, products, limit=4):
     return candidates[:limit]
 
 
+
+OFFICIAL_SPECS_FILE = ROOT / "data" / "official_specs.json"
+
+def load_verified_intelligence_index() -> dict[str, dict]:
+    if not OFFICIAL_SPECS_FILE.exists():
+        return {}
+    try:
+        payload = json.loads(OFFICIAL_SPECS_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    products = payload.get("products", [])
+    if not isinstance(products, list):
+        return {}
+    index = {}
+    for item in products:
+        if not isinstance(item, dict):
+            continue
+        product_id = str(item.get("product_id") or "").strip()
+        semantic = item.get("semantic_consolidation", {})
+        if not product_id or not isinstance(semantic, dict):
+            continue
+        if semantic.get("status") != "ready_for_review":
+            continue
+        validation = semantic.get("validation", {})
+        if not isinstance(validation, dict) or validation.get("status") != "passed":
+            continue
+        result = semantic.get("result", {})
+        facts = result.get("facts", []) if isinstance(result, dict) else []
+        safe_facts = [
+            f for f in facts
+            if isinstance(f, dict)
+            and f.get("requires_review") is False
+            and str(f.get("conflict_status") or "none") == "none"
+        ]
+        if safe_facts:
+            index[product_id] = {"facts": safe_facts}
+    return index
+
+VERIFIED_INTELLIGENCE = load_verified_intelligence_index()
+
+def render_verified_intelligence(product: dict) -> str:
+    product_id = str(
+        product.get("id") or product.get("sl_no") or product.get("asin") or ""
+    ).strip()
+    data = VERIFIED_INTELLIGENCE.get(product_id)
+    if not data:
+        return ""
+
+    preferred = [
+        "noise_cancellation_depth",
+        "driver_dimension",
+        "battery_playback_duration",
+        "microphone_count",
+        "bluetooth_version",
+        "ingress_protection_rating",
+        "audio_codecs",
+        "charging_interface",
+        "battery_capacity",
+        "charging_duration",
+        "supported_translation_languages_count",
+        "audio_certification",
+    ]
+    facts = data.get("facts", [])
+    by_key = {
+        str(f.get("canonical_key") or ""): f
+        for f in facts if isinstance(f, dict)
+    }
+    ordered = [by_key[k] for k in preferred if k in by_key]
+    if not ordered:
+        return ""
+
+    highlights = ordered[:6]
+    lis = "".join(
+        "<li>" + html.escape(str(f.get("normalized_summary") or "")) + "</li>"
+        for f in highlights
+        if str(f.get("normalized_summary") or "").strip()
+    )
+    rows = "".join(
+        "<tr><th>"
+        + html.escape(str(f.get("canonical_key") or "").replace("_", " ").title())
+        + "</th><td>"
+        + html.escape(str(f.get("normalized_summary") or ""))
+        + "</td></tr>"
+        for f in ordered
+        if str(f.get("normalized_summary") or "").strip()
+    )
+    return (
+        '<section class="verified-intelligence">'
+        '<span class="verified-badge">Verified intelligence</span>'
+        '<h2>Key product facts</h2>'
+        '<p class="intel-note">Built from validated official-source evidence.</p>'
+        + ('<ul class="intel-highlights">' + lis + '</ul>' if lis else '')
+        + ('<div class="spec-table-wrap"><table class="spec-table"><tbody>'
+           + rows + '</tbody></table></div>' if rows else '')
+        + '</section>'
+    )
+
+
 def render(product, products):
     title = clean(product.get("title")) or "Product"
     brand = clean(product.get("brand"))
@@ -469,12 +567,12 @@ def render(product, products):
     media = (
         f'<img src="{html.escape(display_image)}" '
         f'alt="{html.escape(title)}" '
-        'loading="lazy" decoding="async">'
+        'loading="eager" fetchpriority="high" decoding="async">'
     )
 
     cta = (
         f'<a class="cta" href="{html.escape(link)}" target="_blank" '
-        'rel="nofollow sponsored noopener">Check Latest Offer →</a>'
+        'rel="nofollow sponsored noopener">Check Latest Offer â†’</a>'
         if active and link else
         '<span class="cta disabled">Currently unavailable</span>'
     )
@@ -534,6 +632,8 @@ def render(product, products):
             '</section>'
         )
 
+    intelligence_html = render_verified_intelligence(product)
+
     related_html = ""
     if cards:
         related_html = (
@@ -586,14 +686,23 @@ section{{margin:28px 0;background:#fff;border:1px solid #e5e7eb;border-radius:18
 .related{{border:1px solid #e5e7eb;border-radius:14px;padding:16px;color:#17191f;text-decoration:none;display:grid;gap:8px}}
 .related span{{color:#68707d;font-size:14px}}
 .note{{color:#68707d;font-size:13px;margin-top:14px}}
+.verified-intelligence{{content-visibility:auto;contain-intrinsic-size:420px}}
+.verified-badge{{display:inline-block;font-size:12px;font-weight:800;padding:5px 9px;border-radius:999px;background:#ecfdf3;color:#067647}}
+.intel-note{{color:#68707d;font-size:14px}}
+.intel-highlights{{display:grid;grid-template-columns:1fr 1fr;gap:10px 28px;padding-left:20px}}
+.spec-table-wrap{{overflow-x:auto}}
+.spec-table{{width:100%;border-collapse:collapse;margin-top:18px}}
+.spec-table th,.spec-table td{{text-align:left;vertical-align:top;padding:11px 10px;border-top:1px solid #e5e7eb}}
+.spec-table th{{width:34%;font-size:14px;color:#475467}}
+.spec-table td{{font-size:15px}}
 footer{{padding:28px 0 40px;color:#68707d;font-size:14px}}
-@media(max-width:760px){{.hero{{grid-template-columns:1fr;padding:18px}}.grid{{grid-template-columns:1fr 1fr}}}}
+@media(max-width:760px){{.hero{{grid-template-columns:1fr;padding:18px}}.grid{{grid-template-columns:1fr 1fr}}.intel-highlights{{grid-template-columns:1fr}}}}
 </style>
 </head>
 <body>
 <header><div class="wrap"><a href="../../">Coupon World</a></div></header>
 <main class="wrap">
-<div class="crumbs"><a href="../../">Home</a> › {html.escape(category)} › {html.escape(title)}</div>
+<div class="crumbs"><a href="../../">Home</a> &rsaquo; {html.escape(category)} &rsaquo; {html.escape(title)}</div>
 <article class="hero">
 <div class="media">{media}</div>
 <div>
@@ -611,6 +720,7 @@ footer{{padding:28px 0 40px;color:#68707d;font-size:14px}}
 </div>
 </article>
 <section><h2>About this product</h2><p>{html.escape(description)}</p></section>
+{intelligence_html}
 {guide_html}
 {related_html}
 </main>
@@ -664,3 +774,5 @@ def main():
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
