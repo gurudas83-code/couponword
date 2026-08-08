@@ -967,6 +967,292 @@ def knowledge_command(action: str, limit: int) -> int:
     return 0
 
 
+
+def intelligence_command(
+    product_ids: list[str],
+    limit: int = 1,
+) -> int:
+    """
+    Run the safe Universal Product Intelligence workflow.
+
+    Flow:
+    official source resolver
+    -> official specification extraction
+    -> universal semantic consolidation
+    -> knowledge review draft preparation
+    -> knowledge status
+
+    This command does not auto-approve, auto-publish, build the public site,
+    commit Git changes, or push to GitHub.
+    """
+
+    scripts = {
+        "resolver": ROOT / "python" / "official_source_resolver.py",
+        "extractor": ROOT / "python" / "official_spec_extractor.py",
+        "builder": ROOT / "python" / "build_product_knowledge.py",
+    }
+
+    missing = [
+        str(path)
+        for path in scripts.values()
+        if not path.exists()
+    ]
+
+    if missing:
+        print("ERROR: Missing intelligence pipeline file(s):")
+        for path in missing:
+            print(" -", path)
+        return 1
+
+    safe_limit = max(1, int(limit))
+
+    selected_ids = [
+        str(value).strip()
+        for value in product_ids
+        if str(value).strip()
+    ]
+
+    def add_product_ids(command: list[str]) -> list[str]:
+        for product_id in selected_ids:
+            command.extend(
+                [
+                    "--product-id",
+                    product_id,
+                ]
+            )
+        return command
+
+    def run_step(
+        label: str,
+        command: list[str],
+    ) -> int:
+        print()
+        print("=" * 72)
+        print(label)
+        print("=" * 72)
+        print("$", " ".join(command))
+
+        result = subprocess.run(
+            command,
+            cwd=ROOT,
+            check=False,
+        )
+
+        if result.returncode != 0:
+            print(
+                f"ERROR: {label} failed with exit code "
+                f"{result.returncode}"
+            )
+
+        return result.returncode
+
+    python_executable = sys.executable
+
+    if selected_ids:
+        resolver_command = add_product_ids(
+            [
+                python_executable,
+                str(scripts["resolver"]),
+                "run",
+            ]
+        )
+
+        extractor_command = add_product_ids(
+            [
+                python_executable,
+                str(scripts["extractor"]),
+                "extract",
+            ]
+        )
+
+        semantic_command = add_product_ids(
+            [
+                python_executable,
+                str(scripts["extractor"]),
+                "semantic",
+            ]
+        )
+    else:
+        resolver_command = [
+            python_executable,
+            str(scripts["resolver"]),
+            "run",
+            "--pending",
+            "--limit",
+            str(safe_limit),
+        ]
+
+        extractor_command = [
+            python_executable,
+            str(scripts["extractor"]),
+            "extract",
+            "--pending",
+            "--limit",
+            str(safe_limit),
+        ]
+
+        semantic_command = [
+            python_executable,
+            str(scripts["extractor"]),
+            "semantic",
+            "--limit",
+            str(safe_limit),
+        ]
+
+    steps = [
+        (
+            "STEP 1/5 - RESOLVE OFFICIAL PRODUCT SOURCE",
+            resolver_command,
+        ),
+        (
+            "STEP 2/5 - EXTRACT OFFICIAL PRODUCT EVIDENCE",
+            extractor_command,
+        ),
+        (
+            "STEP 3/5 - CONSOLIDATE UNIVERSAL PRODUCT FACTS",
+            semantic_command,
+        ),
+        (
+            "STEP 4/5 - PREPARE KNOWLEDGE REVIEW DRAFTS",
+            [
+                python_executable,
+                str(scripts["builder"]),
+                "prepare",
+            ],
+        ),
+        (
+            "STEP 5/5 - SHOW KNOWLEDGE STATUS",
+            [
+                python_executable,
+                str(scripts["builder"]),
+                "status",
+            ],
+        ),
+    ]
+
+    print()
+    print("=" * 72)
+    print("COUPON WORLD UNIVERSAL INTELLIGENCE WORKFLOW")
+    print("=" * 72)
+    print(
+        "Products    :",
+        ", ".join(selected_ids)
+        if selected_ids
+        else f"pending batch, limit {safe_limit}",
+    )
+    print("Auto-publish: NO")
+    print("Auto-push   : NO")
+    print("Review gate : REQUIRED")
+
+    for label, command in steps:
+        return_code = run_step(
+            label,
+            command,
+        )
+
+        if return_code != 0:
+            print()
+            print("=" * 72)
+            print("INTELLIGENCE WORKFLOW STATUS: FAIL")
+            print("=" * 72)
+            print("Stopped safely at:", label)
+            return return_code
+
+    partial_products: list[tuple[str, int, int]] = []
+
+    try:
+        official_specs_path = ROOT / "data" / "official_specs.json"
+
+        if official_specs_path.exists():
+            semantic_db = json.loads(
+                official_specs_path.read_text(encoding="utf-8")
+            )
+
+            semantic_products = semantic_db.get("products", [])
+
+            if isinstance(semantic_products, list):
+                for product in semantic_products:
+                    if not isinstance(product, dict):
+                        continue
+
+                    product_id = str(
+                        product.get("product_id") or ""
+                    ).strip()
+
+                    if selected_ids and product_id not in selected_ids:
+                        continue
+
+                    media = product.get("media_evidence", {})
+
+                    if not isinstance(media, dict):
+                        continue
+
+                    mismatches = int(
+                        media.get(
+                            "vision_provenance_mismatches",
+                            0,
+                        )
+                        or 0
+                    )
+
+                    skipped = int(
+                        media.get(
+                            "vision_skipped_results",
+                            0,
+                        )
+                        or 0
+                    )
+
+                    if mismatches > 0 or skipped > 0:
+                        partial_products.append(
+                            (
+                                product_id,
+                                mismatches,
+                                skipped,
+                            )
+                        )
+
+    except (OSError, ValueError, TypeError) as error:
+        print(
+            "WARNING: Could not evaluate partial vision status:",
+            str(error)[:250],
+        )
+
+    print()
+    print("=" * 72)
+
+    if partial_products:
+        print("INTELLIGENCE WORKFLOW STATUS: PARTIAL_REVIEW")
+    else:
+        print("INTELLIGENCE WORKFLOW STATUS: PASS")
+
+    print("=" * 72)
+    print("Official source       : PROCESSED")
+    print("Evidence extraction   : PROCESSED")
+    print("Semantic consolidation: PROCESSED")
+    print("Knowledge drafts      : PREPARED/REVIEWED")
+
+    if partial_products:
+        print("Vision evidence       : PARTIAL")
+        for product_id, mismatches, skipped in partial_products:
+            print(
+                f"  Product {product_id}: "
+                f"provenance_mismatches={mismatches}, "
+                f"skipped_results={skipped}"
+            )
+        print(
+            "Action                : Retry pending vision evidence when "
+            "provider quota is available"
+        )
+    else:
+        print("Vision evidence       : COMPLETE/NO BLOCKER")
+
+    print("Auto-publish          : NO")
+    print("Human review          : REQUIRED")
+
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Coupon World Control Center"
@@ -1005,6 +1291,26 @@ def build_parser() -> argparse.ArgumentParser:
     subparsers.add_parser(
         "report",
         help="Show product quality and next best action",
+    )
+
+
+    intelligence_parser = subparsers.add_parser(
+        "intelligence",
+        help="Run the Universal Product Intelligence workflow",
+    )
+
+    intelligence_parser.add_argument(
+        "--product-id",
+        action="append",
+        default=[],
+        help="Process a specific product ID; may be repeated",
+    )
+
+    intelligence_parser.add_argument(
+        "--limit",
+        type=int,
+        default=1,
+        help="Maximum pending products when no product ID is supplied",
     )
 
     knowledge_parser = subparsers.add_parser(
@@ -1112,6 +1418,13 @@ def main() -> int:
 
     if args.command == "report":
         return intelligence_report()
+
+
+    if args.command == "intelligence":
+        return intelligence_command(
+            args.product_id,
+            args.limit,
+        )
 
     if args.command == "knowledge":
         return knowledge_command(

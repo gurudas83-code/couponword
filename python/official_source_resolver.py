@@ -637,6 +637,112 @@ def resolve_product(
 
 
 
+LOCALE_SEGMENT_PATTERN = re.compile(
+    r"^[a-z]{2,3}(?:-[a-z]{2,4})?$",
+    re.IGNORECASE,
+)
+
+
+def source_family_key(url: str) -> tuple[str, str]:
+    try:
+        parsed = urlparse(str(url or "").strip())
+    except ValueError:
+        return ("", "")
+
+    hostname = (parsed.hostname or "").lower()
+
+    segments = [
+        segment
+        for segment in (parsed.path or "").split("/")
+        if segment
+    ]
+
+    if (
+        len(segments) >= 2
+        and LOCALE_SEGMENT_PATTERN.fullmatch(segments[0])
+    ):
+        segments = segments[1:]
+
+    normalized_path = "/" + "/".join(
+        segment.lower()
+        for segment in segments
+    )
+
+    return (
+        hostname,
+        normalized_path.rstrip("/"),
+    )
+
+
+def stabilize_verified_source(
+    previous: dict[str, Any] | None,
+    resolved: dict[str, Any],
+) -> dict[str, Any]:
+    if not isinstance(previous, dict):
+        return resolved
+
+    if previous.get("verified") is not True:
+        return resolved
+
+    if resolved.get("verified") is not True:
+        return resolved
+
+    previous_url = str(
+        previous.get("official_url") or ""
+    ).strip()
+
+    resolved_url = str(
+        resolved.get("official_url") or ""
+    ).strip()
+
+    if not previous_url or not resolved_url:
+        return resolved
+
+    previous_family = source_family_key(previous_url)
+    resolved_family = source_family_key(resolved_url)
+
+    if (
+        not previous_family[0]
+        or previous_family != resolved_family
+    ):
+        return resolved
+
+    previous_identity = int(
+        previous.get("identity_score") or 0
+    )
+
+    resolved_identity = int(
+        resolved.get("identity_score") or 0
+    )
+
+    if resolved_identity >= previous_identity + 15:
+        return resolved
+
+    stabilized = dict(resolved)
+
+    stabilized["discovered_official_url"] = resolved_url
+    stabilized["discovered_official_title"] = resolved.get(
+        "official_title"
+    )
+
+    stabilized["official_url"] = previous_url
+    stabilized["official_title"] = previous.get(
+        "official_title"
+    ) or resolved.get("official_title")
+
+    stabilized["source_stability"] = {
+        "status": "retained_previous_verified_member",
+        "source_family": {
+            "hostname": previous_family[0],
+            "normalized_path": previous_family[1],
+        },
+        "previous_url": previous_url,
+        "newly_discovered_url": resolved_url,
+    }
+
+    return stabilized
+
+
 def load_existing_results() -> dict[str, dict[str, Any]]:
     if not OUTPUT_FILE.exists():
         return {}
@@ -845,6 +951,13 @@ def main() -> int:
             timezone.utc
         ).isoformat()
 
+        previous_result = existing_results.get(product_id)
+
+        resolved = stabilize_verified_source(
+            previous_result,
+            resolved,
+        )
+
         updated_results[product_id] = resolved
 
         print("Status   :", resolved.get("status"))
@@ -852,6 +965,15 @@ def main() -> int:
         print("Score    :", resolved.get("match_score"))
         print("Identity :", resolved.get("identity_score"))
         print("Decision :", resolved.get("identity_decision"))
+
+        stability = resolved.get("source_stability", {})
+
+        if isinstance(stability, dict) and stability.get("status"):
+            print("Stability:", stability.get("status"))
+            print(
+                "Discovered:",
+                resolved.get("discovered_official_url"),
+            )
 
     final_products = list(updated_results.values())
 

@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Coupon World Official Specification Extractor v2.0
 
@@ -2769,6 +2769,7 @@ def import_vision_result_payload(
     imported_results = 0
     imported_claims = 0
     skipped_results = 0
+    provenance_mismatches = 0
 
     for result in results:
         if not isinstance(result, dict):
@@ -2788,6 +2789,42 @@ def import_vision_result_payload(
         source_image = clean_text(
             queue_item.get("image_url")
         )
+
+        queue_official_page = clean_text(
+            queue_item.get("official_page")
+        ) or clean_text(
+            product_output.get("official_url")
+        )
+
+        result_source_image = clean_text(
+            result.get("source_image")
+        )
+
+        result_official_page = clean_text(
+            result.get("official_page")
+        )
+
+        # Strict provenance gate:
+        # modern result payloads must match the current queued evidence.
+        # Legacy payloads without provenance are treated as stale/unsafe.
+        if not result_source_image:
+            provenance_mismatches += 1
+            skipped_results += 1
+            continue
+
+        if result_source_image != source_image:
+            provenance_mismatches += 1
+            skipped_results += 1
+            continue
+
+        if (
+            result_official_page
+            and queue_official_page
+            and result_official_page != queue_official_page
+        ):
+            provenance_mismatches += 1
+            skipped_results += 1
+            continue
 
         source_language = clean_text(
             result.get("source_language")
@@ -2859,6 +2896,7 @@ def import_vision_result_payload(
     media["vision_imported_results"] = imported_results
     media["vision_imported_claims"] = imported_claims
     media["vision_skipped_results"] = skipped_results
+    media["vision_provenance_mismatches"] = provenance_mismatches
 
     product_output["media_evidence"] = media
 
@@ -2873,6 +2911,7 @@ def import_vision_result_payload(
     evidence_summary["vision_imported_results"] = imported_results
     evidence_summary["vision_imported_claims"] = imported_claims
     evidence_summary["vision_skipped_results"] = skipped_results
+    evidence_summary["vision_provenance_mismatches"] = provenance_mismatches
 
     product_output["evidence_summary"] = evidence_summary
 
@@ -4648,6 +4687,7 @@ def run_universal_semantic_cli(
     passed = 0
     failed = 0
     skipped = 0
+    semantic_state_updates = 0
 
     for product in selected:
         product_id = clean_text(product.get("product_id"))
@@ -4711,6 +4751,14 @@ def run_universal_semantic_cli(
             print(
                 "SKIP: No review-ready claims available."
             )
+
+            # Persist updated vision/provenance state even when semantic
+            # consolidation cannot run. This prevents stale or mismatched
+            # evidence from being reported later as complete.
+            product_index = products.index(product)
+            products[product_index] = working
+            semantic_state_updates += 1
+
             skipped += 1
             continue
 
@@ -4787,7 +4835,7 @@ def run_universal_semantic_cli(
 
     stored["products"] = products
 
-    if processed:
+    if processed or semantic_state_updates:
         try:
             backup = backup_output()
             save_json(OUTPUT_DB, stored)
@@ -4809,6 +4857,7 @@ def run_universal_semantic_cli(
     print("Passed    :", passed)
     print("Failed    :", failed)
     print("Skipped   :", skipped)
+    print("State saved:", semantic_state_updates)
     print("Auto-publish: NO")
     print("Review gate : REQUIRED")
 
