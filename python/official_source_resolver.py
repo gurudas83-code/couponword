@@ -520,18 +520,10 @@ def resolve_product(
             result_title,
         )
 
-        # Reject pages that match only a generic number or weak series token.
-        # Example: Nothing Ear (3) must not match Nothing Phone (3).
-        if model_score < MIN_MODEL_SCORE:
-            continue
-
-        tavily_score = float(result.get("score") or 0)
-
-        combined_score = round(
-            (model_score * 0.8) + (tavily_score * 0.2),
-            4,
-        )
-
+        # Run structured identity before applying the coarse token gate.
+        # This prevents exact model identities such as MK240 from being
+        # discarded because marketplace/query titles contain extra
+        # descriptors such as Nano, USB, colour, storage, etc.
         identity = compare_identity(
             expected_text=core_title,
             candidate_title=result_title,
@@ -541,6 +533,27 @@ def resolve_product(
 
         if identity.decision == "reject":
             continue
+
+        strong_identity_match = bool(
+            identity.brand_match is True
+            and identity.model_match is True
+            and int(identity.score or 0) >= 80
+        )
+
+        # Keep MIN_MODEL_SCORE conservative for weak candidates.
+        # A structured strong brand+model match may override it.
+        if (
+            model_score < MIN_MODEL_SCORE
+            and not strong_identity_match
+        ):
+            continue
+
+        tavily_score = float(result.get("score") or 0)
+
+        combined_score = round(
+            (model_score * 0.8) + (tavily_score * 0.2),
+            4,
+        )
 
         valid_candidates.append(
             {

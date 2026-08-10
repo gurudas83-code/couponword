@@ -2014,6 +2014,134 @@ def collect_embedded_media_evidence(
     for payload in payloads:
         walk(payload)
 
+    # ---------------------------------------------------------
+    # UNIVERSAL HTML IMAGE DISCOVERY
+    # ---------------------------------------------------------
+    # Embedded application state is not available on every
+    # manufacturer's website. Collect additional image evidence
+    # from standard HTML/meta markup while preserving the
+    # existing embedded-state collector.
+    # ---------------------------------------------------------
+
+    def add_html_image(
+        raw_url: Any,
+        path: str,
+        role: str = "product_candidate",
+    ) -> None:
+        if not isinstance(raw_url, str):
+            return
+
+        url = raw_url.strip()
+
+        if not url:
+            return
+
+        # Protocol-relative CDN URL.
+        if url.startswith("//"):
+            url = "https:" + url
+
+        if not url.lower().startswith(("http://", "https://")):
+            return
+
+        try:
+            parsed_path = urlparse(url).path.lower()
+        except ValueError:
+            return
+
+        # Ignore obvious non-image URLs. Query strings are fine
+        # because urlparse().path excludes them.
+        if not parsed_path.endswith(MEDIA_IMAGE_EXTENSIONS):
+            return
+
+        if url in seen_urls:
+            return
+
+        seen_urls.add(url)
+
+        items.append(
+            {
+                "url": url,
+                "path": path,
+                "role": role,
+            }
+        )
+
+    # OpenGraph / Twitter metadata frequently contains the
+    # manufacturer's preferred product/hero image.
+    for meta in soup.find_all("meta"):
+        key = str(
+            meta.get("property")
+            or meta.get("name")
+            or ""
+        ).strip().lower()
+
+        content = str(meta.get("content") or "").strip()
+
+        if key in {
+            "og:image",
+            "og:image:url",
+            "og:image:secure_url",
+            "twitter:image",
+            "twitter:image:src",
+        }:
+            add_html_image(
+                content,
+                f"html.meta.{key}",
+                "product_candidate",
+            )
+
+    # Standard image elements.
+    for index, image_tag in enumerate(soup.find_all("img")):
+        for attribute in (
+            "src",
+            "data-src",
+            "data-original",
+            "data-lazy-src",
+        ):
+            value = image_tag.get(attribute)
+
+            if value:
+                add_html_image(
+                    str(value),
+                    f"html.img[{index}].{attribute}",
+                    "product_candidate",
+                )
+
+        # srcset/data-srcset can contain several resolutions.
+        for attribute in ("srcset", "data-srcset"):
+            value = image_tag.get(attribute)
+
+            if not value:
+                continue
+
+            for candidate in str(value).split(","):
+                candidate_url = candidate.strip().split()[0]
+
+                add_html_image(
+                    candidate_url,
+                    f"html.img[{index}].{attribute}",
+                    "product_candidate",
+                )
+
+    # <source srcset> inside <picture>.
+    for index, source_tag in enumerate(
+        soup.find_all("source")
+    ):
+        for attribute in ("srcset", "data-srcset"):
+            value = source_tag.get(attribute)
+
+            if not value:
+                continue
+
+            for candidate in str(value).split(","):
+                candidate_url = candidate.strip().split()[0]
+
+                add_html_image(
+                    candidate_url,
+                    f"html.source[{index}].{attribute}",
+                    "product_candidate",
+                )
+
     product_items = [
         item
         for item in items
@@ -2112,13 +2240,27 @@ def rank_media_evidence(
         and item.get("role") == "product_candidate"
     ]
 
-    scan_items = (
-        desktop
-        if desktop
-        else mobile
-        if mobile
-        else generic
-    )[:max_scan]
+    def media_priority(item: dict[str, Any]) -> tuple[int, int]:
+        path_text = clean_text(item.get('path')).lower()
+
+        # Official page metadata is normally the publisher's
+        # preferred representative product image.
+        if 'html.meta.og:image:secure_url' in path_text:
+            return (4, 0)
+
+        if 'html.meta.og:image' in path_text:
+            return (3, 0)
+
+        if 'html.meta.twitter:image' in path_text:
+            return (2, 0)
+
+        return (1, 0)
+
+    scan_items = sorted(
+        desktop + mobile + generic,
+        key=media_priority,
+        reverse=True,
+    )
 
     def dhash(image: Any, hash_size: int = 8) -> int:
         gray = image.convert("L").resize(
@@ -2167,13 +2309,25 @@ def rank_media_evidence(
 
     records: list[dict[str, Any]] = []
 
+    fetch_count = 0
+    max_fetch = max(max_scan * 4, 80)
+
     for item in scan_items:
+        # max_scan now means useful images, not first raw URLs.
+        if len(records) >= max_scan:
+            break
+
+        # Prevent pathological pages from causing unlimited downloads.
+        if fetch_count >= max_fetch:
+            break
+
         url = clean_text(item.get("url"))
 
         if not url:
             continue
 
         try:
+            fetch_count += 1
             response = requests.get(
                 url,
                 headers={"User-Agent": USER_AGENT},
@@ -2184,6 +2338,10 @@ def rank_media_evidence(
             with Image.open(BytesIO(response.content)) as image:
                 image = image.convert("RGB")
                 width, height = image.size
+
+                # Tiny icons/category thumbnails are not shopping heroes.
+                if width < 300 or height < 300:
+                    continue
                 hash_value = dhash(image)
                 mean_edge, strong_ratio = complexity(image)
 
@@ -2225,6 +2383,49 @@ def rank_media_evidence(
                     "strong_edge_ratio": round(strong_ratio, 6),
                     "perceptual_hash": str(hash_value),
                     "rank_score": score,
+                "aspect_ratio": round(width / height, 4) if height else 0.0,
+                "square_distance": round(abs(1.0 - (width / height)), 4) if height else 99.0,
+                "hero_score": (
+                    # Base preference for official product media.
+                    (20 if role == "product_desktop" else 0)
+
+                    # Shopping cards strongly prefer square-ish imagery.
+                    + (
+                        40 if height and 0.80 <= (width / height) <= 1.25
+                        else 25 if height and 0.65 <= (width / height) <= 1.50
+                        else 8 if height and 0.50 <= (width / height) <= 1.80
+                        else -25
+                    )
+
+                    # Very tall artwork is commonly a feature/specification
+                    # panel rather than a clean ecommerce hero.
+                    + (-30 if height and (width / height) < 0.60 else 0)
+
+                    # Require useful resolution without rewarding giant
+                    # marketing banners merely for being large.
+                    + (15 if width >= 800 and height >= 800 else 0)
+                    + (5 if width >= 1200 and height >= 1200 else 0)
+
+                    # Cleaner images generally contain less edge density
+                    # than text-heavy specification sheets and collages.
+                    + (
+                        20 if strong_ratio < 0.035
+                        else 10 if strong_ratio < 0.055
+                        else -15 if strong_ratio >= 0.09
+                        else 0
+                    )
+
+                    + (
+                        15 if mean_edge < 10
+                        else 7 if mean_edge < 16
+                        else -10 if mean_edge >= 24
+                        else 0
+                    )
+
+                    # Existing evidence quality remains only a small
+                    # supporting signal for hero selection.
+                    + min(score, 80) // 8
+                ),
                 }
             )
 
@@ -2473,11 +2674,14 @@ def vision_provider_analyze(
     provider_config: dict[str, Any],
 ) -> dict[str, Any]:
     """
-    Provider-neutral vision adapter entry point.
+    Provider-neutral vision adapter.
 
-    Version 1 is intentionally a no-op adapter. It defines the contract
-    that local OCR or external multimodal providers must follow.
+    Gemini mode performs conservative shopping-hero classification.
+    It does NOT authorize image publication and does NOT approve
+    specification claims automatically.
     """
+
+    import os
 
     result = {
         "status": "not_run",
@@ -2491,6 +2695,16 @@ def vision_provider_analyze(
         "raw_text": "",
         "claims": [],
         "error": "",
+        "hero_classification": {
+            "hero_eligible": False,
+            "image_type": "unknown",
+            "product_prominence": 0.0,
+            "text_heavy": False,
+            "people_present": False,
+            "clean_product_view": False,
+            "hero_confidence": 0.0,
+            "reason": "",
+        },
     }
 
     if not isinstance(evidence_item, dict):
@@ -2502,12 +2716,202 @@ def vision_provider_analyze(
         result["status"] = "provider_disabled"
         return result
 
-    result["status"] = "adapter_not_implemented"
-    result["error"] = (
-        "Selected vision provider adapter has not been implemented yet"
+    provider = clean_text(
+        provider_config.get("provider")
+    ).lower()
+
+    if provider != "gemini":
+        result["status"] = "adapter_not_implemented"
+        result["error"] = (
+            f"Vision adapter not implemented for provider: {provider}"
+        )
+        return result
+
+    api_key = os.environ.get("GEMINI_API_KEY")
+
+    if not api_key:
+        result["status"] = "provider_error"
+        result["error"] = "GEMINI_API_KEY is not set"
+        return result
+
+    image_url = clean_text(
+        evidence_item.get("image_url")
+        or evidence_item.get("url")
     )
 
-    return result
+    product_name = clean_text(
+        evidence_item.get("product_name")
+    )
+
+    if not image_url:
+        result["status"] = "invalid_evidence"
+        result["error"] = "Image URL is missing"
+        return result
+
+    try:
+        from google import genai
+        from google.genai import types
+    except ImportError:
+        result["status"] = "provider_error"
+        result["error"] = "Google GenAI package is not installed"
+        return result
+
+    try:
+        response = requests.get(
+            image_url,
+            headers={"User-Agent": USER_AGENT},
+            timeout=TIMEOUT,
+        )
+        response.raise_for_status()
+
+        content_type = clean_text(
+            response.headers.get("Content-Type")
+        ).split(";", 1)[0].lower()
+
+        if content_type not in {
+            "image/jpeg",
+            "image/png",
+            "image/webp",
+        }:
+            lowered = image_url.lower()
+
+            if lowered.endswith((".jpg", ".jpeg")):
+                content_type = "image/jpeg"
+            elif lowered.endswith(".png"):
+                content_type = "image/png"
+            elif lowered.endswith(".webp"):
+                content_type = "image/webp"
+            else:
+                content_type = "image/jpeg"
+
+        image_part = types.Part.from_bytes(
+            data=response.content,
+            mime_type=content_type,
+        )
+
+        prompt = f"""
+You are classifying ONE official product-page image for use as the
+main shopping-card hero image.
+
+EXPECTED PRODUCT:
+{product_name}
+
+Classify the image conservatively.
+
+A GOOD hero image:
+- clearly shows the expected product
+- product is visually prominent
+- preferably shows the full product / main components
+- has little or no promotional text
+- is not a specification sheet
+- is not primarily an infographic
+- is not primarily a lifestyle/person image
+- is suitable as the main image on an ecommerce recommendation card
+
+Allowed image_type values:
+clean_product
+feature_graphic
+spec_sheet
+lifestyle
+infographic
+packaging
+logo_or_ui
+unknown
+
+Return ONLY JSON with exactly this structure:
+
+{{
+  "image_type": "clean_product",
+  "product_prominence": 0.0,
+  "text_heavy": false,
+  "people_present": false,
+  "clean_product_view": false,
+  "hero_confidence": 0.0,
+  "reason": "short reason"
+}}
+
+Rules:
+- product_prominence must be between 0 and 1.
+- hero_confidence must be between 0 and 1.
+- clean_product_view=true only when this is genuinely suitable as
+  the principal ecommerce product image.
+- Feature banners, specification panels, diagrams and promotional
+  artwork must NOT be called clean_product.
+"""
+
+        client = genai.Client(api_key=api_key)
+
+        ai_response = client.models.generate_content(
+            model="gemini-3.6-flash",
+            contents=[
+                image_part,
+                prompt,
+            ],
+            config=types.GenerateContentConfig(
+                temperature=0.0,
+                response_mime_type="application/json",
+            ),
+        )
+
+        parsed = json.loads(ai_response.text)
+
+        image_type = clean_text(
+            parsed.get("image_type")
+        ).lower() or "unknown"
+
+        try:
+            prominence = float(
+                parsed.get("product_prominence") or 0.0
+            )
+        except (TypeError, ValueError):
+            prominence = 0.0
+
+        try:
+            confidence = float(
+                parsed.get("hero_confidence") or 0.0
+            )
+        except (TypeError, ValueError):
+            confidence = 0.0
+
+        prominence = max(0.0, min(prominence, 1.0))
+        confidence = max(0.0, min(confidence, 1.0))
+
+        text_heavy = parsed.get("text_heavy") is True
+        people_present = parsed.get("people_present") is True
+        clean_product_view = (
+            parsed.get("clean_product_view") is True
+        )
+
+        # Coupon World owns the final gate.
+        # The model supplies observations but cannot publish an image.
+        hero_eligible = bool(
+            image_type == "clean_product"
+            and clean_product_view
+            and not text_heavy
+            and prominence >= 0.65
+            and confidence >= 0.80
+        )
+
+        result["status"] = "success"
+        result["hero_classification"] = {
+            "hero_eligible": hero_eligible,
+            "image_type": image_type,
+            "product_prominence": round(prominence, 3),
+            "text_heavy": text_heavy,
+            "people_present": people_present,
+            "clean_product_view": clean_product_view,
+            "hero_confidence": round(confidence, 3),
+            "reason": clean_text(parsed.get("reason")),
+        }
+
+        return result
+
+    except Exception as error:
+        result["status"] = "provider_error"
+        result["error"] = (
+            f"{type(error).__name__}: {str(error)[:500]}"
+        )
+        return result
 
 
 def attach_vision_provider_state(
@@ -4112,17 +4516,32 @@ def extract_one(
 
     evidence_count = len(specifications) + len(features)
 
-    if (
-        evidence_count < 3
-        and output.get("media_evidence", {}).get(
+    product_image_count = (
+        output.get("media_evidence", {}).get(
             "product_image_count",
             0,
-        ) > 0
-    ):
+        )
+    )
+
+    # Image ranking serves two independent purposes:
+    #
+    # 1. vision/spec evidence when text evidence is weak
+    # 2. verified shopping hero-image selection
+    #
+    # Therefore image ranking must run whenever official product
+    # images are available, regardless of how many textual specs
+    # were already extracted.
+    if product_image_count > 0:
         output["media_evidence"] = rank_media_evidence(
             output.get("media_evidence", {}),
         )
 
+    # Keep the existing vision/spec queue conservative. It is only
+    # needed when textual evidence is sparse.
+    if (
+        evidence_count < 3
+        and product_image_count > 0
+    ):
         output["media_evidence"] = prepare_vision_evidence_queue(
             output.get("media_evidence", {}),
             expected_name,
