@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Coupon World Official Specification Extractor v2.0
 
@@ -188,7 +188,7 @@ def clean_text(value: Any) -> str:
 
 def normalize_key(value: Any) -> str:
     key = clean_text(value).lower()
-    key = re.sub(r"[:ï¼š]+$", "", key)
+    key = re.sub(r"[:Ã¯Â¼Å¡]+$", "", key)
     key = re.sub(r"[^a-z0-9\s/+&-]", " ", key)
     key = re.sub(r"\s+", " ", key).strip()
 
@@ -513,7 +513,7 @@ def extract_label_value_blocks(
                 continue
 
             match = re.match(
-                r"^([A-Za-z][A-Za-z0-9 /+&()._-]{1,55})\s*[:ï¼š]\s*(.{2,300})$",
+                r"^([A-Za-z][A-Za-z0-9 /+&()._-]{1,55})\s*[:Ã¯Â¼Å¡]\s*(.{2,300})$",
                 text,
             )
 
@@ -1012,7 +1012,7 @@ def extract_apple_techspecs(
             )
 
         display_match = re.search(
-            r"\b\d+(?:\.\d+)?[â€‘-]inch[^.]{0,180}?"
+            r"\b\d+(?:\.\d+)?[Ã¢â‚¬â€˜-]inch[^.]{0,180}?"
             r"(?:OLED|LCD)\s+display\b",
             value,
             flags=re.I,
@@ -2027,6 +2027,11 @@ def collect_embedded_media_evidence(
         raw_url: Any,
         path: str,
         role: str = "product_candidate",
+        *,
+        alt: str = "",
+        title: str = "",
+        parent_text: str = "",
+        href: str = "",
     ) -> None:
         if not isinstance(raw_url, str):
             return
@@ -2063,6 +2068,10 @@ def collect_embedded_media_evidence(
                 "url": url,
                 "path": path,
                 "role": role,
+                "alt": clean_text(alt),
+                "title": clean_text(title),
+                "parent_text": clean_text(parent_text)[:500],
+                "href": clean_text(href),
             }
         )
 
@@ -2092,6 +2101,29 @@ def collect_embedded_media_evidence(
 
     # Standard image elements.
     for index, image_tag in enumerate(soup.find_all("img")):
+        image_alt = clean_text(image_tag.get("alt"))
+        image_title = clean_text(image_tag.get("title"))
+
+        parent_link = image_tag.find_parent("a")
+
+        image_href = (
+            clean_text(parent_link.get("href"))
+            if parent_link is not None
+            else ""
+        )
+
+        context_parent = parent_link or image_tag.parent
+
+        image_parent_text = ""
+
+        if context_parent is not None:
+            image_parent_text = clean_text(
+                context_parent.get_text(
+                    " ",
+                    strip=True,
+                )
+            )[:500]
+
         for attribute in (
             "src",
             "data-src",
@@ -2105,6 +2137,10 @@ def collect_embedded_media_evidence(
                     str(value),
                     f"html.img[{index}].{attribute}",
                     "product_candidate",
+                    alt=image_alt,
+                    title=image_title,
+                    parent_text=image_parent_text,
+                    href=image_href,
                 )
 
         # srcset/data-srcset can contain several resolutions.
@@ -2121,6 +2157,10 @@ def collect_embedded_media_evidence(
                     candidate_url,
                     f"html.img[{index}].{attribute}",
                     "product_candidate",
+                    alt=image_alt,
+                    title=image_title,
+                    parent_text=image_parent_text,
+                    href=image_href,
                 )
 
     # <source srcset> inside <picture>.
@@ -2190,6 +2230,7 @@ def collect_embedded_media_evidence(
 
 def rank_media_evidence(
     media_evidence: dict[str, Any],
+    official_url: str = "",
     max_scan: int = 20,
     top_n: int = 8,
 ) -> dict[str, Any]:
@@ -2241,23 +2282,29 @@ def rank_media_evidence(
     ]
 
     def media_priority(item: dict[str, Any]) -> tuple[int, int]:
-        path_text = clean_text(item.get('path')).lower()
+        path_text = clean_text(item.get("path")).lower()
+        href = clean_text(item.get("href")).rstrip("/").lower()
+        expected_url = clean_text(official_url).rstrip("/").lower()
+
+        # Exact product-linked image gets the highest scan priority.
+        if expected_url and href == expected_url:
+            return (10, 0)
 
         # Official page metadata is normally the publisher's
         # preferred representative product image.
-        if 'html.meta.og:image:secure_url' in path_text:
+        if "html.meta.og:image:secure_url" in path_text:
             return (4, 0)
 
-        if 'html.meta.og:image' in path_text:
+        if "html.meta.og:image" in path_text:
             return (3, 0)
 
-        if 'html.meta.twitter:image' in path_text:
+        if "html.meta.twitter:image" in path_text:
             return (2, 0)
 
         return (1, 0)
 
     scan_items = sorted(
-        desktop + mobile + generic,
+        generic + desktop + mobile,
         key=media_priority,
         reverse=True,
     )
@@ -2697,6 +2744,10 @@ def vision_provider_analyze(
         "error": "",
         "hero_classification": {
             "hero_eligible": False,
+            "exact_product_match": False,
+            "model_match": False,
+            "variant_match": False,
+            "identity_confidence": 0.0,
             "image_type": "unknown",
             "product_prominence": 0.0,
             "text_heavy": False,
@@ -2821,6 +2872,10 @@ unknown
 Return ONLY JSON with exactly this structure:
 
 {{
+  "exact_product_match": false,
+  "model_match": false,
+  "variant_match": false,
+  "identity_confidence": 0.0,
   "image_type": "clean_product",
   "product_prominence": 0.0,
   "text_heavy": false,
@@ -2831,6 +2886,19 @@ Return ONLY JSON with exactly this structure:
 }}
 
 Rules:
+
+IDENTITY VERIFICATION IS MANDATORY:
+- exact_product_match=true only when the visible product is consistent with the EXPECTED PRODUCT.
+- model_match=true only when there is no evidence that the image shows another model, generation, series, or product family.
+- variant_match=true only when there is no visible contradiction in color, edition, size, configuration, form factor, or named variant.
+- A product from the same brand or same category is NOT sufficient.
+- An image being hosted on the official manufacturer website is NOT sufficient proof of exact product identity.
+- If the expected product is earbuds, an image of headphones must fail exact_product_match and model_match.
+- If the expected product specifies black and the image clearly shows white, variant_match must be false.
+- If the exact identity cannot be established confidently from the image and expected product context, return false rather than guessing.
+- identity_confidence must be between 0 and 1.
+- identity_confidence means confidence that this image represents the exact expected product/variant, not merely confidence that it is a clean image.
+
 - product_prominence must be between 0 and 1.
 - hero_confidence must be between 0 and 1.
 - clean_product_view=true only when this is genuinely suitable as
@@ -2841,17 +2909,49 @@ Rules:
 
         client = genai.Client(api_key=api_key)
 
-        ai_response = client.models.generate_content(
-            model="gemini-3.6-flash",
-            contents=[
-                image_part,
-                prompt,
-            ],
-            config=types.GenerateContentConfig(
-                temperature=0.0,
-                response_mime_type="application/json",
-            ),
-        )
+        import time
+
+        ai_response = None
+
+        for attempt in range(3):
+            try:
+                ai_response = client.models.generate_content(
+                    model="gemini-3.6-flash",
+                    contents=[
+                        image_part,
+                        prompt,
+                    ],
+                    config=types.GenerateContentConfig(
+                        temperature=0.0,
+                        response_mime_type="application/json",
+                    ),
+                )
+                break
+            except Exception as retry_error:
+                message = str(retry_error)
+                quota_error = (
+                    "429" in message
+                    or "RESOURCE_EXHAUSTED" in message
+                )
+                if not quota_error or attempt >= 2:
+                    raise
+
+                retry_match = re.search(
+                    r"retry in\s+([0-9.]+)s",
+                    message,
+                    re.IGNORECASE,
+                )
+
+                wait_seconds = (
+                    float(retry_match.group(1)) + 2.0
+                    if retry_match
+                    else 60.0
+                )
+                wait_seconds = min(max(wait_seconds, 2.0), 90.0)
+                time.sleep(wait_seconds)
+
+        if ai_response is None:
+            raise RuntimeError("Gemini returned no response")
 
         parsed = json.loads(ai_response.text)
 
@@ -2876,6 +2976,28 @@ Rules:
         prominence = max(0.0, min(prominence, 1.0))
         confidence = max(0.0, min(confidence, 1.0))
 
+        exact_product_match = (
+            parsed.get("exact_product_match") is True
+        )
+        model_match = (
+            parsed.get("model_match") is True
+        )
+        variant_match = (
+            parsed.get("variant_match") is True
+        )
+
+        try:
+            identity_confidence = float(
+                parsed.get("identity_confidence") or 0.0
+            )
+        except (TypeError, ValueError):
+            identity_confidence = 0.0
+
+        identity_confidence = max(
+            0.0,
+            min(identity_confidence, 1.0),
+        )
+
         text_heavy = parsed.get("text_heavy") is True
         people_present = parsed.get("people_present") is True
         clean_product_view = (
@@ -2885,7 +3007,11 @@ Rules:
         # Coupon World owns the final gate.
         # The model supplies observations but cannot publish an image.
         hero_eligible = bool(
-            image_type == "clean_product"
+            exact_product_match
+            and model_match
+            and variant_match
+            and identity_confidence >= 0.90
+            and image_type == "clean_product"
             and clean_product_view
             and not text_heavy
             and prominence >= 0.65
@@ -2895,6 +3021,10 @@ Rules:
         result["status"] = "success"
         result["hero_classification"] = {
             "hero_eligible": hero_eligible,
+            "exact_product_match": exact_product_match,
+            "model_match": model_match,
+            "variant_match": variant_match,
+            "identity_confidence": round(identity_confidence, 3),
             "image_type": image_type,
             "product_prominence": round(prominence, 3),
             "text_heavy": text_heavy,
@@ -4534,6 +4664,7 @@ def extract_one(
     if product_image_count > 0:
         output["media_evidence"] = rank_media_evidence(
             output.get("media_evidence", {}),
+            official_url,
         )
 
     # Keep the existing vision/spec queue conservative. It is only

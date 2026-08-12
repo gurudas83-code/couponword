@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 
 """
 Coupon World Control Center v1
@@ -203,7 +203,7 @@ def check_command() -> int:
     failures: list[str] = []
     warnings: list[str] = []
 
-    print_section("COUPON WORLD CONTROL CENTER — CHECK")
+    print_section("COUPON WORLD CONTROL CENTER â€” CHECK")
 
     try:
         products = load_products()
@@ -398,7 +398,7 @@ def check_command() -> int:
         if ".git" in path.parts:
             continue
 
-        # Do not report the checker’s own blocked-tag definitions.
+        # Do not report the checkerâ€™s own blocked-tag definitions.
         if path.resolve() == Path(__file__).resolve():
             continue
 
@@ -408,6 +408,21 @@ def check_command() -> int:
                 ".branding_backups",
                 ".compliance_backups",
             )
+        ):
+            continue
+
+        name_lower = path.name.lower()
+        relative_lower = str(path.relative_to(ROOT)).lower()
+
+        # Ignore historical backups/audit artifacts in repository-wide
+        # affiliate-tag hygiene checks. Active site/data/code validation
+        # remains unchanged.
+        if (
+            "_before_" in name_lower
+            or ".bak" in name_lower
+            or name_lower.endswith(".bak")
+            or "audit_reports" in path.parts
+            or name_lower == "system_core_audit.txt"
         ):
             continue
 
@@ -599,13 +614,13 @@ def validate_build_source() -> int:
 
 
 def build_command() -> int:
-    print_section("COUPON WORLD CONTROL CENTER — BUILD")
+    print_section("COUPON WORLD CONTROL CENTER â€” BUILD")
 
     if validate_build_source() != 0:
         print("BUILD ABORTED: source validation failed")
         return 1
 
-    print_section("STEP 1 — BUILD PRODUCT PAGES")
+    print_section("STEP 1 â€” BUILD PRODUCT PAGES")
 
     code = run_command(
         [
@@ -620,7 +635,7 @@ def build_command() -> int:
         print("BUILD FAILED: product page generation failed")
         return code
 
-    print_section("STEP 2 — BUILD SITEMAP")
+    print_section("STEP 2 â€” BUILD SITEMAP")
 
     code = run_command(
         [
@@ -633,7 +648,7 @@ def build_command() -> int:
         print("BUILD FAILED: sitemap generation failed")
         return code
 
-    print_section("STEP 3 — POST-BUILD CHECK")
+    print_section("STEP 3 â€” POST-BUILD CHECK")
 
     code = check_command()
 
@@ -654,7 +669,7 @@ def intake_products(
     input_file: str,
     output_csv: str = "data/products_import.csv",
 ) -> int:
-    print_section("COUPON WORLD CONTROL CENTER — INTAKE")
+    print_section("COUPON WORLD CONTROL CENTER â€” INTAKE")
 
     input_path = Path(input_file)
     if not input_path.is_absolute():
@@ -682,7 +697,7 @@ def intake_products(
 
 
 def import_products(csv_file: str, write: bool = False) -> int:
-    print_section("COUPON WORLD CONTROL CENTER — IMPORT")
+    print_section("COUPON WORLD CONTROL CENTER â€” IMPORT")
 
     csv_path = Path(csv_file)
 
@@ -710,7 +725,7 @@ def import_products(csv_file: str, write: bool = False) -> int:
 
 
 def adapt_source(input_csv: str, output_csv: str) -> int:
-    print_section("COUPON WORLD CONTROL CENTER — ADAPT")
+    print_section("COUPON WORLD CONTROL CENTER â€” ADAPT")
 
     input_path = Path(input_csv)
     if not input_path.is_absolute():
@@ -731,7 +746,7 @@ def adapt_source(input_csv: str, output_csv: str) -> int:
 
 
 def intelligence_report() -> int:
-    print_section("COUPON WORLD CONTROL CENTER — REPORT")
+    print_section("COUPON WORLD CONTROL CENTER â€” REPORT")
 
     return run_command(
         [
@@ -770,7 +785,7 @@ def run_workflow(
     print("Auto-push   : NO")
     print("Discovery   : External source required")
 
-    print_section("STEP 1 — FOUNDATION CHECK")
+    print_section("STEP 1 â€” FOUNDATION CHECK")
 
     check_code = check_command()
 
@@ -780,7 +795,7 @@ def run_workflow(
         return check_code
 
     if input_file:
-        print_section("STEP 2 — PRODUCT INTAKE")
+        print_section("STEP 2 â€” PRODUCT INTAKE")
 
         intake_code = intake_products(
             input_file,
@@ -792,7 +807,7 @@ def run_workflow(
             print("Product intake failed. Workflow stopped.")
             return intake_code
 
-        print_section("STEP 3 — IMPORT PREVIEW")
+        print_section("STEP 3 â€” IMPORT PREVIEW")
 
         import_code = import_products(
             output_csv,
@@ -804,10 +819,10 @@ def run_workflow(
             print("Import preview requires review.")
             return import_code
     else:
-        print_section("STEP 2 — PRODUCT INTAKE")
+        print_section("STEP 2 â€” PRODUCT INTAKE")
         print("SKIPPED: No input URL file supplied.")
 
-    print_section("STEP 4 — CONTROLLED BUILD")
+    print_section("STEP 4 â€” CONTROLLED BUILD")
 
     build_code = build_command()
 

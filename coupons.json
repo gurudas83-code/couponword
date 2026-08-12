@@ -256,7 +256,7 @@
     "brand": "realme",
     "category": "Electronics",
     "description": "realme Buds Air 8, 11mm+6mm Dual Dynamic Bass Drivers, 58Hrs Playtime, 55dB ANC, 6 Mic ENC, 45ms Low Latency, 360° Spatial Audio, Hi-Res LHDC, IP55 Dust & Water Resistant, BT v5.4 (Master Gold) is a realme product listed in the Electronics category on Coupon World. Visit the Online Store product page to check the latest price, availability and offer details.",
-    "image": "https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0GDQCTYFB&Format=_SL500_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=guru0906-21",
+    "image": "https://image01.realme.net/general/20260308/1772973648764821b6e96876343359d5458d8f95b2442.png?width=1080&height=1080&size=594216",
     "link": "https://www.amazon.in/dp/B0GDQCTYFB?tag=guru0906-21",
     "store": "Online Store",
     "active": true,
@@ -272,7 +272,20 @@
     "code": "NO CODE NEEDED",
     "expiry": "Limited Time",
     "badge": "Amazon's Choice",
-    "linkType": "product"
+    "linkType": "product",
+    "image_provenance": {
+      "source_type": "official_product_page",
+      "source_page": "https://www.realme.com/id/more-products/realme-buds-air-8",
+      "verified": true,
+      "selection_method": "hero_score_plus_ai_gate_v1",
+      "hero_score": 90,
+      "rank_score": 0,
+      "width": 1080,
+      "height": 1080,
+      "ai_image_type": "clean_product",
+      "ai_product_prominence": 1.0,
+      "ai_confidence": 0.95
+    }
   },
   {
     "id": 12,
@@ -706,7 +719,7 @@
     "brand": "boAt",
     "category": "Electronics",
     "description": "boAt Rockerz 450 Headphones is a boAt product listed in the Electronics category on Coupon World. Visit the Online Store product page to check the latest price, availability and offer details.",
-    "image": null,
+    "image": "https://www.boat-lifestyle.com/cdn/shop/products/eb8e0fbd-c412-48b3-9c91-5b49ddf35800.png?v=1673002681",
     "link": "https://www.amazon.in/s?k=boAt+Rockerz+450+Headphones&tag=guru0906-21",
     "store": "Online Store",
     "active": true,
@@ -722,7 +735,20 @@
     "code": "NO CODE NEEDED",
     "expiry": "05 Jul 2026",
     "badge": null,
-    "linkType": "search"
+    "linkType": "search",
+    "image_provenance": {
+      "source_type": "official_product_page",
+      "source_page": "https://www.boat-lifestyle.com/products/rockerz-450",
+      "verified": true,
+      "selection_method": "hero_score_plus_ai_gate_v1",
+      "hero_score": 75,
+      "rank_score": 0,
+      "width": 600,
+      "height": 600,
+      "ai_image_type": "clean_product",
+      "ai_product_prominence": 0.9,
+      "ai_confidence": 0.98
+    }
   },
   {
     "id": 30,

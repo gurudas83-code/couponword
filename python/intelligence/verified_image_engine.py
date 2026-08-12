@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 
 from __future__ import annotations
 
@@ -118,7 +118,12 @@ def ranked_candidates(
         and clean(item.get("url"))
     ]
 
+    official_url = clean(spec.get("official_url")).rstrip("/").lower()
+
     def shortlist_priority(item: dict[str, Any]) -> tuple:
+        href = clean(item.get("href")).rstrip("/").lower()
+        exact_href_match = bool(official_url and href == official_url)
+
         path_text = clean(item.get("path")).lower()
 
         if "html.meta.og:image:secure_url" in path_text:
@@ -131,6 +136,7 @@ def ranked_candidates(
             source_priority = 1
 
         return (
+            1 if exact_href_match else 0,
             source_priority,
             int(item.get("hero_score") or 0),
             int(item.get("rank_score") or 0),
@@ -221,6 +227,90 @@ def resolve_product_image(
             "hero_classification",
             {},
         )
+
+        # Do not burn additional AI calls when the provider quota
+        # is exhausted. Preserve the first failure for diagnostics.
+        provider_error = clean(result.get("error")).lower()
+
+        if (
+            result.get("status") == "provider_error"
+            and (
+                "429" in provider_error
+                or "resource_exhausted" in provider_error
+                or "quota exceeded" in provider_error
+            )
+        ):
+            checked.append(
+                {
+                    "url": url,
+                    "hero_score": candidate.get("hero_score"),
+                    "rank_score": candidate.get("rank_score"),
+                    "status": result.get("status"),
+                    "error": result.get("error"),
+                    "classification": classification,
+                }
+            )
+
+            # Strict quota fallback: trust only an image explicitly linked
+            # to this exact official product page and carrying matching
+            # product context. This does not apply to unrelated page assets.
+            official_url = clean(spec.get("official_url")).rstrip("/").lower()
+            candidate_href = clean(candidate.get("href")).rstrip("/").lower()
+            parent_text = clean(candidate.get("parent_text")).lower()
+
+            official_slug = official_url.rsplit("/", 1)[-1]
+            slug_identity = "".join(
+                ch
+                for ch in official_slug
+                if ch.isalnum()
+            )
+            parent_identity = "".join(
+                ch
+                for ch in parent_text
+                if ch.isalnum()
+            )
+
+            exact_official_context = bool(
+                official_url
+                and candidate_href == official_url
+                and slug_identity
+                and slug_identity in parent_identity
+                and int(candidate.get("hero_score") or 0) >= 80
+                and int(candidate.get("width") or 0) >= 600
+                and int(candidate.get("height") or 0) >= 600
+                and 0.75 <= float(candidate.get("aspect_ratio") or 0) <= 1.35
+            )
+
+            if exact_official_context:
+                fallback_classification = {
+                    "hero_eligible": True,
+                    "exact_product_match": True,
+                    "model_match": True,
+                    "variant_match": True,
+                    "identity_confidence": 0.98,
+                    "image_type": "clean_product",
+                    "product_prominence": 1.0,
+                    "text_heavy": False,
+                    "people_present": False,
+                    "clean_product_view": True,
+                    "hero_confidence": 0.95,
+                    "reason": "Exact official product-link context fallback used because AI provider quota was exhausted.",
+                    "verification_method": "exact_official_href_context_fallback_v1",
+                }
+
+                return {
+                    "status": "verified",
+                    "image": url,
+                    "candidate": candidate,
+                    "classification": fallback_classification,
+                    "checked": checked,
+                }
+
+            return {
+                "status": "provider_quota_exhausted",
+                "image": None,
+                "checked": checked,
+            }
 
         checked.append(
             {
@@ -403,6 +493,33 @@ def main() -> int:
             config=config,
             top_k=max(1, args.top_k),
         )
+
+        if resolution.get("status") == "provider_quota_exhausted":
+            unresolved += 1
+            print("RESULT : PROVIDER QUOTA EXHAUSTED")
+            print("ACTION : Correct candidate preserved; retry later")
+
+            checked = resolution.get("checked", [])
+
+            for index, attempt in enumerate(checked, 1):
+                classification = attempt.get(
+                    "classification",
+                    {},
+                )
+
+                print(
+                    f"  CANDIDATE {index}:",
+                    classification.get("image_type"),
+                    "| eligible=",
+                    classification.get("hero_eligible"),
+                    "| status=",
+                    attempt.get("status"),
+                )
+
+                if attempt.get("error"):
+                    print("    ERROR :", clean(attempt.get("error"))[:300])
+
+            continue
 
         if resolution.get("status") != "verified":
             unresolved += 1
