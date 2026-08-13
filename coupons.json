@@ -1883,7 +1883,7 @@
     "brand": "Nothing",
     "category": "Mobiles",
     "description": "Nothing Phone (3) (Black, 12GB RAM, 256GB Storage) is a Nothing product listed in the Mobiles category on Coupon World. Visit the retailer product page to check the latest price, availability and offer details.",
-    "image": null,
+    "image": "https://cdn.shopify.com/s/files/1/0579/8091/1768/files/0000s_0011_Phone-3-white.png?v=1753686747",
     "link": "https://www.amazon.in/dp/B0F7R6V1LM?tag=guru0906-21",
     "store": "Online Store",
     "active": true,
@@ -1899,6 +1899,19 @@
     "code": null,
     "expiry": null,
     "badge": null,
-    "linkType": null
+    "linkType": null,
+    "image_provenance": {
+      "source_type": "official_product_page",
+      "source_page": "https://us.nothing.tech/products/phone-3",
+      "verified": true,
+      "selection_method": "hero_score_plus_ai_gate_v1",
+      "hero_score": 81,
+      "rank_score": 35,
+      "width": 2048,
+      "height": 2048,
+      "ai_image_type": "clean_product",
+      "ai_product_prominence": 0.95,
+      "ai_confidence": 0.85
+    }
   }
 ]
