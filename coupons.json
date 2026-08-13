@@ -957,7 +957,7 @@
     "brand": "Samsung",
     "category": "Mobiles",
     "description": "Samsung Galaxy M16 5G is a Samsung product listed in the Mobiles category on Coupon World. Visit the Online Store product page to check the latest price, availability and offer details.",
-    "image": null,
+    "image": "https://images.samsung.com/is/image/samsung/p6pim/in/sm-m166pzkdins/gallery/in-galaxy-m16-5g-sm-m166-sm-m166pzkdins-thumb-545229077",
     "link": "https://www.amazon.in/s?k=Samsung+Galaxy+M16+5G&tag=guru0906-21",
     "store": "Online Store",
     "active": true,
@@ -973,7 +973,20 @@
     "code": "NO CODE NEEDED",
     "expiry": "05 Jul 2026",
     "badge": null,
-    "linkType": "search"
+    "linkType": "search",
+    "image_provenance": {
+      "source_type": "official_product_page",
+      "source_page": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m16-5g-black-128gb-sm-m166pzkdins/",
+      "verified": true,
+      "selection_method": "hero_score_plus_ai_gate_v1",
+      "hero_score": 42,
+      "rank_score": 18,
+      "width": 330,
+      "height": 330,
+      "ai_image_type": "clean_product",
+      "ai_product_prominence": 1.0,
+      "ai_confidence": 0.95
+    }
   },
   {
     "id": 39,
