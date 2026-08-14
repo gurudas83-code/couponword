@@ -1,0 +1,170 @@
+{
+  "generated_at": "2026-08-14T19:21:23+00:00",
+  "mode": "write",
+  "targets": 9,
+  "identity_verified": 6,
+  "images_recovered": 6,
+  "changed": 6,
+  "items": [
+    {
+      "product_id": "1",
+      "title": "JIADA Space Astronaut Stationery Set for Boys - with Badge, Notebook and Pen - Birthday Return Gift/Rakhi Gift for Boys, Kids, Blue",
+      "short_url": "https://amzn.in/d/04HOO2eq?tag=guru0906-21",
+      "status": "verified",
+      "http_status": 200,
+      "resolved_url": "https://www.amazon.in/dp/B0C86BTG14?psc=1&ref=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_2&ref_=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_2&social_share=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_2&tag=guru0906-21",
+      "asin": "B0C86BTG14",
+      "page_title": "JIADA Space Astronaut Stationery Set for for Boys - with Badge, Notebook and Pen - Birthday Return Gift/Rakhi Gift for Boys, Kids, Blue : Amazon.in: Toys & Games",
+      "identity_decision": "verified",
+      "identity_score": 80,
+      "identity_reasons": [
+        "Brand matched",
+        "All expected model tokens matched"
+      ],
+      "exact_url": "https://www.amazon.in/dp/B0C86BTG14?tag=guru0906-21",
+      "image": "https://m.media-amazon.com/images/I/81FF1ekVWyL._SL1500_.jpg",
+      "image_source": "landingImage:data-old-hires"
+    },
+    {
+      "product_id": "2",
+      "title": "Keyboard Case for Samsung Galaxy Tab A11+ & Tab A9 Plus 11” Folio Cover SM-X230, SM-X236B, SM-X210, SM-X215 with Trackpad, 7 Color Backlit Magnetically Detachable Bluetooth Keyboard, Multi-Angle View",
+      "short_url": "https://amzn.in/d/01dfFSgu?tag=guru0906-21",
+      "status": "verified",
+      "http_status": 200,
+      "resolved_url": "https://www.amazon.in/dp/B0DM69148R?psc=1&ref=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_3&ref_=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_3&social_share=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_3&tag=guru0906-21",
+      "asin": "B0DM69148R",
+      "page_title": "Keyboard Case for Samsung Galaxy Tab A11+ & Tab A9 Plus 11” Folio Cover SM-X230, SM-X236B, SM-X210, SM-X215 with Trackpad, 7 Color Backlit Magnetically Detachable Bluetooth Keyboard, Multi-Angle View - Buy Keyboard Case for Samsung Galaxy Tab A11+ & Tab A9 Plus 11” Folio Cover SM-X230, SM-X236B, SM-X210, SM-X215 with Trackpad, 7 Color Backlit Magnetically Detachable Bluetooth Keyboard, Multi-Angle View Online at Low Price in India - Amazon.in",
+      "identity_decision": "verified",
+      "identity_score": 85,
+      "identity_reasons": [
+        "Brand matched",
+        "All identity-bearing model tokens matched",
+        "Supporting model/series token(s) matched: angle, backlit, bluetooth, case, color, cover, detachable, folio, galaxy, keyboard, magnetically, multi, sm, tab, trackpad, view",
+        "Variant matched"
+      ],
+      "exact_url": "https://www.amazon.in/dp/B0DM69148R?tag=guru0906-21",
+      "image": "https://m.media-amazon.com/images/I/61cldknwO1L._SL1024_.jpg",
+      "image_source": "landingImage:data-old-hires"
+    },
+    {
+      "product_id": "3",
+      "title": "TeeSlix NASA Cotton Boys t-Shirt, Teenagers | Soft, Premium Fabric | Regular Fit T-Shirt for Boys, Girls | Space Rocket Design | Blue,Black,RED | Age 8 to 17 Years",
+      "short_url": "https://amzn.in/d/06Ksbhq6?tag=guru0906-21",
+      "status": "identity_rejected",
+      "http_status": 200,
+      "resolved_url": "https://www.amazon.in/dp/B0F5QT64KX?psc=1&ref=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_4&ref_=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_4&social_share=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_4&tag=guru0906-21",
+      "asin": "B0F5QT64KX",
+      "page_title": "Buy TeeSlix Unisex Cotton T-Shirt for Kids, Teenagers, Soft, Premium Fabric Round Neck T-Shirt for Boys, Girls with Unique Design, Comfort for Every Occasion (in, Age, 14 Years, 15 Years, Regular, Black) at Amazon.in",
+      "identity_decision": "reject",
+      "identity_score": 30,
+      "identity_reasons": [
+        "Brand matched",
+        "Missing identity-bearing model token(s): 17, 8"
+      ]
+    },
+    {
+      "product_id": "4",
+      "title": "Bausch + Lomb Fresh Multi-Purpose 500Ml Contact Lens Solution (Pack Of 1)",
+      "short_url": "https://amzn.in/d/06XUsLAR?tag=guru0906-21",
+      "status": "verified",
+      "http_status": 200,
+      "resolved_url": "https://www.amazon.in/dp/B00ZR4XN58?psc=1&ref=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_5&ref_=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_5&social_share=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_5&tag=guru0906-21",
+      "asin": "B00ZR4XN58",
+      "page_title": "Buy Bausch + Lomb Renu Fresh Multi-Purpose Contact Lens Solution 500ml (Pack of 1) Online at Low Prices in India - Amazon.in",
+      "identity_decision": "verified",
+      "identity_score": 80,
+      "identity_reasons": [
+        "Brand matched",
+        "All identity-bearing model tokens matched",
+        "Supporting model/series token(s) matched: bausch, contact, fresh, lens, lomb, multi, pack, purpose, solution"
+      ],
+      "exact_url": "https://www.amazon.in/dp/B00ZR4XN58?tag=guru0906-21",
+      "image": "https://m.media-amazon.com/images/I/61kKX-ehe8L._SL1500_.jpg",
+      "image_source": "landingImage:data-old-hires"
+    },
+    {
+      "product_id": "5",
+      "title": "AASONS Electric Drill Variable Angle Grinder Connecting Rod with 1pc Wood, Marble Cutting Blade, Flap Disk for Paint Remover, Sanding disc and Iron Grinding Wheel",
+      "short_url": "https://amzn.in/d/01GmFjs1?tag=guru0906-21",
+      "status": "verified",
+      "http_status": 200,
+      "resolved_url": "https://www.amazon.in/dp/B0CPDS1S71?psc=1&ref=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_6&ref_=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_6&social_share=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_6&tag=guru0906-21",
+      "asin": "B0CPDS1S71",
+      "page_title": "AASONS Electric Drill Variable Angle Grinder Connecting Rod with 1pc Wood, Marble Cutting Blade, Flap Disk for Paint Remover, Sanding disc and Iron Grinding Wheel : Amazon.in: Industrial & Scientific",
+      "identity_decision": "verified",
+      "identity_score": 80,
+      "identity_reasons": [
+        "Brand matched",
+        "All identity-bearing model tokens matched",
+        "Supporting model/series token(s) matched: aasons, angle, blade, connecting, cutting, disc, disk, drill, electric, flap, grinder, grinding, iron, marble, paint, remover, rod, sanding, variable, wheel, wood"
+      ],
+      "exact_url": "https://www.amazon.in/dp/B0CPDS1S71?tag=guru0906-21",
+      "image": "https://m.media-amazon.com/images/I/51UpwtCegJL.jpg",
+      "image_source": "landingImage:data-a-dynamic-image"
+    },
+    {
+      "product_id": "6",
+      "title": "Hebezon Expandable Appliance Roller Stand with Wheels Heavy Duty Mobile Dolly for Washing Machine, Refrigerator,Furniture Adjustable Moving Base for Home, Kitchen,Laundry Use",
+      "short_url": "https://amzn.in/d/0fkG5ElL?tag=guru0906-21",
+      "status": "verified",
+      "http_status": 200,
+      "resolved_url": "https://www.amazon.in/dp/B0GXDXZX3P?psc=1&ref=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_7&ref_=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_7&social_share=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_7&tag=guru0906-21",
+      "asin": "B0GXDXZX3P",
+      "page_title": "Hebezon Expandable Appliance Roller Stand with Wheels Heavy Duty Mobile Dolly for Washing Machine, Refrigerator,Furniture Adjustable Moving Base for Home, Kitchen,Laundry Use : Amazon.in: Home Improvement",
+      "identity_decision": "verified",
+      "identity_score": 80,
+      "identity_reasons": [
+        "Brand matched",
+        "All expected model tokens matched"
+      ],
+      "exact_url": "https://www.amazon.in/dp/B0GXDXZX3P?tag=guru0906-21",
+      "image": "https://m.media-amazon.com/images/I/51H3nP1Hb0L._SL1024_.jpg",
+      "image_source": "landingImage:data-old-hires"
+    },
+    {
+      "product_id": "7",
+      "title": "Campus Women's OGL-4 Sneakers",
+      "short_url": "https://amzn.in/d/0b3TayvT?tag=guru0906-21",
+      "status": "verified",
+      "http_status": 200,
+      "resolved_url": "https://www.amazon.in/dp/B0FCMRQVBV?psc=1&ref=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_1&ref_=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_1&social_share=cm_sw_r_cso_wa_apan_ct_7Y8N9H9P4SPYS45X33HA_1&tag=guru0906-21",
+      "asin": "B0FCMRQVBV",
+      "page_title": "Buy Campus Women's OGL-4 WHT/ICE BLU Sneakers - 5UK/India 1 Pair at Amazon.in",
+      "identity_decision": "verified",
+      "identity_score": 80,
+      "identity_reasons": [
+        "Brand matched",
+        "All identity-bearing model tokens matched",
+        "Supporting model/series token(s) matched: campus, ogl, sneakers, women"
+      ],
+      "exact_url": "https://www.amazon.in/dp/B0FCMRQVBV?tag=guru0906-21",
+      "image": "https://m.media-amazon.com/images/I/61DuDpuEvFL._SL1500_.jpg",
+      "image_source": "landingImage:data-old-hires"
+    },
+    {
+      "product_id": "8",
+      "title": "HomeStrap Rectangular Set Of 3 Large Plastic Storage Organizers/Baskets With Lid For Kitchen, Clothes, Multipurpose Vegetables, Toys, Books, Office, Stationery, Wardrobe(Biscuit, Grey, Brown)",
+      "short_url": "https://amzn.to/4eZdI1O?tag=guru0906-21",
+      "status": "identity_rejected",
+      "http_status": 200,
+      "resolved_url": "https://www.amazon.in/dp/B0B17WWVD2/ref=cm_sw_r_as_gl_apa_gl_i_dl_7QPTPEVSEHDRJK0SXXYS?linkCode=ml1&tag=guru0906-21&linkId=3eeaad9513128c77a85c0180797aae6b",
+      "asin": "B0B17WWVD2",
+      "page_title": "HomeStrap Rectangular Plastic Storage Organizers/Baskets With Lid",
+      "identity_decision": "reject",
+      "identity_score": 30,
+      "identity_reasons": [
+        "Brand matched",
+        "Missing identity-bearing model token(s): 3"
+      ]
+    },
+    {
+      "product_id": "9",
+      "title": "Amazon Basics 64 GB Micro SD Card with Adapter | Upto 120 MB/s | Class 10 | U1, C10, V10 Speed Classes",
+      "short_url": "https://amzn.to/4v9I4o8?tag=guru0906-21",
+      "status": "http_error",
+      "http_status": 404,
+      "resolved_url": "https://www.amazon.in/dp/B0CGCY57SD/ref=cm_sw_r_as_gl_apa_gl_i_dl_2MSW47BVT03ZW958MEVT?linkCode=ml1&tag=guru0906-21&linkId=844312c73218e748bbc8f2e1f49fbb99",
+      "asin": "B0CGCY57SD"
+    }
+  ]
+}

@@ -1,0 +1,1132 @@
+#!/usr/bin/env python3
+"""
+Coupon World AI OS
+Shopping Intelligence Pipeline v1.1
+
+One command:
+    py python/shopping_intelligence_pipeline.py --query "..."
+
+v1.1 fixes the v1.0 bottleneck where market discovery and identity succeeded
+but official verification returned zero candidates.
+
+Main changes:
+- Cleans commerce-style result titles before identity parsing.
+- Recovers known brands from the title using the resolver's own BRAND_DOMAINS.
+- Uses the existing strict resolver first.
+- If the strict resolver cannot proceed because the brand is not registered,
+  performs a conservative universal official-source fallback.
+- Universal fallback still requires resolver_engine.compare_identity() == verified.
+- Prints grouped failure diagnostics in the same run.
+- Does not auto-publish or mutate permanent product knowledge.
+"""
+
+from __future__ import annotations
+
+import argparse
+import inspect
+import json
+import os
+import re
+import sys
+from collections import Counter
+from pathlib import Path
+from typing import Any
+from urllib.parse import urlparse
+
+from tavily import TavilyClient
+
+ROOT = Path(__file__).resolve().parent.parent
+PYTHON_DIR = ROOT / "python"
+
+if str(PYTHON_DIR) not in sys.path:
+    sys.path.insert(0, str(PYTHON_DIR))
+
+from intent_engine import parse_query
+from market_discovery import discover_market
+from official_source_resolver import (
+    BRAND_DOMAINS,
+    normalize_brand,
+    resolve_product,
+)
+from official_spec_extractor import extract_one
+from product_fit_signal_builder import build_fit_signals
+from product_identity_v2 import build_identity
+from retail_price_evidence import build_price_evidence
+from resolver_engine import compare_identity
+from weighted_fit_engine import calculate_product_fit
+
+
+RUNTIME_OUTPUT = ROOT / "data" / "runtime_shopping_intelligence.json"
+
+MIN_FIT_PERCENT = 50
+DEFAULT_MAX_RESULTS = 5
+DEFAULT_MIN_RESULTS = 3
+
+GENERIC_LEADING_WORDS = {
+    "buy", "shop", "get", "order", "latest", "new", "sale",
+    "best", "online", "india", "official",
+}
+
+GENERIC_BRANDS = {
+    "", "buy", "shop", "get", "order", "latest", "new",
+    "sale", "best", "online", "earbuds", "headphones",
+    "smartphone", "phone", "mobile", "laptop",
+}
+
+NON_OFFICIAL_HOST_FRAGMENTS = (
+    "amazon.",
+    "flipkart.",
+    "croma.",
+    "reliancedigital.",
+    "vijaysales.",
+    "smartprix.",
+    "91mobiles.",
+    "gadgets360.",
+    "indiatoday.",
+    "timesofindia.",
+    "youtube.",
+    "facebook.",
+    "instagram.",
+    "reddit.",
+    "pinterest.",
+    "wikipedia.",
+    "gsmarena.",
+)
+
+NON_OFFICIAL_PATH_FRAGMENTS = (
+    "/blog/",
+    "/blogs/",
+    "/news/",
+    "/review/",
+    "/reviews/",
+    "/guide/",
+    "/guides/",
+    "/article/",
+    "/articles/",
+    "/community/",
+    "/forum/",
+)
+
+OFFICIAL_PAGE_HINTS = (
+    "/product/",
+    "/products/",
+    "/spec",
+    "/specs",
+    "/specifications",
+    "/support/",
+    "/shop/",
+    "/buy-",
+    "/more-products/",
+    "/headphones/",
+    "/earbuds/",
+    "/smartphones/",
+    "/phones/",
+    "/laptops/",
+)
+
+
+def clean(value: Any) -> str:
+    return re.sub(r"\s+", " ", str(value or "")).strip()
+
+
+def safe_float(value: Any) -> float | None:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def hostname(url: str) -> str:
+    try:
+        return (urlparse(clean(url)).hostname or "").lower()
+    except ValueError:
+        return ""
+
+
+def sanitize_discovery_title(value: Any) -> str:
+    title = clean(value)
+    title = re.sub(r"\s*\.\.\.\s*$", "", title)
+
+    # Remove marketplace verbs that poison brand detection:
+    # "Buy boAt Airdopes..." -> "boAt Airdopes..."
+    words = title.split()
+    while words and words[0].lower().strip(":-|") in GENERIC_LEADING_WORDS:
+        words.pop(0)
+
+    title = " ".join(words).strip()
+
+    # Remove common source suffixes without destroying hyphenated models.
+    for sep in (" | ", " – ", " — "):
+        if sep in title:
+            left = clean(title.split(sep, 1)[0])
+            if len(left.split()) >= 2:
+                title = left
+                break
+
+    return title
+
+
+def canonical_brand_from_title(title: str) -> str:
+    normalized_title = re.sub(
+        r"[^a-z0-9]+",
+        " ",
+        title.lower(),
+    ).strip()
+
+    # Retailers/platforms may appear in search-result titles but
+    # must never become the product manufacturer/brand.
+    non_product_brand_keys = {
+        "amazon",
+        "flipkart",
+        "croma",
+        "reliance digital",
+        "vijay sales",
+    }
+
+    matches: list[tuple[int, int, str]] = []
+
+    for brand_key in BRAND_DOMAINS.keys():
+        normalized_brand = normalize_brand(brand_key)
+
+        if not normalized_brand:
+            continue
+
+        if normalized_brand in non_product_brand_keys:
+            continue
+
+        pattern = rf"(?:^|\s){re.escape(normalized_brand)}(?:\s|$)"
+        match = re.search(pattern, normalized_title)
+
+        if not match:
+            continue
+
+        # Prefer a genuine brand occurring earlier in the product title.
+        # Longer aliases win when position is equal.
+        matches.append(
+            (
+                match.start(),
+                -len(normalized_brand),
+                brand_key,
+            )
+        )
+
+    if not matches:
+        return ""
+
+    matches.sort()
+
+    return matches[0][2]
+
+def fallback_brand_from_title(title: str) -> str:
+    words = re.findall(r"[A-Za-z0-9][A-Za-z0-9.+&'-]*", title)
+
+    for word in words:
+        lowered = word.lower()
+        if lowered in GENERIC_LEADING_WORDS:
+            continue
+        if lowered in {
+            "wireless", "bluetooth", "earbuds", "earbud", "tws",
+            "headphones", "headphone", "with", "for", "and",
+        }:
+            continue
+        if word.isdigit():
+            continue
+        return word
+
+    return ""
+
+
+def repair_identity(
+    identity: dict[str, Any],
+    cleaned_title: str,
+) -> dict[str, Any]:
+    repaired = dict(identity)
+
+    brand = clean(repaired.get("brand"))
+    brand_key = normalize_brand(brand)
+
+    if brand_key in GENERIC_BRANDS or not brand:
+        known = canonical_brand_from_title(cleaned_title)
+        repaired["brand"] = known or fallback_brand_from_title(cleaned_title)
+
+    search_name = clean(repaired.get("search_name"))
+
+    if not search_name or search_name.lower().startswith(("buy ", "shop ")):
+        repaired["search_name"] = cleaned_title
+
+    # Ensure product/model search remains brand-bearing.
+    brand = clean(repaired.get("brand"))
+    search_name = clean(repaired.get("search_name"))
+
+    if brand and search_name and normalize_brand(brand) not in normalize_brand(search_name):
+        repaired["search_name"] = f"{brand} {search_name}".strip()
+
+    repaired["official_search_query"] = (
+        f"{clean(repaired.get('search_name'))} official specifications"
+    )
+
+    return repaired
+
+
+def call_build_identity(
+    product: dict[str, Any],
+    position: int,
+) -> dict[str, Any]:
+    signature = inspect.signature(build_identity)
+    positional = [
+        parameter
+        for parameter in signature.parameters.values()
+        if parameter.kind
+        in (
+            inspect.Parameter.POSITIONAL_ONLY,
+            inspect.Parameter.POSITIONAL_OR_KEYWORD,
+        )
+    ]
+
+    if len(positional) >= 2:
+        result = build_identity(product, position)
+    else:
+        result = build_identity(product)
+
+    if not isinstance(result, dict):
+        raise TypeError("build_identity() returned a non-dict result")
+
+    return result
+
+
+def candidate_to_identity_input(
+    candidate: dict[str, Any],
+) -> tuple[dict[str, Any], str]:
+    cleaned_title = sanitize_discovery_title(candidate.get("title"))
+
+    return (
+        {
+            "product_id": clean(candidate.get("candidate_id")),
+            "title": cleaned_title,
+            "brand": canonical_brand_from_title(cleaned_title),
+            "asin": "",
+            "category": "",
+            "link": clean(candidate.get("source_url")),
+            "image": "",
+            "price": None,
+        },
+        cleaned_title,
+    )
+
+
+def resolver_input_from_identity(
+    candidate: dict[str, Any],
+    identity: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "product_id": clean(
+            identity.get("product_id")
+            or candidate.get("candidate_id")
+        ),
+        "title": clean(
+            identity.get("search_name")
+            or sanitize_discovery_title(candidate.get("title"))
+        ),
+        "brand": clean(identity.get("brand")),
+        "asin": clean(identity.get("asin")),
+    }
+
+
+def is_possible_official_page(
+    url: str,
+    expected_brand: str,
+) -> bool:
+    host = hostname(url)
+    lowered = clean(url).lower()
+
+    if not host:
+        return False
+
+    if any(fragment in host for fragment in NON_OFFICIAL_HOST_FRAGMENTS):
+        return False
+
+    if any(fragment in lowered for fragment in NON_OFFICIAL_PATH_FRAGMENTS):
+        return False
+
+    brand_norm = normalize_brand(expected_brand)
+    host_norm = re.sub(r"[^a-z0-9]+", "", host)
+
+    brand_in_host = bool(
+        brand_norm
+        and re.sub(r"[^a-z0-9]+", "", brand_norm) in host_norm
+    )
+
+    # Registered brands must resolve only to approved official domains.
+    approved_domains = BRAND_DOMAINS.get(brand_norm, [])
+
+    if isinstance(approved_domains, str):
+        approved_domains = [approved_domains]
+
+    if approved_domains:
+        for domain in approved_domains:
+            domain = clean(domain).lower().lstrip("www.")
+
+            if not domain:
+                continue
+
+            if host == domain or host.endswith("." + domain):
+                return True
+
+        return False
+
+    # For an unregistered brand, brand-name presence in the hostname is
+    # required. A merely product-looking path on an unrelated retailer or
+    # informational site is not enough to call it official.
+    return brand_in_host
+
+
+def universal_official_resolve(
+    client: TavilyClient,
+    product: dict[str, Any],
+    identity: dict[str, Any],
+) -> dict[str, Any]:
+    product_id = clean(product.get("product_id"))
+    title = clean(
+        identity.get("search_name")
+        or product.get("title")
+    )
+    brand = clean(
+        identity.get("brand")
+        or product.get("brand")
+    )
+
+    result: dict[str, Any] = {
+        "product_id": product_id,
+        "title": title,
+        "brand": brand,
+        "asin": clean(product.get("asin")),
+        "core_title": title,
+        "allowed_domains": [],
+        "query": None,
+        "query_variants": [],
+        "official_title": None,
+        "official_url": None,
+        "match_score": 0.0,
+        "identity_score": 0,
+        "identity_decision": None,
+        "identity_reasons": [],
+        "verified": False,
+        "status": "manual_review",
+        "reason": "Universal official-source fallback found no verified source",
+        "candidates": [],
+        "resolver_mode": "universal_fallback",
+    }
+
+    if not brand or normalize_brand(brand) in GENERIC_BRANDS:
+        result["reason"] = "Brand identity is not reliable enough for official search"
+        return result
+
+    queries = [
+        f"{brand} {title} official specifications",
+        f"{brand} {title} official product",
+        f"{brand} {title} official",
+    ]
+
+    seen_query: set[str] = set()
+    unique_queries: list[str] = []
+
+    for query in queries:
+        q = clean(query)
+        if q.lower() not in seen_query:
+            seen_query.add(q.lower())
+            unique_queries.append(q)
+
+    result["query_variants"] = unique_queries
+    result["query"] = unique_queries[0]
+
+    seen_urls: set[str] = set()
+    candidates: list[dict[str, Any]] = []
+
+    for query in unique_queries:
+        response = client.search(
+            query=query,
+            search_depth="basic",
+            max_results=10,
+        )
+
+        for item in response.get("results", []):
+            if not isinstance(item, dict):
+                continue
+
+            candidate_title = clean(item.get("title"))
+            candidate_url = clean(item.get("url"))
+
+            if not candidate_title or not candidate_url:
+                continue
+
+            if candidate_url in seen_urls:
+                continue
+
+            seen_urls.add(candidate_url)
+
+            if not is_possible_official_page(candidate_url, brand):
+                continue
+
+            try:
+                decision_obj = compare_identity(
+                    expected_text=title,
+                    candidate_title=candidate_title,
+                    candidate_url=candidate_url,
+                    expected_brand=brand,
+                )
+                decision = decision_obj.to_dict()
+            except Exception as error:
+                decision = {
+                    "score": 0,
+                    "decision": "reject",
+                    "reasons": [f"Identity comparison failed: {error}"],
+                }
+
+            score = int(decision.get("score") or 0)
+            verdict = clean(decision.get("decision")).lower()
+            tavily_score = safe_float(item.get("score")) or 0.0
+
+            candidates.append(
+                {
+                    "title": candidate_title,
+                    "url": candidate_url,
+                    "host": hostname(candidate_url),
+                    "identity_score": score,
+                    "identity_decision": verdict,
+                    "identity_reasons": decision.get("reasons", []),
+                    "search_score": round(tavily_score, 4),
+                    "query": query,
+                }
+            )
+
+    candidates.sort(
+        key=lambda x: (
+            x["identity_score"],
+            x["search_score"],
+        ),
+        reverse=True,
+    )
+
+    result["candidates"] = candidates[:5]
+
+    verified = [
+        item
+        for item in candidates
+        if item["identity_decision"] == "verified"
+        and item["identity_score"] >= 80
+    ]
+
+    if not verified:
+        if candidates:
+            best = candidates[0]
+            result["official_title"] = best["title"]
+            result["official_url"] = best["url"]
+            result["identity_score"] = best["identity_score"]
+            result["identity_decision"] = best["identity_decision"]
+            result["identity_reasons"] = best["identity_reasons"]
+            result["match_score"] = round(best["identity_score"] / 100, 4)
+            result["reason"] = (
+                "Official-looking source found but identity did not pass "
+                "the strict verified threshold"
+            )
+        return result
+
+    best = verified[0]
+    result["official_title"] = best["title"]
+    result["official_url"] = best["url"]
+    result["identity_score"] = best["identity_score"]
+    result["identity_decision"] = best["identity_decision"]
+    result["identity_reasons"] = best["identity_reasons"]
+    result["match_score"] = round(best["identity_score"] / 100, 4)
+    result["verified"] = True
+    result["status"] = "candidate_verified"
+    result["reason"] = (
+        "Universal official-source search passed strict identity verification"
+    )
+
+    return result
+
+
+def resolve_with_fallback(
+    client: TavilyClient,
+    candidate: dict[str, Any],
+    identity: dict[str, Any],
+) -> dict[str, Any]:
+    product = resolver_input_from_identity(candidate, identity)
+
+    primary: dict[str, Any]
+
+    try:
+        primary = resolve_product(client, product)
+    except Exception as error:
+        primary = {
+            "product_id": product["product_id"],
+            "title": product["title"],
+            "brand": product["brand"],
+            "verified": False,
+            "status": "error",
+            "reason": str(error),
+        }
+
+    primary["resolver_mode"] = "registered_domain"
+
+    if primary.get("verified") is True:
+        return primary
+
+    reason = clean(primary.get("reason")).lower()
+    status = clean(primary.get("status")).lower()
+
+    fallback_needed = (
+        "no approved official-domain mapping" in reason
+        or status in {"not_found", "manual_review", "error"}
+    )
+
+    if not fallback_needed:
+        return primary
+
+    fallback = universal_official_resolve(
+        client,
+        product,
+        identity,
+    )
+
+    # Preserve why the strict path failed.
+    fallback["primary_resolver_status"] = primary.get("status")
+    fallback["primary_resolver_reason"] = primary.get("reason")
+
+    return fallback
+
+
+def extraction_is_usable(
+    extraction: dict[str, Any],
+) -> tuple[bool, str]:
+    if extraction.get("fetch_status") != "success":
+        return False, clean(
+            extraction.get("review", {}).get("reason")
+            or extraction.get("fetch_status")
+            or "Extraction did not succeed"
+        )
+
+    if extraction.get("resolver_verified") is not True:
+        return False, "Official source was not resolver-verified"
+
+    review = extraction.get("review", {})
+    review_status = clean(review.get("status")).lower()
+
+    if review_status in {"rejected", "rejected_candidate", "error"}:
+        return False, clean(
+            review.get("reason")
+            or "Extractor rejected the official-page candidate"
+        )
+
+    page_identity = safe_float(extraction.get("page_identity_score"))
+
+    if page_identity is not None and page_identity < 0.50:
+        return False, (
+            f"Official page identity score too low: {page_identity:.2f}"
+        )
+
+    specs = extraction.get("specifications")
+    features = extraction.get("features")
+
+    spec_count = len(specs) if isinstance(specs, dict) else 0
+    feature_count = len(features) if isinstance(features, list) else 0
+
+    if spec_count == 0 and feature_count == 0:
+        return False, "No usable specification/feature evidence extracted"
+
+    return True, ""
+
+
+def runtime_profile_from_extraction(
+    *,
+    candidate: dict[str, Any],
+    identity: dict[str, Any],
+    resolved: dict[str, Any],
+    extraction: dict[str, Any],
+    intent: dict[str, Any],
+) -> dict[str, Any]:
+    specifications = extraction.get("specifications", {})
+    if not isinstance(specifications, dict):
+        specifications = {}
+
+    features = extraction.get("features", [])
+    if not isinstance(features, list):
+        features = []
+
+    price_evidence = build_price_evidence(candidate)
+
+    verified_market_price = (
+        price_evidence.get("price")
+        if price_evidence.get("verified") is True
+        else None
+    )
+
+    profile: dict[str, Any] = {
+        "product_id": clean(
+            identity.get("product_id")
+            or candidate.get("candidate_id")
+        ),
+        "title": clean(
+            extraction.get("search_name")
+            or identity.get("search_name")
+            or candidate.get("title")
+        ),
+        "brand": clean(
+            extraction.get("brand")
+            or identity.get("brand")
+        ),
+        "category": clean(intent.get("category")),
+        "price": verified_market_price,
+        "attributes": specifications,
+        "features": features,
+        "best_for": [],
+        "limitations": [],
+        "official_product_url": clean(resolved.get("official_url")),
+        "market_source_url": clean(candidate.get("source_url")),
+        "market_source_host": clean(candidate.get("source_host")),
+        "discovery_channel": clean(candidate.get("discovery_channel")),
+        "provenance": {
+            "discovery_url": clean(candidate.get("source_url")),
+            "official_url": clean(resolved.get("official_url")),
+            "official_title": clean(resolved.get("official_title")),
+            "resolver_mode": clean(resolved.get("resolver_mode")),
+            "resolver_status": clean(resolved.get("status")),
+            "resolver_identity_score": resolved.get("identity_score"),
+            "resolver_match_score": resolved.get("match_score"),
+            "extractor_page_identity_score": extraction.get(
+                "page_identity_score"
+            ),
+            "extractor_review_status": clean(
+                extraction.get("review", {}).get("status")
+            ),
+            "fetch_status": clean(extraction.get("fetch_status")),
+            "price_evidence": price_evidence,
+        },
+    }
+
+    profile["fit_signals"] = build_fit_signals(profile, intent)
+
+    return profile
+
+
+def criterion_groups(
+    assessment: dict[str, Any],
+) -> tuple[list[str], list[str], list[str]]:
+    strong: list[str] = []
+    tradeoffs: list[str] = []
+    unknown: list[str] = []
+
+    for item in assessment.get("criteria", []) or []:
+        if not isinstance(item, dict):
+            continue
+
+        criterion = clean(item.get("criterion"))
+        reason = clean(item.get("reason"))
+        match = item.get("match_score")
+
+        if match is None:
+            unknown.append(
+                f"{criterion}: {reason or 'No reliable evidence'}"
+            )
+            continue
+
+        score = safe_float(match)
+
+        if score is None:
+            unknown.append(f"{criterion}: {reason}")
+        elif score >= 0.80:
+            strong.append(f"{criterion}: {reason}")
+        elif score < 0.50:
+            tradeoffs.append(f"{criterion}: {reason}")
+
+    return strong, tradeoffs, unknown
+
+
+def run_pipeline(
+    query: str,
+    max_candidates: int = 15,
+    max_results: int = 5,
+) -> dict[str, Any]:
+    intent = parse_query(query)
+
+    discovery = discover_market(
+        user_query=query,
+        max_candidates=max_candidates,
+    )
+
+    discovered = [
+        item
+        for item in discovery.get("candidates", [])
+        if isinstance(item, dict)
+    ]
+
+    api_key = os.environ.get("TAVILY_API_KEY")
+    if not api_key:
+        raise RuntimeError("TAVILY_API_KEY is not set")
+
+    client = TavilyClient(api_key=api_key)
+
+    identities: list[dict[str, Any]] = []
+    resolver_records: list[dict[str, Any]] = []
+    evidence_records: list[dict[str, Any]] = []
+    scored_records: list[dict[str, Any]] = []
+    failures: list[dict[str, Any]] = []
+
+    for position, candidate in enumerate(discovered, start=1):
+        candidate_id = clean(candidate.get("candidate_id"))
+        raw_title = clean(candidate.get("title"))
+
+        try:
+            identity_input, cleaned_title = candidate_to_identity_input(candidate)
+            identity = call_build_identity(identity_input, position)
+            identity = repair_identity(identity, cleaned_title)
+        except Exception as error:
+            failures.append({
+                "candidate_id": candidate_id,
+                "title": raw_title,
+                "stage": "identity",
+                "reason": str(error),
+            })
+            continue
+
+        identities.append(identity)
+
+        if not clean(identity.get("brand")) or not clean(identity.get("search_name")):
+            failures.append({
+                "candidate_id": candidate_id,
+                "title": raw_title,
+                "stage": "identity",
+                "reason": "Identity missing usable brand or search_name",
+            })
+            continue
+
+        try:
+            resolved = resolve_with_fallback(
+                client,
+                candidate,
+                identity,
+            )
+        except Exception as error:
+            failures.append({
+                "candidate_id": candidate_id,
+                "title": raw_title,
+                "stage": "official_source",
+                "reason": str(error),
+            })
+            continue
+
+        resolver_records.append(resolved)
+
+        if resolved.get("verified") is not True:
+            failures.append({
+                "candidate_id": candidate_id,
+                "title": raw_title,
+                "brand": identity.get("brand"),
+                "search_name": identity.get("search_name"),
+                "stage": "official_source",
+                "status": resolved.get("status"),
+                "resolver_mode": resolved.get("resolver_mode"),
+                "reason": clean(resolved.get("reason")),
+            })
+            continue
+
+        try:
+            extraction = extract_one(resolved, identity)
+        except Exception as error:
+            failures.append({
+                "candidate_id": candidate_id,
+                "title": raw_title,
+                "stage": "evidence",
+                "reason": str(error),
+            })
+            continue
+
+        evidence_records.append(extraction)
+
+        usable, reason = extraction_is_usable(extraction)
+
+        if not usable:
+            failures.append({
+                "candidate_id": candidate_id,
+                "title": raw_title,
+                "stage": "evidence",
+                "status": extraction.get("review", {}).get("status"),
+                "reason": reason,
+            })
+            continue
+
+        try:
+            profile = runtime_profile_from_extraction(
+                candidate=candidate,
+                identity=identity,
+                resolved=resolved,
+                extraction=extraction,
+                intent=intent,
+            )
+            assessment = calculate_product_fit(profile, intent)
+        except Exception as error:
+            failures.append({
+                "candidate_id": candidate_id,
+                "title": raw_title,
+                "stage": "fit",
+                "reason": str(error),
+            })
+            continue
+
+        scored_records.append({
+            "candidate": candidate,
+            "identity": identity,
+            "resolved": resolved,
+            "extraction": extraction,
+            "profile": profile,
+            "fit_assessment": assessment,
+        })
+
+    qualifying = [
+        item
+        for item in scored_records
+        if item.get("fit_assessment", {}).get("eligible") is True
+        and int(item.get("fit_assessment", {}).get("fit_percent") or 0)
+        >= MIN_FIT_PERCENT
+    ]
+
+    qualifying.sort(
+        key=lambda item: (
+            int(item["fit_assessment"].get("fit_percent") or 0),
+            int(item["fit_assessment"].get("evidence_coverage_percent") or 0),
+        ),
+        reverse=True,
+    )
+
+    recommendations: list[dict[str, Any]] = []
+
+    for rank, item in enumerate(qualifying[:max_results], start=1):
+        assessment = item["fit_assessment"]
+        profile = item["profile"]
+        strong, tradeoffs, unknown = criterion_groups(assessment)
+
+        recommendations.append({
+            "rank": rank,
+            "product_id": profile.get("product_id"),
+            "title": profile.get("title"),
+            "brand": profile.get("brand"),
+            "fit_percent": assessment.get("fit_percent"),
+            "raw_fit_percent": assessment.get("raw_fit_percent"),
+            "evidence_coverage_percent": assessment.get(
+                "evidence_coverage_percent"
+            ),
+            "confidence": assessment.get("recommendation_confidence"),
+            "why_it_fits": strong[:5],
+            "tradeoffs": tradeoffs[:4],
+            "unknown": unknown[:4],
+            "official_source": profile.get("official_product_url"),
+            "market_source": profile.get("market_source_url"),
+            "provenance": profile.get("provenance", {}),
+        })
+
+    failure_counter = Counter()
+
+    for failure in failures:
+        key = (
+            clean(failure.get("stage")),
+            clean(failure.get("status")) or clean(failure.get("reason")),
+        )
+        failure_counter[key] += 1
+
+    failure_summary = [
+        {
+            "stage": stage,
+            "reason_or_status": reason,
+            "count": count,
+        }
+        for (stage, reason), count in failure_counter.most_common()
+    ]
+
+    status = "PASS" if len(recommendations) >= DEFAULT_MIN_RESULTS else "PARTIAL"
+
+    fit_diagnostics = []
+
+    for item in scored_records:
+        assessment = item.get("fit_assessment", {})
+        profile = item.get("profile", {})
+
+        fit_diagnostics.append({
+            "product_id": profile.get("product_id"),
+            "title": profile.get("title"),
+            "brand": profile.get("brand"),
+            "price": profile.get("price"),
+            "eligible": assessment.get("eligible"),
+            "fit_percent": assessment.get("fit_percent"),
+            "raw_fit_percent": assessment.get("raw_fit_percent"),
+            "evidence_coverage_percent": assessment.get(
+                "evidence_coverage_percent"
+            ),
+            "confidence": assessment.get("recommendation_confidence"),
+            "hard_constraint_failures": assessment.get(
+                "hard_constraint_failures", []
+            ),
+            "criteria": assessment.get("criteria", []),
+            "attributes": profile.get("attributes", {}),
+            "features": profile.get("features", []),
+            "price_evidence": profile.get(
+                "provenance", {}
+            ).get("price_evidence", {}),
+            "official_source": profile.get("official_product_url"),
+            "market_source": profile.get("market_source_url"),
+            "resolver_mode": profile.get("provenance", {}).get("resolver_mode"),
+            "resolver_status": profile.get("provenance", {}).get("resolver_status"),
+            "resolver_identity_score": profile.get("provenance", {}).get("resolver_identity_score"),
+            "resolver_match_score": profile.get("provenance", {}).get("resolver_match_score"),
+            "extractor_page_identity_score": profile.get("provenance", {}).get("extractor_page_identity_score"),
+            "extractor_review_status": profile.get("provenance", {}).get("extractor_review_status"),
+        })
+
+    return {
+        "schema_version": "1.1",
+        "query": query,
+        "intent": intent,
+        "stage_counts": {
+            "discovered": len(discovered),
+            "identity_prepared": len(identities),
+            "official_verified": sum(
+                1 for x in resolver_records if x.get("verified") is True
+            ),
+            "evidence_ready": sum(
+                1 for x in evidence_records if extraction_is_usable(x)[0]
+            ),
+            "fit_scored": len(scored_records),
+            "qualifying_50_plus": len(qualifying),
+            "recommendations_returned": len(recommendations),
+        },
+        "recommendations": recommendations,
+        "fit_diagnostics": fit_diagnostics,
+        "failure_summary": failure_summary,
+        "failures": failures,
+        "status": status,
+        "rules": {
+            "min_fit_percent": MIN_FIT_PERCENT,
+            "preferred_minimum_results": DEFAULT_MIN_RESULTS,
+            "maximum_results": max_results,
+            "affiliate_affects_fit": False,
+            "discovery_score_affects_fit": False,
+            "auto_publish": False,
+            "unknown_evidence_is_zero": False,
+        },
+    }
+
+
+def save_runtime_payload(payload: dict[str, Any]) -> None:
+    RUNTIME_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    RUNTIME_OUTPUT.write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+
+def print_result(payload: dict[str, Any]) -> None:
+    c = payload["stage_counts"]
+
+    print("=" * 78)
+    print("COUPON WORLD SHOPPING INTELLIGENCE PIPELINE v1.1")
+    print("=" * 78)
+    print("QUERY:", payload["query"])
+    print()
+    print("DISCOVERED         :", c["discovered"])
+    print("IDENTITY PREPARED  :", c["identity_prepared"])
+    print("OFFICIAL VERIFIED  :", c["official_verified"])
+    print("EVIDENCE READY     :", c["evidence_ready"])
+    print("FIT SCORED         :", c["fit_scored"])
+    print("QUALIFYING >=50%   :", c["qualifying_50_plus"])
+    print("RECOMMENDATIONS    :", c["recommendations_returned"])
+    print()
+
+    for rec in payload["recommendations"]:
+        print("-" * 78)
+        print(f'#{rec["rank"]} | {rec["title"]}')
+        print("BRAND:", rec["brand"])
+        print("FIT:", f'{rec["fit_percent"]}%')
+        print("RAW FIT:", f'{rec["raw_fit_percent"]}%')
+        print(
+            "EVIDENCE COVERAGE:",
+            f'{rec["evidence_coverage_percent"]}%',
+        )
+        print("CONFIDENCE:", clean(rec["confidence"]).upper())
+
+        if rec["why_it_fits"]:
+            print("WHY IT FITS:")
+            for item in rec["why_it_fits"]:
+                print("  +", item)
+
+        if rec["tradeoffs"]:
+            print("TRADE-OFFS:")
+            for item in rec["tradeoffs"]:
+                print("  -", item)
+
+        if rec["unknown"]:
+            print("UNKNOWN:")
+            for item in rec["unknown"]:
+                print("  ?", item)
+
+        print("OFFICIAL SOURCE:", rec["official_source"])
+        print("MARKET SOURCE  :", rec["market_source"])
+
+    print()
+    print("FAILURE SUMMARY:")
+
+    if not payload["failure_summary"]:
+        print("  None")
+    else:
+        for item in payload["failure_summary"][:10]:
+            print(
+                f'  {item["count"]}x | '
+                f'{item["stage"]} | '
+                f'{item["reason_or_status"]}'
+            )
+
+    print()
+    print("STATUS:", payload["status"])
+
+    if payload["status"] == "PARTIAL":
+        print(
+            "No weak, unverified, or <50% product was added "
+            "just to fill Top 3-5."
+        )
+
+    print("RUNTIME OUTPUT:", RUNTIME_OUTPUT)
+    print("=" * 78)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Coupon World end-to-end shopping intelligence pipeline"
+    )
+    parser.add_argument("--query", required=True)
+    parser.add_argument("--max-candidates", type=int, default=15)
+    parser.add_argument("--max-results", type=int, default=5)
+    parser.add_argument("--json", action="store_true")
+
+    args = parser.parse_args()
+
+    try:
+        payload = run_pipeline(
+            query=args.query,
+            max_candidates=max(3, min(int(args.max_candidates), 30)),
+            max_results=max(1, min(int(args.max_results), DEFAULT_MAX_RESULTS)),
+        )
+    except Exception as error:
+        print("PIPELINE ERROR:", str(error))
+        return 1
+
+    save_runtime_payload(payload)
+
+    if args.json:
+        print(json.dumps(payload, indent=2, ensure_ascii=False))
+    else:
+        print_result(payload)
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

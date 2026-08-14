@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0",
-  "generated_at": "2026-08-05T17:56:43.760151+00:00",
+  "generated_at": "2026-08-08T19:23:21.045099+00:00",
   "instructions": [
     "Use official manufacturer sources wherever possible.",
     "Do not add specifications based only on assumptions.",
@@ -10,13 +10,13 @@
   ],
   "summary": {
     "products_in_database": 74,
-    "approved_knowledge": 4,
+    "approved_knowledge": 5,
     "drafts_created_now": 0,
-    "existing_drafts_preserved": 71,
-    "approved_products_skipped": 3,
+    "existing_drafts_preserved": 69,
+    "approved_products_skipped": 5,
     "total_pending_drafts": 69,
-    "drafts_with_official_specs": 2,
-    "knowledge_review_ready": 0
+    "drafts_with_official_specs": 3,
+    "knowledge_review_ready": 2
   },
   "products": [
     {
@@ -31,7 +31,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.in/d/04HOO2eq?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-05T17:56:43.759391+00:00",
+        "checked_on": "2026-08-08T19:23:21.042138+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -63,7 +63,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.in/d/01dfFSgu?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-05T17:56:43.759447+00:00",
+        "checked_on": "2026-08-08T19:23:21.042330+00:00",
         "resolver_status": "not_found",
         "resolver_verified": false,
         "match_score": 0.0
@@ -95,7 +95,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.in/d/06Ksbhq6?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-05T17:56:43.759475+00:00",
+        "checked_on": "2026-08-08T19:23:21.042430+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -127,7 +127,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.in/d/06XUsLAR?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-05T17:56:43.759490+00:00",
+        "checked_on": "2026-08-08T19:23:21.042487+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -159,7 +159,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.in/d/01GmFjs1?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-05T17:56:43.759511+00:00",
+        "checked_on": "2026-08-08T19:23:21.042574+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -191,7 +191,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.in/d/0fkG5ElL?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-05T17:56:43.759531+00:00",
+        "checked_on": "2026-08-08T19:23:21.042650+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -223,7 +223,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.in/d/0b3TayvT?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-05T17:56:43.759541+00:00",
+        "checked_on": "2026-08-08T19:23:21.042685+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -255,7 +255,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.to/4eZdI1O?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-05T17:56:43.759560+00:00",
+        "checked_on": "2026-08-08T19:23:21.042759+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -287,7 +287,7 @@
         "official_brand_url": "",
         "retailer_url": "https://amzn.to/4v9I4o8?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-05T17:56:43.759578+00:00",
+        "checked_on": "2026-08-08T19:23:21.042824+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -319,7 +319,7 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0F1N8B7Z4?tag=guru0906-21",
         "source_checked": true,
-        "checked_on": "2026-08-05T17:56:43.759594+00:00",
+        "checked_on": "2026-08-08T19:23:21.042871+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.6537,
@@ -364,7 +364,7 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0D3HKTL6K?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-05T17:56:43.759675+00:00",
+        "checked_on": "2026-08-08T19:23:21.043071+00:00",
         "resolver_status": "not_found",
         "resolver_verified": false,
         "match_score": 0.0
@@ -396,7 +396,7 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B08232VZ84?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-05T17:56:43.759702+00:00",
+        "checked_on": "2026-08-08T19:23:21.043174+00:00",
         "resolver_status": "not_found",
         "resolver_verified": false,
         "match_score": 0.0
@@ -428,7 +428,7 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0GQVL6STN?tag=guru0906-21&th=1",
         "source_checked": false,
-        "checked_on": "2026-08-05T17:56:43.759725+00:00",
+        "checked_on": "2026-08-08T19:23:21.043265+00:00",
         "resolver_status": "not_found",
         "resolver_verified": false,
         "match_score": 0.0
@@ -460,7 +460,7 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/s?k=Mega+70%25%2B+OFF+Store&tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-05T17:56:43.759763+00:00",
+        "checked_on": "2026-08-08T19:23:21.043313+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -492,7 +492,7 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/s?k=Amazon+IN+Fashion+Fest&tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-05T17:56:43.759773+00:00",
+        "checked_on": "2026-08-08T19:23:21.043351+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -524,7 +524,7 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B09MG7HSS9?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-05T17:56:43.759784+00:00",
+        "checked_on": "2026-08-08T19:23:21.043395+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -556,7 +556,10 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0D8YV6KQ5?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": ""
+        "checked_on": "2026-08-08T19:23:21.043444+00:00",
+        "resolver_status": "not_found",
+        "resolver_verified": false,
+        "match_score": 0.0
       },
       "features": [],
       "best_for": [],
@@ -585,7 +588,7 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0F26CLKW9?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-05T17:56:43.759805+00:00",
+        "checked_on": "2026-08-08T19:23:21.043492+00:00",
         "resolver_status": "manual_review",
         "resolver_verified": false,
         "match_score": 0.0
@@ -617,7 +620,10 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0GKY4WMRV?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": ""
+        "checked_on": "2026-08-08T19:23:21.043541+00:00",
+        "resolver_status": "manual_review",
+        "resolver_verified": false,
+        "match_score": 0.0
       },
       "features": [],
       "best_for": [],
@@ -646,7 +652,10 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0CQK691XQ?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": ""
+        "checked_on": "2026-08-08T19:23:21.043597+00:00",
+        "resolver_status": "manual_review",
+        "resolver_verified": false,
+        "match_score": 0.0
       },
       "features": [],
       "best_for": [],
@@ -675,7 +684,10 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0H1QQ7ML1?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": ""
+        "checked_on": "2026-08-08T19:23:21.043653+00:00",
+        "resolver_status": "manual_review",
+        "resolver_verified": false,
+        "match_score": 0.0
       },
       "features": [],
       "best_for": [],
@@ -698,13 +710,16 @@
       "title": "Fire-Boltt Ninja Smartwatch",
       "brand": "Fire-Boltt",
       "category": "Electronics",
-      "status": "draft",
+      "status": "source_review_required",
       "research": {
-        "official_product_url": "",
+        "official_product_url": "https://www.fireboltt.com/products/ninja-x-ring-black",
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/s?k=Fire-Boltt+Ninja+Smartwatch&tag=guru0906-21",
-        "source_checked": false,
-        "checked_on": ""
+        "source_checked": true,
+        "checked_on": "2026-08-08T19:23:21.043686+00:00",
+        "resolver_status": "manual_review",
+        "resolver_verified": false,
+        "match_score": 0.769
       },
       "features": [],
       "best_for": [],
@@ -733,7 +748,10 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/s?k=Sony+Wireless+Headphones&tag=guru0906-21",
         "source_checked": false,
-        "checked_on": ""
+        "checked_on": "2026-08-08T19:23:21.043719+00:00",
+        "resolver_status": "not_found",
+        "resolver_verified": false,
+        "match_score": 0.0
       },
       "features": [],
       "best_for": [],
@@ -756,27 +774,218 @@
       "title": "Echo Dot 5th Gen",
       "brand": "Amazon",
       "category": "Electronics",
-      "status": "draft",
+      "status": "knowledge_review_required",
       "research": {
-        "official_product_url": "",
+        "official_product_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=TR7RlV0WehGNoLYxKM",
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/s?k=Echo+Dot+5th+Gen&tag=guru0906-21",
-        "source_checked": false,
-        "checked_on": ""
+        "source_checked": true,
+        "checked_on": "2026-08-08T19:23:21.043752+00:00",
+        "resolver_status": "candidate_verified",
+        "resolver_verified": true,
+        "match_score": 0.8158,
+        "spec_extraction": {
+          "fetch_status": "success",
+          "http_status": 200,
+          "page_identity_score": 0.525,
+          "extractor_status": "manual_review",
+          "extractor_reason": "Evidence was extracted, but page identity requires review",
+          "source_host": "www.amazon.com",
+          "extracted_at": "2026-08-08T19:23:10.779137+00:00",
+          "evidence_summary": {
+            "parser": "lxml",
+            "json_ld_products": 0,
+            "json_ld_specifications": 0,
+            "table_specifications": 0,
+            "definition_list_specifications": 0,
+            "label_value_specifications": 0,
+            "structured_section_specifications": 4,
+            "embedded_state_specifications": 0,
+            "shopify_oxygen_specifications": 0,
+            "apple_techspecs_specifications": 0,
+            "total_specifications": 4,
+            "feature_items": 21,
+            "media_product_images": 0,
+            "media_ui_assets": 0,
+            "noise_filter_version": "2.0",
+            "source_attempts": [],
+            "sources_attempted": 1
+          }
+        },
+        "canonical_product_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=TR7RlV0WehGNoLYxKM"
       },
       "features": [],
       "best_for": [],
       "limitations": [],
       "confidence": {
-        "score": 0,
-        "level": "unverified",
-        "reason": "Official product information has not yet been verified"
+        "score": 62,
+        "level": "medium",
+        "reason": "Official-page evidence was extracted but requires manual verification"
       },
       "review": {
         "approved": false,
         "reviewed_by": "",
         "reviewed_on": "",
         "notes": ""
+      },
+      "official_specifications": {
+        "quick_solutions": {
+          "value": "Your Orders Track or cancel orders Your Orders Track or cancel orders Returns & Refunds Exchange or return items Returns & Refunds Exchange or return items Manage Prime Cancel or view benefits Manage Prime Cancel or view benefits Payment Settings Add or edit payment methods Payment Settings Add or edit payment methods Carrier Info Shipping carrier information Carrier Info Shipping carrier information Account Settings Change email or password Account Settings Change email or password",
+          "label": "Quick solutions",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "get_to_know_us": {
+          "value": "Careers Blog About Amazon Investor Relations Amazon Devices Amazon Science",
+          "label": "Get to Know Us",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "amazon_payment_products": {
+          "value": "Amazon Business Card Shop with Points Reload Your Balance Amazon Currency Converter",
+          "label": "Amazon Payment Products",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "let_us_help_you": {
+          "value": "Your Account Your Orders Shipping Rates & Policies Returns & Replacements Manage Your Content and Devices Help",
+          "label": "Let Us Help You",
+          "source": "structured_section",
+          "confidence": 84
+        }
+      },
+      "official_features": [
+        {
+          "text": "The Device meet the FCC Radio Frequency Emission Guidelines. Information on these Products is on file with the FCC and can be found by inputting such Product's FCC ID (which can be found on the bottom of the Device) into the FCC ID Search at https://www.fcc.gov/oet/ea/fccid .",
+          "source": "p",
+          "confidence": 77,
+          "relevance_score": 3
+        },
+        {
+          "text": "Storage temperature Range : 14°F to 113°F (-10°C to 45°C).",
+          "source": "p",
+          "confidence": 77,
+          "relevance_score": 3
+        },
+        {
+          "text": "Use of third party accessories may impact your Device's performance. In limited circumstances, use of third party accessories may void your Device's limited warranty. Read all safety instructions for any accessories before using with your Device.",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Pursuant to Section 15.21 of the FCC rules, changes or modifications to a Product by the user that are not expressly approved by the party responsible for compliance could void the user's authority to operate the equipment.",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "The output power of the radio technology used in the Products is below the radio frequency exposure limits set by the FCC. Nevertheless, it is advised to use the Products in such a manner that minimizes the potential for human contact during normal operation.",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Connectivity : Dual Band Wi-Fi (2.4 & 5 GHz); 802.11a/b/g/n/ac; Bluetooth/Bluetooth Low Energy\\",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Operating temperature Range : 32°F to 95°F (0°C to 35°C).",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Install your power adapter into an easily accessible socket-outlet located near the equipment that will be plugged into, or powered by, the adapter.",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "For safety, compliance, and other information regarding any smart home device connected to your Device, please consult the user manual and other information provided by the manufacturer of such smart home device.",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Increase the separation between the equipment and receiver.",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Connect the equipment into an outlet on a circuit different from that to which the receiver is connected.",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Consult the dealer or an experienced radio/TV technician for help.",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Install your power adaptor into an easily accessible socket-outlet located near the equipment that will be plugged into, or powered by, the adaptor.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Faulty service may void the warranty.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Device Name: Echo Dot (5th Generation)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Model: C2N6L4",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "In some areas, the disposal of certain electronic devices is regulated. Make sure you dispose of, or recycle, your device in accordance with your local laws and regulations. For information about recycling your device, go to www.amazon.com/devicesupport .",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Model Number: C2N6L4",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Ports : DC Input Port",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Power : AC power adapter Output: 12.0 VDC, 1.25 A, 15.0 W. Input: 100-240 Vac, 50/60 Hz, 0.5 A.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "You can find the Terms of Use, Limited Warranty, instructions for using the Device, customer service contact information, and other applicable terms and Device information at www.amazon.com/devicesupport . See the Legal Notices in this product or in the App for other applicable notices.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "official_page_meta": {
+        "html_title": "Safety and Compliance Information for Amazon Echo Dot (5th Generation) - Amazon Customer Service",
+        "canonical_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=TR7RlV0WehGNoLYxKM",
+        "h1": "Safety and Compliance Information for Amazon Echo Dot (5th Generation)"
       }
     },
     {
@@ -785,13 +994,16 @@
       "title": "Milton Thermosteel Bottle",
       "brand": "Milton",
       "category": "Home",
-      "status": "draft",
+      "status": "source_review_required",
       "research": {
-        "official_product_url": "",
+        "official_product_url": "https://www.milton.in/products/fame-thermosteel-bottle",
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/s?k=Milton+Thermosteel+Bottle&tag=guru0906-21",
-        "source_checked": false,
-        "checked_on": ""
+        "source_checked": true,
+        "checked_on": "2026-08-08T19:23:21.043860+00:00",
+        "resolver_status": "manual_review",
+        "resolver_verified": false,
+        "match_score": 0.9791
       },
       "features": [],
       "best_for": [],
@@ -814,13 +1026,16 @@
       "title": "HP Wireless Mouse",
       "brand": "HP",
       "category": "Electronics",
-      "status": "draft",
+      "status": "source_review_required",
       "research": {
-        "official_product_url": "",
+        "official_product_url": "https://www.hp.com/emea_africa-en/products/accessories/product-details/product-specifications/38352315",
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/s?k=HP+Wireless+Mouse&tag=guru0906-21",
-        "source_checked": false,
-        "checked_on": ""
+        "source_checked": true,
+        "checked_on": "2026-08-08T19:23:21.043895+00:00",
+        "resolver_status": "manual_review",
+        "resolver_verified": false,
+        "match_score": 0.9508
       },
       "features": [],
       "best_for": [],
@@ -843,27 +1058,190 @@
       "title": "boAt Rockerz 450 Headphones",
       "brand": "boAt",
       "category": "Electronics",
-      "status": "draft",
+      "status": "knowledge_review_ready",
       "research": {
-        "official_product_url": "",
+        "official_product_url": "https://www.boat-lifestyle.com/products/rockerz-450",
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/s?k=boAt+Rockerz+450+Headphones&tag=guru0906-21",
-        "source_checked": false,
-        "checked_on": ""
+        "source_checked": true,
+        "checked_on": "2026-08-08T19:23:21.043929+00:00",
+        "resolver_status": "candidate_verified",
+        "resolver_verified": true,
+        "match_score": 0.9746,
+        "spec_extraction": {
+          "fetch_status": "success",
+          "http_status": 200,
+          "page_identity_score": 0.925,
+          "extractor_status": "candidate_ready",
+          "extractor_reason": "Page identity and extracted evidence are strong enough for review",
+          "source_host": "www.boat-lifestyle.com",
+          "extracted_at": "2026-08-08T19:23:13.133661+00:00",
+          "evidence_summary": {
+            "parser": "lxml",
+            "json_ld_products": 1,
+            "json_ld_specifications": 4,
+            "table_specifications": 15,
+            "definition_list_specifications": 0,
+            "label_value_specifications": 1,
+            "structured_section_specifications": 0,
+            "embedded_state_specifications": 0,
+            "shopify_oxygen_specifications": 0,
+            "apple_techspecs_specifications": 0,
+            "total_specifications": 20,
+            "feature_items": 0,
+            "media_product_images": 0,
+            "media_ui_assets": 0,
+            "noise_filter_version": "2.0",
+            "source_attempts": [],
+            "sources_attempted": 1
+          }
+        },
+        "canonical_product_url": "https://www.boat-lifestyle.com/products/rockerz-450"
       },
       "features": [],
       "best_for": [],
       "limitations": [],
       "confidence": {
-        "score": 0,
-        "level": "unverified",
-        "reason": "Official product information has not yet been verified"
+        "score": 93,
+        "level": "high",
+        "reason": "Official page identity and extracted evidence are ready for human review"
       },
       "review": {
         "approved": false,
         "reviewed_by": "",
         "reviewed_on": "",
         "notes": ""
+      },
+      "official_specifications": {
+        "name": {
+          "value": "Rockerz 450 | Over Ear Bluetooth Headphones with Upto 15 Hours Playback, Adaptive Headband, 40mm Dynamic Driver, 300 mah Battery",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "sku": {
+          "value": "8904130850875",
+          "label": "sku",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "mpn": {
+          "value": "rockerz-450",
+          "label": "mpn",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "brand": {
+          "value": "boAtlifestylein",
+          "label": "brand",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "headphone_type": {
+          "value": "On-Ear",
+          "label": "Headphone Type",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "driver_type": {
+          "value": "Moving Coil Driver",
+          "label": "Driver Type",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "driver": {
+          "value": "40 mm",
+          "label": "Driver Size",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "impedance": {
+          "value": "32Ω",
+          "label": "Impedance",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "sensitivity_db": {
+          "value": "108dB±3DB",
+          "label": "Sensitivity (dB)",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "frequency_response": {
+          "value": "20Hz-20KHz",
+          "label": "Frequency Response",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "battery_capacity_mah": {
+          "value": "300 mAh",
+          "label": "Battery Capacity (mAh)",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "playback_time": {
+          "value": "15 hours",
+          "label": "Playback Time",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "charging_time": {
+          "value": "3 hours",
+          "label": "Charging Time",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "standby_time": {
+          "value": "400 hours",
+          "label": "Standby Time",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "bluetooth_version": {
+          "value": "V4.2",
+          "label": "Bluetooth Version",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "country_of_origin": {
+          "value": "China",
+          "label": "Country Of Origin",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "compatibility": {
+          "value": "All Bluetooth Devices",
+          "label": "Compatibility",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "bluetooth_range": {
+          "value": "10M",
+          "label": "Bluetooth Range",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "net_content": {
+          "value": "1 Unit Rockerz 450, 1 Unit Charging Cable, 1 Unit Warranty Card, 1 Unit User Manual",
+          "label": "Net Content",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "for_consumer_complaints_contact_us_at": {
+          "value": "022-6918-1920 info@imaginemarketingindia.com Imagine Marketing Limited Address: Unit No. 204&205, D-wing & E-wing, Corporate Avenue, Andheri Ghatkopar Link Road, Andheri East, Mumbai-400093",
+          "label": "For consumer complaints contact us at",
+          "source": "label_value_block",
+          "confidence": 78
+        }
+      },
+      "official_features": [],
+      "official_page_meta": {
+        "html_title": "boAt Rockerz 450 | Bluetooth On-Ear Headphones with 40mm Drivers",
+        "description": "Look sharp and stay sharp with Rockerz 450 wireless headphones that come with an inbuilt mic and passive noise-canceling feature for the immersive audio experience. Shop Now!",
+        "og_title": "Rockerz 450 | Over Ear Bluetooth Headphones with Upto 15 Hours Playback, Adaptive Headband, 40mm Dynamic Driver, 300 mah Battery",
+        "og_description": "Look sharp and stay sharp with Rockerz 450 wireless headphones that come with an inbuilt mic and passive noise-canceling feature for the immersive audio experience. Shop Now!",
+        "canonical_url": "https://www.boat-lifestyle.com/products/rockerz-450",
+        "h1": "Rockerz 450"
       }
     },
     {
@@ -872,13 +1250,16 @@
       "title": "OnePlus Nord CE",
       "brand": "OnePlus",
       "category": "Mobiles",
-      "status": "draft",
+      "status": "source_review_required",
       "research": {
-        "official_product_url": "",
+        "official_product_url": "https://www.oneplus.com/us/nord-ce-5g/specs",
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/s?k=OnePlus+Nord+CE&tag=guru0906-21",
-        "source_checked": false,
-        "checked_on": ""
+        "source_checked": true,
+        "checked_on": "2026-08-08T19:23:21.044016+00:00",
+        "resolver_status": "manual_review",
+        "resolver_verified": false,
+        "match_score": 0.972
       },
       "features": [],
       "best_for": [],
@@ -907,7 +1288,10 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/s?k=Philips+Trimmer&tag=guru0906-21",
         "source_checked": false,
-        "checked_on": ""
+        "checked_on": "2026-08-08T19:23:21.044047+00:00",
+        "resolver_status": "not_found",
+        "resolver_verified": false,
+        "match_score": 0.0
       },
       "features": [],
       "best_for": [],
@@ -936,7 +1320,10 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/s?k=Boult+Audio+Bluetooth+Speaker&tag=guru0906-21",
         "source_checked": false,
-        "checked_on": ""
+        "checked_on": "2026-08-08T19:23:21.044099+00:00",
+        "resolver_status": "manual_review",
+        "resolver_verified": false,
+        "match_score": 0.0
       },
       "features": [],
       "best_for": [],
@@ -959,27 +1346,248 @@
       "title": "Fire TV Stick 4K",
       "brand": "Amazon",
       "category": "Electronics",
-      "status": "draft",
+      "status": "knowledge_review_ready",
       "research": {
-        "official_product_url": "",
+        "official_product_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=T2XOIxxX1V5P0quktW",
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/s?k=Fire+TV+Stick+4K&tag=guru0906-21",
-        "source_checked": false,
-        "checked_on": ""
+        "source_checked": true,
+        "checked_on": "2026-08-08T19:23:21.044132+00:00",
+        "resolver_status": "candidate_verified",
+        "resolver_verified": true,
+        "match_score": 0.972,
+        "spec_extraction": {
+          "fetch_status": "success",
+          "http_status": 200,
+          "page_identity_score": 0.7,
+          "extractor_status": "candidate_ready",
+          "extractor_reason": "Page identity and extracted evidence are strong enough for review",
+          "source_host": "www.amazon.com",
+          "extracted_at": "2026-08-08T19:23:18.292333+00:00",
+          "evidence_summary": {
+            "parser": "lxml",
+            "json_ld_products": 0,
+            "json_ld_specifications": 0,
+            "table_specifications": 0,
+            "definition_list_specifications": 0,
+            "label_value_specifications": 0,
+            "structured_section_specifications": 9,
+            "embedded_state_specifications": 0,
+            "shopify_oxygen_specifications": 0,
+            "apple_techspecs_specifications": 0,
+            "total_specifications": 9,
+            "feature_items": 21,
+            "media_product_images": 0,
+            "media_ui_assets": 0,
+            "noise_filter_version": "2.0",
+            "source_attempts": [],
+            "sources_attempted": 1
+          }
+        },
+        "canonical_product_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=T2XOIxxX1V5P0quktW"
       },
       "features": [],
       "best_for": [],
       "limitations": [],
       "confidence": {
-        "score": 0,
-        "level": "unverified",
-        "reason": "Official product information has not yet been verified"
+        "score": 74,
+        "level": "medium",
+        "reason": "Official page identity and extracted evidence are ready for human review"
       },
       "review": {
         "approved": false,
         "reviewed_by": "",
         "reviewed_on": "",
         "notes": ""
+      },
+      "official_specifications": {
+        "servicing_your_device": {
+          "value": "If your device needs service, please contact Amazon Customer Support. Contact details can be found at www.amazon.com/devicesupport . Faulty service may void the warranty",
+          "label": "Servicing Your Device",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "product_specifications": {
+          "value": "Fire TV Stick 4K Select Model Number: CL32P4 Electrical Rating: 5.25V⎓ 1A Operating Temperature Range: 0°C - 35°C (32°F- 95°F) Alexa Voice Control Remote Model Number: PA38CA Electrical Rating: 3V (2 AAA Batteries) Operating Temperature Range: 0°C - 35°C (32°F- 95°F)",
+          "label": "PRODUCT SPECIFICATIONS",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "recycling_your_device_properly": {
+          "value": "In some areas, the disposal of certain electronic devices is regulated. Make sure you dispose of, or recycle, your device in accordance with your local laws and regulations. For information about recycling your device, go to www.amazon.com/devicesupport .",
+          "label": "RECYCLING YOUR DEVICE PROPERLY",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "additional_safety_and_compliance_information": {
+          "value": "For additional safety, compliance, recycling and other important information regarding your Amazon Fire TV device, please refer to the Settings Menu on your Amazon Fire TV device.",
+          "label": "Additional Safety and Compliance Information",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "additional_information": {
+          "value": "You can find the Terms of Use, Limited Warranty, instructions for using the Device, customer service contact information, and other applicable terms and Device information at www.amazon.com/devicesupport . See the Legal Notices in this product or in the App for other applicable notices.",
+          "label": "Additional Information",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "quick_solutions": {
+          "value": "Your Orders Track or cancel orders Your Orders Track or cancel orders Returns & Refunds Exchange or return items Returns & Refunds Exchange or return items Manage Prime Cancel or view benefits Manage Prime Cancel or view benefits Payment Settings Add or edit payment methods Payment Settings Add or edit payment methods Carrier Info Shipping carrier information Carrier Info Shipping carrier information Account Settings Change email or password Account Settings Change email or password",
+          "label": "Quick solutions",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "get_to_know_us": {
+          "value": "Careers Blog About Amazon Investor Relations Amazon Devices Amazon Science",
+          "label": "Get to Know Us",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "amazon_payment_products": {
+          "value": "Amazon Business Card Shop with Points Reload Your Balance Amazon Currency Converter",
+          "label": "Amazon Payment Products",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "let_us_help_you": {
+          "value": "Your Account Your Orders Shipping Rates & Policies Returns & Replacements Manage Your Content and Devices Help",
+          "label": "Let Us Help You",
+          "source": "structured_section",
+          "confidence": 84
+        }
+      },
+      "official_features": [
+        {
+          "text": "Your device is shipped with an AC adapter. Your device should only be powered using the AC adapter and USB cable included with the device.",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Operating Temperature Range: 0°C - 35°C (32°F- 95°F)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "This device complies with Part 15 of the FCC Rules. Operation is subject to the following two conditions: (1) This device may not cause harmful interference, and (2) This device must accept any interference received, including interference that may cause undesired operation.",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "If you have experienced seizures or blackouts or have a family history of such occurrences, you should consult a doctor before watching videos or playing games.",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Engaging in repetitive motions such as pressing buttons or playing some games may cause you to experience occasional discomfort in your hands, arms, shoulders, neck, or other parts of your body.",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Do not plug multiple electrical devices into the same wall socket. Overloading a socket can cause it to overheat and may result in a fire.",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Install your power adapter into an easily accessible socket-outlet located near the equipment that will be plugged into or powered by the adapter.",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Model Number: CL32P4",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Electrical Rating: 5.25V⎓ 1A",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Model Number: PA38CA",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Electrical Rating: 3V (2 AAA Batteries)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Refer to the Safety & Compliance section on www.amazon.com/devicesupport for additional information.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Your device is shipped with an AC adapter. Your device should only be powered using the AC adapter included with the device.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Faulty service may void the warranty",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Install your power adapter into an easily accessible socket-outlet located near the equipment that will be plugged into, or powered by, the adapter.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "The party responsible for FCC compliance is Amazon.com Services LLC 410 Terry Ave North, Seattle, WA 98109 USA. If you wish to contact Amazon visit www.amazon.com/devicesupport , select United States, click Help & Troubleshooting, then click on Contact Us.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Device Name: Fire TV Stick 4K Select",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Model: CL32P4",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "In some areas, the disposal of certain electronic devices is regulated. Make sure you dispose of, or recycle, your device in accordance with your local laws and regulations. For information about recycling your device, go to www.amazon.com/devicesupport .",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "For additional safety, compliance, recycling and other important information regarding your Amazon Fire TV device, please refer to the Settings Menu on your Amazon Fire TV device.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "You can find the Terms of Use, Limited Warranty, instructions for using the Device, customer service contact information, and other applicable terms and Device information at www.amazon.com/devicesupport . See the Legal Notices in this product or in the App for other applicable notices.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "official_page_meta": {
+        "html_title": "Safety and Compliance Information for Fire TV Stick 4K Select - Amazon Customer Service",
+        "canonical_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=T2XOIxxX1V5P0quktW",
+        "h1": "Safety and Compliance Information for Fire TV Stick 4K Select"
       }
     },
     {
@@ -2067,7 +2675,7 @@
         "official_brand_url": "",
         "retailer_url": "https://www.amazon.in/dp/B0G47YZJH6?tag=guru0906-21",
         "source_checked": false,
-        "checked_on": "2026-08-05T17:56:43.760128+00:00",
+        "checked_on": "2026-08-08T19:23:21.045056+00:00",
         "resolver_status": "not_found",
         "resolver_verified": false,
         "match_score": 0.0
@@ -2087,6 +2695,5 @@
         "notes": ""
       }
     }
-  ],
-  "updated_at": "2026-08-05T18:09:21.790118+00:00"
+  ]
 }

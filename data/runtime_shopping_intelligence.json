@@ -1,0 +1,1232 @@
+{
+  "schema_version": "1.1",
+  "query": "Best earbuds under 3000 with ANC long battery and good call quality",
+  "intent": {
+    "intent": "recommendation",
+    "category": "earbuds",
+    "budget_min": null,
+    "budget_max": 3000,
+    "features": [
+      "ANC",
+      "Battery"
+    ],
+    "brands": [],
+    "compare": false,
+    "keywords": [
+      "best",
+      "earbuds",
+      "under",
+      "3000",
+      "with",
+      "anc",
+      "long",
+      "battery",
+      "and",
+      "good",
+      "call",
+      "quality"
+    ],
+    "user_profile": null,
+    "use_case": [],
+    "hard_constraints": [
+      "budget_max"
+    ],
+    "must_have": [
+      "anc"
+    ],
+    "preferred": [
+      "good_battery",
+      "good_call_quality"
+    ],
+    "avoid": [],
+    "priority_weights": {
+      "budget": 19,
+      "sound_quality": 15,
+      "battery": 19,
+      "call_quality": 19,
+      "anc": 19,
+      "comfort": 7,
+      "connectivity": 2
+    }
+  },
+  "stage_counts": {
+    "discovered": 8,
+    "identity_prepared": 8,
+    "official_verified": 4,
+    "evidence_ready": 4,
+    "fit_scored": 4,
+    "qualifying_50_plus": 1,
+    "recommendations_returned": 1
+  },
+  "recommendations": [
+    {
+      "rank": 1,
+      "product_id": "market-01",
+      "title": "realme Buds Air 6 TWS in Ear Earbuds",
+      "brand": "realme",
+      "fit_percent": 56,
+      "raw_fit_percent": 76,
+      "evidence_coverage_percent": 74,
+      "confidence": "medium",
+      "why_it_fits": [
+        "battery: Strong verified playback/endurance: 40 hours",
+        "call_quality: 6 microphones, call-noise reduction technology",
+        "anc: Deep verified ANC up to 50dB"
+      ],
+      "tradeoffs": [
+        "sound_quality: verified driver specification",
+        "connectivity: Bluetooth 5.3"
+      ],
+      "unknown": [
+        "budget: Current verified selling price is unavailable",
+        "comfort: No conservative v1 scoring rule/evidence for comfort"
+      ],
+      "official_source": "https://darlingretail.com/products/realme-buds-air-6-tws-in-ear-earbuds-realme-buds-air-6-tws-rma2402",
+      "market_source": "https://www.amazon.in/realme-Earbuds-Latency-Resistant-Bluetooth/dp/B0D3HY9X3L",
+      "provenance": {
+        "discovery_url": "https://www.amazon.in/realme-Earbuds-Latency-Resistant-Bluetooth/dp/B0D3HY9X3L",
+        "official_url": "https://darlingretail.com/products/realme-buds-air-6-tws-in-ear-earbuds-realme-buds-air-6-tws-rma2402",
+        "official_title": "Realme Buds Air 6 TWS in Ear Earbuds ...",
+        "resolver_mode": "universal_fallback",
+        "resolver_status": "candidate_verified",
+        "resolver_identity_score": 85,
+        "resolver_match_score": 0.85,
+        "extractor_page_identity_score": 1.0,
+        "extractor_review_status": "candidate_ready",
+        "fetch_status": "success",
+        "price_evidence": {
+          "price": null,
+          "currency": "INR",
+          "verified": false,
+          "status": "unavailable",
+          "source_type": "retailer_price_evidence",
+          "source_url": "https://www.amazon.in/realme-Earbuds-Latency-Resistant-Bluetooth/dp/B0D3HY9X3L",
+          "source_host": "www.amazon.in",
+          "price_mentions": [],
+          "reason": "No structured retailer price found",
+          "evidence_method": null,
+          "page_evidence": {
+            "price": null,
+            "prices_found": [],
+            "status": "unavailable",
+            "reason": "No structured retailer price found",
+            "http_status": 200,
+            "evidence_method": null
+          }
+        }
+      }
+    }
+  ],
+  "fit_diagnostics": [
+    {
+      "product_id": "market-01",
+      "title": "realme Buds Air 6 TWS in Ear Earbuds",
+      "brand": "realme",
+      "price": null,
+      "eligible": true,
+      "fit_percent": 56,
+      "raw_fit_percent": 76,
+      "evidence_coverage_percent": 74,
+      "confidence": "medium",
+      "hard_constraint_failures": [],
+      "criteria": [
+        {
+          "criterion": "budget",
+          "weight": 19,
+          "match_score": null,
+          "weighted_points": 0.0,
+          "evidence_status": "unknown",
+          "reason": "Current verified selling price is unavailable"
+        },
+        {
+          "criterion": "sound_quality",
+          "weight": 15,
+          "match_score": 0.15,
+          "weighted_points": 2.25,
+          "evidence_status": "verified",
+          "reason": "verified driver specification"
+        },
+        {
+          "criterion": "battery",
+          "weight": 19,
+          "match_score": 0.9,
+          "weighted_points": 17.1,
+          "evidence_status": "verified",
+          "reason": "Strong verified playback/endurance: 40 hours"
+        },
+        {
+          "criterion": "call_quality",
+          "weight": 19,
+          "match_score": 0.9,
+          "weighted_points": 17.1,
+          "evidence_status": "verified",
+          "reason": "6 microphones, call-noise reduction technology"
+        },
+        {
+          "criterion": "anc",
+          "weight": 19,
+          "match_score": 1.0,
+          "weighted_points": 19.0,
+          "evidence_status": "verified",
+          "reason": "Deep verified ANC up to 50dB"
+        },
+        {
+          "criterion": "comfort",
+          "weight": 7,
+          "match_score": null,
+          "weighted_points": 0.0,
+          "evidence_status": "unknown",
+          "reason": "No conservative v1 scoring rule/evidence for comfort"
+        },
+        {
+          "criterion": "connectivity",
+          "weight": 2,
+          "match_score": 0.3,
+          "weighted_points": 0.6,
+          "evidence_status": "verified",
+          "reason": "Bluetooth 5.3"
+        }
+      ],
+      "attributes": {
+        "name": {
+          "value": "Realme Buds Air 6 TWS in Ear Earbuds (REALME BUDS AIR 6 TWS - RMA2402)",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "sku": {
+          "value": "REALME BUDS AIR 6 TWS - RMA2402",
+          "label": "sku",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "brand": {
+          "value": "Realme",
+          "label": "brand",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "noise_control": {
+          "value": "‎Active Noise Cancellation",
+          "label": "Noise Control",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "frequency_response": {
+          "value": "‎20 Hz",
+          "label": "Frequency Response",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "sensitivity": {
+          "value": "‎38 dB",
+          "label": "Sensitivity",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "model_name": {
+          "value": "REALME BUDS AIR 6 TWS - RMA2402",
+          "label": "Model Name",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "connectivity_technology": {
+          "value": "‎Wireless",
+          "label": "Connectivity Technology",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "wireless_communication_technology": {
+          "value": "‎Bluetooth",
+          "label": "Wireless Communication Technology",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "included_components": {
+          "value": "‎Cable, User Manual, Eartip",
+          "label": "Included Components",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "age_range_description": {
+          "value": "‎Adult",
+          "label": "Age Range (Description)",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "material": {
+          "value": "‎Plastic",
+          "label": "Material",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "recommended_uses_for_product": {
+          "value": "‎Calling, Running, Exercising, Gaming",
+          "label": "Recommended Uses For Product",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "compatible_devices": {
+          "value": "‎Cellphones, Tablets, Television, Desktops",
+          "label": "Compatible Devices",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "control_type": {
+          "value": "‎Google Assistant",
+          "label": "Control Type",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "cable_feature": {
+          "value": "‎Without Cable",
+          "label": "Cable Feature",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "item_weight": {
+          "value": "‎46 Grams",
+          "label": "Item Weight",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "water_resistance_level": {
+          "value": "‎Water Resistant",
+          "label": "Water Resistance Level",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "package_type": {
+          "value": "‎Standard Packaging",
+          "label": "Package Type",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "net_quantity": {
+          "value": "‎1 Count",
+          "label": "Net Quantity",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "control_method": {
+          "value": "‎App",
+          "label": "Control Method",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "number_of_items": {
+          "value": "‎1",
+          "label": "Number of Items",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "controller_type": {
+          "value": "‎Button, Google Assistant",
+          "label": "Controller Type",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "battery_life": {
+          "value": "‎40 Hours",
+          "label": "Battery Life",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "audio_driver_type": {
+          "value": "‎Dynamic Driver",
+          "label": "Audio Driver Type",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "bluetooth_range": {
+          "value": "‎10 Metres",
+          "label": "Bluetooth Range",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "bluetooth_version": {
+          "value": "‎5.3",
+          "label": "Bluetooth Version",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "audio_latency": {
+          "value": "‎55 Milliseconds",
+          "label": "Audio Latency",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "audio_driver_size": {
+          "value": "‎12.4 Millimetres",
+          "label": "Audio Driver Size",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "earpiece_shape": {
+          "value": "‎Bud",
+          "label": "Earpiece Shape",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "is_autographed": {
+          "value": "‎No",
+          "label": "Is Autographed",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "manufacturer": {
+          "value": "‎Jiangxi risound Electronics Co.LTD ,, Jiangxi risound Electronics co. Ltd",
+          "label": "Manufacturer",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "product_dimensions": {
+          "value": "‎3.1 x 2 x 2.4 cm; 46 g",
+          "label": "Product Dimensions",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "item_model_number": {
+          "value": "‎RMA2402",
+          "label": "Item model number",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "special_features": {
+          "value": "‎Surround Sound, Sweatproof, Noise Cancellation, Multipoint Pairing, Fast Charging",
+          "label": "Special features",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "other_display_features": {
+          "value": "‎Wireless",
+          "label": "Other display features",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "form_factor": {
+          "value": "‎In ear, In Ear",
+          "label": "Form factor",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "country_of_origin": {
+          "value": "‎China",
+          "label": "Country of Origin",
+          "source": "html_table",
+          "confidence": 95
+        }
+      },
+      "features": [
+        {
+          "text": "• 50dB Smart Active Noise Cancellation • 12.4mm Deep Bass Driver • 6-Mic Call Noise Cancellation • 55ms Super Low Latency • Bluetooth 5.3",
+          "source": "p",
+          "confidence": 86,
+          "relevance_score": 6
+        },
+        {
+          "text": "Activate Game Mode for a seamless gaming experience with headset latency as low as 55ms. Equipped with a Bluetooth 5.3 next-gen chip, enjoy lower power consumption, reduced latency, stronger anti-interference, and stable signals within a 10-meter range.",
+          "source": "p",
+          "confidence": 83,
+          "relevance_score": 5
+        },
+        {
+          "text": "Enjoy up to 40 hours of playback with our ultra-long battery life. Listen to music for 5 hours a day without needing to recharge for a week. Plus, with fast charging, you can quickly get back to your long-term listening experience without interruption.",
+          "source": "p",
+          "confidence": 80,
+          "relevance_score": 4
+        },
+        {
+          "text": "‎Surround Sound, Sweatproof, Noise Cancellation, Multipoint Pairing, Fast Charging",
+          "source": "p",
+          "confidence": 80,
+          "relevance_score": 4
+        },
+        {
+          "text": "50dB Smart Active Noise Cancellation",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Note: 50dB is the maximum reduction depth tested in realme labs; actual results may vary.",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "6-Mic Call Noise Cancellation",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "55ms Super Low-Latency",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Experience hassle-free connectivity with Google Fast Pair and enjoy uninterrupted music playback on your Buds Air 6. Ensure seamless, effortless and quick pairing pairing with your smartphone using Google Fast Pair feature.",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "IP55 Dust & Water Resistant",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "realme Buds Air 6 boasts an IP55 rating for water resistance, effectively protecting against sweat and splashes. Use the earbuds confidently during workouts or in light rain without concerns about moisture damage.\"",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "‎Active Noise Cancellation",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Frequency Response",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Age Range (Description)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Bluetooth Range",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Audio Latency",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "12.4mm Deep Bass Driver",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Up to 40hrs of Playback",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Wireless Communication Technology",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "‎Cable, User Manual, Eartip",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Compatible Devices",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Water Resistance Level",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "‎Water Resistant",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Life",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Audio Driver Type",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "‎Dynamic Driver",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Audio Driver Size",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Product Dimensions",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Other display features",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "price_evidence": {
+        "price": null,
+        "currency": "INR",
+        "verified": false,
+        "status": "unavailable",
+        "source_type": "retailer_price_evidence",
+        "source_url": "https://www.amazon.in/realme-Earbuds-Latency-Resistant-Bluetooth/dp/B0D3HY9X3L",
+        "source_host": "www.amazon.in",
+        "price_mentions": [],
+        "reason": "No structured retailer price found",
+        "evidence_method": null,
+        "page_evidence": {
+          "price": null,
+          "prices_found": [],
+          "status": "unavailable",
+          "reason": "No structured retailer price found",
+          "http_status": 200,
+          "evidence_method": null
+        }
+      },
+      "official_source": "https://darlingretail.com/products/realme-buds-air-6-tws-in-ear-earbuds-realme-buds-air-6-tws-rma2402",
+      "market_source": "https://www.amazon.in/realme-Earbuds-Latency-Resistant-Bluetooth/dp/B0D3HY9X3L",
+      "resolver_mode": "universal_fallback",
+      "resolver_status": "candidate_verified",
+      "resolver_identity_score": 85,
+      "resolver_match_score": 0.85,
+      "extractor_page_identity_score": 1.0,
+      "extractor_review_status": "candidate_ready"
+    },
+    {
+      "product_id": "market-03",
+      "title": "boat Airdopes 300",
+      "brand": "boat",
+      "price": null,
+      "eligible": false,
+      "fit_percent": 34,
+      "raw_fit_percent": 90,
+      "evidence_coverage_percent": 38,
+      "confidence": "low",
+      "hard_constraint_failures": [
+        "Must-have requirement is not verified: anc (No explicit listening ANC evidence found)"
+      ],
+      "criteria": [
+        {
+          "criterion": "budget",
+          "weight": 19,
+          "match_score": null,
+          "weighted_points": 0.0,
+          "evidence_status": "unknown",
+          "reason": "Current verified selling price is unavailable"
+        },
+        {
+          "criterion": "sound_quality",
+          "weight": 15,
+          "match_score": null,
+          "weighted_points": 0.0,
+          "evidence_status": "unknown",
+          "reason": "No conservative sound-quality evidence found"
+        },
+        {
+          "criterion": "battery",
+          "weight": 19,
+          "match_score": 1.0,
+          "weighted_points": 19.0,
+          "evidence_status": "verified",
+          "reason": "Long verified playback/endurance: 50 hours"
+        },
+        {
+          "criterion": "call_quality",
+          "weight": 19,
+          "match_score": 0.8,
+          "weighted_points": 15.2,
+          "evidence_status": "verified",
+          "reason": "4 microphones, call-noise reduction technology"
+        },
+        {
+          "criterion": "anc",
+          "weight": 19,
+          "match_score": null,
+          "weighted_points": 0.0,
+          "evidence_status": "unknown",
+          "reason": "No explicit listening ANC evidence found"
+        },
+        {
+          "criterion": "comfort",
+          "weight": 7,
+          "match_score": null,
+          "weighted_points": 0.0,
+          "evidence_status": "unknown",
+          "reason": "No conservative v1 scoring rule/evidence for comfort"
+        },
+        {
+          "criterion": "connectivity",
+          "weight": 2,
+          "match_score": null,
+          "weighted_points": 0.0,
+          "evidence_status": "unknown",
+          "reason": "No reliable connectivity evidence found"
+        }
+      ],
+      "attributes": {
+        "name": {
+          "value": "boAt Airdopes 300 | Wireless Earbuds with 50 Hours Playback, Quad Mics AI ENx™ Tech, ASAP™ Charge, Spatial Audio",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "sku": {
+          "value": "8905650073270",
+          "label": "sku",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "mpn": {
+          "value": "airdopes-300-large-playback-earbuds",
+          "label": "mpn",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "brand": {
+          "value": "boAtlifestylein",
+          "label": "brand",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "for_consumer_complaints_contact_us_at": {
+          "value": "022-6918-1920 info@imaginemarketingindia.com Imagine Marketing Limited Address: Unit No. 204&205, D-wing & E-wing, Corporate Avenue, Andheri Ghatkopar Link Road, Andheri East, Mumbai-400093",
+          "label": "For consumer complaints contact us at",
+          "source": "label_value_block",
+          "confidence": 78
+        }
+      },
+      "features": [],
+      "price_evidence": {
+        "price": null,
+        "currency": "INR",
+        "verified": false,
+        "status": "unavailable",
+        "source_type": "retailer_price_evidence",
+        "source_url": "https://www.amazon.in/boAt-Airdopes-300-Multipoint-Connection/dp/B0D3DH8TSC",
+        "source_host": "www.amazon.in",
+        "price_mentions": [],
+        "reason": "No structured retailer price found",
+        "evidence_method": null,
+        "page_evidence": {
+          "price": null,
+          "prices_found": [],
+          "status": "unavailable",
+          "reason": "No structured retailer price found",
+          "http_status": 200,
+          "evidence_method": null
+        }
+      },
+      "official_source": "https://www.boat-lifestyle.com/products/airdopes-300-large-playback-earbuds",
+      "market_source": "https://www.amazon.in/boAt-Airdopes-300-Multipoint-Connection/dp/B0D3DH8TSC",
+      "resolver_mode": "registered_domain",
+      "resolver_status": "candidate_verified",
+      "resolver_identity_score": 80,
+      "resolver_match_score": 0.9488,
+      "extractor_page_identity_score": 1.0,
+      "extractor_review_status": "candidate_ready"
+    },
+    {
+      "product_id": "market-05",
+      "title": "oneplus Nord Buds 2r in Ear Earbuds",
+      "brand": "oneplus",
+      "price": 1799.0,
+      "eligible": false,
+      "fit_percent": 53,
+      "raw_fit_percent": 74,
+      "evidence_coverage_percent": 72,
+      "confidence": "medium",
+      "hard_constraint_failures": [
+        "Must-have requirement is not verified: anc (No explicit listening ANC evidence found)"
+      ],
+      "criteria": [
+        {
+          "criterion": "budget",
+          "weight": 19,
+          "match_score": 1.0,
+          "weighted_points": 19.0,
+          "evidence_status": "verified",
+          "reason": "Verified price 1799 is within budget 3000"
+        },
+        {
+          "criterion": "sound_quality",
+          "weight": 15,
+          "match_score": 0.15,
+          "weighted_points": 2.25,
+          "evidence_status": "verified",
+          "reason": "verified driver specification"
+        },
+        {
+          "criterion": "battery",
+          "weight": 19,
+          "match_score": 0.9,
+          "weighted_points": 17.1,
+          "evidence_status": "verified",
+          "reason": "Strong verified playback/endurance: 38 hours"
+        },
+        {
+          "criterion": "call_quality",
+          "weight": 19,
+          "match_score": 0.8,
+          "weighted_points": 15.2,
+          "evidence_status": "verified",
+          "reason": "4 microphones, call-noise reduction technology"
+        },
+        {
+          "criterion": "anc",
+          "weight": 19,
+          "match_score": null,
+          "weighted_points": 0.0,
+          "evidence_status": "unknown",
+          "reason": "No explicit listening ANC evidence found"
+        },
+        {
+          "criterion": "comfort",
+          "weight": 7,
+          "match_score": null,
+          "weighted_points": 0.0,
+          "evidence_status": "unknown",
+          "reason": "No conservative v1 scoring rule/evidence for comfort"
+        },
+        {
+          "criterion": "connectivity",
+          "weight": 2,
+          "match_score": null,
+          "weighted_points": 0.0,
+          "evidence_status": "unknown",
+          "reason": "No reliable connectivity evidence found"
+        }
+      ],
+      "attributes": {
+        "size_dimentions_earbuds": {
+          "value": "28.5*20.2*23mm Charging case: 68.9*36.6*28.2mm Weight Earbuds: 4.3 g (±0.2 g) Charging case: 38.1 g (±1 g)",
+          "label": "Size Dimentions Earbuds",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "water_sweat_resistance_earbuds": {
+          "value": "IP55",
+          "label": "Water & Sweat Resistance Earbuds",
+          "source": "label_value_block",
+          "confidence": 78
+        }
+      },
+      "features": [
+        {
+          "text": "OnePlus Nord Buds 2r earbuds x 1 pair OnePlus Nord Buds 2r charging case x 1 User guide x 1 Silicon eartips x 3 (S, M, L) Safety and Warranty card x 1 USB Type-C charging cable x 1 Nord emoji sticker x 1",
+          "source": "p",
+          "confidence": 83,
+          "relevance_score": 5
+        },
+        {
+          "text": "Earbuds: 28.5*20.2*23mm Charging case: 68.9*36.6*28.2mm",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Earbuds: 4.3 g (±0.2 g) Charging case: 38.1 g (±1 g)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "20 Hz - 20,000 Hz Microphones: 4 (2 per earbud)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Wired, USB Type-C",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "8H of Playback on one charge 38H of playback with charging case",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Per earbud: 36 mAh Charging case: 480 mAh",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Dual mic AI noise cancellation call",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Earbuds: IP55",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Deep Grey Triple Blue",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "12.4mm dynamic drivers Titanized vibrating diaphragm",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "4H of Call on one charge 20H of Call with charging case",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "OnePlus Fast Pair Dolby Atmos support Dirac Toner Sound Master Equalizer Compatibility with HeyMelody app",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "price_evidence": {
+        "price": 1799.0,
+        "currency": "INR",
+        "verified": true,
+        "status": "verified_from_retail_page",
+        "source_type": "retailer_price_evidence",
+        "source_url": "https://www.flipkart.com/oneplus-nord-buds-2r-ear-earbuds-dual-mic-ai-crystal-clear-call-bluetooth/p/itm2560f6f9b1d5b",
+        "source_host": "www.flipkart.com",
+        "price_mentions": [
+          3499.0,
+          3099.0,
+          2944.0,
+          2999.0,
+          599.0,
+          569.0,
+          7990.0,
+          1799.0,
+          1709.0,
+          899.0,
+          854.0,
+          1899.0,
+          640.0,
+          608.0,
+          3999.0,
+          999.0,
+          949.0
+        ],
+        "reason": "Exact retailer Product/Offer JSON-LD price found",
+        "evidence_method": "json_ld_offer",
+        "page_evidence": {
+          "price": 1799.0,
+          "prices_found": [
+            1799.0
+          ],
+          "status": "verified",
+          "reason": "Exact retailer Product/Offer JSON-LD price found",
+          "http_status": 200,
+          "evidence_method": "json_ld_offer"
+        }
+      },
+      "official_source": "https://www.oneplus.com/sg/oneplus-nord-buds-2r/specs",
+      "market_source": "https://www.flipkart.com/oneplus-nord-buds-2r-ear-earbuds-dual-mic-ai-crystal-clear-call-bluetooth/p/itm2560f6f9b1d5b",
+      "resolver_mode": "universal_fallback",
+      "resolver_status": "candidate_verified",
+      "resolver_identity_score": 80,
+      "resolver_match_score": 0.8,
+      "extractor_page_identity_score": 0.5714,
+      "extractor_review_status": "manual_review"
+    },
+    {
+      "product_id": "market-06",
+      "title": "nothing CMF by Nothing Buds Pro",
+      "brand": "nothing",
+      "price": 2799.0,
+      "eligible": false,
+      "fit_percent": 20,
+      "raw_fit_percent": 93,
+      "evidence_coverage_percent": 21,
+      "confidence": "low",
+      "hard_constraint_failures": [
+        "Must-have requirement is not verified: anc (No explicit listening ANC evidence found)"
+      ],
+      "criteria": [
+        {
+          "criterion": "budget",
+          "weight": 19,
+          "match_score": 1.0,
+          "weighted_points": 19.0,
+          "evidence_status": "verified",
+          "reason": "Verified price 2799 is within budget 3000"
+        },
+        {
+          "criterion": "sound_quality",
+          "weight": 15,
+          "match_score": null,
+          "weighted_points": 0.0,
+          "evidence_status": "unknown",
+          "reason": "No conservative sound-quality evidence found"
+        },
+        {
+          "criterion": "battery",
+          "weight": 19,
+          "match_score": null,
+          "weighted_points": 0.0,
+          "evidence_status": "unknown",
+          "reason": "No comparable battery/endurance evidence found"
+        },
+        {
+          "criterion": "call_quality",
+          "weight": 19,
+          "match_score": null,
+          "weighted_points": 0.0,
+          "evidence_status": "unknown",
+          "reason": "No reliable call-quality evidence found"
+        },
+        {
+          "criterion": "anc",
+          "weight": 19,
+          "match_score": null,
+          "weighted_points": 0.0,
+          "evidence_status": "unknown",
+          "reason": "No explicit listening ANC evidence found"
+        },
+        {
+          "criterion": "comfort",
+          "weight": 7,
+          "match_score": null,
+          "weighted_points": 0.0,
+          "evidence_status": "unknown",
+          "reason": "No conservative v1 scoring rule/evidence for comfort"
+        },
+        {
+          "criterion": "connectivity",
+          "weight": 2,
+          "match_score": 0.3,
+          "weighted_points": 0.6,
+          "evidence_status": "verified",
+          "reason": "Bluetooth 5.3"
+        }
+      ],
+      "attributes": {
+        "ip_rating": {
+          "value": "IP55",
+          "label": "Ingress protection",
+          "source": "shopify_oxygen_stream",
+          "confidence": 88
+        },
+        "bluetooth": {
+          "value": "Bluetooth 5.3",
+          "label": "Bluetooth",
+          "source": "shopify_oxygen_stream",
+          "confidence": 80
+        }
+      },
+      "features": [
+        {
+          "text": "How do I set a gesture to switch noise cancellation mode? To set a gesture to switch noise cancellation modes, follow these steps: Open the Nothing X App and go to Controls. Select the Tap & Hold gesture. You can customize it to switch between 2-3 noise cancellation modes.",
+          "source": "li",
+          "confidence": 83,
+          "relevance_score": 3,
+          "source_url": "https://support.nothing.tech/hc/en-us/categories/25888199284881-CMF-Buds-Pro"
+        },
+        {
+          "text": "To set a gesture to switch noise cancellation modes, follow these steps: Open the Nothing X App and go to Controls. Select the Tap & Hold gesture. You can customize it to switch between 2-3 noise cancellation modes.",
+          "source": "p",
+          "confidence": 77,
+          "relevance_score": 3,
+          "source_url": "https://support.nothing.tech/hc/en-us/categories/25888199284881-CMF-Buds-Pro"
+        },
+        {
+          "text": "Do the Buds Pro earbuds support wireless charging? No, the Buds Pro earbuds do not support wireless charging.",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2,
+          "source_url": "https://support.nothing.tech/hc/en-us/categories/25888199284881-CMF-Buds-Pro"
+        },
+        {
+          "text": "What is the battery capacity of the Buds Pro earbuds? Buds:55mAh Case:460mAh",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2,
+          "source_url": "https://support.nothing.tech/hc/en-us/categories/25888199284881-CMF-Buds-Pro"
+        },
+        {
+          "text": "How do I reset the Buds Pro earbuds? To reset your Buds Pro, follow these steps: Place both earbuds in the charging case with the lid open. Press and hold the function button on the Buds Pro for 10 seconds. The LED indicator will flash red three times, indicating that the reset is successful.",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2,
+          "source_url": "https://support.nothing.tech/hc/en-us/categories/25888199284881-CMF-Buds-Pro"
+        },
+        {
+          "text": "No, the Buds Pro earbuds do not support wireless charging.",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2,
+          "source_url": "https://support.nothing.tech/hc/en-us/categories/25888199284881-CMF-Buds-Pro"
+        },
+        {
+          "text": "To reset your Buds Pro, follow these steps: Place both earbuds in the charging case with the lid open. Press and hold the function button on the Buds Pro for 10 seconds. The LED indicator will flash red three times, indicating that the reset is successful.",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2,
+          "source_url": "https://support.nothing.tech/hc/en-us/categories/25888199284881-CMF-Buds-Pro"
+        },
+        {
+          "text": "How do I set a gesture to adjust the volume? To set a gesture to adjust volume, follow these steps: Open the Nothing X app and go to Controls. Select the Double Tap & Hold gesture. You can customize it to adjust the volume.",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1,
+          "source_url": "https://support.nothing.tech/hc/en-us/categories/25888199284881-CMF-Buds-Pro"
+        },
+        {
+          "text": "Buds:55mAh Case:460mAh",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1,
+          "source_url": "https://support.nothing.tech/hc/en-us/categories/25888199284881-CMF-Buds-Pro"
+        },
+        {
+          "text": "To set a gesture to adjust volume, follow these steps: Open the Nothing X app and go to Controls. Select the Double Tap & Hold gesture. You can customize it to adjust the volume.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1,
+          "source_url": "https://support.nothing.tech/hc/en-us/categories/25888199284881-CMF-Buds-Pro"
+        }
+      ],
+      "price_evidence": {
+        "price": 2799.0,
+        "currency": "INR",
+        "verified": true,
+        "status": "verified_from_retail_page",
+        "source_type": "retailer_price_evidence",
+        "source_url": "https://www.flipkart.com/cmf-nothing-buds-pro-45-db-anc-ultra-bass-technology-upto-39-hours-battery-life-bluetooth-headset/p/itm7b41eac6df634",
+        "source_host": "www.flipkart.com",
+        "price_mentions": [
+          2999.0,
+          615.0,
+          584.0,
+          2499.0,
+          2374.0,
+          3999.0,
+          2899.0,
+          2754.0
+        ],
+        "reason": "Exact retailer Product/Offer JSON-LD price found",
+        "evidence_method": "json_ld_offer",
+        "page_evidence": {
+          "price": 2799.0,
+          "prices_found": [
+            2799.0
+          ],
+          "status": "verified",
+          "reason": "Exact retailer Product/Offer JSON-LD price found",
+          "http_status": 200,
+          "evidence_method": "json_ld_offer"
+        }
+      },
+      "official_source": "https://us.nothing.tech/products/cmf-buds-pro-2",
+      "market_source": "https://www.flipkart.com/cmf-nothing-buds-pro-45-db-anc-ultra-bass-technology-upto-39-hours-battery-life-bluetooth-headset/p/itm7b41eac6df634",
+      "resolver_mode": "registered_domain",
+      "resolver_status": "candidate_verified",
+      "resolver_identity_score": 80,
+      "resolver_match_score": 0.7853,
+      "extractor_page_identity_score": 0.8,
+      "extractor_review_status": "candidate_ready"
+    }
+  ],
+  "failure_summary": [
+    {
+      "stage": "official_source",
+      "reason_or_status": "manual_review",
+      "count": 2
+    },
+    {
+      "stage": "official_source",
+      "reason_or_status": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com",
+      "count": 2
+    }
+  ],
+  "failures": [
+    {
+      "candidate_id": "market-02",
+      "title": "JBL Wave Buds 2 Ear Buds Wireless BluetoothV5.3, Active Noise Cancellation Earbuds,Multi Connect, App for Customized Extra Bass Eq, Relax Mode,Speed Charge, 40H Playback, Fast Pair, 4 Mics,IP54(Black) : Amazon.in: Electronics",
+      "brand": "jbl",
+      "search_name": "jbl Wave Buds 2 Ear Buds Wireless BluetoothV5.3",
+      "stage": "official_source",
+      "status": "manual_review",
+      "resolver_mode": "universal_fallback",
+      "reason": "Official-looking source found but identity did not pass the strict verified threshold"
+    },
+    {
+      "candidate_id": "market-04",
+      "title": "CMF by Nothing Buds 42 dB Active Noise Cancellation, Ultra Bass Technology, 35.5 Hrs playtime Bluetooth",
+      "brand": "nothing",
+      "search_name": "nothing CMF by Nothing Buds 42 dB Active Noise Cancellation",
+      "stage": "official_source",
+      "status": "manual_review",
+      "resolver_mode": "universal_fallback",
+      "reason": "Official-looking source found but identity did not pass the strict verified threshold"
+    },
+    {
+      "candidate_id": "market-07",
+      "title": "Samsung Galaxy Buds Core (Black) Galaxy AI Enabled in-Ear TWS ...",
+      "stage": "official_source",
+      "reason": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com"
+    },
+    {
+      "candidate_id": "market-08",
+      "title": "Yildiz Buds T110 (RMA2306) Wireless Earbud with AI ENC, 38H Battery Life & Deep Bass-B5 Bluetooth",
+      "stage": "official_source",
+      "reason": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com"
+    }
+  ],
+  "status": "PARTIAL",
+  "rules": {
+    "min_fit_percent": 50,
+    "preferred_minimum_results": 3,
+    "maximum_results": 5,
+    "affiliate_affects_fit": false,
+    "discovery_score_affects_fit": false,
+    "auto_publish": false,
+    "unknown_evidence_is_zero": false
+  }
+}

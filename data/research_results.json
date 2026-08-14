@@ -1,9 +1,9 @@
 {
   "schema_version": "4.0",
   "mode": "incremental",
-  "updated_at": "2026-08-08T17:45:52.510563+00:00",
-  "products_requested": 4,
-  "total_results": 31,
+  "updated_at": "2026-08-13T17:49:11.563320+00:00",
+  "products_requested": 20,
+  "total_results": 61,
   "products": [
     {
       "product_id": "10",
@@ -258,23 +258,10 @@
     {
       "product_id": "56",
       "title": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo",
-      "brand": "Logitech",
-      "asin": "B01N4EV2TL",
-      "core_title": "Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo",
-      "allowed_domains": [
-        "logitech.com"
-      ],
-      "query": "Logitech Logitech MK240 Nano Wireless USB Keyboard and Mouse Combo official specifications",
-      "official_title": null,
-      "official_url": null,
-      "match_score": 0.0,
-      "identity_score": 0,
-      "identity_decision": null,
-      "identity_reasons": [],
       "verified": false,
-      "status": "not_found",
-      "reason": "No result passed official-domain and identity validation",
-      "candidates": []
+      "status": "error",
+      "reason": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com",
+      "resolved_at": "2026-08-10T18:02:05.102670+00:00"
     },
     {
       "product_id": "1",
@@ -2093,6 +2080,1582 @@
         ]
       },
       "resolved_at": "2026-08-08T17:45:52.509809+00:00"
+    },
+    {
+      "product_id": "29",
+      "title": "boAt Rockerz 450 Headphones",
+      "brand": "boAt",
+      "asin": "",
+      "core_title": "boAt Rockerz 450 Headphones",
+      "allowed_domains": [
+        "boat-lifestyle.com"
+      ],
+      "query": "boAt Rockerz 450 Headphones official specifications",
+      "official_title": "boAt Rockerz 450 | Bluetooth On-Ear Headphones with 40mm Drivers",
+      "official_url": "https://www.boat-lifestyle.com/products/rockerz-450",
+      "match_score": 0.9746,
+      "identity_score": 80,
+      "identity_decision": "verified",
+      "identity_reasons": [
+        "Brand matched",
+        "All identity-bearing model tokens matched",
+        "Supporting model/series token(s) matched: headphones, rockerz"
+      ],
+      "verified": true,
+      "status": "candidate_verified",
+      "reason": "Official domain, model identity and search relevance matched",
+      "candidates": [
+        {
+          "title": "boAt Rockerz 450 | Bluetooth On-Ear Headphones with 40mm Drivers",
+          "url": "https://www.boat-lifestyle.com/products/rockerz-450",
+          "model_score": 1.0,
+          "search_score": 0.8732,
+          "combined_score": 0.9746,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: headphones, rockerz"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "boAt Rockerz 450 Bluetooth On Ear Headphones with Mic, Upto 15 Hours Playback, 40MM Drivers",
+          "url": "https://www.boat-lifestyle.com/products/rockerz-450-polo",
+          "model_score": 1.0,
+          "search_score": 0.7293,
+          "combined_score": 0.9459,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: headphones, rockerz"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "boAt Rockerz 450 Superman DC edition Wireless Headphone",
+          "url": "https://www.boat-lifestyle.com/products/rockerz-450-superman-edition",
+          "model_score": 0.75,
+          "search_score": 0.888,
+          "combined_score": 0.7776,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: rockerz"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "boAt Rockerz 450 Wonder Woman DC Edition - Wireless Headphone with Large Playback",
+          "url": "https://www.boat-lifestyle.com/products/rockerz-450-dc-edition-wireless-headphone",
+          "model_score": 0.75,
+          "search_score": 0.8811,
+          "combined_score": 0.7762,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: rockerz"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "boAt Rockerz 450 Batman DC edition Wireless Headphone",
+          "url": "https://www.boat-lifestyle.com/products/rockerz-450-batman-edition",
+          "model_score": 0.75,
+          "search_score": 0.6636,
+          "combined_score": 0.7327,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: rockerz"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "boAt Rockerz 450 Iron Man Edition | Bluetooth Headphone",
+          "url": "https://www.boat-lifestyle.com/products/rockerz-450-iron-man-bluetooth-headphone",
+          "model_score": 0.75,
+          "search_score": 0.6397,
+          "combined_score": 0.7279,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: rockerz"
+          ],
+          "page_type_score": 90,
+          "source_type": "product"
+        },
+        {
+          "title": "‎Rockerz 450 | boAt Support",
+          "url": "https://support.boat-lifestyle.com/articles/rockerz-wireless/rockerz-450/6214ad9534563f6c3d77d5b3",
+          "model_score": 0.75,
+          "search_score": 0.8793,
+          "combined_score": 0.7759,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: rockerz"
+          ],
+          "page_type_score": 20,
+          "source_type": "support"
+        }
+      ],
+      "query_variants": [
+        "boAt Rockerz 450 Headphones official specifications",
+        "boAt Rockerz 450 Headphones official technical specifications",
+        "boAt Rockerz 450 Headphones official product page",
+        "boAt Rockerz 450 Headphones official support",
+        "boAt Rockerz 450 Headphones official manual pdf",
+        "boAt Rockerz 450 Headphones official downloads",
+        "boAt Rockerz 450 Headphones official"
+      ],
+      "source_candidates": {
+        "product": [
+          {
+            "title": "boAt Rockerz 450 | Bluetooth On-Ear Headphones with 40mm Drivers",
+            "url": "https://www.boat-lifestyle.com/products/rockerz-450",
+            "model_score": 1.0,
+            "search_score": 0.8732,
+            "combined_score": 0.9746,
+            "identity_score": 80,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: headphones, rockerz"
+            ],
+            "page_type_score": 90,
+            "source_type": "product"
+          },
+          {
+            "title": "boAt Rockerz 450 Bluetooth On Ear Headphones with Mic, Upto 15 Hours Playback, 40MM Drivers",
+            "url": "https://www.boat-lifestyle.com/products/rockerz-450-polo",
+            "model_score": 1.0,
+            "search_score": 0.7293,
+            "combined_score": 0.9459,
+            "identity_score": 80,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: headphones, rockerz"
+            ],
+            "page_type_score": 90,
+            "source_type": "product"
+          },
+          {
+            "title": "boAt Rockerz 450 Superman DC edition Wireless Headphone",
+            "url": "https://www.boat-lifestyle.com/products/rockerz-450-superman-edition",
+            "model_score": 0.75,
+            "search_score": 0.888,
+            "combined_score": 0.7776,
+            "identity_score": 80,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: rockerz"
+            ],
+            "page_type_score": 90,
+            "source_type": "product"
+          },
+          {
+            "title": "boAt Rockerz 450 Wonder Woman DC Edition - Wireless Headphone with Large Playback",
+            "url": "https://www.boat-lifestyle.com/products/rockerz-450-dc-edition-wireless-headphone",
+            "model_score": 0.75,
+            "search_score": 0.8811,
+            "combined_score": 0.7762,
+            "identity_score": 80,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: rockerz"
+            ],
+            "page_type_score": 90,
+            "source_type": "product"
+          },
+          {
+            "title": "boAt Rockerz 450 Batman DC edition Wireless Headphone",
+            "url": "https://www.boat-lifestyle.com/products/rockerz-450-batman-edition",
+            "model_score": 0.75,
+            "search_score": 0.6636,
+            "combined_score": 0.7327,
+            "identity_score": 80,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: rockerz"
+            ],
+            "page_type_score": 90,
+            "source_type": "product"
+          }
+        ],
+        "support": [
+          {
+            "title": "‎Rockerz 450 | boAt Support",
+            "url": "https://support.boat-lifestyle.com/articles/rockerz-wireless/rockerz-450/6214ad9534563f6c3d77d5b3",
+            "model_score": 0.75,
+            "search_score": 0.8793,
+            "combined_score": 0.7759,
+            "identity_score": 80,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: rockerz"
+            ],
+            "page_type_score": 20,
+            "source_type": "support"
+          }
+        ]
+      },
+      "resolved_at": "2026-08-08T19:22:24.417154+00:00"
+    },
+    {
+      "product_id": "30",
+      "title": "OnePlus Nord CE",
+      "brand": "OnePlus",
+      "asin": "",
+      "core_title": "OnePlus Nord CE",
+      "allowed_domains": [
+        "oneplus.in",
+        "oneplus.com"
+      ],
+      "query": "OnePlus Nord CE official specifications",
+      "official_title": "OnePlus Nord CE 5G Specs",
+      "official_url": "https://www.oneplus.com/us/nord-ce-5g/specs",
+      "match_score": 0.972,
+      "identity_score": 75,
+      "identity_decision": "manual_review",
+      "identity_reasons": [
+        "Brand matched",
+        "Most expected model tokens matched"
+      ],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "Official candidate found, but identity requires manual review",
+      "candidates": [
+        {
+          "title": "OnePlus Nord CE 5G Specs",
+          "url": "https://www.oneplus.com/us/nord-ce-5g/specs",
+          "model_score": 1.0,
+          "search_score": 0.86,
+          "combined_score": 0.972,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 100,
+          "source_type": "specifications"
+        },
+        {
+          "title": "OnePlus Nord CE 2 5G Specs",
+          "url": "https://www.oneplus.com/sg/nord-ce-2-5g/specs",
+          "model_score": 1.0,
+          "search_score": 0.8452,
+          "combined_score": 0.969,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 100,
+          "source_type": "specifications"
+        },
+        {
+          "title": "OnePlus Nord CE 5G",
+          "url": "https://www.oneplus.com/us/nord-ce-5g",
+          "model_score": 1.0,
+          "search_score": 0.7813,
+          "combined_score": 0.9563,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "OnePlus Nord CE 5G",
+          "url": "https://www.oneplus.in/nord-ce-5g",
+          "model_score": 1.0,
+          "search_score": 0.5577,
+          "combined_score": 0.9115,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "Today I updated my OnePlus Nord ce 5g phone.After updating my ...",
+          "url": "https://community.oneplus.com/thread/1502721181168435206",
+          "model_score": 1.0,
+          "search_score": 0.5468,
+          "combined_score": 0.9094,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "OnePlus Nord CE 5G",
+          "url": "https://www.oneplus.com/si/oneplus-nord-ce-5g",
+          "model_score": 1.0,
+          "search_score": 0.5127,
+          "combined_score": 0.9025,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "OnePlus Nord CE 5",
+          "url": "https://www.oneplus.com/us/nord-ce5",
+          "model_score": 1.0,
+          "search_score": 0.4784,
+          "combined_score": 0.8957,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "OnePlus nord CE 5g Review",
+          "url": "https://www.oneplus.com/uk/nord-ce-5g/reviews",
+          "model_score": 1.0,
+          "search_score": 0.4325,
+          "combined_score": 0.8865,
+          "identity_score": 75,
+          "identity_decision": "manual_review",
+          "identity_reasons": [
+            "Brand matched",
+            "Most expected model tokens matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        }
+      ],
+      "query_variants": [
+        "OnePlus Nord CE official specifications",
+        "OnePlus Nord CE official technical specifications",
+        "OnePlus Nord CE official product page",
+        "OnePlus Nord CE official support",
+        "OnePlus Nord CE official manual pdf",
+        "OnePlus Nord CE official downloads",
+        "OnePlus Nord CE official"
+      ],
+      "source_candidates": {
+        "specifications": [
+          {
+            "title": "OnePlus Nord CE 5G Specs",
+            "url": "https://www.oneplus.com/us/nord-ce-5g/specs",
+            "model_score": 1.0,
+            "search_score": 0.86,
+            "combined_score": 0.972,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 100,
+            "source_type": "specifications"
+          },
+          {
+            "title": "OnePlus Nord CE 2 5G Specs",
+            "url": "https://www.oneplus.com/sg/nord-ce-2-5g/specs",
+            "model_score": 1.0,
+            "search_score": 0.8452,
+            "combined_score": 0.969,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 100,
+            "source_type": "specifications"
+          }
+        ],
+        "official_page": [
+          {
+            "title": "OnePlus Nord CE 5G",
+            "url": "https://www.oneplus.com/us/nord-ce-5g",
+            "model_score": 1.0,
+            "search_score": 0.7813,
+            "combined_score": 0.9563,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "OnePlus Nord CE 5G",
+            "url": "https://www.oneplus.in/nord-ce-5g",
+            "model_score": 1.0,
+            "search_score": 0.5577,
+            "combined_score": 0.9115,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "Today I updated my OnePlus Nord ce 5g phone.After updating my ...",
+            "url": "https://community.oneplus.com/thread/1502721181168435206",
+            "model_score": 1.0,
+            "search_score": 0.5468,
+            "combined_score": 0.9094,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "OnePlus Nord CE 5G",
+            "url": "https://www.oneplus.com/si/oneplus-nord-ce-5g",
+            "model_score": 1.0,
+            "search_score": 0.5127,
+            "combined_score": 0.9025,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "OnePlus Nord CE 5",
+            "url": "https://www.oneplus.com/us/nord-ce5",
+            "model_score": 1.0,
+            "search_score": 0.4784,
+            "combined_score": 0.8957,
+            "identity_score": 75,
+            "identity_decision": "manual_review",
+            "identity_reasons": [
+              "Brand matched",
+              "Most expected model tokens matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          }
+        ]
+      },
+      "resolved_at": "2026-08-08T19:22:36.400510+00:00"
+    },
+    {
+      "product_id": "31",
+      "title": "Philips Trimmer",
+      "brand": "Philips",
+      "asin": "",
+      "core_title": "Philips Trimmer",
+      "allowed_domains": [
+        "philips.co.in",
+        "philips.com"
+      ],
+      "query": "Philips Trimmer official specifications",
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": [],
+      "query_variants": [
+        "Philips Trimmer official specifications",
+        "Philips Trimmer official technical specifications",
+        "Philips Trimmer official product page",
+        "Philips Trimmer official support",
+        "Philips Trimmer official manual pdf",
+        "Philips Trimmer official downloads",
+        "Philips Trimmer official"
+      ],
+      "source_candidates": {},
+      "resolved_at": "2026-08-08T19:22:50.999863+00:00"
+    },
+    {
+      "product_id": "33",
+      "title": "Boult Audio Bluetooth Speaker",
+      "brand": "Boult Audio",
+      "asin": "",
+      "core_title": "Boult Audio Bluetooth Speaker",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-08T19:22:51.001486+00:00"
+    },
+    {
+      "product_id": "34",
+      "title": "Fire TV Stick 4K",
+      "brand": "Amazon",
+      "asin": "",
+      "core_title": "Fire TV Stick 4K",
+      "allowed_domains": [
+        "amazon.in",
+        "amazon.com"
+      ],
+      "query": "Amazon Fire TV Stick 4K official specifications",
+      "official_title": "Safety and Compliance Information for Fire TV Stick 4K Select",
+      "official_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=T2XOIxxX1V5P0quktW",
+      "match_score": 0.972,
+      "identity_score": 80,
+      "identity_decision": "verified",
+      "identity_reasons": [
+        "Brand matched",
+        "All identity-bearing model tokens matched",
+        "Supporting model/series token(s) matched: fire, stick, tv"
+      ],
+      "verified": true,
+      "status": "candidate_verified",
+      "reason": "Official domain, model identity and search relevance matched",
+      "candidates": [
+        {
+          "title": "Safety and Compliance Information for Fire TV Stick 4K Select",
+          "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=T2XOIxxX1V5P0quktW",
+          "model_score": 1.0,
+          "search_score": 0.8602,
+          "combined_score": 0.972,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: fire, stick, tv"
+          ],
+          "page_type_score": 40,
+          "source_type": "support"
+        },
+        {
+          "title": "Fire TV Stick 4K Select streaming device - Amazon.com",
+          "url": "https://www.amazon.com/amazon-fire-tv-stick-4K-select/dp/B0C6W3D4RM",
+          "model_score": 1.0,
+          "search_score": 0.8276,
+          "combined_score": 0.9655,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: fire, stick, tv"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "Watch Amazon Fire TV Stick 4K Honest Review&colon; Performance & Features on Amazon Live",
+          "url": "https://www.amazon.com/live/video/09b10b3dd4674366ace93da2109cda3e",
+          "model_score": 1.0,
+          "search_score": 0.5898,
+          "combined_score": 0.918,
+          "identity_score": 80,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: fire, stick, tv"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        }
+      ],
+      "query_variants": [
+        "Amazon Fire TV Stick 4K official specifications",
+        "Amazon Fire TV Stick 4K official technical specifications",
+        "Amazon Fire TV Stick 4K official product page",
+        "Amazon Fire TV Stick 4K official support",
+        "Amazon Fire TV Stick 4K official manual pdf",
+        "Amazon Fire TV Stick 4K official downloads",
+        "Amazon Fire TV Stick 4K official"
+      ],
+      "source_candidates": {
+        "support": [
+          {
+            "title": "Safety and Compliance Information for Fire TV Stick 4K Select",
+            "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=T2XOIxxX1V5P0quktW",
+            "model_score": 1.0,
+            "search_score": 0.8602,
+            "combined_score": 0.972,
+            "identity_score": 80,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: fire, stick, tv"
+            ],
+            "page_type_score": 40,
+            "source_type": "support"
+          }
+        ],
+        "official_page": [
+          {
+            "title": "Fire TV Stick 4K Select streaming device - Amazon.com",
+            "url": "https://www.amazon.com/amazon-fire-tv-stick-4K-select/dp/B0C6W3D4RM",
+            "model_score": 1.0,
+            "search_score": 0.8276,
+            "combined_score": 0.9655,
+            "identity_score": 80,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: fire, stick, tv"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "Watch Amazon Fire TV Stick 4K Honest Review&colon; Performance & Features on Amazon Live",
+            "url": "https://www.amazon.com/live/video/09b10b3dd4674366ace93da2109cda3e",
+            "model_score": 1.0,
+            "search_score": 0.5898,
+            "combined_score": 0.918,
+            "identity_score": 80,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: fire, stick, tv"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          }
+        ]
+      },
+      "resolved_at": "2026-08-08T19:23:09.088738+00:00"
+    },
+    {
+      "product_id": "35",
+      "title": "Puma Men's Running Shoes",
+      "verified": false,
+      "status": "error",
+      "reason": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com",
+      "resolved_at": "2026-08-13T14:47:24.202449+00:00"
+    },
+    {
+      "product_id": "36",
+      "title": "boAt Stone Bluetooth Speaker",
+      "verified": false,
+      "status": "error",
+      "reason": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com",
+      "resolved_at": "2026-08-13T14:47:24.511736+00:00"
+    },
+    {
+      "product_id": "37",
+      "title": "Mi Power Bank 10000mAh",
+      "verified": false,
+      "status": "error",
+      "reason": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com",
+      "resolved_at": "2026-08-13T14:47:24.839313+00:00"
+    },
+    {
+      "product_id": "38",
+      "title": "Samsung Galaxy M16 5G",
+      "brand": "Samsung",
+      "asin": "",
+      "core_title": "Samsung Galaxy M16 5G",
+      "allowed_domains": [
+        "samsung.com"
+      ],
+      "query": "Samsung Galaxy M16 5G official specifications",
+      "official_title": "in smartphones galaxy m galaxy m16 5g black 128gb sm m166pzkdins",
+      "official_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m16-5g-black-128gb-sm-m166pzkdins/",
+      "match_score": 0.75,
+      "identity_score": 90,
+      "identity_decision": "verified",
+      "identity_reasons": [
+        "Brand matched",
+        "All identity-bearing model tokens matched",
+        "Supporting model/series token(s) matched: galaxy",
+        "Network generation matched"
+      ],
+      "verified": true,
+      "status": "candidate_verified",
+      "reason": "Official domain, model identity and search relevance matched",
+      "candidates": [
+        {
+          "title": "in smartphones galaxy m galaxy m16 5g black 128gb sm m166pzkdins",
+          "url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m16-5g-black-128gb-sm-m166pzkdins/",
+          "model_score": 0.75,
+          "search_score": 0.75,
+          "combined_score": 0.75,
+          "identity_score": 90,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: galaxy",
+            "Network generation matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "in smartphones galaxy m galaxy m16 5g black 128gb sm m166pzkgins",
+          "url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m16-5g-black-128gb-sm-m166pzkgins/",
+          "model_score": 0.75,
+          "search_score": 0.75,
+          "combined_score": 0.75,
+          "identity_score": 90,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: galaxy",
+            "Network generation matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "in smartphones galaxy m galaxy m16 5g black 128gb sm m166pzkhins",
+          "url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m16-5g-black-128gb-sm-m166pzkhins/",
+          "model_score": 0.75,
+          "search_score": 0.75,
+          "combined_score": 0.75,
+          "identity_score": 90,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: galaxy",
+            "Network generation matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "in smartphones galaxy m galaxy m16 5g light pink 128gb sm m166plidins",
+          "url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m16-5g-light-pink-128gb-sm-m166plidins/",
+          "model_score": 0.75,
+          "search_score": 0.75,
+          "combined_score": 0.75,
+          "identity_score": 90,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: galaxy",
+            "Network generation matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "in smartphones galaxy m galaxy m16 5g light pink 128gb sm m166pligins",
+          "url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m16-5g-light-pink-128gb-sm-m166pligins/",
+          "model_score": 0.75,
+          "search_score": 0.75,
+          "combined_score": 0.75,
+          "identity_score": 90,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: galaxy",
+            "Network generation matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "in smartphones galaxy m galaxy m16 5g light pink 128gb sm m166plihins",
+          "url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m16-5g-light-pink-128gb-sm-m166plihins/",
+          "model_score": 0.75,
+          "search_score": 0.75,
+          "combined_score": 0.75,
+          "identity_score": 90,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: galaxy",
+            "Network generation matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "in smartphones galaxy m galaxy m16 5g light green 128gb sm m166plgdins",
+          "url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m16-5g-light-green-128gb-sm-m166plgdins/",
+          "model_score": 0.75,
+          "search_score": 0.75,
+          "combined_score": 0.75,
+          "identity_score": 90,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: galaxy",
+            "Network generation matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "in smartphones galaxy m galaxy m16 5g light green 128gb sm m166plggins",
+          "url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m16-5g-light-green-128gb-sm-m166plggins/",
+          "model_score": 0.75,
+          "search_score": 0.75,
+          "combined_score": 0.75,
+          "identity_score": 90,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: galaxy",
+            "Network generation matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        },
+        {
+          "title": "in smartphones galaxy m galaxy m16 5g light green 128gb sm m166plghins",
+          "url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m16-5g-light-green-128gb-sm-m166plghins/",
+          "model_score": 0.75,
+          "search_score": 0.75,
+          "combined_score": 0.75,
+          "identity_score": 90,
+          "identity_decision": "verified",
+          "identity_reasons": [
+            "Brand matched",
+            "All identity-bearing model tokens matched",
+            "Supporting model/series token(s) matched: galaxy",
+            "Network generation matched"
+          ],
+          "page_type_score": 40,
+          "source_type": "official_page"
+        }
+      ],
+      "query_variants": [
+        "Samsung Galaxy M16 5G official specifications",
+        "Samsung Galaxy M16 5G official technical specifications",
+        "Samsung Galaxy M16 5G official product page",
+        "Samsung Galaxy M16 5G official support",
+        "Samsung Galaxy M16 5G official manual pdf",
+        "Samsung Galaxy M16 5G official downloads",
+        "Samsung Galaxy M16 5G official"
+      ],
+      "search_provider": "official_sitemap",
+      "source_candidates": {
+        "official_page": [
+          {
+            "title": "in smartphones galaxy m galaxy m16 5g black 128gb sm m166pzkdins",
+            "url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m16-5g-black-128gb-sm-m166pzkdins/",
+            "model_score": 0.75,
+            "search_score": 0.75,
+            "combined_score": 0.75,
+            "identity_score": 90,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: galaxy",
+              "Network generation matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "in smartphones galaxy m galaxy m16 5g black 128gb sm m166pzkgins",
+            "url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m16-5g-black-128gb-sm-m166pzkgins/",
+            "model_score": 0.75,
+            "search_score": 0.75,
+            "combined_score": 0.75,
+            "identity_score": 90,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: galaxy",
+              "Network generation matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "in smartphones galaxy m galaxy m16 5g black 128gb sm m166pzkhins",
+            "url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m16-5g-black-128gb-sm-m166pzkhins/",
+            "model_score": 0.75,
+            "search_score": 0.75,
+            "combined_score": 0.75,
+            "identity_score": 90,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: galaxy",
+              "Network generation matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "in smartphones galaxy m galaxy m16 5g light pink 128gb sm m166plidins",
+            "url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m16-5g-light-pink-128gb-sm-m166plidins/",
+            "model_score": 0.75,
+            "search_score": 0.75,
+            "combined_score": 0.75,
+            "identity_score": 90,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: galaxy",
+              "Network generation matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          },
+          {
+            "title": "in smartphones galaxy m galaxy m16 5g light pink 128gb sm m166pligins",
+            "url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m16-5g-light-pink-128gb-sm-m166pligins/",
+            "model_score": 0.75,
+            "search_score": 0.75,
+            "combined_score": 0.75,
+            "identity_score": 90,
+            "identity_decision": "verified",
+            "identity_reasons": [
+              "Brand matched",
+              "All identity-bearing model tokens matched",
+              "Supporting model/series token(s) matched: galaxy",
+              "Network generation matched"
+            ],
+            "page_type_score": 40,
+            "source_type": "official_page"
+          }
+        ]
+      },
+      "resolved_at": "2026-08-13T16:35:49.144575+00:00"
+    },
+    {
+      "product_id": "39",
+      "title": "Kindle Paperwhite",
+      "verified": false,
+      "status": "error",
+      "reason": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com",
+      "resolved_at": "2026-08-13T14:47:25.447969+00:00"
+    },
+    {
+      "product_id": "40",
+      "title": "American Tourister Trolley Bag",
+      "brand": "American Tourister",
+      "asin": "",
+      "core_title": "American Tourister Trolley Bag",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-13T17:41:58.911556+00:00"
+    },
+    {
+      "product_id": "41",
+      "title": "ASUS Gaming Laptop",
+      "brand": "ASUS",
+      "asin": "",
+      "core_title": "ASUS Gaming Laptop",
+      "allowed_domains": [
+        "asus.com"
+      ],
+      "query": "ASUS Gaming Laptop official specifications",
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": [],
+      "query_variants": [
+        "ASUS Gaming Laptop official specifications",
+        "ASUS Gaming Laptop official technical specifications",
+        "ASUS Gaming Laptop official product page",
+        "ASUS Gaming Laptop official support",
+        "ASUS Gaming Laptop official manual pdf",
+        "ASUS Gaming Laptop official downloads",
+        "ASUS Gaming Laptop official"
+      ],
+      "provider_fallback_reason": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com",
+      "search_provider": "duckduckgo_html",
+      "source_candidates": {},
+      "resolved_at": "2026-08-13T17:42:09.164374+00:00"
+    },
+    {
+      "product_id": "42",
+      "title": "Realme Buds T100",
+      "brand": "realme",
+      "asin": "",
+      "core_title": "Realme Buds T100",
+      "allowed_domains": [
+        "realme.com"
+      ],
+      "query": "realme Buds T100 official specifications",
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": [],
+      "query_variants": [
+        "realme Buds T100 official specifications",
+        "realme Buds T100 official technical specifications",
+        "realme Buds T100 official product page",
+        "realme Buds T100 official support",
+        "realme Buds T100 official manual pdf",
+        "realme Buds T100 official downloads",
+        "realme Buds T100 official"
+      ],
+      "provider_fallback_reason": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com",
+      "search_provider": "duckduckgo_html",
+      "source_candidates": {},
+      "resolved_at": "2026-08-13T17:42:15.387236+00:00"
+    },
+    {
+      "product_id": "43",
+      "title": "Titan Analog Watch",
+      "brand": "Titan",
+      "asin": "",
+      "core_title": "Titan Analog Watch",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-13T17:42:15.388039+00:00"
+    },
+    {
+      "product_id": "44",
+      "title": "Wildcraft Backpack 35L",
+      "brand": "Wildcraft",
+      "asin": "",
+      "core_title": "Wildcraft Backpack 35L",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-13T17:42:15.388489+00:00"
+    },
+    {
+      "product_id": "45",
+      "title": "Levi's Men's Jeans",
+      "brand": "Levi's",
+      "asin": "",
+      "core_title": "Levi's Men's Jeans",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-13T17:42:15.388946+00:00"
+    },
+    {
+      "product_id": "46",
+      "title": "Strauss Yoga Mat",
+      "brand": "Strauss",
+      "asin": "",
+      "core_title": "Strauss Yoga Mat",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-13T17:42:15.389713+00:00"
+    },
+    {
+      "product_id": "47",
+      "title": "Samsung 28L Microwave Oven",
+      "brand": "Samsung",
+      "asin": "",
+      "core_title": "Samsung 28L Microwave Oven",
+      "allowed_domains": [
+        "samsung.com"
+      ],
+      "query": "Samsung 28L Microwave Oven official specifications",
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": [],
+      "query_variants": [
+        "Samsung 28L Microwave Oven official specifications",
+        "Samsung 28L Microwave Oven official technical specifications",
+        "Samsung 28L Microwave Oven official product page",
+        "Samsung 28L Microwave Oven official support",
+        "Samsung 28L Microwave Oven official manual pdf",
+        "Samsung 28L Microwave Oven official downloads",
+        "Samsung 28L Microwave Oven official"
+      ],
+      "provider_fallback_reason": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com",
+      "search_provider": "duckduckgo_html",
+      "source_candidates": {},
+      "resolved_at": "2026-08-13T17:42:21.617102+00:00"
+    },
+    {
+      "product_id": "48",
+      "title": "Mamaearth Skincare Combo",
+      "brand": "Mamaearth",
+      "asin": "",
+      "core_title": "Mamaearth Skincare Combo",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-13T17:42:21.617616+00:00"
+    },
+    {
+      "product_id": "49",
+      "title": "Kore Adjustable Dumbbells",
+      "brand": "Kore",
+      "asin": "",
+      "core_title": "Kore Adjustable Dumbbells",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-13T17:42:21.617974+00:00"
+    },
+    {
+      "product_id": "50",
+      "title": "Cello Water Bottle Set",
+      "brand": "Cello",
+      "asin": "",
+      "core_title": "Cello Water Bottle Set",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-13T17:42:21.618366+00:00"
+    },
+    {
+      "product_id": "51",
+      "title": "Bajaj Ceiling Fan",
+      "brand": "Bajaj",
+      "asin": "",
+      "core_title": "Bajaj Ceiling Fan",
+      "allowed_domains": [],
+      "query": null,
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "manual_review",
+      "reason": "No approved official-domain mapping for this brand",
+      "candidates": [],
+      "resolved_at": "2026-08-13T17:42:21.618715+00:00"
+    },
+    {
+      "product_id": "52",
+      "title": "Noise Smartwatch with Bluetooth Calling, AMOLED Display, Stainless Steel Design, Emergency SOS & Smart Connectivity",
+      "brand": "Noise",
+      "asin": "B0FNCPKFP6",
+      "core_title": "Noise Smartwatch with Bluetooth Calling",
+      "allowed_domains": [
+        "gonoise.com"
+      ],
+      "query": "Noise Smartwatch with Bluetooth Calling official specifications",
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": [],
+      "query_variants": [
+        "Noise Smartwatch with Bluetooth Calling official specifications",
+        "Noise Smartwatch with Bluetooth Calling official technical specifications",
+        "Noise Smartwatch with Bluetooth Calling official product page",
+        "Noise Smartwatch with Bluetooth Calling official support",
+        "Noise Smartwatch with Bluetooth Calling official manual pdf",
+        "Noise Smartwatch with Bluetooth Calling official downloads",
+        "Noise Smartwatch with Bluetooth Calling official"
+      ],
+      "provider_fallback_reason": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com",
+      "search_provider": "duckduckgo_html",
+      "source_candidates": {},
+      "resolved_at": "2026-08-13T17:42:26.403659+00:00"
+    },
+    {
+      "product_id": "53",
+      "title": "Noise ColorFit Smartwatch",
+      "brand": "Noise",
+      "asin": "",
+      "core_title": "Noise ColorFit Smartwatch",
+      "allowed_domains": [
+        "gonoise.com"
+      ],
+      "query": "Noise ColorFit Smartwatch official specifications",
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": [],
+      "query_variants": [
+        "Noise ColorFit Smartwatch official specifications",
+        "Noise ColorFit Smartwatch official technical specifications",
+        "Noise ColorFit Smartwatch official product page",
+        "Noise ColorFit Smartwatch official support",
+        "Noise ColorFit Smartwatch official manual pdf",
+        "Noise ColorFit Smartwatch official downloads",
+        "Noise ColorFit Smartwatch official"
+      ],
+      "provider_fallback_reason": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com",
+      "search_provider": "duckduckgo_html",
+      "source_candidates": {},
+      "resolved_at": "2026-08-13T17:42:33.176956+00:00"
+    },
+    {
+      "product_id": "54",
+      "title": "Apple AirPods",
+      "brand": "Apple",
+      "asin": "",
+      "core_title": "Apple AirPods",
+      "allowed_domains": [
+        "apple.com"
+      ],
+      "query": "Apple AirPods official specifications",
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": [],
+      "query_variants": [
+        "Apple AirPods official specifications",
+        "Apple AirPods official technical specifications",
+        "Apple AirPods official product page",
+        "Apple AirPods official support",
+        "Apple AirPods official manual pdf",
+        "Apple AirPods official downloads",
+        "Apple AirPods official"
+      ],
+      "provider_fallback_reason": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com",
+      "search_provider": "duckduckgo_html",
+      "source_candidates": {},
+      "resolved_at": "2026-08-13T17:42:39.283645+00:00"
+    },
+    {
+      "product_id": "55",
+      "title": "Dell Inspiron Laptop",
+      "brand": "Dell",
+      "asin": "",
+      "core_title": "Dell Inspiron Laptop",
+      "allowed_domains": [
+        "dell.com"
+      ],
+      "query": "Dell Inspiron Laptop official specifications",
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": [],
+      "query_variants": [
+        "Dell Inspiron Laptop official specifications",
+        "Dell Inspiron Laptop official technical specifications",
+        "Dell Inspiron Laptop official product page",
+        "Dell Inspiron Laptop official support",
+        "Dell Inspiron Laptop official manual pdf",
+        "Dell Inspiron Laptop official downloads",
+        "Dell Inspiron Laptop official"
+      ],
+      "provider_fallback_reason": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com",
+      "search_provider": "duckduckgo_html",
+      "source_candidates": {},
+      "resolved_at": "2026-08-13T17:42:44.025162+00:00"
+    },
+    {
+      "product_id": "57",
+      "title": "REDMI Note 15 5G (Glacier Blue, 8GB RAM, 128GB Storage)",
+      "brand": "Redmi",
+      "asin": "B0G5G7LCJQ",
+      "core_title": "REDMI Note 15 5G",
+      "allowed_domains": [
+        "mi.com",
+        "xiaomi.com"
+      ],
+      "query": "Redmi Note 15 5G official specifications",
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": [],
+      "query_variants": [
+        "Redmi Note 15 5G official specifications",
+        "Redmi Note 15 5G official technical specifications",
+        "Redmi Note 15 5G official product page",
+        "Redmi Note 15 5G official support",
+        "Redmi Note 15 5G official manual pdf",
+        "Redmi Note 15 5G official downloads",
+        "Redmi Note 15 5G official"
+      ],
+      "provider_fallback_reason": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com",
+      "search_provider": "duckduckgo_html",
+      "source_candidates": {},
+      "resolved_at": "2026-08-13T17:43:54.768070+00:00"
+    },
+    {
+      "product_id": "58",
+      "title": "JBL Tune 510BT Headphones",
+      "brand": "JBL",
+      "asin": "",
+      "core_title": "JBL Tune 510BT Headphones",
+      "allowed_domains": [
+        "in.jbl.com",
+        "jbl.com"
+      ],
+      "query": "JBL Tune 510BT Headphones official specifications",
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": [],
+      "query_variants": [
+        "JBL Tune 510BT Headphones official specifications",
+        "JBL Tune 510BT Headphones official technical specifications",
+        "JBL Tune 510BT Headphones official product page",
+        "JBL Tune 510BT Headphones official support",
+        "JBL Tune 510BT Headphones official manual pdf",
+        "JBL Tune 510BT Headphones official downloads",
+        "JBL Tune 510BT Headphones official"
+      ],
+      "provider_fallback_reason": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com",
+      "search_provider": "duckduckgo_html",
+      "source_candidates": {},
+      "resolved_at": "2026-08-13T17:47:25.327595+00:00"
+    },
+    {
+      "product_id": "59",
+      "title": "HP H120 Wired Headset with Microphone, Noise Cancelling Mic, Adjustable Headband, 3.5mm Jack",
+      "brand": "Noise",
+      "asin": "B0D73SQRM1",
+      "core_title": "HP H120 Wired Headset with Microphone",
+      "allowed_domains": [
+        "gonoise.com"
+      ],
+      "query": "Noise HP H120 Wired Headset with Microphone official specifications",
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": [],
+      "query_variants": [
+        "Noise HP H120 Wired Headset with Microphone official specifications",
+        "Noise HP H120 Wired Headset with Microphone official technical specifications",
+        "Noise HP H120 Wired Headset with Microphone official product page",
+        "Noise HP H120 Wired Headset with Microphone official support",
+        "Noise HP H120 Wired Headset with Microphone official manual pdf",
+        "Noise HP H120 Wired Headset with Microphone official downloads",
+        "Noise HP H120 Wired Headset with Microphone official"
+      ],
+      "provider_fallback_reason": "This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com",
+      "search_provider": "duckduckgo_html",
+      "source_candidates": {},
+      "resolved_at": "2026-08-13T17:49:10.858284+00:00"
+    },
+    {
+      "product_id": "60",
+      "title": "typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023, 7-Color Backlit with Touchpad",
+      "brand": "Samsung",
+      "asin": "",
+      "core_title": "typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023",
+      "allowed_domains": [
+        "samsung.com"
+      ],
+      "query": "Samsung typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023 official specifications",
+      "official_title": null,
+      "official_url": null,
+      "match_score": 0.0,
+      "identity_score": 0,
+      "identity_decision": null,
+      "identity_reasons": [],
+      "verified": false,
+      "status": "not_found",
+      "reason": "No result passed official-domain and identity validation",
+      "candidates": [],
+      "query_variants": [
+        "Samsung typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023 official specifications",
+        "Samsung typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023 official technical specifications",
+        "Samsung typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023 official product page",
+        "Samsung typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023 official support",
+        "Samsung typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023 official manual pdf",
+        "Samsung typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023 official downloads",
+        "Samsung typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023 official"
+      ],
+      "search_provider": "official_sitemap",
+      "source_candidates": {},
+      "resolved_at": "2026-08-13T17:49:11.563011+00:00"
     }
   ]
 }

@@ -1,0 +1,203 @@
+﻿{
+  "query": "Best earbuds under 3000 with ANC long battery and good call quality",
+  "intent": {
+    "intent": "recommendation",
+    "category": "earbuds",
+    "budget_min": null,
+    "budget_max": 3000,
+    "features": [
+      "ANC",
+      "Battery"
+    ],
+    "brands": [],
+    "compare": false,
+    "keywords": [
+      "best",
+      "earbuds",
+      "under",
+      "3000",
+      "with",
+      "anc",
+      "long",
+      "battery",
+      "and",
+      "good",
+      "call",
+      "quality"
+    ],
+    "user_profile": null,
+    "use_case": [],
+    "hard_constraints": [
+      "budget_max"
+    ],
+    "must_have": [
+      "anc"
+    ],
+    "preferred": [
+      "good_battery",
+      "good_call_quality"
+    ],
+    "avoid": [],
+    "priority_weights": {
+      "budget": 19,
+      "sound_quality": 15,
+      "battery": 19,
+      "call_quality": 19,
+      "anc": 19,
+      "comfort": 7,
+      "connectivity": 2
+    }
+  },
+  "discovery_queries": [
+    "earbuds anc under 3000 India buy",
+    "earbuds active noise cancellation under 3000 India model",
+    "earbuds anc good battery good call quality under 3000 India",
+    "earbuds ANC Battery good battery good call quality under 3000 India buy",
+    "Best earbuds under 3000 with ANC long battery and good call quality India product",
+    "earbuds anc under 3000 India model"
+  ],
+  "candidate_count": 10,
+  "candidates": [
+    {
+      "candidate_id": "market-01",
+      "title": "realme Buds Air 6 TWS in Ear Earbuds with 12.4 Mm Deep Bass Driver, 40 Hours Play Time, Fast Charge,50 Db ANC,Lhdc 5.0, 55 Ms Low Latency, Ip55 Dust & Water Resistant, Bluetooth V5.3 (Forrest Green) : Amazon.in: Electronics",
+      "source_title": "realme Buds Air 6 TWS in Ear Earbuds with 12.4 Mm Deep Bass Driver, 40 Hours Play Time, Fast Charge,50 Db ANC,Lhdc 5.0, 55 Ms Low Latency, Ip55 Dust & Water Resistant, Bluetooth V5.3 (Forrest Green) : Amazon.in: Electronics",
+      "source_url": "https://www.amazon.in/realme-Earbuds-Latency-Resistant-Bluetooth/dp/B0D3HY9X3L",
+      "source_host": "www.amazon.in",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "Best earbuds under 3000 with ANC long battery and good call quality India product",
+      "discovery_score": 0.7799,
+      "discovery_quality_score": 1.1799,
+      "known_brand": "realme",
+      "snippet": "Better than its cost.. ##### Better than its cost.. Customer Image ### Top reviews from India ##### Really the best TWS under 3k, great ANC & Sound Was one of the most recommended earphones under 3k and being using realme audio products for more than 6+ years. I really trust the brand to deliver in sound, quality, comfort and durability. Which it proved again with realme buds 6. [...] The realme link app provides equillizer mode which is to good Mind flow mode is also satisfying Even if weight of earbuds and case is very low All these things under 3000 is above worth it . My suggestion about my device which is not supporting Bluetooth codec Lhdc. Although I using it under AAC codec I can't imagine if it provide to good output with aac then what if I use hi-res mode [...] No problem in earbuds fitting Ease to use and paired with device very fast The realme link app provides equillizer mode which is to good Mind flow mode is also satisfying Even if weight of earbuds and case is very low All these things under 3000 is above worth it . My suggestion about my device which is not supporting Bluetooth codec Lhdc. Although I using it under AAC codec I can't imagine if it provide to good output with aac then what if I use hi-res mode",
+      "status": "discovered_unverified"
+    },
+    {
+      "candidate_id": "market-02",
+      "title": "JBL Wave Buds 2 Ear Buds Wireless BluetoothV5.3, Active Noise Cancellation Earbuds,Multi Connect, App for Customized Extra Bass Eq, Relax Mode,Speed Charge, 40H Playback, Fast Pair, 4 Mics,IP54(Black) : Amazon.in: Electronics",
+      "source_title": "JBL Wave Buds 2 Ear Buds Wireless BluetoothV5.3, Active Noise Cancellation Earbuds,Multi Connect, App for Customized Extra Bass Eq, Relax Mode,Speed Charge, 40H Playback, Fast Pair, 4 Mics,IP54(Black) : Amazon.in: Electronics",
+      "source_url": "https://www.amazon.in/JBL-Wireless-BluetoothV5-3-Cancellation-Customized/dp/B0DHL63KWK",
+      "source_host": "www.amazon.in",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "earbuds active noise cancellation under 3000 India model",
+      "discovery_score": 0.7355,
+      "discovery_quality_score": 1.1355,
+      "known_brand": "noise",
+      "snippet": "##### Complete Waste of Money ΓÇô Don't Buy These Earbuds I am extremely disappointed with these earbuds. The sound quality is poor, and the bass is almost non-existent. Honestly, even Γé╣300 earbuds sold on the roadside sound much better than these. This is one of the worst audio products I have ever purchased. I have no idea what justifies a Γé╣3,000 price tag because the performance certainly doesn't. Buying these feels like a complete waste of money. [...] I would not recommend these earbuds to anyone. If someone is still interested in buying them, you can take mine insteadΓÇöI bought them for Γé╣3,000 and I'm willing to sell them for Γé╣2,500. Overall, I regret this pComplete Waste of Money ΓÇô Don't Buy These Earbudsurchase. Save your money and look for a better alternative. ##### review [...] ## Skip to ## Keyboard shortcuts AugART26_Event Electronics # Add to your order # Add to your order Amazon Prime Logo ## OneAssist 1 Year Extended Warranty Plan for Headphones Between INR 2501-3000 (E-Mail Delivery) ## Onsitego 1 Year Extended Warranty for Headphones from Rs. 2501-3000 (Email Delivery - No Physical Kit) | Onsitego 1 Year Extended Warranty ## 1 Year Harman Secure Extended Warranty for Lifestyle Headphones/Earphones (2,000-4,999) (Email Delivery)",
+      "status": "discovered_unverified"
+    },
+    {
+      "candidate_id": "market-03",
+      "title": "boAt Airdopes 300, Cinematic Spatial Audio, 50HRS Battery, 4Mic AI ENx, Fast Charge, App Support, Low Latency, IPX4, v5.3 Bluetooth Earbuds, TWS Ear Buds Wireless Earphones with mic (Gunmetal Black) : Amazon.in: Electronics",
+      "source_title": "boAt Airdopes 300, Cinematic Spatial Audio, 50HRS Battery, 4Mic AI ENx, Fast Charge, App Support, Low Latency, IPX4, v5.3 Bluetooth Earbuds, TWS Ear Buds Wireless Earphones with mic (Gunmetal Black) : Amazon.in: Electronics",
+      "source_url": "https://www.amazon.in/boAt-Airdopes-300-Multipoint-Connection/dp/B0D3DH8TSC",
+      "source_host": "www.amazon.in",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "Best earbuds under 3000 with ANC long battery and good call quality India product",
+      "discovery_score": 0.6326,
+      "discovery_quality_score": 1.0326,
+      "known_brand": "boat",
+      "snippet": "Value for Money ##### Value for Money Customer Image ### Top reviews from India ##### Good Its very good christal clarity.we should buy. ##### Excellent Budget Earbuds with Great Battery Life The boAt Airdopes 300 is an excellent choice for anyone looking for feature-packed TWS earbuds . It offers a good balance of sound quality, comfort, and battery life, making it ideal for daily use. ##### Absolutely Blown Away by the boAt Airdopes 300 - My New Audio Holy Grail! (Gunmetal Black) [...] Verdict: The boAt Airdopes 300 deliver phenomenal value. You get flagship-level features ΓÇô incredible 50H battery life, truly immersive spatial audio, excellent call quality with AI ENx, fast charging, app support, low latency, and a sleek design ΓÇô all at a very reasonable price point. The hype is real, and the 5K+ purchases last month make total sense. [...] Airdopes 300 Nirvana ION Airdopes 800 Nirvana Space Airdopes Flex 454 ANC Airdopes 141 ANC Nirvana Ivy Top Brand boAt 85% positive ratings from 100K+ customers 100K+ recent orders from this brand 11+ years on Amazon # Product information",
+      "status": "discovered_unverified"
+    },
+    {
+      "candidate_id": "market-04",
+      "title": "CMF by Nothing Buds 42 dB Active Noise Cancellation, Ultra Bass Technology, 35.5 Hrs playtime Bluetooth",
+      "source_title": "CMF by Nothing Buds 42 dB Active Noise Cancellation, Ultra Bass Technology, 35.5 Hrs playtime Bluetooth Price in India - Buy CMF by Nothing Buds 42 dB Active Noise Cancellation, Ultra Bass Technology, 35.5 Hrs playtime Bluetooth Online - CMF by Nothing : Flipkart.com",
+      "source_url": "https://www.flipkart.com/cmf-nothing-buds-42db-anc-ultra-bass-technology-adjustable-levels-bluetooth-headset/p/itm773fefc18d5c3",
+      "source_host": "www.flipkart.com",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "earbuds anc under 3000 India buy",
+      "discovery_score": 0.5809,
+      "discovery_quality_score": 0.9809,
+      "known_brand": "nothing",
+      "snippet": "Tomorrow AD 3.9 TRIGGR Ultrabuds N1 Neo with ENC, 40Hr Playback, 13mm Drivers, Rich Bass, Fast Charging Bluetooth Headset Jungle Green, True Wireless 78% OFF Γé╣2,999 Γé╣649 Γé╣616 with Bank offer AD 4 TRIGGR Ultrabuds N1 Neo with ENC, 40Hr Playback, 13mm Drivers, Rich Bass, Fast Charging Bluetooth Headset Sky Black, True Wireless 78% OFF Γé╣2,999 Γé╣649 Γé╣616 with Bank offer AD Trending 3.9 [...] +10 Image GOBOULT W40 with 4 Mic ENC, 48H Battery Life, Low Latency Gaming, 5.3v Bluetooth Headset 67% 2,999 Γé╣999 AD Image boAt Airdopes 181 Pro, 100H Battery, ENx,LED Display, Stream Ad Free Music via App Bluetooth Headset 80% 4,990 Γé╣999 AD Image Mivi Duopods B1 (Just Launched)45Hrs Playtime, AI ENC for HD Call, Fast Charging, 5.3 Bluetooth Headset 73% 2,999 Γé╣799 AD Selected Color: Dark Gray Out of stock [...] null Audio & Video:BLUETOOTH HEADPHONES ONLINE5.1 AMPLIFIERIBALL HOME THEATERINTEX SPEAKERS 2.1KINGSTON INDIABUY WINDOWS 7CHROMECASTHOME THEATER SYSTEMSONY HOME THEATER PRICESAMSUNG AC PRICE IN INDIAPHILIPS HOME APPLIANCESNUMERIC UPSLG DVD PLAYERAUDIO TECHNICA HEADPHONESFRENDS HEADPHONESEARPHONE ONLINESKULLCANDY HEADPHONES PRICESAMSUNG HANDSFREESKULLCANDY EARPHONES WITH MICUSB CABLEPORTABLE SPEAKERPHILIPS 2.1 SPEAKERSBUY TABLET ONLINESONY MUSIC SYSTEM",
+      "status": "discovered_unverified"
+    },
+    {
+      "candidate_id": "market-05",
+      "title": "OnePlus Nord Buds 2r in Ear Earbuds with Dual Mic & AI Crystal Cl ...",
+      "source_title": "OnePlus Nord Buds 2r in Ear Earbuds with Dual Mic & AI Crystal Cl ...",
+      "source_url": "https://www.flipkart.com/oneplus-nord-buds-2r-ear-earbuds-dual-mic-ai-crystal-clear-call-bluetooth/p/itm2560f6f9b1d5b",
+      "source_host": "www.flipkart.com",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "Best earbuds under 3000 with ANC long battery and good call quality India product",
+      "discovery_score": 0.4888,
+      "discovery_quality_score": 0.8888,
+      "known_brand": "oneplus",
+      "snippet": "1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 Similar Products AD Bestseller 4.3 OnePlus Nord Buds 4 TWS Earbuds with 52dB Real-time ANC, 12mm Titanium-coated Drivers Bluetooth Headset Stellar Black, In the Ear 11% OFF Γé╣3,499 Γé╣3,099 Γé╣2,944 with Bank offer Get by Today AD 4.1 Mivi Duopods B1 (Just Launched)45Hrs Playtime, AI ENC for HD Call, Fast Charging, 5.3 Bluetooth Headset Black, True Wireless 80% OFF Γé╣2,999 Γé╣599 Γé╣569 with Bank offer Get by Today [AD 4.1 [...] AD 4 boAt Airdopes Prime 701 ANC,46dB Hybrid ANC,50H Battery,Spatial Audio,ENx,BEAST Mode Bluetooth Headset Obsidian Grey, True Wireless 77% OFF Γé╣7,990 Γé╣1,799 Γé╣1,709 with Bank offer Get by Today AD 4 TRIGGR Luma One with Dual Pairing, 4-Mic ENC, 50H Battery, Ambient LED, Rubber Grip Bluetooth Headset Neural Black, True Wireless 82% OFF Γé╣899 Γé╣854 with Bank offer Get by Today AD 4 [...] AD 3.8 uag urbn armour gear UAG Nord Buds 2R TWS Bluetooth Earbuds with Deep Bass, ENC Mic, Touch Control Bluetooth Headset Black, True Wireless 66% OFF Γé╣1,899 Γé╣640 Γé╣608 with Bank offer Get it by 12 Aug AD Trending 4 Mivi Duopods K6, 50Hrs PT, HD Call, Fast Charging, 50ms Latency, IPX4,Voice Asst.5.3v Bluetooth Gaming Headset Black, True Wireless 75% OFF Γé╣3,999 Γé╣999 Γé╣949 with Bank offer AD 4",
+      "status": "discovered_unverified"
+    },
+    {
+      "candidate_id": "market-06",
+      "title": "Buy CMF by Nothing Buds Pro with 45 dB ANC, Ultra Bass ...",
+      "source_title": "Buy CMF by Nothing Buds Pro with 45 dB ANC, Ultra Bass ... - Flipkart",
+      "source_url": "https://www.flipkart.com/cmf-nothing-buds-pro-45-db-anc-ultra-bass-technology-upto-39-hours-battery-life-bluetooth-headset/p/itm7b41eac6df634",
+      "source_host": "www.flipkart.com",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "Best earbuds under 3000 with ANC long battery and good call quality India product",
+      "discovery_score": 0.472,
+      "discovery_quality_score": 0.872,
+      "known_brand": "nothing",
+      "snippet": "AD EQ8 Winds Wireless Earbuds 224 , True Wireless in-Ear Headphones with Charging Case Bluetooth Headset White, True Wireless 79% OFF Γé╣2,999 Γé╣615 Γé╣584 with Bank offer AD 4.3 CMF by Nothing Buds 2 48 dB Hybrid ANC, Ultra Bass Technology 2.0, 55 Hrs playtime Bluetooth Headset Orange, In the Ear 17% OFF Γé╣2,999 Γé╣2,499 Γé╣2,374 with Bank offer Get by Today AD Trending 4.4 [...] 6 7 8 9 0 1 2 3 4 5 6 7 8 9 Similar Products AD 4.3 CMF by Nothing Buds 2 Plus with 50dB Hybrid ANC| Hi-Res + LDAC| Spatial Audio| 6HD Mic| 61.5Hrs Bluetooth Headset Blue, True Wireless 28% OFF Γé╣3,999 Γé╣2,899 Γé╣2,754 with Bank offer Get it by 11 Aug AD Bestseller 4.3 CMF by Nothing Buds 2 48 dB Hybrid ANC, Ultra Bass Technology 2.0, 55 Hrs playtime Bluetooth Headset Light Green, In the Ear 17% OFF Γé╣2,999 Γé╣2,499 Γé╣2,374 with Bank offer AD [...] More about CMF by Nothing Buds Pro with 45 dB ANC, Ultra Bass Technology & upto 39 hours of battery life Bluetooth+ Top Stories :Brand Directory",
+      "status": "discovered_unverified"
+    },
+    {
+      "candidate_id": "market-07",
+      "title": "Samsung Galaxy Buds Core (Black) Galaxy AI Enabled in-Ear TWS ...",
+      "source_title": "Samsung Galaxy Buds Core (Black) Galaxy AI Enabled in-Ear TWS ...",
+      "source_url": "https://www.amazon.in/Samsung-Enabled-Enriched-Battery-Controls/dp/B0FDGVNSLH",
+      "source_host": "www.amazon.in",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "Best earbuds under 3000 with ANC long battery and good call quality India product",
+      "discovery_score": 0.5358,
+      "discovery_quality_score": 0.8158,
+      "known_brand": "samsung",
+      "snippet": "The Earbuds Quality ##### The Earbuds Quality Customer Image ### Top reviews from India ##### Excellent, Worth The Money But Conditions Apply Long detailed review but it hope it offers some perspective Everyone's ear is different. There is no \"best\" earbuds. Whats best for me may not be best you. So first and foremost, decide what type of music you listen to and whats your purpose of buying a TWS [...] ΓÇïCall Quality: Surprisingly decent. The 3-mic system handles indoor calls well. In windy outdoor conditions, my voice sounded a bit robotic to the other person, but they could still understand me. ΓÇï3. Features & ANC: ΓÇïActive Noise Cancellation (ANC): It cuts out the low hum of an AC or a fan effectively. It struggles a bit with high-pitched sounds (like people talking nearby or honking horns), but for this price point, it's competitive. [...] ΓÇïCall Quality: Surprisingly decent. The 3-mic system handles indoor calls well. In windy outdoor conditions, my voice sounded a bit robotic to the other person, but they could still understand me. ΓÇï3. Features & ANC: ΓÇïActive Noise Cancellation (ANC): It cuts out the low hum of an AC or a fan effectively. It struggles a bit with high-pitched sounds (like people talking nearby or honking horns), but for this price point, it's competitive.",
+      "status": "discovered_unverified"
+    },
+    {
+      "candidate_id": "market-08",
+      "title": "Yildiz Buds T110 (RMA2306) Wireless Earbud with AI ENC, 38H Battery Life & Deep Bass-B5 Bluetooth",
+      "source_title": "Yildiz Buds T110 (RMA2306) Wireless Earbud with AI ENC, 38H Battery Life & Deep Bass-B5 Bluetooth Price in India - Buy Yildiz Buds T110 (RMA2306) Wireless Earbud with AI ENC, 38H Battery Life & Deep Bass-B5 Bluetooth Online - Yildiz : Flipkart.com",
+      "source_url": "https://www.flipkart.com/yildiz-buds-t110-rma2306-wireless-earbud-ai-enc-38h-battery-life-deep-bass-b5-bluetooth/p/itm107c89c055870",
+      "source_host": "www.flipkart.com",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "earbuds anc good battery good call quality under 3000 India",
+      "discovery_score": 0.5809,
+      "discovery_quality_score": 0.7609,
+      "known_brand": null,
+      "snippet": "AD 4 uag urbn armour gear Crystal Gaming ANC TWS Wireless Earbuds with Low Latency, Deep Bass, ENC Bluetooth Gaming Headset Red, True Wireless 67% OFF Γé╣2,350 Γé╣769 Γé╣730 with Bank offer Get it by 16 Aug AD uag urbn armour gear UAG Buds 2R True Wireless Earbuds | Powerful Bass | ENC Noise Cancellation Bluetooth Headset Black, True Wireless 65% OFF Γé╣1,998 Γé╣693 Γé╣658 with Bank offer Get it by 16 Aug [...] Get it by 16 Aug Yildiz Z40 v2.0 Bluetooth Earbuds,48H Playtime,Quad ENC,13mm Drivers,v5.4,45ms Gaming10 Bluetooth Headset Black, True Wireless 80% OFF Γé╣2,999 Γé╣599 Γé╣569 with Bank offer Get it by 14 Aug 3.4 TECHIO Ultrapods tws earbuds ENC Series Long Battery Life headphone Bluetooth Headset Black, True Wireless 86% OFF Γé╣1,999 Γé╣272 Γé╣258 with Bank offer Get it by 13 Aug 3.4 GWALBROS New Black Bluetooth Earbuds, True Wireless Headphone F05 Bluetooth Headset Black, In the Ear [...] Γé╣1,991 Γé╣270 Γé╣256 with Bank offer 3.4 GWALBROS New Black Bluetooth Earbuds, True Wireless Headphone F05 Bluetooth Headset Black, In the Ear 83% OFF Γé╣1,499 Γé╣260 Γé╣247 with Bank offer 3.7 GWALBROS Earbuds M19 PRO with Power Bank Upto 48Hrs Playback Bluetooth Headset F22 Bluetooth Headset Black, In the Ear 81% OFF Γé╣1,999 Γé╣380 Γé╣361 with Bank offer 3.6 DSSB Earbuds With Premium Quality Sound Bluetooth Headset Black, True Wireless 85% OFF Γé╣1,999 Γé╣292 Γé╣277 with Bank offer",
+      "status": "discovered_unverified"
+    },
+    {
+      "candidate_id": "market-09",
+      "title": "Passive vs Active Noise Cancellation: What's the Real Difference?",
+      "source_title": "Passive vs Active Noise Cancellation: What's the Real Difference?",
+      "source_url": "https://www.reliancedigital.in/c/resource-center/bg/passive-vs-active-noise-cancellation",
+      "source_host": "www.reliancedigital.in",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "earbuds active noise cancellation under 3000 India model",
+      "discovery_score": 0.1323,
+      "discovery_quality_score": 0.3523,
+      "known_brand": "noise",
+      "snippet": "Active noise cancellation (ANC) uses microphones and anti-phase sound waves to reduce low-frequency noise by up to 30-40 dB - Passive = no",
+      "status": "discovered_unverified"
+    },
+    {
+      "candidate_id": "market-10",
+      "title": "Earbuds & Earphones - Best Buy",
+      "source_title": "Earbuds & Earphones - Best Buy",
+      "source_url": "https://www.bestbuy.com/site/headphones/earbud-in-ear-headphones/pcmcat143000050007.c?id=pcmcat143000050007",
+      "source_host": "www.bestbuy.com",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "earbuds ANC Battery good battery good call quality under 3000 India buy",
+      "discovery_score": 0.2346,
+      "discovery_quality_score": 0.2346,
+      "known_brand": null,
+      "snippet": "### Apple - AirPods 4 with Active Noise Cancellation - White Rating 4.7 out of 5 stars with 6817 reviews Pick up today Get it tomorrow ΓÇó FREE SONY SONY ### Sony - WF-1000XM6 Best Truly Wireless Noise Cancelling Earbuds - Black Rating 4.4 out of 5 stars with 284 reviews Pick up today Get it tomorrow ΓÇó FREE [...] Everything for Back to School ΓÇö and then someShop now # Earbud & In-Ear Headphones ## Filters ## Get it fast ## Sold & shipped by ## Connection Type ## Brand ## Current Deals ## Condition ## Price ## Features ## Headphone Fit ## Model Family ## Customer Rating ## Charging Interface ## Color ## Wireless Connectivity ## Battery Life ## Discount ## Microphone Features ## Works With ## Collection [...] ## Collection Take your listening to the next level. Front. Sony - WH-1000XM6- Best Wireless Noise Cancelling Headphones - Black. Rating 4.7 out of 5 stars with 1282 reviews SONY Rating 4.4 out of 5 stars with 284 reviews Front. Sony - 1000X THE COLLEXION Wireless Noise Canceling Headphones - Black. Rating 4.5 out of 5 stars with 47 reviews Front. Sony - LinkBuds Clip Truly Wireless Open Earbuds - Green. Rating 4.3 out of 5 stars with 85 reviews / /",
+      "status": "discovered_unverified"
+    }
+  ],
+  "note": "Discovery quality scores only prioritize candidate research; final recommendation Fit must be computed from verified evidence."
+}

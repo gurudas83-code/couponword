@@ -1,0 +1,221 @@
+
+def vision_provider_analyze(
+    evidence_item: dict[str, Any],
+    provider_config: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Provider-neutral vision adapter.
+
+    Gemini mode performs conservative shopping-hero classification.
+    It does NOT authorize image publication and does NOT approve
+    specification claims automatically.
+    """
+
+    import os
+
+    result = {
+        "status": "not_run",
+        "provider": clean_text(
+            provider_config.get("provider")
+        ) or "none",
+        "source_language": "auto_detect",
+        "target_language": clean_text(
+            provider_config.get("target_language")
+        ) or "en",
+        "raw_text": "",
+        "claims": [],
+        "error": "",
+        "hero_classification": {
+            "hero_eligible": False,
+            "image_type": "unknown",
+            "product_prominence": 0.0,
+            "text_heavy": False,
+            "people_present": False,
+            "clean_product_view": False,
+            "hero_confidence": 0.0,
+            "reason": "",
+        },
+    }
+
+    if not isinstance(evidence_item, dict):
+        result["status"] = "invalid_evidence"
+        result["error"] = "Evidence item must be an object"
+        return result
+
+    if provider_config.get("enabled") is not True:
+        result["status"] = "provider_disabled"
+        return result
+
+    provider = clean_text(
+        provider_config.get("provider")
+    ).lower()
+
+    if provider != "gemini":
+        result["status"] = "adapter_not_implemented"
+        result["error"] = (
+            f"Vision adapter not implemented for provider: {provider}"
+        )
+        return result
+
+    api_key = os.environ.get("GEMINI_API_KEY")
+
+    if not api_key:
+        result["status"] = "provider_error"
+        result["error"] = "GEMINI_API_KEY is not set"
+        return result
+
+    image_url = clean_text(
+        evidence_item.get("image_url")
+        or evidence_item.get("url")
+    )
+
+    product_name = clean_text(
+        evidence_item.get("product_name")
+    )
+
+    if not image_url:
+        result["status"] = "invalid_evidence"
+        result["error"] = "Image URL is missing"
+        return result
+
+    try:
+        from google import genai
+        from google.genai import types
+    except ImportError:
+        result["status"] = "provider_error"
+        result["error"] = "Google GenAI package is not installed"
+        return result
+
+    try:
+        response = requests.get(
+            image_url,
+            headers={"User-Agent": USER_AGENT},
+            timeout=TIMEOUT,
+        )
+        response.raise_for_status()
+
+        content_type = clean_text(
+            response.headers.get("Content-Type")
+        ).split(";", 1)[0].lower()
+
+        if content_type not in {
+            "image/jpeg",
+            "image/png",
+            "image/webp",
+        }:
+            lowered = image_url.lower()
+
+            if lowered.endswith((".jpg", ".jpeg")):
+                content_type = "image/jpeg"
+            elif lowered.endswith(".png"):
+                content_type = "image/png"
+            elif lowered.endswith(".webp"):
+                content_type = "image/webp"
+            else:
+                content_type = "image/jpeg"
+
+        image_part = types.Part.from_bytes(
+            data=response.content,
+            mime_type=content_type,
+        )
+
+        prompt = f"""
+You are classifying ONE official product-page image for use as the
+main shopping-card hero image.
+
+EXPECTED PRODUCT:
+{product_name}
+
+Classify the image conservatively.
+
+A GOOD hero image:
+- clearly shows the expected product
+- product is visually prominent
+- preferably shows the full product / main components
+- has little or no promotional text
+- is not a specification sheet
+- is not primarily an infographic
+- is not primarily a lifestyle/person image
+- is suitable as the main image on an ecommerce recommendation card
+
+Allowed image_type values:
+clean_product
+feature_graphic
+spec_sheet
+lifestyle
+infographic
+packaging
+logo_or_ui
+unknown
+
+Return ONLY JSON with exactly this structure:
+
+{{
+  "image_type": "clean_product",
+  "product_prominence": 0.0,
+  "text_heavy": false,
+  "people_present": false,
+  "clean_product_view": false,
+  "hero_confidence": 0.0,
+  "reason": "short reason"
+}}
+
+Rules:
+- product_prominence must be between 0 and 1.
+- hero_confidence must be between 0 and 1.
+- clean_product_view=true only when this is genuinely suitable as
+  the principal ecommerce product image.
+- Feature banners, specification panels, diagrams and promotional
+  artwork must NOT be called clean_product.
+"""
+
+        client = genai.Client(api_key=api_key)
+
+        ai_response = client.models.generate_content(
+            model="gemini-3.6-flash",
+            contents=[
+                image_part,
+                prompt,
+            ],
+            config=types.GenerateContentConfig(
+                temperature=0.0,
+                response_mime_type="application/json",
+            ),
+        )
+
+        parsed = json.loads(ai_response.text)
+
+        image_type = clean_text(
+            parsed.get("image_type")
+        ).lower() or "unknown"
+
+        try:
+            prominence = float(
+                parsed.get("product_prominence") or 0.0
+            )
+        except (TypeError, ValueError):
+            prominence = 0.0
+
+        try:
+            confidence = float(
+                parsed.get("hero_confidence") or 0.0
+            )
+        except (TypeError, ValueError):
+            confidence = 0.0
+
+        prominence = max(0.0, min(prominence, 1.0))
+        confidence = max(0.0, min(confidence, 1.0))
+
+        text_heavy = parsed.get("text_heavy") is True
+        people_present = parsed.get("people_present") is True
+        clean_product_view = (
+            parsed.get("clean_product_view") is True
+        )
+
+        # Coupon World owns the final gate.
+        # The model supplies observations but cannot publish an image.
+        hero_eligible = bool(
+            image_type == "clean_product"
+            and clean_product_view
+            and not text_heavy
+            and prominence >= 0.65

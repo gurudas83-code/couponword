@@ -85,8 +85,33 @@ BRAND_ALIASES = {
     "milton": {"milton"},
     "fire-boltt": {"fire-boltt", "fireboltt"},
     "fireboltt": {"fire-boltt", "fireboltt"},
+    "jbl": {"jbl"},
+    "sony": {"sony"},
+    "dell": {"dell"},
+    "asus": {"asus"},
+    "philips": {"philips"},
+    "puma": {"puma"},
+    "noise": {"noise"},
+    "titan": {"titan"},
+    "prestige": {"prestige"},
+    "bajaj": {"bajaj"},
+    "cello": {"cello"},
+    "lakme": {"lakme"},
+    "mamaearth": {"mamaearth"},
+    "wildcraft": {"wildcraft"},
+    "levi": {"levi", "levis"},
+    "american tourister": {"american tourister", "americantourister"},
 }
 
+
+RETAILER_DOMAINS = {
+    "amazon.in",
+    "amazon.com",
+    "flipkart.com",
+    "croma.com",
+    "reliancedigital.in",
+    "vijaysales.com",
+}
 
 DOMAIN_BRANDS = {
     "apple.com": "apple",
@@ -96,6 +121,7 @@ DOMAIN_BRANDS = {
     "xiaomi.com": "xiaomi",
     "yamaha.com": "yamaha",
     "samsung.com": "samsung",
+    "jbl.com": "jbl",
     "boat-lifestyle.com": "boat",
     "oneplus.com": "oneplus",
     "oneplus.in": "oneplus",
@@ -161,6 +187,20 @@ def extract_brand(tokens: list[str]) -> str:
                 return brand
 
     return ""
+
+
+def is_retailer_url(url: Any) -> bool:
+    try:
+        host = (urlparse(str(url or "")).hostname or "").lower()
+    except ValueError:
+        return False
+
+    host = host.removeprefix("www.")
+
+    return any(
+        host == domain or host.endswith("." + domain)
+        for domain in RETAILER_DOMAINS
+    )
 
 
 def infer_brand_from_url(url: Any) -> str:
@@ -240,12 +280,55 @@ def parse_identity(
 
     brand = normalize_text(brand_hint) or extract_brand(tokens)
 
+    # Numeric tokens can represent either genuine model identity
+    # (Redmi 13, Air 8, OGL-4, iPhone 17e) or ordinary catalogue
+    # description (Age 8 to 17 Years, Set of 3, Pack of 25).
+    #
+    # Suppress only numbers that are clearly descriptive quantities.
+    descriptive_numeric_tokens: set[str] = set()
+
+    for index, token in enumerate(tokens):
+        if not token.isdigit():
+            continue
+
+        previous_token = tokens[index - 1] if index > 0 else ""
+        next_token = tokens[index + 1] if index + 1 < len(tokens) else ""
+        previous_two = tokens[index - 2] if index > 1 else ""
+
+        # "age 8 to 17 years"
+        if previous_token == "age":
+            descriptive_numeric_tokens.add(token)
+
+        if previous_token == "to" and previous_two.isdigit():
+            descriptive_numeric_tokens.add(previous_two)
+            descriptive_numeric_tokens.add(token)
+
+        if next_token in {"year", "years", "yr", "yrs"}:
+            descriptive_numeric_tokens.add(token)
+
+        # "set of 3", "pack of 25", "combo of 3"
+        if (
+            previous_token == "of"
+            and previous_two
+            in {
+                "set",
+                "pack",
+                "combo",
+                "bundle",
+                "box",
+                "pair",
+                "jar",
+            }
+        ):
+            descriptive_numeric_tokens.add(token)
+
     numeric_tokens = [
         token
         for token in tokens
         if any(char.isdigit() for char in token)
         and token not in NETWORK_TOKENS
         and not re.fullmatch(r"\d{1,4}(gb|tb)", token)
+        and token not in descriptive_numeric_tokens
     ]
 
     network_tokens = [
@@ -264,14 +347,33 @@ def parse_identity(
     storage_tokens = extract_memory_tokens(tokens, "storage")
     color_tokens = extract_color_tokens(tokens)
 
+    identity_noise_tokens = {
+        "product",
+        "products",
+        "audio",
+        "sound",
+        "shop",
+        "store",
+        "spec",
+        "specs",
+        "specification",
+        "specifications",
+        "support",
+        "html",
+        "htm",
+        "page",
+    }
+
     excluded = (
         STOP_WORDS
+        | identity_noise_tokens
         | NETWORK_TOKENS
         | set(VARIANT_TOKENS)
         | set(ram_tokens)
         | set(storage_tokens)
         | set(color_tokens)
         | set(BRAND_ALIASES.keys())
+        | descriptive_numeric_tokens
     )
 
     model_tokens = [
@@ -388,6 +490,14 @@ def model_score(
     common = expected_model.intersection(candidate_model)
     coverage = len(common) / len(expected_model)
 
+    # Exact non-numeric model identity:
+    # All expected model tokens are present in the candidate.
+    # Extra URL/navigation tokens must not downgrade an otherwise
+    # exact product model such as "Galaxy Buds Core".
+    if expected_model.issubset(candidate_model):
+        reasons.append("All expected model tokens matched")
+        return 50, True, reasons
+
     if coverage >= 0.75:
         reasons.append("Most expected model tokens matched")
         return 45, True, reasons
@@ -400,12 +510,129 @@ def model_score(
     return round(coverage * 25), False, reasons
 
 
+def expected_is_accessory(value: Any) -> bool:
+    text = normalize_text(value)
+
+    accessory_terms = (
+        "case",
+        "cover",
+        "keyboard case",
+        "screen protector",
+        "adapter",
+        "stand",
+        "holder",
+        "strap",
+        "replacement",
+        "compatible",
+    )
+
+    return any(term in text for term in accessory_terms)
+
+
+def candidate_is_product_imposter(
+    expected_text: Any,
+    candidate_title: Any,
+) -> tuple[bool, str]:
+    """
+    Reject third-party/accessory products that mention the expected model
+    only as a compatibility target.
+
+    Example:
+    "Earbuds for Realme Buds T100"
+    must not verify as genuine Realme Buds T100.
+    """
+
+    if expected_is_accessory(expected_text):
+        return False, ""
+
+    candidate = normalize_text(candidate_title)
+
+    hard_patterns = (
+        "compatible with",
+        "replacement for",
+        "replacement",
+        "original like",
+        "designed for",
+        "made for",
+    )
+
+    for pattern in hard_patterns:
+        if pattern in candidate:
+            return True, f"Candidate appears to be accessory/imitation: {pattern}"
+
+    # Strong compatibility wording: "... for Realme Buds T100",
+    # "... for iPhone 17", etc.
+    expected = parse_identity(expected_text)
+
+    identity_terms = [
+        token
+        for token in (
+            list(expected.model_tokens)
+            + list(expected.numeric_tokens)
+        )
+        if token
+    ]
+
+    if identity_terms and " for " in f" {candidate} ":
+        joined = " ".join(identity_terms)
+
+        if joined and joined in candidate:
+            before_model = candidate.split(joined, 1)[0]
+
+            if before_model.rstrip().endswith("for"):
+                return True, "Expected model is used only as compatibility target"
+
+    return False, ""
+
+
 def compare_identity(
     expected_text: Any,
     candidate_title: Any,
     candidate_url: Any = "",
     expected_brand: Any = "",
 ) -> ResolverDecision:
+    imposter, imposter_reason = candidate_is_product_imposter(
+        expected_text,
+        candidate_title,
+    )
+
+    # ---------------------------------------------------------
+    # HARD "<ACCESSORY> FOR <PRODUCT>" GUARD
+    # ---------------------------------------------------------
+    # Example:
+    #   Earbuds for Realme Buds T100
+    #   Case for Samsung Galaxy M36
+    # These mention the genuine model only as a target.
+    candidate_norm = normalize_text(candidate_title)
+
+    compatibility_prefixes = (
+        "earbuds for ",
+        "headphones for ",
+        "case for ",
+        "cover for ",
+        "charger for ",
+        "cable for ",
+        "adapter for ",
+        "strap for ",
+        "band for ",
+        "battery for ",
+        "screen protector for ",
+        "replacement for ",
+    )
+
+    if (
+        not expected_is_accessory(expected_text)
+        and any(
+            candidate_norm.startswith(prefix)
+            for prefix in compatibility_prefixes
+        )
+    ):
+        imposter = True
+        imposter_reason = (
+            "Candidate uses expected product only as "
+            "compatibility/accessory target"
+        )
+
     candidate_path = urlparse(
         str(candidate_url or "")
     ).path.replace("-", " ")
@@ -420,8 +647,10 @@ def compare_identity(
         brand_hint=expected_brand,
     )
 
-    candidate_brand_hint = infer_brand_from_url(
-        candidate_url
+    candidate_brand_hint = (
+        ""
+        if is_retailer_url(candidate_url)
+        else infer_brand_from_url(candidate_url)
     )
 
     candidate = parse_identity(
@@ -440,11 +669,35 @@ def compare_identity(
         {expected_brand_norm},
     )
 
+    # ---------------------------------------------------------
+    # Literal brand fallback for brands not present in the
+    # canonical alias table.
+    #
+    # Example:
+    # expected brand = "JIADA"
+    # page title     = "JIADA Space Astronaut Stationery Set..."
+    #
+    # The retailer URL must never supply this evidence.
+    # Only the candidate product title is considered.
+    # ---------------------------------------------------------
+    candidate_title_norm = normalize_text(candidate_title)
+
+    literal_brand_match = False
+
+    if expected_brand_norm and candidate_title_norm:
+        literal_brand_match = bool(
+            re.search(
+                rf"(?:^|\s){re.escape(expected_brand_norm)}(?:\s|$)",
+                candidate_title_norm,
+            )
+        )
+
     brand_match = bool(
         expected_brand_norm
         and (
             candidate_brand_norm in accepted_candidate_brands
             or expected_brand_norm == candidate_brand_norm
+            or literal_brand_match
         )
     )
 
@@ -507,14 +760,20 @@ def compare_identity(
 
     score = max(0, min(score, 100))
 
+    if imposter:
+        reasons.append(imposter_reason)
+
     critical_failure = (
-        not brand_match
+        imposter
+        or not brand_match
         or not model_match
         or network_match is False
         or variant_match is False
     )
 
-    if score >= 80 and not critical_failure:
+    if critical_failure:
+        decision = "reject"
+    elif score >= 80:
         decision = "verified"
     elif score >= 60 and brand_match and model_match:
         decision = "manual_review"

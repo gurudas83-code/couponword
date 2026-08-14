@@ -1,0 +1,360 @@
+{
+  "total_products": 74,
+  "missing_processed": 54,
+  "candidate_count": 2,
+  "unresolved_count": 52,
+  "results": [
+    {
+      "product_id": "1",
+      "title": "JIADA Space Astronaut Stationery Set for Boys - with Badge, Notebook and Pen - Birthday Return Gift/Rakhi Gift for Boys, Kids, Blue",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "2",
+      "title": "Keyboard Case for Samsung Galaxy Tab A11+ & Tab A9 Plus 11” Folio Cover SM-X230, SM-X236B, SM-X210, SM-X215 with Trackpad, 7 Color Backlit Magnetically Detachable Bluetooth Keyboard, Multi-Angle View",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "3",
+      "title": "TeeSlix NASA Cotton Boys t-Shirt, Teenagers | Soft, Premium Fabric | Regular Fit T-Shirt for Boys, Girls | Space Rocket Design | Blue,Black,RED | Age 8 to 17 Years",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "4",
+      "title": "Bausch + Lomb Fresh Multi-Purpose 500Ml Contact Lens Solution (Pack Of 1)",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "5",
+      "title": "AASONS Electric Drill Variable Angle Grinder Connecting Rod with 1pc Wood, Marble Cutting Blade, Flap Disk for Paint Remover, Sanding disc and Iron Grinding Wheel",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "6",
+      "title": "Hebezon Expandable Appliance Roller Stand with Wheels Heavy Duty Mobile Dolly for Washing Machine, Refrigerator,Furniture Adjustable Moving Base for Home, Kitchen,Laundry Use",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "7",
+      "title": "Campus Women's OGL-4 Sneakers",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "8",
+      "title": "HomeStrap Rectangular Set Of 3 Large Plastic Storage Organizers/Baskets With Lid For Kitchen, Clothes, Multipurpose Vegetables, Toys, Books, Office, Stationery, Wardrobe(Biscuit, Grey, Brown)",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "9",
+      "title": "Amazon Basics 64 GB Micro SD Card with Adapter | Upto 120 MB/s | Class 10 | U1, C10, V10 Speed Classes",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "16",
+      "title": "Mega 70%+ OFF Store",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "17",
+      "title": "Online Store Fashion Fest",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "24",
+      "title": "Fire-Boltt Ninja Smartwatch",
+      "status": "CANDIDATE",
+      "best": {
+        "page_url": "https://www.fireboltt.com/products/ninja-x-ring-black",
+        "status_code": 200,
+        "page_title": "Ninja X Ring with (1.96 inch) Display and BT Calling\n– Fire-Boltt",
+        "identity_score": 1.0,
+        "images": [
+          {
+            "url": "https://www.fireboltt.com/cdn/shop/files/B0G61JSXWJ.MAIN_d4ebaf3b-0a9c-4a84-9798-c8ae922dc5b2.jpg?v=1771405238",
+            "source": "meta:og:image:secure_url"
+          },
+          {
+            "url": "http://www.fireboltt.com/cdn/shop/files/B0G61JSXWJ.MAIN_d4ebaf3b-0a9c-4a84-9798-c8ae922dc5b2.jpg?v=1771405238",
+            "source": "meta:og:image"
+          }
+        ],
+        "source_type": "research"
+      }
+    },
+    {
+      "product_id": "25",
+      "title": "Sony Wireless Headphones",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "26",
+      "title": "Echo Dot 5th Gen",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "27",
+      "title": "Milton Thermosteel Bottle",
+      "status": "CANDIDATE",
+      "best": {
+        "page_url": "https://www.milton.in/products/fame-thermosteel-bottle",
+        "status_code": 200,
+        "page_title": "Buy Fame Thermosteel Bottle Online at Best Price| Milton",
+        "identity_score": 1.0,
+        "images": [
+          {
+            "url": "https://www.milton.in/cdn/shop/files/61zFDxhuwML._SL1500.jpg?v=1772010445",
+            "source": "meta:og:image:secure_url"
+          }
+        ],
+        "source_type": "research"
+      }
+    },
+    {
+      "product_id": "28",
+      "title": "HP Wireless Mouse",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "30",
+      "title": "OnePlus Nord CE",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "31",
+      "title": "Philips Trimmer",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "32",
+      "title": "boAt Airdopes 311 Pro TWS Earbuds",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "33",
+      "title": "Boult Audio Bluetooth Speaker",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "34",
+      "title": "Fire TV Stick 4K",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "35",
+      "title": "Puma Men's Running Shoes",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "36",
+      "title": "boAt Stone Bluetooth Speaker",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "37",
+      "title": "Mi Power Bank 10000mAh",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "39",
+      "title": "Kindle Paperwhite",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "40",
+      "title": "American Tourister Trolley Bag",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "41",
+      "title": "ASUS Gaming Laptop",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "42",
+      "title": "Realme Buds T100",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "43",
+      "title": "Titan Analog Watch",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "44",
+      "title": "Wildcraft Backpack 35L",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "45",
+      "title": "Levi's Men's Jeans",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "46",
+      "title": "Strauss Yoga Mat",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "47",
+      "title": "Samsung 28L Microwave Oven",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "48",
+      "title": "Mamaearth Skincare Combo",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "49",
+      "title": "Kore Adjustable Dumbbells",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "50",
+      "title": "Cello Water Bottle Set",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "51",
+      "title": "Bajaj Ceiling Fan",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "53",
+      "title": "Noise ColorFit Smartwatch",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "54",
+      "title": "Apple AirPods",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "55",
+      "title": "Dell Inspiron Laptop",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "58",
+      "title": "JBL Tune 510BT Headphones",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "60",
+      "title": "typecase Keyboard Case for Samsung Galaxy Tab A11+ / A11 Plus 2025 & A9+ / A9 Plus 2023, 7-Color Backlit with Touchpad",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "61",
+      "title": "Encasify Telescope Cover, Waterproof Dustproof Sunproof Outdoor Protective Cover with Zipper and Durable Closure",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "62",
+      "title": "Hauser Fizzy Gel Pen Jar, Transparent Lightweight Body, Comfortable Grip, Smooth Ink Flow, Blue Ink Pack of 25 Pens",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "63",
+      "title": "Wembley Hover Football for Kids, Electric Floating Soccer Ball, Rechargeable Indoor Game, Birthday Gift for Boys",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "64",
+      "title": "Chair Bush Black Colour 10 Pcs, ID 15mm OD 20mm, Round Shape",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "65",
+      "title": "Drivanto Washing Machine Stand Multi-Functional Movable Adjustable Base with Locking Wheels for Washing Machine, Refrigerator and Furniture",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "66",
+      "title": "UGAOO Combo of 3 Indoor Plants with Ibiza Pot, Money Plant Golden, Jade Plant and Peace Lily for Home and Office Decor",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "67",
+      "title": "Prestige Induction Cooktop",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "68",
+      "title": "Lakme Makeup Kit",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "69",
+      "title": "Redmi Note 13 5G",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "70",
+      "title": "Samsung 25L Microwave Oven",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "72",
+      "title": "Samsung Galaxy M36 5G Mobile (Velvet Black, 6GB RAM, 128GB Storage)",
+      "status": "UNRESOLVED",
+      "best": null
+    },
+    {
+      "product_id": "73",
+      "title": "Nothing Phone (3a) Lite (White, 128 GB, 8 GB RAM)",
+      "status": "UNRESOLVED",
+      "best": null
+    }
+  ]
+}

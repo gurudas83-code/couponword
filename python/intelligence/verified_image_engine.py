@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 
 from __future__ import annotations
 
@@ -120,11 +120,60 @@ def ranked_candidates(
 
     official_url = clean(spec.get("official_url")).rstrip("/").lower()
 
+    def obvious_non_product_asset(item: dict[str, Any]) -> bool:
+        url_text = clean(item.get("url")).lower()
+        path_text = clean(item.get("path")).lower()
+        alt_text = clean(item.get("alt")).lower()
+        parent_text = clean(item.get("parent_text")).lower()
+
+        combined = " ".join(
+            (
+                url_text,
+                path_text,
+                alt_text,
+                parent_text,
+            )
+        )
+
+        blocked_tokens = (
+            "logo-square",
+            "/logo",
+            "logo.",
+            "favicon",
+            "icon-",
+            "/icon/",
+            "sprite",
+            "social-share",
+            "social_share",
+            "placeholder",
+            "loading.gif",
+        )
+
+        return any(
+            token in combined
+            for token in blocked_tokens
+        )
+
+    candidates = [
+        item
+        for item in candidates
+        if not obvious_non_product_asset(item)
+    ]
+
     def shortlist_priority(item: dict[str, Any]) -> tuple:
         href = clean(item.get("href")).rstrip("/").lower()
-        exact_href_match = bool(official_url and href == official_url)
+        exact_href_match = bool(
+            official_url
+            and href == official_url
+        )
 
         path_text = clean(item.get("path")).lower()
+        parent_text = clean(item.get("parent_text")).lower()
+
+        product_context = bool(
+            exact_href_match
+            and parent_text
+        )
 
         if "html.meta.og:image:secure_url" in path_text:
             source_priority = 4
@@ -136,10 +185,11 @@ def ranked_candidates(
             source_priority = 1
 
         return (
+            1 if product_context else 0,
             1 if exact_href_match else 0,
-            source_priority,
             int(item.get("hero_score") or 0),
             int(item.get("rank_score") or 0),
+            source_priority,
             -float(item.get("square_distance") or 99),
         )
 
@@ -238,6 +288,9 @@ def resolve_product_image(
                 "429" in provider_error
                 or "resource_exhausted" in provider_error
                 or "quota exceeded" in provider_error
+                or "503" in provider_error
+                or "unavailable" in provider_error
+                or "high demand" in provider_error
             )
         ):
             checked.append(
@@ -270,15 +323,29 @@ def resolve_product_image(
                 if ch.isalnum()
             )
 
+            candidate_path = clean(candidate.get("path")).lower()
+
+            exact_schema_product_image = bool(
+                candidate_path == "root.schema_product.image"
+                and url
+                and (
+                    "images.samsung.com/" in url.lower()
+                    or candidate_href == official_url
+                )
+            )
+
             exact_official_context = bool(
-                official_url
-                and candidate_href == official_url
-                and slug_identity
-                and slug_identity in parent_identity
-                and int(candidate.get("hero_score") or 0) >= 80
-                and int(candidate.get("width") or 0) >= 600
-                and int(candidate.get("height") or 0) >= 600
-                and 0.75 <= float(candidate.get("aspect_ratio") or 0) <= 1.35
+                (
+                    official_url
+                    and candidate_href == official_url
+                    and slug_identity
+                    and slug_identity in parent_identity
+                    and int(candidate.get("hero_score") or 0) >= 80
+                    and int(candidate.get("width") or 0) >= 600
+                    and int(candidate.get("height") or 0) >= 600
+                    and 0.75 <= float(candidate.get("aspect_ratio") or 0) <= 1.35
+                )
+                or exact_schema_product_image
             )
 
             if exact_official_context:

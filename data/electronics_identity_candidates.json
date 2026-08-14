@@ -1,0 +1,663 @@
+{
+  "targets": 11,
+  "results": [
+    {
+      "product_id": "24",
+      "current_title": "Fire-Boltt Ninja Smartwatch",
+      "brand": "Fire-Boltt",
+      "catalog_status": "identity_review",
+      "candidates": [
+        {
+          "asin": "B0CMF25TKG",
+          "candidate_title": "Fire‑Boltt Rise Smart Watch 1.85″ HD Display with Bluetooth Calling, AI Voice Assistant, Rotating Crown,SpO2 & Heart Rate Monitor, 120+ Sports Modes,IP67 Waterproof Smart Watch for Men & Women - Black",
+          "product_url": "https://www.amazon.in/dp/B0CMF25TKG?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/61IGSSfF-JL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 60,
+          "reasons": [
+            "Brand matched",
+            "Partial model-token match; manual review required"
+          ]
+        },
+        {
+          "asin": "B0GGHWM257",
+          "candidate_title": "Ninja Blaze Smart Watch, Stainless Steel Strap & Steel Body, 1.83” Display Bluetooth Calling Built-in Mic & Speaker, 120+ Sports Modes, Smartwatch for Man and Woman Rose Quartz",
+          "product_url": "https://www.amazon.in/dp/B0GGHWM257?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/71gfAzDqxiL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 30,
+          "reasons": [
+            "Brand mismatch",
+            "Partial model-token match; manual review required"
+          ]
+        },
+        {
+          "asin": "B0B855X6W2",
+          "candidate_title": "Ninja Call Pro Bluetooth Calling Smart Watch, 1.69″ HD Display,Dual Chip,AI Voice Assistant, 120+ Sports Modes, SpO2 & Heart Rate Monitor, Fitness Tracker Smartwatch for Men & Women - Black",
+          "product_url": "https://www.amazon.in/dp/B0B855X6W2?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/61CFe3H+15L._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 30,
+          "reasons": [
+            "Brand mismatch",
+            "Partial model-token match; manual review required"
+          ]
+        },
+        {
+          "asin": "B0DTB2TZ84",
+          "candidate_title": "Ninja Call Pro Max Bluetooth Calling Smart Watch, 2.01\" HD Display, 120+ Sports Modes, Health Suite, AI Voice Assistance, SpO2 & Heart Rate Monitor Smartwatch for Men & Women - Green",
+          "product_url": "https://www.amazon.in/dp/B0DTB2TZ84?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/61C+LPKx+4L._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 30,
+          "reasons": [
+            "Brand mismatch",
+            "Partial model-token match; manual review required"
+          ]
+        },
+        {
+          "asin": "B0DKBZYXZY",
+          "candidate_title": "Ninja Call Pro Max Ultra Bluetooth Calling Smart Watch, 2.01\" HD Display, 120+ Sports Modes, Health Suite, AI Voice Assistance, SpO2 Smartwatch for Men & Women - Black Link",
+          "product_url": "https://www.amazon.in/dp/B0DKBZYXZY?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/71e3LEJuG4L._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 30,
+          "reasons": [
+            "Brand mismatch",
+            "Partial model-token match; manual review required"
+          ]
+        },
+        {
+          "asin": "B0DY82221X",
+          "candidate_title": "Ninja Call Pro Plus Bluetooth Calling Smart Watch, 1.83\" Display, AI Voice Assistant, 120+ Sports Modes, IP67 Waterproof, SpO2 & Heart Rate Monitor Smartwatch for Women - Cinnamon Slate",
+          "product_url": "https://www.amazon.in/dp/B0DY82221X?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/71fKMKsdlDL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 30,
+          "reasons": [
+            "Brand mismatch",
+            "Partial model-token match; manual review required"
+          ]
+        },
+        {
+          "asin": "B0GGHG9CWT",
+          "candidate_title": "Ninja Phantom Smart Watch 1.83” Display, Transparent Clear Body Design, Bluetooth Calling, 120+ Sports Modes, Voice Assistant, AI Outfit Watch Face Smartwatch for Men & Women Stealth Navy",
+          "product_url": "https://www.amazon.in/dp/B0GGHG9CWT?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/71is0VR0idL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 30,
+          "reasons": [
+            "Brand mismatch",
+            "Partial model-token match; manual review required"
+          ]
+        },
+        {
+          "asin": "B0GFDVFNCZ",
+          "candidate_title": "Ninja X Ring Smart Watch 1.96\" Always On Display Bluetooth Calling, Voice Assistant, SpO2 & Heart Rate, 120+ Sports Modes, IP67 Waterproof Smartwatch for Men & Women - Black Nylon",
+          "product_url": "https://www.amazon.in/dp/B0GFDVFNCZ?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/71YvIDY9W-L._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 30,
+          "reasons": [
+            "Brand mismatch",
+            "Partial model-token match; manual review required"
+          ]
+        },
+        {
+          "asin": "B0G61HJYR3",
+          "candidate_title": "Ninja X Ring Smart Watch with 1.96” Large Display, Bluetooth Calling, Wireless Charging, AI Voice Assistant, 500+ Watch Faces, Health Suite, Smart Watch for Man & Woman – Blue S",
+          "product_url": "https://www.amazon.in/dp/B0G61HJYR3?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/61znOcfeueL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 6,
+          "reasons": [
+            "Brand mismatch",
+            "Model token match is weak"
+          ]
+        },
+        {
+          "asin": "B0BRKZG8GH",
+          "candidate_title": "Phoenix Pro Round Smart Watch 1.39\" HD Display with Bluetooth Calling, AI Voice Assistant, SpO2 & Heart Rate Monitor, 120+ Sports Modes, IP67 Waterproof Smartwatch for Men & Women - Grey",
+          "product_url": "https://www.amazon.in/dp/B0BRKZG8GH?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/61643EQDHqL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 6,
+          "reasons": [
+            "Brand mismatch",
+            "Model token match is weak"
+          ]
+        },
+        {
+          "asin": "B0G61K7RGD",
+          "candidate_title": "Ninja X Ring Smart Watch with 1.96” Large Display, Bluetooth Calling, Wireless Charging, AI Voice Assistant, 500+ Watch Faces, Health Suite, Smart Watch for Man & Woman – Mocha Mousse",
+          "product_url": "https://www.amazon.in/dp/B0G61K7RGD?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/61li163wu3L._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 6,
+          "reasons": [
+            "Brand mismatch",
+            "Model token match is weak"
+          ]
+        },
+        {
+          "asin": "B0GH7Q2SH2",
+          "candidate_title": "Phoenix Air Smart Watch 1.26” Round Display, Rotating Button, Wireless Charging, Ultra Lightweight Metal Body, Bluetooth Calling, Smartwatch with Silicone & Mesh Steel Straps Onyx Black",
+          "product_url": "https://www.amazon.in/dp/B0GH7Q2SH2?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/81a-PT5+tDL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 6,
+          "reasons": [
+            "Brand mismatch",
+            "Model token match is weak"
+          ]
+        }
+      ]
+    },
+    {
+      "product_id": "25",
+      "current_title": "Sony Wireless Headphones",
+      "brand": "Sony",
+      "catalog_status": "identity_review",
+      "candidates": []
+    },
+    {
+      "product_id": "28",
+      "current_title": "HP Wireless Mouse",
+      "brand": "HP",
+      "catalog_status": "identity_review",
+      "candidates": [
+        {
+          "asin": "B0DXNY14GL",
+          "candidate_title": "HP M290 Wireless Mouse (AB3C7AA)",
+          "product_url": "https://www.amazon.in/dp/B0DXNY14GL?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/51R93xUQkCL._AC_UY218_.jpg",
+          "decision": "verified",
+          "score": 80,
+          "reasons": [
+            "Brand matched",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0FBMBJ5LV",
+          "candidate_title": "HP M290 Wireless Mouse (B5UA5AA)",
+          "product_url": "https://www.amazon.in/dp/B0FBMBJ5LV?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/51Hyojcv36L._AC_UY218_.jpg",
+          "decision": "verified",
+          "score": 80,
+          "reasons": [
+            "Brand matched",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0DXNTYWHV",
+          "candidate_title": "HP M190 Wireless Mouse (AB3C6AA)",
+          "product_url": "https://www.amazon.in/dp/B0DXNTYWHV?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/51ILYHAHvOL._AC_UY218_.jpg",
+          "decision": "verified",
+          "score": 80,
+          "reasons": [
+            "Brand matched",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0F66P26F6",
+          "candidate_title": "HP M310 Bluetooth Mouse",
+          "product_url": "https://www.amazon.in/dp/B0F66P26F6?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/51ZijHgbqQL._AC_UY218_.jpg",
+          "decision": "verified",
+          "score": 80,
+          "reasons": [
+            "Brand matched",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B083W6MDWV",
+          "candidate_title": "HP S500 7YA11PA USB, Wireless Optical Mouse, Black",
+          "product_url": "https://www.amazon.in/dp/B083W6MDWV?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/51A1vwtYr+L._AC_UY218_.jpg",
+          "decision": "verified",
+          "score": 80,
+          "reasons": [
+            "Brand matched",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B09GB5B4BK",
+          "candidate_title": "150 Wireless USB Mouse with Ergonomic and ambidextrous Design, 1600 DPI Optical Tracking, 2.4 GHz Wireless connectivity, Dual-Function Scroll Wheel and 12 Month Long Battery Life",
+          "product_url": "https://www.amazon.in/dp/B09GB5B4BK?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/616NPYYloKL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B01KK0HU3Y",
+          "candidate_title": "Z3700 Wireless Optical Mouse with USB receiver and 2.4GHz Wireless Connection/ 1200DPI / 16 months Long Battery Life /Ambidextrous and Slim Design (Modern Gold)",
+          "product_url": "https://www.amazon.in/dp/B01KK0HU3Y?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/614DbY9tQsL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0H5C1MXGP",
+          "candidate_title": "M090 Wireless Mouse - 2.4GHz Connectivity, 1200 DPI Optical Sensor, 12-Month Battery Life, Ambidextrous Ergonomic Design, USB Nano Receiver, Compatible with Windows & macOS (Black)",
+          "product_url": "https://www.amazon.in/dp/B0H5C1MXGP?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/51a9if33trL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched",
+            "Candidate appears to be accessory/imitation: compatible with"
+          ]
+        },
+        {
+          "asin": "B09KN1JX8H",
+          "candidate_title": "240 Bluetooth Mouse/Ambidextrous; Compact Size; Portable Mouse/Red Optical Tracking/1600 dpi/3 Years Warranty/Pike Silver (43N04AA)",
+          "product_url": "https://www.amazon.in/dp/B09KN1JX8H?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/71c9iOsSc7L._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0BYF2VLDF",
+          "candidate_title": "Z3700 Dual Black Mouse, Bluetooth 5.0, USB-A dongle, 2.4 GHz Wireless Connection, Multi-Surface Tracking, Silent clicks, Up to 1600 dpi, 16-Month Battery Life, 3-Year Warranty, 50g, Black, 758A8AA",
+          "product_url": "https://www.amazon.in/dp/B0BYF2VLDF?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/61C8wwzHb4L._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0BYDYJLZR",
+          "candidate_title": "Z3700 Dual Silver Mouse/2.4 GHz Wireless connection/1600 dpi/3 Buttons/Silent clicks; Multi-Device; Cross Operating Systems/3 Years (RTB) Warranty",
+          "product_url": "https://www.amazon.in/dp/B0BYDYJLZR?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/31QzmPdXgZL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0C8BDH25B",
+          "candidate_title": "240 Lunar White Bluetooth Mouse/Bluetooth® 5.1 connection/15 Month battery/1600 dpi Optical Sensor/Sleek and ambidextrous Design",
+          "product_url": "https://www.amazon.in/dp/B0C8BDH25B?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/51QmqxvSb6L._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        }
+      ]
+    },
+    {
+      "product_id": "31",
+      "current_title": "Philips Trimmer",
+      "brand": "Philips",
+      "catalog_status": "identity_review",
+      "candidates": [
+        {
+          "asin": "B0CJTWXGBY",
+          "candidate_title": "PHILIPS Men Bt 3302/15 3000 Series Beard Trimmer,Battery Powered",
+          "product_url": "https://www.amazon.in/dp/B0CJTWXGBY?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/41mWkfvDSqL._AC_UL320_.jpg",
+          "decision": "verified",
+          "score": 80,
+          "reasons": [
+            "Brand matched",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0G6DVB6DG",
+          "candidate_title": "India's No.1 Men's Trimmer* | One stroke beard trimming | All-in-One Grooming Kit- Face, Hair, Body | Ear/Nose attachment | Safe for Sensitive Skin | 60 mins runtime | 5yr warranty* | MG3927",
+          "product_url": "https://www.amazon.in/dp/B0G6DVB6DG?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/61FfgEFs1iL._AC_UL320_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0GSQQNKQC",
+          "candidate_title": "India's No.1 Men's Trimmer* | Skin Safe Beard Trimmer for Men | Durapower tech | Self Sharpening Blades | Skin Protect Comb | 30 min runtime USB charging | No oil needed | 2yr warranty |BT1244",
+          "product_url": "https://www.amazon.in/dp/B0GSQQNKQC?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/71TrNsxzxoL._AC_UL320_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0GRGP1B8Y",
+          "candidate_title": "India's No.1 Men's Trimmer* | Lift & Trim Technology | Skin Friendly Beard Trimmer for Men | Effortless Styling | Self-Sharpening Blades | 60 mins runtime | 3 yrs warranty* | BT3325",
+          "product_url": "https://www.amazon.in/dp/B0GRGP1B8Y?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/613UQ+C5RBL._AC_UL320_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0CRF6NJC3",
+          "candidate_title": "OneBlade Turbo2X Hybrid Trim, Edge, Shave | Perfected for Skin Comfort | Trimmer Men Beard | Suits all skin types & beard thickness, Wet & Dry Use | Electric Trimmer for Men | QP2724/10",
+          "product_url": "https://www.amazon.in/dp/B0CRF6NJC3?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/71c-Vt04TtL._AC_UL320_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0G2S8C4VQ",
+          "candidate_title": "India's No.1 Men's Trimmer* | Ultimate Precision | BeardSense Technology- Scans 125x/sec, adapts to density | All-in-One Full body Grooming Kit | 120min runtime | IPX7 | 5yr warranty* | MG7922",
+          "product_url": "https://www.amazon.in/dp/B0G2S8C4VQ?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/71gBLa6dIwL._AC_UL320_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B00TO7K08C",
+          "candidate_title": "Showerproof Body & Balls Trimmer for Men Private Parts | Bi-directional Trimming| Skin Safe Intimate Grooming | Skin Protection System | 2yrs Warranty | India's #1 Men's Trimmer* | BG1025",
+          "product_url": "https://www.amazon.in/dp/B00TO7K08C?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/61Wfuh9LXsL._AC_UL320_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0G6CRGH27",
+          "candidate_title": "India's No.1 Men's Trimmer* | Long-lasting Performance | All-in-One Grooming Kit- Face, Hair, Body, Private Parts | Ear/Nose, Detail trimmer attachment | 90min runtime | 5yr warranty* | MG3941",
+          "product_url": "https://www.amazon.in/dp/B0G6CRGH27?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/71psSroDk6L._AC_UL320_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0G2SGV3DW",
+          "candidate_title": "India's No.1 Men's Trimmer* | 16-in-1 Trimmer | BeardSense Technology | Precision Trimming | Face, Hair, Body, Private Parts | IPX7 Waterproof | 5 yrs warranty* | 120 Min Runtime | MG7931",
+          "product_url": "https://www.amazon.in/dp/B0G2SGV3DW?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/71hLtAF1xsL._AC_UL320_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B09BD7NL76",
+          "candidate_title": "Corded Electric BT1230/15 Skin-friendly Beard trimmer for Men, Dura Power Technology, Cordless Rechargeable with USB Charging, Charging indicator, Travel lock",
+          "product_url": "https://www.amazon.in/dp/B09BD7NL76?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/61KOuKrfuRL._AC_UL320_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0C7VYN5PV",
+          "candidate_title": "Skin Friendly Beard Trimmer For Men| Lift & Trim Technology|10 Length Settings|15 Mins Quick Charge| Self Sharpening Blades|Cordless & Rechargeable|3 Year Warranty|Bt3303/30,Blue",
+          "product_url": "https://www.amazon.in/dp/B0C7VYN5PV?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/61uQ1nRhlVL._AC_UL320_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0CWRPVNWL",
+          "candidate_title": "Electric Shaver for Man| 3D Flex Heads| 27 Self-Sharpening Blades| ComfortCut |100% Waterproof IPX7, 40 Mins Runtime, 2yr warranty | S1151/03",
+          "product_url": "https://www.amazon.in/dp/B0CWRPVNWL?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/711lC6xuvzL._AC_UL320_.jpg",
+          "decision": "reject",
+          "score": 0,
+          "reasons": [
+            "Brand mismatch",
+            "Model token match is weak"
+          ]
+        }
+      ]
+    },
+    {
+      "product_id": "33",
+      "current_title": "Boult Audio Bluetooth Speaker",
+      "brand": "Boult Audio",
+      "catalog_status": "identity_review",
+      "candidates": []
+    },
+    {
+      "product_id": "36",
+      "current_title": "boAt Stone Bluetooth Speaker",
+      "brand": "boAt",
+      "catalog_status": "identity_review",
+      "candidates": []
+    },
+    {
+      "product_id": "41",
+      "current_title": "ASUS Gaming Laptop",
+      "brand": "ASUS",
+      "catalog_status": "identity_review",
+      "candidates": []
+    },
+    {
+      "product_id": "52",
+      "current_title": "Noise Smartwatch with Bluetooth Calling, AMOLED Display, Stainless Steel Design, Emergency SOS & Smart Connectivity",
+      "brand": "Noise",
+      "catalog_status": "identity_review",
+      "candidates": []
+    },
+    {
+      "product_id": "53",
+      "current_title": "Noise ColorFit Smartwatch",
+      "brand": "Noise",
+      "catalog_status": "identity_review",
+      "candidates": []
+    },
+    {
+      "product_id": "54",
+      "current_title": "Apple AirPods",
+      "brand": "Apple",
+      "catalog_status": "identity_review",
+      "candidates": []
+    },
+    {
+      "product_id": "55",
+      "current_title": "Dell Inspiron Laptop",
+      "brand": "Dell",
+      "catalog_status": "identity_review",
+      "candidates": [
+        {
+          "asin": "B0DSFQZTVW",
+          "candidate_title": "15 SmartChoice (Previously Inspiron), Intel 13th Gen Core i5-1334U, 16GB, 1TB SSD, FHD,15.6\"/39.62cm, Win 11, MSO'24, Silver, 1.62kg, [Dell 15], 12 Month McAfee, Backlit KB, Thin & Light Laptop",
+          "product_url": "https://www.amazon.in/dp/B0DSFQZTVW?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/61BdsDQbMiL._AC_UY218_.jpg",
+          "decision": "verified",
+          "score": 80,
+          "reasons": [
+            "Brand matched",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0DSFP9FCS",
+          "candidate_title": "15 (Previously Inspiron), Intel Core i7 13th Gen -1355U, 16GB, 512GB SSD, FHD, 15.6\"/39.62cm, Win 11, MSO'24, Silver, 1.62kg, [Dell 15], Backlit Keyboard, 12 Month McAfee, Thin & Light Laptop",
+          "product_url": "https://www.amazon.in/dp/B0DSFP9FCS?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/710QEbIKNeL._AC_UY218_.jpg",
+          "decision": "verified",
+          "score": 80,
+          "reasons": [
+            "Brand matched",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0FDQ2R315",
+          "candidate_title": "15, Smart Choice, AMD Ryzen 7-7730U, 16GB, 512GB SSD, FHD, 15.6\"/39.6cm, Windows 11, Microsoft Office Home 2024, Silver, 1.63Kg, [Dell 15], 120Hz 250nits, AMD Radeon Graphics, Thin & Light Laptop",
+          "product_url": "https://www.amazon.in/dp/B0FDQ2R315?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/71M9t-wC2FL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 60,
+          "reasons": [
+            "Brand matched",
+            "Partial model-token match; manual review required"
+          ]
+        },
+        {
+          "asin": "B0GV1L119H",
+          "candidate_title": "15 (Previously Inspiron) Laptop, 14th Gen Intel Core i3/Core 3 100U Processor, 16GB DDR4, 512 SSD, Intel UHD Graphics, 15.6\" FHD 120Hz IPS AG 250 nit Display, Win 11 + Office 2024, Black, 1.63Kg",
+          "product_url": "https://www.amazon.in/dp/B0GV1L119H?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/61lqGPKKZAL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0FZKZTXSN",
+          "candidate_title": "15 (Previously Inspiron) Laptop, 14th Gen Intel Core i3/Core 3 100U Processor, 8GB DDR4, 512 SSD, 15.6\" FHD 120Hz IPS AG 250 nit Display, Win 11 + Office H&S 2024, Carbon Black, 1.63Kg",
+          "product_url": "https://www.amazon.in/dp/B0FZKZTXSN?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/617L+f7pSrL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0G48V56FV",
+          "candidate_title": "15 (Previously Inspiron), R5-7520U Processor, 8GB LPDDR5 RAM, 512GB SSD, FHD 15.6\"/39.62 cm Display, Windows 11 Home, Carbon Black, 1.63kg, Standard Keyboard, 15 Month McAfee, Thin & Light Laptop",
+          "product_url": "https://www.amazon.in/dp/B0G48V56FV?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/71-cIb9uoiL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0GS2VW9MN",
+          "candidate_title": "Inspiron 15 DC15250 Laptop (Intel Core 3-100U, 8GB DDR5 RAM, 512GB SSD, 15.6\" Full HD Display, Windows 11 Home, MS Office 2024 + Microsoft 365, Carbon Black, 1 Year NBD Warranty)",
+          "product_url": "https://www.amazon.in/dp/B0GS2VW9MN?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/71ZBa5+qu4L._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0D83G8R99",
+          "candidate_title": "Inspiron 15 3535, Windows 11 Home AMD Ryzen 5 7520U, 8GB RAM, 512GB SSD, FHD, 15.6\"/39.62cm, Carbon Black, 1.67KG, Ideal for Students, Perfect for Learning and Productivity Laptop",
+          "product_url": "https://www.amazon.in/dp/B0D83G8R99?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/71I7xDIyINL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0FFHG2VGJ",
+          "candidate_title": "15 (Previously Inspiron) Laptop, 14th Gen Intel Core i3/Core 3 100U Processor, 8GB, 512GB, Intel UHD Graphics, 15.6\" FHD IPS 250nit Display, 12m Mcafee, Win 11 + MSO'24, Platinum Silver, 1.63kg",
+          "product_url": "https://www.amazon.in/dp/B0FFHG2VGJ?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/71FIUpPy44L._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0FGQRCZL3",
+          "candidate_title": "Inspiron 3530 Laptop - 15.6-inch FHD (1920x1080) Display, Intel Core i3-1305U Processor, 8GB DDR4 RAM, 512GB SSD, Intel UHD Graphics, Windows 11 Home, Onsite Service - Carbon Black",
+          "product_url": "https://www.amazon.in/dp/B0FGQRCZL3?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/71iIEPk5qOL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 50,
+          "reasons": [
+            "Brand mismatch",
+            "All expected model tokens matched"
+          ]
+        },
+        {
+          "asin": "B0GNK6BHB2",
+          "candidate_title": "Inspiron 5440 Notebook Computer, Intel Core 3 100U 14th Gen Processor, 8GB DDR5 RAM, 512GB SSD, 14\" FHD+ Screen, Ubuntu, 1Yr Warranty, Ice Blue",
+          "product_url": "https://www.amazon.in/dp/B0GNK6BHB2?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/61TpeOfqRjL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 30,
+          "reasons": [
+            "Brand mismatch",
+            "Partial model-token match; manual review required"
+          ]
+        },
+        {
+          "asin": "B0GWHGS8P5",
+          "candidate_title": "15 AI Powered Laptop, Intel Core Ultra 5 225H, 16GB DDR5 RAM, 512GB SSD, 15.6\" FHD Anti-Glare Display, Intel Arc Graphics, Dedicated Copilot Key, Backlit Keyboard, Silver, Win11 Home + MSO H&S'24",
+          "product_url": "https://www.amazon.in/dp/B0GWHGS8P5?tag=guru0906-21",
+          "search_image": "https://m.media-amazon.com/images/I/61Hnx-dNRjL._AC_UY218_.jpg",
+          "decision": "reject",
+          "score": 30,
+          "reasons": [
+            "Brand mismatch",
+            "Partial model-token match; manual review required"
+          ]
+        }
+      ]
+    }
+  ]
+}

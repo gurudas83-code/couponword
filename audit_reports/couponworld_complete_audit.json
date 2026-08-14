@@ -1,0 +1,601 @@
+{
+  "audit_version": "1.0",
+  "root": "D:\\Projects\\couponword",
+  "repository": {
+    "python_file_count": 115,
+    "product_page_count": 74,
+    "has_git": true,
+    "has_cname": true,
+    "has_readme": true
+  },
+  "frontend": {
+    "files": {
+      "index.html": true,
+      "style.css": true,
+      "app.js": true,
+      "robots.txt": true,
+      "sitemap.xml": true
+    },
+    "has_search_ui_hint": true,
+    "has_backend_fetch_hint": true,
+    "has_recommendation_ui_hint": true
+  },
+  "product_database": {
+    "exists": true,
+    "valid_json": true,
+    "product_count": 74,
+    "active_count": 74,
+    "missing_image": 57,
+    "missing_price": 74,
+    "missing_brand": 7,
+    "affiliate_tag_matches": 74,
+    "affiliate_tag_missing": 0
+  },
+  "knowledge": {
+    "product_knowledge.json": {
+      "exists": true,
+      "product_count": 5
+    },
+    "official_specs.json": {
+      "exists": true,
+      "product_count": 8
+    },
+    "knowledge_review.json": {
+      "exists": true,
+      "product_count": 69
+    },
+    "runtime_shopping_intelligence.json": {
+      "exists": true,
+      "product_count": 0,
+      "status": "PARTIAL",
+      "stage_counts": {
+        "discovered": 9,
+        "identity_prepared": 9,
+        "official_verified": 0,
+        "evidence_ready": 0,
+        "fit_scored": 0,
+        "qualifying_50_plus": 0,
+        "recommendations_returned": 0
+      }
+    }
+  },
+  "seo": {
+    "robots_exists": true,
+    "sitemap_exists": true,
+    "index_exists": true,
+    "canonical_hint": true,
+    "schema_org_hint": true,
+    "sitemap_url_count": 82
+  },
+  "backend_api": {
+    "api_server_detected": true,
+    "api_files": [
+      "couponworld_complete_audit.py",
+      "couponworld_complete_audit_before_bom_fix_20260809.py",
+      "product_classifier.py",
+      "shopping_brain.py",
+      "shopping_brain_before_decision_engine_20260805_235240.py",
+      "shopping_brain_before_decision_engine_20260805_235607.py",
+      "shopping_brain_before_knowledge_gate_20260805_235931.py",
+      "shopping_brain_before_knowledge_score_20260805_223921.py",
+      "shopping_brain_before_match_v1_20260803_230715.py",
+      "shopping_brain_before_requirement_match_finish_20260803_231339.py"
+    ],
+    "python_backend_modules": [
+      "build_product_knowledge.py",
+      "build_product_pages_before_intelligence_v1.py",
+      "build_product_pages_before_verified_intelligence_20260808_232718.py",
+      "couponworld_before_intelligence_v1_20260808_114212.py",
+      "couponworld_before_knowledge_command_20260805_225432.py",
+      "intent_engine.py",
+      "intent_engine_before_feature_v2_20260805_232541.py",
+      "intent_engine_before_gamer_profile_fix_20260809_143059.py",
+      "intent_engine_before_v2_20260809.py",
+      "knowledge_engine.py",
+      "market_discovery.py",
+      "market_identity_bridge.py",
+      "official_source_resolver.py",
+      "official_source_resolver_backup.py",
+      "official_source_resolver_before_brand_expansion_20260804_222957.py",
+      "official_source_resolver_before_brand_registry_20260808_184921.py",
+      "official_source_resolver_before_model_filter_20260804_225625.py",
+      "official_source_resolver_before_model_normalization_20260806_234104.py",
+      "official_source_resolver_before_page_priority_20260804_225410.py",
+      "official_source_resolver_before_page_priority_20260805_230553.py",
+      "official_source_resolver_before_query_improvement_20260804_223535.py",
+      "official_source_resolver_before_source_stability_20260808_124706.py",
+      "official_source_resolver_before_universal_sources_20260806_233209.py",
+      "official_source_resolver_v3.py",
+      "official_spec_extractor_before_final_vision_knowledge_gate_20260807_223839.py",
+      "official_spec_extractor_before_vision_knowledge_bridge_20260807_223614.py",
+      "product_fit_signal_builder.py",
+      "product_intelligence.py",
+      "product_intelligence_bridge.py",
+      "publish_product_knowledge.py",
+      "real_recommendation_ranker.py",
+      "recommendation_engine.py",
+      "recommendation_engine_before_match_v1_20260803_230715.py",
+      "resolver_engine.py",
+      "resolver_engine_before_brand_registry_20260808_231140.py",
+      "resolver_engine_before_nothing_domain_20260804_224458.py",
+      "shopping_brain.py",
+      "shopping_brain_backup.py",
+      "shopping_brain_before_decision_engine_20260805_235240.py",
+      "shopping_brain_before_decision_engine_20260805_235607.py",
+      "shopping_brain_before_knowledge_gate_20260805_235931.py",
+      "shopping_brain_before_knowledge_score_20260805_223921.py",
+      "shopping_brain_before_match_v1_20260803_230715.py",
+      "shopping_brain_before_requirement_match_finish_20260803_231339.py",
+      "shopping_decision_engine.py",
+      "shopping_intelligence_pipeline.py",
+      "site_intelligence.py",
+      "weighted_fit_engine.py"
+    ],
+    "github_pages_static": true
+  },
+  "core_modules": {
+    "intent_engine.py": {
+      "exists": true,
+      "syntax_ok": true,
+      "functions": [
+        "normalize",
+        "detect_category",
+        "detect_budget",
+        "detect_features",
+        "detect_brands",
+        "detect_intent",
+        "detect_user_profile",
+        "detect_use_cases",
+        "detect_requirements",
+        "normalize_weights",
+        "build_priority_weights",
+        "parse_query"
+      ]
+    },
+    "market_discovery.py": {
+      "exists": true,
+      "syntax_ok": true,
+      "functions": [
+        "clean",
+        "normalize_key",
+        "host_of",
+        "path_of",
+        "is_editorial_title",
+        "has_category_hint",
+        "strong_product_url",
+        "looks_like_product_result",
+        "build_discovery_queries",
+        "compact_product_title",
+        "search_channel",
+        "discover_market",
+        "print_result",
+        "main"
+      ]
+    },
+    "product_identity_v2.py": {
+      "exists": true,
+      "syntax_ok": true,
+      "functions": [
+        "load_products",
+        "normalize_spaces",
+        "detect_brand",
+        "remove_variant_text",
+        "get_core_title",
+        "remove_brand_prefix",
+        "trim_marketing_words",
+        "build_identity",
+        "main"
+      ]
+    },
+    "official_source_resolver.py": {
+      "exists": true,
+      "syntax_ok": true,
+      "functions": [
+        "load_json",
+        "save_json",
+        "normalize_brand",
+        "normalize_text",
+        "core_product_title",
+        "normalized_model_tokens",
+        "has_extra_model_modifier",
+        "significant_tokens",
+        "token_match_score",
+        "hostname_matches",
+        "is_unwanted_page",
+        "page_type_score",
+        "classify_source_type",
+        "build_source_queries",
+        "resolve_product",
+        "source_family_key",
+        "stabilize_verified_source",
+        "load_existing_results",
+        "build_parser",
+        "show_status",
+        "select_products",
+        "main"
+      ]
+    },
+    "official_spec_extractor.py": {
+      "exists": true,
+      "syntax_ok": true,
+      "functions": [
+        "utc_now",
+        "clean_text",
+        "normalize_key",
+        "load_json",
+        "save_json",
+        "load_identity_index",
+        "is_unwanted_url",
+        "hostname",
+        "fetch_page",
+        "parse_json_ld",
+        "extract_meta",
+        "add_specification",
+        "extract_tables",
+        "extract_definition_lists",
+        "extract_json_ld_specs",
+        "extract_label_value_blocks",
+        "remove_page_chrome",
+        "is_noise_feature",
+        "feature_relevance_score",
+        "feature_scope",
+        "extract_features",
+        "identity_tokens",
+        "extract_structured_sections",
+        "extract_apple_techspecs",
+        "decode_shopify_oxygen_stream",
+        "add_stream_spec",
+        "extract_shopify_oxygen_specs",
+        "decode_indexed_state_graph",
+        "embedded_value_is_useful",
+        "extract_embedded_state_specs",
+        "page_identity_score",
+        "collect_official_source_urls",
+        "merge_evidence_records",
+        "apply_review_decision",
+        "collect_embedded_media_evidence",
+        "rank_media_evidence",
+        "prepare_vision_evidence_queue",
+        "empty_vision_claim",
+        "initialize_vision_claim_slots",
+        "build_vision_provider_config",
+        "vision_provider_analyze",
+        "attach_vision_provider_state",
+        "build_vision_job_payload",
+        "save_vision_job_payload",
+        "normalize_imported_vision_claim",
+        "import_vision_result_payload",
+        "load_vision_result_payload",
+        "validate_vision_claim",
+        "validate_vision_claims",
+        "build_universal_semantic_input",
+        "build_universal_semantic_prompt",
+        "validate_universal_semantic_result",
+        "attach_universal_semantic_result",
+        "promote_reviewed_vision_claims",
+        "build_vision_knowledge_candidates",
+        "finalize_vision_knowledge_candidates",
+        "extract_one",
+        "load_existing_output",
+        "backup_output",
+        "select_research_results",
+        "build_output",
+        "print_status",
+        "run_universal_semantic_cli",
+        "main"
+      ]
+    },
+    "product_intelligence_bridge.py": {
+      "exists": true,
+      "syntax_ok": true,
+      "functions": [
+        "load_json",
+        "products_by_id",
+        "flatten",
+        "semantic_facts",
+        "facts_by_key",
+        "fact_value",
+        "first_fact",
+        "spec_value",
+        "find_spec",
+        "pick",
+        "regex_first",
+        "build_profile",
+        "main"
+      ]
+    },
+    "product_fit_signal_builder.py": {
+      "exists": true,
+      "syntax_ok": true,
+      "functions": [
+        "signal",
+        "text_blob",
+        "numeric",
+        "budget_signal",
+        "battery_signal",
+        "display_signal",
+        "performance_signal",
+        "ram_signal",
+        "storage_signal",
+        "software_support_signal",
+        "connectivity_signal",
+        "anc_signal",
+        "sound_quality_signal",
+        "call_quality_signal",
+        "ease_of_use_signal",
+        "camera_signal",
+        "generic_unknown",
+        "build_fit_signals",
+        "score_product",
+        "main"
+      ]
+    },
+    "weighted_fit_engine.py": {
+      "exists": true,
+      "syntax_ok": true,
+      "functions": [
+        "_clamp01",
+        "_normalize_signal",
+        "_hard_constraint_failures",
+        "calculate_product_fit",
+        "rank_recommendations"
+      ]
+    },
+    "real_recommendation_ranker.py": {
+      "exists": true,
+      "syntax_ok": true,
+      "functions": [
+        "load_json",
+        "published_product_ids",
+        "normalize_category",
+        "profile_matches_category",
+        "build_real_candidates",
+        "rank_real_products",
+        "criterion_summary",
+        "print_ranked",
+        "main"
+      ]
+    },
+    "shopping_intelligence_pipeline.py": {
+      "exists": true,
+      "syntax_ok": true,
+      "functions": [
+        "clean",
+        "safe_float",
+        "hostname",
+        "sanitize_discovery_title",
+        "canonical_brand_from_title",
+        "fallback_brand_from_title",
+        "repair_identity",
+        "call_build_identity",
+        "candidate_to_identity_input",
+        "resolver_input_from_identity",
+        "is_possible_official_page",
+        "universal_official_resolve",
+        "resolve_with_fallback",
+        "extraction_is_usable",
+        "runtime_profile_from_extraction",
+        "criterion_groups",
+        "run_pipeline",
+        "save_runtime_payload",
+        "print_result",
+        "main"
+      ]
+    }
+  },
+  "security": {
+    "hardcoded_secret_files": [],
+    "tavily_env_present": true
+  },
+  "backup_clutter": {
+    "count": 65,
+    "files": [
+      "build_product_pages_before_intelligence_v1.py",
+      "build_product_pages_before_published_gate.py",
+      "build_product_pages_before_published_gate_20260809_002946.py",
+      "build_product_pages_before_verified_intelligence_20260808_232718.py",
+      "couponworld_before_ask_20260803_200050.py",
+      "couponworld_before_batch_id_freezer_20260808_141555.py",
+      "couponworld_before_intelligence_v1_20260808_114212.py",
+      "couponworld_before_knowledge_command_20260805_225432.py",
+      "couponworld_before_partial_evidence_mode_20260808_121502.py",
+      "couponworld_before_verified_product_gate_20260808_161003.py",
+      "couponworld_before_vision_key_fix_v2_20260808_134834.py",
+      "couponworld_before_vision_key_fix_v3_20260808_135512.py",
+      "couponworld_before_vision_v2_orchestration_20260808_133158.py",
+      "couponworld_complete_audit_before_bom_fix_20260809.py",
+      "intent_engine_before_feature_v2_20260805_232541.py",
+      "intent_engine_before_gamer_profile_fix_20260809_143059.py",
+      "intent_engine_before_v2_20260809.py",
+      "official_source_resolver_backup.py",
+      "official_source_resolver_before_brand_expansion_20260804_222957.py",
+      "official_source_resolver_before_brand_registry_20260808_184921.py",
+      "official_source_resolver_before_model_filter_20260804_225625.py",
+      "official_source_resolver_before_model_normalization_20260806_234104.py",
+      "official_source_resolver_before_page_priority_20260804_225410.py",
+      "official_source_resolver_before_page_priority_20260805_230553.py",
+      "official_source_resolver_before_query_improvement_20260804_223535.py",
+      "official_source_resolver_before_source_stability_20260808_124706.py",
+      "official_source_resolver_before_universal_sources_20260806_233209.py",
+      "official_spec_extractor_before_apple_techspecs_20260805_231923.py",
+      "official_spec_extractor_before_core_title_fallback_20260804_230342.py",
+      "official_spec_extractor_before_embedded_precision_20260807_210218.py",
+      "official_spec_extractor_before_embedded_state_20260807_205842.py",
+      "official_spec_extractor_before_evidence_collector_20260806_235026.py",
+      "official_spec_extractor_before_final_vision_knowledge_gate_20260807_223839.py",
+      "official_spec_extractor_before_media_evidence_20260807_211103.py",
+      "official_spec_extractor_before_media_ranker_20260807_212319.py",
+      "official_spec_extractor_before_partial_state_persistence_20260808_122702.py",
+      "official_spec_extractor_before_semantic_cli_20260808_111908.py",
+      "official_spec_extractor_before_shopify_oxygen_20260804_233742.py",
+      "official_spec_extractor_before_universal_sections_20260806_225951.py",
+      "official_spec_extractor_before_universal_sections_20260806_230951.py",
+      "official_spec_extractor_before_universal_semantic_core_20260808_110205.py",
+      "official_spec_extractor_before_validator_v1_1_3_20260808_000101.py",
+      "official_spec_extractor_before_vision_claim_schema_20260807_214754.py",
+      "official_spec_extractor_before_vision_claim_validator_20260807_222611.py",
+      "official_spec_extractor_before_vision_job_exporter_20260807_221202.py",
+      "official_spec_extractor_before_vision_knowledge_bridge_20260807_223614.py",
+      "official_spec_extractor_before_vision_promotion_gate_20260807_222918.py",
+      "official_spec_extractor_before_vision_promotion_gate_v1_1_20260807_223332.py",
+      "official_spec_extractor_before_vision_provenance_gate_20260808_120429.py",
+      "official_spec_extractor_before_vision_provider_20260807_215532.py",
+      "official_spec_extractor_before_vision_queue_20260807_214124.py",
+      "official_spec_extractor_before_vision_result_importer_20260807_222125.py",
+      "official_spec_extractor_before_vision_validator_minimal_20260807_235556.py",
+      "official_spec_extractor_before_vision_validator_v1_1_20260807_234529.py",
+      "official_spec_extractor_before_vision_validator_v1_1_2_20260807_235840.py",
+      "recommendation_engine_before_match_v1_20260803_230715.py",
+      "resolver_engine_before_brand_registry_20260808_231140.py",
+      "resolver_engine_before_nothing_domain_20260804_224458.py",
+      "shopping_brain_backup.py",
+      "shopping_brain_before_decision_engine_20260805_235240.py",
+      "shopping_brain_before_decision_engine_20260805_235607.py",
+      "shopping_brain_before_knowledge_gate_20260805_235931.py",
+      "shopping_brain_before_knowledge_score_20260805_223921.py",
+      "shopping_brain_before_match_v1_20260803_230715.py",
+      "shopping_brain_before_requirement_match_finish_20260803_231339.py"
+    ]
+  },
+  "gitignore": {
+    "exists": true,
+    "ignores_env": false,
+    "ignores_pycache": true,
+    "ignores_one_off_approval_helpers": true
+  },
+  "findings": [
+    {
+      "area": "Repository",
+      "status": "PASS",
+      "message": "Python architecture is present.",
+      "details": {
+        "python_files": 115
+      }
+    },
+    {
+      "area": "Frontend",
+      "status": "PASS",
+      "message": "Core static frontend files are present.",
+      "details": null
+    },
+    {
+      "area": "Product Database",
+      "status": "PASS",
+      "message": "Product database is readable with 74 records.",
+      "details": null
+    },
+    {
+      "area": "Price",
+      "status": "WARNING",
+      "message": "74 products have no stored price.",
+      "details": null
+    },
+    {
+      "area": "Images",
+      "status": "WARNING",
+      "message": "57 products have no image field.",
+      "details": null
+    },
+    {
+      "area": "Affiliate",
+      "status": "PASS",
+      "message": "No obvious missing Amazon affiliate tags were found.",
+      "details": null
+    },
+    {
+      "area": "AI Backend",
+      "status": "PASS",
+      "message": "All expected shopping intelligence modules exist and parse successfully.",
+      "details": null
+    },
+    {
+      "area": "API",
+      "status": "PASS",
+      "message": "A Python API/server implementation appears to exist.",
+      "details": {
+        "files": [
+          "couponworld_complete_audit.py",
+          "couponworld_complete_audit_before_bom_fix_20260809.py",
+          "product_classifier.py",
+          "shopping_brain.py",
+          "shopping_brain_before_decision_engine_20260805_235240.py",
+          "shopping_brain_before_decision_engine_20260805_235607.py",
+          "shopping_brain_before_knowledge_gate_20260805_235931.py",
+          "shopping_brain_before_knowledge_score_20260805_223921.py",
+          "shopping_brain_before_match_v1_20260803_230715.py",
+          "shopping_brain_before_requirement_match_finish_20260803_231339.py"
+        ]
+      }
+    },
+    {
+      "area": "Frontend-Backend Link",
+      "status": "PASS",
+      "message": "Frontend contains an API/fetch integration hint.",
+      "details": null
+    },
+    {
+      "area": "Shopping Pipeline",
+      "status": "BLOCKER",
+      "message": "Runtime pipeline exists but is not yet producing the required Top 3-5.",
+      "details": {
+        "stage_counts": {
+          "discovered": 9,
+          "identity_prepared": 9,
+          "official_verified": 0,
+          "evidence_ready": 0,
+          "fit_scored": 0,
+          "qualifying_50_plus": 0,
+          "recommendations_returned": 0
+        }
+      }
+    },
+    {
+      "area": "SEO",
+      "status": "PASS",
+      "message": "robots.txt and sitemap.xml exist; sitemap contains 82 URLs.",
+      "details": null
+    },
+    {
+      "area": "SEO",
+      "status": "PASS",
+      "message": "Homepage contains canonical/schema hints.",
+      "details": null
+    },
+    {
+      "area": "Security",
+      "status": "PASS",
+      "message": "No obvious hardcoded API secrets detected by static scan.",
+      "details": null
+    },
+    {
+      "area": "Runtime Config",
+      "status": "PASS",
+      "message": "TAVILY_API_KEY is available in the current environment.",
+      "details": null
+    },
+    {
+      "area": "Repository Hygiene",
+      "status": "WARNING",
+      "message": "65 backup/before Python files are present. Consider moving them to archive/legacy.",
+      "details": null
+    }
+  ],
+  "summary": {
+    "pass": 11,
+    "warning": 3,
+    "blocker": 1,
+    "overall_readiness_percent": 83,
+    "architecture_ready": true,
+    "shopping_engine_ready": false,
+    "frontend_ready": true,
+    "backend_ready": true,
+    "frontend_backend_linked": true,
+    "live_query_ready": false,
+    "deployment_ready": false
+  },
+  "next_actions": [
+    "Make the master pipeline reliably return 3-5 verified products with Fit >=50%.",
+    "Define a safe image-source contract for recommendation cards.",
+    "Add a live/current price source or clearly show price as unavailable."
+  ]
+}

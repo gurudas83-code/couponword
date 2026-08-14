@@ -1,0 +1,374 @@
+{
+  "https://www.boat-lifestyle.com/cdn/shop/files/Projector_e1_category.png?v=1776665705": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "image_type": "clean_product",
+      "product_prominence": 0.95,
+      "text_heavy": false,
+      "people_present": false,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "The image shows a boAt projector, not the expected boAt Rockerz 450 Headphones."
+    }
+  },
+  "https://www.boat-lifestyle.com/cdn/shop/files/K100_category.png?v=1779430781": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "image_type": "clean_product",
+      "product_prominence": 1.0,
+      "text_heavy": false,
+      "people_present": false,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "The image shows a beard trimmer, which does not match the expected product (boAt Rockerz 450 Headphones)."
+    }
+  },
+  "https://www.boat-lifestyle.com/cdn/shop/products/drivers-blue_1500x.jpg?v=1673002561": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "image_type": "feature_graphic",
+      "product_prominence": 0.85,
+      "text_heavy": false,
+      "people_present": false,
+      "clean_product_view": false,
+      "hero_confidence": 0.35,
+      "reason": "Image features promotional text ('40mm Drivers with HD Sound') and soundwave graphic overlays."
+    }
+  },
+  "https://www.boat-lifestyle.com/cdn/shop/products/eb8e0fbd-c412-48b3-9c91-5b49ddf35800.png?v=1673002681": {
+    "hero_classification": {
+      "hero_eligible": true,
+      "image_type": "clean_product",
+      "product_prominence": 0.9,
+      "text_heavy": false,
+      "people_present": false,
+      "clean_product_view": true,
+      "hero_confidence": 0.98,
+      "reason": "Clean studio product shot of the headphones isolated on a transparent/white background, ideal for a hero image."
+    }
+  },
+  "https://www.apple.com/v/iphone-17e/d/images/meta/iphone17e_specs__b9s8kb5q7s5e_og.png?202607302000": {
+    "hero_classification": {
+      "hero_eligible": true,
+      "image_type": "clean_product",
+      "product_prominence": 0.95,
+      "text_heavy": false,
+      "people_present": false,
+      "clean_product_view": true,
+      "hero_confidence": 0.95,
+      "reason": "Clear studio shot showing multiple color variants and the front screen of the product on a clean background without text."
+    }
+  },
+  "https://cdn.shopify.com/s/files/1/0579/8091/1768/files/Arbok-Primary-White.png?v=1750841624": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "image_type": "clean_product",
+      "product_prominence": 0.9,
+      "text_heavy": false,
+      "people_present": false,
+      "clean_product_view": false,
+      "hero_confidence": 0.3,
+      "reason": "The image shows a clean product view of a white smartphone variant, which mismatches the expected black color variant."
+    }
+  },
+  "https://cdn.shopify.com/s/files/1/0579/8091/1768/files/0000s_0011_Phone-3-white.png?v=1753686747": {
+    "hero_classification": {
+      "hero_eligible": true,
+      "image_type": "clean_product",
+      "product_prominence": 0.95,
+      "text_heavy": false,
+      "people_present": false,
+      "clean_product_view": true,
+      "hero_confidence": 0.85,
+      "reason": "Isolated, clean studio product view of the smartphone back on a white background, though it depicts a white variant instead of black."
+    }
+  },
+  "https://image01.realme.net/general/20260224/177192755005883347ece40da4f2d9a4a5faadfed5363.jpg": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "exact_product_match": false,
+      "model_match": false,
+      "variant_match": false,
+      "identity_confidence": 0.2,
+      "image_type": "feature_graphic",
+      "product_prominence": 0.5,
+      "text_heavy": true,
+      "people_present": false,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "The image is a promotional feature graphic with explanatory text and shows a purple color variant instead of the expected Master Gold."
+    }
+  },
+  "https://image01.realme.net/general/20260224/1771927553259196af3c7736f499086e13761e1d9c3c5.jpg": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "exact_product_match": true,
+      "model_match": true,
+      "variant_match": true,
+      "identity_confidence": 0.95,
+      "image_type": "feature_graphic",
+      "product_prominence": 0.6,
+      "text_heavy": true,
+      "people_present": false,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "This is a feature promotional graphic with text in Indonesian explaining adaptive noise cancellation. It is not a clean standalone product view suitable for a hero image."
+    }
+  },
+  "https://image01.realme.net/general/20260224/177192755916478c2465ea6fe4351907d16d34a9ce487.jpg": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "exact_product_match": true,
+      "model_match": true,
+      "variant_match": true,
+      "identity_confidence": 0.9,
+      "image_type": "feature_graphic",
+      "product_prominence": 0.6,
+      "text_heavy": true,
+      "people_present": false,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "The image is a promotional feature graphic highlighting the battery life with text overlays and battery specification cards, making it unsuitable for a main product hero image."
+    }
+  },
+  "https://image01.realme.net/general/20260224/1771927547560a751489cb3894f26ac0cd9c80123d505.jpg": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "exact_product_match": true,
+      "model_match": true,
+      "variant_match": true,
+      "identity_confidence": 0.95,
+      "image_type": "feature_graphic",
+      "product_prominence": 0.6,
+      "text_heavy": true,
+      "people_present": false,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "The image is a promotional feature graphic containing marketing text and technical details in Indonesian, making it unsuitable for a clean hero image."
+    }
+  },
+  "https://image01.realme.net/general/20260224/1771927543301d597bd099b2e4b48a8a89cdef7442b1b.jpg": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "exact_product_match": true,
+      "model_match": true,
+      "variant_match": true,
+      "identity_confidence": 0.95,
+      "image_type": "feature_graphic",
+      "product_prominence": 0.7,
+      "text_heavy": false,
+      "people_present": true,
+      "clean_product_view": false,
+      "hero_confidence": 0.2,
+      "reason": "This is a marketing feature graphic showing promotional Indonesian text and a hand holding the charging case, making it unsuitable for a main product hero image."
+    }
+  },
+  "https://image01.realme.net/general/20260224/1771927557462d63ab60bd86d4afdbbb957af38145019.jpg": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "exact_product_match": false,
+      "model_match": false,
+      "variant_match": false,
+      "identity_confidence": 0.0,
+      "image_type": "feature_graphic",
+      "product_prominence": 0.0,
+      "text_heavy": true,
+      "people_present": false,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "Image is a promotional feature graphic highlighting AI capabilities and does not display the physical product."
+    }
+  },
+  "https://image01.realme.net/general/20260224/1771927546038040cb470e439405a82da0955f0996364.jpg": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "exact_product_match": true,
+      "model_match": true,
+      "variant_match": true,
+      "identity_confidence": 0.85,
+      "image_type": "feature_graphic",
+      "product_prominence": 0.5,
+      "text_heavy": true,
+      "people_present": false,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "The image is a promotional feature graphic with an exploded internal driver diagram and marketing text, making it unsuitable for a main shopping-card hero image."
+    }
+  },
+  "https://image01.realme.net/general/20260224/1771927542331fd4a21a4e79842028dd9e75891b7d329.jpg": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "exact_product_match": true,
+      "model_match": true,
+      "variant_match": true,
+      "identity_confidence": 0.8,
+      "image_type": "lifestyle",
+      "product_prominence": 0.2,
+      "text_heavy": false,
+      "people_present": true,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "The image features designer Naoto Fukasawa sitting in a chair holding the product, making it a lifestyle/promotional image rather than a clean product view."
+    }
+  },
+  "https://image01.realme.net/general/20260224/177192755155447b1be946ca44cc69cdfd4570b18d46d.jpg": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "exact_product_match": false,
+      "model_match": true,
+      "variant_match": false,
+      "identity_confidence": 0.4,
+      "image_type": "lifestyle",
+      "product_prominence": 0.2,
+      "text_heavy": true,
+      "people_present": true,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "Image is a promotional lifestyle banner featuring a person wearing an earbud with prominent text overlays, unsuitable for a main product hero card."
+    }
+  },
+  "https://image01.realme.net/general/20260224/1771927541122a2b562bf38d04f5ab4405bdea571775a.jpg": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "exact_product_match": true,
+      "model_match": true,
+      "variant_match": true,
+      "identity_confidence": 0.9,
+      "image_type": "feature_graphic",
+      "product_prominence": 0.6,
+      "text_heavy": true,
+      "people_present": false,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "The image is a feature breakdown graphic/banner with multiple panels detailing key specifications in text. It is not a clean standalone product image suitable for a hero card."
+    }
+  },
+  "https://image01.realme.net/general/20260224/17719275606254bfca9e14ff34b9e8d75d133d7e00e37.jpg": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "exact_product_match": true,
+      "model_match": true,
+      "variant_match": true,
+      "identity_confidence": 0.9,
+      "image_type": "feature_graphic",
+      "product_prominence": 0.5,
+      "text_heavy": true,
+      "people_present": false,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "The image is a multi-panel feature graphic/infographic with text and marketing illustrations, making it unsuitable for a main product hero card."
+    }
+  },
+  "https://image01.realme.net/general/20260224/177192754879613d0b2c4598f4d34bca5a0b772b10c2f.jpg": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "exact_product_match": false,
+      "model_match": false,
+      "variant_match": false,
+      "identity_confidence": 0.3,
+      "image_type": "lifestyle",
+      "product_prominence": 0.15,
+      "text_heavy": false,
+      "people_present": true,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "The image is a lifestyle promotional banner featuring a person wearing an earbud with text overlay, making it unsuitable for a main product card."
+    }
+  },
+  "https://image01.realme.net/general/20260224/1771927544639ccdaee9d30524b148fb6219a5ada913a.jpg": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "exact_product_match": false,
+      "model_match": true,
+      "variant_match": false,
+      "identity_confidence": 0.9,
+      "image_type": "feature_graphic",
+      "product_prominence": 0.7,
+      "text_heavy": false,
+      "people_present": false,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "Promotional feature graphic showing three different color variants with marketing text, making it unsuitable for a main single-product hero image."
+    }
+  },
+  "https://image01.realme.net/general/20260224/1771927554695f9fdd4bc21f04ae1b24067d7e1081505.jpg": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "exact_product_match": true,
+      "model_match": true,
+      "variant_match": true,
+      "identity_confidence": 0.95,
+      "image_type": "feature_graphic",
+      "product_prominence": 0.5,
+      "text_heavy": true,
+      "people_present": true,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "This is a promotional feature graphic combining lifestyle photos, text, and an exploded diagram, making it unsuitable as a main hero image."
+    }
+  },
+  "https://image01.realme.net/general/20260224/1771927562328539c671bfacd46bf952bf85783cd5cdb.jpg": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "exact_product_match": true,
+      "model_match": true,
+      "variant_match": true,
+      "identity_confidence": 0.95,
+      "image_type": "spec_sheet",
+      "product_prominence": 0.3,
+      "text_heavy": true,
+      "people_present": false,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "The image is a specification sheet with text tables, box contents, and notes, which is unsuitable for a clean hero product image."
+    }
+  },
+  "https://image01.realme.net/general/20260507/1778163488001efb2cb4021a64edfba2d920d45c4daac.png": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "exact_product_match": false,
+      "model_match": false,
+      "variant_match": false,
+      "identity_confidence": 0.0,
+      "image_type": "clean_product",
+      "product_prominence": 1.0,
+      "text_heavy": false,
+      "people_present": false,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "The image depicts a smartphone instead of the expected realme Buds Air 8 wireless earbuds."
+    }
+  },
+  "https://image01.realme.net/general/20250522/1747889587883d2a3be1075bc4df1a749dfcdd17fdc1b.png?width=1080&height=1080&size=932246": {
+    "hero_classification": {
+      "hero_eligible": false,
+      "exact_product_match": false,
+      "model_match": false,
+      "variant_match": false,
+      "identity_confidence": 0.0,
+      "image_type": "clean_product",
+      "product_prominence": 1.0,
+      "text_heavy": false,
+      "people_present": false,
+      "clean_product_view": false,
+      "hero_confidence": 0.0,
+      "reason": "The expected product is realme Buds Air 8 earbuds, but the image shows a smartphone."
+    }
+  },
+  "https://image01.realme.net/general/20260308/1772973648764821b6e96876343359d5458d8f95b2442.png?width=1080&height=1080&size=594216": {
+    "hero_classification": {
+      "hero_eligible": true,
+      "exact_product_match": true,
+      "model_match": true,
+      "variant_match": true,
+      "identity_confidence": 0.95,
+      "image_type": "clean_product",
+      "product_prominence": 1.0,
+      "text_heavy": false,
+      "people_present": false,
+      "clean_product_view": true,
+      "hero_confidence": 0.95,
+      "reason": "Clean studio product shot of the realme Buds Air 8 in Master Gold on a plain white background, showing both the charging case and earbuds."
+    }
+  }
+}

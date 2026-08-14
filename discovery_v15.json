@@ -1,0 +1,184 @@
+﻿{
+  "query": "Best earbuds under 3000 with ANC long battery and good call quality",
+  "intent": {
+    "intent": "recommendation",
+    "category": "earbuds",
+    "budget_min": null,
+    "budget_max": 3000,
+    "features": [
+      "ANC",
+      "Battery"
+    ],
+    "brands": [],
+    "compare": false,
+    "keywords": [
+      "best",
+      "earbuds",
+      "under",
+      "3000",
+      "with",
+      "anc",
+      "long",
+      "battery",
+      "and",
+      "good",
+      "call",
+      "quality"
+    ],
+    "user_profile": null,
+    "use_case": [],
+    "hard_constraints": [
+      "budget_max"
+    ],
+    "must_have": [],
+    "preferred": [
+      "good_battery",
+      "anc"
+    ],
+    "avoid": [],
+    "priority_weights": {
+      "budget": 18,
+      "sound_quality": 18,
+      "battery": 18,
+      "call_quality": 14,
+      "anc": 18,
+      "comfort": 9,
+      "connectivity": 5
+    }
+  },
+  "discovery_queries": [
+    "earbuds ANC Battery good battery anc under 3000 India buy",
+    "Best earbuds under 3000 with ANC long battery and good call quality India product",
+    "earbuds India under 3000 model"
+  ],
+  "candidate_count": 9,
+  "candidates": [
+    {
+      "candidate_id": "market-01",
+      "title": "Noise Buds N1 Truly Wireless Earbuds with Chrome Finish, 40H of Playtime, Quad Mic with ENC, Ultra Low Latency Gaming (Up to 40 Ms), Instacharge(10 Min=120 Min), Bluetooth V5.3(Carbon Black) : Amazon.in: Electronics",
+      "source_title": "Noise Buds N1 Truly Wireless Earbuds with Chrome Finish, 40H of Playtime, Quad Mic with ENC, Ultra Low Latency Gaming (Up to 40 Ms), Instacharge(10 Min=120 Min), Bluetooth V5.3(Carbon Black) : Amazon.in: Electronics",
+      "source_url": "https://www.amazon.in/Noise-Launched-Wireless-Playtime-Instacharge/dp/B0CQJWMMG7",
+      "source_host": "www.amazon.in",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "Best earbuds under 3000 with ANC long battery and good call quality India product",
+      "discovery_score": 0.9239,
+      "discovery_quality_score": 1.3239,
+      "known_brand": "amazon",
+      "snippet": "they are veryy good but after sometime of use there is a problem you have to face. i.e, connecting to the device, and if they are connected you can't hear the sound of video either from the outside or from the phone its gone from both side and then u have to disconnect them ##### Best product Better base sound ##### Ranf Very good quality product ,gives a premium feel , has very good base but only set back is its range 10 steps away and it will start glitching [...] Calling quality is decent with ENC, works fine in normal environment but in heavy noise itΓÇÖs average (expected in this price). Design is stylish and comfortable, fits well in ears even for long usage. Bluetooth connection is stable and pairing is fast. ≡ƒæë Overall, if your budget is around Γé╣1000 and you want earbuds for music + calling, this is a solid value for money deal. Pros ≡ƒæì Strong bass & good sound Long battery life Stylish design Fast charging Cons ≡ƒæÄ [...] ##### Best Budget Earbuds Under Γé╣1000 ≡ƒöÑ I recently bought Noise Buds N1 and honestly IΓÇÖm impressed at this price range. The sound quality is really good, especially the bass ΓÇô perfect for music lovers like me. Vocals are also clear and balanced. Battery backup is amazing ΓÇô easily lasts long with the case (around 40 hours claimed), so no tension of frequent charging. Fast charging is also helpful.",
+      "status": "discovered_unverified"
+    },
+    {
+      "candidate_id": "market-02",
+      "title": "OnePlus Nord Buds 3 Pro Truly Wireless Earbuds with 49dB Active Noise Cancellation Bluetooth",
+      "source_title": "OnePlus Nord Buds 3 Pro Truly Wireless Earbuds with 49dB Active Noise Cancellation Bluetooth Price in India - Buy OnePlus Nord Buds 3 Pro Truly Wireless Earbuds with 49dB Active Noise Cancellation Bluetooth Online - OnePlus : Flipkart.com",
+      "source_url": "https://www.flipkart.com/oneplus-nord-buds-3-pro-truly-wireless-earbuds-49db-active-noise-cancellation-bluetooth/p/itmd40bdc505265b",
+      "source_host": "www.flipkart.com",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "Best earbuds under 3000 with ANC long battery and good call quality India product",
+      "discovery_score": 0.8589,
+      "discovery_quality_score": 1.2589,
+      "known_brand": "oneplus",
+      "snippet": "Get by Today AD 4.2 truke Mega 7 Gaming TWS, 24-bit Spatial Audio Earbuds, 60H Battery, Quad Mic ENC, 5.4 Bluetooth Headset Coal Black, True Wireless 74% OFF Γé╣3,499 Γé╣899 Γé╣854 with Bank offer Get by Today AD Trending 4.1 Mivi Duopods B1 (Just Launched)45Hrs Playtime, AI ENC for HD Call, Fast Charging, 5.3 Bluetooth Headset Black, True Wireless 80% OFF Γé╣2,999 Γé╣599 Γé╣569 with Bank offer Get by Today AD 4 [...] 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 Similar Products AD Bestseller 4.3 OnePlus Nord Buds 4 TWS Earbuds with 52dB Real-time ANC, 12mm Titanium-coated Drivers Bluetooth Headset Stellar Black, In the Ear 11% OFF Γé╣3,499 Γé╣3,099 Γé╣2,944 with Bank offer Get by Today AD 4.3 OnePlus Nord Buds 4 TWS Earbuds with 52dB Real-time ANC, 12mm Titanium-coated Drivers Bluetooth Headset Astral Teal, In the Ear 11% OFF Γé╣3,499 Γé╣3,099 Γé╣2,944 with Bank offer Get by Today AD [...] Get it by 10 Aug](/mivi-superpods-claro-tws-new-launch-35db-anc-3d-soundstage-spatial-audio-btv5-4-bluetooth/p/itme909f52bbd9ec?pid=ACCHGYH6KA6XHHZZ&lid=LSTACCHGYH6KA6XHHZZRH9KRC&hl_lid=&marketplace=FLIPKART&fm=eyJ3dHAiOiJyZWNvIiwicHJwdCI6InBwIiwibWlkIjoicHJvZHVjdFJlY29tbWVuZGF0aW9uL3NpbWlsYXIifQ%3D%3D) AD ASICEN Original for boat air dopes 212 Bluetooth Headset Black, In the Ear 34% OFF Γé╣1,999 Γé╣1,328 Γé╣1,261 with Bank offer AD 4.1",
+      "status": "discovered_unverified"
+    },
+    {
+      "candidate_id": "market-03",
+      "title": "CMF by Nothing Buds Pro with 45 dB ANC, Ultra Bass Technology & upto 39 hours of battery life Bluetooth",
+      "source_title": "CMF by Nothing Buds Pro with 45 dB ANC, Ultra Bass Technology & upto 39 hours of battery life Bluetooth Price in India - Buy CMF by Nothing Buds Pro with 45 dB ANC, Ultra Bass Technology & upto 39 hours of battery life Bluetooth Online - CMF by Nothing : Flipkart.com",
+      "source_url": "https://www.flipkart.com/cmf-nothing-buds-pro-45-db-anc-ultra-bass-technology-upto-39-hours-battery-life-bluetooth-headset/p/itm7b41eac6df634",
+      "source_host": "www.flipkart.com",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "earbuds ANC Battery good battery anc under 3000 India buy",
+      "discovery_score": 0.7092,
+      "discovery_quality_score": 1.1092,
+      "known_brand": "nothing",
+      "snippet": "AD EQ8 Winds Wireless Earbuds 224 , True Wireless in-Ear Headphones with Charging Case Bluetooth Headset White, True Wireless 79% OFF Γé╣2,999 Γé╣615 Γé╣584 with Bank offer AD 4.3 CMF by Nothing Buds 2 48 dB Hybrid ANC, Ultra Bass Technology 2.0, 55 Hrs playtime Bluetooth Headset Orange, In the Ear 17% OFF Γé╣2,999 Γé╣2,499 Γé╣2,374 with Bank offer Get by Today AD Trending 4.4 [...] 6 7 8 9 0 1 2 3 4 5 6 7 8 9 Similar Products AD 4.3 CMF by Nothing Buds 2 Plus with 50dB Hybrid ANC| Hi-Res + LDAC| Spatial Audio| 6HD Mic| 61.5Hrs Bluetooth Headset Blue, True Wireless 28% OFF Γé╣3,999 Γé╣2,899 Γé╣2,754 with Bank offer Get it by 11 Aug AD Bestseller 4.3 CMF by Nothing Buds 2 48 dB Hybrid ANC, Ultra Bass Technology 2.0, 55 Hrs playtime Bluetooth Headset Light Green, In the Ear 17% OFF Γé╣2,999 Γé╣2,499 Γé╣2,374 with Bank offer AD [...] FLIPKARTChevron Flipkart A one-stop Shopping SelectedMinutes Everything in MinutesGrocery At wholesale pricesTravel All your travel needs New customer?Sign Up My Profile My Profile Flipkart Plus Zone Flipkart Plus Zone Become a Seller Become a Seller Gift Cards Gift Cards Notification Preferences Notification Preferences 24x7 Customer Care 24x7 Customer Care Download App Download App More Become a Seller Become a Seller Notification Settings",
+      "status": "discovered_unverified"
+    },
+    {
+      "candidate_id": "market-04",
+      "title": "Radhe NEW ANC TWS, Ear buds with 48HRS Battery, Fast ...",
+      "source_title": "Radhe NEW ANC TWS, Ear buds with 48HRS Battery, Fast ... - Flipkart",
+      "source_url": "https://www.flipkart.com/radhe-new-anc-tws-ear-buds-48hrs-battery-fast-charge-bluetooth-mic-fkh-309/p/itmd663d4510bb3b",
+      "source_host": "www.flipkart.com",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "earbuds ANC Battery good battery anc under 3000 India buy",
+      "discovery_score": 0.7277,
+      "discovery_quality_score": 0.9077,
+      "known_brand": null,
+      "snippet": "Buy Radhe NEW ANC TWS, Ear buds with 48HRS Battery, Fast Charge, Bluetooth ... Γé╣3,000. Γé╣838. Ratings and reviews. No ratings for this product yet. Be the",
+      "status": "discovered_unverified"
+    },
+    {
+      "candidate_id": "market-05",
+      "title": "ZOLDYCK NEW ANC TWS, Ear buds with 48HRS Battery ...",
+      "source_title": "ZOLDYCK NEW ANC TWS, Ear buds with 48HRS Battery ... - Flipkart",
+      "source_url": "https://www.flipkart.com/zoldyck-new-anc-tws-ear-buds-48hrs-battery-fast-charge-blutooth-mic-a1-487-bluetooth/p/itma23d0cbb1f140",
+      "source_host": "www.flipkart.com",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "earbuds ANC Battery good battery anc under 3000 India buy",
+      "discovery_score": 0.7209,
+      "discovery_quality_score": 0.9009,
+      "known_brand": null,
+      "snippet": "Buy ZOLDYCK NEW ANC TWS, Ear buds with 48HRS Battery, Fast Charge, Blutooth ... Γé╣3,000. Γé╣730. Γé╣693 with Bank offer. Ratings and reviews. No ratings for",
+      "status": "discovered_unverified"
+    },
+    {
+      "candidate_id": "market-06",
+      "title": "Stsar A466 Wireless ENC Earbuds with Clear Calls and Long Battery Backup Bluetooth",
+      "source_title": "Stsar A466 Wireless ENC Earbuds with Clear Calls and Long Battery Backup Bluetooth Price in India - Buy Stsar A466 Wireless ENC Earbuds with Clear Calls and Long Battery Backup Bluetooth Online - Stsar : Flipkart.com",
+      "source_url": "https://www.flipkart.com/stsar-a466-wireless-enc-earbuds-clear-calls-long-battery-backup-bluetooth/p/itm4f50ae5f5c6d4",
+      "source_host": "www.flipkart.com",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "earbuds ANC Battery good battery anc under 3000 India buy",
+      "discovery_score": 0.7394,
+      "discovery_quality_score": 0.8594,
+      "known_brand": null,
+      "snippet": "Γé╣1,999 Γé╣571 Γé╣542 with Bank offer 2.3 CIHROX 141 Pro ANC TWS Earbuds High Quality Noie Canceling Wireless Earbuds Bluetooth Gaming Headset Black, True Wireless 78% OFF Γé╣2,999 Γé╣666 Γé╣632 with Bank offer Get it by 14 Aug Stsar X9 Bluetooth Neckband with ENC Technology, Crystal Clear Calls & Comfort Bluetooth Headset Multicolor, In the Ear 72% OFF Γé╣1,599 Γé╣450 Γé╣427 with Bank offer Get it by 14 Aug [...] ROKAVO Korean Girls/boys Fashion Earring Earbuds Bluetooth 5.3 Gaming,music play 40hr Bluetooth Headset Cream, True Wireless 77% OFF Γé╣2,999 Γé╣697 Γé╣662 with Bank offer 2.3 CIHROX 141 Pro ANC TWS Earbuds High Quality Noie Canceling Wireless Earbuds Bluetooth Gaming Headset Black, True Wireless 78% OFF Γé╣2,999 Γé╣666 Γé╣632 with Bank offer Trending 4 truke Buds Lite with 60H Playtime, Deep Bass, 13mm Speakers, Quad-Mic ENC, Low Latency Bluetooth Headset Pure Black, True Wireless 76% OFF [...] FLIPKARTChevron Flipkart A one-stop Shopping SelectedMinutes Everything in MinutesGrocery At wholesale pricesTravel All your travel needs New customer?Sign Up My Profile My Profile Flipkart Plus Zone Flipkart Plus Zone Become a Seller Become a Seller Gift Cards Gift Cards Notification Preferences Notification Preferences 24x7 Customer Care 24x7 Customer Care Download App Download App More Become a Seller Become a Seller Notification Settings",
+      "status": "discovered_unverified"
+    },
+    {
+      "candidate_id": "market-07",
+      "title": "CORTI Eardrum TWS Earbuds",
+      "source_title": "CORTI Eardrum TWS Earbuds | Dual Built-In MIC | ANC And ENC | Up To 40Hrs Battery Bluetooth Price in India - Buy CORTI Eardrum TWS Earbuds | Dual Built-In MIC | ANC And ENC | Up To 40Hrs Battery Bluetooth Online - CORTI : Flipkart.com",
+      "source_url": "https://www.flipkart.com/corti-eardrum-tws-earbuds-dual-built-in-mic-anc-enc-up-40hrs-battery-bluetooth/p/itm673235b9bf6ab?pid=ACCHNKZHYMMQ3ZW9",
+      "source_host": "www.flipkart.com",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "earbuds ANC Battery good battery anc under 3000 India buy",
+      "discovery_score": 0.7314,
+      "discovery_quality_score": 0.7314,
+      "known_brand": null,
+      "snippet": "54% 2,999 Γé╣1,390 Buy at Γé╣1,320 Apply offers for maximum savings Buy at Γé╣1,320 Bank offers Bank offers Γé╣70 off Apply for Card, EMI and Pay Later Activate Flipkart EMI No Cost EMI\\ | Unlock Γé╣1 lakh Check Limit Additional benefits on this purchase Unlock core coupon ΓÇó 10% off Unlock Core coupon ΓÇó 10% off Delivery details Location not set Select delivery location Delivery by 15 Aug, Sat Fulfilled by Corti 1 year with Flipkart See other sellers Shop with peace of mind [...] FLIPKARTChevron Flipkart A one-stop Shopping SelectedMinutes Everything in MinutesGrocery At wholesale pricesTravel All your travel needs New customer?Sign Up My Profile My Profile Flipkart Plus Zone Flipkart Plus Zone Become a Seller Become a Seller Gift Cards Gift Cards Notification Preferences Notification Preferences 24x7 Customer Care 24x7 Customer Care Download App Download App More Become a Seller Become a Seller Notification Settings [...] Image truke ResonanceX OWS w/ 70H Playtime, 24-bit Spatial Audio, 16mm Drivers, Dual Pairing Bluetooth Headset 77% 6,999 Γé╣1,599 AD Image Trendz AeroX BassPRO Earbuds BT 5.4 ANC ENC Quad Mic 13mm Driver 50Hrs IPX5 ENx Bluetooth Headset 85% 7,999 Γé╣1,199 AD Image Noise Buds VS102 Elite with 50Hr Playtime, ENC, Quad Mic, Chrome finish Flybird Design Bluetooth Headset 71% 3,499 Γé╣999 AD # CORTI Eardrum TWS Earbuds | Dual Built-In MIC | ANC And ENC | Up ... more 54% 2,999 Γé╣1,390",
+      "status": "discovered_unverified"
+    },
+    {
+      "candidate_id": "market-08",
+      "title": "Jakpods TWS",
+      "source_title": "Jakpods TWS || ANC Earbuds with Long battery Life & USB Charging Cable for Daily Use Bluetooth Price in India - Buy Jakpods TWS || ANC Earbuds with Long battery Life & USB Charging Cable for Daily Use Bluetooth Online - Jakpods : Flipkart.com",
+      "source_url": "https://www.flipkart.com/jakpods-tws-anc-earbuds-long-battery-life-usb-charging-cable-daily-use-bluetooth/p/itmb4df6bbcb561b",
+      "source_host": "www.flipkart.com",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "earbuds ANC Battery good battery anc under 3000 India buy",
+      "discovery_score": 0.7223,
+      "discovery_quality_score": 0.7223,
+      "known_brand": null,
+      "snippet": "Key Highlights +1 # Jakpods TWS || ANC Earbuds with Long battery Life & USB Charging ... more 67% 999 Γé╣325 Buy at Γé╣308 Apply offers for maximum savings Buy at Γé╣308 Bank offers Bank offers Γé╣17 off Apply for Card, EMI and Pay Later Activate Flipkart EMI No Cost EMI\\ | Unlock Γé╣1 lakh Check Limit Additional benefits on this purchase Unlock core coupon ΓÇó 10% off Unlock Core coupon ΓÇó 10% off Delivery details Location not set Select delivery location [...] Fulfilled by apnauniquebazaar 2.3 ΓÇó 1 year with Flipkart See other sellers Shop with peace of mind No Warranty 7 Days Replacement No cash on delivery Customer support Product highlights Up to 48 hr of Battery Life Fast Charging Support With Noise Cancellation With Deep Bass Up to 20 m Bluetooth Range Bluetooth Connectivity All details Features, description and more Specifications Warranty Manufacturer info Show More Notify Me You might be interested in Power Banks [...] FLIPKARTChevron Flipkart A one-stop Shopping SelectedMinutes Everything in MinutesGrocery At wholesale pricesTravel All your travel needs New customer?Sign Up My Profile My Profile Flipkart Plus Zone Flipkart Plus Zone Become a Seller Become a Seller Rewards Rewards Gift Cards Gift Cards Notification Preferences Notification Preferences 24x7 Customer Care 24x7 Customer Care Advertise Advertise Download App Download App MoreChevron More Become a Seller",
+      "status": "discovered_unverified"
+    },
+    {
+      "candidate_id": "market-09",
+      "title": "Buy Sree Vani Long Battery Wireless Earbuds with Clear ...",
+      "source_title": "Buy Sree Vani Long Battery Wireless Earbuds with Clear ... - Flipkart",
+      "source_url": "https://www.flipkart.com/sree-vani-long-battery-wireless-earbuds-clear-sound-gaming-feature-anc-bluetooth/p/itmbcc0ca75707f7",
+      "source_host": "www.flipkart.com",
+      "discovery_channel": "commerce",
+      "discovered_by_query": "earbuds ANC Battery good battery anc under 3000 India buy",
+      "discovery_score": 0.5994,
+      "discovery_quality_score": 0.5994,
+      "known_brand": null,
+      "snippet": "Buy Sree Vani Long Battery Wireless Earbuds with Clear Sound&Gaming Feature with ANC Bluetooth for Rs.1999 Online, Also get Sree Vani Long Battery Wireless",
+      "status": "discovered_unverified"
+    }
+  ],
+  "note": "Discovery quality scores only prioritize candidate research; final recommendation Fit must be computed from verified evidence."
+}

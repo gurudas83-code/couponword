@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Coupon World Official Specification Extractor v2.0
 
@@ -1893,8 +1893,11 @@ def collect_embedded_media_evidence(
         if not raw:
             continue
 
+        is_json_ld = "application/ld+json" in script_type
+
         if not (
             "application/json" in script_type
+            or is_json_ld
             or script_id in {
                 "__NEXT_DATA__",
                 "__NUXT_DATA__",
@@ -1905,6 +1908,52 @@ def collect_embedded_media_evidence(
         try:
             payload = json.loads(raw)
         except (json.JSONDecodeError, TypeError, ValueError):
+            continue
+
+        if is_json_ld:
+            # Product JSON-LD is high-value official media evidence.
+            # Preserve only Product-family objects so generic WebPage
+            # logos and primaryImageOfPage assets do not pollute the pool.
+            stack: list[Any] = [payload]
+
+            while stack:
+                current = stack.pop()
+
+                if isinstance(current, list):
+                    stack.extend(current)
+                    continue
+
+                if not isinstance(current, dict):
+                    continue
+
+                graph = current.get("@graph")
+
+                if isinstance(graph, list):
+                    stack.extend(graph)
+
+                item_type = current.get("@type")
+                types = (
+                    item_type
+                    if isinstance(item_type, list)
+                    else [item_type]
+                )
+
+                if any(
+                    str(value).lower()
+                    in {
+                        "product",
+                        "individualproduct",
+                        "productmodel",
+                    }
+                    for value in types
+                    if value
+                ):
+                    payloads.append(
+                        {
+                            "schema_product": current,
+                        }
+                    )
+
             continue
 
         payloads.append(
@@ -1993,8 +2042,23 @@ def collect_embedded_media_evidence(
             except ValueError:
                 return
 
-            if not parsed_path.endswith(
-                MEDIA_IMAGE_EXTENSIONS
+            is_schema_product_image = (
+                "schema_product.image" in path.lower()
+            )
+
+            is_known_image_service = (
+                "/is/image/" in parsed_path
+                or "images.samsung.com" in url.lower()
+            )
+
+            if (
+                not parsed_path.endswith(
+                    MEDIA_IMAGE_EXTENSIONS
+                )
+                and not (
+                    is_schema_product_image
+                    and is_known_image_service
+                )
             ):
                 return
 
@@ -2220,7 +2284,7 @@ def collect_embedded_media_evidence(
         "mobile_count": mobile_count,
         "generic_candidate_count": generic_count,
         "excluded_ui_assets": len(ui_items),
-        "product_images": product_items[:80],
+        "product_images": product_items,
         "ui_assets": ui_items[:30],
         "ocr_status": "not_run",
         "vision_status": "not_run",

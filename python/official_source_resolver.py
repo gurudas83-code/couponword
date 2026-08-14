@@ -15,7 +15,10 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, unquote, urlparse
+import requests
+from bs4 import BeautifulSoup
+from xml.etree import ElementTree as ET
 
 from tavily import TavilyClient
 from resolver_engine import compare_identity
@@ -54,6 +57,17 @@ BRAND_DOMAINS: dict[str, list[str]] = {
     "hp": ["hp.com"],
     "amazon": ["amazon.in", "amazon.com"],
     "echo": ["amazon.in", "amazon.com"],
+
+    # Extended image/source coverage
+    "campus": ["campusshoes.com"],
+    "titan": ["titan.co.in"],
+    "wildcraft": ["wildcraft.com"],
+    "american tourister": ["americantourister.in"],
+    "americantourister": ["americantourister.in"],
+    "levi's": ["levi.in"],
+    "levis": ["levi.in"],
+    "levi": ["levi.in"],
+    "mamaearth": ["mamaearth.in"],
 }
 
 
@@ -114,6 +128,423 @@ def save_json(path: Path, payload: dict[str, Any]) -> None:
         encoding="utf-8",
     )
 
+
+def normalize_search_result_url(raw_url: Any) -> str:
+    value = str(raw_url or "").strip()
+
+    if not value:
+        return ""
+
+    if value.startswith("//"):
+        value = "https:" + value
+
+    try:
+        parsed = urlparse(value)
+    except ValueError:
+        return ""
+
+    hostname = (parsed.hostname or "").lower()
+
+    if hostname.endswith("duckduckgo.com"):
+        redirected = parse_qs(parsed.query).get("uddg", [""])[0]
+
+        if redirected:
+            return unquote(redirected)
+
+    return value
+
+
+def duckduckgo_official_search(
+    query: str,
+    allowed_domains: list[str],
+    max_results: int = 7,
+) -> list[dict[str, Any]]:
+    """Discover candidates only from approved official domains."""
+
+    results: list[dict[str, Any]] = []
+    seen: set[str] = set()
+
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/120.0 Safari/537.36"
+        )
+    }
+
+    for domain in allowed_domains:
+        search_query = f"site:{domain} {query}"
+
+        try:
+            response = requests.get(
+                "https://html.duckduckgo.com/html/",
+                params={"q": search_query},
+                headers=headers,
+                timeout=15,
+            )
+            response.raise_for_status()
+        except requests.RequestException:
+            continue
+
+        soup = BeautifulSoup(response.text, "html.parser")
+
+        for anchor in soup.select("a.result__a"):
+            url = normalize_search_result_url(anchor.get("href"))
+
+            if not url or url in seen:
+                continue
+
+            try:
+                hostname = (urlparse(url).hostname or "").lower()
+            except ValueError:
+                continue
+
+            domain_lower = domain.lower()
+
+            if not (
+                hostname == domain_lower
+                or hostname.endswith("." + domain_lower)
+            ):
+                continue
+
+            seen.add(url)
+
+            results.append(
+                {
+                    "title": anchor.get_text(" ", strip=True),
+                    "url": url,
+                    "score": 0.5,
+                    "search_provider": "duckduckgo_html",
+                }
+            )
+
+            if len(results) >= max_results:
+                return results
+
+    return results
+
+
+
+def official_sitemap_search(
+    title: str,
+    allowed_domains: list[str],
+    max_results: int = 30,
+) -> list[dict[str, Any]]:
+    """
+    Discover official product URLs from a persistent domain sitemap cache.
+
+    Each official domain is crawled once and its sitemap URLs are cached.
+    Product matching is then performed locally against the cached URLs.
+    Existing official-domain and identity validation remain authoritative.
+    """
+
+    if not allowed_domains:
+        return []
+
+    cache_file = (
+        ROOT
+        / "data"
+        / "official_sitemap_cache.json"
+    )
+
+    try:
+        if cache_file.exists():
+            cache = json.loads(
+                cache_file.read_text(
+                    encoding="utf-8"
+                )
+            )
+        else:
+            cache = {}
+    except Exception:
+        cache = {}
+
+    if not isinstance(cache, dict):
+        cache = {}
+
+    headers = {
+        "User-Agent": "Mozilla/5.0",
+        "Accept": "application/xml,text/xml,text/html,*/*",
+    }
+
+    title_tokens = {
+        token
+        for token in re.findall(
+            r"[a-z0-9]+",
+            title.lower(),
+        )
+        if len(token) >= 2
+    }
+
+    if not title_tokens:
+        return []
+
+    def url_tokens(value: str) -> set[str]:
+        return set(
+            re.findall(
+                r"[a-z0-9]+",
+                value.lower(),
+            )
+        )
+
+    def crawl_domain(
+        domain: str,
+    ) -> tuple[list[str], list[str]]:
+
+        visited: set[str] = set()
+        urls: set[str] = set()
+
+        def crawl(
+            sitemap_url: str,
+            depth: int = 0,
+        ) -> None:
+
+            if sitemap_url in visited:
+                return
+
+            if depth > 3:
+                return
+
+            visited.add(sitemap_url)
+
+            try:
+                response = requests.get(
+                    sitemap_url,
+                    headers=headers,
+                    timeout=(5, 12),
+                )
+
+                if response.status_code != 200:
+                    return
+
+                root = ET.fromstring(
+                    response.content
+                )
+
+            except Exception:
+                return
+
+            locations = [
+                element.text.strip()
+                for element in root.iter()
+                if element.tag.endswith("loc")
+                and element.text
+            ]
+
+            if root.tag.endswith(
+                "sitemapindex"
+            ):
+                for child_url in locations:
+                    if hostname_matches(
+                        child_url,
+                        [domain],
+                    ):
+                        crawl(
+                            child_url,
+                            depth + 1,
+                        )
+
+                return
+
+            for candidate_url in locations:
+                if hostname_matches(
+                    candidate_url,
+                    [domain],
+                ):
+                    urls.add(candidate_url)
+
+        roots = [
+            f"https://{domain}/sitemap.xml",
+            f"https://www.{domain}/sitemap.xml",
+        ]
+
+        if domain.endswith(".com"):
+            roots.insert(
+                0,
+                f"https://www.{domain}/in/sitemap.xml",
+            )
+
+        for root_url in roots:
+            crawl(root_url)
+
+        return (
+            sorted(urls),
+            sorted(visited),
+        )
+
+    all_candidates: list[
+        dict[str, Any]
+    ] = []
+
+    cache_changed = False
+
+    for raw_domain in allowed_domains:
+
+        domain = str(
+            raw_domain
+        ).strip().lower()
+
+        if not domain:
+            continue
+
+        entry = cache.get(domain)
+
+        cached_urls: list[str] = []
+
+        if isinstance(entry, dict):
+            raw_urls = entry.get("urls", [])
+
+            if isinstance(raw_urls, list):
+                cached_urls = [
+                    str(url)
+                    for url in raw_urls
+                    if str(url).strip()
+                ]
+
+        if not cached_urls:
+
+            urls, visited = crawl_domain(
+                domain
+            )
+
+            if urls:
+                cache[domain] = {
+                    "fetched_at": datetime.now(
+                        timezone.utc
+                    ).isoformat(),
+                    "urls": urls,
+                    "url_count": len(urls),
+                    "sitemaps_visited": visited,
+                }
+
+                cached_urls = urls
+                cache_changed = True
+
+        for candidate_url in cached_urls:
+
+            overlap = len(
+                title_tokens
+                & url_tokens(candidate_url)
+            )
+
+            if overlap < 2:
+                continue
+
+            raw_score = (
+                overlap
+                / max(
+                    1,
+                    len(title_tokens),
+                )
+            )
+
+            is_buy_page = (
+                candidate_url
+                .rstrip("/")
+                .lower()
+                .endswith("/buy")
+            )
+
+            if is_buy_page:
+                raw_score -= 0.10
+
+            score = max(
+                0.0,
+                min(
+                    1.0,
+                    raw_score,
+                ),
+            )
+
+            slug_title = " ".join(
+                re.findall(
+                    r"[a-z0-9]+",
+                    urlparse(
+                        candidate_url
+                    ).path.lower(),
+                )
+            )
+
+            all_candidates.append(
+                {
+                    "title": slug_title,
+                    "url": candidate_url,
+                    "score": round(
+                        score,
+                        4,
+                    ),
+                    "provider": (
+                        "official_sitemap"
+                    ),
+                }
+            )
+
+    if cache_changed:
+        cache_file.parent.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+        cache_file.write_text(
+            json.dumps(
+                cache,
+                indent=2,
+                ensure_ascii=False,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+    unique: dict[
+        str,
+        dict[str, Any],
+    ] = {}
+
+    for item in all_candidates:
+
+        candidate_url = str(
+            item.get("url") or ""
+        )
+
+        previous = unique.get(
+            candidate_url
+        )
+
+        if (
+            previous is None
+            or float(
+                item.get("score") or 0
+            )
+            > float(
+                previous.get("score") or 0
+            )
+        ):
+            unique[candidate_url] = item
+
+    ranked = list(
+        unique.values()
+    )
+
+    ranked.sort(
+        key=lambda item: (
+            str(
+                item.get("url") or ""
+            )
+            .rstrip("/")
+            .lower()
+            .endswith("/buy"),
+            -float(
+                item.get("score") or 0
+            ),
+            len(
+                str(
+                    item.get("url") or ""
+                )
+            ),
+        )
+    )
+
+    return ranked[:max_results]
 
 def normalize_brand(value: Any) -> str:
     return re.sub(r"[^a-z0-9]+", "", str(value or "").lower())
@@ -422,7 +853,7 @@ def build_source_queries(
 
 
 def resolve_product(
-    client: TavilyClient,
+    client: TavilyClient | None,
     product: dict[str, Any],
 ) -> dict[str, Any]:
     product_id = str(product.get("product_id") or "")
@@ -486,15 +917,164 @@ def resolve_product(
     merged_results: list[dict[str, Any]] = []
     seen_urls: set[str] = set()
 
-    for query in query_variants:
-        response = client.search(
-            query=query,
-            search_depth="basic",
-            max_results=7,
-            include_domains=allowed_domains,
-        )
+    # ---------------------------------------------------------
+    # Fast official sitemap discovery
+    # ---------------------------------------------------------
+    # Prefer a proven official sitemap before paid/general
+    # search providers. Candidates still pass through the
+    # existing official-domain + compare_identity gates below.
+    sitemap_results: list[dict[str, Any]] = []
 
-        for result in response.get("results", []):
+    if brand_key == "samsung":
+        try:
+            sitemap_url = (
+                "https://www.samsung.com/in/im-sitemap.xml"
+            )
+
+            response = requests.get(
+                sitemap_url,
+                headers={
+                    "User-Agent": "Mozilla/5.0",
+                    "Accept": "application/xml,text/xml,*/*",
+                },
+                timeout=(5, 15),
+            )
+
+            if response.status_code == 200:
+                root = ET.fromstring(response.content)
+
+                expected_tokens = normalized_model_tokens(
+                    core_title
+                )
+
+                for element in root.iter():
+                    if (
+                        not element.tag.endswith("loc")
+                        or not element.text
+                    ):
+                        continue
+
+                    candidate_url = element.text.strip()
+
+                    if not hostname_matches(
+                        candidate_url,
+                        allowed_domains,
+                    ):
+                        continue
+
+                    # Prefer canonical product pages.
+                    if (
+                        candidate_url
+                        .rstrip("/")
+                        .lower()
+                        .endswith("/buy")
+                    ):
+                        continue
+
+                    candidate_tokens = normalized_model_tokens(
+                        urlparse(candidate_url).path
+                    )
+
+                    overlap = expected_tokens.intersection(
+                        candidate_tokens
+                    )
+
+                    if len(overlap) < 2:
+                        continue
+
+                    score = (
+                        len(overlap)
+                        / max(1, len(expected_tokens))
+                    )
+
+                    slug_title = " ".join(
+                        re.findall(
+                            r"[a-z0-9]+",
+                            urlparse(
+                                candidate_url
+                            ).path.lower(),
+                        )
+                    )
+
+                    sitemap_results.append(
+                        {
+                            "title": slug_title,
+                            "url": candidate_url,
+                            "score": round(score, 4),
+                            "provider": "official_sitemap",
+                        }
+                    )
+
+                sitemap_results.sort(
+                    key=lambda item: (
+                        -float(item.get("score") or 0),
+                        len(str(item.get("url") or "")),
+                    )
+                )
+
+                sitemap_results = sitemap_results[:30]
+
+        except Exception as error:
+            base_result["sitemap_error"] = str(error)
+
+    for result in sitemap_results:
+        result_url = str(
+            result.get("url") or ""
+        ).strip()
+
+        if not result_url or result_url in seen_urls:
+            continue
+
+        seen_urls.add(result_url)
+        merged_results.append(result)
+
+    if sitemap_results:
+        base_result["search_provider"] = "official_sitemap"
+
+    tavily_available = (
+        client is not None
+        and not sitemap_results
+    )
+
+    for query in query_variants:
+        search_results: list[dict[str, Any]] = []
+
+        if tavily_available:
+            try:
+                response = client.search(
+                    query=query,
+                    search_depth="basic",
+                    max_results=7,
+                    include_domains=allowed_domains,
+                )
+
+                search_results = response.get("results", [])
+                base_result["search_provider"] = "tavily"
+
+            except Exception as error:
+                message = str(error)
+                message_lower = message.lower()
+
+                if (
+                    "usage limit" in message_lower
+                    or "quota" in message_lower
+                    or "rate limit" in message_lower
+                    or "resource_exhausted" in message_lower
+                ):
+                    tavily_available = False
+                    base_result["provider_fallback_reason"] = message
+                else:
+                    raise
+
+        if not tavily_available and not sitemap_results:
+            search_results = duckduckgo_official_search(
+                query,
+                allowed_domains,
+                max_results=7,
+            )
+            base_result["search_provider"] = "duckduckgo_html"
+
+        for result in search_results:
             result_url = str(result.get("url") or "").strip()
 
             if not result_url or result_url in seen_urls:
@@ -934,11 +1514,12 @@ def main() -> int:
 
     api_key = os.getenv("TAVILY_API_KEY")
 
-    if not api_key:
-        print("ERROR: TAVILY_API_KEY is not configured")
-        return 1
+    client: TavilyClient | None = None
 
-    client = TavilyClient(api_key=api_key)
+    if api_key:
+        client = TavilyClient(api_key=api_key)
+    else:
+        print("INFO: TAVILY_API_KEY unavailable; using fallback discovery")
     updated_results = dict(existing_results)
 
     print("=" * 64)
@@ -978,6 +1559,11 @@ def main() -> int:
         )
 
         updated_results[product_id] = resolved
+
+        if resolved.get("status") == "provider_quota_exhausted":
+            print("Status   : provider_quota_exhausted")
+            print("ACTION   : Stopping batch to avoid wasting provider requests")
+            break
 
         print("Status   :", resolved.get("status"))
         print("URL      :", resolved.get("official_url"))
