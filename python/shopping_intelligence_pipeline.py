@@ -748,7 +748,29 @@ def criterion_groups(
         elif score >= 0.80:
             strong.append(f"{criterion}: {reason}")
         elif score < 0.50:
-            tradeoffs.append(f"{criterion}: {reason}")
+            # A low partial score is not automatically a negative.
+            # Example: "6.67-inch class display" is valid evidence,
+            # but by itself is not a user-facing trade-off.
+            negative_terms = (
+                "below",
+                "missing",
+                "not ",
+                "no ",
+                "poor",
+                "weak",
+                "low ",
+                "slow",
+                "limited",
+                "unsupported",
+                "mismatch",
+                "exceeds",
+                "over budget",
+            )
+
+            reason_lower = reason.lower()
+
+            if any(term in reason_lower for term in negative_terms):
+                tradeoffs.append(f"{criterion}: {reason}")
 
     return strong, tradeoffs, unknown
 
@@ -993,6 +1015,93 @@ def run_pipeline(
         ),
         reverse=True,
     )
+
+    # ---------------------------------------------------------
+    # MODEL-LEVEL RECOMMENDATION DEDUPLICATION
+    # ---------------------------------------------------------
+    # Multiple retailer ASINs / colours / listings may represent
+    # the same underlying phone model. Keep only the strongest
+    # already-ranked listing for each model family.
+    #
+    # This affects presentation/ranking only. It does not change
+    # product evidence, fit scoring or eligibility.
+    # ---------------------------------------------------------
+
+    def recommendation_model_key(item: dict[str, Any]) -> str:
+        profile = item.get("profile", {}) or {}
+
+        title = clean(profile.get("title")).lower()
+        brand = clean(profile.get("brand")).lower()
+
+        # Remove common commerce variant descriptors which should
+        # not make the same model appear as a separate recommendation.
+        cleaned = re.sub(
+            r"\([^)]*\)",
+            " ",
+            title,
+        )
+
+        cleaned = re.sub(
+            r"\b(?:"
+            r"\d+\s*gb(?:\s+ram|\s+storage|\s+rom)?|"
+            r"\d+gb|"
+            r"ram|rom|storage|"
+            r"pantone|"
+            r"black|blue|green|grey|gray|silver|purple|"
+            r"yellow|white|red|cyan|frost|pearl|metallic|"
+            r"brilliant|nautical|capri|radiant|arctic"
+            r")\b",
+            " ",
+            cleaned,
+            flags=re.I,
+        )
+
+        cleaned = re.sub(r"\s+", " ", cleaned).strip()
+
+        # Manufacturer shorthand must not create duplicate model keys.
+        # Motorola commonly appears as both:
+        #   Motorola Moto g37 Power
+        #   Motorola g37 Power
+        if brand == "motorola":
+            cleaned = re.sub(
+                r"^(?:motorola\s+)?moto\s+",
+                "",
+                cleaned,
+                flags=re.I,
+            )
+            cleaned = re.sub(
+                r"^motorola\s+",
+                "",
+                cleaned,
+                flags=re.I,
+            )
+
+        # Brand is already carried separately in the key.
+        if brand and cleaned.startswith(brand + " "):
+            cleaned = cleaned[len(brand):].strip()
+
+        cleaned = re.sub(r"\s+", " ", cleaned).strip()
+
+        return f"{brand}|{cleaned}".strip("|")
+
+    deduped_qualifying: list[dict[str, Any]] = []
+    seen_model_keys: set[str] = set()
+
+    for item in qualifying:
+        key = recommendation_model_key(item)
+
+        if not key:
+            key = clean(
+                item.get("profile", {}).get("product_id")
+            ).lower()
+
+        if key in seen_model_keys:
+            continue
+
+        seen_model_keys.add(key)
+        deduped_qualifying.append(item)
+
+    qualifying = deduped_qualifying
 
     recommendations: list[dict[str, Any]] = []
 

@@ -154,6 +154,10 @@ def display_signal(text: str) -> dict[str, Any]:
     score = 0.0
     reasons: list[str] = []
 
+    # This builder currently serves phone-oriented fit scoring.
+    # Accept only plausible handheld display sizes so unrelated
+    # measurements such as 12-inch accessories or packaging do not
+    # become smartphone display evidence.
     display_sizes = [
         float(x)
         for x in re.findall(
@@ -161,9 +165,11 @@ def display_signal(text: str) -> dict[str, Any]:
             text,
             re.I,
         )
-        if 1.0 <= float(x) <= 100.0
+        if 4.0 <= float(x) <= 8.5
     ]
+
     size = max(display_sizes) if display_sizes else None
+
     if size is not None:
         if size >= 6.6:
             score += 0.45
@@ -171,6 +177,7 @@ def display_signal(text: str) -> dict[str, Any]:
             score += 0.35
         else:
             score += 0.25
+
         reasons.append(f"{size:g}-inch class display")
 
     if "amoled" in text or "oled" in text:
@@ -182,6 +189,7 @@ def display_signal(text: str) -> dict[str, Any]:
         reasons.append("high refresh rate")
 
     brightness = numeric(r"\b(\d{3,5})\s*(?:nit|nits)\b", text)
+
     if brightness is not None and brightness >= 1500:
         score += 0.10
         reasons.append("high peak brightness")
@@ -288,24 +296,36 @@ def connectivity_signal(text: str) -> dict[str, Any]:
     score = 0.0
     reasons: list[str] = []
 
-    if "5g" in text:
-        score += 0.40
+    # Signal builders must be safe when called directly as well as
+    # through text_blob(), which already returns lowercase text.
+    normalized = str(text or "").lower()
+
+    # 5G alone is strong positive connectivity evidence.
+    if re.search(r"\b5g\b", normalized):
+        score += 0.80
         reasons.append("5G")
 
-    if "wi-fi 7" in text or "wifi 7" in text:
+    if "wi-fi 7" in normalized or "wifi 7" in normalized:
         score += 0.30
         reasons.append("Wi-Fi 7")
-    elif "wi-fi 6" in text or "wifi 6" in text:
+    elif "wi-fi 6" in normalized or "wifi 6" in normalized:
         score += 0.25
         reasons.append("Wi-Fi 6")
 
-    bt = numeric(r"bluetooth(?:\s+version)?\s*(5\.\d)", text)
+    bt = numeric(
+        r"bluetooth(?:\s+version)?\s*(5\.\d)",
+        normalized,
+    )
+
     if bt is not None:
         score += 0.30 if bt >= 5.3 else 0.20
         reasons.append(f"Bluetooth {bt:g}")
 
     if not reasons:
-        return signal(None, "No reliable connectivity evidence found")
+        return signal(
+            None,
+            "No reliable connectivity evidence found",
+        )
 
     return signal(min(score, 1.0), ", ".join(reasons))
 
