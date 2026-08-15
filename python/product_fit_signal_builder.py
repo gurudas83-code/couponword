@@ -464,6 +464,74 @@ def generic_unknown(name: str) -> dict[str, Any]:
     return signal(None, f"No conservative v1 scoring rule/evidence for {name}")
 
 
+def capacity_requirement_signal(
+    requirement: str,
+    text: str,
+) -> dict[str, Any]:
+    """
+    Evaluate query-specific RAM/storage requirements.
+
+    Examples:
+        8gb_ram
+        128gb_storage
+
+    Normal shopping wording means "at least" the requested capacity.
+    Missing evidence remains UNKNOWN.
+    """
+
+    ram_match = re.fullmatch(r"(\d+)gb_ram", requirement)
+    if ram_match:
+        required = float(ram_match.group(1))
+        actual = numeric(
+            r"\b(\d{1,3})\s*gb\s*ram\b",
+            text,
+        )
+
+        if actual is None:
+            return signal(
+                None,
+                f"Required {required:g}GB RAM, but verified RAM capacity is unavailable",
+            )
+
+        if actual >= required:
+            return signal(
+                1.0,
+                f"Verified {actual:g}GB RAM satisfies requirement of at least {required:g}GB",
+            )
+
+        return signal(
+            0.0,
+            f"Verified {actual:g}GB RAM is below required {required:g}GB",
+        )
+
+    storage_match = re.fullmatch(r"(\d+)gb_storage", requirement)
+    if storage_match:
+        required = float(storage_match.group(1))
+        actual = numeric(
+            r"\b(\d{2,4})\s*gb\s*(?:storage|internal storage|rom)\b",
+            text,
+        )
+
+        if actual is None:
+            return signal(
+                None,
+                f"Required {required:g}GB storage, but verified storage capacity is unavailable",
+            )
+
+        if actual >= required:
+            return signal(
+                1.0,
+                f"Verified {actual:g}GB storage satisfies requirement of at least {required:g}GB",
+            )
+
+        return signal(
+            0.0,
+            f"Verified {actual:g}GB storage is below required {required:g}GB",
+        )
+
+    return generic_unknown(requirement)
+
+
 BUILDERS = {
     "budget": lambda p, i, t: budget_signal(p, i),
     "battery": lambda p, i, t: battery_signal(t),
@@ -495,6 +563,24 @@ def build_fit_signals(profile: dict[str, Any], intent: dict[str, Any]) -> dict[s
             signals[criterion] = generic_unknown(criterion)
         else:
             signals[criterion] = builder(profile, intent, text)
+
+    # Bridge query-specific must-have capacities into fit_signals.
+    # Weighted Fit Engine can then enforce them without knowing how
+    # product evidence was extracted.
+    must_have = intent.get("must_have", [])
+
+    if isinstance(must_have, list):
+        for requirement in must_have:
+            requirement = str(requirement).strip().lower()
+
+            if (
+                re.fullmatch(r"\d+gb_ram", requirement)
+                or re.fullmatch(r"\d+gb_storage", requirement)
+            ):
+                signals[requirement] = capacity_requirement_signal(
+                    requirement,
+                    text,
+                )
 
     return signals
 
