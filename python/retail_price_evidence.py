@@ -379,6 +379,63 @@ def fetch_structured_price(url: str) -> dict[str, Any]:
         })
         return result
 
+    # Amazon India does not consistently expose Product/Offer JSON-LD
+    # or generic price metadata. On an exact /dp/ ASIN page, use only
+    # high-confidence primary buy-box containers.
+    #
+    # Do NOT use generic ".a-price-whole" or page-wide price text here:
+    # those can include MRP, EMI, accessories and related products.
+    host = urlparse(response.url).netloc.lower()
+
+    if host == "amazon.in" or host.endswith(".amazon.in"):
+        amazon_values: list[object] = []
+
+        # Current Amazon India markup exposes the primary payable
+        # amount directly in .priceToPay. Do not scan generic
+        # .a-price-whole elements because those also contain MRP,
+        # related products, accessories and other non-buy-box prices.
+        amazon_selectors = (
+            ".priceToPay",
+            "#corePriceDisplay_desktop_feature_div .priceToPay",
+            "#apex_desktop .priceToPay",
+        )
+
+        for selector in amazon_selectors:
+            for tag in soup.select(selector):
+                text_value = tag.get_text(" ", strip=True)
+
+                # Extract INR amount only from this trusted buy-box
+                # container rather than treating its whole text as
+                # a numeric value.
+                amazon_values.extend(
+                    extract_price_mentions(text_value)
+                )
+
+        amazon_found = unique_prices(amazon_values)
+
+        if len(amazon_found) == 1:
+            result.update({
+                "price": amazon_found[0],
+                "prices_found": amazon_found,
+                "status": "verified",
+                "reason": (
+                    "Exact Amazon primary buy-box price found"
+                ),
+                "evidence_method": "amazon_primary_buybox",
+            })
+            return result
+
+        if len(amazon_found) > 1:
+            result.update({
+                "prices_found": amazon_found,
+                "status": "ambiguous",
+                "reason": (
+                    "Multiple Amazon primary buy-box prices found"
+                ),
+                "evidence_method": "amazon_primary_buybox",
+            })
+            return result
+
     meta_values: list[object] = []
 
     meta_selectors = (

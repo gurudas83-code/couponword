@@ -306,6 +306,18 @@ def parse_identity(
         if next_token in {"year", "years", "yr", "yrs"}:
             descriptive_numeric_tokens.add(token)
 
+        # Standalone calendar year in marketplace titles is descriptive
+        # metadata, not product model identity.
+        # Examples:
+        #   Aqua Blue 2026
+        #   2025 Edition
+        #
+        # Do not affect alphanumeric identities such as 17e, 90x, A55.
+        if token.isdigit():
+            year_value = int(token)
+            if 1990 <= year_value <= 2100:
+                descriptive_numeric_tokens.add(token)
+
         # "set of 3", "pack of 25", "combo of 3"
         if (
             previous_token == "of"
@@ -714,10 +726,23 @@ def compare_identity(
     score += model_points
     reasons.extend(model_reasons)
 
-    network_match = subset_match(
-        expected.network_tokens,
-        candidate.network_tokens,
-    )
+    # Network identity uses three-state semantics:
+    # True  = expected generation explicitly matched
+    # False = candidate explicitly states a conflicting generation
+    # None  = candidate does not state network generation
+    #
+    # Missing network text on an otherwise exact official model page
+    # must not be treated as contradictory evidence.
+    if expected.network_tokens:
+        if candidate.network_tokens:
+            network_match = subset_match(
+                expected.network_tokens,
+                candidate.network_tokens,
+            )
+        else:
+            network_match = None
+    else:
+        network_match = None
 
     if network_match is True:
         score += 10

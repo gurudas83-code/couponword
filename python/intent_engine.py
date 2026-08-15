@@ -262,10 +262,36 @@ def detect_requirements(
         if "5g" in preferred:
             preferred.remove("5g")
 
-    if category == "laptop":
-        m = re.search(r"\b(8|16|24|32|64)\s*gb\s*ram\b", text)
-        if m:
-            add(must_have, f"{m.group(1)}gb_ram")
+    # Explicit RAM/storage capacities are product requirements.
+    # Keep them in the existing must_have contract so discovery,
+    # fit scoring and downstream engines can consume them without
+    # introducing a parallel intent schema.
+    if category in {"smartphone", "laptop", "tablet"}:
+        ram_match = re.search(
+            r"\b(2|3|4|6|8|12|16|18|24|32|64)\s*gb\s*(?:of\s*)?ram\b",
+            text,
+        )
+        if ram_match:
+            add(must_have, f"{ram_match.group(1)}gb_ram")
+
+        storage_match = re.search(
+            r"\b(32|64|128|256|512|1024)\s*gb\s*"
+            r"(?:storage|internal\s+storage|rom)\b",
+            text,
+        )
+        if storage_match:
+            add(must_have, f"{storage_match.group(1)}gb_storage")
+
+        tb_storage_match = re.search(
+            r"\b(1|2|4)\s*tb\s*"
+            r"(?:storage|internal\s+storage|ssd|rom)\b",
+            text,
+        )
+        if tb_storage_match:
+            add(
+                must_have,
+                f"{int(tb_storage_match.group(1)) * 1024}gb_storage",
+            )
 
     return hard_constraints, must_have, preferred, avoid
 

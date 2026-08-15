@@ -381,7 +381,7 @@ def is_possible_official_page(
 
 
 def universal_official_resolve(
-    client: TavilyClient,
+    client: TavilyClient | None,
     product: dict[str, Any],
     identity: dict[str, Any],
 ) -> dict[str, Any]:
@@ -419,6 +419,16 @@ def universal_official_resolve(
 
     if not brand or normalize_brand(brand) in GENERIC_BRANDS:
         result["reason"] = "Brand identity is not reliable enough for official search"
+        return result
+
+    # Tavily is optional. Universal web-search fallback cannot run
+    # without a search client, so fail closed instead of crashing.
+    if client is None:
+        result["status"] = "manual_review"
+        result["reason"] = (
+            "Universal official-source search unavailable because "
+            "no Tavily client is configured"
+        )
         return result
 
     queries = [
@@ -548,7 +558,7 @@ def universal_official_resolve(
 
 
 def resolve_with_fallback(
-    client: TavilyClient,
+    client: TavilyClient | None,
     candidate: dict[str, Any],
     identity: dict[str, Any],
 ) -> dict[str, Any]:
@@ -762,10 +772,12 @@ def run_pipeline(
     ]
 
     api_key = os.environ.get("TAVILY_API_KEY")
-    if not api_key:
-        raise RuntimeError("TAVILY_API_KEY is not set")
 
-    client = TavilyClient(api_key=api_key)
+    client = (
+        TavilyClient(api_key=api_key)
+        if api_key
+        else None
+    )
 
     identities: list[dict[str, Any]] = []
     resolver_records: list[dict[str, Any]] = []
@@ -819,17 +831,100 @@ def run_pipeline(
         resolver_records.append(resolved)
 
         if resolved.get("verified") is not True:
-            failures.append({
-                "candidate_id": candidate_id,
-                "title": raw_title,
-                "brand": identity.get("brand"),
-                "search_name": identity.get("search_name"),
-                "stage": "official_source",
-                "status": resolved.get("status"),
-                "resolver_mode": resolved.get("resolver_mode"),
-                "reason": clean(resolved.get("reason")),
-            })
-            continue
+            # ---------------------------------------------------------
+            # VERIFIED COMMERCE-EVIDENCE FALLBACK
+            # ---------------------------------------------------------
+            # Official manufacturer evidence remains preferred.
+            # However, absence of Tavily/general-search availability
+            # must not discard a product when its discovered retailer
+            # page itself provides strong product identity + verified
+            # primary buy-box price evidence.
+            #
+            # Safety remains fail-closed:
+            #   1. retailer page must pass compare_identity()
+            #   2. identity decision must be "verified"
+            #   3. price evidence must independently be verified
+            # ---------------------------------------------------------
+
+            market_url = clean(candidate.get("source_url"))
+            market_title = clean(candidate.get("title") or raw_title)
+
+            try:
+                commerce_identity_obj = compare_identity(
+                    expected_text=clean(
+                        identity.get("search_name")
+                        or identity.get("model")
+                        or raw_title
+                    ),
+                    candidate_title=market_title,
+                    candidate_url=market_url,
+                    expected_brand=clean(identity.get("brand")),
+                )
+                commerce_identity = commerce_identity_obj.to_dict()
+            except Exception as error:
+                commerce_identity = {
+                    "score": 0,
+                    "decision": "reject",
+                    "reasons": [
+                        f"Commerce identity comparison failed: {error}"
+                    ],
+                }
+
+            commerce_price = build_price_evidence(candidate)
+
+            commerce_verified = bool(
+                clean(commerce_identity.get("decision")).lower() == "verified"
+                and commerce_price.get("verified") is True
+                and commerce_price.get("price") is not None
+            )
+
+            if commerce_verified:
+                resolved = dict(resolved)
+                resolved["verified"] = True
+                resolved["status"] = "commerce_evidence_verified"
+                resolved["resolver_mode"] = "verified_retailer_fallback"
+                resolved["official_url"] = market_url
+                resolved["official_title"] = market_title
+                resolved["identity_score"] = int(
+                    commerce_identity.get("score") or 0
+                )
+                resolved["identity_decision"] = commerce_identity.get(
+                    "decision"
+                )
+                resolved["identity_reasons"] = commerce_identity.get(
+                    "reasons", []
+                )
+                resolved["match_score"] = round(
+                    int(commerce_identity.get("score") or 0) / 100,
+                    4,
+                )
+                resolved["commerce_evidence"] = commerce_price
+            else:
+                failures.append({
+                    "candidate_id": candidate_id,
+                    "title": raw_title,
+                    "brand": identity.get("brand"),
+                    "search_name": identity.get("search_name"),
+                    "stage": "official_source",
+                    "status": resolved.get("status"),
+                    "resolver_mode": resolved.get("resolver_mode"),
+                    "reason": clean(resolved.get("reason")),
+                    "commerce_identity_score": commerce_identity.get(
+                        "score"
+                    ),
+                    "commerce_identity_decision": commerce_identity.get(
+                        "decision"
+                    ),
+                    "commerce_identity_reasons": commerce_identity.get(
+                        "reasons", []
+                    ),
+                    "commerce_price_verified": commerce_price.get(
+                        "verified"
+                    ),
+                    "commerce_price": commerce_price.get("price"),
+                    "commerce_price_reason": commerce_price.get("reason"),
+                })
+                continue
 
         try:
             extraction = extract_one(resolved, identity)

@@ -25,6 +25,7 @@ from typing import Any
 from urllib.parse import urlparse
 
 from tavily import TavilyClient
+from amazon_search_image_resolver import search_asins
 
 ROOT = Path(__file__).resolve().parent.parent
 PYTHON_DIR = ROOT / "python"
@@ -487,43 +488,41 @@ def fallback_search_channel(
     max_results: int,
 ) -> list[dict[str, Any]]:
     """
-    Free discovery fallback using the existing DuckDuckGo HTML
-    search helper.
+    Runtime discovery fallback using the existing Amazon search-card
+    infrastructure.
 
-    Existing product-result validation remains authoritative.
+    This is discovery only. Search position, Amazon relevance and
+    merchant presence do not affect final Fit.
+
+    All candidates remain unverified and must pass the existing
+    downstream identity/evidence gates.
     """
 
-    domains: list[str] = []
+    # Amazon fallback is currently a commerce discovery lane.
+    # Open-web fallback must not pretend Amazon is independent
+    # corroborating evidence.
+    if channel != "commerce":
+        return []
 
-    if include_domains:
-        domains.extend(include_domains)
-
-    # Open-web fallback should still remain commerce/product oriented.
-    # Include known official brand domains as secondary discovery sources.
-    if channel == "open_web":
-        for values in BRAND_DOMAINS.values():
-            for domain in values:
-                if domain not in domains:
-                    domains.append(domain)
-
-    if not domains:
-        domains = list(COMMERCE_DOMAINS)
-
-    # DuckDuckGo HTML is currently disabled as a runtime provider.
-    # It has proven too unreliable/slow for unattended batch discovery.
-    # Keep this adapter in place so a better free provider can be wired
-    # here later without touching downstream ranking logic.
-    return []
+    try:
+        raw_results = search_asins(
+            query,
+            max_cards=max(3, min(max_results, 20)),
+        )
+    except Exception:
+        return []
 
     accepted: list[dict[str, Any]] = []
 
     for result in raw_results:
-
         if not isinstance(result, dict):
             continue
 
-        title = clean(result.get("title"))
-        url = clean(result.get("url"))
+        title = clean(result.get("search_title"))
+        url = clean(result.get("product_url"))
+
+        if not title or not url:
+            continue
 
         if not looks_like_product_result(
             title,
@@ -537,20 +536,22 @@ def fallback_search_channel(
                 "title": title,
                 "url": url,
                 "host": host_of(url),
-                "content": clean(
-                    result.get("content")
-                ),
-                "search_score": float(
-                    result.get("score") or 0
-                ),
+                "content": "",
+                "search_score": 0.5,
                 "query": query,
                 "channel": channel,
-                "provider": "duckduckgo_html",
+                "provider": "amazon_search_cards",
+                "asin": clean(result.get("asin")),
+                "search_image": clean(
+                    result.get("search_image")
+                ),
             }
         )
 
-    return accepted
+        if len(accepted) >= max_results:
+            break
 
+    return accepted
 
 def search_channel(
     client: TavilyClient,
@@ -723,6 +724,189 @@ def candidate_quality_score(item: dict[str, Any], title: str) -> float:
     return round(score, 4)
 
 
+def _capacity_values_from_title(
+    title: str,
+    kind: str,
+) -> list[int]:
+    """
+    Extract explicitly stated physical RAM/storage capacities.
+
+    Conservative by design:
+    - returns [] when evidence is absent/ambiguous;
+    - does not infer capacities;
+    - does not count extended/virtual RAM as physical RAM.
+    """
+    text = clean(title).lower()
+    values: list[int] = []
+
+    if kind == "ram":
+        patterns = [
+            r"\b(\d{1,3})\s*gb\s*(?:physical\s*)?ram\b",
+            r"\b(\d{1,3})\s*gb\s*\+\s*\d{1,3}\s*gb\s*(?:virtual|dynamic|extended)\s*ram\b",
+            r"\b(\d{1,3})\s*gb\s*\+\s*\d{1,3}\s*gb\s*ram\b",
+            r"\b(\d{1,3})\s*\+\s*\d{1,3}\s*\*?\s*gb\s*ram\b",
+        ]
+
+        for pattern in patterns:
+            for match in re.finditer(pattern, text, flags=re.I):
+                value = int(match.group(1))
+                if value not in values:
+                    values.append(value)
+
+        # Common commerce shorthand: 8GB+128GB.
+        for match in re.finditer(
+            r"\b(\d{1,3})\s*gb\s*\+\s*(\d{2,4})\s*gb\b",
+            text,
+            flags=re.I,
+        ):
+            ram = int(match.group(1))
+            storage = int(match.group(2))
+
+            if ram <= 64 and storage >= 32 and ram not in values:
+                values.append(ram)
+
+    elif kind == "storage":
+        patterns = [
+            r"\b(\d{2,4})\s*gb\s*(?:storage|internal\s+storage|rom)\b",
+        ]
+
+        for pattern in patterns:
+            for match in re.finditer(pattern, text, flags=re.I):
+                value = int(match.group(1))
+                if value not in values:
+                    values.append(value)
+
+        # Common commerce shorthand: 8GB+128GB.
+        for match in re.finditer(
+            r"\b(\d{1,3})\s*gb\s*\+\s*(\d{2,4})\s*gb\b",
+            text,
+            flags=re.I,
+        ):
+            ram = int(match.group(1))
+            storage = int(match.group(2))
+
+            if ram <= 64 and storage >= 32 and storage not in values:
+                values.append(storage)
+
+    # Common marketplace shorthand:
+    # "(6GB, 128GB)" or "(8GB, 256GB)"
+    #
+    # In phone/tablet commerce titles the smaller first capacity
+    # represents RAM and the larger second capacity represents storage.
+    for match in re.finditer(
+        r"[\(\[]\s*(\d{1,3})\s*gb\s*,\s*(\d{2,4})\s*gb\s*[\)\]]",
+        text,
+        flags=re.I,
+    ):
+        first = int(match.group(1))
+        second = int(match.group(2))
+
+        if first <= 64 and second >= 32:
+            value = first if kind == "ram" else second
+
+            if value not in values:
+                values.append(value)
+
+    return values
+
+
+def _required_capacity(
+    must_have: list[str],
+    suffix: str,
+) -> int | None:
+    for requirement in must_have:
+        match = re.fullmatch(
+            rf"(\d+)gb_{re.escape(suffix)}",
+            clean(requirement).lower(),
+        )
+        if match:
+            return int(match.group(1))
+
+    return None
+
+
+def discovery_variant_gate(
+    title: str,
+    intent: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Early contradiction gate only.
+
+    PASS    = explicit title evidence satisfies requirement.
+    REJECT  = explicit title evidence contradicts requirement.
+    UNKNOWN = title does not contain enough evidence.
+
+    UNKNOWN must continue downstream for official verification.
+    """
+    must_have = list(intent.get("must_have") or [])
+
+    required_ram = _required_capacity(must_have, "ram")
+    required_storage = _required_capacity(must_have, "storage")
+
+    ram_values = _capacity_values_from_title(title, "ram")
+    storage_values = _capacity_values_from_title(title, "storage")
+
+    reasons: list[str] = []
+    contradictions: list[str] = []
+    confirmed: list[str] = []
+
+    if required_ram is not None:
+        if ram_values:
+            if max(ram_values) >= required_ram:
+                confirmed.append(
+                    f"RAM satisfies at least {required_ram}GB"
+                )
+            else:
+                contradictions.append(
+                    f"requires at least {required_ram}GB RAM; "
+                    f"title explicitly shows {ram_values}GB"
+                )
+        else:
+            reasons.append("RAM capacity not explicit in title")
+
+    if required_storage is not None:
+        if storage_values:
+            if max(storage_values) >= required_storage:
+                confirmed.append(
+                    f"Storage satisfies at least {required_storage}GB"
+                )
+            else:
+                contradictions.append(
+                    f"requires at least {required_storage}GB storage; "
+                    f"title explicitly shows {storage_values}GB"
+                )
+        else:
+            reasons.append("Storage capacity not explicit in title")
+
+    if contradictions:
+        status = "reject"
+    elif (
+        (required_ram is None or (ram_values and max(ram_values) >= required_ram))
+        and
+        (
+            required_storage is None
+            or (
+                storage_values
+                and max(storage_values) >= required_storage
+            )
+        )
+    ):
+        status = "pass"
+    else:
+        status = "unknown"
+
+    return {
+        "status": status,
+        "required_ram_gb": required_ram,
+        "required_storage_gb": required_storage,
+        "observed_ram_gb": ram_values,
+        "observed_storage_gb": storage_values,
+        "confirmed": confirmed,
+        "contradictions": contradictions,
+        "notes": reasons,
+    }
+
+
 def discover_market(
     user_query: str,
     max_candidates: int = 20,
@@ -820,10 +1004,21 @@ def discover_market(
         if is_generic_listing_title(title):
             continue
 
+        variant_gate = discovery_variant_gate(
+            title,
+            intent,
+        )
+
+        # Discovery is allowed to reject only explicit contradictions.
+        # Missing title evidence remains eligible for official verification.
+        if variant_gate["status"] == "reject":
+            continue
+
         enriched = dict(item)
         enriched["clean_title"] = title
         enriched["known_brand"] = known_brand_from_title(title)
         enriched["quality_score"] = candidate_quality_score(item, title)
+        enriched["variant_gate"] = variant_gate
 
         ranked.append(enriched)
 
@@ -868,6 +1063,7 @@ def discover_market(
                 "discovery_quality_score": item["quality_score"],
                 "known_brand": item["known_brand"],
                 "snippet": item["content"],
+                "variant_gate": item.get("variant_gate"),
                 "status": "discovered_unverified",
             }
         )

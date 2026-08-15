@@ -1017,6 +1017,26 @@ def resolve_product(
         except Exception as error:
             base_result["sitemap_error"] = str(error)
 
+    # ---------------------------------------------------------
+    # Generic official sitemap discovery
+    # ---------------------------------------------------------
+    # Samsung has a proven dedicated sitemap path above.
+    # For all other registered brands, reuse the existing generic
+    # official_sitemap_search() before any external search provider.
+    if not sitemap_results:
+        try:
+            sitemap_results = official_sitemap_search(
+                core_title,
+                allowed_domains,
+                max_results=30,
+            )
+
+            if sitemap_results:
+                base_result["search_provider"] = "official_sitemap"
+
+        except Exception as error:
+            base_result["generic_sitemap_error"] = str(error)
+
     for result in sitemap_results:
         result_url = str(
             result.get("url") or ""
@@ -1067,12 +1087,17 @@ def resolve_product(
                     raise
 
         if not tavily_available and not sitemap_results:
-            search_results = duckduckgo_official_search(
-                query,
-                allowed_domains,
-                max_results=7,
+            # DuckDuckGo HTML is intentionally disabled in the
+            # unattended runtime path because repeated network
+            # timeouts can stall the entire shopping pipeline.
+            #
+            # Direct/official sitemap discovery remains active.
+            search_results = []
+            base_result["search_provider"] = "direct_official_only"
+            base_result["provider_fallback_reason"] = (
+                base_result.get("provider_fallback_reason")
+                or "No reliable general-search provider available"
             )
-            base_result["search_provider"] = "duckduckgo_html"
 
         for result in search_results:
             result_url = str(result.get("url") or "").strip()
@@ -1217,15 +1242,27 @@ def resolve_product(
     base_result["identity_decision"] = best["identity_decision"]
     base_result["identity_reasons"] = best["identity_reasons"]
 
-    if (
-        best["identity_decision"] == "verified"
-        and best["combined_score"] >= 0.70
-    ):
+    # Structured identity is authoritative once the candidate:
+    #   1. belongs to an approved official domain,
+    #   2. is not an unwanted page,
+    #   3. passes strict brand/model/conflict validation.
+    #
+    # combined_score remains useful for ranking candidates, but must
+    # not overturn an already verified structured identity merely
+    # because marketplace colour/year wording reduced token overlap.
+    if best["identity_decision"] == "verified":
         base_result["verified"] = True
         base_result["status"] = "candidate_verified"
-        base_result["reason"] = (
-            "Official domain, model identity and search relevance matched"
-        )
+
+        if best["combined_score"] >= 0.70:
+            base_result["reason"] = (
+                "Official domain, model identity and search relevance matched"
+            )
+        else:
+            base_result["reason"] = (
+                "Official domain and strict structured model identity matched; "
+                "coarse search relevance was lower but non-authoritative"
+            )
     else:
         base_result["status"] = "manual_review"
         base_result["reason"] = (
