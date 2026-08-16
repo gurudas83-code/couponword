@@ -505,6 +505,154 @@ def camera_signal(text: str) -> dict[str, Any]:
     return signal(None, "Camera quality is not sufficiently verified")
 
 
+def category_relevance_signal(
+    profile: dict[str, Any],
+    intent: dict[str, Any],
+    text: str,
+) -> dict[str, Any]:
+    category = str(intent.get("category") or "").strip().lower()
+
+    if not category:
+        return signal(None, "Shopping category is not yet identified")
+
+    aliases = {
+        "smartphone": ("phone", "mobile", "smartphone"),
+        "television": ("tv", "television", "smart tv", "led tv", "oled", "qled"),
+        "mixer_grinder": ("mixer grinder", "mixer", "grinder", "mixie"),
+        "air_fryer": ("air fryer",),
+        "air_conditioner": ("air conditioner", "split ac", "window ac", " ac "),
+        "washing_machine": ("washing machine", "washer"),
+        "refrigerator": ("refrigerator", "fridge"),
+        "shoes": ("shoe", "shoes", "running shoes", "walking shoes", "sneakers"),
+        "chair": ("chair", "office chair", "gaming chair"),
+        "camera": ("camera", "dslr", "mirrorless"),
+        "gift": ("gift", "toy", "toys"),
+        "vacuum_cleaner": ("vacuum cleaner", "vacuum"),
+        "water_purifier": ("water purifier", "ro purifier"),
+        "microwave": ("microwave", "microwave oven"),
+        "monitor": ("monitor",),
+        "printer": ("printer",),
+        "router": ("router", "wifi router", "wi-fi router"),
+        "power_bank": ("power bank", "powerbank"),
+        "backpack": ("backpack", "rucksack"),
+        "luggage": ("luggage", "suitcase", "trolley"),
+    }
+
+    haystack = f" {str(text or '').lower()} "
+    category_aliases = aliases.get(
+        category,
+        (category.replace("_", " "),),
+    )
+
+    for alias in category_aliases:
+        if f" {alias.strip()} " in haystack or alias.strip() in haystack:
+            return signal(
+                1.0,
+                f"Verified product evidence matches shopping category: {category.replace('_', ' ')}",
+            )
+
+    return signal(
+        None,
+        f"No reliable evidence yet confirms category {category.replace('_', ' ')}",
+    )
+
+
+def query_relevance_signal(
+    profile: dict[str, Any],
+    intent: dict[str, Any],
+    text: str,
+) -> dict[str, Any]:
+    stopwords = {
+        "best", "top", "recommend", "recommended", "suggest", "show",
+        "buy", "online", "india", "under", "below", "less", "than",
+        "upto", "up", "to", "for", "with", "without", "and", "or",
+        "the", "a", "an", "my", "me", "good", "latest", "family",
+    }
+
+    raw_keywords = intent.get("keywords", [])
+    if not isinstance(raw_keywords, list):
+        raw_keywords = []
+
+    terms = []
+
+    for item in raw_keywords:
+        term = str(item or "").strip().lower()
+
+        if (
+            not term
+            or term in stopwords
+            or term.isdigit()
+            or len(term) < 2
+        ):
+            continue
+
+        if term not in terms:
+            terms.append(term)
+
+    if not terms:
+        return signal(None, "No meaningful query terms available for relevance scoring")
+
+    haystack = str(text or "").lower()
+
+    matched = [
+        term
+        for term in terms
+        if re.search(r"(?<!\w)" + re.escape(term) + r"(?!\w)", haystack)
+    ]
+
+    if not matched:
+        return signal(None, "No reliable query-term match found in product evidence")
+
+    ratio = len(matched) / len(terms)
+
+    if ratio >= 0.75:
+        score = 1.0
+    elif ratio >= 0.50:
+        score = 0.85
+    elif ratio >= 0.30:
+        score = 0.65
+    else:
+        score = 0.50
+
+    return signal(
+        score,
+        "Matched shopping need terms: " + ", ".join(matched[:6]),
+    )
+
+
+def product_identity_signal(
+    profile: dict[str, Any],
+    intent: dict[str, Any],
+    text: str,
+) -> dict[str, Any]:
+    title = str(profile.get("title") or "").strip()
+
+    if not title:
+        return signal(None, "Product title is unavailable")
+
+    tokens = re.findall(r"[A-Za-z0-9]+", title)
+
+    if len(tokens) < 2:
+        return signal(None, "Product identity is too generic")
+
+    brand = str(profile.get("brand") or "").strip()
+
+    has_model_marker = bool(
+        re.search(r"\b[A-Za-z]*\d+[A-Za-z0-9-]*\b", title)
+    )
+
+    if brand and has_model_marker:
+        return signal(1.0, "Specific branded product/model identity verified")
+
+    if has_model_marker:
+        return signal(0.90, "Specific product/model identity detected")
+
+    if brand:
+        return signal(0.85, "Specific branded product identity detected")
+
+    return signal(0.70, "Specific product listing identity detected")
+
+
 def generic_unknown(name: str) -> dict[str, Any]:
     return signal(None, f"No conservative v1 scoring rule/evidence for {name}")
 
@@ -612,6 +760,9 @@ BUILDERS = {
     "anc": lambda p, i, t: anc_signal(t),
     "sound_quality": lambda p, i, t: sound_quality_signal(t),
     "call_quality": lambda p, i, t: call_quality_signal(t),
+    "category_relevance": lambda p, i, t: category_relevance_signal(p, i, t),
+    "query_relevance": lambda p, i, t: query_relevance_signal(p, i, t),
+    "product_identity": lambda p, i, t: product_identity_signal(p, i, t),
 }
 
 

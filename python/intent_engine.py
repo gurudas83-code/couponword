@@ -37,20 +37,102 @@ def normalize(text: str) -> str:
 
 
 def detect_category(text: str) -> str | None:
+    """
+    Detect the shopper's primary product category.
+
+    Keep stable canonical category names downstream while accepting
+    common Indian-shopping wording and product aliases.
+    """
     mapping = [
-        (("phone", "mobile", "smartphone"), "smartphone"),
+        # Personal electronics
+        (("smartphone", "mobile phone", "mobile", "phone"), "smartphone"),
         (("earbuds", "earbud", "tws"), "earbuds"),
         (("laptop", "notebook"), "laptop"),
         (("smartwatch", "smart watch"), "smartwatch"),
-        (("tablet",), "tablet"),
+        (("tablet", "ipad"), "tablet"),
         (("headphone", "headphones", "headset"), "headphones"),
-        (("speaker",), "speaker"),
-    ]
-    for aliases, category in mapping:
-        if any(alias in text for alias in aliases):
-            return category
-    return None
+        (("bluetooth speaker", "portable speaker", "speaker"), "speaker"),
 
+        # TV / entertainment
+        (("smart tv", "television", "led tv", "oled tv", "qled tv", "tv"), "television"),
+        (("soundbar", "sound bar"), "soundbar"),
+        (("projector",), "projector"),
+
+        # Kitchen appliances
+        (("mixer grinder", "mixie"), "mixer_grinder"),
+        (("air fryer",), "air_fryer"),
+        (("microwave oven", "microwave"), "microwave"),
+        (("induction cooktop", "induction stove", "induction"), "induction_cooktop"),
+        (("electric kettle", "kettle"), "electric_kettle"),
+        (("toaster",), "toaster"),
+        (("juicer",), "juicer"),
+        (("water purifier", "ro purifier", "water filter"), "water_purifier"),
+
+        # Major appliances
+        (("refrigerator", "fridge"), "refrigerator"),
+        (("washing machine", "washer"), "washing_machine"),
+        (("air conditioner", "split ac", "window ac", " ac "), "air_conditioner"),
+        (("room heater", "heater"), "room_heater"),
+        (("ceiling fan", "table fan", "pedestal fan", "fan"), "fan"),
+        (("vacuum cleaner", "vacuum"), "vacuum_cleaner"),
+
+        # Computing / accessories
+        (("monitor",), "monitor"),
+        (("keyboard",), "keyboard"),
+        (("mouse",), "mouse"),
+        (("printer",), "printer"),
+        (("router", "wifi router", "wi-fi router"), "router"),
+        (("power bank", "powerbank"), "power_bank"),
+
+        # Photography
+        (("dslr", "mirrorless camera", "digital camera", "camera"), "camera"),
+
+        # Fashion / footwear
+        (("running shoes", "walking shoes", "sports shoes", "sneakers", "shoes", "shoe"), "shoes"),
+        (("sandals", "slippers", "flip flops"), "footwear"),
+        (("t shirt", "t-shirt", "shirt"), "shirt"),
+        (("jeans",), "jeans"),
+        (("trousers", "pants"), "trousers"),
+        (("dress", "kurti", "saree"), "womens_clothing"),
+        (("jacket",), "jacket"),
+
+        # Home / furniture
+        (("office chair", "gaming chair", "chair"), "chair"),
+        (("mattress",), "mattress"),
+        (("sofa",), "sofa"),
+        (("study table", "computer table", "desk"), "table"),
+
+        # Personal care / beauty
+        (("trimmer",), "trimmer"),
+        (("electric shaver", "shaver"), "shaver"),
+        (("hair dryer", "hairdryer"), "hair_dryer"),
+        (("straightener",), "hair_straightener"),
+        (("perfume", "fragrance"), "perfume"),
+        (("sunscreen",), "sunscreen"),
+
+        # Bags / travel
+        (("backpack", "rucksack"), "backpack"),
+        (("suitcase", "trolley bag", "luggage"), "luggage"),
+
+        # Broad shopping intents
+        (("toy", "toys"), "toys"),
+        (("gift", "gifting"), "gift"),
+    ]
+
+    padded_text = f" {text} "
+
+    for aliases, category in mapping:
+        for alias in aliases:
+            if alias.startswith(" ") or alias.endswith(" "):
+                if alias in padded_text:
+                    return category
+            elif re.search(
+                r"(?<!\\w)" + re.escape(alias) + r"(?!\\w)",
+                text,
+            ):
+                return category
+
+    return None
 
 def detect_budget(text: str) -> tuple[int | None, int | None]:
     m = re.search(r"(?:under|below|less than|upto|up to|max|maximum)\s*(\d{3,7})", text)
@@ -345,10 +427,25 @@ def build_priority_weights(
             "call_quality": 15, "anc": 15, "comfort": 10, "connectivity": 5,
         }
     else:
-        weights = {
-            "budget": 25, "core_function": 35, "quality": 20,
-            "ease_of_use": 10, "support": 10,
-        }
+        # Universal fallback for categories that do not yet have a
+        # dedicated deep-scoring profile.
+        #
+        # Rank only from evidence we can conservatively verify:
+        # product/category relevance, query relevance and specific
+        # product identity. Never invent quality/performance claims.
+        if "budget_max" in hard_constraints_for_weights:
+            weights = {
+                "budget": 25,
+                "category_relevance": 35,
+                "query_relevance": 30,
+                "product_identity": 10,
+            }
+        else:
+            weights = {
+                "category_relevance": 45,
+                "query_relevance": 40,
+                "product_identity": 15,
+            }
 
     if user_profile in {"parent", "senior"} and category == "smartphone":
         weights = {

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Coupon World AI OS
 Market Discovery Engine v1.6.1
@@ -293,7 +293,7 @@ def build_discovery_queries(
     user_query: str,
     intent: dict[str, Any],
 ) -> list[str]:
-    category = clean(intent.get("category"))
+    category = clean(intent.get("category")).replace("_", " ")
     budget = intent.get("budget_max")
 
     features = [
@@ -1214,3 +1214,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
