@@ -664,7 +664,16 @@ def runtime_profile_from_extraction(
     if not isinstance(features, list):
         features = []
 
-    price_evidence = build_price_evidence(candidate)
+    existing_commerce_price = resolved.get("commerce_evidence")
+
+    if (
+        isinstance(existing_commerce_price, dict)
+        and existing_commerce_price.get("verified") is True
+        and existing_commerce_price.get("price") is not None
+    ):
+        price_evidence = existing_commerce_price
+    else:
+        price_evidence = build_price_evidence(candidate)
 
     verified_market_price = (
         price_evidence.get("price")
@@ -779,6 +788,7 @@ def run_pipeline(
     query: str,
     max_candidates: int = 15,
     max_results: int = 5,
+    live_fast: bool = False,
 ) -> dict[str, Any]:
     intent = parse_query(query)
 
@@ -948,16 +958,72 @@ def run_pipeline(
                 })
                 continue
 
-        try:
-            extraction = extract_one(resolved, identity)
-        except Exception as error:
-            failures.append({
-                "candidate_id": candidate_id,
-                "title": raw_title,
-                "stage": "evidence",
-                "reason": str(error),
-            })
-            continue
+        if (
+            live_fast
+            and clean(resolved.get("resolver_mode"))
+                == "verified_retailer_fallback"
+        ):
+            # -----------------------------------------------------
+            # FAST LIVE EVIDENCE
+            # -----------------------------------------------------
+            # Commerce identity and primary retailer price were
+            # already independently verified above.
+            #
+            # For live visitor requests, avoid a second deep page
+            # crawl. Use the trusted retailer listing text as
+            # bounded feature evidence. Unknown criteria remain
+            # unknown; no missing specification is invented.
+            # -----------------------------------------------------
+
+            source_title = clean(
+                candidate.get("source_title")
+                or candidate.get("title")
+                or raw_title
+            )
+
+            snippet = clean(candidate.get("snippet"))
+
+            fast_features = [
+                value
+                for value in (source_title, snippet)
+                if value
+            ]
+
+            extraction = {
+                "fetch_status": "success",
+                "resolver_verified": True,
+                "page_identity_score": round(
+                    int(resolved.get("identity_score") or 0) / 100,
+                    4,
+                ),
+                "search_name": clean(
+                    identity.get("search_name")
+                    or candidate.get("title")
+                ),
+                "brand": clean(identity.get("brand")),
+                "specifications": {},
+                "features": fast_features,
+                "review": {
+                    "status": "verified_live_commerce",
+                    "reason": (
+                        "Fast live mode used already verified retailer "
+                        "identity, listing evidence and primary price"
+                    ),
+                },
+                "evidence_mode": "verified_commerce_fast",
+            }
+
+        else:
+            try:
+                extraction = extract_one(resolved, identity)
+            except Exception as error:
+                failures.append({
+                    "candidate_id": candidate_id,
+                    "title": raw_title,
+                    "stage": "evidence",
+                    "reason": str(error),
+                })
+                continue
 
         evidence_records.append(extraction)
 

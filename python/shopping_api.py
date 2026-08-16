@@ -64,8 +64,9 @@ def recommend():
     try:
         payload = run_pipeline(
             query=query,
-            max_candidates=15,
-            max_results=5,
+            max_candidates=8,
+            max_results=4,
+            live_fast=True,
         )
     except Exception as error:
         return (
@@ -88,3 +89,4 @@ if __name__ == "__main__":
         port=8000,
         debug=False,
     )
+

@@ -825,6 +825,72 @@ def _required_capacity(
     return None
 
 
+def category_accessory_gate(
+    title: str,
+    category: str,
+) -> dict[str, Any]:
+    """
+    Conservative category-mismatch gate.
+
+    Reject obvious accessories/replacement parts when the user is
+    shopping for the primary product itself. Generic words such as
+    "display" alone are not enough to reject a smartphone.
+    """
+    text = normalize_key(title)
+    category_text = normalize_key(category)
+
+    if category_text not in {
+        "smartphone",
+        "phone",
+        "mobile",
+        "mobile phone",
+    }:
+        return {
+            "status": "pass",
+            "reason": "No smartphone accessory gate required",
+        }
+
+    accessory_patterns = (
+        r"\bdisplay\s+combo\b",
+        r"\bcombo\s+folder\b",
+        r"\bdisplay\s+folder\b",
+        r"\blcd\s+screen\b",
+        r"\bdigitizer\b",
+        r"\bscreen\s+replacement\b",
+        r"\breplacement\s+screen\b",
+        r"\bdisplay\s+replacement\b",
+        r"\breplacement\s+display\b",
+        r"\bscreen\s+protector\b",
+        r"\btempered\s+glass\b",
+        r"\bphone\s+case\b",
+        r"\bmobile\s+case\b",
+        r"\bflip\s+case\b",
+        r"\bback\s+cover\b",
+        r"\bprotective\s+cover\b",
+        r"\bcase\s+cover\b",
+        r"\bleather\s+case\b",
+        r"\bcharging\s+cable\b",
+        r"\bcharger\b",
+        r"\bphone\s+holder\b",
+        r"\bmobile\s+holder\b",
+    )
+
+    for pattern in accessory_patterns:
+        if re.search(pattern, text, re.I):
+            return {
+                "status": "reject",
+                "reason": (
+                    "Obvious smartphone accessory/replacement part "
+                    "detected in product title"
+                ),
+            }
+
+    return {
+        "status": "pass",
+        "reason": "No explicit smartphone accessory evidence",
+    }
+
+
 def discovery_variant_gate(
     title: str,
     intent: dict[str, Any],
@@ -1002,6 +1068,14 @@ def discover_market(
         title = compact_product_title(item["title"])
 
         if is_generic_listing_title(title):
+            continue
+
+        accessory_gate = category_accessory_gate(
+            title,
+            category,
+        )
+
+        if accessory_gate["status"] == "reject":
             continue
 
         variant_gate = discovery_variant_gate(

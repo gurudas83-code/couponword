@@ -388,6 +388,43 @@ def build_priority_weights(
 
     combined = set(must_have + preferred)
 
+    # ------------------------------------------------------------
+    # Explicit smartphone memory/network query
+    # ------------------------------------------------------------
+    # When the shopper explicitly asks for RAM/storage capacity,
+    # those requirements must become first-class ranking dimensions.
+    #
+    # Example:
+    #   phone under 20000 with 8GB RAM and 128GB storage and 5G
+    #
+    # Generic secondary qualities such as camera/software remain
+    # useful, but they must not dominate the shopper's stated needs.
+    # ------------------------------------------------------------
+    if category == "smartphone":
+        has_ram_requirement = any(
+            re.fullmatch(r"\d+gb_ram", str(req or "").lower())
+            for req in must_have
+        )
+
+        has_storage_requirement = any(
+            re.fullmatch(r"\d+gb_storage", str(req or "").lower())
+            for req in must_have
+        )
+
+        if has_ram_requirement or has_storage_requirement:
+            weights = {
+                "budget": 25,
+                "ram": 20 if has_ram_requirement else 5,
+                "storage": 20 if has_storage_requirement else 5,
+                "connectivity": 15 if "5g" in combined else 8,
+                "battery": 7,
+                "display": 5,
+                "performance": 3,
+                "camera": 2,
+                "ease_of_use": 1,
+                "software_support": 2,
+            }
+
     # Explicit requirements should materially influence ranking,
     # while category defaults remain secondary decision factors.
     for req, dimension in nudges.items():

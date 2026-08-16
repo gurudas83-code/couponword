@@ -235,6 +235,19 @@ def performance_signal(text: str) -> dict[str, Any]:
 
 def ram_signal(text: str) -> dict[str, Any]:
     amount = numeric(r"\b(\d{1,3})\s*gb\s*ram\b", text)
+
+    if amount is None:
+        amount = numeric(
+            r"\b(\d{1,3})\s*gb\s*\+\s*\d{2,4}\s*gb\b",
+            text,
+        )
+
+    if amount is None:
+        amount = numeric(
+            r"\b(\d{1,3})\s*\+\s*\d{2,4}\s*gb\b",
+            text,
+        )
+
     if amount is None:
         return signal(None, "No verified RAM capacity found")
 
@@ -250,7 +263,19 @@ def ram_signal(text: str) -> dict[str, Any]:
 
 
 def storage_signal(text: str) -> dict[str, Any]:
-    amount = numeric(r"\b(\d{2,4})\s*gb\s*(?:storage|internal storage)?", text)
+    amount = numeric(
+        r"\b(\d{2,4})\s*gb\s*(?:storage|internal storage|rom)\b",
+        text,
+    )
+
+    if amount is None:
+        compact = re.search(
+            r"\b\d{1,3}\s*(?:gb\s*)?\+\s*(\d{2,4})\s*gb\b",
+            text,
+            re.I,
+        )
+        if compact:
+            amount = float(compact.group(1))
     fast = any(x in text for x in ("ufs 4.0", "ssd"))
 
     if amount is not None:
@@ -508,6 +533,18 @@ def capacity_requirement_signal(
         )
 
         if actual is None:
+            actual = numeric(
+                r"\b(\d{1,3})\s*gb\s*\+\s*\d{2,4}\s*gb\b",
+                text,
+            )
+
+        if actual is None:
+            actual = numeric(
+                r"\b(\d{1,3})\s*\+\s*\d{2,4}\s*gb\b",
+                text,
+            )
+
+        if actual is None:
             return signal(
                 None,
                 f"Required {required:g}GB RAM, but verified RAM capacity is unavailable",
@@ -531,6 +568,15 @@ def capacity_requirement_signal(
             r"\b(\d{2,4})\s*gb\s*(?:storage|internal storage|rom)\b",
             text,
         )
+
+        if actual is None:
+            compact = re.search(
+                r"\b\d{1,3}\s*(?:gb\s*)?\+\s*(\d{2,4})\s*gb\b",
+                text,
+                re.I,
+            )
+            if compact:
+                actual = float(compact.group(1))
 
         if actual is None:
             return signal(
