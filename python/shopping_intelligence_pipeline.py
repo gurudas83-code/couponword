@@ -1181,6 +1181,7 @@ def run_pipeline(
             "product_id": profile.get("product_id"),
             "title": profile.get("title"),
             "brand": profile.get("brand"),
+            "price": profile.get("price"),
             "fit_percent": assessment.get("fit_percent"),
             "raw_fit_percent": assessment.get("raw_fit_percent"),
             "evidence_coverage_percent": assessment.get(

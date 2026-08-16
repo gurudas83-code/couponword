@@ -232,9 +232,18 @@ function escapeHTML(value) {
 searchInput.addEventListener("input", renderDeals);
 sortSelect.addEventListener("change", renderDeals);
 
-heroSearchButton.addEventListener("click", () => applySearch(heroSearch.value));
+heroSearchButton.addEventListener("click", () => {
+  const query = heroSearch.value;
+  applySearch(query);
+  loadShoppingRecommendation(query);
+});
+
 heroSearch.addEventListener("keydown", e => {
-  if (e.key === "Enter") applySearch(heroSearch.value);
+  if (e.key === "Enter") {
+    const query = heroSearch.value;
+    applySearch(query);
+    loadShoppingRecommendation(query);
+  }
 });
 
 document.querySelectorAll("[data-search]").forEach(el => {
@@ -281,91 +290,136 @@ document.addEventListener("DOMContentLoaded", removeUnverifiedDiscounts);
 
 // Also run after dynamically rendered products.
 setTimeout(removeUnverifiedDiscounts, 300);
-async function loadShoppingRecommendation() {
+async function loadShoppingRecommendation(query) {
   const card = document.getElementById("shoppingBrainCard");
+  const section = document.getElementById("aiRecommendation");
 
   if (!card) {
     console.error("shoppingBrainCard element not found");
     return;
   }
 
+  const cleanQuery = String(query || "").trim();
+
+  if (!cleanQuery) {
+    card.innerHTML = `
+      <h3>Ask Coupon World</h3>
+      <p>Search for a product above to get personalized AI recommendations.</p>
+    `;
+    return;
+  }
+
+  card.innerHTML = `
+    <h3>Finding the best matches...</h3>
+    <p>Coupon World AI is checking products, prices and fit for your request.</p>
+  `;
+
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   try {
-    const response = await fetch(
-      `data/shopping_response.json?v=${Date.now()}`
-    );
+    const endpoint =
+      "https://couponword.onrender.com/api/recommend?q=" +
+      encodeURIComponent(cleanQuery);
+
+    const response = await fetch(endpoint);
 
     if (!response.ok) {
-      throw new Error(`Recommendation file returned HTTP ${response.status}`);
+      throw new Error(`Shopping API returned HTTP ${response.status}`);
     }
 
     const data = await response.json();
 
-    console.log("Shopping Brain response:", data);
+    console.log("Shopping Brain live response:", data);
 
-    if (
-      !data ||
-      !Array.isArray(data.matches) ||
-      data.matches.length === 0
-    ) {
+    const recommendations = Array.isArray(data.recommendations)
+      ? data.recommendations
+      : [];
+
+    if (recommendations.length === 0) {
       card.innerHTML = `
-        <h3>No recommendation available</h3>
-        <p>Shopping Brain did not find a suitable product.</p>
+        <h3>No strong match found</h3>
+        <p>Try changing the budget, RAM, storage, brand or other requirements.</p>
       `;
       return;
     }
 
-    const p = data.matches[0];
+    card.innerHTML = recommendations.map((p) => {
+      const title = escapeHTML(p.title || "Recommended Product");
+      const brand = escapeHTML(p.brand || "Not available");
+      const fit =
+        p.fit_percent != null ? escapeHTML(p.fit_percent) : "Not available";
+      const confidence = escapeHTML(p.confidence || "unknown");
 
-    const title = escapeHTML(p.title || "Recommended Product");
-    const brand = escapeHTML(p.brand || "Not available");
-    const score =
-      p.score != null ? escapeHTML(p.score) : "Not available";
+      const price =
+        p.price != null
+          ? `\u20B9${escapeHTML(p.price)}`
+          : "Check latest price";
 
-    const priceHTML =
-      p.price != null
-        ? `<p><strong>Price:</strong> ₹${escapeHTML(p.price)}</p>`
-        : `<p><strong>Price:</strong> Check latest price on retailer</p>`;
+      const productLink = safeLink(
+        p.market_source ||
+        p.official_source ||
+        p.link
+      );
 
-    const productLink = safeLink(p.link);
+      const why = Array.isArray(p.why_it_fits)
+        ? p.why_it_fits
+        : [];
 
-    card.innerHTML = `
-      <h3>${title}</h3>
+      const whyHTML = why.length
+        ? `
+          <ul class="ai-reasons">
+            ${why.map(item => `<li>${escapeHTML(item)}</li>`).join("")}
+          </ul>
+        `
+        : "";
 
-      ${priceHTML}
+      return `
+        <article class="ai-result-card">
+          <div class="ai-result-rank">#${escapeHTML(p.rank || "")}</div>
 
-      <p><strong>Brand:</strong> ${brand}</p>
-      <p><strong>Match Score:</strong> ${score}</p>
+          <h3>${title}</h3>
 
-      ${
-        productLink !== "#"
-          ? `
-            <a
-              class="shop-button"
-              href="${productLink}"
-              target="_blank"
-              rel="nofollow sponsored noopener"
-            >
-              View Product →
-            </a>
-          `
-          : `
-            <p class="card-note">
-              Product link is currently unavailable.
-            </p>
-          `
-      }
-    `;
+          <p><strong>Brand:</strong> ${brand}</p>
+          <p><strong>Price:</strong> ${price}</p>
+          <p><strong>Fit:</strong> ${fit}%</p>
+          <p><strong>Confidence:</strong> ${confidence}</p>
+
+          ${whyHTML}
+
+          ${
+            productLink !== "#"
+              ? `
+                <a
+                  class="shop-button"
+                  href="${productLink}"
+                  target="_blank"
+                  rel="nofollow sponsored noopener"
+                >
+                  Check Price \u2192
+                </a>
+              `
+              : `
+                <p class="card-note">
+                  Retailer link is currently unavailable.
+                </p>
+              `
+          }
+        </article>
+      `;
+    }).join("");
+
   } catch (error) {
-    console.error(
-      "Unable to load Shopping Brain response:",
-      error
-    );
+    console.error("Unable to load Shopping Brain response:", error);
 
     card.innerHTML = `
-      <h3>Recommendation unavailable</h3>
-      <p>${escapeHTML(error.message || "Unable to load Shopping Brain data.")}</p>
+      <h3>Recommendation temporarily unavailable</h3>
+      <p>${escapeHTML(
+        error.message || "Unable to reach Coupon World Shopping Intelligence."
+      )}</p>
     `;
   }
 }
 
-loadShoppingRecommendation();
+loadShoppingRecommendation("");
