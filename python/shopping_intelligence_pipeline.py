@@ -21,6 +21,7 @@ Main changes:
 """
 
 from __future__ import annotations
+import time
 
 import argparse
 import inspect
@@ -790,12 +791,18 @@ def run_pipeline(
     max_results: int = 5,
     live_fast: bool = False,
 ) -> dict[str, Any]:
-    intent = parse_query(query)
+    pipeline_started = time.perf_counter()
 
+    intent_started = time.perf_counter()
+    intent = parse_query(query)
+    intent_seconds = time.perf_counter() - intent_started
+
+    discovery_started = time.perf_counter()
     discovery = discover_market(
         user_query=query,
         max_candidates=max_candidates,
     )
+    discovery_seconds = time.perf_counter() - discovery_started
 
     discovered = [
         item
@@ -817,7 +824,10 @@ def run_pipeline(
     scored_records: list[dict[str, Any]] = []
     failures: list[dict[str, Any]] = []
 
+    candidate_timings: list[dict[str, Any]] = []
+
     for position, candidate in enumerate(discovered, start=1):
+        candidate_started = time.perf_counter()
         candidate_id = clean(candidate.get("candidate_id"))
         raw_title = clean(candidate.get("title"))
 
@@ -845,20 +855,95 @@ def run_pipeline(
             })
             continue
 
-        try:
-            resolved = resolve_with_fallback(
-                client,
-                candidate,
-                identity,
+        resolved = None
+
+        # ---------------------------------------------------------
+        # LIVE-FAST COMMERCE-FIRST PATH
+        # ---------------------------------------------------------
+        # For live visitor requests, first try the already discovered
+        # retailer listing. If both identity and primary selling price
+        # verify independently, avoid the slower official-source
+        # resolver on the critical response path.
+        #
+        # Deep/non-live mode keeps the original resolver-first flow.
+        # ---------------------------------------------------------
+        if live_fast:
+            market_url = clean(candidate.get("source_url"))
+            market_title = clean(candidate.get("title") or raw_title)
+
+            try:
+                fast_identity_obj = compare_identity(
+                    expected_text=clean(
+                        identity.get("search_name")
+                        or identity.get("model")
+                        or raw_title
+                    ),
+                    candidate_title=market_title,
+                    candidate_url=market_url,
+                    expected_brand=clean(identity.get("brand")),
+                )
+                fast_identity = fast_identity_obj.to_dict()
+            except Exception as error:
+                fast_identity = {
+                    "score": 0,
+                    "decision": "reject",
+                    "reasons": [
+                        f"Fast commerce identity comparison failed: {error}"
+                    ],
+                }
+
+            fast_price = build_price_evidence(candidate)
+
+            fast_commerce_verified = bool(
+                clean(fast_identity.get("decision")).lower() == "verified"
+                and fast_price.get("verified") is True
+                and fast_price.get("price") is not None
             )
-        except Exception as error:
-            failures.append({
-                "candidate_id": candidate_id,
-                "title": raw_title,
-                "stage": "official_source",
-                "reason": str(error),
-            })
-            continue
+
+            if fast_commerce_verified:
+                resolved = {
+                    "product_id": clean(
+                        identity.get("product_id")
+                        or candidate.get("candidate_id")
+                    ),
+                    "title": market_title,
+                    "brand": clean(identity.get("brand")),
+                    "verified": True,
+                    "status": "commerce_evidence_verified",
+                    "resolver_mode": "verified_retailer_fallback",
+                    "official_url": market_url,
+                    "official_title": market_title,
+                    "identity_score": int(
+                        fast_identity.get("score") or 0
+                    ),
+                    "identity_decision": fast_identity.get("decision"),
+                    "identity_reasons": fast_identity.get("reasons", []),
+                    "match_score": round(
+                        int(fast_identity.get("score") or 0) / 100,
+                        4,
+                    ),
+                    "commerce_evidence": fast_price,
+                    "reason": (
+                        "Live-fast verified retailer identity and "
+                        "primary price evidence"
+                    ),
+                }
+
+        if resolved is None:
+            try:
+                resolved = resolve_with_fallback(
+                    client,
+                    candidate,
+                    identity,
+                )
+            except Exception as error:
+                failures.append({
+                    "candidate_id": candidate_id,
+                    "title": raw_title,
+                    "stage": "official_source",
+                    "reason": str(error),
+                })
+                continue
 
         resolver_records.append(resolved)
 
@@ -1253,7 +1338,14 @@ def run_pipeline(
             "extractor_review_status": profile.get("provenance", {}).get("extractor_review_status"),
         })
 
+    total_seconds = time.perf_counter() - pipeline_started
+
     return {
+        "timings": {
+            "intent_seconds": round(intent_seconds, 3),
+            "discovery_seconds": round(discovery_seconds, 3),
+            "total_seconds": round(total_seconds, 3),
+        },
         "schema_version": "1.1",
         "query": query,
         "intent": intent,

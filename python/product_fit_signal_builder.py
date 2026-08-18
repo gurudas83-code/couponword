@@ -40,6 +40,7 @@ def text_blob(profile: dict[str, Any]) -> str:
     parts = [
         str(profile.get("title") or ""),
         str(profile.get("brand") or ""),
+        str(profile.get("description") or ""),
         json.dumps(profile.get("attributes", {}), ensure_ascii=False),
         " ".join(str(x) for x in profile.get("features", []) if x),
         " ".join(str(x) for x in profile.get("best_for", []) if x),
@@ -200,6 +201,200 @@ def display_signal(text: str) -> dict[str, Any]:
     return signal(min(score, 1.0), ", ".join(reasons))
 
 
+
+def laptop_display_signal(text: str) -> dict[str, Any]:
+    sizes = [
+        float(x)
+        for x in re.findall(
+            r"\b(\d{2}(?:\.\d)?)\s*(?:\\?\"|-?inch|inches?)",
+            text,
+            re.I,
+        )
+        if 10.0 <= float(x) <= 19.0
+    ]
+
+    score = 0.0
+    reasons: list[str] = []
+
+    if sizes:
+        size = max(sizes)
+        score += 0.35
+        reasons.append(f"{size:g}-inch laptop display")
+
+    if any(x in text for x in ("oled", "amoled")):
+        score += 0.30
+        reasons.append("OLED display")
+
+    if any(x in text for x in ("ips", "ips-level", "ips level")):
+        score += 0.15
+        reasons.append("IPS-class panel")
+
+    if re.search(r"\b(?:120|144|165|240)\s*hz\b", text, re.I):
+        score += 0.20
+        reasons.append("high refresh rate")
+
+    if any(x in text for x in ("2.5k", "2.8k", "3k", "4k", "qhd")):
+        score += 0.20
+        reasons.append("high-resolution display")
+
+    if not reasons:
+        return signal(None, "No reliable laptop display evidence found")
+
+    return signal(min(score, 1.0), ", ".join(reasons))
+
+
+def laptop_battery_signal(text: str) -> dict[str, Any]:
+    hours = [
+        float(x)
+        for x in re.findall(
+            r"\b(\d{1,2}(?:\.\d+)?)\s*(?:hours?|hrs?|hr)\b",
+            text,
+            re.I,
+        )
+    ]
+
+    if hours:
+        endurance = max(hours)
+
+        if endurance >= 12:
+            return signal(
+                1.0,
+                f"Strong verified laptop battery endurance: {endurance:g} hours",
+            )
+
+        if endurance >= 8:
+            return signal(
+                0.80,
+                f"Good verified laptop battery endurance: {endurance:g} hours",
+            )
+
+        if endurance >= 5:
+            return signal(
+                0.65,
+                f"Moderate verified laptop battery endurance: {endurance:g} hours",
+            )
+
+        return signal(
+            0.50,
+            f"Verified laptop battery endurance: {endurance:g} hours",
+        )
+
+    wh_values = [
+        float(x)
+        for x in re.findall(
+            r"\b(\d{2,3}(?:\.\d+)?)\s*wh\b",
+            text,
+            re.I,
+        )
+    ]
+
+    if wh_values:
+        capacity = max(wh_values)
+
+        if capacity >= 70:
+            return signal(0.90, f"Large verified laptop battery: {capacity:g}Wh")
+
+        if capacity >= 55:
+            return signal(0.75, f"Good verified laptop battery: {capacity:g}Wh")
+
+        if capacity >= 40:
+            return signal(0.60, f"Moderate verified laptop battery: {capacity:g}Wh")
+
+    return signal(None, "No reliable laptop battery evidence found")
+
+
+def portability_signal(text: str) -> dict[str, Any]:
+    weights = [
+        float(x)
+        for x in re.findall(
+            r"\b(\d(?:\.\d{1,2})?)\s*kg\b",
+            text,
+            re.I,
+        )
+        if 0.5 <= float(x) <= 5.0
+    ]
+
+    if weights:
+        weight = min(weights)
+
+        if weight <= 1.3:
+            return signal(1.0, f"Highly portable verified weight: {weight:g}kg")
+
+        if weight <= 1.6:
+            return signal(0.85, f"Portable verified weight: {weight:g}kg")
+
+        if weight <= 2.0:
+            return signal(0.65, f"Moderate verified weight: {weight:g}kg")
+
+        return signal(0.45, f"Relatively heavy verified weight: {weight:g}kg")
+
+    if any(
+        phrase in text
+        for phrase in ("lightweight", "thin and light", "thin & light", "ultralight")
+    ):
+        return signal(0.80, "Verified lightweight/thin-and-light positioning")
+
+    return signal(None, "No reliable portability evidence found")
+
+
+def build_quality_signal(text: str) -> dict[str, Any]:
+    reasons: list[str] = []
+    score = 0.0
+
+    if any(
+        phrase in text
+        for phrase in (
+            "aluminium chassis",
+            "aluminum chassis",
+            "aluminium body",
+            "aluminum body",
+            "metal chassis",
+            "metal body",
+        )
+    ):
+        score += 0.70
+        reasons.append("metal/aluminium construction")
+
+    if any(
+        phrase in text
+        for phrase in (
+            "mil-std",
+            "mil std",
+            "military grade",
+            "military-grade",
+        )
+    ):
+        score += 0.30
+        reasons.append("durability-standard evidence")
+
+    if not reasons:
+        return signal(None, "No conservative laptop build-quality evidence found")
+
+    return signal(min(score, 1.0), ", ".join(reasons))
+
+
+def category_display_signal(
+    profile: dict[str, Any],
+    intent: dict[str, Any],
+    text: str,
+) -> dict[str, Any]:
+    if str(intent.get("category") or "").lower() == "laptop":
+        return laptop_display_signal(text)
+
+    return display_signal(text)
+
+
+def category_battery_signal(
+    profile: dict[str, Any],
+    intent: dict[str, Any],
+    text: str,
+) -> dict[str, Any]:
+    if str(intent.get("category") or "").lower() == "laptop":
+        return laptop_battery_signal(text)
+
+    return battery_signal(text)
+
+
 def performance_signal(text: str) -> dict[str, Any]:
     high = (
         "snapdragon 8 elite",
@@ -233,6 +428,78 @@ def performance_signal(text: str) -> dict[str, Any]:
     return signal(None, "No reliable performance evidence found")
 
 
+
+def graphics_signal(text: str) -> dict[str, Any]:
+    normalized = str(text or "").lower()
+
+    very_high = (
+        "rtx 4090",
+        "rtx 4080",
+        "rtx 4070",
+        "rtx 4060",
+    )
+
+    high = (
+        "rtx 4050",
+        "rx 7700",
+        "rx 7600",
+        "rx 7600s",
+    )
+
+    medium = (
+        "rtx 3050",
+        "rtx 2050",
+        "gtx 1660",
+        "gtx 1650",
+        "rx 6500",
+    )
+
+    integrated = (
+        "intel iris xe",
+        "intel uhd",
+        "intel arc integrated",
+        "radeon 780m",
+        "radeon 680m",
+        "radeon graphics",
+        "integrated graphics",
+    )
+
+    if any(x in normalized for x in very_high):
+        return signal(
+            1.0,
+            "High-end dedicated gaming GPU verified",
+        )
+
+    if any(x in normalized for x in high):
+        return signal(
+            0.90,
+            "Strong dedicated gaming GPU verified",
+        )
+
+    if any(x in normalized for x in medium):
+        return signal(
+            0.70,
+            "Moderate dedicated gaming GPU verified",
+        )
+
+    if any(x in normalized for x in integrated):
+        return signal(
+            0.35,
+            "Integrated graphics detected; limited for demanding gaming",
+        )
+
+    if any(x in normalized for x in ("nvidia geforce", "radeon rx")):
+        return signal(
+            0.60,
+            "Dedicated graphics hardware detected",
+        )
+
+    return signal(
+        None,
+        "No reliable graphics/GPU evidence found",
+    )
+
+
 def ram_signal(text: str) -> dict[str, Any]:
     amount = numeric(r"\b(\d{1,3})\s*gb\s*ram\b", text)
 
@@ -264,7 +531,7 @@ def ram_signal(text: str) -> dict[str, Any]:
 
 def storage_signal(text: str) -> dict[str, Any]:
     amount = numeric(
-        r"\b(\d{2,4})\s*gb\s*(?:storage|internal storage|rom)\b",
+        r"\b(\d{2,4})\s*gb\s*(?:storage|internal storage|rom|ssd)\b",
         text,
     )
 
@@ -713,7 +980,7 @@ def capacity_requirement_signal(
     if storage_match:
         required = float(storage_match.group(1))
         actual = numeric(
-            r"\b(\d{2,4})\s*gb\s*(?:storage|internal storage|rom)\b",
+            r"\b(\d{2,4})\s*gb\s*(?:storage|internal storage|rom|ssd)\b",
             text,
         )
 
@@ -748,11 +1015,12 @@ def capacity_requirement_signal(
 
 BUILDERS = {
     "budget": lambda p, i, t: budget_signal(p, i),
-    "battery": lambda p, i, t: battery_signal(t),
-    "display": lambda p, i, t: display_signal(t),
+    "battery": lambda p, i, t: category_battery_signal(p, i, t),
+    "display": lambda p, i, t: category_display_signal(p, i, t),
     "ease_of_use": lambda p, i, t: ease_of_use_signal(t),
     "camera": lambda p, i, t: camera_signal(t),
     "performance": lambda p, i, t: performance_signal(t),
+    "graphics": lambda p, i, t: graphics_signal(t),
     "ram": lambda p, i, t: ram_signal(t),
     "storage": lambda p, i, t: storage_signal(t),
     "software_support": lambda p, i, t: software_support_signal(t),
@@ -763,6 +1031,8 @@ BUILDERS = {
     "category_relevance": lambda p, i, t: category_relevance_signal(p, i, t),
     "query_relevance": lambda p, i, t: query_relevance_signal(p, i, t),
     "product_identity": lambda p, i, t: product_identity_signal(p, i, t),
+    "portability": lambda p, i, t: portability_signal(t),
+    "build_quality": lambda p, i, t: build_quality_signal(t),
 }
 
 

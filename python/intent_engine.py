@@ -358,7 +358,7 @@ def detect_requirements(
 
         storage_match = re.search(
             r"\b(32|64|128|256|512|1024)\s*gb\s*"
-            r"(?:storage|internal\s+storage|rom)\b",
+            r"(?:storage|internal\s+storage|rom|ssd)\b",
             text,
         )
         if storage_match:
@@ -467,8 +467,15 @@ def build_priority_weights(
 
     if category == "laptop" and "gaming" in use_cases:
         weights = {
-            "budget": 15, "performance": 35, "ram": 15, "storage": 10,
-            "battery": 5, "display": 15, "portability": 0, "build_quality": 5,
+            "budget": 15,
+            "graphics": 25,
+            "performance": 20,
+            "ram": 12,
+            "storage": 8,
+            "display": 12,
+            "battery": 3,
+            "portability": 0,
+            "build_quality": 5,
         }
 
     nudges = {

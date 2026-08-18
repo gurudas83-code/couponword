@@ -64,7 +64,7 @@ def recommend():
     try:
         payload = run_pipeline(
             query=query,
-            max_candidates=8,
+            max_candidates=4,
             max_results=4,
             live_fast=True,
         )

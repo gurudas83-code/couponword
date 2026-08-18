@@ -308,6 +308,12 @@ def build_discovery_queries(
         if clean(x)
     ]
 
+    use_cases = [
+        clean(x).replace("_", " ")
+        for x in intent.get("use_case", [])
+        if clean(x)
+    ]
+
     must_have = [
         clean(x).replace("_", " ")
         for x in intent.get("must_have", [])
@@ -335,6 +341,34 @@ def build_discovery_queries(
         budget_terms = ["under", str(budget)]
 
     queries: list[str] = []
+
+    # --------------------------------------------------------
+    # Lane 0: use-case-aware discovery.
+    # Preserve what the shopper intends to DO with the product.
+    # --------------------------------------------------------
+    if use_cases:
+        use_case_terms = list(use_cases)
+
+        if category == "laptop" and "gaming" in {
+            x.lower() for x in use_cases
+        }:
+            use_case_terms.extend([
+                "dedicated graphics",
+                "RTX",
+            ])
+
+        queries.append(
+            join_unique(
+                [
+                    category or "product",
+                    *use_case_terms[:3],
+                    *must_have[:2],
+                    *budget_terms,
+                    "India",
+                    "buy",
+                ]
+            )
+        )
 
     # --------------------------------------------------------
     # Lane 1: explicit must-have search.
