@@ -32,7 +32,7 @@ class ShoppingIntent:
 def normalize(text: str) -> str:
     text = str(text or "").lower()
     text = text.replace("₹", " ").replace("â‚¹", " ").replace(",", "")
-    text = re.sub(r"[^\w\s.+-]", " ", text)
+    text = re.sub(r"[^\w\s.+/\-]", " ", text)
     return re.sub(r"\s+", " ", text).strip()
 
 
@@ -135,18 +135,110 @@ def detect_category(text: str) -> str | None:
     return None
 
 def detect_budget(text: str) -> tuple[int | None, int | None]:
-    m = re.search(r"(?:under|below|less than|upto|up to|max|maximum)\s*(\d{3,7})", text)
-    if m:
-        return None, int(m.group(1))
+    """
+    Parse common Indian shopping-budget expressions while preserving
+    the existing min/max contract.
 
-    m = re.search(r"(?:between|from)\s*(\d{3,7})\s*(?:and|to|-)\s*(\d{3,7})", text)
+    Examples:
+      under 20000
+      under 20k
+      20k ke andar
+      20 hazar tak
+      between 15k and 20k
+      15k-20k
+      above 30k
+      30k se upar
+    """
+
+    def amount(value: str, unit: str | None = None) -> int:
+        number = float(value)
+
+        unit = str(unit or "").lower().strip()
+
+        if unit in {"k", "thousand", "hazar", "hazaar"}:
+            number *= 1000
+
+        return int(number)
+
+    amount_pattern = (
+        r"(\d+(?:\.\d+)?)\s*"
+        r"(k|thousand|hazar|hazaar)?"
+    )
+
+    # ------------------------------------------------------------
+    # Maximum budget
+    # ------------------------------------------------------------
+    m = re.search(
+        rf"(?:under|below|less than|upto|up to|max|maximum)\s*"
+        rf"{amount_pattern}",
+        text,
+    )
     if m:
-        a, b = int(m.group(1)), int(m.group(2))
+        return None, amount(m.group(1), m.group(2))
+
+    # Common Hinglish forms:
+    #   20k ke andar
+    #   20k ke under
+    #   20 hazar tak
+    #   20000 tak
+    m = re.search(
+        rf"\b{amount_pattern}\s*"
+        rf"(?:ke\s+)?(?:andar|under|below|tak)\b",
+        text,
+    )
+    if m:
+        return None, amount(m.group(1), m.group(2))
+
+    # ------------------------------------------------------------
+    # Budget range
+    # ------------------------------------------------------------
+    m = re.search(
+        rf"(?:between|from)\s*"
+        rf"{amount_pattern}\s*"
+        rf"(?:and|to|-)\s*"
+        rf"{amount_pattern}",
+        text,
+    )
+    if m:
+        a = amount(m.group(1), m.group(2))
+        b = amount(m.group(3), m.group(4))
         return min(a, b), max(a, b)
 
-    m = re.search(r"(?:above|over|more than|min|minimum)\s*(\d{3,7})", text)
+    # Compact range:
+    #   15k-20k
+    #   15000 to 20000
+    m = re.search(
+        rf"\b{amount_pattern}\s*"
+        rf"(?:-|to)\s*"
+        rf"{amount_pattern}\b",
+        text,
+    )
     if m:
-        return int(m.group(1)), None
+        a = amount(m.group(1), m.group(2))
+        b = amount(m.group(3), m.group(4))
+        return min(a, b), max(a, b)
+
+    # ------------------------------------------------------------
+    # Minimum budget
+    # ------------------------------------------------------------
+    m = re.search(
+        rf"(?:above|over|more than|min|minimum)\s*"
+        rf"{amount_pattern}",
+        text,
+    )
+    if m:
+        return amount(m.group(1), m.group(2)), None
+
+    # Hinglish:
+    #   30k se upar
+    #   30k se above
+    m = re.search(
+        rf"\b{amount_pattern}\s*se\s*"
+        rf"(?:upar|above|over)\b",
+        text,
+    )
+    if m:
+        return amount(m.group(1), m.group(2)), None
 
     return None, None
 
@@ -317,6 +409,59 @@ def detect_requirements(
         if value not in items:
             items.append(value)
 
+    # ------------------------------------------------------------
+    # Brand semantics
+    # ------------------------------------------------------------
+    detected_brands = [
+        brand.lower()
+        for brand in detect_brands(text)
+    ]
+
+    for brand in detected_brands:
+        marker = f"brand_{brand}"
+
+        hard_brand_patterns = (
+            rf"\bonly\s+{re.escape(brand)}\b",
+            rf"\b{re.escape(brand)}\s+only\b",
+            rf"\b{re.escape(brand)}\s+hi\s+chahiye\b",
+            rf"\b{re.escape(brand)}\s+hi\b",
+        )
+
+        avoid_brand_patterns = (
+            rf"\bno\s+{re.escape(brand)}\b",
+            rf"\bwithout\s+{re.escape(brand)}\b",
+            rf"\b{re.escape(brand)}\s+nahi\b",
+            rf"\b{re.escape(brand)}\s+nahi\s+chahiye\b",
+            rf"\bdont\s+want\s+{re.escape(brand)}\b",
+            rf"\bdon't\s+want\s+{re.escape(brand)}\b",
+        )
+
+        preferred_brand_patterns = (
+            rf"\bprefer(?:red|ably)?\s+{re.escape(brand)}\b",
+            rf"\b{re.escape(brand)}\s+preferred\b",
+            rf"\bprefer\s+{re.escape(brand)}\b",
+        )
+
+        if any(re.search(pattern, text) for pattern in avoid_brand_patterns):
+            add(avoid, marker)
+            continue
+
+        if any(re.search(pattern, text) for pattern in hard_brand_patterns):
+            add(must_have, marker)
+            continue
+
+        if any(re.search(pattern, text) for pattern in preferred_brand_patterns):
+            add(preferred, marker)
+
+    # Multi-brand alternatives:
+    #   Samsung or OnePlus
+    #   Samsung ya OnePlus
+    if len(detected_brands) >= 2 and re.search(r"\b(?:or|ya)\b", text):
+        for brand in detected_brands:
+            marker = f"brand_{brand}"
+            if marker not in avoid and marker not in must_have:
+                add(preferred, marker)
+
     if re.search(r"(under|below|less than|upto|up to|max|maximum)\s*\d{3,7}", text):
         add(hard_constraints, "budget_max")
 
@@ -399,6 +544,26 @@ def detect_requirements(
     # fit scoring and downstream engines can consume them without
     # introducing a parallel intent schema.
     if category in {"smartphone", "laptop", "tablet"}:
+        # Compact memory notation commonly used by shoppers:
+        #   8/128
+        #   8+128
+        #   12/256
+        compact_variant_match = re.search(
+            r"\b(2|3|4|6|8|12|16|18|24|32|64)\s*(?:/|\+)\s*"
+            r"(32|64|128|256|512|1024)\b",
+            text,
+        )
+
+        if compact_variant_match:
+            add(
+                must_have,
+                f"{compact_variant_match.group(1)}gb_ram",
+            )
+            add(
+                must_have,
+                f"{compact_variant_match.group(2)}gb_storage",
+            )
+
         ram_match = re.search(
             r"\b(2|3|4|6|8|12|16|18|24|32|64)\s*gb\s*(?:of\s*)?ram\b",
             text,
@@ -475,6 +640,7 @@ def build_priority_weights(
     must_have: list[str],
     preferred: list[str],
     hard_constraints_for_weights: list[str] | None = None,
+    text: str = "",
 ) -> dict[str, int]:
     hard_constraints_for_weights = hard_constraints_for_weights or []
 
@@ -664,6 +830,114 @@ def build_priority_weights(
         if req in combined and dimension in weights:
             weights[dimension] += 10
 
+    # ------------------------------------------------------------
+    # Natural-language priority emphasis
+    # ------------------------------------------------------------
+    # These phrases affect ranking strength, not eligibility.
+    # Examples:
+    #   camera sabse important
+    #   battery priority
+    #   gaming most important
+    #   performance zyada important
+    #
+    # Stronger mandatory language is handled separately by the
+    # requirement layer; this section only changes ranking emphasis.
+    priority_aliases = {
+        "camera": ("camera",),
+        "battery": ("battery",),
+        "display": ("display", "screen"),
+        "performance": ("performance", "speed", "processor"),
+        "sound_quality": ("sound", "audio"),
+        "call_quality": ("call quality", "calling", "mic", "microphone"),
+        "anc": ("anc", "noise cancellation"),
+        "comfort": ("comfort", "comfortable"),
+        "picture_quality": ("picture quality", "picture"),
+        "brightness": ("brightness", "bright"),
+        "refresh_rate": ("refresh rate", "hz"),
+        "gaming_features": ("gaming", "game"),
+        "graphics": ("graphics", "gpu", "gaming"),
+        "portability": ("portable", "lightweight"),
+    }
+
+    strong_priority_patterns = (
+        "sabse important",
+        "most important",
+        "top priority",
+        "highest priority",
+        "main priority",
+        "first priority",
+        "priority no 1",
+        "priority number 1",
+        "zyada important",
+        "more important",
+    )
+
+    normal_priority_patterns = (
+        "priority",
+        "important",
+        "important hai",
+        "prefer",
+        "preference",
+    )
+
+    for dimension, aliases in priority_aliases.items():
+        if dimension not in weights:
+            continue
+
+        strong_match = False
+        normal_match = False
+
+        for alias in aliases:
+            alias_re = re.escape(alias)
+
+            if any(
+                re.search(
+                    rf"\b{alias_re}\b.{{0,30}}\b{re.escape(pattern)}\b"
+                    rf"|\b{re.escape(pattern)}\b.{{0,30}}\b{alias_re}\b",
+                    text,
+                )
+                for pattern in strong_priority_patterns
+            ):
+                strong_match = True
+                break
+
+            if any(
+                re.search(
+                    rf"\b{alias_re}\b.{{0,20}}\b{re.escape(pattern)}\b"
+                    rf"|\b{re.escape(pattern)}\b.{{0,20}}\b{alias_re}\b",
+                    text,
+                )
+                for pattern in normal_priority_patterns
+            ):
+                normal_match = True
+
+        if strong_match:
+            weights[dimension] += 25
+        elif normal_match:
+            weights[dimension] += 12
+
+    # Gaming wording usually represents a composite priority rather
+    # than only one dimension.
+    if any(
+        phrase in text
+        for phrase in (
+            "gaming priority",
+            "gaming important",
+            "gaming sabse important",
+            "gaming most important",
+        )
+    ):
+        if "performance" in weights:
+            weights["performance"] += 15
+        if "graphics" in weights:
+            weights["graphics"] += 18
+        if "display" in weights:
+            weights["display"] += 8
+        if "refresh_rate" in weights:
+            weights["refresh_rate"] += 10
+        if "gaming_features" in weights:
+            weights["gaming_features"] += 15
+
     # Hard budget constraints are always important.
     if "budget_max" in hard_constraints_for_weights:
         weights["budget"] = max(weights.get("budget", 0), 25)
@@ -706,6 +980,7 @@ def parse_query(query: str) -> dict:
                 must_have,
                 preferred,
                 hard_constraints,
+                text,
             ),
         )
     )
