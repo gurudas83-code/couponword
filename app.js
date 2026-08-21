@@ -352,6 +352,8 @@ async function loadShoppingRecommendation(query) {
         p.fit_percent != null ? escapeHTML(p.fit_percent) : "Not available";
       const confidence = escapeHTML(p.confidence || "unknown");
 
+      const imageUrl = safeLink(p.image_url);
+
       const price =
         p.price != null
           ? `\u20B9${escapeHTML(p.price)}`
@@ -378,6 +380,21 @@ async function loadShoppingRecommendation(query) {
       return `
         <article class="ai-result-card">
           <div class="ai-result-rank">#${escapeHTML(p.rank || "")}</div>
+
+          ${
+            imageUrl !== "#"
+              ? `
+                <div class="ai-result-image-wrap">
+                  <img
+                    class="ai-result-image"
+                    src="${imageUrl}"
+                    alt="${title}"
+                    loading="lazy"
+                  />
+                </div>
+              `
+              : ""
+          }
 
           <h3>${title}</h3>
 
