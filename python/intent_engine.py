@@ -938,6 +938,152 @@ def build_priority_weights(
         if "gaming_features" in weights:
             weights["gaming_features"] += 15
 
+    # ------------------------------------------------------------
+    # Relative-priority language
+    # ------------------------------------------------------------
+    # Examples:
+    #   camera achha but battery more important
+    #   performance important but battery zyada important
+    #   display achha ho but camera priority
+    #
+    # The dimension appearing after "but/lekin" with stronger wording
+    # receives the larger boost.
+    relative_aliases = {
+        "camera": ("camera",),
+        "battery": ("battery",),
+        "display": ("display", "screen"),
+        "performance": ("performance", "processor", "speed"),
+        "sound_quality": ("sound", "audio"),
+        "call_quality": ("call quality", "calling", "mic", "microphone"),
+        "anc": ("anc", "noise cancellation"),
+        "comfort": ("comfort", "comfortable"),
+        "picture_quality": ("picture quality", "picture"),
+        "brightness": ("brightness", "bright"),
+        "refresh_rate": ("refresh rate", "hz"),
+        "gaming_features": ("gaming", "game"),
+        "graphics": ("graphics", "gpu"),
+        "portability": ("portable", "lightweight"),
+    }
+
+    relative_markers = (
+        "more important",
+        "zyada important",
+        "higher priority",
+        "top priority",
+        "priority",
+        "sabse important",
+        "most important",
+    )
+
+    for dimension, aliases in relative_aliases.items():
+        if dimension not in weights:
+            continue
+
+        for alias in aliases:
+            alias_re = re.escape(alias)
+
+            if re.search(
+                rf"(?:but|lekin|however).{{0,35}}\b{alias_re}\b"
+                rf".{{0,25}}(?:"
+                + "|".join(re.escape(x) for x in relative_markers)
+                + r")",
+                text,
+            ):
+                weights[dimension] += 18
+                break
+
+            if re.search(
+                rf"\b{alias_re}\b.{{0,25}}(?:"
+                + "|".join(re.escape(x) for x in relative_markers)
+                + r").{0,35}(?:but|lekin|however)",
+                text,
+            ):
+                weights[dimension] += 10
+                break
+
+    # ------------------------------------------------------------
+    # No-compromise / non-negotiable language
+    # ------------------------------------------------------------
+    no_compromise_aliases = {
+        "battery": ("battery",),
+        "camera": ("camera",),
+        "performance": ("performance", "processor", "speed"),
+        "display": ("display", "screen"),
+        "picture_quality": ("picture quality", "picture"),
+        "sound_quality": ("sound", "audio"),
+        "call_quality": ("call quality", "calling"),
+        "anc": ("anc", "noise cancellation"),
+        "graphics": ("graphics", "gpu"),
+    }
+
+    no_compromise_patterns = (
+        "no compromise",
+        "compromise nahi",
+        "compromise nahi chahiye",
+        "must be good",
+        "must be strong",
+        "bilkul compromise nahi",
+        "non negotiable",
+        "non-negotiable",
+    )
+
+    for dimension, aliases in no_compromise_aliases.items():
+        if dimension not in weights:
+            continue
+
+        matched = False
+
+        for alias in aliases:
+            alias_re = re.escape(alias)
+
+            for phrase in no_compromise_patterns:
+                phrase_re = re.escape(phrase)
+
+                if (
+                    re.search(
+                        rf"\b{alias_re}\b.{{0,30}}\b{phrase_re}\b",
+                        text,
+                    )
+                    or re.search(
+                        rf"\b{phrase_re}\b.{{0,30}}\b{alias_re}\b",
+                        text,
+                    )
+                ):
+                    weights[dimension] += 25
+                    matched = True
+                    break
+
+            if matched:
+                break
+
+    # ------------------------------------------------------------
+    # Secondary supportive wording
+    # ------------------------------------------------------------
+    # "gaming important but battery bhi strong" should keep gaming
+    # primary while still giving battery meaningful weight.
+    supportive_aliases = {
+        "battery": ("battery",),
+        "camera": ("camera",),
+        "display": ("display", "screen"),
+        "performance": ("performance", "processor"),
+        "sound_quality": ("sound", "audio"),
+        "portability": ("portable", "lightweight"),
+    }
+
+    for dimension, aliases in supportive_aliases.items():
+        if dimension not in weights:
+            continue
+
+        if any(
+            re.search(
+                rf"\b{re.escape(alias)}\b.{{0,20}}\b(?:bhi|also|too)\b"
+                rf"|\b(?:bhi|also|too)\b.{{0,20}}\b{re.escape(alias)}\b",
+                text,
+            )
+            for alias in aliases
+        ):
+            weights[dimension] += 8
+
     # Hard budget constraints are always important.
     if "budget_max" in hard_constraints_for_weights:
         weights["budget"] = max(weights.get("budget", 0), 25)
