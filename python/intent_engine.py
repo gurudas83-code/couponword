@@ -414,6 +414,24 @@ def detect_requirements(
         if storage_match:
             add(must_have, f"{storage_match.group(1)}gb_storage")
 
+        # Smartphone shoppers commonly write memory variants in compact
+        # form, e.g. "8GB RAM 128GB". In that pattern the second bare
+        # capacity is storage even when "storage" or "ROM" is omitted.
+        if category == "smartphone" and not storage_match:
+            compact_memory_match = re.search(
+                r"\b(?:2|3|4|6|8|12|16|18|24|32|64)\s*gb\s*"
+                r"(?:of\s*)?ram\b"
+                r".{0,20}?"
+                r"\b(32|64|128|256|512|1024)\s*gb\b",
+                text,
+            )
+
+            if compact_memory_match:
+                add(
+                    must_have,
+                    f"{compact_memory_match.group(1)}gb_storage",
+                )
+
         tb_storage_match = re.search(
             r"\b(1|2|4)\s*tb\s*"
             r"(?:storage|internal\s+storage|ssd|rom)\b",
