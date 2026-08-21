@@ -233,6 +233,11 @@ def detect_user_profile(text: str) -> str | None:
 
 def detect_use_cases(text: str) -> list[str]:
     rules = [
+        (("ps5", "playstation 5", "xbox", "console gaming"), "tv_gaming"),
+        (("cricket", "sports", "football", "match"), "sports_viewing"),
+        (("movies", "movie", "cinema", "netflix", "ott"), "movie_viewing"),
+        (("bright room", "sunny room", "daylight room"), "bright_room"),
+        (("dark room", "night viewing", "home theatre", "home theater"), "dark_room"),
         (("coding", "programming", "developer"), "coding"),
         (("occasional gaming", "light gaming", "casual gaming"), "light_gaming"),
         (("gaming", "game"), "gaming"),
@@ -250,6 +255,51 @@ def detect_use_cases(text: str) -> list[str]:
     if "light_gaming" in found and "gaming" in found:
         found.remove("gaming")
     return found
+
+
+
+def detect_tv_requirements(text: str) -> dict[str, object]:
+    result: dict[str, object] = {}
+
+    size_match = re.search(
+        r"\b(32|40|42|43|48|50|55|58|60|65|70|75|77|83|85|86|98|100)\s*(?:inch|inches|in|\\?\")\b",
+        text,
+        re.I,
+    )
+    if size_match:
+        result["screen_size_inches"] = int(size_match.group(1))
+
+    if re.search(r"\boled\b", text, re.I):
+        result["panel_technology"] = "oled"
+    elif re.search(r"\b(?:mini[\s-]?led|miniled)\b", text, re.I):
+        result["panel_technology"] = "mini_led"
+    elif re.search(r"\bqled\b", text, re.I):
+        result["panel_technology"] = "qled"
+
+    refresh_match = re.search(
+        r"\b(60|90|100|120|144|165)\s*hz\b",
+        text,
+        re.I,
+    )
+    if refresh_match:
+        result["refresh_rate_hz"] = int(refresh_match.group(1))
+
+    if re.search(r"\bhdmi\s*2\.1\b", text, re.I):
+        result["hdmi_2_1"] = True
+
+    if re.search(r"\b(?:vrr|variable refresh rate)\b", text, re.I):
+        result["vrr"] = True
+
+    if re.search(r"\b(?:allm|auto low latency mode)\b", text, re.I):
+        result["allm"] = True
+
+    if re.search(r"\b(?:dolby vision)\b", text, re.I):
+        result["dolby_vision"] = True
+
+    if re.search(r"\b(?:hdr10\+)\b", text, re.I):
+        result["hdr10_plus"] = True
+
+    return result
 
 
 def detect_requirements(
@@ -421,6 +471,21 @@ def build_priority_weights(
             "budget": 20, "performance": 20, "ram": 15, "storage": 10,
             "battery": 10, "display": 10, "portability": 10, "build_quality": 5,
         }
+    elif category == "television":
+        weights = {
+            "budget": 15,
+            "screen_size": 15,
+            "picture_quality": 18,
+            "panel_technology": 12,
+            "refresh_rate": 8,
+            "gaming_features": 7,
+            "brightness": 7,
+            "motion": 6,
+            "smart_tv": 5,
+            "sound": 4,
+            "product_identity": 3,
+        }
+
     elif category == "earbuds":
         weights = {
             "budget": 20, "sound_quality": 20, "battery": 15,
@@ -458,6 +523,52 @@ def build_priority_weights(
         weights["budget"] = max(weights.get("budget", 0), 25)
         if "battery" in weights:
             weights["battery"] = max(weights["battery"], 15)
+
+    if category == "television":
+        if "tv_gaming" in use_cases:
+            weights = {
+                "budget": 12,
+                "screen_size": 10,
+                "picture_quality": 12,
+                "panel_technology": 8,
+                "refresh_rate": 18,
+                "gaming_features": 22,
+                "brightness": 4,
+                "motion": 8,
+                "smart_tv": 2,
+                "sound": 2,
+                "product_identity": 2,
+            }
+
+        elif "sports_viewing" in use_cases and "bright_room" in use_cases:
+            weights = {
+                "budget": 12,
+                "screen_size": 16,
+                "picture_quality": 12,
+                "panel_technology": 8,
+                "refresh_rate": 10,
+                "gaming_features": 2,
+                "brightness": 18,
+                "motion": 14,
+                "smart_tv": 3,
+                "sound": 3,
+                "product_identity": 2,
+            }
+
+        elif "movie_viewing" in use_cases and "dark_room" in use_cases:
+            weights = {
+                "budget": 12,
+                "screen_size": 12,
+                "picture_quality": 24,
+                "panel_technology": 20,
+                "refresh_rate": 5,
+                "gaming_features": 2,
+                "brightness": 3,
+                "motion": 5,
+                "smart_tv": 5,
+                "sound": 8,
+                "product_identity": 4,
+            }
 
     if category == "laptop" and "coding" in use_cases:
         weights = {
@@ -554,7 +665,7 @@ def parse_query(query: str) -> dict:
         text, category, user_profile, use_cases
     )
 
-    return asdict(
+    parsed = asdict(
         ShoppingIntent(
             intent=intent,
             category=category,
@@ -580,6 +691,18 @@ def parse_query(query: str) -> dict:
             ),
         )
     )
+
+    # TV-specific structured requirements live alongside the stable
+    # common ShoppingIntent contract. This keeps other category engines
+    # backward-compatible while giving the specialist TV engine precise
+    # inputs for size, panel technology and gaming/display requirements.
+    parsed["tv_requirements"] = (
+        detect_tv_requirements(text)
+        if category == "television"
+        else {}
+    )
+
+    return parsed
 
 
 if __name__ == "__main__":

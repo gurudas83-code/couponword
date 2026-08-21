@@ -305,10 +305,10 @@ def candidate_to_identity_input(
             "product_id": clean(candidate.get("candidate_id")),
             "title": cleaned_title,
             "brand": canonical_brand_from_title(cleaned_title),
-            "asin": "",
+            "asin": clean(candidate.get("asin")),
             "category": "",
             "link": clean(candidate.get("source_url")),
-            "image": "",
+            "image": clean(candidate.get("search_image")),
             "price": None,
         },
         cleaned_title,
@@ -698,6 +698,12 @@ def runtime_profile_from_extraction(
         ),
         "category": clean(intent.get("category")),
         "price": verified_market_price,
+        "asin": clean(
+            candidate.get("asin")
+            or identity.get("asin")
+        ),
+        "image_url": clean(candidate.get("search_image")),
+        "commerce_provider": clean(candidate.get("provider")),
         "attributes": specifications,
         "features": features,
         "best_for": [],
@@ -928,6 +934,27 @@ def run_pipeline(
                         "primary price evidence"
                     ),
                 }
+
+        if resolved is None and live_fast:
+            # Live visitor mode is intentionally independent of Tavily /
+            # official-source deep search. If retailer identity or price
+            # evidence is insufficient, fail this candidate quickly and
+            # transparently rather than falling back to a slow network
+            # resolver.
+            failures.append({
+                "candidate_id": candidate_id,
+                "title": raw_title,
+                "stage": "live_commerce_verification",
+                "status": "not_verified",
+                "reason": "Live-fast commerce verification did not pass",
+                "commerce_identity_score": fast_identity.get("score"),
+                "commerce_identity_decision": fast_identity.get("decision"),
+                "commerce_identity_reasons": fast_identity.get("reasons", []),
+                "commerce_price_verified": fast_price.get("verified"),
+                "commerce_price": fast_price.get("price"),
+                "commerce_price_reason": fast_price.get("reason"),
+            })
+            continue
 
         if resolved is None:
             try:
@@ -1267,6 +1294,9 @@ def run_pipeline(
             "title": profile.get("title"),
             "brand": profile.get("brand"),
             "price": profile.get("price"),
+            "asin": profile.get("asin"),
+            "image_url": profile.get("image_url"),
+            "commerce_provider": profile.get("commerce_provider"),
             "fit_percent": assessment.get("fit_percent"),
             "raw_fit_percent": assessment.get("raw_fit_percent"),
             "evidence_coverage_percent": assessment.get(

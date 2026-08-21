@@ -20,6 +20,7 @@ import json
 import os
 import re
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
@@ -29,6 +30,9 @@ from amazon_search_image_resolver import search_asins
 
 ROOT = Path(__file__).resolve().parent.parent
 PYTHON_DIR = ROOT / "python"
+
+DISCOVERY_CACHE_PATH = ROOT / "data" / "market_discovery_cache.json"
+DISCOVERY_CACHE_MAX_AGE_SECONDS = 24 * 60 * 60
 
 if str(PYTHON_DIR) not in sys.path:
     sys.path.insert(0, str(PYTHON_DIR))
@@ -296,6 +300,14 @@ def build_discovery_queries(
     category = clean(intent.get("category")).replace("_", " ")
     budget = intent.get("budget_max")
 
+    brands = [
+        clean(x)
+        for x in intent.get("brands", [])
+        if clean(x)
+    ]
+
+    brand_terms = brands[:1]
+
     features = [
         clean(x)
         for x in intent.get("features", [])
@@ -320,6 +332,10 @@ def build_discovery_queries(
         if clean(x)
     ]
 
+    tv_requirements = intent.get("tv_requirements", {})
+    if not isinstance(tv_requirements, dict):
+        tv_requirements = {}
+
     def join_unique(parts: list[object]) -> str:
         seen: set[str] = set()
         output: list[str] = []
@@ -341,6 +357,52 @@ def build_discovery_queries(
         budget_terms = ["under", str(budget)]
 
     queries: list[str] = []
+
+    # --------------------------------------------------------
+    # TV specialist lane: preserve explicit screen/panel requirements.
+    # --------------------------------------------------------
+    if category == "television" and tv_requirements:
+        tv_terms = []
+
+        screen_size = tv_requirements.get("screen_size_inches")
+        if screen_size:
+            tv_terms.append(f"{int(screen_size)} inch")
+
+        panel = clean(tv_requirements.get("panel_technology"))
+        panel_labels = {
+            "oled": "OLED",
+            "qled": "QLED",
+            "mini_led": "Mini LED",
+            "led": "LED",
+        }
+
+        if panel:
+            tv_terms.append(panel_labels.get(panel, panel))
+
+        refresh = tv_requirements.get("refresh_rate_hz")
+        if refresh:
+            tv_terms.append(f"{int(refresh)}Hz")
+
+        if tv_requirements.get("hdmi_2_1") is True:
+            tv_terms.append("HDMI 2.1")
+
+        if tv_requirements.get("vrr") is True:
+            tv_terms.append("VRR")
+
+        if tv_requirements.get("allm") is True:
+            tv_terms.append("ALLM")
+
+        queries.append(
+            join_unique(
+                [
+                    category,
+                    *tv_terms,
+                    *budget_terms,
+                    "India",
+                    "buy",
+                ]
+            )
+        )
 
     # --------------------------------------------------------
     # Lane 0: use-case-aware discovery.
@@ -435,6 +497,22 @@ def build_discovery_queries(
         )
     )
 
+    # Preserve an explicit shopper brand across generated lanes.
+    # The original-user-query lane already contains the user's wording.
+    if brand_terms:
+        brand = brand_terms[0]
+        branded_queries: list[str] = []
+
+        for generated_query in queries:
+            if brand.lower() in generated_query.lower():
+                branded_queries.append(generated_query)
+            else:
+                branded_queries.append(
+                    join_unique([brand, generated_query])
+                )
+
+        queries = branded_queries
+
     # --------------------------------------------------------
     # Lane 5: original user wording.
     # This helps preserve nuance not represented in structured intent.
@@ -455,6 +533,7 @@ def build_discovery_queries(
     queries.append(
         join_unique(
             [
+                *brand_terms,
                 category or "product",
                 *must_have[:1],
                 *budget_terms,
@@ -513,6 +592,336 @@ def compact_product_title(title: str) -> str:
 
     return clean(title)
 
+
+
+def discovery_cache_key(query: str, category: str | None) -> str:
+    return f"{normalize_key(category or '')}::{normalize_key(query)}"
+
+
+def load_discovery_cache() -> dict[str, Any]:
+    if not DISCOVERY_CACHE_PATH.exists():
+        return {}
+
+    try:
+        payload = json.loads(
+            DISCOVERY_CACHE_PATH.read_text(encoding="utf-8-sig")
+        )
+    except Exception:
+        return {}
+
+    return payload if isinstance(payload, dict) else {}
+
+
+def save_discovery_cache(cache: dict[str, Any]) -> None:
+    DISCOVERY_CACHE_PATH.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    temp = DISCOVERY_CACHE_PATH.with_suffix(".tmp")
+
+    temp.write_text(
+        json.dumps(
+            cache,
+            indent=2,
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    temp.replace(DISCOVERY_CACHE_PATH)
+
+
+def cache_discovery_results(
+    *,
+    query: str,
+    category: str | None,
+    results: list[dict[str, Any]],
+) -> None:
+    if not results:
+        return
+
+    safe_results = []
+
+    for item in results:
+        if not isinstance(item, dict):
+            continue
+
+        title = clean(item.get("title"))
+        url = clean(item.get("url"))
+
+        if not title or not url:
+            continue
+
+        safe_results.append(
+            {
+                "title": title,
+                "url": url,
+                "host": clean(item.get("host")) or host_of(url),
+                "content": clean(item.get("content")),
+                "search_score": float(item.get("search_score") or 0),
+                "query": clean(item.get("query")) or query,
+                "channel": clean(item.get("channel")) or "commerce",
+                "provider": clean(item.get("provider")) or "cached_provider",
+                "asin": clean(item.get("asin")),
+                "search_image": clean(item.get("search_image")),
+                "search_price_text": clean(item.get("search_price_text")),
+                "search_price_currency": clean(
+                    item.get("search_price_currency")
+                ),
+                "search_price_evidence_method": clean(
+                    item.get("search_price_evidence_method")
+                ),
+            }
+        )
+
+    if not safe_results:
+        return
+
+    cache = load_discovery_cache()
+    key = discovery_cache_key(query, category)
+
+    cache[key] = {
+        "saved_at": datetime.now(timezone.utc).isoformat(),
+        "query": query,
+        "category": category,
+        "results": safe_results,
+    }
+
+    try:
+        save_discovery_cache(cache)
+    except OSError:
+        pass
+
+
+def get_recent_discovery_cache(
+    *,
+    query: str,
+    category: str | None,
+    max_results: int,
+) -> list[dict[str, Any]]:
+    cache = load_discovery_cache()
+    key = discovery_cache_key(query, category)
+    record = cache.get(key)
+
+    if not isinstance(record, dict):
+        return []
+
+    saved_at = clean(record.get("saved_at"))
+
+    if not saved_at:
+        return []
+
+    try:
+        timestamp = datetime.fromisoformat(
+            saved_at.replace("Z", "+00:00")
+        )
+
+        if timestamp.tzinfo is None:
+            timestamp = timestamp.replace(tzinfo=timezone.utc)
+
+        age_seconds = (
+            datetime.now(timezone.utc) - timestamp
+        ).total_seconds()
+    except Exception:
+        return []
+
+    if (
+        age_seconds < 0
+        or age_seconds > DISCOVERY_CACHE_MAX_AGE_SECONDS
+    ):
+        return []
+
+    raw_results = record.get("results", [])
+
+    if not isinstance(raw_results, list):
+        return []
+
+    results: list[dict[str, Any]] = []
+
+    for item in raw_results:
+        if not isinstance(item, dict):
+            continue
+
+        restored = dict(item)
+        restored["provider"] = (
+            "recent_discovery_cache:"
+            + clean(item.get("provider"))
+        )
+        restored["cache_age_seconds"] = round(age_seconds)
+
+        results.append(restored)
+
+        if len(results) >= max_results:
+            break
+
+    return results
+
+def local_known_product_fallback(
+    *,
+    query: str,
+    category: str | None,
+    max_results: int,
+) -> list[dict[str, Any]]:
+    """
+    Search Coupon World's accumulated local product knowledge when live
+    discovery providers are unavailable.
+
+    This is a resilience fallback only:
+    - candidates remain unverified;
+    - no local ranking becomes final recommendation Fit;
+    - retailer/official evidence must still pass downstream gates.
+    """
+
+    query_key = normalize_key(query)
+    query_tokens = {
+        token
+        for token in query_key.split()
+        if len(token) >= 2
+    }
+
+    if not query_tokens:
+        return []
+
+    candidates: list[dict[str, Any]] = []
+
+    def add_candidate(
+        *,
+        title: str,
+        url: str,
+        brand: str = "",
+        source: str,
+        extra_score: float = 0.0,
+    ) -> None:
+        title = clean(title)
+        url = clean(url)
+
+        if not title or not url:
+            return
+
+        if not looks_like_product_result(title, url, category):
+            return
+
+        title_tokens = set(normalize_key(title).split())
+        brand_tokens = set(normalize_key(brand).split())
+
+        overlap = len(query_tokens & title_tokens)
+
+        if overlap == 0:
+            return
+
+        score = overlap / max(1, len(query_tokens))
+
+        if brand_tokens and query_tokens & brand_tokens:
+            score += 0.20
+
+        score += extra_score
+
+        candidates.append(
+            {
+                "title": title,
+                "url": url,
+                "host": host_of(url),
+                "content": "",
+                "search_score": round(min(score, 1.0), 4),
+                "query": query,
+                "channel": "commerce",
+                "provider": source,
+            }
+        )
+
+    # ---------------------------------------------------------
+    # Source 1: accumulated official research results.
+    # ---------------------------------------------------------
+    research_path = ROOT / "data" / "research_results.json"
+
+    try:
+        research = json.loads(
+            research_path.read_text(encoding="utf-8-sig")
+        )
+    except Exception:
+        research = {}
+
+    research_products = (
+        research.get("products", [])
+        if isinstance(research, dict)
+        else []
+    )
+
+    for product in research_products:
+        if not isinstance(product, dict):
+            continue
+
+        add_candidate(
+            title=clean(product.get("title")),
+            url=clean(product.get("official_url")),
+            brand=clean(product.get("brand")),
+            source="local_research_cache",
+            extra_score=0.08 if product.get("verified") is True else 0.0,
+        )
+
+    # ---------------------------------------------------------
+    # Source 2: current Coupon World commerce catalogue.
+    # ---------------------------------------------------------
+    catalogue_path = ROOT / "coupons.json"
+
+    try:
+        catalogue = json.loads(
+            catalogue_path.read_text(encoding="utf-8-sig")
+        )
+    except Exception:
+        catalogue = []
+
+    catalogue_products = (
+        catalogue
+        if isinstance(catalogue, list)
+        else catalogue.get("products", [])
+        if isinstance(catalogue, dict)
+        else []
+    )
+
+    for product in catalogue_products:
+        if not isinstance(product, dict):
+            continue
+
+        if product.get("active") is False:
+            continue
+
+        add_candidate(
+            title=clean(product.get("title")),
+            url=clean(product.get("link")),
+            brand=clean(product.get("brand")),
+            source="local_coupon_catalogue",
+            extra_score=0.05,
+        )
+
+    # Deduplicate and rank locally.
+    best_by_url: dict[str, dict[str, Any]] = {}
+
+    for item in candidates:
+        url = clean(item.get("url"))
+
+        if not url:
+            continue
+
+        previous = best_by_url.get(url)
+
+        if (
+            previous is None
+            or float(item.get("search_score") or 0)
+            > float(previous.get("search_score") or 0)
+        ):
+            best_by_url[url] = item
+
+    ranked = list(best_by_url.values())
+
+    ranked.sort(
+        key=lambda item: float(item.get("search_score") or 0),
+        reverse=True,
+    )
+
+    return ranked[:max_results]
+
 def fallback_search_channel(
     *,
     query: str,
@@ -538,15 +947,25 @@ def fallback_search_channel(
     if channel != "commerce":
         return []
 
+    # First collect Coupon World's accumulated local knowledge.
+    # Do not return early: local knowledge may be incomplete or may
+    # contain candidates that downstream category gates later reject.
+    local_results = local_known_product_fallback(
+        query=query,
+        category=category,
+        max_results=max_results,
+    )
+
+    # Amazon remains an optional independent discovery lane.
     try:
         raw_results = search_asins(
             query,
             max_cards=max(3, min(max_results, 20)),
         )
     except Exception:
-        return []
+        raw_results = []
 
-    accepted: list[dict[str, Any]] = []
+    accepted: list[dict[str, Any]] = list(local_results)
 
     for result in raw_results:
         if not isinstance(result, dict):
@@ -579,11 +998,57 @@ def fallback_search_channel(
                 "search_image": clean(
                     result.get("search_image")
                 ),
+                "search_price_text": clean(
+                    result.get("search_price_text")
+                ),
+                "search_price_currency": clean(
+                    result.get("search_price_currency")
+                ),
+                "search_price_evidence_method": clean(
+                    result.get("search_price_evidence_method")
+                ),
             }
         )
 
         if len(accepted) >= max_results:
             break
+
+    live_amazon_results = [
+        item
+        for item in accepted
+        if clean(item.get("provider")) == "amazon_search_cards"
+    ]
+
+    if live_amazon_results:
+        cache_discovery_results(
+            query=query,
+            category=category,
+            results=live_amazon_results,
+        )
+    else:
+        cached_results = get_recent_discovery_cache(
+            query=query,
+            category=category,
+            max_results=max_results,
+        )
+
+        seen_urls = {
+            clean(item.get("url"))
+            for item in accepted
+            if clean(item.get("url"))
+        }
+
+        for item in cached_results:
+            url = clean(item.get("url"))
+
+            if not url or url in seen_urls:
+                continue
+
+            accepted.append(item)
+            seen_urls.add(url)
+
+            if len(accepted) >= max_results:
+                break
 
     return accepted
 
@@ -859,6 +1324,116 @@ def _required_capacity(
     return None
 
 
+
+def tv_requirement_gate(
+    title: str,
+    intent: dict[str, Any],
+) -> dict[str, Any]:
+    requirements = intent.get("tv_requirements", {})
+    if not isinstance(requirements, dict) or not requirements:
+        return {
+            "decision": "unknown",
+            "reasons": [],
+        }
+
+    text = clean(title).lower()
+    reasons = []
+    contradictions = []
+
+    # Reject obvious TV accessories before evaluating TV specs.
+    tv_accessory_terms = (
+        "remote compatible",
+        "remote control",
+        "replacement remote",
+        "tv remote",
+        "wall mount",
+        "wall bracket",
+        "tv stand",
+        "replacement stand",
+        "screen protector",
+        "tv cover",
+        "motherboard",
+        "power board",
+        "backlight strip",
+    )
+
+    if any(term in text for term in tv_accessory_terms):
+        return {
+            "decision": "reject",
+            "reasons": ["TV accessory/replacement part, not a television"],
+        }
+
+    required_size = requirements.get("screen_size_inches")
+
+    if required_size:
+        sizes = [
+            int(x)
+            for x in re.findall(
+                r"\b(32|40|42|43|48|50|55|58|60|65|70|75|77|83|85|86|98|100)"
+                r"\s*(?:inch|inches|in|\\?\")\b",
+                text,
+                re.I,
+            )
+        ]
+
+        if sizes:
+            if int(required_size) in sizes:
+                reasons.append(
+                    f"screen size matches requested {required_size} inch"
+                )
+            else:
+                contradictions.append(
+                    f"requires {required_size} inch but title shows "
+                    + "/".join(str(x) for x in sorted(set(sizes)))
+                    + " inch"
+                )
+
+    required_panel = clean(requirements.get("panel_technology")).lower()
+
+    if required_panel:
+        detected_panel = None
+
+        if re.search(r"\b(?:mini[\s-]?led|miniled)\b", text):
+            detected_panel = "mini_led"
+        elif re.search(r"\boled\b", text):
+            detected_panel = "oled"
+        elif re.search(r"\bqled\b", text):
+            detected_panel = "qled"
+        elif re.search(r"\bqned\b", text):
+            detected_panel = "qned"
+        elif re.search(r"\bcrystal(?:\s+uhd)?\b", text):
+            detected_panel = "crystal_led"
+        elif re.search(r"\bled\b", text):
+            detected_panel = "led"
+
+        if detected_panel:
+            if detected_panel == required_panel:
+                reasons.append(
+                    f"panel technology matches requested {required_panel}"
+                )
+            else:
+                contradictions.append(
+                    f"requires {required_panel} but title indicates {detected_panel}"
+                )
+
+    if contradictions:
+        return {
+            "decision": "reject",
+            "reasons": contradictions,
+        }
+
+    if reasons:
+        return {
+            "decision": "verified",
+            "reasons": reasons,
+        }
+
+    return {
+        "decision": "unknown",
+        "reasons": [],
+    }
+
+
 def category_accessory_gate(
     title: str,
     category: str,
@@ -872,6 +1447,43 @@ def category_accessory_gate(
     """
     text = normalize_key(title)
     category_text = normalize_key(category)
+
+    # ---------------------------------------------------------
+    # Television category mismatch gate.
+    # Reject obvious phones, tablets and TV accessories when
+    # the shopper is looking for an actual television.
+    # ---------------------------------------------------------
+    if category_text == "television":
+        television_mismatch_patterns = (
+            r"\bsmartphone\b",
+            r"\bmobile\b",
+            r"\bgalaxy\s+[amfsz]\d",
+            r"\btablet\b",
+            r"\bgalaxy\s+tab\b",
+            r"\bkeyboard\s+case\b",
+            r"\bphone\s+case\b",
+            r"\bmobile\s+case\b",
+            r"\bscreen\s+protector\b",
+            r"\breplacement\s+remote\b",
+            r"\bremote\s+control\b",
+            r"\bwall\s+mount\b",
+            r"\btv\s+stand\b",
+        )
+
+        for pattern in television_mismatch_patterns:
+            if re.search(pattern, text, re.I):
+                return {
+                    "status": "reject",
+                    "reason": (
+                        "Obvious non-television product/accessory "
+                        "detected in product title"
+                    ),
+                }
+
+        return {
+            "status": "pass",
+            "reason": "No explicit television category mismatch",
+        }
 
     if category_text not in {
         "smartphone",
@@ -1098,11 +1710,31 @@ def discover_market(
 
     ranked: list[dict[str, Any]] = []
 
+    requested_brands = [
+        normalize_key(brand)
+        for brand in intent.get("brands", [])
+        if normalize_key(brand)
+    ]
+
     for item in raw:
         title = compact_product_title(item["title"])
 
         if is_generic_listing_title(title):
             continue
+
+        # Explicit shopper brand is a hard discovery constraint.
+        # Example: "Samsung 55 inch TV" must not admit Sony/LG/Xiaomi.
+        if requested_brands:
+            normalized_title = normalize_key(title)
+
+            if not any(
+                re.search(
+                    rf"(?:^|\s){re.escape(brand)}(?:\s|$)",
+                    normalized_title,
+                )
+                for brand in requested_brands
+            ):
+                continue
 
         accessory_gate = category_accessory_gate(
             title,
@@ -1111,6 +1743,23 @@ def discover_market(
 
         if accessory_gate["status"] == "reject":
             continue
+
+        tv_gate = {
+            "decision": "unknown",
+            "reasons": [],
+        }
+
+        if category == "television":
+            tv_gate = tv_requirement_gate(
+                title,
+                intent,
+            )
+
+            # Reject only explicit contradictions.
+            # Missing title evidence remains eligible for downstream
+            # verification rather than being treated as a failure.
+            if tv_gate.get("decision") == "reject":
+                continue
 
         variant_gate = discovery_variant_gate(
             title,
@@ -1127,6 +1776,7 @@ def discover_market(
         enriched["known_brand"] = known_brand_from_title(title)
         enriched["quality_score"] = candidate_quality_score(item, title)
         enriched["variant_gate"] = variant_gate
+        enriched["tv_requirement_gate"] = tv_gate
 
         ranked.append(enriched)
 
@@ -1171,7 +1821,18 @@ def discover_market(
                 "discovery_quality_score": item["quality_score"],
                 "known_brand": item["known_brand"],
                 "snippet": item["content"],
+                "provider": item.get("provider"),
+                "asin": item.get("asin"),
+                "search_image": item.get("search_image"),
+                "search_price_text": item.get("search_price_text"),
+                "search_price_currency": item.get(
+                    "search_price_currency"
+                ),
+                "search_price_evidence_method": item.get(
+                    "search_price_evidence_method"
+                ),
                 "variant_gate": item.get("variant_gate"),
+                "tv_requirement_gate": item.get("tv_requirement_gate"),
                 "status": "discovered_unverified",
             }
         )

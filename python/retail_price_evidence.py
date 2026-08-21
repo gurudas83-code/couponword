@@ -499,7 +499,63 @@ def build_price_evidence(candidate: dict[str, Any]) -> dict[str, Any]:
         "evidence_method": None,
     }
 
-    # First preference: current structured retailer evidence.
+    # First preference: exact-ASIN Amazon search-card evidence already
+    # captured during live discovery. Accept it only when identity binding
+    # is exact and explicit.
+    candidate_asin = clean(candidate.get("asin")).upper()
+    search_price_text = clean(candidate.get("search_price_text"))
+    search_price_method = clean(
+        candidate.get("search_price_evidence_method")
+    )
+
+    try:
+        source_path = urlparse(source_url).path
+    except Exception:
+        source_path = ""
+
+    url_asin_match = re.search(
+        r"/(?:dp|gp/product)/([A-Z0-9]{10})(?:/|$)",
+        source_path,
+        re.I,
+    )
+
+    url_asin = (
+        clean(url_asin_match.group(1)).upper()
+        if url_asin_match
+        else ""
+    )
+
+    if (
+        candidate_asin
+        and url_asin
+        and candidate_asin == url_asin
+        and search_price_text
+        and search_price_method == "amazon_exact_asin_search_card"
+        and "amazon.in" in source_host.lower()
+    ):
+        search_card_price = normalize_amount(search_price_text)
+
+        if search_card_price is not None:
+            cache_verified_price(
+                url=source_url,
+                price=search_card_price,
+                source_host=source_host,
+                evidence_method=search_price_method,
+            )
+
+            result.update({
+                "price": search_card_price,
+                "verified": True,
+                "status": "verified_from_exact_asin_search_card",
+                "reason": (
+                    "Exact Amazon ASIN-bound search-card price verified"
+                ),
+                "evidence_method": search_price_method,
+            })
+
+            return result
+
+    # Second preference: current structured retailer evidence.
     page_result = fetch_structured_price(source_url)
 
     result["page_evidence"] = page_result

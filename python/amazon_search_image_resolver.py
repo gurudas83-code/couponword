@@ -20,7 +20,8 @@ DB = ROOT / "coupons.json"
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 Chrome/131 Safari/537.36"
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/131 Safari/537.36"
     ),
     "Accept-Language": "en-IN,en;q=0.9",
 }
@@ -155,11 +156,47 @@ def search_asins(title, max_cards=12):
             if len(image_alt) > len(title_text):
                 title_text = image_alt
 
+            # Capture the primary payable price from this exact ASIN-bound
+            # Amazon search-result card. This remains discovery evidence
+            # until downstream price validation accepts it.
+            search_price_text = ""
+
+            for selector in (
+                ".a-price:not(.a-text-price) .a-offscreen",
+                "[data-a-color='price'] .a-offscreen",
+                ".a-price .a-offscreen",
+            ):
+                for price_node in card.select(selector):
+                    candidate_price = clean(
+                        price_node.get_text(
+                            " ",
+                            strip=True,
+                        )
+                    )
+
+                    if candidate_price:
+                        search_price_text = candidate_price
+                        break
+
+                if search_price_text:
+                    break
+
             results.append(
                 {
                     "asin": asin,
                     "search_title": title_text,
                     "search_image": search_image,
+                    "search_price_text": search_price_text,
+                    "search_price_currency": (
+                        "INR"
+                        if search_price_text
+                        else ""
+                    ),
+                    "search_price_evidence_method": (
+                        "amazon_exact_asin_search_card"
+                        if search_price_text
+                        else ""
+                    ),
                     "product_url": (
                         f"https://www.amazon.in/dp/{asin}"
                         f"?tag={AFFILIATE_TAG}"

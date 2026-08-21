@@ -920,6 +920,464 @@ def product_identity_signal(
     return signal(0.70, "Specific product listing identity detected")
 
 
+
+def tv_screen_size_signal(
+    profile: dict[str, Any],
+    intent: dict[str, Any],
+    text: str,
+) -> dict[str, Any]:
+    requirements = intent.get("tv_requirements", {})
+    required = requirements.get("screen_size_inches")
+
+    sizes = [
+        int(x)
+        for x in re.findall(
+            r"\b(32|40|42|43|48|50|55|58|60|65|70|75|77|83|85|86|98|100)"
+            r"\s*(?:inch|inches|in|\\?\")\b",
+            text,
+            re.I,
+        )
+    ]
+
+    if required is not None:
+        if required in sizes:
+            return signal(
+                1.0,
+                f"Verified {required}-inch screen matches requested size",
+            )
+
+        if sizes:
+            return signal(
+                0.0,
+                f"Requested {required}-inch TV but listing shows "
+                + "/".join(str(x) for x in sorted(set(sizes)))
+                + "-inch",
+            )
+
+        return signal(
+            None,
+            f"Requested {required}-inch screen size is not verified",
+        )
+
+    if sizes:
+        return signal(
+            0.85,
+            f"TV screen size verified: {sizes[0]} inch",
+        )
+
+    return signal(None, "TV screen size is unavailable")
+
+
+def tv_panel_technology_signal(
+    profile: dict[str, Any],
+    intent: dict[str, Any],
+    text: str,
+) -> dict[str, Any]:
+    requirements = intent.get("tv_requirements", {})
+    required = str(
+        requirements.get("panel_technology") or ""
+    ).lower()
+
+    lower = text.lower()
+
+    detected = None
+
+    if re.search(r"\b(?:mini[\s-]?led|miniled)\b", lower):
+        detected = "mini_led"
+    elif re.search(r"\boled\b", lower):
+        detected = "oled"
+    elif re.search(r"\bqled\b", lower):
+        detected = "qled"
+    elif re.search(r"\bled\b", lower):
+        detected = "led"
+
+    labels = {
+        "mini_led": "Mini LED",
+        "oled": "OLED",
+        "qled": "QLED",
+        "led": "LED",
+    }
+
+    if required:
+        if detected == required:
+            return signal(
+                1.0,
+                f"Verified {labels.get(required, required)} panel "
+                "matches requested technology",
+            )
+
+        if detected:
+            return signal(
+                0.0,
+                f"Requested {labels.get(required, required)} but "
+                f"listing indicates {labels.get(detected, detected)}",
+            )
+
+        return signal(
+            None,
+            f"Requested {labels.get(required, required)} panel "
+            "technology is not verified",
+        )
+
+    scores = {
+        "oled": 0.95,
+        "mini_led": 0.92,
+        "qled": 0.82,
+        "led": 0.60,
+    }
+
+    if detected:
+        return signal(
+            scores[detected],
+            f"{labels[detected]} display technology detected",
+        )
+
+    return signal(None, "TV panel technology is unavailable")
+
+
+def tv_refresh_rate_signal(
+    profile: dict[str, Any],
+    intent: dict[str, Any],
+    text: str,
+) -> dict[str, Any]:
+    requirements = intent.get("tv_requirements", {})
+    required = requirements.get("refresh_rate_hz")
+
+    rates = [
+        int(x)
+        for x in re.findall(
+            r"\b(50|60|90|100|120|144|165)\s*hz\b",
+            text,
+            re.I,
+        )
+    ]
+
+    verified_rate = max(rates) if rates else None
+
+    if required is not None:
+        if verified_rate is None:
+            return signal(
+                None,
+                f"Requested {required}Hz refresh rate is not verified",
+            )
+
+        if verified_rate >= int(required):
+            return signal(
+                1.0,
+                f"Verified {verified_rate}Hz satisfies requested "
+                f"{required}Hz refresh rate",
+            )
+
+        return signal(
+            0.0,
+            f"Verified {verified_rate}Hz is below requested {required}Hz",
+        )
+
+    if verified_rate is None:
+        return signal(None, "TV refresh rate is unavailable")
+
+    if verified_rate >= 120:
+        return signal(
+            0.95,
+            f"High-refresh {verified_rate}Hz TV display verified",
+        )
+
+    if verified_rate >= 100:
+        return signal(
+            0.82,
+            f"{verified_rate}Hz TV refresh rate verified",
+        )
+
+    return signal(
+        0.55,
+        f"Standard {verified_rate}Hz TV refresh rate verified",
+    )
+
+
+def tv_gaming_features_signal(
+    profile: dict[str, Any],
+    intent: dict[str, Any],
+    text: str,
+) -> dict[str, Any]:
+    requirements = intent.get("tv_requirements", {})
+    lower = text.lower()
+
+    hdmi21 = bool(re.search(r"\bhdmi\s*2\.1\b", lower))
+    vrr = bool(
+        re.search(r"\b(?:vrr|variable refresh rate)\b", lower)
+    )
+    allm = bool(
+        re.search(r"\b(?:allm|auto low latency mode)\b", lower)
+    )
+    four_k_120 = bool(
+        re.search(
+            r"\b(?:4k\s*(?:at|@)?\s*120\s*hz|4k120)\b",
+            lower,
+        )
+    )
+
+    required_hdmi = requirements.get("hdmi_2_1") is True
+    required_vrr = requirements.get("vrr") is True
+    required_allm = requirements.get("allm") is True
+
+    missing_required = []
+
+    if required_hdmi and not hdmi21:
+        missing_required.append("HDMI 2.1")
+    if required_vrr and not vrr:
+        missing_required.append("VRR")
+    if required_allm and not allm:
+        missing_required.append("ALLM")
+
+    if missing_required:
+        return signal(
+            None,
+            "Required gaming feature(s) are not verified: "
+            + ", ".join(missing_required),
+        )
+
+    features = []
+
+    if hdmi21:
+        features.append("HDMI 2.1")
+    if vrr:
+        features.append("VRR")
+    if allm:
+        features.append("ALLM")
+    if four_k_120:
+        features.append("4K120")
+
+    if not features:
+        return signal(
+            None,
+            "Dedicated TV gaming features are not verified",
+        )
+
+    score = min(1.0, 0.55 + 0.12 * len(features))
+
+    if required_hdmi or required_vrr or required_allm:
+        score = max(score, 0.90)
+
+    return signal(
+        score,
+        "Verified gaming features: " + ", ".join(features),
+    )
+
+
+
+def tv_picture_quality_signal(text: str) -> dict[str, Any]:
+    lower = text.lower()
+    score = 0.0
+    reasons = []
+
+    if "oled" in lower:
+        score += 0.35
+        reasons.append("OLED contrast/black-level capability")
+    elif re.search(r"\b(?:mini[\s-]?led|miniled)\b", lower):
+        score += 0.32
+        reasons.append("Mini LED contrast capability")
+    elif "qled" in lower:
+        score += 0.22
+        reasons.append("QLED colour-volume capability")
+
+    if "dolby vision" in lower:
+        score += 0.20
+        reasons.append("Dolby Vision")
+
+    if "hdr10+" in lower:
+        score += 0.15
+        reasons.append("HDR10+")
+
+    if re.search(r"\b4k\b|ultra hd|uhd", lower):
+        score += 0.15
+        reasons.append("4K resolution")
+
+    if any(
+        phrase in lower
+        for phrase in (
+            "full array local dimming",
+            "local dimming",
+            "fald",
+            "mini led",
+        )
+    ):
+        score += 0.15
+        reasons.append("local-dimming evidence")
+
+    if not reasons:
+        return signal(None, "No reliable TV picture-quality evidence found")
+
+    return signal(min(score, 1.0), ", ".join(reasons))
+
+
+def tv_brightness_signal(text: str) -> dict[str, Any]:
+    lower = text.lower()
+
+    brightness_values = [
+        int(x)
+        for x in re.findall(
+            r"\b(\d{3,4})\s*(?:nit|nits)\b",
+            lower,
+            re.I,
+        )
+    ]
+
+    if brightness_values:
+        peak = max(brightness_values)
+
+        if peak >= 1200:
+            return signal(1.0, f"Very strong verified brightness: {peak} nits")
+        if peak >= 800:
+            return signal(0.90, f"Strong verified brightness: {peak} nits")
+        if peak >= 500:
+            return signal(0.72, f"Good verified brightness: {peak} nits")
+        if peak >= 350:
+            return signal(0.58, f"Moderate verified brightness: {peak} nits")
+
+        return signal(0.40, f"Low verified brightness: {peak} nits")
+
+    if any(
+        phrase in lower
+        for phrase in (
+            "high brightness",
+            "bright room",
+            "anti reflection",
+            "anti-reflection",
+            "glare free",
+            "glare-free",
+        )
+    ):
+        return signal(0.72, "Brightness/glare-handling evidence detected")
+
+    return signal(None, "No reliable TV brightness evidence found")
+
+
+def tv_motion_signal(text: str) -> dict[str, Any]:
+    lower = text.lower()
+
+    rates = [
+        int(x)
+        for x in re.findall(
+            r"\b(60|90|100|120|144|165)\s*hz\b",
+            lower,
+            re.I,
+        )
+    ]
+
+    score = 0.0
+    reasons = []
+
+    if rates:
+        rate = max(rates)
+
+        if rate >= 120:
+            score += 0.65
+            reasons.append(f"{rate}Hz refresh rate")
+        elif rate >= 100:
+            score += 0.55
+            reasons.append(f"{rate}Hz refresh rate")
+        else:
+            score += 0.35
+            reasons.append(f"{rate}Hz refresh rate")
+
+    if any(
+        phrase in lower
+        for phrase in (
+            "motionflow",
+            "motion pro",
+            "motion xcelerator",
+            "trumotion",
+            "smooth motion",
+        )
+    ):
+        score += 0.25
+        reasons.append("motion-processing feature")
+
+    if "vrr" in lower or "variable refresh rate" in lower:
+        score += 0.15
+        reasons.append("VRR")
+
+    if not reasons:
+        return signal(None, "No reliable TV motion evidence found")
+
+    return signal(min(score, 1.0), ", ".join(reasons))
+
+
+def tv_smart_signal(text: str) -> dict[str, Any]:
+    lower = text.lower()
+
+    platforms = (
+        "google tv",
+        "android tv",
+        "webos",
+        "tizen",
+        "fire tv",
+        "vidaa",
+    )
+
+    detected = [x for x in platforms if x in lower]
+
+    if detected:
+        return signal(
+            0.90,
+            "Verified smart-TV platform: " + ", ".join(detected),
+        )
+
+    if "smart tv" in lower:
+        return signal(0.70, "Smart TV capability verified")
+
+    return signal(None, "Smart-TV platform/capability is not verified")
+
+
+def tv_sound_signal(text: str) -> dict[str, Any]:
+    lower = text.lower()
+    score = 0.0
+    reasons = []
+
+    if "dolby atmos" in lower:
+        score += 0.45
+        reasons.append("Dolby Atmos")
+
+    watt_values = [
+        int(x)
+        for x in re.findall(
+            r"\b(\d{2,3})\s*w(?:att)?\b",
+            lower,
+            re.I,
+        )
+    ]
+
+    if watt_values:
+        power = max(watt_values)
+
+        if power >= 40:
+            score += 0.45
+        elif power >= 20:
+            score += 0.30
+        else:
+            score += 0.18
+
+        reasons.append(f"{power}W audio output")
+
+    if any(
+        phrase in lower
+        for phrase in (
+            "acoustic surface",
+            "object tracking sound",
+            "ai sound",
+            "woofer",
+            "subwoofer",
+        )
+    ):
+        score += 0.20
+        reasons.append("enhanced TV audio feature")
+
+    if not reasons:
+        return signal(None, "No reliable TV sound evidence found")
+
+    return signal(min(score, 1.0), ", ".join(reasons))
+
+
 def generic_unknown(name: str) -> dict[str, Any]:
     return signal(None, f"No conservative v1 scoring rule/evidence for {name}")
 
@@ -1015,6 +1473,15 @@ def capacity_requirement_signal(
 
 BUILDERS = {
     "budget": lambda p, i, t: budget_signal(p, i),
+    "screen_size": lambda p, i, t: tv_screen_size_signal(p, i, t),
+    "picture_quality": lambda p, i, t: tv_picture_quality_signal(t),
+    "brightness": lambda p, i, t: tv_brightness_signal(t),
+    "motion": lambda p, i, t: tv_motion_signal(t),
+    "smart_tv": lambda p, i, t: tv_smart_signal(t),
+    "sound": lambda p, i, t: tv_sound_signal(t),
+    "panel_technology": lambda p, i, t: tv_panel_technology_signal(p, i, t),
+    "refresh_rate": lambda p, i, t: tv_refresh_rate_signal(p, i, t),
+    "gaming_features": lambda p, i, t: tv_gaming_features_signal(p, i, t),
     "battery": lambda p, i, t: category_battery_signal(p, i, t),
     "display": lambda p, i, t: category_display_signal(p, i, t),
     "ease_of_use": lambda p, i, t: ease_of_use_signal(t),
