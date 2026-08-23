@@ -45,7 +45,7 @@ def detect_category(text: str) -> str | None:
     """
     mapping = [
         # Personal electronics
-        (("smartphone", "mobile phone", "mobile", "phone"), "smartphone"),
+        (("smartphone", "mobile phone", "mobile", "phone", "mob"), "smartphone"),
         (("earbuds", "earbud", "tws"), "earbuds"),
         (("laptop", "notebook"), "laptop"),
         (("smartwatch", "smart watch"), "smartwatch"),
@@ -240,6 +240,31 @@ def detect_budget(text: str) -> tuple[int | None, int | None]:
     if m:
         return amount(m.group(1), m.group(2)), None
 
+    # Bare Indian-shopping budget shorthand:
+    #   "20k best mob"
+    #   "samsung phone 25k"
+    #   "game ke liye mobile 25k"
+    #
+    # Do not interpret every bare number as money. Require obvious
+    # shopping/product context and a k/hazar suffix.
+    bare_budget = re.search(
+        r"\b(\d{1,3})\s*(k|hazar|hazaar)\b",
+        text,
+        re.I,
+    )
+
+    shopping_context = re.search(
+        r"\b(?:smartphone|mobile|phone|mob|best|buy|lena|"
+        r"samsung|oneplus|redmi|realme|motorola|oppo|vivo|"
+        r"gaming|game|camera|battery)\b",
+        text,
+        re.I,
+    )
+
+    if bare_budget and shopping_context:
+        amount_value = int(bare_budget.group(1)) * 1000
+        return None, amount_value
+
     return None, None
 
 
@@ -298,6 +323,16 @@ def detect_intent(text: str) -> tuple[str, bool]:
 
 
 def detect_user_profile(text: str) -> str | None:
+    gaming_negative = bool(
+        re.search(
+            r"\b(?:gaming nahi|game nahi|no gaming|"
+            r"gaming not required|not for gaming|"
+            r"dont need gaming|don't need gaming)\b",
+            text,
+            re.I,
+        )
+    )
+
     profiles = [
         (("father", "dad", "papa", "mother", "mom", "mummy", "parents", "parent"), "parent"),
         (("senior citizen", "elderly", "grandfather", "grandmother"), "senior"),
@@ -313,6 +348,7 @@ def detect_user_profile(text: str) -> str | None:
 
     if (
         "gaming" in text
+        and not gaming_negative
         and not any(
             phrase in text
             for phrase in ("occasional gaming", "light gaming", "casual gaming")
@@ -340,12 +376,38 @@ def detect_use_cases(text: str) -> list[str]:
         (("senior", "elderly"), "senior_use"),
     ]
     found = []
+
+    gaming_negative = bool(
+        re.search(
+            r"\b(?:gaming nahi|game nahi|no gaming|"
+            r"gaming not required|not for gaming|"
+            r"dont need gaming|don't need gaming)\b",
+            text,
+            re.I,
+        )
+    )
+
     for aliases, label in rules:
+        if label == "gaming" and gaming_negative:
+            continue
+
         if any(alias in text for alias in aliases) and label not in found:
             found.append(label)
 
+    if (
+        not gaming_negative
+        and re.search(
+            r"\b(?:bgmi|pubg|cod mobile|call of duty mobile)\b",
+            text,
+            re.I,
+        )
+        and "gaming" not in found
+    ):
+        found.append("gaming")
+
     if "light_gaming" in found and "gaming" in found:
         found.remove("gaming")
+
     return found
 
 
@@ -608,6 +670,206 @@ def detect_requirements(
                 f"{int(tb_storage_match.group(1)) * 1024}gb_storage",
             )
 
+    # ============================================================
+    # MOBILE FINAL INTENT SEMANTICS
+    # ============================================================
+    if category == "smartphone":
+
+        # Battery-quality wording.
+        if re.search(
+            r"\b(?:battery priority|battery important|"
+            r"battery more important|battery zyada important|"
+            r"battery jyada important|"
+            r"battery strong|strong battery|good battery|"
+            r"long battery|battery life|"
+            r"battery jyada|battery zyada|"
+            r"battery jyada chal|battery zyada chal)\b",
+            text,
+            re.I,
+        ):
+            add(preferred, "good_battery")
+
+        # Non-negotiable battery wording remains a preference marker
+        # here; build_priority_weights() supplies the strong ranking boost.
+        if re.search(
+            r"\bbattery\b.{0,30}\b(?:compromise nahi|"
+            r"no compromise|non negotiable|non-negotiable)\b",
+            text,
+            re.I,
+        ):
+            add(preferred, "good_battery")
+
+        # Charging.
+        if re.search(
+            r"\b(?:fast charging|quick charging|rapid charging)\b",
+            text,
+            re.I,
+        ):
+            add(preferred, "fast_charging")
+
+        # Processor / performance language.
+        if re.search(
+            r"\b(?:best processor|good processor|fast processor|"
+            r"powerful processor|performance phone|"
+            r"high performance)\b",
+            text,
+            re.I,
+        ):
+            add(preferred, "good_performance")
+
+        # Compact form factor.
+        if re.search(
+            r"\b(?:compact phone|compact mobile|small phone|"
+            r"small screen phone|one hand phone|one-handed phone)\b",
+            text,
+            re.I,
+        ):
+            add(preferred, "compact_phone")
+
+        # Clean/simple software experience.
+        if re.search(
+            r"\b(?:clean ui|clean software|clean android|"
+            r"stock android|bloatware free|no bloatware|"
+            r"simple ui)\b",
+            text,
+            re.I,
+        ):
+            add(preferred, "clean_ui")
+
+        # Camera-quality natural language beyond exact "good/best camera".
+        if re.search(
+            r"\b(?:camera mast|camera achha|camera accha|"
+            r"camera acha|camera strong|camera important)\b",
+            text,
+            re.I,
+        ):
+            add(preferred, "good_camera")
+
+    # ============================================================
+    # MOBILE PHASE-3 GENERIC REQUIREMENTS
+    # ============================================================
+    if category == "smartphone":
+
+        # Bare storage:
+        # "256GB phone", "128GB mobile"
+        # Do not mistake an explicitly-labelled RAM value for storage.
+        bare_capacities = re.findall(
+            r"\b(32|64|128|256|512|1024)\s*gb\b",
+            text,
+            re.I,
+        )
+
+        for capacity in bare_capacities:
+            is_ram = re.search(
+                rf"\b{capacity}\s*gb\s*(?:of\s*)?ram\b",
+                text,
+                re.I,
+            )
+
+            if not is_ram:
+                add(must_have, f"{capacity}gb_storage")
+
+        # Hinglish memory shorthand:
+        # "8 128 wala phone"
+        spaced_memory = re.search(
+            r"\b(2|3|4|6|8|12|16|18|24)\s+"
+            r"(32|64|128|256|512|1024)"
+            r"(?:\s*(?:gb))?\s+"
+            r"(?:wala|wali|variant|phone|mobile)\b",
+            text,
+            re.I,
+        )
+
+        if spaced_memory:
+            add(must_have, f"{spaced_memory.group(1)}gb_ram")
+            add(must_have, f"{spaced_memory.group(2)}gb_storage")
+
+        # Explicit battery capacity.
+        battery_match = re.search(
+            r"\b(\d{4,5})\s*mah\b",
+            text,
+            re.I,
+        )
+
+        if battery_match:
+            add(
+                must_have,
+                f"{battery_match.group(1)}mah_battery",
+            )
+
+        # Explicit display refresh rate.
+        refresh_match = re.search(
+            r"\b(60|90|120|144|165)\s*hz\b",
+            text,
+            re.I,
+        )
+
+        if refresh_match:
+            add(
+                must_have,
+                f"{refresh_match.group(1)}hz_display",
+            )
+
+        # AMOLED can be required or preferred.
+        # Requirement language must be attached to AMOLED itself.
+        # Example:
+        #   "8/128 compulsory AMOLED preferred"
+        # means memory is compulsory, AMOLED is preferred.
+        if re.search(r"\bamoled\b", text, re.I):
+
+            amoled_preferred = bool(
+                re.search(
+                    r"\bamoled\b.{0,15}\b(?:preferred|prefer|preference)\b"
+                    r"|\b(?:preferred|prefer|preference)\b.{0,15}\bamoled\b",
+                    text,
+                    re.I,
+                )
+            )
+
+            amoled_required = bool(
+                re.search(
+                    r"\bamoled\b.{0,15}\b(?:must|required|compulsory|"
+                    r"mandatory|chahiye|hona chahiye)\b"
+                    r"|\b(?:must|required|mandatory)\b.{0,15}\bamoled\b",
+                    text,
+                    re.I,
+                )
+            )
+
+            if amoled_preferred:
+                add(preferred, "amoled_display")
+                if "amoled_display" in must_have:
+                    must_have.remove("amoled_display")
+
+            elif amoled_required:
+                add(must_have, "amoled_display")
+                if "amoled_display" in preferred:
+                    preferred.remove("amoled_display")
+
+            else:
+                add(preferred, "amoled_display")
+
+        # Mobile gaming aliases.
+        gaming_alias = re.search(
+            r"\b(?:bgmi|pubg|cod mobile|call of duty mobile)\b",
+            text,
+            re.I,
+        )
+
+        gaming_negative = re.search(
+            r"\b(?:gaming nahi|game nahi|no gaming|"
+            r"gaming not required|not for gaming|"
+            r"dont need gaming|don't need gaming)\b",
+            text,
+            re.I,
+        )
+
+        if gaming_alias and not gaming_negative:
+            add(preferred, "strong_gaming_performance")
+
+        if gaming_negative:
+            add(avoid, "gaming_focused")
+
     return hard_constraints, must_have, preferred, avoid
 
 
@@ -783,6 +1045,9 @@ def build_priority_weights(
         "portable": "portability",
         "anc": "anc",
         "ssd": "storage",
+        "fast_charging": "battery",
+        "compact_phone": "display",
+        "clean_ui": "ease_of_use",
     }
 
     combined = set(must_have + preferred)
@@ -1096,12 +1361,97 @@ def parse_query(query: str) -> dict:
     intent, compare = detect_intent(text)
     budget_min, budget_max = detect_budget(text)
     category = detect_category(text)
+
+    # ------------------------------------------------------------
+    # Conservative smartphone context inference
+    # ------------------------------------------------------------
+    # Handles shorthand where "phone/mobile" is omitted:
+    #   Redmi nahi chahiye 20k ke andar
+    #   gaming important but battery strong under 25k
+    #   8/128 compulsory AMOLED preferred under 20k
+    #
+    # Also resolves "camera ..." as smartphone-camera intent when
+    # surrounding wording is clearly phone-shopping/spec context.
+    smartphone_brand_context = bool(
+        re.search(
+            r"\b(?:samsung|oneplus|xiaomi|redmi|realme|vivo|oppo|"
+            r"motorola|nothing)\b",
+            text,
+            re.I,
+        )
+    )
+
+    smartphone_spec_context = bool(
+        re.search(
+            r"\b(?:"
+            r"\d+\s*(?:/|\+)\s*\d+|"
+            r"\d+\s+\d+\s+(?:wala|wali|variant)|"
+            r"\d{4,5}\s*mah|"
+            r"(?:60|90|120|144|165)\s*hz|"
+            r"amoled|5g|bgmi|pubg|cod mobile|"
+            r"fast charging|battery|processor"
+            r")\b",
+            text,
+            re.I,
+        )
+    )
+
+    smartphone_shopping_context = bool(
+        re.search(
+            r"\b(?:under|below|upto|up to|tak|andar|"
+            r"best|acha|achha|accha|mast|"
+            r"important|priority|preferred|compulsory|"
+            r"chahiye|nahi chahiye)\b",
+            text,
+            re.I,
+        )
+    )
+
+    # Brand/spec-heavy queries without an explicit category are treated
+    # as smartphones only when mobile-specific evidence is present.
+    if category is None and (
+        smartphone_spec_context
+        or (
+            smartphone_brand_context
+            and smartphone_shopping_context
+        )
+    ):
+        category = "smartphone"
+
+    # "camera mast hona chahiye 20k tak" / similar benchmark wording
+    # refers to smartphone camera quality when camera is accompanied by
+    # mobile-shopping language rather than DSLR/mirrorless terminology.
+    if (
+        category == "camera"
+        and "camera" in text
+        and smartphone_shopping_context
+        and not re.search(
+            r"\b(?:dslr|mirrorless|digital camera|camera body|lens)\b",
+            text,
+            re.I,
+        )
+    ):
+        category = "smartphone"
     user_profile = detect_user_profile(text)
     use_cases = detect_use_cases(text)
 
     hard_constraints, must_have, preferred, avoid = detect_requirements(
         text, category, user_profile, use_cases
     )
+
+    # Any successfully parsed explicit maximum-budget expression is a
+    # hard shopping constraint. detect_budget() already understands
+    # forms such as:
+    #   under 20000
+    #   under 20k
+    #   20k ke andar
+    #   20 hazar tak
+    #   20000 tak
+    #
+    # Keep budget parsing as the single source of truth instead of
+    # duplicating a narrower budget regex inside detect_requirements().
+    if budget_max is not None and "budget_max" not in hard_constraints:
+        hard_constraints.append("budget_max")
 
     parsed = asdict(
         ShoppingIntent(

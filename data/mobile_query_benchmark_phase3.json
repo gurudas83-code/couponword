@@ -1,0 +1,242 @@
+[
+  {
+    "id": "Q001",
+    "q": "best phone under 20000"
+  },
+  {
+    "id": "Q002",
+    "q": "phone under 20k"
+  },
+  {
+    "id": "Q003",
+    "q": "phone 20k ke andar"
+  },
+  {
+    "id": "Q004",
+    "q": "20 hazar tak acha mobile"
+  },
+  {
+    "id": "Q005",
+    "q": "mobile below 15000"
+  },
+  {
+    "id": "Q006",
+    "q": "best phone 25000 tak"
+  },
+  {
+    "id": "Q007",
+    "q": "8/128 phone under 20k"
+  },
+  {
+    "id": "Q008",
+    "q": "8+128 mobile 20k ke andar"
+  },
+  {
+    "id": "Q009",
+    "q": "8GB RAM 128GB phone under 20000"
+  },
+  {
+    "id": "Q010",
+    "q": "12/256 phone under 30k"
+  },
+  {
+    "id": "Q011",
+    "q": "256GB phone under 20000"
+  },
+  {
+    "id": "Q012",
+    "q": "12GB RAM phone under 30000"
+  },
+  {
+    "id": "Q013",
+    "q": "5G phone under 15000"
+  },
+  {
+    "id": "Q014",
+    "q": "8/128 5G phone under 20k"
+  },
+  {
+    "id": "Q015",
+    "q": "12/256 5G mobile under 30k"
+  },
+  {
+    "id": "Q016",
+    "q": "Samsung"
+  },
+  {
+    "id": "Q017",
+    "q": "OnePlus"
+  },
+  {
+    "id": "Q018",
+    "q": "Motorola phone"
+  },
+  {
+    "id": "Q019",
+    "q": "Samsung phone under 25000"
+  },
+  {
+    "id": "Q020",
+    "q": "Samsung only phone under 30000"
+  },
+  {
+    "id": "Q021",
+    "q": "only OnePlus phone under 30000"
+  },
+  {
+    "id": "Q022",
+    "q": "Samsung preferred phone under 25000"
+  },
+  {
+    "id": "Q023",
+    "q": "Samsung ya OnePlus phone under 30000"
+  },
+  {
+    "id": "Q024",
+    "q": "Samsung nahi chahiye phone under 20000"
+  },
+  {
+    "id": "Q025",
+    "q": "Redmi nahi chahiye 20k ke andar"
+  },
+  {
+    "id": "Q026",
+    "q": "best camera phone under 25000"
+  },
+  {
+    "id": "Q027",
+    "q": "phone under 20k camera sabse important"
+  },
+  {
+    "id": "Q028",
+    "q": "OIS camera phone under 25000"
+  },
+  {
+    "id": "Q029",
+    "q": "phone for photography under 30000"
+  },
+  {
+    "id": "Q030",
+    "q": "camera mast hona chahiye 20k tak"
+  },
+  {
+    "id": "Q031",
+    "q": "phone under 20k battery priority"
+  },
+  {
+    "id": "Q032",
+    "q": "phone under 20k battery pe compromise nahi"
+  },
+  {
+    "id": "Q033",
+    "q": "6000mah battery phone under 15000"
+  },
+  {
+    "id": "Q034",
+    "q": "fast charging phone under 20000"
+  },
+  {
+    "id": "Q035",
+    "q": "battery jyada chalne wala phone under 20k"
+  },
+  {
+    "id": "Q036",
+    "q": "gaming phone under 30000"
+  },
+  {
+    "id": "Q037",
+    "q": "gaming phone under 20k"
+  },
+  {
+    "id": "Q038",
+    "q": "phone for BGMI under 25000"
+  },
+  {
+    "id": "Q039",
+    "q": "best processor phone under 25000"
+  },
+  {
+    "id": "Q040",
+    "q": "gaming important but battery bhi strong under 25k"
+  },
+  {
+    "id": "Q041",
+    "q": "AMOLED phone under 20000"
+  },
+  {
+    "id": "Q042",
+    "q": "120Hz AMOLED phone under 25000"
+  },
+  {
+    "id": "Q043",
+    "q": "big display phone under 15000"
+  },
+  {
+    "id": "Q044",
+    "q": "compact phone under 30000"
+  },
+  {
+    "id": "Q045",
+    "q": "phone for father under 15000"
+  },
+  {
+    "id": "Q046",
+    "q": "phone for mother under 15000"
+  },
+  {
+    "id": "Q047",
+    "q": "phone for student under 18000"
+  },
+  {
+    "id": "Q048",
+    "q": "phone for office use under 20000"
+  },
+  {
+    "id": "Q049",
+    "q": "simple phone with good battery for parents"
+  },
+  {
+    "id": "Q050",
+    "q": "phone with clean UI under 25000"
+  },
+  {
+    "id": "Q051",
+    "q": "phone under 20k camera achha but battery more important"
+  },
+  {
+    "id": "Q052",
+    "q": "8/128 phone under 20k battery pe compromise nahi camera bhi achha ho"
+  },
+  {
+    "id": "Q053",
+    "q": "camera important but gaming nahi karta under 25k"
+  },
+  {
+    "id": "Q054",
+    "q": "Samsung preferred but battery more important under 25k"
+  },
+  {
+    "id": "Q055",
+    "q": "8/128 compulsory AMOLED preferred under 20k"
+  },
+  {
+    "id": "Q056",
+    "q": "20k best mob"
+  },
+  {
+    "id": "Q057",
+    "q": "8 128 wala phone 20k"
+  },
+  {
+    "id": "Q058",
+    "q": "samsung ka acha phone 25k"
+  },
+  {
+    "id": "Q059",
+    "q": "game ke liye mobile 25k"
+  },
+  {
+    "id": "Q060",
+    "q": "phone lena hai 20k tak"
+  }
+]
