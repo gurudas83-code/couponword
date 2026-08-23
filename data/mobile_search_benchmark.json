@@ -1,0 +1,268 @@
+[
+  {
+    "id": "M001",
+    "query": "best phone under 20000",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 20000
+    }
+  },
+  {
+    "id": "M002",
+    "query": "phone under 20k",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 20000
+    }
+  },
+  {
+    "id": "M003",
+    "query": "phone 20k ke andar",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 20000
+    }
+  },
+  {
+    "id": "M004",
+    "query": "phone 20 hazar tak",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 20000
+    }
+  },
+  {
+    "id": "M005",
+    "query": "8/128 phone under 20k",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 20000,
+      "must_have": [
+        "8gb_ram",
+        "128gb_storage"
+      ]
+    }
+  },
+  {
+    "id": "M006",
+    "query": "8+128 mobile 20k ke andar",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 20000,
+      "must_have": [
+        "8gb_ram",
+        "128gb_storage"
+      ]
+    }
+  },
+  {
+    "id": "M007",
+    "query": "12/256 phone under 30k",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 30000,
+      "must_have": [
+        "12gb_ram",
+        "256gb_storage"
+      ]
+    }
+  },
+  {
+    "id": "M008",
+    "query": "Samsung only phone under 30k",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 30000,
+      "brands": [
+        "Samsung"
+      ],
+      "must_have": [
+        "brand_samsung"
+      ]
+    }
+  },
+  {
+    "id": "M009",
+    "query": "Samsung preferred phone under 25k",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 25000,
+      "brands": [
+        "Samsung"
+      ],
+      "preferred": [
+        "brand_samsung"
+      ]
+    }
+  },
+  {
+    "id": "M010",
+    "query": "Samsung nahi chahiye phone under 20k",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 20000,
+      "avoid": [
+        "brand_samsung"
+      ]
+    }
+  },
+  {
+    "id": "M011",
+    "query": "Samsung ya OnePlus mobile 25k ke andar",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 25000,
+      "brands": [
+        "Samsung",
+        "Oneplus"
+      ]
+    }
+  },
+  {
+    "id": "M012",
+    "query": "phone under 20k camera sabse important",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 20000,
+      "priority_high": "camera"
+    }
+  },
+  {
+    "id": "M013",
+    "query": "phone under 20k battery priority",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 20000,
+      "priority_high": "battery"
+    }
+  },
+  {
+    "id": "M014",
+    "query": "phone under 20k gaming priority",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 20000
+    }
+  },
+  {
+    "id": "M015",
+    "query": "phone under 20k camera achha but battery more important",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 20000,
+      "priority_relation": [
+        "battery",
+        "camera"
+      ]
+    }
+  },
+  {
+    "id": "M016",
+    "query": "phone under 20k battery pe compromise nahi",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 20000,
+      "priority_high": "battery"
+    }
+  },
+  {
+    "id": "M017",
+    "query": "phone 20k ke andar 8/128 battery pe compromise nahi camera bhi achha ho",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 20000,
+      "must_have": [
+        "8gb_ram",
+        "128gb_storage"
+      ],
+      "priority_relation": [
+        "camera",
+        "budget"
+      ]
+    }
+  },
+  {
+    "id": "M018",
+    "query": "5G phone under 15000",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 15000,
+      "must_have": [
+        "5g"
+      ]
+    }
+  },
+  {
+    "id": "M019",
+    "query": "phone for father under 15000",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 15000,
+      "user_profile": "parent"
+    }
+  },
+  {
+    "id": "M020",
+    "query": "phone for student under 18000",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 18000,
+      "user_profile": "student"
+    }
+  },
+  {
+    "id": "M021",
+    "query": "gaming phone under 30000",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 30000
+    }
+  },
+  {
+    "id": "M022",
+    "query": "best camera phone under 25000",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 25000
+    }
+  },
+  {
+    "id": "M023",
+    "query": "Samsung",
+    "expected": {
+      "brands": [
+        "Samsung"
+      ]
+    },
+    "e2e": {
+      "target_best_choices": 3,
+      "target_total_options": 6
+    }
+  },
+  {
+    "id": "M024",
+    "query": "OnePlus",
+    "expected": {
+      "brands": [
+        "Oneplus"
+      ]
+    },
+    "e2e": {
+      "target_best_choices": 3,
+      "target_total_options": 6
+    }
+  },
+  {
+    "id": "M025",
+    "query": "8/128 5G phone under 10000",
+    "expected": {
+      "category": "smartphone",
+      "budget_max": 10000,
+      "must_have": [
+        "8gb_ram",
+        "128gb_storage",
+        "5g"
+      ]
+    }
+  }
+]

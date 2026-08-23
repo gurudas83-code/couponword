@@ -649,6 +649,238 @@ def extraction_is_usable(
     return True, ""
 
 
+
+def enrich_priority_evidence(
+    profile: dict[str, Any],
+    candidate: dict[str, Any],
+    extraction: dict[str, Any],
+    intent: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Consolidate already-verified runtime evidence for dimensions that
+    matter most to the shopper.
+
+    Important:
+    - No specification is invented.
+    - No network request is performed here.
+    - Only evidence already present in candidate/extraction is reused.
+    - High-priority dimensions are recorded for later diagnostics.
+    """
+    enriched = dict(profile)
+
+    features = list(enriched.get("features") or [])
+    attributes = dict(enriched.get("attributes") or {})
+
+    weights = intent.get("priority_weights") or {}
+
+    priority_dimensions = [
+        str(name)
+        for name, weight in sorted(
+            weights.items(),
+            key=lambda item: int(item[1] or 0),
+            reverse=True,
+        )
+        if int(weight or 0) >= 15
+    ]
+
+    evidence_parts: list[str] = []
+
+    def add_evidence(value: Any) -> None:
+        value = clean(value)
+        if value and value not in evidence_parts:
+            evidence_parts.append(value)
+
+    # Verified/discovered listing evidence already available in memory.
+    add_evidence(candidate.get("source_title"))
+    add_evidence(candidate.get("title"))
+    add_evidence(candidate.get("snippet"))
+
+    # Evidence produced by official extraction or verified live-fast mode.
+    for value in extraction.get("features") or []:
+        add_evidence(value)
+
+    specifications = extraction.get("specifications") or {}
+
+    if isinstance(specifications, dict):
+        for key, value in specifications.items():
+            key_text = clean(key)
+            value_text = clean(value)
+
+            if key_text and value_text:
+                attributes.setdefault(key_text, value_text)
+                add_evidence(f"{key_text}: {value_text}")
+
+    # Add consolidated evidence to the feature corpus consumed by the
+    # fit-signal builder. Deduplication keeps the profile bounded.
+    for value in evidence_parts:
+        if value not in features:
+            features.append(value)
+
+    enriched["features"] = features
+    enriched["attributes"] = attributes
+
+    enriched["priority_evidence"] = {
+        "dimensions": priority_dimensions,
+        "threshold": 15,
+        "mode": "existing_verified_evidence_only",
+        "evidence_items": len(evidence_parts),
+    }
+
+    return enriched
+
+
+
+
+def retrieve_missing_priority_evidence(
+    profile: dict[str, Any],
+    intent: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Retrieve bounded external evidence only for high-priority criteria
+    that remain unknown after the first scoring pass.
+
+    Safety:
+    - Search evidence is never used unless product identity matches.
+    - Only high-priority unknown dimensions are queried.
+    - No missing specification is invented.
+    - If Tavily is unavailable, return profile unchanged.
+    """
+    api_key = os.environ.get("TAVILY_API_KEY")
+
+    if not api_key:
+        return profile
+
+    weights = intent.get("priority_weights") or {}
+
+    # First-pass signals tell us what is genuinely missing.
+    initial_signals = build_fit_signals(profile, intent)
+
+    missing: list[str] = []
+
+    for dimension, weight in sorted(
+        weights.items(),
+        key=lambda item: int(item[1] or 0),
+        reverse=True,
+    ):
+        weight = int(weight or 0)
+
+        if weight < 15:
+            continue
+
+        signal_obj = initial_signals.get(dimension)
+
+        if not isinstance(signal_obj, dict):
+            continue
+
+        if signal_obj.get("match") is None:
+            missing.append(str(dimension))
+
+    if not missing:
+        return profile
+
+    # Keep live latency bounded.
+    missing = missing[:2]
+
+    title = clean(profile.get("title"))
+    brand = clean(profile.get("brand"))
+
+    if not title:
+        return profile
+
+    query_terms = {
+        "battery": "battery capacity charging",
+        "camera": "camera OIS ultrawide telephoto",
+        "display": "display panel refresh rate brightness",
+        "performance": "processor chipset performance",
+        "software_support": "software updates support years",
+        "connectivity": "5G WiFi Bluetooth NFC",
+        "ram": "RAM memory",
+        "storage": "storage capacity",
+    }
+
+    client = TavilyClient(api_key=api_key)
+
+    existing_features = list(profile.get("features") or [])
+    enrichment_records: list[dict[str, Any]] = []
+
+    for dimension in missing:
+        terms = query_terms.get(dimension)
+
+        if not terms:
+            continue
+
+        query = f"{brand} {title} {terms}".strip()
+
+        try:
+            response = client.search(
+                query=query,
+                search_depth="basic",
+                max_results=4,
+            )
+        except Exception as error:
+            enrichment_records.append({
+                "criterion": dimension,
+                "query": query,
+                "status": "search_failed",
+                "reason": str(error),
+            })
+            continue
+
+        for result in response.get("results", []):
+            if not isinstance(result, dict):
+                continue
+
+            result_title = clean(result.get("title"))
+            result_url = clean(result.get("url"))
+            result_content = clean(result.get("content"))
+
+            if not result_title or not result_content:
+                continue
+
+            try:
+                identity_obj = compare_identity(
+                    expected_text=title,
+                    candidate_title=result_title,
+                    candidate_url=result_url,
+                    expected_brand=brand,
+                )
+                identity_check = identity_obj.to_dict()
+            except Exception:
+                continue
+
+            if clean(identity_check.get("decision")).lower() != "verified":
+                continue
+
+            evidence_text = clean(
+                f"{result_title}. {result_content}"
+            )
+
+            if evidence_text and evidence_text not in existing_features:
+                existing_features.append(evidence_text)
+
+            enrichment_records.append({
+                "criterion": dimension,
+                "query": query,
+                "source_url": result_url,
+                "source_title": result_title,
+                "identity_score": identity_check.get("score"),
+            })
+
+            # One verified identity-bound source per criterion is enough
+            # for this bounded live pass.
+            break
+
+    enriched = dict(profile)
+    enriched["features"] = existing_features
+
+    provenance = dict(enriched.get("provenance") or {})
+    provenance["priority_evidence_retrieval"] = enrichment_records
+    enriched["provenance"] = provenance
+
+    return enriched
+
+
+
 def runtime_profile_from_extraction(
     *,
     candidate: dict[str, Any],
@@ -730,8 +962,6 @@ def runtime_profile_from_extraction(
             "price_evidence": price_evidence,
         },
     }
-
-    profile["fit_signals"] = build_fit_signals(profile, intent)
 
     return profile
 
@@ -1159,6 +1389,22 @@ def run_pipeline(
                 extraction=extraction,
                 intent=intent,
             )
+            # Consolidate existing verified evidence before scoring.
+            # This remains network-free and never invents missing specs.
+            profile = enrich_priority_evidence(
+                profile=profile,
+                candidate=candidate,
+                extraction=extraction,
+                intent=intent,
+            )
+
+            profile = retrieve_missing_priority_evidence(
+                profile=profile,
+                intent=intent,
+            )
+
+            profile["fit_signals"] = build_fit_signals(profile, intent)
+
             assessment = calculate_product_fit(profile, intent)
         except Exception as error:
             failures.append({

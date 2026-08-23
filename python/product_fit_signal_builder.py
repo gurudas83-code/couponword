@@ -764,12 +764,102 @@ def ease_of_use_signal(text: str) -> dict[str, Any]:
 
 
 def camera_signal(text: str) -> dict[str, Any]:
-    # Megapixels alone are not enough to claim camera quality.
+    """
+    Conservatively score verified camera-system evidence.
+
+    Important:
+    Megapixel count alone must never be treated as proof of image quality.
+    It can provide weak hardware evidence, while features such as OIS,
+    telephoto capability and useful multi-camera hardware provide stronger
+    support.
+    """
+    text = str(text or "").lower()
+
     if "camera specifications have not yet been added" in text:
         return signal(None, "Camera evidence is explicitly incomplete")
+
+    score = 0.0
+    reasons: list[str] = []
+
+    # Strong camera-system evidence.
     if "ois" in text or "optical image stabilization" in text:
-        return signal(0.75, "Verified OIS evidence found")
-    return signal(None, "Camera quality is not sufficiently verified")
+        score += 0.45
+        reasons.append("verified optical image stabilization")
+
+    if re.search(
+        r"\btelephoto\b|\boptical\s+zoom\b|\bperiscope\b",
+        text,
+        re.I,
+    ):
+        score += 0.30
+        reasons.append("verified telephoto/optical-zoom capability")
+
+    # Useful supporting camera-system evidence.
+    if re.search(
+        r"\bultra[- ]?wide\b|\bultrawide\b|\bwide[- ]angle\b",
+        text,
+        re.I,
+    ):
+        score += 0.15
+        reasons.append("verified ultrawide camera")
+
+    if re.search(r"\b4k\b.{0,30}\bvideo\b|\bvideo\b.{0,30}\b4k\b", text, re.I):
+        score += 0.10
+        reasons.append("verified 4K video capability")
+
+    if re.search(
+        r"\b(?:dual|triple|quad)\s+(?:rear\s+)?camera\b"
+        r"|\b(?:dual|triple|quad)[- ]camera\b",
+        text,
+        re.I,
+    ):
+        score += 0.10
+        reasons.append("verified multi-camera system")
+
+    # Megapixel specifications are useful hardware evidence, but they do
+    # not establish real-world camera quality by themselves.
+    megapixels = [
+        int(value)
+        for value in re.findall(r"\b(\d{1,3})\s*mp\b", text, re.I)
+        if int(value) <= 250
+    ]
+
+    if megapixels:
+        main_mp = max(megapixels)
+
+        if main_mp >= 48:
+            score += 0.10
+            reasons.append(f"verified {main_mp}MP camera hardware")
+        elif main_mp >= 12:
+            score += 0.05
+            reasons.append(f"verified {main_mp}MP camera hardware")
+
+    if not reasons:
+        return signal(None, "Camera quality is not sufficiently verified")
+
+    # Hardware-only evidence must remain moderate unless meaningful
+    # imaging capabilities such as OIS/telephoto are also verified.
+    strong_evidence = (
+        "ois" in text
+        or "optical image stabilization" in text
+        or bool(
+            re.search(
+                r"\btelephoto\b|\boptical\s+zoom\b|\bperiscope\b",
+                text,
+                re.I,
+            )
+        )
+    )
+
+    if strong_evidence:
+        score = max(score, 0.70)
+    else:
+        score = min(score, 0.55)
+
+    return signal(
+        min(score, 1.0),
+        "; ".join(reasons),
+    )
 
 
 def category_relevance_signal(
