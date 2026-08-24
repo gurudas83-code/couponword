@@ -1,0 +1,3788 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-08-24T14:51:43.455269+00:00",
+  "records": [
+    {
+      "asin": "B0GTRKWY7J",
+      "brand": "realme",
+      "model": "narzo 100 Lite 5G Frost",
+      "search_name": "realme narzo 100 Lite 5G Frost",
+      "model_key": "realme|narzo 100 lite 5g frost",
+      "official_url": "https://www.realme.com/in/realme-narzo-100-lite-5g/specs",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 0.8333,
+      "specifications": {
+        "name": {
+          "value": "realme NARZO 100 Lite 5G",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "model": {
+          "value": "NARZO 100 Lite 5G",
+          "label": "model",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "sku": {
+          "value": "REALMENARZO100LITE5G-IN-SPECS",
+          "label": "sku",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "brand": {
+          "value": "realme",
+          "label": "brand",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "description": {
+          "value": "realme NARZO 100 Lite 5G features a 17.3 cm 144Hz display, MediaTek Dimensity 6300 chipset, 4GB+64GB storage, a 7000mAh battery with 15W PD, and 5G connectivity.",
+          "label": "description",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "size_and_weight": {
+          "value": "Height about 16.63cm, Width about 7.81cm, Thickness about 0.84cm, Weight about 212g",
+          "label": "Size and Weight",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "storage": {
+          "value": "4GB+64GB, 4GB+128GB, 6GB+128GB; LPDDR4X RAM, eMMC5.1 ROM, microSD supported",
+          "label": "Storage",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "display": {
+          "value": "17.3 cm HD+ 1570*720, maximum 144Hz refresh rate, 256 PPI, 700 nits typical brightness, 900 nits HBM, Corning+LCD panel, Panda-MN228 cover glass",
+          "label": "Display",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "rear_camera": {
+          "value": "13MP wide angle, f/2.2, FOV 77°, 4P lens, AF supported",
+          "label": "Rear Camera",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "front_camera": {
+          "value": "5MP, f/2.2, FOV 78°, 3P lens",
+          "label": "Front Camera",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "chips": {
+          "value": "MediaTek Dimensity 6300, 8-core CPU, ARM Mali-G57 MC2@1072MHz GPU",
+          "label": "Chips",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "battery_and_charging": {
+          "value": "7000mAh (Typical), 15W PD, 15W DCP, wireless charging unsupported",
+          "label": "Battery and Charging",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "cellular_network": {
+          "value": "5G NR: n1/n3/n5/n8/n28B/n40/n41/n77/n78, 4G LTE, GSM, WCDMA",
+          "label": "Cellular Network",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "connectivity": {
+          "value": "Wi-Fi 5 (802.11ac), Bluetooth 5.3, USB Type-C, 3.5mm jack, NFC (region dependent)",
+          "label": "Connectivity",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "operating_system": {
+          "value": "realme UI 7.0",
+          "label": "Operating System",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        }
+      },
+      "features": [
+        {
+          "text": "* Product size and weight may vary by configuration, manufacturing process and measurements. All specifications are subject to the actual product.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "* The available internal storage may be smaller as part of the internal storage is occupied by software. Actual memory space may change due to application updates, user operations, and other related factors.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "* The operating system information is for reference only, subject to the actual product. If updated, no further notice will be given.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-08-23T10:39:15.532904+00:00"
+    },
+    {
+      "asin": "B0H6HY2C29",
+      "brand": "realme",
+      "model": "narzo 80 Lite 4G See",
+      "search_name": "realme narzo 80 Lite 4G See",
+      "model_key": "realme|narzo 80 lite 4g see",
+      "official_url": "https://www.realme.com/in/realme-narzo-80-lite/specs",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 0.6667,
+      "specifications": {
+        "name": {
+          "value": "realme NARZO 80 Lite",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "model": {
+          "value": "NARZO 80 Lite",
+          "label": "model",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "brand": {
+          "value": "realme",
+          "label": "brand",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "description": {
+          "value": "realme NARZO 80 Lite features a 17.13cm 90Hz display, UNISOC T7250 octa-core chipset, up to 8+16GB dynamic RAM, a 6300mAh battery with 15W VOOC charge, and 4G connectivity.",
+          "label": "description",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "display": {
+          "value": "17.13cm (6.74 inch) HD+ 720×1600, 90Hz, 563nit peak brightness, 90.4% screen-to-body ratio",
+          "label": "Display",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "processor": {
+          "value": "UNISOC T7250, 12nm, 8 cores up to 1.8GHz, Mali G57 MP1 GPU",
+          "label": "Chipset",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "memory_and_storage": {
+          "value": "4GB/6GB LPDDR4X RAM, 64GB/128GB eMMC5.1 ROM, up to 16GB dynamic RAM, microSD supported",
+          "label": "Memory and Storage",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "rear_camera": {
+          "value": "13MP, f/2.2, 27mm equivalent focal length, 1080P@30fps video, Night Mode, Portrait Mode",
+          "label": "Rear Camera",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "front_camera": {
+          "value": "5MP, f/2.2, 720P@30fps video",
+          "label": "Front Camera",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "battery_and_charging": {
+          "value": "6300mAh (typical), 15W VOOC charge, USB Type-C, reverse charging up to 6W",
+          "label": "Battery and Charging",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "cellular_network": {
+          "value": "4G LTE / GSM / WCDMA, 5G not supported",
+          "label": "Cellular Network",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "connectivity": {
+          "value": "Wi-Fi 5 (802.11 a/b/g/n/ac), Bluetooth 5.2, USB Type-C, jack",
+          "label": "Connectivity",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "operating_system": {
+          "value": "realme UI based on Android 15",
+          "label": "Operating System",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "dimensions_and_weight": {
+          "value": "167.20×76.60×7.94mm, 201g",
+          "label": "Dimensions and Weight",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        }
+      },
+      "features": [],
+      "review": {
+        "approved": false,
+        "status": "manual_review",
+        "reason": "Evidence was extracted, but page identity requires review"
+      },
+      "saved_at": "2026-08-23T10:39:27.606957+00:00"
+    },
+    {
+      "asin": "B0GWQZJQX6",
+      "brand": "realme",
+      "model": "P4 Lite 5G",
+      "search_name": "realme P4 Lite 5G",
+      "model_key": "realme|p4 lite 5g",
+      "official_url": "https://www.realme.com/in/realme-p4-lite-5g/specs",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 1.0,
+      "specifications": {
+        "name": {
+          "value": "realme P4 Lite 5G",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "model": {
+          "value": "P4 Lite 5G",
+          "label": "model",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "sku": {
+          "value": "REALMEP4LITE5G-IN-SPECS",
+          "label": "sku",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "brand": {
+          "value": "realme",
+          "label": "brand",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "description": {
+          "value": "realme P4 Lite 5G features a 17.3 cm 144Hz display, MediaTek Dimensity 6300 chipset, up to 8GB RAM, a 7000mAh battery with 15W charging, and 5G connectivity.",
+          "label": "description",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "size_and_weight": {
+          "value": "Height about 16.63cm, Width about 7.81cm, Thickness about 0.84cm, Weight about 212g",
+          "label": "Size and Weight",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "storage": {
+          "value": "4GB+64GB, 4GB+128GB, 6GB+128GB, 8GB+128GB; LPDDR4X RAM, eMMC5.1 ROM, microSD supported",
+          "label": "Storage",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "display": {
+          "value": "17.3 cm HD+ 1570*720, maximum 144Hz refresh rate, 256 PPI, 700 nits typical brightness, 900 nits HBM, Corning+LCD panel",
+          "label": "Display",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "camera": {
+          "value": "Rear: 13MP wide angle, f/2.2, AF; Front: 5MP, f/2.2",
+          "label": "Camera",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "chips": {
+          "value": "MediaTek Dimensity 6300, 8-core CPU, ARM Mali-G57 MC2 GPU",
+          "label": "Chips",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "battery": {
+          "value": "7000mAh (Typical), 15W PD fast charge, 15W DCP, wireless charging unsupported",
+          "label": "Battery",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "cellular_network": {
+          "value": "5G NR: n1/n3/n5/n8/n28B/n40/n41/n77/n78; LTE FDD/TDD; WCDMA; GSM; Dual SIM (Nano)",
+          "label": "Cellular Network",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "connectivity": {
+          "value": "Wi-Fi 5, Bluetooth 5.3, USB Type-C, 3.5mm jack, NFC (region dependent)",
+          "label": "Connectivity",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "operating_system": {
+          "value": "realme UI 7.0",
+          "label": "Operating System",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "in_the_box": {
+          "value": "Phone, Charger, USB Data Cable, SIM Ejector Tool, Protective Case, Quick Guide",
+          "label": "In the Box",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        }
+      },
+      "features": [
+        {
+          "text": "* Product size and weight may vary by configuration, manufacturing process and measurements. All specifications are subject to the actual product.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "* The available internal storage may be smaller as part of the internal storage is occupied by software. Actual memory space may change due to application updates, user operations, and other related factors.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "* The operating system information is for reference only, subject to the actual product. If updated, no further notice will be given.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-08-23T10:39:40.651976+00:00"
+    },
+    {
+      "asin": "B0H33NLLTS",
+      "brand": "realme",
+      "model": "NARZO 100x 5G Midnight",
+      "search_name": "realme NARZO 100x 5G Midnight",
+      "model_key": "realme|narzo 100x 5g midnight",
+      "official_url": "https://www.realme.com/in/realme-narzo-100x-5g/specs",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 0.8,
+      "specifications": {
+        "name": {
+          "value": "realme NARZO 100X 5G",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "sku": {
+          "value": "REALMENARZO100X5G-IN",
+          "label": "sku",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "brand": {
+          "value": "realme",
+          "label": "brand",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "description": {
+          "value": "View realme NARZO 100X 5G specifications, including 8000mAh battery, Dimensity 6300, 144Hz display, 50MP camera, storage and 45W fast charge.",
+          "label": "description",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "color_options": {
+          "value": "Flash Orange, Midnight Black",
+          "label": "Color Options",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "size_and_weight": {
+          "value": "about 224g, 8.8mm slim",
+          "label": "Size and Weight",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "storage": {
+          "value": "4GB+64GB, 4GB+128GB, 6GB+128GB, 6GB+256GB",
+          "label": "Storage",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "display": {
+          "value": "17.30 cm, 144Hz, HD+ 1570×720",
+          "label": "Display",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "rear_camera": {
+          "value": "50MP",
+          "label": "Rear Camera",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "front_camera": {
+          "value": "8MP",
+          "label": "Front Camera",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "processor": {
+          "value": "MediaTek Dimensity 6300",
+          "label": "Chipset",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "battery_and_charge": {
+          "value": "8000mAh, SUPERVOOC 45W",
+          "label": "Battery and Charge",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "operating_system": {
+          "value": "ColorOS 16.0",
+          "label": "Operating System",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        }
+      },
+      "features": [
+        {
+          "text": "* Product size and weight may vary by configuration, manufacturing process and measurements. All specifications are subject to the actual product.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "* The available internal storage may be smaller as part of the internal storage is occupied by software. Actual memory space may change due to application updates, user operations, and other related factors.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "* The operating system information is for reference only, subject to the actual product. If updated, no further notice will be given.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-08-23T10:39:52.815719+00:00"
+    },
+    {
+      "asin": "B0G81TPT89",
+      "brand": "samsung",
+      "model": "Galaxy M17 5G Mobile Moonlight",
+      "search_name": "samsung Galaxy M17 5G Mobile Moonlight",
+      "model_key": "samsung|galaxy m17 5g moonlight",
+      "official_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-moonlight-silver-128gb-sm-m176bzsains/",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 0.7167,
+      "specifications": {
+        "name": {
+          "value": "Galaxy M17 5G (4 GB Memory)",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "sku": {
+          "value": "SM-M176BZSA",
+          "label": "sku",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "description": {
+          "value": "Buy Samsung Galaxy M17 5G (Silver) with 4GB memory and 128GB Storage, 16.91 cm Display, 5000mAh battery, 50MP Camera, Super AMOLED & more. Know more visit here.",
+          "label": "description",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "product_ratings": {
+          "value": "0 ( Number of Ratings : 0 )",
+          "label": "Product Ratings",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "segment_s_best_camera": {
+          "value": "50MP No Shake Cam | ±1.5° OIS 1",
+          "label": "Segment's best camera",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "monster_camera": {
+          "value": "Turn moments into Monster memories",
+          "label": "Monster camera",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "segment_s_toughest_display": {
+          "value": "Corning ® Gorilla ® Glass Victus ® | IP54 ~ protection 2",
+          "label": "Segment’s toughest display",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "segment_s_brightest_samoled_display": {
+          "value": "Binge even under the Sun with a truly immersive bright screen",
+          "label": "Segment's brightest sAMOLED display",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "monster_performance": {
+          "value": "5nm Processor | Exynos 1330 Seamless productivity without any lag",
+          "label": "Monster performance",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "5nm_processor_exynos_1330": {
+          "value": "Seamless productivity without any lag",
+          "label": "5nm Processor | Exynos 1330",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "monster_battery": {
+          "value": "25W Fast Charge | 5000mAh Stay charged up and power through your day with massive battery and fast charging 4",
+          "label": "Monster battery",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "25w_fast_charge_5000mah": {
+          "value": "Stay charged up and power through your day with massive battery and fast charging 4",
+          "label": "25W Fast Charge | 5000mAh",
+          "source": "structured_section",
+          "confidence": 86
+        }
+      },
+      "features": [
+        {
+          "text": "Rear Camera - Resolution (Multiple) 50.0 MP + 5.0 MP + 2.0 MP",
+          "source": "li",
+          "confidence": 83,
+          "relevance_score": 3
+        },
+        {
+          "text": "Rear Camera - Resolution (Multiple)",
+          "source": "p",
+          "confidence": 77,
+          "relevance_score": 3
+        },
+        {
+          "text": "Resolution (Main Display) 1080 x 2340 (FHD+)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display) 16M",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display) 90 Hz",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple) F1.8 , F2.2 , F2.4",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution 13.0 MP",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "USB Interface USB Type-C",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Earjack USB Type-C",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Contact us For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Resolution (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Size (Main Display) 16.91 cm full rectangle / 16.45 cm rounded corners",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display) Super AMOLED",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom Digital Zoom up to 10x",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number F2.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - OIS No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution FHD (1920 x 1080)@30fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB) 128",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB) 106.5",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support MicroSD (Up to 2 TB)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Version USB 2.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version Bluetooth v5.3",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Accelerometer, Fingerprint Sensor, Gyro Sensor, Geomagnetic Sensor, Light Sensor, Virtual Proximity Sensing",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm) 164.4 x 77.9 x 7.5",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Weight (g) 192",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playback Time (Hours) Up to 18",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical) 5000",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution UHD 4K (3840 x 2160)@30fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth® Hearing Aid Support Android Audio Streaming for Hearing Aid(ASHA)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Size (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - OIS",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Interface",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth v5.3",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playback Time (Hours)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth® Hearing Aid Support",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-08-23T10:40:31.788092+00:00"
+    },
+    {
+      "asin": "B0H6C1F3RC",
+      "brand": "realme",
+      "model": "P4R 5G Smartphone",
+      "search_name": "realme P4R 5G Smartphone",
+      "model_key": "realme|p4r 5g",
+      "official_url": "https://www.realme.com/in/realme-p4r-5g/specs",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 0.75,
+      "specifications": {
+        "name": {
+          "value": "realme P4R 5G",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "model": {
+          "value": "P4R 5G",
+          "label": "model",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "sku": {
+          "value": "REALMEP4R5G-IN",
+          "label": "sku",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "brand": {
+          "value": "realme",
+          "label": "brand",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "description": {
+          "value": "realme P4R 5G features a 17.30 cm 144Hz display, MediaTek Dimensity 6300 chipset, 4GB+128GB storage, 50MP rear camera, 8000mAh battery with 45W SUPERVOOC, and 5G connectivity.",
+          "label": "description",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "size_and_weight": {
+          "value": "Height about 16.64 cm, Width about 7.82 cm, Thickness about 0.88 cm, Weight about 224 g",
+          "label": "Size and Weight",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "storage": {
+          "value": "4GB+128GB, 6GB+128GB, 6GB+256GB, 4GB+64GB; LPDDR4X RAM; UFS 2.2 ROM; microSD supported",
+          "label": "Storage",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "display": {
+          "value": "17.30 cm LCD, HD+ 1570×720 pixels, maximum 144Hz refresh rate, 1200 nits HBM brightness, 254 PPI",
+          "label": "Display",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "rear_camera": {
+          "value": "50MP wide angle, f/1.8, FOV 75°, 5P lens, AF supported",
+          "label": "Rear Camera",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "front_camera": {
+          "value": "8MP, f/2.0, FOV 80°, 4P lens",
+          "label": "Front Camera",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "processor": {
+          "value": "MediaTek Dimensity 6300, 8-core CPU, ARM Mali-G57 MC2 GPU",
+          "label": "Chipset",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "battery_and_charging": {
+          "value": "8000mAh (Typical), 7780mAh (Rated); SUPERVOOC 45W fast charge; wireless charging unsupported",
+          "label": "Battery and Charging",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "cellular_network": {
+          "value": "5G NR: n1/n3/n5/n8/n28B/n40/n41/n77/n78; LTE FDD: Band 1/3/5/8/28B; LTE TDD: Band 40/41; WCDMA: Band 1/5/8; GSM: 850/900/1800MHz",
+          "label": "Cellular Network",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "connectivity": {
+          "value": "Wi-Fi 5 (802.11ac), Bluetooth 5.3, USB Type-C, Type-C headphones supported",
+          "label": "Connectivity",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "operating_system": {
+          "value": "ColorOS 16.0, realme UI 7.0 based on Android 16",
+          "label": "Operating System",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "video": {
+          "value": "Rear 1080P video 30fps, 720P video 30fps, dual-view video and time-lapse",
+          "label": "Video",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "biometrics": {
+          "value": "Side capacitive fingerprint, facial recognition",
+          "label": "Biometrics",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "sensors": {
+          "value": "Proximity sensor, ambient light sensor, e-compass, accelerometer",
+          "label": "Sensors",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        }
+      },
+      "features": [
+        {
+          "text": "* Product size and weight may vary by configuration, manufacturing process and measurements. All specifications are subject to the actual product.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "* The available internal storage may be smaller as part of the internal storage is occupied by software. Actual memory space may change due to application updates, user operations, and other related factors.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "* The operating system information is for reference only, subject to the actual product. If updated, no further notice will be given.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "manual_review",
+        "reason": "Evidence was extracted, but page identity requires review"
+      },
+      "saved_at": "2026-08-23T10:40:59.858643+00:00"
+    },
+    {
+      "asin": "B0GTRM9NQ7",
+      "brand": "realme",
+      "model": "narzo 100 Lite 5G Thunder",
+      "search_name": "realme narzo 100 Lite 5G Thunder",
+      "model_key": "realme|narzo 100 lite 5g thunder",
+      "official_url": "https://www.realme.com/in/realme-narzo-100-lite-5g/specs",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 0.8333,
+      "specifications": {
+        "name": {
+          "value": "realme NARZO 100 Lite 5G",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "model": {
+          "value": "NARZO 100 Lite 5G",
+          "label": "model",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "sku": {
+          "value": "REALMENARZO100LITE5G-IN-SPECS",
+          "label": "sku",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "brand": {
+          "value": "realme",
+          "label": "brand",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "description": {
+          "value": "realme NARZO 100 Lite 5G features a 17.3 cm 144Hz display, MediaTek Dimensity 6300 chipset, 4GB+64GB storage, a 7000mAh battery with 15W PD, and 5G connectivity.",
+          "label": "description",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "size_and_weight": {
+          "value": "Height about 16.63cm, Width about 7.81cm, Thickness about 0.84cm, Weight about 212g",
+          "label": "Size and Weight",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "storage": {
+          "value": "4GB+64GB, 4GB+128GB, 6GB+128GB; LPDDR4X RAM, eMMC5.1 ROM, microSD supported",
+          "label": "Storage",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "display": {
+          "value": "17.3 cm HD+ 1570*720, maximum 144Hz refresh rate, 256 PPI, 700 nits typical brightness, 900 nits HBM, Corning+LCD panel, Panda-MN228 cover glass",
+          "label": "Display",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "rear_camera": {
+          "value": "13MP wide angle, f/2.2, FOV 77°, 4P lens, AF supported",
+          "label": "Rear Camera",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "front_camera": {
+          "value": "5MP, f/2.2, FOV 78°, 3P lens",
+          "label": "Front Camera",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "chips": {
+          "value": "MediaTek Dimensity 6300, 8-core CPU, ARM Mali-G57 MC2@1072MHz GPU",
+          "label": "Chips",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "battery_and_charging": {
+          "value": "7000mAh (Typical), 15W PD, 15W DCP, wireless charging unsupported",
+          "label": "Battery and Charging",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "cellular_network": {
+          "value": "5G NR: n1/n3/n5/n8/n28B/n40/n41/n77/n78, 4G LTE, GSM, WCDMA",
+          "label": "Cellular Network",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "connectivity": {
+          "value": "Wi-Fi 5 (802.11ac), Bluetooth 5.3, USB Type-C, 3.5mm jack, NFC (region dependent)",
+          "label": "Connectivity",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        },
+        "operating_system": {
+          "value": "realme UI 7.0",
+          "label": "Operating System",
+          "source": "json_ld_additional_property",
+          "confidence": 94
+        }
+      },
+      "features": [
+        {
+          "text": "* Product size and weight may vary by configuration, manufacturing process and measurements. All specifications are subject to the actual product.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "* The available internal storage may be smaller as part of the internal storage is occupied by software. Actual memory space may change due to application updates, user operations, and other related factors.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "* The operating system information is for reference only, subject to the actual product. If updated, no further notice will be given.",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-08-23T16:33:48.773598+00:00"
+    },
+    {
+      "asin": "B0G81P4MPG",
+      "brand": "samsung",
+      "model": "Galaxy M17 5G Mobile Sapphire",
+      "search_name": "samsung Galaxy M17 5G Mobile Sapphire",
+      "model_key": "samsung|galaxy m17 5g sapphire",
+      "official_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 0.6667,
+      "specifications": {
+        "name": {
+          "value": "Galaxy M17 5G (4 GB Memory)",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "sku": {
+          "value": "SM-M176BZKA",
+          "label": "sku",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "description": {
+          "value": "Buy Samsung Galaxy M17 5G (Black) with 4GB memory and 128GB Storage, 16.91 cm Display, 5000mAh battery, 50MP Camera, Super AMOLED & more. Know more visit here.",
+          "label": "description",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "product_ratings": {
+          "value": "0 ( Number of Ratings : 0 )",
+          "label": "Product Ratings",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "segment_s_best_camera": {
+          "value": "50MP No Shake Cam | ±1.5° OIS 1",
+          "label": "Segment's best camera",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "monster_camera": {
+          "value": "Turn moments into Monster memories",
+          "label": "Monster camera",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "segment_s_toughest_display": {
+          "value": "Corning ® Gorilla ® Glass Victus ® | IP54 ~ protection 2",
+          "label": "Segment’s toughest display",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "segment_s_brightest_samoled_display": {
+          "value": "Binge even under the Sun with a truly immersive bright screen",
+          "label": "Segment's brightest sAMOLED display",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "monster_performance": {
+          "value": "5nm Processor | Exynos 1330 Seamless productivity without any lag",
+          "label": "Monster performance",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "5nm_processor_exynos_1330": {
+          "value": "Seamless productivity without any lag",
+          "label": "5nm Processor | Exynos 1330",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "monster_battery": {
+          "value": "25W Fast Charge | 5000mAh Stay charged up and power through your day with massive battery and fast charging 4",
+          "label": "Monster battery",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "25w_fast_charge_5000mah": {
+          "value": "Stay charged up and power through your day with massive battery and fast charging 4",
+          "label": "25W Fast Charge | 5000mAh",
+          "source": "structured_section",
+          "confidence": 86
+        }
+      },
+      "features": [
+        {
+          "text": "Rear Camera - Resolution (Multiple) 50.0 MP + 5.0 MP + 2.0 MP",
+          "source": "li",
+          "confidence": 83,
+          "relevance_score": 3
+        },
+        {
+          "text": "Rear Camera - Resolution (Multiple)",
+          "source": "p",
+          "confidence": 77,
+          "relevance_score": 3
+        },
+        {
+          "text": "Resolution (Main Display) 1080 x 2340 (FHD+)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display) 16M",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display) 90 Hz",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple) F1.8 , F2.2 , F2.4",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution 13.0 MP",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "USB Interface USB Type-C",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Earjack USB Type-C",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Contact us For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Resolution (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Size (Main Display) 16.91 cm full rectangle / 16.45 cm rounded corners",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display) Super AMOLED",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom Digital Zoom up to 10x",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number F2.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - OIS No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution FHD (1920 x 1080)@30fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB) 128",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB) 106.5",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support MicroSD (Up to 2 TB)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Version USB 2.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version Bluetooth v5.3",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Accelerometer, Fingerprint Sensor, Gyro Sensor, Geomagnetic Sensor, Light Sensor, Virtual Proximity Sensing",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm) 164.4 x 77.9 x 7.5",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Weight (g) 192",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playback Time (Hours) Up to 18",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical) 5000",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution UHD 4K (3840 x 2160)@30fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth® Hearing Aid Support Android Audio Streaming for Hearing Aid(ASHA)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Size (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - OIS",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Interface",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth v5.3",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playback Time (Hours)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth® Hearing Aid Support",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "manual_review",
+        "reason": "Evidence was extracted, but page identity requires review"
+      },
+      "saved_at": "2026-08-23T16:35:28.825477+00:00"
+    },
+    {
+      "asin": null,
+      "brand": "Samsung",
+      "model": "Galaxy M36 5G Mobile Velvet",
+      "search_name": "Samsung Galaxy M36 5G Mobile Velvet",
+      "model_key": "samsung|galaxy m36 5g velvet",
+      "official_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m36-5g-velvet-black-128gb-sm-m366bzkbins/",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 0.7167,
+      "specifications": {
+        "product_ratings": {
+          "value": "0 ( Number of Ratings : 0 )",
+          "label": "Product Ratings",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "capture_your_monster_story": {
+          "value": "Sharp, crisp photos and videos with the advanced 50MP OIS Cam",
+          "label": "Capture your Monster story",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "monster_4k_video_recording": {
+          "value": "Monster-level clarity with 4K recording on both Front and Rear Camera",
+          "label": "Monster 4K video recording",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "create_your_monster_vision": {
+          "value": "Enhanced AI-powered photo editing for your next Monster adventure.",
+          "label": "Create your Monster vision",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "monster_power_that_keeps_going": {
+          "value": "Fast charging that helps you be on-the-go in no time",
+          "label": "Monster power that keeps going",
+          "source": "structured_section",
+          "confidence": 84
+        }
+      },
+      "features": [
+        {
+          "text": "Rear Camera - Resolution (Multiple) 50.0 MP + 8.0 MP + 2.0 MP",
+          "source": "li",
+          "confidence": 83,
+          "relevance_score": 3
+        },
+        {
+          "text": "Rear Camera - Resolution (Multiple)",
+          "source": "p",
+          "confidence": 77,
+          "relevance_score": 3
+        },
+        {
+          "text": "Resolution (Main Display) 1080 x 2340 (FHD+)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display) 16M",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display) 120 Hz",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple) F1.8 , F2.2 , F2.4",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution 13.0 MP",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "USB Interface USB Type-C",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Earjack USB Type-C",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Contact us For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Resolution (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Processor 2.4GHz, 2GHz",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Weight (g) 197",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Size (Main Display) 16.91 cm full rectangle / 16.45 cm rounded corners",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display) Super AMOLED",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom Digital Zoom up to 10x",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number F2.2",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - OIS No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution UHD 4K (3840 x 2160)@30fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB) 128",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB) 103.5",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support MicroSD (Up to 2 TB)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Version USB 2.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version Bluetooth v5.3",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Accelerometer, Fingerprint Sensor, Gyro Sensor, Geomagnetic Sensor, Light Sensor, Virtual Proximity Sensing",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm) 164.4 x 77.9 x 7.7",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playback Time (Hours) Up to 17",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical) 5000",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution UHD 4K (3840 x 2160)@30fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth® Hearing Aid Support Android Audio Streaming for Hearing Aid(ASHA)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Size (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - OIS",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Interface",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth v5.3",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playback Time (Hours)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth® Hearing Aid Support",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "manual_review",
+        "reason": "Evidence was extracted, but page identity requires review"
+      },
+      "saved_at": "2026-08-23T16:59:49.030687+00:00"
+    },
+    {
+      "asin": "B0DYKC512N",
+      "brand": "Samsung",
+      "model": "Galaxy F06 5G Bahama",
+      "search_name": "Samsung Galaxy F06 5G Bahama",
+      "model_key": "samsung|galaxy f06 5g bahama",
+      "official_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-bahama-blue-64gb-sm-e066bzbdins/",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 0.8,
+      "specifications": {
+        "name": {
+          "value": "Galaxy F06 5G (4 GB Memory)",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "sku": {
+          "value": "SM-E066BZBD",
+          "label": "sku",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "description": {
+          "value": "12 5G Bands, Supports all networks MediaTek 6300 Processor 25 W Fast Charging",
+          "label": "description",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "product_ratings": {
+          "value": "1.0 ( Number of Ratings : 1 )",
+          "label": "Product Ratings",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "stylish_new_design_two_new_colours": {
+          "value": "A perfect blend of style and elegance in Bahama Blue and Lit Violet colours. Designed to make a statement wherever you go",
+          "label": "Stylish new design. Two new colours",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "superfast_performance": {
+          "value": "Switch between apps, handle work, and play games smoothly with the power of MediaTek Dimensity 6300",
+          "label": "Superfast performance",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "segment_s_only_smartphone_with_25w_fast_charging": {
+          "value": "Stream, game, and stay connected all day with a 5000 mAh battery that lasts",
+          "label": "Segment's only* smartphone with 25W* fast charging",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "great_portraits_stunning_selfies": {
+          "value": "Turn every selfie into a showstopper and make your pictures social ready with 50 MP camera and 8 MP selfie camera",
+          "label": "Great portraits. Stunning selfies",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "your_data_fully_secured": {
+          "value": "Unlock instantly with the fast and secure advanced fingerprint sensor",
+          "label": "Your data. Fully secured",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "quick_share_large_files_instantly": {
+          "value": "Share large files instantly to multiple devices without the need for cables or internet. Fast and easy!",
+          "label": "Quick Share large files instantly",
+          "source": "structured_section",
+          "confidence": 84
+        }
+      },
+      "features": [
+        {
+          "text": "Rear Camera - Resolution (Multiple) 50.0 MP + 2.0 MP",
+          "source": "li",
+          "confidence": 83,
+          "relevance_score": 3
+        },
+        {
+          "text": "Rear Camera - Resolution (Multiple)",
+          "source": "p",
+          "confidence": 77,
+          "relevance_score": 3
+        },
+        {
+          "text": "Resolution (Main Display) 720 x 1600 (HD+)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display) 16M",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display) 90 Hz",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple) F1.8 , F2.4",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution 8.0 MP",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "USB Interface USB Type-C",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Contact us For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Resolution (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Processor 2.4GHz, 2GHz",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Weight (g) 191",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Size (Main Display) 17.13 cm full rectangle / 16.73 cm rounded corners",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display) PLS LCD",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom Digital Zoom up to 10x",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number F2.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - OIS No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution FHD (1920 x 1080)@30fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB) 64",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB) 44.5",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support MicroSD (Up to 1.5 TB)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Version USB 2.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version Bluetooth v5.3",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Accelerometer, Fingerprint Sensor, Gyro Sensor, Geomagnetic Sensor, Light Sensor, Proximity Sensor",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm) 167.4 x 77.4 x 8.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical) 5000",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution FHD (1920 x 1080)@60fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Size (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - OIS",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Interface",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth v5.3",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-08-23T17:00:29.201179+00:00"
+    },
+    {
+      "asin": "B0DYP4NYYJ",
+      "brand": "Samsung",
+      "model": "Galaxy F06 5G",
+      "search_name": "Samsung Galaxy F06 5G",
+      "model_key": "samsung|galaxy f06 5g",
+      "official_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-blue-128gb-sm-e066bzbgins/",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 0.925,
+      "specifications": {
+        "name": {
+          "value": "Galaxy F06 5G (4 GB Memory)",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "sku": {
+          "value": "SM-E066BZBG",
+          "label": "sku",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "description": {
+          "value": "12 5G Bands, Supports all networks MediaTek 6300 Processor 25 W Fast Charging",
+          "label": "description",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "product_ratings": {
+          "value": "1.0 ( Number of Ratings : 1 )",
+          "label": "Product Ratings",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "stylish_new_design_two_new_colours": {
+          "value": "A perfect blend of style and elegance in Bahama Blue and Lit Violet colours. Designed to make a statement wherever you go",
+          "label": "Stylish new design. Two new colours",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "superfast_performance": {
+          "value": "Switch between apps, handle work, and play games smoothly with the power of MediaTek Dimensity 6300",
+          "label": "Superfast performance",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "segment_s_only_smartphone_with_25w_fast_charging": {
+          "value": "Stream, game, and stay connected all day with a 5000 mAh battery that lasts",
+          "label": "Segment's only* smartphone with 25W* fast charging",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "great_portraits_stunning_selfies": {
+          "value": "Turn every selfie into a showstopper and make your pictures social ready with 50 MP camera and 8 MP selfie camera",
+          "label": "Great portraits. Stunning selfies",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "your_data_fully_secured": {
+          "value": "Unlock instantly with the fast and secure advanced fingerprint sensor",
+          "label": "Your data. Fully secured",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "quick_share_large_files_instantly": {
+          "value": "Share large files instantly to multiple devices without the need for cables or internet. Fast and easy!",
+          "label": "Quick Share large files instantly",
+          "source": "structured_section",
+          "confidence": 84
+        }
+      },
+      "features": [
+        {
+          "text": "Rear Camera - Resolution (Multiple) 50.0 MP + 2.0 MP",
+          "source": "li",
+          "confidence": 83,
+          "relevance_score": 3
+        },
+        {
+          "text": "Rear Camera - Resolution (Multiple)",
+          "source": "p",
+          "confidence": 77,
+          "relevance_score": 3
+        },
+        {
+          "text": "Resolution (Main Display) 720 x 1600 (HD+)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display) 16M",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display) 90 Hz",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple) F1.8 , F2.4",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution 8.0 MP",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "USB Interface USB Type-C",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Contact us For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Resolution (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Weight (g) 191",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Size (Main Display) 17.13 cm full rectangle / 16.73 cm rounded corners",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display) PLS LCD",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom Digital Zoom up to 10x",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number F2.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - OIS No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution FHD (1920 x 1080)@30fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB) 128",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB) 108.6",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support MicroSD (Up to 1.5 TB)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Version USB 2.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version Bluetooth v5.3",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Accelerometer, Fingerprint Sensor, Gyro Sensor, Geomagnetic Sensor, Light Sensor, Proximity Sensor",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm) 167.4 x 77.4 x 8.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical) 5000",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution FHD (1920 x 1080)@60fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Size (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - OIS",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Interface",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth v5.3",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-08-23T17:01:14.851682+00:00"
+    },
+    {
+      "asin": "B0FLZ517QL",
+      "brand": "Samsung",
+      "model": "Galaxy F36 5G",
+      "search_name": "Samsung Galaxy F36 5G",
+      "model_key": "samsung|galaxy f36 5g",
+      "official_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f36-5g-red-128gb-sm-e366bzrdins/",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 1.0,
+      "specifications": {
+        "product_ratings": {
+          "value": "0 ( Number of Ratings : 0 )",
+          "label": "Product Ratings",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "click_hi_fai": {
+          "value": "Advanced 50MP OIS Triple Camera",
+          "label": "Click Hi-FAI",
+          "source": "structured_section",
+          "confidence": 88
+        },
+        "record_hi_fai": {
+          "value": "4K recording on both front and rear camera",
+          "label": "Record Hi-FAI",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "binge_hi_fai": {
+          "value": "Bright and sharp display even in the sun",
+          "label": "Binge Hi-FAI",
+          "source": "structured_section",
+          "confidence": 84
+        }
+      },
+      "features": [
+        {
+          "text": "Rear Camera - Resolution (Multiple) 50.0 MP + 8.0 MP + 2.0 MP",
+          "source": "li",
+          "confidence": 83,
+          "relevance_score": 3
+        },
+        {
+          "text": "Rear Camera - Resolution (Multiple)",
+          "source": "p",
+          "confidence": 77,
+          "relevance_score": 3
+        },
+        {
+          "text": "Resolution (Main Display) 1080 x 2340 (FHD+)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display) 16M",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display) 120 Hz",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple) F1.8 , F2.2 , F2.4",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution 13.0 MP",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "USB Interface USB Type-C",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Earjack USB Type-C",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Security Update Period (Valid until) 31 December 2031",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Contact us For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Resolution (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Security Update Period (Valid until)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Weight (g) 197",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Size (Main Display) 16.91 cm full rectangle / 16.45 cm rounded corners",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display) Super AMOLED",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom Digital Zoom up to 10x",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number F2.2",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - OIS No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution UHD 4K (3840 x 2160)@30fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB) 128",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB) 104.2",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support MicroSD (Up to 2 TB)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Version USB 2.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version Bluetooth v5.3",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Accelerometer, Fingerprint Sensor, Gyro Sensor, Geomagnetic Sensor, Light Sensor, Virtual Proximity Sensing",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm) 164.4 x 77.9 x 7.7",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playback Time (Hours) Up to 17",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical) 5000",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution UHD 4K (3840 x 2160)@30fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth® Hearing Aid Support Android Audio Streaming for Hearing Aid(ASHA)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Size (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - OIS",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Interface",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth v5.3",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playback Time (Hours)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth® Hearing Aid Support",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-08-24T14:51:08.716356+00:00"
+    },
+    {
+      "asin": "B0FT8H8JZ8",
+      "brand": "Samsung",
+      "model": "Galaxy F36 5G Violet",
+      "search_name": "Samsung Galaxy F36 5G Violet",
+      "model_key": "samsung|galaxy f36 5g violet",
+      "official_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f36-5g-luxe-violet-128gb-sm-e366bzvbins/",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 1.0,
+      "specifications": {
+        "product_ratings": {
+          "value": "0 ( Number of Ratings : 0 )",
+          "label": "Product Ratings",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "click_hi_fai": {
+          "value": "Advanced 50MP OIS Triple Camera",
+          "label": "Click Hi-FAI",
+          "source": "structured_section",
+          "confidence": 88
+        },
+        "record_hi_fai": {
+          "value": "4K recording on both front and rear camera",
+          "label": "Record Hi-FAI",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "binge_hi_fai": {
+          "value": "Bright and sharp display even in the sun",
+          "label": "Binge Hi-FAI",
+          "source": "structured_section",
+          "confidence": 84
+        }
+      },
+      "features": [
+        {
+          "text": "Rear Camera - Resolution (Multiple) 50.0 MP + 8.0 MP + 2.0 MP",
+          "source": "li",
+          "confidence": 83,
+          "relevance_score": 3
+        },
+        {
+          "text": "Rear Camera - Resolution (Multiple)",
+          "source": "p",
+          "confidence": 77,
+          "relevance_score": 3
+        },
+        {
+          "text": "Resolution (Main Display) 1080 x 2340 (FHD+)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display) 16M",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display) 120 Hz",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple) F1.8 , F2.2 , F2.4",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution 13.0 MP",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "USB Interface USB Type-C",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Earjack USB Type-C",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Security Update Period (Valid until) 31 December 2031",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Contact us For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Resolution (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Security Update Period (Valid until)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Weight (g) 197",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Size (Main Display) 16.91 cm full rectangle / 16.45 cm rounded corners",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display) Super AMOLED",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom Digital Zoom up to 10x",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number F2.2",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - OIS No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution UHD 4K (3840 x 2160)@30fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB) 128",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB) 104.2",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support MicroSD (Up to 2 TB)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Version USB 2.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version Bluetooth v5.3",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Accelerometer, Fingerprint Sensor, Gyro Sensor, Geomagnetic Sensor, Light Sensor, Virtual Proximity Sensing",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm) 164.4 x 77.9 x 7.7",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playback Time (Hours) Up to 17",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical) 5000",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution UHD 4K (3840 x 2160)@30fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth® Hearing Aid Support Android Audio Streaming for Hearing Aid(ASHA)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Size (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - OIS",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Interface",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth v5.3",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playback Time (Hours)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth® Hearing Aid Support",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-08-24T14:51:43.413871+00:00"
+    }
+  ]
+}
