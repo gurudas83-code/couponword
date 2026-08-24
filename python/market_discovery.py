@@ -1517,8 +1517,50 @@ def category_accessory_gate(
         r"\bleather\s+case\b",
         r"\bcharging\s+cable\b",
         r"\bcharger\b",
+        r"\bpower\s*bank\b",
+        r"\bportable\s+charger\b",
+        r"\btravel\s+adap(?:ter|tor)\b",
+        r"\bwall\s+adap(?:ter|tor)\b",
+        r"\busb\s+adap(?:ter|tor)\b",
+        r"\bwireless\s+charger\b",
+        r"\bcharging\s+stand\b",
+        r"\bcharging\s+pad\b",
         r"\bphone\s+holder\b",
         r"\bmobile\s+holder\b",
+
+        # Additional accessory noise commonly returned by
+        # brand-scoped smartphone marketplace searches.
+        r"\botg\b",
+        r"\botg\s+(?:cable|adapter|adaptor|converter)\b",
+        r"\bconverter\b",
+        r"\bconnector\b",
+        r"\bpouch\b",
+        r"\bmobile\s+pouch\b",
+        r"\bphone\s+pouch\b",
+        r"\bskin\b",
+        r"\bmobile\s+skin\b",
+        r"\bphone\s+skin\b",
+        r"\bback\s+skin\b",
+        r"\bhard\s+back\b",
+        r"\bhard\s+case\b",
+        r"\bmagnetic\s+case\b",
+        r"\bbumper\s+case\b",
+        r"\bsilicone\s+case\b",
+        r"\bclear\s+case\b",
+        r"\bprotective\s+case\b",
+        # Obvious adjacent electronics that can leak into broad
+        # marketplace searches, especially brand-only/battery queries.
+        r"\bearbuds?\b",
+        r"\btws\b",
+        r"\bneckband\b",
+        r"\bheadphones?\b",
+        r"\bsmartwatch\b",
+        r"\bsmart\s+watch\b",
+        r"\btablet\b",
+        r"\btelevision\b",
+        r"\bsmart\s+tv\b",
+        r"\brefrigerator\b",
+        r"\bwashing\s+machine\b",
     )
 
     for pattern in accessory_patterns:
@@ -1622,10 +1664,16 @@ def discovery_variant_gate(
 def discover_market(
     user_query: str,
     max_candidates: int = 20,
+    live_fast: bool = False,
 ) -> dict[str, Any]:
     intent = parse_query(user_query)
     category = intent.get("category")
     queries = build_discovery_queries(user_query, intent)
+
+    # Visitor requests must keep discovery latency bounded.
+    # Deep/offline mode still uses the full discovery query set.
+    if live_fast and len(queries) > 2:
+        queries = queries[:2]
 
     api_key = os.environ.get("TAVILY_API_KEY")
 
@@ -1710,11 +1758,71 @@ def discover_market(
 
     ranked: list[dict[str, Any]] = []
 
-    requested_brands = [
+    # ---------------------------------------------------------
+    # EXACT NAMED-MODEL DISCOVERY GATE
+    # ---------------------------------------------------------
+    # When the shopper explicitly names an alphanumeric model,
+    # sibling models must be removed BEFORE ranking/truncation.
+    #
+    # Examples:
+    # Samsung Galaxy F36 5G -> require F36
+    # Motorola G86 -> require G86
+    #
+    # Generic queries such as "best phone under 20000" or
+    # "8/128 phone under 20k" remain unrestricted.
+    query_key_for_model = normalize_key(user_query)
+
+    exact_query_model_tokens = {
+        token
+        for token in query_key_for_model.split()
+        if re.search(r"[a-z]", token)
+        and re.search(r"\d", token)
+        and token not in {"5g", "4g", "3g", "2g"}
+    }
+
+    # Brand semantics must distinguish REQUIRED, PREFERRED and AVOIDED.
+    # `intent["brands"]` is detection metadata and includes all mentioned
+    # brands, so treating it as a hard filter breaks queries such as
+    # "Samsung preferred" and "Samsung nahi chahiye".
+    mentioned_brands = [
         normalize_key(brand)
         for brand in intent.get("brands", [])
         if normalize_key(brand)
     ]
+    must_markers = {
+        normalize_key(x)
+        for x in intent.get("must_have", [])
+        if normalize_key(x)
+    }
+    preferred_markers = {
+        normalize_key(x)
+        for x in intent.get("preferred", [])
+        if normalize_key(x)
+    }
+    avoid_markers = {
+        normalize_key(x)
+        for x in intent.get("avoid", [])
+        if normalize_key(x)
+    }
+
+    required_brands = []
+    avoided_brands = []
+
+    for brand in mentioned_brands:
+        marker = normalize_key(f"brand_{brand}")
+
+        if marker in avoid_markers:
+            avoided_brands.append(brand)
+            continue
+
+        if marker in must_markers:
+            required_brands.append(brand)
+            continue
+
+        # A bare brand query (e.g. "Samsung phone under 25k") is a
+        # brand-scoped request. An explicitly preferred brand remains soft.
+        if marker not in preferred_markers:
+            required_brands.append(brand)
 
     for item in raw:
         title = compact_product_title(item["title"])
@@ -1722,19 +1830,36 @@ def discover_market(
         if is_generic_listing_title(title):
             continue
 
-        # Explicit shopper brand is a hard discovery constraint.
-        # Example: "Samsung 55 inch TV" must not admit Sony/LG/Xiaomi.
-        if requested_brands:
-            normalized_title = normalize_key(title)
+        normalized_title = normalize_key(title)
 
-            if not any(
-                re.search(
-                    rf"(?:^|\s){re.escape(brand)}(?:\s|$)",
-                    normalized_title,
-                )
-                for brand in requested_brands
-            ):
+        # Exact named-model queries must not allow sibling models to
+        # consume the limited candidate slots.
+        if exact_query_model_tokens:
+            title_tokens = set(normalized_title.split())
+
+            if not exact_query_model_tokens.issubset(title_tokens):
                 continue
+
+        # Explicit/bare brand scope is hard. Preferred brands are ranked
+        # downstream and therefore must not narrow discovery.
+        if required_brands and not any(
+            re.search(
+                rf"(?:^|\s){re.escape(brand)}(?:\s|$)",
+                normalized_title,
+            )
+            for brand in required_brands
+        ):
+            continue
+
+        # Explicit negative brand semantics are a hard exclusion.
+        if avoided_brands and any(
+            re.search(
+                rf"(?:^|\s){re.escape(brand)}(?:\s|$)",
+                normalized_title,
+            )
+            for brand in avoided_brands
+        ):
+            continue
 
         accessory_gate = category_accessory_gate(
             title,

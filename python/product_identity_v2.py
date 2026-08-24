@@ -121,6 +121,17 @@ def detect_brand(product: dict[str, Any]) -> str:
     title = normalize_spaces(product.get("title"))
     title_lower = title.lower()
 
+    # Canonical Samsung Galaxy-family identity.
+    # Commerce listings sometimes omit "Samsung" and begin directly
+    # with Galaxy A/M/F/S/Z. These are Samsung smartphone identities,
+    # not a separate "Galaxy" manufacturer.
+    if re.search(
+        r"\\bgalaxy\\s+(?:a|m|f|s|z)\\s*\\d",
+        title_lower,
+        flags=re.IGNORECASE,
+    ):
+        return "Samsung"
+
     for brand in sorted(KNOWN_BRANDS, key=len, reverse=True):
         if brand.lower() in title_lower:
             return brand

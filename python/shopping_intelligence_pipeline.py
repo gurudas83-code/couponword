@@ -24,6 +24,7 @@ from __future__ import annotations
 import time
 
 import argparse
+import ast
 import inspect
 import json
 import os
@@ -51,6 +52,10 @@ from official_source_resolver import (
 )
 from official_spec_extractor import extract_one
 from product_fit_signal_builder import build_fit_signals
+from product_evidence_store import (
+    find_verified_evidence,
+    save_verified_evidence,
+)
 from product_identity_v2 import build_identity
 from retail_price_evidence import build_price_evidence
 from resolver_engine import compare_identity
@@ -174,6 +179,16 @@ def canonical_brand_from_title(title: str) -> str:
         title.lower(),
     ).strip()
 
+    # Samsung Galaxy smartphone families are sometimes listed without
+    # the manufacturer name. Treat Galaxy A/M/F/S/Z model families as
+    # Samsung, not as a standalone "Galaxy" brand.
+    if re.search(
+        r"\bgalaxy\s+(?:a|m|f|s|z)\s*\d",
+        normalized_title,
+        flags=re.IGNORECASE,
+    ):
+        return "Samsung"
+
     # Retailers/platforms may appear in search-result titles but
     # must never become the product manufacturer/brand.
     non_product_brand_keys = {
@@ -245,6 +260,18 @@ def repair_identity(
 
     brand = clean(repaired.get("brand"))
     brand_key = normalize_brand(brand)
+
+    if (
+        brand_key == "galaxy"
+        or re.search(
+            r"\bgalaxy\s+(?:a|m|f|s|z)\s*\d",
+            cleaned_title,
+            flags=re.IGNORECASE,
+        )
+    ):
+        repaired["brand"] = "Samsung"
+        brand = "Samsung"
+        brand_key = normalize_brand(brand)
 
     if brand_key in GENERIC_BRANDS or not brand:
         known = canonical_brand_from_title(cleaned_title)
@@ -650,6 +677,73 @@ def extraction_is_usable(
 
 
 
+
+def normalize_feature_corpus(values: Any) -> list[str]:
+    """
+    Canonical runtime feature representation.
+
+    Rules:
+    - structured evidence dict -> text/value/label only
+    - Python-stringified evidence dict -> safely parse, then text only
+    - metadata such as confidence/source/relevance_score is discarded
+    - blank values are removed
+    - case-insensitive duplicates are removed
+    - output is always list[str]
+    """
+    if not isinstance(values, list):
+        values = [values] if values not in (None, "") else []
+
+    output: list[str] = []
+    seen: set[str] = set()
+
+    for item in values:
+        value = ""
+
+        if isinstance(item, dict):
+            for key in ("text", "value", "label"):
+                candidate = item.get(key)
+
+                if candidate not in (None, ""):
+                    value = clean(candidate)
+                    break
+
+        elif isinstance(item, str):
+            stripped = item.strip()
+            parsed = None
+
+            if stripped.startswith("{") and stripped.endswith("}"):
+                try:
+                    parsed = ast.literal_eval(stripped)
+                except (ValueError, SyntaxError):
+                    parsed = None
+
+            if isinstance(parsed, dict):
+                for key in ("text", "value", "label"):
+                    candidate = parsed.get(key)
+
+                    if candidate not in (None, ""):
+                        value = clean(candidate)
+                        break
+            else:
+                value = clean(item)
+
+        else:
+            value = clean(item)
+
+        if not value:
+            continue
+
+        key = value.casefold()
+
+        if key in seen:
+            continue
+
+        seen.add(key)
+        output.append(value)
+
+    return output
+
+
 def enrich_priority_evidence(
     profile: dict[str, Any],
     candidate: dict[str, Any],
@@ -685,8 +779,36 @@ def enrich_priority_evidence(
 
     evidence_parts: list[str] = []
 
+    def evidence_text(value: Any) -> str:
+        """
+        Convert verified evidence to human-readable text only.
+
+        Extraction features may be structured dictionaries such as:
+        {
+            "text": "Battery Capacity (mAh, Typical) 5000",
+            "source": "li",
+            "confidence": 77,
+            "relevance_score": 1,
+        }
+
+        Metadata must never be converted into product evidence.
+        """
+        if value in (None, ""):
+            return ""
+
+        if isinstance(value, dict):
+            for key in ("text", "value", "label"):
+                candidate = value.get(key)
+                if candidate not in (None, ""):
+                    return clean(candidate)
+
+            return ""
+
+        return clean(value)
+
     def add_evidence(value: Any) -> None:
-        value = clean(value)
+        value = evidence_text(value)
+
         if value and value not in evidence_parts:
             evidence_parts.append(value)
 
@@ -704,7 +826,11 @@ def enrich_priority_evidence(
     if isinstance(specifications, dict):
         for key, value in specifications.items():
             key_text = clean(key)
-            value_text = clean(value)
+
+            # Structured specification objects must contribute only
+            # their human-readable value/text/label. Metadata such as
+            # source/confidence must never enter the feature corpus.
+            value_text = evidence_text(value)
 
             if key_text and value_text:
                 attributes.setdefault(key_text, value_text)
@@ -716,7 +842,7 @@ def enrich_priority_evidence(
         if value not in features:
             features.append(value)
 
-    enriched["features"] = features
+    enriched["features"] = normalize_feature_corpus(features)
     enriched["attributes"] = attributes
 
     enriched["priority_evidence"] = {
@@ -745,6 +871,29 @@ def retrieve_missing_priority_evidence(
     - No missing specification is invented.
     - If Tavily is unavailable, return profile unchanged.
     """
+    # Live recommendation requests must not depend on external
+    # enrichment. Verified cached/official evidence is sufficient for
+    # the first response; unresolved criteria remain unknown and can
+    # be enriched later in deep/background mode.
+    live_fast = clean(
+        os.environ.get("COUPONWORLD_LIVE_FAST", "1")
+    ).lower() not in {"0", "false", "no", "off"}
+
+    if live_fast:
+        enriched = dict(profile)
+
+        provenance = dict(enriched.get("provenance") or {})
+        provenance["priority_evidence_retrieval"] = [{
+            "status": "skipped_live_fast",
+            "reason": (
+                "External priority-evidence retrieval is disabled "
+                "on the live-fast recommendation path"
+            ),
+        }]
+        enriched["provenance"] = provenance
+
+        return enriched
+
     api_key = os.environ.get("TAVILY_API_KEY")
 
     if not api_key:
@@ -755,38 +904,13 @@ def retrieve_missing_priority_evidence(
     # First-pass signals tell us what is genuinely missing.
     initial_signals = build_fit_signals(profile, intent)
 
-    missing: list[str] = []
-
-    for dimension, weight in sorted(
-        weights.items(),
-        key=lambda item: int(item[1] or 0),
-        reverse=True,
-    ):
-        weight = int(weight or 0)
-
-        if weight < 15:
-            continue
-
-        signal_obj = initial_signals.get(dimension)
-
-        if not isinstance(signal_obj, dict):
-            continue
-
-        if signal_obj.get("match") is None:
-            missing.append(str(dimension))
-
-    if not missing:
-        return profile
-
-    # Keep live latency bounded.
-    missing = missing[:2]
-
-    title = clean(profile.get("title"))
-    brand = clean(profile.get("brand"))
-
-    if not title:
-        return profile
-
+    # Only criteria for which this retriever has an evidence-search
+    # strategy are eligible for the bounded live pass.
+    #
+    # Do not use an arbitrary minimum-weight threshold here. Category
+    # defaults may assign important dimensions (for example phone
+    # performance/software support) weights below 15, which previously
+    # prevented those unknown signals from ever reaching retrieval.
     query_terms = {
         "battery": "battery capacity charging",
         "camera": "camera OIS ultrawide telephoto",
@@ -798,9 +922,47 @@ def retrieve_missing_priority_evidence(
         "storage": "storage capacity",
     }
 
+    missing: list[str] = []
+
+    for dimension, weight in sorted(
+        weights.items(),
+        key=lambda item: int(item[1] or 0),
+        reverse=True,
+    ):
+        dimension = str(dimension)
+
+        # Unsupported/generic criteria such as ease_of_use must not
+        # consume one of the limited retrieval slots.
+        if dimension not in query_terms:
+            continue
+
+        signal_obj = initial_signals.get(dimension)
+
+        if not isinstance(signal_obj, dict):
+            continue
+
+        if signal_obj.get("match") is None:
+            missing.append(dimension)
+
+    if not missing:
+        return profile
+
+    # Keep live latency bounded. Filtering supported dimensions before
+    # truncation ensures that an unsupported criterion cannot steal a
+    # retrieval slot.
+    missing = missing[:2]
+
+    title = clean(profile.get("title"))
+    brand = clean(profile.get("brand"))
+
+    if not title:
+        return profile
+
     client = TavilyClient(api_key=api_key)
 
-    existing_features = list(profile.get("features") or [])
+    existing_features = normalize_feature_corpus(
+        profile.get("features") or []
+    )
     enrichment_records: list[dict[str, Any]] = []
 
     for dimension in missing:
@@ -871,7 +1033,9 @@ def retrieve_missing_priority_evidence(
             break
 
     enriched = dict(profile)
-    enriched["features"] = existing_features
+    enriched["features"] = normalize_feature_corpus(
+        existing_features
+    )
 
     provenance = dict(enriched.get("provenance") or {})
     provenance["priority_evidence_retrieval"] = enrichment_records
@@ -896,6 +1060,73 @@ def runtime_profile_from_extraction(
     features = extraction.get("features", [])
     if not isinstance(features, list):
         features = []
+
+    # Normalize and deduplicate extraction features at the runtime
+    # profile boundary. This also cleans stale cached evidence that may
+    # contain Python-stringified feature dictionaries.
+    normalized_features: list[Any] = []
+    seen_feature_text: set[str] = set()
+
+    for item in features:
+        normalized_item = item
+        feature_text = ""
+
+        if isinstance(item, dict):
+            for key in ("text", "value", "label"):
+                value = item.get(key)
+                if value not in (None, ""):
+                    feature_text = clean(value)
+                    break
+
+        elif isinstance(item, str):
+            stripped = item.strip()
+
+            if (
+                stripped.startswith("{")
+                and stripped.endswith("}")
+                and (
+                    "'text'" in stripped
+                    or '"text"' in stripped
+                    or "'value'" in stripped
+                    or '"value"' in stripped
+                    or "'label'" in stripped
+                    or '"label"' in stripped
+                )
+            ):
+                try:
+                    import ast
+                    parsed = ast.literal_eval(stripped)
+                except (ValueError, SyntaxError):
+                    parsed = None
+
+                if isinstance(parsed, dict):
+                    for key in ("text", "value", "label"):
+                        value = parsed.get(key)
+                        if value not in (None, ""):
+                            feature_text = clean(value)
+                            normalized_item = feature_text
+                            break
+            else:
+                feature_text = clean(item)
+
+        else:
+            feature_text = clean(item)
+
+        if not feature_text:
+            continue
+
+        dedupe_key = feature_text.lower()
+
+        if dedupe_key in seen_feature_text:
+            continue
+
+        seen_feature_text.add(dedupe_key)
+
+        # Keep native structured evidence where available; stringified
+        # dicts are converted to their human-readable evidence text.
+        normalized_features.append(normalized_item)
+
+    features = normalized_features
 
     existing_commerce_price = resolved.get("commerce_evidence")
 
@@ -1037,6 +1268,7 @@ def run_pipeline(
     discovery = discover_market(
         user_query=query,
         max_candidates=max_candidates,
+        live_fast=live_fast,
     )
     discovery_seconds = time.perf_counter() - discovery_started
 
@@ -1081,6 +1313,74 @@ def run_pipeline(
             continue
 
         identities.append(identity)
+
+        # ---------------------------------------------------------
+        # EXACT NAMED-MODEL LOCK
+        # ---------------------------------------------------------
+        # Deep research for an explicitly named model must never
+        # drift into a sibling model and persist that sibling's
+        # evidence as if it answered the requested model.
+        #
+        # Examples:
+        #   "Samsung Galaxy F36 5G" -> F36 candidates only
+        #   "Samsung Galaxy F06 5G" -> reject
+        #
+        # Generic shopping queries such as:
+        #   "Samsung phone under 25000"
+        #   "best phone under 20000"
+        # remain unrestricted.
+        if not live_fast:
+            query_key = re.sub(
+                r"[^a-z0-9]+",
+                " ",
+                clean(query).lower(),
+            ).strip()
+
+            candidate_key = re.sub(
+                r"[^a-z0-9]+",
+                " ",
+                clean(
+                    identity.get("search_name")
+                    or identity.get("model")
+                    or raw_title
+                ).lower(),
+            ).strip()
+
+            # Conservative model-token detection.
+            # A token must contain both letters and digits:
+            # F36, A23, S24, G86, C85, 100x, etc.
+            query_model_tokens = {
+                token
+                for token in query_key.split()
+                if re.search(r"[a-z]", token)
+                and re.search(r"\d", token)
+                and token not in {"5g", "4g", "3g", "2g"}
+            }
+
+            if query_model_tokens:
+                candidate_tokens = set(candidate_key.split())
+
+                missing_model_tokens = (
+                    query_model_tokens - candidate_tokens
+                )
+
+                if missing_model_tokens:
+                    failures.append({
+                        "candidate_id": candidate_id,
+                        "title": raw_title,
+                        "stage": "exact_model_lock",
+                        "status": "rejected",
+                        "reason": (
+                            "Named-model deep research mismatch: "
+                            f"required {sorted(query_model_tokens)}, "
+                            f"candidate identity was "
+                            f"{identity.get('search_name') or raw_title}"
+                        ),
+                        "required_model_tokens": sorted(
+                            query_model_tokens
+                        ),
+                    })
+                    continue
 
         if not clean(identity.get("brand")) or not clean(identity.get("search_name")):
             failures.append({
@@ -1300,7 +1600,58 @@ def run_pipeline(
                 })
                 continue
 
-        if (
+        cached_extraction = find_verified_evidence(
+            asin=clean(
+                candidate.get("asin")
+                or identity.get("asin")
+            ),
+            brand=clean(identity.get("brand")),
+            model=clean(identity.get("model")),
+            search_name=clean(identity.get("search_name")),
+            title=raw_title,
+        )
+
+        if cached_extraction:
+            extraction = {
+                "search_name": clean(
+                    cached_extraction.get("search_name")
+                    or identity.get("search_name")
+                    or raw_title
+                ),
+                "brand": clean(
+                    cached_extraction.get("brand")
+                    or identity.get("brand")
+                ),
+                "specifications": (
+                    cached_extraction.get("specifications")
+                    or {}
+                ),
+                "features": (
+                    cached_extraction.get("features")
+                    or []
+                ),
+                "review": (
+                    cached_extraction.get("review")
+                    or {
+                        "status": "verified_cache",
+                        "reason": "Verified persistent evidence cache hit",
+                    }
+                ),
+                "fetch_status": "success",
+                "resolver_verified": True,
+                "page_identity_score": (
+                    cached_extraction.get("page_identity_score")
+                ),
+                "official_url": clean(
+                    cached_extraction.get("official_url")
+                ),
+                "evidence_mode": "verified_persistent_cache",
+                "cache_match_mode": clean(
+                    cached_extraction.get("cache_match_mode")
+                ),
+            }
+
+        elif (
             live_fast
             and clean(resolved.get("resolver_mode"))
                 == "verified_retailer_fallback"
@@ -1367,6 +1718,25 @@ def run_pipeline(
                 })
                 continue
 
+        # Persist only genuinely verified deep extraction evidence.
+        # Fast listing-only evidence is intentionally not saved as
+        # long-term product knowledge.
+        if clean(extraction.get("evidence_mode")) not in {
+            "verified_commerce_fast",
+            "verified_persistent_cache",
+        }:
+            try:
+                save_verified_evidence(
+                    identity=identity,
+                    extraction=extraction,
+                    asin=clean(
+                        candidate.get("asin")
+                        or identity.get("asin")
+                    ),
+                )
+            except Exception:
+                pass
+
         evidence_records.append(extraction)
 
         usable, reason = extraction_is_usable(extraction)
@@ -1401,6 +1771,14 @@ def run_pipeline(
             profile = retrieve_missing_priority_evidence(
                 profile=profile,
                 intent=intent,
+            )
+
+            # Final evidence-contract gate.
+            # Regardless of which cache/enrichment path produced the
+            # profile, scoring always consumes canonical list[str]
+            # feature evidence.
+            profile["features"] = normalize_feature_corpus(
+                profile.get("features") or []
             )
 
             profile["fit_signals"] = build_fit_signals(profile, intent)

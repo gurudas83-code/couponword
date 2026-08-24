@@ -13,6 +13,7 @@ If evidence is missing, return UNKNOWN. Never guess a positive match.
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import re
 import sys
@@ -37,17 +38,101 @@ def signal(match: float | None, reason: str, status: str = "verified") -> dict[s
 
 
 def text_blob(profile: dict[str, Any]) -> str:
-    parts = [
-        str(profile.get("title") or ""),
-        str(profile.get("brand") or ""),
-        str(profile.get("description") or ""),
-        json.dumps(profile.get("attributes", {}), ensure_ascii=False),
-        " ".join(str(x) for x in profile.get("features", []) if x),
-        " ".join(str(x) for x in profile.get("best_for", []) if x),
-        " ".join(str(x) for x in profile.get("limitations", []) if x),
-    ]
-    return " ".join(parts).lower()
+    def evidence_text(value: Any) -> str:
+        if value in (None, ""):
+            return ""
 
+        # Native structured evidence:
+        # use only human-readable evidence fields.
+        if isinstance(value, dict):
+            for key in ("text", "value", "label"):
+                candidate = value.get(key)
+                if candidate not in (None, ""):
+                    return str(candidate)
+
+            return ""
+
+        # Some upstream paths currently duplicate evidence objects
+        # as their Python string representation, e.g.
+        #
+        # "{'text': 'Battery Capacity ... 5000',
+        #   'confidence': 77, ...}"
+        #
+        # Parse these safely and again retain ONLY the evidence text.
+        if isinstance(value, str):
+            stripped = value.strip()
+
+            if (
+                stripped.startswith("{")
+                and stripped.endswith("}")
+                and (
+                    "'text'" in stripped
+                    or '"text"' in stripped
+                    or "'value'" in stripped
+                    or '"value"' in stripped
+                    or "'label'" in stripped
+                    or '"label"' in stripped
+                )
+            ):
+                try:
+                    parsed = ast.literal_eval(stripped)
+                except (ValueError, SyntaxError):
+                    parsed = None
+
+                if isinstance(parsed, dict):
+                    for key in ("text", "value", "label"):
+                        candidate = parsed.get(key)
+                        if candidate not in (None, ""):
+                            return str(candidate)
+
+                    return ""
+
+            return value
+
+        return str(value)
+
+    def list_text(values: Any) -> str:
+        if not isinstance(values, list):
+            return evidence_text(values)
+
+        return " ".join(
+            evidence_text(item)
+            for item in values
+            if evidence_text(item)
+        )
+
+    attributes = profile.get("attributes", {})
+
+    if isinstance(attributes, dict):
+        attribute_parts = []
+
+        for key, value in attributes.items():
+            rendered = evidence_text(value)
+
+            if rendered:
+                attribute_parts.append(
+                    f"{key} {rendered}"
+                )
+
+        attributes_text = " ".join(attribute_parts)
+    else:
+        attributes_text = evidence_text(attributes)
+
+    parts = [
+        evidence_text(profile.get("title")),
+        evidence_text(profile.get("brand")),
+        evidence_text(profile.get("description")),
+        attributes_text,
+        list_text(profile.get("features", [])),
+        list_text(profile.get("best_for", [])),
+        list_text(profile.get("limitations", [])),
+    ]
+
+    return " ".join(
+        part
+        for part in parts
+        if part
+    ).lower()
 
 def numeric(pattern: str, text: str) -> float | None:
     m = re.search(pattern, text, re.I)
@@ -93,63 +178,98 @@ def battery_signal(text: str) -> dict[str, Any]:
 
     capacities = [
         float(x)
-        for x in re.findall(r"\b(\d{2,5})\s*mah\b", text, re.I)
+        for x in re.findall(
+            r"\b(\d{2,5})\s*mah\b",
+            text,
+            re.I,
+        )
     ]
 
-    # Earbud/product pages commonly state both single-charge playback
-    # and total playback with the charging case. For shopping endurance,
-    # the largest explicitly verified playback figure is the useful signal.
-    playback = max(playback_values) if playback_values else None
+    # Label-first official specifications, e.g.
+    # "Battery Capacity (mAh, Typical) 5000"
+    capacities.extend(
+        float(x)
+        for x in re.findall(
+            r"battery\s+capacity[^\n\r]{0,40}?(\d{3,5})\b",
+            text,
+            re.I,
+        )
+    )
 
-    if playback is not None:
+    # Label-first endurance, e.g.
+    # "Video Playback Time (Hours) Up to 17"
+    playback_values.extend(
+        float(x)
+        for x in re.findall(
+            r"(?:video\s+)?playback\s+time[^\n\r]{0,40}?"
+            r"(?:up\s+to\s+)?(\d{1,3}(?:\.\d+)?)\b",
+            text,
+            re.I,
+        )
+    )
+
+    candidates: list[tuple[float, str]] = []
+
+    if playback_values:
+        playback = max(playback_values)
+
         if playback >= 50:
-            return signal(
+            candidates.append((
                 1.0,
                 f"Long verified playback/endurance: {playback:g} hours",
-            )
-        if playback >= 30:
-            return signal(
+            ))
+        elif playback >= 30:
+            candidates.append((
                 0.90,
                 f"Strong verified playback/endurance: {playback:g} hours",
-            )
-        if playback >= 15:
-            return signal(
+            ))
+        elif playback >= 15:
+            candidates.append((
                 0.75,
                 f"Moderate verified playback/endurance: {playback:g} hours",
-            )
-        return signal(
-            0.55,
-            f"Verified playback/endurance: {playback:g} hours",
-        )
+            ))
+        else:
+            candidates.append((
+                0.55,
+                f"Verified playback/endurance: {playback:g} hours",
+            ))
 
-    # Capacity fallback is intentionally conservative.
-    # Large mAh thresholds mainly apply to phones/laptops, while tiny
-    # earbud/case capacities must not be converted into guessed runtime.
     if capacities:
         capacity = max(capacities)
 
         if capacity >= 5500:
-            return signal(
+            candidates.append((
                 1.0,
                 f"Large verified battery capacity: {capacity:g}mAh",
-            )
-        if capacity >= 5000:
-            return signal(
+            ))
+        elif capacity >= 5000:
+            candidates.append((
                 0.90,
                 f"Strong verified battery capacity: {capacity:g}mAh",
-            )
-        if capacity >= 4500:
-            return signal(
+            ))
+        elif capacity >= 4500:
+            candidates.append((
                 0.75,
                 f"Moderate verified battery capacity: {capacity:g}mAh",
-            )
-        if capacity >= 4000:
-            return signal(
+            ))
+        elif capacity >= 4000:
+            candidates.append((
                 0.60,
                 f"Verified battery capacity: {capacity:g}mAh",
-            )
+            ))
 
-    return signal(None, "No comparable battery/endurance evidence found")
+    if not candidates:
+        return signal(
+            None,
+            "No comparable battery/endurance evidence found",
+        )
+
+    best_score, best_reason = max(
+        candidates,
+        key=lambda item: item[0],
+    )
+
+    return signal(best_score, best_reason)
 
 def display_signal(text: str) -> dict[str, Any]:
     score = 0.0
@@ -567,33 +687,166 @@ def storage_signal(text: str) -> dict[str, Any]:
 
 
 def software_support_signal(text: str) -> dict[str, Any]:
+    normalized = str(text or "")
+
+    # ---------------------------------------------------------
+    # 1. Explicit support duration
+    # ---------------------------------------------------------
+    # Examples:
+    #   6 years of software updates
+    #   6 years of Android updates
+    #   6 years of security updates
+    #   6 years security patches
     years = [
         float(x)
-        for x in re.findall(r"\b(\d+)\s+years?\s+(?:of\s+)?(?:android updates|security patches|software updates)", text, re.I)
+        for x in re.findall(
+            r"\b(\d+(?:\.\d+)?)\s+years?\s+"
+            r"(?:of\s+)?"
+            r"(?:android\s+updates?|"
+            r"android\s+upgrades?|"
+            r"security\s+patches?|"
+            r"security\s+updates?|"
+            r"software\s+updates?|"
+            r"os\s+updates?)\b",
+            normalized,
+            re.I,
+        )
     ]
+
+    # ---------------------------------------------------------
+    # 2. Explicit support-valid-until date
+    # ---------------------------------------------------------
+    # Manufacturer pages commonly provide support as:
+    #
+    #   Security Update Period (Valid until) 31 December 2031
+    #
+    # Convert that verified date into remaining support years.
+    date_match = re.search(
+        r"(?:security\s+update\s+period|"
+        r"software\s+support|"
+        r"support\s+period)"
+        r"[^\n\r]{0,80}?"
+        r"(?:valid\s+until|until|through|to)"
+        r"[^\d]{0,20}"
+        r"(\d{1,2})\s+"
+        r"(january|february|march|april|may|june|july|"
+        r"august|september|october|november|december)"
+        r"\s+(\d{4})",
+        normalized,
+        re.I,
+    )
+
+    if date_match:
+        from datetime import date
+
+        month_numbers = {
+            "january": 1,
+            "february": 2,
+            "march": 3,
+            "april": 4,
+            "may": 5,
+            "june": 6,
+            "july": 7,
+            "august": 8,
+            "september": 9,
+            "october": 10,
+            "november": 11,
+            "december": 12,
+        }
+
+        try:
+            support_end = date(
+                int(date_match.group(3)),
+                month_numbers[date_match.group(2).lower()],
+                int(date_match.group(1)),
+            )
+
+            today = date.today()
+
+            remaining_days = (
+                support_end - today
+            ).days
+
+            if remaining_days > 0:
+                remaining_years = remaining_days / 365.2425
+                years.append(remaining_years)
+
+        except (TypeError, ValueError):
+            pass
+
     if not years:
-        return signal(None, "No verified support-duration evidence found")
+        return signal(
+            None,
+            "No verified support-duration evidence found",
+        )
 
     longest = max(years)
-    if longest >= 7:
-        return signal(1.0, f"Long verified software/security support: up to {longest:g} years")
-    if longest >= 5:
-        return signal(0.90, f"Strong verified support duration: {longest:g} years")
-    if longest >= 3:
-        return signal(0.75, f"Moderate verified support duration: {longest:g} years")
-    return signal(0.55, f"Verified support duration: {longest:g} years")
 
+    if longest >= 7:
+        return signal(
+            1.0,
+            f"Long verified software/security support: up to {longest:.1f} years",
+        )
+
+    if longest >= 5:
+        return signal(
+            0.90,
+            f"Strong verified support duration: {longest:.1f} years",
+        )
+
+    if longest >= 3:
+        return signal(
+            0.75,
+            f"Moderate verified support duration: {longest:.1f} years",
+        )
+
+    return signal(
+        0.55,
+        f"Verified support duration: {longest:.1f} years",
+    )
 
 def connectivity_signal(text: str) -> dict[str, Any]:
     score = 0.0
     reasons: list[str] = []
 
-    # Signal builders must be safe when called directly as well as
-    # through text_blob(), which already returns lowercase text.
     normalized = str(text or "").lower()
 
-    # 5G alone is strong positive connectivity evidence.
-    if re.search(r"\b5g\b", normalized):
+    # ---------------------------------------------------------
+    # 5G evidence with negation protection
+    # ---------------------------------------------------------
+    # A bare "5G" is not sufficient when the surrounding text
+    # explicitly says that 5G is absent / unsupported.
+    #
+    # Examples that must NOT become positive evidence:
+    #   "5G not supported"
+    #   "does not support 5G"
+    #   "no 5G"
+    #   "without 5G"
+    #   "4G only"
+    # ---------------------------------------------------------
+
+    has_5g_token = bool(re.search(r"\b5g\b", normalized))
+
+    negative_5g_patterns = (
+        r"\bno\s+5g\b",
+        r"\bwithout\s+5g\b",
+        r"\bnon[-\s]?5g\b",
+        r"\b5g\s+(?:is\s+)?not\s+supported\b",
+        r"\b5g\s+unsupported\b",
+        r"\b5g\s+not\s+available\b",
+        r"\bdoes\s+not\s+support\s+5g\b",
+        r"\bdoesn't\s+support\s+5g\b",
+        r"\bnot\s+support(?:ed|ing)?\s+5g\b",
+        r"\b4g\s+only\b",
+        r"\bonly\s+4g\b",
+    )
+
+    has_negative_5g = any(
+        re.search(pattern, normalized)
+        for pattern in negative_5g_patterns
+    )
+
+    if has_5g_token and not has_negative_5g:
         score += 0.80
         reasons.append("5G")
 
@@ -614,13 +867,18 @@ def connectivity_signal(text: str) -> dict[str, Any]:
         reasons.append(f"Bluetooth {bt:g}")
 
     if not reasons:
+        if has_negative_5g:
+            return signal(
+                None,
+                "5G is explicitly unavailable; no other reliable connectivity evidence found",
+            )
+
         return signal(
             None,
             "No reliable connectivity evidence found",
         )
 
     return signal(min(score, 1.0), ", ".join(reasons))
-
 
 def anc_signal(text: str) -> dict[str, Any]:
     explicit_anc = bool(

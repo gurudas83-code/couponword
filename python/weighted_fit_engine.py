@@ -13,6 +13,8 @@ Purpose:
 
 from __future__ import annotations
 
+import re
+
 from dataclasses import dataclass, asdict
 from typing import Any
 
@@ -85,6 +87,75 @@ def _hard_constraint_failures(product: dict, intent: dict) -> list[str]:
 
     if not isinstance(hard_constraints, list):
         hard_constraints = []
+
+    # --------------------------------------------------------
+    # Explicit brand semantics
+    #
+    # intent["brands"] is mention metadata. A mentioned brand is:
+    # - avoided when brand_<name> appears in intent["avoid"]
+    # - preferred when brand_<name> appears in intent["preferred"]
+    # - otherwise required for a brand-scoped query
+    #
+    # This gate is deliberately generic: Samsung, Apple, OnePlus,
+    # Motorola, Redmi etc. all use the same mechanism.
+    # --------------------------------------------------------
+
+    def norm_brand(value):
+        return re.sub(
+            r"[^a-z0-9]+",
+            " ",
+            str(value or "").lower(),
+        ).strip()
+
+    product_brand = norm_brand(product.get("brand"))
+
+    mentioned_brands = [
+        norm_brand(x)
+        for x in intent.get("brands", [])
+        if norm_brand(x)
+    ]
+
+    avoid_markers = {
+        norm_brand(x).replace(" ", "_")
+        for x in intent.get("avoid", [])
+        if norm_brand(x)
+    }
+
+    preferred_markers = {
+        norm_brand(x).replace(" ", "_")
+        for x in intent.get("preferred", [])
+        if norm_brand(x)
+    }
+
+    must_markers = {
+        norm_brand(x).replace(" ", "_")
+        for x in intent.get("must_have", [])
+        if norm_brand(x)
+    }
+
+    for mentioned_brand in mentioned_brands:
+        marker = f"brand_{mentioned_brand}".replace(" ", "_")
+
+        if marker in avoid_markers:
+            if product_brand == mentioned_brand:
+                failures.append(
+                    f"Excluded brand matched: {mentioned_brand}"
+                )
+            continue
+
+        if marker in preferred_markers:
+            continue
+
+        # Explicit must-have brand OR ordinary brand-scoped query.
+        if (
+            marker in must_markers
+            or marker not in preferred_markers
+        ):
+            if product_brand and product_brand != mentioned_brand:
+                failures.append(
+                    f"Required brand not matched: "
+                    f"{mentioned_brand} required, got {product_brand}"
+                )
 
     if "budget_max" in hard_constraints:
         budget_max = intent.get("budget_max")

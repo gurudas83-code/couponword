@@ -97,6 +97,18 @@ FEATURE_HINTS = (
     "range",
     "warranty",
     "processor",
+    "chipset",
+    "software",
+    "software support",
+    "security update",
+    "security updates",
+    "os update",
+    "os updates",
+    "android upgrade",
+    "android upgrades",
+    "operating system",
+    "support period",
+    "update period",
     "display",
     "storage",
     "ram",
@@ -162,6 +174,16 @@ ALIASES = {
     "refresh rate": "refresh_rate",
     "processor": "processor",
     "chipset": "processor",
+    "software support": "software_support",
+    "security update": "security_updates",
+    "security updates": "security_updates",
+    "security update period": "security_update_period",
+    "os update": "software_support",
+    "os updates": "software_support",
+    "android upgrade": "software_support",
+    "android upgrades": "software_support",
+    "support period": "software_support",
+    "update period": "software_support",
     "ram": "ram",
     "memory": "memory",
     "storage": "storage",
@@ -1752,6 +1774,75 @@ def collect_official_source_urls(
                 )
 
     return collected
+
+
+
+def critical_evidence_gaps(
+    output: dict[str, Any],
+) -> set[str]:
+    """
+    Detect important shopping-spec dimensions that remain absent even when
+    the page has many total evidence items.
+
+    This is intentionally generic. Total evidence count must not be treated
+    as semantic completeness.
+    """
+    parts: list[str] = []
+
+    specifications = output.get("specifications") or {}
+
+    if isinstance(specifications, dict):
+        for key, record in specifications.items():
+            parts.append(str(key))
+
+            if isinstance(record, dict):
+                parts.append(str(record.get("label") or ""))
+                parts.append(str(record.get("value") or ""))
+
+    features = output.get("features") or []
+
+    if isinstance(features, list):
+        for item in features:
+            if isinstance(item, dict):
+                parts.append(str(item.get("text") or ""))
+            else:
+                parts.append(str(item or ""))
+
+    blob = " ".join(parts).lower()
+
+    gaps: set[str] = set()
+
+    if not any(
+        token in blob
+        for token in (
+            "processor",
+            "chipset",
+            "snapdragon",
+            "exynos",
+            "dimensity",
+            "mediatek",
+        )
+    ):
+        gaps.add("performance")
+
+    if not any(
+        token in blob
+        for token in (
+            "software support",
+            "security update",
+            "security updates",
+            "os update",
+            "os updates",
+            "android upgrade",
+            "android upgrades",
+            "support period",
+            "update period",
+        )
+    ):
+        gaps.add("software_support")
+
+    return gaps
+
 
 
 def merge_evidence_records(
@@ -4825,8 +4916,9 @@ def extract_one(
             len(output.get("specifications", {}))
             + len(output.get("features", []))
         )
+        current_gaps = critical_evidence_gaps(output)
 
-        if current_evidence < 3:
+        if current_evidence < 3 or current_gaps:
             for source in collect_official_source_urls(research_result):
                 source_url = clean_text(source.get("url"))
 
@@ -4873,10 +4965,13 @@ def extract_one(
                     float(alternate.get("page_identity_score") or 0),
                 )
 
-                if (
+                merged_evidence = (
                     len(output.get("specifications", {}))
                     + len(output.get("features", []))
-                ) >= 3:
+                )
+                remaining_gaps = critical_evidence_gaps(output)
+
+                if merged_evidence >= 3 and not remaining_gaps:
                     break
 
         summary = output.setdefault("evidence_summary", {})

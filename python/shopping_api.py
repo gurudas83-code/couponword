@@ -64,8 +64,12 @@ def recommend():
     try:
         payload = run_pipeline(
             query=query,
-            max_candidates=4,
-            max_results=4,
+            # Mobile benchmark target:
+            # enough discovery depth for Best-3 plus additional
+            # comparison choices without immediately paying the
+            # latency cost of the full 15-candidate pool.
+            max_candidates=8,
+            max_results=6,
             live_fast=True,
         )
     except Exception as error:
