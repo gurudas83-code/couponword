@@ -19,7 +19,14 @@ def compare_offers(
     if not offers:
         return {
             "status": "no_offers",
-            "offers": [],
+            "identity_matched_offer_count": 0,
+            "comparable_offer_count": 0,
+            "rejected_offer_count": 0,
+            "best_offer": None,
+            "price_gap": None,
+            "identity_matched_offers": [],
+            "comparable_offers": [],
+            "rejected_offers": [],
         }
 
     anchor = offers[0]
@@ -28,48 +35,72 @@ def compare_offers(
     rejected: list[dict] = []
 
     for offer in offers:
+
         if offer is anchor:
             matched.append(offer)
             continue
 
-        result = match_offers(anchor, offer)
+        result = match_offers(
+            anchor,
+            offer,
+        )
 
         if result["same_product"]:
             matched.append(offer)
+
         else:
             rejected.append(
                 {
                     "offer": asdict(offer),
-                    "reason": "product_or_variant_mismatch",
+                    "reason": (
+                        "product_or_variant_mismatch"
+                    ),
                     "match_result": result,
                 }
             )
 
-    available = [
+    comparable = [
         offer
         for offer in matched
         if offer.availability == "in_stock"
         and offer.price is not None
     ]
 
-    available.sort(
+    comparable.sort(
         key=lambda offer: offer.price
     )
 
-    best_offer = available[0] if available else None
+    best_offer = (
+        comparable[0]
+        if comparable
+        else None
+    )
 
     price_gap = None
 
-    if len(available) >= 2:
+    if len(comparable) >= 2:
         price_gap = round(
-            available[-1].price - available[0].price,
+            comparable[-1].price
+            - comparable[0].price,
             2,
         )
 
+    if not comparable:
+        status = "no_comparable_price"
+    else:
+        status = "ok"
+
     return {
-        "status": "ok",
-        "matched_offer_count": len(matched),
-        "rejected_offer_count": len(rejected),
+        "status": status,
+
+        "identity_matched_offer_count":
+            len(matched),
+
+        "comparable_offer_count":
+            len(comparable),
+
+        "rejected_offer_count":
+            len(rejected),
 
         "best_offer": (
             asdict(best_offer)
@@ -79,12 +110,28 @@ def compare_offers(
 
         "price_gap": price_gap,
 
-        "matched_offers": [
+        "identity_matched_offers": [
             asdict(offer)
-            for offer in available
+            for offer in matched
         ],
 
-        "rejected_offers": rejected,
+        "comparable_offers": [
+            asdict(offer)
+            for offer in comparable
+        ],
+
+        "rejected_offers":
+            rejected,
+
+        # Backward compatibility for any existing code
+        # still reading these older keys.
+        "matched_offer_count":
+            len(matched),
+
+        "matched_offers": [
+            asdict(offer)
+            for offer in comparable
+        ],
     }
 
 
@@ -94,7 +141,8 @@ if __name__ == "__main__":
         "Amazon",
         {
             "asin": "B0TEST123",
-            "title": "Samsung Galaxy Test 8GB 128GB",
+            "title":
+                "Samsung Galaxy Test 8GB 128GB",
             "brand": "Samsung",
             "model": "Galaxy Test",
             "variant": "8GB/128GB",
@@ -109,7 +157,8 @@ if __name__ == "__main__":
         "Flipkart",
         {
             "fsn": "MOBTEST456",
-            "name": "Samsung Galaxy Test 8 GB 128 GB",
+            "name":
+                "Samsung Galaxy Test 8 GB 128 GB",
             "brand": "Samsung",
             "model": "Galaxy Test",
             "configuration": "8GB/128GB",
@@ -124,7 +173,8 @@ if __name__ == "__main__":
         "Flipkart",
         {
             "fsn": "MOBTEST999",
-            "name": "Samsung Galaxy Test 6 GB 128 GB",
+            "name":
+                "Samsung Galaxy Test 6 GB 128 GB",
             "brand": "Samsung",
             "model": "Galaxy Test",
             "configuration": "6GB/128GB",
@@ -143,13 +193,20 @@ if __name__ == "__main__":
         ]
     )
 
-    print("\nMULTI-RETAILER COMPARISON")
+    print(
+        "\nMULTI-RETAILER COMPARISON"
+    )
+
     print(result)
 
     if result["best_offer"]:
+
         best = result["best_offer"]
 
-        print("\nBEST BUYING OPTION")
+        print(
+            "\nBEST BUYING OPTION"
+        )
+
         print(
             best["retailer"],
             "₹",

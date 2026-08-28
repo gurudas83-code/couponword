@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "offers": [
+    {
+      "retailer": "flipkart",
+      "product_id": "cw-mobile-72",
+      "retailer_product_id": "MOBHEYY2FCCGHYEM",
+      "brand": "Samsung",
+      "model": "Galaxy M36 5G",
+      "variant": "6GB/128GB",
+      "title": "Samsung Galaxy M36 5G",
+      "price": 23499.0,
+      "mrp": 26999.0,
+      "currency": "INR",
+      "availability": "out_of_stock",
+      "product_url": "https://www.flipkart.com/samsung-m36-5g-velvet-black-black-128-gb/p/itm1e7be51802033?pid=MOBHEYY2FCCGHYEM",
+      "affiliate_url": "",
+      "source": "retailer_page_verified",
+      "confidence": 0.95,
+      "last_checked": "2026-08-28T16:17:25.140226+00:00",
+      "metadata": {
+        "evidence_source_url": "https://www.flipkart.com/samsung-m36-5g-velvet-black-black-128-gb/p/itm1e7be51802033?pid=MOBHEYY2FCCGHYEM",
+        "evidence_source_type": "retailer_page_verified",
+        "evidence_observed_at": "2026-08-28T16:17:25.140226+00:00",
+        "evidence_notes": "Exact Samsung M36 5G Velvet Black 6GB/128GB listing verified. Listing currently out of stock."
+      }
+    },
+    {
+      "retailer": "amazon",
+      "product_id": "cw-mobile-72",
+      "retailer_product_id": "B0FDBB2VRC",
+      "brand": "Samsung",
+      "model": "Galaxy M36 5G",
+      "variant": "6GB/128GB",
+      "title": "Samsung Galaxy M36 5G",
+      "price": 20999.0,
+      "mrp": null,
+      "currency": "INR",
+      "availability": "unknown",
+      "product_url": "https://www.amazon.in/dp/B0FDBB2VRC",
+      "affiliate_url": "",
+      "source": "retailer_price_observed",
+      "confidence": 0.9,
+      "last_checked": "2026-08-28T16:26:10.118602+00:00",
+      "metadata": {
+        "raw_retailer": "Amazon",
+        "evidence_source_url": "https://www.amazon.in/dp/B0FDBB2VRC",
+        "evidence_source_type": "retailer_price_observed",
+        "evidence_observed_at": "2026-08-28T16:26:10.118602+00:00",
+        "evidence_notes": "Exact Samsung Galaxy M36 5G Velvet Black 6GB/128GB Amazon price observed at INR 20,999. Live availability not independently verified."
+      }
+    }
+  ]
+}

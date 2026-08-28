@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "products": {
+    "cw-mobile-72": {
+      "amazon": {
+        "retailer_product_id": "B0FDBB2VRC",
+        "product_url": "https://www.amazon.in/dp/B0FDBB2VRC",
+        "confidence": 0.95,
+        "source": "couponworld-existing-data"
+      },
+      "flipkart": {
+        "retailer_product_id": "MOBHEYY2FCCGHYEM",
+        "product_url": "https://www.flipkart.com/samsung-m36-5g-velvet-black-black-128-gb/p/itm1e7be51802033?pid=MOBHEYY2FCCGHYEM",
+        "confidence": 0.95,
+        "source": "verified-web-match"
+      }
+    }
+  }
+}
