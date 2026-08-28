@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 
 from __future__ import annotations
 
@@ -8,6 +8,7 @@ from typing import Iterable
 from retailer_contract import RetailerOffer
 from offer_normalizer import normalize_offer
 from product_matcher import match_offers
+from evidence_freshness import is_offer_fresh
 
 
 def compare_offers(
@@ -64,6 +65,7 @@ def compare_offers(
         for offer in matched
         if offer.availability == "in_stock"
         and offer.price is not None
+        and is_offer_fresh(offer)
     ]
 
     comparable.sort(

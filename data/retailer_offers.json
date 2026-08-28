@@ -49,6 +49,30 @@
         "evidence_observed_at": "2026-08-28T16:26:10.118602+00:00",
         "evidence_notes": "Exact Samsung Galaxy M36 5G Velvet Black 6GB/128GB Amazon price observed at INR 20,999. Live availability not independently verified."
       }
+    },
+    {
+      "retailer": "flipkart",
+      "product_id": "cw-mobile-10",
+      "retailer_product_id": "itmbf96c9b15ce5e",
+      "brand": "Redmi",
+      "model": "Redmi 13 5G",
+      "variant": "8GB/128GB",
+      "title": "Redmi 13 5G",
+      "price": 24990.0,
+      "mrp": 24995.0,
+      "currency": "INR",
+      "availability": "in_stock",
+      "product_url": "https://www.flipkart.com/redmi-13-5g-hawaiian-blue-128-gb/p/itmbf96c9b15ce5e",
+      "affiliate_url": "",
+      "source": "retailer_page_verified",
+      "confidence": 0.97,
+      "last_checked": "2026-08-28T16:40:56.243647+00:00",
+      "metadata": {
+        "evidence_source_url": "https://www.flipkart.com/redmi-13-5g-hawaiian-blue-128-gb/p/itmbf96c9b15ce5e",
+        "evidence_source_type": "retailer_page_verified",
+        "evidence_observed_at": "2026-08-28T16:40:56.243647+00:00",
+        "evidence_notes": "Exact Redmi 13 5G Hawaiian Blue 8GB/128GB Flipkart listing verified. Current page shows seller and delivery by 31 Aug 2026. Availability can change rapidly."
+      }
     }
   ]
 }
