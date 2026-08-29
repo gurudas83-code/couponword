@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 from evidence_freshness import freshness_status
 from multi_retailer_engine import compare_offers
@@ -29,6 +30,52 @@ def to_offer(value) -> RetailerOffer:
     )
 
 
+def clean_public_product_url(url: str) -> str:
+    """Return a direct retailer URL without affiliate tracking parameters."""
+    url = str(url or "").strip()
+
+    if not url:
+        return ""
+
+    try:
+        parts = urlsplit(url)
+    except ValueError:
+        return url
+
+    hostname = (parts.hostname or "").lower()
+
+    if hostname == "amazon.in" or hostname.endswith(".amazon.in"):
+        affiliate_keys = {
+            "tag",
+            "ascsubtag",
+            "linkcode",
+            "camp",
+            "creative",
+            "creativeasin",
+        }
+
+        query = [
+            (key, value)
+            for key, value in parse_qsl(
+                parts.query,
+                keep_blank_values=True,
+            )
+            if key.lower() not in affiliate_keys
+        ]
+
+        return urlunsplit(
+            (
+                parts.scheme,
+                parts.netloc,
+                parts.path,
+                urlencode(query, doseq=True),
+                parts.fragment,
+            )
+        )
+
+    return url
+
+
 def public_offer(value) -> dict:
     offer = to_offer(value)
 
@@ -40,8 +87,10 @@ def public_offer(value) -> dict:
         "currency": offer.currency,
         "availability": offer.availability,
         "freshness": freshness_status(offer),
-        "product_url": offer.product_url,
-        "affiliate_url": offer.affiliate_url,
+        "product_url": clean_public_product_url(
+            offer.product_url
+        ),
+        "affiliate_url": "",
         "last_checked": offer.last_checked,
         "source": offer.source,
         "confidence": offer.confidence,

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-08-29T10:40:55.280781+00:00",
+  "generated_at": "2026-08-29T14:12:29.443166+00:00",
   "products": [
     {
       "product_id": "cw-mobile-72",
@@ -101,7 +101,7 @@
           "currency": "INR",
           "availability": "unknown",
           "freshness": "fresh",
-          "product_url": "https://www.amazon.in/dp/B0F1N8B7Z4?tag=guru0906-21",
+          "product_url": "https://www.amazon.in/dp/B0F1N8B7Z4",
           "affiliate_url": "",
           "last_checked": "2026-08-29T09:14:46.601779+00:00",
           "source": "market_price_observed",
@@ -118,12 +118,27 @@
       "attributes": {
         "color": "Master Gold"
       },
-      "status": "no_offers",
-      "identity_matched_offer_count": 0,
+      "status": "no_comparable_price",
+      "identity_matched_offer_count": 1,
       "comparable_offer_count": 0,
       "best_offer": null,
       "price_gap": null,
-      "offers": []
+      "offers": [
+        {
+          "retailer": "amazon",
+          "retailer_product_id": "B0GDQCTYFB",
+          "price": 3999.0,
+          "mrp": 5299.0,
+          "currency": "INR",
+          "availability": "unknown",
+          "freshness": "fresh",
+          "product_url": "https://www.amazon.in/dp/B0GDQCTYFB",
+          "affiliate_url": "",
+          "last_checked": "2026-08-29T10:43:49.914652+00:00",
+          "source": "market_price_observed",
+          "confidence": 0.8
+        }
+      ]
     },
     {
       "product_id": "cw-keyboard-13",
