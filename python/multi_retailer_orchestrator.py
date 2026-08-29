@@ -33,6 +33,7 @@ class MultiRetailerOrchestrator:
     def run(
         self,
         product: CanonicalProduct,
+        write: bool = False,
     ) -> dict:
 
         identity_offers = (
@@ -95,9 +96,10 @@ class MultiRetailerOrchestrator:
                 evidence,
             )
 
-            add_verified_offer(
-                updated_offer
-            )
+            if write:
+                add_verified_offer(
+                    updated_offer
+                )
 
             final_offers.append(
                 updated_offer
@@ -115,6 +117,7 @@ class MultiRetailerOrchestrator:
                 len(evidence_records),
             "rejected_evidence":
                 rejected_evidence,
+            "write_enabled": write,
             "offers": [
                 offer.to_dict()
                 for offer in final_offers
