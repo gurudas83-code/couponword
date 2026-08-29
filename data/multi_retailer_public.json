@@ -1,0 +1,162 @@
+{
+  "version": 1,
+  "generated_at": "2026-08-29T10:10:51.298602+00:00",
+  "products": [
+    {
+      "product_id": "cw-mobile-72",
+      "title": "Samsung Galaxy M36 5G",
+      "brand": "Samsung",
+      "model": "Galaxy M36 5G",
+      "variant": "6GB/128GB",
+      "attributes": {
+        "ram": "6GB",
+        "storage": "128GB",
+        "color": "Velvet Black"
+      },
+      "status": "no_comparable_price",
+      "identity_matched_offer_count": 2,
+      "comparable_offer_count": 0,
+      "best_offer": null,
+      "price_gap": null,
+      "offers": [
+        {
+          "retailer": "flipkart",
+          "retailer_product_id": "MOBHEYY2FCCGHYEM",
+          "price": 23499.0,
+          "mrp": 26999.0,
+          "currency": "INR",
+          "availability": "out_of_stock",
+          "freshness": "fresh",
+          "product_url": "https://www.flipkart.com/samsung-m36-5g-velvet-black-black-128-gb/p/itm1e7be51802033?pid=MOBHEYY2FCCGHYEM",
+          "affiliate_url": "",
+          "last_checked": "2026-08-28T16:17:25.140226+00:00",
+          "source": "retailer_page_verified",
+          "confidence": 0.95
+        },
+        {
+          "retailer": "amazon",
+          "retailer_product_id": "B0FDBB2VRC",
+          "price": 20999.0,
+          "mrp": null,
+          "currency": "INR",
+          "availability": "unknown",
+          "freshness": "fresh",
+          "product_url": "https://www.amazon.in/dp/B0FDBB2VRC",
+          "affiliate_url": "",
+          "last_checked": "2026-08-28T16:26:10.118602+00:00",
+          "source": "retailer_price_observed",
+          "confidence": 0.9
+        }
+      ]
+    },
+    {
+      "product_id": "cw-mobile-10",
+      "title": "Redmi 13 5G",
+      "brand": "Redmi",
+      "model": "Redmi 13 5G",
+      "variant": "8GB/128GB",
+      "attributes": {
+        "ram": "8GB",
+        "storage": "128GB",
+        "color": "Hawaiian Blue"
+      },
+      "status": "ok",
+      "identity_matched_offer_count": 2,
+      "comparable_offer_count": 1,
+      "best_offer": {
+        "retailer": "flipkart",
+        "retailer_product_id": "itmbf96c9b15ce5e",
+        "price": 24990.0,
+        "mrp": 24995.0,
+        "currency": "INR",
+        "availability": "in_stock",
+        "freshness": "fresh",
+        "product_url": "https://www.flipkart.com/redmi-13-5g-hawaiian-blue-128-gb/p/itmbf96c9b15ce5e",
+        "affiliate_url": "",
+        "last_checked": "2026-08-28T16:40:56.243647+00:00",
+        "source": "retailer_page_verified",
+        "confidence": 0.97
+      },
+      "price_gap": null,
+      "offers": [
+        {
+          "retailer": "flipkart",
+          "retailer_product_id": "itmbf96c9b15ce5e",
+          "price": 24990.0,
+          "mrp": 24995.0,
+          "currency": "INR",
+          "availability": "in_stock",
+          "freshness": "fresh",
+          "product_url": "https://www.flipkart.com/redmi-13-5g-hawaiian-blue-128-gb/p/itmbf96c9b15ce5e",
+          "affiliate_url": "",
+          "last_checked": "2026-08-28T16:40:56.243647+00:00",
+          "source": "retailer_page_verified",
+          "confidence": 0.97
+        },
+        {
+          "retailer": "amazon",
+          "retailer_product_id": "B0F1N8B7Z4",
+          "price": 19990.0,
+          "mrp": 19990.0,
+          "currency": "INR",
+          "availability": "unknown",
+          "freshness": "fresh",
+          "product_url": "https://www.amazon.in/dp/B0F1N8B7Z4?tag=guru0906-21",
+          "affiliate_url": "",
+          "last_checked": "2026-08-29T09:14:46.601779+00:00",
+          "source": "market_price_observed",
+          "confidence": 0.8
+        }
+      ]
+    },
+    {
+      "product_id": "cw-audio-11",
+      "title": "realme Buds Air 8",
+      "brand": "realme",
+      "model": "Buds Air 8",
+      "variant": "Master Gold",
+      "attributes": {
+        "color": "Master Gold"
+      },
+      "status": "no_offers",
+      "identity_matched_offer_count": 0,
+      "comparable_offer_count": 0,
+      "best_offer": null,
+      "price_gap": null,
+      "offers": []
+    },
+    {
+      "product_id": "cw-keyboard-13",
+      "title": "Yamaha PSS-E30 Remie Portable Mini Keyboard",
+      "brand": "Yamaha",
+      "model": "PSS-E30 Remie",
+      "variant": "White",
+      "attributes": {
+        "keys": "37",
+        "color": "White"
+      },
+      "status": "no_offers",
+      "identity_matched_offer_count": 0,
+      "comparable_offer_count": 0,
+      "best_offer": null,
+      "price_gap": null,
+      "offers": []
+    },
+    {
+      "product_id": "cw-telescope-20",
+      "title": "Audavibe Stellar 76700 Newtonian Reflector Telescope",
+      "brand": "Audavibe",
+      "model": "Stellar 76700",
+      "variant": "",
+      "attributes": {
+        "max_zoom": "235x"
+      },
+      "status": "no_offers",
+      "identity_matched_offer_count": 0,
+      "comparable_offer_count": 0,
+      "best_offer": null,
+      "price_gap": null,
+      "offers": []
+    }
+  ]
+}

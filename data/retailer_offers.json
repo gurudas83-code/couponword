@@ -73,6 +73,31 @@
         "evidence_observed_at": "2026-08-28T16:40:56.243647+00:00",
         "evidence_notes": "Exact Redmi 13 5G Hawaiian Blue 8GB/128GB Flipkart listing verified. Current page shows seller and delivery by 31 Aug 2026. Availability can change rapidly."
       }
+    },
+    {
+      "retailer": "amazon",
+      "product_id": "cw-mobile-10",
+      "retailer_product_id": "B0F1N8B7Z4",
+      "brand": "Redmi",
+      "model": "Redmi 13 5G",
+      "variant": "8GB/128GB",
+      "title": "Redmi 13 5G",
+      "price": 19990.0,
+      "mrp": 19990.0,
+      "currency": "INR",
+      "availability": "unknown",
+      "product_url": "https://www.amazon.in/dp/B0F1N8B7Z4?tag=guru0906-21",
+      "affiliate_url": "",
+      "source": "market_price_observed",
+      "confidence": 0.8,
+      "last_checked": "2026-08-29T09:14:46.601779+00:00",
+      "metadata": {
+        "raw_retailer": "Amazon",
+        "evidence_source_url": "https://www.amazon.in/dp/B0F1N8B7Z4?tag=guru0906-21",
+        "evidence_source_type": "market_price_observed",
+        "evidence_observed_at": "2026-08-29T09:14:46.601779+00:00",
+        "evidence_notes": "Exact ASIN B0F1N8B7Z4 verified for Redmi 13 5G Hawaiian Blue 8GB/128GB. Price observed at Rs 19,990. Live Amazon availability not independently verified, therefore availability remains unknown."
+      }
     }
   ]
 }
