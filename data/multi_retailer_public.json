@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-08-29T10:10:51.298602+00:00",
+  "generated_at": "2026-08-29T10:40:55.280781+00:00",
   "products": [
     {
       "product_id": "cw-mobile-72",
@@ -135,12 +135,54 @@
         "keys": "37",
         "color": "White"
       },
-      "status": "no_offers",
-      "identity_matched_offer_count": 0,
-      "comparable_offer_count": 0,
-      "best_offer": null,
+      "status": "ok",
+      "identity_matched_offer_count": 2,
+      "comparable_offer_count": 1,
+      "best_offer": {
+        "retailer": "flipkart",
+        "retailer_product_id": "itm5815b7d445a0e",
+        "price": 4391.0,
+        "mrp": 5195.0,
+        "currency": "INR",
+        "availability": "in_stock",
+        "freshness": "fresh",
+        "product_url": "https://www.flipkart.com/yamaha-pss-e30-remie-digital-portable-keyboard/p/itm5815b7d445a0e",
+        "affiliate_url": "",
+        "last_checked": "2026-08-29T10:38:17.246415+00:00",
+        "source": "retailer_page_verified",
+        "confidence": 0.97
+      },
       "price_gap": null,
-      "offers": []
+      "offers": [
+        {
+          "retailer": "flipkart",
+          "retailer_product_id": "itm5815b7d445a0e",
+          "price": 4391.0,
+          "mrp": 5195.0,
+          "currency": "INR",
+          "availability": "in_stock",
+          "freshness": "fresh",
+          "product_url": "https://www.flipkart.com/yamaha-pss-e30-remie-digital-portable-keyboard/p/itm5815b7d445a0e",
+          "affiliate_url": "",
+          "last_checked": "2026-08-29T10:38:17.246415+00:00",
+          "source": "retailer_page_verified",
+          "confidence": 0.97
+        },
+        {
+          "retailer": "amazon",
+          "retailer_product_id": "B08232VZ84",
+          "price": 4377.0,
+          "mrp": 5195.0,
+          "currency": "INR",
+          "availability": "unknown",
+          "freshness": "fresh",
+          "product_url": "https://www.amazon.in/dp/B08232VZ84",
+          "affiliate_url": "",
+          "last_checked": "2026-08-29T10:39:33.365631+00:00",
+          "source": "market_price_observed",
+          "confidence": 0.8
+        }
+      ]
     },
     {
       "product_id": "cw-telescope-20",

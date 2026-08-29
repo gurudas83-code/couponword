@@ -98,6 +98,76 @@
         "evidence_observed_at": "2026-08-29T09:14:46.601779+00:00",
         "evidence_notes": "Exact ASIN B0F1N8B7Z4 verified for Redmi 13 5G Hawaiian Blue 8GB/128GB. Price observed at Rs 19,990. Live Amazon availability not independently verified, therefore availability remains unknown."
       }
+    },
+    {
+      "retailer": "flipkart",
+      "product_id": "cw-keyboard-13",
+      "retailer_product_id": "itm5815b7d445a0e",
+      "brand": "Yamaha",
+      "model": "PSS-E30 Remie",
+      "variant": "White",
+      "title": "Yamaha PSS-E30 Remie Portable Mini Keyboard",
+      "price": 4391.0,
+      "mrp": 5195.0,
+      "currency": "INR",
+      "availability": "in_stock",
+      "product_url": "https://www.flipkart.com/yamaha-pss-e30-remie-digital-portable-keyboard/p/itm5815b7d445a0e",
+      "affiliate_url": "",
+      "source": "retailer_page_verified",
+      "confidence": 0.97,
+      "last_checked": "2026-08-29T10:38:17.246415+00:00",
+      "metadata": {
+        "evidence_source_url": "https://www.flipkart.com/yamaha-pss-e30-remie-digital-portable-keyboard/p/itm5815b7d445a0e",
+        "evidence_source_type": "retailer_page_verified",
+        "evidence_observed_at": "2026-08-29T10:38:17.246415+00:00",
+        "evidence_notes": "Exact Yamaha PSS-E30 Remie 37-key listing verified on Flipkart. Seller and delivery shown. Availability may change rapidly."
+      }
+    },
+    {
+      "retailer": "amazon",
+      "product_id": "cw-keyboard-13",
+      "retailer_product_id": "B08232VZ84",
+      "brand": "Yamaha",
+      "model": "PSS-E30 Remie",
+      "variant": "White",
+      "title": "Yamaha PSS-E30 Remie Portable Mini Keyboard",
+      "price": 4377.0,
+      "mrp": 5195.0,
+      "currency": "INR",
+      "availability": "unknown",
+      "product_url": "https://www.amazon.in/dp/B08232VZ84?tag=guru0906-21",
+      "affiliate_url": "",
+      "source": "market_price_observed",
+      "confidence": 0.8,
+      "last_checked": "2026-08-29T10:39:33.365631+00:00",
+      "metadata": {
+        "raw_retailer": "Amazon",
+        "evidence_source_url": "https://www.amazon.in/dp/B08232VZ84",
+        "evidence_source_type": "market_price_observed",
+        "evidence_observed_at": "2026-08-29T10:39:33.365631+00:00",
+        "evidence_notes": "Exact Amazon ASIN B08232VZ84 verified for Yamaha PSS-E30. Price observed at Rs 4,377. Live Amazon availability was not independently verified, therefore availability remains unknown."
+      }
+    },
+    {
+      "retailer": "amazon",
+      "product_id": "cw-audio-11",
+      "retailer_product_id": "B0GDQCTYFB",
+      "brand": "realme",
+      "model": "Buds Air 8",
+      "variant": "Master Gold",
+      "title": "realme Buds Air 8",
+      "price": 3999.0,
+      "mrp": 5299.0,
+      "currency": "INR",
+      "availability": "unknown",
+      "product_url": "https://www.amazon.in/dp/B0GDQCTYFB",
+      "affiliate_url": "",
+      "source": "market_price_observed",
+      "confidence": 0.8,
+      "last_checked": "2026-08-29T10:43:49.914652+00:00",
+      "metadata": {
+        "evidence_notes": "Exact Amazon ASIN B0GDQCTYFB verified for realme Buds Air 8 Master Gold. Price observed at Rs 3,999. Live Amazon availability not independently verified, therefore availability remains unknown."
+      }
     }
   ]
 }
