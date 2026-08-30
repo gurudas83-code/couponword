@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 from canonical_product import CanonicalProduct
+from amazon_evidence_collector import AmazonEvidenceCollector
+from flipkart_evidence_collector import FlipkartEvidenceCollector
 from evidence_offer_updater import apply_price_evidence
 from evidence_validator import validate_price_evidence
 from multi_retailer_engine import compare_offers
@@ -27,7 +29,12 @@ class MultiRetailerOrchestrator:
 
         self.evidence_manager = (
             evidence_manager
-            or RetailerEvidenceCollectorManager()
+            or RetailerEvidenceCollectorManager(
+                [
+                    AmazonEvidenceCollector(),
+                    FlipkartEvidenceCollector(),
+                ]
+            )
         )
 
     def run(
@@ -187,3 +194,4 @@ if __name__ == "__main__":
             "best_offer"
         ),
     )
+
