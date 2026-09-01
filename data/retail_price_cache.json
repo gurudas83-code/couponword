@@ -16,5 +16,1238 @@
     "source_host": "www.flipkart.com",
     "evidence_method": "json_ld_offer",
     "verified_at": "2026-08-09T18:34:29.039322+00:00"
+  },
+  "https://www.amazon.in/dp/B0DV97GJBK": {
+    "price": 72990.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0DV97GJBK?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_primary_buybox",
+    "verified_at": "2026-08-17T18:39:14.720898+00:00"
+  },
+  "https://www.amazon.in/dp/B0GXV5313B": {
+    "price": 49990.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GXV5313B?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-21T14:44:00.727774+00:00"
+  },
+  "https://www.amazon.in/dp/B0F63GQB55": {
+    "price": 43199.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0F63GQB55?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-21T14:46:01.438739+00:00"
+  },
+  "https://www.amazon.in/dp/B0F6VHPZS6": {
+    "price": 51950.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0F6VHPZS6?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-21T14:46:01.456556+00:00"
+  },
+  "https://www.amazon.in/dp/B0GYDZK595": {
+    "price": 79990.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GYDZK595?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-21T14:46:01.474423+00:00"
+  },
+  "https://www.amazon.in/dp/B0F6VG7MB3": {
+    "price": 58990.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0F6VG7MB3?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-21T14:46:01.491212+00:00"
+  },
+  "https://www.amazon.in/dp/B08VB2MRDJ": {
+    "price": 17990.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B08VB2MRDJ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-21T18:41:05.851910+00:00"
+  },
+  "https://www.amazon.in/dp/B0BSCDPVS2": {
+    "price": 17990.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0BSCDPVS2?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-21T14:52:44.324756+00:00"
+  },
+  "https://www.amazon.in/dp/B0HCZP3ZJG": {
+    "price": 19990.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0HCZP3ZJG?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-21T18:41:07.415251+00:00"
+  },
+  "https://www.amazon.in/dp/B0GQKQ9QVX": {
+    "price": 19499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GQKQ9QVX?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:07.432738+00:00"
+  },
+  "https://www.amazon.in/dp/B0FTZ1WND9": {
+    "price": 17999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FTZ1WND9?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:45:18.127866+00:00"
+  },
+  "https://www.amazon.in/dp/B0CV48QSRV": {
+    "price": 15999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0CV48QSRV?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-21T14:57:18.423721+00:00"
+  },
+  "https://www.amazon.in/dp/B0GGRT6Z46": {
+    "price": 18999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GGRT6Z46?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:08.265676+00:00"
+  },
+  "https://www.amazon.in/dp/B0GF24LR6D": {
+    "price": 31999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GF24LR6D?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T07:04:44.045677+00:00"
+  },
+  "https://www.amazon.in/dp/B0GS5Y6BD3": {
+    "price": 15499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GS5Y6BD3?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:59.220575+00:00"
+  },
+  "https://www.amazon.in/dp/B0GTRXVQ8N": {
+    "price": 15499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GTRXVQ8N?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:17:53.341912+00:00"
+  },
+  "https://www.amazon.in/dp/B0GWQZJQX6": {
+    "price": 17499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GWQZJQX6?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:39:40.674541+00:00"
+  },
+  "https://www.amazon.in/dp/B0GF1V7BCC": {
+    "price": 31999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GF1V7BCC?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T08:47:33.274137+00:00"
+  },
+  "https://www.amazon.in/dp/B0GVYXPZBS": {
+    "price": 30999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GVYXPZBS?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:45.706903+00:00"
+  },
+  "https://www.amazon.in/dp/B0H8CFCHRB": {
+    "price": 30999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H8CFCHRB?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:19:06.636672+00:00"
+  },
+  "https://www.amazon.in/dp/B0H293SFTR": {
+    "price": 41999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H293SFTR?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:38.820387+00:00"
+  },
+  "https://www.amazon.in/dp/B0G81XTZT4": {
+    "price": 21999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0G81XTZT4?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:18:06.310694+00:00"
+  },
+  "https://www.amazon.in/dp/B0FTZ1H478": {
+    "price": 17999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FTZ1H478?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:18:20.555179+00:00"
+  },
+  "https://www.amazon.in/dp/B0D67745WS": {
+    "price": 199.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0D67745WS?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T16:50:39.563190+00:00"
+  },
+  "https://www.amazon.in/dp/B0CWV1NK3Z": {
+    "price": 128.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0CWV1NK3Z?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T16:50:39.595551+00:00"
+  },
+  "https://www.amazon.in/dp/B0FL2H8HZ6": {
+    "price": 5299.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FL2H8HZ6?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:15.922132+00:00"
+  },
+  "https://www.amazon.in/dp/B0CZ474ZMY": {
+    "price": 699.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0CZ474ZMY?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:18:53.942951+00:00"
+  },
+  "https://www.amazon.in/dp/B0FT7VK6TZ": {
+    "price": 21588.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FT7VK6TZ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T07:03:57.135870+00:00"
+  },
+  "https://www.amazon.in/dp/B0H4TY7WRQ": {
+    "price": 29990.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H4TY7WRQ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:18:43.315164+00:00"
+  },
+  "https://www.amazon.in/dp/B0DYKC512N": {
+    "price": 16850.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0DYKC512N?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T17:00:29.209761+00:00"
+  },
+  "https://www.amazon.in/dp/B0DYP4NYYJ": {
+    "price": 15190.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0DYP4NYYJ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:10:32.733476+00:00"
+  },
+  "https://www.amazon.in/dp/B098KD2KL7": {
+    "price": 299.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B098KD2KL7?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T07:04:06.927764+00:00"
+  },
+  "https://www.amazon.in/dp/B0C8ZH17WQ": {
+    "price": 149.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0C8ZH17WQ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T07:04:06.950663+00:00"
+  },
+  "https://www.amazon.in/dp/B0GF23R9B6": {
+    "price": 34999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GF23R9B6?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T07:04:19.292528+00:00"
+  },
+  "https://www.amazon.in/dp/B0BRXVWN8Q": {
+    "price": 579.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0BRXVWN8Q?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T07:04:19.317192+00:00"
+  },
+  "https://www.amazon.in/dp/B0H297XH3K": {
+    "price": 41999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H297XH3K?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:59.259852+00:00"
+  },
+  "https://www.amazon.in/dp/B0GTRM9NQ7": {
+    "price": 15499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GTRM9NQ7?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:45.763143+00:00"
+  },
+  "https://www.amazon.in/dp/B0DQL91KVZ": {
+    "price": 24890.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0DQL91KVZ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:29.156479+00:00"
+  },
+  "https://www.amazon.in/dp/B0GVFZXB9J": {
+    "price": 12999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GVFZXB9J?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:45.793556+00:00"
+  },
+  "https://www.amazon.in/dp/B0GTRKWY7J": {
+    "price": 19999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GTRKWY7J?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:42:43.204844+00:00"
+  },
+  "https://www.amazon.in/dp/B0FDBB2VRC": {
+    "price": 20999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FDBB2VRC?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_primary_buybox",
+    "verified_at": "2026-08-23T17:33:48.084975+00:00"
+  },
+  "https://www.amazon.in/dp/B0H2YHDLXJ": {
+    "price": 359.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H2YHDLXJ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T07:04:57.890869+00:00"
+  },
+  "https://www.amazon.in/dp/B0CS69QQTG": {
+    "price": 58949.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0CS69QQTG?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:19:52.634697+00:00"
+  },
+  "https://www.amazon.in/dp/B0H1X5XP25": {
+    "price": 34999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H1X5XP25?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T07:20:42.103526+00:00"
+  },
+  "https://www.amazon.in/dp/B0H4L92YY7": {
+    "price": 29999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H4L92YY7?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:59.284823+00:00"
+  },
+  "https://www.amazon.in/dp/B0FW3XS6YG": {
+    "price": 24499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FW3XS6YG?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T07:20:43.695733+00:00"
+  },
+  "https://www.amazon.in/dp/B0H8CCBJBM": {
+    "price": 30999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H8CCBJBM?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T08:47:33.299759+00:00"
+  },
+  "https://www.amazon.in/dp/B09WN26DLF": {
+    "price": 19999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B09WN26DLF?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:18:06.333758+00:00"
+  },
+  "https://www.amazon.in/dp/B0CVLBYDQQ": {
+    "price": 27990.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0CVLBYDQQ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:18:20.579828+00:00"
+  },
+  "https://www.amazon.in/dp/B0H2X39PV6": {
+    "price": 19929.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H2X39PV6?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:07.477698+00:00"
+  },
+  "https://www.amazon.in/dp/B0GGRD8DRW": {
+    "price": 18499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GGRD8DRW?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:07.515057+00:00"
+  },
+  "https://www.amazon.in/dp/B0FJFT4VDY": {
+    "price": 21499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FJFT4VDY?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:19:38.204266+00:00"
+  },
+  "https://www.amazon.in/dp/B0H33NLLTS": {
+    "price": 19999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H33NLLTS?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:42:43.263625+00:00"
+  },
+  "https://www.amazon.in/dp/B0G81TPT89": {
+    "price": 19999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0G81TPT89?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:46.435373+00:00"
+  },
+  "https://www.amazon.in/dp/B0FJFSHJ6Z": {
+    "price": 25499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FJFSHJ6Z?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:19:24.163155+00:00"
+  },
+  "https://www.amazon.in/dp/B0GZGJ2XNQ": {
+    "price": 19499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GZGJ2XNQ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T16:45:30.152353+00:00"
+  },
+  "https://www.amazon.in/dp/B0FJFSNNMX": {
+    "price": 23499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FJFSNNMX?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:18:20.505855+00:00"
+  },
+  "https://www.amazon.in/dp/B0FKN95GMN": {
+    "price": 17835.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FKN95GMN?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:08.207482+00:00"
+  },
+  "https://www.amazon.in/dp/B0F8W1SNVP": {
+    "price": 19980.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0F8W1SNVP?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:18:20.650705+00:00"
+  },
+  "https://www.amazon.in/dp/B0FQ5JT9NS": {
+    "price": 189.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FQ5JT9NS?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:18:30.812211+00:00"
+  },
+  "https://www.amazon.in/dp/B0FQ5GWQDX": {
+    "price": 189.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FQ5GWQDX?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:18:30.834597+00:00"
+  },
+  "https://www.amazon.in/dp/B0DYDW6PK9": {
+    "price": 699.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0DYDW6PK9?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:24:12.133383+00:00"
+  },
+  "https://www.amazon.in/dp/B094H1CBZR": {
+    "price": 299.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B094H1CBZR?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T16:50:39.647764+00:00"
+  },
+  "https://www.amazon.in/dp/B0FT834QNK": {
+    "price": 23599.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FT834QNK?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:40:30.987161+00:00"
+  },
+  "https://www.amazon.in/dp/B0FLZ517QL": {
+    "price": 21874.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FLZ517QL?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:39.451035+00:00"
+  },
+  "https://www.amazon.in/dp/B0F1ZGG7YJ": {
+    "price": 14959.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0F1ZGG7YJ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:10:32.761104+00:00"
+  },
+  "https://www.amazon.in/dp/B0D5VQ8WF2": {
+    "price": 25999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0D5VQ8WF2?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:18:43.292343+00:00"
+  },
+  "https://www.amazon.in/dp/B09VKBL81J": {
+    "price": 23900.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B09VKBL81J?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:22.566194+00:00"
+  },
+  "https://www.amazon.in/dp/B09VK5D8KW": {
+    "price": 22900.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B09VK5D8KW?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:23.015737+00:00"
+  },
+  "https://www.amazon.in/dp/B0G3X99MZS": {
+    "price": 21999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0G3X99MZS?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:21.907069+00:00"
+  },
+  "https://www.amazon.in/dp/B0H255CF45": {
+    "price": 28999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H255CF45?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:19:06.610360+00:00"
+  },
+  "https://www.amazon.in/dp/B0G81P4MPG": {
+    "price": 19999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0G81P4MPG?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T16:53:12.341190+00:00"
+  },
+  "https://www.amazon.in/dp/B0H338XVJQ": {
+    "price": 23999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H338XVJQ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:31.686645+00:00"
+  },
+  "https://www.amazon.in/dp/B0H6C8Q3LR": {
+    "price": 22490.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H6C8Q3LR?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:22.010747+00:00"
+  },
+  "https://www.amazon.in/dp/B0GZGBXWJZ": {
+    "price": 19499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GZGBXWJZ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:22.046361+00:00"
+  },
+  "https://www.amazon.in/dp/B0H5VV2BGR": {
+    "price": 23990.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H5VV2BGR?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:27.878989+00:00"
+  },
+  "https://www.amazon.in/dp/B0FDB9H277": {
+    "price": 23999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FDB9H277?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:19:25.581285+00:00"
+  },
+  "https://www.amazon.in/dp/B0H83XVS8S": {
+    "price": 17899.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H83XVS8S?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:42:43.321634+00:00"
+  },
+  "https://www.amazon.in/dp/B0G827QJ7S": {
+    "price": 15999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0G827QJ7S?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:19:40.945117+00:00"
+  },
+  "https://www.amazon.in/dp/B0F8ZVRLZB": {
+    "price": 16790.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0F8ZVRLZB?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:19:52.668038+00:00"
+  },
+  "https://www.amazon.in/dp/B0G8JZP2QR": {
+    "price": 25990.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0G8JZP2QR?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:19:52.692011+00:00"
+  },
+  "https://www.amazon.in/dp/B0D2R2MXXJ": {
+    "price": 622.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0D2R2MXXJ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:19:52.716018+00:00"
+  },
+  "https://www.amazon.in/dp/B0H6HY2C29": {
+    "price": 12999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H6HY2C29?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:39:27.627767+00:00"
+  },
+  "https://www.amazon.in/dp/B0GWF2HM26": {
+    "price": 15949.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GWF2HM26?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:45:58.259038+00:00"
+  },
+  "https://www.amazon.in/dp/B0GTRSCBWX": {
+    "price": 19999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GTRSCBWX?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:45:58.284276+00:00"
+  },
+  "https://www.amazon.in/dp/B0GPXTY8V5": {
+    "price": 8999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GPXTY8V5?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T16:45:30.229099+00:00"
+  },
+  "https://www.amazon.in/dp/B0H1JD62J1": {
+    "price": 18999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H1JD62J1?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:45:18.056223+00:00"
+  },
+  "https://www.amazon.in/dp/B0FTZ3DR7D": {
+    "price": 17749.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FTZ3DR7D?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:45:18.080234+00:00"
+  },
+  "https://www.amazon.in/dp/B0H1WY1D37": {
+    "price": 19499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H1WY1D37?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T09:45:18.104974+00:00"
+  },
+  "https://www.amazon.in/dp/B0H6C1F3RC": {
+    "price": 19199.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H6C1F3RC?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:40:59.879689+00:00"
+  },
+  "https://www.amazon.in/dp/B0F9TT7Z5Q": {
+    "price": 19490.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0F9TT7Z5Q?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:42:43.240551+00:00"
+  },
+  "https://www.amazon.in/dp/B0H1JG522K": {
+    "price": 18999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H1JG522K?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T16:45:30.254158+00:00"
+  },
+  "https://www.amazon.in/dp/B0GGRQLMCG": {
+    "price": 18795.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GGRQLMCG?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:08.235679+00:00"
+  },
+  "https://www.amazon.in/dp/B0F4DK3PDS": {
+    "price": 19499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0F4DK3PDS?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:08.299111+00:00"
+  },
+  "https://www.amazon.in/dp/B0HDZRXPFM": {
+    "price": 299.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0HDZRXPFM?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T16:50:39.672486+00:00"
+  },
+  "https://www.amazon.in/dp/B0DHVYGFW1": {
+    "price": 799.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0DHVYGFW1?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:24:12.159236+00:00"
+  },
+  "https://www.amazon.in/dp/B0BBD88FZS": {
+    "price": 299.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0BBD88FZS?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T16:50:39.725186+00:00"
+  },
+  "https://www.amazon.in/dp/B0F1D9Q5G4": {
+    "price": 25999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0F1D9Q5G4?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:21.930611+00:00"
+  },
+  "https://www.amazon.in/dp/B0GMFQ6243": {
+    "price": 29999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GMFQ6243?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:59.312575+00:00"
+  },
+  "https://www.amazon.in/dp/B0FDB9H9Z7": {
+    "price": 25999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FDB9H9Z7?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:59.370152+00:00"
+  },
+  "https://www.amazon.in/dp/B0GHX9W5HW": {
+    "price": 20499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GHX9W5HW?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:31.744098+00:00"
+  },
+  "https://www.amazon.in/dp/B09VK34ZZR": {
+    "price": 24900.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B09VK34ZZR?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:33.076756+00:00"
+  },
+  "https://www.amazon.in/dp/B0GVG27VS7": {
+    "price": 12887.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GVG27VS7?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T16:45:30.129733+00:00"
+  },
+  "https://www.amazon.in/dp/B0F48D1KB2": {
+    "price": 2099.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0F48D1KB2?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:42.692343+00:00"
+  },
+  "https://www.amazon.in/dp/B0FJMRF4CM": {
+    "price": 699.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FJMRF4CM?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:42.717707+00:00"
+  },
+  "https://www.amazon.in/dp/B0D73XBQRW": {
+    "price": 1499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0D73XBQRW?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T10:44:42.757674+00:00"
+  },
+  "https://www.amazon.in/dp/B0B6CF6RF6": {
+    "price": 15499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0B6CF6RF6?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T16:45:30.277666+00:00"
+  },
+  "https://www.amazon.in/dp/B0BBD7MM24": {
+    "price": 299.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0BBD7MM24?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T16:50:39.751116+00:00"
+  },
+  "https://www.amazon.in/dp/B0GZVJHC5L": {
+    "price": 12999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GZVJHC5L?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T16:53:12.372697+00:00"
+  },
+  "https://www.amazon.in/dp/B0H4YW1MBH": {
+    "price": 11999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H4YW1MBH?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-26T18:17:01.006337+00:00"
+  },
+  "https://www.amazon.in/dp/B0GHWPCWFS": {
+    "price": 18499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GHWPCWFS?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T16:53:12.425247+00:00"
+  },
+  "https://www.amazon.in/dp/B082LZGK39": {
+    "price": 149.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B082LZGK39?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T16:53:12.451196+00:00"
+  },
+  "https://www.amazon.in/dp/B0GNZSK9HJ": {
+    "price": 16259.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GNZSK9HJ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T16:53:12.479776+00:00"
+  },
+  "https://www.amazon.in/dp/B0FN7QTRPY": {
+    "price": 11499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FN7QTRPY?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T16:53:12.504901+00:00"
+  },
+  "https://www.amazon.in/dp/B0FT8H8JZ8": {
+    "price": 23988.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FT8H8JZ8?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:46:30.123834+00:00"
+  },
+  "https://www.amazon.in/dp/B0CZ483PZ8": {
+    "price": 698.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0CZ483PZ8?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:24:12.105773+00:00"
+  },
+  "https://www.amazon.in/dp/B0CZ48FCDS": {
+    "price": 699.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0CZ48FCDS?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-23T17:39:48.812399+00:00"
+  },
+  "https://www.amazon.in/dp/B0GWLHVJRH": {
+    "price": 37999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GWLHVJRH?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:38.720072+00:00"
+  },
+  "https://www.amazon.in/dp/B0GF2H24ZJ": {
+    "price": 44999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GF2H24ZJ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:52.265920+00:00"
+  },
+  "https://www.amazon.in/dp/B0G5G25YBQ": {
+    "price": 31999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0G5G25YBQ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:38.855387+00:00"
+  },
+  "https://www.amazon.in/dp/B0G5G7LCJQ": {
+    "price": 28999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0G5G7LCJQ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:46.464696+00:00"
+  },
+  "https://www.amazon.in/dp/B0GS5Y7QBF": {
+    "price": 14499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GS5Y7QBF?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:52.301240+00:00"
+  },
+  "https://www.amazon.in/dp/B0H83WKFYR": {
+    "price": 48000.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H83WKFYR?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:52.887364+00:00"
+  },
+  "https://www.amazon.in/dp/B0CJ91BY1H": {
+    "price": 12998.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0CJ91BY1H?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:52.922489+00:00"
+  },
+  "https://www.amazon.in/dp/B0GVZ3MP99": {
+    "price": 14170.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GVZ3MP99?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:52.946686+00:00"
+  },
+  "https://www.amazon.in/dp/B0FTZ2CXWN": {
+    "price": 12980.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FTZ2CXWN?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:52.993716+00:00"
+  },
+  "https://www.amazon.in/dp/B0GZQDHYMD": {
+    "price": 12999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GZQDHYMD?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:53.023831+00:00"
+  },
+  "https://www.amazon.in/dp/B0GVYFM7QZ": {
+    "price": 34999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GVYFM7QZ?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:59.112093+00:00"
+  },
+  "https://www.amazon.in/dp/B0GF22T5WM": {
+    "price": 34999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GF22T5WM?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:59.138746+00:00"
+  },
+  "https://www.amazon.in/dp/B0H33KMYHX": {
+    "price": 22999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H33KMYHX?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-24T18:33:59.337195+00:00"
+  },
+  "https://www.amazon.in/dp/B0CYQ3T919": {
+    "price": 31999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0CYQ3T919?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-26T18:17:00.907802+00:00"
+  },
+  "https://www.amazon.in/dp/B0GS17CJDB": {
+    "price": 45999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0GS17CJDB?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-26T18:17:00.931289+00:00"
+  },
+  "https://www.amazon.in/dp/B0H4VCH2LG": {
+    "price": 40499.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H4VCH2LG?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-26T18:17:00.955784+00:00"
+  },
+  "https://www.amazon.in/dp/B0H1X9D2VG": {
+    "price": 35999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H1X9D2VG?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-26T18:17:00.982591+00:00"
+  },
+  "https://www.amazon.in/dp/B0HDYW9SF9": {
+    "price": 38999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0HDYW9SF9?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-26T18:17:00.824682+00:00"
+  },
+  "https://www.amazon.in/dp/B0FW3V3K32": {
+    "price": 32999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0FW3V3K32?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card_offer_text",
+    "verified_at": "2026-08-26T18:17:00.881502+00:00"
+  },
+  "https://www.amazon.in/dp/B0H4LBSKK3": {
+    "price": 33999.0,
+    "currency": "INR",
+    "verified": true,
+    "source_url": "https://www.amazon.in/dp/B0H4LBSKK3?tag=guru0906-21",
+    "source_host": "www.amazon.in",
+    "evidence_method": "amazon_exact_asin_search_card",
+    "verified_at": "2026-08-26T18:17:00.857528+00:00"
   }
 }
