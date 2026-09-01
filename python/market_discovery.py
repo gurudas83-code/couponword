@@ -2003,15 +2003,22 @@ def discover_market(
                 commerce_results = []
                 open_web_results = []
 
-        if not commerce_results:
+        # Coupon World's local knowledge + Amazon exact-ASIN search-card
+        # lane supplements general commerce discovery rather than running
+        # only when Tavily returns zero results.
+        #
+        # This keeps discovery-provider relevance separate from evidence
+        # quality: downstream identity, variant and evidence gates still
+        # decide what is trustworthy and final Fit remains unaffected.
+        supplementary_commerce_results = fallback_search_channel(
+            query=query,
+            category=category,
+            include_domains=COMMERCE_DOMAINS,
+            channel="commerce",
+            max_results=20,
+        )
 
-            commerce_results = fallback_search_channel(
-                query=query,
-                category=category,
-                include_domains=COMMERCE_DOMAINS,
-                channel="commerce",
-                max_results=20,
-            )
+        commerce_results.extend(supplementary_commerce_results)
 
         if not open_web_results:
 
@@ -2252,6 +2259,43 @@ def discover_market(
         "reject": 0,
     }
 
+    def named_model_evidence_priority(
+        item: dict[str, Any],
+    ) -> int:
+        """
+        Prefer stronger commerce evidence only for an explicit named-model
+        query after the strict model/variant gates have already passed.
+
+        This is discovery evidence priority, not product Fit and not a
+        retailer preference.
+        """
+        if not exact_query_model_tokens:
+            return 0
+
+        title_text = clean(item.get("clean_title") or item.get("title"))
+
+        # Do not let protection/warranty/service bundles become the primary
+        # handset evidence merely because they expose an ASIN and price.
+        if re.search(
+            r"\b(?:care services|damage protection|protection plan|"
+            r"extended warranty|warranty plan)\b",
+            title_text,
+            re.I,
+        ):
+            return 0
+
+        asin = clean(item.get("asin"))
+        price_text = clean(item.get("search_price_text"))
+        method = clean(item.get("search_price_evidence_method"))
+
+        if asin and price_text and method:
+            return 2
+
+        if asin:
+            return 1
+
+        return 0
+
     ranked.sort(
         key=lambda item: (
             variant_priority.get(
@@ -2260,6 +2304,7 @@ def discover_market(
                 ).lower(),
                 1,
             ),
+            named_model_evidence_priority(item),
             item["quality_score"],
             item["search_score"],
         ),
