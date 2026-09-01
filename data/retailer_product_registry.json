@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "products": {
+    "cw-mobile-72": {
+      "amazon": {
+        "retailer_product_id": "B0FDBB2VRC",
+        "product_url": "https://www.amazon.in/dp/B0FDBB2VRC",
+        "confidence": 0.95,
+        "source": "pilot_manifest_verified_identity"
+      },
+      "flipkart": {
+        "retailer_product_id": "MOBHEYY2FCCGHYEM",
+        "product_url": "https://www.flipkart.com/samsung-m36-5g-velvet-black-black-128-gb/p/itm1e7be51802033?pid=MOBHEYY2FCCGHYEM",
+        "confidence": 0.95,
+        "source": "verified-web-match"
+      }
+    },
+    "cw-mobile-10": {
+      "amazon": {
+        "retailer_product_id": "B0F1N8B7Z4",
+        "product_url": "https://www.amazon.in/dp/B0F1N8B7Z4",
+        "confidence": 0.95,
+        "source": "pilot_manifest_verified_identity"
+      },
+      "flipkart": {
+        "retailer_product_id": "itmbf96c9b15ce5e",
+        "product_url": "https://www.flipkart.com/redmi-13-5g-hawaiian-blue-128-gb/p/itmbf96c9b15ce5e",
+        "confidence": 0.97,
+        "source": "verified-web-match"
+      }
+    },
+    "cw-audio-11": {
+      "amazon": {
+        "retailer_product_id": "B0GDQCTYFB",
+        "product_url": "https://www.amazon.in/dp/B0GDQCTYFB",
+        "confidence": 0.95,
+        "source": "pilot_manifest_verified_identity"
+      }
+    },
+    "cw-keyboard-13": {
+      "amazon": {
+        "retailer_product_id": "B08232VZ84",
+        "product_url": "https://www.amazon.in/dp/B08232VZ84",
+        "confidence": 0.95,
+        "source": "pilot_manifest_verified_identity"
+      },
+      "flipkart": {
+        "retailer_product_id": "itm5815b7d445a0e",
+        "product_url": "https://www.flipkart.com/yamaha-pss-e30-remie-digital-portable-keyboard/p/itm5815b7d445a0e",
+        "confidence": 0.97,
+        "source": "verified-web-match"
+      }
+    },
+    "cw-telescope-20": {
+      "amazon": {
+        "retailer_product_id": "B0F26CLKW9",
+        "product_url": "https://www.amazon.in/dp/B0F26CLKW9",
+        "confidence": 0.95,
+        "source": "pilot_manifest_verified_identity"
+      }
+    }
+  }
+}

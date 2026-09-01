@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Coupon World AI OS
 Market Discovery Engine v1.6.1
@@ -1825,6 +1825,41 @@ def discover_market(
     # discovery recall without relaxing recommendation correctness.
     if live_fast and len(queries) > 2:
         live_queries: list[str] = []
+
+        # If the shopper explicitly names an alphanumeric product model,
+        # reserve the first live discovery slot for the query that preserves
+        # that exact model token. This improves recall without weakening any
+        # downstream identity, variant, evidence, or recommendation gate.
+        query_key_for_live_model = normalize_key(user_query)
+
+        live_model_tokens = {
+            token
+            for token in query_key_for_live_model.split()
+            if re.search(r"[a-z]", token)
+            and re.search(r"\d", token)
+            and token not in {"5g", "4g", "3g", "2g"}
+            and not re.fullmatch(
+                r"\d+(?:\.\d+)?"
+                r"(?:gb|tb|mb|mah|hz|khz|mhz|ghz|mp|w|kw|v|inch|inches|cm|mm)",
+                token,
+                re.I,
+            )
+        }
+
+        if live_model_tokens:
+            named_model_query = next(
+                (
+                    query
+                    for query in queries
+                    if live_model_tokens.issubset(
+                        set(normalize_key(query).split())
+                    )
+                ),
+                None,
+            )
+
+            if named_model_query:
+                live_queries.append(named_model_query)
 
         must_have_values = {
             clean(value).lower()

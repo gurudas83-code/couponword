@@ -61,8 +61,64 @@ from retail_price_evidence import build_price_evidence
 from resolver_engine import compare_identity
 from weighted_fit_engine import calculate_product_fit
 
+from core_multi_retailer_adapter import build_canonical_product
+from multi_retailer_orchestrator import MultiRetailerOrchestrator
+
 
 RUNTIME_OUTPUT = ROOT / "data" / "runtime_shopping_intelligence.json"
+
+
+def enrich_with_multi_retailer(
+    *,
+    profile: dict[str, Any],
+    identity: dict[str, Any],
+    assessment: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Add WHERE/NOW retailer intelligence to an already selected Core product.
+
+    Fail-soft contract:
+    - never changes Core fit, rank, eligibility, or verified price
+    - never writes retailer evidence to persistent storage
+    - retailer/network failure must not fail the Core recommendation
+    """
+
+    result: dict[str, Any] = {
+        "retailer_offers": [],
+        "best_offer": None,
+        "retailer_comparison_status": "unavailable",
+    }
+
+    try:
+        canonical = build_canonical_product(
+            profile=profile,
+            identity=identity,
+            assessment=assessment,
+        )
+
+        if not canonical.product_id or not canonical.brand or not canonical.model:
+            result["retailer_comparison_status"] = "insufficient_identity"
+            return result
+
+        retailer_result = MultiRetailerOrchestrator().run(
+            canonical,
+            write=False,
+        )
+
+        comparison = retailer_result.get("comparison") or {}
+
+        result["retailer_offers"] = retailer_result.get("offers") or []
+        result["best_offer"] = comparison.get("best_offer")
+        result["retailer_comparison_status"] = (
+            comparison.get("status") or "unavailable"
+        )
+
+        return result
+
+    except Exception as error:
+        result["retailer_comparison_status"] = "error"
+        result["retailer_error"] = str(error)
+        return result
 
 MIN_FIT_PERCENT = 50
 DEFAULT_MAX_RESULTS = 5
@@ -162,7 +218,7 @@ def sanitize_discovery_title(value: Any) -> str:
     title = " ".join(words).strip()
 
     # Remove common source suffixes without destroying hyphenated models.
-    for sep in (" | ", " – ", " — "):
+    for sep in (" | ", " â€“ ", " â€” "):
         if sep in title:
             left = clean(title.split(sep, 1)[0])
             if len(left.split()) >= 2:
@@ -2091,6 +2147,12 @@ def run_pipeline(
         profile = item["profile"]
         strong, tradeoffs, unknown = criterion_groups(assessment)
 
+        multi_retailer = enrich_with_multi_retailer(
+            profile=profile,
+            identity=item.get("identity", {}) or {},
+            assessment=assessment,
+        )
+
         recommendations.append({
             "rank": rank,
             "product_id": profile.get("product_id"),
@@ -2112,6 +2174,14 @@ def run_pipeline(
             "official_source": profile.get("official_product_url"),
             "market_source": profile.get("market_source_url"),
             "provenance": profile.get("provenance", {}),
+            "retailer_offers": multi_retailer.get(
+                "retailer_offers", []
+            ),
+            "best_offer": multi_retailer.get("best_offer"),
+            "retailer_comparison_status": multi_retailer.get(
+                "retailer_comparison_status",
+                "unavailable",
+            ),
         })
 
     failure_counter = Counter()
@@ -2139,9 +2209,15 @@ def run_pipeline(
     for item in scored_records:
         assessment = item.get("fit_assessment", {})
         profile = item.get("profile", {})
+        candidate = item.get("candidate", {}) or {}
+        identity = item.get("identity", {}) or {}
 
         fit_diagnostics.append({
             "product_id": profile.get("product_id"),
+            "candidate_asin": candidate.get("asin"),
+            "identity_asin": identity.get("asin"),
+            "profile_asin": profile.get("asin"),
+            "identity_model": identity.get("model"),
             "title": profile.get("title"),
             "brand": profile.get("brand"),
             "price": profile.get("price"),
@@ -2328,3 +2404,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
