@@ -1905,6 +1905,185 @@ def run_pipeline(
 
     qualifying = deduped_qualifying
 
+    # ---------------------------------------------------------
+    # NO-MATCH INTELLIGENCE
+    # ---------------------------------------------------------
+    # When no product satisfies all hard constraints, preserve
+    # strict recommendation integrity but return useful nearby
+    # options separately.
+    closest_matches: list[dict[str, Any]] = []
+
+    if not qualifying and scored_records:
+        budget = intent.get("budget_max")
+
+        nearby_records = []
+
+        for item in scored_records:
+            assessment = item.get("fit_assessment", {}) or {}
+            profile = item.get("profile", {}) or {}
+
+            price = profile.get("price")
+
+            try:
+                numeric_price = float(price) if price is not None else None
+            except (TypeError, ValueError):
+                numeric_price = None
+
+            budget_gap = None
+
+            if budget is not None and numeric_price is not None:
+                try:
+                    budget_gap = max(
+                        0.0,
+                        numeric_price - float(budget),
+                    )
+                except (TypeError, ValueError):
+                    budget_gap = None
+
+            nearby_records.append(
+                {
+                    "item": item,
+                    "price": numeric_price,
+                    "budget_gap": budget_gap,
+                    "fit_percent": int(
+                        assessment.get("fit_percent") or 0
+                    ),
+                    "coverage": int(
+                        assessment.get(
+                            "evidence_coverage_percent"
+                        ) or 0
+                    ),
+                }
+            )
+
+        nearby_records.sort(
+            key=lambda row: (
+                row["budget_gap"]
+                if row["budget_gap"] is not None
+                else float("inf"),
+                -row["fit_percent"],
+                -row["coverage"],
+            )
+        )
+
+        for row in nearby_records[:3]:
+            item = row["item"]
+            profile = item.get("profile", {}) or {}
+            assessment = item.get("fit_assessment", {}) or {}
+
+            closest_matches.append(
+                {
+                    "title": profile.get("title"),
+                    "brand": profile.get("brand"),
+                    "price": row["price"],
+                    "budget_gap": row["budget_gap"],
+                    "fit_percent": row["fit_percent"],
+                    "evidence_coverage_percent": row["coverage"],
+                    "hard_constraint_failures": assessment.get(
+                        "hard_constraint_failures", []
+                    ),
+                    "market_source": profile.get(
+                        "market_source_url"
+                    ),
+                }
+            )
+    
+        # ---------------------------------------------------------
+    # CONSTRAINT RELAXATION INTELLIGENCE
+    # ---------------------------------------------------------
+    # Only emit relaxations that are supported by already
+    # verified/scored evidence. Do not speculate that changing
+    # RAM/storage/brand will produce a match without re-running
+    # discovery under that relaxed constraint.
+    relaxation_options: list[dict[str, Any]] = []
+
+    if not qualifying and closest_matches:
+        budget_max = intent.get("budget_max")
+
+        if budget_max is not None:
+            budget_candidates = [
+                item
+                for item in closest_matches
+                if item.get("price") is not None
+                and item.get("budget_gap") is not None
+                and float(item.get("budget_gap") or 0) > 0
+            ]
+
+            if budget_candidates:
+                nearest = min(
+                    budget_candidates,
+                    key=lambda item: float(
+                        item.get("budget_gap") or float("inf")
+                    ),
+                )
+
+                relaxation_options.append(
+                    {
+                        "type": "increase_budget",
+                        "status": "verified",
+                        "current_budget": float(budget_max),
+                        "suggested_budget": float(
+                            nearest.get("price")
+                        ),
+                        "additional_budget_needed": float(
+                            nearest.get("budget_gap")
+                        ),
+                        "unlocks_product": nearest.get("title"),
+                        "reason": (
+                            "Nearest verified product satisfying the "
+                            "researched requirements is above the "
+                            "current budget."
+                        ),
+                    }
+                )
+
+        # These are potential next searches, not verified claims.
+        must_have = list(intent.get("must_have") or [])
+        brands = list(intent.get("brands") or [])
+
+        for requirement in must_have:
+            if requirement.endswith("gb_storage"):
+                relaxation_options.append(
+                    {
+                        "type": "relax_storage",
+                        "status": "requires_research",
+                        "current_requirement": requirement,
+                        "reason": (
+                            "Search again with a lower storage "
+                            "requirement while preserving the other "
+                            "constraints."
+                        ),
+                    }
+                )
+
+            elif requirement.endswith("gb_ram"):
+                relaxation_options.append(
+                    {
+                        "type": "relax_ram",
+                        "status": "requires_research",
+                        "current_requirement": requirement,
+                        "reason": (
+                            "Search again with a lower RAM "
+                            "requirement while preserving the other "
+                            "constraints."
+                        ),
+                    }
+                )
+
+        if brands:
+            relaxation_options.append(
+                {
+                    "type": "relax_brand",
+                    "status": "requires_research",
+                    "current_brands": brands,
+                    "reason": (
+                        "Search other brands while preserving "
+                        "budget and must-have specifications."
+                    ),
+                }
+            )
+  
+
     recommendations: list[dict[str, Any]] = []
 
     for rank, item in enumerate(qualifying[:max_results], start=1):
@@ -2017,6 +2196,8 @@ def run_pipeline(
             "recommendations_returned": len(recommendations),
         },
         "recommendations": recommendations,
+        "closest_matches": closest_matches,
+        "relaxation_options": relaxation_options,
         "fit_diagnostics": fit_diagnostics,
         "failure_summary": failure_summary,
         "failures": failures,

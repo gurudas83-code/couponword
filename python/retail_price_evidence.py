@@ -530,7 +530,10 @@ def build_price_evidence(candidate: dict[str, Any]) -> dict[str, Any]:
         and url_asin
         and candidate_asin == url_asin
         and search_price_text
-        and search_price_method == "amazon_exact_asin_search_card"
+        and search_price_method in {
+    "amazon_exact_asin_search_card",
+    "amazon_exact_asin_search_card_offer_text",
+}
         and "amazon.in" in source_host.lower()
     ):
         search_card_price = normalize_amount(search_price_text)

@@ -497,6 +497,103 @@ def build_discovery_queries(
         )
     )
 
+    # --------------------------------------------------------
+    # Mobile specialist lane: RAM / storage variant discovery.
+    #
+    # Commerce sources express the same phone capacity in several ways:
+    #   8GB RAM 256GB
+    #   8GB + 256GB
+    #   8+256GB
+    #   (8 GB RAM, 256 GB)
+    #
+    # Discovery should maximize recall across these representations.
+    # Exact capacity compliance remains the responsibility of the
+    # downstream evidence / hard-constraint verification layer.
+    # --------------------------------------------------------
+    if category in {"mobile", "phone", "smartphone", "mobile phone"}:
+        query_text = " ".join(
+            [
+                clean(user_query),
+                *must_have,
+                *features,
+            ]
+        )
+
+        ram_match = re.search(
+            r"\b(\d{1,3})\s*gb(?:\s*ram|_ram)?\b",
+            query_text,
+            re.I,
+        )
+
+        storage_match = re.search(
+            r"\b(\d{2,4})\s*gb(?:\s*(?:storage|rom|internal storage)|_storage)?\b",
+            query_text,
+            re.I,
+        )
+
+        ram_gb = int(ram_match.group(1)) if ram_match else None
+        storage_gb = int(storage_match.group(1)) if storage_match else None
+
+        # Avoid accidentally treating the RAM number as storage when
+        # both capacities are written in normal shopper wording.
+        if ram_gb is not None:
+            storage_candidates = [
+                int(value)
+                for value in re.findall(
+                    r"\b(\d{2,4})\s*gb\b",
+                    query_text,
+                    re.I,
+                )
+                if int(value) != ram_gb
+            ]
+
+            if storage_candidates:
+                storage_gb = max(storage_candidates)
+
+        if ram_gb is not None and storage_gb is not None:
+            # Retailer-style identity query.
+            #
+            # Keep this deliberately clean: budget / India / "buy" terms
+            # can reduce exact-variant recall on retailer search pages.
+            # Budget compliance is enforced downstream from verified price.
+            if brand_terms:
+                brand = brand_terms[0]
+
+                brand_family = {
+                    "samsung": "Galaxy",
+                }.get(normalize_key(brand))
+
+                queries.append(
+                    join_unique(
+                        [
+                            brand,
+                            brand_family,
+                            f"{storage_gb}GB",
+                            f"{ram_gb}GB RAM",
+                        ]
+                    )
+                )
+
+            capacity_variants = [
+                f"{ram_gb}GB RAM {storage_gb}GB",
+                f"{ram_gb}GB {storage_gb}GB",
+                f"{ram_gb}GB+{storage_gb}GB",
+            ]
+
+            for capacity_variant in capacity_variants:
+                queries.append(
+                    join_unique(
+                        [
+                            *brand_terms,
+                            category or "smartphone",
+                            capacity_variant,
+                            *budget_terms,
+                            "India",
+                            "buy",
+                        ]
+                    )
+                )
+
     # Preserve an explicit shopper brand across generated lanes.
     # The original-user-query lane already contains the user's wording.
     if brand_terms:
@@ -1010,8 +1107,16 @@ def fallback_search_channel(
             }
         )
 
-        if len(accepted) >= max_results:
-            break
+        # Do not stop live Amazon collection because local fallback
+        # candidates already consumed part of max_results.
+        #
+        # search_asins() already limits the Amazon card count.
+        # Downstream purity / variant / brand gates should decide which
+        # candidates survive.
+        #
+        # This is important for constrained searches such as
+        # "Samsung 8GB RAM 256GB under 25000", where the correct variant
+        # may appear later in Amazon's search results.
 
     live_amazon_results = [
         item
@@ -1287,6 +1392,39 @@ def _capacity_values_from_title(
             if ram <= 64 and storage >= 32 and storage not in values:
                 values.append(storage)
 
+        # Common marketplace variant titles:
+        #
+        #   (Black, 128 GB) (8 GB RAM)
+        #   Violet, 256 GB, 8 GB RAM
+        #
+        # A standalone capacity >= 32GB is treated as storage only when
+        # it is NOT immediately labelled as RAM/virtual/dynamic memory.
+        #
+        # This keeps 8 GB RAM out of the storage signal while allowing
+        # retailer variant capacities such as 128 GB / 256 GB.
+        for match in re.finditer(
+            r"\b(\d{2,4})\s*gb\b",
+            text,
+            flags=re.I,
+        ):
+            storage = int(match.group(1))
+
+            if storage < 32:
+                continue
+
+            tail = text[match.end():match.end() + 30]
+
+            if re.match(
+                r"\s*(?:physical\s+)?ram\b|"
+                r"\s*(?:virtual|dynamic|extended)\s+ram\b",
+                tail,
+                re.I,
+            ):
+                continue
+
+            if storage not in values:
+                values.append(storage)
+
     # Common marketplace shorthand:
     # "(6GB, 128GB)" or "(8GB, 256GB)"
     #
@@ -1510,6 +1648,10 @@ def category_accessory_gate(
         r"\btempered\s+glass\b",
         r"\bphone\s+case\b",
         r"\bmobile\s+case\b",
+        r"\bkeyboard\s+case\b",
+        r"\btablet\s+case\b",
+        r"\bfolio\s+cover\b",
+        r"\bgalaxy\s+tab\b",
         r"\bflip\s+case\b",
         r"\bback\s+cover\b",
         r"\bprotective\s+cover\b",
@@ -1672,8 +1814,101 @@ def discover_market(
 
     # Visitor requests must keep discovery latency bounded.
     # Deep/offline mode still uses the full discovery query set.
+    #
+    # For RAM/storage-specific smartphone searches, blindly taking the
+    # first two queries wastes both live slots on near-duplicates.
+    # Prefer:
+    #   1. one retailer-friendly exact capacity representation
+    #   2. one broad brand/category/budget fallback
+    #
+    # Downstream variant/evidence gates remain strict, so this increases
+    # discovery recall without relaxing recommendation correctness.
     if live_fast and len(queries) > 2:
-        queries = queries[:2]
+        live_queries: list[str] = []
+
+        must_have_values = {
+            clean(value).lower()
+            for value in intent.get("must_have", [])
+            if clean(value)
+        }
+
+        has_ram_requirement = any(
+            re.fullmatch(r"\d+gb_ram", value)
+            for value in must_have_values
+        )
+        has_storage_requirement = any(
+            re.fullmatch(r"\d+gb_storage", value)
+            for value in must_have_values
+        )
+
+        if (
+            category == "smartphone"
+            and has_ram_requirement
+            and has_storage_requirement
+        ):
+            # Prefer the clean retailer-style brand/family/capacity
+            # query when available. This avoids noisy terms such as
+            # "under", "India" and "buy" reducing exact variant recall.
+            specialist = next(
+                (
+                    query
+                    for query in queries
+                    if re.search(
+                        r"\b\d{2,4}gb\b.*\b\d{1,3}gb\s+ram\b",
+                        query,
+                        re.I,
+                    )
+                    and "india" not in query.lower()
+                    and "under" not in query.lower()
+                    and "buy" not in query.lower()
+                ),
+                None,
+            )
+
+            if specialist is None:
+                specialist = next(
+                    (
+                        query
+                        for query in queries
+                        if re.search(
+                            r"\b\d{1,3}gb\+\d{2,4}gb\b",
+                            query,
+                            re.I,
+                        )
+                    ),
+                    None,
+                )
+
+            # Broad fallback should preserve brand/category/budget but
+            # not force a particular capacity representation.
+            broad = next(
+                (
+                    query
+                    for query in queries
+                    if "ram" not in query.lower()
+                    and "storage" not in query.lower()
+                    and not re.search(
+                        r"\b\d{1,3}gb\+\d{2,4}gb\b",
+                        query,
+                        re.I,
+                    )
+                ),
+                None,
+            )
+
+            for query in (specialist, broad):
+                if query and query not in live_queries:
+                    live_queries.append(query)
+
+        # Generic categories / queries keep the original fast behavior.
+        for query in queries:
+            if len(live_queries) >= 2:
+                break
+
+            if query not in live_queries:
+                live_queries.append(query)
+
+        queries = live_queries[:2]
 
     api_key = os.environ.get("TAVILY_API_KEY")
 
@@ -1772,12 +2007,40 @@ def discover_market(
     # "8/128 phone under 20k" remain unrestricted.
     query_key_for_model = normalize_key(user_query)
 
+    def is_capacity_or_unit_token(token: str) -> bool:
+        """
+        Exclude shopper specification tokens from exact model locking.
+
+        Examples:
+        - 8gb / 12gb RAM
+        - 128gb / 256gb / 512gb storage
+        - 1tb storage
+        - 5000mah battery
+        - 120hz refresh rate
+
+        True model tokens such as F36, A23, S24 and G86 remain eligible.
+        """
+        token = str(token or "").lower().strip()
+
+        if not token:
+            return False
+
+        return bool(
+            re.fullmatch(
+                r"\d+(?:\.\d+)?"
+                r"(?:gb|tb|mb|mah|hz|khz|mhz|ghz|mp|w|kw|v|inch|inches|cm|mm)",
+                token,
+                re.I,
+            )
+        )
+
     exact_query_model_tokens = {
         token
         for token in query_key_for_model.split()
         if re.search(r"[a-z]", token)
         and re.search(r"\d", token)
         and token not in {"5g", "4g", "3g", "2g"}
+        and not is_capacity_or_unit_token(token)
     }
 
     # Brand semantics must distinguish REQUIRED, PREFERRED and AVOIDED.
@@ -1842,11 +2105,40 @@ def discover_market(
 
         # Explicit/bare brand scope is hard. Preferred brands are ranked
         # downstream and therefore must not narrow discovery.
-        if required_brands and not any(
-            re.search(
+        #
+        # Marketplace titles sometimes omit the manufacturer name while
+        # retaining a distinctive product-family identity. Example:
+        #   "Galaxy A17 5G ..." instead of "Samsung Galaxy A17 5G ..."
+        #
+        # Accept a small conservative set of strong family aliases rather
+        # than weakening the brand gate globally.
+        def title_matches_required_brand(brand: str) -> bool:
+            if re.search(
                 rf"(?:^|\s){re.escape(brand)}(?:\s|$)",
                 normalized_title,
-            )
+            ):
+                return True
+
+            # Amazon frequently omits "Samsung" from genuine Galaxy
+            # phone titles. Do not treat the word "Galaxy" alone as
+            # Samsung evidence because unrelated products such as
+            # "Gesto Galaxy Projector" would leak through.
+            if brand == "samsung":
+                return bool(
+                    re.search(
+                        r"\bgalaxy\s+(?:"
+                        r"[amfs]\s*\d{1,3}[a-z]*"
+                        r"|z\s*(?:fold|flip)\s*\d*[a-z]*"
+                        r")\b",
+                        normalized_title,
+                        re.I,
+                    )
+                )
+
+            return False
+
+        if required_brands and not any(
+            title_matches_required_brand(brand)
             for brand in required_brands
         ):
             continue
@@ -1907,8 +2199,32 @@ def discover_market(
 
     # Quality-aware discovery ranking.
     # Known brand is supportive evidence, never a hard requirement.
+    # Variant-aware discovery ranking.
+    #
+    # Explicitly confirmed shopper requirements must outrank candidates
+    # whose title does not provide enough variant evidence.
+    #
+    # PASS    -> strongest discovery priority
+    # UNKNOWN -> remains eligible for downstream verification
+    # REJECT  -> already removed above
+    #
+    # This does not convert discovery evidence into final recommendation
+    # Fit. It only prevents an unknown variant from crowding out an
+    # explicitly matching variant before max_candidates truncation.
+    variant_priority = {
+        "pass": 2,
+        "unknown": 1,
+        "reject": 0,
+    }
+
     ranked.sort(
         key=lambda item: (
+            variant_priority.get(
+                clean(
+                    (item.get("variant_gate") or {}).get("status")
+                ).lower(),
+                1,
+            ),
             item["quality_score"],
             item["search_score"],
         ),

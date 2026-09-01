@@ -704,12 +704,46 @@ def compare_identity(
             )
         )
 
+    # ---------------------------------------------------------
+    # Samsung Galaxy family fallback.
+    #
+    # Amazon frequently omits the literal "Samsung" brand from
+    # genuine Samsung phone titles, e.g.:
+    #   Galaxy A17 5G
+    #   Galaxy M55 5G
+    #   Galaxy F70 Pro 5G
+    #
+    # Do NOT treat the word "Galaxy" alone as Samsung evidence.
+    # That would incorrectly accept unrelated products such as
+    # "Gesto Galaxy Projector".
+    #
+    # Require a recognised Samsung Galaxy phone-family model:
+    #   A-series, M-series, F-series, S-series, Z Fold/Flip.
+    # ---------------------------------------------------------
+    samsung_galaxy_phone_family_match = False
+
+    if (
+        expected_brand_norm == "samsung"
+        and candidate_title_norm
+    ):
+        samsung_galaxy_phone_family_match = bool(
+            re.search(
+                r"\bgalaxy\s+(?:"
+                r"[amfs]\s*\d{1,3}[a-z]*"
+                r"|z\s*(?:fold|flip)\s*\d*[a-z]*"
+                r")\b",
+                candidate_title_norm,
+                flags=re.I,
+            )
+        )
+
     brand_match = bool(
         expected_brand_norm
         and (
             candidate_brand_norm in accepted_candidate_brands
             or expected_brand_norm == candidate_brand_norm
             or literal_brand_match
+            or samsung_galaxy_phone_family_match
         )
     )
 
