@@ -100,9 +100,89 @@ def enrich_with_multi_retailer(
             result["retailer_comparison_status"] = "insufficient_identity"
             return result
 
+        seed_evidence = []
+
+        core_price_evidence = (
+            (profile.get("provenance") or {}).get("price_evidence")
+            or {}
+        )
+
+        canonical_asin = str(
+            (canonical.identifiers or {}).get("amazon_asin") or ""
+        ).strip()
+
+        evidence_url = str(
+            core_price_evidence.get("source_url") or ""
+        ).strip()
+
+        evidence_method = str(
+            core_price_evidence.get("evidence_method")
+            or core_price_evidence.get("source_type")
+            or ""
+        ).strip()
+
+        verified_price = core_price_evidence.get("price")
+
+        verified_availability = str(
+            core_price_evidence.get("availability") or "unknown"
+        ).strip().lower()
+
+        if verified_availability not in {
+            "in_stock",
+            "out_of_stock",
+        }:
+            verified_availability = "unknown"
+
+        amazon_exact_methods = {
+            "amazon_exact_asin_search_card",
+            "amazon_exact_asin_search_card_offer_text",
+            "amazon_primary_buybox",
+        }
+
+        if (
+            core_price_evidence.get("verified") is True
+            and canonical_asin
+            and verified_price is not None
+            and "amazon.in/" in evidence_url.lower()
+            and evidence_method in amazon_exact_methods
+        ):
+            from price_evidence import PriceEvidence
+
+            if evidence_method == "amazon_primary_buybox":
+                evidence_confidence = (
+                    0.95
+                    if verified_availability in {
+                        "in_stock",
+                        "out_of_stock",
+                    }
+                    else 0.90
+                )
+            else:
+                evidence_confidence = 0.85
+
+            seed_evidence.append(
+                PriceEvidence(
+                    product_id=canonical.product_id,
+                    retailer="amazon",
+                    retailer_product_id=canonical_asin,
+                    price=float(verified_price),
+                    availability=verified_availability,
+                    source_url=evidence_url,
+                    source_type=evidence_method,
+                    confidence=evidence_confidence,
+                    notes=(
+                        "Verified exact-ASIN Amazon evidence "
+                        "supplied by Core recommendation pipeline. "
+                        "Availability is forwarded only when explicitly "
+                        "established by the Core evidence."
+                    ),
+                )
+            )
+
         retailer_result = MultiRetailerOrchestrator().run(
             canonical,
             write=False,
+            seed_evidence=seed_evidence,
         )
 
         comparison = retailer_result.get("comparison") or {}

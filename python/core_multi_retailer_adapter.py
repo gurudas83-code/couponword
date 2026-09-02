@@ -6,7 +6,10 @@ import re
 from typing import Any
 
 from canonical_product import CanonicalProduct
-from core_identity_bridge import resolve_stable_identity
+from core_identity_bridge import (
+    resolve_family_identity,
+    resolve_stable_identity,
+)
 from retailer_product_registry import find_canonical_product_id
 
 
@@ -150,6 +153,30 @@ def build_canonical_product(
 
         if registry_product_id:
             product_id = registry_product_id
+        else:
+            family_identity = resolve_family_identity(
+                brand=profile.get("brand") or identity.get("brand"),
+                model=identity.get("model"),
+                title=profile.get("title") or identity.get("original_title"),
+            )
+
+            if family_identity:
+                stable_product_id = clean(
+                    family_identity.get("product_id")
+                )
+
+                if stable_product_id:
+                    registry_product_id = (
+                        find_canonical_product_id(
+                            retailer="amazon",
+                            retailer_product_id=clean(
+                                family_identity.get("asin")
+                            ),
+                        )
+                    )
+
+                    if registry_product_id:
+                        product_id = registry_product_id
 
     return CanonicalProduct(
         product_id=product_id,
@@ -165,5 +192,23 @@ def build_canonical_product(
         attributes=dict(attributes),
         source_product_id=clean(profile.get("product_id")),
         source="core_v1_runtime",
-        confidence=0.0,
+        confidence=(
+            max(
+                0.0,
+                min(
+                    float(
+                        (
+                            identity.get("confidence")
+                            or {}
+                        ).get("score", 0)
+                    ) / 100.0,
+                    1.0,
+                ),
+            )
+            if isinstance(
+                identity.get("confidence"),
+                dict,
+            )
+            else 0.0
+        ),
     )

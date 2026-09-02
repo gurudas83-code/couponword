@@ -72,25 +72,31 @@ def compare_offers(
         key=lambda offer: offer.price
     )
 
+    # A "Best Current Offer" requires at least two trustworthy,
+    # exact-product/variant, priced and in-stock comparable offers.
+    # A single valid offer remains visible as evidence, but is not
+    # sufficient to claim that it is the best retailer option.
+    sufficient_comparison = len(comparable) >= 2
+
     best_offer = (
         comparable[0]
-        if comparable
+        if sufficient_comparison
         else None
     )
 
     price_gap = None
 
-    if len(comparable) >= 2:
+    if sufficient_comparison:
         price_gap = round(
             comparable[-1].price
             - comparable[0].price,
             2,
         )
 
-    if not comparable:
-        status = "no_comparable_price"
-    else:
+    if sufficient_comparison:
         status = "ok"
+    else:
+        status = "no_comparable_price"
 
     return {
         "status": status,

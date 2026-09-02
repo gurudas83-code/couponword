@@ -41,6 +41,7 @@ class MultiRetailerOrchestrator:
         self,
         product: CanonicalProduct,
         write: bool = False,
+        seed_evidence=None,
     ) -> dict:
 
         identity_offers = (
@@ -49,12 +50,23 @@ class MultiRetailerOrchestrator:
             )
         )
 
-        evidence_records = (
+        evidence_records = list(
             self.evidence_manager.collect_evidence(
                 product,
                 identity_offers,
             )
         )
+
+        # Optional upstream evidence may be supplied by the Core
+        # recommendation pipeline when that evidence has already been
+        # verified against an exact retailer product identifier.
+        #
+        # It still passes through the normal WHERE evidence validator
+        # before it can update an offer.
+        if seed_evidence:
+            evidence_records.extend(
+                list(seed_evidence)
+            )
 
         evidence_by_key = {
             (

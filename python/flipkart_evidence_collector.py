@@ -171,6 +171,60 @@ class FlipkartEvidenceCollector(RetailerEvidenceCollector):
         if clean_text(page_brand) != clean_text(product.brand):
             return False
 
+        # Exact configuration safety gate.
+        #
+        # Flipkart Product JSON-LD commonly exposes RAM/storage in the
+        # description even when RAM is absent from the visible product name.
+        # When both the canonical product and retailer page provide explicit
+        # configuration evidence, they must agree.
+        description = str(
+            structured.get("description") or ""
+        ).strip()
+
+        page_identity_text = f"{page_name} {description}"
+
+        page_ram_match = re.search(
+            r"\b(\d+)\s*GB\s*RAM\b",
+            page_identity_text,
+            flags=re.I,
+        )
+
+        page_storage_match = re.search(
+            r"\b(\d+)\s*GB\s*(?:ROM|STORAGE)\b",
+            page_identity_text,
+            flags=re.I,
+        )
+
+        canonical_variant = str(
+            product.variant or ""
+        ).strip()
+
+        canonical_ram_match = re.search(
+            r"\b(\d+)\s*GB\s*/",
+            canonical_variant,
+            flags=re.I,
+        )
+
+        canonical_storage_match = re.search(
+            r"/\s*(\d+)\s*GB\b",
+            canonical_variant,
+            flags=re.I,
+        )
+
+        if canonical_ram_match and page_ram_match:
+            if (
+                canonical_ram_match.group(1)
+                != page_ram_match.group(1)
+            ):
+                return False
+
+        if canonical_storage_match and page_storage_match:
+            if (
+                canonical_storage_match.group(1)
+                != page_storage_match.group(1)
+            ):
+                return False
+
         page = clean_text(page_name)
         model = clean_text(product.model)
 

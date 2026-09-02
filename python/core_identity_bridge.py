@@ -32,6 +32,102 @@ def load_catalog_products() -> list[dict[str, Any]]:
     return [p for p in products if isinstance(p, dict)]
 
 
+
+def _family_tokens(value: Any) -> set[str]:
+    """
+    Build conservative product-family tokens.
+
+    Retailer colour wording such as Serene or Velvet must not create
+    different product families. Generic commerce words are ignored.
+    """
+    import re
+
+    text = clean(value).lower()
+    text = re.sub(r"[^a-z0-9]+", " ", text)
+
+    ignored = {
+        "mobile",
+        "smartphone",
+        "phone",
+        "serene",
+        "velvet",
+        "black",
+        "blue",
+        "green",
+        "white",
+        "gold",
+        "silver",
+        "grey",
+        "gray",
+    }
+
+    return {
+        token
+        for token in text.split()
+        if token not in ignored
+    }
+
+
+def resolve_family_identity(
+    *,
+    brand: Any = "",
+    model: Any = "",
+    title: Any = "",
+) -> dict[str, Any] | None:
+    """
+    Resolve only a unique conservative catalog product-family match.
+
+    This is weaker than exact ASIN/model-key identity and therefore must
+    never replace retailer SKU identity. It only supplies the stable
+    Coupon World catalog family when the match is unique.
+
+    No fuzzy similarity.
+    No ASIN invention.
+    No retailer SKU replacement.
+    """
+
+    live_brand = clean(brand).casefold()
+    live_tokens = _family_tokens(model or title)
+
+    if not live_brand or not live_tokens:
+        return None
+
+    products = load_catalog_products()
+    matches: list[tuple[dict[str, Any], dict[str, Any]]] = []
+
+    for index, product in enumerate(products, start=1):
+        identity = build_identity(product, index)
+
+        if clean(identity.get("brand")).casefold() != live_brand:
+            continue
+
+        catalog_tokens = _family_tokens(
+            identity.get("model")
+            or identity.get("search_name")
+            or product.get("title")
+        )
+
+        if catalog_tokens != live_tokens:
+            continue
+
+        matches.append((product, identity))
+
+    if len(matches) != 1:
+        return None
+
+    product, identity = matches[0]
+
+    return {
+        "match_mode": "product_family",
+        "product_id": clean(identity.get("product_id")),
+        "asin": clean(identity.get("asin")),
+        "brand": clean(identity.get("brand")),
+        "model": clean(identity.get("model")),
+        "search_name": clean(identity.get("search_name")),
+        "title": clean(product.get("title")),
+    }
+
+
 def resolve_stable_identity(
     *,
     asin: Any = "",

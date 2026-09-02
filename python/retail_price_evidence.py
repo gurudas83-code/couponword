@@ -49,7 +49,8 @@ ALLOWED_RETAIL_HOSTS = (
 REQUEST_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 Chrome/131 Safari/537.36"
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/152.0.0.0 Safari/537.36"
     ),
     "Accept-Language": "en-IN,en;q=0.9",
 }
@@ -300,6 +301,7 @@ def fetch_structured_price(url: str) -> dict[str, Any]:
     result: dict[str, Any] = {
         "price": None,
         "prices_found": [],
+        "availability": "unknown",
         "status": "unavailable",
         "reason": "No structured retailer price found",
         "http_status": None,
@@ -389,6 +391,39 @@ def fetch_structured_price(url: str) -> dict[str, Any]:
 
     if host == "amazon.in" or host.endswith(".amazon.in"):
         amazon_values: list[object] = []
+
+        availability_nodes = soup.select(
+            "#availability, "
+            "#availabilityInsideBuyBox_feature_div"
+        )
+
+        availability_text = " ".join(
+            node.get_text(" ", strip=True)
+            for node in availability_nodes
+        ).strip().lower()
+
+        has_add_to_cart = bool(
+            soup.select("#add-to-cart-button")
+        )
+        has_buy_now = bool(
+            soup.select("#buy-now-button")
+        )
+        has_out_of_stock = bool(
+            soup.select("#outOfStock")
+        )
+
+        if (
+            "in stock" in availability_text
+            and not has_out_of_stock
+            and (has_add_to_cart or has_buy_now)
+        ):
+            result["availability"] = "in_stock"
+        elif (
+            has_out_of_stock
+            or "currently unavailable" in availability_text
+            or "out of stock" in availability_text
+        ):
+            result["availability"] = "out_of_stock"
 
         # Current Amazon India markup exposes the primary payable
         # amount directly in .priceToPay. Do not scan generic
@@ -556,7 +591,11 @@ def build_price_evidence(candidate: dict[str, Any]) -> dict[str, Any]:
                 "evidence_method": search_price_method,
             })
 
-            return result
+            # Keep the exact-ASIN search-card price as a safe fallback,
+            # but continue to the exact retailer page. The page may
+            # provide stronger buy-box price and availability evidence.
+            # If page verification fails, the verified search-card
+            # evidence already stored in result remains usable.
 
     # Second preference: current structured retailer evidence.
     page_result = fetch_structured_price(source_url)
@@ -579,6 +618,9 @@ def build_price_evidence(candidate: dict[str, Any]) -> dict[str, Any]:
             result.update({
                 "price": price,
                 "verified": True,
+                "availability": (
+                    page_result.get("availability") or "unknown"
+                ),
                 "status": "verified_from_retail_page",
                 "reason": page_result.get("reason"),
                 "evidence_method": method,
