@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Coupon World AI OS
 Market Discovery Engine v1.6.1
@@ -573,6 +573,19 @@ def build_discovery_queries(
                         ]
                     )
                 )
+
+            # Clean capacity query is also required for brand-less searches.
+            # Example: smartphone 128GB 8GB RAM
+            queries.append(
+                join_unique(
+                    [
+                        *brand_terms,
+                        category or "smartphone",
+                        f"{storage_gb}GB",
+                        f"{ram_gb}GB RAM",
+                    ]
+                )
+            )
 
             capacity_variants = [
                 f"{ram_gb}GB RAM {storage_gb}GB",
@@ -1838,6 +1851,7 @@ def discover_market(
             if re.search(r"[a-z]", token)
             and re.search(r"\d", token)
             and token not in {"5g", "4g", "3g", "2g"}
+            and not re.fullmatch(r"\d+(?:\.\d+)?k", token, re.I)
             and not re.fullmatch(
                 r"\d+(?:\.\d+)?"
                 r"(?:gb|tb|mb|mah|hz|khz|mhz|ghz|mp|w|kw|v|inch|inches|cm|mm)",
@@ -2082,6 +2096,7 @@ def discover_market(
         if re.search(r"[a-z]", token)
         and re.search(r"\d", token)
         and token not in {"5g", "4g", "3g", "2g"}
+        and not re.fullmatch(r"\d+(?:\.\d+)?k", token, re.I)
         and not is_capacity_or_unit_token(token)
     }
 
@@ -2259,6 +2274,44 @@ def discover_market(
         "reject": 0,
     }
 
+    def discovery_evidence_priority(
+        item: dict[str, Any],
+    ) -> int:
+        """
+        Prefer candidates that already carry identity-bound commerce
+        evidence before max_candidates truncation.
+
+        This is not retailer preference and does not affect final Fit.
+        """
+        title_text = clean(item.get("clean_title") or item.get("title"))
+
+        if re.search(
+            r"\b(?:care services|damage protection|protection plan|"
+            r"extended warranty|warranty plan)\b",
+            title_text,
+            re.I,
+        ):
+            return 0
+
+        asin = clean(item.get("asin"))
+        price_text = clean(item.get("search_price_text"))
+        method = clean(item.get("search_price_evidence_method"))
+
+        if (
+            asin
+            and price_text
+            and method in {
+                "amazon_exact_asin_search_card",
+                "amazon_exact_asin_search_card_offer_text",
+            }
+        ):
+            return 2
+
+        if asin:
+            return 1
+
+        return 0
+
     def named_model_evidence_priority(
         item: dict[str, Any],
     ) -> int:
@@ -2304,6 +2357,7 @@ def discover_market(
                 ).lower(),
                 1,
             ),
+            discovery_evidence_priority(item),
             named_model_evidence_priority(item),
             item["quality_score"],
             item["search_score"],
@@ -2430,4 +2484,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
