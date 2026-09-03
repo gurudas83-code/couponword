@@ -2274,6 +2274,48 @@ def discover_market(
         "reject": 0,
     }
 
+    def hard_budget_priority(
+        item: dict[str, Any],
+    ) -> int:
+        """
+        Prefer candidates whose trusted search-card price is already known
+        to satisfy the shopper's hard budget before max_candidates
+        truncation.
+
+        Unknown/unparseable price remains neutral and is not rejected.
+        """
+        budget_max = intent.get("budget_max")
+
+        if budget_max is None:
+            return 1
+
+        price_text = clean(item.get("search_price_text"))
+        method = clean(item.get("search_price_evidence_method"))
+
+        trusted_methods = {
+            "amazon_exact_asin_search_card",
+            "amazon_exact_asin_search_card_offer_text",
+        }
+
+        if not price_text or method not in trusted_methods:
+            return 1
+
+        match = re.fullmatch(
+            r"\s*₹?\s*([\d,]+(?:\.\d+)?)\s*",
+            price_text,
+        )
+
+        if not match:
+            return 1
+
+        try:
+            price = float(match.group(1).replace(",", ""))
+            budget = float(budget_max)
+        except (TypeError, ValueError):
+            return 1
+
+        return 2 if price <= budget else 0
+
     def discovery_evidence_priority(
         item: dict[str, Any],
     ) -> int:
@@ -2357,6 +2399,7 @@ def discover_market(
                 ).lower(),
                 1,
             ),
+            hard_budget_priority(item),
             discovery_evidence_priority(item),
             named_model_evidence_priority(item),
             item["quality_score"],
