@@ -43,7 +43,6 @@ from official_source_resolver import (
     duckduckgo_official_search,
 )
 
-
 COMMERCE_DOMAINS = [
     "amazon.in",
     "flipkart.com",
@@ -93,10 +92,8 @@ CATEGORY_HINTS = {
     "speaker": ("speaker", "bluetooth speaker"),
 }
 
-
 def clean(value: Any) -> str:
     return re.sub(r"\s+", " ", str(value or "")).strip()
-
 
 def normalize_key(value: str) -> str:
     text = clean(value).lower()
@@ -104,13 +101,11 @@ def normalize_key(value: str) -> str:
     text = re.sub(r"[^a-z0-9]+", " ", text)
     return re.sub(r"\s+", " ", text).strip()
 
-
 def host_of(url: str) -> str:
     try:
         return (urlparse(url).hostname or "").lower()
     except ValueError:
         return ""
-
 
 def path_of(url: str) -> str:
     try:
@@ -118,11 +113,9 @@ def path_of(url: str) -> str:
     except ValueError:
         return ""
 
-
 def is_editorial_title(title: str) -> bool:
     text = clean(title).lower()
     return any(re.search(pattern, text, re.I) for pattern in EDITORIAL_PATTERNS)
-
 
 def has_category_hint(title: str, category: str | None) -> bool:
     if not category:
@@ -132,7 +125,6 @@ def has_category_hint(title: str, category: str | None) -> bool:
     title_l = clean(title).lower()
 
     return not hints or any(hint in title_l for hint in hints)
-
 
 def strong_product_url(url: str) -> bool:
     host = host_of(url)
@@ -175,7 +167,6 @@ def strong_product_url(url: str) -> bool:
     )
 
     return any(marker in path for marker in markers)
-
 
 def is_search_or_listing_url(url: str) -> bool:
     """
@@ -263,7 +254,6 @@ def is_search_or_listing_url(url: str) -> bool:
 
     return False
 
-
 def looks_like_product_result(
     title: str,
     url: str,
@@ -291,7 +281,6 @@ def looks_like_product_result(
     # Still allow a strong commerce product URL even when a compact title
     # does not contain the category term.
     return any(domain in host for domain in COMMERCE_DOMAINS)
-
 
 def build_discovery_queries(
     user_query: str,
@@ -666,7 +655,6 @@ def build_discovery_queries(
 
     return unique
 
-
 def compact_product_title(title: str) -> str:
     title = clean(title)
 
@@ -702,11 +690,8 @@ def compact_product_title(title: str) -> str:
 
     return clean(title)
 
-
-
 def discovery_cache_key(query: str, category: str | None) -> str:
     return f"{normalize_key(category or '')}::{normalize_key(query)}"
-
 
 def load_discovery_cache() -> dict[str, Any]:
     if not DISCOVERY_CACHE_PATH.exists():
@@ -720,7 +705,6 @@ def load_discovery_cache() -> dict[str, Any]:
         return {}
 
     return payload if isinstance(payload, dict) else {}
-
 
 def save_discovery_cache(cache: dict[str, Any]) -> None:
     DISCOVERY_CACHE_PATH.parent.mkdir(
@@ -740,7 +724,6 @@ def save_discovery_cache(cache: dict[str, Any]) -> None:
     )
 
     temp.replace(DISCOVERY_CACHE_PATH)
-
 
 def cache_discovery_results(
     *,
@@ -803,7 +786,6 @@ def cache_discovery_results(
     except OSError:
         pass
 
-
 def get_recent_discovery_cache(
     *,
     query: str,
@@ -854,6 +836,12 @@ def get_recent_discovery_cache(
             continue
 
         restored = dict(item)
+        # Discovery cache may reuse product identity/candidate data,
+        # but cached search-card price must not become fresh price evidence.
+        restored["search_price_text"] = ""
+        restored["search_price_currency"] = ""
+        restored["search_price_evidence_method"] = ""
+
         restored["provider"] = (
             "recent_discovery_cache:"
             + clean(item.get("provider"))
@@ -1066,6 +1054,35 @@ def fallback_search_channel(
         max_results=max_results,
     )
 
+    cached_results = get_recent_discovery_cache(
+        query=query,
+        category=category,
+        max_results=max_results,
+    )
+
+    if cached_results:
+        accepted = list(local_results)
+
+        seen_urls = {
+            clean(item.get("url"))
+            for item in accepted
+            if clean(item.get("url"))
+        }
+
+        for item in cached_results:
+            url = clean(item.get("url"))
+
+            if not url or url in seen_urls:
+                continue
+
+            accepted.append(item)
+            seen_urls.add(url)
+
+            if len(accepted) >= max_results:
+                break
+
+        return accepted
+
     # Amazon remains an optional independent discovery lane.
     try:
         raw_results = search_asins(
@@ -1216,7 +1233,6 @@ def search_channel(
 
     return accepted
 
-
 def known_brand_from_title(title: str) -> str | None:
     normalized = normalize_key(title)
 
@@ -1261,7 +1277,6 @@ def known_brand_from_title(title: str) -> str | None:
 
     return None
 
-
 def is_generic_listing_title(title: str) -> bool:
     text = normalize_key(title)
 
@@ -1294,7 +1309,6 @@ def is_generic_listing_title(title: str) -> bool:
 
     return text in generic_only
 
-
 def model_identity_signal(title: str) -> float:
     text = clean(title)
 
@@ -1318,7 +1332,6 @@ def model_identity_signal(title: str) -> float:
 
     return min(score, 0.18)
 
-
 def candidate_quality_score(item: dict[str, Any], title: str) -> float:
     """
     Discovery quality only.
@@ -1339,7 +1352,6 @@ def candidate_quality_score(item: dict[str, Any], title: str) -> float:
     # known-brand confidence boost and must prove themselves downstream.
 
     return round(score, 4)
-
 
 def _capacity_values_from_title(
     title: str,
@@ -1459,7 +1471,6 @@ def _capacity_values_from_title(
 
     return values
 
-
 def _required_capacity(
     must_have: list[str],
     suffix: str,
@@ -1473,8 +1484,6 @@ def _required_capacity(
             return int(match.group(1))
 
     return None
-
-
 
 def tv_requirement_gate(
     title: str,
@@ -1583,7 +1592,6 @@ def tv_requirement_gate(
         "decision": "unknown",
         "reasons": [],
     }
-
 
 def category_accessory_gate(
     title: str,
@@ -1733,7 +1741,6 @@ def category_accessory_gate(
         "reason": "No explicit smartphone accessory evidence",
     }
 
-
 def discovery_variant_gate(
     title: str,
     intent: dict[str, Any],
@@ -1814,7 +1821,6 @@ def discovery_variant_gate(
         "contradictions": contradictions,
         "notes": reasons,
     }
-
 
 def discover_market(
     user_query: str,
@@ -1977,9 +1983,25 @@ def discover_market(
         commerce_results: list[dict[str, Any]] = []
         open_web_results: list[dict[str, Any]] = []
 
-        if tavily_available and client is not None:
+        recent_cached_results = get_recent_discovery_cache(
+            query=query,
+            category=category,
+            max_results=max_candidates,
+        )
+
+        cache_sufficient = (
+            live_fast
+            and len(recent_cached_results) >= max_candidates
+        )
+
+        if (
+            not cache_sufficient
+            and tavily_available
+            and client is not None
+        ):
 
             try:
+
                 commerce_results = search_channel(
                     client,
                     query=query,
@@ -2024,6 +2046,7 @@ def discover_market(
         # This keeps discovery-provider relevance separate from evidence
         # quality: downstream identity, variant and evidence gates still
         # decide what is trustworthy and final Fit remains unaffected.
+
         supplementary_commerce_results = fallback_search_channel(
             query=query,
             category=category,
@@ -2497,7 +2520,6 @@ def print_result(payload: dict[str, Any]) -> None:
     print()
     print(payload.get("note"))
 
-
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Discover real product-detail candidates from the market"
@@ -2523,7 +2545,6 @@ def main() -> int:
         print_result(payload)
 
     return 0
-
 
 if __name__ == "__main__":
     raise SystemExit(main())

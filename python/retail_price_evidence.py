@@ -24,13 +24,11 @@ from urllib.parse import urlparse, urlunparse
 import requests
 from bs4 import BeautifulSoup
 
-
 ROOT = Path(__file__).resolve().parent.parent
 CACHE_PATH = ROOT / "data" / "retail_price_cache.json"
 
 # A cached price may satisfy the hard-budget check only while recent.
 CACHE_MAX_AGE_SECONDS = 6 * 60 * 60
-
 
 PRICE_PATTERNS = [
     re.compile(r"₹\s*([\d,]+(?:\.\d{1,2})?)"),
@@ -55,14 +53,11 @@ REQUEST_HEADERS = {
     "Accept-Language": "en-IN,en;q=0.9",
 }
 
-
 def clean(value: object) -> str:
     return " ".join(str(value or "").split())
 
-
 def utc_now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
-
 
 def normalize_url(url: str) -> str:
     url = clean(url)
@@ -82,7 +77,6 @@ def normalize_url(url: str) -> str:
         )
     except Exception:
         return url
-
 
 def normalize_amount(value: object) -> float | None:
     text = clean(value).replace(",", "")
@@ -105,7 +99,6 @@ def normalize_amount(value: object) -> float | None:
 
     return amount
 
-
 def unique_prices(values: list[object]) -> list[float]:
     found: list[float] = []
 
@@ -117,7 +110,6 @@ def unique_prices(values: list[object]) -> list[float]:
 
     return found
 
-
 def extract_price_mentions(text: str) -> list[float]:
     values: list[object] = []
 
@@ -126,7 +118,6 @@ def extract_price_mentions(text: str) -> list[float]:
             values.append(match.group(1))
 
     return unique_prices(values)
-
 
 def retailer_host_allowed(url: str) -> bool:
     try:
@@ -138,7 +129,6 @@ def retailer_host_allowed(url: str) -> bool:
         host == allowed or host.endswith("." + allowed)
         for allowed in ALLOWED_RETAIL_HOSTS
     )
-
 
 def load_cache() -> dict[str, Any]:
     if not CACHE_PATH.exists():
@@ -152,7 +142,6 @@ def load_cache() -> dict[str, Any]:
         return {}
 
     return payload if isinstance(payload, dict) else {}
-
 
 def save_cache(cache: dict[str, Any]) -> None:
     CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -169,7 +158,6 @@ def save_cache(cache: dict[str, Any]) -> None:
     )
 
     temp.replace(CACHE_PATH)
-
 
 def cache_verified_price(
     *,
@@ -200,7 +188,6 @@ def cache_verified_price(
     except OSError:
         # Cache failure must never break shopping intelligence.
         pass
-
 
 def get_recent_cached_price(url: str) -> dict[str, Any] | None:
     key = normalize_url(url)
@@ -249,7 +236,6 @@ def get_recent_cached_price(url: str) -> dict[str, Any] | None:
 
     return result
 
-
 def jsonld_prices(value: Any) -> list[object]:
     prices: list[object] = []
 
@@ -295,7 +281,6 @@ def jsonld_prices(value: Any) -> list[object]:
             prices.extend(jsonld_prices(nested))
 
     return prices
-
 
 def fetch_structured_price(url: str) -> dict[str, Any]:
     result: dict[str, Any] = {
@@ -513,7 +498,6 @@ def fetch_structured_price(url: str) -> dict[str, Any]:
 
     return result
 
-
 def build_price_evidence(candidate: dict[str, Any]) -> dict[str, Any]:
     source_url = clean(candidate.get("source_url"))
     source_host = clean(candidate.get("source_host"))
@@ -597,7 +581,32 @@ def build_price_evidence(candidate: dict[str, Any]) -> dict[str, Any]:
             # If page verification fails, the verified search-card
             # evidence already stored in result remains usable.
 
-    # Second preference: current structured retailer evidence.
+    # Second preference for visitor latency: reuse only a genuinely
+    # recent verified price observation.
+    #
+    # This cache contains price evidence only. It does not establish
+    # current stock/availability, so availability must remain unknown.
+    if result.get("verified") is True:
+        return result
+
+    cached = get_recent_cached_price(source_url)
+
+    if cached:
+        result.update({
+            "price": cached.get("price"),
+            "verified": True,
+            "availability": "unknown",
+            "status": "verified_from_recent_cache",
+            "reason": (
+                "Reused a recent verified retailer price observation; "
+                "current availability was not re-verified"
+            ),
+            "evidence_method": "recent_verified_cache",
+            "cached_evidence": cached,
+        })
+
+        return result
+
     page_result = fetch_structured_price(source_url)
 
     result["page_evidence"] = page_result
@@ -664,7 +673,6 @@ def build_price_evidence(candidate: dict[str, Any]) -> dict[str, Any]:
         )
 
     return result
-
 
 if __name__ == "__main__":
     print("Retail Price Evidence v1.2")
