@@ -295,7 +295,18 @@ def build_discovery_queries(
         if clean(x)
     ]
 
-    brand_terms = brands[:1]
+    avoided_brand_markers = {
+        normalize_key(x)
+        for x in intent.get("avoid", [])
+        if normalize_key(x).startswith("brand ")
+    }
+
+    brand_terms = [
+        brand
+        for brand in brands
+        if normalize_key(f"brand {brand}") not in avoided_brand_markers
+    ][:1]
+
 
     features = [
         clean(x)
