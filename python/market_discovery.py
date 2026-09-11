@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Coupon World AI OS
 Market Discovery Engine v1.6.1
@@ -42,7 +42,6 @@ from official_source_resolver import (
     BRAND_DOMAINS,
     duckduckgo_official_search,
 )
-
 
 COMMERCE_DOMAINS = [
     "amazon.in",
@@ -93,10 +92,8 @@ CATEGORY_HINTS = {
     "speaker": ("speaker", "bluetooth speaker"),
 }
 
-
 def clean(value: Any) -> str:
     return re.sub(r"\s+", " ", str(value or "")).strip()
-
 
 def normalize_key(value: str) -> str:
     text = clean(value).lower()
@@ -104,13 +101,11 @@ def normalize_key(value: str) -> str:
     text = re.sub(r"[^a-z0-9]+", " ", text)
     return re.sub(r"\s+", " ", text).strip()
 
-
 def host_of(url: str) -> str:
     try:
         return (urlparse(url).hostname or "").lower()
     except ValueError:
         return ""
-
 
 def path_of(url: str) -> str:
     try:
@@ -118,11 +113,9 @@ def path_of(url: str) -> str:
     except ValueError:
         return ""
 
-
 def is_editorial_title(title: str) -> bool:
     text = clean(title).lower()
     return any(re.search(pattern, text, re.I) for pattern in EDITORIAL_PATTERNS)
-
 
 def has_category_hint(title: str, category: str | None) -> bool:
     if not category:
@@ -132,7 +125,6 @@ def has_category_hint(title: str, category: str | None) -> bool:
     title_l = clean(title).lower()
 
     return not hints or any(hint in title_l for hint in hints)
-
 
 def strong_product_url(url: str) -> bool:
     host = host_of(url)
@@ -175,7 +167,6 @@ def strong_product_url(url: str) -> bool:
     )
 
     return any(marker in path for marker in markers)
-
 
 def is_search_or_listing_url(url: str) -> bool:
     """
@@ -263,7 +254,6 @@ def is_search_or_listing_url(url: str) -> bool:
 
     return False
 
-
 def looks_like_product_result(
     title: str,
     url: str,
@@ -292,7 +282,6 @@ def looks_like_product_result(
     # does not contain the category term.
     return any(domain in host for domain in COMMERCE_DOMAINS)
 
-
 def build_discovery_queries(
     user_query: str,
     intent: dict[str, Any],
@@ -306,7 +295,18 @@ def build_discovery_queries(
         if clean(x)
     ]
 
-    brand_terms = brands[:1]
+    avoided_brand_markers = {
+        normalize_key(x)
+        for x in intent.get("avoid", [])
+        if normalize_key(x).startswith("brand ")
+    }
+
+    brand_terms = [
+        brand
+        for brand in brands
+        if normalize_key(f"brand {brand}") not in avoided_brand_markers
+    ][:1]
+
 
     features = [
         clean(x)
@@ -497,6 +497,116 @@ def build_discovery_queries(
         )
     )
 
+    # --------------------------------------------------------
+    # Mobile specialist lane: RAM / storage variant discovery.
+    #
+    # Commerce sources express the same phone capacity in several ways:
+    #   8GB RAM 256GB
+    #   8GB + 256GB
+    #   8+256GB
+    #   (8 GB RAM, 256 GB)
+    #
+    # Discovery should maximize recall across these representations.
+    # Exact capacity compliance remains the responsibility of the
+    # downstream evidence / hard-constraint verification layer.
+    # --------------------------------------------------------
+    if category in {"mobile", "phone", "smartphone", "mobile phone"}:
+        query_text = " ".join(
+            [
+                clean(user_query),
+                *must_have,
+                *features,
+            ]
+        )
+
+        ram_match = re.search(
+            r"\b(\d{1,3})\s*gb(?:\s*ram|_ram)?\b",
+            query_text,
+            re.I,
+        )
+
+        storage_match = re.search(
+            r"\b(\d{2,4})\s*gb(?:\s*(?:storage|rom|internal storage)|_storage)?\b",
+            query_text,
+            re.I,
+        )
+
+        ram_gb = int(ram_match.group(1)) if ram_match else None
+        storage_gb = int(storage_match.group(1)) if storage_match else None
+
+        # Avoid accidentally treating the RAM number as storage when
+        # both capacities are written in normal shopper wording.
+        if ram_gb is not None:
+            storage_candidates = [
+                int(value)
+                for value in re.findall(
+                    r"\b(\d{2,4})\s*gb\b",
+                    query_text,
+                    re.I,
+                )
+                if int(value) != ram_gb
+            ]
+
+            if storage_candidates:
+                storage_gb = max(storage_candidates)
+
+        if ram_gb is not None and storage_gb is not None:
+            # Retailer-style identity query.
+            #
+            # Keep this deliberately clean: budget / India / "buy" terms
+            # can reduce exact-variant recall on retailer search pages.
+            # Budget compliance is enforced downstream from verified price.
+            if brand_terms:
+                brand = brand_terms[0]
+
+                brand_family = {
+                    "samsung": "Galaxy",
+                }.get(normalize_key(brand))
+
+                queries.append(
+                    join_unique(
+                        [
+                            brand,
+                            brand_family,
+                            f"{storage_gb}GB",
+                            f"{ram_gb}GB RAM",
+                        ]
+                    )
+                )
+
+            # Clean capacity query is also required for brand-less searches.
+            # Example: smartphone 128GB 8GB RAM
+            queries.append(
+                join_unique(
+                    [
+                        *brand_terms,
+                        category or "smartphone",
+                        f"{storage_gb}GB",
+                        f"{ram_gb}GB RAM",
+                    ]
+                )
+            )
+
+            capacity_variants = [
+                f"{ram_gb}GB RAM {storage_gb}GB",
+                f"{ram_gb}GB {storage_gb}GB",
+                f"{ram_gb}GB+{storage_gb}GB",
+            ]
+
+            for capacity_variant in capacity_variants:
+                queries.append(
+                    join_unique(
+                        [
+                            *brand_terms,
+                            category or "smartphone",
+                            capacity_variant,
+                            *budget_terms,
+                            "India",
+                            "buy",
+                        ]
+                    )
+                )
+
     # Preserve an explicit shopper brand across generated lanes.
     # The original-user-query lane already contains the user's wording.
     if brand_terms:
@@ -556,7 +666,6 @@ def build_discovery_queries(
 
     return unique
 
-
 def compact_product_title(title: str) -> str:
     title = clean(title)
 
@@ -592,11 +701,8 @@ def compact_product_title(title: str) -> str:
 
     return clean(title)
 
-
-
 def discovery_cache_key(query: str, category: str | None) -> str:
     return f"{normalize_key(category or '')}::{normalize_key(query)}"
-
 
 def load_discovery_cache() -> dict[str, Any]:
     if not DISCOVERY_CACHE_PATH.exists():
@@ -610,7 +716,6 @@ def load_discovery_cache() -> dict[str, Any]:
         return {}
 
     return payload if isinstance(payload, dict) else {}
-
 
 def save_discovery_cache(cache: dict[str, Any]) -> None:
     DISCOVERY_CACHE_PATH.parent.mkdir(
@@ -630,7 +735,6 @@ def save_discovery_cache(cache: dict[str, Any]) -> None:
     )
 
     temp.replace(DISCOVERY_CACHE_PATH)
-
 
 def cache_discovery_results(
     *,
@@ -693,7 +797,6 @@ def cache_discovery_results(
     except OSError:
         pass
 
-
 def get_recent_discovery_cache(
     *,
     query: str,
@@ -744,6 +847,12 @@ def get_recent_discovery_cache(
             continue
 
         restored = dict(item)
+        # Discovery cache may reuse product identity/candidate data,
+        # but cached search-card price must not become fresh price evidence.
+        restored["search_price_text"] = ""
+        restored["search_price_currency"] = ""
+        restored["search_price_evidence_method"] = ""
+
         restored["provider"] = (
             "recent_discovery_cache:"
             + clean(item.get("provider"))
@@ -956,6 +1065,35 @@ def fallback_search_channel(
         max_results=max_results,
     )
 
+    cached_results = get_recent_discovery_cache(
+        query=query,
+        category=category,
+        max_results=max_results,
+    )
+
+    if cached_results:
+        accepted = list(local_results)
+
+        seen_urls = {
+            clean(item.get("url"))
+            for item in accepted
+            if clean(item.get("url"))
+        }
+
+        for item in cached_results:
+            url = clean(item.get("url"))
+
+            if not url or url in seen_urls:
+                continue
+
+            accepted.append(item)
+            seen_urls.add(url)
+
+            if len(accepted) >= max_results:
+                break
+
+        return accepted
+
     # Amazon remains an optional independent discovery lane.
     try:
         raw_results = search_asins(
@@ -1010,8 +1148,16 @@ def fallback_search_channel(
             }
         )
 
-        if len(accepted) >= max_results:
-            break
+        # Do not stop live Amazon collection because local fallback
+        # candidates already consumed part of max_results.
+        #
+        # search_asins() already limits the Amazon card count.
+        # Downstream purity / variant / brand gates should decide which
+        # candidates survive.
+        #
+        # This is important for constrained searches such as
+        # "Samsung 8GB RAM 256GB under 25000", where the correct variant
+        # may appear later in Amazon's search results.
 
     live_amazon_results = [
         item
@@ -1098,7 +1244,6 @@ def search_channel(
 
     return accepted
 
-
 def known_brand_from_title(title: str) -> str | None:
     normalized = normalize_key(title)
 
@@ -1143,7 +1288,6 @@ def known_brand_from_title(title: str) -> str | None:
 
     return None
 
-
 def is_generic_listing_title(title: str) -> bool:
     text = normalize_key(title)
 
@@ -1176,7 +1320,6 @@ def is_generic_listing_title(title: str) -> bool:
 
     return text in generic_only
 
-
 def model_identity_signal(title: str) -> float:
     text = clean(title)
 
@@ -1200,7 +1343,6 @@ def model_identity_signal(title: str) -> float:
 
     return min(score, 0.18)
 
-
 def candidate_quality_score(item: dict[str, Any], title: str) -> float:
     """
     Discovery quality only.
@@ -1221,7 +1363,6 @@ def candidate_quality_score(item: dict[str, Any], title: str) -> float:
     # known-brand confidence boost and must prove themselves downstream.
 
     return round(score, 4)
-
 
 def _capacity_values_from_title(
     title: str,
@@ -1287,6 +1428,39 @@ def _capacity_values_from_title(
             if ram <= 64 and storage >= 32 and storage not in values:
                 values.append(storage)
 
+        # Common marketplace variant titles:
+        #
+        #   (Black, 128 GB) (8 GB RAM)
+        #   Violet, 256 GB, 8 GB RAM
+        #
+        # A standalone capacity >= 32GB is treated as storage only when
+        # it is NOT immediately labelled as RAM/virtual/dynamic memory.
+        #
+        # This keeps 8 GB RAM out of the storage signal while allowing
+        # retailer variant capacities such as 128 GB / 256 GB.
+        for match in re.finditer(
+            r"\b(\d{2,4})\s*gb\b",
+            text,
+            flags=re.I,
+        ):
+            storage = int(match.group(1))
+
+            if storage < 32:
+                continue
+
+            tail = text[match.end():match.end() + 30]
+
+            if re.match(
+                r"\s*(?:physical\s+)?ram\b|"
+                r"\s*(?:virtual|dynamic|extended)\s+ram\b",
+                tail,
+                re.I,
+            ):
+                continue
+
+            if storage not in values:
+                values.append(storage)
+
     # Common marketplace shorthand:
     # "(6GB, 128GB)" or "(8GB, 256GB)"
     #
@@ -1308,7 +1482,6 @@ def _capacity_values_from_title(
 
     return values
 
-
 def _required_capacity(
     must_have: list[str],
     suffix: str,
@@ -1322,8 +1495,6 @@ def _required_capacity(
             return int(match.group(1))
 
     return None
-
-
 
 def tv_requirement_gate(
     title: str,
@@ -1433,7 +1604,6 @@ def tv_requirement_gate(
         "reasons": [],
     }
 
-
 def category_accessory_gate(
     title: str,
     category: str,
@@ -1510,10 +1680,16 @@ def category_accessory_gate(
         r"\btempered\s+glass\b",
         r"\bphone\s+case\b",
         r"\bmobile\s+case\b",
+        r"\bkeyboard\s+case\b",
+        r"\btablet\s+case\b",
+        r"\bfolio\s+cover\b",
+        r"\bgalaxy\s+tab\b",
         r"\bflip\s+case\b",
+        r"\bflip\s+cover\b",
         r"\bback\s+cover\b",
         r"\bprotective\s+cover\b",
         r"\bcase\s+cover\b",
+        r"\bcover\s+case\b",
         r"\bleather\s+case\b",
         r"\bcharging\s+cable\b",
         r"\bcharger\b",
@@ -1578,10 +1754,10 @@ def category_accessory_gate(
         "reason": "No explicit smartphone accessory evidence",
     }
 
-
 def discovery_variant_gate(
     title: str,
     intent: dict[str, Any],
+    exact_memory_variant: bool = False,
 ) -> dict[str, Any]:
     """
     Early contradiction gate only.
@@ -1604,46 +1780,70 @@ def discovery_variant_gate(
     contradictions: list[str] = []
     confirmed: list[str] = []
 
+    def capacity_matches(values, required):
+        if required is None:
+            return True
+        if not values:
+            return False
+        if exact_memory_variant:
+            return required in values
+        return max(values) >= required
+
     if required_ram is not None:
         if ram_values:
-            if max(ram_values) >= required_ram:
-                confirmed.append(
-                    f"RAM satisfies at least {required_ram}GB"
-                )
+            if capacity_matches(ram_values, required_ram):
+                if exact_memory_variant:
+                    confirmed.append(
+                        f"RAM matches exact {required_ram}GB variant"
+                    )
+                else:
+                    confirmed.append(
+                        f"RAM satisfies at least {required_ram}GB"
+                    )
             else:
-                contradictions.append(
-                    f"requires at least {required_ram}GB RAM; "
-                    f"title explicitly shows {ram_values}GB"
-                )
+                if exact_memory_variant:
+                    contradictions.append(
+                        f"requires exact {required_ram}GB RAM variant; "
+                        f"title explicitly shows {ram_values}GB"
+                    )
+                else:
+                    contradictions.append(
+                        f"requires at least {required_ram}GB RAM; "
+                        f"title explicitly shows {ram_values}GB"
+                    )
         else:
             reasons.append("RAM capacity not explicit in title")
 
     if required_storage is not None:
         if storage_values:
-            if max(storage_values) >= required_storage:
-                confirmed.append(
-                    f"Storage satisfies at least {required_storage}GB"
-                )
+            if capacity_matches(storage_values, required_storage):
+                if exact_memory_variant:
+                    confirmed.append(
+                        f"Storage matches exact {required_storage}GB variant"
+                    )
+                else:
+                    confirmed.append(
+                        f"Storage satisfies at least {required_storage}GB"
+                    )
             else:
-                contradictions.append(
-                    f"requires at least {required_storage}GB storage; "
-                    f"title explicitly shows {storage_values}GB"
-                )
+                if exact_memory_variant:
+                    contradictions.append(
+                        f"requires exact {required_storage}GB storage variant; "
+                        f"title explicitly shows {storage_values}GB"
+                    )
+                else:
+                    contradictions.append(
+                        f"requires at least {required_storage}GB storage; "
+                        f"title explicitly shows {storage_values}GB"
+                    )
         else:
             reasons.append("Storage capacity not explicit in title")
 
     if contradictions:
         status = "reject"
     elif (
-        (required_ram is None or (ram_values and max(ram_values) >= required_ram))
-        and
-        (
-            required_storage is None
-            or (
-                storage_values
-                and max(storage_values) >= required_storage
-            )
-        )
+        capacity_matches(ram_values, required_ram)
+        and capacity_matches(storage_values, required_storage)
     ):
         status = "pass"
     else:
@@ -1660,7 +1860,6 @@ def discovery_variant_gate(
         "notes": reasons,
     }
 
-
 def discover_market(
     user_query: str,
     max_candidates: int = 20,
@@ -1672,8 +1871,137 @@ def discover_market(
 
     # Visitor requests must keep discovery latency bounded.
     # Deep/offline mode still uses the full discovery query set.
+    #
+    # For RAM/storage-specific smartphone searches, blindly taking the
+    # first two queries wastes both live slots on near-duplicates.
+    # Prefer:
+    #   1. one retailer-friendly exact capacity representation
+    #   2. one broad brand/category/budget fallback
+    #
+    # Downstream variant/evidence gates remain strict, so this increases
+    # discovery recall without relaxing recommendation correctness.
     if live_fast and len(queries) > 2:
-        queries = queries[:2]
+        live_queries: list[str] = []
+
+        # If the shopper explicitly names an alphanumeric product model,
+        # reserve the first live discovery slot for the query that preserves
+        # that exact model token. This improves recall without weakening any
+        # downstream identity, variant, evidence, or recommendation gate.
+        query_key_for_live_model = normalize_key(user_query)
+
+        live_model_tokens = {
+            token
+            for token in query_key_for_live_model.split()
+            if re.search(r"[a-z]", token)
+            and re.search(r"\d", token)
+            and token not in {"5g", "4g", "3g", "2g"}
+            and not re.fullmatch(r"\d+(?:\.\d+)?k", token, re.I)
+            and not re.fullmatch(
+                r"\d+(?:\.\d+)?"
+                r"(?:gb|tb|mb|mah|hz|khz|mhz|ghz|mp|w|kw|v|inch|inches|cm|mm)",
+                token,
+                re.I,
+            )
+        }
+
+        if live_model_tokens:
+            named_model_query = next(
+                (
+                    query
+                    for query in queries
+                    if live_model_tokens.issubset(
+                        set(normalize_key(query).split())
+                    )
+                ),
+                None,
+            )
+
+            if named_model_query:
+                live_queries.append(named_model_query)
+
+        must_have_values = {
+            clean(value).lower()
+            for value in intent.get("must_have", [])
+            if clean(value)
+        }
+
+        has_ram_requirement = any(
+            re.fullmatch(r"\d+gb_ram", value)
+            for value in must_have_values
+        )
+        has_storage_requirement = any(
+            re.fullmatch(r"\d+gb_storage", value)
+            for value in must_have_values
+        )
+
+        if (
+            category == "smartphone"
+            and has_ram_requirement
+            and has_storage_requirement
+        ):
+            # Prefer the clean retailer-style brand/family/capacity
+            # query when available. This avoids noisy terms such as
+            # "under", "India" and "buy" reducing exact variant recall.
+            specialist = next(
+                (
+                    query
+                    for query in queries
+                    if re.search(
+                        r"\b\d{2,4}gb\b.*\b\d{1,3}gb\s+ram\b",
+                        query,
+                        re.I,
+                    )
+                    and "india" not in query.lower()
+                    and "under" not in query.lower()
+                    and "buy" not in query.lower()
+                ),
+                None,
+            )
+
+            if specialist is None:
+                specialist = next(
+                    (
+                        query
+                        for query in queries
+                        if re.search(
+                            r"\b\d{1,3}gb\+\d{2,4}gb\b",
+                            query,
+                            re.I,
+                        )
+                    ),
+                    None,
+                )
+
+            # Broad fallback should preserve brand/category/budget but
+            # not force a particular capacity representation.
+            broad = next(
+                (
+                    query
+                    for query in queries
+                    if "ram" not in query.lower()
+                    and "storage" not in query.lower()
+                    and not re.search(
+                        r"\b\d{1,3}gb\+\d{2,4}gb\b",
+                        query,
+                        re.I,
+                    )
+                ),
+                None,
+            )
+
+            for query in (specialist, broad):
+                if query and query not in live_queries:
+                    live_queries.append(query)
+
+        # Generic categories / queries keep the original fast behavior.
+        for query in queries:
+            if len(live_queries) >= 2:
+                break
+
+            if query not in live_queries:
+                live_queries.append(query)
+
+        queries = live_queries[:2]
 
     api_key = os.environ.get("TAVILY_API_KEY")
 
@@ -1693,9 +2021,25 @@ def discover_market(
         commerce_results: list[dict[str, Any]] = []
         open_web_results: list[dict[str, Any]] = []
 
-        if tavily_available and client is not None:
+        recent_cached_results = get_recent_discovery_cache(
+            query=query,
+            category=category,
+            max_results=max_candidates,
+        )
+
+        cache_sufficient = (
+            live_fast
+            and len(recent_cached_results) >= max_candidates
+        )
+
+        if (
+            not cache_sufficient
+            and tavily_available
+            and client is not None
+        ):
 
             try:
+
                 commerce_results = search_channel(
                     client,
                     query=query,
@@ -1733,15 +2077,23 @@ def discover_market(
                 commerce_results = []
                 open_web_results = []
 
-        if not commerce_results:
+        # Coupon World's local knowledge + Amazon exact-ASIN search-card
+        # lane supplements general commerce discovery rather than running
+        # only when Tavily returns zero results.
+        #
+        # This keeps discovery-provider relevance separate from evidence
+        # quality: downstream identity, variant and evidence gates still
+        # decide what is trustworthy and final Fit remains unaffected.
 
-            commerce_results = fallback_search_channel(
-                query=query,
-                category=category,
-                include_domains=COMMERCE_DOMAINS,
-                channel="commerce",
-                max_results=20,
-            )
+        supplementary_commerce_results = fallback_search_channel(
+            query=query,
+            category=category,
+            include_domains=COMMERCE_DOMAINS,
+            channel="commerce",
+            max_results=20,
+        )
+
+        commerce_results.extend(supplementary_commerce_results)
 
         if not open_web_results:
 
@@ -1772,13 +2124,100 @@ def discover_market(
     # "8/128 phone under 20k" remain unrestricted.
     query_key_for_model = normalize_key(user_query)
 
+    def is_capacity_or_unit_token(token: str) -> bool:
+        """
+        Exclude shopper specification tokens from exact model locking.
+
+        Examples:
+        - 8gb / 12gb RAM
+        - 128gb / 256gb / 512gb storage
+        - 1tb storage
+        - 5000mah battery
+        - 120hz refresh rate
+
+        True model tokens such as F36, A23, S24 and G86 remain eligible.
+        """
+        token = str(token or "").lower().strip()
+
+        if not token:
+            return False
+
+        return bool(
+            re.fullmatch(
+                r"\d+(?:\.\d+)?"
+                r"(?:gb|tb|mb|mah|hz|khz|mhz|ghz|mp|w|kw|v|inch|inches|cm|mm)",
+                token,
+                re.I,
+            )
+        )
+
+    query_model_parts = query_key_for_model.split()
+    explicit_brand_tokens = {
+        token
+        for brand in intent.get("brands", [])
+        for token in normalize_key(brand).split()
+        if token
+    }
+
     exact_query_model_tokens = {
         token
-        for token in query_key_for_model.split()
-        if re.search(r"[a-z]", token)
-        and re.search(r"\d", token)
+        for index, token in enumerate(query_model_parts)
+        if (
+            (
+                re.search(r"[a-z]", token)
+                and re.search(r"\d", token)
+            )
+            or (
+                token.isdigit()
+                and 1 <= len(token) <= 3
+                and index > 0
+                and query_model_parts[index - 1] in explicit_brand_tokens
+            )
+        )
         and token not in {"5g", "4g", "3g", "2g"}
+        and not re.fullmatch(r"\d+(?:\.\d+)?k", token, re.I)
+        and not is_capacity_or_unit_token(token)
     }
+
+    # Preserve family identity for numeric models written directly
+    # after an explicit brand.
+    #
+    # Redmi 13   -> require contiguous "redmi 13"
+    # OnePlus 13 -> require contiguous "oneplus 13"
+    #
+    # This prevents sibling families such as "Redmi Note 13"
+    # from satisfying a bare numeric model token lock.
+    exact_numeric_brand_pairs = {
+        (query_model_parts[index - 1], token)
+        for index, token in enumerate(query_model_parts)
+        if token.isdigit()
+        and 1 <= len(token) <= 3
+        and index > 0
+        and query_model_parts[index - 1] in explicit_brand_tokens
+    }
+
+    must_have_for_variant = list(intent.get("must_have") or [])
+    has_explicit_memory_pair = (
+        _required_capacity(must_have_for_variant, "ram") is not None
+        and
+        _required_capacity(must_have_for_variant, "storage") is not None
+    )
+
+    minimum_capacity_language = bool(
+        re.search(
+            r"\b(?:at\s+least|min(?:imum)?|more\s+than|"
+            r"or\s+more|or\s+higher|and\s+above)\b",
+            user_query,
+            re.I,
+        )
+    )
+
+    exact_memory_variant = (
+        intent.get("category") == "smartphone"
+        and bool(exact_query_model_tokens)
+        and has_explicit_memory_pair
+        and not minimum_capacity_language
+    )
 
     # Brand semantics must distinguish REQUIRED, PREFERRED and AVOIDED.
     # `intent["brands"]` is detection metadata and includes all mentioned
@@ -1840,13 +2279,54 @@ def discover_market(
             if not exact_query_model_tokens.issubset(title_tokens):
                 continue
 
+            if exact_numeric_brand_pairs:
+                numeric_family_match = any(
+                    re.search(
+                        rf"(?:^|\s){re.escape(brand)}\s+"
+                        rf"{re.escape(model)}(?:\s|$)",
+                        normalized_title,
+                    )
+                    for brand, model in exact_numeric_brand_pairs
+                )
+
+                if not numeric_family_match:
+                    continue
         # Explicit/bare brand scope is hard. Preferred brands are ranked
         # downstream and therefore must not narrow discovery.
-        if required_brands and not any(
-            re.search(
+        #
+        # Marketplace titles sometimes omit the manufacturer name while
+        # retaining a distinctive product-family identity. Example:
+        #   "Galaxy A17 5G ..." instead of "Samsung Galaxy A17 5G ..."
+        #
+        # Accept a small conservative set of strong family aliases rather
+        # than weakening the brand gate globally.
+        def title_matches_required_brand(brand: str) -> bool:
+            if re.search(
                 rf"(?:^|\s){re.escape(brand)}(?:\s|$)",
                 normalized_title,
-            )
+            ):
+                return True
+
+            # Amazon frequently omits "Samsung" from genuine Galaxy
+            # phone titles. Do not treat the word "Galaxy" alone as
+            # Samsung evidence because unrelated products such as
+            # "Gesto Galaxy Projector" would leak through.
+            if brand == "samsung":
+                return bool(
+                    re.search(
+                        r"\bgalaxy\s+(?:"
+                        r"[amfs]\s*\d{1,3}[a-z]*"
+                        r"|z\s*(?:fold|flip)\s*\d*[a-z]*"
+                        r")\b",
+                        normalized_title,
+                        re.I,
+                    )
+                )
+
+            return False
+
+        if required_brands and not any(
+            title_matches_required_brand(brand)
             for brand in required_brands
         ):
             continue
@@ -1889,6 +2369,7 @@ def discover_market(
         variant_gate = discovery_variant_gate(
             title,
             intent,
+            exact_memory_variant=exact_memory_variant,
         )
 
         # Discovery is allowed to reject only explicit contradictions.
@@ -1907,8 +2388,152 @@ def discover_market(
 
     # Quality-aware discovery ranking.
     # Known brand is supportive evidence, never a hard requirement.
+    # Variant-aware discovery ranking.
+    #
+    # Explicitly confirmed shopper requirements must outrank candidates
+    # whose title does not provide enough variant evidence.
+    #
+    # PASS    -> strongest discovery priority
+    # UNKNOWN -> remains eligible for downstream verification
+    # REJECT  -> already removed above
+    #
+    # This does not convert discovery evidence into final recommendation
+    # Fit. It only prevents an unknown variant from crowding out an
+    # explicitly matching variant before max_candidates truncation.
+    variant_priority = {
+        "pass": 2,
+        "unknown": 1,
+        "reject": 0,
+    }
+
+    def hard_budget_priority(
+        item: dict[str, Any],
+    ) -> int:
+        """
+        Prefer candidates whose trusted search-card price is already known
+        to satisfy the shopper's hard budget before max_candidates
+        truncation.
+
+        Unknown/unparseable price remains neutral and is not rejected.
+        """
+        budget_max = intent.get("budget_max")
+
+        if budget_max is None:
+            return 1
+
+        price_text = clean(item.get("search_price_text"))
+        method = clean(item.get("search_price_evidence_method"))
+
+        trusted_methods = {
+            "amazon_exact_asin_search_card",
+            "amazon_exact_asin_search_card_offer_text",
+        }
+
+        if not price_text or method not in trusted_methods:
+            return 1
+
+        match = re.fullmatch(
+            r"\s*Ã¢â€šÂ¹?\s*([\d,]+(?:\.\d+)?)\s*",
+            price_text,
+        )
+
+        if not match:
+            return 1
+
+        try:
+            price = float(match.group(1).replace(",", ""))
+            budget = float(budget_max)
+        except (TypeError, ValueError):
+            return 1
+
+        return 2 if price <= budget else 0
+
+    def discovery_evidence_priority(
+        item: dict[str, Any],
+    ) -> int:
+        """
+        Prefer candidates that already carry identity-bound commerce
+        evidence before max_candidates truncation.
+
+        This is not retailer preference and does not affect final Fit.
+        """
+        title_text = clean(item.get("clean_title") or item.get("title"))
+
+        if re.search(
+            r"\b(?:care services|damage protection|protection plan|"
+            r"extended warranty|warranty plan)\b",
+            title_text,
+            re.I,
+        ):
+            return 0
+
+        asin = clean(item.get("asin"))
+        price_text = clean(item.get("search_price_text"))
+        method = clean(item.get("search_price_evidence_method"))
+
+        if (
+            asin
+            and price_text
+            and method in {
+                "amazon_exact_asin_search_card",
+                "amazon_exact_asin_search_card_offer_text",
+            }
+        ):
+            return 2
+
+        if asin:
+            return 1
+
+        return 0
+
+    def named_model_evidence_priority(
+        item: dict[str, Any],
+    ) -> int:
+        """
+        Prefer stronger commerce evidence only for an explicit named-model
+        query after the strict model/variant gates have already passed.
+
+        This is discovery evidence priority, not product Fit and not a
+        retailer preference.
+        """
+        if not exact_query_model_tokens:
+            return 0
+
+        title_text = clean(item.get("clean_title") or item.get("title"))
+
+        # Do not let protection/warranty/service bundles become the primary
+        # handset evidence merely because they expose an ASIN and price.
+        if re.search(
+            r"\b(?:care services|damage protection|protection plan|"
+            r"extended warranty|warranty plan)\b",
+            title_text,
+            re.I,
+        ):
+            return 0
+
+        asin = clean(item.get("asin"))
+        price_text = clean(item.get("search_price_text"))
+        method = clean(item.get("search_price_evidence_method"))
+
+        if asin and price_text and method:
+            return 2
+
+        if asin:
+            return 1
+
+        return 0
+
     ranked.sort(
         key=lambda item: (
+            variant_priority.get(
+                clean(
+                    (item.get("variant_gate") or {}).get("status")
+                ).lower(),
+                1,
+            ),
+            hard_budget_priority(item),
+            discovery_evidence_priority(item),
+            named_model_evidence_priority(item),
             item["quality_score"],
             item["search_score"],
         ),
@@ -1971,6 +2596,14 @@ def discover_market(
         "discovery_queries": queries,
         "candidate_count": len(candidates),
         "candidates": candidates,
+        "exact_model_scope": {
+            "active": bool(exact_query_model_tokens),
+            "model_tokens": sorted(exact_query_model_tokens),
+            "numeric_brand_pairs": [
+                {"brand": brand, "model": model}
+                for brand, model in sorted(exact_numeric_brand_pairs)
+            ],
+        },
         "note": (
             "Discovery quality scores only prioritize candidate research; "
             "final recommendation Fit must be computed from verified evidence."
@@ -2004,7 +2637,6 @@ def print_result(payload: dict[str, Any]) -> None:
     print()
     print(payload.get("note"))
 
-
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Discover real product-detail candidates from the market"
@@ -2031,7 +2663,5 @@ def main() -> int:
 
     return 0
 
-
 if __name__ == "__main__":
     raise SystemExit(main())
-

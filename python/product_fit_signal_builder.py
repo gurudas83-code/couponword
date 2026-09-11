@@ -636,6 +636,14 @@ def ram_signal(text: str) -> dict[str, Any]:
         )
 
     if amount is None:
+        # Canonical structured attributes rendered by text_blob(),
+        # e.g. "memory_gb 6" or "ram_gb 8".
+        amount = numeric(
+            r"\b(?:memory|ram)_gb\s+(\d{1,3})\b",
+            text,
+        )
+
+    if amount is None:
         return signal(None, "No verified RAM capacity found")
 
     if amount >= 16:
@@ -654,6 +662,22 @@ def storage_signal(text: str) -> dict[str, Any]:
         r"\b(\d{2,4})\s*gb\s*(?:storage|internal storage|rom|ssd)\b",
         text,
     )
+
+    # Manufacturer/spec-sheet label-first formats:
+    #   Storage (GB) 128
+    #   Storage (GB): 256
+    #   Internal Storage 256 GB
+    #   ROM 256 GB
+    if amount is None:
+        label_first = re.search(
+            r"\b(?:storage\s*\(\s*gb\s*\)|"
+            r"internal\s+storage|rom)"
+            r"\s*[:\-]?\s*(\d{2,4})(?:\s*gb)?\b",
+            text,
+            re.I,
+        )
+        if label_first:
+            amount = float(label_first.group(1))
 
     if amount is None:
         compact = re.search(
@@ -1766,6 +1790,14 @@ def capacity_requirement_signal(
             )
 
         if actual is None:
+            # Canonical structured attributes rendered by text_blob(),
+            # e.g. "memory_gb 6" or "ram_gb 8".
+            actual = numeric(
+                r"\b(?:memory|ram)_gb\s+(\d{1,3})\b",
+                text,
+            )
+
+        if actual is None:
             return signal(
                 None,
                 f"Required {required:g}GB RAM, but verified RAM capacity is unavailable",
@@ -1785,19 +1817,40 @@ def capacity_requirement_signal(
     storage_match = re.fullmatch(r"(\d+)gb_storage", requirement)
     if storage_match:
         required = float(storage_match.group(1))
-        actual = numeric(
-            r"\b(\d{2,4})\s*gb\s*(?:storage|internal storage|rom|ssd)\b",
-            text,
-        )
+        # Explicit storage-labelled formats:
+        #   Storage (GB) 128
+        #   Storage (GB): 256
+        #   Storage 256 GB
+        #   Internal Storage 256GB
+        #   256GB storage / ROM / SSD
+        storage_patterns = [
+            r"\bstorage\s*\(\s*gb\s*\)\s*[:=-]?\s*(\d{2,4})\b",
+            r"\b(?:storage|internal\s+storage|rom|ssd)\s*[:=-]?\s*(\d{2,4})\s*gb\b",
+            r"\b(\d{2,4})\s*gb\s*(?:storage|internal\s+storage|rom|ssd)\b",
+        ]
 
+        actual = None
+        for pattern in storage_patterns:
+            match = re.search(pattern, text, re.I)
+            if match:
+                actual = float(match.group(1))
+                break
+
+        # Common marketplace variant formats:
+        #   8GB + 256GB
+        #   8 + 256GB
+        #   (8GB, 256GB)
         if actual is None:
-            compact = re.search(
+            compact_patterns = [
                 r"\b\d{1,3}\s*(?:gb\s*)?\+\s*(\d{2,4})\s*gb\b",
-                text,
-                re.I,
-            )
-            if compact:
-                actual = float(compact.group(1))
+                r"[\(\[]\s*\d{1,3}\s*gb\s*,\s*(\d{2,4})\s*gb\s*[\)\]]",
+            ]
+
+            for pattern in compact_patterns:
+                match = re.search(pattern, text, re.I)
+                if match:
+                    actual = float(match.group(1))
+                    break
 
         if actual is None:
             return signal(

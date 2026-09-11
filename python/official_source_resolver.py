@@ -852,6 +852,158 @@ def build_source_queries(
     return unique
 
 
+
+def direct_official_product_search(
+    title: str,
+    brand: str,
+    allowed_domains: list[str],
+    max_results: int = 8,
+) -> list[dict[str, Any]]:
+    """
+    Probe a small set of deterministic product-page URLs on approved
+    official domains.
+
+    This is discovery only. Every returned page must already pass the
+    existing compare_identity() brand/model verification gate, and the
+    normal resolver validation remains authoritative afterwards.
+    """
+
+    normalized_title = normalize_text(title)
+
+    slug = re.sub(
+        r"[^a-z0-9]+",
+        "-",
+        normalized_title,
+    ).strip("-")
+
+    if not slug or not allowed_domains:
+        return []
+
+    path_patterns = (
+        "/in/product/{slug}/",
+        "/in/product/{slug}/specs/",
+        "/product/{slug}/",
+        "/product/{slug}/specs/",
+    )
+
+    headers = {
+        "User-Agent": "Mozilla/5.0",
+        "Accept": "text/html,*/*",
+    }
+
+    results: list[dict[str, Any]] = []
+    seen_urls: set[str] = set()
+
+    for raw_domain in allowed_domains:
+        domain = str(raw_domain or "").strip().lower()
+
+        if not domain:
+            continue
+
+        domain_results: list[dict[str, Any]] = []
+
+        for path_pattern in path_patterns:
+            probe_url = (
+                f"https://www.{domain}"
+                + path_pattern.format(slug=slug)
+            )
+
+            try:
+                response = requests.get(
+                    probe_url,
+                    headers=headers,
+                    timeout=(4, 8),
+                    allow_redirects=True,
+                )
+            except Exception:
+                continue
+
+            if response.status_code != 200:
+                continue
+
+            final_url = str(response.url or "").strip()
+
+            if not final_url:
+                continue
+
+            if final_url in seen_urls:
+                continue
+
+            seen_urls.add(final_url)
+
+            if not hostname_matches(
+                final_url,
+                [domain],
+            ):
+                continue
+
+            if is_unwanted_page(final_url):
+                continue
+
+            title_match = re.search(
+                r"<title[^>]*>(.*?)</title>",
+                response.text,
+                flags=re.I | re.S,
+            )
+
+            if not title_match:
+                continue
+
+            page_title = re.sub(
+                r"<[^>]+>",
+                " ",
+                title_match.group(1),
+            )
+
+            page_title = re.sub(
+                r"\s+",
+                " ",
+                page_title,
+            ).strip()
+
+            if not page_title:
+                continue
+
+            try:
+                identity = compare_identity(
+                    expected_text=title,
+                    candidate_title=page_title,
+                    candidate_url=final_url,
+                    expected_brand=brand,
+                )
+            except Exception:
+                continue
+
+            if (
+                identity.decision != "verified"
+                or identity.brand_match is not True
+                or identity.model_match is not True
+                or int(identity.score or 0) < 80
+            ):
+                continue
+
+            domain_results.append(
+                {
+                    "title": page_title,
+                    "url": final_url,
+                    "score": round(
+                        int(identity.score or 0) / 100,
+                        4,
+                    ),
+                    "provider": "direct_official",
+                }
+            )
+
+        if domain_results:
+            results.extend(domain_results)
+
+            # BRAND_DOMAINS is ordered with the preferred official
+            # domain first. Once a verified product page is found,
+            # avoid unnecessary probes against fallback domains.
+            break
+
+    return results[:max_results]
+
 def resolve_product(
     client: TavilyClient | None,
     product: dict[str, Any],
@@ -918,6 +1070,30 @@ def resolve_product(
     seen_urls: set[str] = set()
 
     # ---------------------------------------------------------
+    # Deterministic direct official product discovery
+    # ---------------------------------------------------------
+    direct_results = direct_official_product_search(
+        core_title,
+        brand,
+        allowed_domains,
+        max_results=8,
+    )
+
+    for result in direct_results:
+        result_url = str(
+            result.get("url") or ""
+        ).strip()
+
+        if not result_url or result_url in seen_urls:
+            continue
+
+        seen_urls.add(result_url)
+        merged_results.append(result)
+
+    if direct_results:
+        base_result["search_provider"] = "direct_official"
+
+    # ---------------------------------------------------------
     # Fast official sitemap discovery
     # ---------------------------------------------------------
     # Prefer a proven official sitemap before paid/general
@@ -925,7 +1101,7 @@ def resolve_product(
     # existing official-domain + compare_identity gates below.
     sitemap_results: list[dict[str, Any]] = []
 
-    if brand_key == "samsung":
+    if not direct_results and brand_key == "samsung":
         try:
             sitemap_url = (
                 "https://www.samsung.com/in/im-sitemap.xml"
@@ -1023,7 +1199,7 @@ def resolve_product(
     # Samsung has a proven dedicated sitemap path above.
     # For all other registered brands, reuse the existing generic
     # official_sitemap_search() before any external search provider.
-    if not sitemap_results:
+    if not direct_results and not sitemap_results:
         try:
             sitemap_results = official_sitemap_search(
                 core_title,
@@ -1053,6 +1229,7 @@ def resolve_product(
 
     tavily_available = (
         client is not None
+        and not direct_results
         and not sitemap_results
     )
 
@@ -1086,7 +1263,11 @@ def resolve_product(
                 else:
                     raise
 
-        if not tavily_available and not sitemap_results:
+        if (
+            not tavily_available
+            and not direct_results
+            and not sitemap_results
+        ):
             # DuckDuckGo HTML is intentionally disabled in the
             # unattended runtime path because repeated network
             # timeouts can stall the entire shopping pipeline.

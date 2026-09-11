@@ -61,8 +61,144 @@ from retail_price_evidence import build_price_evidence
 from resolver_engine import compare_identity
 from weighted_fit_engine import calculate_product_fit
 
+from core_multi_retailer_adapter import build_canonical_product
+from multi_retailer_orchestrator import MultiRetailerOrchestrator
+
 
 RUNTIME_OUTPUT = ROOT / "data" / "runtime_shopping_intelligence.json"
+
+
+def enrich_with_multi_retailer(
+    *,
+    profile: dict[str, Any],
+    identity: dict[str, Any],
+    assessment: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Add WHERE/NOW retailer intelligence to an already selected Core product.
+
+    Fail-soft contract:
+    - never changes Core fit, rank, eligibility, or verified price
+    - never writes retailer evidence to persistent storage
+    - retailer/network failure must not fail the Core recommendation
+    """
+
+    result: dict[str, Any] = {
+        "retailer_offers": [],
+        "best_offer": None,
+        "retailer_comparison_status": "unavailable",
+    }
+
+    try:
+        canonical = build_canonical_product(
+            profile=profile,
+            identity=identity,
+            assessment=assessment,
+        )
+
+        if not canonical.product_id or not canonical.brand or not canonical.model:
+            result["retailer_comparison_status"] = "insufficient_identity"
+            return result
+
+        seed_evidence = []
+
+        core_price_evidence = (
+            (profile.get("provenance") or {}).get("price_evidence")
+            or {}
+        )
+
+        canonical_asin = str(
+            (canonical.identifiers or {}).get("amazon_asin") or ""
+        ).strip()
+
+        evidence_url = str(
+            core_price_evidence.get("source_url") or ""
+        ).strip()
+
+        evidence_method = str(
+            core_price_evidence.get("evidence_method")
+            or core_price_evidence.get("source_type")
+            or ""
+        ).strip()
+
+        verified_price = core_price_evidence.get("price")
+
+        verified_availability = str(
+            core_price_evidence.get("availability") or "unknown"
+        ).strip().lower()
+
+        if verified_availability not in {
+            "in_stock",
+            "out_of_stock",
+        }:
+            verified_availability = "unknown"
+
+        amazon_exact_methods = {
+            "amazon_exact_asin_search_card",
+            "amazon_exact_asin_search_card_offer_text",
+            "amazon_primary_buybox",
+        }
+
+        if (
+            core_price_evidence.get("verified") is True
+            and canonical_asin
+            and verified_price is not None
+            and "amazon.in/" in evidence_url.lower()
+            and evidence_method in amazon_exact_methods
+        ):
+            from price_evidence import PriceEvidence
+
+            if evidence_method == "amazon_primary_buybox":
+                evidence_confidence = (
+                    0.95
+                    if verified_availability in {
+                        "in_stock",
+                        "out_of_stock",
+                    }
+                    else 0.90
+                )
+            else:
+                evidence_confidence = 0.85
+
+            seed_evidence.append(
+                PriceEvidence(
+                    product_id=canonical.product_id,
+                    retailer="amazon",
+                    retailer_product_id=canonical_asin,
+                    price=float(verified_price),
+                    availability=verified_availability,
+                    source_url=evidence_url,
+                    source_type=evidence_method,
+                    confidence=evidence_confidence,
+                    notes=(
+                        "Verified exact-ASIN Amazon evidence "
+                        "supplied by Core recommendation pipeline. "
+                        "Availability is forwarded only when explicitly "
+                        "established by the Core evidence."
+                    ),
+                )
+            )
+
+        retailer_result = MultiRetailerOrchestrator().run(
+            canonical,
+            write=False,
+            seed_evidence=seed_evidence,
+        )
+
+        comparison = retailer_result.get("comparison") or {}
+
+        result["retailer_offers"] = retailer_result.get("offers") or []
+        result["best_offer"] = comparison.get("best_offer")
+        result["retailer_comparison_status"] = (
+            comparison.get("status") or "unavailable"
+        )
+
+        return result
+
+    except Exception as error:
+        result["retailer_comparison_status"] = "error"
+        result["retailer_error"] = str(error)
+        return result
 
 MIN_FIT_PERCENT = 50
 DEFAULT_MAX_RESULTS = 5
@@ -162,7 +298,7 @@ def sanitize_discovery_title(value: Any) -> str:
     title = " ".join(words).strip()
 
     # Remove common source suffixes without destroying hyphenated models.
-    for sep in (" | ", " – ", " — "):
+    for sep in (" | ", " Ã¢â‚¬â€œ ", " Ã¢â‚¬â€ "):
         if sep in title:
             left = clean(title.split(sep, 1)[0])
             if len(left.split()) >= 2:
@@ -1278,6 +1414,9 @@ def run_pipeline(
         if isinstance(item, dict)
     ]
 
+    exact_model_scope = discovery.get("exact_model_scope") or {}
+    exact_model_query = exact_model_scope.get("active") is True
+
     api_key = os.environ.get("TAVILY_API_KEY")
 
     client = (
@@ -1355,6 +1494,7 @@ def run_pipeline(
                 if re.search(r"[a-z]", token)
                 and re.search(r"\d", token)
                 and token not in {"5g", "4g", "3g", "2g"}
+                and not re.fullmatch(r"\d+(?:gb|tb)", token)
             }
 
             if query_model_tokens:
@@ -1818,6 +1958,9 @@ def run_pipeline(
         reverse=True,
     )
 
+    # Preserve pre-deduplication qualification breadth for diagnostics.
+    raw_qualifying_count = len(qualifying)
+
     # ---------------------------------------------------------
     # MODEL-LEVEL RECOMMENDATION DEDUPLICATION
     # ---------------------------------------------------------
@@ -1905,12 +2048,197 @@ def run_pipeline(
 
     qualifying = deduped_qualifying
 
+    # ---------------------------------------------------------
+    # NO-MATCH INTELLIGENCE
+    # ---------------------------------------------------------
+    # When no product satisfies all hard constraints, preserve
+    # strict recommendation integrity but return useful nearby
+    # options separately.
+    closest_matches: list[dict[str, Any]] = []
+
+    if not qualifying and scored_records:
+        budget = intent.get("budget_max")
+
+        nearby_records = []
+
+        for item in scored_records:
+            assessment = item.get("fit_assessment", {}) or {}
+            profile = item.get("profile", {}) or {}
+
+            price = profile.get("price")
+
+            try:
+                numeric_price = float(price) if price is not None else None
+            except (TypeError, ValueError):
+                numeric_price = None
+
+            budget_gap = None
+
+            if budget is not None and numeric_price is not None:
+                try:
+                    budget_gap = max(
+                        0.0,
+                        numeric_price - float(budget),
+                    )
+                except (TypeError, ValueError):
+                    budget_gap = None
+
+            nearby_records.append(
+                {
+                    "item": item,
+                    "price": numeric_price,
+                    "budget_gap": budget_gap,
+                    "fit_percent": int(
+                        assessment.get("fit_percent") or 0
+                    ),
+                    "coverage": int(
+                        assessment.get(
+                            "evidence_coverage_percent"
+                        ) or 0
+                    ),
+                }
+            )
+
+        nearby_records.sort(
+            key=lambda row: (
+                row["budget_gap"]
+                if row["budget_gap"] is not None
+                else float("inf"),
+                -row["fit_percent"],
+                -row["coverage"],
+            )
+        )
+
+        for row in nearby_records[:3]:
+            item = row["item"]
+            profile = item.get("profile", {}) or {}
+            assessment = item.get("fit_assessment", {}) or {}
+
+            closest_matches.append(
+                {
+                    "title": profile.get("title"),
+                    "brand": profile.get("brand"),
+                    "price": row["price"],
+                    "budget_gap": row["budget_gap"],
+                    "fit_percent": row["fit_percent"],
+                    "evidence_coverage_percent": row["coverage"],
+                    "hard_constraint_failures": assessment.get(
+                        "hard_constraint_failures", []
+                    ),
+                    "market_source": profile.get(
+                        "market_source_url"
+                    ),
+                }
+            )
+
+        # ---------------------------------------------------------
+    # CONSTRAINT RELAXATION INTELLIGENCE
+    # ---------------------------------------------------------
+    # Only emit relaxations that are supported by already
+    # verified/scored evidence. Do not speculate that changing
+    # RAM/storage/brand will produce a match without re-running
+    # discovery under that relaxed constraint.
+    relaxation_options: list[dict[str, Any]] = []
+
+    if not qualifying and closest_matches:
+        budget_max = intent.get("budget_max")
+
+        if budget_max is not None:
+            budget_candidates = [
+                item
+                for item in closest_matches
+                if item.get("price") is not None
+                and item.get("budget_gap") is not None
+                and float(item.get("budget_gap") or 0) > 0
+            ]
+
+            if budget_candidates:
+                nearest = min(
+                    budget_candidates,
+                    key=lambda item: float(
+                        item.get("budget_gap") or float("inf")
+                    ),
+                )
+
+                relaxation_options.append(
+                    {
+                        "type": "increase_budget",
+                        "status": "verified",
+                        "current_budget": float(budget_max),
+                        "suggested_budget": float(
+                            nearest.get("price")
+                        ),
+                        "additional_budget_needed": float(
+                            nearest.get("budget_gap")
+                        ),
+                        "unlocks_product": nearest.get("title"),
+                        "reason": (
+                            "Nearest verified product satisfying the "
+                            "researched requirements is above the "
+                            "current budget."
+                        ),
+                    }
+                )
+
+        # These are potential next searches, not verified claims.
+        must_have = list(intent.get("must_have") or [])
+        brands = list(intent.get("brands") or [])
+
+        for requirement in must_have:
+            if requirement.endswith("gb_storage"):
+                relaxation_options.append(
+                    {
+                        "type": "relax_storage",
+                        "status": "requires_research",
+                        "current_requirement": requirement,
+                        "reason": (
+                            "Search again with a lower storage "
+                            "requirement while preserving the other "
+                            "constraints."
+                        ),
+                    }
+                )
+
+            elif requirement.endswith("gb_ram"):
+                relaxation_options.append(
+                    {
+                        "type": "relax_ram",
+                        "status": "requires_research",
+                        "current_requirement": requirement,
+                        "reason": (
+                            "Search again with a lower RAM "
+                            "requirement while preserving the other "
+                            "constraints."
+                        ),
+                    }
+                )
+
+        if brands:
+            relaxation_options.append(
+                {
+                    "type": "relax_brand",
+                    "status": "requires_research",
+                    "current_brands": brands,
+                    "reason": (
+                        "Search other brands while preserving "
+                        "budget and must-have specifications."
+                    ),
+                }
+            )
+
+
     recommendations: list[dict[str, Any]] = []
 
     for rank, item in enumerate(qualifying[:max_results], start=1):
         assessment = item["fit_assessment"]
         profile = item["profile"]
         strong, tradeoffs, unknown = criterion_groups(assessment)
+
+        multi_retailer = enrich_with_multi_retailer(
+            profile=profile,
+            identity=item.get("identity", {}) or {},
+            assessment=assessment,
+        )
 
         recommendations.append({
             "rank": rank,
@@ -1933,6 +2261,14 @@ def run_pipeline(
             "official_source": profile.get("official_product_url"),
             "market_source": profile.get("market_source_url"),
             "provenance": profile.get("provenance", {}),
+            "retailer_offers": multi_retailer.get(
+                "retailer_offers", []
+            ),
+            "best_offer": multi_retailer.get("best_offer"),
+            "retailer_comparison_status": multi_retailer.get(
+                "retailer_comparison_status",
+                "unavailable",
+            ),
         })
 
     failure_counter = Counter()
@@ -1955,14 +2291,35 @@ def run_pipeline(
 
     status = "PASS" if len(recommendations) >= DEFAULT_MIN_RESULTS else "PARTIAL"
 
+    # Query-aware result sufficiency.
+    # Exact named-model queries need one verified unique model;
+    # generic shopping queries retain the preferred Top-3 breadth.
+    result_status = (
+        "PASS"
+        if (
+            (exact_model_query and len(recommendations) >= 1)
+            or (
+                not exact_model_query
+                and len(recommendations) >= DEFAULT_MIN_RESULTS
+            )
+        )
+        else "PARTIAL"
+    )
+
     fit_diagnostics = []
 
     for item in scored_records:
         assessment = item.get("fit_assessment", {})
         profile = item.get("profile", {})
+        candidate = item.get("candidate", {}) or {}
+        identity = item.get("identity", {}) or {}
 
         fit_diagnostics.append({
             "product_id": profile.get("product_id"),
+            "candidate_asin": candidate.get("asin"),
+            "identity_asin": identity.get("asin"),
+            "profile_asin": profile.get("asin"),
+            "identity_model": identity.get("model"),
             "title": profile.get("title"),
             "brand": profile.get("brand"),
             "price": profile.get("price"),
@@ -2003,6 +2360,7 @@ def run_pipeline(
         "schema_version": "1.1",
         "query": query,
         "intent": intent,
+        "exact_model_scope": exact_model_scope,
         "stage_counts": {
             "discovered": len(discovered),
             "identity_prepared": len(identities),
@@ -2013,13 +2371,19 @@ def run_pipeline(
                 1 for x in evidence_records if extraction_is_usable(x)[0]
             ),
             "fit_scored": len(scored_records),
+            "qualifying_50_plus_raw": raw_qualifying_count,
+            "qualifying_unique_models": len(qualifying),
+            # Backward-compatible legacy field: post-deduplication count.
             "qualifying_50_plus": len(qualifying),
             "recommendations_returned": len(recommendations),
         },
         "recommendations": recommendations,
+        "closest_matches": closest_matches,
+        "relaxation_options": relaxation_options,
         "fit_diagnostics": fit_diagnostics,
         "failure_summary": failure_summary,
         "failures": failures,
+        "result_status": result_status,
         "status": status,
         "rules": {
             "min_fit_percent": MIN_FIT_PERCENT,

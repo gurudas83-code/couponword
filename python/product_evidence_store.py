@@ -10,7 +10,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 STORE_PATH = ROOT / "data" / "verified_product_evidence_cache.json"
 
-SCHEMA_VERSION = "1.0"
+SCHEMA_VERSION = "1.1"
 
 
 def clean(value: Any) -> str:
@@ -59,6 +59,208 @@ def normalize_model(
     ]
 
     return " ".join(tokens).strip()
+
+
+
+def _capacity_gb(value: Any) -> str:
+    if isinstance(value, dict):
+        value = value.get("value")
+
+    text = clean(value).lower()
+
+    if not text:
+        return ""
+
+    tb_match = re.search(
+        r"\b(\d+(?:\.\d+)?)\s*tb\b",
+        text,
+        re.I,
+    )
+
+    if tb_match:
+        try:
+            return str(int(round(float(tb_match.group(1)) * 1024)))
+        except (TypeError, ValueError):
+            return ""
+
+    gb_match = re.search(
+        r"\b(\d+(?:\.\d+)?)\s*gb\b",
+        text,
+        re.I,
+    )
+
+    if gb_match:
+        try:
+            return str(int(float(gb_match.group(1))))
+        except (TypeError, ValueError):
+            return ""
+
+    if re.fullmatch(r"\d+(?:\.0+)?", text):
+        try:
+            return str(int(float(text)))
+        except (TypeError, ValueError):
+            return ""
+
+    return ""
+
+
+def variant_signature_from_text(*values: Any) -> dict[str, str]:
+    """
+    Extract only variant-sensitive capacity identity.
+
+    This intentionally ignores cosmetic variants such as colour so
+    same-capacity colour siblings may share verified official evidence.
+    """
+    text = " ".join(
+        clean(value)
+        for value in values
+        if clean(value)
+    ).lower()
+
+    if not text:
+        return {}
+
+    signature: dict[str, str] = {}
+
+    ram_patterns = (
+        r"\b(\d{1,3})\s*gb\s*(?:ram|memory)\b",
+        r"\b(?:ram|memory)\s*(?:\(\s*gb\s*\))?"
+        r"\s*[:=\-]?\s*(\d{1,3})(?:\s*gb)?\b",
+    )
+
+    storage_patterns = (
+        r"\b(\d{2,4})\s*gb\s*"
+        r"(?:storage|internal\s+storage|rom)\b",
+        r"\b(?:storage|internal\s+storage|rom)"
+        r"\s*(?:\(\s*gb\s*\))?"
+        r"\s*[:=\-]?\s*(\d{2,4})(?:\s*gb)?\b",
+    )
+
+    for pattern in ram_patterns:
+        match = re.search(pattern, text, re.I)
+
+        if match:
+            signature["ram_gb"] = str(int(match.group(1)))
+            break
+
+    for pattern in storage_patterns:
+        match = re.search(pattern, text, re.I)
+
+        if match:
+            signature["storage_gb"] = str(int(match.group(1)))
+            break
+
+    # Common compact marketplace/query variants:
+    #   6GB + 128GB
+    #   6GB/128GB
+    #   6GB 128GB
+    if "ram_gb" not in signature or "storage_gb" not in signature:
+        capacities = [
+            int(value)
+            for value in re.findall(
+                r"\b(\d{1,4})\s*gb\b",
+                text,
+                re.I,
+            )
+        ]
+
+        plausible_ram = [
+            value
+            for value in capacities
+            if 1 <= value <= 32
+        ]
+
+        plausible_storage = [
+            value
+            for value in capacities
+            if value >= 32
+        ]
+
+        if "ram_gb" not in signature and plausible_ram:
+            signature["ram_gb"] = str(plausible_ram[0])
+
+        if "storage_gb" not in signature and plausible_storage:
+            signature["storage_gb"] = str(plausible_storage[0])
+
+    return signature
+
+
+def variant_signature_from_specifications(
+    specifications: Any,
+) -> dict[str, str]:
+    if not isinstance(specifications, dict):
+        return {}
+
+    signature: dict[str, str] = {}
+
+    for key in (
+        "memory_gb",
+        "ram_gb",
+        "ram",
+        "memory",
+    ):
+        if key not in specifications:
+            continue
+
+        value = _capacity_gb(specifications.get(key))
+
+        if value:
+            signature["ram_gb"] = value
+            break
+
+    for key in (
+        "storage_gb",
+        "storage_capacity_gb",
+        "storage",
+        "rom_gb",
+        "rom",
+    ):
+        if key not in specifications:
+            continue
+
+        value = _capacity_gb(specifications.get(key))
+
+        if value:
+            signature["storage_gb"] = value
+            break
+
+    return signature
+
+
+def record_variant_signature(
+    record: dict[str, Any],
+) -> dict[str, str]:
+    stored = record.get("variant_signature")
+
+    if isinstance(stored, dict):
+        normalized = {
+            key: clean(value)
+            for key, value in stored.items()
+            if key in {"ram_gb", "storage_gb"}
+            and clean(value)
+        }
+
+        if normalized:
+            return normalized
+
+    return variant_signature_from_specifications(
+        record.get("specifications")
+    )
+
+
+def variant_signatures_match(
+    requested: dict[str, str],
+    stored: dict[str, str],
+) -> bool:
+    """
+    Fail closed for model-level cache reuse.
+
+    Whole-record evidence may contain capacity-specific facts, so
+    model fallback is allowed only when both sides expose the same
+    RAM/storage identity. Empty-to-empty remains valid for products
+    without capacity variants.
+    """
+    return requested == stored
 
 
 def build_model_key(
@@ -230,17 +432,43 @@ def find_verified_evidence(
     asin_key = clean(asin).upper()
 
     if asin_key:
+        requested_variant = variant_signature_from_text(
+            title,
+            search_name,
+            model,
+        )
+
         for record in records:
             if not isinstance(record, dict):
                 continue
 
             if (
                 clean(record.get("asin")).upper()
-                == asin_key
+                != asin_key
             ):
-                result = dict(record)
-                result["cache_match_mode"] = "asin"
-                return result
+                continue
+
+            stored_variant = record_variant_signature(record)
+
+            # Exact ASIN remains the highest-priority cache identity,
+            # but explicit RAM/storage evidence in the current candidate
+            # must not conflict with (or be absent from) stored variant
+            # evidence. With no explicit requested capacities, preserve
+            # the historical exact-ASIN behavior.
+            if requested_variant:
+                incompatible = any(
+                    not stored_variant.get(key)
+                    or stored_variant.get(key) != value
+                    for key, value in requested_variant.items()
+                )
+
+                if incompatible:
+                    continue
+
+            result = dict(record)
+            result["cache_match_mode"] = "asin"
+            result["cache_variant_signature"] = stored_variant
+            return result
 
     model_key = build_model_key(
         brand=brand,
@@ -252,14 +480,31 @@ def find_verified_evidence(
     if not model_key:
         return None
 
+    requested_variant = variant_signature_from_text(
+        title,
+        search_name,
+        model,
+    )
+
     for record in records:
         if not isinstance(record, dict):
             continue
 
-        if clean(record.get("model_key")) == model_key:
-            result = dict(record)
-            result["cache_match_mode"] = "brand_model"
-            return result
+        if clean(record.get("model_key")) != model_key:
+            continue
+
+        stored_variant = record_variant_signature(record)
+
+        if not variant_signatures_match(
+            requested_variant,
+            stored_variant,
+        ):
+            continue
+
+        result = dict(record)
+        result["cache_match_mode"] = "brand_model"
+        result["cache_variant_signature"] = stored_variant
+        return result
 
     return None
 
@@ -306,6 +551,10 @@ def save_verified_evidence(
         title=title,
     )
 
+    variant_signature = variant_signature_from_specifications(
+        extraction.get("specifications")
+    )
+
     if not asin_value and not model_key:
         return (
             False,
@@ -318,6 +567,7 @@ def save_verified_evidence(
         "model": model or None,
         "search_name": search_name or None,
         "model_key": model_key or None,
+        "variant_signature": variant_signature,
         "official_url": clean(
             extraction.get("official_url")
             or extraction.get("canonical_url")
@@ -368,6 +618,10 @@ def save_verified_evidence(
             model_key
             and existing_model_key
             and model_key == existing_model_key
+            and variant_signatures_match(
+                variant_signature,
+                record_variant_signature(existing),
+            )
         ):
             replacement_index = index
             break

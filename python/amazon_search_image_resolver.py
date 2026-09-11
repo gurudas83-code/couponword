@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 from urllib.parse import urlparse, quote_plus
 
+import re
 import requests
 from bs4 import BeautifulSoup
 
@@ -180,6 +181,38 @@ def search_asins(title, max_cards=12):
 
                 if search_price_text:
                     break
+            # Fallback for Amazon cards where price is visible only
+            # in the exact ASIN-bound card text.
+            search_price_evidence_method = ""
+
+            if not search_price_text:
+                card_text = clean(
+                    card.get_text(
+                        " ",
+                        strip=True,
+                    )
+                )
+
+                price_match = re.search(
+                    r"₹\s*([\d,]+(?:\.\d{1,2})?)"
+                    r"\s*\(\s*\d+\s+new\s+offers?\s*\)",
+                    card_text,
+                    re.I,
+                )
+
+                if price_match:
+                    search_price_text = (
+                        "₹" + price_match.group(1)
+                    )
+
+                    search_price_evidence_method = (
+                        "amazon_exact_asin_search_card_offer_text"
+                    )
+            else:
+                search_price_evidence_method = (
+                    "amazon_exact_asin_search_card"
+                )
+
 
             results.append(
                 {
@@ -193,9 +226,7 @@ def search_asins(title, max_cards=12):
                         else ""
                     ),
                     "search_price_evidence_method": (
-                        "amazon_exact_asin_search_card"
-                        if search_price_text
-                        else ""
+                        search_price_evidence_method
                     ),
                     "product_url": (
                         f"https://www.amazon.in/dp/{asin}"
