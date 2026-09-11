@@ -298,7 +298,7 @@ def sanitize_discovery_title(value: Any) -> str:
     title = " ".join(words).strip()
 
     # Remove common source suffixes without destroying hyphenated models.
-    for sep in (" | ", " â€“ ", " â€” "):
+    for sep in (" | ", " Ã¢â‚¬â€œ ", " Ã¢â‚¬â€ "):
         if sep in title:
             left = clean(title.split(sep, 1)[0])
             if len(left.split()) >= 2:
@@ -1414,6 +1414,9 @@ def run_pipeline(
         if isinstance(item, dict)
     ]
 
+    exact_model_scope = discovery.get("exact_model_scope") or {}
+    exact_model_query = exact_model_scope.get("active") is True
+
     api_key = os.environ.get("TAVILY_API_KEY")
 
     client = (
@@ -1491,6 +1494,7 @@ def run_pipeline(
                 if re.search(r"[a-z]", token)
                 and re.search(r"\d", token)
                 and token not in {"5g", "4g", "3g", "2g"}
+                and not re.fullmatch(r"\d+(?:gb|tb)", token)
             }
 
             if query_model_tokens:
@@ -1954,6 +1958,9 @@ def run_pipeline(
         reverse=True,
     )
 
+    # Preserve pre-deduplication qualification breadth for diagnostics.
+    raw_qualifying_count = len(qualifying)
+
     # ---------------------------------------------------------
     # MODEL-LEVEL RECOMMENDATION DEDUPLICATION
     # ---------------------------------------------------------
@@ -2284,6 +2291,21 @@ def run_pipeline(
 
     status = "PASS" if len(recommendations) >= DEFAULT_MIN_RESULTS else "PARTIAL"
 
+    # Query-aware result sufficiency.
+    # Exact named-model queries need one verified unique model;
+    # generic shopping queries retain the preferred Top-3 breadth.
+    result_status = (
+        "PASS"
+        if (
+            (exact_model_query and len(recommendations) >= 1)
+            or (
+                not exact_model_query
+                and len(recommendations) >= DEFAULT_MIN_RESULTS
+            )
+        )
+        else "PARTIAL"
+    )
+
     fit_diagnostics = []
 
     for item in scored_records:
@@ -2338,6 +2360,7 @@ def run_pipeline(
         "schema_version": "1.1",
         "query": query,
         "intent": intent,
+        "exact_model_scope": exact_model_scope,
         "stage_counts": {
             "discovered": len(discovered),
             "identity_prepared": len(identities),
@@ -2348,6 +2371,9 @@ def run_pipeline(
                 1 for x in evidence_records if extraction_is_usable(x)[0]
             ),
             "fit_scored": len(scored_records),
+            "qualifying_50_plus_raw": raw_qualifying_count,
+            "qualifying_unique_models": len(qualifying),
+            # Backward-compatible legacy field: post-deduplication count.
             "qualifying_50_plus": len(qualifying),
             "recommendations_returned": len(recommendations),
         },
@@ -2357,6 +2383,7 @@ def run_pipeline(
         "fit_diagnostics": fit_diagnostics,
         "failure_summary": failure_summary,
         "failures": failures,
+        "result_status": result_status,
         "status": status,
         "rules": {
             "min_fit_percent": MIN_FIT_PERCENT,

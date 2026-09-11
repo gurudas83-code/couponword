@@ -4,5 +4,56 @@
   "category": "smartphone",
   "generated_at": null,
   "source_method": "mobile_market_universe_builder",
-  "products": []
+  "products": [
+    {
+      "brand": "Redmi",
+      "model": "Redmi 13 5G",
+      "variant": "8GB/128GB",
+      "ram_gb": 8,
+      "storage_gb": 128,
+      "canonical_product_id": "cw-mobile-10",
+      "source": "legacy_product_features_bootstrap",
+      "source_reference": "amazon_asin:B0F1N8B7Z4"
+    },
+    {
+      "brand": "Apple",
+      "model": "iPhone 17e",
+      "variant": "256GB",
+      "ram_gb": null,
+      "storage_gb": 256,
+      "canonical_product_id": "",
+      "source": "legacy_product_features_bootstrap",
+      "source_reference": "amazon_asin:B0GQVL6STN"
+    },
+    {
+      "brand": "Redmi",
+      "model": "Redmi Note 15 5G",
+      "variant": "8GB/128GB",
+      "ram_gb": 8,
+      "storage_gb": 128,
+      "canonical_product_id": "",
+      "source": "legacy_product_features_bootstrap",
+      "source_reference": "amazon_asin:B0G5G7LCJQ"
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy M36 5G",
+      "variant": "6GB/128GB",
+      "ram_gb": 6,
+      "storage_gb": 128,
+      "canonical_product_id": "cw-mobile-72",
+      "source": "legacy_product_features_bootstrap",
+      "source_reference": "amazon_asin:B0FDBB2VRC"
+    },
+    {
+      "brand": "Nothing",
+      "model": "Phone (3)",
+      "variant": "12GB/256GB",
+      "ram_gb": 12,
+      "storage_gb": 256,
+      "canonical_product_id": "",
+      "source": "legacy_product_features_bootstrap",
+      "source_reference": "amazon_asin:B0F7R6V1LM"
+    }
+  ]
 }

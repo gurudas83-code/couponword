@@ -31,7 +31,7 @@ class ShoppingIntent:
 
 def normalize(text: str) -> str:
     text = str(text or "").lower()
-    text = text.replace("₹", " ").replace("â‚¹", " ").replace(",", "")
+    text = text.replace("â‚¹", " ").replace("Ã¢â€šÂ¹", " ").replace(",", "")
     text = re.sub(r"[^\w\s.+/\-]", " ", text)
     return re.sub(r"\s+", " ", text).strip()
 
@@ -626,6 +626,29 @@ def detect_requirements(
                 f"{compact_variant_match.group(2)}gb_storage",
             )
 
+        # Bare smartphone memory pair:
+        #   8GB 128GB
+        #   12GB 256GB
+        #
+        # Interpret only a plausible RAM capacity followed immediately
+        # by a plausible storage capacity. Reuse the existing must_have
+        # contract; do not create a parallel intent schema.
+        bare_memory_pair = re.search(
+            r"\b(2|3|4|6|8|12|16|18|24)\s*gb\s+"
+            r"(32|64|128|256|512|1024)\s*gb\b",
+            text,
+            re.I,
+        )
+
+        if category == "smartphone" and bare_memory_pair:
+            add(
+                must_have,
+                f"{bare_memory_pair.group(1)}gb_ram",
+            )
+            add(
+                must_have,
+                f"{bare_memory_pair.group(2)}gb_storage",
+            )
         ram_match = re.search(
             r"\b(2|3|4|6|8|12|16|18|24|32|64)\s*gb\s*(?:of\s*)?ram\b",
             text,

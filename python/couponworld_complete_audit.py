@@ -273,6 +273,11 @@ def inspect_knowledge() -> dict[str, Any]:
 
             if key == "runtime_shopping_intelligence.json":
                 result[key]["status"] = data.get("status")
+                result[key]["result_status"] = data.get("result_status")
+                result[key]["exact_model_scope"] = data.get(
+                    "exact_model_scope", {}
+                )
+                result[key]["query"] = data.get("query")
                 result[key]["stage_counts"] = data.get("stage_counts", {})
 
     return result
@@ -539,12 +544,51 @@ def build_findings(audit: dict[str, Any]) -> list[Finding]:
     runtime = audit["knowledge"].get("runtime_shopping_intelligence.json", {})
     if runtime.get("exists"):
         counts = runtime.get("stage_counts", {})
-        if counts.get("recommendations_returned", 0) >= 3:
-            add(findings, "Shopping Pipeline", "PASS", "Runtime pipeline has produced at least 3 recommendations.", stage_counts=counts)
+        exact_model_active = (
+            (runtime.get("exact_model_scope") or {}).get("active") is True
+        )
+        result_status = runtime.get("result_status")
+        recommendations_returned = int(
+            counts.get("recommendations_returned", 0) or 0
+        )
+
+        if (
+            exact_model_active
+            and result_status == "PASS"
+            and recommendations_returned >= 1
+        ):
+            add(
+                findings,
+                "Shopping Pipeline",
+                "PASS",
+                "Runtime exact-model pipeline produced a qualifying recommendation.",
+                query=runtime.get("query"),
+                result_status=result_status,
+                stage_counts=counts,
+            )
+        elif recommendations_returned >= 3:
+            add(
+                findings,
+                "Shopping Pipeline",
+                "PASS",
+                "Runtime pipeline has produced at least 3 recommendations.",
+                stage_counts=counts,
+            )
         elif counts:
-            add(findings, "Shopping Pipeline", "BLOCKER", "Runtime pipeline exists but is not yet producing the required Top 3-5.", stage_counts=counts)
+            add(
+                findings,
+                "Shopping Pipeline",
+                "BLOCKER",
+                "Runtime pipeline exists but is not yet producing the required Top 3-5.",
+                stage_counts=counts,
+            )
         else:
-            add(findings, "Shopping Pipeline", "WARNING", "Runtime pipeline file exists but stage counts are unavailable.")
+            add(
+                findings,
+                "Shopping Pipeline",
+                "WARNING",
+                "Runtime pipeline file exists but stage counts are unavailable.",
+            )
     else:
         add(findings, "Shopping Pipeline", "WARNING", "No runtime shopping intelligence result file was found.")
 

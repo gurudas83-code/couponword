@@ -62,6 +62,7 @@ VARIANT_PATTERNS = [
     r"\b\d+\s*gb\s*ram\b",
     r"\b\d+\s*gb\s*storage\b",
     r"\b\d+\s*tb\s*storage\b",
+    r"\b\d+\s*(?:gb|tb)\s*rom\b",
     r"\b\d+\s*gb\b",
     r"\b\d+\s*tb\b",
     r"\bblack\b",
@@ -73,6 +74,7 @@ VARIANT_PATTERNS = [
     r"\bred\b",
     r"\bgreen\b",
     r"\bsilver\b",
+    r"\borchid pink\b",
     r"\bhawaiian\b",
     r"\bhawaiian blue\b",
     r"\bmaster gold\b",
@@ -92,6 +94,7 @@ MARKETING_START_WORDS = {
     "premium",
     "soft",
     "all-day",
+    "mobile",
 }
 
 
@@ -181,11 +184,30 @@ def get_core_title(title: str) -> str:
     # Long feature description after an en/em dash.
     title = re.split(r"\s+[–—]\s+", title, maxsplit=1)[0].strip()
 
-    comma_parts = [
-        part.strip()
-        for part in title.split(",")
-        if part.strip()
-    ]
+    # Split only on top-level commas. Retailer variant blocks commonly
+    # contain commas inside parentheses, e.g.
+    # "(Orange Haze, 6GB RAM, 128GB Storage)".
+    comma_parts: list[str] = []
+    current: list[str] = []
+    paren_depth = 0
+
+    for char in title:
+        if char == "(":
+            paren_depth += 1
+        elif char == ")" and paren_depth > 0:
+            paren_depth -= 1
+
+        if char == "," and paren_depth == 0:
+            part = "".join(current).strip()
+            if part:
+                comma_parts.append(part)
+            current = []
+        else:
+            current.append(char)
+
+    final_part = "".join(current).strip()
+    if final_part:
+        comma_parts.append(final_part)
 
     if len(comma_parts) > 1:
         first_part = comma_parts[0]

@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Coupon World AI OS
 Market Discovery Engine v1.6.1
@@ -1685,9 +1685,11 @@ def category_accessory_gate(
         r"\bfolio\s+cover\b",
         r"\bgalaxy\s+tab\b",
         r"\bflip\s+case\b",
+        r"\bflip\s+cover\b",
         r"\bback\s+cover\b",
         r"\bprotective\s+cover\b",
         r"\bcase\s+cover\b",
+        r"\bcover\s+case\b",
         r"\bleather\s+case\b",
         r"\bcharging\s+cable\b",
         r"\bcharger\b",
@@ -1755,6 +1757,7 @@ def category_accessory_gate(
 def discovery_variant_gate(
     title: str,
     intent: dict[str, Any],
+    exact_memory_variant: bool = False,
 ) -> dict[str, Any]:
     """
     Early contradiction gate only.
@@ -1777,46 +1780,70 @@ def discovery_variant_gate(
     contradictions: list[str] = []
     confirmed: list[str] = []
 
+    def capacity_matches(values, required):
+        if required is None:
+            return True
+        if not values:
+            return False
+        if exact_memory_variant:
+            return required in values
+        return max(values) >= required
+
     if required_ram is not None:
         if ram_values:
-            if max(ram_values) >= required_ram:
-                confirmed.append(
-                    f"RAM satisfies at least {required_ram}GB"
-                )
+            if capacity_matches(ram_values, required_ram):
+                if exact_memory_variant:
+                    confirmed.append(
+                        f"RAM matches exact {required_ram}GB variant"
+                    )
+                else:
+                    confirmed.append(
+                        f"RAM satisfies at least {required_ram}GB"
+                    )
             else:
-                contradictions.append(
-                    f"requires at least {required_ram}GB RAM; "
-                    f"title explicitly shows {ram_values}GB"
-                )
+                if exact_memory_variant:
+                    contradictions.append(
+                        f"requires exact {required_ram}GB RAM variant; "
+                        f"title explicitly shows {ram_values}GB"
+                    )
+                else:
+                    contradictions.append(
+                        f"requires at least {required_ram}GB RAM; "
+                        f"title explicitly shows {ram_values}GB"
+                    )
         else:
             reasons.append("RAM capacity not explicit in title")
 
     if required_storage is not None:
         if storage_values:
-            if max(storage_values) >= required_storage:
-                confirmed.append(
-                    f"Storage satisfies at least {required_storage}GB"
-                )
+            if capacity_matches(storage_values, required_storage):
+                if exact_memory_variant:
+                    confirmed.append(
+                        f"Storage matches exact {required_storage}GB variant"
+                    )
+                else:
+                    confirmed.append(
+                        f"Storage satisfies at least {required_storage}GB"
+                    )
             else:
-                contradictions.append(
-                    f"requires at least {required_storage}GB storage; "
-                    f"title explicitly shows {storage_values}GB"
-                )
+                if exact_memory_variant:
+                    contradictions.append(
+                        f"requires exact {required_storage}GB storage variant; "
+                        f"title explicitly shows {storage_values}GB"
+                    )
+                else:
+                    contradictions.append(
+                        f"requires at least {required_storage}GB storage; "
+                        f"title explicitly shows {storage_values}GB"
+                    )
         else:
             reasons.append("Storage capacity not explicit in title")
 
     if contradictions:
         status = "reject"
     elif (
-        (required_ram is None or (ram_values and max(ram_values) >= required_ram))
-        and
-        (
-            required_storage is None
-            or (
-                storage_values
-                and max(storage_values) >= required_storage
-            )
-        )
+        capacity_matches(ram_values, required_ram)
+        and capacity_matches(storage_values, required_storage)
     ):
         status = "pass"
     else:
@@ -2124,15 +2151,73 @@ def discover_market(
             )
         )
 
+    query_model_parts = query_key_for_model.split()
+    explicit_brand_tokens = {
+        token
+        for brand in intent.get("brands", [])
+        for token in normalize_key(brand).split()
+        if token
+    }
+
     exact_query_model_tokens = {
         token
-        for token in query_key_for_model.split()
-        if re.search(r"[a-z]", token)
-        and re.search(r"\d", token)
+        for index, token in enumerate(query_model_parts)
+        if (
+            (
+                re.search(r"[a-z]", token)
+                and re.search(r"\d", token)
+            )
+            or (
+                token.isdigit()
+                and 1 <= len(token) <= 3
+                and index > 0
+                and query_model_parts[index - 1] in explicit_brand_tokens
+            )
+        )
         and token not in {"5g", "4g", "3g", "2g"}
         and not re.fullmatch(r"\d+(?:\.\d+)?k", token, re.I)
         and not is_capacity_or_unit_token(token)
     }
+
+    # Preserve family identity for numeric models written directly
+    # after an explicit brand.
+    #
+    # Redmi 13   -> require contiguous "redmi 13"
+    # OnePlus 13 -> require contiguous "oneplus 13"
+    #
+    # This prevents sibling families such as "Redmi Note 13"
+    # from satisfying a bare numeric model token lock.
+    exact_numeric_brand_pairs = {
+        (query_model_parts[index - 1], token)
+        for index, token in enumerate(query_model_parts)
+        if token.isdigit()
+        and 1 <= len(token) <= 3
+        and index > 0
+        and query_model_parts[index - 1] in explicit_brand_tokens
+    }
+
+    must_have_for_variant = list(intent.get("must_have") or [])
+    has_explicit_memory_pair = (
+        _required_capacity(must_have_for_variant, "ram") is not None
+        and
+        _required_capacity(must_have_for_variant, "storage") is not None
+    )
+
+    minimum_capacity_language = bool(
+        re.search(
+            r"\b(?:at\s+least|min(?:imum)?|more\s+than|"
+            r"or\s+more|or\s+higher|and\s+above)\b",
+            user_query,
+            re.I,
+        )
+    )
+
+    exact_memory_variant = (
+        intent.get("category") == "smartphone"
+        and bool(exact_query_model_tokens)
+        and has_explicit_memory_pair
+        and not minimum_capacity_language
+    )
 
     # Brand semantics must distinguish REQUIRED, PREFERRED and AVOIDED.
     # `intent["brands"]` is detection metadata and includes all mentioned
@@ -2194,6 +2279,18 @@ def discover_market(
             if not exact_query_model_tokens.issubset(title_tokens):
                 continue
 
+            if exact_numeric_brand_pairs:
+                numeric_family_match = any(
+                    re.search(
+                        rf"(?:^|\s){re.escape(brand)}\s+"
+                        rf"{re.escape(model)}(?:\s|$)",
+                        normalized_title,
+                    )
+                    for brand, model in exact_numeric_brand_pairs
+                )
+
+                if not numeric_family_match:
+                    continue
         # Explicit/bare brand scope is hard. Preferred brands are ranked
         # downstream and therefore must not narrow discovery.
         #
@@ -2272,6 +2369,7 @@ def discover_market(
         variant_gate = discovery_variant_gate(
             title,
             intent,
+            exact_memory_variant=exact_memory_variant,
         )
 
         # Discovery is allowed to reject only explicit contradictions.
@@ -2335,7 +2433,7 @@ def discover_market(
             return 1
 
         match = re.fullmatch(
-            r"\s*₹?\s*([\d,]+(?:\.\d+)?)\s*",
+            r"\s*Ã¢â€šÂ¹?\s*([\d,]+(?:\.\d+)?)\s*",
             price_text,
         )
 
@@ -2498,6 +2596,14 @@ def discover_market(
         "discovery_queries": queries,
         "candidate_count": len(candidates),
         "candidates": candidates,
+        "exact_model_scope": {
+            "active": bool(exact_query_model_tokens),
+            "model_tokens": sorted(exact_query_model_tokens),
+            "numeric_brand_pairs": [
+                {"brand": brand, "model": model}
+                for brand, model in sorted(exact_numeric_brand_pairs)
+            ],
+        },
         "note": (
             "Discovery quality scores only prioritize candidate research; "
             "final recommendation Fit must be computed from verified evidence."

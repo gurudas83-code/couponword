@@ -111,6 +111,7 @@ FEATURE_HINTS = (
     "update period",
     "display",
     "storage",
+    "memory",
     "ram",
     "camera",
     "resolution",
@@ -272,7 +273,10 @@ def hostname(url: str) -> str:
 
 def fetch_page(url: str) -> tuple[str | None, str | None, int | None]:
     headers = {
-        "User-Agent": USER_AGENT,
+        # Use the same conservative public-page request identity as the
+        # official-source resolver. Some official sites reject the
+        # legacy research-bot UA before returning the product page.
+        "User-Agent": "Mozilla/5.0",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         "Accept-Language": "en-IN,en;q=0.9",
     }
@@ -547,6 +551,153 @@ def extract_label_value_blocks(
                     "label_value_block",
                     78,
                 )
+
+
+    # Generic adjacent technical label/value discovery
+    #
+    # Some official product pages render specifications as:
+    #
+    #   <div><span>Battery</span></div>
+    #   <div><span>5000mAh ...</span></div>
+    #
+    # rather than semantic headings, tables, or colon-separated text.
+    # Keep this conservative: the label itself must look technical
+    # through the existing aliases / FEATURE_HINTS, and the nearby
+    # value must contain meaningful technical evidence.
+    seen_adjacent: set[tuple[str, str]] = set()
+
+    known_labels = set(ALIASES.values())
+
+    for label_node in soup.find_all(
+        ["span", "strong", "b", "dt", "p"]
+    ):
+        raw_label = clean_text(
+            label_node.get_text(" ", strip=True)
+        )
+
+        if not raw_label:
+            continue
+
+        if len(raw_label) < 2 or len(raw_label) > 80:
+            continue
+
+        if is_noise_feature(raw_label):
+            continue
+
+        label_lower = raw_label.lower()
+        normalized_label = normalize_key(raw_label)
+
+        label_relevance = sum(
+            1
+            for hint in FEATURE_HINTS
+            if hint in label_lower
+        )
+
+        label_is_known = (
+            normalized_label in known_labels
+            or label_lower in ALIASES
+        )
+
+        if not label_is_known and label_relevance <= 0:
+            continue
+
+        sibling_candidates = []
+
+        direct_sibling = label_node.find_next_sibling()
+
+        if direct_sibling is not None:
+            sibling_candidates.append(direct_sibling)
+
+        parent = label_node.parent
+
+        if parent is not None:
+            # Some official spec layouts insert empty spacer/container
+            # nodes between a technical label and its value. Walk only
+            # a few adjacent siblings and use the nearest non-empty one.
+            parent_sibling = parent.find_next_sibling()
+            sibling_steps = 0
+
+            while (
+                parent_sibling is not None
+                and sibling_steps < 4
+            ):
+                sibling_steps += 1
+
+                sibling_text = clean_text(
+                    parent_sibling.get_text(" ", strip=True)
+                )
+
+                if sibling_text:
+                    if parent_sibling not in sibling_candidates:
+                        sibling_candidates.append(parent_sibling)
+                    break
+
+                parent_sibling = parent_sibling.find_next_sibling()
+
+        for sibling in sibling_candidates:
+            value = clean_text(
+                sibling.get_text(" ", strip=True)
+            )
+
+            if not value:
+                continue
+
+            if len(value) > 500:
+                continue
+
+            # Single-digit numeric values are valid technical evidence,
+            # e.g. "Memory (GB) 6". Reject only non-numeric one-character noise.
+            if len(value) < 2 and not re.fullmatch(r"\d", value):
+                continue
+
+            if value.lower() == label_lower:
+                continue
+
+            if is_noise_feature(value):
+                continue
+
+            combined_text = f"{raw_label} {value}".lower()
+
+            relevance = sum(
+                1
+                for hint in FEATURE_HINTS
+                if hint in combined_text
+            )
+
+            # Require either an explicit technical value such as
+            # capacity, frequency, resolution, version, etc., or
+            # multiple independent technical hints.
+            if (
+                not re.search(r"\d", value)
+                and relevance < 2
+            ):
+                continue
+
+            pair = (
+                label_lower,
+                value.lower(),
+            )
+
+            if pair in seen_adjacent:
+                continue
+
+            seen_adjacent.add(pair)
+
+            confidence = min(
+                90,
+                82 + min(8, relevance * 2),
+            )
+
+            add_specification(
+                specifications,
+                raw_label,
+                value,
+                "adjacent_label_value",
+                confidence,
+            )
+
+            # Use the closest valid sibling only.
+            break
 
     return len(specifications) - before
 

@@ -636,6 +636,14 @@ def ram_signal(text: str) -> dict[str, Any]:
         )
 
     if amount is None:
+        # Canonical structured attributes rendered by text_blob(),
+        # e.g. "memory_gb 6" or "ram_gb 8".
+        amount = numeric(
+            r"\b(?:memory|ram)_gb\s+(\d{1,3})\b",
+            text,
+        )
+
+    if amount is None:
         return signal(None, "No verified RAM capacity found")
 
     if amount >= 16:
@@ -1778,6 +1786,14 @@ def capacity_requirement_signal(
         if actual is None:
             actual = numeric(
                 r"\b(\d{1,3})\s*\+\s*\d{2,4}\s*gb\b",
+                text,
+            )
+
+        if actual is None:
+            # Canonical structured attributes rendered by text_blob(),
+            # e.g. "memory_gb 6" or "ram_gb 8".
+            actual = numeric(
+                r"\b(?:memory|ram)_gb\s+(\d{1,3})\b",
                 text,
             )
 
