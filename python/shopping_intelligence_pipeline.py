@@ -1570,13 +1570,11 @@ def run_pipeline(
 
             fast_price = build_price_evidence(candidate)
 
-            fast_commerce_verified = bool(
+            fast_identity_verified = bool(
                 clean(fast_identity.get("decision")).lower() == "verified"
-                and fast_price.get("verified") is True
-                and fast_price.get("price") is not None
             )
 
-            if fast_commerce_verified:
+            if fast_identity_verified:
                 resolved = {
                     "product_id": clean(
                         identity.get("product_id")
@@ -1585,8 +1583,8 @@ def run_pipeline(
                     "title": market_title,
                     "brand": clean(identity.get("brand")),
                     "verified": True,
-                    "status": "commerce_evidence_verified",
-                    "resolver_mode": "verified_retailer_fallback",
+                    "status": "retailer_identity_verified",
+                    "resolver_mode": "verified_retailer_identity",
                     "official_url": market_url,
                     "official_title": market_title,
                     "identity_score": int(
@@ -1600,23 +1598,23 @@ def run_pipeline(
                     ),
                     "commerce_evidence": fast_price,
                     "reason": (
-                        "Live-fast verified retailer identity and "
-                        "primary price evidence"
+                        "Live-fast verified retailer identity; "
+                        "price evidence is an independent commerce overlay"
                     ),
                 }
 
         if resolved is None and live_fast:
             # Live visitor mode is intentionally independent of Tavily /
-            # official-source deep search. If retailer identity or price
-            # evidence is insufficient, fail this candidate quickly and
-            # transparently rather than falling back to a slow network
-            # resolver.
+            # official-source deep search. Retailer identity must verify,
+            # but price is a volatile commerce overlay and may be unknown.
+            # Fail quickly only when retailer identity itself is insufficient
+            # rather than falling back to a slow network resolver.
             failures.append({
                 "candidate_id": candidate_id,
                 "title": raw_title,
                 "stage": "live_commerce_verification",
                 "status": "not_verified",
-                "reason": "Live-fast commerce verification did not pass",
+                "reason": "Live-fast retailer identity verification did not pass",
                 "commerce_identity_score": fast_identity.get("score"),
                 "commerce_identity_decision": fast_identity.get("decision"),
                 "commerce_identity_reasons": fast_identity.get("reasons", []),
@@ -1794,13 +1792,13 @@ def run_pipeline(
         elif (
             live_fast
             and clean(resolved.get("resolver_mode"))
-                == "verified_retailer_fallback"
+                in {"verified_retailer_fallback", "verified_retailer_identity"}
         ):
             # -----------------------------------------------------
             # FAST LIVE EVIDENCE
             # -----------------------------------------------------
-            # Commerce identity and primary retailer price were
-            # already independently verified above.
+            # Commerce identity was independently verified above.
+            # Retailer price evidence is optional and remains separate.
             #
             # For live visitor requests, avoid a second deep page
             # crawl. Use the trusted retailer listing text as
@@ -1837,13 +1835,14 @@ def run_pipeline(
                 "specifications": {},
                 "features": fast_features,
                 "review": {
-                    "status": "verified_live_commerce",
+                    "status": "verified_live_retailer_identity",
                     "reason": (
-                        "Fast live mode used already verified retailer "
-                        "identity, listing evidence and primary price"
+                        "Fast live mode used verified retailer identity "
+                        "and bounded listing evidence; price remains "
+                        "an independent commerce overlay"
                     ),
                 },
-                "evidence_mode": "verified_commerce_fast",
+                "evidence_mode": "verified_retailer_fast",
             }
 
         else:
@@ -1862,6 +1861,7 @@ def run_pipeline(
         # Fast listing-only evidence is intentionally not saved as
         # long-term product knowledge.
         if clean(extraction.get("evidence_mode")) not in {
+            "verified_retailer_fast",
             "verified_commerce_fast",
             "verified_persistent_cache",
         }:
