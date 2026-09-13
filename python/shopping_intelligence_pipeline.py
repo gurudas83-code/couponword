@@ -1281,6 +1281,104 @@ def runtime_profile_from_extraction(
         else None
     )
 
+    # Canonical retailer identity hydration: recover stable identity from exact retailer URLs.
+    candidate_asin = clean(
+        candidate.get("asin")
+        or identity.get("asin")
+    )
+
+    if not candidate_asin:
+        for retailer_url in (
+            candidate.get("source_url"),
+            resolved.get("official_url"),
+        ):
+            retailer_url = clean(retailer_url)
+
+            if not retailer_url or "amazon." not in retailer_url.lower():
+                continue
+
+            try:
+                from product_pipeline import extract_asin
+
+                candidate_asin = extract_asin(retailer_url)
+                break
+            except ValueError:
+                continue
+
+    canonical_product_id = ""
+
+    if candidate_asin:
+        from retailer_product_registry import find_canonical_product_id
+
+        canonical_product_id = clean(
+            find_canonical_product_id(
+                retailer="amazon",
+                retailer_product_id=candidate_asin,
+            )
+        )
+
+    # Promote compact mobile variant capacity into structured evidence only
+    # after canonical retailer identity and exact live-retailer identity pass.
+    if (
+        canonical_product_id
+        and clean(intent.get("category")).lower() == "smartphone"
+        and clean(resolved.get("status")).lower()
+            == "retailer_identity_verified"
+        and clean(
+            extraction.get("review", {}).get("status")
+        ).lower() == "verified_live_retailer_identity"
+    ):
+        import re as _re
+
+        verified_identity_text = " ".join(
+            clean(value)
+            for value in (
+                extraction.get("search_name"),
+                resolved.get("official_title"),
+                candidate.get("title"),
+            )
+            if clean(value)
+        )
+
+        compact_pair = _re.search(
+            r"\(\s*(\d{1,3})\s*GB\s*,\s*(\d{2,4})\s*GB\s*\)",
+            verified_identity_text,
+            flags=_re.IGNORECASE,
+        )
+
+        if compact_pair:
+            specifications.setdefault(
+                "ram_gb",
+                int(compact_pair.group(1)),
+            )
+            specifications.setdefault(
+                "storage_gb",
+                int(compact_pair.group(2)),
+            )
+
+        ram_match = _re.search(
+            r"\b(\d{1,3})\s*GB\s*RAM\b",
+            verified_identity_text,
+            flags=_re.IGNORECASE,
+        )
+        storage_match = _re.search(
+            r"\b(\d{2,4})\s*GB\s*(?:Storage|ROM)\b",
+            verified_identity_text,
+            flags=_re.IGNORECASE,
+        )
+
+        if ram_match:
+            specifications.setdefault(
+                "ram_gb",
+                int(ram_match.group(1)),
+            )
+
+        if storage_match:
+            specifications.setdefault(
+                "storage_gb",
+                int(storage_match.group(1)),
+            )
+
     profile: dict[str, Any] = {
         "product_id": clean(
             identity.get("product_id")
@@ -1297,10 +1395,7 @@ def runtime_profile_from_extraction(
         ),
         "category": clean(intent.get("category")),
         "price": verified_market_price,
-        "asin": clean(
-            candidate.get("asin")
-            or identity.get("asin")
-        ),
+        "asin": candidate_asin,
         "image_url": clean(candidate.get("search_image")),
         "commerce_provider": clean(candidate.get("provider")),
         "attributes": specifications,

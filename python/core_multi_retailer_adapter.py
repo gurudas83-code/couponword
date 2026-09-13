@@ -48,9 +48,29 @@ def first_capacity(
     *keys: str,
 ) -> str:
     for key in keys:
-        value = capacity_gb(attributes.get(key))
+        raw_value = attributes.get(key)
+
+        value = capacity_gb(raw_value)
         if value:
             return value
+
+        # *_gb schema keys already declare the unit explicitly.
+        # Accept only positive whole-number capacities here; keep
+        # legacy generic keys fail-closed unless their value says GB.
+        if key.endswith("_gb") and not isinstance(raw_value, bool):
+            if isinstance(raw_value, int) and raw_value > 0:
+                return f"{raw_value}GB"
+
+            if (
+                isinstance(raw_value, float)
+                and raw_value > 0
+                and raw_value.is_integer()
+            ):
+                return f"{int(raw_value)}GB"
+
+            raw_text = clean(raw_value)
+            if raw_text.isdigit() and int(raw_text) > 0:
+                return f"{int(raw_text)}GB"
 
     return ""
 
@@ -73,6 +93,7 @@ def verified_variant(
     ram = first_capacity(
         attributes,
         "ram",
+        "ram_gb",
         "ram_capacity",
         "memory_capacity",
     )
@@ -80,6 +101,7 @@ def verified_variant(
     storage = first_capacity(
         attributes,
         "storage",
+        "storage_gb",
         "storage_capacity",
         "internal_storage",
     )
