@@ -66,6 +66,14 @@
         "confidence": 0.99,
         "source": "live-amazon-exact-page+mobile-exact-identity-gate-v1"
       }
+    },
+    "cw-mobile-75": {
+      "amazon": {
+        "retailer_product_id": "B0FV98G8VT",
+        "product_url": "https://www.amazon.in/dp/B0FV98G8VT",
+        "confidence": 0.99,
+        "source": "live-amazon-exact-page+mobile-exact-identity-gate-v1"
+      }
     }
   }
 }

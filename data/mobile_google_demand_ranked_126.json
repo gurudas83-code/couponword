@@ -1,0 +1,4887 @@
+{
+  "schema_version": "1.0",
+  "signal": "google_search_demand",
+  "market": "IN",
+  "category": "smartphone",
+  "score_policy": "Research/enrichment priority only. Not sales units and not recommendation Fit.",
+  "source": {
+    "type": "google_keyword_planner_historical_metrics",
+    "metrics_file": "C:\\Users\\HP\\Downloads\\Keyword Stats 2026-09-12 at 23_41_57.csv",
+    "keyword_map_file": "data\\mobile_google_demand_keywords_126_google_safe.csv",
+    "detected_columns": {
+      "keyword_column": "Keyword",
+      "search_column": "Avg. monthly searches",
+      "competition_column": "Competition",
+      "encoding": "utf-16",
+      "delimiter": "tab",
+      "header_row": 3,
+      "report_title": "Keyword Stats 2026-09-12 at 23_41_57",
+      "period": "1 September 2025 - 31 August 2026",
+      "metric_keyword_count": 385
+    }
+  },
+  "product_count": 126,
+  "products_with_google_metrics": 122,
+  "products_without_google_metrics": 4,
+  "products": [
+    {
+      "priority": 47,
+      "brand": "vivo",
+      "model": "T4X",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "vivo T4X",
+          "avg_monthly_searches": 5000000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "vivo T4X price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "vivo T4X buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "vivo T4X 6GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 5000000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "exceptional",
+      "google_demand_score": 100.0,
+      "google_demand_rank": 1
+    },
+    {
+      "priority": 16,
+      "brand": "Apple",
+      "model": "iPhone 15",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone 15",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone 15 price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone 15 buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone 15 6GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 20,
+      "brand": "Apple",
+      "model": "iPhone 16",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone 16",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone 16 price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone 16 buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone 16 8GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 26,
+      "brand": "Apple",
+      "model": "iPhone 17",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone 17",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone 17 price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone 17 buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone 17 8GB 256GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 29,
+      "brand": "Apple",
+      "model": "iPhone 17 Pro",
+      "variant": "12GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone 17 Pro",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone 17 Pro price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone 17 Pro buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone 17 Pro 12GB 256GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 31,
+      "brand": "Apple",
+      "model": "iPhone 17 Pro Max",
+      "variant": "12GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone 17 Pro Max",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone 17 Pro Max price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone 17 Pro Max buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone 17 Pro Max 12GB 256GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 34,
+      "brand": "OPPO",
+      "model": "A5x",
+      "variant": "4GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO A5x",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO A5x price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO A5x buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO A5x 4GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 42,
+      "brand": "POCO",
+      "model": "M7 Pro",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "POCO M7 Pro",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "POCO M7 Pro price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "POCO M7 Pro buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "POCO M7 Pro 6GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 44,
+      "brand": "realme",
+      "model": "P3",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "realme P3",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "realme P3 price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "realme P3 buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "realme P3 6GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 48,
+      "brand": "OPPO",
+      "model": "K14x 5G",
+      "variant": "4GB/64GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO K14x 5G",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO K14x 5G price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO K14x 5G 4GB 64GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO K14x 5G buy"
+        }
+      ],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 53,
+      "brand": "Motorola",
+      "model": "Edge 60 Fusion",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Motorola Edge 60 Fusion",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Motorola Edge 60 Fusion price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Motorola Edge 60 Fusion buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Motorola Edge 60 Fusion 8GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 55,
+      "brand": "OPPO",
+      "model": "K13 5G",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO K13 5G",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO K13 5G price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO K13 5G buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO K13 5G 8GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 61,
+      "brand": "Nothing",
+      "model": "Phone 3a",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Nothing Phone 3a",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Nothing Phone 3a price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Nothing Phone 3a buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Nothing Phone 3a 8GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 66,
+      "brand": "vivo",
+      "model": "T5x",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "vivo T5x",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "vivo T5x price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "vivo T5x buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "vivo T5x 6GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 67,
+      "brand": "Nothing",
+      "model": "Phone 3a Pro",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Nothing Phone 3a Pro",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Nothing Phone 3a Pro price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Nothing Phone 3a Pro buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Nothing Phone 3a Pro 8GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 69,
+      "brand": "iQOO",
+      "model": "Z11x",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "iQOO Z11x",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "iQOO Z11x price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "iQOO Z11x buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "iQOO Z11x 6GB 128GB",
+          "avg_monthly_searches": 5000.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 72,
+      "brand": "realme",
+      "model": "P4 Pro",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "realme P4 Pro",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "realme P4 Pro price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "realme P4 Pro buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "realme P4 Pro 8GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 73,
+      "brand": "Motorola",
+      "model": "Edge 70 Fusion",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Motorola Edge 70 Fusion",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Motorola Edge 70 Fusion price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Motorola Edge 70 Fusion buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Motorola Edge 70 Fusion 8GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 75,
+      "brand": "Motorola",
+      "model": "Edge 60 Pro",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Motorola Edge 60 Pro",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Motorola Edge 60 Pro price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Motorola Edge 60 Pro buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Motorola Edge 60 Pro 8GB 256GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 76,
+      "brand": "realme",
+      "model": "P4 Power",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "realme P4 Power",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "realme P4 Power price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "realme P4 Power buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "realme P4 Power 8GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 78,
+      "brand": "Lava",
+      "model": "Agni 4",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Lava Agni 4",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Lava Agni 4 price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Lava Agni 4 buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "variant",
+          "keyword": "Lava Agni 4 8GB 256GB"
+        }
+      ],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 79,
+      "brand": "OPPO",
+      "model": "A6 Pro",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO A6 Pro",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO A6 Pro price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO A6 Pro buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO A6 Pro 8GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 82,
+      "brand": "Motorola",
+      "model": "Edge 70",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Motorola Edge 70",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Motorola Edge 70 price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Motorola Edge 70 buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Motorola Edge 70 8GB 256GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 83,
+      "brand": "Infinix",
+      "model": "GT 30 Pro",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Infinix GT 30 Pro",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Infinix GT 30 Pro price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Infinix GT 30 Pro buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Infinix GT 30 Pro 8GB 256GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 85,
+      "brand": "OPPO",
+      "model": "F31",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO F31",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO F31 price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO F31 buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO F31 8GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 88,
+      "brand": "POCO",
+      "model": "X7 Pro",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "POCO X7 Pro",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "POCO X7 Pro price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "POCO X7 Pro buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "POCO X7 Pro 8GB 256GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 95,
+      "brand": "vivo",
+      "model": "T5 Pro",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "vivo T5 Pro",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "vivo T5 Pro price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "vivo T5 Pro buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "vivo T5 Pro 8GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 101,
+      "brand": "Nothing",
+      "model": "Phone 4a Pro",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Nothing Phone 4a Pro",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Nothing Phone 4a Pro price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Nothing Phone 4a Pro buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Nothing Phone 4a Pro 8GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 103,
+      "brand": "vivo",
+      "model": "V70 Elite",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "vivo V70 Elite",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "vivo V70 Elite price",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "vivo V70 Elite buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "vivo V70 Elite 8GB 256GB",
+          "avg_monthly_searches": 5000.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 104,
+      "brand": "iQOO",
+      "model": "Neo 10",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "iQOO Neo 10",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "iQOO Neo 10 price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "iQOO Neo 10 buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "iQOO Neo 10 8GB 128GB",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 105,
+      "brand": "OnePlus",
+      "model": "Nord 6",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OnePlus Nord 6",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OnePlus Nord 6 price",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "OnePlus Nord 6 buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OnePlus Nord 6 8GB 256GB",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 107,
+      "brand": "POCO",
+      "model": "X8 Pro Max",
+      "variant": "12GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "POCO X8 Pro Max",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "POCO X8 Pro Max price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "POCO X8 Pro Max buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "POCO X8 Pro Max 12GB 256GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 110,
+      "brand": "Nothing",
+      "model": "Phone 3",
+      "variant": "12GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Nothing Phone 3",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Nothing Phone 3 price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Nothing Phone 3 buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Nothing Phone 3 12GB 256GB",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 111,
+      "brand": "Google",
+      "model": "Pixel 10A",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Google Pixel 10A",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Google Pixel 10A price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Google Pixel 10A buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Google Pixel 10A 8GB 256GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 112,
+      "brand": "iQOO",
+      "model": "15R",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "iQOO 15R",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "iQOO 15R price",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "iQOO 15R buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "iQOO 15R 8GB 256GB",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 113,
+      "brand": "OnePlus",
+      "model": "13s",
+      "variant": "12GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OnePlus 13s",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OnePlus 13s price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "OnePlus 13s buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OnePlus 13s 12GB 256GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 116,
+      "brand": "OnePlus",
+      "model": "15R",
+      "variant": "12GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OnePlus 15R",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OnePlus 15R price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "OnePlus 15R buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OnePlus 15R 12GB 256GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 117,
+      "brand": "OnePlus",
+      "model": "13",
+      "variant": "12GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OnePlus 13",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OnePlus 13 price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "OnePlus 13 buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OnePlus 13 12GB 256GB",
+          "avg_monthly_searches": 5000.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 120,
+      "brand": "Google",
+      "model": "Pixel 10",
+      "variant": "12GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Google Pixel 10",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Google Pixel 10 price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Google Pixel 10 buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Google Pixel 10 12GB 256GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 121,
+      "brand": "iQOO",
+      "model": "15",
+      "variant": "12GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "iQOO 15",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "iQOO 15 price",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "iQOO 15 buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "iQOO 15 12GB 256GB",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 122,
+      "brand": "Google",
+      "model": "Pixel 11",
+      "variant": "12GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Google Pixel 11",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Google Pixel 11 price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Google Pixel 11 buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Google Pixel 11 12GB 256GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 124,
+      "brand": "OnePlus",
+      "model": "15",
+      "variant": "12GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OnePlus 15",
+          "avg_monthly_searches": 500000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OnePlus 15 price",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "OnePlus 15 buy",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OnePlus 15 12GB 256GB",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 125,
+      "brand": "Google",
+      "model": "Pixel 11 Pro",
+      "variant": "12GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Google Pixel 11 Pro",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Google Pixel 11 Pro price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Google Pixel 11 Pro buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "variant",
+          "keyword": "Google Pixel 11 Pro 12GB 256GB"
+        }
+      ],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 126,
+      "brand": "Samsung",
+      "model": "Galaxy S26 Ultra",
+      "variant": "12GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Samsung Galaxy S26 Ultra",
+          "avg_monthly_searches": 500000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Samsung Galaxy S26 Ultra price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Samsung Galaxy S26 Ultra buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Samsung Galaxy S26 Ultra 12GB 256GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 500000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "very_high",
+      "google_demand_score": 85.07,
+      "google_demand_rank": 2
+    },
+    {
+      "priority": 1,
+      "brand": "Samsung",
+      "model": "Galaxy F05",
+      "variant": "4GB/64GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Samsung Galaxy F05",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Samsung Galaxy F05 price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Samsung Galaxy F05 buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Samsung Galaxy F05 4GB 64GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 2,
+      "brand": "Infinix",
+      "model": "Smart 8 HD",
+      "variant": "3GB/64GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Infinix Smart 8 HD",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Infinix Smart 8 HD price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Infinix Smart 8 HD buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "variant",
+          "keyword": "Infinix Smart 8 HD 3GB 64GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 10,
+      "brand": "Infinix",
+      "model": "Hot 30i",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Infinix Hot 30i",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Infinix Hot 30i price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Infinix Hot 30i buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Infinix Hot 30i 8GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 12,
+      "brand": "Infinix",
+      "model": "Hot 50 5G",
+      "variant": "4GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Infinix Hot 50 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Infinix Hot 50 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Infinix Hot 50 5G buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Infinix Hot 50 5G 4GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 13,
+      "brand": "Apple",
+      "model": "iPhone 13",
+      "variant": "4GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone 13",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone 13 price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone 13 buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone 13 4GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 18,
+      "brand": "Apple",
+      "model": "iPhone 17e",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone 17e",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone 17e price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone 17e buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone 17e 8GB 256GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 25,
+      "brand": "Apple",
+      "model": "iPhone 16 Plus",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone 16 Plus",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone 16 Plus price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone 16 Plus buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone 16 Plus 8GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 28,
+      "brand": "Apple",
+      "model": "iPhone Air",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone Air",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone Air price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone Air buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone Air 8GB 256GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 30,
+      "brand": "Apple",
+      "model": "iPhone 16 Pro Max",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone 16 Pro Max",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone 16 Pro Max price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone 16 Pro Max buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone 16 Pro Max 8GB 256GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 36,
+      "brand": "OPPO",
+      "model": "K12x",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO K12x",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO K12x price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO K12x buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO K12x 6GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 37,
+      "brand": "Lava",
+      "model": "Virat V1 5G",
+      "variant": "4GB/64GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Lava Virat V1 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Lava Virat V1 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Lava Virat V1 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Lava Virat V1 5G 4GB 64GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 38,
+      "brand": "Infinix",
+      "model": "Note 50X",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Infinix Note 50X",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Infinix Note 50X price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Infinix Note 50X buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Infinix Note 50X 6GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 41,
+      "brand": "OPPO",
+      "model": "A17",
+      "variant": "4GB/64GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO A17",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO A17 price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO A17 buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO A17 4GB 64GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 45,
+      "brand": "OPPO",
+      "model": "A38",
+      "variant": "4GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO A38",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO A38 price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO A38 buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO A38 4GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 46,
+      "brand": "OPPO",
+      "model": "A5 5G",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO A5 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO A5 5G price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO A5 5G 6GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO A5 5G buy"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 50,
+      "brand": "Tecno",
+      "model": "Spark 50 5G",
+      "variant": "4GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Tecno Spark 50 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Tecno Spark 50 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Tecno Spark 50 5G 4GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Tecno Spark 50 5G buy"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 52,
+      "brand": "realme",
+      "model": "P4R 5G",
+      "variant": "4GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "realme P4R 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "realme P4R 5G price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "realme P4R 5G buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "realme P4R 5G 4GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 56,
+      "brand": "POCO",
+      "model": "X7 Pro 5G",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "POCO X7 Pro 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "POCO X7 Pro 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "POCO X7 Pro 5G buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "POCO X7 Pro 5G 8GB 256GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 58,
+      "brand": "POCO",
+      "model": "M8 Power 5G",
+      "variant": "",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "POCO M8 Power 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "POCO M8 Power 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "POCO M8 Power 5G buy"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 62,
+      "brand": "OnePlus",
+      "model": "N6 5G",
+      "variant": "4GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OnePlus N6 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OnePlus N6 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "OnePlus N6 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OnePlus N6 5G 4GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 63,
+      "brand": "realme",
+      "model": "16x 5G",
+      "variant": "4GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "realme 16x 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "realme 16x 5G price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "realme 16x 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "realme 16x 5G 4GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 64,
+      "brand": "Samsung",
+      "model": "Galaxy F70 Pro 5G",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Samsung Galaxy F70 Pro 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Samsung Galaxy F70 Pro 5G price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Samsung Galaxy F70 Pro 5G buy",
+          "avg_monthly_searches": 0.0,
+          "competition": ""
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "variant",
+          "keyword": "Samsung Galaxy F70 Pro 5G 6GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 65,
+      "brand": "Tecno",
+      "model": "Pova Curve 2",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Tecno Pova Curve 2",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Tecno Pova Curve 2 price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Tecno Pova Curve 2 buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "variant",
+          "keyword": "Tecno Pova Curve 2 8GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 74,
+      "brand": "Tecno",
+      "model": "Pova 8 5G",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Tecno Pova 8 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Tecno Pova 8 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Tecno Pova 8 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Tecno Pova 8 5G 6GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 77,
+      "brand": "Google",
+      "model": "Pixel 7A",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Google Pixel 7A",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Google Pixel 7A price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Google Pixel 7A buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Google Pixel 7A 8GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 80,
+      "brand": "Samsung",
+      "model": "Galaxy M47 5G",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Samsung Galaxy M47 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Samsung Galaxy M47 5G price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Samsung Galaxy M47 5G buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Samsung Galaxy M47 5G 6GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 81,
+      "brand": "Nothing",
+      "model": "Phone 4b",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Nothing Phone 4b",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Nothing Phone 4b price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Nothing Phone 4b buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Nothing Phone 4b 8GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 84,
+      "brand": "OPPO",
+      "model": "F33 Pro 5G",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO F33 Pro 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO F33 Pro 5G price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO F33 Pro 5G 8GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO F33 Pro 5G buy"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 86,
+      "brand": "OPPO",
+      "model": "F31 Pro Plus",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO F31 Pro Plus",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO F31 Pro Plus price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO F31 Pro Plus 8GB 256GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO F31 Pro Plus buy"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 89,
+      "brand": "OPPO",
+      "model": "K13 Turbo 5G",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO K13 Turbo 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO K13 Turbo 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO K13 Turbo 5G buy",
+          "avg_monthly_searches": 0.0,
+          "competition": ""
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO K13 Turbo 5G 8GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 90,
+      "brand": "Infinix",
+      "model": "Note 60 Pro 5G",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Infinix Note 60 Pro 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Infinix Note 60 Pro 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Infinix Note 60 Pro 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Infinix Note 60 Pro 5G 8GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 91,
+      "brand": "iQOO",
+      "model": "Z11 5G",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "iQOO Z11 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "iQOO Z11 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "iQOO Z11 5G buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "variant",
+          "keyword": "iQOO Z11 5G 6GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 92,
+      "brand": "realme",
+      "model": "P4s 5G",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "realme P4s 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "realme P4s 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "realme P4s 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "realme P4s 5G 8GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 93,
+      "brand": "vivo",
+      "model": "T5 5G",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "vivo T5 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "vivo T5 5G price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "vivo T5 5G 6GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "vivo T5 5G buy"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 96,
+      "brand": "OnePlus",
+      "model": "Nord CE 6 5G",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OnePlus Nord CE 6 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OnePlus Nord CE 6 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "OnePlus Nord CE 6 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OnePlus Nord CE 6 5G 8GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 97,
+      "brand": "Samsung",
+      "model": "Galaxy A37 5G",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Samsung Galaxy A37 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Samsung Galaxy A37 5G price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Samsung Galaxy A37 5G 8GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Samsung Galaxy A37 5G buy"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 99,
+      "brand": "vivo",
+      "model": "S2 5G",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "vivo S2 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "vivo S2 5G price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "vivo S2 5G 8GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "vivo S2 5G buy"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 102,
+      "brand": "OPPO",
+      "model": "Reno14",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO Reno14",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO Reno14 price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO Reno14 buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO Reno14 8GB 256GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 106,
+      "brand": "Samsung",
+      "model": "Galaxy S25 FE",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Samsung Galaxy S25 FE",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Samsung Galaxy S25 FE price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Samsung Galaxy S25 FE buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Samsung Galaxy S25 FE 8GB 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 108,
+      "brand": "OPPO",
+      "model": "Reno16c 5G",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO Reno16c 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO Reno16c 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO Reno16c 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO Reno16c 5G 8GB 256GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 114,
+      "brand": "Samsung",
+      "model": "Galaxy A57 5G",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Samsung Galaxy A57 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Samsung Galaxy A57 5G price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Samsung Galaxy A57 5G buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Samsung Galaxy A57 5G 8GB 256GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 115,
+      "brand": "Samsung",
+      "model": "Galaxy S24 5G",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Samsung Galaxy S24 5G",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Samsung Galaxy S24 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Samsung Galaxy S24 5G 8GB 256GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Samsung Galaxy S24 5G buy"
+        }
+      ],
+      "model_avg_monthly_searches": 50000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "high",
+      "google_demand_score": 70.14,
+      "google_demand_rank": 3
+    },
+    {
+      "priority": 3,
+      "brand": "Samsung",
+      "model": "Galaxy M04",
+      "variant": "4GB/64GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Samsung Galaxy M04",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Samsung Galaxy M04 price",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Samsung Galaxy M04 4GB 64GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Samsung Galaxy M04 buy"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 8,
+      "brand": "Samsung",
+      "model": "Galaxy M14 4G",
+      "variant": "4GB/64GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Samsung Galaxy M14 4G",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Samsung Galaxy M14 4G price",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Samsung Galaxy M14 4G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Samsung Galaxy M14 4G 4GB 64GB"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 9,
+      "brand": "Samsung",
+      "model": "Galaxy F22",
+      "variant": "4GB/64GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Samsung Galaxy F22",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Samsung Galaxy F22 price",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Samsung Galaxy F22 buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Samsung Galaxy F22 4GB 64GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 11,
+      "brand": "Infinix",
+      "model": "Hot 11",
+      "variant": "4GB/64GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Infinix Hot 11",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Infinix Hot 11 price",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Infinix Hot 11 buy",
+          "avg_monthly_searches": 50.0,
+          "competition": ""
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Infinix Hot 11 4GB 64GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 14,
+      "brand": "Apple",
+      "model": "iPhone 11",
+      "variant": "4GB/64GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone 11",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone 11 price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone 11 buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone 11 4GB 64GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 3,
+      "matched_keyword_count": 4,
+      "missing_keyword_count": 0,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 21,
+      "brand": "Apple",
+      "model": "iPhone 15 256GB",
+      "variant": "6GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone 15 256GB",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone 15 256GB price",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone 15 256GB buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone 15 256GB 6GB 256GB"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 22,
+      "brand": "Apple",
+      "model": "iPhone 15 Plus",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone 15 Plus",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone 15 Plus price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone 15 Plus buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone 15 Plus 6GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 39,
+      "brand": "Lava",
+      "model": "Bold N2 5G",
+      "variant": "4GB/64GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Lava Bold N2 5G",
+          "avg_monthly_searches": 5000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Lava Bold N2 5G price",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Lava Bold N2 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Lava Bold N2 5G 4GB 64GB"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 40,
+      "brand": "OPPO",
+      "model": "A6c 4G",
+      "variant": "4GB/64GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO A6c 4G",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO A6c 4G price",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO A6c 4G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO A6c 4G 4GB 64GB"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 43,
+      "brand": "Lava",
+      "model": "Virat V1 Pro 5G",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Lava Virat V1 Pro 5G",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Lava Virat V1 Pro 5G price",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Lava Virat V1 Pro 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Lava Virat V1 Pro 5G 6GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 49,
+      "brand": "Motorola",
+      "model": "Moto G86 Power",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Motorola Moto G86 Power",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Motorola Moto G86 Power price",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Motorola Moto G86 Power buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Motorola Moto G86 Power 8GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 51,
+      "brand": "iQOO",
+      "model": "Z11 Lite 5G",
+      "variant": "4GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "iQOO Z11 Lite 5G",
+          "avg_monthly_searches": 5000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "iQOO Z11 Lite 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "iQOO Z11 Lite 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "iQOO Z11 Lite 5G 4GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 54,
+      "brand": "OnePlus",
+      "model": "N6x 5G",
+      "variant": "4GB/64GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OnePlus N6x 5G",
+          "avg_monthly_searches": 5000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OnePlus N6x 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "OnePlus N6x 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OnePlus N6x 5G 4GB 64GB"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 59,
+      "brand": "Infinix",
+      "model": "Hot 70 Pro 5G",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Infinix Hot 70 Pro 5G",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Infinix Hot 70 Pro 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Infinix Hot 70 Pro 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Infinix Hot 70 Pro 5G 6GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 60,
+      "brand": "Lava",
+      "model": "Blaze Duo 3",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Lava Blaze Duo 3",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Lava Blaze Duo 3 price",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Lava Blaze Duo 3 buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Lava Blaze Duo 3 6GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 70,
+      "brand": "OnePlus",
+      "model": "Nord CE 6 Lite 5G",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OnePlus Nord CE 6 Lite 5G",
+          "avg_monthly_searches": 5000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OnePlus Nord CE 6 Lite 5G price",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OnePlus Nord CE 6 Lite 5G 6GB 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "OnePlus Nord CE 6 Lite 5G buy"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 87,
+      "brand": "OPPO",
+      "model": "Reno12",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO Reno12",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO Reno12 price",
+          "avg_monthly_searches": 500.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO Reno12 buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO Reno12 8GB 256GB"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 94,
+      "brand": "POCO",
+      "model": "X8 Power 5G",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "POCO X8 Power 5G",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "POCO X8 Power 5G price",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "POCO X8 Power 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "POCO X8 Power 5G 8GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 98,
+      "brand": "Tecno",
+      "model": "Camon 50 Ultra",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Tecno Camon 50 Ultra",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Tecno Camon 50 Ultra price",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Tecno Camon 50 Ultra buy",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "variant",
+          "keyword": "Tecno Camon 50 Ultra 8GB 256GB"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 109,
+      "brand": "Tecno",
+      "model": "Pova 8 Pro 5G",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Tecno Pova 8 Pro 5G",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Tecno Pova 8 Pro 5G price",
+          "avg_monthly_searches": 500.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Tecno Pova 8 Pro 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Tecno Pova 8 Pro 5G 8GB 256GB"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 118,
+      "brand": "OPPO",
+      "model": "Reno16 5G",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO Reno16 5G",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO Reno16 5G price",
+          "avg_monthly_searches": 50000.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO Reno16 5G 8GB 256GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO Reno16 5G buy"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 119,
+      "brand": "OnePlus",
+      "model": "15R 16GB 512GB",
+      "variant": "16GB/512GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OnePlus 15R 16GB 512GB",
+          "avg_monthly_searches": 5000.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OnePlus 15R 16GB 512GB price",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "OnePlus 15R 16GB 512GB buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OnePlus 15R 16GB 512GB 16GB 512GB"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 123,
+      "brand": "OPPO",
+      "model": "Find X9 5G",
+      "variant": "12GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO Find X9 5G",
+          "avg_monthly_searches": 5000.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO Find X9 5G price",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO Find X9 5G 12GB 256GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO Find X9 5G buy"
+        }
+      ],
+      "model_avg_monthly_searches": 5000.0,
+      "supporting_keyword_count": 2,
+      "matched_keyword_count": 3,
+      "missing_keyword_count": 1,
+      "google_demand_tier": "medium",
+      "google_demand_score": 55.22,
+      "google_demand_rank": 4
+    },
+    {
+      "priority": 6,
+      "brand": "Infinix",
+      "model": "Smart 8 128GB",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Infinix Smart 8 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "High"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Infinix Smart 8 128GB price",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Infinix Smart 8 128GB buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Infinix Smart 8 128GB 8GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 500.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "low",
+      "google_demand_score": 40.3,
+      "google_demand_rank": 5
+    },
+    {
+      "priority": 19,
+      "brand": "Apple",
+      "model": "iPhone 15 Plus 256GB",
+      "variant": "6GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone 15 Plus 256GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone 15 Plus 256GB price",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone 15 Plus 256GB buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone 15 Plus 256GB 6GB 256GB"
+        }
+      ],
+      "model_avg_monthly_searches": 500.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "low",
+      "google_demand_score": 40.3,
+      "google_demand_rank": 5
+    },
+    {
+      "priority": 23,
+      "brand": "Apple",
+      "model": "iPhone 16E 256GB",
+      "variant": "8GB/256GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone 16E 256GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone 16E 256GB price",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone 16E 256GB buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone 16E 256GB 8GB 256GB"
+        }
+      ],
+      "model_avg_monthly_searches": 500.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "low",
+      "google_demand_score": 40.3,
+      "google_demand_rank": 5
+    },
+    {
+      "priority": 24,
+      "brand": "Apple",
+      "model": "iPhone 15 512GB",
+      "variant": "6GB/512GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone 15 512GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone 15 512GB price",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone 15 512GB buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone 15 512GB 6GB 512GB"
+        }
+      ],
+      "model_avg_monthly_searches": 500.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "low",
+      "google_demand_score": 40.3,
+      "google_demand_rank": 5
+    },
+    {
+      "priority": 27,
+      "brand": "Apple",
+      "model": "iPhone 17e 512GB",
+      "variant": "8GB/512GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone 17e 512GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone 17e 512GB price",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone 17e 512GB buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone 17e 512GB 8GB 512GB"
+        }
+      ],
+      "model_avg_monthly_searches": 500.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "low",
+      "google_demand_score": 40.3,
+      "google_demand_rank": 5
+    },
+    {
+      "priority": 32,
+      "brand": "OPPO",
+      "model": "A3X 128GB",
+      "variant": "4GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "OPPO A3X 128GB",
+          "avg_monthly_searches": 500.0,
+          "competition": "Low"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "OPPO A3X 128GB price",
+          "avg_monthly_searches": 50.0,
+          "competition": "High"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "OPPO A3X 128GB buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "OPPO A3X 128GB 4GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 500.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "low",
+      "google_demand_score": 40.3,
+      "google_demand_rank": 5
+    },
+    {
+      "priority": 4,
+      "brand": "realme",
+      "model": "C61 6GB RAM",
+      "variant": "6GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "realme C61 6GB RAM",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "price",
+          "keyword": "realme C61 6GB RAM price"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "realme C61 6GB RAM buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "realme C61 6GB RAM 6GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50.0,
+      "supporting_keyword_count": 0,
+      "matched_keyword_count": 1,
+      "missing_keyword_count": 3,
+      "google_demand_tier": "very_low",
+      "google_demand_score": 25.49,
+      "google_demand_rank": 6
+    },
+    {
+      "priority": 5,
+      "brand": "Samsung",
+      "model": "Galaxy M04 128GB",
+      "variant": "4GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Samsung Galaxy M04 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Samsung Galaxy M04 128GB price",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Samsung Galaxy M04 128GB buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Samsung Galaxy M04 128GB 4GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "very_low",
+      "google_demand_score": 25.49,
+      "google_demand_rank": 6
+    },
+    {
+      "priority": 7,
+      "brand": "Lava",
+      "model": "Yuva 5G 128GB",
+      "variant": "4GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Lava Yuva 5G 128GB",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "price",
+          "keyword": "Lava Yuva 5G 128GB price"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Lava Yuva 5G 128GB buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Lava Yuva 5G 128GB 4GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50.0,
+      "supporting_keyword_count": 0,
+      "matched_keyword_count": 1,
+      "missing_keyword_count": 3,
+      "google_demand_tier": "very_low",
+      "google_demand_score": 25.49,
+      "google_demand_rank": 6
+    },
+    {
+      "priority": 15,
+      "brand": "Apple",
+      "model": "iPhone SE 2022 (iPhone SE 3)",
+      "variant": "4GB/64GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone SE 2022 iPhone SE 3",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone SE 2022 iPhone SE 3 price"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone SE 2022 iPhone SE 3 buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone SE 2022 iPhone SE 3 4GB 64GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50.0,
+      "supporting_keyword_count": 0,
+      "matched_keyword_count": 1,
+      "missing_keyword_count": 3,
+      "google_demand_tier": "very_low",
+      "google_demand_score": 25.49,
+      "google_demand_rank": 6
+    },
+    {
+      "priority": 17,
+      "brand": "Apple",
+      "model": "iPhone 16E (iPhone SE 4)",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Apple iPhone 16E iPhone SE 4",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "price",
+          "keyword": "Apple iPhone 16E iPhone SE 4 price"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Apple iPhone 16E iPhone SE 4 buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Apple iPhone 16E iPhone SE 4 8GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50.0,
+      "supporting_keyword_count": 0,
+      "matched_keyword_count": 1,
+      "missing_keyword_count": 3,
+      "google_demand_tier": "very_low",
+      "google_demand_score": 25.49,
+      "google_demand_rank": 6
+    },
+    {
+      "priority": 33,
+      "brand": "Infinix",
+      "model": "Smart 20 4G",
+      "variant": "4GB/64GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Infinix Smart 20 4G",
+          "avg_monthly_searches": 50.0,
+          "competition": "Medium"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Infinix Smart 20 4G price",
+          "avg_monthly_searches": 50.0,
+          "competition": "Low"
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "buy",
+          "keyword": "Infinix Smart 20 4G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Infinix Smart 20 4G 4GB 64GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50.0,
+      "supporting_keyword_count": 1,
+      "matched_keyword_count": 2,
+      "missing_keyword_count": 2,
+      "google_demand_tier": "very_low",
+      "google_demand_score": 25.49,
+      "google_demand_rank": 6
+    },
+    {
+      "priority": 71,
+      "brand": "Xiaomi/Redmi",
+      "model": "Redmi Note 15",
+      "variant": "8GB/128GB",
+      "matched_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Xiaomi Redmi Redmi Note 15",
+          "avg_monthly_searches": 50.0,
+          "competition": ""
+        }
+      ],
+      "missing_keywords": [
+        {
+          "keyword_type": "price",
+          "keyword": "Xiaomi Redmi Redmi Note 15 price"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Xiaomi Redmi Redmi Note 15 buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Xiaomi Redmi Redmi Note 15 8GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": 50.0,
+      "supporting_keyword_count": 0,
+      "matched_keyword_count": 1,
+      "missing_keyword_count": 3,
+      "google_demand_tier": "very_low",
+      "google_demand_score": 25.49,
+      "google_demand_rank": 6
+    },
+    {
+      "priority": 35,
+      "brand": "Xiaomi/Redmi",
+      "model": "Redmi 13 5G",
+      "variant": "6GB/128GB",
+      "matched_keywords": [],
+      "missing_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Xiaomi Redmi Redmi 13 5G"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Xiaomi Redmi Redmi 13 5G price"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Xiaomi Redmi Redmi 13 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Xiaomi Redmi Redmi 13 5G 6GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": null,
+      "supporting_keyword_count": 0,
+      "matched_keyword_count": 0,
+      "missing_keyword_count": 4,
+      "google_demand_tier": "unknown",
+      "google_demand_score": null,
+      "google_demand_rank": null
+    },
+    {
+      "priority": 57,
+      "brand": "Xiaomi/Redmi",
+      "model": "Redmi 17 5G",
+      "variant": "6GB/128GB",
+      "matched_keywords": [],
+      "missing_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Xiaomi Redmi Redmi 17 5G"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Xiaomi Redmi Redmi 17 5G price"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Xiaomi Redmi Redmi 17 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Xiaomi Redmi Redmi 17 5G 6GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": null,
+      "supporting_keyword_count": 0,
+      "matched_keyword_count": 0,
+      "missing_keyword_count": 4,
+      "google_demand_tier": "unknown",
+      "google_demand_score": null,
+      "google_demand_rank": null
+    },
+    {
+      "priority": 68,
+      "brand": "Xiaomi/Redmi",
+      "model": "Redmi Note 17 5G",
+      "variant": "6GB/128GB",
+      "matched_keywords": [],
+      "missing_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Xiaomi Redmi Redmi Note 17 5G"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Xiaomi Redmi Redmi Note 17 5G price"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Xiaomi Redmi Redmi Note 17 5G buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Xiaomi Redmi Redmi Note 17 5G 6GB 128GB"
+        }
+      ],
+      "model_avg_monthly_searches": null,
+      "supporting_keyword_count": 0,
+      "matched_keyword_count": 0,
+      "missing_keyword_count": 4,
+      "google_demand_tier": "unknown",
+      "google_demand_score": null,
+      "google_demand_rank": null
+    },
+    {
+      "priority": 100,
+      "brand": "Xiaomi/Redmi",
+      "model": "Redmi Turbo 5",
+      "variant": "8GB/256GB",
+      "matched_keywords": [],
+      "missing_keywords": [
+        {
+          "keyword_type": "model",
+          "keyword": "Xiaomi Redmi Redmi Turbo 5"
+        },
+        {
+          "keyword_type": "price",
+          "keyword": "Xiaomi Redmi Redmi Turbo 5 price"
+        },
+        {
+          "keyword_type": "buy",
+          "keyword": "Xiaomi Redmi Redmi Turbo 5 buy"
+        },
+        {
+          "keyword_type": "variant",
+          "keyword": "Xiaomi Redmi Redmi Turbo 5 8GB 256GB"
+        }
+      ],
+      "model_avg_monthly_searches": null,
+      "supporting_keyword_count": 0,
+      "matched_keyword_count": 0,
+      "missing_keyword_count": 4,
+      "google_demand_tier": "unknown",
+      "google_demand_score": null,
+      "google_demand_rank": null
+    }
+  ]
+}
