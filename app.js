@@ -220,6 +220,16 @@ function safeLink(link) {
   return link || "#";
 }
 
+function trackAnalyticsEvent(eventName, params = {}) {
+  try {
+    if (typeof window.gtag === "function") {
+      window.gtag("event", eventName, params);
+    }
+  } catch (error) {
+    console.warn("Coupon World analytics event failed:", eventName, error);
+  }
+}
+
 function escapeHTML(value) {
   return String(value || "")
     .replaceAll("&", "&amp;")
@@ -309,6 +319,10 @@ async function loadShoppingRecommendation(query) {
     return;
   }
 
+  trackAnalyticsEvent("ai_search_submit", {
+    search_term: cleanQuery.slice(0, 100)
+  });
+
   card.innerHTML = `
     <h3>Finding the best matches...</h3>
     <p>Coupon World AI is checking products, prices and fit for your request.</p>
@@ -336,6 +350,61 @@ async function loadShoppingRecommendation(query) {
     const recommendations = Array.isArray(data.recommendations)
       ? data.recommendations
       : [];
+
+    const rawTotalSeconds =
+      data.timings && data.timings.total_seconds;
+
+    const totalSeconds =
+      rawTotalSeconds != null &&
+      rawTotalSeconds !== "" &&
+      Number.isFinite(Number(rawTotalSeconds))
+        ? Number(rawTotalSeconds)
+        : null;
+
+    const resultAnalytics = {
+      search_term: cleanQuery.slice(0, 100),
+      result_status: String(data.result_status || ""),
+      response_status: String(data.status || ""),
+      recommendation_count: recommendations.length
+    };
+
+    if (Number.isFinite(totalSeconds)) {
+      resultAnalytics.total_seconds = totalSeconds;
+    }
+
+    trackAnalyticsEvent("ai_search_result", resultAnalytics);
+
+    if (recommendations.length > 0) {
+      const topRecommendation = recommendations[0] || {};
+      const topOffers = Array.isArray(topRecommendation.retailer_offers)
+        ? topRecommendation.retailer_offers
+        : [];
+      const topOffer = topOffers[0] || {};
+      const rawTopFit = topRecommendation.fit_percent;
+      const topFit =
+        rawTopFit != null &&
+        rawTopFit !== "" &&
+        Number.isFinite(Number(rawTopFit))
+          ? Number(rawTopFit)
+          : null;
+
+      const viewAnalytics = {
+        search_term: cleanQuery.slice(0, 100),
+        recommendation_count: recommendations.length,
+        top_product_id: String(
+          topOffer.product_id ||
+          topRecommendation.product_id ||
+          ""
+        ),
+        top_rank: Number(topRecommendation.rank || 1)
+      };
+
+      if (Number.isFinite(topFit)) {
+        viewAnalytics.top_fit_percent = topFit;
+      }
+
+      trackAnalyticsEvent("recommendation_view", viewAnalytics);
+    }
 
     if (recommendations.length === 0) {
       card.innerHTML = `
@@ -548,6 +617,12 @@ async function loadShoppingRecommendation(query) {
                   href="${productLink}"
                   target="_blank"
                   rel="nofollow sponsored noopener"
+                  data-ai-retailer-click="1"
+                  data-ai-rank="${escapeHTML(p.rank || "")}"
+                  data-ai-product-id="${escapeHTML(
+                    primaryOffer.product_id || p.product_id || ""
+                  )}"
+                  data-ai-retailer="${retailer}"
                 >
                   Check Price \u2192
                 </a>
@@ -561,6 +636,19 @@ async function loadShoppingRecommendation(query) {
         </article>
       `;
     }).join("");
+
+    card
+      .querySelectorAll('a.shop-button[data-ai-retailer-click="1"]')
+      .forEach(link => {
+        link.addEventListener("click", () => {
+          trackAnalyticsEvent("retailer_click", {
+            search_term: cleanQuery.slice(0, 100),
+            product_id: link.dataset.aiProductId || "",
+            retailer: link.dataset.aiRetailer || "",
+            recommendation_rank: Number(link.dataset.aiRank || 0)
+          });
+        });
+      });
 
   } catch (error) {
     console.error("Unable to load Shopping Brain response:", error);
