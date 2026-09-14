@@ -348,9 +348,57 @@ async function loadShoppingRecommendation(query) {
     card.innerHTML = recommendations.map((p) => {
       const title = escapeHTML(p.title || "Recommended Product");
       const brand = escapeHTML(p.brand || "Not available");
-      const fit =
-        p.fit_percent != null ? escapeHTML(p.fit_percent) : "Not available";
+      const fitNumber =
+        p.fit_percent != null &&
+        p.fit_percent !== "" &&
+        Number.isFinite(Number(p.fit_percent))
+          ? Math.max(0, Math.min(100, Number(p.fit_percent)))
+          : null;
+
+      const fitDisplay =
+        fitNumber != null ? `${fitNumber}%` : "Not available";
+
+      const evidenceNumber =
+        p.evidence_coverage_percent != null &&
+        p.evidence_coverage_percent !== "" &&
+        Number.isFinite(Number(p.evidence_coverage_percent))
+          ? Math.max(0, Math.min(100, Number(p.evidence_coverage_percent)))
+          : null;
+
+      const evidenceDisplay =
+        evidenceNumber != null ? `${evidenceNumber}%` : "Not available";
+
       const confidence = escapeHTML(p.confidence || "unknown");
+
+      const offers = Array.isArray(p.retailer_offers)
+        ? p.retailer_offers
+        : [];
+
+      const primaryOffer = offers[0] || {};
+
+      const variant = primaryOffer.variant
+        ? escapeHTML(primaryOffer.variant)
+        : "Not available";
+
+      const retailer = primaryOffer.retailer
+        ? escapeHTML(primaryOffer.retailer)
+        : "Not available";
+
+      const lastChecked = primaryOffer.last_checked
+        ? escapeHTML(primaryOffer.last_checked)
+        : "Not available";
+
+      const priceEvidence =
+        p.provenance && p.provenance.price_evidence
+          ? p.provenance.price_evidence
+          : {};
+
+      const priceStatus = escapeHTML(
+        String(
+          priceEvidence.status ||
+          (p.price != null ? "available" : "unavailable")
+        ).replaceAll("_", " ")
+      );
 
       const imageUrl = safeLink(p.image_url);
 
@@ -371,9 +419,42 @@ async function loadShoppingRecommendation(query) {
 
       const whyHTML = why.length
         ? `
-          <ul class="ai-reasons">
-            ${why.map(item => `<li>${escapeHTML(item)}</li>`).join("")}
-          </ul>
+          <div class="ai-detail-block ai-positive">
+            <div class="ai-detail-title">Why it fits</div>
+            <ul class="ai-reasons">
+              ${why.map(item => `<li>${escapeHTML(item)}</li>`).join("")}
+            </ul>
+          </div>
+        `
+        : "";
+
+      const tradeoffs = Array.isArray(p.tradeoffs)
+        ? p.tradeoffs
+        : [];
+
+      const tradeoffsHTML = tradeoffs.length
+        ? `
+          <div class="ai-detail-block ai-tradeoffs">
+            <div class="ai-detail-title">Trade-offs</div>
+            <ul>
+              ${tradeoffs.map(item => `<li>${escapeHTML(item)}</li>`).join("")}
+            </ul>
+          </div>
+        `
+        : "";
+
+      const unknowns = Array.isArray(p.unknown)
+        ? p.unknown
+        : [];
+
+      const unknownsHTML = unknowns.length
+        ? `
+          <div class="ai-detail-block ai-unknowns">
+            <div class="ai-detail-title">Missing / uncertain evidence</div>
+            <ul>
+              ${unknowns.map(item => `<li>${escapeHTML(item)}</li>`).join("")}
+            </ul>
+          </div>
         `
         : "";
 
@@ -398,12 +479,66 @@ async function loadShoppingRecommendation(query) {
 
           <h3>${title}</h3>
 
-          <p><strong>Brand:</strong> ${brand}</p>
+          <div class="ai-meta-grid">
+            <div class="ai-meta-chip">
+              <span>Brand</span>
+              <strong>${brand}</strong>
+            </div>
+            <div class="ai-meta-chip">
+              <span>Variant</span>
+              <strong>${variant}</strong>
+            </div>
+            <div class="ai-meta-chip">
+              <span>Retailer</span>
+              <strong>${retailer}</strong>
+            </div>
+            <div class="ai-meta-chip">
+              <span>Price status</span>
+              <strong>${priceStatus}</strong>
+            </div>
+          </div>
+
+          <div class="ai-metrics">
+            <div class="ai-meter">
+              <div class="ai-meter-row">
+                <span>Requirement Match</span>
+                <strong>${fitDisplay}</strong>
+              </div>
+              ${
+                fitNumber != null
+                  ? `
+                    <div class="ai-meter-track">
+                      <span class="ai-meter-fill" style="width:${fitNumber}%"></span>
+                    </div>
+                  `
+                  : ""
+              }
+            </div>
+
+            <div class="ai-meter">
+              <div class="ai-meter-row">
+                <span>Evidence Coverage</span>
+                <strong>${evidenceDisplay}</strong>
+              </div>
+              ${
+                evidenceNumber != null
+                  ? `
+                    <div class="ai-meter-track">
+                      <span class="ai-meter-fill" style="width:${evidenceNumber}%"></span>
+                    </div>
+                  `
+                  : ""
+              }
+            </div>
+          </div>
+
+          <p><strong>AI Confidence:</strong> ${confidence}</p>
           <p><strong>Price:</strong> ${price}</p>
-          <p><strong>Fit:</strong> ${fit}%</p>
-          <p><strong>Confidence:</strong> ${confidence}</p>
+          <p class="ai-last-checked"><strong>Last checked:</strong> ${lastChecked}</p>
 
           ${whyHTML}
+          ${tradeoffsHTML}
+          ${unknownsHTML}
 
           ${
             productLink !== "#"
