@@ -687,6 +687,15 @@ def storage_signal(text: str) -> dict[str, Any]:
         )
         if compact:
             amount = float(compact.group(1))
+
+    if amount is None:
+        # Canonical structured attribute rendered by text_blob(),
+        # e.g. "storage_gb 128".
+        amount = numeric(
+            r"\bstorage_gb\s+(\d{2,4})\b",
+            text,
+        )
+
     fast = any(x in text for x in ("ufs 4.0", "ssd"))
 
     if amount is not None:
@@ -1852,6 +1861,13 @@ def capacity_requirement_signal(
                     actual = float(match.group(1))
                     break
 
+        if actual is None:
+            # Canonical structured attribute rendered by text_blob(),
+            # e.g. "storage_gb 128".
+            actual = numeric(
+                r"\bstorage_gb\s+(\d{2,4})\b",
+                text,
+            )
         if actual is None:
             return signal(
                 None,
