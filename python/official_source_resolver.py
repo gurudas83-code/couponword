@@ -34,6 +34,7 @@ BRAND_DOMAINS: dict[str, list[str]] = {
     "redmi": ["mi.com", "xiaomi.com"],
     "xiaomi": ["mi.com", "xiaomi.com"],
     "realme": ["realme.com"],
+    "vivo": ["vivo.com"],
     "apple": ["apple.com"],
     "samsung": ["samsung.com"],
     "boat": ["boat-lifestyle.com"],
@@ -1230,7 +1231,6 @@ def resolve_product(
     tavily_available = (
         client is not None
         and not direct_results
-        and not sitemap_results
     )
 
     for query in query_variants:
