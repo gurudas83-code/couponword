@@ -302,12 +302,28 @@ def detect_features(text: str) -> list[str]:
 
 
 def detect_brands(text: str) -> list[str]:
-    brands = [
-        "apple", "samsung", "oneplus", "xiaomi", "redmi", "realme",
-        "vivo", "oppo", "boat", "noise", "sony", "jbl", "hp",
-        "dell", "lenovo", "asus", "acer", "motorola", "nothing",
-    ]
-    return [brand.title() for brand in brands if brand in text]
+    # Canonical names stay compatible with the existing title-cased output,
+    # while aliases cover the brands present in the priority mobile universe.
+    brand_aliases = (
+        ("Apple", ("apple",)), ("Samsung", ("samsung",)),
+        ("Oneplus", ("oneplus", "one plus")),
+        ("Xiaomi", ("xiaomi",)), ("Redmi", ("redmi",)),
+        ("Realme", ("realme",)), ("Vivo", ("vivo",)),
+        ("Oppo", ("oppo",)), ("Infinix", ("infinix",)),
+        ("Lava", ("lava",)), ("Poco", ("poco",)),
+        ("Tecno", ("tecno",)), ("Iqoo", ("iqoo",)),
+        ("Motorola", ("motorola", "moto")),
+        ("Nothing", ("nothing",)), ("Google", ("google", "pixel")),
+        ("Boat", ("boat",)), ("Noise", ("noise",)),
+        ("Sony", ("sony",)), ("Jbl", ("jbl",)), ("Hp", ("hp",)),
+        ("Dell", ("dell",)), ("Lenovo", ("lenovo",)),
+        ("Asus", ("asus",)), ("Acer", ("acer",)),
+    )
+    found = []
+    for canonical, aliases in brand_aliases:
+        if any(re.search(rf"\b{re.escape(alias)}\b", text, re.I) for alias in aliases):
+            found.append(canonical)
+    return found
 
 
 def detect_intent(text: str) -> tuple[str, bool]:
@@ -1397,8 +1413,8 @@ def parse_query(query: str) -> dict:
     # surrounding wording is clearly phone-shopping/spec context.
     smartphone_brand_context = bool(
         re.search(
-            r"\b(?:samsung|oneplus|xiaomi|redmi|realme|vivo|oppo|"
-            r"motorola|nothing)\b",
+            r"\b(?:apple|samsung|oneplus|one plus|xiaomi|redmi|realme|vivo|oppo|"
+            r"infinix|lava|poco|tecno|iqoo|motorola|moto|nothing|google|pixel)\b",
             text,
             re.I,
         )

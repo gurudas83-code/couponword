@@ -1,4 +1,6 @@
+import argparse
 import json
+import os
 import time
 import urllib.parse
 import urllib.request
@@ -8,7 +10,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 REPORT = ROOT / "data" / "mobile_search_benchmark_e2e_report.json"
 
-API_BASE = "http://127.0.0.1:8000/api/recommend?q="
+DEFAULT_API_BASE = os.environ.get(
+    "COUPONWORLD_API_BASE",
+    "https://couponword.onrender.com/api/recommend?q=",
+)
 
 
 TESTS = [
@@ -100,12 +105,21 @@ TESTS = [
 ]
 
 
-def fetch(query):
-    url = API_BASE + urllib.parse.quote(query)
+def normalise_api_base(value):
+    base = str(value or "").strip()
+    if not base.startswith(("http://", "https://")):
+        raise ValueError("API base must start with http:// or https://")
+    if "?q=" not in base:
+        base = base.rstrip("/") + "/api/recommend?q="
+    return base
+
+
+def fetch(query, api_base, timeout):
+    url = api_base + urllib.parse.quote(query)
 
     started = time.perf_counter()
 
-    with urllib.request.urlopen(url, timeout=60) as response:
+    with urllib.request.urlopen(url, timeout=timeout) as response:
         data = json.loads(response.read().decode("utf-8"))
 
     elapsed = time.perf_counter() - started
@@ -321,12 +335,25 @@ def evaluate(test, data, elapsed):
 
 
 def main():
+    parser = argparse.ArgumentParser(
+        description="Run the mobile E2E benchmark against a chosen API."
+    )
+    parser.add_argument(
+        "--api-base",
+        default=DEFAULT_API_BASE,
+        help="API origin or complete /api/recommend?q= base",
+    )
+    parser.add_argument("--timeout", type=int, default=60)
+    args = parser.parse_args()
+    api_base = normalise_api_base(args.api_base)
+
     results = []
 
     print()
     print("=" * 110)
     print("COUPON WORLD - MOBILE SEARCH BENCHMARK / PHASE 2 END-TO-END")
     print("=" * 110)
+    print("API                    :", api_base)
 
     for test in TESTS:
         print()
@@ -334,7 +361,9 @@ def main():
         print(test["id"], "|", test["query"])
 
         try:
-            data, elapsed = fetch(test["query"])
+            data, elapsed = fetch(
+                test["query"], api_base, args.timeout
+            )
             result = evaluate(test, data, elapsed)
 
         except Exception as error:

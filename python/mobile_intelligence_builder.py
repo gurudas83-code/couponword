@@ -17,6 +17,7 @@ This module is intentionally dry-run only.
 
 from __future__ import annotations
 
+import argparse
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -26,7 +27,9 @@ from typing import Any, Iterable
 BUILDER_VERSION = "1.1"
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_SEED_FILE = PROJECT_ROOT / "data" / "mobile_universe_seed.json"
+DEFAULT_SEED_FILE = (
+    PROJECT_ROOT / "data" / "mobile_universe_priority_126.json"
+)
 
 EXPECTED_SCHEMA_VERSION = "1.0"
 EXPECTED_MARKET = "IN"
@@ -295,6 +298,8 @@ def print_assessment(
 
 def dry_run(
     payload: dict[str, Any],
+    *,
+    summary_only: bool = False,
 ) -> list[BuilderAssessment]:
     products = payload["products"]
     assessments = assess_universe(products)
@@ -327,7 +332,8 @@ def dry_run(
         counts[item.status] = (
             counts.get(item.status, 0) + 1
         )
-        print_assessment(item)
+        if not summary_only:
+            print_assessment(item)
 
     print()
     print("-" * 72)
@@ -352,9 +358,28 @@ def dry_run(
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Validate the priority mobile universe without network calls "
+            "or repository writes."
+        )
+    )
+    parser.add_argument(
+        "--seed",
+        type=Path,
+        default=DEFAULT_SEED_FILE,
+        help="mobile-universe JSON (default: priority 126)",
+    )
+    parser.add_argument(
+        "--summary-only",
+        action="store_true",
+        help="print counts without printing every product",
+    )
+    args = parser.parse_args()
+
     try:
-        payload = load_universe_seed()
-        dry_run(payload)
+        payload = load_universe_seed(args.seed)
+        dry_run(payload, summary_only=args.summary_only)
     except (
         FileNotFoundError,
         json.JSONDecodeError,
