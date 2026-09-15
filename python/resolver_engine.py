@@ -570,12 +570,29 @@ def candidate_is_product_imposter(
         r"case cover|back cover|flip cover|bumper case|protective case|"
         r"silicone case|wallet case|mobile cover|phone cover|"
         r"camera lens protector"
+        r"|damage (?:and|&) theft protection plan|protection plan|"
+        r"insurance plan|extended warranty"
         r")\b",
         re.I,
     )
 
     if leading_accessory_pattern.search(candidate):
         return True, "Candidate is an accessory listing, not the expected product"
+
+    accessory_noun = re.search(
+        r"\b(?:case|cover|protector|screen guard|tempered glass|"
+        r"protection plan|insurance plan|extended warranty)\b",
+        candidate,
+        re.I,
+    )
+    handset_hardware_evidence = re.search(
+        r"\b(?:\d+\s*gb\s*(?:ram|storage|rom)|\d+\s*mah|"
+        r"\d+\s*mp|amoled|lcd display|smartphone\s*\(|mobile\s*\()",
+        candidate,
+        re.I,
+    )
+    if accessory_noun and not handset_hardware_evidence:
+        return True, "Accessory noun present without handset hardware evidence"
 
     hard_patterns = (
         "compatible with",
