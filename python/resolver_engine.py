@@ -559,6 +559,24 @@ def candidate_is_product_imposter(
 
     candidate = normalize_text(candidate_title)
 
+    # Product-accessory titles often contain the exact handset model and
+    # variant without using the words "compatible with" or "for". Reject
+    # only when an accessory noun appears at the start of the listing (after
+    # at most a short seller/brand prefix), so genuine handset listings that
+    # merely mention an included case or charger remain eligible.
+    leading_accessory_pattern = re.compile(
+        r"^(?:[a-z0-9.-]+\s+){0,3}(?:"
+        r"screen protector|tempered glass|screen guard|back case|"
+        r"case cover|back cover|flip cover|bumper case|protective case|"
+        r"silicone case|wallet case|mobile cover|phone cover|"
+        r"camera lens protector"
+        r")\b",
+        re.I,
+    )
+
+    if leading_accessory_pattern.search(candidate):
+        return True, "Candidate is an accessory listing, not the expected product"
+
     hard_patterns = (
         "compatible with",
         "replacement for",
