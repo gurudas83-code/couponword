@@ -230,6 +230,45 @@ function trackAnalyticsEvent(eventName, params = {}) {
   }
 }
 
+function analyticsSearchTerm(value) {
+  return String(value || "")
+    .replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, "[email]")
+    .replace(/(?:\+?91[\s-]?)?[6-9]\d{9}/g, "[phone]")
+    .trim()
+    .slice(0, 100);
+}
+
+function retailerFromLink(link) {
+  try {
+    return new URL(link.href, window.location.href).hostname
+      .replace(/^www\./, "")
+      .slice(0, 100);
+  } catch (error) {
+    return "unknown";
+  }
+}
+
+document.addEventListener("click", event => {
+  const link = event.target.closest('a[rel~="sponsored"]');
+
+  if (!link || link.dataset.aiRetailerClick === "1") {
+    return;
+  }
+
+  const card = link.closest(".deal-card, #featuredDeal");
+  const title = card
+    ? card.querySelector(".deal-title, h2, h3")?.textContent
+    : "";
+
+  trackAnalyticsEvent("affiliate_click", {
+    retailer: retailerFromLink(link),
+    link_placement: link.closest("#featuredDeal")
+      ? "featured_deal"
+      : "deal_card",
+    product_title: String(title || "").trim().slice(0, 100)
+  });
+});
+
 function escapeHTML(value) {
   return String(value || "")
     .replaceAll("&", "&amp;")
@@ -310,6 +349,7 @@ async function loadShoppingRecommendation(query) {
   }
 
   const cleanQuery = String(query || "").trim();
+  const analyticsQuery = analyticsSearchTerm(cleanQuery);
 
   if (!cleanQuery) {
     card.innerHTML = `
@@ -320,7 +360,7 @@ async function loadShoppingRecommendation(query) {
   }
 
   trackAnalyticsEvent("ai_search_submit", {
-    search_term: cleanQuery.slice(0, 100)
+    search_term: analyticsQuery
   });
 
   card.innerHTML = `
@@ -351,6 +391,13 @@ async function loadShoppingRecommendation(query) {
       ? data.recommendations
       : [];
 
+    const exactModelQuery =
+      Boolean(data.exact_model_scope) &&
+      data.exact_model_scope.active === true;
+
+    const recommendationPass =
+      String(data.result_status || "").toUpperCase() === "PASS";
+
     const rawTotalSeconds =
       data.timings && data.timings.total_seconds;
 
@@ -362,14 +409,21 @@ async function loadShoppingRecommendation(query) {
         : null;
 
     const resultAnalytics = {
-      search_term: cleanQuery.slice(0, 100),
+      search_term: analyticsQuery,
       result_status: String(data.result_status || ""),
       response_status: String(data.status || ""),
-      recommendation_count: recommendations.length
+      recommendation_count: recommendations.length,
+      exact_model_query: exactModelQuery ? 1 : 0,
+      exact_model_success:
+        exactModelQuery && recommendationPass &&
+        recommendations.length > 0 ? 1 : 0,
+      recommendation_pass: recommendationPass ? 1 : 0,
+      zero_result: recommendations.length === 0 ? 1 : 0
     };
 
     if (Number.isFinite(totalSeconds)) {
       resultAnalytics.total_seconds = totalSeconds;
+      resultAnalytics.api_latency_ms = Math.round(totalSeconds * 1000);
     }
 
     trackAnalyticsEvent("ai_search_result", resultAnalytics);
@@ -389,7 +443,7 @@ async function loadShoppingRecommendation(query) {
           : null;
 
       const viewAnalytics = {
-        search_term: cleanQuery.slice(0, 100),
+        search_term: analyticsQuery,
         recommendation_count: recommendations.length,
         top_product_id: String(
           topOffer.product_id ||
@@ -407,6 +461,12 @@ async function loadShoppingRecommendation(query) {
     }
 
     if (recommendations.length === 0) {
+      trackAnalyticsEvent("zero_result", {
+        search_term: analyticsQuery,
+        result_status: String(data.result_status || ""),
+        exact_model_query: exactModelQuery ? 1 : 0
+      });
+
       card.innerHTML = `
         <h3>No strong match found</h3>
         <p>Try changing the budget, RAM, storage, brand or other requirements.</p>
@@ -642,7 +702,7 @@ async function loadShoppingRecommendation(query) {
       .forEach(link => {
         link.addEventListener("click", () => {
           trackAnalyticsEvent("retailer_click", {
-            search_term: cleanQuery.slice(0, 100),
+            search_term: analyticsQuery,
             product_id: link.dataset.aiProductId || "",
             retailer: link.dataset.aiRetailer || "",
             recommendation_rank: Number(link.dataset.aiRank || 0)
@@ -652,6 +712,11 @@ async function loadShoppingRecommendation(query) {
 
   } catch (error) {
     console.error("Unable to load Shopping Brain response:", error);
+
+    trackAnalyticsEvent("ai_search_error", {
+      search_term: analyticsQuery,
+      error_type: String(error && error.name || "Error").slice(0, 40)
+    });
 
     card.innerHTML = `
       <h3>Recommendation temporarily unavailable</h3>
