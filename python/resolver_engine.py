@@ -59,6 +59,7 @@ VARIANT_TOKENS = {
     "mini",
     "lite",
     "neo",
+    "turbo",
     "prime",
     "nano",
     "e",
@@ -651,6 +652,35 @@ def compare_identity(
     #   Case for Samsung Galaxy M36
     # These mention the genuine model only as a target.
     candidate_norm = normalize_text(candidate_title)
+    expected_norm = normalize_text(expected_text)
+
+    # A retailer bundle/combo is not the same canonical product identity
+    # as the standalone expected product. Fail closed unless the expected
+    # identity itself explicitly describes a bundle/combo.
+    bundle_markers = (
+        " combo ",
+        " bundle ",
+        " bundled with ",
+    )
+
+    candidate_bundle_text = f" {candidate_norm} "
+    expected_bundle_text = f" {expected_norm} "
+
+    candidate_is_bundle = any(
+        marker in candidate_bundle_text
+        for marker in bundle_markers
+    )
+    expected_is_bundle = any(
+        marker in expected_bundle_text
+        for marker in bundle_markers
+    )
+
+    if candidate_is_bundle and not expected_is_bundle:
+        imposter = True
+        imposter_reason = (
+            "Candidate is a bundle/combo while expected identity "
+            "is standalone"
+        )
 
     compatibility_prefixes = (
         "earbuds for ",

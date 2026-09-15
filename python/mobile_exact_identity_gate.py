@@ -150,6 +150,15 @@ def classify_mobile_identity_reuse(
 
     missing_evidence = []
 
+    # Exact Product + Variant identity is required for automatic reuse.
+    # A concrete retailer variant cannot be silently selected when the
+    # expected/canonical identity did not specify RAM or storage.
+    if candidate_ram and not expected_ram:
+        missing_evidence.append("expected RAM identity")
+
+    if candidate_storage and not expected_storage:
+        missing_evidence.append("expected storage identity")
+
     if expected_ram and not candidate_ram:
         missing_evidence.append("RAM")
 
