@@ -68,6 +68,79 @@ from multi_retailer_orchestrator import MultiRetailerOrchestrator
 RUNTIME_OUTPUT = ROOT / "data" / "runtime_shopping_intelligence.json"
 
 
+def clean_public_retailer_url(value: Any) -> str:
+    """
+    Return a public direct retailer URL without affiliate tracking
+    parameters. Internal affiliate/evidence data remains untouched.
+    """
+    from urllib.parse import (
+        parse_qsl,
+        urlencode,
+        urlsplit,
+        urlunsplit,
+    )
+
+    url = str(value or "").strip()
+
+    if not url:
+        return ""
+
+    try:
+        parts = urlsplit(url)
+    except ValueError:
+        return url
+
+    hostname = (parts.hostname or "").lower()
+
+    if hostname == "amazon.in" or hostname.endswith(".amazon.in"):
+        affiliate_keys = {
+            "tag",
+            "ascsubtag",
+            "linkcode",
+            "camp",
+            "creative",
+            "creativeasin",
+        }
+
+        query = [
+            (key, item)
+            for key, item in parse_qsl(
+                parts.query,
+                keep_blank_values=True,
+            )
+            if key.lower() not in affiliate_keys
+        ]
+
+        return urlunsplit(
+            (
+                parts.scheme,
+                parts.netloc,
+                parts.path,
+                urlencode(query, doseq=True),
+                parts.fragment,
+            )
+        )
+
+    return url
+
+
+def public_retailer_offer(value: Any) -> dict[str, Any] | None:
+    """
+    Sanitize only the user-facing retailer offer payload.
+    """
+    if not isinstance(value, dict):
+        return None
+
+    public = dict(value)
+
+    public["product_url"] = clean_public_retailer_url(
+        public.get("product_url")
+    )
+    public["affiliate_url"] = ""
+
+    return public
+
+
 def enrich_with_multi_retailer(
     *,
     profile: dict[str, Any],
@@ -187,8 +260,18 @@ def enrich_with_multi_retailer(
 
         comparison = retailer_result.get("comparison") or {}
 
-        result["retailer_offers"] = retailer_result.get("offers") or []
-        result["best_offer"] = comparison.get("best_offer")
+        public_offers = []
+
+        for offer in retailer_result.get("offers") or []:
+            public_offer = public_retailer_offer(offer)
+
+            if public_offer is not None:
+                public_offers.append(public_offer)
+
+        result["retailer_offers"] = public_offers
+        result["best_offer"] = public_retailer_offer(
+            comparison.get("best_offer")
+        )
         result["retailer_comparison_status"] = (
             comparison.get("status") or "unavailable"
         )
