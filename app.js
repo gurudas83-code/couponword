@@ -433,7 +433,14 @@ async function loadShoppingRecommendation(query) {
       const topOffers = Array.isArray(topRecommendation.retailer_offers)
         ? topRecommendation.retailer_offers
         : [];
-      const topOffer = topOffers[0] || {};
+
+      const topBestOffer =
+        topRecommendation.best_offer &&
+        typeof topRecommendation.best_offer === "object"
+          ? topRecommendation.best_offer
+          : null;
+
+      const topOffer = topBestOffer || topOffers[0] || {};
       const rawTopFit = topRecommendation.fit_percent;
       const topFit =
         rawTopFit != null &&
@@ -503,7 +510,16 @@ async function loadShoppingRecommendation(query) {
         ? p.retailer_offers
         : [];
 
-      const primaryOffer = offers[0] || {};
+      // Respect the backend comparison contract:
+      // best_offer exists only when enough trustworthy comparable
+      // retailer offers are available. A single verified offer is
+      // still useful, but must not be presented as "best".
+      const bestOffer =
+        p.best_offer && typeof p.best_offer === "object"
+          ? p.best_offer
+          : null;
+
+      const primaryOffer = bestOffer || offers[0] || {};
 
       const variant = primaryOffer.variant
         ? escapeHTML(primaryOffer.variant)
@@ -512,6 +528,12 @@ async function loadShoppingRecommendation(query) {
       const retailer = primaryOffer.retailer
         ? escapeHTML(primaryOffer.retailer)
         : "Not available";
+
+      const retailerHeading = bestOffer
+        ? "Best verified retailer"
+        : offers.length > 0
+          ? "Verified retailer"
+          : "Retailer";
 
       const lastChecked = primaryOffer.last_checked
         ? escapeHTML(primaryOffer.last_checked)
@@ -522,25 +544,69 @@ async function loadShoppingRecommendation(query) {
           ? p.provenance.price_evidence
           : {};
 
-      const priceStatus = escapeHTML(
-        String(
+      const retailerAvailability = String(
+        primaryOffer.availability || ""
+      ).trim().toLowerCase();
+
+      let priceStatusRaw;
+
+      if (offers.length > 0) {
+        if (
+          primaryOffer.price != null &&
+          primaryOffer.price !== ""
+        ) {
+          priceStatusRaw =
+            retailerAvailability &&
+            retailerAvailability !== "unknown"
+              ? `price available ? ${retailerAvailability.replaceAll("_", " ")}`
+              : "price available ? availability not verified";
+        } else {
+          priceStatusRaw = "price unavailable";
+        }
+      } else {
+        priceStatusRaw =
           priceEvidence.status ||
-          (p.price != null ? "available" : "unavailable")
-        ).replaceAll("_", " ")
+          (p.price != null ? "available" : "unavailable");
+      }
+
+      const priceStatus = escapeHTML(
+        String(priceStatusRaw).replaceAll("_", " ")
       );
+
+      const priceStatusHeading =
+        offers.length > 0
+          ? "Retailer offer status"
+          : "Price status";
 
       const imageUrl = safeLink(p.image_url);
 
+      const selectedPrice =
+        primaryOffer.price != null &&
+        primaryOffer.price !== ""
+          ? primaryOffer.price
+          : p.price;
+
       const price =
-        p.price != null
-          ? `\u20B9${escapeHTML(p.price)}`
+        selectedPrice != null &&
+        selectedPrice !== ""
+          ? `\u20B9${escapeHTML(selectedPrice)}`
           : "Check latest price";
 
+      // retailer_offers and best_offer are sanitized by the backend.
+      // Prefer that exact retailer URL so displayed retailer, price
+      // and CTA all refer to the same offer.
       const productLink = safeLink(
+        primaryOffer.product_url ||
         p.market_source ||
         p.official_source ||
         p.link
       );
+
+      const offerCtaLabel = bestOffer
+        ? "View Best Verified Offer \u2192"
+        : offers.length > 0
+          ? "Check Verified Retailer \u2192"
+          : "Check Price \u2192";
 
       const why = Array.isArray(p.why_it_fits)
         ? p.why_it_fits
@@ -618,11 +684,11 @@ async function loadShoppingRecommendation(query) {
               <strong>${variant}</strong>
             </div>
             <div class="ai-meta-chip">
-              <span>Retailer</span>
+              <span>${retailerHeading}</span>
               <strong>${retailer}</strong>
             </div>
             <div class="ai-meta-chip">
-              <span>Price status</span>
+              <span>${priceStatusHeading}</span>
               <strong>${priceStatus}</strong>
             </div>
           </div>
@@ -684,7 +750,7 @@ async function loadShoppingRecommendation(query) {
                   )}"
                   data-ai-retailer="${retailer}"
                 >
-                  Check Price \u2192
+                  ${offerCtaLabel}
                 </a>
               `
               : `
