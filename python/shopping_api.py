@@ -70,7 +70,7 @@ def recommend():
             # latency cost of the full 15-candidate pool.
             max_candidates=8,
             max_results=6,
-            live_fast=False,
+            live_fast=True,
         )
     except Exception as error:
         return (
