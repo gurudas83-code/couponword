@@ -99,6 +99,7 @@ TESTS = [
         "query": "Samsung",
         "expect": {
             "brand": "Samsung",
+            "category": "smartphone",
             "min_discovered": 3,
         },
     },
@@ -163,6 +164,21 @@ def evaluate(test, data, elapsed):
             failures.append(
                 f"intent budget_max={intent.get('budget_max')}, "
                 f"expected={expect['budget_max']}"
+            )
+
+    expected_category = norm(
+        expect.get("category")
+    )
+
+    if expected_category:
+        actual_category = norm(
+            intent.get("category")
+        )
+
+        if actual_category != expected_category:
+            failures.append(
+                f"intent category={intent.get('category')}, "
+                f"expected={expect.get('category')}"
             )
 
     expected_must = {
