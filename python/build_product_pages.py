@@ -30,6 +30,15 @@ LEGACY_PRODUCT_PATHS = {
 }
 SITE = "https://coupon-world.in"
 
+from multi_retailer_page_renderer import (
+    MULTI_RETAILER_CSS,
+    couponworld_product_id,
+    load_multi_retailer_products,
+    render_multi_retailer_section,
+)
+
+MULTI_RETAILER_PRODUCTS = load_multi_retailer_products()
+
 
 def clean(value):
     return "" if value is None else " ".join(str(value).strip().split())
@@ -483,6 +492,10 @@ def render_verified_intelligence(product: dict) -> str:
 
 
 def render(product, products):
+    multi_retailer_html = render_multi_retailer_section(
+        product,
+        MULTI_RETAILER_PRODUCTS,
+    )
     title = clean(product.get("title")) or "Product"
     brand = clean(product.get("brand"))
     category = clean(product.get("category")) or "Deals"
@@ -606,6 +619,50 @@ def render(product, products):
         '<span class="cta disabled">Currently unavailable</span>'
     )
 
+    multi_product_id = couponworld_product_id(product)
+
+    multi_data = (
+        MULTI_RETAILER_PRODUCTS.get(multi_product_id)
+        if multi_product_id else None
+    )
+
+    best_multi_offer = (
+        multi_data.get("best_offer")
+        if isinstance(multi_data, dict) else None
+    )
+
+    if isinstance(best_multi_offer, dict):
+        best_price = best_multi_offer.get("price")
+        best_retailer = str(
+            best_multi_offer.get("retailer") or ""
+        ).strip().title()
+
+        best_url = (
+            best_multi_offer.get("affiliate_url")
+            or best_multi_offer.get("product_url")
+            or ""
+        )
+
+        if best_price is not None:
+            price_html = (
+                '<div class="price-box">'
+                f'<span class="current-price">₹{float(best_price):,.0f}</span>'
+                '</div>'
+            )
+
+        availability = (
+            f"Best verified offer on {best_retailer}"
+            if best_retailer else
+            "Best verified offer"
+        )
+
+        if best_url:
+            cta = (
+                f'<a class="cta" href="{html.escape(best_url)}" target="_blank" '
+                'rel="nofollow sponsored noopener">'
+                'View Best Verified Offer →</a>'
+            )
+
     cards = []
     for item in related(product, products):
         href = "../../" + page_dir(item).relative_to(ROOT).as_posix() + "/"
@@ -724,6 +781,7 @@ section{{margin:28px 0;background:#fff;border:1px solid #e5e7eb;border-radius:18
 .spec-table th,.spec-table td{{text-align:left;vertical-align:top;padding:11px 10px;border-top:1px solid #e5e7eb}}
 .spec-table th{{width:34%;font-size:14px;color:#475467}}
 .spec-table td{{font-size:15px}}
+{MULTI_RETAILER_CSS}
 footer{{padding:28px 0 40px;color:#68707d;font-size:14px}}
 @media(max-width:760px){{.hero{{grid-template-columns:1fr;padding:18px}}.grid{{grid-template-columns:1fr 1fr}}.intel-highlights{{grid-template-columns:1fr}}}}
 </style>
@@ -743,11 +801,12 @@ footer{{padding:28px 0 40px;color:#68707d;font-size:14px}}
 <span>Status: {html.escape(availability)}</span>
 </div>
 {price_html}
-<div class="status">{'Check Latest Offer' if active else 'Currently unavailable'}</div>
+<div class="status">{html.escape(availability) if best_multi_offer else ('Check Latest Offer' if active else 'Currently unavailable')}</div>
 {cta}
 <div class="note">Displayed price is based on the latest verified data available to Coupon World. Final price and availability are confirmed on the retailer site.</div>
 </div>
 </article>
+{multi_retailer_html}
 <section><h2>About this product</h2><p>{html.escape(description)}</p></section>
 {intelligence_html}
 {guide_html}

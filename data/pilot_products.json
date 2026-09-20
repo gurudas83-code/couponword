@@ -1,0 +1,75 @@
+﻿{
+  "version": 1,
+  "products": [
+    {
+      "catalog_id": "72",
+      "product_id": "cw-mobile-72",
+      "brand": "Samsung",
+      "model": "Galaxy M36 5G",
+      "variant": "6GB/128GB",
+      "category": "Mobiles",
+      "amazon_asin": "B0FDBB2VRC",
+      "title": "Samsung Galaxy M36 5G",
+      "attributes": {
+        "ram": "6GB",
+        "storage": "128GB",
+        "color": "Velvet Black"
+      }
+    },
+    {
+      "catalog_id": "10",
+      "product_id": "cw-mobile-10",
+      "brand": "Redmi",
+      "model": "Redmi 13 5G",
+      "variant": "8GB/128GB",
+      "category": "Mobiles",
+      "amazon_asin": "B0F1N8B7Z4",
+      "title": "Redmi 13 5G",
+      "attributes": {
+        "ram": "8GB",
+        "storage": "128GB",
+        "color": "Hawaiian Blue"
+      }
+    },
+    {
+      "catalog_id": "11",
+      "product_id": "cw-audio-11",
+      "brand": "realme",
+      "model": "Buds Air 8",
+      "variant": "Master Gold",
+      "category": "Electronics",
+      "amazon_asin": "B0GDQCTYFB",
+      "title": "realme Buds Air 8",
+      "attributes": {
+        "color": "Master Gold"
+      }
+    },
+    {
+      "catalog_id": "13",
+      "product_id": "cw-keyboard-13",
+      "brand": "Yamaha",
+      "model": "PSS-E30 Remie",
+      "variant": "White",
+      "category": "Musical Instruments",
+      "amazon_asin": "B08232VZ84",
+      "title": "Yamaha PSS-E30 Remie Portable Mini Keyboard",
+      "attributes": {
+        "keys": "37",
+        "color": "White"
+      }
+    },
+    {
+      "catalog_id": "20",
+      "product_id": "cw-telescope-20",
+      "brand": "Audavibe",
+      "model": "Stellar 76700",
+      "variant": "",
+      "category": "Electronics",
+      "amazon_asin": "B0F26CLKW9",
+      "title": "Audavibe Stellar 76700 Newtonian Reflector Telescope",
+      "attributes": {
+        "max_zoom": "235x"
+      }
+    }
+  ]
+}
