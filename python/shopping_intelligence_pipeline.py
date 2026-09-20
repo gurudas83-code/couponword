@@ -1916,16 +1916,79 @@ def run_pipeline(
                 })
                 continue
 
+        cache_asin = clean(
+            candidate.get("asin")
+            or identity.get("asin")
+        ).upper()
+
+        if not cache_asin:
+            for retailer_url in (
+                candidate.get("source_url"),
+                resolved.get("official_url"),
+            ):
+                retailer_url = clean(retailer_url)
+
+                if (
+                    not retailer_url
+                    or "amazon." not in retailer_url.lower()
+                ):
+                    continue
+
+                try:
+                    from product_pipeline import extract_asin
+
+                    cache_asin = extract_asin(retailer_url)
+                    break
+                except ValueError:
+                    continue
+
         cached_extraction = find_verified_evidence(
-            asin=clean(
-                candidate.get("asin")
-                or identity.get("asin")
-            ),
+            asin=cache_asin,
             brand=clean(identity.get("brand")),
             model=clean(identity.get("model")),
             search_name=clean(identity.get("search_name")),
             title=raw_title,
         )
+
+        # Keep the normal variant-sensitive cache lookup fail-closed.
+        #
+        # A second exact-ASIN cache lookup is allowed only after:
+        #   1. live retailer identity has independently verified, and
+        #   2. the same Amazon ASIN has a canonical registry owner.
+        #
+        # This permits reuse of official model evidence when the stored
+        # official page omits a capacity field such as RAM, without
+        # weakening the global sibling/variant protection.
+        if (
+            not cached_extraction
+            and live_fast
+            and clean(resolved.get("status")).lower()
+                == "retailer_identity_verified"
+        ):
+            canonical_asin = cache_asin
+
+            if canonical_asin:
+                from retailer_product_registry import (
+                    find_canonical_product_id,
+                )
+
+                canonical_product_id = clean(
+                    find_canonical_product_id(
+                        retailer="amazon",
+                        retailer_product_id=canonical_asin,
+                    )
+                )
+
+                if canonical_product_id:
+                    cached_extraction = find_verified_evidence(
+                        asin=canonical_asin,
+                    )
+
+                    if cached_extraction:
+                        cached_extraction = dict(cached_extraction)
+                        cached_extraction["cache_match_mode"] = (
+                            "canonical_exact_asin_after_live_identity"
+                        )
 
         if cached_extraction:
             extraction = {

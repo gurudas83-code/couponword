@@ -82,10 +82,6 @@ def audit_brand(brand: str, budget: int, max_cards: int) -> list[dict[str, Any]]
 
         normalized_title = re.sub(r"[^a-z0-9]+", " ", title.lower()).strip()
         normalized_brand = re.sub(r"[^a-z0-9]+", " ", brand.lower()).strip()
-        if not re.search(rf"(?:^|\s){re.escape(normalized_brand)}(?:\s|$)", normalized_title):
-            row["reason"] = "requested brand is not explicitly present in product title"
-            rows.append(row)
-            continue
 
         if re.search(
             r"\b(?:keypad|feature phone|protection plan|insurance plan|"
@@ -111,13 +107,41 @@ def audit_brand(brand: str, budget: int, max_cards: int) -> list[dict[str, Any]]
 
         parsed = parse_identity(title)
         parsed_brand = clean(parsed.brand)
-        if parsed_brand.casefold() != brand.casefold():
+
+        # If the retailer title explicitly identifies another brand, fail closed.
+        # Some genuine OEM listings omit the brand and use a protected family
+        # identity such as "Galaxy M17". In that case, retain the requested
+        # brand as context and let the existing exact-page strict identity gate
+        # make the final decision.
+        if (
+            parsed_brand
+            and parsed_brand.casefold() != brand.casefold()
+        ):
             row["reason"] = "parsed candidate brand does not match requested brand"
             rows.append(row)
             continue
 
+        identity_brand = parsed_brand or brand
+
+        brand_explicit = bool(
+            re.search(
+                rf"(?:^|\s){re.escape(normalized_brand)}(?:\s|$)",
+                normalized_title,
+            )
+        )
+
+        expected_identity_text = (
+            title
+            if brand_explicit
+            else f"{brand} {title}".strip()
+        )
+
         try:
-            live = fetch_amazon_identity(asin, title, parsed_brand)
+            live = fetch_amazon_identity(
+                asin,
+                expected_identity_text,
+                identity_brand,
+            )
         except BaseException as error:
             row["reason"] = str(error)
             rows.append(row)
@@ -126,7 +150,7 @@ def audit_brand(brand: str, budget: int, max_cards: int) -> list[dict[str, Any]]
         row.update({
             "status": "VERIFIED_FOR_REPLACEMENT_REVIEW",
             "reason": "exact search-card price and exact ASIN page identity verified",
-            "brand": parsed_brand,
+            "brand": identity_brand,
             "model_tokens": parsed.model_tokens,
             "ram_tokens": parsed.ram_tokens,
             "storage_tokens": parsed.storage_tokens,

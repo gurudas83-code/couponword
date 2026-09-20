@@ -1092,7 +1092,10 @@ def fallback_search_channel(
             if len(accepted) >= max_results:
                 break
 
-        return accepted
+        # Cached discovery may restore stable candidate identity,
+        # but must not prevent fresh Amazon commerce evidence.
+        # Continue into the live Amazon search-card lane so current
+        # exact-ASIN price evidence can be refreshed.
 
     # Amazon remains an optional independent discovery lane.
     try:
