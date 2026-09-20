@@ -1670,6 +1670,12 @@ def category_accessory_gate(
         }
 
     accessory_patterns = (
+        # Obvious removable-storage products. Keep these specific
+        # enough that a genuine phone merely mentioning expandable
+        # microSD support is not rejected.
+        r"\bmicrosd(?:xc|hc)?\s+uhs\b",
+        r"\b(?:sd|sdxc|sdhc)\s+memory\s+card\b",
+        r"\bmemory\s+card\b.{0,40}\b(?:uhs|class\s*10|mb/s|mbps)\b",
         r"\bdisplay\s+combo\b",
         r"\bcombo\s+folder\b",
         r"\bdisplay\s+folder\b",
