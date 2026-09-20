@@ -54,7 +54,11 @@ from official_spec_extractor import extract_one
 from product_fit_signal_builder import build_fit_signals
 from product_evidence_store import (
     find_verified_evidence,
+    record_variant_signature,
     save_verified_evidence,
+    variant_signature_from_specifications,
+    variant_signature_from_text,
+    variant_signatures_conflict,
 )
 from product_identity_v2 import build_identity
 from retail_price_evidence import build_price_evidence
@@ -2097,6 +2101,50 @@ def run_pipeline(
                     "reason": str(error),
                 })
                 continue
+
+        # -----------------------------------------------------
+        # VARIANT-INTEGRITY GATE
+        # -----------------------------------------------------
+        # Exact retailer identity does not authorize evidence from a
+        # different RAM/storage sibling. Missing capacity is unknown,
+        # but an explicit contradiction must fail closed.
+        # -----------------------------------------------------
+        requested_variant = variant_signature_from_text(
+            raw_title,
+            candidate.get("source_title"),
+            candidate.get("title"),
+        )
+
+        evidence_variant = {}
+
+        if isinstance(cached_extraction, dict):
+            evidence_variant = record_variant_signature(
+                cached_extraction
+            )
+
+        if not evidence_variant:
+            evidence_variant = variant_signature_from_specifications(
+                extraction.get("specifications")
+            )
+
+        if variant_signatures_conflict(
+            requested_variant,
+            evidence_variant,
+        ):
+            failures.append({
+                "candidate_id": candidate_id,
+                "title": raw_title,
+                "stage": "variant_evidence_integrity",
+                "status": "rejected",
+                "reason": (
+                    "Explicit candidate/evidence variant conflict: "
+                    f"candidate={requested_variant}, "
+                    f"evidence={evidence_variant}"
+                ),
+                "requested_variant": requested_variant,
+                "evidence_variant": evidence_variant,
+            })
+            continue
 
         # Persist only genuinely verified deep extraction evidence.
         # Fast listing-only evidence is intentionally not saved as

@@ -248,6 +248,29 @@ def record_variant_signature(
     )
 
 
+def variant_signatures_conflict(
+    requested: dict[str, str],
+    stored: dict[str, str],
+) -> bool:
+    """
+    Return True only for an explicit RAM/storage contradiction.
+
+    Missing variant fields are unknown, not conflicts.
+    Example:
+      6/128 vs 8/128 -> conflict
+      6/128 vs ?/128 -> no explicit conflict
+      6/128 vs 6/128 -> no conflict
+    """
+    for key in ("ram_gb", "storage_gb"):
+        left = clean(requested.get(key))
+        right = clean(stored.get(key))
+
+        if left and right and left != right:
+            return True
+
+    return False
+
+
 def variant_signatures_match(
     requested: dict[str, str],
     stored: dict[str, str],
