@@ -627,9 +627,10 @@ def detect_requirements(
         #   8+128
         #   12/256
         compact_variant_match = re.search(
-            r"\b(2|3|4|6|8|12|16|18|24|32|64)\s*(?:/|\+)\s*"
-            r"(32|64|128|256|512|1024)\b",
+            r"\b(2|3|4|6|8|12|16|18|24|32|64)(?:\s*gb)?\s*(?:/|\+)\s*"
+            r"(32|64|128|256|512|1024)(?:\s*gb)?\b",
             text,
+            re.I,
         )
 
         if compact_variant_match:

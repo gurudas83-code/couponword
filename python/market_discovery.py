@@ -520,7 +520,7 @@ def build_discovery_queries(
         )
 
         ram_match = re.search(
-            r"\b(\d{1,3})\s*gb(?:\s*ram|_ram)?\b",
+            r"\b(\d{1,3})\s*gb(?:\s*ram|_ram)\b",
             query_text,
             re.I,
         )

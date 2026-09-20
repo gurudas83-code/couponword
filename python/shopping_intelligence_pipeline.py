@@ -2127,6 +2127,97 @@ def run_pipeline(
                 extraction.get("specifications")
             )
 
+        # -----------------------------------------------------
+        # DEEP OFFICIAL VARIANT RETRY
+        # -----------------------------------------------------
+        # A manufacturer may expose separate official pages for
+        # RAM/storage siblings while sitemap/search titles omit RAM.
+        # If the initially selected official page explicitly conflicts
+        # with the retailer variant, inspect only already-verified
+        # official candidates and prefer an exact capacity match.
+        #
+        # This is deliberately deep-mode only. Live visitor traffic
+        # remains on the fast path, and the final integrity gate below
+        # still fails closed when no exact official variant is found.
+        # -----------------------------------------------------
+        if (
+            not live_fast
+            and requested_variant
+            and variant_signatures_conflict(
+                requested_variant,
+                evidence_variant,
+            )
+            and not isinstance(cached_extraction, dict)
+        ):
+            current_url = clean(resolved.get("official_url"))
+
+            for alternate in resolved.get("candidates") or []:
+                if not isinstance(alternate, dict):
+                    continue
+
+                alternate_url = clean(alternate.get("url"))
+                alternate_title = clean(alternate.get("title"))
+
+                if not alternate_url or alternate_url == current_url:
+                    continue
+
+                if (
+                    clean(alternate.get("identity_decision")).lower()
+                    != "verified"
+                ):
+                    continue
+
+                alternate_resolved = dict(resolved)
+                alternate_resolved["official_url"] = alternate_url
+                alternate_resolved["official_title"] = alternate_title
+
+                for key in (
+                    "identity_score",
+                    "identity_decision",
+                    "identity_reasons",
+                    "combined_score",
+                ):
+                    if alternate.get(key) is not None:
+                        alternate_resolved[key] = alternate.get(key)
+
+                if alternate.get("combined_score") is not None:
+                    alternate_resolved["match_score"] = alternate.get(
+                        "combined_score"
+                    )
+
+                try:
+                    alternate_extraction = extract_one(
+                        alternate_resolved,
+                        identity,
+                    )
+                except Exception:
+                    continue
+
+                alternate_variant = (
+                    variant_signature_from_specifications(
+                        alternate_extraction.get("specifications")
+                    )
+                )
+
+                exact_variant_match = all(
+                    alternate_variant.get(key) == value
+                    for key, value in requested_variant.items()
+                )
+
+                if not exact_variant_match:
+                    continue
+
+                resolved = alternate_resolved
+                extraction = alternate_extraction
+                evidence_variant = alternate_variant
+
+                # Resolver diagnostics/provenance should reflect the
+                # official variant that actually supplied evidence.
+                if resolver_records:
+                    resolver_records[-1] = resolved
+
+                break
+
         if variant_signatures_conflict(
             requested_variant,
             evidence_variant,
