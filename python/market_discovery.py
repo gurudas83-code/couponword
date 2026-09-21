@@ -627,15 +627,7 @@ def build_discovery_queries(
     # Lane 5: original user wording.
     # This helps preserve nuance not represented in structured intent.
     # --------------------------------------------------------
-    queries.append(
-        join_unique(
-            [
-                clean(user_query),
-                "India",
-                "product",
-            ]
-        )
-    )
+    queries.append(clean(user_query))
 
     # --------------------------------------------------------
     # Lane 6: broad model fallback.
