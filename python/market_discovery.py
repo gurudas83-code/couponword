@@ -1693,7 +1693,13 @@ def category_accessory_gate(
         r"\bcover\s+case\b",
         r"\bleather\s+case\b",
         r"\bcharging\s+cable\b",
-        r"\bcharger\b",
+        # Charger wording also appears in genuine phone titles such as
+        # "Without Charger", so do not reject the bare word "charger".
+        # Reject explicit charging-adapter products instead.
+        r"\bcharging\s+adap(?:ter|tor)\b",
+        r"\bfast\s+charger\b",
+        r"\bgan\s+(?:fast\s+)?charger\b",
+        r"\bmultiport\s+(?:fast\s+)?charger\b",
         r"\bpower\s*bank\b",
         r"\bportable\s+charger\b",
         r"\btravel\s+adap(?:ter|tor)\b",
