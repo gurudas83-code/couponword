@@ -53,6 +53,35 @@ def url_asin(url: str) -> str:
     return match.group(1).upper() if match else ""
 
 
+
+class AmazonAccessChallenge(SystemExit):
+    """Amazon returned an access challenge instead of a product page."""
+
+
+def _is_amazon_access_challenge(soup) -> bool:
+    captcha_form = soup.find(
+        "form",
+        attrs={
+            "action": re.compile(
+                r"validatecaptcha",
+                flags=re.IGNORECASE,
+            )
+        },
+    )
+
+    if captcha_form is not None:
+        return True
+
+    visible_text = " ".join(
+        soup.stripped_strings
+    ).casefold()
+
+    return (
+        "automated access" in visible_text
+        and "continue shopping" in visible_text
+    )
+
+
 def fetch_amazon_identity(
     asin: str,
     expected_title: str,
@@ -73,6 +102,12 @@ def fetch_amazon_identity(
         )
 
     soup = BeautifulSoup(response.text, "lxml")
+
+    if _is_amazon_access_challenge(soup):
+        raise AmazonAccessChallenge(
+            "TRANSIENT: Amazon CAPTCHA/automated-access interstitial "
+            "returned instead of the requested product page"
+        )
 
     node = soup.find(id="productTitle")
 

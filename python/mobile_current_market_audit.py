@@ -35,7 +35,10 @@ def parse_price(value: Any) -> float | None:
 
 def audit_brand(brand: str, budget: int, max_cards: int) -> list[dict[str, Any]]:
     from amazon_search_image_resolver import search_asins
-    from promote_mobile_canonical import fetch_amazon_identity
+    from promote_mobile_canonical import (
+        AmazonAccessChallenge,
+        fetch_amazon_identity,
+    )
     from resolver_engine import candidate_is_product_imposter, parse_identity
     from product_identity_v2 import get_core_title
 
@@ -207,6 +210,11 @@ def audit_brand(brand: str, budget: int, max_cards: int) -> list[dict[str, Any]]
                 expected_identity_text,
                 identity_brand,
             )
+        except AmazonAccessChallenge as error:
+            row["status"] = "AUDIT_ABORTED_AMAZON_CHALLENGE"
+            row["reason"] = str(error)
+            rows.append(row)
+            return rows
         except BaseException as error:
             row["reason"] = str(error)
             rows.append(row)
@@ -249,17 +257,63 @@ def main() -> int:
 
     results: list[dict[str, Any]] = []
     seen_asins: set[str] = set()
+    audit_aborted = False
+    audit_abort_reason = ""
+
     for brand in brands:
-        for row in audit_brand(brand, args.budget, max(1, min(args.max_cards, 24))):
+        brand_rows = audit_brand(
+            brand,
+            args.budget,
+            max(1, min(args.max_cards, 24)),
+        )
+
+        for row in brand_rows:
             asin = clean(row.get("asin"))
-            if asin and asin in seen_asins:
+            status = clean(row.get("status"))
+
+            is_challenge_abort = (
+                status
+                == "AUDIT_ABORTED_AMAZON_CHALLENGE"
+            )
+
+            if (
+                asin
+                and asin in seen_asins
+                and not is_challenge_abort
+            ):
                 continue
+
             if asin:
                 seen_asins.add(asin)
-            results.append(row)
-            print(row.get("status"), "|", brand, "|", asin or "NO-ASIN", "|", row.get("title", ""))
 
-    verified = [x for x in results if x.get("status") == "VERIFIED_FOR_REPLACEMENT_REVIEW"]
+            results.append(row)
+
+            print(
+                status,
+                "|",
+                brand,
+                "|",
+                asin or "NO-ASIN",
+                "|",
+                row.get("title", ""),
+            )
+
+            if is_challenge_abort:
+                audit_aborted = True
+                audit_abort_reason = clean(
+                    row.get("reason")
+                )
+                break
+
+        if audit_aborted:
+            break
+
+    verified = [
+        x
+        for x in results
+        if x.get("status")
+        == "VERIFIED_FOR_REPLACEMENT_REVIEW"
+    ]
     payload = {
         "schema_version": "1.0",
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -267,7 +321,19 @@ def main() -> int:
         "database_write": False,
         "budget": args.budget,
         "brands": brands,
-        "counts": {"reviewed": len(results), "verified_for_review": len(verified)},
+        "audit_complete": not audit_aborted,
+        "audit_abort_reason": (
+            audit_abort_reason
+            if audit_aborted
+            else None
+        ),
+        "counts": {
+            "reviewed": len(results),
+            "verified_for_review": len(verified),
+            "aborted_due_amazon_challenge": int(
+                audit_aborted
+            ),
+        },
         "verified_candidates": verified,
         "results": results,
     }
@@ -276,6 +342,15 @@ def main() -> int:
     print("Output        :", args.output)
     print("Reviewed      :", len(results))
     print("Verified      :", len(verified))
+    print(
+        "Audit complete:",
+        "YES" if not audit_aborted else "NO",
+    )
+
+    if audit_aborted:
+        print("Abort reason  :", audit_abort_reason)
+        return 2
+
     return 0
 
 
