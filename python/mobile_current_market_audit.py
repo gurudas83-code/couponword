@@ -128,10 +128,44 @@ def audit_brand(brand: str, budget: int, max_cards: int) -> list[dict[str, Any]]
             re.I,
         ))
 
+        # Some genuine retailer titles omit generic words such as
+        # "smartphone". Accept only recognized phone-family/model patterns
+        # when backed by memory or network identity evidence.
+        short_mobile_family = bool(re.search(
+            r"\b(?:"
+            r"samsung\s+[amfs]\d{1,3}[a-z]*"
+            r"|motorola\s+(?:moto\s+)?(?:g|edge)\d+[a-z]*"
+            r"|moto\s+g\d+[a-z]*"
+            r"|poco\s+[cmxf]\d+[a-z]*"
+            r"|iqoo\s+z\d+[a-z]*"
+            r"|nord\s+(?:ce)?\d+[a-z]*"
+            r"|narzo\s+\d+[a-z]*"
+            r")\b",
+            normalized_title,
+            re.I,
+        ))
+
+        short_identity_evidence = (
+            bool(re.search(
+                r"\b\d+\s*gb\b",
+                normalized_title,
+                re.I,
+            ))
+            or bool(re.search(
+                r"\b(?:4g|5g)\b",
+                normalized_title,
+                re.I,
+            ))
+        )
+
         handset_signal = (
             explicit_handset
             or samsung_phone_family
             or (handset_memory and handset_hardware)
+            or (
+                short_mobile_family
+                and short_identity_evidence
+            )
         )
 
         if not handset_signal:
