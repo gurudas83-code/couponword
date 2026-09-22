@@ -217,36 +217,166 @@ def infer_brand_from_url(url: Any) -> str:
     return ""
 
 
+
 def extract_memory_tokens(tokens: list[str], kind: str) -> list[str]:
-    found: list[str] = []
+    """
+    Extract physical RAM/storage conservatively.
 
-    for i, token in enumerate(tokens):
-        if re.fullmatch(r"\d{1,4}", token):
-            next_token = tokens[i + 1] if i + 1 < len(tokens) else ""
+    Explicit RAM/storage labels are authoritative. Virtual RAM is not
+    physical RAM. Unlabelled compact pairs such as 8GB/128GB are accepted
+    only when their ordering provides safe RAM/storage evidence.
+    """
+    mentions: list[dict[str, Any]] = []
+    index = 0
 
-            if next_token in {"gb", "tb"}:
-                value = f"{token}{next_token}"
+    while index < len(tokens):
+        token = tokens[index]
 
-                if kind == "ram" and int(token) <= 64:
-                    found.append(value)
+        # "4 GB"
+        if (
+            re.fullmatch(r"\d{1,4}", token)
+            and index + 1 < len(tokens)
+            and tokens[index + 1] in {"gb", "tb"}
+        ):
+            mentions.append({
+                "start": index,
+                "end": index + 1,
+                "number": int(token),
+                "unit": tokens[index + 1],
+                "value": f"{token}{tokens[index + 1]}",
+            })
+            index += 2
+            continue
 
-                if kind == "storage" and (
-                    next_token == "tb" or int(token) >= 64
-                ):
-                    found.append(value)
+        # "4GB"
+        match = re.fullmatch(r"(\d{1,4})(gb|tb)", token)
 
-        elif re.fullmatch(r"\d{1,4}(gb|tb)", token):
-            number = int(re.match(r"\d+", token).group())
+        if match:
+            mentions.append({
+                "start": index,
+                "end": index,
+                "number": int(match.group(1)),
+                "unit": match.group(2),
+                "value": token,
+            })
 
-            if kind == "ram" and number <= 64:
-                found.append(token)
+        index += 1
 
-            if kind == "storage" and (
-                token.endswith("tb") or number >= 64
-            ):
-                found.append(token)
+    classifications: list[str | None] = [None] * len(mentions)
+    consumed_label_indexes: set[int] = set()
 
-    return sorted(set(found))
+    # Pass 1: explicit RAM / storage / virtual-RAM grammar.
+    for position, item in enumerate(mentions):
+        start = int(item["start"])
+        end = int(item["end"])
+
+        previous_1_index = start - 1
+        previous_2_index = start - 2
+        next_1_index = end + 1
+        next_2_index = end + 2
+
+        previous_1 = (
+            tokens[previous_1_index]
+            if previous_1_index >= 0
+            else ""
+        )
+        previous_2 = (
+            tokens[previous_2_index]
+            if previous_2_index >= 0
+            else ""
+        )
+        next_1 = (
+            tokens[next_1_index]
+            if next_1_index < len(tokens)
+            else ""
+        )
+        next_2 = (
+            tokens[next_2_index]
+            if next_2_index < len(tokens)
+            else ""
+        )
+
+        # "5GB Virtual RAM"
+        if next_1 == "virtual" and next_2 == "ram":
+            classifications[position] = "virtual_ram"
+            consumed_label_indexes.add(next_2_index)
+            continue
+
+        # "Virtual RAM 5GB" ? only when that RAM label has not already
+        # been consumed by the preceding memory mention.
+        if (
+            previous_1 == "ram"
+            and previous_2 == "virtual"
+            and previous_1_index not in consumed_label_indexes
+        ):
+            classifications[position] = "virtual_ram"
+            consumed_label_indexes.add(previous_1_index)
+            continue
+
+        prefix_label = None
+        prefix_index = None
+
+        if (
+            previous_1_index >= 0
+            and previous_1_index not in consumed_label_indexes
+        ):
+            if previous_1 == "ram":
+                prefix_label = "ram"
+                prefix_index = previous_1_index
+            elif previous_1 in {"storage", "rom"}:
+                prefix_label = "storage"
+                prefix_index = previous_1_index
+
+        suffix_label = None
+        suffix_index = None
+
+        if next_1 == "ram":
+            suffix_label = "ram"
+            suffix_index = next_1_index
+        elif next_1 in {"storage", "rom"}:
+            suffix_label = "storage"
+            suffix_index = next_1_index
+
+        if prefix_label:
+            classifications[position] = prefix_label
+            consumed_label_indexes.add(prefix_index)
+            continue
+
+        if suffix_label:
+            classifications[position] = suffix_label
+            consumed_label_indexes.add(suffix_index)
+            continue
+
+    # Pass 2: safe unlabelled storage.
+    for position, item in enumerate(mentions):
+        if classifications[position] is not None:
+            continue
+
+        if item["unit"] == "tb" or int(item["number"]) >= 64:
+            classifications[position] = "storage"
+
+    # Pass 3: compact pair such as 8GB/128GB or 12GB 256GB.
+    for position, item in enumerate(mentions):
+        if classifications[position] is not None:
+            continue
+
+        if int(item["number"]) > 32:
+            continue
+
+        later_storage = any(
+            classifications[later] == "storage"
+            for later in range(position + 1, len(mentions))
+        )
+
+        if later_storage:
+            classifications[position] = "ram"
+
+    return sorted(set(
+        str(item["value"])
+        for item, classification in zip(mentions, classifications)
+        if classification == kind
+    ))
+
 
 
 def extract_color_tokens(tokens: list[str]) -> list[str]:

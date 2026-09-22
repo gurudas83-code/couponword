@@ -37,6 +37,7 @@ def audit_brand(brand: str, budget: int, max_cards: int) -> list[dict[str, Any]]
     from amazon_search_image_resolver import search_asins
     from promote_mobile_canonical import fetch_amazon_identity
     from resolver_engine import candidate_is_product_imposter, parse_identity
+    from product_identity_v2 import get_core_title
 
     query = f"{brand} smartphone under {budget}"
     rows: list[dict[str, Any]] = []
@@ -84,8 +85,10 @@ def audit_brand(brand: str, budget: int, max_cards: int) -> list[dict[str, Any]]
         normalized_brand = re.sub(r"[^a-z0-9]+", " ", brand.lower()).strip()
 
         if re.search(
-            r"\b(?:keypad|feature phone|protection plan|insurance plan|"
-            r"extended warranty|power bank|case|cover|protector|"
+            r"\b(?:keypad|feature phone|"
+            r"earbuds?|buds|tws|headphones?|headset|neckband|"
+            r"protection plan|insurance plan|extended warranty|"
+            r"complete protect|plan for smartphones?|power bank|"
             r"screen guard|tempered glass|cable)\b",
             normalized_title,
             re.I,
@@ -94,12 +97,40 @@ def audit_brand(brand: str, budget: int, max_cards: int) -> list[dict[str, Any]]
             rows.append(row)
             continue
 
-        handset_signal = bool(re.search(
-            r"\b(?:smartphone|galaxy|iphone|redmi|poco|realme|infinix|"
-            r"lava|motorola|moto|oppo|vivo|iqoo|oneplus|nothing|pixel)\b",
+        explicit_handset = bool(re.search(
+            r"\b(?:smartphone|mobile|mobile phone|handset|iphone)\b",
             normalized_title,
             re.I,
         ))
+
+        samsung_phone_family = bool(re.search(
+            r"\bgalaxy\s+(?:"
+            r"[amfs]\s*\d{1,3}[a-z]*"
+            r"|z\s*(?:fold|flip)\s*\d*[a-z]*"
+            r")\b",
+            normalized_title,
+            re.I,
+        ))
+
+        handset_memory = bool(re.search(
+            r"\b\d+\s*gb\s*(?:ram|storage|rom)\b",
+            normalized_title,
+            re.I,
+        ))
+
+        handset_hardware = bool(re.search(
+            r"\b(?:\d+\s*mp|\d+\s*mah|hd\+|fhd\+|amoled|lcd|"
+            r"octa[- ]?core|processor|chipset)\b",
+            normalized_title,
+            re.I,
+        ))
+
+        handset_signal = (
+            explicit_handset
+            or samsung_phone_family
+            or (handset_memory and handset_hardware)
+        )
+
         if not handset_signal:
             row["reason"] = "smartphone handset identity is not explicit"
             rows.append(row)
@@ -123,18 +154,52 @@ def audit_brand(brand: str, budget: int, max_cards: int) -> list[dict[str, Any]]
 
         identity_brand = parsed_brand or brand
 
+        core_title = clean(get_core_title(title)) or title
+        normalized_core = re.sub(
+            r"[^a-z0-9]+",
+            " ",
+            core_title.lower(),
+        ).strip()
+
         brand_explicit = bool(
             re.search(
                 rf"(?:^|\s){re.escape(normalized_brand)}(?:\s|$)",
-                normalized_title,
+                normalized_core,
             )
         )
 
         expected_identity_text = (
-            title
+            core_title
             if brand_explicit
-            else f"{brand} {title}".strip()
+            else f"{brand} {core_title}".strip()
         )
+
+        expected_tokens = set(
+            re.sub(
+                r"[^a-z0-9]+",
+                " ",
+                expected_identity_text.lower(),
+            ).split()
+        )
+
+        # Preserve explicit network/sibling identity after trimming
+        # retailer marketing/specification noise.
+        for identity_token in (
+            list(parsed.network_tokens)
+            + list(parsed.variant_tokens)
+        ):
+            token = clean(identity_token).lower()
+            if token and token not in expected_tokens:
+                expected_identity_text += f" {token}"
+                expected_tokens.add(token)
+
+        # Restore exact physical memory variant identity using the
+        # context-aware resolver parser.
+        for ram_token in parsed.ram_tokens:
+            expected_identity_text += f" {ram_token} RAM"
+
+        for storage_token in parsed.storage_tokens:
+            expected_identity_text += f" {storage_token} Storage"
 
         try:
             live = fetch_amazon_identity(
