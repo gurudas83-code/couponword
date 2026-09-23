@@ -41,6 +41,7 @@ def audit_brand(brand: str, budget: int, max_cards: int) -> list[dict[str, Any]]
     )
     from resolver_engine import candidate_is_product_imposter, parse_identity
     from product_identity_v2 import get_core_title
+    from intent_engine import detect_brands
 
     query = f"{brand} smartphone under {budget}"
     rows: list[dict[str, Any]] = []
@@ -140,6 +141,7 @@ def audit_brand(brand: str, budget: int, max_cards: int) -> list[dict[str, Any]]
             r"|iqoo\s+z\d+[a-z]*"
             r"|nord\s+(?:ce)?\d+[a-z]*"
             r"|narzo\s+\d+[a-z]*"
+            r"|lava\s+bold\s+n\d+[a-z]*"
             r")\b",
             normalized_title,
             re.I,
@@ -174,22 +176,75 @@ def audit_brand(brand: str, budget: int, max_cards: int) -> list[dict[str, Any]]
             continue
 
         parsed = parse_identity(title)
-        parsed_brand = clean(parsed.brand)
 
-        # If the retailer title explicitly identifies another brand, fail closed.
-        # Some genuine OEM listings omit the brand and use a protected family
-        # identity such as "Galaxy M17". In that case, retain the requested
-        # brand as context and let the existing exact-page strict identity gate
-        # make the final decision.
-        if (
-            parsed_brand
-            and parsed_brand.casefold() != brand.casefold()
+        # Generic resolver brand extraction is not authoritative for this
+        # mobile audit because ordinary feature/colour words such as "Titan"
+        # may also exist in the global brand alias table.
+        mobile_brand_keys = {
+            "apple", "samsung", "oneplus", "xiaomi", "redmi",
+            "realme", "vivo", "oppo", "infinix", "lava",
+            "poco", "tecno", "iqoo", "motorola", "nothing",
+            "google",
+        }
+
+        title_brand_evidence = {
+            clean(value).casefold()
+            for value in detect_brands(title)
+            if clean(value).casefold() in mobile_brand_keys
+        }
+
+        protected_family_brand = ""
+
+        if samsung_phone_family:
+            protected_family_brand = "samsung"
+        elif re.search(
+            r"\bnord\s+(?:ce)?\d+[a-z]*\b",
+            normalized_title,
+            re.I,
         ):
-            row["reason"] = "parsed candidate brand does not match requested brand"
+            protected_family_brand = "oneplus"
+        elif re.search(
+            r"\bnarzo\s+\d+[a-z]*\b",
+            normalized_title,
+            re.I,
+        ):
+            protected_family_brand = "realme"
+        elif re.search(
+            r"\b(?:edge\s+\d+[a-z]*|moto\s+g\d+[a-z]*)\b",
+            normalized_title,
+            re.I,
+        ):
+            protected_family_brand = "motorola"
+        elif re.search(
+            r"\blava\s+bold\s+n\d+[a-z]*\b",
+            normalized_title,
+            re.I,
+        ):
+            protected_family_brand = "lava"
+
+        if protected_family_brand:
+            title_brand_evidence.add(protected_family_brand)
+
+        requested_brand_key = brand.casefold()
+
+        conflicting_brands = sorted(
+            value
+            for value in title_brand_evidence
+            if value != requested_brand_key
+        )
+
+        if conflicting_brands:
+            row["reason"] = (
+                "explicit candidate mobile brand does not match "
+                "requested brand: "
+                + ", ".join(conflicting_brands)
+            )
             rows.append(row)
             continue
 
-        identity_brand = parsed_brand or brand
+        # Brand context is still verified later by the strict exact-page
+        # identity gate. Missing explicit title brand is not treated as proof.
+        identity_brand = brand
 
         core_title = clean(get_core_title(title)) or title
         normalized_core = re.sub(
