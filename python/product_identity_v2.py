@@ -125,21 +125,80 @@ def detect_brand(product: dict[str, Any]) -> str:
     title_lower = title.lower()
 
     # Canonical Samsung Galaxy-family identity.
-    # Commerce listings sometimes omit "Samsung" and begin directly
-    # with Galaxy A/M/F/S/Z. These are Samsung smartphone identities,
-    # not a separate "Galaxy" manufacturer.
     if re.search(
-        r"\\bgalaxy\\s+(?:a|m|f|s|z)\\s*\\d",
+        r"\bgalaxy\s+(?:a|m|f|s|z)\s*\d",
         title_lower,
         flags=re.IGNORECASE,
     ):
         return "Samsung"
 
-    for brand in sorted(KNOWN_BRANDS, key=len, reverse=True):
-        if brand.lower() in title_lower:
-            return brand
-
     first_word = title.split()[0] if title else ""
+    first_key = re.sub(
+        r"[^a-z0-9]+",
+        "",
+        first_word.lower(),
+    )
+
+    # Several active mobile OEMs/families are not represented in the
+    # general KNOWN_BRANDS list. Prefer a genuine leading handset identity
+    # before scanning later feature/component brands such as Sony.
+    leading_mobile_brands = {
+        "apple": "Apple",
+        "iphone": "Apple",
+        "samsung": "Samsung",
+        "redmi": "Redmi",
+        "xiaomi": "Xiaomi",
+        "realme": "realme",
+        "oneplus": "OnePlus",
+        "nord": "OnePlus",
+        "iqoo": "iQOO",
+        "poco": "POCO",
+        "motorola": "Motorola",
+        "moto": "Motorola",
+        "lava": "Lava",
+        "vivo": "Vivo",
+        "oppo": "Oppo",
+        "infinix": "Infinix",
+        "tecno": "Tecno",
+        "nothing": "Nothing",
+        "google": "Google",
+        "pixel": "Google",
+        "narzo": "realme",
+    }
+
+    leading_brand = leading_mobile_brands.get(first_key)
+
+    if leading_brand:
+        return leading_brand
+
+    # General brand matching must use lexical boundaries. Substring
+    # matching previously classified "Titanium Blue" as brand "Titan".
+    # When more than one real brand token exists, prefer the earliest
+    # occurrence in the product title rather than list ordering.
+    matches: list[tuple[int, int, str]] = []
+
+    for brand in KNOWN_BRANDS:
+        normalized_brand = brand.lower()
+
+        match = re.search(
+            rf"(?<![a-z0-9]){re.escape(normalized_brand)}(?![a-z0-9])",
+            title_lower,
+        )
+
+        if not match:
+            continue
+
+        matches.append(
+            (
+                match.start(),
+                -len(normalized_brand),
+                brand,
+            )
+        )
+
+    if matches:
+        matches.sort()
+        return matches[0][2]
 
     return first_word
 
