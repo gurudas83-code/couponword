@@ -37,6 +37,8 @@ BRAND_DOMAINS: dict[str, list[str]] = {
     "vivo": ["vivo.com"],
     "apple": ["apple.com"],
     "samsung": ["samsung.com"],
+    "lava": ["lavamobiles.com"],
+    "itel": ["itel-india.com"],
     "boat": ["boat-lifestyle.com"],
     "noise": ["gonoise.com"],
     "oneplus": ["oneplus.in", "oneplus.com"],
@@ -887,6 +889,47 @@ def direct_official_product_search(
         "/product/{slug}/specs/",
     )
 
+    # OnePlus N-series model pages use /n6-lite/specs rather than
+    # /product/oneplus-n6-lite-4gb-64gb/specs. Capacity belongs to
+    # the later exact-variant evidence gate, not the URL slug.
+    if normalize_text(brand) == "oneplus":
+        model_text = re.sub(
+            r"\b\d+\s*(?:gb|tb)\b", "", normalized_title, flags=re.I
+        ).strip()
+        model_slug = re.sub(
+            r"[^a-z0-9]+", "-", model_text
+        ).strip("-")
+        model_slug = re.sub(r"^oneplus-", "", model_slug)
+        if re.fullmatch(r"n\d+[a-z]*(?:-[a-z0-9]+)*", model_slug):
+            path_patterns = (
+                f"/{model_slug}/specs",
+                f"/{model_slug}",
+            ) + path_patterns
+
+    # itel India publishes Zeno handset pages under the model name alone.
+    # Keep Lite and Pro in the slug: /product/zeno-100 is not proof of
+    # either sibling, and a search-result snippet may mention both.
+    if normalize_text(brand) == "itel":
+        model_text = re.sub(
+            r"\b\d+\s*(?:gb|tb)\b", "", normalized_title, flags=re.I
+        ).strip()
+        model_slug = re.sub(r"[^a-z0-9]+", "-", model_text).strip("-")
+        model_slug = re.sub(r"^itel-", "", model_slug)
+        if re.fullmatch(r"zeno-100-(?:lite|pro)", model_slug):
+            path_patterns = (f"/product/{model_slug}",) + path_patterns
+
+    # Lava's verified model pages live under /smartphones/<model>.
+    # Restrict direct guesses to the explicitly identified Bold N2 family;
+    # every candidate still has to pass page-title and resolver identity.
+    if normalize_text(brand) == "lava":
+        model_text = re.sub(
+            r"\b\d+\s*(?:gb|tb)\b", "", normalized_title, flags=re.I
+        ).strip()
+        model_slug = re.sub(r"[^a-z0-9]+", "-", model_text).strip("-")
+        model_slug = re.sub(r"^lava-", "", model_slug)
+        if model_slug in {"bold-n2", "bold-n2-lite"}:
+            path_patterns = (f"/smartphones/{model_slug}",) + path_patterns
+
     headers = {
         "User-Agent": "Mozilla/5.0",
         "Accept": "text/html,*/*",
@@ -941,26 +984,83 @@ def direct_official_product_search(
             if is_unwanted_page(final_url):
                 continue
 
-            title_match = re.search(
-                r"<title[^>]*>(.*?)</title>",
-                response.text,
-                flags=re.I | re.S,
-            )
+            # Some official product pages leave <title> empty in their
+            # initial HTML. Trust only explicit page-level product names:
+            # <title>, og:title, twitter:title or the primary <h1>.
+            # A model mentioned in recommended/comparison cards, or only
+            # in the URL slug, is not sufficient evidence.
+            soup = BeautifulSoup(response.text, "html.parser")
+            explicit_titles = []
+            title_text = soup.title.get_text(" ", strip=True) if soup.title else ""
+            if title_text:
+                explicit_titles.append(title_text)
+            for selector in (
+                'meta[property="og:title"]',
+                'meta[name="twitter:title"]',
+            ):
+                tag = soup.select_one(selector)
+                if tag and str(tag.get("content") or "").strip():
+                    explicit_titles.append(str(tag["content"]).strip())
+            heading = soup.find("h1")
+            if heading:
+                heading_text = heading.get_text(" ", strip=True)
+                if heading_text:
+                    explicit_titles.append(heading_text)
 
-            if not title_match:
-                continue
+            def same_product_page(value: str) -> bool:
+                candidate = urlparse(str(value or "").strip())
+                final = urlparse(final_url)
+                return bool(
+                    candidate.scheme in {"http", "https"}
+                    and candidate.netloc.lower().removeprefix("www.")
+                    == final.netloc.lower().removeprefix("www.")
+                    and candidate.path.rstrip("/") == final.path.rstrip("/")
+                    and candidate.path.rstrip("/") not in {"", "/"}
+                )
 
-            page_title = re.sub(
-                r"<[^>]+>",
-                " ",
-                title_match.group(1),
-            )
+            for script in soup.find_all("script", type="application/ld+json"):
+                try:
+                    structured = json.loads(script.string or script.get_text())
+                except (TypeError, ValueError):
+                    continue
+                nodes = list(structured) if isinstance(structured, list) else [structured]
+                nodes += [
+                    item
+                    for node in nodes
+                    if isinstance(node, dict)
+                    and isinstance(node.get("@graph"), list)
+                    for item in node["@graph"]
+                ]
+                for node in nodes:
+                    if not isinstance(node, dict):
+                        continue
+                    types = node.get("@type")
+                    if not (
+                        types == "Product"
+                        or isinstance(types, list) and "Product" in types
+                    ):
+                        continue
+                    page_url = node.get("@id") or node.get("url")
+                    product_name = node.get("name")
+                    if (
+                        isinstance(page_url, str)
+                        and same_product_page(page_url)
+                        and isinstance(product_name, str)
+                        and product_name.strip()
+                    ):
+                        explicit_titles.append(product_name.strip())
 
-            page_title = re.sub(
-                r"\s+",
-                " ",
-                page_title,
-            ).strip()
+            page_title = ""
+            for title_text in explicit_titles:
+                title_identity = compare_identity(
+                    expected_text=title,
+                    candidate_title=title_text,
+                    candidate_url="",
+                    expected_brand=brand,
+                )
+                if title_identity.model_match is True:
+                    page_title = title_text
+                    break
 
             if not page_title:
                 continue

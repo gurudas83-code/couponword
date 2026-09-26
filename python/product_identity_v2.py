@@ -27,6 +27,7 @@ KNOWN_BRANDS = [
     "Boult Audio",
     "Apple",
     "Samsung",
+    "itel",
     "Redmi",
     "Xiaomi",
     "realme",
@@ -132,6 +133,15 @@ def detect_brand(product: dict[str, Any]) -> str:
     ):
         return "Samsung"
 
+    # Retailer cards sometimes omit itel before these two manufacturer
+    # confirmed Zeno models. Do not treat "Zeno" as a brand, and do not
+    # extrapolate ownership to unrelated Zeno-named products.
+    if re.match(r"^(?:itel\s+)?zeno\s+100\s+(?:lite|pro)\b", title_lower):
+        return "itel"
+
+    if re.match(r"^bold\s+n2(?:\s+lite)?\b", title_lower):
+        return "Lava"
+
     first_word = title.split()[0] if title else ""
     first_key = re.sub(
         r"[^a-z0-9]+",
@@ -156,6 +166,7 @@ def detect_brand(product: dict[str, Any]) -> str:
         "motorola": "Motorola",
         "moto": "Motorola",
         "lava": "Lava",
+        "itel": "itel",
         "vivo": "Vivo",
         "oppo": "Oppo",
         "infinix": "Infinix",

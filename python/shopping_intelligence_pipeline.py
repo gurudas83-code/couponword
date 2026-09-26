@@ -44,9 +44,14 @@ if str(PYTHON_DIR) not in sys.path:
     sys.path.insert(0, str(PYTHON_DIR))
 
 from intent_engine import parse_query
-from market_discovery import discover_market
+from market_discovery import (
+    discover_market,
+    save_candidate_snapshot,
+    save_partial_candidate_memory,
+)
 from official_source_resolver import (
     BRAND_DOMAINS,
+    hostname_matches,
     normalize_brand,
     resolve_product,
 )
@@ -70,6 +75,58 @@ from multi_retailer_orchestrator import MultiRetailerOrchestrator
 
 
 RUNTIME_OUTPUT = ROOT / "data" / "runtime_shopping_intelligence.json"
+
+
+def verified_official_evidence_url(
+    identity: dict[str, Any],
+    resolved: dict[str, Any],
+    extraction: dict[str, Any],
+) -> str:
+    """Attribute manufacturer evidence only to an approved model and domain."""
+    brand = clean(identity.get("brand")).casefold()
+    domains = BRAND_DOMAINS.get(brand) or []
+    if not domains:
+        return ""
+
+    cached = clean(extraction.get("evidence_mode")) == "verified_persistent_cache"
+    if cached:
+        if clean((extraction.get("review") or {}).get("status")) != "candidate_ready":
+            return ""
+        url = clean(extraction.get("official_url"))
+        title = clean(extraction.get("search_name"))
+    elif clean(resolved.get("status")) == "candidate_verified":
+        if clean((extraction.get("review") or {}).get("status")) != "candidate_ready":
+            return ""
+        url = clean(resolved.get("official_url"))
+        title = clean(resolved.get("official_title"))
+    else:
+        return ""
+
+    if not url or not title or not hostname_matches(url, domains):
+        return ""
+    try:
+        # The URL must not rescue a conflicting product name (N6x vs N6 Lite).
+        title_match = compare_identity(
+            expected_text=clean(identity.get("search_name") or identity.get("model")),
+            candidate_title=title,
+            candidate_url="",
+            expected_brand=brand,
+        )
+        match = compare_identity(
+            expected_text=clean(identity.get("search_name") or identity.get("model")),
+            candidate_title=title,
+            candidate_url=url,
+            expected_brand=brand,
+        )
+    except Exception:
+        return ""
+    return url if (
+        title_match.model_match is True
+        and
+        match.decision == "verified"
+        and match.brand_match is True
+        and match.model_match is True
+    ) else ""
 
 
 def clean_public_retailer_url(value: Any) -> str:
@@ -401,6 +458,12 @@ def canonical_brand_from_title(title: str) -> str:
         " ",
         title.lower(),
     ).strip()
+
+    if re.match(r"^(?:itel\s+)?zeno\s+100\s+(?:lite|pro)\b", normalized_title):
+        return "itel"
+
+    if re.match(r"^bold\s+n2(?:\s+lite)?\b", normalized_title):
+        return "Lava"
 
     # Samsung Galaxy smartphone families are sometimes listed without
     # the manufacturer name. Treat Galaxy A/M/F/S/Z model families as
@@ -1276,6 +1339,9 @@ def runtime_profile_from_extraction(
     extraction: dict[str, Any],
     intent: dict[str, Any],
 ) -> dict[str, Any]:
+    official_evidence_url = verified_official_evidence_url(
+        identity, resolved, extraction,
+    )
     specifications = extraction.get("specifications", {})
     if not isinstance(specifications, dict):
         specifications = {}
@@ -1489,14 +1555,18 @@ def runtime_profile_from_extraction(
         "features": features,
         "best_for": [],
         "limitations": [],
-        "official_product_url": clean(resolved.get("official_url")),
+        "official_product_url": official_evidence_url,
         "market_source_url": clean(candidate.get("source_url")),
         "market_source_host": clean(candidate.get("source_host")),
         "discovery_channel": clean(candidate.get("discovery_channel")),
         "provenance": {
             "discovery_url": clean(candidate.get("source_url")),
-            "official_url": clean(resolved.get("official_url")),
-            "official_title": clean(resolved.get("official_title")),
+            "official_url": official_evidence_url,
+            "official_title": (
+                clean(resolved.get("official_title"))
+                if official_evidence_url and clean(resolved.get("status")) == "candidate_verified"
+                else clean(extraction.get("search_name")) if official_evidence_url else ""
+            ),
             "resolver_mode": clean(resolved.get("resolver_mode")),
             "resolver_status": clean(resolved.get("status")),
             "resolver_identity_score": resolved.get("identity_score"),
@@ -1951,7 +2021,7 @@ def run_pipeline(
             brand=clean(identity.get("brand")),
             model=clean(identity.get("model")),
             search_name=clean(identity.get("search_name")),
-            title=raw_title,
+            title=clean(candidate.get("source_title") or raw_title),
         )
 
         # Keep the normal variant-sensitive cache lookup fail-closed.
@@ -2240,11 +2310,16 @@ def run_pipeline(
         # Persist only genuinely verified deep extraction evidence.
         # Fast listing-only evidence is intentionally not saved as
         # long-term product knowledge.
-        if clean(extraction.get("evidence_mode")) not in {
-            "verified_retailer_fast",
-            "verified_commerce_fast",
-            "verified_persistent_cache",
-        }:
+        if (
+            clean(resolved.get("status")) != "commerce_evidence_verified"
+            and clean((extraction.get("review") or {}).get("status"))
+                == "candidate_ready"
+            and clean(extraction.get("evidence_mode")) not in {
+                "verified_retailer_fast",
+                "verified_commerce_fast",
+                "verified_persistent_cache",
+            }
+        ):
             try:
                 save_verified_evidence(
                     identity=identity,
@@ -2332,10 +2407,11 @@ def run_pipeline(
 
     qualifying.sort(
         key=lambda item: (
-            int(item["fit_assessment"].get("fit_percent") or 0),
-            int(item["fit_assessment"].get("evidence_coverage_percent") or 0),
+            -int(item["fit_assessment"].get("fit_percent") or 0),
+            -int(item["fit_assessment"].get("evidence_coverage_percent") or 0),
+            -int(bool(item.get("candidate", {}).get("partial_model_pin"))),
+            clean(item.get("candidate", {}).get("asin") or item.get("profile", {}).get("product_id")),
         ),
-        reverse=True,
     )
 
     # Preserve pre-deduplication qualification breadth for diagnostics.
@@ -2374,7 +2450,7 @@ def run_pipeline(
             r"pantone|"
             r"black|blue|green|grey|gray|silver|purple|"
             r"yellow|white|red|cyan|frost|pearl|metallic|"
-            r"brilliant|nautical|capri|radiant|arctic"
+            r"brilliant|nautical|capri|radiant|arctic|dusk"
             r")\b",
             " ",
             cleaned,
@@ -2406,6 +2482,7 @@ def run_pipeline(
             cleaned = cleaned[len(brand):].strip()
 
         cleaned = re.sub(r"\s+", " ", cleaned).strip()
+        cleaned = re.sub(r"\s*\+\s*$", "", cleaned).strip()
 
         return f"{brand}|{cleaned}".strip("|")
 
@@ -2431,19 +2508,42 @@ def run_pipeline(
     # ---------------------------------------------------------
     # NO-MATCH INTELLIGENCE
     # ---------------------------------------------------------
-    # When no product satisfies all hard constraints, preserve
-    # strict recommendation integrity but return useful nearby
-    # options separately.
+    # When fewer than three products qualify, preserve strict
+    # recommendation integrity and describe researched alternatives
+    # separately. A near match is never counted as a recommendation.
     closest_matches: list[dict[str, Any]] = []
 
-    if not qualifying and scored_records:
+    if len(qualifying) < DEFAULT_MIN_RESULTS and scored_records:
         budget = intent.get("budget_max")
 
         nearby_records = []
+        partial_results = bool(qualifying)
+        seen_nearby_models = set(seen_model_keys)
+
 
         for item in scored_records:
             assessment = item.get("fit_assessment", {}) or {}
             profile = item.get("profile", {}) or {}
+
+            if partial_results:
+                fit = int(assessment.get("fit_percent") or 0)
+                if (
+                    assessment.get("eligible") is True
+                    or fit < 40
+                    or assessment.get("hard_constraint_failures")
+                    or clean((item.get("resolved") or {}).get("status"))
+                        != "candidate_verified"
+                    or clean((item.get("resolved") or {}).get("official_url"))
+                        == ""
+                    or clean(
+                        ((item.get("extraction") or {}).get("review") or {})
+                        .get("status")
+                    ) != "candidate_ready"
+                ):
+                    continue
+                model_key = recommendation_model_key(item)
+                if not model_key or model_key in seen_nearby_models:
+                    continue
 
             price = profile.get("price")
 
@@ -2451,6 +2551,15 @@ def run_pipeline(
                 numeric_price = float(price) if price is not None else None
             except (TypeError, ValueError):
                 numeric_price = None
+
+            if partial_results and (
+                numeric_price is None
+                or (budget is not None and numeric_price > float(budget))
+            ):
+                continue
+
+            if partial_results:
+                seen_nearby_models.add(model_key)
 
             budget_gap = None
 
@@ -2489,7 +2598,11 @@ def run_pipeline(
             )
         )
 
-        for row in nearby_records[:3]:
+        nearby_limit = (
+            max(0, DEFAULT_MIN_RESULTS - len(qualifying))
+            if partial_results else 3
+        )
+        for row in nearby_records[:nearby_limit]:
             item = row["item"]
             profile = item.get("profile", {}) or {}
             assessment = item.get("fit_assessment", {}) or {}
@@ -2501,6 +2614,10 @@ def run_pipeline(
                     "price": row["price"],
                     "budget_gap": row["budget_gap"],
                     "fit_percent": row["fit_percent"],
+                    "why_not_recommended": (
+                        "Below the minimum verified Fit threshold"
+                        if partial_results else None
+                    ),
                     "evidence_coverage_percent": row["coverage"],
                     "hard_constraint_failures": assessment.get(
                         "hard_constraint_failures", []
@@ -2731,6 +2848,34 @@ def run_pipeline(
 
     total_seconds = time.perf_counter() - pipeline_started
 
+    if (
+        live_fast
+        and not exact_model_query
+        and len(recommendations) >= DEFAULT_MIN_RESULTS
+        and len(discovered) == max_candidates
+        and clean(intent.get("category")) == "smartphone"
+    ):
+        save_candidate_snapshot(
+            query=query,
+            category=intent.get("category"),
+            candidates=discovered,
+            max_candidates=max_candidates,
+        )
+    elif (
+        live_fast
+        and not exact_model_query
+        and 0 < len(recommendations) < DEFAULT_MIN_RESULTS
+        and clean(intent.get("category")) == "smartphone"
+        and not intent.get("brands")
+        and intent.get("budget_max") is not None
+        and float(intent["budget_max"]) <= 10000
+    ):
+        save_partial_candidate_memory(
+            query=query, category=intent.get("category"),
+            candidates=[item["candidate"] for item in qualifying[:max_results]],
+            max_candidates=max_candidates,
+        )
+
     return {
         "timings": {
             "intent_seconds": round(intent_seconds, 3),
@@ -2741,11 +2886,17 @@ def run_pipeline(
         "query": query,
         "intent": intent,
         "exact_model_scope": exact_model_scope,
+        "candidate_snapshot": discovery.get("candidate_snapshot"),
+        "partial_candidate_memory": discovery.get("partial_candidate_memory"),
         "stage_counts": {
             "discovered": len(discovered),
             "identity_prepared": len(identities),
-            "official_verified": sum(
+            "identity_verified": sum(
                 1 for x in resolver_records if x.get("verified") is True
+            ),
+            "official_verified": sum(
+                1 for x in scored_records
+                if clean(x.get("profile", {}).get("official_product_url"))
             ),
             "evidence_ready": sum(
                 1 for x in evidence_records if extraction_is_usable(x)[0]

@@ -571,7 +571,8 @@ def build_findings(audit: dict[str, Any]) -> list[Finding]:
                 findings,
                 "Shopping Pipeline",
                 "PASS",
-                "Runtime pipeline has produced at least 3 recommendations.",
+                "Last saved runtime query produced at least 3 recommendations.",
+                query=runtime.get("query"),
                 stage_counts=counts,
             )
         elif counts:
@@ -591,6 +592,17 @@ def build_findings(audit: dict[str, Any]) -> list[Finding]:
             )
     else:
         add(findings, "Shopping Pipeline", "WARNING", "No runtime shopping intelligence result file was found.")
+
+    # The structural audit sees one saved query, not repeated live API
+    # answers across budgets. Keep Phase E coverage explicitly unverified.
+    add(
+        findings,
+        "Phase E Coverage",
+        "WARNING",
+        "Multi-query accuracy and repeat stability were not checked by this audit.",
+        last_saved_query=runtime.get("query"),
+        next_check="Run the local /api/recommend gate across budgets and brands.",
+    )
 
     seo = audit["seo"]
     if seo["robots_exists"] and seo["sitemap_exists"]:

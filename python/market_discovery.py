@@ -696,6 +696,180 @@ def compact_product_title(title: str) -> str:
 def discovery_cache_key(query: str, category: str | None) -> str:
     return f"{normalize_key(category or '')}::{normalize_key(query)}"
 
+
+def candidate_snapshot_key(
+    query: str, category: str | None, max_candidates: int,
+) -> str:
+    return (
+        f"__candidate_snapshot__::{discovery_cache_key(query, category)}"
+        f"::{max_candidates}"
+    )
+
+
+PARTIAL_MEMORY_MAX_AGE_SECONDS = 10 * 60
+
+
+def partial_candidate_memory_key(
+    query: str, category: str | None, max_candidates: int,
+) -> str:
+    return (
+        f"__partial_candidate_memory__::{discovery_cache_key(query, category)}"
+        f"::{max_candidates}"
+    )
+
+
+def get_partial_candidate_memory(
+    *, query: str, category: str | None, max_candidates: int,
+) -> list[dict[str, Any]]:
+    """Remember verified partial picks briefly, without remembering prices."""
+    record = load_discovery_cache().get(
+        partial_candidate_memory_key(query, category, max_candidates)
+    )
+    if not isinstance(record, dict):
+        return []
+    try:
+        saved_at = datetime.fromisoformat(
+            clean(record.get("saved_at")).replace("Z", "+00:00")
+        )
+        if saved_at.tzinfo is None:
+            saved_at = saved_at.replace(tzinfo=timezone.utc)
+        age = (datetime.now(timezone.utc) - saved_at).total_seconds()
+    except (TypeError, ValueError):
+        return []
+    if age < 0 or age > PARTIAL_MEMORY_MAX_AGE_SECONDS:
+        return []
+    candidates = record.get("candidates")
+    if not isinstance(candidates, list):
+        return []
+    restored = []
+    for candidate in candidates[:2]:
+        if not isinstance(candidate, dict):
+            continue
+        item = dict(candidate)
+        asin = clean(item.get("asin")).upper()
+        if not re.fullmatch(r"[A-Z0-9]{10}", asin):
+            continue
+        if not clean(item.get("source_url")) or not clean(item.get("title")):
+            continue
+        for field in (
+            "search_price_text", "search_price_currency",
+            "search_price_evidence_method",
+        ):
+            item[field] = ""
+        item["partial_model_pin"] = True
+        restored.append(item)
+    return restored
+
+
+def save_partial_candidate_memory(
+    *, query: str, category: str | None, candidates: list[dict[str, Any]],
+    max_candidates: int,
+) -> None:
+    """Only already qualified picks may anchor a partial answer."""
+    if not 0 < len(candidates) < 3:
+        return
+    key = partial_candidate_memory_key(query, category, max_candidates)
+    cache = load_discovery_cache()
+    existing = get_partial_candidate_memory(
+        query=query, category=category, max_candidates=max_candidates,
+    )
+    winners = [dict(item) for item in candidates if isinstance(item, dict)]
+    if existing and {clean(x.get("asin")) for x in existing}.issubset(
+        {clean(x.get("asin")) for x in winners}
+    ):
+        return
+    safe = []
+    for item in winners[:2]:
+        asin = clean(item.get("asin")).upper()
+        if not re.fullmatch(r"[A-Z0-9]{10}", asin):
+            return
+        for field in (
+            "search_price_text", "search_price_currency",
+            "search_price_evidence_method", "partial_model_pin",
+        ):
+            item.pop(field, None)
+        safe.append(item)
+    cache[key] = {
+        "saved_at": datetime.now(timezone.utc).isoformat(),
+        "candidates": safe,
+    }
+    try:
+        save_discovery_cache(cache)
+    except OSError:
+        pass
+
+
+def get_candidate_snapshot(
+    *, query: str, category: str | None, max_candidates: int,
+) -> dict[str, Any] | None:
+    """Restore identities only; a previous search-card price is never fresh."""
+    record = load_discovery_cache().get(
+        candidate_snapshot_key(query, category, max_candidates)
+    )
+    if not isinstance(record, dict):
+        return None
+    try:
+        saved_at = datetime.fromisoformat(
+            clean(record.get("saved_at")).replace("Z", "+00:00")
+        )
+        if saved_at.tzinfo is None:
+            saved_at = saved_at.replace(tzinfo=timezone.utc)
+        age = (datetime.now(timezone.utc) - saved_at).total_seconds()
+    except (TypeError, ValueError):
+        return None
+    candidates = record.get("candidates")
+    if (
+        age < 0 or age > DISCOVERY_CACHE_MAX_AGE_SECONDS
+        or not isinstance(candidates, list)
+        or len(candidates) != max_candidates
+        or any(
+            not isinstance(item, dict)
+            or not clean(item.get("source_url"))
+            or not clean(item.get("title"))
+            for item in candidates
+        )
+    ):
+        return None
+    restored = [dict(item) for item in candidates]
+    for item in restored:
+        for field in (
+            "search_price_text", "search_price_currency",
+            "search_price_evidence_method",
+        ):
+            item[field] = ""
+    return {"candidates": restored, "age_seconds": round(age)}
+
+
+def save_candidate_snapshot(
+    *, query: str, category: str | None, candidates: list[dict[str, Any]],
+    max_candidates: int,
+) -> None:
+    """Pin a complete candidate pool only after the pipeline finds Best-3."""
+    if len(candidates) != max_candidates or get_candidate_snapshot(
+        query=query, category=category, max_candidates=max_candidates,
+    ):
+        return
+    safe = []
+    for candidate in candidates:
+        if not isinstance(candidate, dict):
+            return
+        item = dict(candidate)
+        for field in (
+            "search_price_text", "search_price_currency",
+            "search_price_evidence_method",
+        ):
+            item[field] = ""
+        safe.append(item)
+    cache = load_discovery_cache()
+    cache[candidate_snapshot_key(query, category, max_candidates)] = {
+        "saved_at": datetime.now(timezone.utc).isoformat(),
+        "candidates": safe,
+    }
+    try:
+        save_discovery_cache(cache)
+    except OSError:
+        pass
+
 def load_discovery_cache() -> dict[str, Any]:
     if not DISCOVERY_CACHE_PATH.exists():
         return {}
@@ -857,6 +1031,98 @@ def get_recent_discovery_cache(
             break
 
     return results
+
+def recent_cross_query_commerce_results(
+    *, category: str | None, budget: Any, max_results: int,
+) -> list[dict[str, Any]]:
+    """Reuse other query identities only with a recent exact-ASIN price.
+
+    This is discovery evidence. The usual identity, budget and Fit gates
+    still decide whether a candidate is recommended.
+    """
+    if category != "smartphone" or budget is None:
+        return []
+    try:
+        limit = float(budget)
+    except (TypeError, ValueError):
+        return []
+
+    from retail_price_evidence import (
+        CACHE_MAX_AGE_SECONDS, load_cache, normalize_url,
+    )
+
+    now = datetime.now(timezone.utc)
+    prices = load_cache()
+    found: dict[str, dict[str, Any]] = {}
+    for key, entry in load_discovery_cache().items():
+        if not key.startswith("smartphone::") or not isinstance(entry, dict):
+            continue
+        try:
+            stamp = datetime.fromisoformat(
+                clean(entry.get("saved_at")).replace("Z", "+00:00")
+            )
+            if stamp.tzinfo is None:
+                stamp = stamp.replace(tzinfo=timezone.utc)
+            age = (now - stamp).total_seconds()
+        except (TypeError, ValueError):
+            continue
+        # An ASIN/title may be reused longer than a price. The price must
+        # independently have fresh exact-ASIN evidence below, and the
+        # downstream identity/variant gates still validate this candidate.
+        if not 0 <= age <= 7 * 24 * 60 * 60:
+            continue
+
+        for row in entry.get("results", []):
+            if not isinstance(row, dict) or clean(row.get("provider")) != "amazon_search_cards":
+                continue
+            asin = clean(row.get("asin")).upper()
+            url = clean(row.get("url"))
+            if not re.fullmatch(r"[A-Z0-9]{10}", asin) or asin in found:
+                continue
+            parsed = urlparse(url)
+            if (parsed.hostname or "").lower() not in {"amazon.in", "www.amazon.in"}:
+                continue
+            if parsed.path.rstrip("/").upper() != f"/DP/{asin}":
+                continue
+            price_record = prices.get(normalize_url(url))
+            if not isinstance(price_record, dict) or price_record.get("verified") is not True:
+                continue
+            if clean(price_record.get("evidence_method")) not in {
+                "amazon_exact_asin_search_card",
+                "amazon_exact_asin_search_card_offer_text",
+            }:
+                continue
+            try:
+                checked = datetime.fromisoformat(
+                    clean(price_record.get("verified_at")).replace("Z", "+00:00")
+                )
+                if checked.tzinfo is None:
+                    checked = checked.replace(tzinfo=timezone.utc)
+                amount = float(price_record["price"])
+                price_age = (now - checked).total_seconds()
+            except (TypeError, ValueError, KeyError):
+                continue
+            if not 0 <= price_age <= CACHE_MAX_AGE_SECONDS or not 50 <= amount <= limit:
+                continue
+            title = clean(row.get("title"))
+            if not looks_like_product_result(title, url, category):
+                continue
+            found[asin] = {
+                **row, "search_price_text": f"₹{amount:g}",
+                "search_price_currency": "INR",
+                "search_price_evidence_method": price_record["evidence_method"],
+                "provider": "recent_cross_query_exact_asin",
+                "search_score": 0.5,
+                "cross_query_price_verified_at": checked.isoformat(),
+            }
+    return sorted(
+        found.values(),
+        key=lambda item: (
+            clean(item["cross_query_price_verified_at"]),
+            clean(item["asin"]),
+        ),
+        reverse=True,
+    )[:max_results]
 
 def local_known_product_fallback(
     *,
@@ -1098,7 +1364,11 @@ def fallback_search_channel(
     except Exception:
         raw_results = []
 
-    accepted: list[dict[str, Any]] = list(local_results)
+    # Keep recent cached identities alongside local knowledge.
+    # get_recent_discovery_cache() has already cleared stale price fields.
+    accepted: list[dict[str, Any]] = (
+        accepted if cached_results else list(local_results)
+    )
 
     for result in raw_results:
         if not isinstance(result, dict):
@@ -1191,6 +1461,21 @@ def fallback_search_channel(
             if len(accepted) >= max_results:
                 break
 
+    # Other recent searches can add in-budget exact-ASIN candidates even
+    # when the generic live search returns cards from only a few brands.
+    # Keep this separate from the no-live-cards branch above.
+    intent = parse_query(query)
+    if not intent.get("brands") and intent.get("budget_max") is not None:
+        seen_urls = {clean(item.get("url")) for item in accepted}
+        for item in recent_cross_query_commerce_results(
+            category=category, budget=intent["budget_max"],
+            max_results=max_results,
+        ):
+            url = clean(item.get("url"))
+            if url and url not in seen_urls:
+                accepted.append(item)
+                seen_urls.add(url)
+
     return accepted
 
 def search_channel(
@@ -1244,6 +1529,24 @@ def known_brand_from_title(title: str) -> str | None:
 
     if not normalized:
         return None
+
+    if re.match(r"^(?:itel\s+)?zeno\s+100\s+(?:lite|pro)\b", normalized):
+        return "itel"
+
+    # Lava's Bold N2 family is listed without the maker on some
+    # marketplace cards. Keep this tied to the exact model family.
+    if re.match(r"^bold\s+n2(?:\s+lite)?\b", normalized):
+        return "lava"
+
+    # Samsung retailer cards can start with the handset family instead of
+    # the maker. This is discovery priority only; the downstream identity
+    # check still verifies the actual model and source independently.
+    if re.match(
+        r"^galaxy\s+(?:[amfs]\s*\d{1,3}[a-z]*|"
+        r"z\s*(?:fold|flip)\s*\d*[a-z]*)\b",
+        normalized,
+    ):
+        return "samsung"
 
     # Retail/platform words must never become product brands.
     non_product_brands = {
@@ -1710,6 +2013,7 @@ def category_accessory_gate(
         r"\bcharging\s+pad\b",
         r"\bphone\s+holder\b",
         r"\bmobile\s+holder\b",
+        r"\btripod\s+adap(?:ter|tor)\b",
 
         # Additional accessory noise commonly returned by
         # brand-scoped smartphone marketplace searches.
@@ -1867,6 +2171,36 @@ def discovery_variant_gate(
         "notes": reasons,
     }
 
+def trusted_price_budget_priority(item: dict[str, Any], budget_max: Any) -> int:
+    """Use a current exact-ASIN card price only to order discovery candidates."""
+    if budget_max is None:
+        return 1
+
+    price_text = clean(item.get("search_price_text"))
+    method = clean(item.get("search_price_evidence_method"))
+    if not price_text or method not in {
+        "amazon_exact_asin_search_card",
+        "amazon_exact_asin_search_card_offer_text",
+    }:
+        return 1
+
+    match = re.fullmatch(
+        r"\s*(?:(?:₹|rs\.?|inr)\s*)?([\d,]+(?:\.\d+)?)\s*",
+        price_text,
+        re.I,
+    )
+    if not match:
+        return 1
+
+    try:
+        price = float(match.group(1).replace(",", ""))
+        budget = float(budget_max)
+    except (TypeError, ValueError):
+        return 1
+
+    return 2 if price <= budget else 0
+
+
 def discover_market(
     user_query: str,
     max_candidates: int = 20,
@@ -2000,7 +2334,27 @@ def discover_market(
                 if query and query not in live_queries:
                     live_queries.append(query)
 
-        # Generic categories / queries keep the original fast behavior.
+        # A low-budget generic phone search needs two distinct retailer
+        # phrasings. "smartphone under 10000 India" and the same text with
+        # "buy" often return the same noisy cards, exhausting both lanes.
+        # Keep the shopper's original wording as the second lane only when
+        # there is no brand, named model or explicit variant to protect.
+        if (
+            category == "smartphone"
+            and not live_queries
+            and not intent.get("brands")
+            and not intent.get("must_have")
+            and intent.get("budget_max") is not None
+            and float(intent["budget_max"]) <= 10000
+        ):
+            original_query = clean(user_query)
+            if (
+                original_query in queries
+                and normalize_key(original_query) != normalize_key(queries[0])
+            ):
+                live_queries.extend((queries[0], original_query))
+
+        # Other generic categories / queries keep the original fast behavior.
         for query in queries:
             if len(live_queries) >= 2:
                 break
@@ -2009,6 +2363,61 @@ def discover_market(
                 live_queries.append(query)
 
         queries = live_queries[:2]
+
+    if live_fast and category == "smartphone":
+        snapshot = get_candidate_snapshot(
+            query=user_query, category=category,
+            max_candidates=max_candidates,
+        )
+        if snapshot is not None:
+            candidates = snapshot["candidates"]
+            by_asin = {
+                clean(item.get("asin")).upper(): item
+                for item in candidates if clean(item.get("asin"))
+            }
+            refreshed_asins: set[str] = set()
+            for search_query in queries:
+                try:
+                    cards = search_asins(search_query, max_cards=20)
+                except Exception:
+                    cards = []
+                for card in cards:
+                    if not isinstance(card, dict):
+                        continue
+                    asin = clean(card.get("asin")).upper()
+                    item = by_asin.get(asin)
+                    if (
+                        item is None
+                        or not clean(card.get("search_price_text"))
+                        or not clean(card.get("search_price_evidence_method"))
+                    ):
+                        continue
+                    for field in (
+                        "search_price_text", "search_price_currency",
+                        "search_price_evidence_method",
+                    ):
+                        item[field] = clean(card.get(field))
+                    refreshed_asins.add(asin)
+            return {
+                "query": user_query,
+                "intent": intent,
+                "discovery_queries": queries,
+                "candidate_count": len(candidates),
+                "candidates": candidates,
+                "exact_model_scope": {
+                    "active": False, "model_tokens": [],
+                    "numeric_brand_pairs": [],
+                },
+                "candidate_snapshot": {
+                    "status": "reused_verified_pool",
+                    "age_seconds": snapshot["age_seconds"],
+                    "fresh_price_asins": len(refreshed_asins),
+                },
+                "note": (
+                    "Candidate identities came from a prior successful run; "
+                    "only current exact-ASIN search cards can refresh prices."
+                ),
+            }
 
     api_key = os.environ.get("TAVILY_API_KEY")
 
@@ -2330,6 +2739,9 @@ def discover_market(
                     )
                 )
 
+            if brand == "lava":
+                return bool(re.match(r"^bold\s+n2(?:\s+lite)?\b", normalized_title))
+
             return False
 
         if required_brands and not any(
@@ -2423,37 +2835,7 @@ def discover_market(
 
         Unknown/unparseable price remains neutral and is not rejected.
         """
-        budget_max = intent.get("budget_max")
-
-        if budget_max is None:
-            return 1
-
-        price_text = clean(item.get("search_price_text"))
-        method = clean(item.get("search_price_evidence_method"))
-
-        trusted_methods = {
-            "amazon_exact_asin_search_card",
-            "amazon_exact_asin_search_card_offer_text",
-        }
-
-        if not price_text or method not in trusted_methods:
-            return 1
-
-        match = re.fullmatch(
-            r"\s*Ã¢â€šÂ¹?\s*([\d,]+(?:\.\d+)?)\s*",
-            price_text,
-        )
-
-        if not match:
-            return 1
-
-        try:
-            price = float(match.group(1).replace(",", ""))
-            budget = float(budget_max)
-        except (TypeError, ValueError):
-            return 1
-
-        return 2 if price <= budget else 0
+        return trusted_price_budget_priority(item, intent.get("budget_max"))
 
     def discovery_evidence_priority(
         item: dict[str, Any],
@@ -2597,12 +2979,54 @@ def discover_market(
         if len(candidates) >= max_candidates:
             break
 
+    partial_memory_used = 0
+    if (
+        live_fast and category == "smartphone"
+        and not exact_query_model_tokens
+        and not intent.get("brands")
+        and intent.get("budget_max") is not None
+        and float(intent["budget_max"]) <= 10000
+    ):
+        for stored in get_partial_candidate_memory(
+            query=user_query, category=category,
+            max_candidates=max_candidates,
+        ):
+            asin = clean(stored.get("asin")).upper()
+            present = next(
+                (item for item in candidates
+                 if clean(item.get("asin")).upper() == asin),
+                None,
+            )
+            if present is not None:
+                present["partial_model_pin"] = True
+                partial_memory_used += 1
+                continue
+            if category_accessory_gate(
+                clean(stored.get("source_title") or stored.get("title")),
+                category,
+            )["status"] != "pass":
+                continue
+            remembered = dict(stored)
+            remembered["candidate_id"] = f"market-{len(candidates):02d}"
+            remembered["status"] = "discovered_unverified"
+            # Existing candidate slots remain available to new models.
+            # The old listing must independently pass identity and current
+            # exact-ASIN price checks again in the downstream pipeline.
+            if len(candidates) >= max_candidates:
+                candidates.pop()
+            remembered["candidate_id"] = f"market-{len(candidates)+1:02d}"
+            candidates.append(remembered)
+            partial_memory_used += 1
+
     return {
         "query": user_query,
         "intent": intent,
         "discovery_queries": queries,
         "candidate_count": len(candidates),
         "candidates": candidates,
+        "partial_candidate_memory": {
+            "reused_listings": partial_memory_used,
+        } if partial_memory_used else None,
         "exact_model_scope": {
             "active": bool(exact_query_model_tokens),
             "model_tokens": sorted(exact_query_model_tokens),

@@ -212,6 +212,7 @@ def variant_signature_from_specifications(
         "storage_gb",
         "storage_capacity_gb",
         "storage",
+        "internal_memory",
         "rom_gb",
         "rom",
     ):
@@ -222,6 +223,35 @@ def variant_signature_from_specifications(
 
         if value:
             signature["storage_gb"] = value
+            break
+
+    # Some manufacturer pages have a single "RAM / ROM" specifications
+    # row. Parse it only when both physical capacities are explicit and no
+    # alternate configuration is listed. Virtual RAM can share the same
+    # value (e.g. 4GB+4GB* RAM); differing values fail closed.
+    if set(signature) != {"ram_gb", "storage_gb"}:
+        for key in (
+            "ram_storage", "ram_rom", "ram_and_storage", "ram", "memory",
+            "storage", "rom",
+        ):
+            if key not in specifications:
+                continue
+            value = specifications[key]
+            text = clean(value.get("value")) if isinstance(value, dict) else clean(value)
+            capacities = [
+                int(number)
+                for number in re.findall(r"\b(\d{1,4})\s*gb\b", text, re.I)
+            ]
+            ram_values = {number for number in capacities if 1 <= number <= 32}
+            storage_values = {number for number in capacities if number >= 32}
+            if len(ram_values) != 1 or len(storage_values) != 1:
+                return signature
+            parsed = variant_signature_from_text(text)
+            if set(parsed) != {"ram_gb", "storage_gb"}:
+                return signature
+            if any(signature.get(name, value) != value for name, value in parsed.items()):
+                return signature
+            signature.update(parsed)
             break
 
     return signature

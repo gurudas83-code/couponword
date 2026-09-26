@@ -161,8 +161,8 @@ def recommend():
             # enough discovery depth for Best-3 plus additional
             # comparison choices without immediately paying the
             # latency cost of the full 15-candidate pool.
-            max_candidates=8,
-            max_results=6,
+            max_candidates=15,
+            max_results=3,
             live_fast=True,
         )
     except Exception as error:

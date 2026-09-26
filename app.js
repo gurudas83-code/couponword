@@ -763,6 +763,34 @@ async function loadShoppingRecommendation(query) {
       `;
     }).join("");
 
+    if (
+      !exactModelQuery &&
+      String(data.intent && data.intent.category || "").toLowerCase() === "smartphone" &&
+      recommendations.length < 3
+    ) {
+      const nearby = Array.isArray(data.closest_matches)
+        ? data.closest_matches.filter(p =>
+            p && p.why_not_recommended ===
+              "Below the minimum verified Fit threshold"
+          ).slice(0, 3 - recommendations.length)
+        : [];
+
+      card.insertAdjacentHTML("beforeend", `
+        <section class="ai-detail-block ai-unknowns" aria-label="Other researched phones">
+          <h3>Only ${recommendations.length} phone${recommendations.length === 1 ? "" : "s"} met the recommendation standard</h3>
+          <p>${nearby.length
+            ? "Other phones with official product evidence are shown separately because their Fit is below 50%. They are not recommendations."
+            : "No additional phones passed the identity, evidence and Fit checks."}</p>
+          ${nearby.length ? `<ul>${nearby.map(p => `
+            <li>${escapeHTML(p.title || "Phone")} —
+              ${p.price == null ? "Price unverified" : `₹${escapeHTML(p.price)}`},
+              Fit ${escapeHTML(p.fit_percent || 0)}%
+            </li>
+          `).join("")}</ul>` : ""}
+        </section>
+      `);
+    }
+
     card
       .querySelectorAll('a.shop-button[data-ai-retailer-click="1"]')
       .forEach(link => {

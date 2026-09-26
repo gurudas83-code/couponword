@@ -78,6 +78,7 @@ BRAND_ALIASES = {
     "logitech": {"logitech"},
     "yamaha": {"yamaha"},
     "samsung": {"samsung"},
+    "itel": {"itel"},
     "boat": {"boat", "boatlifestyle"},
     "oneplus": {"oneplus"},
     "amazon": {"amazon", "echo"},
@@ -122,6 +123,8 @@ DOMAIN_BRANDS = {
     "xiaomi.com": "xiaomi",
     "yamaha.com": "yamaha",
     "samsung.com": "samsung",
+    "lavamobiles.com": "lava",
+    "itel-india.com": "itel",
     "jbl.com": "jbl",
     "boat-lifestyle.com": "boat",
     "oneplus.com": "oneplus",
@@ -889,6 +892,29 @@ def compare_identity(
     # ---------------------------------------------------------
     candidate_title_norm = normalize_text(candidate_title)
 
+    # A manufacturer URL identifies the host, but cannot override a
+    # different manufacturer explicitly named at the start of the page title.
+    # In particular, a Lava URL must not verify a "Redmi Bold N2" page.
+    leading_mobile_brand = re.match(
+        r"^(apple|samsung|oneplus|xiaomi|redmi|realme|vivo|oppo|"
+        r"infinix|lava|poco|tecno|iqoo|motorola|nothing|google|itel)\b",
+        candidate_title_norm,
+    )
+    explicit_brand_conflict = bool(
+        leading_mobile_brand
+        and expected_brand_norm
+        and leading_mobile_brand.group(1) != expected_brand_norm
+        and leading_mobile_brand.group(1) not in accepted_candidate_brands
+    )
+
+    lava_sibling_conflict = bool(
+        expected_brand_norm == "lava"
+        and re.search(r"\bbold\s+n2\b", normalize_text(expected_text))
+        and re.search(r"\bbold\s+n2\b", candidate_title_norm)
+        and bool(re.search(r"\bbold\s+n2\s+lite\b", normalize_text(expected_text)))
+        != bool(re.search(r"\bbold\s+n2\s+lite\b", candidate_title_norm))
+    )
+
     literal_brand_match = False
 
     if expected_brand_norm and candidate_title_norm:
@@ -932,6 +958,28 @@ def compare_identity(
             )
         )
 
+    # itel's two confirmed Zeno 100 models also appear in retailer cards
+    # without the maker name. Accept the protected family as brand evidence
+    # only for an exact product title; model/variant and accessory gates
+    # below still have to pass independently.
+    itel_zeno_family_match = bool(
+        expected_brand_norm == "itel"
+        and re.match(
+            r"^zeno\s+100\s+(?:lite|pro)\b",
+            candidate_title_norm,
+        )
+        and is_retailer_url(candidate_url)
+    )
+
+    # Lava's Bold N2 / N2 Lite family is also sold with the maker omitted
+    # from some retailer titles. Require a leading exact family model and
+    # the retailer domain; the normal model/variant checks still apply.
+    lava_bold_n2_family_match = bool(
+        expected_brand_norm == "lava"
+        and re.match(r"^bold\s+n2(?:\s+lite)?\b", candidate_title_norm)
+        and is_retailer_url(candidate_url)
+    )
+
     brand_match = bool(
         expected_brand_norm
         and (
@@ -939,6 +987,8 @@ def compare_identity(
             or expected_brand_norm == candidate_brand_norm
             or literal_brand_match
             or samsung_galaxy_phone_family_match
+            or itel_zeno_family_match
+            or lava_bold_n2_family_match
         )
     )
 
@@ -1019,6 +1069,8 @@ def compare_identity(
 
     critical_failure = (
         imposter
+        or explicit_brand_conflict
+        or lava_sibling_conflict
         or not brand_match
         or not model_match
         or network_match is False
@@ -1048,6 +1100,21 @@ def compare_identity(
         candidate=asdict(candidate),
     )
 
+    # "Bold N2" and "Bold N2 Lite" have different physical product
+    # identities. A missing Lite suffix must never match its sibling.
+    if expected_brand_norm == "lava":
+        expected_n2 = re.search(r"\bbold\s+n2\b", normalize_text(expected_text))
+        candidate_n2 = re.search(r"\bbold\s+n2\b", candidate_title_norm)
+        if expected_n2 and candidate_n2:
+            expected_lite = bool(re.search(
+                r"\bbold\s+n2\s+lite\b", normalize_text(expected_text)
+            ))
+            candidate_lite = bool(re.search(
+                r"\bbold\s+n2\s+lite\b", candidate_title_norm
+            ))
+            if expected_lite != candidate_lite:
+                model_match = False
+                reasons.append("Bold N2 / N2 Lite sibling mismatch")
 
 def validate_candidate(
     expected_identity: dict[str, Any],

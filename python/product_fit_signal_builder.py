@@ -516,6 +516,8 @@ def category_battery_signal(
 
 
 def performance_signal(text: str) -> dict[str, Any]:
+    text = str(text or "").lower()
+
     high = (
         "snapdragon 8 elite",
         "snapdragon 8s gen 4",
@@ -542,7 +544,19 @@ def performance_signal(text: str) -> dict[str, Any]:
         return signal(1.0, "High-performance verified chipset/GPU class detected")
     if any(x in text for x in medium):
         return signal(0.80, "Strong mainstream verified performance hardware detected")
-    if any(x in text for x in ("snapdragon", "dimensity", "ryzen", "core i", "tensor", "exynos")):
+    if any(
+        x in text
+        for x in (
+            "snapdragon",
+            "dimensity",
+            "helio",
+            "unisoc",
+            "ryzen",
+            "core i",
+            "tensor",
+            "exynos",
+        )
+    ):
         return signal(0.65, "Recognized verified performance hardware detected")
 
     return signal(None, "No reliable performance evidence found")
@@ -882,6 +896,16 @@ def connectivity_signal(text: str) -> dict[str, Any]:
     if has_5g_token and not has_negative_5g:
         score += 0.80
         reasons.append("5G")
+
+    # Explicit 4G/LTE-class evidence is still useful connectivity evidence,
+    # but it must remain materially weaker than verified 5G.
+    has_4g_token = bool(re.search(r"\b4g\b", normalized))
+
+    if has_4g_token and not (
+        has_5g_token and not has_negative_5g
+    ):
+        score += 0.35
+        reasons.append("4G")
 
     if "wi-fi 7" in normalized or "wifi 7" in normalized:
         score += 0.30

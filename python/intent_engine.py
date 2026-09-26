@@ -311,6 +311,7 @@ def detect_brands(text: str) -> list[str]:
         ("Realme", ("realme",)), ("Vivo", ("vivo",)),
         ("Oppo", ("oppo",)), ("Infinix", ("infinix",)),
         ("Lava", ("lava",)), ("Poco", ("poco",)),
+        ("Itel", ("itel",)),
         ("Tecno", ("tecno",)), ("Iqoo", ("iqoo",)),
         ("Motorola", ("motorola", "moto")),
         ("Nothing", ("nothing",)), ("Google", ("google", "pixel")),

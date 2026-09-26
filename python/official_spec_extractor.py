@@ -1837,6 +1837,56 @@ def extract_embedded_state_specs(
             source_name,
         )
 
+
+    # Official specification layouts with visible rows or grouped script data.
+    # Parse the original HTML here: page-chrome cleanup may remove these nodes.
+    for row in soup.select(".specs_in__row"):
+        label_node = row.select_one(".specs_in__row_label")
+        value_node = row.select_one(".specs_in__row_value")
+        if label_node is None or value_node is None:
+            continue
+        label = clean_text(label_node.get_text(" ", strip=True))
+        value = clean_text(value_node.get_text(" ", strip=True))
+        if label and value and len(label) <= 80 and len(value) <= 400:
+            add_specification(
+                specifications, label, value, "official_visible_spec_row", 88
+            )
+
+    decoder = json.JSONDecoder()
+    for script in soup.find_all("script"):
+        raw = script.string or script.get_text("", strip=False)
+        if not raw or '"GroupName"' not in raw or '"nameDetailList"' not in raw:
+            continue
+        groups = list(re.finditer(r'"GroupName"\s*:\s*"([^"]+)"', raw))
+        for index, group_match in enumerate(groups[:30]):
+            group = clean_text(group_match.group(1))
+            end = groups[index + 1].start() if index + 1 < len(groups) else len(raw)
+            section = raw[group_match.end():end]
+            for content_match in list(re.finditer(r'"content"\s*:\s*', section))[:50]:
+                remainder = section[content_match.end():].lstrip()
+                try:
+                    content, _ = decoder.raw_decode(remainder)
+                except (json.JSONDecodeError, TypeError, ValueError):
+                    continue
+                if not isinstance(content, str) or len(content) > 6000:
+                    continue
+                prefix = section[:content_match.start()]
+                names = re.findall(r'"name"\s*:\s*"([^"]+)"', prefix)
+                item_name = clean_text(names[-1]) if names else ""
+                for line in content.splitlines():
+                    line = clean_text(line)
+                    if not line or len(line) > 400 or ":" not in line:
+                        continue
+                    label, value = (part.strip() for part in line.split(":", 1))
+                    if not label or not value or len(label) > 80:
+                        continue
+                    if group.lower() == "camera" and item_name:
+                        label = f"{item_name} {label}"
+                    add_specification(
+                        specifications, label, value,
+                        "official_grouped_spec_state", 86
+                    )
+
     return len(specifications) - before
 
 
@@ -4920,6 +4970,80 @@ def extract_one(
         page_title,
         canonical_url,
     )
+
+    # A manufacturer spec page may identify the model in its title while
+    # placing RAM and storage only in the specifications. Accept its model
+    # score only when the official resolver verified the page and both
+    # requested capacities exactly match the extracted capacities.
+    if (
+        research_result.get("verified") is True
+        and clean_text(research_result.get("resolver_mode"))
+            != "verified_retailer_fallback"
+        and clean_text(identity.get("brand"))
+        and clean_text(identity.get("model"))
+    ):
+        from product_evidence_store import (
+            variant_signature_from_text,
+            variant_signature_from_specifications,
+        )
+
+        requested_capacity = variant_signature_from_text(expected_name)
+        # Resolver core_title and identity search_name intentionally discard
+        # colour/marketing brackets; those brackets can also hold the only
+        # physical RAM/storage request. Recover it from the original retailer
+        # title, but never merge contradictory capacities. The page must
+        # independently extract an exact two-field match below.
+        listing_capacity = variant_signature_from_text(
+            identity.get("original_title")
+        )
+        if (
+            listing_capacity
+            and all(
+                listing_capacity.get(key) == value
+                for key, value in requested_capacity.items()
+            )
+        ):
+            requested_capacity = listing_capacity
+        page_capacity = variant_signature_from_specifications(specifications)
+        model_name = clean_text(
+            f"{identity.get('brand')} {identity.get('model')}"
+        )
+        model_score = page_identity_score(
+            model_name, page_title, canonical_url
+        )
+        # Lava labels these two official pages "Bold N2" and "Bold N2
+        # Lite" without repeating the maker in the HTML title. The
+        # missing brand token lowers the generic score even when the
+        # verified official URL, model title and physical capacities agree.
+        # Keep this narrow: a sibling, a 5G suffix, an unrelated host or
+        # a retailer fallback must never inherit the exception.
+        lava_model = clean_text(identity.get("model")).casefold()
+        lava_slug = {
+            "bold n2": "bold-n2",
+            "bold n2 lite": "bold-n2-lite",
+        }.get(lava_model)
+        if (
+            clean_text(identity.get("brand")).casefold() == "lava"
+            and lava_slug
+            and clean_text(page_title).casefold() == lava_model
+            and hostname(official_url) in {
+                "lavamobiles.com", "www.lavamobiles.com"
+            }
+            and urlparse(official_url).path.rstrip("/").casefold()
+                == f"/smartphones/{lava_slug}"
+            and clean_text(research_result.get("identity_decision")).lower()
+                == "verified"
+        ):
+            model_score = 1.0
+        if (
+            set(requested_capacity) == {"ram_gb", "storage_gb"}
+            and requested_capacity == page_capacity
+            and model_score >= 0.80
+        ):
+            match_score = max(match_score, model_score)
+            output["identity_match_mode"] = (
+                "verified_official_model_exact_capacity"
+            )
 
     output["fetch_status"] = "success"
     output["page_identity_score"] = match_score
