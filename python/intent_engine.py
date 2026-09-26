@@ -32,6 +32,9 @@ class ShoppingIntent:
 def normalize(text: str) -> str:
     text = str(text or "").lower()
     text = text.replace("â‚¹", " ").replace("Ã¢â€šÂ¹", " ").replace(",", "")
+    # Treat a common camera typo as the same shopper requirement throughout
+    # intent detection and weighting, without changing unrelated words.
+    text = re.sub(r"\bcamara\b", "camera", text)
     text = re.sub(r"[^\w\s.+/\-]", " ", text)
     return re.sub(r"\s+", " ", text).strip()
 
@@ -545,7 +548,7 @@ def detect_requirements(
         add(hard_constraints, "budget_max")
 
     for phrases, value in [
-        (("good battery", "long battery", "battery life"), "good_battery"),
+        (("good battery", "best battery", "long battery", "battery life"), "good_battery"),
         (
             (
                 "good call quality",
