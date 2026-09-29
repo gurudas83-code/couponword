@@ -313,10 +313,13 @@ def smartphone_battery_signal(text: str) -> dict[str, Any]:
         if values:
             measurements[kind] = sorted(set(value for value in values if value > 0))
 
-    capacities = [float(value) for value in re.findall(r"\b(\d{3,5})\s*mah\b", text)]
-    capacities.extend(float(value) for value in re.findall(
+    capacity_number = r"(\d{1,2},\d{3}|\d{3,5})"
+    capacities = [float(value.replace(",", "")) for value in re.findall(
+        rf"(?<![\d,]){capacity_number}\s*mah\b", text,
+    )]
+    capacities.extend(float(value.replace(",", "")) for value in re.findall(
         r"\bbattery\s+capacity\s*\(?\s*mah\s*(?:,?\s*(?:typical|rated))?"
-        r"\s*\)?\s*[:=-]?\s*(\d{3,5})\b", text,
+        rf"\s*\)?\s*[:=-]?\s*{capacity_number}\b", text,
     ))
     if capacities:
         measurements["capacity_mah"] = sorted(set(capacities))
@@ -1184,8 +1187,23 @@ def camera_signal(text: str) -> dict[str, Any]:
     score = 0.0
     reasons: list[str] = []
 
+    # A specification label (or "noise") is not positive OIS evidence.
+    # Remove explicit negatives before looking for affirmative claims. This
+    # keeps front-camera "OIS No" from cancelling verified rear-camera OIS.
+    ois_term = r"(?:ois|optical image stabili[sz]ation)"
+    ois_text = re.sub(
+        rf"\b(?:no|without|does not support|doesn't support)\s+{ois_term}\b"
+        rf"|\b{ois_term}\s*[:=-]?\s*(?:no|not supported|unsupported|absent)\b",
+        " ", text,
+    )
+    has_ois = bool(re.search(
+        rf"\b{ois_term}\s*[:=-]?\s*(?:yes|supported|enabled|camera)\b"
+        rf"|\b(?:with|supports?|features?)\s+{ois_term}\b"
+        rf"|\b\d{{1,3}}\s*mp\s+{ois_term}\b",
+        ois_text,
+    ))
     # Strong camera-system evidence.
-    if "ois" in text or "optical image stabilization" in text:
+    if has_ois:
         score += 0.45
         reasons.append("verified optical image stabilization")
 
@@ -1243,8 +1261,7 @@ def camera_signal(text: str) -> dict[str, Any]:
     # Hardware-only evidence must remain moderate unless meaningful
     # imaging capabilities such as OIS/telephoto are also verified.
     strong_evidence = (
-        "ois" in text
-        or "optical image stabilization" in text
+        has_ois
         or bool(
             re.search(
                 r"\btelephoto\b|\boptical\s+zoom\b|\bperiscope\b",
