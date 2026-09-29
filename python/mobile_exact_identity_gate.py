@@ -97,7 +97,10 @@ def classify_mobile_identity_reuse(
     expected_network = _token_set(expected.network_tokens)
     candidate_network = _token_set(candidate.network_tokens)
 
-    if expected_ram and candidate_ram and not expected_ram.issubset(candidate_ram):
+    # A listing that states both the requested capacity and a conflicting
+    # second physical capacity is ambiguous, not an exact variant match.
+    # Reusing its canonical identity would merge distinct RAM/storage SKUs.
+    if expected_ram and candidate_ram and expected_ram != candidate_ram:
         return _result(
             HARD_REJECT,
             "explicit RAM conflict",
@@ -109,7 +112,7 @@ def classify_mobile_identity_reuse(
     if (
         expected_storage
         and candidate_storage
-        and not expected_storage.issubset(candidate_storage)
+        and expected_storage != candidate_storage
     ):
         return _result(
             HARD_REJECT,

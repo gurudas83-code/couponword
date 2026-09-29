@@ -37,7 +37,7 @@ def signal(match: float | None, reason: str, status: str = "verified") -> dict[s
     }
 
 
-def text_blob(profile: dict[str, Any]) -> str:
+def text_blob(profile: dict[str, Any], separator: str = " ") -> str:
     def evidence_text(value: Any) -> str:
         if value in (None, ""):
             return ""
@@ -95,7 +95,7 @@ def text_blob(profile: dict[str, Any]) -> str:
         if not isinstance(values, list):
             return evidence_text(values)
 
-        return " ".join(
+        return separator.join(
             evidence_text(item)
             for item in values
             if evidence_text(item)
@@ -114,7 +114,7 @@ def text_blob(profile: dict[str, Any]) -> str:
                     f"{key} {rendered}"
                 )
 
-        attributes_text = " ".join(attribute_parts)
+        attributes_text = separator.join(attribute_parts)
     else:
         attributes_text = evidence_text(attributes)
 
@@ -128,7 +128,7 @@ def text_blob(profile: dict[str, Any]) -> str:
         list_text(profile.get("limitations", [])),
     ]
 
-    return " ".join(
+    return separator.join(
         part
         for part in parts
         if part
@@ -270,6 +270,88 @@ def battery_signal(text: str) -> dict[str, Any]:
     )
 
     return signal(best_score, best_reason)
+
+def smartphone_battery_signal(text: str) -> dict[str, Any]:
+    """Conservative fit heuristic, not a measured cross-device benchmark.
+
+    Only explicitly labelled video/YouTube duration supports active use.
+    Standby, audio, talk and unlabelled hours never supply active endurance.
+    Capacity is a capped fallback proxy and cannot override video evidence.
+    The score curves are policy, not inferred specifications or test results.
+    """
+    text = str(text or "").lower().replace("_", " ")
+    number = r"(\d{1,4}(?:\.\d+)?)"
+    unit = r"(hours?|hrs?|h|minutes?|mins?|min)\b"
+    labels = {
+        "video_playback_hours": r"video\s+(?:playback|playing)",
+        "youtube_playback_hours": r"youtube\s+(?:video\s+)?playback",
+        "standby_hours": r"stand[\s-]*by",
+        "audio_playback_hours": r"(?:audio|music)\s+playback",
+        "talk_hours": r"talk",
+    }
+    measurements: dict[str, list[float]] = {}
+    for kind, label in labels.items():
+        values = []
+        # Bounded grammar prevents a label from capturing a number belonging
+        # to the next field in a flattened official specification corpus.
+        prefix = rf"\b{label}(?:\s+time)?\s*\**\s*[:=-]?\s*"
+        for match in re.finditer(
+            prefix + rf"(?:up\s+to\s+)?{number}\s*{unit}", text,
+        ):
+            value = float(match.group(1))
+            values.append(value / 60 if match.group(2).startswith("min") else value)
+        for match in re.finditer(
+            prefix + rf"\(?\s*{unit}\s*\)?\s*[:=-]?\s*(?:up\s+to\s+)?{number}\b", text,
+        ):
+            value = float(match.group(2))
+            values.append(value / 60 if match.group(1).startswith("min") else value)
+        for match in re.finditer(
+            rf"(?:^|[;,])\s*(?:up\s+to\s+)?{number}\s*{unit}\s+(?:of\s+)?{label}\b", text,
+        ):
+            value = float(match.group(1))
+            values.append(value / 60 if match.group(2).startswith("min") else value)
+        if values:
+            measurements[kind] = sorted(set(value for value in values if value > 0))
+
+    capacities = [float(value) for value in re.findall(r"\b(\d{3,5})\s*mah\b", text)]
+    capacities.extend(float(value) for value in re.findall(
+        r"\bbattery\s+capacity\s*\(?\s*mah\s*(?:,?\s*(?:typical|rated))?"
+        r"\s*\)?\s*[:=-]?\s*(\d{3,5})\b", text,
+    ))
+    if capacities:
+        measurements["capacity_mah"] = sorted(set(capacities))
+
+    active = [
+        (value, kind) for kind in ("video_playback_hours", "youtube_playback_hours")
+        for value in measurements.get(kind, []) if 0 < value <= 72
+    ]
+    if active:
+        # Use the conservative observed duration, never the largest marketing
+        # number. Retain the measurement kind so unlike tests are visible.
+        hours, basis = min(active)
+        result = signal(
+            round(min(0.95, hours / 30), 4),
+            f"Reported {basis.replace('_', ' ')}: {hours:g} hours; "
+            "active-use fit heuristic, test conditions may differ; capacity does not override it",
+            "derived",
+        )
+    elif capacities and all(1000 <= value <= 12000 for value in capacities):
+        capacity = min(capacities)
+        basis = "capacity_proxy"
+        result = signal(
+            round(min(0.75, capacity / 12000), 4),
+            f"Reported battery capacity: {capacity:g}mAh; capacity-only proxy, "
+            "active-use endurance unverified",
+            "derived",
+        )
+    else:
+        basis = "unknown"
+        result = signal(None, "No comparable active-use battery evidence; standby, audio, "
+                        "talk time and unlabelled hours do not establish video endurance")
+    result["basis"] = basis
+    result["measurements"] = measurements
+    return result
+
 
 def display_signal(text: str) -> dict[str, Any]:
     score = 0.0
@@ -512,6 +594,11 @@ def category_battery_signal(
     if str(intent.get("category") or "").lower() == "laptop":
         return laptop_battery_signal(text)
 
+    if str(intent.get("category") or "").lower() == "smartphone":
+        # Preserve field boundaries: 'standby 340hrs' in one attribute
+        # must not be interpreted as '340hrs video playback' in the next.
+        return smartphone_battery_signal(text_blob(profile, separator="; "))
+
     return battery_signal(text)
 
 
@@ -531,7 +618,6 @@ def performance_signal(text: str) -> dict[str, Any]:
     medium = (
         "snapdragon 7",
         "dimensity 8",
-        "core ultra",
         "ryzen 7",
         "ryzen 5",
         "core i7",
@@ -542,7 +628,9 @@ def performance_signal(text: str) -> dict[str, Any]:
 
     if any(x in text for x in high):
         return signal(1.0, "High-performance verified chipset/GPU class detected")
-    if any(x in text for x in medium):
+    # "Octacore Ultrafast" is marketing language, not Intel Core Ultra.
+    # Require a separate CPU-family token and an explicit processor tier.
+    if any(x in text for x in medium) or re.search(r"\bcore\s+ultra\s+[3579]\b", text):
         return signal(0.80, "Strong mainstream verified performance hardware detected")
     if any(
         x in text

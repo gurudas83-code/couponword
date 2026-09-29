@@ -30,6 +30,7 @@ import json
 import os
 import re
 import sys
+from copy import deepcopy
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -64,9 +65,10 @@ from product_evidence_store import (
     variant_signature_from_specifications,
     variant_signature_from_text,
     variant_signatures_conflict,
+    variant_text_is_ambiguous,
 )
 from product_identity_v2 import build_identity
-from retail_price_evidence import build_price_evidence
+from retail_price_evidence import build_price_evidence, get_recent_cached_price, normalize_url
 from resolver_engine import compare_identity
 from weighted_fit_engine import calculate_product_fit
 
@@ -1640,11 +1642,129 @@ def criterion_groups(
     return strong, tradeoffs, unknown
 
 
+def _reusable_candidate_record(cache, key):
+    entry = cache.get(key) if cache is not None else None
+    if entry is None or time.monotonic() - entry["stored_at"] >= 60:
+        return None
+    record = entry["record"]
+    profile = record["profile"]
+    evidence = profile.get("provenance", {}).get("price_evidence", {})
+    source = normalize_url(record["candidate"].get("source_url", ""))
+    if (not source or evidence.get("verified") is not True
+            or normalize_url(evidence.get("source_url", "")) != source):
+        return None
+    # Even same-request reuse must obey the price engine's freshness gate.
+    # A changed, missing or expired observation requires the full path again.
+    current = get_recent_cached_price(record["candidate"]["source_url"])
+    if (not current or current.get("verified") is not True
+            or current.get("currency") != "INR"
+            or normalize_url(current.get("source_url", "")) != source
+            or current.get("price") != evidence.get("price")
+            or current.get("price") != profile.get("price")):
+        return None
+    return deepcopy(record)
+
+
 def run_pipeline(
     query: str,
     max_candidates: int = 15,
     max_results: int = 5,
     live_fast: bool = False,
+) -> dict[str, Any]:
+    started = time.perf_counter()
+    # Limit this optimization to the two low-budget recovery paths.
+    request_intent = parse_query(query)
+    reuse_recovery = (live_fast and request_intent.get("category") == "smartphone"
+                      and request_intent.get("budget_max") in (10000, 15000))
+    discovery_cache = {} if reuse_recovery else None
+    candidate_cache = {} if reuse_recovery else None
+    initial_discovery = discover_market(
+        user_query=query, max_candidates=max_candidates, live_fast=live_fast,
+        _request_cache=discovery_cache,
+    )
+    discovery_seconds = time.perf_counter() - started
+    result = _run_pipeline_once(
+        query, max_candidates, max_results, live_fast,
+        _discovery=initial_discovery,
+        _candidate_cache=candidate_cache,
+    )
+    intent = result.get("intent") or {}
+    if (not live_fast or intent.get("category") != "smartphone"
+            or intent.get("budget_max") is None or intent.get("brands")
+            or intent.get("must_have")
+            or (initial_discovery.get("exact_model_scope") or {}).get("active")
+            or len(result.get("recommendations", [])) >= min(DEFAULT_MIN_RESULTS, max_results)):
+        result["timings"]["total_seconds"] = round(time.perf_counter() - started, 3)
+        result["timings"]["discovery_seconds"] = round(discovery_seconds, 3)
+        return result
+
+    # Research a bounded reserve using the same discovery and scoring engines.
+    # Keep every initial listing: a different query must not replace a valid
+    # candidate simply because provider ordering changed.
+    reserve_limit = min(max_candidates, 15)
+    reserve_started = time.perf_counter()
+    reserve = discover_market(
+        user_query=query, max_candidates=max_candidates + reserve_limit,
+        live_fast=True, supplemental=True,
+        _request_cache=discovery_cache,
+    )
+    discovery_seconds += time.perf_counter() - reserve_started
+    candidates = [dict(item) for item in initial_discovery.get("candidates", [])]
+
+    def listing_key(item):
+        return clean(item.get("asin")).upper() or clean(item.get("source_url"))
+
+    seen = {listing_key(item) for item in candidates}
+    added = []
+    used_ids = {clean(item.get("candidate_id")) for item in candidates}
+    for item in reserve.get("candidates", []):
+        key = listing_key(item)
+        if not key or key in seen:
+            continue
+        candidate = dict(item)
+        serial = len(candidates) + 1
+        while f"market-{serial:02d}" in used_ids:
+            serial += 1
+        candidate["candidate_id"] = f"market-{serial:02d}"
+        used_ids.add(candidate["candidate_id"])
+        candidates.append(candidate)
+        seen.add(key)
+        added.append(key)
+        if len(added) >= reserve_limit:
+            break
+
+    initial_counts = dict(result.get("stage_counts") or {})
+    if added:
+        merged = dict(initial_discovery, candidates=candidates,
+                      candidate_count=len(candidates),
+                      discovery_queries=list(dict.fromkeys(
+                          initial_discovery.get("discovery_queries", [])
+                          + reserve.get("discovery_queries", []))))
+        result = _run_pipeline_once(
+            query, len(candidates), max_results, live_fast,
+            _discovery=merged, _save_discovery_memory=False,
+            _candidate_cache=candidate_cache,
+        )
+    result["discovery_recovery"] = {
+        "initial_stage_counts": initial_counts,
+        "added_listing_ids": added,
+        "reserve_limit": reserve_limit,
+        "discovery_queries": reserve.get("discovery_queries", []),
+    }
+    result["timings"]["total_seconds"] = round(time.perf_counter() - started, 3)
+    result["timings"]["discovery_seconds"] = round(discovery_seconds, 3)
+    return result
+
+
+def _run_pipeline_once(
+    query: str,
+    max_candidates: int = 15,
+    max_results: int = 5,
+    live_fast: bool = False,
+    *,
+    _discovery: dict[str, Any] | None = None,
+    _save_discovery_memory: bool = True,
+    _candidate_cache: dict | None = None,
 ) -> dict[str, Any]:
     pipeline_started = time.perf_counter()
 
@@ -1653,7 +1773,7 @@ def run_pipeline(
     intent_seconds = time.perf_counter() - intent_started
 
     discovery_started = time.perf_counter()
-    discovery = discover_market(
+    discovery = _discovery if _discovery is not None else discover_market(
         user_query=query,
         max_candidates=max_candidates,
         live_fast=live_fast,
@@ -1687,8 +1807,27 @@ def run_pipeline(
 
     for position, candidate in enumerate(discovered, start=1):
         candidate_started = time.perf_counter()
+        cache_key = json.dumps([query, live_fast, position, candidate], sort_keys=True)
+        reused = _reusable_candidate_record(_candidate_cache, cache_key)
+        if reused is not None:
+            identities.append(reused["identity"])
+            resolver_records.append(reused["resolved"])
+            evidence_records.append(reused["extraction"])
+            scored_records.append(reused)
+            continue
         candidate_id = clean(candidate.get("candidate_id"))
         raw_title = clean(candidate.get("title"))
+
+        if variant_text_is_ambiguous(
+            raw_title, candidate.get("source_title")
+        ):
+            failures.append({
+                "candidate_id": candidate_id,
+                "title": raw_title,
+                "stage": "variant_identity",
+                "reason": "Listing names multiple RAM/storage capacities",
+            })
+            continue
 
         try:
             identity_input, cleaned_title = candidate_to_identity_input(candidate)
@@ -2396,6 +2535,13 @@ def run_pipeline(
             "profile": profile,
             "fit_assessment": assessment,
         })
+        if _candidate_cache is not None:
+            # Store only after identity, exact variant, usable evidence and
+            # fit checks completed. Failed candidates take the full path.
+            _candidate_cache[cache_key] = {
+                "stored_at": time.monotonic(),
+                "record": deepcopy(scored_records[-1]),
+            }
 
     qualifying = [
         item
@@ -2731,6 +2877,20 @@ def run_pipeline(
         profile = item["profile"]
         strong, tradeoffs, unknown = criterion_groups(assessment)
 
+        # The transient market-XX product_id is a search position. Only
+        # expose a canonical ID when registry, durable catalogue, brand,
+        # model and physical RAM/storage all agree on the exact ASIN.
+        from retailer_product_registry import find_catalogued_mobile_id
+
+        canonical_product_id = find_catalogued_mobile_id(
+            retailer_product_id=clean(profile.get("asin")),
+            candidate_title=clean(
+                (item.get("candidate") or {}).get("source_title")
+                or (item.get("candidate") or {}).get("title")
+            ),
+            candidate_brand=clean(profile.get("brand")),
+        )
+
         multi_retailer = enrich_with_multi_retailer(
             profile=profile,
             identity=item.get("identity", {}) or {},
@@ -2740,6 +2900,19 @@ def run_pipeline(
         recommendations.append({
             "rank": rank,
             "product_id": profile.get("product_id"),
+            "canonical_product_id": canonical_product_id,
+            "identity_evidence": {
+                "status": "catalogued_exact_variant" if canonical_product_id else "canonical_unresolved",
+                "source_title": clean(
+                    (item.get("candidate") or {}).get("source_title")
+                    or (item.get("candidate") or {}).get("title")
+                ),
+                "variant": variant_signature_from_text(
+                    (item.get("candidate") or {}).get("source_title")
+                    or (item.get("candidate") or {}).get("title")
+                ),
+            },
+            "battery_evidence": (profile.get("fit_signals") or {}).get("battery"),
             "title": profile.get("title"),
             "brand": profile.get("brand"),
             "price": profile.get("price"),
@@ -2831,6 +3004,7 @@ def run_pipeline(
                 "hard_constraint_failures", []
             ),
             "criteria": assessment.get("criteria", []),
+            "battery_evidence": (profile.get("fit_signals") or {}).get("battery"),
             "attributes": profile.get("attributes", {}),
             "features": profile.get("features", []),
             "price_evidence": profile.get(
@@ -2849,7 +3023,7 @@ def run_pipeline(
     total_seconds = time.perf_counter() - pipeline_started
 
     if (
-        live_fast
+        _save_discovery_memory and live_fast
         and not exact_model_query
         and len(recommendations) >= DEFAULT_MIN_RESULTS
         and len(discovered) == max_candidates
@@ -2860,9 +3034,10 @@ def run_pipeline(
             category=intent.get("category"),
             candidates=discovered,
             max_candidates=max_candidates,
+            replace=discovery.get("candidate_snapshot_research") is True,
         )
     elif (
-        live_fast
+        _save_discovery_memory and live_fast
         and not exact_model_query
         and 0 < len(recommendations) < DEFAULT_MIN_RESULTS
         and clean(intent.get("category")) == "smartphone"

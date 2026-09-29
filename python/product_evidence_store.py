@@ -185,6 +185,52 @@ def variant_signature_from_text(*values: Any) -> dict[str, str]:
     return signature
 
 
+def variant_text_is_ambiguous(*values: Any) -> bool:
+    """Reject titles explicitly naming multiple physical capacity candidates.
+
+    A first regex match cannot establish which RAM/storage SKU the ASIN
+    represents when a listing itself gives conflicting GB capacities.
+    """
+    text = " ".join(clean(value) for value in values if clean(value))
+    # Extended/virtual RAM and expandable storage are not physical SKU
+    # capacities. A starred second RAM number is a common manufacturer
+    # notation for extended memory, e.g. 3GB+4GB* RAM.
+    text = re.sub(
+        r"\b(\d{1,3})\s*gb\s*\+\s*\d{1,3}\s*gb\s*\*\s*ram\b",
+        r"\1GB RAM", text, flags=re.I,
+    )
+    text = re.sub(
+        r"\b\d{1,4}\s*gb\s*(?:virtual|extended|expandable)\s*"
+        r"(?:ram|memory|storage)?\b", " ", text, flags=re.I,
+    )
+    text = re.sub(
+        r"\b(?:up\s+to|expandable\s+to)\s*\d{1,4}\s*gb\b",
+        " ", text, flags=re.I,
+    )
+    capacities = {
+        int(value) for value in re.findall(r"\b(\d{1,4})\s*gb\b", text, re.I)
+    }
+    explicit_ram = {
+        int(value) for value in re.findall(
+            r"\b(\d{1,3})\s*gb\s*(?:physical\s+)?ram\b", text, re.I
+        )
+    }
+    explicit_storage = {
+        int(value) for value in re.findall(
+            r"\b(\d{2,4})\s*gb\s*(?:storage|rom)\b", text, re.I
+        )
+    }
+    ram_options = explicit_ram or {
+        value for value in capacities if 1 <= value <= 32
+        and value not in explicit_storage
+    }
+    storage_options = explicit_storage | {
+        value for value in capacities if value >= 32
+        and value not in explicit_ram
+    }
+    return len(ram_options) > 1 or len(storage_options) > 1
+
+
 def variant_signature_from_specifications(
     specifications: Any,
 ) -> dict[str, str]:
@@ -481,6 +527,9 @@ def find_verified_evidence(
     """
     data = load_store()
     records = data.get("records") or []
+
+    if variant_text_is_ambiguous(title, search_name, model):
+        return None
 
     asin_key = clean(asin).upper()
 

@@ -7,7 +7,6 @@ from typing import Any
 
 from canonical_product import CanonicalProduct
 from core_identity_bridge import (
-    resolve_family_identity,
     resolve_stable_identity,
 )
 from retailer_product_registry import find_canonical_product_id
@@ -15,6 +14,16 @@ from retailer_product_registry import find_canonical_product_id
 
 def clean(value: Any) -> str:
     return str(value or "").strip()
+
+
+def catalogued_owner(asin: str, title: str, brand: str) -> str:
+    from retailer_product_registry import find_catalogued_mobile_id
+
+    return clean(find_catalogued_mobile_id(
+        retailer_product_id=asin,
+        candidate_title=title,
+        candidate_brand=brand,
+    ))
 
 
 def capacity_gb(value: Any) -> str:
@@ -153,6 +162,12 @@ def build_canonical_product(
 
     asin = clean(profile.get("asin") or identity.get("asin"))
     product_id = clean(profile.get("product_id"))
+    transient = product_id.lower().startswith("market-")
+
+    # Discovery positions are request-local IDs, not canonical products.
+    # Never pass one into a cross-retailer comparison as a product owner.
+    if transient:
+        product_id = ""
 
     if not asin:
         stable_identity = resolve_stable_identity(
@@ -174,31 +189,17 @@ def build_canonical_product(
         )
 
         if registry_product_id:
-            product_id = registry_product_id
-        else:
-            family_identity = resolve_family_identity(
-                brand=profile.get("brand") or identity.get("brand"),
-                model=identity.get("model"),
-                title=profile.get("title") or identity.get("original_title"),
-            )
-
-            if family_identity:
-                stable_product_id = clean(
-                    family_identity.get("product_id")
+            product_id = (
+                catalogued_owner(
+                    asin,
+                    clean(identity.get("original_title") or profile.get("title")),
+                    clean(profile.get("brand") or identity.get("brand")),
                 )
-
-                if stable_product_id:
-                    registry_product_id = (
-                        find_canonical_product_id(
-                            retailer="amazon",
-                            retailer_product_id=clean(
-                                family_identity.get("asin")
-                            ),
-                        )
-                    )
-
-                    if registry_product_id:
-                        product_id = registry_product_id
+                if transient else registry_product_id
+            )
+        # A sibling ASIN or family match does not prove an identical
+        # RAM/storage variant. Only the exact retailer ID may give this
+        # runtime candidate a registered canonical owner.
 
     return CanonicalProduct(
         product_id=product_id,

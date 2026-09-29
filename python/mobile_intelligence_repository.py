@@ -123,12 +123,13 @@ def save_mobile_dna(
             or created_at
         )
 
+    # A private DNA record may be under review. Its storage key is not
+    # evidence that a trusted canonical product identity exists.
+    canonical_id = str(dna.canonical_product_id or "").strip() or None
+
     products[product_id] = {
         "product_id": product_id,
-        "canonical_product_id": (
-            dna.canonical_product_id
-            or product_id
-        ),
+        "canonical_product_id": canonical_id,
         "dna": dna.to_dict(),
         "created_at": created_at,
         "updated_at": utc_now_iso(),

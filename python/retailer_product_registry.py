@@ -88,6 +88,19 @@ def register_retailer_product(
         {},
     )
 
+    for owner_id, owner_retailers in products.items():
+        if owner_id == product_id or not isinstance(owner_retailers, dict):
+            continue
+        owner_record = owner_retailers.get(retailer)
+        if (
+            isinstance(owner_record, dict)
+            and str(owner_record.get("retailer_product_id") or "").strip().casefold()
+            == retailer_product_id.casefold()
+        ):
+            raise ValueError(
+                "Retailer product ID already belongs to another canonical product."
+            )
+
     product_record = products.setdefault(
         product_id,
         {},
@@ -144,6 +157,8 @@ def find_canonical_product_id(
 
     data = load_registry()
 
+    matching_ids: list[str] = []
+
     for product_id, retailer_records in (
         data.get("products", {}).items()
     ):
@@ -163,9 +178,60 @@ def find_canonical_product_id(
             registered_id.casefold()
             == retailer_product_id.casefold()
         ):
-            return str(product_id)
+            matching_ids.append(str(product_id))
 
-    return None
+    return matching_ids[0] if len(matching_ids) == 1 else None
+
+
+def find_catalogued_mobile_id(
+    *, retailer_product_id: str, candidate_title: str, candidate_brand: str,
+) -> str | None:
+    """Expose an existing canonical ID only for an exact catalogue variant.
+
+    A registry entry alone does not establish that a search-card title still
+    describes the same phone and physical RAM/storage variant.
+    """
+    from mobile_exact_identity_gate import AUTO_REUSE, classify_mobile_identity_reuse
+    from product_evidence_store import variant_signature_from_text
+
+    asin = str(retailer_product_id or "").strip().upper()
+    owner = find_canonical_product_id(retailer="amazon", retailer_product_id=asin)
+    if not owner or not owner.startswith("cw-mobile-"):
+        return None
+
+    catalogue_file = ROOT / "coupons.json"
+    if not catalogue_file.is_file():
+        return None
+    try:
+        products = json.loads(catalogue_file.read_text(encoding="utf-8-sig"))
+    except (OSError, ValueError):
+        return None
+    if isinstance(products, dict):
+        products = products.get("products", [])
+    if not isinstance(products, list):
+        return None
+
+    matches = [
+        item for item in products if isinstance(item, dict)
+        and str(item.get("id")) == owner.removeprefix("cw-mobile-")
+        and str(item.get("asin") or "").strip().upper() == asin
+        and str(item.get("category") or "").strip().casefold() == "mobiles"
+    ]
+    if len(matches) != 1:
+        return None
+    item = matches[0]
+    if str(item.get("brand") or "").strip().casefold() != str(candidate_brand or "").strip().casefold():
+        return None
+    expected = variant_signature_from_text(item.get("title"))
+    observed = variant_signature_from_text(candidate_title)
+    if not all(expected.get(key) and observed.get(key) == expected[key]
+               for key in ("ram_gb", "storage_gb")):
+        return None
+    identity = classify_mobile_identity_reuse(
+        expected_text=item.get("title"), candidate_title=candidate_title,
+        expected_brand=item.get("brand"),
+    )
+    return owner if identity.get("status") == AUTO_REUSE else None
 
 
 if __name__ == "__main__":

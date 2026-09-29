@@ -20,6 +20,8 @@ import json
 import os
 import re
 import sys
+import time
+from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -27,6 +29,7 @@ from urllib.parse import urlparse
 
 from tavily import TavilyClient
 from amazon_search_image_resolver import search_asins
+from retail_price_evidence import get_recent_cached_price
 
 ROOT = Path(__file__).resolve().parent.parent
 PYTHON_DIR = ROOT / "python"
@@ -700,9 +703,12 @@ def discovery_cache_key(query: str, category: str | None) -> str:
 def candidate_snapshot_key(
     query: str, category: str | None, max_candidates: int,
 ) -> str:
+    # Success under the previous battery scorer (which treated standby as
+    # playback) does not prove this pool can still produce Best-3. Preserve
+    # old evidence, but require a fresh successful pool for this policy.
     return (
         f"__candidate_snapshot__::{discovery_cache_key(query, category)}"
-        f"::{max_candidates}"
+        f"::{max_candidates}::battery-workloads-v2"
     )
 
 
@@ -714,7 +720,7 @@ def partial_candidate_memory_key(
 ) -> str:
     return (
         f"__partial_candidate_memory__::{discovery_cache_key(query, category)}"
-        f"::{max_candidates}"
+        f"::{max_candidates}::battery-workloads-v2"
     )
 
 
@@ -842,12 +848,12 @@ def get_candidate_snapshot(
 
 def save_candidate_snapshot(
     *, query: str, category: str | None, candidates: list[dict[str, Any]],
-    max_candidates: int,
+    max_candidates: int, replace: bool = False,
 ) -> None:
     """Pin a complete candidate pool only after the pipeline finds Best-3."""
-    if len(candidates) != max_candidates or get_candidate_snapshot(
+    if len(candidates) != max_candidates or (not replace and get_candidate_snapshot(
         query=query, category=category, max_candidates=max_candidates,
-    ):
+    )):
         return
     safe = []
     for candidate in candidates:
@@ -2172,7 +2178,7 @@ def discovery_variant_gate(
     }
 
 def trusted_price_budget_priority(item: dict[str, Any], budget_max: Any) -> int:
-    """Use a current exact-ASIN card price only to order discovery candidates."""
+    """Order by current card or fresh exact-listing cached price; never by snippets."""
     if budget_max is None:
         return 1
 
@@ -2182,6 +2188,9 @@ def trusted_price_budget_priority(item: dict[str, Any], budget_max: Any) -> int:
         "amazon_exact_asin_search_card",
         "amazon_exact_asin_search_card_offer_text",
     }:
+        cached = item.get("_recent_verified_price")
+        if cached is not None:
+            return 2 if cached <= float(budget_max) else 0
         return 1
 
     match = re.fullmatch(
@@ -2201,14 +2210,50 @@ def trusted_price_budget_priority(item: dict[str, Any], budget_max: Any) -> int:
     return 2 if price <= budget else 0
 
 
+def recent_discovery_price(item: dict[str, Any]) -> float | None:
+    """Reuse the price engine's freshness gate without transferring prices across ASINs."""
+    url = clean(item.get("url"))
+    asin = clean(item.get("asin")).upper()
+    parsed = urlparse(url)
+    match = re.search(r"/(?:dp|gp/product)/([A-Z0-9]{10})(?:/|$)", parsed.path, re.I)
+    if (parsed.hostname not in {"amazon.in", "www.amazon.in"}
+            or not match or match.group(1).upper() != asin):
+        return None
+    cached = get_recent_cached_price(url)
+    if not cached or cached.get("verified") is not True or cached.get("currency") != "INR":
+        return None
+    cached_path = urlparse(clean(cached.get("source_url")))
+    cached_match = re.search(r"/(?:dp|gp/product)/([A-Z0-9]{10})(?:/|$)", cached_path.path, re.I)
+    if (cached_path.hostname != parsed.hostname or not cached_match
+            or cached_match.group(1).upper() != asin):
+        return None
+    return float(cached["price"])
+
+
+def _request_search(cache, provider_key, provider, *args, **kwargs):
+    """Reuse successful identical provider calls only inside one request."""
+    key = (provider_key, json.dumps(kwargs, sort_keys=True))
+    cached = cache.get(key) if cache is not None else None
+    if cached is not None and time.monotonic() - cached[0] < 60:
+        return deepcopy(cached[1])
+    rows = provider(*args, **kwargs)
+    # Empty/failed searches may retry; never turn a transient failure into a pin.
+    if cache is not None and rows:
+        cache[key] = (time.monotonic(), deepcopy(rows))
+    return rows
+
+
 def discover_market(
     user_query: str,
     max_candidates: int = 20,
     live_fast: bool = False,
+    supplemental: bool = False,
+    _request_cache: dict | None = None,
 ) -> dict[str, Any]:
     intent = parse_query(user_query)
     category = intent.get("category")
     queries = build_discovery_queries(user_query, intent)
+    live_model_tokens: set[str] = set()
 
     # Visitor requests must keep discovery latency bounded.
     # Deep/offline mode still uses the full discovery query set.
@@ -2364,7 +2409,18 @@ def discover_market(
 
         queries = live_queries[:2]
 
-    if live_fast and category == "smartphone":
+    # A bounded retry may add the original wording; never replace a lane
+    # that already discovered a valid listing. Exact/variant searches keep
+    # their existing query policy.
+    if (supplemental and live_fast and category == "smartphone"
+            and not intent.get("brands") and not intent.get("must_have")
+            and not live_model_tokens):
+        original_query = clean(user_query)
+        if original_query and original_query not in queries:
+            queries.append(original_query)
+
+    snapshot_research = False
+    if live_fast and category == "smartphone" and not supplemental:
         snapshot = get_candidate_snapshot(
             query=user_query, category=category,
             max_candidates=max_candidates,
@@ -2398,26 +2454,44 @@ def discover_market(
                     ):
                         item[field] = clean(card.get(field))
                     refreshed_asins.add(asin)
-            return {
-                "query": user_query,
-                "intent": intent,
-                "discovery_queries": queries,
-                "candidate_count": len(candidates),
-                "candidates": candidates,
-                "exact_model_scope": {
-                    "active": False, "model_tokens": [],
-                    "numeric_brand_pairs": [],
-                },
-                "candidate_snapshot": {
-                    "status": "reused_verified_pool",
-                    "age_seconds": snapshot["age_seconds"],
-                    "fresh_price_asins": len(refreshed_asins),
-                },
-                "note": (
-                    "Candidate identities came from a prior successful run; "
-                    "only current exact-ASIN search cards can refresh prices."
-                ),
-            }
+            # A snapshot pins identity, not price. If none of its ASINs
+            # obtained a current exact-card price, it cannot provide a
+            # useful budget answer. Continue through normal discovery so
+            # another currently priced model may be considered. Old cached
+            # prices remain subject to their normal freshness gate.
+            # Search-card collection can be intermittent. A recently
+            # verified exact-product price in the existing six-hour cache
+            # still satisfies the downstream price gate; count it before
+            # abandoning a pinned identity pool. Never copy that price into
+            # the discovery snapshot itself.
+            priced_asins = set(refreshed_asins)
+            for asin, item in by_asin.items():
+                if asin not in priced_asins and get_recent_cached_price(
+                    clean(item.get("source_url"))
+                ):
+                    priced_asins.add(asin)
+            if len(priced_asins) >= 3:
+                return {
+                    "query": user_query,
+                    "intent": intent,
+                    "discovery_queries": queries,
+                    "candidate_count": len(candidates),
+                    "candidates": candidates,
+                    "exact_model_scope": {
+                        "active": False, "model_tokens": [],
+                        "numeric_brand_pairs": [],
+                    },
+                    "candidate_snapshot": {
+                        "status": "reused_verified_pool",
+                        "age_seconds": snapshot["age_seconds"],
+                        "fresh_price_asins": len(refreshed_asins),
+                    },
+                    "note": (
+                        "Candidate identities came from a prior successful run; "
+                        "only current exact-ASIN search cards can refresh prices."
+                    ),
+                }
+            snapshot_research = True
 
     api_key = os.environ.get("TAVILY_API_KEY")
 
@@ -2456,7 +2530,8 @@ def discover_market(
 
             try:
 
-                commerce_results = search_channel(
+                commerce_results = _request_search(
+                    _request_cache, "tavily", search_channel,
                     client,
                     query=query,
                     category=category,
@@ -2465,7 +2540,8 @@ def discover_market(
                     max_results=20,
                 )
 
-                open_web_results = search_channel(
+                open_web_results = _request_search(
+                    _request_cache, "tavily", search_channel,
                     client,
                     query=query,
                     category=category,
@@ -2501,7 +2577,8 @@ def discover_market(
         # quality: downstream identity, variant and evidence gates still
         # decide what is trustworthy and final Fit remains unaffected.
 
-        supplementary_commerce_results = fallback_search_channel(
+        supplementary_commerce_results = _request_search(
+            _request_cache, "fallback", fallback_search_channel,
             query=query,
             category=category,
             include_domains=COMMERCE_DOMAINS,
@@ -2513,7 +2590,8 @@ def discover_market(
 
         if not open_web_results:
 
-            open_web_results = fallback_search_channel(
+            open_web_results = _request_search(
+                _request_cache, "fallback", fallback_search_channel,
                 query=query,
                 category=category,
                 include_domains=None,
@@ -2802,6 +2880,10 @@ def discover_market(
         enriched["quality_score"] = candidate_quality_score(item, title)
         enriched["variant_gate"] = variant_gate
         enriched["tv_requirement_gate"] = tv_gate
+        # Discovery-cache rows deliberately strip card prices. A still-fresh
+        # price for the same listing must not become "unknown" at truncation
+        # while the downstream price engine would accept that very evidence.
+        enriched["_recent_verified_price"] = recent_discovery_price(item)
 
         ranked.append(enriched)
 
@@ -2868,6 +2950,9 @@ def discover_market(
                 "amazon_exact_asin_search_card_offer_text",
             }
         ):
+            return 2
+
+        if asin and item.get("_recent_verified_price") is not None:
             return 2
 
         if asin:
@@ -3024,6 +3109,7 @@ def discover_market(
         "discovery_queries": queries,
         "candidate_count": len(candidates),
         "candidates": candidates,
+        "candidate_snapshot_research": snapshot_research,
         "partial_candidate_memory": {
             "reused_listings": partial_memory_used,
         } if partial_memory_used else None,
