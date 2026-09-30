@@ -5261,6 +5261,12 @@ def extract_one(
 
         apply_review_decision(output)
 
+    # Deep extraction only: follow the verified product's own support link.
+    # Live requests reuse this evidence through the existing exact-variant cache.
+    from lava_support_evidence import add_lava_support_evidence
+    if add_lava_support_evidence(output, identity, html, fetch_page, utc_now()):
+        output["evidence_summary"]["total_specifications"] = len(output["specifications"])
+
     return output
 
 
