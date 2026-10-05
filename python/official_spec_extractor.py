@@ -5021,6 +5021,7 @@ def extract_one(
         lava_slug = {
             "bold n2": "bold-n2",
             "bold n2 lite": "bold-n2-lite",
+            "virat v1": "virat-v1",
         }.get(lava_model)
         if (
             clean_text(identity.get("brand")).casefold() == "lava"

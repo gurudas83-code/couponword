@@ -13,6 +13,8 @@ import product_evidence_store as store
 class AmbiguousCapacityTests(unittest.TestCase):
     def test_clear_capacity_and_common_physical_ram_are_unambiguous(self):
         for title in (
+            "Phone 4GB RAM + 4GB virtual RAM 128GB Storage",
+            "Phone 4GB + 128GB Storage",
             "Lava Bold N2 4GB RAM 64GB Storage",
             "Lava Bold N2 Lite 3GB RAM 32GB Storage",
             "Lava Bold N2 32GB RAM 64GB Storage",
@@ -24,6 +26,8 @@ class AmbiguousCapacityTests(unittest.TestCase):
 
     def test_multiple_physical_ram_or_storage_options_are_ambiguous(self):
         for title in (
+            "Zeno 100 Lite 2GB + 4GB RAM 64GB Storage",
+            "Phone 4GB+4GB RAM 128GB Storage",
             "Samsung Galaxy F70e 4GB RAM 8GB RAM 128GB Storage",
             "Samsung Galaxy F70e 4GB RAM 64GB / 128GB Storage",
             "Samsung Galaxy F70e 4GB RAM 64GB Storage 128GB Storage",

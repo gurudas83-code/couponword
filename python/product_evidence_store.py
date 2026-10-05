@@ -207,6 +207,14 @@ def variant_text_is_ambiguous(*values: Any) -> bool:
         r"\b(?:up\s+to|expandable\s+to)\s*\d{1,4}\s*gb\b",
         " ", text, flags=re.I,
     )
+    # An unlabelled RAM sum cannot establish which part is physical.
+    # Do not interpret the number nearest "RAM" as the SKU capacity.
+    # Explicit virtual/starred expansions were removed above.
+    if any(1 <= int(a) <= 32 and 1 <= int(b) <= 32
+           for a, b in re.findall(
+               r"\b(\d{1,3})\s*gb\s*\+\s*(\d{1,3})\s*gb\s*ram\b",
+               text, re.I)):
+        return True
     capacities = {
         int(value) for value in re.findall(r"\b(\d{1,4})\s*gb\b", text, re.I)
     }

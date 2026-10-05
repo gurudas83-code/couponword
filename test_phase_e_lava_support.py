@@ -24,6 +24,13 @@ class LavaSupportTests(unittest.TestCase):
         self.assertEqual(fact['identity_match']['variant'], {'ram_gb': '4', 'storage_gb': '64'})
         self.assertNotIn('Android 17', fact['value'])
         self.fetch.assert_called_once_with(SUPPORT_URL)
+    def test_virat_v1_is_separate_from_5g_sibling(self):
+        self.identity.update(model='Virat V1', original_title='Lava Virat V1 4GB RAM 64GB Storage')
+        self.output['official_url'] = 'https://www.lavamobiles.com/smartphones/virat-v1'
+        self.assertFalse(self.run_policy(page('Virat V1 5G')))
+        self.assertTrue(self.run_policy(page('Virat V1')))
+        self.assertEqual(self.output['specifications']['software_security_support']['identity_match']['model'], 'virat v1')
+
     def test_sibling_or_duplicate_rows_rejected(self):
         self.assertFalse(self.run_policy(page('Bold N2 5G')))
         self.assertFalse(self.run_policy(page()+page()))

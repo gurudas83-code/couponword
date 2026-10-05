@@ -12,7 +12,7 @@ def add_lava_support_evidence(output, identity, product_html, fetch_page, observ
     if output.get("resolver_verified") is not True or output.get("review", {}).get("status") != "candidate_ready":
         return False
     model = str(identity.get("model") or "").strip().casefold()
-    if model not in {"bold n2", "bold n2 lite"} or str(identity.get("brand", "")).casefold() != "lava":
+    if model not in {"bold n2", "bold n2 lite", "virat v1"} or str(identity.get("brand", "")).casefold() != "lava":
         return False
     product_url = urlparse(output.get("official_url") or "")
     if product_url.hostname not in {"lavamobiles.com", "www.lavamobiles.com"} or product_url.path.rstrip("/") != "/smartphones/" + model.replace(" ", "-"):
