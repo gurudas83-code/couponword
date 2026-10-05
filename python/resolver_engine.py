@@ -485,8 +485,19 @@ def parse_identity(
 
     variant_tokens = [
         token
-        for token in tokens
+        for index, token in enumerate(tokens)
         if token in VARIANT_TOKENS
+        # "HD Plus 90Hz Display" describes the screen, not a Plus SKU.
+        # Exclude this occurrence only; retain any Plus in the model name.
+        and not (
+            token == "plus" and index > 0 and tokens[index - 1] == "hd"
+            and (
+                tokens[index + 1:index + 2] == ["display"]
+                or (index + 2 < len(tokens)
+                    and re.fullmatch(r"\d{2,3}hz", tokens[index + 1])
+                    and tokens[index + 2] == "display")
+            )
+        )
     ]
 
     ram_tokens = extract_memory_tokens(tokens, "ram")
