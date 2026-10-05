@@ -1970,6 +1970,13 @@ def category_accessory_gate(
             "reason": "No smartphone accessory gate required",
         }
 
+    # Exact Lava phone titles include a bundled case. Keep the exception
+    # bound to the phone model and explicit physical RAM/storage wording.
+    if (re.match(r"^lava\s+bold\s+n2(?:\s+lite)?\b", text)
+            and re.search(r"\b\d+\s*gb\s+ram\b", text)
+            and re.search(r"\b\d+\s*gb\s+storage\b", text)):
+        text = re.sub(r"\bphone\s+case\s+in\s+box\b", "", text)
+
     accessory_patterns = (
         # Obvious removable-storage products. Keep these specific
         # enough that a genuine phone merely mentioning expandable
@@ -2013,6 +2020,8 @@ def category_accessory_gate(
         r"\bportable\s+charger\b",
         r"\btravel\s+adap(?:ter|tor)\b",
         r"\bwall\s+adap(?:ter|tor)\b",
+        r"\b(?:wall|car)\s+charger\b",
+        r"\b\d+\s*w\s+charger\s+for\b",
         r"\busb\s+adap(?:ter|tor)\b",
         r"\bwireless\s+charger\b",
         r"\bcharging\s+stand\b",
@@ -2030,7 +2039,7 @@ def category_accessory_gate(
         r"\bpouch\b",
         r"\bmobile\s+pouch\b",
         r"\bphone\s+pouch\b",
-        r"\bskin\b",
+        r"\bskins?\b",
         r"\bmobile\s+skin\b",
         r"\bphone\s+skin\b",
         r"\bback\s+skin\b",
@@ -2047,6 +2056,7 @@ def category_accessory_gate(
         r"\btws\b",
         r"\bneckband\b",
         r"\bheadphones?\b",
+        r"\bearphones?\b",
         r"\bsmartwatch\b",
         r"\bsmart\s+watch\b",
         r"\btablet\b",
