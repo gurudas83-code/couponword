@@ -82,6 +82,30 @@
         "confidence": 0.99,
         "source": "live-amazon-exact-page+mobile-exact-identity-gate-v1"
       }
+    },
+    "cw-mobile-77": {
+      "amazon": {
+        "retailer_product_id": "B0HG9SZ7HD",
+        "product_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+        "confidence": 0.99,
+        "source": "live-amazon-exact-page+mobile-exact-identity-gate-v1"
+      }
+    },
+    "cw-mobile-78": {
+      "amazon": {
+        "retailer_product_id": "B0GL1WGHJX",
+        "product_url": "https://www.amazon.in/dp/B0GL1WGHJX",
+        "confidence": 0.99,
+        "source": "live-amazon-exact-page+mobile-exact-identity-gate-v1"
+      }
+    },
+    "cw-mobile-79": {
+      "amazon": {
+        "retailer_product_id": "B0GPXTY8V5",
+        "product_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+        "confidence": 0.99,
+        "source": "live-amazon-exact-page+mobile-exact-identity-gate-v1"
+      }
     }
   }
 }

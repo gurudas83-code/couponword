@@ -22,6 +22,7 @@ from typing import Any
 
 
 KNOWN_BRANDS = {
+    "lava": "Lava",
     "boat": "boAt",
     "apple": "Apple",
     "samsung": "Samsung",

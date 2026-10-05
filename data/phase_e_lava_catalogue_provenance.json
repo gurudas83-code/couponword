@@ -1,0 +1,68 @@
+{
+  "purpose": "Three verified exact-listing catalogue admissions; prices/images remain unknown in catalogue",
+  "candidates": [
+    {
+      "asin": "B0HG9SZ7HD",
+      "observed_at": "2026-10-05T02:48:39.429625+00:00",
+      "expected_variant": {
+        "ram_gb": "4",
+        "storage_gb": "64"
+      },
+      "live": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+        "page_asin": "B0HG9SZ7HD",
+        "page_title": "Lava Virat V1 Smartphone, 64GB, 4GB RAM, Himalayan Silver",
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 85
+      },
+      "canonical_id": "cw-mobile-77",
+      "source_id": 77,
+      "allocation_workflow": "batch_product_importer.import_csv -> product_pipeline.next_product_id -> promote_mobile_canonical"
+    },
+    {
+      "asin": "B0GL1WGHJX",
+      "observed_at": "2026-10-05T02:48:41.877230+00:00",
+      "expected_variant": {
+        "ram_gb": "4",
+        "storage_gb": "64"
+      },
+      "live": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0GL1WGHJX",
+        "page_asin": "B0GL1WGHJX",
+        "page_title": "Lava Bold N2 (Indus Black, 4 GB RAM, 64 GB Storage) | 13MP AI Dual Rear Camera | Largest 6.75\" HD+ Display | 5000 mAh Battery & 10W Charging | IP64 Water & Dust Proof | Charger & Phone-Case in Box",
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 85
+      },
+      "canonical_id": "cw-mobile-78",
+      "source_id": 78,
+      "allocation_workflow": "batch_product_importer.import_csv -> product_pipeline.next_product_id -> promote_mobile_canonical"
+    },
+    {
+      "asin": "B0GPXTY8V5",
+      "observed_at": "2026-10-05T02:48:44.353931+00:00",
+      "expected_variant": {
+        "ram_gb": "3",
+        "storage_gb": "64"
+      },
+      "live": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+        "page_asin": "B0GPXTY8V5",
+        "page_title": "Lava Bold N2 Lite (Kolar Gold, 3 GB RAM, 64 GB Storage) | 6.75\" HD+ Display | 13MP AI Dual Rear Camera | 5000 mAh Battery | Secure Face Unlock | Fingerprint Reader | Charger & Phone-Cover in Box",
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 90
+      },
+      "canonical_id": "cw-mobile-79",
+      "source_id": 79,
+      "allocation_workflow": "batch_product_importer.import_csv -> product_pipeline.next_product_id -> promote_mobile_canonical"
+    }
+  ]
+}
