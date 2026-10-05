@@ -1,0 +1,68 @@
+{
+  "purpose": "Three verified exact-listing catalogue admissions; prices/images remain unknown in catalogue",
+  "candidates": [
+    {
+      "asin": "B0GM69XM7R",
+      "observed_at": "2026-10-05T15:08:42.301852+00:00",
+      "expected_variant": {
+        "ram_gb": "4",
+        "storage_gb": "64"
+      },
+      "live": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0GM69XM7R",
+        "page_asin": "B0GM69XM7R",
+        "page_title": "Samsung Galaxy A06 5G Light Gray 4GB RAM 64GB ROM with 6.7 inch HD Plus 90Hz Display, 50MP Dual Camera, 8MP Front Camera, MTK D6300 Processor, 5000mAh Battery, Side Fingerprint, One UI 7.0",
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 95
+      },
+      "canonical_id": "cw-mobile-80",
+      "source_id": 80,
+      "allocation_workflow": "batch_product_importer.import_csv -> product_pipeline.next_product_id -> promote_mobile_canonical"
+    },
+    {
+      "asin": "B0GSQT3JTD",
+      "observed_at": "2026-10-05T15:08:44.932427+00:00",
+      "expected_variant": {
+        "ram_gb": "4",
+        "storage_gb": "128"
+      },
+      "live": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0GSQT3JTD",
+        "page_asin": "B0GSQT3JTD",
+        "page_title": "Samsung Galaxy A07 5G (Black, 4GB RAM, 128GB Storage) | 6.7 inch HD+ 120Hz Display | MediaTek Dimensity 6300 | 50MP + 2MP Rear Camera | 6000 mAh Battery",
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 95
+      },
+      "canonical_id": "cw-mobile-81",
+      "source_id": 81,
+      "allocation_workflow": "batch_product_importer.import_csv -> product_pipeline.next_product_id -> promote_mobile_canonical"
+    },
+    {
+      "asin": "B0GNZSK9HJ",
+      "observed_at": "2026-10-05T15:08:47.637946+00:00",
+      "expected_variant": {
+        "ram_gb": "4",
+        "storage_gb": "128"
+      },
+      "live": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0GNZSK9HJ",
+        "page_asin": "B0GNZSK9HJ",
+        "page_title": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (4 GB RAM) | 6000 mAh Battery | 6.74\" PLS LCD Display | Dimensity 6300 | Octa Core Processor |",
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 95
+      },
+      "canonical_id": "cw-mobile-82",
+      "source_id": 82,
+      "allocation_workflow": "batch_product_importer.import_csv -> product_pipeline.next_product_id -> promote_mobile_canonical"
+    }
+  ]
+}
