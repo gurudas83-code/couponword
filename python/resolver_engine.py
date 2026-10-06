@@ -487,6 +487,13 @@ def parse_identity(
         token
         for index, token in enumerate(tokens)
         if token in VARIANT_TOKENS
+        # A named Dimensity chipset suffix is not a phone's Turbo SKU.
+        and not (
+            token == "turbo" and index >= 2
+            and tokens[index - 2] == "dimensity"
+            and re.fullmatch(r"\d{3,4}", tokens[index - 1])
+            and tokens[index + 1:index + 2] == ["processor"]
+        )
         # "HD Plus 90Hz Display" describes the screen, not a Plus SKU.
         # Exclude this occurrence only; retain any Plus in the model name.
         and not (
