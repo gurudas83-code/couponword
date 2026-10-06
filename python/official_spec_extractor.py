@@ -5068,17 +5068,18 @@ def extract_one(
         model_score = page_identity_score(
             model_name, page_title, canonical_url
         )
-        # Lava labels these two official pages "Bold N2" and "Bold N2
-        # Lite" without repeating the maker in the HTML title. The
+        # Lava labels these exact official model pages without repeating
+        # the maker in the HTML title. The
         # missing brand token lowers the generic score even when the
         # verified official URL, model title and physical capacities agree.
-        # Keep this narrow: a sibling, a 5G suffix, an unrelated host or
+        # Keep this narrow: an unmatched sibling/network, unrelated host or
         # a retailer fallback must never inherit the exception.
         lava_model = clean_text(identity.get("model")).casefold()
         lava_slug = {
             "bold n2": "bold-n2",
             "bold n2 lite": "bold-n2-lite",
             "virat v1": "virat-v1",
+            "virat v1 5g": "virat-v1-5g",
         }.get(lava_model)
         if (
             clean_text(identity.get("brand")).casefold() == "lava"

@@ -1,0 +1,529 @@
+{
+  "schema_version": 1,
+  "asin": "B0HCNQPXRY",
+  "physical_variant": {
+    "ram_gb": "4",
+    "storage_gb": "64"
+  },
+  "listing": {
+    "observed_at": "2026-10-06T14:24:00.680051+00:00",
+    "identity": {
+      "http_status": 200,
+      "final_url": "https://www.amazon.in/dp/B0HCNQPXRY",
+      "page_asin": "B0HCNQPXRY",
+      "page_title": "Lava Virat V1 5G Arya Blue (4GB RAM, 64GB Storage) | 13MP Camera | 6.75\" 120Hz Display | Unisoc T8200 5G Processor | 6000mAh Battery | 10W Charging | IP64",
+      "strict_status": "AUTO_REUSE",
+      "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+      "resolver_decision": "verified",
+      "resolver_score": 95
+    },
+    "price": {
+      "price": 13099.0,
+      "prices_found": [
+        13099.0
+      ],
+      "availability": "in_stock",
+      "status": "verified",
+      "reason": "Exact Amazon primary buy-box price found",
+      "http_status": 200,
+      "evidence_method": "amazon_primary_buybox"
+    }
+  },
+  "identity": {
+    "asin": "B0HCNQPXRY",
+    "brand": "Lava",
+    "model": "Virat V1 5G",
+    "search_name": "Lava Virat V1 5G",
+    "original_title": "Lava Virat V1 5G Arya Blue (4GB RAM, 64GB Storage) | 13MP Camera | 6.75\" 120Hz Display | Unisoc T8200 5G Processor | 6000mAh Battery | 10W Charging | IP64"
+  },
+  "extraction": {
+    "product_id": "",
+    "brand": "Lava",
+    "model": "Virat V1 5G",
+    "search_name": "Lava Virat V1 5G",
+    "official_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+    "source_host": "www.lavamobiles.com",
+    "resolver_status": null,
+    "resolver_verified": true,
+    "fetch_status": "success",
+    "http_status": 200,
+    "page_identity_score": 1.0,
+    "specifications": {
+      "form": {
+        "value": "Touch",
+        "label": "Form",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "sim": {
+        "value": "Dual Sim (5G+5G), Nano+Nano",
+        "label": "SIM",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "touch_screen": {
+        "value": "Yes",
+        "label": "Touch Screen",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "business_features": {
+        "value": "Gmail",
+        "label": "Business Features",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "call_features": {
+        "value": "Conference Call, Anonymous & Auto Call Recording",
+        "label": "Call Features",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "handset_color": {
+        "value": "Arya Blue/Sonar Gold",
+        "label": "Handset Color",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "in_sales_package": {
+        "value": "Handset, USB Cable Type-C, Charger, SIM Ejector Pin, Back Cover",
+        "label": "In Sales Package",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "operating_frequency": {
+        "value": "GSM: 850MHz, 900MHz, 1800MHz, 1900MHz",
+        "label": "Operating Frequency",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "processor": {
+        "value": "UNISOC T8200 Octa-core Processor",
+        "label": "Processor",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "operating_system": {
+        "value": "Android 16",
+        "label": "OS",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "size": {
+        "value": "17.13cm (6.75\") Notch HD+ Display with 2.5D Glass, 120Hz Refresh Rate & Aspect Ratio of 20:9",
+        "label": "Size",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "resolution": {
+        "value": "720*1600",
+        "label": "Resolution",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "ppi": {
+        "value": "260",
+        "label": "PPI",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "color": {
+        "value": "16.7M",
+        "label": "Color",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "primary_camera_rear_camera": {
+        "value": "13 MP",
+        "label": "Primary Camera (Rear Camera)",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "secondary_camera_front_camera": {
+        "value": "5MP",
+        "label": "Secondary Camera (Front Camera)",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "flash": {
+        "value": "Yes, Both Camera (Front Flash Type - Screen)",
+        "label": "Flash",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "video_recording": {
+        "value": "Yes",
+        "label": "Video Recording",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "hd_recording": {
+        "value": "Yes",
+        "label": "HD Recording",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "other_camera_features": {
+        "value": "Portrait, Slow Motion, Timelapse, Refocus, Audio Note, Motion Photo, Beauty, HDR, Night, AI,Panorama, Filters, QR Scanning",
+        "label": "Other Camera Features",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "ram": {
+        "value": "4GB+4GB*",
+        "label": "RAM",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "internal_memory": {
+        "value": "64GB",
+        "label": "Internal Memory",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "expandable_memory": {
+        "value": "1TB",
+        "label": "Expandable Memory",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "weight_with_battery": {
+        "value": "210gm",
+        "label": "Weight With Battery",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "type": {
+        "value": "6000mAh (Typ) Li-Ion Battery",
+        "label": "Type",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "charger": {
+        "value": "10W Charger, Type-C Cable",
+        "label": "Charger",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "charging_time_of_device_0_100": {
+        "value": "185mins",
+        "label": "Charging Time of Device (0-100%)**",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "talk_time": {
+        "value": "47hrs",
+        "label": "Talk Time**",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "stand_by_time": {
+        "value": "750Hrs",
+        "label": "Stand By Time**",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "youtube_playback_time": {
+        "value": "810mins",
+        "label": "Youtube Playback Time**",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00",
+        "test_conditions": "Under LAVA Testing Conditions, as marked by ** on this exact 5G model page; manufacturer claim, not an independent cross-device benchmark."
+      },
+      "internet_features": {
+        "value": "Google Play Store, Gmail, YouTube, Google, Google Assistant, Maps, Files, Facebook",
+        "label": "Internet Features",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "navigation": {
+        "value": "Yes",
+        "label": "Navigation",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "preinstalled_browser": {
+        "value": "Yes, Google Chrome",
+        "label": "Preinstalled Browser",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "gprs": {
+        "value": "Yes",
+        "label": "GPRS",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "edge": {
+        "value": "Yes",
+        "label": "EDGE",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "3g": {
+        "value": "Yes",
+        "label": "3G",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "4g": {
+        "value": "Yes",
+        "label": "4G",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "wi_fi": {
+        "value": "Wi-Fi 802.11 b/g/n/ac, hotspot",
+        "label": "Wi-Fi",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "usb_connectivity": {
+        "value": "Type-C",
+        "label": "USB Connectivity",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "glonass": {
+        "value": "No",
+        "label": "GLONASS",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "bluetooth": {
+        "value": "V5.0",
+        "label": "Bluetooth",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "audio_jack": {
+        "value": "3.5mm",
+        "label": "Audio Jack",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "otg_support": {
+        "value": "Yes",
+        "label": "OTG Support",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "music_player": {
+        "value": "Yes",
+        "label": "Music Player",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "video_player": {
+        "value": "Yes",
+        "label": "Video Player",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "fm": {
+        "value": "Yes",
+        "label": "FM",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "ringtone": {
+        "value": "Yes",
+        "label": "Ringtone",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "sar_value": {
+        "value": "<1.6W/Kg",
+        "label": "SAR Value",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "sensors": {
+        "value": "Accelerometer",
+        "label": "Sensors",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "additional_features": {
+        "value": "Side Fingerprint Sensor, Face Unlock, Battery Saver Mode",
+        "label": "Additional Features",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "warranty": {
+        "value": "1 Year Handset Warranty and 6 Months Warranty on Accessories",
+        "label": "WARRANTY",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "face_unlock_time": {
+        "value": "0.67sec",
+        "label": "Face Unlock Time**",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      },
+      "fingerprint_unlock_time": {
+        "value": "0.33sec",
+        "label": "Fingerprint Unlock Time**",
+        "source": "html_table",
+        "confidence": 95,
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "observed_at": "2026-10-06T14:28:17.475153+00:00"
+      }
+    },
+    "features": [
+      {
+        "text": "*Refers to Virtual RAM ** - Under LAVA Testing Conditions",
+        "source": "p",
+        "confidence": 71,
+        "relevance_score": 1
+      }
+    ],
+    "meta": {
+      "html_title": "Virat V1 5G"
+    },
+    "evidence_summary": {
+      "parser": "lxml",
+      "json_ld_products": 0,
+      "json_ld_specifications": 0,
+      "table_specifications": 53,
+      "definition_list_specifications": 0,
+      "label_value_specifications": 0,
+      "structured_section_specifications": 0,
+      "embedded_state_specifications": 0,
+      "shopify_oxygen_specifications": 0,
+      "apple_techspecs_specifications": 0,
+      "total_specifications": 53,
+      "feature_items": 1,
+      "media_product_images": 0,
+      "media_ui_assets": 0,
+      "noise_filter_version": "2.0"
+    },
+    "media_evidence": {
+      "collector": "embedded_application_state",
+      "total_images": 0,
+      "product_image_count": 0,
+      "desktop_count": 0,
+      "mobile_count": 0,
+      "generic_candidate_count": 0,
+      "excluded_ui_assets": 0,
+      "product_images": [],
+      "ui_assets": [],
+      "ocr_status": "not_run",
+      "vision_status": "not_run"
+    },
+    "review": {
+      "approved": false,
+      "status": "candidate_ready",
+      "reason": "Page identity and extracted evidence are strong enough for review"
+    },
+    "extracted_at": "2026-10-06T14:28:17.475153+00:00",
+    "identity_match_mode": "verified_official_model_exact_capacity"
+  },
+  "scope": "Exact 5G model only. 4GB starred extra RAM is virtual per official footnote. 810min YouTube is manufacturer test claim; standby/talk are not active-video scores. Listing price observation is historical and must pass normal freshness checks.",
+  "canonical_id": "cw-mobile-85"
+}
