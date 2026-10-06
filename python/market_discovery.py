@@ -1156,6 +1156,15 @@ def local_known_product_fallback(
     if not query_tokens:
         return []
 
+    # Generic category searches need not repeat a category word in each title.
+    # Explicit brands, model names and capacities still require lexical matching.
+    generic_words = {"phone", "phones", "mobile", "mobiles", "smartphone",
+                     "smartphones", "best", "battery", "under", "below", "india", "in", "rs", "inr"}
+    generic_mobile_query = (
+        category == "smartphone"
+        and bool(query_tokens & {"phone", "phones", "mobile", "mobiles", "smartphone", "smartphones"})
+        and all(token in generic_words or token.isdigit() for token in query_tokens)
+    )
     candidates: list[dict[str, Any]] = []
 
     def add_candidate(
@@ -1164,6 +1173,7 @@ def local_known_product_fallback(
         url: str,
         brand: str = "",
         source: str,
+        declared_category: str = "",
         extra_score: float = 0.0,
     ) -> None:
         title = clean(title)
@@ -1180,7 +1190,10 @@ def local_known_product_fallback(
 
         overlap = len(query_tokens & title_tokens)
 
-        if overlap == 0:
+        category_match = generic_mobile_query and normalize_key(declared_category) in {
+            "mobiles", "mobile", "phone", "phones", "smartphone", "smartphones"
+        }
+        if overlap == 0 and not category_match:
             return
 
         score = overlap / max(1, len(query_tokens))
@@ -1265,6 +1278,7 @@ def local_known_product_fallback(
             url=clean(product.get("link")),
             brand=clean(product.get("brand")),
             source="local_coupon_catalogue",
+            declared_category=clean(product.get("category")),
             extra_score=0.05,
         )
 

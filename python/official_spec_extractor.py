@@ -568,9 +568,30 @@ def extract_label_value_blocks(
 
     known_labels = set(ALIASES.values())
 
+    # Workload cards may put the duration before the label. Keep each
+    # pair inside its own list item; the following item is another test.
+    workload_items: set[int] = set()
+    for item in soup.find_all("li"):
+        children = item.find_all(recursive=False)
+        if len(children) != 2:
+            continue
+        duration_node, label_node = children
+        duration = clean_text(duration_node.get_text(" ", strip=True))
+        label_copy = BeautifulSoup(str(label_node), "html.parser")
+        for marker in label_copy.find_all("sup"):
+            marker.decompose()
+        label = clean_text(label_copy.get_text(" ", strip=True))
+        if (re.fullmatch(r"\d+(?:\.\d+)?\s*(?:hours?|hrs?|minutes?|mins?)", duration, re.I)
+                and re.fullmatch(r"video playback|music playback|gaming|navigation", label, re.I)):
+            add_specification(specifications, label, duration,
+                              "same_item_duration_workload", 90)
+            workload_items.add(id(item))
+
     for label_node in soup.find_all(
         ["span", "strong", "b", "dt", "p"]
     ):
+        if any(id(parent) in workload_items for parent in label_node.parents):
+            continue
         raw_label = clean_text(
             label_node.get_text(" ", strip=True)
         )
@@ -610,7 +631,7 @@ def extract_label_value_blocks(
 
         parent = label_node.parent
 
-        if parent is not None:
+        if parent is not None and parent.name != "li":
             # Some official spec layouts insert empty spacer/container
             # nodes between a technical label and its value. Walk only
             # a few adjacent siblings and use the nearest non-empty one.
@@ -700,6 +721,40 @@ def extract_label_value_blocks(
             break
 
     return len(specifications) - before
+
+
+def extract_vivo_selected_capacity(soup, specifications, official_url, identity, verified):
+    """Bind capacity only to the official store's one selected SKU heading."""
+    from urllib.parse import parse_qs
+    from mobile_exact_identity_gate import AUTO_REUSE, classify_mobile_identity_reuse
+    from product_evidence_store import variant_signature_from_text, variant_signature_from_specifications, variant_text_is_ambiguous
+    parsed = urlparse(official_url)
+    if (verified is not True or clean_text(identity.get("brand")).casefold() != "vivo"
+            or not clean_text(identity.get("model"))
+            or parsed.hostname != "shop.vivo.com"
+            or not re.fullmatch(r"/in/product/\d+", parsed.path)
+            or not re.fullmatch(r"\d+", parse_qs(parsed.query).get("skuId", [""])[0])):
+        return
+    headings = soup.find_all("h1")
+    if len(headings) != 1:
+        return
+    heading = clean_text(headings[0].get_text(" ", strip=True))
+    requested = clean_text(identity.get("original_title"))
+    capacity = variant_signature_from_text(heading)
+    existing = variant_signature_from_specifications(specifications)
+    if (variant_text_is_ambiguous(heading) or variant_text_is_ambiguous(requested)
+            or set(capacity) != {"ram_gb", "storage_gb"}
+            or capacity != variant_signature_from_text(requested)
+            or (existing and existing != capacity)):
+        return
+    # The verified manufacturer's store heading omits its own brand.
+    expected_model = (f"vivo {identity['model']} {capacity['ram_gb']}GB RAM "
+                      f"{capacity['storage_gb']}GB Storage")
+    if classify_mobile_identity_reuse(expected_model, "vivo " + heading, official_url, "vivo")["status"] != AUTO_REUSE:
+        return
+    for label, key in (("RAM", "ram_gb"), ("Storage", "storage_gb")):
+        add_specification(specifications, label, capacity[key] + " GB", "official_selected_sku_heading", 95)
+        specifications[normalize_key(label)].update(source_url=official_url, observed_at=utc_now(), identity_match={"heading": heading, "variant": capacity})
 
 
 def remove_page_chrome(soup: BeautifulSoup) -> None:
@@ -5004,6 +5059,8 @@ def extract_one(
             )
         ):
             requested_capacity = listing_capacity
+        extract_vivo_selected_capacity(soup, specifications, official_url, identity,
+                                       research_result.get("verified"))
         page_capacity = variant_signature_from_specifications(specifications)
         model_name = clean_text(
             f"{identity.get('brand')} {identity.get('model')}"

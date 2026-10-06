@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "asin": "B0GL1JFK48",
+  "canonical_id": "cw-mobile-84",
+  "physical_variant": {
+    "ram_gb": "4",
+    "storage_gb": "64"
+  },
+  "listing_verification": {
+    "http_status": 200,
+    "final_url": "https://www.amazon.in/dp/B0GL1JFK48",
+    "page_asin": "B0GL1JFK48",
+    "page_title": "Lava Bold N2 (Siachen White, 4 GB RAM, 64 GB Storage) | 13MP AI Dual Rear Camera | Largest 6.75\" HD+ Display | 5000 mAh Battery & 10W Charging | IP64 Water & Dust Proof | Charger & Phone-Case in Box",
+    "strict_status": "AUTO_REUSE",
+    "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+    "resolver_decision": "verified",
+    "resolver_score": 85,
+    "observed_at": "2026-10-06T13:38:38.599887+00:00"
+  },
+  "scope": "Exact retailer identity admission only. Existing model evidence and fresh-price gates remain required; no new specifications inferred from colour."
+}

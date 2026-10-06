@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "asin": "B0GTTXP6WF",
+  "canonical_id": "cw-mobile-83",
+  "physical_variant": {
+    "ram_gb": "6",
+    "storage_gb": "128"
+  },
+  "listing_verification": {
+    "observed_at": "2026-10-06T13:23:17.265710+00:00",
+    "live": {
+      "http_status": 200,
+      "final_url": "https://www.amazon.in/dp/B0GTTXP6WF",
+      "page_asin": "B0GTTXP6WF",
+      "page_title": "vivo T5x 5G (Cyber Green, 6GB RAM, 128GB Storage) | 50MP AI Dual Camera | 32MP Selfie | 6.76\" FHD+ Display | 7200mAh Battery | Dimensity 7400-Turbo Processor | Fast Charging | Dual SIM Smartphone",
+      "strict_status": "AUTO_REUSE",
+      "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+      "resolver_decision": "verified",
+      "resolver_score": 95
+    }
+  },
+  "evidence_extracted_at": "2026-10-06T01:53:54.271061+00:00",
+  "official_selected_sku_url": "https://shop.vivo.com/in/product/10339?skuId=19387",
+  "specifications": {
+    "ram": {
+      "value": "6 GB",
+      "label": "RAM",
+      "source": "official_selected_sku_heading",
+      "confidence": 95,
+      "source_url": "https://shop.vivo.com/in/product/10339?skuId=19387",
+      "observed_at": "2026-10-06T01:52:44.205972+00:00",
+      "identity_match": {
+        "heading": "T5x 5G 6GB+128GB Cyber Green",
+        "variant": {
+          "ram_gb": "6",
+          "storage_gb": "128"
+        }
+      }
+    },
+    "storage": {
+      "value": "128 GB",
+      "label": "Storage",
+      "source": "official_selected_sku_heading",
+      "confidence": 95,
+      "source_url": "https://shop.vivo.com/in/product/10339?skuId=19387",
+      "observed_at": "2026-10-06T01:52:44.206006+00:00",
+      "identity_match": {
+        "heading": "T5x 5G 6GB+128GB Cyber Green",
+        "variant": {
+          "ram_gb": "6",
+          "storage_gb": "128"
+        }
+      }
+    },
+    "video_playback": {
+      "value": "40 Hours",
+      "label": "Video Playback",
+      "source": "same_item_duration_workload",
+      "confidence": 90,
+      "test_conditions": "Manufacturer lab claim; 25 C +/-1, fully charged, minimum screen brightness, muted sound. Actual performance varies.",
+      "observed_at": "2026-10-06T01:53:53.855232+00:00",
+      "source_url": "https://www.vivo.com/in/products/t5x"
+    },
+    "gaming": {
+      "value": "15.4 Hours",
+      "label": "Gaming",
+      "source": "same_item_duration_workload",
+      "confidence": 90,
+      "observed_at": "2026-10-06T01:53:53.855248+00:00",
+      "source_url": "https://www.vivo.com/in/products/t5x"
+    },
+    "music_playback": {
+      "value": "93 Hours",
+      "label": "Music Playback",
+      "source": "same_item_duration_workload",
+      "confidence": 90,
+      "observed_at": "2026-10-06T01:53:53.855253+00:00",
+      "source_url": "https://www.vivo.com/in/products/t5x"
+    },
+    "navigation": {
+      "value": "14.5 Hours",
+      "label": "Navigation",
+      "source": "same_item_duration_workload",
+      "confidence": 90,
+      "observed_at": "2026-10-06T01:53:53.855257+00:00",
+      "source_url": "https://www.vivo.com/in/products/t5x"
+    }
+  },
+  "scope": "Manufacturer workload claims, not independently benchmarked. Prices remain in freshness-controlled cache. Duration cards were structurally bound to their own workloads; model-wide overview plus exact manufacturer selected SKU bind 6GB/128GB."
+}
