@@ -72,6 +72,16 @@ class BatteryTests(unittest.TestCase):
             self.assertEqual(result['basis'], 'video_playback_hours')
             self.assertEqual(result['measurements']['capacity_mah'], [5000])
 
+    def test_remaining_charge_cards_do_not_become_full_discharge_endurance(self):
+        observed = ('10 hours Video 11 hours Chat 70 hours Music 34 hours Call '
+                    '393 hours Standby 12 hours Game 50% Charge left, even after: 7000mAh')
+        for text in (observed, 'Video Playback 10 hours; 50% charge remaining; 7000mAh'):
+            result = smartphone_battery_signal(text)
+            self.assertEqual(result['basis'], 'capacity_proxy')
+            self.assertEqual(result['measurements'], {'capacity_mah': [7000.0]})
+            self.assertIn('excluded_duration_reason', result)
+        self.assertIsNone(smartphone_battery_signal('Video playback 10 hours, 50% battery remaining')['match'])
+
     def test_other_categories_keep_existing_battery_engine(self):
         self.assertEqual(category_battery_signal({}, {'category': 'headphones'}, '50 hours'), battery_signal('50 hours'))
 

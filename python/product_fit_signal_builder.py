@@ -289,6 +289,14 @@ def smartphone_battery_signal(text: str) -> dict[str, Any]:
         "audio_playback_hours": r"(?:audio|music)\s+playback",
         "talk_hours": r"talk",
     }
+    # A remaining-charge endpoint is not a full-discharge endurance test.
+    # Flattened cards lose their field boundaries; retain capacity but do not
+    # attach adjacent durations or extrapolate a 50%-remaining claim.
+    partial_charge = bool(re.search(
+        r"\b\d+(?:\.\d+)?\s*%\s*(?:battery\s+)?(?:charge\s+)?(?:left|remaining)\b",
+        text,
+    ))
+    duration_text = "" if partial_charge else text
     measurements: dict[str, list[float]] = {}
     for kind, label in labels.items():
         values = []
@@ -296,17 +304,17 @@ def smartphone_battery_signal(text: str) -> dict[str, Any]:
         # to the next field in a flattened official specification corpus.
         prefix = rf"\b{label}(?:\s+time)?\s*\**\s*[:=-]?\s*"
         for match in re.finditer(
-            prefix + rf"(?:up\s+to\s+)?{number}\s*{unit}", text,
+            prefix + rf"(?:up\s+to\s+)?{number}\s*{unit}", duration_text,
         ):
             value = float(match.group(1))
             values.append(value / 60 if match.group(2).startswith("min") else value)
         for match in re.finditer(
-            prefix + rf"\(?\s*{unit}\s*\)?\s*[:=-]?\s*(?:up\s+to\s+)?{number}\b", text,
+            prefix + rf"\(?\s*{unit}\s*\)?\s*[:=-]?\s*(?:up\s+to\s+)?{number}\b", duration_text,
         ):
             value = float(match.group(2))
             values.append(value / 60 if match.group(1).startswith("min") else value)
         for match in re.finditer(
-            rf"(?:^|[;,])\s*(?:up\s+to\s+)?{number}\s*{unit}\s+(?:of\s+)?{label}\b", text,
+            rf"(?:^|[;,])\s*(?:up\s+to\s+)?{number}\s*{unit}\s+(?:of\s+)?{label}\b", duration_text,
         ):
             value = float(match.group(1))
             values.append(value / 60 if match.group(2).startswith("min") else value)
@@ -351,6 +359,8 @@ def smartphone_battery_signal(text: str) -> dict[str, Any]:
         basis = "unknown"
         result = signal(None, "No comparable active-use battery evidence; standby, audio, "
                         "talk time and unlabelled hours do not establish video endurance")
+    if partial_charge:
+        result["excluded_duration_reason"] = "Remaining-charge endpoint; no full-discharge duration inferred"
     result["basis"] = basis
     result["measurements"] = measurements
     return result
