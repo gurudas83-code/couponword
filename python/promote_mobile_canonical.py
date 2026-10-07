@@ -82,6 +82,35 @@ def _is_amazon_access_challenge(soup) -> bool:
     )
 
 
+def exact_listing_capacity_title(soup, page_title: str) -> tuple[str, dict]:
+    """Fill missing capacity only from the exact product's specification tables."""
+    from product_evidence_store import variant_signature_from_text
+    values = {"ram_gb": set(), "storage_gb": set()}
+    labels = {"ram memory installed size": "ram_gb", "ram memory installed": "ram_gb",
+              "ram size": "ram_gb", "memory storage capacity": "storage_gb"}
+    for section in soup.select("#productOverview_feature_div, #productDetails_feature_div"):
+        for row in section.select("tr"):
+            cells = row.find_all(["th", "td"], recursive=False)
+            if len(cells) != 2:
+                continue
+            key = labels.get(" ".join(cells[0].stripped_strings).casefold())
+            if not key:
+                continue
+            value = " ".join(cells[1].stripped_strings)
+            match = re.fullmatch(r"(\d+)\s*GB", value, re.I)
+            if not match:
+                return page_title, {}
+            values[key].add(str(int(match.group(1))))
+    if any(len(items) != 1 for items in values.values()):
+        return page_title, {}
+    capacity = {key: next(iter(items)) for key, items in values.items()}
+    stated = variant_signature_from_text(page_title)
+    if any(capacity.get(key) != value for key, value in stated.items()):
+        return page_title, {}
+    title = f"{page_title} | {capacity['ram_gb']}GB RAM, {capacity['storage_gb']}GB Storage"
+    return title, capacity
+
+
 def fetch_amazon_identity(
     asin: str,
     expected_title: str,
@@ -156,6 +185,16 @@ def fetch_amazon_identity(
         expected_brand=expected_brand,
     )
 
+    identity_title = page_title
+    table_capacity = {}
+    if gate.get("status") == "NEEDS_EVIDENCE":
+        identity_title, table_capacity = exact_listing_capacity_title(soup, page_title)
+        if table_capacity:
+            gate = classify_mobile_identity_reuse(
+                expected_text=expected_title, candidate_title=identity_title,
+                candidate_url=response.url, expected_brand=expected_brand,
+            )
+
     if gate.get("status") != AUTO_REUSE:
         raise SystemExit(
             "BLOCKED: strict mobile identity gate returned "
@@ -167,6 +206,8 @@ def fetch_amazon_identity(
         "final_url": response.url,
         "page_asin": page_asin,
         "page_title": page_title,
+        "identity_title": identity_title,
+        "exact_listing_capacity": table_capacity,
         "strict_status": gate.get("status"),
         "strict_reason": gate.get("reason"),
         "resolver_decision": gate.get("resolver_decision"),

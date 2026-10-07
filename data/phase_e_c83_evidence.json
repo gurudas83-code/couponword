@@ -1,0 +1,1737 @@
+{
+  "schema_version": 1,
+  "asin": "B0GPWRYNM1",
+  "physical_variant": {
+    "ram_gb": "4",
+    "storage_gb": "64"
+  },
+  "listing": {
+    "identity": {
+      "http_status": 200,
+      "final_url": "https://www.amazon.in/dp/B0GPWRYNM1",
+      "page_asin": "B0GPWRYNM1",
+      "page_title": "realme C83 5G Smartphone 4+64GB Green",
+      "identity_title": "realme C83 5G Smartphone 4+64GB Green | 4GB RAM, 64GB Storage",
+      "exact_listing_capacity": {
+        "ram_gb": "4",
+        "storage_gb": "64"
+      },
+      "strict_status": "AUTO_REUSE",
+      "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+      "resolver_decision": "verified",
+      "resolver_score": 95
+    },
+    "price": {
+      "price": 19999.0,
+      "prices_found": [
+        19999.0
+      ],
+      "availability": "in_stock",
+      "status": "verified",
+      "reason": "Exact Amazon primary buy-box price found",
+      "http_status": 200,
+      "evidence_method": "amazon_primary_buybox"
+    },
+    "observed_at": "2026-10-07T01:52:26.394466+00:00",
+    "identity_observed_at": "2026-10-07T01:50:24.834564+00:00"
+  },
+  "identity": {
+    "asin": "B0GPWRYNM1",
+    "brand": "realme",
+    "model": "C83 5G",
+    "search_name": "realme C83 5G",
+    "original_title": "realme C83 5G Smartphone 4+64GB Green | 4GB RAM, 64GB Storage"
+  },
+  "extraction": {
+    "product_id": "",
+    "brand": "realme",
+    "model": "C83 5G",
+    "search_name": "realme C83 5G",
+    "official_url": "https://www.realme.com/in/realme-c83",
+    "source_host": "www.realme.com",
+    "resolver_status": null,
+    "resolver_verified": true,
+    "fetch_status": "success",
+    "http_status": 200,
+    "page_identity_score": 0.9,
+    "specifications": {
+      "description": {
+        "value": "realme C83 5G combines a 7000mAh Titan Battery with a 144Hz Ultra Bright Display, MediaTek Dimensity 6300 5G chipset, 13MP AI camera, IP64 dust and water resistance, and military-grade shock resistance.",
+        "label": "description",
+        "source": "json_ld",
+        "confidence": 90,
+        "source_url": "https://www.realme.com/in/realme-c83",
+        "observed_at": "2026-10-07T01:54:24.401908+00:00"
+      },
+      "battery_and_charging": {
+        "value": "7000mAh Titan Battery, 15W Fast Charge, reverse wired charging, bypass charging",
+        "label": "Battery and Charging",
+        "source": "json_ld_additional_property",
+        "confidence": 94,
+        "source_url": "https://www.realme.com/in/realme-c83",
+        "observed_at": "2026-10-07T01:54:24.401908+00:00"
+      },
+      "display": {
+        "value": "6.8-inch 144Hz Ultra Bright Display, 900nit peak brightness, HD+ 1570x720",
+        "label": "Display",
+        "source": "json_ld_additional_property",
+        "confidence": 94,
+        "source_url": "https://www.realme.com/in/realme-c83",
+        "observed_at": "2026-10-07T01:54:24.401908+00:00"
+      },
+      "rear_camera": {
+        "value": "13MP AI camera, f/2.2, 77\u00b0 FOV, AF, dual-view video",
+        "label": "Rear Camera",
+        "source": "json_ld_additional_property",
+        "confidence": 94,
+        "source_url": "https://www.realme.com/in/realme-c83",
+        "observed_at": "2026-10-07T01:54:24.401908+00:00"
+      },
+      "durability": {
+        "value": "IP64 dust and water resistance, military-grade shock resistance (MIL-STD-810H), ArmorShell Protection",
+        "label": "Durability",
+        "source": "json_ld_additional_property",
+        "confidence": 94,
+        "source_url": "https://www.realme.com/in/realme-c83",
+        "observed_at": "2026-10-07T01:54:24.401908+00:00"
+      },
+      "operating_system": {
+        "value": "realme UI 7.0 based on Android 16",
+        "label": "Operating System",
+        "source": "json_ld_additional_property",
+        "confidence": 94,
+        "source_url": "https://www.realme.com/in/realme-c83",
+        "observed_at": "2026-10-07T01:54:24.401908+00:00"
+      },
+      "cellular_network": {
+        "value": "5G NR: n1/n3/n5/n8/n28B/n40/n41/n77/n78, 4G LTE, GSM, WCDMA",
+        "label": "Cellular Network",
+        "source": "json_ld_additional_property",
+        "confidence": 94,
+        "source_url": "https://www.realme.com/in/realme-c83",
+        "observed_at": "2026-10-07T01:54:24.401908+00:00"
+      },
+      "performance_amplified": {
+        "value": "MediaTek Dimensity 6300 5G Chipset",
+        "label": "Performance Amplified",
+        "source": "adjacent_label_value",
+        "confidence": 88,
+        "source_url": "https://www.realme.com/in/realme-c83",
+        "observed_at": "2026-10-07T01:54:24.401908+00:00"
+      },
+      "video_playback": {
+        "value": "19 hours",
+        "label": "Video Playback",
+        "source": "official_100_percent_power_card",
+        "confidence": 95,
+        "source_url": "https://www.realme.com/in/realme-c83",
+        "observed_at": "2026-10-07T01:54:24.401908+00:00",
+        "raw_label": "Online Videos",
+        "test_conditions": "At 100% Power panel; manufacturer realme Lab claim, actual results may vary. Separate from mixed-use 50%-remaining panel. Detailed brightness/network configuration unspecified."
+      },
+      "ram": {
+        "value": "4 GB",
+        "label": "RAM",
+        "source": "exact_amazon_listing_specification_table",
+        "confidence": 95,
+        "source_url": "https://www.amazon.in/dp/B0GPWRYNM1",
+        "observed_at": "2026-10-07T01:50:24.834564+00:00"
+      },
+      "storage": {
+        "value": "64 GB",
+        "label": "Storage",
+        "source": "exact_amazon_listing_specification_table",
+        "confidence": 95,
+        "source_url": "https://www.amazon.in/dp/B0GPWRYNM1",
+        "observed_at": "2026-10-07T01:50:24.834564+00:00"
+      }
+    },
+    "features": [],
+    "meta": {
+      "html_title": "realme C83 5G \u2013 7000mAh Titan Battery & 144Hz Display | realme India",
+      "description": "Power through your day with realme C83 5G: a 7000mAh Titan Battery, 144Hz Ultra Bright Display, MediaTek Dimensity 6300 5G chipset, IP64 dust and water resistance.",
+      "canonical_url": "https://www.realme.com/in/realme-c83",
+      "h1": "realme C83 5G \u2013 7000mAh Titan Battery"
+    },
+    "evidence_summary": {
+      "parser": "lxml",
+      "json_ld_products": 1,
+      "json_ld_specifications": 14,
+      "table_specifications": 0,
+      "definition_list_specifications": 0,
+      "label_value_specifications": 18,
+      "structured_section_specifications": 0,
+      "embedded_state_specifications": 0,
+      "shopify_oxygen_specifications": 0,
+      "apple_techspecs_specifications": 0,
+      "total_specifications": 32,
+      "feature_items": 43,
+      "media_product_images": 264,
+      "media_ui_assets": 0,
+      "noise_filter_version": "2.0"
+    },
+    "media_evidence": {
+      "collector": "embedded_application_state",
+      "total_images": 264,
+      "product_image_count": 264,
+      "desktop_count": 110,
+      "mobile_count": 99,
+      "generic_candidate_count": 55,
+      "excluded_ui_assets": 0,
+      "product_images": [
+        {
+          "url": "https://static2.realme.net/images/realme-c83/product_1.webp",
+          "path": "root.schema_product.image",
+          "role": "product_candidate"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260304/177262100549831aebf704e004d0c81c2bcffba3e07db.webp",
+          "path": "root[1].state.$sspecs.colors[0].pc",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260304/1772620639182736f1e2870ea42b7b4d36f0d57fd07f7.png",
+          "path": "root[1].state.$sspecs.colors[0].mobile",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260304/17726206414336aff80c41a374108bd365d212bae5191.png",
+          "path": "root[1].state.$sspecs.colors[1].pc",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260304/177262064278401a1972fe1b3489fab0a54adbfb4c92f.png",
+          "path": "root[1].state.$sspecs.colors[1].mobile",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719862432785dca483f7f314c8ca6d350dcc7d74242_news.jpg",
+          "path": "root[1].state.$simages.pc_section0.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/product_2.webp",
+          "path": "root[1].state.$simages.pc_section_product.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/product_3.webp",
+          "path": "root[1].state.$simages.pc_section_product.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/product_4.webp",
+          "path": "root[1].state.$simages.pc_section_product.image3",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/product_5.webp",
+          "path": "root[1].state.$simages.pc_section_product.image4",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719862512239e6ec88acfa54ef6a01a2a47c29d9a1f.webp",
+          "path": "root[1].state.$simages.pc_section2.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198625167312e9ed27a0974889a0a337a479d58906.webp",
+          "path": "root[1].state.$simages.pc_section2.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719862530333cdcc82e2b5d4f11845d149f5a950315.webp",
+          "path": "root[1].state.$simages.pc_section2.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719862532631782d394a57941349fbbb6d2245b1127.webp",
+          "path": "root[1].state.$simages.pc_section2.image3",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198625348379d8b65354ee4a0fbcef583440260850.webp",
+          "path": "root[1].state.$simages.pc_section2.image4",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986253717a4f8325bc95e4ec2a132ead586608c25.webp",
+          "path": "root[1].state.$simages.pc_section2.image5",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719862539608ebf8e1770a44c90ad8f8efdf8591d48.webp",
+          "path": "root[1].state.$simages.pc_section2.image6",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986254185c7dede1f3b7147e1ba488a2e9a59b6a2.webp",
+          "path": "root[1].state.$simages.pc_section2.image7",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/pc_sec2_battery.webp",
+          "path": "root[1].state.$simages.pc_section2.image8",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/pc_sec2_phone.webp",
+          "path": "root[1].state.$simages.pc_section2.image9",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/pc_sec2_bg.webp",
+          "path": "root[1].state.$simages.pc_section2.image10",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986255515ab85f6aa401742168a560040a4772bdf.webp",
+          "path": "root[1].state.$simages.pc_section3.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986259063e1a550cd01ac4f00a09f49d3ce557c41.webp",
+          "path": "root[1].state.$simages.pc_section3.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198625936661518f59a1b3482ba4a5e2fbf324c2c6.webp",
+          "path": "root[1].state.$simages.pc_section3.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986259608a6d69934b6864213b5bab485d4c91c01.webp",
+          "path": "root[1].state.$simages.pc_section3.image3",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986260541e1bc26b0acb0425a93d8d22507a1035b.webp",
+          "path": "root[1].state.$simages.pc_section4.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986267601dc5fd4ce70a944fab410eb2ba5499cd3.webp",
+          "path": "root[1].state.$simages.pc_section5.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719862681487acbcecc28a04a8493b8665aadef99ca.webp",
+          "path": "root[1].state.$simages.pc_section5.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198626856359b6d1537c8b40779462dd4cc4432ad1.webp",
+          "path": "root[1].state.$simages.pc_section5.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719862826971bd7f3c0e2af46979551d31b6e26c999.webp",
+          "path": "root[1].state.$simages.pc_section6.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719862833972ef43901dcb64b1787d78f9969e1f9ad.webp",
+          "path": "root[1].state.$simages.pc_section6.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986283656668a60aa34ce4ff78cdd0e16c6c264d1.webp",
+          "path": "root[1].state.$simages.pc_section6.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986291890d49c6ade614046e19c0f5b197920236a_new.jpg",
+          "path": "root[1].state.$simages.pc_section7.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719862960872f66d1581e6649748ea6e62be337f098.webp",
+          "path": "root[1].state.$simages.pc_section8.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198632863120860853fbf04e4e8f30be55aed7c498.webp",
+          "path": "root[1].state.$simages.pc_section9.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719863292811e8caf75f06848af9ba0f87c18489574.webp",
+          "path": "root[1].state.$simages.pc_section9.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198632954878b4035a9ac94342bfa4c514903968b3.webp",
+          "path": "root[1].state.$simages.pc_section9.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986329985151a1e58864b401c9b01ea157d47cf47.webp",
+          "path": "root[1].state.$simages.pc_section9.image3",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986330283f36623919b0d45d894aec829b98c1b53.webp",
+          "path": "root[1].state.$simages.pc_section9.image4",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986330576f44b0e2115ce4a43888fa552c9cf7d99.webp",
+          "path": "root[1].state.$simages.pc_section9.image5",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986330838d3697d8ead854cd892ee47fa7e527837.webp",
+          "path": "root[1].state.$simages.pc_section9.image6",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198633119529dc9ac8b6104621a526f1b0ca1e7985.webp",
+          "path": "root[1].state.$simages.pc_section9.image7",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986331487941f43ac51244296bcdb02dd2cb8f04b.webp",
+          "path": "root[1].state.$simages.pc_section9.image8",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986338174196e3da724c54b64aca25525762e84a7.webp",
+          "path": "root[1].state.$simages.pc_section10.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986364778c4ae218eacff4d089ffe88d6c60d7cf4.webp",
+          "path": "root[1].state.$simages.pc_section11.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986365198ab79f67997a24c658f7154e172be57c7.webp",
+          "path": "root[1].state.$simages.pc_section11.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986365459147cefb5f87f4a54aa6e3b9e9992046d.webp",
+          "path": "root[1].state.$simages.pc_section11.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198636726426518256b4144147993b38c004dcdd6c.webp",
+          "path": "root[1].state.$simages.pc_section12.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986370722e8f9dfe59c4d4bbb9eaee80c6cc5e43e.webp",
+          "path": "root[1].state.$simages.pc_section12.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719863710169924a7a549164b5ebe03ee3f47eea730.webp",
+          "path": "root[1].state.$simages.pc_section12.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986371239b935df98f4954a9db1c698524d79061c.webp",
+          "path": "root[1].state.$simages.pc_section12.image3",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986371471efbc2c0aeaa24ad5b46f9dc222bb6f67.webp",
+          "path": "root[1].state.$simages.pc_section12.image4",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986371711eab05cfd2ce849d4aac2ec5392f2fd64.webp",
+          "path": "root[1].state.$simages.pc_section12.image5",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986372309e27ef4354d9c4fedb14385b1d2b3cc5e.webp",
+          "path": "root[1].state.$simages.pc_section13.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986373744d8742cf9af174c0082babb552c63b71b.webp",
+          "path": "root[1].state.$simages.pc_section13.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986394116f73a6f07884d42a3819c4cb683349241.webp",
+          "path": "root[1].state.$simages.pc_section14.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986407965b67f0e8b3a3440b0b198482c550ffd23.webp",
+          "path": "root[1].state.$simages.pc_section15.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719864088133a32bbf7c5094938871efaf079bf7f01.webp",
+          "path": "root[1].state.$simages.pc_section16.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719864234300d79312f2bdb4bb689cb02872962984e.webp",
+          "path": "root[1].state.$simages.pc_section17.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986424062cdbbaa778be34984ad8c4efeb45944eb.webp",
+          "path": "root[1].state.$simages.pc_section17.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719864245448c5049f9cf93404485643e268720b373.webp",
+          "path": "root[1].state.$simages.pc_section17.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986430906f1234795f37c415e80e328bab81b7c7a.webp",
+          "path": "root[1].state.$simages.pc_section18.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719864320723948f7e0140047c788ebd937e64f8bf2.webp",
+          "path": "root[1].state.$simages.pc_section18.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198643238875583d4079af477aad0fa11f22f72b34.webp",
+          "path": "root[1].state.$simages.pc_section18.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198643263986837b1410564905ac69360a70d022b2.webp",
+          "path": "root[1].state.$simages.pc_section18.image3",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719864329094f7f345531464bda87693a3657d41663.webp",
+          "path": "root[1].state.$simages.pc_section18.image4",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719864452176fc77c632b6c44c1b5044ad092923ebb.webp",
+          "path": "root[1].state.$simages.pc_section19.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986452380b7a4063be01a49fb8fea47ef50e25d42.webp",
+          "path": "root[1].state.$simages.pc_section20.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986454361fa5985acacbe4265b556a4565bc6feca.webp",
+          "path": "root[1].state.$simages.pc_section21.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198646102441c48e5f410345b99d65dd3385a071a7.webp",
+          "path": "root[1].state.$simages.pc_section21.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719864615699baea6a2c52e4be99df52413e799d049.webp",
+          "path": "root[1].state.$simages.pc_section21.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986461980af1ae14f7a294b8b8ea6848193289769.webp",
+          "path": "root[1].state.$simages.pc_section21.image3",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986464653bee2539a033441eb9f108befef07ffae.webp",
+          "path": "root[1].state.$simages.pc_section21.image4",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986472429863285ab308b49d7b8183634fbcb4e31.webp",
+          "path": "root[1].state.$simages.pc_section22.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719864728941ad1516dc7d74553a3ac113268fd7fbd.webp",
+          "path": "root[1].state.$simages.pc_section22.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719864791324b126f65878043d7b226d06eb30b696f.webp",
+          "path": "root[1].state.$simages.pc_section23.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198649706339f2c6a0419d4e4fa38e2f783dfb5030.webp",
+          "path": "root[1].state.$simages.pc_section24.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719865075728ae1f0e625bd4ef2b14df7b3edc4c585_news.jpg",
+          "path": "root[1].state.$simages.pc_section24.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986508021b6db7444f62042ff8ec45ae7f5b31b29.webp",
+          "path": "root[1].state.$simages.pc_section24.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719865082601013d84bd3e0455f9ddc5dfd7d7423bd.webp",
+          "path": "root[1].state.$simages.pc_section24.image3",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986508535adf62ef258624fa4b7651b653198c400.webp",
+          "path": "root[1].state.$simages.pc_section24.image4",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719865195851ae546aa2abd48e1bdac071d4f1bd48f.webp",
+          "path": "root[1].state.$simages.pc_section25.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198651997183079a9f3cba4221a633027e974ce3db.webp",
+          "path": "root[1].state.$simages.pc_section25.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986520376fce96105a4d64a3e897f4eadbf218442.webp",
+          "path": "root[1].state.$simages.pc_section25.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719865206137714e2e1047d4511a226c73faf5b9d85.webp",
+          "path": "root[1].state.$simages.pc_section25.image3",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719865245350647bc69203d49e1b08ab2b5790ced88.webp",
+          "path": "root[1].state.$simages.pc_section26.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986530204544ae752e03a4e7e9052668c0a2028df.webp",
+          "path": "root[1].state.$simages.pc_section26.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986536770cc7c125f7d414484b42a12526d9c57de.webp",
+          "path": "root[1].state.$simages.pc_section27.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198653711904ac628d9ecb425096d49390481a9f42.webp",
+          "path": "root[1].state.$simages.pc_section27.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719865373611239e80d89004e3cae4377d40c89d510.webp",
+          "path": "root[1].state.$simages.pc_section27.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719865439220703cc9c6e394c2088b53863758c3919.webp",
+          "path": "root[1].state.$simages.pc_section28.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986554793f6ec9477f5984ce5a884ab439666a7bb.webp",
+          "path": "root[1].state.$simages.pc_section29.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986555568ae7f578e61de44559f270563f776407f.webp",
+          "path": "root[1].state.$simages.pc_section29.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198656816496e052e4c3154285b87b72142136d8f1.webp",
+          "path": "root[1].state.$simages.pc_section30.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719865730713d4c6ddace49495fa0104033441d7dc8.webp",
+          "path": "root[1].state.$simages.pc_section30.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/pc_sec30_2.webp",
+          "path": "root[1].state.$simages.pc_section30.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198658561376a6313e366d43eb8c46f5fbb85972f2.webp",
+          "path": "root[1].state.$simages.pc_section31.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986586266625b93044e13425cb134a1349f6fa55b.webp",
+          "path": "root[1].state.$simages.pc_section31.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986590900135a35cbfc68471d8bf46d6eaa2ffd33.webp",
+          "path": "root[1].state.$simages.pc_section31.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986591346b689bc2991eb4b88be7c0fab8692b250.webp",
+          "path": "root[1].state.$simages.pc_section31.image3",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719865916648c144d6cef664730a51f6d8106098919.webp",
+          "path": "root[1].state.$simages.pc_section31.image4",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986591978a1ec446ae1fd484b976877904119d4eb.webp",
+          "path": "root[1].state.$simages.pc_section31.image5",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198659221423702f97440c4c669d9187c47222b69f.webp",
+          "path": "root[1].state.$simages.pc_section31.image6",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986597828ba754f25e4cc499b9edec1ad6b22198f.webp",
+          "path": "root[1].state.$simages.pc_section32.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719866048930cdccacf89a2426492f3c8373c1ff9b3.webp",
+          "path": "root[1].state.$simages.pc_section33.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986606410e0c0849743ad4e6a925a622eb9b0fc35.webp",
+          "path": "root[1].state.$simages.pc_section33.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719866067756b1e2c2f5d094fd0a08a75cacf1341d9.webp",
+          "path": "root[1].state.$simages.pc_section33.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986607017d6cd8925b1e84abeac0efc5b93105c2b.webp",
+          "path": "root[1].state.$simages.pc_section33.image3",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719866072630266f646f35d4493b1fd729d5f76b558.webp",
+          "path": "root[1].state.$simages.pc_section33.image4",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986611108aff15a04d940434c83c9446d7d85ef17.webp",
+          "path": "root[1].state.$simages.pc_section34.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177198661416806cc4bbf5be44ee3aa14f1a10bfe026a.webp",
+          "path": "root[1].state.$simages.pc_section34.image1",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771986618316350a1cc2312f4984af4c896a67c781ab.webp",
+          "path": "root[1].state.$simages.pc_section34.image2",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719866229606f264f3e3fae4ab88fdef9fd4782e718.webp",
+          "path": "root[1].state.$simages.pc_section35.image0",
+          "role": "product_desktop"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991490246905858d88e8841138fd6869a5d5cab11_news.jpg",
+          "path": "root[1].state.$simages.mobile_section0.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991492014876d95f966e148ebbae5318f45bd5b46.webp",
+          "path": "root[1].state.$simages.mobile_section1.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719914926104fe9df12702342dcbda82f241a4473ae.webp",
+          "path": "root[1].state.$simages.mobile_section1.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719914936992ac0124605334d5ab8e0be66144d33d1.webp",
+          "path": "root[1].state.$simages.mobile_section1.image2",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991495177bc9db49e80144be8abfd271e432e005a.webp",
+          "path": "root[1].state.$simages.mobile_section1.image3",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991496223df47bd2a1fc14b2687d38abc747838a6.webp",
+          "path": "root[1].state.$simages.mobile_section1.image4",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991498850835223098a394bfc96779168ae6b9b96.webp",
+          "path": "root[1].state.$simages.mobile_section3.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991499269e04600bf3e1d4860a5af98a66d43fcb6.webp",
+          "path": "root[1].state.$simages.mobile_section3.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991500482d9bbb60701414183a467f22412702b75.webp",
+          "path": "root[1].state.$simages.mobile_section3.image2",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199150070968ea35eaf90a42cba588e17f58e02b7e.webp",
+          "path": "root[1].state.$simages.mobile_section3.image3",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991500933f1af89137ae9486ca164f0ee4463e44d.webp",
+          "path": "root[1].state.$simages.mobile_section3.image4",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915011849e5c22aab2d1428f8998bbf48b1c8ab7.webp",
+          "path": "root[1].state.$simages.mobile_section3.image5",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199150143569e790ab41a2479fa691ed3ad749d920.webp",
+          "path": "root[1].state.$simages.mobile_section3.image6",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915016811ec21239acc049bbb6a76b1c23d9e7f5.webp",
+          "path": "root[1].state.$simages.mobile_section3.image7",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/msec3_battery.png",
+          "path": "root[1].state.$simages.mobile_section3.image8",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/msec3_phone.png",
+          "path": "root[1].state.$simages.mobile_section3.image9",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/msec3_bg.jpg",
+          "path": "root[1].state.$simages.mobile_section3.image10",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991504451cd072eb08d2246799f29947ec3db5bff_news.jpg",
+          "path": "root[1].state.$simages.mobile_section4.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915047193023333cf99c4bb4869794fc0d291736.webp",
+          "path": "root[1].state.$simages.mobile_section4.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991504940645ddd11092547a6bfcff88749b8b76c.webp",
+          "path": "root[1].state.$simages.mobile_section4.image2",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915051584eb0ca8a222140d7a2272f5555055a96.webp",
+          "path": "root[1].state.$simages.mobile_section4.image3",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991505388bae89f1495504e93acf64e5de83afa72.webp",
+          "path": "root[1].state.$simages.mobile_section4.image4",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915056231ca825fe210346259b903611d13fbe59.webp",
+          "path": "root[1].state.$simages.mobile_section4.image5",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199150585665565620804b4ed291549e1d68e3c26b.webp",
+          "path": "root[1].state.$simages.mobile_section4.image6",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991508223e6af28c307cf4fb0b865954da53ba3fc.webp",
+          "path": "root[1].state.$simages.mobile_section5.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991508588cb45d03fbcb048e3899a017bc6405aa3.webp",
+          "path": "root[1].state.$simages.mobile_section5.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991509050cf301ae1c5984e47b96f9463a76a17ee.webp",
+          "path": "root[1].state.$simages.mobile_section5.image2",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915114863be88cc712ef4221bf7fdf9029331d7c.webp",
+          "path": "root[1].state.$simages.mobile_section7.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199151221931cd32c3bfdf45258192ab2a6a49aedc.webp",
+          "path": "root[1].state.$simages.mobile_section7.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991512909a01ddf19f6674158b45c8e7ce556141c.webp",
+          "path": "root[1].state.$simages.mobile_section7.image2",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991516994507b86c366bf462793c61c9cb68bf191.webp",
+          "path": "root[1].state.$simages.mobile_section8.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991517415d56564d5e9c3474eaca1b9fe618b91d1.webp",
+          "path": "root[1].state.$simages.mobile_section8.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915178342715fc408ca34240b1cfb6074818e2fc.webp",
+          "path": "root[1].state.$simages.mobile_section8.image2",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991520207bddfe9ee093f4e6ebc9a3ef801b4b5d1_new.png",
+          "path": "root[1].state.$simages.mobile_section9.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991522794f0ef731b247a4fbd9aa406532d6be7e5.webp",
+          "path": "root[1].state.$simages.mobile_section11.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991523227a4a254ec1d494c49b49cd3df656653de.webp",
+          "path": "root[1].state.$simages.mobile_section11.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199152373402644150385f45559efb8094c4290d78.webp",
+          "path": "root[1].state.$simages.mobile_section11.image2",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915242554d8054442a804cd4a937c31dcaa381e3.webp",
+          "path": "root[1].state.$simages.mobile_section11.image3",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991524770bb2ee5713ac44f1f89171c9f8a1c22e3.webp",
+          "path": "root[1].state.$simages.mobile_section11.image4",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991525099883bba60a527481db5cec90370d6fe6c.webp",
+          "path": "root[1].state.$simages.mobile_section11.image5",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915253172b9b0c8cebf54a968a92357501fc8b65.webp",
+          "path": "root[1].state.$simages.mobile_section11.image6",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199152563125f3a2a2c31b458baece84c7d5ebae5a.webp",
+          "path": "root[1].state.$simages.mobile_section11.image7",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991525864079adf36045645f889a952e3d2f57151.webp",
+          "path": "root[1].state.$simages.mobile_section11.image8",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991528056309f988c2db64653a99232a43e726af0.webp",
+          "path": "root[1].state.$simages.mobile_section12.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915314856c06165804d549bd8e20ea1c316f2d3c.webp",
+          "path": "root[1].state.$simages.mobile_section13.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991532004248d64de4c8746658df401a0c5127bd7.webp",
+          "path": "root[1].state.$simages.mobile_section13.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915325133e8921caf5a144cdb0017e054010ca80.webp",
+          "path": "root[1].state.$simages.mobile_section13.image2",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991534825e0ea55c1b1784c0ca2feb4bf3d2ca030.webp",
+          "path": "root[1].state.$simages.mobile_section14.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915352967d59cf95142f488fa789654cc0656bb6.webp",
+          "path": "root[1].state.$simages.mobile_section14.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199153579969b855b0ad1e4e7f802a37d9137555a4.webp",
+          "path": "root[1].state.$simages.mobile_section14.image2",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991536127ec98944620854ba595ba116e6f249db8.webp",
+          "path": "root[1].state.$simages.mobile_section14.image3",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991536358afba498b4c514a8da1f9a756b272c2ef.webp",
+          "path": "root[1].state.$simages.mobile_section14.image4",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915403381f2ae290448b4f0ab973243308fc8b37_news.jpg",
+          "path": "root[1].state.$simages.mobile_section15.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991541081195404e9b9914102b38611455de41441.webp",
+          "path": "root[1].state.$simages.mobile_section15.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991542288da4aa4f3e90c4f90ab570571b82bcefc.webp",
+          "path": "root[1].state.$simages.mobile_section15.image2",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/m_sec3_phone_new.png",
+          "path": "root[1].state.$simages.mobile_section15.image3",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/m_sec3_bg_new.jpg",
+          "path": "root[1].state.$simages.mobile_section15.image4",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199154549397da7b20662d4ebb946cd063e205f0ae.webp",
+          "path": "root[1].state.$simages.mobile_section16.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915478344c7683b101c14f7aae5f62031b974a83.webp",
+          "path": "root[1].state.$simages.mobile_section17.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199155125830cc369449da4b74a973be1d0063b238.webp",
+          "path": "root[1].state.$simages.mobile_section19.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199155195104adb65c9d324b61b2962244506a9695.webp",
+          "path": "root[1].state.$simages.mobile_section19.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991552531cef239d1cd624b9ab9709dbc60cd4b17.webp",
+          "path": "root[1].state.$simages.mobile_section19.image2",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991554745577ecda9a72441cea09cbc053216d0a5.webp",
+          "path": "root[1].state.$simages.mobile_section20.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915550591293a20f69034a28b75fdef77e469ab6.webp",
+          "path": "root[1].state.$simages.mobile_section20.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991555286d5f94ec0d0cc43c790cf9978cd76f4b1.webp",
+          "path": "root[1].state.$simages.mobile_section20.image2",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991555504848c2cca29ba4f9cae0adcb88690c26a.webp",
+          "path": "root[1].state.$simages.mobile_section20.image3",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915570337a6adbc807e04ef3b8e1fa9ddcac280a.webp",
+          "path": "root[1].state.$simages.mobile_section21.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991558551fb1c564ec2074d8c81698ebf88037340.webp",
+          "path": "root[1].state.$simages.mobile_section21.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199155978101a5815a4a8e45dab84f6ee656bbfd4e.webp",
+          "path": "root[1].state.$simages.mobile_section22.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915631235a4865de816f4617b59e011007ac18ed.webp",
+          "path": "root[1].state.$simages.mobile_section23.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991563589813ebe7583c844edb08d183b0252db16.webp",
+          "path": "root[1].state.$simages.mobile_section23.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915653948ac66380b96e40b494676463f2fb5f97.webp",
+          "path": "root[1].state.$simages.mobile_section24.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199156758435c02c97e5344c3cafe05b242a0a1f52.webp",
+          "path": "root[1].state.$simages.mobile_section25.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991570177110dfa1d997f40bbb9fbd7f9f2017b43.webp",
+          "path": "root[1].state.$simages.mobile_section26.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991570539c34df016c0e24245a6c7f4ee982474a2.webp",
+          "path": "root[1].state.$simages.mobile_section26.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199157077563a5ecd0495b499cbd0f50563286f723.webp",
+          "path": "root[1].state.$simages.mobile_section26.image2",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199157101905cd76094cb04a769662f66dda7252c1.webp",
+          "path": "root[1].state.$simages.mobile_section26.image3",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915734507c601c3ac0824f11ab35f8c49dcbeca5.webp",
+          "path": "root[1].state.$simages.mobile_section27.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991575886ef27ab749ced480baa1c33ccbdea059c.webp",
+          "path": "root[1].state.$simages.mobile_section28.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991576236245dec08fcc44cab8a4615bd64eae0c6.webp",
+          "path": "root[1].state.$simages.mobile_section28.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915764701a81ef8845d14576b6f0a27581ee443b.webp",
+          "path": "root[1].state.$simages.mobile_section28.image2",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991579685eabf05df1d134e0e8da0c1947b2c8a0d.webp",
+          "path": "root[1].state.$simages.mobile_section29.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991579972188c0a4a371d446897a4a88d1d32600f.webp",
+          "path": "root[1].state.$simages.mobile_section29.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991580214863e24d76fdf42d4835a657cd7effeca.webp",
+          "path": "root[1].state.$simages.mobile_section29.image2",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199158339967c6f0a5ad704a82ba282db338a94abb_news.jpg",
+          "path": "root[1].state.$simages.mobile_section30.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915837187b3e60bfe7334d88b759dab52229164d.webp",
+          "path": "root[1].state.$simages.mobile_section30.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199158395983f91f6e801f4923adcc5724e3a67d0f.webp",
+          "path": "root[1].state.$simages.mobile_section30.image2",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991584188aa549b30d1d549ad8a64a6d372671643.webp",
+          "path": "root[1].state.$simages.mobile_section30.image3",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199158450218ff9be160b14ff6984fc6943613038a.webp",
+          "path": "root[1].state.$simages.mobile_section30.image4",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/177199158670421190fa3edf34f20b46fcbf5ba35f2c9.webp",
+          "path": "root[1].state.$simages.mobile_section31.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915888688ab41b750ba8477c974f79059b65ef2f.webp",
+          "path": "root[1].state.$simages.mobile_section32.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915891493833527c79774b80bd579c627aa3a4ac.webp",
+          "path": "root[1].state.$simages.mobile_section32.image1",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/17719915893806719926a06ce4b47acbeff17e8cd1ea2.webp",
+          "path": "root[1].state.$simages.mobile_section32.image2",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991589618d91612583d0149709b6d0d1bd6f39bab.webp",
+          "path": "root[1].state.$simages.mobile_section32.image3",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991591144754d8503325d456292002b5395c84e00.webp",
+          "path": "root[1].state.$simages.mobile_section33.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991592874566020111f9f4931808274cc25bea7fc.webp",
+          "path": "root[1].state.$simages.mobile_section34.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static2.realme.net/images/realme-c83/1771991594199f6fb7296ee58429a81dab41859b04940.webp",
+          "path": "root[1].state.$simages.mobile_section35.image0",
+          "role": "product_mobile"
+        },
+        {
+          "url": "https://static.realme.net/v3/common/images/close_w-023b40f19a.png",
+          "path": "html.img[0].src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "Download App to Unlock More Benefits. Download App",
+          "href": ""
+        },
+        {
+          "url": "https://static.realme.net/v3/common/images/toApp_icon-59b38c1c07.png",
+          "path": "html.img[1].src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "Download App to Unlock More Benefits. Download App",
+          "href": ""
+        },
+        {
+          "url": "https://image01.realme.net/general/20260930/17907467111966b01a34c043d4fdeaa9e5497942c5385.png?width=1080&height=1080&size=802158",
+          "path": "html.img[2].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "NEW realme P4s Lite",
+          "href": "https://www.realme.com/in/realme-p4s-lite"
+        },
+        {
+          "url": "https://realme-upload.s3.ap-south-1.amazonaws.com/general/20260826/178774644984770dd07a9e34941df97fb31130357877d.png?width=1080&height=1080&size=971319",
+          "path": "html.img[3].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "NEW realme C100i",
+          "href": "https://www.realme.com/in/realme-c100i"
+        },
+        {
+          "url": "https://realme-upload.s3.ap-south-1.amazonaws.com/general/20260817/1786961924631c087b8bffe564f7c9d65f1604711744d.png?width=1080&height=1080&size=1042011",
+          "path": "html.img[4].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "NEW realme P4s 5G",
+          "href": "https://www.realme.com/in/realme-p4s-5g"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260810/1786344449147fe55ffe4fbdf4968b7e3ee82173f11ac.png?width=1080&height=1080&size=1213545",
+          "path": "html.img[5].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "NEW realme 16x 5G",
+          "href": "https://www.realme.com/in/realme-16x-5g"
+        },
+        {
+          "url": "https://image01.realme.net/general/20251104/176223337780100ac97bf683c4226845bb61f3f517cf7.png?width=1080&height=1080&size=751097",
+          "path": "html.img[6].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme GT 8 Pro",
+          "href": "https://www.realme.com/in/realme-gt-8-pro"
+        },
+        {
+          "url": "https://image01.realme.net/general/20250528/17484129770028784a8e2d6a04a8b83e44c7ce7263275.png",
+          "path": "html.img[7].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme GT 7T",
+          "href": "https://www.realme.com/in/realme-gt-7t-5g"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260312/177331102534196293e56495641de9cbf9bc3e609a045.png?width=1080&height=1080&size=984846",
+          "path": "html.img[9].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme 16 5G",
+          "href": "https://www.realme.com/in/realme-16-5g"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260520/17792576304257aeb59a826964ca7acf57adb5eccc10e.png?width=1080&height=1080&size=1393166",
+          "path": "html.img[10].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme 16T 5G",
+          "href": "https://www.realme.com/in/realme-16t-5g"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260105/176760593270679cf42c367ac44ee8be7e72ca766162c.png?width=1080&height=1080&size=1143282",
+          "path": "html.img[11].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme 16 Pro+ 5G",
+          "href": "https://www.realme.com/in/realme-16-pro-plus-5g"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260105/1767607330558648a26c6a4294b058149e0a23522ff6b.png?width=1080&height=1080&size=1205622",
+          "path": "html.img[12].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme 16 Pro 5G",
+          "href": "https://www.realme.com/in/realme-16-pro-5g"
+        },
+        {
+          "url": "https://realme-upload.s3.ap-south-1.amazonaws.com/general/20260908/17888597793107f1a85efb97345d482e95d0325e3d913.png?width=1080&height=1080&size=1839782",
+          "path": "html.img[13].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme 16 Pro 5G Harry Potter Edition",
+          "href": "https://www.realme.com/in/realme-16-pro-5g-harry-potter-edition"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260507/1778148667036368eb467efee402ba73103155160d874.png?width=1080&height=1080&size=321173",
+          "path": "html.img[16].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme P4R 5G",
+          "href": "https://www.realme.com/in/realme-p4r-5g"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260312/1773310206415f8b7a1f34e564fc7970d359d0d8716e4.png?width=1080&height=1080&size=1068607",
+          "path": "html.img[17].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme P4 Lite 5G",
+          "href": "https://www.realme.com/in/realme-p4-lite-5g"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260210/17707166136120cbd5c52d8044bc18ea71b865eb87e01.png?width=1080&height=1080&size=1112828",
+          "path": "html.img[18].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme P4 Lite",
+          "href": "https://www.realme.com/in/realme-p4-lite"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260121/1768986481102b5e1e2a9272e4de5b31b3cd967ffe6a3.png?width=1080&height=1080&size=929941",
+          "path": "html.img[19].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme P4 Power 5G",
+          "href": "https://www.realme.com/in/realme-p4-power-5g?from=owbanner1"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260710/1783686075950170a572870794f9da1f1b8fc1f26dd1d.png?width=1080&height=1080&size=360544",
+          "path": "html.img[20].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "NEW realme NARZO 100x 5G",
+          "href": "https://www.realme.com/in/realme-narzo-100x-5g"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260414/1776145429338ee6c95f4f436437e957443a3d23c5b63.png?width=1080&height=1080&size=1280845",
+          "path": "html.img[21].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme NARZO 100 Lite 5G",
+          "href": "https://www.realme.com/in/realme-narzo-100-lite-5g"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260211/17708049752765831fa9d065f42e8a4a5804d049c5bd1.png?width=1080&height=1080&size=929941",
+          "path": "html.img[22].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme NARZO Power 5G",
+          "href": "https://realme.com/in/realme-narzo-power-5g"
+        },
+        {
+          "url": "https://image01.realme.net/general/20251216/176587160636737b2cf7e89f6486a8908c2860ebd7600.png?width=1080&height=1080&size=1167042",
+          "path": "html.img[23].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme NARZO 90x 5G",
+          "href": "https://www.realme.com/in/realme-narzo-90x"
+        },
+        {
+          "url": "https://image01.realme.net/general/20250721/17530820857856aae8857ba9c4b759cbb0967b2d3028e.png?width=1080&height=1080&size=355154",
+          "path": "html.img[24].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme NARZO 80 Lite",
+          "href": "https://www.realme.com/in/realme-narzo-80-lite"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260713/17839373360368e682bb5e9d84f598a9fc295b6d617b0.png?width=1080&height=1080&size=1093420",
+          "path": "html.img[26].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme C100x",
+          "href": "https://www.realme.com/in/realme-c100x"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260303/1772523834262d83d6e6763304ab4a2f4000e5286bfbf.png?width=1080&height=1080&size=1179048",
+          "path": "html.img[27].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme C83 5G",
+          "href": "https://www.realme.com/in/realme-c83"
+        },
+        {
+          "url": "https://image01.realme.net/general/20251124/1763963399871cf34fd6b071d44f683abd985bdd5e012.png?width=1080&height=1080&size=959058",
+          "path": "html.img[28].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme C85 5G",
+          "href": "https://www.realme.com/in/realme-c85-5g"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260513/1778669642272914dd496618741dcb975e4e67eb79b2f.png?width=1440&height=1440&size=755827",
+          "path": "html.img[29].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "NEW realme Buds Air8 Pro",
+          "href": "https://www.realme.com/in/more-products/realme-buds-air-8-pro"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260416/177631642756068e9da97b2a748d3ade9c6e7adb076c0.png?width=1080&height=1080&size=891958",
+          "path": "html.img[30].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "NEW realme Buds T500 Pro",
+          "href": "https://www.realme.com/in/more-products/realme-buds-t500-pro"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260105/1767608318444db5cc236cad84022a05f1cf57050eb80.png?width=1440&height=1440&size=1562252",
+          "path": "html.img[31].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme Buds Air8",
+          "href": "https://buy.realme.com/in/goods/783"
+        },
+        {
+          "url": "https://image01.realme.net/general/20250519/17476345431018732286c01714f3d9b3a7fc055522fb6.png?width=1440&height=1440&size=1031260",
+          "path": "html.img[32].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme Buds Air7 Pro",
+          "href": "https://buy.realme.com/in/goods/755"
+        },
+        {
+          "url": "https://image01.realme.net/general/20250528/17484005708799ac1f8105b1a43ef81adb2e7e0183398.png",
+          "path": "html.img[33].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme Buds Air7",
+          "href": "https://buy.realme.com/in/goods/746"
+        },
+        {
+          "url": "https://image01.realme.net/general/20250618/1750218083167e64057c37a794ccea28e0891696f8e39.png?width=1080&height=1080&size=236738",
+          "path": "html.img[34].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme Buds Wireless 5 Lite",
+          "href": "https://buy.realme.com/in/goods/760"
+        },
+        {
+          "url": "https://image01.realme.net/general/20250109/173641931665827500271654245b1b97340fe59b225e6.png?width=1440&height=1440&size=298668",
+          "path": "html.img[35].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme Buds Wireless 5 ANC",
+          "href": "https://buy.realme.com/in/goods/737"
+        },
+        {
+          "url": "https://image01.realme.net/general/20240521/171629514960474b0120e52214ba5939a7635ab80345e.png?width=1440&height=1440&size=115343",
+          "path": "html.img[36].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme Buds Wireless 3 Neo",
+          "href": "https://buy.realme.com/in/goods/769?utm_source=mainayer4&feedback=01"
+        },
+        {
+          "url": "https://image01.realme.net/general/20230621/1687318015656f406a0f0eb71439c958bd2b3e8f2ced2.png?width=1440&height=1440&size=126923",
+          "path": "html.img[37].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme Buds Wireless 3",
+          "href": "https://buy.realme.com/in/goods/769"
+        },
+        {
+          "url": "https://image01.realme.net/general/20241014/1728880078507c6227bd8e2384dedb85fa9740bf50383.png?width=1440&height=1440&size=260521",
+          "path": "html.img[38].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme Techlife Studio H1",
+          "href": "https://buy.realme.com/in/goods/729"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260129/17696788149374bb6445e1f0349e8aa7b1525a3cf4635.png?width=1440&height=1440&size=1397551",
+          "path": "html.img[39].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "NEW realme Buds Clip",
+          "href": "https://buy.realme.com/in/goods/786"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260513/1778667696470f5bc6d9d5b244e3b908bc0e635068c77.png?width=1080&height=1080&size=432073",
+          "path": "html.img[40].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "NEW realme Watch S5",
+          "href": "https://www.realme.com/in/realme-watch-s5"
+        },
+        {
+          "url": "https://image01.realme.net/general/20251202/1764674915174d6ec4b40879b4ccfba095e9ef2f2314c.png?width=1080&height=1080&size=248390",
+          "path": "html.img[41].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "NEW realme Watch 5",
+          "href": "https://buy.realme.com/in/goods/777"
+        },
+        {
+          "url": "https://image01.realme.net/general/20240716/1721129139044612f8872d41843aaa3770e04dbdfc812.png?width=1440&height=1440&size=343626",
+          "path": "html.img[42].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme Watch S2",
+          "href": "https://buy.realme.com/in/goods/716"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260105/17676092159623b1938a07ca64e2782cd7937ab95ceed.png?width=1080&height=1080&size=881512",
+          "path": "html.img[43].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "NEW realme Pad 3",
+          "href": "https://www.realme.com/in/realme-pad-3"
+        },
+        {
+          "url": "https://image01.realme.net/general/20240911/172603661550551585d4265d44a35aed9a02635df0675.jpg",
+          "path": "html.img[44].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme Pad 2 Lite",
+          "href": "https://buy.realme.com/in/goods/727"
+        },
+        {
+          "url": "https://image01.realme.net/general/20240911/1726036617713be12b49158d44e509b7386f1598bd28e.jpg",
+          "path": "html.img[45].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme Pad 2",
+          "href": "https://buy.realme.com/in/goods/664?utm_source=mainayer5&feedback=01"
+        },
+        {
+          "url": "https://image01.realme.net/general/20240911/17260366200275fc2944f435149afa331ee7b90f1aed4.jpg",
+          "path": "html.img[46].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme Pad X",
+          "href": "https://buy.realme.com/in/goods/561?utm_source=mainayer5&feedback=01"
+        },
+        {
+          "url": "https://image01.realme.net/general/20240705/1720159310117e2bb5ff1cff44cc8b6882105db3852e4.png?width=1080&height=1080&size=119123",
+          "path": "html.img[47].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme SUPERVOOC 80W Power Adapter",
+          "href": "https://buy.realme.com/in/goods/708"
+        },
+        {
+          "url": "https://image01.realme.net/general/20240705/17201591665251307190f2cef4edea5a36b8cf5de98eb.png?width=1080&height=1080&size=42434",
+          "path": "html.img[48].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme SUPERVOOC 45W Power Adapter",
+          "href": "https://buy.realme.com/in/goods/710"
+        },
+        {
+          "url": "https://image01.realme.net/general/20240820/1724125255679347a29702b3d4425836ce371ece6f4bf.png?width=920&height=920&size=171342",
+          "path": "html.img[49].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme Power Charger 10W",
+          "href": "https://buy.realme.com/in/goods/122"
+        },
+        {
+          "url": "https://image01.realme.net/general/20240705/17201589093269914a542074c4f2f889200322f7be33f.png?width=1080&height=1080&size=123791",
+          "path": "html.img[50].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme USB-A to Type-C SUPERVOOC Cable",
+          "href": "https://buy.realme.com/in/goods/711"
+        },
+        {
+          "url": "https://image01.realme.net/general/20211229/1640776570235.png",
+          "path": "html.img[51].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "realme Type-C Hub",
+          "href": "https://buy.realme.com/in/goods/477"
+        },
+        {
+          "url": "https://image01.realme.net/general/20220725/1658750486990.png",
+          "path": "html.img[52].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "NEW realme Smart Keyboard",
+          "href": "https://buy.realme.com/in/goods/580"
+        },
+        {
+          "url": "https://image01.realme.net/general/20260112/17681900301639fea1e2ccc5f4c28928cc008b9ff7d89.png?width=1080&height=1080&size=23179",
+          "path": "html.img[53].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "NEW realme Smart Pen",
+          "href": "https://buy.realme.com/in/goods/785"
+        },
+        {
+          "url": "https://image01.realme.net/general/20251106/1762421344072e00dc6c27eb74d79aadd51febd37b2cf.png?width=1080&height=1080&size=317336",
+          "path": "html.img[54].data-src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "NEW realme GT 8 Pro Series Detachable Camera Set",
+          "href": "https://buy.realme.com/in/goods/774"
+        },
+        {
+          "url": "https://r1.realme.net/general/20240709/17205164136143c84d7c7fb1d43058305ac6cdbe1c6f5.png",
+          "path": "html.img[55].src",
+          "role": "product_candidate",
+          "alt": "",
+          "title": "",
+          "parent_text": "",
+          "href": ""
+        },
+        {
+          "url": "https://static.realme.net/v3/common/images/service-7d998b548c.png",
+          "path": "html.img[177].data-src",
+          "role": "product_candidate",
+          "alt": "Contact us",
+          "title": "",
+          "parent_text": "",
+          "href": ""
+        },
+        {
+          "url": "https://static.realme.net/v3/common/images/service_hover-c442d0f025.png",
+          "path": "html.img[178].data-src",
+          "role": "product_candidate",
+          "alt": "Contact us",
+          "title": "",
+          "parent_text": "",
+          "href": ""
+        }
+      ],
+      "ui_assets": [],
+      "ocr_status": "not_run",
+      "vision_status": "not_run",
+      "ranker_status": "dependency_missing",
+      "ranker_reason": "Pillow is not installed",
+      "vision_candidates": []
+    },
+    "review": {
+      "approved": false,
+      "status": "candidate_ready",
+      "reason": "Page identity and extracted evidence are strong enough for review"
+    },
+    "extracted_at": "2026-10-07T01:54:24.401908+00:00"
+  },
+  "battery_panel_text": "19 hours Online Videos 22 hours Chat 68 hours Voice Call 7000mAh \nTitan Battery All Day Out, Still 50% Left It's not just big, it's a new level of reliability. \nEnsuring you have the power you need for any outdoor adventure or daily demand, \nfor a truly worry-free experience. *Data comes from realme Lab. Actual results may vary. At 100% Power:",
+  "official_html_sha256": "153ca8b8d400330a84ce02af34f50c5ca785816cd6505d97e4c3395615a5dba1",
+  "scope": "19h online video card is within explicitly labelled At100%Power panel. No mixed-use50%-remaining extrapolation. RAM/storage from exact-ASIN retailer tables; no6GB-only enhancement facts ingested.",
+  "canonical_id": "cw-mobile-88"
+}
