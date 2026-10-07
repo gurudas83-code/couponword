@@ -178,6 +178,22 @@
         "confidence": 0.99,
         "source": "live-amazon-exact-page+mobile-exact-identity-gate-v1"
       }
+    },
+    "cw-mobile-89": {
+      "amazon": {
+        "retailer_product_id": "B0HG9W5L2V",
+        "product_url": "https://www.amazon.in/dp/B0HG9W5L2V",
+        "confidence": 0.99,
+        "source": "live-amazon-exact-page+mobile-exact-identity-gate-v1"
+      }
+    },
+    "cw-mobile-90": {
+      "amazon": {
+        "retailer_product_id": "B0H2X1Z2KP",
+        "product_url": "https://www.amazon.in/dp/B0H2X1Z2KP",
+        "confidence": 0.99,
+        "source": "live-amazon-exact-page+mobile-exact-identity-gate-v1"
+      }
     }
   }
 }
