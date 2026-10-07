@@ -1,7 +1,7 @@
 import copy,sys,unittest
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parent/'python'))
-from market_discovery import active_endurance_discovery_priority
+from market_discovery import active_endurance_discovery_priority, discovery_budget_endurance_rank
 class VerifiedEnduranceDiscoveryTests(unittest.TestCase):
     def setUp(self):
         self.row={'asin':'B0HCNQPXRY','url':'https://www.amazon.in/dp/B0HCNQPXRY','title':'Lava Virat V1 5G 4GB RAM 64GB Storage'}
@@ -17,4 +17,14 @@ class VerifiedEnduranceDiscoveryTests(unittest.TestCase):
         for text in ('6000mAh;Standby750hours','Video playback10hours;50% charge left'):
             record=copy.deepcopy(self.record);record['specifications']={'battery':{'value':text}}
             self.assertEqual(self.priority(record=record),0)
+    def test_unknown_price_keeps_known_endurance_available_for_refresh(self):
+        store={'records':[self.record]}
+        unknown=dict(self.row)
+        proxy={'asin':'B0WRONG123','url':'https://www.amazon.in/dp/B0WRONG123','title':'Other Phone 4GB RAM 64GB Storage','_recent_verified_price':9000}
+        self.assertGreater(discovery_budget_endurance_rank(unknown,20000,store),discovery_budget_endurance_rank(proxy,20000,store))
+        expensive=dict(self.row,_recent_verified_price=21000)
+        self.assertLess(discovery_budget_endurance_rank(expensive,20000,store),discovery_budget_endurance_rank(proxy,20000,store))
+        self.assertLess(discovery_budget_endurance_rank(unknown,20000,None),discovery_budget_endurance_rank(proxy,20000,None))
+        self.assertNotIn('_recent_verified_price',unknown)
+
 if __name__=='__main__':unittest.main()

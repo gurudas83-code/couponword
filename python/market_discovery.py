@@ -2244,6 +2244,16 @@ def trusted_price_budget_priority(item: dict[str, Any], budget_max: Any) -> int:
     return 2 if price <= budget else 0
 
 
+def discovery_budget_endurance_rank(item: dict[str, Any], budget_max: Any,
+                                   evidence_store: dict[str, Any] | None) -> tuple[int, int, int]:
+    budget = trusted_price_budget_priority(item, budget_max)
+    if evidence_store is None:
+        return budget, 0, budget
+    # Unknown/expired price needs downstream refresh, not loss before that check.
+    # Explicitly over-budget cards still rank below every non-contradictory row.
+    return int(budget > 0), active_endurance_discovery_priority(item, evidence_store), budget
+
+
 def active_endurance_discovery_priority(item: dict[str, Any], evidence_store: dict[str, Any]) -> int:
     """Prefer already verified exact-variant endurance before candidate truncation.
 
@@ -3074,8 +3084,7 @@ def discover_market(
                 ).lower(),
                 1,
             ),
-            hard_budget_priority(item),
-            active_endurance_discovery_priority(item, evidence_priority_store) if evidence_priority_store is not None else 0,
+            *discovery_budget_endurance_rank(item, intent.get("budget_max"), evidence_priority_store),
             discovery_evidence_priority(item),
             named_model_evidence_priority(item),
             item["quality_score"],
