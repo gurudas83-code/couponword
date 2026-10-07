@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "asin": "B0F7M1338H",
+  "canonical_id": "cw-mobile-86",
+  "physical_variant": {
+    "ram_gb": "8",
+    "storage_gb": "128"
+  },
+  "listing": {
+    "observed_at": "2026-10-06T18:23:57.898648+00:00",
+    "identity": {
+      "http_status": 200,
+      "final_url": "https://www.amazon.in/dp/B0F7M1338H",
+      "page_asin": "B0F7M1338H",
+      "page_title": "Redmi Note 14 Pro+ 5G (Phantom Purple, 8GB RAM, 128GB Storage) | Snapdragon 7s Gen 3 Processor | AMOLED Display | Dual Nano-SIM | 6200mAh Battery | Corning Gorilla Glass Victus 2",
+      "strict_status": "AUTO_REUSE",
+      "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+      "resolver_decision": "verified",
+      "resolver_score": 100
+    },
+    "price": {
+      "price": 29999.0,
+      "prices_found": [
+        29999.0
+      ],
+      "availability": "in_stock",
+      "status": "verified",
+      "reason": "Exact Amazon primary buy-box price found",
+      "http_status": 200,
+      "evidence_method": "amazon_primary_buybox"
+    }
+  },
+  "official_sources": [
+    {
+      "url": "https://www.mi.com/in/product/redmi-note-14-pro-plus-5g/",
+      "observed_at": "2026-10-06T18:24:58.497915+00:00",
+      "http": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.mi.com/in/product/redmi-note-14-pro-plus-5g/specs/",
+      "observed_at": "2026-10-06T18:24:59.551104+00:00",
+      "http": 200,
+      "error": null
+    }
+  ],
+  "official_variant_options": "8+128 | 8+256 | 12+512",
+  "scope": "India model exact retailer identity admission. Official variant table includes8/128. No quantified playback duration found in fetched overview/specs text; images not transcribed. Endurance unknown; no global/UK5110mAh facts used. No new evidence-store specs inferred. Price is timestamped observation, not perpetual current price."
+}

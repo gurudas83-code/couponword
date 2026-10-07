@@ -191,6 +191,21 @@ def _hard_constraint_failures(product: dict, intent: dict) -> list[str]:
             except (TypeError, ValueError):
                 pass
 
+    if "active_battery_endurance" in hard_constraints:
+        signals = product.get("fit_signals") or {}
+        battery = signals.get("battery") if isinstance(signals, dict) else None
+        basis = battery.get("basis") if isinstance(battery, dict) else None
+        values = (battery.get("measurements") or {}).get(basis, []) if isinstance(battery, dict) else []
+        valid_duration = (
+            basis in {"video_playback_hours", "youtube_playback_hours"}
+            and isinstance(values, list)
+            and any(isinstance(value, (int, float)) and not isinstance(value, bool)
+                    and 0 < value <= 72 for value in values)
+            and battery.get("match") is not None
+        )
+        if not valid_duration:
+            failures.append("Best battery requires verified active-use endurance; capacity/standby is insufficient")
+
     # Optional explicit hard requirement map on the product.
     requirement_status = product.get("hard_requirement_status", {})
     if isinstance(requirement_status, dict):

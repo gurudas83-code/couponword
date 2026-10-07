@@ -573,6 +573,12 @@ def detect_requirements(
         if any(p in text for p in phrases):
             add(preferred, value)
 
+    # A "best battery" recommendation needs active-use duration evidence;
+    # a capacity proxy alone cannot establish that explicit claim.
+    if (category == "smartphone" and re.search(r"\bbest\s+battery\b", text)
+            and not re.search(r"\b(?:headphones?|headsets?|earbuds?|laptops?|tablets?|smartwatches?)\b", text)):
+        add(hard_constraints, "active_battery_endurance")
+
     if user_profile in {"parent", "senior"}:
         for value in ("good_battery", "large_display", "easy_to_use", "good_call_quality"):
             add(preferred, value)

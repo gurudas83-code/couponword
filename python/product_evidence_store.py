@@ -525,6 +525,7 @@ def find_verified_evidence(
     model: Any = "",
     search_name: Any = "",
     title: Any = "",
+    store_data: dict[str, Any] | None = None,
 ) -> dict[str, Any] | None:
     """
     Match order:
@@ -533,7 +534,7 @@ def find_verified_evidence(
 
     No fuzzy product-family matching.
     """
-    data = load_store()
+    data = load_store() if store_data is None else store_data
     records = data.get("records") or []
 
     if variant_text_is_ambiguous(title, search_name, model):

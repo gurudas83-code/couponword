@@ -1174,6 +1174,7 @@ def local_known_product_fallback(
         brand: str = "",
         source: str,
         declared_category: str = "",
+        declared_asin: str = "",
         extra_score: float = 0.0,
     ) -> None:
         title = clean(title)
@@ -1203,9 +1204,17 @@ def local_known_product_fallback(
 
         score += extra_score
 
+        parsed = urlparse(url)
+        listing = re.search(r"/(?:dp|gp/product)/([A-Z0-9]{10})(?:/|$)", parsed.path, re.I)
+        bound_asin = clean(declared_asin).upper()
+        if (parsed.hostname not in {"amazon.in", "www.amazon.in"}
+                or not listing or listing.group(1).upper() != bound_asin):
+            bound_asin = ""
+
         candidates.append(
             {
                 "title": title,
+                "asin": bound_asin or None,
                 "url": url,
                 "host": host_of(url),
                 "content": "",
@@ -1279,6 +1288,7 @@ def local_known_product_fallback(
             brand=clean(product.get("brand")),
             source="local_coupon_catalogue",
             declared_category=clean(product.get("category")),
+            declared_asin=clean(product.get("asin")),
             extra_score=0.05,
         )
 
@@ -2234,6 +2244,36 @@ def trusted_price_budget_priority(item: dict[str, Any], budget_max: Any) -> int:
     return 2 if price <= budget else 0
 
 
+def active_endurance_discovery_priority(item: dict[str, Any], evidence_store: dict[str, Any]) -> int:
+    """Prefer already verified exact-variant endurance before candidate truncation.
+
+    Discovery remains unverified; price freshness and final Fit still run later.
+    The caller loads the existing evidence store once per discovery invocation.
+    """
+    from product_evidence_store import (find_verified_evidence, extraction_is_cacheable,
+                                       variant_signature_from_text, record_variant_signature)
+    from mobile_exact_identity_gate import AUTO_REUSE, classify_mobile_identity_reuse
+    from product_fit_signal_builder import smartphone_battery_signal, text_blob
+    asin = clean(item.get("asin")).upper()
+    parsed = urlparse(clean(item.get("url")))
+    bound = re.search(r"/(?:dp|gp/product)/([A-Z0-9]{10})(?:/|$)", parsed.path, re.I)
+    if not asin or parsed.hostname not in {"amazon.in", "www.amazon.in"} or not bound or bound.group(1).upper() != asin:
+        return 0
+    title = clean(item.get("title"))
+    record = find_verified_evidence(asin=asin, title=title, store_data=evidence_store)
+    if not record or record.get("cache_match_mode") != "asin" or not extraction_is_cacheable(record)[0]:
+        return 0
+    variant = variant_signature_from_text(title)
+    if set(variant) != {"ram_gb", "storage_gb"} or variant != record_variant_signature(record):
+        return 0
+    expected = f"{record.get('brand', '')} {record.get('model', '')} {variant['ram_gb']}GB RAM {variant['storage_gb']}GB Storage"
+    if classify_mobile_identity_reuse(expected, title, item['url'], record.get('brand', ''))['status'] != AUTO_REUSE:
+        return 0
+    battery = smartphone_battery_signal(text_blob({"attributes": record.get("specifications", {}),
+                                                 "features": record.get("features", [])}, separator="; "))
+    return int(battery.get("basis") in {"video_playback_hours", "youtube_playback_hours"})
+
+
 def recent_discovery_price(item: dict[str, Any]) -> float | None:
     """Reuse the price engine's freshness gate without transferring prices across ASINs."""
     url = clean(item.get("url"))
@@ -3021,6 +3061,11 @@ def discover_market(
 
         return 0
 
+    evidence_priority_store = None
+    if "active_battery_endurance" in (intent.get("hard_constraints") or []):
+        from product_evidence_store import load_store
+        evidence_priority_store = load_store()
+
     ranked.sort(
         key=lambda item: (
             variant_priority.get(
@@ -3030,6 +3075,7 @@ def discover_market(
                 1,
             ),
             hard_budget_priority(item),
+            active_endurance_discovery_priority(item, evidence_priority_store) if evidence_priority_store is not None else 0,
             discovery_evidence_priority(item),
             named_model_evidence_priority(item),
             item["quality_score"],
