@@ -1,0 +1,65 @@
+{
+  "purpose": "Exact listings admitted after post-deployment live canonical gaps; prices are observations only and remain subject to normal freshness checks",
+  "candidates": [
+    {
+      "observed_at": "2026-10-07T13:43:34.717424+00:00",
+      "expected_title": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (6 GB RAM) | 6000 mAh Battery | Dimensity 6300 | Octa Core Processor | 6.74\" PLS LCD Display |",
+      "identity": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0GNZPHXGN",
+        "page_asin": "B0GNZPHXGN",
+        "page_title": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (6 GB RAM) | 6000 mAh Battery | Dimensity 6300 | Octa Core Processor | 6.74\" PLS LCD Display |",
+        "identity_title": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (6 GB RAM) | 6000 mAh Battery | Dimensity 6300 | Octa Core Processor | 6.74\" PLS LCD Display |",
+        "exact_listing_capacity": {},
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 95
+      },
+      "price": {
+        "price": 18760.0,
+        "prices_found": [
+          18760.0
+        ],
+        "availability": "in_stock",
+        "status": "verified",
+        "reason": "Exact Amazon primary buy-box price found",
+        "http_status": 200,
+        "evidence_method": "amazon_primary_buybox"
+      },
+      "source_id": 91,
+      "canonical_id": "cw-mobile-91",
+      "allocation_workflow": "batch_product_importer.import_csv -> next_product_id -> promote_mobile_canonical"
+    },
+    {
+      "observed_at": "2026-10-07T13:43:02.933663+00:00",
+      "expected_title": "Galaxy M15 5G (Blue Topaz,4GB RAM,128GB Storage)| 50MP Triple Cam| 6000mAh Battery| MediaTek Dimensity 6100+| 4 Gen. OS Upgrade & 5 Year Security Update| Super AMOLED Display| Without Charger",
+      "identity": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0CYQ3D6VJ",
+        "page_asin": "B0CYQ3D6VJ",
+        "page_title": "Samsung Galaxy M15 5G (Blue Topaz,4GB RAM,128GB Storage)| 50MP Triple Cam| 6000mAh Battery| MediaTek Dimensity 6100+| 4 Gen. OS Upgrade & 5 Year Security Update| Super AMOLED Display| Without Charger",
+        "identity_title": "Samsung Galaxy M15 5G (Blue Topaz,4GB RAM,128GB Storage)| 50MP Triple Cam| 6000mAh Battery| MediaTek Dimensity 6100+| 4 Gen. OS Upgrade & 5 Year Security Update| Super AMOLED Display| Without Charger",
+        "exact_listing_capacity": {},
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 95
+      },
+      "price": {
+        "price": 15999.0,
+        "prices_found": [
+          15999.0
+        ],
+        "availability": "in_stock",
+        "status": "verified",
+        "reason": "Exact Amazon primary buy-box price found",
+        "http_status": 200,
+        "evidence_method": "amazon_primary_buybox"
+      },
+      "source_id": 92,
+      "canonical_id": "cw-mobile-92",
+      "allocation_workflow": "batch_product_importer.import_csv -> next_product_id -> promote_mobile_canonical"
+    }
+  ]
+}
