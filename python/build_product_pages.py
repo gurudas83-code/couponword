@@ -30,6 +30,8 @@ LEGACY_PRODUCT_PATHS = {
 }
 SITE = "https://coupon-world.in"
 
+from mobile_page_evidence import render_mobile_evidence
+
 from multi_retailer_page_renderer import (
     MULTI_RETAILER_CSS,
     couponworld_product_id,
@@ -718,7 +720,7 @@ def render(product, products):
             '</section>'
         )
 
-    intelligence_html = render_verified_intelligence(product)
+    intelligence_html = render_verified_intelligence(product) + render_mobile_evidence(product)
 
     related_html = ""
     if cards:
