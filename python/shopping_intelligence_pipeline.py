@@ -1642,6 +1642,34 @@ def criterion_groups(
     return strong, tradeoffs, unknown
 
 
+def catalogued_recommendation_candidates(items, failures):
+    """Require exact durable ownership before model deduplication/top-k.
+
+    Fit eligibility remains visible in diagnostics. A missing catalogue
+    mapping cannot occupy a recommendation slot or suppress recovery.
+    """
+    from retailer_product_registry import find_catalogued_mobile_id
+    admitted = []
+    for item in items:
+        profile = item.get("profile") or {}
+        candidate = item.get("candidate") or {}
+        owner = find_catalogued_mobile_id(
+            retailer_product_id=clean(profile.get("asin")),
+            candidate_title=clean(candidate.get("source_title") or candidate.get("title")),
+            candidate_brand=clean(profile.get("brand")),
+        )
+        if owner:
+            admitted.append(item)
+        else:
+            failures.append({
+                "candidate_id": clean(candidate.get("candidate_id")),
+                "title": clean(candidate.get("source_title") or candidate.get("title")),
+                "stage": "canonical_identity",
+                "reason": "Exact physical variant has no unique verified catalogue owner",
+            })
+    return admitted
+
+
 def _reusable_candidate_record(cache, key):
     entry = cache.get(key) if cache is not None else None
     if entry is None or time.monotonic() - entry["stored_at"] >= 60:
@@ -2551,6 +2579,10 @@ def _run_pipeline_once(
         >= MIN_FIT_PERCENT
     ]
 
+    raw_qualifying_count = len(qualifying)
+    if intent.get("category") == "smartphone":
+        qualifying = catalogued_recommendation_candidates(qualifying, failures)
+
     qualifying.sort(
         key=lambda item: (
             -int(item["fit_assessment"].get("fit_percent") or 0),
@@ -2560,8 +2592,7 @@ def _run_pipeline_once(
         ),
     )
 
-    # Preserve pre-deduplication qualification breadth for diagnostics.
-    raw_qualifying_count = len(qualifying)
+    # Raw fit-qualified breadth is preserved before canonical admission.
 
     # ---------------------------------------------------------
     # MODEL-LEVEL RECOMMENDATION DEDUPLICATION
