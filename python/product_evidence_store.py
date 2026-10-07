@@ -404,27 +404,47 @@ def empty_store() -> dict[str, Any]:
     }
 
 
-def load_store() -> dict[str, Any]:
-    if not STORE_PATH.exists():
-        return empty_store()
+BUNDLED_EVIDENCE_PATH = ROOT / "data" / "phase_e_release_evidence.json"
 
+
+def _read_store(path: Path) -> dict[str, Any]:
     try:
-        data = json.loads(
-            STORE_PATH.read_text(
-                encoding="utf-8-sig"
-            )
-        )
-    except Exception:
+        data = json.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, ValueError):
         return empty_store()
-
     if not isinstance(data, dict):
         return empty_store()
-
-    records = data.get("records")
-
-    if not isinstance(records, list):
+    if not isinstance(data.get("records"), list):
         data["records"] = []
+    return data
 
+
+def load_store() -> dict[str, Any]:
+    data = _read_store(STORE_PATH)
+    records = data["records"]
+    for baseline in _read_store(BUNDLED_EVIDENCE_PATH)["records"]:
+        if not isinstance(baseline, dict) or not extraction_is_cacheable(baseline)[0]:
+            continue
+        if not baseline.get("official_url") or not baseline.get("saved_at"):
+            continue
+        signature = record_variant_signature(baseline)
+        if not signature.get("ram_gb") or not signature.get("storage_gb"):
+            continue
+        # Preserve original observation dates. Never hydrate prices or bypass
+        # the existing exact-ASIN / physical-variant matching downstream.
+        key = (baseline.get("model_key"), signature)
+        index = next((i for i, record in enumerate(records)
+                      if isinstance(record, dict) and
+                      (record.get("model_key"), record_variant_signature(record)) == key), None)
+        if index is None:
+            records.append(baseline)
+        else:
+            try:
+                newer = datetime.fromisoformat(baseline["saved_at"]) > datetime.fromisoformat(records[index].get("saved_at", ""))
+            except (ValueError, TypeError):
+                newer = False
+            if newer:
+                records[index] = baseline
     return data
 
 

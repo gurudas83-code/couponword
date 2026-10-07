@@ -1,0 +1,3029 @@
+{
+  "schema_version": 1,
+  "purpose": "Reviewed Gate 3 evidence baseline; original observation times preserved. Not a price cache. Runtime verified evidence of the same identity takes precedence when newer.",
+  "records": [
+    {
+      "asin": "B0GL1WGHJX",
+      "brand": "lava",
+      "model": "Bold N2",
+      "search_name": "lava Bold N2",
+      "model_key": "lava|bold n2",
+      "variant_signature": {
+        "ram_gb": "4",
+        "storage_gb": "64"
+      },
+      "official_url": "https://www.lavamobiles.com/smartphones/bold-n2",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 1.0,
+      "specifications": {
+        "form": {
+          "value": "Touch",
+          "label": "Form",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "sim": {
+          "value": "Dual Sim (4G+4G), Nano+Nano",
+          "label": "SIM",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "touch_screen": {
+          "value": "Yes",
+          "label": "Touch Screen",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "business_features": {
+          "value": "Gmail",
+          "label": "Business Features",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "call_features": {
+          "value": "Conference Call, Anonymous & Auto Call Recording",
+          "label": "Call Features",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "handset_color": {
+          "value": "Indus Black/Siachen White",
+          "label": "Handset Color",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "in_sales_package": {
+          "value": "Handset, USB Cable Type-C, Charger, SIM Ejector Pin, Back Cover",
+          "label": "In Sales Package",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "operating_frequency": {
+          "value": "GSM: 850MHz, 900MHz, 1800MHz, 1900MHz",
+          "label": "Operating Frequency",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "processor": {
+          "value": "UNISOC 9863a Octa-core Processor",
+          "label": "Processor",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "operating_system": {
+          "value": "Android 15 Go",
+          "label": "OS",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "display_size": {
+          "value": "17.13cm (6.75\") Notch HD+ Display with 2.5D Glass, 90Hz Refresh Rate & Aspect Ratio of 20:9",
+          "label": "Screen Size",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "resolution": {
+          "value": "720*1600",
+          "label": "Resolution",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "ppi": {
+          "value": "260",
+          "label": "PPI",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "color_depth": {
+          "value": "16M",
+          "label": "Color Depth",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "primary_camera_rear_camera": {
+          "value": "13MP",
+          "label": "Primary Camera (Rear Camera)",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "secondary_camera_front_camera": {
+          "value": "5MP",
+          "label": "Secondary Camera (Front Camera)",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "flash": {
+          "value": "Yes, Both Camera (Front Flash Type - Screen)",
+          "label": "Flash",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "video_recording": {
+          "value": "Yes",
+          "label": "Video Recording",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "hd_recording": {
+          "value": "Yes",
+          "label": "HD Recording",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "other_camera_features": {
+          "value": "Portrait, Slow Motion, Timelapse, Refocus, Audio Note, Motion Photo, Beauty, HDR, Night, AI,Panorama, Filters, QR Scanning",
+          "label": "Other Camera Features",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "ram": {
+          "value": "4GB+4GB*",
+          "label": "RAM",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "internal_memory": {
+          "value": "64GB",
+          "label": "Internal Memory",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "expandable_memory": {
+          "value": "256GB",
+          "label": "Expandable Memory",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "size": {
+          "value": "164.96*76.1*8.5mm",
+          "label": "Size",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "weight_with_battery": {
+          "value": "193.7g",
+          "label": "Weight With Battery",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "type": {
+          "value": "5000mAh (Typ) Li-Ion Battery",
+          "label": "Type",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "charging": {
+          "value": "10W Charger, Type-C Cable",
+          "label": "Charging",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "charging_time_of_device_0_100": {
+          "value": "185 mins",
+          "label": "Charging Time of Device (0-100%)**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "talk_time": {
+          "value": "30hrs",
+          "label": "Talk Time**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "stand_by_time": {
+          "value": "340Hrs",
+          "label": "Stand By Time**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "youtube_playback_time": {
+          "value": "615min",
+          "label": "Youtube Playback Time**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "internet_features": {
+          "value": "Google Play Store, Gmail, YouTube, Google, Google Assistant, Maps, Files, Facebook",
+          "label": "Internet Features",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "navigation": {
+          "value": "Yes",
+          "label": "Navigation",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "preinstalled_browser": {
+          "value": "Yes, Google Chrome",
+          "label": "Preinstalled Browser",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "gprs": {
+          "value": "Yes",
+          "label": "GPRS",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "edge": {
+          "value": "Yes",
+          "label": "EDGE",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "3g": {
+          "value": "Yes",
+          "label": "3G",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "4g": {
+          "value": "Yes",
+          "label": "4G",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "wi_fi": {
+          "value": "Wi-Fi 802.11 b/g/n/ac, hotspot",
+          "label": "Wi-Fi",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "usb_connectivity": {
+          "value": "Type-C",
+          "label": "USB Connectivity",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "glonass": {
+          "value": "No",
+          "label": "GLONASS",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "bluetooth": {
+          "value": "V4.2",
+          "label": "Bluetooth",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "audio_jack": {
+          "value": "3.5mm",
+          "label": "Audio Jack",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "otg_support": {
+          "value": "Yes",
+          "label": "OTG Support",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "music_player": {
+          "value": "Yes",
+          "label": "Music Player",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "video_player": {
+          "value": "Yes",
+          "label": "Video Player",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "fm": {
+          "value": "Yes",
+          "label": "FM",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "ringtone": {
+          "value": "Yes",
+          "label": "Ringtone",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "sar_value": {
+          "value": "<1.6W/Kg",
+          "label": "SAR Value",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "sensors": {
+          "value": "Accelerometer",
+          "label": "Sensors",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "additional_features": {
+          "value": "Side Fingerprint Sensor, Face Unlock, Battery Saver Mode",
+          "label": "Additional Features",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "warranty": {
+          "value": "1 Year Handset Warranty and 6 Months Warranty on Accessories",
+          "label": "WARRANTY",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "face_unlock_time": {
+          "value": "0.86sec",
+          "label": "Face Unlock Time**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "fingerprint_unlock_time": {
+          "value": "0.42sec",
+          "label": "Fingerprint Unlock Time**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "with_4gb_4gb_ram": {
+          "value": "5MP Selfie Camera",
+          "label": "With 4GB+4GB* RAM",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "5mp_selfie_camera": {
+          "value": "13MP AI Rear Camera",
+          "label": "5MP Selfie Camera",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "see_bigger_move_smoother": {
+          "value": "17.13cm (6.75\") HD+ Display",
+          "label": "See Bigger. Move Smoother.",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "built_to_keep_up": {
+          "value": "Powered by Octa-Core performance",
+          "label": "Built to Keep Up",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "power_that_moves_when_you_do": {
+          "value": "With 4GB+4GB* RAM 5MP Selfie Camera 13MP AI Rear Camera",
+          "label": "Power That Moves When You Do",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "5mp": {
+          "value": "With 4GB+4GB* RAM 5MP Selfie Camera 13MP AI Rear Camera",
+          "label": "5MP",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "13mp": {
+          "value": "With 4GB+4GB* RAM 5MP Selfie Camera 13MP AI Rear Camera",
+          "label": "13MP",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "ip64": {
+          "value": "Fearless in Any Weather",
+          "label": "IP64",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "software_security_support": {
+          "label": "Software security support",
+          "value": "2 years of security updates from model launch; quarterly cadence",
+          "source": "official_model_support_policy",
+          "source_url": "https://www.lavamobiles.com/software-update-center",
+          "observed_at": "2026-09-30T01:02:37.125850+00:00",
+          "identity_match": {
+            "model": "bold n2",
+            "variant": {
+              "ram_gb": "4",
+              "storage_gb": "64"
+            },
+            "status": "exact_model_row_and_verified_product_variant"
+          },
+          "launch_month": "Feb-26",
+          "policy_text": "We are committed to providing continuous security updates for our smartphones. These updates typically include the latest security patches, vulnerability fixes, and other system improvements. We will provide quarterly security updates for two years after the launch of a model and three years for flagship Agni Series models ."
+        }
+      },
+      "features": [
+        {
+          "text": "*Refers to Virtual RAM ** - Under LAVA Testing Conditions",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-09-30T01:02:37.524910+00:00"
+    },
+    {
+      "asin": "B0GPXTY8V5",
+      "brand": "lava",
+      "model": "Bold N2 Lite",
+      "search_name": "lava Bold N2 Lite",
+      "model_key": "lava|bold n2 lite",
+      "variant_signature": {
+        "ram_gb": "3",
+        "storage_gb": "64"
+      },
+      "official_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 1.0,
+      "specifications": {
+        "form": {
+          "value": "Touch",
+          "label": "Form",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "sim": {
+          "value": "Dual Sim (4G+4G), Nano+Nano",
+          "label": "SIM",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "touch_screen": {
+          "value": "Yes",
+          "label": "Touch Screen",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "business_features": {
+          "value": "Gmail",
+          "label": "Business Features",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "call_features": {
+          "value": "Conference Call, Anonymous & Auto Call Recording",
+          "label": "Call Features",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "handset_color": {
+          "value": "Crystal Gold and Crystal Blue",
+          "label": "Handset Color",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "in_sales_package": {
+          "value": "Handset, USB Cable Type-C, Charger, SIM Ejector Pin, Back Cover",
+          "label": "In Sales Package",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "operating_frequency": {
+          "value": "GSM: 850MHz, 900MHz, 1800MHz, 1900MHz",
+          "label": "Operating Frequency",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "processor": {
+          "value": "UNISOC 98663a Octa-core Processor",
+          "label": "Processor",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "operating_system": {
+          "value": "Android 15Go",
+          "label": "OS",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "size": {
+          "value": "17.13cm (6.75\") Notch HD+ Display with 2.5D Glass, 90Hz Refresh Rate & Aspect Ratio of 20:9",
+          "label": "Size",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "resolution": {
+          "value": "720*1600",
+          "label": "Resolution",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "ppi": {
+          "value": "260",
+          "label": "PPI",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "color_depth": {
+          "value": "16M",
+          "label": "Color Depth",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "primary_camera_rear_camera": {
+          "value": "13 MP",
+          "label": "Primary Camera (Rear Camera)",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "secondary_camera_front_camera": {
+          "value": "5MP",
+          "label": "Secondary Camera (Front Camera)",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "flash": {
+          "value": "Yes, Both Camera (Front Flash Type - Screen)",
+          "label": "Flash",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "video_recording": {
+          "value": "Yes",
+          "label": "Video Recording",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "hd_recording": {
+          "value": "Yes",
+          "label": "HD Recording",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "other_camera_features": {
+          "value": "Portrait, Slow Motion, Timelapse, Slow Motion, Beauty, HDR, Night, AI,Panorama, Filters, QR Scanning",
+          "label": "Other Camera Features",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "ram": {
+          "value": "3GB+4GB*",
+          "label": "RAM",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "internal_memory": {
+          "value": "64GB",
+          "label": "Internal Memory",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "expandable_memory": {
+          "value": "512GB",
+          "label": "Expandable Memory",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "weight_with_battery": {
+          "value": "192g",
+          "label": "Weight With Battery",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "type": {
+          "value": "5000mAh (Typ) Li-Ion Battery",
+          "label": "Type",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "charge": {
+          "value": "10W Charger, Type-C Cable",
+          "label": "Charge",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "charging_time_of_device_0_100": {
+          "value": "205min",
+          "label": "Charging Time of Device (0-100%)**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "talk_time": {
+          "value": "30hrs",
+          "label": "Talk Time**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "stand_by_time": {
+          "value": "340Hrs",
+          "label": "Stand By Time**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "youtube_playback_time": {
+          "value": "566min",
+          "label": "Youtube Playback Time**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "internet_features": {
+          "value": "Google Play Store, Gmail, YouTube, Google, Google Assistant, Maps, Files, Facebook",
+          "label": "Internet Features",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "navigation": {
+          "value": "Yes",
+          "label": "Navigation",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "preinstalled_browser": {
+          "value": "Yes, Google Chrome",
+          "label": "Preinstalled Browser",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "gprs": {
+          "value": "Yes",
+          "label": "GPRS",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "edge": {
+          "value": "Yes",
+          "label": "EDGE",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "3g": {
+          "value": "Yes",
+          "label": "3G",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "4g": {
+          "value": "Yes",
+          "label": "4G",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "wi_fi": {
+          "value": "Wi-Fi 802.11 b/g/n/ac, hotspot",
+          "label": "Wi-Fi",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "usb_connectivity": {
+          "value": "Type-C",
+          "label": "USB Connectivity",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "glonass": {
+          "value": "No",
+          "label": "GLONASS",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "bluetooth": {
+          "value": "V4.2",
+          "label": "Bluetooth",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "audio_jack": {
+          "value": "3.5mm",
+          "label": "Audio Jack",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "otg_support": {
+          "value": "Yes",
+          "label": "OTG Support",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "music_player": {
+          "value": "Yes",
+          "label": "Music Player",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "video_player": {
+          "value": "Yes",
+          "label": "Video Player",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "fm": {
+          "value": "Yes",
+          "label": "FM",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "ringtone": {
+          "value": "Yes",
+          "label": "Ringtone",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "sar_value": {
+          "value": "<1.6W/Kg",
+          "label": "SAR Value",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "sensors": {
+          "value": "Accelerometer",
+          "label": "Sensors",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "additional_features": {
+          "value": "Side Fingerprint Sensor, Face Unlock, Battery Saver Mode",
+          "label": "Additional Features",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "warranty": {
+          "value": "1 Year Handset Warranty and 6 Months Warranty on Accessories",
+          "label": "WARRANTY",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "face_unlock_time": {
+          "value": "1.20sec",
+          "label": "Face Unlock Time**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "fingerprint_unlock_time": {
+          "value": "0.44sec",
+          "label": "Fingerprint Unlock Time**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "smart_camera": {
+          "value": "5MP Selfie Camera 13MP AI Rear Camera Multiple Camera Modes: Beauty, HDR, Night Mode, Portrait, Panorama, Slow Motion, Filters, Time lapse, QR Code.",
+          "label": "Smart camera",
+          "source": "adjacent_label_value",
+          "confidence": 88
+        },
+        "5mp_selfie_camera": {
+          "value": "13MP AI Rear Camera Multiple Camera Modes: Beauty, HDR, Night Mode, Portrait, Panorama, Slow Motion, Filters, Time lapse, QR Code.",
+          "label": "5MP Selfie Camera",
+          "source": "adjacent_label_value",
+          "confidence": 88
+        },
+        "ai_rear_camera": {
+          "value": "Multiple Camera Modes: Beauty, HDR, Night Mode, Portrait, Panorama, Slow Motion, Filters, Time lapse, QR Code.",
+          "label": "AI Rear Camera",
+          "source": "adjacent_label_value",
+          "confidence": 88
+        },
+        "smart_multitasking": {
+          "value": "3GB+3GB* RAM | 64GB ROM",
+          "label": "Smart Multitasking",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "5mp": {
+          "value": "5MP Selfie Camera 13MP AI Rear Camera Multiple Camera Modes: Beauty, HDR, Night Mode, Portrait, Panorama, Slow Motion, Filters, Time lapse, QR Code.",
+          "label": "5MP",
+          "source": "structured_section",
+          "confidence": 88
+        },
+        "13mp": {
+          "value": "5MP Selfie Camera 13MP AI Rear Camera Multiple Camera Modes: Beauty, HDR, Night Mode, Portrait, Panorama, Slow Motion, Filters, Time lapse, QR Code.",
+          "label": "13MP",
+          "source": "structured_section",
+          "confidence": 88
+        },
+        "smart_performance": {
+          "value": "Octa-core Processor",
+          "label": "Smart Performance",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "smart_display": {
+          "value": "17.13cm (6.75\") HD+ Notch Display",
+          "label": "Smart Display",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "smart_battery": {
+          "value": "Power that keeps up with your day",
+          "label": "Smart Battery",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "software_security_support": {
+          "label": "Software security support",
+          "value": "2 years of security updates from model launch; quarterly cadence",
+          "source": "official_model_support_policy",
+          "source_url": "https://www.lavamobiles.com/software-update-center",
+          "observed_at": "2026-09-30T01:02:30.734615+00:00",
+          "identity_match": {
+            "model": "bold n2 lite",
+            "variant": {
+              "ram_gb": "3",
+              "storage_gb": "64"
+            },
+            "status": "exact_model_row_and_verified_product_variant"
+          },
+          "launch_month": "Apr'26",
+          "policy_text": "We are committed to providing continuous security updates for our smartphones. These updates typically include the latest security patches, vulnerability fixes, and other system improvements. We will provide quarterly security updates for two years after the launch of a model and three years for flagship Agni Series models ."
+        }
+      },
+      "features": [
+        {
+          "text": "*Refers to Virtual RAM ** - Under LAVA Testing Conditions",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-09-30T01:02:31.134612+00:00"
+    },
+    {
+      "asin": "B0GM69XM7R",
+      "brand": "Samsung",
+      "model": "Galaxy A06 5G Light",
+      "search_name": "Samsung Galaxy A06 5G Light",
+      "model_key": "samsung|galaxy a06 5g light",
+      "variant_signature": {
+        "ram_gb": "4",
+        "storage_gb": "64"
+      },
+      "official_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a06-5g-light-gray-64gb-sm-a066bzadins/",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 1.0,
+      "specifications": {
+        "product_ratings": {
+          "value": "0 ( Number of Ratings : 0 )",
+          "label": "Product Ratings",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "processor": {
+          "value": "2.4GHz, 2GHz",
+          "label": "Processor",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "weight_g": {
+          "value": "191",
+          "label": "Weight (g)",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "size_main_display": {
+          "value": "17.13 cm full rectangle / 16.73 cm rounded corners",
+          "label": "Size (Main Display)",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "resolution_main_display": {
+          "value": "720 x 1600 (HD+)",
+          "label": "Resolution (Main Display)",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "technology_main_display": {
+          "value": "Colour Depth (Main Display) 16M",
+          "label": "Technology (Main Display)",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "colour_depth_main_display": {
+          "value": "16M",
+          "label": "Colour Depth (Main Display)",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "max_refresh_rate_main_display": {
+          "value": "90 Hz",
+          "label": "Max Refresh Rate (Main Display)",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "rear_camera_resolution_multiple": {
+          "value": "50.0 MP + 2.0 MP",
+          "label": "Rear Camera - Resolution (Multiple)",
+          "source": "adjacent_label_value",
+          "confidence": 88
+        },
+        "rear_camera_f_number_multiple": {
+          "value": "F1.8 , F2.4",
+          "label": "Rear Camera - F Number (Multiple)",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "rear_camera_ois": {
+          "value": "Rear Camera Zoom Digital Zoom up to 10x",
+          "label": "Rear Camera - OIS",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "rear_camera_zoom": {
+          "value": "Digital Zoom up to 10x",
+          "label": "Rear Camera Zoom",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "front_camera_resolution": {
+          "value": "8.0 MP",
+          "label": "Front Camera - Resolution",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "front_camera_f_number": {
+          "value": "F2.0",
+          "label": "Front Camera - F Number",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "front_camera_flash": {
+          "value": "Video Recording Resolution FHD (1920 x 1080)@30fps",
+          "label": "Front Camera - Flash",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "video_recording_resolution": {
+          "value": "FHD (1920 x 1080)@30fps",
+          "label": "Video Recording Resolution",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "memory_gb": {
+          "value": "4",
+          "label": "Memory (GB)",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "storage_gb": {
+          "value": "64",
+          "label": "Storage (GB)",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "available_storage_gb": {
+          "value": "44.8",
+          "label": "Available Storage (GB)",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "external_storage_support": {
+          "value": "MicroSD (Up to 1.5 TB)",
+          "label": "External Storage Support",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "usb_interface": {
+          "value": "USB Type-C",
+          "label": "USB Interface",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "usb_type_c": {
+          "value": "USB Version USB 2.0",
+          "label": "USB Type-C",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "usb_version": {
+          "value": "USB 2.0",
+          "label": "USB Version",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "bluetooth_version": {
+          "value": "Bluetooth v5.3",
+          "label": "Bluetooth Version",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "dimension_hxwxd_mm": {
+          "value": "167.3 x 77.3 x 8.0",
+          "label": "Dimension (HxWxD, mm)",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "battery_capacity_mah_typical": {
+          "value": "5000",
+          "label": "Battery Capacity (mAh, Typical)",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "video_playing_resolution": {
+          "value": "FHD (1920 x 1080)@60fps",
+          "label": "Video Playing Resolution",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "security_update_period_valid_until": {
+          "value": "31 March 2030",
+          "label": "Security Update Period (Valid until)",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "solutions_tips": {
+          "value": "How to use AI select on your Galaxy phone and tablet How to check when to replace your Samsung Galaxy phone battery What to do when the buttons on your Galaxy device stop working One UI Software Update What to do when Wi-Fi appears to be not connecting on your Samsung Galaxy device",
+          "label": "Solutions & Tips",
+          "source": "adjacent_label_value",
+          "confidence": 88
+        },
+        "17_13_cm_large_display_expand_your_view": {
+          "value": "Maximize your view with the Galaxy A06 5G 17.13 cm large display*. Smooth 90 Hz scrolling and the HD+ U-Cut display gives you more room to enjoy your content. Experience the upgrade.",
+          "label": "17.13 cm large display. Expand your view.",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "run_apps_smoothly_multitask_with_ease": {
+          "value": "The Galaxy A06 5G features MediaTek Dimensity 6300 processor* for seamless gaming, video streaming, and social media.",
+          "label": "Run apps smoothly, multitask with ease",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "superfast_connectivity_with_awesome_5g": {
+          "value": "Galaxy A06 5G supports up to 12 bands of 5G network, giving you awesome 5G experience and lightning-fast connectivity. So stream, game, or download on the move with reliable 5G speeds* that keep up with your lifestyle.",
+          "label": "Superfast connectivity with awesome 5G.",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "capture_life_in_high_definition": {
+          "value": "Discover the power of the Galaxy A06 5G\u2019s 50MP main camera and 2 MP depth camera. Experience the freedom to capture stunning, quality photos. Background images generated with Adobe Firefly AI engine. Images simulated for illustrative purposes. *Individual results may vary depending upon light or shooting condition",
+          "label": "Capture life in high definition",
+          "source": "structured_section",
+          "confidence": 88
+        },
+        "no_noise_only_voice": {
+          "value": "Eliminate all background sounds with Noise Cancellation*.",
+          "label": "No noise. Only voice",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "reliable_protection_for_daily_life": {
+          "value": "With IP54* protection, enjoy peace of mind throughout your day. Be it splashes of water or dust, Galaxy A06 5G\u2019s durability can handle surprises, allowing you to focus on what truly matters.",
+          "label": "Reliable protection for daily life",
+          "source": "structured_section",
+          "confidence": 84
+        },
+        "built_to_last_on_the_os_upgrades": {
+          "value": "Offered with up to 4 generations of OS upgrades* and 4 years of security updates*, your Galaxy A06 5G stays up-to-date for longer.",
+          "label": "Built to last on the OS upgrades",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "power_up_stay_connected": {
+          "value": "Enjoy more of what you love without worrying about battery life\u2014the Galaxy A06 5G lasts longer with its 5,000 mAh (typical) battery*. And with 25 W Fast Charging**, it's back in action quickly.",
+          "label": "Power up. Stay connected.",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "secure_access_at_your_fingertips": {
+          "value": "Unlocking is easy with the side fingerprint sensor. It offers reliable single-press access and lets you set double-press shortcuts for your camera or other frequently used apps. Image simulated for illustrative purposes. Actual product may differ from the image shown.",
+          "label": "Secure access at your fingertips",
+          "source": "structured_section",
+          "confidence": 88
+        }
+      },
+      "features": [
+        {
+          "text": "Rear Camera - Resolution (Multiple) 50.0 MP + 2.0 MP",
+          "source": "li",
+          "confidence": 83,
+          "relevance_score": 3
+        },
+        {
+          "text": "Rear Camera - Resolution (Multiple)",
+          "source": "p",
+          "confidence": 77,
+          "relevance_score": 3
+        },
+        {
+          "text": "Resolution (Main Display) 720 x 1600 (HD+)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display) 16M",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display) 90 Hz",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple) F1.8 , F2.4",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution 8.0 MP",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "USB Interface USB Type-C",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Security Update Period (Valid until) 31 March 2030",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Contact us For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Resolution (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Security Update Period (Valid until)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Processor 2.4GHz, 2GHz",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Weight (g) 191",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Size (Main Display) 17.13 cm full rectangle / 16.73 cm rounded corners",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display) PLS LCD",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom Digital Zoom up to 10x",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number F2.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - OIS No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution FHD (1920 x 1080)@30fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Memory (GB) 4",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB) 64",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB) 44.8",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support MicroSD (Up to 1.5 TB)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Version USB 2.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version Bluetooth v5.3",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Accelerometer, Fingerprint Sensor, Gyro Sensor, Geomagnetic Sensor, Light Sensor, Proximity Sensor",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm) 167.3 x 77.3 x 8.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical) 5000",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution FHD (1920 x 1080)@60fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Size (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - OIS",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Interface",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth v5.3",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-09-29T18:46:27.229515+00:00"
+    },
+    {
+      "asin": "B0GNZPHXGN",
+      "brand": "Samsung",
+      "model": "Galaxy F70e 5G",
+      "search_name": "Samsung Galaxy F70e 5G",
+      "model_key": "samsung|galaxy f70e 5g",
+      "variant_signature": {
+        "ram_gb": "6",
+        "storage_gb": "128"
+      },
+      "official_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70e-5g-spotlight-blue-128gb-sm-e076bdbbins/",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 1.0,
+      "specifications": {
+        "product_ratings": {
+          "value": "0 ( Number of Ratings : 0 )",
+          "label": "Product Ratings",
+          "source": "label_value_block",
+          "confidence": 78
+        },
+        "size_main_display": {
+          "value": "17.13 cm full rectangle / 16.73 cm rounded corners",
+          "label": "Size (Main Display)",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "resolution_main_display": {
+          "value": "720 x 1600 (HD+)",
+          "label": "Resolution (Main Display)",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "technology_main_display": {
+          "value": "Colour Depth (Main Display) 16M",
+          "label": "Technology (Main Display)",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "colour_depth_main_display": {
+          "value": "16M",
+          "label": "Colour Depth (Main Display)",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "max_refresh_rate_main_display": {
+          "value": "120 Hz",
+          "label": "Max Refresh Rate (Main Display)",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "rear_camera_resolution_multiple": {
+          "value": "50.0 MP + 2.0 MP",
+          "label": "Rear Camera - Resolution (Multiple)",
+          "source": "adjacent_label_value",
+          "confidence": 88
+        },
+        "rear_camera_f_number_multiple": {
+          "value": "F1.8 , F2.4",
+          "label": "Rear Camera - F Number (Multiple)",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "rear_camera_ois": {
+          "value": "Rear Camera Zoom Digital Zoom up to 10x",
+          "label": "Rear Camera - OIS",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "rear_camera_zoom": {
+          "value": "Digital Zoom up to 10x",
+          "label": "Rear Camera Zoom",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "front_camera_resolution": {
+          "value": "8.0 MP",
+          "label": "Front Camera - Resolution",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "front_camera_f_number": {
+          "value": "F2.0",
+          "label": "Front Camera - F Number",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "front_camera_flash": {
+          "value": "Video Recording Resolution FHD (1920 x 1080)@30fps",
+          "label": "Front Camera - Flash",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "video_recording_resolution": {
+          "value": "FHD (1920 x 1080)@30fps",
+          "label": "Video Recording Resolution",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "memory_gb": {
+          "value": "6",
+          "label": "Memory (GB)",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "storage_gb": {
+          "value": "128",
+          "label": "Storage (GB)",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "available_storage_gb": {
+          "value": "108.0",
+          "label": "Available Storage (GB)",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "external_storage_support": {
+          "value": "MicroSD (Up to 2 TB)",
+          "label": "External Storage Support",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "usb_interface": {
+          "value": "USB Type-C",
+          "label": "USB Interface",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "usb_type_c": {
+          "value": "USB Version USB 2.0",
+          "label": "USB Type-C",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "usb_version": {
+          "value": "USB 2.0",
+          "label": "USB Version",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "bluetooth_version": {
+          "value": "Bluetooth v5.3",
+          "label": "Bluetooth Version",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "dimension_hxwxd_mm": {
+          "value": "167.4 x 77.4 x 8.2",
+          "label": "Dimension (HxWxD, mm)",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "weight_g": {
+          "value": "199",
+          "label": "Weight (g)",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "battery_capacity_mah_typical": {
+          "value": "6000",
+          "label": "Battery Capacity (mAh, Typical)",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "video_playing_resolution": {
+          "value": "FHD (1920 x 1080)@60fps",
+          "label": "Video Playing Resolution",
+          "source": "adjacent_label_value",
+          "confidence": 84
+        },
+        "security_update_period_valid_until": {
+          "value": "31 January 2032",
+          "label": "Security Update Period (Valid until)",
+          "source": "adjacent_label_value",
+          "confidence": 86
+        },
+        "solutions_tips": {
+          "value": "How to use AI select on your Galaxy phone and tablet How to check when to replace your Samsung Galaxy phone battery What to do when the buttons on your Galaxy device stop working One UI Software Update What to do when Wi-Fi appears to be not connecting on your Samsung Galaxy device",
+          "label": "Solutions & Tips",
+          "source": "adjacent_label_value",
+          "confidence": 88
+        },
+        "battery_stays_up": {
+          "value": "Concert or day trips, binging or creating, a single charge powers all day and night.",
+          "label": "Battery stays up",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "processor_speeds_up": {
+          "value": "Ultra-powerful performance that makes multitasking effortless with a superfast response.",
+          "label": "Processor speeds up",
+          "source": "structured_section",
+          "confidence": 86
+        },
+        "durability_goes_up": {
+          "value": "Built to handle everyday spills, splashes, and light rains with IP54.",
+          "label": "Durability goes up",
+          "source": "structured_section",
+          "confidence": 84
+        }
+      },
+      "features": [
+        {
+          "text": "Rear Camera - Resolution (Multiple) 50.0 MP + 2.0 MP",
+          "source": "li",
+          "confidence": 83,
+          "relevance_score": 3
+        },
+        {
+          "text": "Rear Camera - Resolution (Multiple)",
+          "source": "p",
+          "confidence": 77,
+          "relevance_score": 3
+        },
+        {
+          "text": "Resolution (Main Display) 720 x 1600 (HD+)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display) 16M",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display) 120 Hz",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple) F1.8 , F2.4",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution 8.0 MP",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "USB Interface USB Type-C",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Security Update Period (Valid until) 31 January 2032",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Contact us For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "li",
+          "confidence": 80,
+          "relevance_score": 2
+        },
+        {
+          "text": "Resolution (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Colour Depth (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Max Refresh Rate (Main Display)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Rear Camera - F Number (Multiple)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Front Camera - Resolution",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Security Update Period (Valid until)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "For All Product Related Complaints/assistance, please contact Manager, Customer Care Samsung India Electronics Pvt. Ltd., 6th Floor, DLF Centre, Sansad Marg, New Delhi - 110001 Email us at: support.india@samsung.com Tel (Toll Free): 1800 40 7267864 (1800 40 SAMSUNG)",
+          "source": "p",
+          "confidence": 74,
+          "relevance_score": 2
+        },
+        {
+          "text": "Size (Main Display) 17.13 cm full rectangle / 16.73 cm rounded corners",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display) PLS LCD",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom Digital Zoom up to 10x",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number F2.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash Yes",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash No",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution FHD (1920 x 1080)@30fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Memory (GB) 6",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB) 128",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB) 108.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support MicroSD (Up to 2 TB)",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Version USB 2.0",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version Bluetooth v5.3",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Accelerometer, Fingerprint Sensor, Gyro Sensor, Geomagnetic Sensor, Light Sensor, Proximity Sensor",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm) 167.4 x 77.4 x 8.2",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Weight (g) 199",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical) 6000",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution FHD (1920 x 1080)@60fps",
+          "source": "li",
+          "confidence": 77,
+          "relevance_score": 1
+        },
+        {
+          "text": "Size (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Technology (Main Display)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - OIS",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera Zoom",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - F Number",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Auto Focus",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Rear Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Front Camera - Flash",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Recording Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Available Storage (GB)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "External Storage Support",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "USB Interface",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth Version",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Bluetooth v5.3",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Dimension (HxWxD, mm)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Battery Capacity (mAh, Typical)",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        },
+        {
+          "text": "Video Playing Resolution",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-09-29T18:48:27.505052+00:00"
+    },
+    {
+      "asin": "B0HG9SZ7HD",
+      "brand": "Lava",
+      "model": "Virat V1",
+      "search_name": "Lava Virat V1",
+      "model_key": "lava|virat v1",
+      "variant_signature": {
+        "ram_gb": "4",
+        "storage_gb": "64"
+      },
+      "official_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 1.0,
+      "specifications": {
+        "form": {
+          "value": "Touch",
+          "label": "Form",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "sim": {
+          "value": "Dual Sim (4G+4G), Nano+Nano",
+          "label": "SIM",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "touch_screen": {
+          "value": "Yes",
+          "label": "Touch Screen",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "business_features": {
+          "value": "Gmail",
+          "label": "Business Features",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "call_features": {
+          "value": "Conference Call, Anonymous & Auto Call Recording",
+          "label": "Call Features",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "handset_color": {
+          "value": "Nilgiri Blue/Himalayan Silver",
+          "label": "Handset Color",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "in_sales_package": {
+          "value": "Handset, USB Cable Type-C, Charger, SIM Ejector Pin, Back Cover",
+          "label": "In Sales Package",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "operating_frequency": {
+          "value": "GSM: 850MHz, 900MHz, 1800MHz, 1900MHz",
+          "label": "Operating Frequency",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "processor": {
+          "value": "UNISOC 9863a Octa-core Processor",
+          "label": "Processor",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "operating_system": {
+          "value": "Android 15 Go",
+          "label": "OS",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "size": {
+          "value": "17.13cm (6.75\") Notch HD+ Display with 2.5D Glass, 90Hz Refresh Rate & Aspect Ratio of 20:9",
+          "label": "Size",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "resolution": {
+          "value": "720*1600",
+          "label": "Resolution",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "ppi": {
+          "value": "260",
+          "label": "PPI",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "color": {
+          "value": "16M",
+          "label": "Color",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "primary_camera_rear_camera": {
+          "value": "13 MP",
+          "label": "Primary Camera (Rear Camera)",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "secondary_camera_front_camera": {
+          "value": "5MP",
+          "label": "Secondary Camera (Front Camera)",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "flash": {
+          "value": "Yes, Both Camera (Front Flash Type - Screen)",
+          "label": "Flash",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "video_recording": {
+          "value": "Yes",
+          "label": "Video Recording",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "hd_recording": {
+          "value": "Yes",
+          "label": "HD Recording",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "other_camera_features": {
+          "value": "Portrait, Slow Motion, Timelapse, Refocus, Audio Note, Motion Photo, Beauty, HDR, Night, AI,Panorama, Filters, QR Scanning",
+          "label": "Other Camera Features",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "ram": {
+          "value": "4GB+4GB*",
+          "label": "RAM",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "internal_memory": {
+          "value": "64GB",
+          "label": "Internal Memory",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "expandable_memory": {
+          "value": "256GB",
+          "label": "Expandable Memory",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "type": {
+          "value": "5000mAh (Typ) Li-Ion Battery",
+          "label": "Type",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "charger": {
+          "value": "10W Charger, Type-C Cable",
+          "label": "Charger",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "charging_time_of_device_0_100": {
+          "value": "185 mins",
+          "label": "Charging Time of Device (0-100%)**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "talk_time": {
+          "value": "30hrs",
+          "label": "Talk Time**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "stand_by_time": {
+          "value": "340Hrs",
+          "label": "Stand By Time**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "youtube_playback_time": {
+          "value": "615min",
+          "label": "Youtube Playback Time**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "internet_features": {
+          "value": "Google Play Store, Gmail, YouTube, Google, Google Assistant, Maps, Files, Facebook",
+          "label": "Internet Features",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "navigation": {
+          "value": "Yes",
+          "label": "Navigation",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "preinstalled_browser": {
+          "value": "Yes, Google Chrome",
+          "label": "Preinstalled Browser",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "gprs": {
+          "value": "Yes",
+          "label": "GPRS",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "edge": {
+          "value": "Yes",
+          "label": "EDGE",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "3g": {
+          "value": "Yes",
+          "label": "3G",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "4g": {
+          "value": "Yes",
+          "label": "4G",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "wi_fi": {
+          "value": "Wi-Fi 802.11 b/g/n/ac, hotspot",
+          "label": "Wi-Fi",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "usb_connectivity": {
+          "value": "Type-C",
+          "label": "USB Connectivity",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "glonass": {
+          "value": "No",
+          "label": "GLONASS",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "bluetooth": {
+          "value": "V4.2",
+          "label": "Bluetooth",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "audio_jack": {
+          "value": "3.5mm",
+          "label": "Audio Jack",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "otg_support": {
+          "value": "Yes",
+          "label": "OTG Support",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "music_player": {
+          "value": "Yes",
+          "label": "Music Player",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "video_player": {
+          "value": "Yes",
+          "label": "Video Player",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "fm": {
+          "value": "Yes",
+          "label": "FM",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "ringtone": {
+          "value": "Yes",
+          "label": "Ringtone",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "sar_value": {
+          "value": "<1.6W/Kg",
+          "label": "SAR Value",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "sensors": {
+          "value": "Accelerometer",
+          "label": "Sensors",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "additional_features": {
+          "value": "Side Fingerprint Sensor, Face Unlock, Battery Saver Mode",
+          "label": "Additional Features",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "warranty": {
+          "value": "1 Year Handset Warranty and 6 Months Warranty on Accessories",
+          "label": "WARRANTY",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "face_unlock_time": {
+          "value": "0.86sec",
+          "label": "Face Unlock Time**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "fingerprint_unlock_time": {
+          "value": "0.42sec",
+          "label": "Fingerprint Unlock Time**",
+          "source": "html_table",
+          "confidence": 95
+        },
+        "software_security_support": {
+          "label": "Software security support",
+          "value": "2 years of security updates from model launch; quarterly cadence",
+          "source": "official_model_support_policy",
+          "source_url": "https://www.lavamobiles.com/software-update-center",
+          "observed_at": "2026-10-05T02:15:42.749204+00:00",
+          "identity_match": {
+            "model": "virat v1",
+            "variant": {
+              "ram_gb": "4",
+              "storage_gb": "64"
+            },
+            "status": "exact_model_row_and_verified_product_variant"
+          },
+          "launch_month": "Jul'26",
+          "policy_text": "We are committed to providing continuous security updates for our smartphones. These updates typically include the latest security patches, vulnerability fixes, and other system improvements. We will provide quarterly security updates for two years after the launch of a model and three years for flagship Agni Series models ."
+        }
+      },
+      "features": [
+        {
+          "text": "*Refers to Virtual RAM ** - Under LAVA Testing Conditions",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-10-05T02:15:43.330431+00:00"
+    },
+    {
+      "asin": "B0GTTXP6WF",
+      "brand": "vivo",
+      "model": "T5x 5G",
+      "search_name": "vivo T5x 5G",
+      "model_key": "vivo|t5x 5g",
+      "variant_signature": {
+        "ram_gb": "6",
+        "storage_gb": "128"
+      },
+      "official_url": "https://shop.vivo.com/in/product/10339?skuId=19387",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 0.8,
+      "specifications": {
+        "ram": {
+          "value": "6 GB",
+          "label": "RAM",
+          "source": "official_selected_sku_heading",
+          "confidence": 95,
+          "source_url": "https://shop.vivo.com/in/product/10339?skuId=19387",
+          "observed_at": "2026-10-06T01:52:44.205972+00:00",
+          "identity_match": {
+            "heading": "T5x 5G 6GB+128GB Cyber Green",
+            "variant": {
+              "ram_gb": "6",
+              "storage_gb": "128"
+            }
+          }
+        },
+        "storage": {
+          "value": "128 GB",
+          "label": "Storage",
+          "source": "official_selected_sku_heading",
+          "confidence": 95,
+          "source_url": "https://shop.vivo.com/in/product/10339?skuId=19387",
+          "observed_at": "2026-10-06T01:52:44.206006+00:00",
+          "identity_match": {
+            "heading": "T5x 5G 6GB+128GB Cyber Green",
+            "variant": {
+              "ram_gb": "6",
+              "storage_gb": "128"
+            }
+          }
+        },
+        "video_playback": {
+          "value": "40 Hours",
+          "label": "Video Playback",
+          "source": "same_item_duration_workload",
+          "confidence": 90,
+          "test_conditions": "Manufacturer lab claim; 25 C +/-1, fully charged, minimum screen brightness, muted sound. Actual performance varies.",
+          "observed_at": "2026-10-06T01:53:53.855232+00:00",
+          "source_url": "https://www.vivo.com/in/products/t5x"
+        },
+        "gaming": {
+          "value": "15.4 Hours",
+          "label": "Gaming",
+          "source": "same_item_duration_workload",
+          "confidence": 90,
+          "observed_at": "2026-10-06T01:53:53.855248+00:00",
+          "source_url": "https://www.vivo.com/in/products/t5x"
+        },
+        "music_playback": {
+          "value": "93 Hours",
+          "label": "Music Playback",
+          "source": "same_item_duration_workload",
+          "confidence": 90,
+          "observed_at": "2026-10-06T01:53:53.855253+00:00",
+          "source_url": "https://www.vivo.com/in/products/t5x"
+        },
+        "navigation": {
+          "value": "14.5 Hours",
+          "label": "Navigation",
+          "source": "same_item_duration_workload",
+          "confidence": 90,
+          "observed_at": "2026-10-06T01:53:53.855257+00:00",
+          "source_url": "https://www.vivo.com/in/products/t5x"
+        }
+      },
+      "features": [],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-10-06T01:53:53.872089+00:00"
+    },
+    {
+      "asin": "B0HCNQPXRY",
+      "brand": "Lava",
+      "model": "Virat V1 5G",
+      "search_name": "Lava Virat V1 5G",
+      "model_key": "lava|virat v1 5g",
+      "variant_signature": {
+        "ram_gb": "4",
+        "storage_gb": "64"
+      },
+      "official_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 1.0,
+      "specifications": {
+        "form": {
+          "value": "Touch",
+          "label": "Form",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "sim": {
+          "value": "Dual Sim (5G+5G), Nano+Nano",
+          "label": "SIM",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "touch_screen": {
+          "value": "Yes",
+          "label": "Touch Screen",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "business_features": {
+          "value": "Gmail",
+          "label": "Business Features",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "call_features": {
+          "value": "Conference Call, Anonymous & Auto Call Recording",
+          "label": "Call Features",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "handset_color": {
+          "value": "Arya Blue/Sonar Gold",
+          "label": "Handset Color",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "in_sales_package": {
+          "value": "Handset, USB Cable Type-C, Charger, SIM Ejector Pin, Back Cover",
+          "label": "In Sales Package",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "operating_frequency": {
+          "value": "GSM: 850MHz, 900MHz, 1800MHz, 1900MHz",
+          "label": "Operating Frequency",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "processor": {
+          "value": "UNISOC T8200 Octa-core Processor",
+          "label": "Processor",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "operating_system": {
+          "value": "Android 16",
+          "label": "OS",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "size": {
+          "value": "17.13cm (6.75\") Notch HD+ Display with 2.5D Glass, 120Hz Refresh Rate & Aspect Ratio of 20:9",
+          "label": "Size",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "resolution": {
+          "value": "720*1600",
+          "label": "Resolution",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "ppi": {
+          "value": "260",
+          "label": "PPI",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "color": {
+          "value": "16.7M",
+          "label": "Color",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "primary_camera_rear_camera": {
+          "value": "13 MP",
+          "label": "Primary Camera (Rear Camera)",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "secondary_camera_front_camera": {
+          "value": "5MP",
+          "label": "Secondary Camera (Front Camera)",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "flash": {
+          "value": "Yes, Both Camera (Front Flash Type - Screen)",
+          "label": "Flash",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "video_recording": {
+          "value": "Yes",
+          "label": "Video Recording",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "hd_recording": {
+          "value": "Yes",
+          "label": "HD Recording",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "other_camera_features": {
+          "value": "Portrait, Slow Motion, Timelapse, Refocus, Audio Note, Motion Photo, Beauty, HDR, Night, AI,Panorama, Filters, QR Scanning",
+          "label": "Other Camera Features",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "ram": {
+          "value": "4GB+4GB*",
+          "label": "RAM",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "internal_memory": {
+          "value": "64GB",
+          "label": "Internal Memory",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "expandable_memory": {
+          "value": "1TB",
+          "label": "Expandable Memory",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "weight_with_battery": {
+          "value": "210gm",
+          "label": "Weight With Battery",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "type": {
+          "value": "6000mAh (Typ) Li-Ion Battery",
+          "label": "Type",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "charger": {
+          "value": "10W Charger, Type-C Cable",
+          "label": "Charger",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "charging_time_of_device_0_100": {
+          "value": "185mins",
+          "label": "Charging Time of Device (0-100%)**",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "talk_time": {
+          "value": "47hrs",
+          "label": "Talk Time**",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "stand_by_time": {
+          "value": "750Hrs",
+          "label": "Stand By Time**",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "youtube_playback_time": {
+          "value": "810mins",
+          "label": "Youtube Playback Time**",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00",
+          "test_conditions": "Under LAVA Testing Conditions, as marked by ** on this exact 5G model page; manufacturer claim, not an independent cross-device benchmark."
+        },
+        "internet_features": {
+          "value": "Google Play Store, Gmail, YouTube, Google, Google Assistant, Maps, Files, Facebook",
+          "label": "Internet Features",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "navigation": {
+          "value": "Yes",
+          "label": "Navigation",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "preinstalled_browser": {
+          "value": "Yes, Google Chrome",
+          "label": "Preinstalled Browser",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "gprs": {
+          "value": "Yes",
+          "label": "GPRS",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "edge": {
+          "value": "Yes",
+          "label": "EDGE",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "3g": {
+          "value": "Yes",
+          "label": "3G",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "4g": {
+          "value": "Yes",
+          "label": "4G",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "wi_fi": {
+          "value": "Wi-Fi 802.11 b/g/n/ac, hotspot",
+          "label": "Wi-Fi",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "usb_connectivity": {
+          "value": "Type-C",
+          "label": "USB Connectivity",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "glonass": {
+          "value": "No",
+          "label": "GLONASS",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "bluetooth": {
+          "value": "V5.0",
+          "label": "Bluetooth",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "audio_jack": {
+          "value": "3.5mm",
+          "label": "Audio Jack",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "otg_support": {
+          "value": "Yes",
+          "label": "OTG Support",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "music_player": {
+          "value": "Yes",
+          "label": "Music Player",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "video_player": {
+          "value": "Yes",
+          "label": "Video Player",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "fm": {
+          "value": "Yes",
+          "label": "FM",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "ringtone": {
+          "value": "Yes",
+          "label": "Ringtone",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "sar_value": {
+          "value": "<1.6W/Kg",
+          "label": "SAR Value",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "sensors": {
+          "value": "Accelerometer",
+          "label": "Sensors",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "additional_features": {
+          "value": "Side Fingerprint Sensor, Face Unlock, Battery Saver Mode",
+          "label": "Additional Features",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "warranty": {
+          "value": "1 Year Handset Warranty and 6 Months Warranty on Accessories",
+          "label": "WARRANTY",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "face_unlock_time": {
+          "value": "0.67sec",
+          "label": "Face Unlock Time**",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        },
+        "fingerprint_unlock_time": {
+          "value": "0.33sec",
+          "label": "Fingerprint Unlock Time**",
+          "source": "html_table",
+          "confidence": 95,
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "observed_at": "2026-10-06T14:28:17.475153+00:00"
+        }
+      },
+      "features": [
+        {
+          "text": "*Refers to Virtual RAM ** - Under LAVA Testing Conditions",
+          "source": "p",
+          "confidence": 71,
+          "relevance_score": 1
+        }
+      ],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-10-06T14:29:00.640211+00:00"
+    },
+    {
+      "asin": "B0GPWRYNM1",
+      "brand": "realme",
+      "model": "C83 5G",
+      "search_name": "realme C83 5G",
+      "model_key": "realme|c83 5g",
+      "variant_signature": {
+        "ram_gb": "4",
+        "storage_gb": "64"
+      },
+      "official_url": "https://www.realme.com/in/realme-c83",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 0.9,
+      "specifications": {
+        "description": {
+          "value": "realme C83 5G combines a 7000mAh Titan Battery with a 144Hz Ultra Bright Display, MediaTek Dimensity 6300 5G chipset, 13MP AI camera, IP64 dust and water resistance, and military-grade shock resistance.",
+          "label": "description",
+          "source": "json_ld",
+          "confidence": 90,
+          "source_url": "https://www.realme.com/in/realme-c83",
+          "observed_at": "2026-10-07T01:54:24.401908+00:00"
+        },
+        "battery_and_charging": {
+          "value": "7000mAh Titan Battery, 15W Fast Charge, reverse wired charging, bypass charging",
+          "label": "Battery and Charging",
+          "source": "json_ld_additional_property",
+          "confidence": 94,
+          "source_url": "https://www.realme.com/in/realme-c83",
+          "observed_at": "2026-10-07T01:54:24.401908+00:00"
+        },
+        "display": {
+          "value": "6.8-inch 144Hz Ultra Bright Display, 900nit peak brightness, HD+ 1570x720",
+          "label": "Display",
+          "source": "json_ld_additional_property",
+          "confidence": 94,
+          "source_url": "https://www.realme.com/in/realme-c83",
+          "observed_at": "2026-10-07T01:54:24.401908+00:00"
+        },
+        "rear_camera": {
+          "value": "13MP AI camera, f/2.2, 77\u00b0 FOV, AF, dual-view video",
+          "label": "Rear Camera",
+          "source": "json_ld_additional_property",
+          "confidence": 94,
+          "source_url": "https://www.realme.com/in/realme-c83",
+          "observed_at": "2026-10-07T01:54:24.401908+00:00"
+        },
+        "durability": {
+          "value": "IP64 dust and water resistance, military-grade shock resistance (MIL-STD-810H), ArmorShell Protection",
+          "label": "Durability",
+          "source": "json_ld_additional_property",
+          "confidence": 94,
+          "source_url": "https://www.realme.com/in/realme-c83",
+          "observed_at": "2026-10-07T01:54:24.401908+00:00"
+        },
+        "operating_system": {
+          "value": "realme UI 7.0 based on Android 16",
+          "label": "Operating System",
+          "source": "json_ld_additional_property",
+          "confidence": 94,
+          "source_url": "https://www.realme.com/in/realme-c83",
+          "observed_at": "2026-10-07T01:54:24.401908+00:00"
+        },
+        "cellular_network": {
+          "value": "5G NR: n1/n3/n5/n8/n28B/n40/n41/n77/n78, 4G LTE, GSM, WCDMA",
+          "label": "Cellular Network",
+          "source": "json_ld_additional_property",
+          "confidence": 94,
+          "source_url": "https://www.realme.com/in/realme-c83",
+          "observed_at": "2026-10-07T01:54:24.401908+00:00"
+        },
+        "performance_amplified": {
+          "value": "MediaTek Dimensity 6300 5G Chipset",
+          "label": "Performance Amplified",
+          "source": "adjacent_label_value",
+          "confidence": 88,
+          "source_url": "https://www.realme.com/in/realme-c83",
+          "observed_at": "2026-10-07T01:54:24.401908+00:00"
+        },
+        "video_playback": {
+          "value": "19 hours",
+          "label": "Video Playback",
+          "source": "official_100_percent_power_card",
+          "confidence": 95,
+          "source_url": "https://www.realme.com/in/realme-c83",
+          "observed_at": "2026-10-07T01:54:24.401908+00:00",
+          "raw_label": "Online Videos",
+          "test_conditions": "At 100% Power panel; manufacturer realme Lab claim, actual results may vary. Separate from mixed-use 50%-remaining panel. Detailed brightness/network configuration unspecified."
+        },
+        "ram": {
+          "value": "4 GB",
+          "label": "RAM",
+          "source": "exact_amazon_listing_specification_table",
+          "confidence": 95,
+          "source_url": "https://www.amazon.in/dp/B0GPWRYNM1",
+          "observed_at": "2026-10-07T01:50:24.834564+00:00"
+        },
+        "storage": {
+          "value": "64 GB",
+          "label": "Storage",
+          "source": "exact_amazon_listing_specification_table",
+          "confidence": 95,
+          "source_url": "https://www.amazon.in/dp/B0GPWRYNM1",
+          "observed_at": "2026-10-07T01:50:24.834564+00:00"
+        }
+      },
+      "features": [],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-10-07T01:55:04.523658+00:00"
+    }
+  ]
+}
