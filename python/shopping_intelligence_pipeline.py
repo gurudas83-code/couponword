@@ -2946,7 +2946,15 @@ def _run_pipeline_once(
 
         multi_retailer = enrich_with_multi_retailer(
             profile=profile,
-            identity=item.get("identity", {}) or {},
+            identity={
+                **(item.get("identity", {}) or {}),
+                # Reuse the exact listing title checked above; the normalized
+                # model name may omit physical RAM/storage capacities.
+                "original_title": clean(
+                    (item.get("candidate") or {}).get("source_title")
+                    or (item.get("candidate") or {}).get("title")
+                ),
+            },
             assessment=assessment,
         )
 

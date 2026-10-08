@@ -42,6 +42,21 @@ class MultiRetailerIdentityTests(unittest.TestCase):
         )
         catalogued.assert_called_once()
 
+    def test_exact_f70e_source_title_retains_registered_variant(self):
+        profile = dict(self.profile, asin="B0GNZSK9HJ", brand="Samsung",
+                       title="Samsung Galaxy F70e 5G")
+        identity = {"brand": "Samsung", "model": "Galaxy F70e 5G"}
+        self.assertEqual(adapter.build_canonical_product(
+            profile=profile, identity=identity).product_id, "")
+        identity["original_title"] = (
+            "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (4 GB RAM) | "
+            '6000 mAh Battery | 6.74" PLS LCD Display | Dimensity 6300 | Octa Core Processor |')
+        self.assertEqual(adapter.build_canonical_product(
+            profile=profile, identity=identity).product_id, "cw-mobile-82")
+        identity["original_title"] = identity["original_title"].replace("4 GB RAM", "6 GB RAM")
+        self.assertEqual(adapter.build_canonical_product(
+            profile=profile, identity=identity).product_id, "")
+
     def test_registry_owner_with_wrong_catalogue_variant_is_not_reused(self):
         with patch.object(adapter, "find_canonical_product_id", return_value="cw-mobile-72"), \
              patch.object(adapter, "catalogued_owner", return_value=""):
