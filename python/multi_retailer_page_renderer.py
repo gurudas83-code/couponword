@@ -148,16 +148,20 @@ def render_multi_retailer_section(product, multi_products):
         if is_best:
             badges.append(
                 '<span class="offer-best">'
-                'Best verified offer'
+                'Lowest observed price'
                 '</span>'
             )
 
-        if freshness == "fresh":
-            badges.append(
-                '<span class="offer-fresh">'
-                'Price checked recently'
-                '</span>'
-            )
+        # Static pages must not describe an old snapshot as "recent" forever.
+        from datetime import datetime, timezone
+        try:
+            observed = datetime.fromisoformat(str(offer.get("last_checked") or ""))
+            if observed.tzinfo is not None:
+                label = observed.astimezone(timezone.utc).strftime("%d %b %Y, %H:%M UTC")
+                badges.append('<span class="offer-fresh">Observed '
+                              + html.escape(label) + '</span>')
+        except (ValueError, TypeError):
+            pass
 
         button = ""
 
@@ -188,7 +192,7 @@ def render_multi_retailer_section(product, multi_products):
         '<div class="multi-retailer-heading">'
         '<div>'
         '<h2>Compare retailer offers</h2>'
-        '<p>Prices and availability are based on recently verified evidence.</p>'
+        '<p>Recorded prices and availability are shown with their observation dates.</p>'
         '</div>'
         '</div>'
         '<div class="retailer-offer-grid">'

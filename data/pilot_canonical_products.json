@@ -90,6 +90,23 @@
       "source_product_id": "20",
       "source": "pilot_manifest",
       "confidence": 0.95
+    },
+    {
+      "product_id": "cw-mobile-82",
+      "title": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (4 GB RAM) | 6000 mAh Battery | 6.74\" PLS LCD Display | Dimensity 6300 | Octa Core Processor |",
+      "brand": "Samsung",
+      "model": "Galaxy F70e 5G",
+      "variant": "4GB/128GB",
+      "category": "Mobiles",
+      "identifiers": {},
+      "attributes": {
+        "ram": "4GB",
+        "storage": "128GB",
+        "color": "Spotlight Blue"
+      },
+      "source_product_id": "",
+      "source": "couponworld",
+      "confidence": 0.99
     }
   ]
 }

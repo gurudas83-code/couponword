@@ -1,0 +1,391 @@
+{
+  "canonical_product": {
+    "product_id": "cw-mobile-82",
+    "title": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (4 GB RAM) | 6000 mAh Battery | 6.74\" PLS LCD Display | Dimensity 6300 | Octa Core Processor |",
+    "brand": "Samsung",
+    "model": "Galaxy F70e 5G",
+    "variant": "4GB/128GB",
+    "category": "Mobiles",
+    "identifiers": {},
+    "attributes": {
+      "ram": "4GB",
+      "storage": "128GB",
+      "color": "Spotlight Blue"
+    },
+    "source_product_id": "",
+    "source": "couponworld",
+    "confidence": 0.99
+  },
+  "amazon_identity": {
+    "http_status": 200,
+    "final_url": "https://www.amazon.in/dp/B0GNZSK9HJ",
+    "page_asin": "B0GNZSK9HJ",
+    "page_title": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (4 GB RAM) | 6000 mAh Battery | 6.74\" PLS LCD Display | Dimensity 6300 | Octa Core Processor |",
+    "identity_title": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (4 GB RAM) | 6000 mAh Battery | 6.74\" PLS LCD Display | Dimensity 6300 | Octa Core Processor |",
+    "exact_listing_capacity": {},
+    "strict_status": "AUTO_REUSE",
+    "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+    "resolver_decision": "verified",
+    "resolver_score": 95
+  },
+  "flipkart_identity": {
+    "name": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB)",
+    "description": "Buy Samsung Galaxy F70e 5G online at best price with offers in India. Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) features and specifications include 4 GB RAM, 128 GB ROM, 6000 mAh Battery, 50 MP back camera and 8 MP front camera. Compare Galaxy F70e 5G by price and performance to shop at Flipkart",
+    "image": [
+      "https://rukmini1.flixcart.com/image/1500/1500/xif0q/mobile/o/q/o/-resized-original-imahqmeqyq7qzsfy.jpeg?q=70",
+      "https://rukmini1.flixcart.com/image/1500/1500/xif0q/mobile/h/u/x/-original-imahrqphnfkvfv9n.jpeg?q=70",
+      "https://rukmini1.flixcart.com/image/1500/1500/xif0q/mobile/2/c/k/-original-imahqmeqftdnjbnz.jpeg?q=70",
+      "https://rukmini1.flixcart.com/image/1500/1500/xif0q/mobile/w/6/w/-original-imahqmeqmwyxwnjx.jpeg?q=70",
+      "https://rukmini1.flixcart.com/image/1500/1500/xif0q/mobile/d/4/6/-original-imahqmeqrerpzhgt.jpeg?q=70"
+    ],
+    "sku": "MOBHQGZQYHNBZHNW",
+    "color": "Spotlight Blue",
+    "category": "mobile",
+    "aggregateRating": {
+      "ratingValue": 4.1,
+      "reviewCount": 1443,
+      "ratingCount": 11525,
+      "@type": "AggregateRating"
+    },
+    "brand": {
+      "name": "Samsung",
+      "@type": "Brand"
+    },
+    "offers": {
+      "price": 16999,
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "shippingDetails": {
+        "shippingRate": {
+          "value": 0,
+          "currency": "INR",
+          "@type": "MonetaryAmount"
+        },
+        "shippingDestination": {
+          "addressCountry": "IN",
+          "@type": "DefinedRegion"
+        },
+        "@type": "OfferShippingDetails"
+      },
+      "hasMerchantReturnPolicy": {
+        "applicableCountry": "IN",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+        "description": "Returns are not permitted. We offer a 7 days replacement-only policy.",
+        "@type": "MerchantReturnPolicy"
+      },
+      "@type": "Offer"
+    },
+    "review": [
+      {
+        "name": "\u0905\u091a\u094d\u091b\u093e \u091a\u0949\u0907\u0938 ",
+        "author": {
+          "name": "Binanda Barman",
+          "@type": "Person"
+        },
+        "datePublished": "2026-08-08",
+        "reviewBody": "\u0939\u0948\u0902\u0917 \u0939\u094b \u0930\u0939\u093e \u0907\u0936\u0942 \u092f\u093e \u0932\u0948\u0917\u093f\u0902\u0917 \u092a\u094d\u0930\u0949\u092c\u094d\u0932\u092e ",
+        "reviewRating": {
+          "ratingValue": 4,
+          "bestRating": 5,
+          "@type": "Rating"
+        },
+        "@type": "Review"
+      },
+      {
+        "name": "\u0905\u091a\u094d\u091b\u093e \u092a\u094d\u0930\u094b\u0921\u0915\u094d\u091f ",
+        "author": {
+          "name": "GURU CHARAN OJHA",
+          "@type": "Person"
+        },
+        "datePublished": "2026-03-30",
+        "reviewBody": "\u0915\u0941\u0932 \u092e\u093f\u0932\u093e\u0915\u0930 \u0905\u091a\u094d\u091b\u093e \u092b\u094b\u0928 ",
+        "reviewRating": {
+          "ratingValue": 4,
+          "bestRating": 5,
+          "@type": "Rating"
+        },
+        "@type": "Review"
+      },
+      {
+        "name": "\u092e\u0942\u0932\u094d\u092f - \u092a\u0948\u0938\u0947 \u0915\u0947 \u0932\u093f\u090f ",
+        "author": {
+          "name": "Sandeep Yadav",
+          "@type": "Person"
+        },
+        "datePublished": "2026-03-05",
+        "reviewBody": "\u0938\u093e\u0927\u093e\u0930\u0923 \u092a\u094d\u0930\u094b\u0921\u0915\u094d\u091f \u0907\u0938 \u092e\u0942\u0932\u094d\u092f \u092a\u0930 ",
+        "reviewRating": {
+          "ratingValue": 4,
+          "bestRating": 5,
+          "@type": "Rating"
+        },
+        "@type": "Review"
+      }
+    ],
+    "@context": "https://schema.org",
+    "@type": "Product"
+  },
+  "flipkart_observed_at": "2026-10-08T02:11:48.174235+00:00",
+  "evidence": [
+    {
+      "product_id": "cw-mobile-82",
+      "retailer": "amazon",
+      "retailer_product_id": "B0GNZSK9HJ",
+      "price": 16330.0,
+      "mrp": null,
+      "availability": "in_stock",
+      "source_url": "https://www.amazon.in/dp/B0GNZSK9HJ",
+      "source_type": "amazon_primary_buybox",
+      "observed_at": "2026-10-08T02:14:00.445837+00:00",
+      "confidence": 0.95,
+      "notes": "Exact4GB/128GB SpotlightBlue listing; unconditional observed base price. Checkout confirms final total; no bank-discount extrapolation."
+    },
+    {
+      "product_id": "cw-mobile-82",
+      "retailer": "flipkart",
+      "retailer_product_id": "MOBHQGZQYHNBZHNW",
+      "price": 16999.0,
+      "mrp": null,
+      "availability": "in_stock",
+      "source_url": "https://www.flipkart.com/hi/samsung-galaxy-f70e-5g-spotlight-blue-128-gb/p/itmfe8b93b7695f6?ov_redirect=true",
+      "source_type": "flipkart-product-jsonld",
+      "observed_at": "2026-10-08T02:11:48.174235+00:00",
+      "confidence": 0.95,
+      "notes": "Exact4GB/128GB SpotlightBlue listing; unconditional observed base price. Checkout confirms final total; no bank-discount extrapolation."
+    }
+  ],
+  "offers": [
+    {
+      "retailer": "amazon",
+      "product_id": "cw-mobile-82",
+      "retailer_product_id": "B0GNZSK9HJ",
+      "brand": "Samsung",
+      "model": "Galaxy F70e 5G",
+      "variant": "4GB/128GB",
+      "title": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (4 GB RAM) | 6000 mAh Battery | 6.74\" PLS LCD Display | Dimensity 6300 | Octa Core Processor |",
+      "price": 16330.0,
+      "mrp": null,
+      "currency": "INR",
+      "availability": "in_stock",
+      "product_url": "https://www.amazon.in/dp/B0GNZSK9HJ",
+      "affiliate_url": "",
+      "source": "amazon_primary_buybox",
+      "confidence": 0.95,
+      "last_checked": "2026-10-08T02:14:00.445837+00:00",
+      "metadata": {
+        "evidence_source_url": "https://www.amazon.in/dp/B0GNZSK9HJ",
+        "evidence_source_type": "amazon_primary_buybox",
+        "evidence_observed_at": "2026-10-08T02:14:00.445837+00:00",
+        "evidence_notes": "Exact4GB/128GB SpotlightBlue listing; unconditional observed base price. Checkout confirms final total; no bank-discount extrapolation."
+      }
+    },
+    {
+      "retailer": "flipkart",
+      "product_id": "cw-mobile-82",
+      "retailer_product_id": "MOBHQGZQYHNBZHNW",
+      "brand": "Samsung",
+      "model": "Galaxy F70e 5G",
+      "variant": "4GB/128GB",
+      "title": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (4 GB RAM) | 6000 mAh Battery | 6.74\" PLS LCD Display | Dimensity 6300 | Octa Core Processor |",
+      "price": 16999.0,
+      "mrp": null,
+      "currency": "INR",
+      "availability": "in_stock",
+      "product_url": "https://www.flipkart.com/hi/samsung-galaxy-f70e-5g-spotlight-blue-128-gb/p/itmfe8b93b7695f6?ov_redirect=true",
+      "affiliate_url": "",
+      "source": "flipkart-product-jsonld",
+      "confidence": 0.95,
+      "last_checked": "2026-10-08T02:11:48.174235+00:00",
+      "metadata": {
+        "evidence_source_url": "https://www.flipkart.com/hi/samsung-galaxy-f70e-5g-spotlight-blue-128-gb/p/itmfe8b93b7695f6?ov_redirect=true",
+        "evidence_source_type": "flipkart-product-jsonld",
+        "evidence_observed_at": "2026-10-08T02:11:48.174235+00:00",
+        "evidence_notes": "Exact4GB/128GB SpotlightBlue listing; unconditional observed base price. Checkout confirms final total; no bank-discount extrapolation."
+      }
+    }
+  ],
+  "comparison": {
+    "status": "ok",
+    "identity_matched_offer_count": 2,
+    "comparable_offer_count": 2,
+    "rejected_offer_count": 0,
+    "best_offer": {
+      "retailer": "amazon",
+      "product_id": "cw-mobile-82",
+      "retailer_product_id": "B0GNZSK9HJ",
+      "brand": "Samsung",
+      "model": "Galaxy F70e 5G",
+      "variant": "4GB/128GB",
+      "title": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (4 GB RAM) | 6000 mAh Battery | 6.74\" PLS LCD Display | Dimensity 6300 | Octa Core Processor |",
+      "price": 16330.0,
+      "mrp": null,
+      "currency": "INR",
+      "availability": "in_stock",
+      "product_url": "https://www.amazon.in/dp/B0GNZSK9HJ",
+      "affiliate_url": "",
+      "source": "amazon_primary_buybox",
+      "confidence": 0.95,
+      "last_checked": "2026-10-08T02:14:00.445837+00:00",
+      "metadata": {
+        "evidence_source_url": "https://www.amazon.in/dp/B0GNZSK9HJ",
+        "evidence_source_type": "amazon_primary_buybox",
+        "evidence_observed_at": "2026-10-08T02:14:00.445837+00:00",
+        "evidence_notes": "Exact4GB/128GB SpotlightBlue listing; unconditional observed base price. Checkout confirms final total; no bank-discount extrapolation."
+      }
+    },
+    "price_gap": 669.0,
+    "identity_matched_offers": [
+      {
+        "retailer": "amazon",
+        "product_id": "cw-mobile-82",
+        "retailer_product_id": "B0GNZSK9HJ",
+        "brand": "Samsung",
+        "model": "Galaxy F70e 5G",
+        "variant": "4GB/128GB",
+        "title": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (4 GB RAM) | 6000 mAh Battery | 6.74\" PLS LCD Display | Dimensity 6300 | Octa Core Processor |",
+        "price": 16330.0,
+        "mrp": null,
+        "currency": "INR",
+        "availability": "in_stock",
+        "product_url": "https://www.amazon.in/dp/B0GNZSK9HJ",
+        "affiliate_url": "",
+        "source": "amazon_primary_buybox",
+        "confidence": 0.95,
+        "last_checked": "2026-10-08T02:14:00.445837+00:00",
+        "metadata": {
+          "evidence_source_url": "https://www.amazon.in/dp/B0GNZSK9HJ",
+          "evidence_source_type": "amazon_primary_buybox",
+          "evidence_observed_at": "2026-10-08T02:14:00.445837+00:00",
+          "evidence_notes": "Exact4GB/128GB SpotlightBlue listing; unconditional observed base price. Checkout confirms final total; no bank-discount extrapolation."
+        }
+      },
+      {
+        "retailer": "flipkart",
+        "product_id": "cw-mobile-82",
+        "retailer_product_id": "MOBHQGZQYHNBZHNW",
+        "brand": "Samsung",
+        "model": "Galaxy F70e 5G",
+        "variant": "4GB/128GB",
+        "title": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (4 GB RAM) | 6000 mAh Battery | 6.74\" PLS LCD Display | Dimensity 6300 | Octa Core Processor |",
+        "price": 16999.0,
+        "mrp": null,
+        "currency": "INR",
+        "availability": "in_stock",
+        "product_url": "https://www.flipkart.com/hi/samsung-galaxy-f70e-5g-spotlight-blue-128-gb/p/itmfe8b93b7695f6?ov_redirect=true",
+        "affiliate_url": "",
+        "source": "flipkart-product-jsonld",
+        "confidence": 0.95,
+        "last_checked": "2026-10-08T02:11:48.174235+00:00",
+        "metadata": {
+          "evidence_source_url": "https://www.flipkart.com/hi/samsung-galaxy-f70e-5g-spotlight-blue-128-gb/p/itmfe8b93b7695f6?ov_redirect=true",
+          "evidence_source_type": "flipkart-product-jsonld",
+          "evidence_observed_at": "2026-10-08T02:11:48.174235+00:00",
+          "evidence_notes": "Exact4GB/128GB SpotlightBlue listing; unconditional observed base price. Checkout confirms final total; no bank-discount extrapolation."
+        }
+      }
+    ],
+    "comparable_offers": [
+      {
+        "retailer": "amazon",
+        "product_id": "cw-mobile-82",
+        "retailer_product_id": "B0GNZSK9HJ",
+        "brand": "Samsung",
+        "model": "Galaxy F70e 5G",
+        "variant": "4GB/128GB",
+        "title": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (4 GB RAM) | 6000 mAh Battery | 6.74\" PLS LCD Display | Dimensity 6300 | Octa Core Processor |",
+        "price": 16330.0,
+        "mrp": null,
+        "currency": "INR",
+        "availability": "in_stock",
+        "product_url": "https://www.amazon.in/dp/B0GNZSK9HJ",
+        "affiliate_url": "",
+        "source": "amazon_primary_buybox",
+        "confidence": 0.95,
+        "last_checked": "2026-10-08T02:14:00.445837+00:00",
+        "metadata": {
+          "evidence_source_url": "https://www.amazon.in/dp/B0GNZSK9HJ",
+          "evidence_source_type": "amazon_primary_buybox",
+          "evidence_observed_at": "2026-10-08T02:14:00.445837+00:00",
+          "evidence_notes": "Exact4GB/128GB SpotlightBlue listing; unconditional observed base price. Checkout confirms final total; no bank-discount extrapolation."
+        }
+      },
+      {
+        "retailer": "flipkart",
+        "product_id": "cw-mobile-82",
+        "retailer_product_id": "MOBHQGZQYHNBZHNW",
+        "brand": "Samsung",
+        "model": "Galaxy F70e 5G",
+        "variant": "4GB/128GB",
+        "title": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (4 GB RAM) | 6000 mAh Battery | 6.74\" PLS LCD Display | Dimensity 6300 | Octa Core Processor |",
+        "price": 16999.0,
+        "mrp": null,
+        "currency": "INR",
+        "availability": "in_stock",
+        "product_url": "https://www.flipkart.com/hi/samsung-galaxy-f70e-5g-spotlight-blue-128-gb/p/itmfe8b93b7695f6?ov_redirect=true",
+        "affiliate_url": "",
+        "source": "flipkart-product-jsonld",
+        "confidence": 0.95,
+        "last_checked": "2026-10-08T02:11:48.174235+00:00",
+        "metadata": {
+          "evidence_source_url": "https://www.flipkart.com/hi/samsung-galaxy-f70e-5g-spotlight-blue-128-gb/p/itmfe8b93b7695f6?ov_redirect=true",
+          "evidence_source_type": "flipkart-product-jsonld",
+          "evidence_observed_at": "2026-10-08T02:11:48.174235+00:00",
+          "evidence_notes": "Exact4GB/128GB SpotlightBlue listing; unconditional observed base price. Checkout confirms final total; no bank-discount extrapolation."
+        }
+      }
+    ],
+    "rejected_offers": [],
+    "matched_offer_count": 2,
+    "matched_offers": [
+      {
+        "retailer": "amazon",
+        "product_id": "cw-mobile-82",
+        "retailer_product_id": "B0GNZSK9HJ",
+        "brand": "Samsung",
+        "model": "Galaxy F70e 5G",
+        "variant": "4GB/128GB",
+        "title": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (4 GB RAM) | 6000 mAh Battery | 6.74\" PLS LCD Display | Dimensity 6300 | Octa Core Processor |",
+        "price": 16330.0,
+        "mrp": null,
+        "currency": "INR",
+        "availability": "in_stock",
+        "product_url": "https://www.amazon.in/dp/B0GNZSK9HJ",
+        "affiliate_url": "",
+        "source": "amazon_primary_buybox",
+        "confidence": 0.95,
+        "last_checked": "2026-10-08T02:14:00.445837+00:00",
+        "metadata": {
+          "evidence_source_url": "https://www.amazon.in/dp/B0GNZSK9HJ",
+          "evidence_source_type": "amazon_primary_buybox",
+          "evidence_observed_at": "2026-10-08T02:14:00.445837+00:00",
+          "evidence_notes": "Exact4GB/128GB SpotlightBlue listing; unconditional observed base price. Checkout confirms final total; no bank-discount extrapolation."
+        }
+      },
+      {
+        "retailer": "flipkart",
+        "product_id": "cw-mobile-82",
+        "retailer_product_id": "MOBHQGZQYHNBZHNW",
+        "brand": "Samsung",
+        "model": "Galaxy F70e 5G",
+        "variant": "4GB/128GB",
+        "title": "Samsung Galaxy F70e 5G (Spotlight Blue, 128 GB) (4 GB RAM) | 6000 mAh Battery | 6.74\" PLS LCD Display | Dimensity 6300 | Octa Core Processor |",
+        "price": 16999.0,
+        "mrp": null,
+        "currency": "INR",
+        "availability": "in_stock",
+        "product_url": "https://www.flipkart.com/hi/samsung-galaxy-f70e-5g-spotlight-blue-128-gb/p/itmfe8b93b7695f6?ov_redirect=true",
+        "affiliate_url": "",
+        "source": "flipkart-product-jsonld",
+        "confidence": 0.95,
+        "last_checked": "2026-10-08T02:11:48.174235+00:00",
+        "metadata": {
+          "evidence_source_url": "https://www.flipkart.com/hi/samsung-galaxy-f70e-5g-spotlight-blue-128-gb/p/itmfe8b93b7695f6?ov_redirect=true",
+          "evidence_source_type": "flipkart-product-jsonld",
+          "evidence_observed_at": "2026-10-08T02:11:48.174235+00:00",
+          "evidence_notes": "Exact4GB/128GB SpotlightBlue listing; unconditional observed base price. Checkout confirms final total; no bank-discount extrapolation."
+        }
+      }
+    ]
+  }
+}

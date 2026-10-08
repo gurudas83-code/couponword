@@ -11,7 +11,8 @@ def load_product_offers(
     product_id: str,
 ) -> list[RetailerOffer]:
 
-    data = load_offer_database()
+    from reviewed_comparison_offers import merge_reviewed_offers
+    data = merge_reviewed_offers(load_offer_database(), product_id)
 
     offers = []
 

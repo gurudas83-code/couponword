@@ -129,6 +129,12 @@
         "product_url": "https://www.amazon.in/dp/B0GNZSK9HJ",
         "confidence": 0.99,
         "source": "live-amazon-exact-page+mobile-exact-identity-gate-v1"
+      },
+      "flipkart": {
+        "retailer_product_id": "MOBHQGZQYHNBZHNW",
+        "product_url": "https://www.flipkart.com/hi/samsung-galaxy-f70e-5g-spotlight-blue-128-gb/p/itmfe8b93b7695f6?ov_redirect=true",
+        "confidence": 0.95,
+        "source": "exact-product-jsonld-4GB-128GB-SpotlightBlue-observed-2026-10-08"
       }
     },
     "cw-mobile-83": {
