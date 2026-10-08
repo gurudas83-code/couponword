@@ -805,6 +805,20 @@ def save_partial_candidate_memory(
         pass
 
 
+def candidate_catalogue_revision():
+    """Cheap revision for the two durable identity inputs; caches are excluded."""
+    try:
+        return [
+            [stat.st_size, stat.st_mtime_ns]
+            for stat in (
+                (ROOT / "coupons.json").stat(),
+                (ROOT / "data" / "retailer_product_registry.json").stat(),
+            )
+        ]
+    except OSError:
+        return None
+
+
 def get_candidate_snapshot(
     *, query: str, category: str | None, max_candidates: int,
 ) -> dict[str, Any] | None:
@@ -813,6 +827,9 @@ def get_candidate_snapshot(
         candidate_snapshot_key(query, category, max_candidates)
     )
     if not isinstance(record, dict):
+        return None
+    revision = candidate_catalogue_revision()
+    if revision is None or record.get("catalogue_revision") != revision:
         return None
     try:
         saved_at = datetime.fromisoformat(
@@ -868,6 +885,7 @@ def save_candidate_snapshot(
         safe.append(item)
     cache = load_discovery_cache()
     cache[candidate_snapshot_key(query, category, max_candidates)] = {
+        "catalogue_revision": candidate_catalogue_revision(),
         "saved_at": datetime.now(timezone.utc).isoformat(),
         "candidates": safe,
     }

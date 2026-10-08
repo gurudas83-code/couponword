@@ -16,7 +16,7 @@ from typing import Any
 SOURCE = Path(__file__).parent / "python" / "market_discovery.py"
 FUNCTIONS = {
     "clean", "normalize_key", "discovery_cache_key",
-    "candidate_snapshot_key", "load_discovery_cache",
+    "candidate_snapshot_key", "candidate_catalogue_revision", "load_discovery_cache",
     "save_discovery_cache", "get_candidate_snapshot",
     "save_candidate_snapshot", "discover_market",
     "trusted_price_budget_priority", "category_accessory_gate", "_request_search",
@@ -32,7 +32,12 @@ class CandidateSnapshotTests(unittest.TestCase):
             node for node in tree.body
             if isinstance(node, ast.FunctionDef) and node.name in FUNCTIONS
         ]
+        root = Path(self.temp.name)
+        (root / "data").mkdir()
+        (root / "coupons.json").write_text("[]")
+        (root / "data/retailer_product_registry.json").write_text("{}")
         self.ns = {
+            "ROOT": root,
             "Any": Any, "Path": Path, "json": json, "re": re,
             "time": time, "deepcopy": deepcopy,
             "datetime": datetime, "timezone": timezone,
@@ -67,6 +72,18 @@ class CandidateSnapshotTests(unittest.TestCase):
             query='best battery under 20000', category='smartphone', max_candidates=15,
         ))
         self.assertIn(legacy_key, self.ns['load_discovery_cache']())
+
+    def test_catalogue_or_registry_change_invalidates_pool_without_deleting_it(self):
+        for name in ("coupons.json", "data/retailer_product_registry.json"):
+            self.ns["save_candidate_snapshot"](
+                query="mobile under 50k", category="smartphone",
+                candidates=self.sample_pool(), max_candidates=15, replace=True)
+            args = dict(query="mobile under 50k", category="smartphone", max_candidates=15)
+            self.assertIsNotNone(self.ns["get_candidate_snapshot"](**args))
+            target = self.ns["ROOT"] / name
+            target.write_text(target.read_text() + " ")
+            self.assertIsNone(self.ns["get_candidate_snapshot"](**args))
+            self.assertTrue(self.ns["load_discovery_cache"]())
 
     def sample_pool(self):
         return [{

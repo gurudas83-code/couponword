@@ -1,0 +1,67 @@
+{
+  "purpose": "Exact vivo T5 Pro 8/128 and Redmi Note 17 Pro Max 8/256 catalogue admissions. Recorded prices are observations only; runtime fresh price and evidence guards remain mandatory. Unknown support and endurance are not fabricated.",
+  "candidates": [
+    {
+      "observed_at": "2026-10-08T18:15:34.525959+00:00",
+      "expected_title": "vivo T5 Pro 5G (Cosmic Black, 8GB RAM, 128GB Storage) | Snapdragon 7s Gen 4 Processor | 50MP AI Dual Camera | 32MP Front Camera | 6.83-inch FHD+ AMOLED Display | 9020mAh Battery | 5G Smartphone",
+      "prior_fit": 62,
+      "identity": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0H6F4KZGF",
+        "page_asin": "B0H6F4KZGF",
+        "page_title": "vivo T5 Pro 5G (Cosmic Black, 8GB RAM, 128GB Storage) | Snapdragon 7s Gen 4 Processor | 50MP AI Dual Camera | 32MP Front Camera | 6.83-inch FHD+ AMOLED Display | 9020mAh Battery | 5G Smartphone",
+        "identity_title": "vivo T5 Pro 5G (Cosmic Black, 8GB RAM, 128GB Storage) | Snapdragon 7s Gen 4 Processor | 50MP AI Dual Camera | 32MP Front Camera | 6.83-inch FHD+ AMOLED Display | 9020mAh Battery | 5G Smartphone",
+        "exact_listing_capacity": {},
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 100
+      },
+      "price": {
+        "price": 41999.0,
+        "prices_found": [
+          41999.0
+        ],
+        "availability": "in_stock",
+        "status": "verified",
+        "reason": "Exact Amazon primary buy-box price found",
+        "http_status": 200,
+        "evidence_method": "amazon_primary_buybox"
+      },
+      "source_id": 96,
+      "canonical_id": "cw-mobile-96",
+      "allocation_workflow": "batch_product_importer.import_csv -> next_product_id -> promote_mobile_canonical"
+    },
+    {
+      "observed_at": "2026-10-08T18:15:39.636050+00:00",
+      "expected_title": "Redmi Note 17 Pro Max 5G (Secret Sunrise, 8GB RAM, 256GB ROM) | 10000mAh Battery + 100W HyperCharge | 6.83\" 120Hz 12-bit TrueColour AMOLED | No. 1 Care Plan | SD 6 Gen 5 | 50MP OIS Camera | IP69K",
+      "prior_fit": 61,
+      "identity": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0HGM9RBMH",
+        "page_asin": "B0HGM9RBMH",
+        "page_title": "Redmi Note 17 Pro Max 5G (Secret Sunrise, 8GB RAM, 256GB ROM) | 10000mAh Battery + 100W HyperCharge | 6.83\" 120Hz 12-bit TrueColour AMOLED | No. 1 Care Plan | SD 6 Gen 5 | 50MP OIS Camera | IP69K",
+        "identity_title": "Redmi Note 17 Pro Max 5G (Secret Sunrise, 8GB RAM, 256GB ROM) | 10000mAh Battery + 100W HyperCharge | 6.83\" 120Hz 12-bit TrueColour AMOLED | No. 1 Care Plan | SD 6 Gen 5 | 50MP OIS Camera | IP69K",
+        "exact_listing_capacity": {},
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 100
+      },
+      "price": {
+        "price": 49998.0,
+        "prices_found": [
+          49998.0
+        ],
+        "availability": "in_stock",
+        "status": "verified",
+        "reason": "Exact Amazon primary buy-box price found",
+        "http_status": 200,
+        "evidence_method": "amazon_primary_buybox"
+      },
+      "source_id": 97,
+      "canonical_id": "cw-mobile-97",
+      "allocation_workflow": "batch_product_importer.import_csv -> next_product_id -> promote_mobile_canonical"
+    }
+  ]
+}
