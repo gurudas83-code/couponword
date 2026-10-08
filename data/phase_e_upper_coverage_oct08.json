@@ -1,0 +1,65 @@
+{
+  "purpose": "Exact A36 8/128 and T5x 8/256 catalogue admissions. Recorded prices are observations, never a substitute for fresh runtime price verification. No T5x6/128 facts transferred to8/256.",
+  "candidates": [
+    {
+      "observed_at": "2026-10-07T13:47:59.714643+00:00",
+      "expected_title": "Samsung Galaxy A36 5G (Dark Blue, 8GB RAM, 128GB Storage) | Snapdragon 6 Gen 3 Octa-Core Processor | 50MP + 8MP AI Dual Camera | 12MP Front Camera | 6.7-inch FHD+ Super AMOLED 120Hz Display |",
+      "identity": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0HJ1YVT1V",
+        "page_asin": "B0HJ1YVT1V",
+        "page_title": "Samsung Galaxy A36 5G (Dark Blue, 8GB RAM, 128GB Storage) | Snapdragon 6 Gen 3 Octa-Core Processor | 50MP + 8MP AI Dual Camera | 12MP Front Camera | 6.7-inch FHD+ Super AMOLED 120Hz Display |",
+        "identity_title": "Samsung Galaxy A36 5G (Dark Blue, 8GB RAM, 128GB Storage) | Snapdragon 6 Gen 3 Octa-Core Processor | 50MP + 8MP AI Dual Camera | 12MP Front Camera | 6.7-inch FHD+ Super AMOLED 120Hz Display |",
+        "exact_listing_capacity": {},
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 95
+      },
+      "price": {
+        "price": 26499.0,
+        "prices_found": [
+          26499.0
+        ],
+        "availability": "in_stock",
+        "status": "verified",
+        "reason": "Exact Amazon primary buy-box price found",
+        "http_status": 200,
+        "evidence_method": "amazon_primary_buybox"
+      },
+      "source_id": 93,
+      "canonical_id": "cw-mobile-93",
+      "allocation_workflow": "batch_product_importer.import_csv -> next_product_id -> promote_mobile_canonical"
+    },
+    {
+      "observed_at": "2026-10-07T13:48:04.918708+00:00",
+      "expected_title": "vivo T5x 5G (Cyber Green, 8GB RAM, 256GB Storage) | 50MP AI Dual Camera | 32MP Selfie | 6.76\" FHD+ Display | 7200mAh Battery | Dimensity 7400-Turbo Processor | Fast Charging | Dual SIM Smartphone",
+      "identity": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0GTTW99DG",
+        "page_asin": "B0GTTW99DG",
+        "page_title": "vivo T5x 5G (Cyber Green, 8GB RAM, 256GB Storage) | 50MP AI Dual Camera | 32MP Selfie | 6.76\" FHD+ Display | 7200mAh Battery | Dimensity 7400-Turbo Processor | Fast Charging | Dual SIM Smartphone",
+        "identity_title": "vivo T5x 5G (Cyber Green, 8GB RAM, 256GB Storage) | 50MP AI Dual Camera | 32MP Selfie | 6.76\" FHD+ Display | 7200mAh Battery | Dimensity 7400-Turbo Processor | Fast Charging | Dual SIM Smartphone",
+        "exact_listing_capacity": {},
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 95
+      },
+      "price": {
+        "price": 32999.0,
+        "prices_found": [
+          32999.0
+        ],
+        "availability": "in_stock",
+        "status": "verified",
+        "reason": "Exact Amazon primary buy-box price found",
+        "http_status": 200,
+        "evidence_method": "amazon_primary_buybox"
+      },
+      "source_id": 94,
+      "canonical_id": "cw-mobile-94",
+      "allocation_workflow": "batch_product_importer.import_csv -> next_product_id -> promote_mobile_canonical"
+    }
+  ]
+}
