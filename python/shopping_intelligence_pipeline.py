@@ -1534,6 +1534,28 @@ def runtime_profile_from_extraction(
                 int(storage_match.group(1)),
             )
 
+        # Exact retailer titles also label a SKU as (colour, 128 GB) (4 GB RAM).
+        # Use verified title fields only; never promote a discovery-only title.
+        from product_evidence_store import variant_text_is_ambiguous
+        retailer_titles = " ".join(
+            clean(value) for value in (
+                extraction.get("search_name"), resolved.get("official_title"),
+            ) if clean(value)
+        )
+        labelled_pairs = _re.findall(
+            r"\([^()]*,\s*(\d{2,4})\s*GB\s*\)\s*"
+            r"\(\s*(\d{1,2})\s*GB\s*RAM\s*\)",
+            retailer_titles, flags=_re.IGNORECASE,
+        )
+        if (
+            len(set(labelled_pairs)) == 1
+            and not variant_text_is_ambiguous(retailer_titles)
+        ):
+            storage, ram = map(int, labelled_pairs[0])
+            if 1 <= ram <= 32 and storage >= 32:
+                specifications.setdefault("ram_gb", ram)
+                specifications.setdefault("storage_gb", storage)
+
     profile: dict[str, Any] = {
         "product_id": clean(
             identity.get("product_id")
