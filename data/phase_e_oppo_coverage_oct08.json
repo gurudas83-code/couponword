@@ -1,0 +1,60 @@
+{
+  "purpose": "Verified exact listing admission. Prices remain observations, not evergreen prices. Regional warranty, support and endurance unknown.",
+  "candidates": [
+    {
+      "observed_at": "2026-10-08T14:03:21.046776+00:00",
+      "expected_title": "OPPO Find X8 Pro 5G Mediatek Dimensity 9400 16GB RAM 512GB Storage 6.7 inch QHD+ AMOLED Smartphone ColorOS - Black",
+      "prior_fit": 51,
+      "identity": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0DMP3T6QW",
+        "page_asin": "B0DMP3T6QW",
+        "page_title": "OPPO Find X8 Pro 5G Mediatek Dimensity 9400 16GB RAM 512GB Storage 6.7 inch QHD+ AMOLED Smartphone ColorOS - Black",
+        "identity_title": "OPPO Find X8 Pro 5G Mediatek Dimensity 9400 16GB RAM 512GB Storage 6.7 inch QHD+ AMOLED Smartphone ColorOS - Black",
+        "exact_listing_capacity": {},
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 100
+      },
+      "price": {
+        "price": 96900.0,
+        "prices_found": [
+          96900.0
+        ],
+        "availability": "in_stock",
+        "status": "verified",
+        "reason": "Exact Amazon primary buy-box price found",
+        "http_status": 200,
+        "evidence_method": "amazon_primary_buybox"
+      },
+      "admission_status": "PROMOTED after fresh exact listing identity check",
+      "manufacturer_cross_reference": {
+        "url": "https://www.oppo.com/in/smartphones/series-find-x/find-x8-pro/specs/",
+        "observed_at": "2026-10-08T14:08:08.827015+00:00",
+        "model": "Find X8 Pro",
+        "physical_variant": "16GB/512GB",
+        "binding_limit": "retailer region unverified; no official support or endurance facts applied"
+      },
+      "fresh_price_check": {
+        "observed_at": "2026-10-08T17:22:56.875430+00:00",
+        "source_url": "https://www.amazon.in/dp/B0DMP3T6QW",
+        "evidence": {
+          "price": 96900.0,
+          "prices_found": [
+            96900.0
+          ],
+          "availability": "in_stock",
+          "status": "verified",
+          "reason": "Exact Amazon primary buy-box price found",
+          "http_status": 200,
+          "evidence_method": "amazon_primary_buybox"
+        }
+      },
+      "source_id": 95,
+      "canonical_id": "cw-mobile-95",
+      "promoted_at": "2026-10-08T17:23:03.585645+00:00",
+      "allocation_workflow": "existing import source95 -> promote_mobile_canonical --source-id95 --asinB0DMP3T6QW --write"
+    }
+  ]
+}
