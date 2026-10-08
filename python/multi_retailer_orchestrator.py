@@ -124,6 +124,30 @@ class MultiRetailerOrchestrator:
                 updated_offer
             )
 
+        # Reuse reviewed evidence only for an independently matched exact offer.
+        # Keep original observation times; normal comparison expiry still applies.
+        from reviewed_comparison_offers import merge_reviewed_offers
+        from retailer_contract import RetailerOffer
+        reviewed = merge_reviewed_offers({"offers": []}, product.product_id)
+        for record in reviewed["offers"]:
+            if any(
+                str(record.get(key, "")).strip().casefold()
+                != str(getattr(product, key, "")).strip().casefold()
+                for key in ("brand", "model", "variant")
+            ):
+                continue
+            for index, current in enumerate(final_offers):
+                if (
+                    current.product_id == product.product_id
+                    and current.retailer == record["retailer"]
+                    and current.retailer_product_id == record["retailer_product_id"]
+                    and current.price is None
+                    and current.availability == "unknown"
+                    and (current.retailer, current.retailer_product_id)
+                        not in evidence_by_key
+                ):
+                    final_offers[index] = RetailerOffer(**record)
+
         comparison = compare_offers(
             final_offers
         )
