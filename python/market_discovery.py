@@ -2657,7 +2657,10 @@ def discover_market(
             category=category,
             include_domains=COMMERCE_DOMAINS,
             channel="commerce",
-            max_results=20,
+            # Recovery may score 30 candidates. Do not silently cap its
+            # existing local catalogue lane at 20; network cards stay capped
+            # at 20 inside fallback_search_channel.
+            max_results=max(20, min(max_candidates, 30)),
         )
 
         commerce_results.extend(supplementary_commerce_results)

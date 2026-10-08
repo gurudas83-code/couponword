@@ -40,6 +40,19 @@ class QueryDiversityTests(unittest.TestCase):
              patch.object(discovery, 'fallback_search_channel', return_value=[]):
             return discovery.discover_market(query, max_candidates=15, live_fast=True, supplemental=supplemental)
 
+    def test_recovery_local_lane_matches_bounded_candidate_capacity(self):
+        for cap, expected in ((15, 20), (30, 30), (100, 30)):
+            with self.subTest(cap=cap), patch.dict(os.environ, {'TAVILY_API_KEY': ''}), \
+                 patch.object(discovery, 'get_candidate_snapshot', return_value=None), \
+                 patch.object(discovery, 'get_recent_discovery_cache', return_value=[]), \
+                 patch.object(discovery, 'get_partial_candidate_memory', return_value=[]), \
+                 patch.object(discovery, 'fallback_search_channel', return_value=[]) as search:
+                discovery.discover_market('mobile under 120000', max_candidates=cap, live_fast=True)
+                commerce = [call.kwargs for call in search.call_args_list
+                            if call.kwargs.get('channel') == 'commerce']
+                self.assertTrue(commerce)
+                self.assertTrue(all(call['max_results'] == expected for call in commerce))
+
     def test_original_wording_survives_at_all_generic_budgets(self):
         for query in ('mobile under 10000', 'mobile under 15000', 'best phone under 20000',
                       'best battery under ₹20k', 'best battery under ₹30k', 'best battery under ₹50k'):
