@@ -31,7 +31,8 @@ class VariantIdentityTests(unittest.TestCase):
                 encoding="utf-8-sig"
             )
         )["products"]
-        self.assertEqual(len(products), 126)
+        # The original 126 seeds plus 61 model-only workbook additions.
+        self.assertEqual(len(products), 187)
         reviewed = 0
         for row in products:
             ram, storage = row.get("ram_gb"), row.get("storage_gb")
