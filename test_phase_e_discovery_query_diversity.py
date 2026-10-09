@@ -73,6 +73,32 @@ class QueryDiversityTests(unittest.TestCase):
                     self.assertIn('f36', result['exact_model_scope']['model_tokens'])
                 self.assertEqual(result['discovery_queries'], self.discover(query, True)['discovery_queries'])
 
+    def test_agni_generation_is_an_exact_model_scope(self):
+        result = self.discover('Lava Agni 4 5G under 40000')
+        self.assertTrue(result['exact_model_scope']['active'])
+        self.assertEqual(result['exact_model_scope']['model_tokens'], ['4', 'agni'])
+        self.assertIn({'brand': 'agni', 'model': '4'}, result['exact_model_scope']['numeric_brand_pairs'])
+        self.assertFalse(self.discover('Lava phone under 40000')['exact_model_scope']['active'])
+
+    def test_distinct_agni_listings_survive_shortened_title_deduplication(self):
+        cards = [dict(title='Lava Agni 4 5G (8GB RAM, 256GB Storage, '+colour+')',
+                      asin=asin, url='https://www.amazon.in/dp/'+asin,
+                      host='www.amazon.in', channel='commerce', query='Lava Agni 4',
+                      content='', search_score=1.0)
+                 for asin, colour in [('B0FT3DXJM3', 'Lunar Mist'),
+                                      ('B0FT3J2W97', 'Phantom Black')]]
+        cards.append(dict(cards[0], title='Lava Bold N2 4GB RAM 64GB Storage',
+                          asin='B0GL1WGHJX', url='https://www.amazon.in/dp/B0GL1WGHJX'))
+        with patch.dict(os.environ, {'TAVILY_API_KEY': ''}), \
+             patch.object(discovery, 'get_candidate_snapshot', return_value=None), \
+             patch.object(discovery, 'get_recent_discovery_cache', return_value=[]), \
+             patch.object(discovery, 'get_partial_candidate_memory', return_value=[]), \
+             patch.object(discovery, 'fallback_search_channel', return_value=cards):
+            result = discovery.discover_market('Lava Agni 4 5G under 40000', live_fast=True)
+        self.assertEqual({x['asin'] for x in result['candidates']},
+                         {'B0FT3DXJM3', 'B0FT3J2W97'})
+        self.assertEqual(len(result['candidates']), 2)
+
     def test_retry_preserves_original_variants_and_bounds_unique_reserve(self):
         first = {'candidates': [{'candidate_id': 'market-01', 'asin': 'A', 'title': 'original 4GB 128GB'}]}
         reserve = {'candidates': [

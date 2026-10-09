@@ -1,0 +1,119 @@
+{
+  "purpose": "India three-year expansion batch1: exact Samsung A56, Motorola G96 and Lava Agni4 listings. Launch inventory remains incomplete. Prices observations only; unknown support/endurance remainunknown; no threshold changes.",
+  "candidates": [
+    {
+      "observed_at": "2026-10-09T02:07:28.092919+00:00",
+      "expected_title": "Samsung Galaxy A56 5G Mobile (Awesome Violet Glow, 8GB, 128GB) | Segment Most Complete Triple Camera | 50MP | AI Editing | 4nm Processor | sAMOLED | 5000mAh | Gorilla Glass Victus+| Knox Security",
+      "brand": "Samsung",
+      "identity": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0H1WY55ZL",
+        "page_asin": "B0H1WY55ZL",
+        "page_title": "Samsung Galaxy A56 5G Mobile (Awesome Violet Glow, 8GB, 128GB) | Segment Most Complete Triple Camera | 50MP | AI Editing | 4nm Processor | sAMOLED | 5000mAh | Gorilla Glass Victus+| Knox Security",
+        "identity_title": "Samsung Galaxy A56 5G Mobile (Awesome Violet Glow, 8GB, 128GB) | Segment Most Complete Triple Camera | 50MP | AI Editing | 4nm Processor | sAMOLED | 5000mAh | Gorilla Glass Victus+| Knox Security",
+        "exact_listing_capacity": {},
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 95
+      },
+      "price": {
+        "price": 31999.0,
+        "prices_found": [
+          31999.0
+        ],
+        "availability": "in_stock",
+        "status": "verified",
+        "reason": "Exact Amazon primary buy-box price found",
+        "http_status": 200,
+        "evidence_method": "amazon_primary_buybox",
+        "source_url": "https://www.amazon.in/dp/B0H1WY55ZL",
+        "observed_at": "2026-10-09T02:07:28.092919+00:00"
+      },
+      "source_id": 100,
+      "canonical_id": "cw-mobile-100",
+      "allocation_workflow": "batch_product_importer.import_csv -> next_product_id -> promote_mobile_canonical",
+      "official_model_presence": {
+        "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+        "observed_at": "2026-10-09T02:14:43.323268+00:00",
+        "scope": "India model presence only; no colour-specific facts or launch date inferred"
+      }
+    },
+    {
+      "observed_at": "2026-10-09T02:07:33.573521+00:00",
+      "expected_title": "Moto G96 5G AI Smartphone (Pantone Ashleigh Blue, 8GB RAM+ 256GB Storage) | Snapdragon\u202f7s Gen\u202f2 Processor | Curved pOLED Display | Dual SIM | 5500\u202fmAh Battery",
+      "brand": "Motorola",
+      "identity": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0FHGGW5PJ",
+        "page_asin": "B0FHGGW5PJ",
+        "page_title": "Motorola Moto G96 5G AI Smartphone (Pantone Ashleigh Blue, 8GB RAM+ 256GB Storage) | Snapdragon\u202f7s Gen\u202f2 Processor | Curved pOLED Display | Dual SIM | 5500\u202fmAh Battery",
+        "identity_title": "Motorola Moto G96 5G AI Smartphone (Pantone Ashleigh Blue, 8GB RAM+ 256GB Storage) | Snapdragon\u202f7s Gen\u202f2 Processor | Curved pOLED Display | Dual SIM | 5500\u202fmAh Battery",
+        "exact_listing_capacity": {},
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 95
+      },
+      "price": {
+        "price": 21450.0,
+        "prices_found": [
+          21450.0
+        ],
+        "availability": "in_stock",
+        "status": "verified",
+        "reason": "Exact Amazon primary buy-box price found",
+        "http_status": 200,
+        "evidence_method": "amazon_primary_buybox",
+        "source_url": "https://www.amazon.in/dp/B0FHGGW5PJ",
+        "observed_at": "2026-10-09T02:07:33.573521+00:00"
+      },
+      "source_id": 101,
+      "canonical_id": "cw-mobile-101",
+      "allocation_workflow": "batch_product_importer.import_csv -> next_product_id -> promote_mobile_canonical",
+      "official_model_presence": {
+        "source_url": "https://www.motorola.in/smartphones-moto-g-96-5g/p?skuId=556",
+        "observed_at": "2026-10-09T02:14:43.323293+00:00",
+        "scope": "India model presence only; no colour-specific facts or launch date inferred"
+      }
+    },
+    {
+      "observed_at": "2026-10-09T02:07:38.217000+00:00",
+      "expected_title": "Agni 4 5G (8GB RAM, 256GB Storage, Lunar Mist) | Metal Body | MTK Dimensity 8350 Processor (1.4Mn+ Antutu) | 1.5K AMOLED Display | 50MP OIS Camera | LPDDR5X RAM | UFS 4.0 | 4K@ 60fps | Vayu AI",
+      "brand": "Lava",
+      "identity": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0FT3DXJM3",
+        "page_asin": "B0FT3DXJM3",
+        "page_title": "Lava Agni 4 5G (8GB RAM, 256GB Storage, Lunar Mist) | Metal Body | MTK Dimensity 8350 Processor (1.4Mn+ Antutu) | 1.5K AMOLED Display | 50MP OIS Camera | LPDDR5X RAM | UFS 4.0 | 4K@ 60fps | Vayu AI",
+        "identity_title": "Lava Agni 4 5G (8GB RAM, 256GB Storage, Lunar Mist) | Metal Body | MTK Dimensity 8350 Processor (1.4Mn+ Antutu) | 1.5K AMOLED Display | 50MP OIS Camera | LPDDR5X RAM | UFS 4.0 | 4K@ 60fps | Vayu AI",
+        "exact_listing_capacity": {},
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 95
+      },
+      "price": {
+        "price": 31999.0,
+        "prices_found": [
+          31999.0
+        ],
+        "availability": "in_stock",
+        "status": "verified",
+        "reason": "Exact Amazon primary buy-box price found",
+        "http_status": 200,
+        "evidence_method": "amazon_primary_buybox",
+        "source_url": "https://www.amazon.in/dp/B0FT3DXJM3",
+        "observed_at": "2026-10-09T02:07:38.217000+00:00"
+      },
+      "source_id": 102,
+      "canonical_id": "cw-mobile-102",
+      "allocation_workflow": "batch_product_importer.import_csv -> next_product_id -> promote_mobile_canonical",
+      "official_model_presence": {
+        "source_url": "https://www.lavamobiles.com/smartphone/agni-4",
+        "observed_at": "2026-10-09T02:14:43.323300+00:00",
+        "scope": "India model presence only; no colour-specific facts or launch date inferred"
+      }
+    }
+  ]
+}

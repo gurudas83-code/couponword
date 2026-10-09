@@ -2785,6 +2785,14 @@ def discover_market(
         and query_model_parts[index - 1] in explicit_brand_tokens
     }
 
+    # Agni's separated generation number is model identity, not a budget.
+    # Keep both tokens locked so other Lava families cannot fill this query.
+    for index, token in enumerate(query_model_parts):
+        if (token.isdigit() and 1 <= len(token) <= 2 and index > 0
+                and query_model_parts[index - 1] == "agni"):
+            exact_query_model_tokens.update({"agni", token})
+            exact_numeric_brand_pairs.add(("agni", token))
+
     must_have_for_variant = list(intent.get("must_have") or [])
     has_explicit_memory_pair = (
         _required_capacity(must_have_for_variant, "ram") is not None
@@ -3121,6 +3129,11 @@ def discover_market(
     for item in ranked:
         title = item["clean_title"]
         title_key = normalize_key(title)
+        # Distinct exact listings can share a shortened model title. Keep
+        # them until price, variant and canonical ownership are checked.
+        # Final recommendations still deduplicate verified model families.
+        if title_key and clean(item.get("asin")):
+            title_key += "|" + clean(item.get("asin")).upper()
         url = item["url"]
 
         if not title_key or url in seen_urls:
