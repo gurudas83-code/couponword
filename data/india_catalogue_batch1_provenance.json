@@ -1,0 +1,77 @@
+{
+  "purpose": "India catalogue expansion batch1: existing exact retailer IDs excluded; realme14T8/128 andOnePlusNordCE6 8/256. Prices observations only; unknown support/endurance remainunknown; no threshold changes.",
+  "candidates": [
+    {
+      "observed_at": "2026-10-09T01:51:44.476410+00:00",
+      "expected_title": "realme 14T 5G (Surf Green, 8GB RAM, 128GB Storage) | 6.67\" 120Hz AMOLED FHD+ 2100 nits 111% DCI-P3 | 50MP+2MP Rear + 16MP Selfie | 6000mAh | 45W | Dimensity 6300 | IP69 | Android 15, UI6.0",
+      "prior_fit": 59,
+      "identity": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0FSLC6GSL",
+        "page_asin": "B0FSLC6GSL",
+        "page_title": "realme 14T 5G (Surf Green, 8GB RAM, 128GB Storage) | 6.67\" 120Hz AMOLED FHD+ 2100 nits 111% DCI-P3 | 50MP+2MP Rear + 16MP Selfie | 6000mAh | 45W | Dimensity 6300 | IP69 | Android 15, UI6.0",
+        "identity_title": "realme 14T 5G (Surf Green, 8GB RAM, 128GB Storage) | 6.67\" 120Hz AMOLED FHD+ 2100 nits 111% DCI-P3 | 50MP+2MP Rear + 16MP Selfie | 6000mAh | 45W | Dimensity 6300 | IP69 | Android 15, UI6.0",
+        "exact_listing_capacity": {},
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 95
+      },
+      "price": {
+        "price": 23999.0,
+        "prices_found": [
+          23999.0
+        ],
+        "availability": "in_stock",
+        "status": "verified",
+        "reason": "Exact Amazon primary buy-box price found",
+        "http_status": 200,
+        "evidence_method": "amazon_primary_buybox"
+      },
+      "official_india_reference": {
+        "source_url": "https://www.realme.com/in/realme-14t-5g/specs",
+        "observed_at": "2026-10-09T01:52:35.837109+00:00",
+        "scope": "India model presence corroboration; exact physical variant independently verified on retailer listing; no unobserved specs transferred"
+      },
+      "source_id": 98,
+      "canonical_id": "cw-mobile-98",
+      "allocation_workflow": "batch_product_importer.import_csv -> next_product_id -> promote_mobile_canonical"
+    },
+    {
+      "observed_at": "2026-10-09T01:51:49.180372+00:00",
+      "expected_title": "OnePlus Nord CE6 | 8GB+256GB | Fresh Blue | Snapdragon 7s Gen 4 | Segment's Fastest Touch Response | 8000mAh Battery | 144Hz 1.5K AMOLED Display | 50MP Main + 32MP Selfie 4K Cameras | IP66,68,69,69K",
+      "prior_fit": 50,
+      "identity": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0GWLDWKF3",
+        "page_asin": "B0GWLDWKF3",
+        "page_title": "OnePlus Nord CE6 | 8GB+256GB | Fresh Blue | Snapdragon 7s Gen 4 | Segment's Fastest Touch Response | 8000mAh Battery | 144Hz 1.5K AMOLED Display | 50MP Main + 32MP Selfie 4K Cameras | IP66,68,69,69K",
+        "identity_title": "OnePlus Nord CE6 | 8GB+256GB | Fresh Blue | Snapdragon 7s Gen 4 | Segment's Fastest Touch Response | 8000mAh Battery | 144Hz 1.5K AMOLED Display | 50MP Main + 32MP Selfie 4K Cameras | IP66,68,69,69K",
+        "exact_listing_capacity": {},
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 85
+      },
+      "price": {
+        "price": 38999.0,
+        "prices_found": [
+          38999.0
+        ],
+        "availability": "in_stock",
+        "status": "verified",
+        "reason": "Exact Amazon primary buy-box price found",
+        "http_status": 200,
+        "evidence_method": "amazon_primary_buybox"
+      },
+      "official_india_reference": {
+        "source_url": "https://www.oneplus.in/nord-ce6",
+        "observed_at": "2026-10-09T01:52:35.852234+00:00",
+        "scope": "India model presence corroboration; exact physical variant independently verified on retailer listing; no unobserved specs transferred"
+      },
+      "source_id": 99,
+      "canonical_id": "cw-mobile-99",
+      "allocation_workflow": "batch_product_importer.import_csv -> next_product_id -> promote_mobile_canonical"
+    }
+  ]
+}
