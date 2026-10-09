@@ -12,7 +12,10 @@ class ReleaseEvidenceTests(unittest.TestCase):
     def test_clean_install_and_variant_guard(self):
         with tempfile.TemporaryDirectory() as tmp, patch.object(store, 'STORE_PATH', Path(tmp)/'missing.json'):
             data = store.load_store()
-            self.assertEqual(len(data['records']), 8)
+            self.assertEqual(len(data['records']), 9)
+            a56 = store.find_verified_evidence(asin='B0H1WY55ZL', title='Samsung Galaxy A56 5G 8GB RAM 128GB Storage', store_data=data)
+            self.assertIsNotNone(a56)
+            self.assertIsNone(store.find_verified_evidence(asin='B0H1WY55ZL', title='Samsung Galaxy A56 5G 8GB RAM 256GB Storage', store_data=data))
             self.assertIsNotNone(store.find_verified_evidence(asin='B0GPWRYNM1',title='realme C83 5G 4GB RAM 64GB Storage',store_data=data))
             self.assertIsNone(store.find_verified_evidence(asin='B0GPWRYNM1',title='realme C83 5G 6GB RAM 128GB Storage',store_data=data))
             self.assertFalse(store.STORE_PATH.exists())

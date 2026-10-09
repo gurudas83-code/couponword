@@ -6,14 +6,14 @@
     "colours_are_not_new_models": true,
     "include_unavailable_in_inventory_only": true
   },
-  "updated_at": "2026-10-09T02:14:43.340780+00:00",
+  "updated_at": "2026-10-09T14:27:51.706846+00:00",
   "status": "INCOMPLETE",
   "coverage_complete": false,
   "note": "Existing126seed reused for discovery only, not a complete launch inventory or verified facts. Missing brands and launches must be enumerated from officialIndia sources. No runtime eligibility is granted by this ledger.",
   "brand_audit": {
     "Samsung": {
       "launch_inventory_complete": false,
-      "status": "not_started",
+      "status": "partial_primary_launch_inventory",
       "seed_candidates": 12
     },
     "Xiaomi": {
@@ -23,7 +23,7 @@
     },
     "Redmi": {
       "launch_inventory_complete": false,
-      "status": "not_started",
+      "status": "partial_primary_launch_inventory",
       "seed_candidates": 5
     },
     "POCO": {
@@ -1657,6 +1657,272 @@
       "not_admitted": {
         "B0DPFST37Y": "strict identity HARD_REJECT; additional sibling/variant identity"
       }
+    }
+  ],
+  "verified_india_launch_inventory": [
+    {
+      "brand": "Samsung",
+      "model": "Galaxy S24",
+      "india_launch": "2024-01-18",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-ushers-in-mobile-ai-era-launches-galaxy-s24-series-in-india-pre-book-now-for-exciting-offers",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy S24+",
+      "india_launch": "2024-01-18",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-ushers-in-mobile-ai-era-launches-galaxy-s24-series-in-india-pre-book-now-for-exciting-offers",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy S24 Ultra",
+      "india_launch": "2024-01-18",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-ushers-in-mobile-ai-era-launches-galaxy-s24-series-in-india-pre-book-now-for-exciting-offers",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy A55 5G",
+      "india_launch": "2024-03-14",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-launches-galaxy-a55-5g-and-galaxy-a35-5g-with-flagship-like-camera-innovations-and-samsung-knox-vault-protection",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy A35 5G",
+      "india_launch": "2024-03-14",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-launches-galaxy-a55-5g-and-galaxy-a35-5g-with-flagship-like-camera-innovations-and-samsung-knox-vault-protection",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy M16 5G",
+      "india_launch": "2025-02-27",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-launches-galaxy-m16-5g-and-galaxy-m06-5g-in-india-with-refreshed-design-and-monster-performance",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy M06 5G",
+      "india_launch": "2025-02-27",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-launches-galaxy-m16-5g-and-galaxy-m06-5g-in-india-with-refreshed-design-and-monster-performance",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy A56 5G",
+      "india_launch": "2025-03-03",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy A36 5G",
+      "india_launch": "2025-03-03",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy F16 5G",
+      "india_launch": "2025-03-13",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-launches-galaxy-f16-5g-with-segment-leading-features-in-india",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy A06 5G",
+      "india_launch": "2025-02-19",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a06-5g-kaam-ka-5g-with-superfast-connectivity-powerful-performance-at-an-affordable-price",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy S25 FE",
+      "india_launch": "2025-09-15",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-launches-galaxy-s25-fe-with-special-storage-upgrade-offer-in-india",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy S26",
+      "india_launch": "2026-02-26",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-india-launches-its-most-advanced-ai-phone-the-galaxy-s26-series-pre-order-now-for-exciting-offers",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy S26+",
+      "india_launch": "2026-02-26",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-india-launches-its-most-advanced-ai-phone-the-galaxy-s26-series-pre-order-now-for-exciting-offers",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy S26 Ultra",
+      "india_launch": "2026-02-26",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-india-launches-its-most-advanced-ai-phone-the-galaxy-s26-series-pre-order-now-for-exciting-offers",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy S26 FE",
+      "india_launch": "2026-09-14",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-launches-galaxy-s26-fe-in-india-bringing-flagship-camera-galaxy-ai-and-powerful-performance",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy M17e 5G",
+      "india_launch": "2026-03-18",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-launches-galaxy-m17e-5g-redefining-the-smartphone-experience-for-indias-young-on-the-go-generation",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy A27 5G",
+      "india_launch": "2026-06-30",
+      "date_precision": "day",
+      "source_url": "https://news.samsung.com/in/samsung-galaxy-a27-5g-launches-in-india-at-inr-28999-with-cashback-and-zero-down-payment-emi-schemes",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Redmi",
+      "model": "A3",
+      "india_launch": "2024",
+      "date_precision": "year",
+      "source_url": "https://www.mi.com/in/product/redmi-a3/specs/",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Redmi",
+      "model": "A3x",
+      "india_launch": "2024",
+      "date_precision": "year",
+      "source_url": "https://www.mi.com/in/product/redmi-a3x/specs/",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Redmi",
+      "model": "13 5G",
+      "india_launch": "2024",
+      "date_precision": "year",
+      "source_url": "https://www.mi.com/in/product/redmi-13-5g/specs/",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Redmi",
+      "model": "Note 13 5G",
+      "india_launch": "2024",
+      "date_precision": "year",
+      "source_url": "https://www.mi.com/in/product/redmi-note-13-5g/specs/",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Redmi",
+      "model": "Note 13 Pro 5G",
+      "india_launch": "2024",
+      "date_precision": "year",
+      "source_url": "https://www.mi.com/in/product/redmi-note-13-pro-5g/specs/",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
+    },
+    {
+      "brand": "Redmi",
+      "model": "Note 13 Pro+ 5G",
+      "india_launch": "2024",
+      "date_precision": "year",
+      "source_url": "https://www.mi.com/in/product/redmi-note-13-pro-plus-5g/specs/",
+      "source_type": "manufacturer_india_launch_or_specification",
+      "observed_at": "2026-10-09T14:27:51.706846+00:00",
+      "inventory_status": "launch_verified_variant_listing_reconciliation_pending",
+      "recommendation_eligible": false
     }
   ]
 }

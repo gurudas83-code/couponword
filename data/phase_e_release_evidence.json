@@ -1050,7 +1050,7 @@
           "confidence": 84
         },
         "capture_life_in_high_definition": {
-          "value": "Discover the power of the Galaxy A06 5G\u2019s 50MP main camera and 2 MP depth camera. Experience the freedom to capture stunning, quality photos. Background images generated with Adobe Firefly AI engine. Images simulated for illustrative purposes. *Individual results may vary depending upon light or shooting condition",
+          "value": "Discover the power of the Galaxy A06 5G’s 50MP main camera and 2 MP depth camera. Experience the freedom to capture stunning, quality photos. Background images generated with Adobe Firefly AI engine. Images simulated for illustrative purposes. *Individual results may vary depending upon light or shooting condition",
           "label": "Capture life in high definition",
           "source": "structured_section",
           "confidence": 88
@@ -1062,7 +1062,7 @@
           "confidence": 86
         },
         "reliable_protection_for_daily_life": {
-          "value": "With IP54* protection, enjoy peace of mind throughout your day. Be it splashes of water or dust, Galaxy A06 5G\u2019s durability can handle surprises, allowing you to focus on what truly matters.",
+          "value": "With IP54* protection, enjoy peace of mind throughout your day. Be it splashes of water or dust, Galaxy A06 5G’s durability can handle surprises, allowing you to focus on what truly matters.",
           "label": "Reliable protection for daily life",
           "source": "structured_section",
           "confidence": 84
@@ -1074,7 +1074,7 @@
           "confidence": 86
         },
         "power_up_stay_connected": {
-          "value": "Enjoy more of what you love without worrying about battery life\u2014the Galaxy A06 5G lasts longer with its 5,000 mAh (typical) battery*. And with 25 W Fast Charging**, it's back in action quickly.",
+          "value": "Enjoy more of what you love without worrying about battery life—the Galaxy A06 5G lasts longer with its 5,000 mAh (typical) battery*. And with 25 W Fast Charging**, it's back in action quickly.",
           "label": "Power up. Stay connected.",
           "source": "structured_section",
           "confidence": 86
@@ -2951,7 +2951,7 @@
           "observed_at": "2026-10-07T01:54:24.401908+00:00"
         },
         "rear_camera": {
-          "value": "13MP AI camera, f/2.2, 77\u00b0 FOV, AF, dual-view video",
+          "value": "13MP AI camera, f/2.2, 77° FOV, AF, dual-view video",
           "label": "Rear Camera",
           "source": "json_ld_additional_property",
           "confidence": 94,
@@ -3024,6 +3024,184 @@
         "reason": "Page identity and extracted evidence are strong enough for review"
       },
       "saved_at": "2026-10-07T01:55:04.523658+00:00"
+    },
+    {
+      "asin": "B0H1WY55ZL",
+      "brand": "Samsung",
+      "model": "Galaxy A56 5G",
+      "search_name": "Samsung Galaxy A56 5G",
+      "model_key": "samsung|galaxy a56 5g",
+      "variant_signature": {
+        "ram_gb": "8",
+        "storage_gb": "128"
+      },
+      "official_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 1.0,
+      "specifications": {
+        "resolution_main_display": {
+          "value": "1080 x 2340 (FHD+)",
+          "label": "Resolution (Main Display)",
+          "source": "adjacent_label_value",
+          "confidence": 86,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+          "observed_at": "2026-10-09T14:24:22.373956+00:00",
+          "identity_match": {
+            "model": "Galaxy A56 5G",
+            "physical_ram_gb": 8,
+            "storage_gb": 128,
+            "scope": "model and memory variant; no colour facts transferred"
+          }
+        },
+        "max_refresh_rate_main_display": {
+          "value": "120 Hz",
+          "label": "Max Refresh Rate (Main Display)",
+          "source": "adjacent_label_value",
+          "confidence": 86,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+          "observed_at": "2026-10-09T14:24:22.373956+00:00",
+          "identity_match": {
+            "model": "Galaxy A56 5G",
+            "physical_ram_gb": 8,
+            "storage_gb": 128,
+            "scope": "model and memory variant; no colour facts transferred"
+          }
+        },
+        "rear_camera_resolution_multiple": {
+          "value": "50.0 MP + 12.0 MP + 5.0 MP",
+          "label": "Rear Camera - Resolution (Multiple)",
+          "source": "adjacent_label_value",
+          "confidence": 88,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+          "observed_at": "2026-10-09T14:24:22.373956+00:00",
+          "identity_match": {
+            "model": "Galaxy A56 5G",
+            "physical_ram_gb": 8,
+            "storage_gb": 128,
+            "scope": "model and memory variant; no colour facts transferred"
+          }
+        },
+        "front_camera_resolution": {
+          "value": "12.0 MP",
+          "label": "Front Camera - Resolution",
+          "source": "adjacent_label_value",
+          "confidence": 86,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+          "observed_at": "2026-10-09T14:24:22.373956+00:00",
+          "identity_match": {
+            "model": "Galaxy A56 5G",
+            "physical_ram_gb": 8,
+            "storage_gb": 128,
+            "scope": "model and memory variant; no colour facts transferred"
+          }
+        },
+        "memory_gb": {
+          "value": "8",
+          "label": "Memory (GB)",
+          "source": "adjacent_label_value",
+          "confidence": 84,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+          "observed_at": "2026-10-09T14:24:22.373956+00:00",
+          "identity_match": {
+            "model": "Galaxy A56 5G",
+            "physical_ram_gb": 8,
+            "storage_gb": 128,
+            "scope": "model and memory variant; no colour facts transferred"
+          }
+        },
+        "storage_gb": {
+          "value": "128",
+          "label": "Storage (GB)",
+          "source": "adjacent_label_value",
+          "confidence": 84,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+          "observed_at": "2026-10-09T14:24:22.373956+00:00",
+          "identity_match": {
+            "model": "Galaxy A56 5G",
+            "physical_ram_gb": 8,
+            "storage_gb": 128,
+            "scope": "model and memory variant; no colour facts transferred"
+          }
+        },
+        "video_playback_time_hours": {
+          "value": "Up to 29",
+          "label": "Video Playback Time (Hours)",
+          "source": "adjacent_label_value",
+          "confidence": 84,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+          "observed_at": "2026-10-09T14:24:22.373956+00:00",
+          "identity_match": {
+            "model": "Galaxy A56 5G",
+            "physical_ram_gb": 8,
+            "storage_gb": 128,
+            "scope": "model and memory variant; no colour facts transferred"
+          }
+        },
+        "battery_capacity_mah_typical": {
+          "value": "5000",
+          "label": "Battery Capacity (mAh, Typical)",
+          "source": "adjacent_label_value",
+          "confidence": 84,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+          "observed_at": "2026-10-09T14:24:22.373956+00:00",
+          "identity_match": {
+            "model": "Galaxy A56 5G",
+            "physical_ram_gb": 8,
+            "storage_gb": 128,
+            "scope": "model and memory variant; no colour facts transferred"
+          }
+        },
+        "security_update_period_valid_until": {
+          "value": "31 March 2032",
+          "label": "Security Update Period (Valid until)",
+          "source": "adjacent_label_value",
+          "confidence": 86,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+          "observed_at": "2026-10-09T14:24:22.373956+00:00",
+          "identity_match": {
+            "model": "Galaxy A56 5G",
+            "physical_ram_gb": 8,
+            "storage_gb": 128,
+            "scope": "model and memory variant; no colour facts transferred"
+          }
+        },
+        "built_to_last_with_6x_os_upgrades": {
+          "value": "Up to 6 generations of OS upgrades and up to 6 years of security updates",
+          "label": "Built to last with 6x OS upgrades",
+          "source": "structured_section",
+          "confidence": 86,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+          "observed_at": "2026-10-09T14:24:22.373956+00:00",
+          "identity_match": {
+            "model": "Galaxy A56 5G",
+            "physical_ram_gb": 8,
+            "storage_gb": 128,
+            "scope": "model and memory variant; no colour facts transferred"
+          }
+        },
+        "samsung_galaxy_experience": {
+          "value": "One UI 7; Smart Switch transfers photos, videos, contacts and apps",
+          "label": "Samsung Galaxy Experience",
+          "source": "structured_section",
+          "confidence": 84,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+          "observed_at": "2026-10-09T14:24:22.373956+00:00",
+          "identity_match": {
+            "model": "Galaxy A56 5G",
+            "physical_ram_gb": 8,
+            "storage_gb": 128,
+            "scope": "model and memory variant; no colour facts transferred"
+          }
+        }
+      },
+      "features": [],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-10-09T14:25:55.974495+00:00"
     }
   ]
 }

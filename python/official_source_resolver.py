@@ -37,6 +37,7 @@ BRAND_DOMAINS: dict[str, list[str]] = {
     "vivo": ["vivo.com"],
     "apple": ["apple.com"],
     "samsung": ["samsung.com"],
+    "motorola": ["motorola.in", "motorola.com"],
     "lava": ["lavamobiles.com"],
     "itel": ["itel-india.com"],
     "boat": ["boat-lifestyle.com"],
