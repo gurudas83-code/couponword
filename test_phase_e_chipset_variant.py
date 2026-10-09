@@ -21,4 +21,13 @@ class ChipsetVariantTests(unittest.TestCase):
         for title in (self.base.replace('6GB','8GB'),self.base.replace('128GB','256GB'),self.base.replace('5G','4G')):
             self.assertNotEqual(classify_mobile_identity_reuse(self.base,title+' Dimensity 7400-Turbo Processor',expected_brand='vivo')['status'],AUTO_REUSE)
 
+    def test_observed_dimensity_7025_ultra_is_not_handset_variant(self):
+        base = 'Redmi Note 14 5G 8GB RAM 256GB Storage'
+        suffix = ' Global Debut MTK Dimensity 7025 Ultra'
+        self.assertEqual(classify_mobile_identity_reuse(base, base+suffix, expected_brand='Redmi')['status'], AUTO_REUSE)
+        for changed in (base.replace('Note 14', 'Note 14 Ultra'),
+                        base.replace('8GB', '12GB'), base.replace('256GB', '128GB'),
+                        base.replace('5G', '4G')):
+            self.assertNotEqual(classify_mobile_identity_reuse(base, changed+suffix, expected_brand='Redmi')['status'], AUTO_REUSE)
+
 if __name__=='__main__':unittest.main()

@@ -494,6 +494,11 @@ def parse_identity(
             and re.fullmatch(r"\d{3,4}", tokens[index - 1])
             and tokens[index + 1:index + 2] == ["processor"]
         )
+        # Observed Redmi Note 14 chipset name, not an Ultra handset SKU.
+        and not (
+            token == "ultra" and index >= 2
+            and tokens[index - 2:index] == ["dimensity", "7025"]
+        )
         # "HD Plus 90Hz Display" describes the screen, not a Plus SKU.
         # Exclude this occurrence only; retain any Plus in the model name.
         and not (
