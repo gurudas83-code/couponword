@@ -12,7 +12,10 @@ class ReleaseEvidenceTests(unittest.TestCase):
     def test_clean_install_and_variant_guard(self):
         with tempfile.TemporaryDirectory() as tmp, patch.object(store, 'STORE_PATH', Path(tmp)/'missing.json'):
             data = store.load_store()
-            self.assertEqual(len(data['records']), 9)
+            self.assertEqual(len(data['records']), 11)
+            for asin, model in [('B0GN24SV22', 'M17e'), ('B0H5BRHZBX', 'M17')]:
+                self.assertIsNotNone(store.find_verified_evidence(asin=asin, title=f'Samsung Galaxy {model} 5G 4GB RAM 128GB Storage', store_data=data))
+                self.assertIsNone(store.find_verified_evidence(asin=asin, title=f'Samsung Galaxy {model} 5G 6GB RAM 128GB Storage', store_data=data))
             a56 = store.find_verified_evidence(asin='B0H1WY55ZL', title='Samsung Galaxy A56 5G 8GB RAM 128GB Storage', store_data=data)
             self.assertIsNotNone(a56)
             self.assertIsNone(store.find_verified_evidence(asin='B0H1WY55ZL', title='Samsung Galaxy A56 5G 8GB RAM 256GB Storage', store_data=data))
@@ -21,7 +24,7 @@ class ReleaseEvidenceTests(unittest.TestCase):
             self.assertFalse(store.STORE_PATH.exists())
 
     def test_newer_runtime_wins_and_original_time_preserved(self):
-        baseline=json.loads(store.BUNDLED_EVIDENCE_PATH.read_text())['records'][0]
+        baseline=json.loads(store.BUNDLED_EVIDENCE_PATH.read_text(encoding='utf-8'))['records'][0]
         current=copy.deepcopy(baseline);current['saved_at']='2099-01-01T00:00:00+00:00'
         current['features']=['new runtime evidence']
         with tempfile.TemporaryDirectory() as tmp:
@@ -32,7 +35,7 @@ class ReleaseEvidenceTests(unittest.TestCase):
             self.assertEqual(json.loads(path.read_text())['records'],[current])
 
     def test_rejected_bundle_not_loaded(self):
-        bad=json.loads(store.BUNDLED_EVIDENCE_PATH.read_text())
+        bad=json.loads(store.BUNDLED_EVIDENCE_PATH.read_text(encoding='utf-8'))
         for row in bad['records']:row['resolver_verified']=False
         with tempfile.TemporaryDirectory() as tmp:
             seed=Path(tmp)/'seed.json';seed.write_text(json.dumps(bad))

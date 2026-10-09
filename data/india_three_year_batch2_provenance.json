@@ -1,0 +1,85 @@
+{
+  "purpose": "India catalogue expansion batch1: existing exact retailer IDs excluded; Samsung M17e4/128 and M17 4/128. Prices observations only; unknown support/endurance remainunknown; no threshold changes.",
+  "candidates": [
+    {
+      "observed_at": "2026-10-09T14:28:47.736095+00:00",
+      "expected_title": "Galaxy M17e 5G Mobile (Blitz Blue, 4GB RAM, 128GB Storage, Monster 6000mAh Battery) | 120 Hz Refresh Rate | IP54 Rating | 6 Gen OS Upgrades | 50MP Dual Camera | Knox Security | AI",
+      "brand": "Samsung",
+      "identity": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0GN24SV22",
+        "page_asin": "B0GN24SV22",
+        "page_title": "Samsung Galaxy M17e 5G Mobile (Blitz Blue, 4GB RAM, 128GB Storage, Monster 6000mAh Battery) | 120 Hz Refresh Rate | IP54 Rating | 6 Gen OS Upgrades | 50MP Dual Camera | Knox Security | AI",
+        "identity_title": "Samsung Galaxy M17e 5G Mobile (Blitz Blue, 4GB RAM, 128GB Storage, Monster 6000mAh Battery) | 120 Hz Refresh Rate | IP54 Rating | 6 Gen OS Upgrades | 50MP Dual Camera | Knox Security | AI",
+        "exact_listing_capacity": {},
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 95
+      },
+      "price": {
+        "price": 16998.0,
+        "prices_found": [
+          16998.0
+        ],
+        "availability": "in_stock",
+        "status": "verified",
+        "reason": "Exact Amazon primary buy-box price found",
+        "http_status": 200,
+        "evidence_method": "amazon_primary_buybox",
+        "source_url": "https://www.amazon.in/dp/B0GN24SV22",
+        "observed_at": "2026-10-09T14:28:47.736095+00:00"
+      },
+      "source_id": 103,
+      "canonical_id": "cw-mobile-103",
+      "allocation_workflow": "batch_product_importer.import_csv -> next_product_id -> promote_mobile_canonical",
+      "india_launch_evidence": {
+        "source_url": "https://news.samsung.com/in/samsung-launches-galaxy-m17e-5g-redefining-the-smartphone-experience-for-indias-young-on-the-go-generation",
+        "observed_at": "2026-10-09T14:30:22.336245+00:00",
+        "date": "2026-03-18",
+        "date_precision": "day",
+        "scope": "manufacturer India launch; launch prices are not current prices"
+      }
+    },
+    {
+      "observed_at": "2026-10-09T14:28:53.075040+00:00",
+      "expected_title": "Galaxy M17 5G Mobile (Sapphire Black, 4GB RAM, 128GB Storage) | 50MP OIS Triple Camera | Super AMOLED Display | Gorilla Glass Victus | 6 Gen OS Upgrades | Knox Security | AI",
+      "brand": "Samsung",
+      "identity": {
+        "http_status": 200,
+        "final_url": "https://www.amazon.in/dp/B0H5BRHZBX",
+        "page_asin": "B0H5BRHZBX",
+        "page_title": "Samsung Galaxy M17 5G Mobile (Sapphire Black, 4GB RAM, 128GB Storage) | 50MP OIS Triple Camera | Super AMOLED Display | Gorilla Glass Victus | 6 Gen OS Upgrades | Knox Security | AI",
+        "identity_title": "Samsung Galaxy M17 5G Mobile (Sapphire Black, 4GB RAM, 128GB Storage) | 50MP OIS Triple Camera | Super AMOLED Display | Gorilla Glass Victus | 6 Gen OS Upgrades | Knox Security | AI",
+        "exact_listing_capacity": {},
+        "strict_status": "AUTO_REUSE",
+        "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+        "resolver_decision": "verified",
+        "resolver_score": 95
+      },
+      "price": {
+        "price": 18999.0,
+        "prices_found": [
+          18999.0
+        ],
+        "availability": "in_stock",
+        "status": "verified",
+        "reason": "Exact Amazon primary buy-box price found",
+        "http_status": 200,
+        "evidence_method": "amazon_primary_buybox",
+        "source_url": "https://www.amazon.in/dp/B0H5BRHZBX",
+        "observed_at": "2026-10-09T14:28:53.075040+00:00"
+      },
+      "source_id": 104,
+      "canonical_id": "cw-mobile-104",
+      "allocation_workflow": "batch_product_importer.import_csv -> next_product_id -> promote_mobile_canonical",
+      "india_launch_evidence": {
+        "source_url": "https://news.samsung.com/in/samsung-launches-galaxy-m17-5g-with-segment-first-ois-camera-enhanced-durability-ai-features-in-india",
+        "observed_at": "2026-10-09T14:30:22.336245+00:00",
+        "date": "2025-10-13",
+        "date_precision": "day",
+        "scope": "manufacturer India launch; launch prices are not current prices"
+      }
+    }
+  ]
+}

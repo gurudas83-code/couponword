@@ -3202,6 +3202,353 @@
         "reason": "Page identity and extracted evidence are strong enough for review"
       },
       "saved_at": "2026-10-09T14:25:55.974495+00:00"
+    },
+    {
+      "asin": "B0GN24SV22",
+      "brand": "Samsung",
+      "model": "Galaxy M17e 5G",
+      "search_name": "Samsung Galaxy M17e 5G",
+      "model_key": "samsung|galaxy m17e 5g",
+      "variant_signature": {
+        "ram_gb": "4",
+        "storage_gb": "128"
+      },
+      "official_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 1.0,
+      "specifications": {
+        "resolution_main_display": {
+          "value": "720 x 1600 (HD+)",
+          "label": "Resolution (Main Display)",
+          "source": "adjacent_label_value",
+          "confidence": 86,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+          "observed_at": "2026-10-09T14:30:59.033731+00:00",
+          "identity_match": {
+            "model": "Galaxy M17e 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "max_refresh_rate_main_display": {
+          "value": "120 Hz",
+          "label": "Max Refresh Rate (Main Display)",
+          "source": "adjacent_label_value",
+          "confidence": 86,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+          "observed_at": "2026-10-09T14:30:59.033731+00:00",
+          "identity_match": {
+            "model": "Galaxy M17e 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "rear_camera_resolution_multiple": {
+          "value": "50.0 MP + 2.0 MP",
+          "label": "Rear Camera - Resolution (Multiple)",
+          "source": "adjacent_label_value",
+          "confidence": 88,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+          "observed_at": "2026-10-09T14:30:59.033731+00:00",
+          "identity_match": {
+            "model": "Galaxy M17e 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "front_camera_resolution": {
+          "value": "8.0 MP",
+          "label": "Front Camera - Resolution",
+          "source": "adjacent_label_value",
+          "confidence": 86,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+          "observed_at": "2026-10-09T14:30:59.033731+00:00",
+          "identity_match": {
+            "model": "Galaxy M17e 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "memory_gb": {
+          "value": "4",
+          "label": "Memory (GB)",
+          "source": "adjacent_label_value",
+          "confidence": 84,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+          "observed_at": "2026-10-09T14:30:59.033731+00:00",
+          "identity_match": {
+            "model": "Galaxy M17e 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "storage_gb": {
+          "value": "128",
+          "label": "Storage (GB)",
+          "source": "adjacent_label_value",
+          "confidence": 84,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+          "observed_at": "2026-10-09T14:30:59.033731+00:00",
+          "identity_match": {
+            "model": "Galaxy M17e 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "battery_capacity_mah_typical": {
+          "value": "6000",
+          "label": "Battery Capacity (mAh, Typical)",
+          "source": "adjacent_label_value",
+          "confidence": 84,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+          "observed_at": "2026-10-09T14:30:59.033731+00:00",
+          "identity_match": {
+            "model": "Galaxy M17e 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "security_update_period_valid_until": {
+          "value": "31 January 2032",
+          "label": "Security Update Period (Valid until)",
+          "source": "adjacent_label_value",
+          "confidence": 86,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+          "observed_at": "2026-10-09T14:30:59.033731+00:00",
+          "identity_match": {
+            "model": "Galaxy M17e 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "segment_s_longest_video_playback_time_up_to_26_hours": {
+          "value": "From morning scroll to midnight binge",
+          "label": "Segment’s longest video playback time up to 26 hours",
+          "source": "structured_section",
+          "confidence": 84,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+          "observed_at": "2026-10-09T14:30:59.033731+00:00",
+          "identity_match": {
+            "model": "Galaxy M17e 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "experience_flagship_inspired_features_like": {
+          "value": "Now bar | Live notification | Large folders on home screen",
+          "label": "Experience flagship inspired features like",
+          "source": "structured_section",
+          "confidence": 86,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+          "observed_at": "2026-10-09T14:30:59.033731+00:00",
+          "identity_match": {
+            "model": "Galaxy M17e 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "one_ui_8_0_with_android_16": {
+          "value": "Experience flagship inspired features like Now bar | Live notification | Large folders on home screen",
+          "label": "One UI 8.0 with Android 16",
+          "source": "structured_section",
+          "confidence": 86,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+          "observed_at": "2026-10-09T14:30:59.033731+00:00",
+          "identity_match": {
+            "model": "Galaxy M17e 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "your_privacy_locked_in": {
+          "value": "Most secure for payments & privacy comes with side-mounted fingerprint sensor & face unlock",
+          "label": "Your privacy, locked in",
+          "source": "structured_section",
+          "confidence": 84,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+          "observed_at": "2026-10-09T14:30:59.033731+00:00",
+          "identity_match": {
+            "model": "Galaxy M17e 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        }
+      },
+      "features": [],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-10-09T14:33:52.563044+00:00"
+    },
+    {
+      "asin": "B0H5BRHZBX",
+      "brand": "Samsung",
+      "model": "Galaxy M17 5G",
+      "search_name": "Samsung Galaxy M17 5G",
+      "model_key": "samsung|galaxy m17 5g",
+      "variant_signature": {
+        "ram_gb": "4",
+        "storage_gb": "128"
+      },
+      "official_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 1.0,
+      "specifications": {
+        "resolution_main_display": {
+          "value": "1080 x 2340 (FHD+)",
+          "label": "Resolution (Main Display)",
+          "source": "adjacent_label_value",
+          "confidence": 86,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+          "observed_at": "2026-10-09T14:31:01.413385+00:00",
+          "identity_match": {
+            "model": "Galaxy M17 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "max_refresh_rate_main_display": {
+          "value": "90 Hz",
+          "label": "Max Refresh Rate (Main Display)",
+          "source": "adjacent_label_value",
+          "confidence": 86,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+          "observed_at": "2026-10-09T14:31:01.413385+00:00",
+          "identity_match": {
+            "model": "Galaxy M17 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "rear_camera_resolution_multiple": {
+          "value": "50.0 MP + 5.0 MP + 2.0 MP",
+          "label": "Rear Camera - Resolution (Multiple)",
+          "source": "adjacent_label_value",
+          "confidence": 88,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+          "observed_at": "2026-10-09T14:31:01.413385+00:00",
+          "identity_match": {
+            "model": "Galaxy M17 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "front_camera_resolution": {
+          "value": "13.0 MP",
+          "label": "Front Camera - Resolution",
+          "source": "adjacent_label_value",
+          "confidence": 86,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+          "observed_at": "2026-10-09T14:31:01.413385+00:00",
+          "identity_match": {
+            "model": "Galaxy M17 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "memory_gb": {
+          "value": "4",
+          "label": "Memory (GB)",
+          "source": "adjacent_label_value",
+          "confidence": 84,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+          "observed_at": "2026-10-09T14:31:01.413385+00:00",
+          "identity_match": {
+            "model": "Galaxy M17 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "storage_gb": {
+          "value": "128",
+          "label": "Storage (GB)",
+          "source": "adjacent_label_value",
+          "confidence": 84,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+          "observed_at": "2026-10-09T14:31:01.413385+00:00",
+          "identity_match": {
+            "model": "Galaxy M17 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "video_playback_time_hours": {
+          "value": "Up to 18",
+          "label": "Video Playback Time (Hours)",
+          "source": "adjacent_label_value",
+          "confidence": 84,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+          "observed_at": "2026-10-09T14:31:01.413385+00:00",
+          "identity_match": {
+            "model": "Galaxy M17 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "battery_capacity_mah_typical": {
+          "value": "5000",
+          "label": "Battery Capacity (mAh, Typical)",
+          "source": "adjacent_label_value",
+          "confidence": 84,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+          "observed_at": "2026-10-09T14:31:01.413385+00:00",
+          "identity_match": {
+            "model": "Galaxy M17 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "security_update_period_valid_until": {
+          "value": "30 September 2031",
+          "label": "Security Update Period (Valid until)",
+          "source": "adjacent_label_value",
+          "confidence": 86,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+          "observed_at": "2026-10-09T14:31:01.413385+00:00",
+          "identity_match": {
+            "model": "Galaxy M17 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "segment_s_best_camera": {
+          "value": "50MP No Shake Cam | ±1.5° OIS 1",
+          "label": "Segment's best camera",
+          "source": "structured_section",
+          "confidence": 84,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+          "observed_at": "2026-10-09T14:31:01.413385+00:00",
+          "identity_match": {
+            "model": "Galaxy M17 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        },
+        "segment_s_best_upgrades": {
+          "value": "6 Gen OS Upgrades | 6 years Security Updates Stay updated and always ahead of the game 3",
+          "label": "Segment's best upgrades",
+          "source": "structured_section",
+          "confidence": 86,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+          "observed_at": "2026-10-09T14:31:01.413385+00:00",
+          "identity_match": {
+            "model": "Galaxy M17 5G",
+            "physical_ram_gb": 4,
+            "storage_gb": 128
+          }
+        }
+      },
+      "features": [],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-10-09T14:31:39.299923+00:00"
     }
   ]
 }

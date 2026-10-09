@@ -835,7 +835,10 @@ def storage_signal(text: str) -> dict[str, Any]:
 
 
 def software_support_signal(text: str) -> dict[str, Any]:
-    normalized = str(text or "")
+    # Stored official specifications use this key when building profile text.
+    # Preserve its meaning without interpreting unrelated dates as support.
+    normalized = re.sub(r"\bsecurity_update_period_valid_until\b",
+                        "Security Update Period Valid until", str(text or ""), flags=re.I)
 
     # ---------------------------------------------------------
     # 1. Explicit support duration
