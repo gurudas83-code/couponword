@@ -28,6 +28,20 @@ class LocalCategoryFallbackTests(unittest.TestCase):
                 self.assertTrue(all(row['provider'] == 'local_coupon_catalogue' for row in rows))
                 self.assertTrue(all('verified' not in row for row in rows))
 
+    def test_generic_catalogue_is_not_cut_off_before_evidence_ranking(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            rows = [{"title": f"Phone model {i} 8GB RAM 128GB Storage",
+                     "link": f"https://www.amazon.in/dp/B{i:09d}",
+                     "asin": f"B{i:09d}", "category": "Mobiles"}
+                    for i in range(35)]
+            (root / "coupons.json").write_text(json.dumps(rows), encoding="utf-8")
+            with patch.object(discovery, "ROOT", root):
+                found = discovery.local_known_product_fallback(
+                    query="mobile under 50000", category="smartphone", max_results=20)
+            self.assertEqual(len(found), 35)
+            self.assertEqual(found[-1]["asin"], "B000000034")
+
     def test_only_url_bound_catalogue_asin_is_forwarded(self):
         rows=self.search('mobile under 15000')
         self.assertEqual(rows[0]['asin'],'B0GL1WGHJX')

@@ -708,7 +708,7 @@ def candidate_snapshot_key(
     # old evidence, but require a fresh successful pool for this policy.
     return (
         f"__candidate_snapshot__::{discovery_cache_key(query, category)}"
-        f"::{max_candidates}::battery-workloads-v2"
+        f"::{max_candidates}::catalogue-breadth-v3"
     )
 
 
@@ -1335,7 +1335,10 @@ def local_known_product_fallback(
         reverse=True,
     )
 
-    return ranked[:max_results]
+    # Generic mobile discovery must not discard later catalogue entries by
+    # insertion order before price/evidence ranking. The final discovery pool
+    # remains bounded; only this local, network-free input lane is complete.
+    return ranked if generic_mobile_query else ranked[:max_results]
 
 def fallback_search_channel(
     *,
@@ -2272,7 +2275,8 @@ def discovery_budget_endurance_rank(item: dict[str, Any], budget_max: Any,
     return int(budget > 0), active_endurance_discovery_priority(item, evidence_store), budget
 
 
-def active_endurance_discovery_priority(item: dict[str, Any], evidence_store: dict[str, Any]) -> int:
+def active_endurance_discovery_priority(item: dict[str, Any], evidence_store: dict[str, Any],
+                                       require_endurance: bool = True) -> int:
     """Prefer already verified exact-variant endurance before candidate truncation.
 
     Discovery remains unverified; price freshness and final Fit still run later.
@@ -2297,6 +2301,8 @@ def active_endurance_discovery_priority(item: dict[str, Any], evidence_store: di
     expected = f"{record.get('brand', '')} {record.get('model', '')} {variant['ram_gb']}GB RAM {variant['storage_gb']}GB Storage"
     if classify_mobile_identity_reuse(expected, title, item['url'], record.get('brand', ''))['status'] != AUTO_REUSE:
         return 0
+    if not require_endurance:
+        return 1
     battery = smartphone_battery_signal(text_blob({"attributes": record.get("specifications", {}),
                                                  "features": record.get("features", [])}, separator="; "))
     return int(battery.get("basis") in {"video_playback_hours", "youtube_playback_hours"})
@@ -3105,6 +3111,25 @@ def discover_market(
         from product_evidence_store import load_store
         evidence_priority_store = load_store()
 
+    # An unregistered alternate listing must not consume the bounded pool
+    # ahead of an exact catalogue variant that can actually be recommended.
+    # This is discovery priority only; all downstream checks still run.
+    from retailer_product_registry import find_catalogued_mobile_id
+    catalogue_priority = {}
+    catalogue_evidence_priority = {}
+    if category == "smartphone":
+        from product_evidence_store import load_store
+        catalogue_store = evidence_priority_store if evidence_priority_store is not None else load_store()
+        for item in ranked:
+            catalogue_priority[id(item)] = bool(find_catalogued_mobile_id(
+                retailer_product_id=clean(item.get("asin")),
+                candidate_title=clean(item.get("title")),
+                candidate_brand=clean(item.get("known_brand") or item.get("brand")),
+            ))
+            if catalogue_priority[id(item)]:
+                catalogue_evidence_priority[id(item)] = active_endurance_discovery_priority(
+                    item, catalogue_store, require_endurance=False)
+
     ranked.sort(
         key=lambda item: (
             variant_priority.get(
@@ -3113,6 +3138,9 @@ def discover_market(
                 ).lower(),
                 1,
             ),
+            int(trusted_price_budget_priority(item, intent.get("budget_max")) > 0),
+            catalogue_priority.get(id(item), False),
+            catalogue_evidence_priority.get(id(item), 0),
             *discovery_budget_endurance_rank(item, intent.get("budget_max"), evidence_priority_store),
             discovery_evidence_priority(item),
             named_model_evidence_priority(item),

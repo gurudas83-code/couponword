@@ -99,18 +99,35 @@ class QueryDiversityTests(unittest.TestCase):
                          {'B0FT3DXJM3', 'B0FT3J2W97'})
         self.assertEqual(len(result['candidates']), 2)
 
+    def test_exact_catalogue_a56_survives_alternate_listing_cutoff(self):
+        import json
+        products = json.loads((Path(__file__).resolve().parent / "coupons.json").read_text(encoding="utf-8"))
+        product = next(p for p in products if p.get("asin") == "B0H1WY55ZL")
+        owned = dict(title=product["title"], asin=product["asin"], url=product["link"],
+                     host="www.amazon.in", content="", channel="commerce", query="mobile under 50000", search_score=0.05)
+        other = dict(owned, asin="B0H1X5XP25", url="https://www.amazon.in/dp/B0H1X5XP25", search_score=1.0)
+        for budget in (40000, 50000):
+            with self.subTest(budget=budget), patch.dict(os.environ, {"TAVILY_API_KEY": ""}), \
+                 patch.object(discovery, "get_candidate_snapshot", return_value=None), \
+                 patch.object(discovery, "get_recent_discovery_cache", return_value=[]), \
+                 patch.object(discovery, "get_partial_candidate_memory", return_value=[]), \
+                 patch.object(discovery, "recent_discovery_price", return_value=31999), \
+                 patch.object(discovery, "fallback_search_channel", return_value=[other, owned]):
+                result = discovery.discover_market(f"mobile under {budget}", max_candidates=1, live_fast=True)
+            self.assertEqual(result["candidates"][0]["asin"], "B0H1WY55ZL")
+
     def test_retry_preserves_original_variants_and_bounds_unique_reserve(self):
         first = {'candidates': [{'candidate_id': 'market-01', 'asin': 'A', 'title': 'original 4GB 128GB'}]}
         reserve = {'candidates': [
             {'candidate_id': 'market-01', 'asin': 'A', 'title': 'conflicting 8GB 256GB'},
             *[{'candidate_id': 'market-01', 'asin': str(i), 'title': 'observed'} for i in range(30)]
         ]}
-        initial_result = {'intent': {'category': 'smartphone', 'budget_max': 20000},
+        initial_result = {'intent': {'category': 'smartphone', 'budget_max': 15000},
                           'recommendations': [], 'stage_counts': {'eligible': 0}, 'timings': {}}
         final_result = dict(initial_result, recommendations=[{'asin': 'A'}], timings={})
         with patch.object(pipeline, 'discover_market', side_effect=[first, reserve]) as search, \
              patch.object(pipeline, '_run_pipeline_once', side_effect=[initial_result, final_result]) as score:
-            result = pipeline.run_pipeline('best phone under 20000', live_fast=True)
+            result = pipeline.run_pipeline('best phone under 15000', live_fast=True)
         merged = score.call_args.kwargs['_discovery']['candidates']
         self.assertEqual(merged[0], first['candidates'][0])
         self.assertEqual(len(merged), 16)

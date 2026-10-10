@@ -1722,8 +1722,19 @@ def run_pipeline(
     live_fast: bool = False,
 ) -> dict[str, Any]:
     started = time.perf_counter()
-    # Limit this optimization to the two low-budget recovery paths.
     request_intent = parse_query(query)
+    # General higher-budget searches must examine the same bounded breadth,
+    # even when the first 15 listings already yield three eligible models.
+    # Otherwise a wider budget can hide a better phone seen only in recovery.
+    broad_budget_pool = (
+        live_fast and request_intent.get("category") == "smartphone"
+        and (request_intent.get("budget_max") or 0) > 15000
+        and not request_intent.get("brands")
+        and not request_intent.get("must_have")
+    )
+    if broad_budget_pool:
+        max_candidates = max(max_candidates, 30)
+    # Retain the existing low-budget request-scoped recovery optimization.
     reuse_recovery = (live_fast and request_intent.get("category") == "smartphone"
                       and request_intent.get("budget_max") in (10000, 15000))
     discovery_cache = {} if reuse_recovery else None
@@ -1739,7 +1750,7 @@ def run_pipeline(
         _candidate_cache=candidate_cache,
     )
     intent = result.get("intent") or {}
-    if (not live_fast or intent.get("category") != "smartphone"
+    if (broad_budget_pool or not live_fast or intent.get("category") != "smartphone"
             or intent.get("budget_max") is None or intent.get("brands")
             or intent.get("must_have")
             or (initial_discovery.get("exact_model_scope") or {}).get("active")
