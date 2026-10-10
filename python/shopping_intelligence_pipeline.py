@@ -1421,10 +1421,23 @@ def runtime_profile_from_extraction(
 
     existing_commerce_price = resolved.get("commerce_evidence")
 
+    # The live resolver just checked this exact listing in this request.
+    # Repeating a failed network lookup here adds another timeout without
+    # additional evidence. Keep the failure unknown; never persist a negative
+    # price cache or reuse it for another listing/deep resolver.
+    checked_live_failure = (
+        isinstance(existing_commerce_price, dict)
+        and existing_commerce_price.get("verified") is False
+        and resolved.get("status") == "retailer_identity_verified"
+        and bool(clean(candidate.get("source_url")))
+        and normalize_url(existing_commerce_price.get("source_url") or "")
+            == normalize_url(candidate.get("source_url") or "")
+    )
     if (
         isinstance(existing_commerce_price, dict)
-        and existing_commerce_price.get("verified") is True
-        and existing_commerce_price.get("price") is not None
+        and ((existing_commerce_price.get("verified") is True
+              and existing_commerce_price.get("price") is not None)
+             or checked_live_failure)
     ):
         price_evidence = existing_commerce_price
     else:
@@ -2020,11 +2033,14 @@ def _run_pipeline_once(
                     ],
                 }
 
-            fast_price = build_price_evidence(candidate)
-
             fast_identity_verified = bool(
                 clean(fast_identity.get("decision")).lower() == "verified"
             )
+            fast_price = build_price_evidence(candidate) if fast_identity_verified else {
+                "verified": False, "price": None, "status": "skipped_identity_rejected",
+                "source_url": market_url,
+                "reason": "Price lookup skipped because retailer identity did not verify",
+            }
 
             if fast_identity_verified:
                 resolved = {
