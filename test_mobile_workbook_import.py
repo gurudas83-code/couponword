@@ -7,6 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / 'python'))
 from mobile_intelligence_builder import load_universe_seed, seed_from_dict, assess_seed
+from product_evidence_store import extraction_is_cacheable
 
 
 class WorkbookImportTests(unittest.TestCase):
@@ -22,6 +23,12 @@ class WorkbookImportTests(unittest.TestCase):
                 for key in ('ram_gb', 'storage_gb', 'current_price', 'retailer_product_id', 'launch_date'):
                     self.assertIsNone(row[key])
                 self.assertEqual(assess_seed(seed_from_dict(row)).status, 'NEEDS_IDENTITY')
+                self.assertFalse(extraction_is_cacheable(row)[0])
+                self.assertFalse(row['resolver_verified'])
+                for spec in row['specifications'].values():
+                    self.assertTrue({'value', 'label', 'source', 'confidence'} <= spec.keys())
+                    self.assertEqual(spec['source'], 'user_workbook_unverified')
+                    self.assertEqual(spec['confidence'], 0)
 
     def test_additions_are_discovery_seeds_and_catalogued_models_are_not_readded(self):
         universe = load_universe_seed()
