@@ -124,7 +124,58 @@ def check_payload(payload, http_status, budget, brand=None):
         if battery_requested and (pick.get('battery_evidence') or {}).get('basis') in ('unknown', 'capacity_proxy'):
             gaps.append(f"{pick.get('asin')}: active-use battery endurance unverified")
     return {'status': 'FAIL' if errors else 'INCOMPLETE' if gaps else 'PASS',
+            'scope': 'reported_evidence_eligibility_only',
+            'market_quality': 'NOT_VERIFIED',
             'errors': errors, 'coverage_gaps': gaps}
+
+
+def check_budget_coverage(runs):
+    """Flag discovery/selection review, never infer current stock from an older run.
+
+    This is only for otherwise identical generic mobile budget queries. A phone
+    missing at a wider budget is a lead for investigation, not proof its price
+    or evidence remained valid. Competitor names/prices cannot grant eligibility.
+    """
+    observations, issues = [], []
+    for run in sorted(runs, key=lambda item: item.get('budget', 0)):
+        budget = run.get('budget', 0)
+        payload = run.get('payload') or {}
+        query = run.get('query') or payload.get('query') or ''
+        if not re.fullmatch(r'mobile under\s+' + str(budget), query.strip(), re.I):
+            continue
+        picks = payload.get('recommendations') or []
+        scores = [p.get('fit_percent') for p in picks]
+        if not picks or any(not isinstance(s, (int, float)) or not math.isfinite(s) for s in scores):
+            continue
+        selected = {p.get('asin') for p in picks}
+        diagnostics = {r.get('profile_asin'): r for r in payload.get('fit_diagnostics', [])}
+        for previous_budget, previous in observations:
+            asin = previous.get('asin')
+            if previous_budget >= budget or not asin or asin in selected:
+                continue
+            old_fit, old_price = previous.get('fit_percent'), previous.get('price')
+            if not isinstance(old_fit, (int, float)) or not isinstance(old_price, (int, float)):
+                continue
+            if not math.isfinite(old_fit) or not math.isfinite(old_price) or not 0 < old_price <= budget:
+                continue
+            if old_fit <= min(scores):
+                continue  # Ties and replacement by stronger picks are not defects.
+            row = diagnostics.get(asin)
+            if row is not None and (row.get('eligible') is not True
+                                    or row.get('hard_constraint_failures')
+                                    or not isinstance(row.get('fit_percent'), (int, float))
+                                    or row['fit_percent'] <= min(scores)):
+                continue  # Current evidence explains the different result.
+            issue = {'budget': budget, 'asin': asin,
+                     'previous_budget': previous_budget,
+                     'previous_price': old_price, 'previous_fit': old_fit,
+                     'kind': 'discovery_coverage_review' if row is None else 'selection_review',
+                     'current_price_and_identity_require_revalidation': row is None}
+            if not any(i['budget'] == budget and i['asin'] == asin for i in issues):
+                issues.append(issue)
+        observations.extend((budget, p) for p in picks)
+    return {'status': 'REVIEW_REQUIRED' if issues else 'NO_OBSERVED_OMISSION',
+            'market_quality': 'NOT_VERIFIED', 'issues': issues}
 
 
 def check_repeat(before, after):
