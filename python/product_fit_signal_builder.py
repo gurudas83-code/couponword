@@ -400,7 +400,7 @@ def display_signal(text: str) -> dict[str, Any]:
         score += 0.30
         reasons.append("AMOLED/OLED")
 
-    if re.search(r"\b(?:120|144)\s*hz\b", text):
+    if re.search(r"\b(?:120|144|165)\s*hz\b", text, re.I):
         score += 0.20
         reasons.append("high refresh rate")
 
@@ -639,7 +639,10 @@ def performance_signal(text: str) -> dict[str, Any]:
         "rtx 3050",
     )
 
-    if any(x in text for x in high):
+    # Qualcomm identifies this exact platform as flagship-class. Keep the
+    # existing tier heuristic; do not infer benchmarks or future chip names.
+    # https://www.qualcomm.com/smartphones/products/8-series/snapdragon-8-gen-5-mobile-platform
+    if any(x in text for x in high) or re.search(r"\bsnapdragon\s+8\s+gen\s+5\b", text):
         return signal(1.0, "High-performance verified chipset/GPU class detected")
     # "Octacore Ultrafast" is marketing language, not Intel Core Ultra.
     # Require a separate CPU-family token and an explicit processor tier.
