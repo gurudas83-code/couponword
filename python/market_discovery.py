@@ -708,7 +708,7 @@ def candidate_snapshot_key(
     # old evidence, but require a fresh successful pool for this policy.
     return (
         f"__candidate_snapshot__::{discovery_cache_key(query, category)}"
-        f"::{max_candidates}::catalogue-breadth-v3"
+        f"::{max_candidates}::catalogue-breadth-v4"
     )
 
 
@@ -2341,6 +2341,11 @@ def _request_search(cache, provider_key, provider, *args, **kwargs):
     return rows
 
 
+def within_research_scope(selected_count, limit, canonical_owner, evidence_priority):
+    """Bound new research, but do not discard an already evidenced exact catalogue listing."""
+    return selected_count < limit or (bool(canonical_owner) and evidence_priority > 0)
+
+
 def discover_market(
     user_query: str,
     max_candidates: int = 20,
@@ -3155,6 +3160,11 @@ def discover_market(
     candidates: list[dict[str, Any]] = []
 
     for item in ranked:
+        if not within_research_scope(
+            len(candidates), max_candidates, catalogue_priority.get(id(item), False),
+            catalogue_evidence_priority.get(id(item), 0),
+        ):
+            continue
         title = item["clean_title"]
         title_key = normalize_key(title)
         # Distinct exact listings can share a shortened model title. Keep
@@ -3201,9 +3211,6 @@ def discover_market(
                 "status": "discovered_unverified",
             }
         )
-
-        if len(candidates) >= max_candidates:
-            break
 
     partial_memory_used = 0
     if (

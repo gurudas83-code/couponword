@@ -1,0 +1,9 @@
+budget,evidence_scope,discovered,identity_verified,fit_scored,eligible_unique,returned,failures
+10000,historical_before_fix_not_current,15,15,15,3,3,[]
+12000,NOT_RUN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,[]
+20000,historical_before_fix_not_current,30,30,30,12,3,[]
+30000,historical_before_fix_not_current,30,30,30,16,3,[]
+40000,historical_before_fix_not_current,30,30,30,19,3,[]
+50000,historical_before_fix_not_current,30,30,30,21,3,[]
+120000,NOT_RUN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,[]
+150000,NOT_RUN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,[]
