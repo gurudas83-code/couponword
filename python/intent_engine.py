@@ -31,6 +31,13 @@ class ShoppingIntent:
 
 def normalize(text: str) -> str:
     text = str(text or "").lower()
+    # Translate complete Hindi phrases before punctuation normalization removes
+    # combining vowel marks. Keep the existing intent/feature engine downstream.
+    for source, target in (("डेढ़ लाख", "1.5 lakh"), ("लाख", "lakh"),
+                           ("हज़ार", "thousand"), ("हजार", "thousand"),
+                           ("के अंदर", "ke andar"), ("मोबाइल", "mobile"),
+                           ("सबसे अच्छा", "best")):
+        text = text.replace(source, target)
     text = text.replace("â‚¹", " ").replace("Ã¢â€šÂ¹", " ").replace(",", "")
     # Treat a common camera typo as the same shopper requirement throughout
     # intent detection and weighting, without changing unrelated words.
@@ -153,121 +160,53 @@ def detect_budget(text: str) -> tuple[int | None, int | None]:
       30k se upar
     """
 
-    def amount(value: str, unit: str | None = None) -> int:
-        number = float(value)
+    text = text.lower().replace(",", "")
+    currency = r"(?:₹|inr|rs\.?)\s*"
+    # A number must end before a specification unit, not inside one.
+    token = (r"(?<![\w.])(\d+(?:\.\d+)?)\s*"
+             r"(lakh|lac|k|thousand|hazar|hazaar)?"
+             r"(?![\w.])(?!(?:\s*)(?:gb|tb|mah|hz|mp|inch)\b)")
 
-        unit = str(unit or "").lower().strip()
+    def amount(value, unit):
+        multiplier = 100000 if unit in {"lakh", "lac"} else 1000 if unit else 1
+        return int(float(value) * multiplier)
 
-        if unit in {"k", "thousand", "hazar", "hazaar"}:
-            number *= 1000
+    # Parse ranges first; allow the conventional shared suffix in 20-30k.
+    match = re.search(rf"(?:between\s+|from\s+)?(?:{currency})?{token}"
+                      rf"\s*(?:-|to|and)\s*(?:{currency})?{token}", text)
+    if match:
+        a, au, b, bu = match.groups()
+        low, high = amount(a, au or bu), amount(b, bu or au)
+        return min(low, high), max(low, high)
 
-        return int(number)
+    for prefix, is_min in (
+        (r"under|below|less than|upto|up to|max|maximum|budget", False),
+        (r"above|over|more than|min|minimum", True),
+    ):
+        match = re.search(rf"\b(?:{prefix})\s*(?:{currency})?{token}", text)
+        if match:
+            value = amount(*match.groups())
+            return (value, None) if is_min else (None, value)
+    for suffix, is_min in (
+        (r"(?:ke\s+)?(?:andar|under|below|tak)", False),
+        (r"se\s+(?:upar|above|over)", True),
+    ):
+        match = re.search(rf"{token}\s*{suffix}\b", text)
+        if match:
+            value = amount(*match.groups())
+            return (value, None) if is_min else (None, value)
 
-    amount_pattern = (
-        r"(\d+(?:\.\d+)?)\s*"
-        r"(k|thousand|hazar|hazaar)?"
-    )
-
-    # ------------------------------------------------------------
-    # Maximum budget
-    # ------------------------------------------------------------
-    m = re.search(
-        rf"(?:under|below|less than|upto|up to|max|maximum)\s*"
-        rf"{amount_pattern}",
-        text,
-    )
-    if m:
-        return None, amount(m.group(1), m.group(2))
-
-    # Common Hinglish forms:
-    #   20k ke andar
-    #   20k ke under
-    #   20 hazar tak
-    #   20000 tak
-    m = re.search(
-        rf"\b{amount_pattern}\s*"
-        rf"(?:ke\s+)?(?:andar|under|below|tak)\b",
-        text,
-    )
-    if m:
-        return None, amount(m.group(1), m.group(2))
-
-    # ------------------------------------------------------------
-    # Budget range
-    # ------------------------------------------------------------
-    m = re.search(
-        rf"(?:between|from)\s*"
-        rf"{amount_pattern}\s*"
-        rf"(?:and|to|-)\s*"
-        rf"{amount_pattern}",
-        text,
-    )
-    if m:
-        a = amount(m.group(1), m.group(2))
-        b = amount(m.group(3), m.group(4))
-        return min(a, b), max(a, b)
-
-    # Compact range:
-    #   15k-20k
-    #   15000 to 20000
-    m = re.search(
-        rf"\b{amount_pattern}\s*"
-        rf"(?:-|to)\s*"
-        rf"{amount_pattern}\b",
-        text,
-    )
-    if m:
-        a = amount(m.group(1), m.group(2))
-        b = amount(m.group(3), m.group(4))
-        return min(a, b), max(a, b)
-
-    # ------------------------------------------------------------
-    # Minimum budget
-    # ------------------------------------------------------------
-    m = re.search(
-        rf"(?:above|over|more than|min|minimum)\s*"
-        rf"{amount_pattern}",
-        text,
-    )
-    if m:
-        return amount(m.group(1), m.group(2)), None
-
-    # Hinglish:
-    #   30k se upar
-    #   30k se above
-    m = re.search(
-        rf"\b{amount_pattern}\s*se\s*"
-        rf"(?:upar|above|over)\b",
-        text,
-    )
-    if m:
-        return amount(m.group(1), m.group(2)), None
-
-    # Bare Indian-shopping budget shorthand:
-    #   "20k best mob"
-    #   "samsung phone 25k"
-    #   "game ke liye mobile 25k"
-    #
-    # Do not interpret every bare number as money. Require obvious
-    # shopping/product context and a k/hazar suffix.
-    bare_budget = re.search(
-        r"\b(\d{1,3})\s*(k|hazar|hazaar)\b",
-        text,
-        re.I,
-    )
-
-    shopping_context = re.search(
-        r"\b(?:smartphone|mobile|phone|mob|best|buy|lena|"
-        r"samsung|oneplus|redmi|realme|motorola|oppo|vivo|"
-        r"gaming|game|camera|battery)\b",
-        text,
-        re.I,
-    )
-
-    if bare_budget and shopping_context:
-        amount_value = int(bare_budget.group(1)) * 1000
-        return None, amount_value
-
+    context = re.search(r"\b(?:smartphone|mobile|phone|mob|best|buy|lena|"
+                        r"samsung|oneplus|redmi|realme|motorola|oppo|vivo|"
+                        r"gaming|game|camera|battery)\b", text)
+    if context:
+        for match in re.finditer(token, text):
+            number, unit = match.groups()
+            # Unmarked small/model numbers are not budgets. A plain shopping
+            # amount must be at least four digits and not adjacent to a unit.
+            if unit or (float(number) >= 1000 and not re.search(
+                    r"(?:model|galaxy|nokia|redmi|snapdragon)\s*$", text[:match.start()])):
+                return None, amount(number, unit)
     return None, None
 
 
