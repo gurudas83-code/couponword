@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -118,10 +119,15 @@ CORS(app)
 
 @app.get("/health")
 def health():
+    # Render supplies the deployed revision. Never infer it from a local checkout.
+    revision = os.environ.get("RENDER_GIT_COMMIT", "").strip()
+    if not re.fullmatch(r"[0-9a-fA-F]{40}", revision):
+        revision = None
     return jsonify(
         {
             "status": "ok",
             "service": "coupon-world-shopping-intelligence",
+            "revision": revision,
         }
     )
 
