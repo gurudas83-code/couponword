@@ -569,6 +569,8 @@ def build_price_evidence(candidate: dict[str, Any]) -> dict[str, Any]:
                 "price": search_card_price,
                 "verified": True,
                 "status": "verified_from_exact_asin_search_card",
+                "verified_at": datetime.now(timezone.utc).isoformat(),
+                "availability": "unknown",
                 "reason": (
                     "Exact Amazon ASIN-bound search-card price verified"
                 ),
@@ -597,6 +599,7 @@ def build_price_evidence(candidate: dict[str, Any]) -> dict[str, Any]:
             "verified": True,
             "availability": "unknown",
             "status": "verified_from_recent_cache",
+            "verified_at": cached.get("verified_at"),
             "reason": (
                 "Reused a recent verified retailer price observation; "
                 "current availability was not re-verified"
@@ -631,6 +634,7 @@ def build_price_evidence(candidate: dict[str, Any]) -> dict[str, Any]:
                     page_result.get("availability") or "unknown"
                 ),
                 "status": "verified_from_retail_page",
+                "verified_at": datetime.now(timezone.utc).isoformat(),
                 "reason": page_result.get("reason"),
                 "evidence_method": method,
             })
@@ -646,6 +650,8 @@ def build_price_evidence(candidate: dict[str, Any]) -> dict[str, Any]:
             "price": cached.get("price"),
             "verified": True,
             "status": "verified_from_recent_cache",
+            "verified_at": cached.get("verified_at"),
+            "availability": "unknown",
             "reason": (
                 "Live retailer price was unavailable; reused a "
                 "recent structured price verification"

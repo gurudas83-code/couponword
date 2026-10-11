@@ -281,6 +281,7 @@ def enrich_with_multi_retailer(
             and verified_price is not None
             and "amazon.in/" in evidence_url.lower()
             and evidence_method in amazon_exact_methods
+            and core_price_evidence.get("verified_at")
         ):
             from price_evidence import PriceEvidence
 
@@ -305,6 +306,7 @@ def enrich_with_multi_retailer(
                     availability=verified_availability,
                     source_url=evidence_url,
                     source_type=evidence_method,
+                    observed_at=core_price_evidence["verified_at"],
                     confidence=evidence_confidence,
                     notes=(
                         "Verified exact-ASIN Amazon evidence "
