@@ -3549,6 +3549,134 @@
         "reason": "Page identity and extracted evidence are strong enough for review"
       },
       "saved_at": "2026-10-09T14:31:39.299923+00:00"
+    },
+    {
+      "asin": "B0GKB38XWZ",
+      "brand": "Motorola",
+      "model": "Signature",
+      "search_name": "Motorola Signature",
+      "model_key": "motorola|signature",
+      "variant_signature": {
+        "ram_gb": "12",
+        "storage_gb": "256"
+      },
+      "official_url": "https://www.motorola.in/smartphones-motorola-signature/p?skuId=609",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 1.0,
+      "specifications": {
+        "processor": {
+          "value": "Snapdragon 8 Gen 5",
+          "label": "processor",
+          "source": "reviewed_manufacturer_model_claim",
+          "confidence": 90,
+          "source_url": "https://motorolanews.com/motorola-sets-a-new-standard-for-world-class-refinement-with-the-launch-of-motorola-signature/",
+          "observed_at": "2026-10-10T16:42:32.512793+00:00",
+          "identity_match": {
+            "brand": "Motorola",
+            "model": "Signature",
+            "scope": "model-level hardware; no memory, colour or regional support inferred"
+          }
+        },
+        "display": {
+          "value": "6.8 inch AMOLED; 165Hz",
+          "label": "display",
+          "source": "reviewed_manufacturer_model_claim",
+          "confidence": 90,
+          "source_url": "https://motorolanews.com/motorola-sets-a-new-standard-for-world-class-refinement-with-the-launch-of-motorola-signature/",
+          "observed_at": "2026-10-10T16:42:32.512793+00:00",
+          "identity_match": {
+            "brand": "Motorola",
+            "model": "Signature",
+            "scope": "model-level hardware; no memory, colour or regional support inferred"
+          }
+        },
+        "rear_camera": {
+          "value": "50MP main; 50MP periscope telephoto; 3x optical zoom; 50MP ultrawide",
+          "label": "rear_camera",
+          "source": "reviewed_manufacturer_model_claim",
+          "confidence": 90,
+          "source_url": "https://motorolanews.com/motorola-sets-a-new-standard-for-world-class-refinement-with-the-launch-of-motorola-signature/",
+          "observed_at": "2026-10-10T16:42:32.512793+00:00",
+          "identity_match": {
+            "brand": "Motorola",
+            "model": "Signature",
+            "scope": "model-level hardware; no memory, colour or regional support inferred"
+          }
+        },
+        "battery_capacity_mah": {
+          "value": 5200,
+          "label": "battery_capacity_mah",
+          "source": "reviewed_manufacturer_model_claim",
+          "confidence": 90,
+          "source_url": "https://motorolanews.com/motorola-sets-a-new-standard-for-world-class-refinement-with-the-launch-of-motorola-signature/",
+          "observed_at": "2026-10-10T16:42:32.512793+00:00",
+          "identity_match": {
+            "brand": "Motorola",
+            "model": "Signature",
+            "scope": "model-level hardware; no memory, colour or regional support inferred"
+          }
+        },
+        "video_playback": {
+          "value": "Up to 28 hours continuous video playback",
+          "label": "video_playback",
+          "source": "reviewed_manufacturer_model_claim",
+          "confidence": 90,
+          "source_url": "https://motorolanews.com/motorola-sets-a-new-standard-for-world-class-refinement-with-the-launch-of-motorola-signature/",
+          "observed_at": "2026-10-10T16:42:32.512793+00:00",
+          "identity_match": {
+            "brand": "Motorola",
+            "model": "Signature",
+            "scope": "model-level hardware; no memory, colour or regional support inferred"
+          }
+        },
+        "music_streaming": {
+          "value": "Up to 57 hours music streaming",
+          "label": "music_streaming",
+          "source": "reviewed_manufacturer_model_claim",
+          "confidence": 90,
+          "source_url": "https://motorolanews.com/motorola-sets-a-new-standard-for-world-class-refinement-with-the-launch-of-motorola-signature/",
+          "observed_at": "2026-10-10T16:42:32.512793+00:00",
+          "identity_match": {
+            "brand": "Motorola",
+            "model": "Signature",
+            "scope": "model-level hardware; no memory, colour or regional support inferred"
+          }
+        },
+        "ram_gb": {
+          "value": 12,
+          "label": "ram_gb",
+          "source": "verified_exact_retailer_identity",
+          "confidence": 100,
+          "source_url": "https://www.amazon.in/dp/B0GKB38XWZ",
+          "observed_at": "2026-10-10T16:38:43.503969+00:00",
+          "identity_match": {
+            "asin": "B0GKB38XWZ",
+            "physical_ram_gb": 12,
+            "storage_gb": 256
+          }
+        },
+        "storage_gb": {
+          "value": 256,
+          "label": "storage_gb",
+          "source": "verified_exact_retailer_identity",
+          "confidence": 100,
+          "source_url": "https://www.amazon.in/dp/B0GKB38XWZ",
+          "observed_at": "2026-10-10T16:38:43.503969+00:00",
+          "identity_match": {
+            "asin": "B0GKB38XWZ",
+            "physical_ram_gb": 12,
+            "storage_gb": 256
+          }
+        }
+      },
+      "features": [],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Reviewed exact retailer variant plus model-only manufacturer hardware facts. Regional software support and mixed-use52h claim excluded."
+      },
+      "saved_at": "2026-10-10T16:42:43.837402+00:00"
     }
   ]
 }

@@ -1,0 +1,43 @@
+{
+  "asin": "B0GKB38XWZ",
+  "observed_at": "2026-10-10T16:38:43.503969+00:00",
+  "identity": {
+    "http_status": 200,
+    "final_url": "https://www.amazon.in/dp/B0GKB38XWZ",
+    "page_asin": "B0GKB38XWZ",
+    "page_title": "Motorola Signature (Pantone Carbon, 12GB RAM +256GB Storage)",
+    "identity_title": "Motorola Signature (Pantone Carbon, 12GB RAM +256GB Storage)",
+    "exact_listing_capacity": {},
+    "strict_status": "AUTO_REUSE",
+    "strict_reason": "brand/model identity passed and all explicit mobile variant constraints matched",
+    "resolver_decision": "verified",
+    "resolver_score": 85
+  },
+  "price": {
+    "price": 59990.0,
+    "prices_found": [
+      59990.0
+    ],
+    "availability": "in_stock",
+    "status": "verified",
+    "reason": "Exact Amazon primary buy-box price found",
+    "http_status": 200,
+    "evidence_method": "amazon_primary_buybox"
+  },
+  "official_model_url": "https://www.motorola.in/smartphones-motorola-signature/p?skuId=609",
+  "manufacturer_claim_url": "https://motorolanews.com/motorola-sets-a-new-standard-for-world-class-refinement-with-the-launch-of-motorola-signature/",
+  "manufacturer_domain_provenance": "motorola.in official navigation links blog hellomoto to motorolanews.com",
+  "source_id": 105,
+  "canonical_id": "cw-mobile-105",
+  "allocation_workflow": "batch_product_importer then promote_mobile_canonical",
+  "unknown": [
+    "India-specific software support",
+    "ease of use",
+    "independent measured endurance"
+  ],
+  "excluded": [
+    "52h unspecified mixed-use claim",
+    "regional software-update promise"
+  ],
+  "variant_scope": "Physical12/256 from exact Amazon; hardware/playback claims model-level from official manufacturer, not independently measured"
+}

@@ -510,7 +510,7 @@ async function loadShoppingRecommendation(query) {
         : "Not available";
 
       const offers = Array.isArray(p.retailer_offers)
-        ? p.retailer_offers
+        ? p.retailer_offers.filter(offer => offer && offer.price != null && offer.price !== "" && Number.isFinite(Number(offer.price)) && Number(offer.price) > 0)
         : [];
 
       // Respect the backend comparison contract:
@@ -518,15 +518,22 @@ async function loadShoppingRecommendation(query) {
       // retailer offers are available. A single verified offer is
       // still useful, but must not be presented as "best".
       const bestOffer =
-        p.best_offer && typeof p.best_offer === "object"
+        p.best_offer && typeof p.best_offer === "object" && p.best_offer.price != null && Number.isFinite(Number(p.best_offer.price)) && Number(p.best_offer.price) > 0
           ? p.best_offer
           : null;
 
       const primaryOffer = bestOffer || offers[0] || {};
+      const priceEvidence =
+        p.provenance && p.provenance.price_evidence
+          ? p.provenance.price_evidence
+          : {};
+      const exactVariant = p.identity_evidence && p.identity_evidence.variant || {};
 
       const variant = primaryOffer.variant
         ? escapeHTML(primaryOffer.variant)
-        : "Not available";
+        : exactVariant.ram_gb && exactVariant.storage_gb
+          ? `${escapeHTML(exactVariant.ram_gb)}GB/${escapeHTML(exactVariant.storage_gb)}GB`
+          : "Not available";
 
       const retailer = primaryOffer.retailer
         ? escapeHTML(primaryOffer.retailer)
@@ -540,12 +547,7 @@ async function loadShoppingRecommendation(query) {
 
       const lastChecked = primaryOffer.last_checked
         ? escapeHTML(primaryOffer.last_checked)
-        : "Not available";
-
-      const priceEvidence =
-        p.provenance && p.provenance.price_evidence
-          ? p.provenance.price_evidence
-          : {};
+        : priceEvidence.verified_at ? escapeHTML(priceEvidence.verified_at) : "Not available";
 
       const retailerAvailability = String(
         primaryOffer.availability || ""
@@ -600,6 +602,7 @@ async function loadShoppingRecommendation(query) {
       // and CTA all refer to the same offer.
       const productLink = safeLink(
         primaryOffer.product_url ||
+        priceEvidence.source_url ||
         p.market_source ||
         p.official_source ||
         p.link

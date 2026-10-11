@@ -21,3 +21,5 @@ Limitations: no claim that all retailer adapters or live pages have been indepen
 certified. Unknown stock stays unknown; a verified recent price is not proof of current stock.
 Final live checks and complete regression results belong to Task6. No price was fabricated,
 no stale cache was refreshed by this repair, and no deployment occurred.
+
+Task6 integration caught and fixed the unpriced-offer timestamp/variant fallback in app.js; permanent Node-backed test_phase_g_frontend_offer.py verifies price, URL, timestamp and physical variant remain paired. Full162-test suite passes.

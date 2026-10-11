@@ -32,3 +32,5 @@ in Task6 acceptance; historical observations are not relabelled current.
 
 Status: recall repair PASS on frozen regression; full current market coverage INCOMPLETE.
 No exhaustive India-market claim, fabricated specification or external source price added.
+
+Final acceptance update: CSV now contains the actual current eight-budget run plus150k repeat, superseding historical-only rows. Runtime evidence has15 cacheable exact variants. See06_final_acceptance.md for exact picks/timings and bounded OnePlus15 extractor rejection/new candidate B0FTR5NGHJ.

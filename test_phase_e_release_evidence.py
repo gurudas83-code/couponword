@@ -12,7 +12,10 @@ class ReleaseEvidenceTests(unittest.TestCase):
     def test_clean_install_and_variant_guard(self):
         with tempfile.TemporaryDirectory() as tmp, patch.object(store, 'STORE_PATH', Path(tmp)/'missing.json'):
             data = store.load_store()
-            self.assertEqual(len(data['records']), 11)
+            bundled = json.loads(store.BUNDLED_EVIDENCE_PATH.read_text(encoding='utf-8'))['records']
+            self.assertGreaterEqual(len(bundled), 11)
+            self.assertEqual({r['asin'] for r in data['records']}, {r['asin'] for r in bundled})
+            self.assertEqual(len(data['records']), len(bundled))
             for asin, model in [('B0GN24SV22', 'M17e'), ('B0H5BRHZBX', 'M17')]:
                 self.assertIsNotNone(store.find_verified_evidence(asin=asin, title=f'Samsung Galaxy {model} 5G 4GB RAM 128GB Storage', store_data=data))
                 self.assertIsNone(store.find_verified_evidence(asin=asin, title=f'Samsung Galaxy {model} 5G 6GB RAM 128GB Storage', store_data=data))
