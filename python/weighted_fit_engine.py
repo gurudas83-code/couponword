@@ -353,8 +353,20 @@ def calculate_product_fit(product: dict, intent: dict) -> dict:
         and evidence_coverage_percent >= MIN_EVIDENCE_COVERAGE_PERCENT
     )
 
+    # Affordability is a hard eligibility condition, not phone capability.
+    # Reuse the existing preference weights and verified normalized signals;
+    # publish evidence coverage separately instead of multiplying it into quality.
+    quality_criteria = [c for c in criteria if c.criterion != "budget"]
+    quality_total = sum(c.weight for c in quality_criteria)
+    quality_known = sum(c.weight for c in quality_criteria if c.match_score is not None)
+    quality_score = (round(100 * sum(c.weighted_points for c in quality_criteria)
+                           / quality_known, 2) if quality_known else None)
+
     return {
         "eligible": eligible,
+        "quality_score": quality_score,
+        "quality_evidence_coverage_percent": round(100 * quality_known / quality_total) if quality_total else 0,
+        "scoring_contract": "capability-with-separate-evidence-v1",
         "fit_percent": fit_percent,
         "raw_fit_percent": raw_fit_percent,
         "evidence_coverage_percent": evidence_coverage_percent,
@@ -366,6 +378,17 @@ def calculate_product_fit(product: dict, intent: dict) -> dict:
         "unknown_requirements": unknown,
         "weak_requirements": weak,
     }
+
+
+def recommendation_sort_key(assessment: dict, stable_identity: str) -> tuple:
+    """Shared order for eligible records; no price-floor or affiliate preference."""
+    quality = assessment.get("quality_score")
+    return (
+        -(float(quality) if quality is not None else -1),
+        -int(assessment.get("quality_evidence_coverage_percent") or 0),
+        -int(assessment.get("fit_percent") or 0),
+        str(stable_identity),
+    )
 
 
 def rank_recommendations(
@@ -386,11 +409,7 @@ def rank_recommendations(
             scored.append(item)
 
     scored.sort(
-        key=lambda item: (
-            item["fit_assessment"]["fit_percent"],
-            item["fit_assessment"]["evidence_coverage_percent"],
-        ),
-        reverse=True,
+        key=lambda item: recommendation_sort_key(item["fit_assessment"], item.get("product_id", "")),
     )
 
     recommendations = scored[:max(1, int(max_results))]

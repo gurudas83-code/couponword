@@ -70,7 +70,7 @@ from product_evidence_store import (
 from product_identity_v2 import build_identity
 from retail_price_evidence import build_price_evidence, get_recent_cached_price, normalize_url
 from resolver_engine import compare_identity
-from weighted_fit_engine import calculate_product_fit
+from weighted_fit_engine import calculate_product_fit, recommendation_sort_key
 
 from core_multi_retailer_adapter import build_canonical_product
 from multi_retailer_orchestrator import MultiRetailerOrchestrator
@@ -2635,10 +2635,8 @@ def _run_pipeline_once(
         qualifying = catalogued_recommendation_candidates(qualifying, failures)
 
     qualifying.sort(
-        key=lambda item: (
-            -int(item["fit_assessment"].get("fit_percent") or 0),
-            -int(item["fit_assessment"].get("evidence_coverage_percent") or 0),
-            -int(bool(item.get("candidate", {}).get("partial_model_pin"))),
+        key=lambda item: recommendation_sort_key(
+            item["fit_assessment"],
             clean(item.get("candidate", {}).get("asin") or item.get("profile", {}).get("product_id")),
         ),
     )
@@ -3010,6 +3008,9 @@ def _run_pipeline_once(
             "image_url": profile.get("image_url"),
             "commerce_provider": profile.get("commerce_provider"),
             "fit_percent": assessment.get("fit_percent"),
+            "quality_score": assessment.get("quality_score"),
+            "quality_evidence_coverage_percent": assessment.get("quality_evidence_coverage_percent"),
+            "scoring_contract": assessment.get("scoring_contract"),
             "raw_fit_percent": assessment.get("raw_fit_percent"),
             "evidence_coverage_percent": assessment.get(
                 "evidence_coverage_percent"
@@ -3180,6 +3181,8 @@ def _run_pipeline_once(
         "failure_summary": failure_summary,
         "failures": failures,
         "result_status": result_status,
+        "completion_status": "PASS" if result_status == "PASS" else "INCOMPLETE",
+        "completion_reason": None if result_status == "PASS" else "Insufficient verified eligible unique models; constraints were not relaxed.",
         "status": status,
         "rules": {
             "min_fit_percent": MIN_FIT_PERCENT,

@@ -505,6 +505,9 @@ async function loadShoppingRecommendation(query) {
         evidenceNumber != null ? `${evidenceNumber}%` : "Not available";
 
       const confidence = escapeHTML(p.confidence || "unknown");
+      const capabilityDisplay = p.quality_score != null && Number.isFinite(Number(p.quality_score))
+        ? `${Math.max(0, Math.min(100, Number(p.quality_score)))}/100`
+        : "Not available";
 
       const offers = Array.isArray(p.retailer_offers)
         ? p.retailer_offers
@@ -728,6 +731,7 @@ async function loadShoppingRecommendation(query) {
           </div>
 
           <p><strong>AI Confidence:</strong> ${confidence}</p>
+          <p><strong>Capability match:</strong> ${capabilityDisplay} <small>(known specifications; missing evidence is listed below)</small></p>
           <p><strong>Price:</strong> ${price}</p>
           <p class="ai-last-checked"><strong>Last checked:</strong> ${lastChecked}</p>
 
