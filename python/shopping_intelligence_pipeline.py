@@ -1730,6 +1730,23 @@ def _reusable_candidate_record(cache, key):
     return deepcopy(record)
 
 
+def premium_market_quality_status(intent: dict[str, Any], discovery: dict[str, Any]) -> tuple[str, str | None]:
+    budget_max = intent.get("budget_max")
+    incomplete = (
+        clean(intent.get("category")) == "smartphone"
+        and budget_max is not None
+        and float(budget_max) >= 120000
+        and not bool(discovery.get("premium_market_coverage_verified"))
+    )
+    if incomplete:
+        return (
+            "INCOMPLETE",
+            "Premium market coverage is not verified for this budget; results "
+            "are an evidenced catalogue scope, not a best-in-market claim.",
+        )
+    return "VERIFIED_SCOPE", None
+
+
 def run_pipeline(
     query: str,
     max_candidates: int = 15,
@@ -3052,6 +3069,15 @@ def _run_pipeline_once(
 
     status = "PASS" if len(recommendations) >= DEFAULT_MIN_RESULTS else "PARTIAL"
 
+    # A high-budget query can have three eligible catalogue rows while still
+    # lacking verified premium-market coverage. Keep the rows visible, but do
+    # not label them as a verified best-in-market Top-3 until a durable source
+    # explicitly establishes premium coverage.
+    market_quality_status, premium_quality_reason = premium_market_quality_status(
+        intent, discovery
+    )
+    premium_quality_incomplete = market_quality_status == "INCOMPLETE"
+
     # Query-aware result sufficiency.
     # Exact named-model queries need one verified unique model;
     # generic shopping queries retain the preferred Top-3 breadth.
@@ -3181,8 +3207,20 @@ def _run_pipeline_once(
         "failure_summary": failure_summary,
         "failures": failures,
         "result_status": result_status,
-        "completion_status": "PASS" if result_status == "PASS" else "INCOMPLETE",
-        "completion_reason": None if result_status == "PASS" else "Insufficient verified eligible unique models; constraints were not relaxed.",
+        "completion_status": (
+            "INCOMPLETE"
+            if result_status != "PASS" or premium_quality_incomplete
+            else "PASS"
+        ),
+        "completion_reason": (
+            premium_quality_reason
+            if premium_quality_incomplete
+            else (
+                None if result_status == "PASS"
+                else "Insufficient verified eligible unique models; constraints were not relaxed."
+            )
+        ),
+        "market_quality_status": market_quality_status,
         "status": status,
         "rules": {
             "min_fit_percent": MIN_FIT_PERCENT,
