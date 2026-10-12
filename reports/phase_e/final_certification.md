@@ -23,6 +23,26 @@ Remote baseline: `5167712b369c81ab85779819763eee6e9b90a831`
 - Full unittest discovery: **172 discovered; 170 PASS, 0 FAIL, 0 ERROR, 2 SKIP**. Skips are the optional `google.genai` dependency and absent optional semantic v1.3 fixture.
 - Premium safety: ₹1.2L/₹1.5L responses expose `market_quality_status=INCOMPLETE` when premium coverage is not verified.
 
+## Four saved E2E failures
+
+These are from the saved remote `mobile_search_benchmark_e2e_report.json`
+snapshot, not from the passing local Gate-3 fixture. The snapshot shows eight
+discovered/evidence-ready candidates in each failing case, so the failure is
+after discovery. It does not include the per-candidate rejection trace needed
+to name a narrower source function; no code defect is proven by this receipt.
+
+| ID/query | Actual result | Stage and root cause | Status |
+|---|---|---|---|
+| E001 `best phone under 20000` | 2 picks: redmi 15C 5G Prime Edition ₹19,499; Titan iQOO Z10 Lite 5G ₹18,999 | eligibility/selection retained only two verified qualifying rows in that remote snapshot; local Gate-3 has three under the frozen local evidence | BLOCKED — catalogue/evidence snapshot mismatch |
+| E004 `Samsung phone under 25000` | 1 pick: Samsung Galaxy F36 5G ₹22,950 | brand-filtered eligibility had only one verified qualifying Samsung row in the remote snapshot | BLOCKED — verified Samsung coverage gap |
+| E007 `gaming phone under 30000` | 2 picks, both realme 16X 5G variants at ₹27,999 | capability eligibility/variant dedup left two verified rows; the receipt does not prove whether other rows failed identity, evidence or score gates | BLOCKED — rejection trace/evidence gap |
+| E010 `Samsung` | 1 pick: Samsung Galaxy F36 5G ₹22,950 | unbounded Samsung query had only one verified eligible row in the remote snapshot | BLOCKED — verified Samsung coverage gap |
+
+The saved E2E report is therefore insufficient to justify a parser, identity,
+threshold or scoring change. Filling these slots would require verified
+catalogue/evidence additions, which are outside this controlled repair and must
+not be fabricated. The local original Gate-3 remains **14/14 PASS**.
+
 ## A–D recheck conclusions
 
 - **A — NOT VERIFIED:** local HEAD and remote baseline are known; no current Render backend/frontend SHA or live smoke receipt is available.
