@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import unittest
 from pathlib import Path
 
 PRODUCT_ID = "11"
@@ -9,6 +10,11 @@ PRODUCT_ID = "11"
 src = Path(
     f"data/semantic_results/product_{PRODUCT_ID}_semantic_v1_3.json"
 )
+
+if not src.exists():
+    raise unittest.SkipTest(
+        "Optional semantic v1.3 fixture is not present in this checkout"
+    )
 
 data = json.loads(src.read_text(encoding="utf-8"))
 facts = data.get("facts", [])

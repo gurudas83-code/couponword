@@ -5,10 +5,17 @@ import copy
 import json
 import os
 import sys
+import unittest
 from pathlib import Path
 
-from google import genai
-from google.genai import types
+try:
+    from google import genai
+    from google.genai import types
+except ModuleNotFoundError as error:
+    raise unittest.SkipTest(
+        "Optional Gemini semantic consolidator dependency is unavailable: "
+        f"{error}"
+    )
 
 sys.path.insert(0, "python")
 import official_spec_extractor as ose
