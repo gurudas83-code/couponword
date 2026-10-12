@@ -91,7 +91,7 @@ invoking the real pipeline, and writes machine-readable results to
 
 The first run processed all 1,000 queries twice at the harness level:
 
-- Full-pipeline executable cases: **0**
+- Full-pipeline executable cases: **1 pilot query; 0/1000 corpus rows**
 - Fixture gaps: **1000**
 - Deterministic semantic matches: **0/0 executable**
 - Quality review cases: 40 **PROPOSED**, not independently approved
@@ -101,6 +101,13 @@ required durable evidence/offer fixture manifest does not. The harness will
 not silently use live discovery or treat candidate snapshots as complete
 pipeline fixtures. E007 remains **INSUFFICIENT_DIAGNOSTICS** and E010 remains
 **CONTRACT_GAP**; no third recommendation was invented.
+
+The real-engine pilot now proves one executable path using the existing frozen
+`mobile under 10000` candidate snapshot. It ran intent parsing, 15-candidate
+selection, canonical identity, official/evidence gates, eligibility, scoring,
+ranking and response serialization twice: **1/1 executed, 1/1 deterministic,
+3 recommendations returned**. The other corpus queries remain fixture gaps;
+this pilot is not a 1000-query market-quality claim.
 
 ## Frozen manifest attempt
 

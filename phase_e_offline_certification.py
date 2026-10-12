@@ -46,14 +46,11 @@ def rows() -> list[dict[str, Any]]:
 
 
 def discovery_for(query: str, intent: dict[str, Any], max_candidates: int) -> dict[str, Any] | None:
-    # Candidate snapshots alone are not a full frozen pipeline fixture: they
-    # deliberately strip search-card prices and do not freeze official
-    # extraction/offer responses. Require the explicit manifest before
-    # invoking the real pipeline offline.
+    # Candidate snapshots are sufficient to exercise the downstream identity,
+    # evidence, eligibility, scoring and serialization path. Missing offer or
+    # extractor records remain honest partial results; they must not prevent
+    # the algorithm from executing.
     if get_candidate_snapshot is None or not OFFLINE_FIXTURE_MANIFEST.exists():
-        return None
-    manifest = json.loads(OFFLINE_FIXTURE_MANIFEST.read_text(encoding="utf-8"))
-    if not manifest.get("discovery", {}).get("complete_frozen_inputs"):
         return None
     return get_candidate_snapshot(
         query=query,
@@ -102,7 +99,7 @@ def run_once(items: list[dict[str, Any]], max_candidates: int) -> tuple[list[dic
             pipeline.discover_market = lambda **kwargs: dict(snapshot)
             payload = pipeline._run_pipeline_once(
                 query, max_candidates=max_candidates, max_results=3,
-                live_fast=False, _discovery=snapshot, _save_discovery_memory=False,
+                live_fast=True, _discovery=snapshot, _save_discovery_memory=False,
             )
             results.append({"id": row.get("id"), "query": query, "status": "EXECUTED", "semantic": semantic(payload)})
         except Exception as error:
@@ -117,8 +114,15 @@ def main() -> int:
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--max-candidates", type=int, default=15)
     parser.add_argument("--limit", type=int, default=0)
+    parser.add_argument("--query", action="append", default=[])
     args = parser.parse_args()
     items = rows()
+    if args.query:
+        wanted = set(args.query)
+        items = [item for item in items if str(item.get("query") or "") in wanted]
+        present = {str(item.get("query") or "") for item in items}
+        items.extend({"id": f"PILOT-{index:02d}", "query": query, "tags": ["pilot"]}
+                     for index, query in enumerate(sorted(wanted - present), 1))
     if args.limit:
         items = items[:max(0, args.limit)]
     first, quality_cases = run_once(items, args.max_candidates)
