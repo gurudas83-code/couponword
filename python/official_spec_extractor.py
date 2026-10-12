@@ -388,6 +388,47 @@ def extract_meta(soup: BeautifulSoup) -> dict[str, str]:
     return result
 
 
+def extract_oneplus_15_meta_specs(
+    soup: BeautifulSoup,
+    official_url: str,
+    specifications: dict[str, dict[str, Any]],
+) -> int:
+    """Read the OnePlus 15's stable official metadata when its SPA hides specs.
+
+    This is deliberately restricted to the manufacturer's exact /15 route. It
+    never creates RAM/storage evidence; those must come from the exact listing
+    identity and the normal variant gate.
+    """
+    parsed = urlparse(official_url)
+    if parsed.hostname not in {"oneplus.in", "www.oneplus.in"} or parsed.path.rstrip("/").lower() != "/15":
+        return 0
+
+    title = clean_text(soup.title.get_text(" ", strip=True) if soup.title else "")
+    meta_text = " ".join(
+        clean_text(tag.get("content"))
+        for tag in soup.find_all("meta")
+        if tag.get("content")
+    )
+    combined = f"{title} {meta_text}"
+    if not re.search(r"\boneplus\s+15\b", combined, re.I) or re.search(r"\boneplus\s+15r\b", combined, re.I):
+        return 0
+
+    before = len(specifications)
+    patterns = (
+        ("processor", "Processor", r"Snapdragon[^A-Za-z0-9]+8\s+Elite\s+Gen\s+5", 92),
+        ("display_refresh", "Display refresh rate", r"165Hz", 88),
+        ("battery_capacity", "Battery capacity", r"7300\s*mAh", 92),
+        ("camera_system", "Camera system", r"triple\s+50MP\s+camera", 86),
+        ("video_capability", "Video capability", r"4K\s+120FPS\s+Dolby\s+Vision", 86),
+        ("operating_system", "Operating system", r"OxygenOS\s+16(?:\.0)?", 86),
+    )
+    for key, label, pattern, confidence in patterns:
+        match = re.search(pattern, combined, re.I)
+        if match:
+            add_specification(specifications, key, match.group(0), "oneplus_official_meta", confidence)
+    return len(specifications) - before
+
+
 def add_specification(
     specifications: dict[str, dict[str, Any]],
     key: str,
@@ -4987,6 +5028,9 @@ def extract_one(
     remove_page_chrome(soup)
 
     specifications: dict[str, dict[str, Any]] = {}
+    oneplus_meta_count = extract_oneplus_15_meta_specs(
+        soup, official_url, specifications
+    )
     json_ld_count = extract_json_ld_specs(json_ld_products, specifications)
     table_count = extract_tables(soup, specifications)
     definition_count = extract_definition_lists(soup, specifications)
@@ -5025,6 +5069,18 @@ def extract_one(
         page_title,
         canonical_url,
     )
+
+    # The OnePlus SPA sometimes returns a canonical URL/title shell while its
+    # stable metadata carries the actual model name. Keep this fallback route
+    # strict to /15 and reject 15R explicitly.
+    if (
+        match_score < 0.80
+        and urlparse(official_url).hostname in {"oneplus.in", "www.oneplus.in"}
+        and urlparse(official_url).path.rstrip("/").lower() == "/15"
+        and re.search(r"\boneplus\s+15\b", f"{page_title} {meta.get('description', '')}", re.I)
+        and not re.search(r"\boneplus\s+15r\b", f"{page_title} {meta.get('description', '')}", re.I)
+    ):
+        match_score = 0.90
 
     # A manufacturer spec page may identify the model in its title while
     # placing RAM and storage only in the specifications. Accept its model
@@ -5119,6 +5175,7 @@ def extract_one(
         "structured_section_specifications": structured_section_count,
         "embedded_state_specifications": embedded_state_count,
         "shopify_oxygen_specifications": shopify_oxygen_count,
+        "oneplus_official_meta_specifications": oneplus_meta_count,
         "apple_techspecs_specifications": apple_techspecs_count,
         "total_specifications": len(specifications),
         "feature_items": len(features),
