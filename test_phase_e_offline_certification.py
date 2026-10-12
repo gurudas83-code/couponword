@@ -33,6 +33,18 @@ class OfflineCertificationHarnessTests(unittest.TestCase):
         self.assertEqual(payload["counts"]["deterministic_matches"], 1)
         self.assertEqual(payload["run_1"][0]["semantic"]["stage_counts"]["recommendations_returned"], 3)
 
+    def test_frozen_catalogue_lane_reaches_real_pipeline(self):
+        root = Path(__file__).resolve().parent
+        output = root / "outputs" / "phase_e_catalogue_pilot_test.json"
+        result = subprocess.run(
+            [sys.executable, "phase_e_offline_certification.py", "--catalogue-mode", "--query", "mobile under 10000", "--output", str(output)],
+            cwd=root, capture_output=True, text=True, timeout=60,
+        )
+        self.assertEqual(result.returncode, 0)
+        payload = json.loads(output.read_text(encoding="utf-8"))
+        self.assertEqual(payload["counts"]["executed"], 1)
+        self.assertEqual(payload["run_1"][0]["snapshot_source_query"], "FROZEN_CATALOGUE_INTEGRATION")
+
 
 if __name__ == "__main__":
     unittest.main()

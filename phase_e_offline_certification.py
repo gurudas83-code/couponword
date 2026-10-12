@@ -33,6 +33,34 @@ DEFAULT_OUTPUT = ROOT / "data" / "phase_e_offline_certification.json"
 QUALITY_TAGS = {"camera", "battery", "gaming", "display", "brand", "ram", "storage", "exact_model"}
 OFFLINE_FIXTURE_MANIFEST = ROOT / "data" / "phase_e_offline_fixture_manifest.json"
 _DISCOVERY_CACHE: dict[str, Any] | None = None
+_CATALOGUE_CANDIDATES: list[dict[str, Any]] | None = None
+CATALOGUE_MODE = False
+
+def frozen_catalogue_candidates() -> list[dict[str, Any]]:
+    global _CATALOGUE_CANDIDATES
+    if _CATALOGUE_CANDIDATES is not None:
+        return _CATALOGUE_CANDIDATES
+    registry = json.loads((ROOT / "data" / "retailer_product_registry.json").read_text(encoding="utf-8"))
+    owned = set()
+    for value in (registry.get("products") or {}).values():
+        for retailer in (value or {}).values():
+            if retailer.get("retailer_product_id"):
+                owned.add(str(retailer["retailer_product_id"]).upper())
+    catalogue = json.loads((ROOT / "coupons.json").read_text(encoding="utf-8-sig"))
+    catalogue = catalogue if isinstance(catalogue, list) else catalogue.get("products", [])
+    rows = []
+    for item in catalogue:
+        asin = str(item.get("asin") or "").upper()
+        if asin not in owned or "mobile" not in str(item.get("category") or "").lower() and "phone" not in str(item.get("title") or "").lower():
+            continue
+        rows.append({
+            "candidate_id": f"frozen-{asin}", "asin": asin,
+            "title": item.get("title"), "source_title": item.get("title"),
+            "brand": item.get("brand"), "source_url": item.get("link"),
+            "market_source_url": item.get("link"), "source": "FROZEN_CATALOGUE_INTEGRATION",
+        })
+    _CATALOGUE_CANDIDATES = rows
+    return rows
 
 
 def sha256(path: Path) -> str:
@@ -52,6 +80,12 @@ def discovery_for(query: str, intent: dict[str, Any], max_candidates: int, *, al
     # evidence, eligibility, scoring and serialization path. Missing offer or
     # extractor records remain honest partial results; they must not prevent
     # the algorithm from executing.
+    if CATALOGUE_MODE:
+        candidates = frozen_catalogue_candidates()
+        return ({"candidates": [dict(item) for item in candidates],
+                 "candidate_count": len(candidates),
+                 "snapshot_source_query": "FROZEN_CATALOGUE_INTEGRATION"}
+                if candidates else None)
     if get_candidate_snapshot is None or not OFFLINE_FIXTURE_MANIFEST.exists():
         return None
     exact = get_candidate_snapshot(
@@ -97,6 +131,13 @@ def discovery_for(query: str, intent: dict[str, Any], max_candidates: int, *, al
         if candidate is not None:
             candidate["snapshot_source_query"] = snapshot_query
             return candidate
+    # Catalogue-backed integration lane: this is a frozen candidate universe,
+    # not a live discovery result. Query constraints remain enforced downstream.
+    candidates = frozen_catalogue_candidates() if CATALOGUE_MODE else []
+    if candidates:
+        return {"candidates": [dict(item) for item in candidates],
+                "candidate_count": len(candidates),
+                "snapshot_source_query": "FROZEN_CATALOGUE_INTEGRATION"}
     return None
 
 
@@ -160,6 +201,7 @@ def main() -> int:
     parser.add_argument("--max-candidates", type=int, default=15)
     parser.add_argument("--limit", type=int, default=0)
     parser.add_argument("--query", action="append", default=[])
+    parser.add_argument("--catalogue-mode", action="store_true")
     args = parser.parse_args()
     items = rows()
     if args.query:
@@ -170,6 +212,12 @@ def main() -> int:
                      for index, query in enumerate(sorted(wanted - present), 1))
     if args.limit:
         items = items[:max(0, args.limit)]
+    if args.catalogue_mode:
+        # The lane is selected by making the frozen catalogue available only
+        # for this invocation; captured-source mode remains the default.
+        global _DISCOVERY_CACHE, CATALOGUE_MODE
+        _DISCOVERY_CACHE = {}
+        CATALOGUE_MODE = True
     first, quality_cases = run_once(items, args.max_candidates)
     second, _ = run_once(items, args.max_candidates)
     first_semantic = {x["id"]: x.get("semantic") for x in first if x.get("status") == "EXECUTED"}

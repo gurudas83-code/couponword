@@ -147,3 +147,15 @@ The remaining blocker is deployment authorization and live verification, plus th
 ## Resume checkpoint
 
 Next session: read this file first; do not repeat parser, premium source or local Gate-3 work. If production authorization is granted, push the reviewed local release SHA, verify remote/Render/frontend revisions, run the live seven-query matrix once, then record PASS/FAIL/NOT VERIFIED outcomes.
+
+## Frozen catalogue integration lane
+
+The harness now supports `--catalogue-mode`, building candidates only from
+registry-owned ASINs matched to the existing catalogue and labeling the source
+`FROZEN_CATALOGUE_INTEGRATION`. Identity, evidence, eligibility, scoring,
+ranking and serialization remain the existing pipeline stages.
+
+Pilot `mobile under 10000`: **1/1 real catalogue-backed execution**, **1/1
+deterministic**, with 3 recommendations. Missing or stale offers remain under
+the existing incomplete/unknown contracts. The full corpus is not certified;
+verified offer coverage and bounded runtime remain the blockers.
