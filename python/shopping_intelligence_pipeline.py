@@ -60,6 +60,7 @@ from official_spec_extractor import extract_one
 from product_fit_signal_builder import build_fit_signals
 from product_evidence_store import (
     find_verified_evidence,
+    load_store,
     record_variant_signature,
     save_verified_evidence,
     variant_signature_from_specifications,
@@ -1895,6 +1896,9 @@ def _run_pipeline_once(
     evidence_records: list[dict[str, Any]] = []
     scored_records: list[dict[str, Any]] = []
     failures: list[dict[str, Any]] = []
+    # Evidence is immutable for one frozen batch. Load and hydrate it once;
+    # query-specific variant matching still runs on every candidate.
+    frozen_evidence_store = load_store()
 
     candidate_timings: list[dict[str, Any]] = []
 
@@ -2257,6 +2261,7 @@ def _run_pipeline_once(
             model=clean(identity.get("model")),
             search_name=clean(identity.get("search_name")),
             title=clean(candidate.get("source_title") or raw_title),
+            store_data=frozen_evidence_store,
         )
 
         # Keep the normal variant-sensitive cache lookup fail-closed.
@@ -2291,6 +2296,7 @@ def _run_pipeline_once(
                 if canonical_product_id:
                     cached_extraction = find_verified_evidence(
                         asin=canonical_asin,
+                        store_data=frozen_evidence_store,
                     )
 
                     if cached_extraction:

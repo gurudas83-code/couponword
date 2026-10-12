@@ -175,3 +175,18 @@ The attempted 100-query batch exceeded the local command execution window
 before producing a receipt; it is therefore **UNEXECUTED**, not a pass. The
 remaining limitation is bounded runtime for the current evidence resolver and
 offer coverage, not a hidden recommendation result.
+
+## Resolver performance completion update
+
+Profiling confirmed repeated `product_evidence_store.load_store()` hydration
+inside `find_verified_evidence()` for every candidate. The existing pipeline
+now loads the immutable evidence store once per `_run_pipeline_once` batch and
+passes it into exact variant-aware lookups. No scoring, identity or freshness
+rule changed.
+
+After the fix, the 20-query catalogue replay completed in **20/20 executions**
+(8 scored, 12 incomplete, 0 technical failures, 20/20 deterministic matches)
+in 16.23 seconds. The 100-query batch completed **100/100** (41 scored, 59
+incomplete, 0 technical failures, 100/100 deterministic matches). A 1000-query
+attempt was stopped after proving the current per-query resolver cost remains
+too high for one local run; no partial 1000 receipt is counted as PASS.
