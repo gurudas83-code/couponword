@@ -43,6 +43,44 @@ threshold or scoring change. Filling these slots would require verified
 catalogue/evidence additions, which are outside this controlled repair and must
 not be fabricated. The local original Gate-3 remains **14/14 PASS**.
 
+### Failure classifications
+
+- **E001 — SNAPSHOT_DIFFERENCE:** the remote receipt has two eligible rows,
+  while the local frozen Gate-3 snapshot has three for its approved fixture.
+  The saved remote report contains no catalogue/evidence hash or per-candidate
+  rejection trace, so the count difference cannot be attributed to a source
+  function.
+- **E004 — VERIFIED_COVERAGE_GAP:** only Galaxy F36 is verified in the saved
+  Samsung-filtered remote result. Missing/rejected Samsung variants are not
+  independently evidenced in the receipt.
+- **E007 — INSUFFICIENT_DIAGNOSTICS:** two realme variants survived; the report
+  has no rejection-stage rows for the other six candidates, so identity,
+  evidence and score causes cannot be separated.
+- **E010 — CONTRACT_GAP:** the saved generic Samsung expectation requires three
+  picks, but no independent catalogue contract establishes three verified
+  Samsung choices for an unbounded query. The one-row result is therefore an
+  incomplete market response, not proof of a code failure.
+
+The responsible existing paths are the pipeline's `run_pipeline` eligibility
+and result-status path and the benchmark evaluator's `evaluate` function. No
+shared code defect is proven, so no source or scoring change was made.
+
+## Offline 1,000-query limitation
+
+The committed 1,000-row corpus and `mobile_query_benchmark_phase3_report.json`
+provide an independently labeled **intent/parser** result of 1000/1000. The
+repository does not contain an approved independent expected-output file for
+full recommendation correctness, nor a frozen full-pipeline replay harness
+that records all semantic outputs without live discovery/retailer calls. The
+available 10-query recommendation report is not a substitute. Consequently:
+
+- Parser correctness: **1000/1000 PASS**.
+- Full recommendation contractual correctness: **NOT VERIFIED** (no approved
+  expected answer for the remaining rows).
+- Full 1,000-query deterministic replay: **NOT VERIFIED**; no semantic
+  before/after corpus receipt exists.
+- No new code defect was identified to fix safely from the available evidence.
+
 ## A–D recheck conclusions
 
 - **A — NOT VERIFIED:** local HEAD and remote baseline are known; no current Render backend/frontend SHA or live smoke receipt is available.
