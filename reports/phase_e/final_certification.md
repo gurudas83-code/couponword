@@ -81,6 +81,27 @@ available 10-query recommendation report is not a substitute. Consequently:
   before/after corpus receipt exists.
 - No new code defect was identified to fix safely from the available evidence.
 
+## Offline certification harness
+
+`phase_e_offline_certification.py` and its focused test now provide a bounded
+replay entry point. It freezes the corpus hash, refuses live network use,
+requires an explicit complete catalogue/evidence/offer fixture manifest before
+invoking the real pipeline, and writes machine-readable results to
+`data/phase_e_offline_certification.json`.
+
+The first run processed all 1,000 queries twice at the harness level:
+
+- Full-pipeline executable cases: **0**
+- Fixture gaps: **1000**
+- Deterministic semantic matches: **0/0 executable**
+- Quality review cases: 40 **PROPOSED**, not independently approved
+
+This is an honest infrastructure result: candidate snapshots exist, but the
+required durable evidence/offer fixture manifest does not. The harness will
+not silently use live discovery or treat candidate snapshots as complete
+pipeline fixtures. E007 remains **INSUFFICIENT_DIAGNOSTICS** and E010 remains
+**CONTRACT_GAP**; no third recommendation was invented.
+
 ## A–D recheck conclusions
 
 - **A — NOT VERIFIED:** local HEAD and remote baseline are known; no current Render backend/frontend SHA or live smoke receipt is available.
