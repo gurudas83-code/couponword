@@ -212,6 +212,8 @@ def main() -> int:
     parser.add_argument("--limit", type=int, default=0)
     parser.add_argument("--query", action="append", default=[])
     parser.add_argument("--catalogue-mode", action="store_true")
+    parser.add_argument("--offset", type=int, default=0)
+    parser.add_argument("--checkpoint", type=Path, default=None)
     args = parser.parse_args()
     items = rows()
     if args.query:
@@ -220,6 +222,8 @@ def main() -> int:
         present = {str(item.get("query") or "") for item in items}
         items.extend({"id": f"PILOT-{index:02d}", "query": query, "tags": ["pilot"]}
                      for index, query in enumerate(sorted(wanted - present), 1))
+    if args.offset:
+        items = items[max(0, args.offset):]
     if args.limit:
         items = items[:max(0, args.limit)]
     if args.catalogue_mode:
@@ -244,6 +248,19 @@ def main() -> int:
         "quality_review_cases": quality_cases,
         "quality_review_status": "PROPOSED_NOT_INDEPENDENTLY_APPROVED",
     }
+    if args.checkpoint:
+        args.checkpoint.parent.mkdir(parents=True, exist_ok=True)
+        previous = {}
+        if args.checkpoint.exists():
+            try:
+                previous = json.loads(args.checkpoint.read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                previous = {}
+        batches = previous.get("batches") if isinstance(previous, dict) else []
+        if not isinstance(batches, list):
+            batches = []
+        batches.append({"offset": args.offset, "limit": args.limit, "corpus_sha256": output["corpus_sha256"], "counts": output["counts"], "run_1": first, "run_2": second})
+        args.checkpoint.write_text(json.dumps({"schema_version": output["schema_version"], "corpus_sha256": output["corpus_sha256"], "batches": batches}, indent=2, ensure_ascii=False), encoding="utf-8")
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(output, indent=2, ensure_ascii=False), encoding="utf-8")
     print(json.dumps(output["counts"], indent=2))

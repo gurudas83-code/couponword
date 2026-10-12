@@ -45,6 +45,20 @@ class OfflineCertificationHarnessTests(unittest.TestCase):
         self.assertEqual(payload["counts"]["executed"], 1)
         self.assertEqual(payload["run_1"][0]["snapshot_source_query"], "FROZEN_CATALOGUE_INTEGRATION")
 
+    def test_checkpoint_records_batch_identity(self):
+        root = Path(__file__).resolve().parent
+        output = root / "outputs" / "phase_e_checkpoint_test.json"
+        checkpoint = root / "outputs" / "phase_e_checkpoint_test_receipt.json"
+        checkpoint.unlink(missing_ok=True)
+        result = subprocess.run(
+            [sys.executable, "phase_e_offline_certification.py", "--catalogue-mode", "--offset", "0", "--limit", "1", "--checkpoint", str(checkpoint), "--output", str(output)],
+            cwd=root, capture_output=True, text=True, timeout=60,
+        )
+        self.assertEqual(result.returncode, 0)
+        receipt = json.loads(checkpoint.read_text(encoding="utf-8"))
+        self.assertEqual(len(receipt["batches"]), 1)
+        self.assertTrue(receipt["corpus_sha256"])
+
 
 if __name__ == "__main__":
     unittest.main()

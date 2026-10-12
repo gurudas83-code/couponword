@@ -190,3 +190,16 @@ in 16.23 seconds. The 100-query batch completed **100/100** (41 scored, 59
 incomplete, 0 technical failures, 100/100 deterministic matches). A 1000-query
 attempt was stopped after proving the current per-query resolver cost remains
 too high for one local run; no partial 1000 receipt is counted as PASS.
+
+## Resumable 1000-query certification update
+
+The runner now accepts `--offset`, `--limit` and an append-only `--checkpoint`.
+Each batch records the corpus hash, Run-A/Run-B counts and semantic-match status.
+A fresh checkpointed ten-query batch completed **10/10** executions (5 scored,
+5 incomplete, 0 technical failures, 10/10 deterministic matches). The full
+1000-query Run-A and Run-B receipts remain **UNEXECUTED**; the earlier
+single-process attempt was stopped and is not counted as certification.
+
+Next exact action: continue the original corpus in bounded checkpointed batches
+until all 1000 IDs have Run-A and Run-B receipts, then aggregate the checkpoint
+without changing the engine or evidence rules.
