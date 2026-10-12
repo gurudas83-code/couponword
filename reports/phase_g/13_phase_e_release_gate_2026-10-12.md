@@ -2,7 +2,7 @@
 
 ## Test environment
 
-- Full unittest discovery: **170 run; 168 PASS, 0 FAIL, 0 ERROR, 2 SKIP**.
+- Full unittest discovery: **172 discovered; 170 PASS, 0 FAIL, 0 ERROR, 2 SKIP**.
 - The skips are explicit and justified: optional `google.genai` is not
   installed, and the optional semantic v1.3 fixture is absent. No test was
   deleted or counted as PASS.
