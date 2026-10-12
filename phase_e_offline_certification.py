@@ -52,6 +52,9 @@ def discovery_for(query: str, intent: dict[str, Any], max_candidates: int) -> di
     # invoking the real pipeline offline.
     if get_candidate_snapshot is None or not OFFLINE_FIXTURE_MANIFEST.exists():
         return None
+    manifest = json.loads(OFFLINE_FIXTURE_MANIFEST.read_text(encoding="utf-8"))
+    if not manifest.get("discovery", {}).get("complete_frozen_inputs"):
+        return None
     return get_candidate_snapshot(
         query=query,
         category=intent.get("category"),
@@ -113,8 +116,11 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--max-candidates", type=int, default=15)
+    parser.add_argument("--limit", type=int, default=0)
     args = parser.parse_args()
     items = rows()
+    if args.limit:
+        items = items[:max(0, args.limit)]
     first, quality_cases = run_once(items, args.max_candidates)
     second, _ = run_once(items, args.max_candidates)
     first_semantic = {x["id"]: x.get("semantic") for x in first if x.get("status") == "EXECUTED"}

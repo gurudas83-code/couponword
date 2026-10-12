@@ -102,6 +102,17 @@ not silently use live discovery or treat candidate snapshots as complete
 pipeline fixtures. E007 remains **INSUFFICIENT_DIAGNOSTICS** and E010 remains
 **CONTRACT_GAP**; no third recommendation was invented.
 
+## Frozen manifest attempt
+
+`data/phase_e_offline_fixture_manifest.json` now records the durable source
+inventory: 37 registry products, 9 official-spec products and 8 saved offer
+records. The offer/cache files are modified in the worktree and are explicitly
+excluded from release. Because discovery inputs are not a complete frozen
+semantic snapshot (`complete_frozen_inputs=false`), the 10-query pilot
+executed **0/10** and the full replay executed **0/1000**; all were recorded as
+`FIXTURE_GAP`, with no network calls. Deterministic comparisons are **0/0
+executable**, not 1000 passes.
+
 ## A–D recheck conclusions
 
 - **A — NOT VERIFIED:** local HEAD and remote baseline are known; no current Render backend/frontend SHA or live smoke receipt is available.

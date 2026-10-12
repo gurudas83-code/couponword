@@ -1,0 +1,32 @@
+{
+  "schema_version": "phase_e_offline_fixture_manifest.v1",
+  "frozen_at": "2026-10-12T00:00:00Z",
+  "evaluation_clock": "2026-10-12T00:00:00Z",
+  "ranking_policy_version": "weighted_fit_engine.v1",
+  "catalogue": {
+    "source": "data/retailer_product_registry.json",
+    "record_count": 37,
+    "sha256": "see committed Git blob at release HEAD"
+  },
+  "evidence": {
+    "source": "data/official_specs.json",
+    "record_count": 9,
+    "sha256": "see committed Git blob at release HEAD"
+  },
+  "offers": {
+    "source": "data/retailer_offers.json",
+    "record_count": 8,
+    "sha256": "worktree offer cache; mutable cache excluded from release"
+  },
+  "discovery": {
+    "source": "data/market_discovery_cache.json",
+    "network": false,
+    "complete_frozen_inputs": false,
+    "search_card_prices_are_verified": false
+  },
+  "configuration": {
+    "external_network": false,
+    "paid_ai": false,
+    "mutable_worktree_caches_excluded": true
+  }
+}
