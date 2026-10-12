@@ -44,6 +44,14 @@ ALLOWED_RETAIL_HOSTS = (
     "vijaysales.com",
 )
 
+# Manufacturer stores are accepted only as first-party evidence sources.  The
+# product-page path checks below prevent a generic support, news, or search
+# page from becoming a price source.
+ALLOWED_MANUFACTURER_HOSTS = (
+    "oneplus.in",
+    "samsung.com",
+)
+
 REQUEST_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -128,7 +136,27 @@ def retailer_host_allowed(url: str) -> bool:
     return any(
         host == allowed or host.endswith("." + allowed)
         for allowed in ALLOWED_RETAIL_HOSTS
-    )
+    ) or manufacturer_product_url_allowed(url)
+
+def manufacturer_product_url_allowed(url: str) -> bool:
+    try:
+        parsed = urlparse(url)
+        host = (parsed.hostname or "").lower()
+        path = (parsed.path or "").lower().rstrip("/")
+    except Exception:
+        return False
+
+    if not any(host == allowed or host.endswith("." + allowed)
+               for allowed in ALLOWED_MANUFACTURER_HOSTS):
+        return False
+
+    if host.endswith("oneplus.in"):
+        return path in {"/15", "/oneplus-15"} or path.startswith("/oneplus-15/")
+
+    if host.endswith("samsung.com"):
+        return path.startswith("/in/smartphones/") and "/buy" in path
+
+    return False
 
 def load_cache() -> dict[str, Any]:
     if not CACHE_PATH.exists():
@@ -282,6 +310,25 @@ def jsonld_prices(value: Any) -> list[object]:
 
     return prices
 
+def jsonld_availability(value: Any) -> list[str]:
+    found: list[str] = []
+    if isinstance(value, list):
+        for item in value:
+            found.extend(jsonld_availability(item))
+        return found
+    if not isinstance(value, dict):
+        return found
+    availability = clean(value.get("availability")).lower()
+    if availability:
+        if "instock" in availability or "in stock" in availability:
+            found.append("in_stock")
+        elif "outofstock" in availability or "out of stock" in availability:
+            found.append("out_of_stock")
+    for nested in value.values():
+        if isinstance(nested, (dict, list)):
+            found.extend(jsonld_availability(nested))
+    return found
+
 def fetch_structured_price(url: str) -> dict[str, Any]:
     result: dict[str, Any] = {
         "price": None,
@@ -328,6 +375,7 @@ def fetch_structured_price(url: str) -> dict[str, Any]:
         soup = BeautifulSoup(response.text, "html.parser")
 
     structured_values: list[object] = []
+    structured_payloads: list[Any] = []
 
     for script in soup.find_all(
         "script",
@@ -343,9 +391,13 @@ def fetch_structured_price(url: str) -> dict[str, Any]:
         except Exception:
             continue
 
+        structured_payloads.append(payload)
         structured_values.extend(jsonld_prices(payload))
 
     jsonld_found = unique_prices(structured_values)
+    jsonld_stock = jsonld_availability(structured_payloads)
+    if jsonld_stock and len(set(jsonld_stock)) == 1:
+        result["availability"] = jsonld_stock[0]
 
     if len(jsonld_found) == 1:
         result.update({
