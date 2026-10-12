@@ -159,3 +159,19 @@ Pilot `mobile under 10000`: **1/1 real catalogue-backed execution**, **1/1
 deterministic**, with 3 recommendations. Missing or stale offers remain under
 the existing incomplete/unknown contracts. The full corpus is not certified;
 verified offer coverage and bounded runtime remain the blockers.
+
+## Catalogue execution completion update
+
+The catalogue lane was then run against the first ten original corpus IDs:
+
+- **10/10 pipeline executions**
+- **5** returned scored recommendations
+- **5** returned honest incomplete results
+- **0** technical execution failures
+- **0** fixture gaps in the catalogue lane
+- Deterministic semantic replay: **10/10 matches**
+
+The attempted 100-query batch exceeded the local command execution window
+before producing a receipt; it is therefore **UNEXECUTED**, not a pass. The
+remaining limitation is bounded runtime for the current evidence resolver and
+offer coverage, not a hidden recommendation result.

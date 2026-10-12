@@ -12,6 +12,9 @@ import hashlib
 import json
 import sys
 import re
+from unittest.mock import patch
+import requests
+import urllib.request
 from pathlib import Path
 from typing import Any
 
@@ -183,13 +186,20 @@ def run_once(items: list[dict[str, Any]], max_candidates: int) -> tuple[list[dic
         try:
             original = pipeline.discover_market
             pipeline.discover_market = lambda **kwargs: dict(snapshot)
-            payload = pipeline._run_pipeline_once(
-                query, max_candidates=max_candidates, max_results=3,
-                live_fast=True, _discovery=snapshot, _save_discovery_memory=False,
+            def blocked(*args, **kwargs):
+                raise requests.ConnectionError("offline external source blocked")
+            with patch.object(requests, "get", blocked), patch.object(urllib.request, "urlopen", blocked):
+                payload = pipeline._run_pipeline_once(
+                    query, max_candidates=max_candidates, max_results=3,
+                    live_fast=True, _discovery=snapshot, _save_discovery_memory=False,
+                )
+            execution_class = (
+                "EXECUTED_WITH_RESULTS" if payload.get("recommendations")
+                else "EXECUTED_INCOMPLETE"
             )
-            results.append({"id": row.get("id"), "query": query, "status": "EXECUTED", "snapshot_source_query": snapshot.get("snapshot_source_query"), "semantic": semantic(payload)})
+            results.append({"id": row.get("id"), "query": query, "status": execution_class, "snapshot_source_query": snapshot.get("snapshot_source_query"), "semantic": semantic(payload), "rejection_summary": payload.get("failure_summary", [])})
         except Exception as error:
-            results.append({"id": row.get("id"), "query": query, "status": "FIXTURE_GAP", "reason": f"offline pipeline dependency unavailable: {type(error).__name__}: {error}", "intent": intent})
+            results.append({"id": row.get("id"), "query": query, "status": "TECHNICAL_EXECUTION_FAILURE", "reason": f"offline pipeline dependency unavailable: {type(error).__name__}: {error}", "intent": intent})
         finally:
             pipeline.discover_market = original
     return results, quality_cases
@@ -220,15 +230,16 @@ def main() -> int:
         CATALOGUE_MODE = True
     first, quality_cases = run_once(items, args.max_candidates)
     second, _ = run_once(items, args.max_candidates)
-    first_semantic = {x["id"]: x.get("semantic") for x in first if x.get("status") == "EXECUTED"}
-    second_semantic = {x["id"]: x.get("semantic") for x in second if x.get("status") == "EXECUTED"}
+    executed_statuses = {"EXECUTED_WITH_RESULTS", "EXECUTED_INCOMPLETE", "EXECUTED_UNSUPPORTED"}
+    first_semantic = {x["id"]: x.get("semantic") for x in first if x.get("status") in executed_statuses}
+    second_semantic = {x["id"]: x.get("semantic") for x in second if x.get("status") in executed_statuses}
     mismatches = [key for key in sorted(set(first_semantic) | set(second_semantic)) if first_semantic.get(key) != second_semantic.get(key)]
     output = {
         "schema_version": "phase_e_offline_certification.v1",
         "corpus": str(CORPUS), "corpus_sha256": sha256(CORPUS), "total": len(items),
         "freeze": {"catalogue_revision": pipeline.CATALOGUE_REVISION if pipeline is not None and hasattr(pipeline, "CATALOGUE_REVISION") else None, "max_candidates": args.max_candidates, "external_network": False, "pipeline_import_error": PIPELINE_IMPORT_ERROR},
         "run_1": first, "run_2": second,
-        "counts": {"executed": len(first_semantic), "fixture_gap": sum(x.get("status") == "FIXTURE_GAP" for x in first), "deterministic_matches": len(first_semantic) - len(mismatches), "deterministic_mismatches": len(mismatches)},
+        "counts": {"executed": len(first_semantic), "with_results": sum(x.get("status") == "EXECUTED_WITH_RESULTS" for x in first), "incomplete": sum(x.get("status") == "EXECUTED_INCOMPLETE" for x in first), "technical_failure": sum(x.get("status") == "TECHNICAL_EXECUTION_FAILURE" for x in first), "fixture_gap": sum(x.get("status") == "FIXTURE_GAP" for x in first), "deterministic_matches": len(first_semantic) - len(mismatches), "deterministic_mismatches": len(mismatches)},
         "mismatch_ids": mismatches,
         "quality_review_cases": quality_cases,
         "quality_review_status": "PROPOSED_NOT_INDEPENDENTLY_APPROVED",
