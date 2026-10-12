@@ -10,7 +10,8 @@
 | 6 | `118a36c` | Frontend source-bound price display, Signature evidence, acceptance reports | 162-test suite final pass |
 | 7 | `cbd2f09` | Premium quality audit and reviewed release manifest | audit/report only |
 | 8 | `f2a3a87` | Bounded OnePlus 15 and S26 Ultra source blockers | no catalogue change; prior tests remain green |
-| 9 | pending | Source-specific OnePlus `/15` metadata extraction correction | 165-test suite PASS; no catalogue admission |
+| 9 | `e3dfb5b` | Source-specific OnePlus `/15` metadata extraction correction | 165-test suite PASS; no catalogue admission |
+| 10 | `6eef4cd` | Bounded OnePlus/Samsung first-party price-path and JSON-LD availability adapter | 9 focused tests PASS; no catalogue admission |
 
 Previous HEAD `118a36c` is preserved. No push or deploy was performed in this turn.
 Uncommitted caches and backups remain outside this manifest. The manifest is a local
