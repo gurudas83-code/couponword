@@ -109,6 +109,17 @@ ranking and response serialization twice: **1/1 executed, 1/1 deterministic,
 3 recommendations returned**. The other corpus queries remain fixture gaps;
 this pilot is not a 1000-query market-quality claim.
 
+## Corpus-to-snapshot compatibility
+
+The corpus contains **1000 query IDs and 1000 unique structured signatures**;
+the discovery cache contains **42** candidate snapshots. Compatibility now
+compares category, budget range, brand, must-have variant constraints,
+preferences and exclusions. Exact-model, RAM and storage-tagged corpus rows
+are never mapped to a generic budget snapshot. The first ten corpus rows
+therefore remain **0/10 executable** under the strict mapping, while the
+separate generic pilot remains **1/1 executable**. This prevents a false
+identity/variant match.
+
 ## Frozen manifest attempt
 
 `data/phase_e_offline_fixture_manifest.json` now records the durable source

@@ -11,6 +11,7 @@ import argparse
 import hashlib
 import json
 import sys
+import re
 from pathlib import Path
 from typing import Any
 
@@ -31,6 +32,7 @@ CORPUS = ROOT / "data" / "mobile_query_corpus_1000.json"
 DEFAULT_OUTPUT = ROOT / "data" / "phase_e_offline_certification.json"
 QUALITY_TAGS = {"camera", "battery", "gaming", "display", "brand", "ram", "storage", "exact_model"}
 OFFLINE_FIXTURE_MANIFEST = ROOT / "data" / "phase_e_offline_fixture_manifest.json"
+_DISCOVERY_CACHE: dict[str, Any] | None = None
 
 
 def sha256(path: Path) -> str:
@@ -45,18 +47,57 @@ def rows() -> list[dict[str, Any]]:
     return [item for split in ("train", "validation", "test") for item in splits.get(split, [])]
 
 
-def discovery_for(query: str, intent: dict[str, Any], max_candidates: int) -> dict[str, Any] | None:
+def discovery_for(query: str, intent: dict[str, Any], max_candidates: int, *, allow_compatible: bool = True) -> dict[str, Any] | None:
     # Candidate snapshots are sufficient to exercise the downstream identity,
     # evidence, eligibility, scoring and serialization path. Missing offer or
     # extractor records remain honest partial results; they must not prevent
     # the algorithm from executing.
     if get_candidate_snapshot is None or not OFFLINE_FIXTURE_MANIFEST.exists():
         return None
-    return get_candidate_snapshot(
+    exact = get_candidate_snapshot(
         query=query,
         category=intent.get("category"),
         max_candidates=max_candidates,
     )
+    if exact is not None:
+        exact["snapshot_source_query"] = query
+        return exact
+    if not allow_compatible:
+        return None
+
+    # Reuse only a snapshot whose structured intent constraints are identical.
+    # Lexical wording may differ, but budget, category, brand, variant and
+    # preference constraints must match exactly.
+    def signature(parsed: dict[str, Any]) -> tuple[Any, ...]:
+        return (
+            parsed.get("category"), parsed.get("budget_min"), parsed.get("budget_max"),
+            tuple(sorted(parsed.get("brands") or [])),
+            tuple(sorted(parsed.get("must_have") or [])),
+            tuple(sorted(parsed.get("preferred") or [])),
+            tuple(sorted(parsed.get("avoid") or [])),
+        )
+
+    global _DISCOVERY_CACHE
+    if _DISCOVERY_CACHE is None:
+        _DISCOVERY_CACHE = __import__("market_discovery").load_discovery_cache()
+    cache = _DISCOVERY_CACHE
+    prefix = f"__candidate_snapshot__::{intent.get('category')}::"
+    for key in sorted(cache):
+        if not key.startswith(prefix) or not key.endswith(f"::{max_candidates}"):
+            continue
+        snapshot_query = key[len(prefix):-len(f"::{max_candidates}")]
+        snapshot_intent = parse_query(snapshot_query)
+        if signature(snapshot_intent) != signature(intent):
+            continue
+        candidate = get_candidate_snapshot(
+            query=snapshot_query,
+            category=snapshot_intent.get("category"),
+            max_candidates=max_candidates,
+        )
+        if candidate is not None:
+            candidate["snapshot_source_query"] = snapshot_query
+            return candidate
+    return None
 
 
 def semantic(payload: dict[str, Any]) -> dict[str, Any]:
@@ -85,7 +126,11 @@ def run_once(items: list[dict[str, Any]], max_candidates: int) -> tuple[list[dic
         tags = set(row.get("tags") or [])
         if tags & QUALITY_TAGS and len(quality_cases) < 40:
             quality_cases.append({"id": row.get("id"), "query": query, "tags": sorted(tags & QUALITY_TAGS), "status": "PROPOSED"})
-        snapshot = discovery_for(query, intent, max_candidates)
+        tags = set(row.get("tags") or [])
+        snapshot = discovery_for(
+            query, intent, max_candidates,
+            allow_compatible=not bool(tags & {"exact_model", "ram", "storage"}),
+        )
         if snapshot is None:
             reason = PIPELINE_IMPORT_ERROR or (
                 "No complete frozen catalogue/evidence/offer fixture manifest"
@@ -101,7 +146,7 @@ def run_once(items: list[dict[str, Any]], max_candidates: int) -> tuple[list[dic
                 query, max_candidates=max_candidates, max_results=3,
                 live_fast=True, _discovery=snapshot, _save_discovery_memory=False,
             )
-            results.append({"id": row.get("id"), "query": query, "status": "EXECUTED", "semantic": semantic(payload)})
+            results.append({"id": row.get("id"), "query": query, "status": "EXECUTED", "snapshot_source_query": snapshot.get("snapshot_source_query"), "semantic": semantic(payload)})
         except Exception as error:
             results.append({"id": row.get("id"), "query": query, "status": "FIXTURE_GAP", "reason": f"offline pipeline dependency unavailable: {type(error).__name__}: {error}", "intent": intent})
         finally:
