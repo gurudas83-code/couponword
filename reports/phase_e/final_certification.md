@@ -319,3 +319,34 @@ query cases** (under ₹10,000, under ₹50,000, exact A56 and exact Virat) and
 **4/4 deterministic Run-A/Run-B matches**. The under-₹10,000 result returned
 the two genuinely eligible Lava phones; the under-₹50,000 result returned
 three phones led by A56 at ₹31,999. No threshold or identity rule changed.
+
+## Final-gap focused validation
+
+After a bounded refresh of the same four exact ASINs, the existing pipeline
+returned scored results for all six requested budgets:
+
+| Query | Result | Top returned evidence |
+|---|---|---|
+| under ₹10k | PASS | Bold N2 Lite ₹9,099; Virat V1 ₹9,889 |
+| under ₹20k | PASS | Bold N2 Lite; Virat V1 |
+| under ₹30k | PASS | Bold N2 Lite; Virat V1 |
+| under ₹40k | PASS | A56 ₹31,999; Bold N2 Lite; Virat V1 |
+| under ₹50k | PASS | A56 ₹31,999; Bold N2 Lite; Virat V1 |
+| under ₹1.2 lakh | PASS | Motorola Signature ₹59,849; A56 ₹31,999; Bold N2 Lite |
+
+The equivalent spellings `mobile under 30000`, `mobile under 30 k` and
+`mobile under 30k` produced identical two-result sets and scores: **3/3
+deterministic matches**. Preference checks produced 2 scored and 1 honest
+incomplete response (battery under ₹20k has insufficient verified capability
+coverage); all three were deterministic. Exact identity, RAM/storage, fresh
+price and stock gates held. Camera and gaming responses retained their
+explanations and evidence basis.
+
+The refreshed immutable offer receipt is
+`data/phase_e_positive_offer_snapshot_2026-10-13-refresh.json`; Motorola's
+observed buy-box changed from ₹59,869 to ₹59,849, so the earlier snapshot was
+preserved rather than overwritten. The historical three-result test remains
+unresolved because its original evidence fixture is unavailable. Local HEAD is
+`20d3cd4fe6a1501d7c00e5e3c5abb2f220421194`; `origin/main` is
+`5167712b369c81ab85779819763eee6e9b90a831`. Render production SHA is
+**UNVERIFIED** from this local environment.
