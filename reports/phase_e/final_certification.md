@@ -388,3 +388,128 @@ The existing `admin.html` generator now includes a structured evidence-review
 record form. It reuses the current evidence vocabulary and emits a review JSON
 record with `writes_calculated_score: false`; it cannot overwrite evidence or
 Fit scores. No second evidence database or dashboard was created.
+
+## Final release preflight (2026-10-13)
+
+The 40 functional local-only commits reviewed in this preflight end at
+`c3bf5e8d9b83d22cdd25f951b808b8cbfdda4c60`. `origin/main` is
+`5167712b369c81ab85779819763eee6e9b90a831`. This report is a separate
+report-only local commit, so the branch is **41 commits ahead** after recording
+the preflight; no remote branch contains the current local tip. No push or
+deployment was performed.
+
+### Historical three-result fixture
+
+The non-catalogue pilot still fails: `mobile under 10000` is classified as
+`FIXTURE_GAP` because there is no version-matching candidate snapshot, so the
+pipeline executes `0` queries and cannot produce the historical expected three
+results. The old three-result output was produced from mutable working evidence;
+the immutable evidence/offer snapshot that created it was not found in the
+repository or current caches. The failure remains visible in
+`test_existing_snapshot_reaches_real_pipeline`; it was not deleted, skipped or
+weakened. The replacement regression is the genuine frozen-catalogue replay
+(`test_frozen_catalogue_lane_reaches_real_pipeline` plus the semantic replay and
+score-trace checks), but closing the historical expectation requires explicit
+review acceptance or recovery of the original immutable fixture. This is not a
+market-quality PASS.
+
+### Admin and security preflight
+
+`python/shopping_api.py` exposes only `GET /health`, `GET /api/recommend` and
+static-file routes. There is no POST/PUT/PATCH/DELETE evidence or score mutation
+endpoint. `admin.html` only emits a review JSON record and hard-codes
+`writes_calculated_score: false`; direct score/evidence mutation was therefore
+not possible through the current page. However, the page is publicly reachable
+and has no authentication, session or role check. Access control for a future
+evidence-review write path is therefore **UNVERIFIED/FAIL** and blocks a
+production release of that surface. Static secret scan found no hard-coded API
+secret; provider keys are read from environment variables.
+
+### Focused integration results
+
+The necessary preflight checks produced **57 PASS, 1 FAIL** across 58 focused
+tests. PASS groups were: Gate-3 API 7/7; battery 11/11; battery eligibility
+3/3; variant identity 2/2; canonical output 2/2; multi-retailer identity 4/4;
+release evidence 3/3; reviewed comparison 4/4; runtime reviewed comparison
+4/4; mobile-page evidence 3/3; frontend offer traceability 1/1; price/freshness
+3/3; premium safety guard 2/2; active route 2/2; performance boundaries 5/5;
+recovery reuse 3/3. The offline harness was **5/6 PASS, 1 FAIL** (the
+historical fixture above). `node --check app.js` passed and `git diff --check`
+found only pre-existing trailing whitespace in the report header. The prior
+full baseline remains 170 PASS and 2 optional SKIP; it was not rerun here.
+
+### Exact release manifest
+
+Pending functional local-only commits, in ancestry order (all 40 reviewed
+before the report-only preflight commit):
+
+1. `258aaa9` Keep verified catalogue candidates in bounded budget ranking
+2. `0fdacc9` Separate eligibility checks from cross-budget market coverage review
+3. `d84902d` Avoid repeated failed price lookups in live candidate evaluation
+4. `d30d2a6` Recognize verified 165Hz displays and Snapdragon 8 Gen 5 tier
+5. `c14bb0e` Audit active shopping route and expose verified deployment revision
+6. `a9ae8e4` Parse Indian shopping budgets without treating specification units as money
+7. `54b842f` Retain evidenced exact catalogue candidates beyond the new research cap
+8. `68716b4` Preserve verified price observation times through retailer offer conversion
+9. `41f828e` Separate capability ranking from affordability and evidence coverage
+10. `118a36c` Validate Phase G acceptance and bind displayed prices to their evidence source
+11. `cbd2f09` Document premium coverage blocker and reviewed Phase G release manifest
+12. `f2a3a87` Record bounded OnePlus 15 and S26 Ultra premium evidence blockers
+13. `0982dbd` Update Phase G manifest with premium source attempt
+14. `e3dfb5b` Extract verified OnePlus 15 official metadata without relaxing variant gates
+15. `6eef4cd` Support bounded manufacturer price evidence adapters
+16. `1564022` Record Phase G manufacturer price audit
+17. `9b4aba5` Guard premium recommendations with explicit market scope
+18. `a12f5d5` Save controlled Phase E completion checkpoint
+19. `20cd264` Classify unavailable semantic test inputs as skips
+20. `b9f45a9` Record Phase E local release gate
+21. `f1b797b` Correct release gate test totals
+22. `51effe1` Add Phase E final certification report
+23. `735b2b8` Document Phase E E2E evidence blockers
+24. `5151173` Certify Phase E offline evidence limits
+25. `7fd6316` Add offline Phase E certification harness
+26. `4a4d33b` Make Phase E offline fixture gating explicit
+27. `5208a71` Execute real Phase E pipeline pilot from frozen snapshot
+28. `bbf55ea` Map corpus queries to compatible frozen snapshots
+29. `3edff5e` Add frozen catalogue integration lane
+30. `4a2ac11` Run original corpus through frozen catalogue lane
+31. `2fcad14` Cache immutable evidence during Phase E batches
+32. `b939aaa` Add resumable Phase E certification batches
+33. `e4c218d` Isolate frozen catalogue evidence writes
+34. `3dd5d17` Record final Phase E determinism acceptance
+35. `fa7134f` Document Phase E positive path coverage gap
+36. `20d3cd4` Add verified positive offer snapshot
+37. `3a3b7d9` Complete Phase E budget and spelling validation
+38. `2ad0506` Expose auditable Phase E score traces
+39. `f2d662e` Complete Phase E score and release audit
+40. `c3bf5e8` Add criterion evidence provenance to score trace
+
+Tracked release candidates are the existing backend modules (`python/intent_engine.py`,
+`market_discovery.py`, `official_spec_extractor.py`, `product_fit_signal_builder.py`,
+`retail_price_evidence.py`, `shopping_api.py`, `shopping_intelligence_pipeline.py`,
+`weighted_fit_engine.py`), `phase_e_gate3_api.py`,
+`phase_e_offline_certification.py`, `app.js`, `admin.html`, the reviewed durable
+evidence/offer JSON files, and the listed Phase-E tests/reports. The tracked
+`data/phase_e_offline_certification.json` is a large generated receipt and is a
+release-review risk; it must not be treated as live evidence. Uncommitted runtime
+price/evidence caches, discovery/sitemap caches, audit JSON, `outputs/`, zip
+archives, backup directories and `phase_e_*.before_gate1` files are excluded
+from release staging and were preserved untouched.
+
+When explicitly authorized, deployment order is: push the reviewed scoped
+commit(s), deploy the backend, check `/health` and a representative
+`/api/recommend` response, deploy the frontend, then run exact-variant,
+price-timestamp, score-trace and no-write admin smoke checks. The current
+production Render SHA and live frontend revision are **UNKNOWN** from this
+environment. Rollback therefore requires the last SHA shown in the Render
+dashboard; the verified repository baseline is `5167712b…`.
+
+### Preflight decision
+
+**Phase-E acceptance: FAIL/INCOMPLETE.** Technical frozen determinism and the
+required identity, freshness, offer and score-trace checks pass, but the
+historical fixture is unresolved and admin access control is not production
+verified. **RELEASE READY: NO.** The single release blocker is explicit review
+acceptance (or recovery) of the historical immutable fixture together with a
+server-side authorization decision for the evidence-review surface; no push or
+deploy should occur before that review.
