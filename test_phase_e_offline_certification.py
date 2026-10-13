@@ -58,6 +58,25 @@ class OfflineCertificationHarnessTests(unittest.TestCase):
         self.assertEqual(payload["counts"]["deterministic_matches"], 1)
         self.assertEqual(payload["counts"]["deterministic_mismatches"], 0)
 
+    def test_score_trace_matches_existing_fit_contract(self):
+        root = Path(__file__).resolve().parent
+        output = root / "outputs" / "phase_e_score_trace_test.json"
+        result = subprocess.run(
+            [sys.executable, "phase_e_offline_certification.py", "--catalogue-mode",
+             "--query", "mobile under 50000", "--output", str(output)],
+            cwd=root, capture_output=True, text=True, timeout=60,
+        )
+        self.assertEqual(result.returncode, 0)
+        payload = json.loads(output.read_text(encoding="utf-8"))
+        recommendation = payload["run_1"][0]["semantic"]["recommendations"][0]
+        trace = recommendation["score_trace"]
+        self.assertEqual(trace["policy_version"], "capability-with-separate-evidence-v1")
+        self.assertEqual(recommendation["fit_percent"], round(
+            recommendation["raw_fit_percent"]
+            * recommendation["evidence_coverage_percent"] / 100
+        ))
+        self.assertTrue(trace["criteria"])
+
     def test_checkpoint_records_batch_identity(self):
         root = Path(__file__).resolve().parent
         output = root / "outputs" / "phase_e_checkpoint_test.json"

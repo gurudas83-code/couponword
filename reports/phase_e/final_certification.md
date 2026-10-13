@@ -350,3 +350,37 @@ unresolved because its original evidence fixture is unavailable. Local HEAD is
 `20d3cd4fe6a1501d7c00e5e3c5abb2f220421194`; `origin/main` is
 `5167712b369c81ab85779819763eee6e9b90a831`. Render production SHA is
 **UNVERIFIED** from this local environment.
+
+## Score transparency and release audit
+
+For criterion weights `w_i` and normalized match values `m_i`, the existing
+engine computes:
+
+`raw_fit = round(100 * sum(w_i*m_i for known criteria) / sum(w_i for known criteria))`
+
+`evidence_coverage = round(100 * sum(w_i for known criteria) / sum(w_i for all criteria))`
+
+`fit = round(raw_fit * evidence_coverage / 100)`.
+
+Unknown criteria contribute zero points and zero known weight; they receive no
+unsupported credit. Eligibility still requires no hard-constraint failures,
+`fit >= 50` and evidence coverage `>= 50`. Capability `quality_score` excludes
+budget and is reported separately. Ranking uses quality score, quality evidence
+coverage, fit and stable identity; affiliate data is not used.
+
+The API now carries `score_trace` with policy version, interpreted query
+weights, existing criterion match/weight/points/status/reason, eligibility
+failures and official/market/price provenance. `app.js` renders it in an
+expandable **Why this Fit Score?** section. Focused score-trace and frozen
+replay tests pass (**2/2**); frontend syntax validation passes.
+
+The historical pilot remains **FAIL** (5 harness tests: 4 PASS, 1 FAIL; its
+three-result expectation depends on an unavailable archived evidence snapshot).
+It was not deleted, skipped or weakened; the separate verified positive-path
+replacement passes.
+
+Git audit: local `main` is **37 commits ahead** of `origin/main` (`5167712…`),
+and no remote branch contains current HEAD. Runtime/price/evidence caches,
+generated outputs and backups remain uncommitted and excluded. Render and live
+frontend revisions are **UNVERIFIED**. The pending release includes backend,
+frontend, data and historical report changes and needs a separate push review.

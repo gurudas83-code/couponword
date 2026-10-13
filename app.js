@@ -509,6 +509,37 @@ async function loadShoppingRecommendation(query) {
         ? `${Math.max(0, Math.min(100, Number(p.quality_score)))}/100`
         : "Not available";
 
+      const scoreTrace = p.score_trace && typeof p.score_trace === "object"
+        ? p.score_trace
+        : {};
+      const traceCriteria = Array.isArray(scoreTrace.criteria)
+        ? scoreTrace.criteria
+        : [];
+      const scoreTraceRows = traceCriteria.map((criterion) => {
+        const match = criterion.match_score == null
+          ? "UNKNOWN"
+          : `${Math.round(Number(criterion.match_score) * 100)}%`;
+        const points = criterion.match_score == null
+          ? "0"
+          : `${criterion.weighted_points ?? 0} / ${criterion.weight ?? 0}`;
+        return `<tr>
+          <td>${escapeHTML(criterion.criterion || "criterion")}</td>
+          <td>${escapeHTML(String(criterion.weight ?? ""))}</td>
+          <td>${escapeHTML(match)}</td>
+          <td>${escapeHTML(points)}</td>
+          <td>${escapeHTML(criterion.evidence_status || "unknown")}</td>
+          <td>${escapeHTML(criterion.reason || "No reliable evidence available")}</td>
+        </tr>`;
+      }).join("");
+      const scoreTraceHTML = traceCriteria.length
+        ? `<details class="ai-score-trace">
+            <summary>Why this Fit Score?</summary>
+            <p><strong>Raw Fit:</strong> ${escapeHTML(String(p.raw_fit_percent ?? "Not available"))}% · <strong>Evidence Coverage:</strong> ${escapeHTML(String(p.evidence_coverage_percent ?? "Not available"))}% · <strong>Policy:</strong> ${escapeHTML(scoreTrace.policy_version || "Not available")}</p>
+            <p><strong>Eligibility:</strong> ${scoreTrace.eligibility && scoreTrace.eligibility.eligible ? "eligible" : "not eligible"}</p>
+            <table><thead><tr><th>Criterion</th><th>Weight</th><th>Match</th><th>Points / max</th><th>Evidence</th><th>Reason</th></tr></thead><tbody>${scoreTraceRows}</tbody></table>
+          </details>`
+        : "";
+
       const offers = Array.isArray(p.retailer_offers)
         ? p.retailer_offers.filter(offer => offer && offer.price != null && offer.price !== "" && Number.isFinite(Number(offer.price)) && Number(offer.price) > 0)
         : [];
@@ -732,6 +763,8 @@ async function loadShoppingRecommendation(query) {
               }
             </div>
           </div>
+
+          ${scoreTraceHTML}
 
           <p><strong>AI Confidence:</strong> ${confidence}</p>
           <p><strong>Capability match:</strong> ${capabilityDisplay} <small>(known specifications; missing evidence is listed below)</small></p>

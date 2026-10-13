@@ -152,7 +152,7 @@ def semantic(payload: dict[str, Any]) -> dict[str, Any]:
         "recommendations": [
             {
                 key: item.get(key)
-                for key in ("product_id", "canonical_product_id", "asin", "title", "brand", "price", "fit_percent", "quality_score", "quality_evidence_coverage_percent", "battery_evidence", "why_it_fits", "tradeoffs", "unknown", "best_offer")
+                for key in ("product_id", "canonical_product_id", "asin", "title", "brand", "price", "fit_percent", "raw_fit_percent", "evidence_coverage_percent", "quality_score", "quality_evidence_coverage_percent", "scoring_contract", "score_trace", "battery_evidence", "why_it_fits", "tradeoffs", "unknown", "best_offer")
             }
             for item in payload.get("recommendations") or []
         ],

@@ -3010,6 +3010,33 @@ def _run_pipeline_once(
             assessment=assessment,
         )
 
+        trace_price_evidence = dict(
+            profile.get("provenance", {}).get("price_evidence", {}) or {}
+        )
+        trace_cached = trace_price_evidence.get("cached_evidence")
+        if isinstance(trace_cached, dict):
+            trace_cached = dict(trace_cached)
+            trace_cached.pop("age_seconds", None)
+            trace_price_evidence["cached_evidence"] = trace_cached
+
+        score_trace = {
+            "policy_version": assessment.get("scoring_contract"),
+            "query": query,
+            "priority_weights": dict(intent.get("priority_weights") or {}),
+            "criteria": assessment.get("criteria", []),
+            "eligibility": {
+                "eligible": assessment.get("eligible"),
+                "hard_constraint_failures": assessment.get(
+                    "hard_constraint_failures", []
+                ),
+            },
+            "evidence": {
+                "official_source": profile.get("official_product_url"),
+                "market_source": profile.get("market_source_url"),
+                "price": trace_price_evidence,
+            },
+        }
+
         recommendations.append({
             "rank": rank,
             "product_id": profile.get("product_id"),
@@ -3036,6 +3063,7 @@ def _run_pipeline_once(
             "quality_score": assessment.get("quality_score"),
             "quality_evidence_coverage_percent": assessment.get("quality_evidence_coverage_percent"),
             "scoring_contract": assessment.get("scoring_contract"),
+            "score_trace": score_trace,
             "raw_fit_percent": assessment.get("raw_fit_percent"),
             "evidence_coverage_percent": assessment.get(
                 "evidence_coverage_percent"
