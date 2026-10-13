@@ -384,3 +384,7 @@ and no remote branch contains current HEAD. Runtime/price/evidence caches,
 generated outputs and backups remain uncommitted and excluded. Render and live
 frontend revisions are **UNVERIFIED**. The pending release includes backend,
 frontend, data and historical report changes and needs a separate push review.
+The existing `admin.html` generator now includes a structured evidence-review
+record form. It reuses the current evidence vocabulary and emits a review JSON
+record with `writes_calculated_score: false`; it cannot overwrite evidence or
+Fit scores. No second evidence database or dashboard was created.

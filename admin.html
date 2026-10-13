@@ -96,6 +96,25 @@
     <button onclick="copyJSON()">Copy JSON</button>
     <button onclick="clearAll()">Clear</button>
 
+    <h2>Evidence review record</h2>
+    <p>Creates a review record only. It does not write evidence or change a calculated Fit score.</p>
+    <div class="row">
+      <div><label>Canonical Product ID</label><input id="evidenceProductId" placeholder="cw-mobile-100"></div>
+      <div><label>Exact RAM / Storage</label><input id="evidenceVariant" placeholder="8GB/128GB"></div>
+      <div><label>Criterion</label><input id="evidenceCriterion" placeholder="battery"></div>
+      <div><label>Measurement type</label><input id="evidenceMeasurement" placeholder="capacity or playback"></div>
+      <div><label>Observed value</label><input id="evidenceValue" placeholder="5000"></div>
+      <div><label>Unit</label><input id="evidenceUnit" placeholder="mAh or hours"></div>
+      <div><label>Evidence classification</label><select id="evidenceClass"><option>official_specification</option><option>retailer_page_verified</option><option>independent_measurement</option><option>unknown</option></select></div>
+      <div><label>Verification decision</label><select id="evidenceDecision"><option>pending</option><option>accepted</option><option>rejected</option></select></div>
+    </div>
+    <label>Source URL / document</label><input id="evidenceSource" placeholder="https://..."><br>
+    <label>Observed timestamp</label><input id="evidenceObservedAt" type="datetime-local"><br>
+    <label>Validity / freshness</label><input id="evidenceValidity" placeholder="fresh, expired, or unknown"><br>
+    <label>Reviewer notes</label><textarea id="evidenceNotes" rows="3"></textarea>
+    <label>Existing scoring rule reference</label><input id="evidenceRule" value="capability-with-separate-evidence-v1">
+    <button onclick="generateEvidenceReview()">Generate review record</button>
+
     <h2>Output</h2>
     <pre id="output">JSON will appear here...</pre>
   </div>
@@ -162,6 +181,27 @@ function generateJSON(){
   };
 
   document.getElementById("output").textContent = JSON.stringify(deal, null, 2);
+}
+
+function generateEvidenceReview(){
+  const review = {
+    record_type: "evidence_review",
+    canonical_product_id: document.getElementById("evidenceProductId").value.trim(),
+    exact_variant: document.getElementById("evidenceVariant").value.trim(),
+    criterion: document.getElementById("evidenceCriterion").value.trim(),
+    measurement_type: document.getElementById("evidenceMeasurement").value.trim(),
+    observed_value: document.getElementById("evidenceValue").value.trim(),
+    unit: document.getElementById("evidenceUnit").value.trim(),
+    evidence_classification: document.getElementById("evidenceClass").value,
+    source_url: document.getElementById("evidenceSource").value.trim(),
+    observed_at: document.getElementById("evidenceObservedAt").value,
+    validity_state: document.getElementById("evidenceValidity").value.trim(),
+    verification_decision: document.getElementById("evidenceDecision").value,
+    reviewer_notes: document.getElementById("evidenceNotes").value.trim(),
+    scoring_rule_reference: document.getElementById("evidenceRule").value.trim(),
+    writes_calculated_score: false
+  };
+  document.getElementById("output").textContent = JSON.stringify(review, null, 2);
 }
 
 function copyJSON(){
