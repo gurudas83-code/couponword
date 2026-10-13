@@ -3019,11 +3019,29 @@ def _run_pipeline_once(
             trace_cached.pop("age_seconds", None)
             trace_price_evidence["cached_evidence"] = trace_cached
 
+        trace_criteria = []
+        trace_price = profile.get("provenance", {}).get("price_evidence", {}) or {}
+        for criterion in assessment.get("criteria", []):
+            row = dict(criterion)
+            signal = (profile.get("fit_signals") or {}).get(
+                criterion.get("criterion"), {}
+            )
+            if not isinstance(signal, dict):
+                signal = {}
+            is_budget = criterion.get("criterion") == "budget"
+            row.update({
+                "evidence_type": signal.get("basis") or signal.get("status") or "unknown",
+                "verified_value": signal.get("measurements") or signal.get("value"),
+                "source_url": trace_price.get("source_url") if is_budget else profile.get("official_product_url"),
+                "observed_at": trace_price.get("verified_at") if is_budget else None,
+            })
+            trace_criteria.append(row)
+
         score_trace = {
             "policy_version": assessment.get("scoring_contract"),
             "query": query,
             "priority_weights": dict(intent.get("priority_weights") or {}),
-            "criteria": assessment.get("criteria", []),
+            "criteria": trace_criteria,
             "eligibility": {
                 "eligible": assessment.get("eligible"),
                 "hard_constraint_failures": assessment.get(

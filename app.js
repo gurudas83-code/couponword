@@ -528,6 +528,8 @@ async function loadShoppingRecommendation(query) {
           <td>${escapeHTML(match)}</td>
           <td>${escapeHTML(points)}</td>
           <td>${escapeHTML(criterion.evidence_status || "unknown")}</td>
+          <td>${criterion.source_url ? `<a href="${safeLink(criterion.source_url)}" target="_blank" rel="noopener">source</a>` : "UNKNOWN"}</td>
+          <td>${escapeHTML(criterion.observed_at || "UNKNOWN")}</td>
           <td>${escapeHTML(criterion.reason || "No reliable evidence available")}</td>
         </tr>`;
       }).join("");
@@ -536,7 +538,7 @@ async function loadShoppingRecommendation(query) {
             <summary>Why this Fit Score?</summary>
             <p><strong>Raw Fit:</strong> ${escapeHTML(String(p.raw_fit_percent ?? "Not available"))}% · <strong>Evidence Coverage:</strong> ${escapeHTML(String(p.evidence_coverage_percent ?? "Not available"))}% · <strong>Policy:</strong> ${escapeHTML(scoreTrace.policy_version || "Not available")}</p>
             <p><strong>Eligibility:</strong> ${scoreTrace.eligibility && scoreTrace.eligibility.eligible ? "eligible" : "not eligible"}</p>
-            <table><thead><tr><th>Criterion</th><th>Weight</th><th>Match</th><th>Points / max</th><th>Evidence</th><th>Reason</th></tr></thead><tbody>${scoreTraceRows}</tbody></table>
+            <table><thead><tr><th>Criterion</th><th>Weight</th><th>Match</th><th>Points / max</th><th>Evidence</th><th>Source</th><th>Observed</th><th>Reason</th></tr></thead><tbody>${scoreTraceRows}</tbody></table>
           </details>`
         : "";
 

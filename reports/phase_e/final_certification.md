@@ -370,7 +370,7 @@ coverage, fit and stable identity; affiliate data is not used.
 
 The API now carries `score_trace` with policy version, interpreted query
 weights, existing criterion match/weight/points/status/reason, eligibility
-failures and official/market/price provenance. `app.js` renders it in an
+failures and criterion-level source URL/observation provenance. `app.js` renders it in an
 expandable **Why this Fit Score?** section. Focused score-trace and frozen
 replay tests pass (**2/2**); frontend syntax validation passes.
 
