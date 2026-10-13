@@ -192,6 +192,7 @@ def run_once(items: list[dict[str, Any]], max_candidates: int) -> tuple[list[dic
                 payload = pipeline._run_pipeline_once(
                     query, max_candidates=max_candidates, max_results=3,
                     live_fast=True, _discovery=snapshot, _save_discovery_memory=False,
+                    _allow_evidence_writes=CATALOGUE_MODE,
                 )
             execution_class = (
                 "EXECUTED_WITH_RESULTS" if payload.get("recommendations")

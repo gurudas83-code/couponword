@@ -203,3 +203,42 @@ single-process attempt was stopped and is not counted as certification.
 Next exact action: continue the original corpus in bounded checkpointed batches
 until all 1000 IDs have Run-A and Run-B receipts, then aggregate the checkpoint
 without changing the engine or evidence rules.
+
+## Phase-E 1000-query execution receipt
+
+The existing frozen-catalogue runner completed both independent passes:
+
+- Run-A: **1000/1000** executed.
+- Run-B: **1000/1000** executed.
+- Executed with scored recommendations: **342**.
+- Executed incomplete: **658**.
+- Technical execution failures: **0**.
+- Fixture gaps: **0**.
+- Budget violations in returned recommendations: **0**.
+- Semantic Run-A/Run-B matches: **922/1000**; mismatches: **78**.
+
+The mismatches cluster in the later corpus IDs and show a shared-state/cache
+effect: Run-A mutates the existing runtime/evidence cache, after which Run-B
+can change qualifying counts for the same frozen catalogue. This is a proven
+determinism defect in the existing execution path; it is not a scoring or
+identity threshold change. Market-quality certification remains separate and
+unverified for the 658 incomplete cases and for recommendations without an
+independent market-quality oracle. Phase-E technical certification is
+**INCOMPLETE** until the cache isolation defect is repaired and the 1000-query
+semantic replay reaches 1000/1000.
+
+## Determinism repair attempt
+
+The proven write path was `shopping_intelligence_pipeline._run_pipeline_once`
+calling `save_verified_evidence()` while processing the frozen catalogue. The
+certification lane now disables that persistent evidence write only when
+`--catalogue-mode` is active; normal production runs retain their existing
+verified-evidence persistence behavior. A focused replay of a previously
+mismatched query produced identical Run-A/Run-B semantic outputs, including
+zero-result and stage counts.
+
+Focused frozen-lane tests: **2/2 PASS**. The broader harness still has one
+pre-existing failure in the non-catalogue pilot because the mutable working
+cache no longer contains its historical three-result fixture. The saved
+1000-query receipts remain **922/1000** until a fresh full replay after this
+repair.

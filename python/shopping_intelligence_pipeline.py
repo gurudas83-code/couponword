@@ -1859,6 +1859,7 @@ def _run_pipeline_once(
     _discovery: dict[str, Any] | None = None,
     _save_discovery_memory: bool = True,
     _candidate_cache: dict | None = None,
+    _allow_evidence_writes: bool = True,
 ) -> dict[str, Any]:
     pipeline_started = time.perf_counter()
 
@@ -2552,7 +2553,8 @@ def _run_pipeline_once(
         # Fast listing-only evidence is intentionally not saved as
         # long-term product knowledge.
         if (
-            clean(resolved.get("status")) != "commerce_evidence_verified"
+            _allow_evidence_writes
+            and clean(resolved.get("status")) != "commerce_evidence_verified"
             and clean((extraction.get("review") or {}).get("status"))
                 == "candidate_ready"
             and clean(extraction.get("evidence_mode")) not in {

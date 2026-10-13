@@ -45,6 +45,19 @@ class OfflineCertificationHarnessTests(unittest.TestCase):
         self.assertEqual(payload["counts"]["executed"], 1)
         self.assertEqual(payload["run_1"][0]["snapshot_source_query"], "FROZEN_CATALOGUE_INTEGRATION")
 
+    def test_frozen_catalogue_replay_is_semantically_stable(self):
+        root = Path(__file__).resolve().parent
+        output = root / "outputs" / "phase_e_catalogue_determinism_test.json"
+        result = subprocess.run(
+            [sys.executable, "phase_e_offline_certification.py", "--catalogue-mode",
+             "--query", "exact model iPhone 13 phone under 12000", "--output", str(output)],
+            cwd=root, capture_output=True, text=True, timeout=60,
+        )
+        self.assertEqual(result.returncode, 0)
+        payload = json.loads(output.read_text(encoding="utf-8"))
+        self.assertEqual(payload["counts"]["deterministic_matches"], 1)
+        self.assertEqual(payload["counts"]["deterministic_mismatches"], 0)
+
     def test_checkpoint_records_batch_identity(self):
         root = Path(__file__).resolve().parent
         output = root / "outputs" / "phase_e_checkpoint_test.json"
