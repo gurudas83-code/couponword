@@ -294,3 +294,28 @@ The historical non-catalogue three-result test remains **FAIL** because its
 original mutable evidence fixture is not present in the current durable store;
 the required replacement is the archived evidence and exact offer snapshot
 for that test, not fabricated products.
+
+## Verified offer recovery and positive path
+
+Four existing registry products were verified through the approved exact Amazon
+product-page adapter and paired with their existing official evidence:
+
+| Canonical ID | Exact variant | ASIN | Observed price | Availability |
+|---|---|---|---:|---|
+| `cw-mobile-79` Lava Bold N2 Lite | 3GB/64GB | `B0GPXTY8V5` | ₹9,099 | in stock |
+| `cw-mobile-77` Lava Virat V1 | 4GB/64GB | `B0HG9SZ7HD` | ₹9,889 | in stock |
+| `cw-mobile-100` Samsung Galaxy A56 5G | 8GB/128GB | `B0H1WY55ZL` | ₹31,999 | in stock |
+| `cw-mobile-105` Motorola Signature | 12GB/256GB | `B0GKB38XWZ` | ₹59,869 | in stock |
+
+Each observation has an exact ASIN, direct product URL, buy-box price,
+explicit stock state and UTC observation timestamp. The immutable offer receipt
+is `data/phase_e_positive_offer_snapshot_2026-10-13.json` with catalogue hash
+`d05b25c0c60d9e857543f07f18c47f38112fa6c5832457ff8f824433edf4922b`, evidence
+hash `4355adf15284b0965eb5220ae4fa735bd02900c77282669b2a1a6a610d4fe809` and
+offer hash `ac332d0b28499a1f262b136b691d7c1b907370d7d821e505f7e768c7573b5dcd`.
+
+Positive integration replay using the existing pipeline produced **4/4 scored
+query cases** (under ₹10,000, under ₹50,000, exact A56 and exact Virat) and
+**4/4 deterministic Run-A/Run-B matches**. The under-₹10,000 result returned
+the two genuinely eligible Lava phones; the under-₹50,000 result returned
+three phones led by A56 at ₹31,999. No threshold or identity rule changed.
