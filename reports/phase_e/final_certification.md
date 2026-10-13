@@ -1,6 +1,6 @@
 # Coupon-World Phase-E final certification
 
-Date: 2026-10-12  
+Date: 2026-10-13  
 Local release candidate: `f1b797be861fd3fda92849f6205c9466c1b09189`  
 Current local HEAD after certification report: recorded in Git history  
 Remote baseline: `5167712b369c81ab85779819763eee6e9b90a831`
@@ -13,7 +13,7 @@ Remote baseline: `5167712b369c81ab85779819763eee6e9b90a831`
 | B — intelligence UI | exact variant, price/source/time, reasons, unknowns, incomplete state | local API/renderer regressions | 0 known | browser production presentation | 80% | live browser smoke |
 | C — analytics | event emission and actual receipts | code paths not re-audited in this run | 0 known | GA4/dashboard receipts | 50% | verify live events separately |
 | D — mobile knowledge coverage | 126 priority seeds, verified identity/specs/offers/rankability | committed catalogue/evidence gates | no fabricated coverage claim | complete 126 reconciliation | 60% | reconcile verified/pending/rejected counts |
-| E — local acceptance | parser, Gate-3, deterministic frozen checks | parser 1000/1000; Gate-3 14/14; 170 tests | 0 | full recommendation 1000 replay | 85% | production deployment and live gates |
+| E — local acceptance | parser, Gate-3, deterministic frozen checks, approved historical-test supersession | parser 1000/1000; Gate-3 14/14; 170 tests; 21/21 closure checks; approved two-result successor | old three-result test preserved FAIL/FIXTURE_GAP | full recommendation 1000 replay and live deployment | local acceptance YES | staging/live gates |
 
 ## Measured evidence
 
@@ -504,12 +504,123 @@ production Render SHA and live frontend revision are **UNKNOWN** from this
 environment. Rollback therefore requires the last SHA shown in the Render
 dashboard; the verified repository baseline is `5167712b…`.
 
-### Preflight decision
+### Preflight decision (before owner approval)
 
-**Phase-E acceptance: FAIL/INCOMPLETE.** Technical frozen determinism and the
+**Historical decision only: Phase-E acceptance was FAIL/INCOMPLETE.** Technical frozen determinism and the
 required identity, freshness, offer and score-trace checks pass, but the
 historical fixture is unresolved and admin access control is not production
 verified. **RELEASE READY: NO.** The single release blocker is explicit review
 acceptance (or recovery) of the historical immutable fixture together with a
 server-side authorization decision for the evidence-review surface; no push or
 deploy should occur before that review.
+
+This pre-approval decision is superseded by the owner-approved closure recorded
+below. The old fixture remains visible as FAIL/FIXTURE_GAP and is not converted
+to PASS.
+
+## Last-two-blocker verification (2026-10-13)
+
+The archived search covered the tracked Phase-E snapshots, the untracked
+`phase_e_current.zip`, prior output receipts and the Git history. The archive
+contains mutable cache copies, but no immutable evidence/offer bundle that
+contains the historical third under-₹10k result. The durable refreshed positive
+snapshot contains exactly two eligible records:
+
+| Canonical ID | Exact variant | ASIN | Observed price | State |
+|---|---|---|---:|---|
+| `cw-mobile-79` | Lava Bold N2 Lite 3GB/64GB | `B0GPXTY8V5` | ₹9,099 | in_stock |
+| `cw-mobile-77` | Lava Virat V1 4GB/64GB | `B0HG9SZ7HD` | ₹9,889 | in_stock |
+
+The separate regression `test_verified_under_10000_snapshot_supersedes_unrecoverable_three_result_fixture`
+passes and validates both exact identities, prices, source URLs and observation
+timestamps. This is the documented supersession candidate: it proves the
+current genuine evidence supports two results, while the old three-result test
+remains FAIL and is formally superseded after the owner's approval. A worktree catalogue replay
+also returned these two exact results with a 1/1 deterministic match; it is not
+treated as a clean-deployment market-quality oracle because runtime caches are
+uncommitted.
+
+The new read-only admin/API regression passes. `admin.html` has no network or
+mutation call and the Flask route map has no API POST/PUT/PATCH/DELETE route.
+The page still has no authentication or role check, so it remains a local
+review utility only and is excluded from the public artifact.
+Public recommendation routes remain unchanged and the API/frontend smoke group
+is **15/15 PASS**.
+
+The focused total after this verification is **60 PASS, 1 FAIL** (the old
+historical harness test remains visible; the new positive/admin tests pass).
+No source engine, cache, backup or research snapshot was removed or overwritten.
+The old failure is not retrospectively converted to PASS.
+
+This blocker-verification test/report commit is the current local tip; the
+branch is now **42 commits ahead** of `origin/main`. Read the exact tip and
+working-tree receipt from Git rather than inferring a deployment revision.
+
+## Phase-E release closure decision (2026-10-13)
+
+### Formal test supersession record
+
+| Item | Decision |
+|---|---|
+| Original expectation | Three products for the historical non-catalogue `mobile under 10000` test |
+| Original immutable evidence | **UNRECOVERABLE** after searching tracked snapshots, Git history, archived zip contents and saved receipts |
+| Current verified snapshot | Two exact, fresh, in-stock products: `cw-mobile-79` at ₹9,099 and `cw-mobile-77` at ₹9,889 |
+| Replacement regression | `test_verified_under_10000_snapshot_supersedes_unrecoverable_three_result_fixture` — **PASS** |
+| Old failure | `test_existing_snapshot_reaches_real_pipeline` remains visible and **FAIL** as `FIXTURE_GAP` |
+| Owner decision | **APPROVED** — project owner approved historical-test supersession on 13 October 2026 |
+
+The replacement test does not assert three results, relax any eligibility rule,
+or reuse an unverified price. The original failing test and its evidence remain
+unchanged; it is formally superseded, never retrospectively passed.
+
+### Actual public-artifact admin audit
+
+The existing root publishing instructions remain in place, but the new
+`.github/workflows/public-pages-artifact.yml` uses the allow-list builder
+`scripts/build_public_pages.py` before uploading a Pages artifact. The local
+artifact build passed: approved homepage/deal/product/SEO assets were present,
+while `admin.html`, `validator.html`, Python modules, reports, outputs,
+backups, caches and `phase_e_current.zip` were absent. `admin.html` remains in
+the repository root for local use; it is not copied into the public artifact.
+This proves artifact exclusion locally, but no live HTTP 404 is claimed because
+the workflow has not been deployed. The remote `origin/main` does not yet
+contain this workflow (raw-file check returned 404), and the GitHub Pages API
+was not publicly available (404), so the live Pages source is **UNKNOWN**. A
+root-publishing Pages configuration would still expose `admin.html` until the
+Pages source is explicitly switched to the Actions artifact.
+
+### Closure verification
+
+Relevant regressions and compatibility smoke checks are **21/21 PASS**:
+release evidence 6/6, Gate-3 7/7, active route 2/2, frontend offer traceability
+1/1, price/freshness 3/3, premium guard 2/2; `node --check app.js` also passed.
+The complete release ancestry is **42 commits ahead** of
+`5167712b369c81ab85779819763eee6e9b90a831` (40 functional commits plus the
+two local verification/report commits). Local HEAD at this closure is read from
+Git; production Render and live frontend revisions remain UNKNOWN. No push or
+deployment occurred.
+
+**Supersession approval: APPROVED. Admin exclusion: PASS (local artifact only;
+live Pages source UNKNOWN). Phase-E local acceptance: YES. Staging readiness:
+NO until the Actions artifact is pushed/run and staging smoke checks pass.
+Production readiness: NO.**
+
+### Reviewed 42-commit staging checklist
+
+1. Push the reviewed 42-commit ancestry only after separate authorization; do
+   not stage caches, backups, outputs or research receipts.
+2. In GitHub Pages settings, select **GitHub Actions** as the source and run
+   `public-pages-artifact.yml`; inspect the uploaded artifact before publishing.
+3. Confirm the artifact contains the approved homepage/deal/product assets,
+   excludes `admin.html` and internal files, and returns the expected public
+   admin 404 after staging publication.
+4. Run staging `/health`, one representative `/api/recommend`, exact-variant
+   price/freshness, score-trace and frontend offer smoke checks.
+5. Record the staging SHA and live Pages/Render revisions. Current production
+   revisions remain UNKNOWN. Rollback is the last verified staging/Render SHA;
+   repository fallback is `5167712b369c81ab85779819763eee6e9b90a831`.
+
+**Remaining release blocker:** the remote Pages source has not been switched to
+or verified against the allow-listed Actions artifact. **Next action:** obtain
+separate authorization to push the reviewed 42-commit release, run the artifact
+workflow, switch Pages to Actions, and complete staging smoke verification.

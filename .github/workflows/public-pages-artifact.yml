@@ -1,0 +1,65 @@
+name: Build public GitHub Pages artifact
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout reviewed source
+        uses: actions/checkout@v4
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build allow-listed public artifact
+        run: python scripts/build_public_pages.py --output public
+      - name: Verify public artifact has no private or generated files
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          root = Path("public")
+          forbidden_names = {
+              "admin.html", "validator.html", "python", "reports", "outputs",
+              "backups", "backup", "cache", "caches", "secrets", "secret",
+              "credentials", "phase_e_current.zip",
+          }
+          forbidden_suffixes = (".zip", ".env", ".pem", ".key")
+          leaks = []
+          for path in root.rglob("*"):
+              name = path.name.lower()
+              if (
+                  name in forbidden_names
+                  or name.startswith(".env")
+                  or name.endswith(forbidden_suffixes)
+                  or name in {"secret.json", "credentials.json", "passwords.json"}
+              ):
+                  leaks.append(str(path.relative_to(root)))
+          if leaks:
+              raise SystemExit("forbidden files entered Pages artifact: " + ", ".join(leaks))
+          print("public artifact verification passed")
+          PY
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

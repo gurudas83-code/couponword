@@ -1,6 +1,7 @@
 import copy
 import json
 import sys
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -9,6 +10,67 @@ sys.path.insert(0, str(Path(__file__).resolve().parent / 'python'))
 import product_evidence_store as store
 
 class ReleaseEvidenceTests(unittest.TestCase):
+    def test_public_pages_artifact_excludes_admin_and_internal_files(self):
+        root = Path(__file__).resolve().parent
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "public"
+            result = subprocess.run(
+                [sys.executable, "scripts/build_public_pages.py", "--output", str(output)],
+                cwd=root,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertTrue((output / "index.html").is_file())
+            self.assertTrue((output / "coupons.json").is_file())
+            self.assertTrue((output / "data" / "seo-pages.json").is_file())
+            for forbidden in (
+                "admin.html", "validator.html", "python", "reports",
+                "outputs", "backups", "phase_e_current.zip",
+            ):
+                self.assertFalse((output / forbidden).exists(), forbidden)
+
+    def test_verified_under_10000_snapshot_supersedes_unrecoverable_three_result_fixture(self):
+        snapshot = json.loads(
+            (Path(__file__).resolve().parent / "data" /
+             "phase_e_positive_offer_snapshot_2026-10-13-refresh.json")
+            .read_text(encoding="utf-8")
+        )
+        under_10000 = [
+            row for row in snapshot["offers"]
+            if row["availability"] == "in_stock" and row["price"] <= 10000
+        ]
+        self.assertEqual(
+            [(row["product_id"], row["retailer_product_id"], row["price"])
+             for row in under_10000],
+            [
+                ("cw-mobile-79", "B0GPXTY8V5", 9099.0),
+                ("cw-mobile-77", "B0HG9SZ7HD", 9889.0),
+            ],
+        )
+        for row in under_10000:
+            self.assertTrue(row["identity_evidence_url"].startswith("https://"))
+            self.assertTrue(row["observed_at"])
+
+    def test_admin_review_is_read_only_and_public_api_has_no_mutation_route(self):
+        root = Path(__file__).resolve().parent
+        admin = (root / "admin.html").read_text(encoding="utf-8").lower()
+        self.assertIn("writes_calculated_score: false", admin)
+        self.assertNotIn("fetch(", admin)
+        self.assertNotIn("xmlhttprequest", admin)
+        self.assertNotIn("axios", admin)
+
+        from python.shopping_api import app
+        methods_by_route = {
+            rule.rule: set(rule.methods)
+            for rule in app.url_map.iter_rules()
+        }
+        mutation_methods = {"POST", "PUT", "PATCH", "DELETE"}
+        for route, methods in methods_by_route.items():
+            if route.startswith("/api/"):
+                self.assertFalse(methods & mutation_methods, route)
+
     def test_clean_install_and_variant_guard(self):
         with tempfile.TemporaryDirectory() as tmp, patch.object(store, 'STORE_PATH', Path(tmp)/'missing.json'):
             data = store.load_store()
