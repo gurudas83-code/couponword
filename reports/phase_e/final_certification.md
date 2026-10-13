@@ -242,3 +242,32 @@ pre-existing failure in the non-catalogue pilot because the mutable working
 cache no longer contains its historical three-result fixture. The saved
 1000-query receipts remain **922/1000** until a fresh full replay after this
 repair.
+
+Fresh post-fix replay status: new Run-A receipts completed offsets `0`, `100`,
+and `200` (**300/1000**). Offset `300` was stopped before completion to
+preserve completed receipts; fresh Run-B has not started. The new benchmark is
+therefore **INCOMPLETE**, and no fresh deterministic total is claimed.
+
+## Final post-fix 1000-query replay
+
+The resumed fresh namespaces completed independently:
+
+- Run-A: **1000/1000**.
+- Run-B: **1000/1000**.
+- Deterministic semantic matches: **1000/1000**; mismatches: **0**.
+- Scored recommendations: **0**.
+- Honest incomplete responses: **1000**.
+- Technical failures: **0**.
+- Fixture gaps: **0**.
+
+The frozen catalogue/evidence/offer inputs remained semantically stable across
+both passes. The result is a valid determinism and execution PASS, but not a
+market-quality PASS: the frozen lane currently has no qualifying verified
+recommendations for this corpus. The non-catalogue historical pilot fixture
+still fails its three-result expectation because its mutable working evidence
+state cannot be reconstructed from the current cache without the original
+fixture snapshot.
+
+The original Gate-3 focused regression remains **7/7 PASS**. Phase-E offline
+technical certification is **PASS** for deterministic frozen execution;
+market-quality certification remains **INCOMPLETE**.
