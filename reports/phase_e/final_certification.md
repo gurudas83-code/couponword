@@ -271,3 +271,26 @@ fixture snapshot.
 The original Gate-3 focused regression remains **7/7 PASS**. Phase-E offline
 technical certification is **PASS** for deterministic frozen execution;
 market-quality certification remains **INCOMPLETE**.
+
+## Positive-path validation
+
+The historical 342-to-0 change is explained by the old mutable run: it used
+temporary cache prices/evidence and persisted newly extracted records while
+processing the catalogue. The durable current stores do not contain those
+same buyable facts. The current retailer offer store has **8** offers total;
+the mobile records are dated **2026-08-28/29** (and one test record is dated
+2026-09-20), so they fail the current freshness contract. The three Lava
+registry identities have exact product/evidence records, but no current exact
+retailer offer in the durable offer store.
+
+Representative catalogue queries (`mobile under 10000`, `mobile under
+50000`, and the generic original-corpus cases) therefore produced **0
+verified buyable recommendations**. Positive scored integration cases: **0/10
+supportable** from the existing durable evidence; positive deterministic
+cases: **0/0**. This is a verified offer-coverage gap, not a relaxed threshold
+or a new resolver defect. No stale price was promoted to current.
+
+The historical non-catalogue three-result test remains **FAIL** because its
+original mutable evidence fixture is not present in the current durable store;
+the required replacement is the archived evidence and exact offer snapshot
+for that test, not fabricated products.
