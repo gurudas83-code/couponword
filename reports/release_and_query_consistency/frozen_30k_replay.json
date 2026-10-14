@@ -1,0 +1,3574 @@
+{
+  "schema_version": "phase_e_offline_certification.v1",
+  "corpus": "C:\\Users\\HP\\Documents\\projects\\couponword-integration\\data\\mobile_query_corpus_1000.json",
+  "corpus_sha256": "917c9a51d1056a084506ad893bf04df1ab955f9cb50f5fa8174fe830366b75f1",
+  "total": 4,
+  "freeze": {
+    "catalogue_revision": null,
+    "max_candidates": 15,
+    "external_network": false,
+    "pipeline_import_error": null
+  },
+  "run_1": [
+    {
+      "id": "PILOT-01",
+      "query": "mobile under 30 k",
+      "status": "EXECUTED_WITH_RESULTS",
+      "snapshot_source_query": "FROZEN_CATALOGUE_INTEGRATION",
+      "semantic": {
+        "query": "mobile under 30 k",
+        "intent": {
+          "intent": "recommendation",
+          "category": "smartphone",
+          "budget_min": null,
+          "budget_max": 30000,
+          "features": [],
+          "brands": [],
+          "compare": false,
+          "keywords": [
+            "mobile",
+            "under",
+            "30",
+            "k"
+          ],
+          "user_profile": null,
+          "use_case": [],
+          "hard_constraints": [
+            "budget_max"
+          ],
+          "must_have": [],
+          "preferred": [],
+          "avoid": [],
+          "priority_weights": {
+            "budget": 24,
+            "battery": 14,
+            "display": 14,
+            "ease_of_use": 10,
+            "camera": 10,
+            "performance": 10,
+            "software_support": 10,
+            "connectivity": 8
+          },
+          "tv_requirements": {}
+        },
+        "stage_counts": {
+          "discovered": 34,
+          "identity_prepared": 34,
+          "identity_verified": 34,
+          "official_verified": 15,
+          "evidence_ready": 34,
+          "fit_scored": 34,
+          "qualifying_50_plus_raw": 2,
+          "qualifying_unique_models": 2,
+          "qualifying_50_plus": 2,
+          "recommendations_returned": 2
+        },
+        "recommendations": [
+          {
+            "product_id": "frozen-B0GPXTY8V5",
+            "canonical_product_id": "cw-mobile-79",
+            "asin": "B0GPXTY8V5",
+            "title": "lava Bold N2 Lite",
+            "brand": "lava",
+            "price": 9099.0,
+            "fit_percent": 51,
+            "raw_fit_percent": 57,
+            "evidence_coverage_percent": 90,
+            "quality_score": 40.91,
+            "quality_evidence_coverage_percent": 87,
+            "scoring_contract": "capability-with-separate-evidence-v1",
+            "score_trace": {
+              "policy_version": "capability-with-separate-evidence-v1",
+              "query": "mobile under 30 k",
+              "priority_weights": {
+                "budget": 24,
+                "battery": 14,
+                "display": 14,
+                "ease_of_use": 10,
+                "camera": 10,
+                "performance": 10,
+                "software_support": 10,
+                "connectivity": 8
+              },
+              "criteria": [
+                {
+                  "criterion": "budget",
+                  "weight": 24,
+                  "match_score": 1.0,
+                  "weighted_points": 24.0,
+                  "evidence_status": "verified",
+                  "reason": "Verified price 9099 is within budget 30000",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+                  "observed_at": "2026-10-13T13:57:37.941273+00:00"
+                },
+                {
+                  "criterion": "battery",
+                  "weight": 14,
+                  "match_score": 0.3144,
+                  "weighted_points": 4.4,
+                  "evidence_status": "derived",
+                  "reason": "Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+                  "evidence_type": "youtube_playback_hours",
+                  "verified_value": {
+                    "youtube_playback_hours": [
+                      9.433333333333334
+                    ],
+                    "standby_hours": [
+                      340.0
+                    ],
+                    "talk_hours": [
+                      30.0
+                    ],
+                    "capacity_mah": [
+                      5000.0
+                    ]
+                  },
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "display",
+                  "weight": 14,
+                  "match_score": 0.45,
+                  "weighted_points": 6.3,
+                  "evidence_status": "verified",
+                  "reason": "6.75-inch class display",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "ease_of_use",
+                  "weight": 10,
+                  "match_score": null,
+                  "weighted_points": 0.0,
+                  "evidence_status": "unknown",
+                  "reason": "Ease-of-use is not sufficiently verified",
+                  "evidence_type": "unknown",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "camera",
+                  "weight": 10,
+                  "match_score": 0.15000000000000002,
+                  "weighted_points": 1.5,
+                  "evidence_status": "verified",
+                  "reason": "verified multi-camera system; verified 13MP camera hardware",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "performance",
+                  "weight": 10,
+                  "match_score": 0.65,
+                  "weighted_points": 6.5,
+                  "evidence_status": "verified",
+                  "reason": "Recognized verified performance hardware detected",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "software_support",
+                  "weight": 10,
+                  "match_score": 0.55,
+                  "weighted_points": 5.5,
+                  "evidence_status": "verified",
+                  "reason": "Verified support duration: 2.0 years",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "connectivity",
+                  "weight": 8,
+                  "match_score": 0.35,
+                  "weighted_points": 2.8,
+                  "evidence_status": "verified",
+                  "reason": "4G",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                }
+              ],
+              "eligibility": {
+                "eligible": true,
+                "hard_constraint_failures": []
+              },
+              "evidence": {
+                "official_source": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                "market_source": "https://www.amazon.in/dp/B0GPXTY8V5?tag=guru0906-21",
+                "price": {
+                  "price": 9099.0,
+                  "currency": "INR",
+                  "verified": true,
+                  "status": "verified_from_frozen_offer_snapshot",
+                  "source_type": "amazon_primary_buybox",
+                  "source_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+                  "source_host": "www.amazon.in",
+                  "verified_at": "2026-10-13T13:57:37.941273+00:00",
+                  "availability": "in_stock",
+                  "reason": "Exact-ASIN offer from committed frozen evidence snapshot",
+                  "evidence_method": "amazon_primary_buybox",
+                  "snapshot_id": "positive-2026-10-13-refresh",
+                  "identity_evidence_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite"
+                }
+              }
+            },
+            "battery_evidence": {
+              "match": 0.3144,
+              "status": "derived",
+              "reason": "Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+              "basis": "youtube_playback_hours",
+              "measurements": {
+                "youtube_playback_hours": [
+                  9.433333333333334
+                ],
+                "standby_hours": [
+                  340.0
+                ],
+                "talk_hours": [
+                  30.0
+                ],
+                "capacity_mah": [
+                  5000.0
+                ]
+              }
+            },
+            "why_it_fits": [
+              "budget: Verified price 9099 is within budget 30000"
+            ],
+            "tradeoffs": [
+              "battery: Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it"
+            ],
+            "unknown": [
+              "ease_of_use: Ease-of-use is not sufficiently verified"
+            ],
+            "best_offer": null
+          },
+          {
+            "product_id": "frozen-B0HG9SZ7HD",
+            "canonical_product_id": "cw-mobile-77",
+            "asin": "B0HG9SZ7HD",
+            "title": "Lava Virat V1",
+            "brand": "Lava",
+            "price": 9889.0,
+            "fit_percent": 50,
+            "raw_fit_percent": 56,
+            "evidence_coverage_percent": 90,
+            "quality_score": 39.97,
+            "quality_evidence_coverage_percent": 87,
+            "scoring_contract": "capability-with-separate-evidence-v1",
+            "score_trace": {
+              "policy_version": "capability-with-separate-evidence-v1",
+              "query": "mobile under 30 k",
+              "priority_weights": {
+                "budget": 24,
+                "battery": 14,
+                "display": 14,
+                "ease_of_use": 10,
+                "camera": 10,
+                "performance": 10,
+                "software_support": 10,
+                "connectivity": 8
+              },
+              "criteria": [
+                {
+                  "criterion": "budget",
+                  "weight": 24,
+                  "match_score": 1.0,
+                  "weighted_points": 24.0,
+                  "evidence_status": "verified",
+                  "reason": "Verified price 9889 is within budget 30000",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+                  "observed_at": "2026-10-13T13:57:40.862981+00:00"
+                },
+                {
+                  "criterion": "battery",
+                  "weight": 14,
+                  "match_score": 0.3417,
+                  "weighted_points": 4.78,
+                  "evidence_status": "derived",
+                  "reason": "Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+                  "evidence_type": "youtube_playback_hours",
+                  "verified_value": {
+                    "youtube_playback_hours": [
+                      10.25
+                    ],
+                    "standby_hours": [
+                      340.0
+                    ],
+                    "talk_hours": [
+                      30.0
+                    ],
+                    "capacity_mah": [
+                      5000.0
+                    ]
+                  },
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "display",
+                  "weight": 14,
+                  "match_score": 0.45,
+                  "weighted_points": 6.3,
+                  "evidence_status": "verified",
+                  "reason": "6.75-inch class display",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "ease_of_use",
+                  "weight": 10,
+                  "match_score": null,
+                  "weighted_points": 0.0,
+                  "evidence_status": "unknown",
+                  "reason": "Ease-of-use is not sufficiently verified",
+                  "evidence_type": "unknown",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "camera",
+                  "weight": 10,
+                  "match_score": 0.05,
+                  "weighted_points": 0.5,
+                  "evidence_status": "verified",
+                  "reason": "verified 13MP camera hardware",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "performance",
+                  "weight": 10,
+                  "match_score": 0.65,
+                  "weighted_points": 6.5,
+                  "evidence_status": "verified",
+                  "reason": "Recognized verified performance hardware detected",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "software_support",
+                  "weight": 10,
+                  "match_score": 0.55,
+                  "weighted_points": 5.5,
+                  "evidence_status": "verified",
+                  "reason": "Verified support duration: 2.0 years",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "connectivity",
+                  "weight": 8,
+                  "match_score": 0.35,
+                  "weighted_points": 2.8,
+                  "evidence_status": "verified",
+                  "reason": "4G",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                }
+              ],
+              "eligibility": {
+                "eligible": true,
+                "hard_constraint_failures": []
+              },
+              "evidence": {
+                "official_source": "https://www.lavamobiles.com/smartphones/virat-v1",
+                "market_source": "https://www.amazon.in/dp/B0HG9SZ7HD?tag=guru0906-21",
+                "price": {
+                  "price": 9889.0,
+                  "currency": "INR",
+                  "verified": true,
+                  "status": "verified_from_frozen_offer_snapshot",
+                  "source_type": "amazon_primary_buybox",
+                  "source_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+                  "source_host": "www.amazon.in",
+                  "verified_at": "2026-10-13T13:57:40.862981+00:00",
+                  "availability": "in_stock",
+                  "reason": "Exact-ASIN offer from committed frozen evidence snapshot",
+                  "evidence_method": "amazon_primary_buybox",
+                  "snapshot_id": "positive-2026-10-13-refresh",
+                  "identity_evidence_url": "https://www.lavamobiles.com/smartphones/virat-v1"
+                }
+              }
+            },
+            "battery_evidence": {
+              "match": 0.3417,
+              "status": "derived",
+              "reason": "Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+              "basis": "youtube_playback_hours",
+              "measurements": {
+                "youtube_playback_hours": [
+                  10.25
+                ],
+                "standby_hours": [
+                  340.0
+                ],
+                "talk_hours": [
+                  30.0
+                ],
+                "capacity_mah": [
+                  5000.0
+                ]
+              }
+            },
+            "why_it_fits": [
+              "budget: Verified price 9889 is within budget 30000"
+            ],
+            "tradeoffs": [
+              "battery: Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it"
+            ],
+            "unknown": [
+              "ease_of_use: Ease-of-use is not sufficiently verified"
+            ],
+            "best_offer": null
+          }
+        ],
+        "market_quality_status": "VERIFIED_SCOPE",
+        "completion_status": "INCOMPLETE"
+      },
+      "rejection_summary": []
+    },
+    {
+      "id": "PILOT-02",
+      "query": "mobile under 30,000",
+      "status": "EXECUTED_WITH_RESULTS",
+      "snapshot_source_query": "FROZEN_CATALOGUE_INTEGRATION",
+      "semantic": {
+        "query": "mobile under 30,000",
+        "intent": {
+          "intent": "recommendation",
+          "category": "smartphone",
+          "budget_min": null,
+          "budget_max": 30000,
+          "features": [],
+          "brands": [],
+          "compare": false,
+          "keywords": [
+            "mobile",
+            "under",
+            "30000"
+          ],
+          "user_profile": null,
+          "use_case": [],
+          "hard_constraints": [
+            "budget_max"
+          ],
+          "must_have": [],
+          "preferred": [],
+          "avoid": [],
+          "priority_weights": {
+            "budget": 24,
+            "battery": 14,
+            "display": 14,
+            "ease_of_use": 10,
+            "camera": 10,
+            "performance": 10,
+            "software_support": 10,
+            "connectivity": 8
+          },
+          "tv_requirements": {}
+        },
+        "stage_counts": {
+          "discovered": 34,
+          "identity_prepared": 34,
+          "identity_verified": 34,
+          "official_verified": 15,
+          "evidence_ready": 34,
+          "fit_scored": 34,
+          "qualifying_50_plus_raw": 2,
+          "qualifying_unique_models": 2,
+          "qualifying_50_plus": 2,
+          "recommendations_returned": 2
+        },
+        "recommendations": [
+          {
+            "product_id": "frozen-B0GPXTY8V5",
+            "canonical_product_id": "cw-mobile-79",
+            "asin": "B0GPXTY8V5",
+            "title": "lava Bold N2 Lite",
+            "brand": "lava",
+            "price": 9099.0,
+            "fit_percent": 51,
+            "raw_fit_percent": 57,
+            "evidence_coverage_percent": 90,
+            "quality_score": 40.91,
+            "quality_evidence_coverage_percent": 87,
+            "scoring_contract": "capability-with-separate-evidence-v1",
+            "score_trace": {
+              "policy_version": "capability-with-separate-evidence-v1",
+              "query": "mobile under 30,000",
+              "priority_weights": {
+                "budget": 24,
+                "battery": 14,
+                "display": 14,
+                "ease_of_use": 10,
+                "camera": 10,
+                "performance": 10,
+                "software_support": 10,
+                "connectivity": 8
+              },
+              "criteria": [
+                {
+                  "criterion": "budget",
+                  "weight": 24,
+                  "match_score": 1.0,
+                  "weighted_points": 24.0,
+                  "evidence_status": "verified",
+                  "reason": "Verified price 9099 is within budget 30000",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+                  "observed_at": "2026-10-13T13:57:37.941273+00:00"
+                },
+                {
+                  "criterion": "battery",
+                  "weight": 14,
+                  "match_score": 0.3144,
+                  "weighted_points": 4.4,
+                  "evidence_status": "derived",
+                  "reason": "Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+                  "evidence_type": "youtube_playback_hours",
+                  "verified_value": {
+                    "youtube_playback_hours": [
+                      9.433333333333334
+                    ],
+                    "standby_hours": [
+                      340.0
+                    ],
+                    "talk_hours": [
+                      30.0
+                    ],
+                    "capacity_mah": [
+                      5000.0
+                    ]
+                  },
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "display",
+                  "weight": 14,
+                  "match_score": 0.45,
+                  "weighted_points": 6.3,
+                  "evidence_status": "verified",
+                  "reason": "6.75-inch class display",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "ease_of_use",
+                  "weight": 10,
+                  "match_score": null,
+                  "weighted_points": 0.0,
+                  "evidence_status": "unknown",
+                  "reason": "Ease-of-use is not sufficiently verified",
+                  "evidence_type": "unknown",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "camera",
+                  "weight": 10,
+                  "match_score": 0.15000000000000002,
+                  "weighted_points": 1.5,
+                  "evidence_status": "verified",
+                  "reason": "verified multi-camera system; verified 13MP camera hardware",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "performance",
+                  "weight": 10,
+                  "match_score": 0.65,
+                  "weighted_points": 6.5,
+                  "evidence_status": "verified",
+                  "reason": "Recognized verified performance hardware detected",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "software_support",
+                  "weight": 10,
+                  "match_score": 0.55,
+                  "weighted_points": 5.5,
+                  "evidence_status": "verified",
+                  "reason": "Verified support duration: 2.0 years",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "connectivity",
+                  "weight": 8,
+                  "match_score": 0.35,
+                  "weighted_points": 2.8,
+                  "evidence_status": "verified",
+                  "reason": "4G",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                }
+              ],
+              "eligibility": {
+                "eligible": true,
+                "hard_constraint_failures": []
+              },
+              "evidence": {
+                "official_source": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                "market_source": "https://www.amazon.in/dp/B0GPXTY8V5?tag=guru0906-21",
+                "price": {
+                  "price": 9099.0,
+                  "currency": "INR",
+                  "verified": true,
+                  "status": "verified_from_frozen_offer_snapshot",
+                  "source_type": "amazon_primary_buybox",
+                  "source_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+                  "source_host": "www.amazon.in",
+                  "verified_at": "2026-10-13T13:57:37.941273+00:00",
+                  "availability": "in_stock",
+                  "reason": "Exact-ASIN offer from committed frozen evidence snapshot",
+                  "evidence_method": "amazon_primary_buybox",
+                  "snapshot_id": "positive-2026-10-13-refresh",
+                  "identity_evidence_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite"
+                }
+              }
+            },
+            "battery_evidence": {
+              "match": 0.3144,
+              "status": "derived",
+              "reason": "Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+              "basis": "youtube_playback_hours",
+              "measurements": {
+                "youtube_playback_hours": [
+                  9.433333333333334
+                ],
+                "standby_hours": [
+                  340.0
+                ],
+                "talk_hours": [
+                  30.0
+                ],
+                "capacity_mah": [
+                  5000.0
+                ]
+              }
+            },
+            "why_it_fits": [
+              "budget: Verified price 9099 is within budget 30000"
+            ],
+            "tradeoffs": [
+              "battery: Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it"
+            ],
+            "unknown": [
+              "ease_of_use: Ease-of-use is not sufficiently verified"
+            ],
+            "best_offer": null
+          },
+          {
+            "product_id": "frozen-B0HG9SZ7HD",
+            "canonical_product_id": "cw-mobile-77",
+            "asin": "B0HG9SZ7HD",
+            "title": "Lava Virat V1",
+            "brand": "Lava",
+            "price": 9889.0,
+            "fit_percent": 50,
+            "raw_fit_percent": 56,
+            "evidence_coverage_percent": 90,
+            "quality_score": 39.97,
+            "quality_evidence_coverage_percent": 87,
+            "scoring_contract": "capability-with-separate-evidence-v1",
+            "score_trace": {
+              "policy_version": "capability-with-separate-evidence-v1",
+              "query": "mobile under 30,000",
+              "priority_weights": {
+                "budget": 24,
+                "battery": 14,
+                "display": 14,
+                "ease_of_use": 10,
+                "camera": 10,
+                "performance": 10,
+                "software_support": 10,
+                "connectivity": 8
+              },
+              "criteria": [
+                {
+                  "criterion": "budget",
+                  "weight": 24,
+                  "match_score": 1.0,
+                  "weighted_points": 24.0,
+                  "evidence_status": "verified",
+                  "reason": "Verified price 9889 is within budget 30000",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+                  "observed_at": "2026-10-13T13:57:40.862981+00:00"
+                },
+                {
+                  "criterion": "battery",
+                  "weight": 14,
+                  "match_score": 0.3417,
+                  "weighted_points": 4.78,
+                  "evidence_status": "derived",
+                  "reason": "Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+                  "evidence_type": "youtube_playback_hours",
+                  "verified_value": {
+                    "youtube_playback_hours": [
+                      10.25
+                    ],
+                    "standby_hours": [
+                      340.0
+                    ],
+                    "talk_hours": [
+                      30.0
+                    ],
+                    "capacity_mah": [
+                      5000.0
+                    ]
+                  },
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "display",
+                  "weight": 14,
+                  "match_score": 0.45,
+                  "weighted_points": 6.3,
+                  "evidence_status": "verified",
+                  "reason": "6.75-inch class display",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "ease_of_use",
+                  "weight": 10,
+                  "match_score": null,
+                  "weighted_points": 0.0,
+                  "evidence_status": "unknown",
+                  "reason": "Ease-of-use is not sufficiently verified",
+                  "evidence_type": "unknown",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "camera",
+                  "weight": 10,
+                  "match_score": 0.05,
+                  "weighted_points": 0.5,
+                  "evidence_status": "verified",
+                  "reason": "verified 13MP camera hardware",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "performance",
+                  "weight": 10,
+                  "match_score": 0.65,
+                  "weighted_points": 6.5,
+                  "evidence_status": "verified",
+                  "reason": "Recognized verified performance hardware detected",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "software_support",
+                  "weight": 10,
+                  "match_score": 0.55,
+                  "weighted_points": 5.5,
+                  "evidence_status": "verified",
+                  "reason": "Verified support duration: 2.0 years",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "connectivity",
+                  "weight": 8,
+                  "match_score": 0.35,
+                  "weighted_points": 2.8,
+                  "evidence_status": "verified",
+                  "reason": "4G",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                }
+              ],
+              "eligibility": {
+                "eligible": true,
+                "hard_constraint_failures": []
+              },
+              "evidence": {
+                "official_source": "https://www.lavamobiles.com/smartphones/virat-v1",
+                "market_source": "https://www.amazon.in/dp/B0HG9SZ7HD?tag=guru0906-21",
+                "price": {
+                  "price": 9889.0,
+                  "currency": "INR",
+                  "verified": true,
+                  "status": "verified_from_frozen_offer_snapshot",
+                  "source_type": "amazon_primary_buybox",
+                  "source_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+                  "source_host": "www.amazon.in",
+                  "verified_at": "2026-10-13T13:57:40.862981+00:00",
+                  "availability": "in_stock",
+                  "reason": "Exact-ASIN offer from committed frozen evidence snapshot",
+                  "evidence_method": "amazon_primary_buybox",
+                  "snapshot_id": "positive-2026-10-13-refresh",
+                  "identity_evidence_url": "https://www.lavamobiles.com/smartphones/virat-v1"
+                }
+              }
+            },
+            "battery_evidence": {
+              "match": 0.3417,
+              "status": "derived",
+              "reason": "Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+              "basis": "youtube_playback_hours",
+              "measurements": {
+                "youtube_playback_hours": [
+                  10.25
+                ],
+                "standby_hours": [
+                  340.0
+                ],
+                "talk_hours": [
+                  30.0
+                ],
+                "capacity_mah": [
+                  5000.0
+                ]
+              }
+            },
+            "why_it_fits": [
+              "budget: Verified price 9889 is within budget 30000"
+            ],
+            "tradeoffs": [
+              "battery: Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it"
+            ],
+            "unknown": [
+              "ease_of_use: Ease-of-use is not sufficiently verified"
+            ],
+            "best_offer": null
+          }
+        ],
+        "market_quality_status": "VERIFIED_SCOPE",
+        "completion_status": "INCOMPLETE"
+      },
+      "rejection_summary": []
+    },
+    {
+      "id": "PILOT-03",
+      "query": "mobile under 30000",
+      "status": "EXECUTED_WITH_RESULTS",
+      "snapshot_source_query": "FROZEN_CATALOGUE_INTEGRATION",
+      "semantic": {
+        "query": "mobile under 30000",
+        "intent": {
+          "intent": "recommendation",
+          "category": "smartphone",
+          "budget_min": null,
+          "budget_max": 30000,
+          "features": [],
+          "brands": [],
+          "compare": false,
+          "keywords": [
+            "mobile",
+            "under",
+            "30000"
+          ],
+          "user_profile": null,
+          "use_case": [],
+          "hard_constraints": [
+            "budget_max"
+          ],
+          "must_have": [],
+          "preferred": [],
+          "avoid": [],
+          "priority_weights": {
+            "budget": 24,
+            "battery": 14,
+            "display": 14,
+            "ease_of_use": 10,
+            "camera": 10,
+            "performance": 10,
+            "software_support": 10,
+            "connectivity": 8
+          },
+          "tv_requirements": {}
+        },
+        "stage_counts": {
+          "discovered": 34,
+          "identity_prepared": 34,
+          "identity_verified": 34,
+          "official_verified": 15,
+          "evidence_ready": 34,
+          "fit_scored": 34,
+          "qualifying_50_plus_raw": 2,
+          "qualifying_unique_models": 2,
+          "qualifying_50_plus": 2,
+          "recommendations_returned": 2
+        },
+        "recommendations": [
+          {
+            "product_id": "frozen-B0GPXTY8V5",
+            "canonical_product_id": "cw-mobile-79",
+            "asin": "B0GPXTY8V5",
+            "title": "lava Bold N2 Lite",
+            "brand": "lava",
+            "price": 9099.0,
+            "fit_percent": 51,
+            "raw_fit_percent": 57,
+            "evidence_coverage_percent": 90,
+            "quality_score": 40.91,
+            "quality_evidence_coverage_percent": 87,
+            "scoring_contract": "capability-with-separate-evidence-v1",
+            "score_trace": {
+              "policy_version": "capability-with-separate-evidence-v1",
+              "query": "mobile under 30000",
+              "priority_weights": {
+                "budget": 24,
+                "battery": 14,
+                "display": 14,
+                "ease_of_use": 10,
+                "camera": 10,
+                "performance": 10,
+                "software_support": 10,
+                "connectivity": 8
+              },
+              "criteria": [
+                {
+                  "criterion": "budget",
+                  "weight": 24,
+                  "match_score": 1.0,
+                  "weighted_points": 24.0,
+                  "evidence_status": "verified",
+                  "reason": "Verified price 9099 is within budget 30000",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+                  "observed_at": "2026-10-13T13:57:37.941273+00:00"
+                },
+                {
+                  "criterion": "battery",
+                  "weight": 14,
+                  "match_score": 0.3144,
+                  "weighted_points": 4.4,
+                  "evidence_status": "derived",
+                  "reason": "Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+                  "evidence_type": "youtube_playback_hours",
+                  "verified_value": {
+                    "youtube_playback_hours": [
+                      9.433333333333334
+                    ],
+                    "standby_hours": [
+                      340.0
+                    ],
+                    "talk_hours": [
+                      30.0
+                    ],
+                    "capacity_mah": [
+                      5000.0
+                    ]
+                  },
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "display",
+                  "weight": 14,
+                  "match_score": 0.45,
+                  "weighted_points": 6.3,
+                  "evidence_status": "verified",
+                  "reason": "6.75-inch class display",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "ease_of_use",
+                  "weight": 10,
+                  "match_score": null,
+                  "weighted_points": 0.0,
+                  "evidence_status": "unknown",
+                  "reason": "Ease-of-use is not sufficiently verified",
+                  "evidence_type": "unknown",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "camera",
+                  "weight": 10,
+                  "match_score": 0.15000000000000002,
+                  "weighted_points": 1.5,
+                  "evidence_status": "verified",
+                  "reason": "verified multi-camera system; verified 13MP camera hardware",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "performance",
+                  "weight": 10,
+                  "match_score": 0.65,
+                  "weighted_points": 6.5,
+                  "evidence_status": "verified",
+                  "reason": "Recognized verified performance hardware detected",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "software_support",
+                  "weight": 10,
+                  "match_score": 0.55,
+                  "weighted_points": 5.5,
+                  "evidence_status": "verified",
+                  "reason": "Verified support duration: 2.0 years",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "connectivity",
+                  "weight": 8,
+                  "match_score": 0.35,
+                  "weighted_points": 2.8,
+                  "evidence_status": "verified",
+                  "reason": "4G",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                }
+              ],
+              "eligibility": {
+                "eligible": true,
+                "hard_constraint_failures": []
+              },
+              "evidence": {
+                "official_source": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                "market_source": "https://www.amazon.in/dp/B0GPXTY8V5?tag=guru0906-21",
+                "price": {
+                  "price": 9099.0,
+                  "currency": "INR",
+                  "verified": true,
+                  "status": "verified_from_frozen_offer_snapshot",
+                  "source_type": "amazon_primary_buybox",
+                  "source_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+                  "source_host": "www.amazon.in",
+                  "verified_at": "2026-10-13T13:57:37.941273+00:00",
+                  "availability": "in_stock",
+                  "reason": "Exact-ASIN offer from committed frozen evidence snapshot",
+                  "evidence_method": "amazon_primary_buybox",
+                  "snapshot_id": "positive-2026-10-13-refresh",
+                  "identity_evidence_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite"
+                }
+              }
+            },
+            "battery_evidence": {
+              "match": 0.3144,
+              "status": "derived",
+              "reason": "Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+              "basis": "youtube_playback_hours",
+              "measurements": {
+                "youtube_playback_hours": [
+                  9.433333333333334
+                ],
+                "standby_hours": [
+                  340.0
+                ],
+                "talk_hours": [
+                  30.0
+                ],
+                "capacity_mah": [
+                  5000.0
+                ]
+              }
+            },
+            "why_it_fits": [
+              "budget: Verified price 9099 is within budget 30000"
+            ],
+            "tradeoffs": [
+              "battery: Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it"
+            ],
+            "unknown": [
+              "ease_of_use: Ease-of-use is not sufficiently verified"
+            ],
+            "best_offer": null
+          },
+          {
+            "product_id": "frozen-B0HG9SZ7HD",
+            "canonical_product_id": "cw-mobile-77",
+            "asin": "B0HG9SZ7HD",
+            "title": "Lava Virat V1",
+            "brand": "Lava",
+            "price": 9889.0,
+            "fit_percent": 50,
+            "raw_fit_percent": 56,
+            "evidence_coverage_percent": 90,
+            "quality_score": 39.97,
+            "quality_evidence_coverage_percent": 87,
+            "scoring_contract": "capability-with-separate-evidence-v1",
+            "score_trace": {
+              "policy_version": "capability-with-separate-evidence-v1",
+              "query": "mobile under 30000",
+              "priority_weights": {
+                "budget": 24,
+                "battery": 14,
+                "display": 14,
+                "ease_of_use": 10,
+                "camera": 10,
+                "performance": 10,
+                "software_support": 10,
+                "connectivity": 8
+              },
+              "criteria": [
+                {
+                  "criterion": "budget",
+                  "weight": 24,
+                  "match_score": 1.0,
+                  "weighted_points": 24.0,
+                  "evidence_status": "verified",
+                  "reason": "Verified price 9889 is within budget 30000",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+                  "observed_at": "2026-10-13T13:57:40.862981+00:00"
+                },
+                {
+                  "criterion": "battery",
+                  "weight": 14,
+                  "match_score": 0.3417,
+                  "weighted_points": 4.78,
+                  "evidence_status": "derived",
+                  "reason": "Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+                  "evidence_type": "youtube_playback_hours",
+                  "verified_value": {
+                    "youtube_playback_hours": [
+                      10.25
+                    ],
+                    "standby_hours": [
+                      340.0
+                    ],
+                    "talk_hours": [
+                      30.0
+                    ],
+                    "capacity_mah": [
+                      5000.0
+                    ]
+                  },
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "display",
+                  "weight": 14,
+                  "match_score": 0.45,
+                  "weighted_points": 6.3,
+                  "evidence_status": "verified",
+                  "reason": "6.75-inch class display",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "ease_of_use",
+                  "weight": 10,
+                  "match_score": null,
+                  "weighted_points": 0.0,
+                  "evidence_status": "unknown",
+                  "reason": "Ease-of-use is not sufficiently verified",
+                  "evidence_type": "unknown",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "camera",
+                  "weight": 10,
+                  "match_score": 0.05,
+                  "weighted_points": 0.5,
+                  "evidence_status": "verified",
+                  "reason": "verified 13MP camera hardware",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "performance",
+                  "weight": 10,
+                  "match_score": 0.65,
+                  "weighted_points": 6.5,
+                  "evidence_status": "verified",
+                  "reason": "Recognized verified performance hardware detected",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "software_support",
+                  "weight": 10,
+                  "match_score": 0.55,
+                  "weighted_points": 5.5,
+                  "evidence_status": "verified",
+                  "reason": "Verified support duration: 2.0 years",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "connectivity",
+                  "weight": 8,
+                  "match_score": 0.35,
+                  "weighted_points": 2.8,
+                  "evidence_status": "verified",
+                  "reason": "4G",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                }
+              ],
+              "eligibility": {
+                "eligible": true,
+                "hard_constraint_failures": []
+              },
+              "evidence": {
+                "official_source": "https://www.lavamobiles.com/smartphones/virat-v1",
+                "market_source": "https://www.amazon.in/dp/B0HG9SZ7HD?tag=guru0906-21",
+                "price": {
+                  "price": 9889.0,
+                  "currency": "INR",
+                  "verified": true,
+                  "status": "verified_from_frozen_offer_snapshot",
+                  "source_type": "amazon_primary_buybox",
+                  "source_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+                  "source_host": "www.amazon.in",
+                  "verified_at": "2026-10-13T13:57:40.862981+00:00",
+                  "availability": "in_stock",
+                  "reason": "Exact-ASIN offer from committed frozen evidence snapshot",
+                  "evidence_method": "amazon_primary_buybox",
+                  "snapshot_id": "positive-2026-10-13-refresh",
+                  "identity_evidence_url": "https://www.lavamobiles.com/smartphones/virat-v1"
+                }
+              }
+            },
+            "battery_evidence": {
+              "match": 0.3417,
+              "status": "derived",
+              "reason": "Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+              "basis": "youtube_playback_hours",
+              "measurements": {
+                "youtube_playback_hours": [
+                  10.25
+                ],
+                "standby_hours": [
+                  340.0
+                ],
+                "talk_hours": [
+                  30.0
+                ],
+                "capacity_mah": [
+                  5000.0
+                ]
+              }
+            },
+            "why_it_fits": [
+              "budget: Verified price 9889 is within budget 30000"
+            ],
+            "tradeoffs": [
+              "battery: Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it"
+            ],
+            "unknown": [
+              "ease_of_use: Ease-of-use is not sufficiently verified"
+            ],
+            "best_offer": null
+          }
+        ],
+        "market_quality_status": "VERIFIED_SCOPE",
+        "completion_status": "INCOMPLETE"
+      },
+      "rejection_summary": []
+    },
+    {
+      "id": "PILOT-04",
+      "query": "mobile under 30k",
+      "status": "EXECUTED_WITH_RESULTS",
+      "snapshot_source_query": "FROZEN_CATALOGUE_INTEGRATION",
+      "semantic": {
+        "query": "mobile under 30k",
+        "intent": {
+          "intent": "recommendation",
+          "category": "smartphone",
+          "budget_min": null,
+          "budget_max": 30000,
+          "features": [],
+          "brands": [],
+          "compare": false,
+          "keywords": [
+            "mobile",
+            "under",
+            "30k"
+          ],
+          "user_profile": null,
+          "use_case": [],
+          "hard_constraints": [
+            "budget_max"
+          ],
+          "must_have": [],
+          "preferred": [],
+          "avoid": [],
+          "priority_weights": {
+            "budget": 24,
+            "battery": 14,
+            "display": 14,
+            "ease_of_use": 10,
+            "camera": 10,
+            "performance": 10,
+            "software_support": 10,
+            "connectivity": 8
+          },
+          "tv_requirements": {}
+        },
+        "stage_counts": {
+          "discovered": 34,
+          "identity_prepared": 34,
+          "identity_verified": 34,
+          "official_verified": 15,
+          "evidence_ready": 34,
+          "fit_scored": 34,
+          "qualifying_50_plus_raw": 2,
+          "qualifying_unique_models": 2,
+          "qualifying_50_plus": 2,
+          "recommendations_returned": 2
+        },
+        "recommendations": [
+          {
+            "product_id": "frozen-B0GPXTY8V5",
+            "canonical_product_id": "cw-mobile-79",
+            "asin": "B0GPXTY8V5",
+            "title": "lava Bold N2 Lite",
+            "brand": "lava",
+            "price": 9099.0,
+            "fit_percent": 51,
+            "raw_fit_percent": 57,
+            "evidence_coverage_percent": 90,
+            "quality_score": 40.91,
+            "quality_evidence_coverage_percent": 87,
+            "scoring_contract": "capability-with-separate-evidence-v1",
+            "score_trace": {
+              "policy_version": "capability-with-separate-evidence-v1",
+              "query": "mobile under 30k",
+              "priority_weights": {
+                "budget": 24,
+                "battery": 14,
+                "display": 14,
+                "ease_of_use": 10,
+                "camera": 10,
+                "performance": 10,
+                "software_support": 10,
+                "connectivity": 8
+              },
+              "criteria": [
+                {
+                  "criterion": "budget",
+                  "weight": 24,
+                  "match_score": 1.0,
+                  "weighted_points": 24.0,
+                  "evidence_status": "verified",
+                  "reason": "Verified price 9099 is within budget 30000",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+                  "observed_at": "2026-10-13T13:57:37.941273+00:00"
+                },
+                {
+                  "criterion": "battery",
+                  "weight": 14,
+                  "match_score": 0.3144,
+                  "weighted_points": 4.4,
+                  "evidence_status": "derived",
+                  "reason": "Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+                  "evidence_type": "youtube_playback_hours",
+                  "verified_value": {
+                    "youtube_playback_hours": [
+                      9.433333333333334
+                    ],
+                    "standby_hours": [
+                      340.0
+                    ],
+                    "talk_hours": [
+                      30.0
+                    ],
+                    "capacity_mah": [
+                      5000.0
+                    ]
+                  },
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "display",
+                  "weight": 14,
+                  "match_score": 0.45,
+                  "weighted_points": 6.3,
+                  "evidence_status": "verified",
+                  "reason": "6.75-inch class display",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "ease_of_use",
+                  "weight": 10,
+                  "match_score": null,
+                  "weighted_points": 0.0,
+                  "evidence_status": "unknown",
+                  "reason": "Ease-of-use is not sufficiently verified",
+                  "evidence_type": "unknown",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "camera",
+                  "weight": 10,
+                  "match_score": 0.15000000000000002,
+                  "weighted_points": 1.5,
+                  "evidence_status": "verified",
+                  "reason": "verified multi-camera system; verified 13MP camera hardware",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "performance",
+                  "weight": 10,
+                  "match_score": 0.65,
+                  "weighted_points": 6.5,
+                  "evidence_status": "verified",
+                  "reason": "Recognized verified performance hardware detected",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "software_support",
+                  "weight": 10,
+                  "match_score": 0.55,
+                  "weighted_points": 5.5,
+                  "evidence_status": "verified",
+                  "reason": "Verified support duration: 2.0 years",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "connectivity",
+                  "weight": 8,
+                  "match_score": 0.35,
+                  "weighted_points": 2.8,
+                  "evidence_status": "verified",
+                  "reason": "4G",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                }
+              ],
+              "eligibility": {
+                "eligible": true,
+                "hard_constraint_failures": []
+              },
+              "evidence": {
+                "official_source": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                "market_source": "https://www.amazon.in/dp/B0GPXTY8V5?tag=guru0906-21",
+                "price": {
+                  "price": 9099.0,
+                  "currency": "INR",
+                  "verified": true,
+                  "status": "verified_from_frozen_offer_snapshot",
+                  "source_type": "amazon_primary_buybox",
+                  "source_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+                  "source_host": "www.amazon.in",
+                  "verified_at": "2026-10-13T13:57:37.941273+00:00",
+                  "availability": "in_stock",
+                  "reason": "Exact-ASIN offer from committed frozen evidence snapshot",
+                  "evidence_method": "amazon_primary_buybox",
+                  "snapshot_id": "positive-2026-10-13-refresh",
+                  "identity_evidence_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite"
+                }
+              }
+            },
+            "battery_evidence": {
+              "match": 0.3144,
+              "status": "derived",
+              "reason": "Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+              "basis": "youtube_playback_hours",
+              "measurements": {
+                "youtube_playback_hours": [
+                  9.433333333333334
+                ],
+                "standby_hours": [
+                  340.0
+                ],
+                "talk_hours": [
+                  30.0
+                ],
+                "capacity_mah": [
+                  5000.0
+                ]
+              }
+            },
+            "why_it_fits": [
+              "budget: Verified price 9099 is within budget 30000"
+            ],
+            "tradeoffs": [
+              "battery: Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it"
+            ],
+            "unknown": [
+              "ease_of_use: Ease-of-use is not sufficiently verified"
+            ],
+            "best_offer": null
+          },
+          {
+            "product_id": "frozen-B0HG9SZ7HD",
+            "canonical_product_id": "cw-mobile-77",
+            "asin": "B0HG9SZ7HD",
+            "title": "Lava Virat V1",
+            "brand": "Lava",
+            "price": 9889.0,
+            "fit_percent": 50,
+            "raw_fit_percent": 56,
+            "evidence_coverage_percent": 90,
+            "quality_score": 39.97,
+            "quality_evidence_coverage_percent": 87,
+            "scoring_contract": "capability-with-separate-evidence-v1",
+            "score_trace": {
+              "policy_version": "capability-with-separate-evidence-v1",
+              "query": "mobile under 30k",
+              "priority_weights": {
+                "budget": 24,
+                "battery": 14,
+                "display": 14,
+                "ease_of_use": 10,
+                "camera": 10,
+                "performance": 10,
+                "software_support": 10,
+                "connectivity": 8
+              },
+              "criteria": [
+                {
+                  "criterion": "budget",
+                  "weight": 24,
+                  "match_score": 1.0,
+                  "weighted_points": 24.0,
+                  "evidence_status": "verified",
+                  "reason": "Verified price 9889 is within budget 30000",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+                  "observed_at": "2026-10-13T13:57:40.862981+00:00"
+                },
+                {
+                  "criterion": "battery",
+                  "weight": 14,
+                  "match_score": 0.3417,
+                  "weighted_points": 4.78,
+                  "evidence_status": "derived",
+                  "reason": "Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+                  "evidence_type": "youtube_playback_hours",
+                  "verified_value": {
+                    "youtube_playback_hours": [
+                      10.25
+                    ],
+                    "standby_hours": [
+                      340.0
+                    ],
+                    "talk_hours": [
+                      30.0
+                    ],
+                    "capacity_mah": [
+                      5000.0
+                    ]
+                  },
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "display",
+                  "weight": 14,
+                  "match_score": 0.45,
+                  "weighted_points": 6.3,
+                  "evidence_status": "verified",
+                  "reason": "6.75-inch class display",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "ease_of_use",
+                  "weight": 10,
+                  "match_score": null,
+                  "weighted_points": 0.0,
+                  "evidence_status": "unknown",
+                  "reason": "Ease-of-use is not sufficiently verified",
+                  "evidence_type": "unknown",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "camera",
+                  "weight": 10,
+                  "match_score": 0.05,
+                  "weighted_points": 0.5,
+                  "evidence_status": "verified",
+                  "reason": "verified 13MP camera hardware",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "performance",
+                  "weight": 10,
+                  "match_score": 0.65,
+                  "weighted_points": 6.5,
+                  "evidence_status": "verified",
+                  "reason": "Recognized verified performance hardware detected",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "software_support",
+                  "weight": 10,
+                  "match_score": 0.55,
+                  "weighted_points": 5.5,
+                  "evidence_status": "verified",
+                  "reason": "Verified support duration: 2.0 years",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "connectivity",
+                  "weight": 8,
+                  "match_score": 0.35,
+                  "weighted_points": 2.8,
+                  "evidence_status": "verified",
+                  "reason": "4G",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                }
+              ],
+              "eligibility": {
+                "eligible": true,
+                "hard_constraint_failures": []
+              },
+              "evidence": {
+                "official_source": "https://www.lavamobiles.com/smartphones/virat-v1",
+                "market_source": "https://www.amazon.in/dp/B0HG9SZ7HD?tag=guru0906-21",
+                "price": {
+                  "price": 9889.0,
+                  "currency": "INR",
+                  "verified": true,
+                  "status": "verified_from_frozen_offer_snapshot",
+                  "source_type": "amazon_primary_buybox",
+                  "source_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+                  "source_host": "www.amazon.in",
+                  "verified_at": "2026-10-13T13:57:40.862981+00:00",
+                  "availability": "in_stock",
+                  "reason": "Exact-ASIN offer from committed frozen evidence snapshot",
+                  "evidence_method": "amazon_primary_buybox",
+                  "snapshot_id": "positive-2026-10-13-refresh",
+                  "identity_evidence_url": "https://www.lavamobiles.com/smartphones/virat-v1"
+                }
+              }
+            },
+            "battery_evidence": {
+              "match": 0.3417,
+              "status": "derived",
+              "reason": "Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+              "basis": "youtube_playback_hours",
+              "measurements": {
+                "youtube_playback_hours": [
+                  10.25
+                ],
+                "standby_hours": [
+                  340.0
+                ],
+                "talk_hours": [
+                  30.0
+                ],
+                "capacity_mah": [
+                  5000.0
+                ]
+              }
+            },
+            "why_it_fits": [
+              "budget: Verified price 9889 is within budget 30000"
+            ],
+            "tradeoffs": [
+              "battery: Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it"
+            ],
+            "unknown": [
+              "ease_of_use: Ease-of-use is not sufficiently verified"
+            ],
+            "best_offer": null
+          }
+        ],
+        "market_quality_status": "VERIFIED_SCOPE",
+        "completion_status": "INCOMPLETE"
+      },
+      "rejection_summary": []
+    }
+  ],
+  "run_2": [
+    {
+      "id": "PILOT-01",
+      "query": "mobile under 30 k",
+      "status": "EXECUTED_WITH_RESULTS",
+      "snapshot_source_query": "FROZEN_CATALOGUE_INTEGRATION",
+      "semantic": {
+        "query": "mobile under 30 k",
+        "intent": {
+          "intent": "recommendation",
+          "category": "smartphone",
+          "budget_min": null,
+          "budget_max": 30000,
+          "features": [],
+          "brands": [],
+          "compare": false,
+          "keywords": [
+            "mobile",
+            "under",
+            "30",
+            "k"
+          ],
+          "user_profile": null,
+          "use_case": [],
+          "hard_constraints": [
+            "budget_max"
+          ],
+          "must_have": [],
+          "preferred": [],
+          "avoid": [],
+          "priority_weights": {
+            "budget": 24,
+            "battery": 14,
+            "display": 14,
+            "ease_of_use": 10,
+            "camera": 10,
+            "performance": 10,
+            "software_support": 10,
+            "connectivity": 8
+          },
+          "tv_requirements": {}
+        },
+        "stage_counts": {
+          "discovered": 34,
+          "identity_prepared": 34,
+          "identity_verified": 34,
+          "official_verified": 15,
+          "evidence_ready": 34,
+          "fit_scored": 34,
+          "qualifying_50_plus_raw": 2,
+          "qualifying_unique_models": 2,
+          "qualifying_50_plus": 2,
+          "recommendations_returned": 2
+        },
+        "recommendations": [
+          {
+            "product_id": "frozen-B0GPXTY8V5",
+            "canonical_product_id": "cw-mobile-79",
+            "asin": "B0GPXTY8V5",
+            "title": "lava Bold N2 Lite",
+            "brand": "lava",
+            "price": 9099.0,
+            "fit_percent": 51,
+            "raw_fit_percent": 57,
+            "evidence_coverage_percent": 90,
+            "quality_score": 40.91,
+            "quality_evidence_coverage_percent": 87,
+            "scoring_contract": "capability-with-separate-evidence-v1",
+            "score_trace": {
+              "policy_version": "capability-with-separate-evidence-v1",
+              "query": "mobile under 30 k",
+              "priority_weights": {
+                "budget": 24,
+                "battery": 14,
+                "display": 14,
+                "ease_of_use": 10,
+                "camera": 10,
+                "performance": 10,
+                "software_support": 10,
+                "connectivity": 8
+              },
+              "criteria": [
+                {
+                  "criterion": "budget",
+                  "weight": 24,
+                  "match_score": 1.0,
+                  "weighted_points": 24.0,
+                  "evidence_status": "verified",
+                  "reason": "Verified price 9099 is within budget 30000",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+                  "observed_at": "2026-10-13T13:57:37.941273+00:00"
+                },
+                {
+                  "criterion": "battery",
+                  "weight": 14,
+                  "match_score": 0.3144,
+                  "weighted_points": 4.4,
+                  "evidence_status": "derived",
+                  "reason": "Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+                  "evidence_type": "youtube_playback_hours",
+                  "verified_value": {
+                    "youtube_playback_hours": [
+                      9.433333333333334
+                    ],
+                    "standby_hours": [
+                      340.0
+                    ],
+                    "talk_hours": [
+                      30.0
+                    ],
+                    "capacity_mah": [
+                      5000.0
+                    ]
+                  },
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "display",
+                  "weight": 14,
+                  "match_score": 0.45,
+                  "weighted_points": 6.3,
+                  "evidence_status": "verified",
+                  "reason": "6.75-inch class display",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "ease_of_use",
+                  "weight": 10,
+                  "match_score": null,
+                  "weighted_points": 0.0,
+                  "evidence_status": "unknown",
+                  "reason": "Ease-of-use is not sufficiently verified",
+                  "evidence_type": "unknown",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "camera",
+                  "weight": 10,
+                  "match_score": 0.15000000000000002,
+                  "weighted_points": 1.5,
+                  "evidence_status": "verified",
+                  "reason": "verified multi-camera system; verified 13MP camera hardware",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "performance",
+                  "weight": 10,
+                  "match_score": 0.65,
+                  "weighted_points": 6.5,
+                  "evidence_status": "verified",
+                  "reason": "Recognized verified performance hardware detected",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "software_support",
+                  "weight": 10,
+                  "match_score": 0.55,
+                  "weighted_points": 5.5,
+                  "evidence_status": "verified",
+                  "reason": "Verified support duration: 2.0 years",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "connectivity",
+                  "weight": 8,
+                  "match_score": 0.35,
+                  "weighted_points": 2.8,
+                  "evidence_status": "verified",
+                  "reason": "4G",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                }
+              ],
+              "eligibility": {
+                "eligible": true,
+                "hard_constraint_failures": []
+              },
+              "evidence": {
+                "official_source": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                "market_source": "https://www.amazon.in/dp/B0GPXTY8V5?tag=guru0906-21",
+                "price": {
+                  "price": 9099.0,
+                  "currency": "INR",
+                  "verified": true,
+                  "status": "verified_from_frozen_offer_snapshot",
+                  "source_type": "amazon_primary_buybox",
+                  "source_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+                  "source_host": "www.amazon.in",
+                  "verified_at": "2026-10-13T13:57:37.941273+00:00",
+                  "availability": "in_stock",
+                  "reason": "Exact-ASIN offer from committed frozen evidence snapshot",
+                  "evidence_method": "amazon_primary_buybox",
+                  "snapshot_id": "positive-2026-10-13-refresh",
+                  "identity_evidence_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite"
+                }
+              }
+            },
+            "battery_evidence": {
+              "match": 0.3144,
+              "status": "derived",
+              "reason": "Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+              "basis": "youtube_playback_hours",
+              "measurements": {
+                "youtube_playback_hours": [
+                  9.433333333333334
+                ],
+                "standby_hours": [
+                  340.0
+                ],
+                "talk_hours": [
+                  30.0
+                ],
+                "capacity_mah": [
+                  5000.0
+                ]
+              }
+            },
+            "why_it_fits": [
+              "budget: Verified price 9099 is within budget 30000"
+            ],
+            "tradeoffs": [
+              "battery: Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it"
+            ],
+            "unknown": [
+              "ease_of_use: Ease-of-use is not sufficiently verified"
+            ],
+            "best_offer": null
+          },
+          {
+            "product_id": "frozen-B0HG9SZ7HD",
+            "canonical_product_id": "cw-mobile-77",
+            "asin": "B0HG9SZ7HD",
+            "title": "Lava Virat V1",
+            "brand": "Lava",
+            "price": 9889.0,
+            "fit_percent": 50,
+            "raw_fit_percent": 56,
+            "evidence_coverage_percent": 90,
+            "quality_score": 39.97,
+            "quality_evidence_coverage_percent": 87,
+            "scoring_contract": "capability-with-separate-evidence-v1",
+            "score_trace": {
+              "policy_version": "capability-with-separate-evidence-v1",
+              "query": "mobile under 30 k",
+              "priority_weights": {
+                "budget": 24,
+                "battery": 14,
+                "display": 14,
+                "ease_of_use": 10,
+                "camera": 10,
+                "performance": 10,
+                "software_support": 10,
+                "connectivity": 8
+              },
+              "criteria": [
+                {
+                  "criterion": "budget",
+                  "weight": 24,
+                  "match_score": 1.0,
+                  "weighted_points": 24.0,
+                  "evidence_status": "verified",
+                  "reason": "Verified price 9889 is within budget 30000",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+                  "observed_at": "2026-10-13T13:57:40.862981+00:00"
+                },
+                {
+                  "criterion": "battery",
+                  "weight": 14,
+                  "match_score": 0.3417,
+                  "weighted_points": 4.78,
+                  "evidence_status": "derived",
+                  "reason": "Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+                  "evidence_type": "youtube_playback_hours",
+                  "verified_value": {
+                    "youtube_playback_hours": [
+                      10.25
+                    ],
+                    "standby_hours": [
+                      340.0
+                    ],
+                    "talk_hours": [
+                      30.0
+                    ],
+                    "capacity_mah": [
+                      5000.0
+                    ]
+                  },
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "display",
+                  "weight": 14,
+                  "match_score": 0.45,
+                  "weighted_points": 6.3,
+                  "evidence_status": "verified",
+                  "reason": "6.75-inch class display",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "ease_of_use",
+                  "weight": 10,
+                  "match_score": null,
+                  "weighted_points": 0.0,
+                  "evidence_status": "unknown",
+                  "reason": "Ease-of-use is not sufficiently verified",
+                  "evidence_type": "unknown",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "camera",
+                  "weight": 10,
+                  "match_score": 0.05,
+                  "weighted_points": 0.5,
+                  "evidence_status": "verified",
+                  "reason": "verified 13MP camera hardware",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "performance",
+                  "weight": 10,
+                  "match_score": 0.65,
+                  "weighted_points": 6.5,
+                  "evidence_status": "verified",
+                  "reason": "Recognized verified performance hardware detected",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "software_support",
+                  "weight": 10,
+                  "match_score": 0.55,
+                  "weighted_points": 5.5,
+                  "evidence_status": "verified",
+                  "reason": "Verified support duration: 2.0 years",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "connectivity",
+                  "weight": 8,
+                  "match_score": 0.35,
+                  "weighted_points": 2.8,
+                  "evidence_status": "verified",
+                  "reason": "4G",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                }
+              ],
+              "eligibility": {
+                "eligible": true,
+                "hard_constraint_failures": []
+              },
+              "evidence": {
+                "official_source": "https://www.lavamobiles.com/smartphones/virat-v1",
+                "market_source": "https://www.amazon.in/dp/B0HG9SZ7HD?tag=guru0906-21",
+                "price": {
+                  "price": 9889.0,
+                  "currency": "INR",
+                  "verified": true,
+                  "status": "verified_from_frozen_offer_snapshot",
+                  "source_type": "amazon_primary_buybox",
+                  "source_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+                  "source_host": "www.amazon.in",
+                  "verified_at": "2026-10-13T13:57:40.862981+00:00",
+                  "availability": "in_stock",
+                  "reason": "Exact-ASIN offer from committed frozen evidence snapshot",
+                  "evidence_method": "amazon_primary_buybox",
+                  "snapshot_id": "positive-2026-10-13-refresh",
+                  "identity_evidence_url": "https://www.lavamobiles.com/smartphones/virat-v1"
+                }
+              }
+            },
+            "battery_evidence": {
+              "match": 0.3417,
+              "status": "derived",
+              "reason": "Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+              "basis": "youtube_playback_hours",
+              "measurements": {
+                "youtube_playback_hours": [
+                  10.25
+                ],
+                "standby_hours": [
+                  340.0
+                ],
+                "talk_hours": [
+                  30.0
+                ],
+                "capacity_mah": [
+                  5000.0
+                ]
+              }
+            },
+            "why_it_fits": [
+              "budget: Verified price 9889 is within budget 30000"
+            ],
+            "tradeoffs": [
+              "battery: Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it"
+            ],
+            "unknown": [
+              "ease_of_use: Ease-of-use is not sufficiently verified"
+            ],
+            "best_offer": null
+          }
+        ],
+        "market_quality_status": "VERIFIED_SCOPE",
+        "completion_status": "INCOMPLETE"
+      },
+      "rejection_summary": []
+    },
+    {
+      "id": "PILOT-02",
+      "query": "mobile under 30,000",
+      "status": "EXECUTED_WITH_RESULTS",
+      "snapshot_source_query": "FROZEN_CATALOGUE_INTEGRATION",
+      "semantic": {
+        "query": "mobile under 30,000",
+        "intent": {
+          "intent": "recommendation",
+          "category": "smartphone",
+          "budget_min": null,
+          "budget_max": 30000,
+          "features": [],
+          "brands": [],
+          "compare": false,
+          "keywords": [
+            "mobile",
+            "under",
+            "30000"
+          ],
+          "user_profile": null,
+          "use_case": [],
+          "hard_constraints": [
+            "budget_max"
+          ],
+          "must_have": [],
+          "preferred": [],
+          "avoid": [],
+          "priority_weights": {
+            "budget": 24,
+            "battery": 14,
+            "display": 14,
+            "ease_of_use": 10,
+            "camera": 10,
+            "performance": 10,
+            "software_support": 10,
+            "connectivity": 8
+          },
+          "tv_requirements": {}
+        },
+        "stage_counts": {
+          "discovered": 34,
+          "identity_prepared": 34,
+          "identity_verified": 34,
+          "official_verified": 15,
+          "evidence_ready": 34,
+          "fit_scored": 34,
+          "qualifying_50_plus_raw": 2,
+          "qualifying_unique_models": 2,
+          "qualifying_50_plus": 2,
+          "recommendations_returned": 2
+        },
+        "recommendations": [
+          {
+            "product_id": "frozen-B0GPXTY8V5",
+            "canonical_product_id": "cw-mobile-79",
+            "asin": "B0GPXTY8V5",
+            "title": "lava Bold N2 Lite",
+            "brand": "lava",
+            "price": 9099.0,
+            "fit_percent": 51,
+            "raw_fit_percent": 57,
+            "evidence_coverage_percent": 90,
+            "quality_score": 40.91,
+            "quality_evidence_coverage_percent": 87,
+            "scoring_contract": "capability-with-separate-evidence-v1",
+            "score_trace": {
+              "policy_version": "capability-with-separate-evidence-v1",
+              "query": "mobile under 30,000",
+              "priority_weights": {
+                "budget": 24,
+                "battery": 14,
+                "display": 14,
+                "ease_of_use": 10,
+                "camera": 10,
+                "performance": 10,
+                "software_support": 10,
+                "connectivity": 8
+              },
+              "criteria": [
+                {
+                  "criterion": "budget",
+                  "weight": 24,
+                  "match_score": 1.0,
+                  "weighted_points": 24.0,
+                  "evidence_status": "verified",
+                  "reason": "Verified price 9099 is within budget 30000",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+                  "observed_at": "2026-10-13T13:57:37.941273+00:00"
+                },
+                {
+                  "criterion": "battery",
+                  "weight": 14,
+                  "match_score": 0.3144,
+                  "weighted_points": 4.4,
+                  "evidence_status": "derived",
+                  "reason": "Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+                  "evidence_type": "youtube_playback_hours",
+                  "verified_value": {
+                    "youtube_playback_hours": [
+                      9.433333333333334
+                    ],
+                    "standby_hours": [
+                      340.0
+                    ],
+                    "talk_hours": [
+                      30.0
+                    ],
+                    "capacity_mah": [
+                      5000.0
+                    ]
+                  },
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "display",
+                  "weight": 14,
+                  "match_score": 0.45,
+                  "weighted_points": 6.3,
+                  "evidence_status": "verified",
+                  "reason": "6.75-inch class display",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "ease_of_use",
+                  "weight": 10,
+                  "match_score": null,
+                  "weighted_points": 0.0,
+                  "evidence_status": "unknown",
+                  "reason": "Ease-of-use is not sufficiently verified",
+                  "evidence_type": "unknown",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "camera",
+                  "weight": 10,
+                  "match_score": 0.15000000000000002,
+                  "weighted_points": 1.5,
+                  "evidence_status": "verified",
+                  "reason": "verified multi-camera system; verified 13MP camera hardware",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "performance",
+                  "weight": 10,
+                  "match_score": 0.65,
+                  "weighted_points": 6.5,
+                  "evidence_status": "verified",
+                  "reason": "Recognized verified performance hardware detected",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "software_support",
+                  "weight": 10,
+                  "match_score": 0.55,
+                  "weighted_points": 5.5,
+                  "evidence_status": "verified",
+                  "reason": "Verified support duration: 2.0 years",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "connectivity",
+                  "weight": 8,
+                  "match_score": 0.35,
+                  "weighted_points": 2.8,
+                  "evidence_status": "verified",
+                  "reason": "4G",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                }
+              ],
+              "eligibility": {
+                "eligible": true,
+                "hard_constraint_failures": []
+              },
+              "evidence": {
+                "official_source": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                "market_source": "https://www.amazon.in/dp/B0GPXTY8V5?tag=guru0906-21",
+                "price": {
+                  "price": 9099.0,
+                  "currency": "INR",
+                  "verified": true,
+                  "status": "verified_from_frozen_offer_snapshot",
+                  "source_type": "amazon_primary_buybox",
+                  "source_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+                  "source_host": "www.amazon.in",
+                  "verified_at": "2026-10-13T13:57:37.941273+00:00",
+                  "availability": "in_stock",
+                  "reason": "Exact-ASIN offer from committed frozen evidence snapshot",
+                  "evidence_method": "amazon_primary_buybox",
+                  "snapshot_id": "positive-2026-10-13-refresh",
+                  "identity_evidence_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite"
+                }
+              }
+            },
+            "battery_evidence": {
+              "match": 0.3144,
+              "status": "derived",
+              "reason": "Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+              "basis": "youtube_playback_hours",
+              "measurements": {
+                "youtube_playback_hours": [
+                  9.433333333333334
+                ],
+                "standby_hours": [
+                  340.0
+                ],
+                "talk_hours": [
+                  30.0
+                ],
+                "capacity_mah": [
+                  5000.0
+                ]
+              }
+            },
+            "why_it_fits": [
+              "budget: Verified price 9099 is within budget 30000"
+            ],
+            "tradeoffs": [
+              "battery: Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it"
+            ],
+            "unknown": [
+              "ease_of_use: Ease-of-use is not sufficiently verified"
+            ],
+            "best_offer": null
+          },
+          {
+            "product_id": "frozen-B0HG9SZ7HD",
+            "canonical_product_id": "cw-mobile-77",
+            "asin": "B0HG9SZ7HD",
+            "title": "Lava Virat V1",
+            "brand": "Lava",
+            "price": 9889.0,
+            "fit_percent": 50,
+            "raw_fit_percent": 56,
+            "evidence_coverage_percent": 90,
+            "quality_score": 39.97,
+            "quality_evidence_coverage_percent": 87,
+            "scoring_contract": "capability-with-separate-evidence-v1",
+            "score_trace": {
+              "policy_version": "capability-with-separate-evidence-v1",
+              "query": "mobile under 30,000",
+              "priority_weights": {
+                "budget": 24,
+                "battery": 14,
+                "display": 14,
+                "ease_of_use": 10,
+                "camera": 10,
+                "performance": 10,
+                "software_support": 10,
+                "connectivity": 8
+              },
+              "criteria": [
+                {
+                  "criterion": "budget",
+                  "weight": 24,
+                  "match_score": 1.0,
+                  "weighted_points": 24.0,
+                  "evidence_status": "verified",
+                  "reason": "Verified price 9889 is within budget 30000",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+                  "observed_at": "2026-10-13T13:57:40.862981+00:00"
+                },
+                {
+                  "criterion": "battery",
+                  "weight": 14,
+                  "match_score": 0.3417,
+                  "weighted_points": 4.78,
+                  "evidence_status": "derived",
+                  "reason": "Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+                  "evidence_type": "youtube_playback_hours",
+                  "verified_value": {
+                    "youtube_playback_hours": [
+                      10.25
+                    ],
+                    "standby_hours": [
+                      340.0
+                    ],
+                    "talk_hours": [
+                      30.0
+                    ],
+                    "capacity_mah": [
+                      5000.0
+                    ]
+                  },
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "display",
+                  "weight": 14,
+                  "match_score": 0.45,
+                  "weighted_points": 6.3,
+                  "evidence_status": "verified",
+                  "reason": "6.75-inch class display",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "ease_of_use",
+                  "weight": 10,
+                  "match_score": null,
+                  "weighted_points": 0.0,
+                  "evidence_status": "unknown",
+                  "reason": "Ease-of-use is not sufficiently verified",
+                  "evidence_type": "unknown",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "camera",
+                  "weight": 10,
+                  "match_score": 0.05,
+                  "weighted_points": 0.5,
+                  "evidence_status": "verified",
+                  "reason": "verified 13MP camera hardware",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "performance",
+                  "weight": 10,
+                  "match_score": 0.65,
+                  "weighted_points": 6.5,
+                  "evidence_status": "verified",
+                  "reason": "Recognized verified performance hardware detected",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "software_support",
+                  "weight": 10,
+                  "match_score": 0.55,
+                  "weighted_points": 5.5,
+                  "evidence_status": "verified",
+                  "reason": "Verified support duration: 2.0 years",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "connectivity",
+                  "weight": 8,
+                  "match_score": 0.35,
+                  "weighted_points": 2.8,
+                  "evidence_status": "verified",
+                  "reason": "4G",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                }
+              ],
+              "eligibility": {
+                "eligible": true,
+                "hard_constraint_failures": []
+              },
+              "evidence": {
+                "official_source": "https://www.lavamobiles.com/smartphones/virat-v1",
+                "market_source": "https://www.amazon.in/dp/B0HG9SZ7HD?tag=guru0906-21",
+                "price": {
+                  "price": 9889.0,
+                  "currency": "INR",
+                  "verified": true,
+                  "status": "verified_from_frozen_offer_snapshot",
+                  "source_type": "amazon_primary_buybox",
+                  "source_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+                  "source_host": "www.amazon.in",
+                  "verified_at": "2026-10-13T13:57:40.862981+00:00",
+                  "availability": "in_stock",
+                  "reason": "Exact-ASIN offer from committed frozen evidence snapshot",
+                  "evidence_method": "amazon_primary_buybox",
+                  "snapshot_id": "positive-2026-10-13-refresh",
+                  "identity_evidence_url": "https://www.lavamobiles.com/smartphones/virat-v1"
+                }
+              }
+            },
+            "battery_evidence": {
+              "match": 0.3417,
+              "status": "derived",
+              "reason": "Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+              "basis": "youtube_playback_hours",
+              "measurements": {
+                "youtube_playback_hours": [
+                  10.25
+                ],
+                "standby_hours": [
+                  340.0
+                ],
+                "talk_hours": [
+                  30.0
+                ],
+                "capacity_mah": [
+                  5000.0
+                ]
+              }
+            },
+            "why_it_fits": [
+              "budget: Verified price 9889 is within budget 30000"
+            ],
+            "tradeoffs": [
+              "battery: Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it"
+            ],
+            "unknown": [
+              "ease_of_use: Ease-of-use is not sufficiently verified"
+            ],
+            "best_offer": null
+          }
+        ],
+        "market_quality_status": "VERIFIED_SCOPE",
+        "completion_status": "INCOMPLETE"
+      },
+      "rejection_summary": []
+    },
+    {
+      "id": "PILOT-03",
+      "query": "mobile under 30000",
+      "status": "EXECUTED_WITH_RESULTS",
+      "snapshot_source_query": "FROZEN_CATALOGUE_INTEGRATION",
+      "semantic": {
+        "query": "mobile under 30000",
+        "intent": {
+          "intent": "recommendation",
+          "category": "smartphone",
+          "budget_min": null,
+          "budget_max": 30000,
+          "features": [],
+          "brands": [],
+          "compare": false,
+          "keywords": [
+            "mobile",
+            "under",
+            "30000"
+          ],
+          "user_profile": null,
+          "use_case": [],
+          "hard_constraints": [
+            "budget_max"
+          ],
+          "must_have": [],
+          "preferred": [],
+          "avoid": [],
+          "priority_weights": {
+            "budget": 24,
+            "battery": 14,
+            "display": 14,
+            "ease_of_use": 10,
+            "camera": 10,
+            "performance": 10,
+            "software_support": 10,
+            "connectivity": 8
+          },
+          "tv_requirements": {}
+        },
+        "stage_counts": {
+          "discovered": 34,
+          "identity_prepared": 34,
+          "identity_verified": 34,
+          "official_verified": 15,
+          "evidence_ready": 34,
+          "fit_scored": 34,
+          "qualifying_50_plus_raw": 2,
+          "qualifying_unique_models": 2,
+          "qualifying_50_plus": 2,
+          "recommendations_returned": 2
+        },
+        "recommendations": [
+          {
+            "product_id": "frozen-B0GPXTY8V5",
+            "canonical_product_id": "cw-mobile-79",
+            "asin": "B0GPXTY8V5",
+            "title": "lava Bold N2 Lite",
+            "brand": "lava",
+            "price": 9099.0,
+            "fit_percent": 51,
+            "raw_fit_percent": 57,
+            "evidence_coverage_percent": 90,
+            "quality_score": 40.91,
+            "quality_evidence_coverage_percent": 87,
+            "scoring_contract": "capability-with-separate-evidence-v1",
+            "score_trace": {
+              "policy_version": "capability-with-separate-evidence-v1",
+              "query": "mobile under 30000",
+              "priority_weights": {
+                "budget": 24,
+                "battery": 14,
+                "display": 14,
+                "ease_of_use": 10,
+                "camera": 10,
+                "performance": 10,
+                "software_support": 10,
+                "connectivity": 8
+              },
+              "criteria": [
+                {
+                  "criterion": "budget",
+                  "weight": 24,
+                  "match_score": 1.0,
+                  "weighted_points": 24.0,
+                  "evidence_status": "verified",
+                  "reason": "Verified price 9099 is within budget 30000",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+                  "observed_at": "2026-10-13T13:57:37.941273+00:00"
+                },
+                {
+                  "criterion": "battery",
+                  "weight": 14,
+                  "match_score": 0.3144,
+                  "weighted_points": 4.4,
+                  "evidence_status": "derived",
+                  "reason": "Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+                  "evidence_type": "youtube_playback_hours",
+                  "verified_value": {
+                    "youtube_playback_hours": [
+                      9.433333333333334
+                    ],
+                    "standby_hours": [
+                      340.0
+                    ],
+                    "talk_hours": [
+                      30.0
+                    ],
+                    "capacity_mah": [
+                      5000.0
+                    ]
+                  },
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "display",
+                  "weight": 14,
+                  "match_score": 0.45,
+                  "weighted_points": 6.3,
+                  "evidence_status": "verified",
+                  "reason": "6.75-inch class display",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "ease_of_use",
+                  "weight": 10,
+                  "match_score": null,
+                  "weighted_points": 0.0,
+                  "evidence_status": "unknown",
+                  "reason": "Ease-of-use is not sufficiently verified",
+                  "evidence_type": "unknown",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "camera",
+                  "weight": 10,
+                  "match_score": 0.15000000000000002,
+                  "weighted_points": 1.5,
+                  "evidence_status": "verified",
+                  "reason": "verified multi-camera system; verified 13MP camera hardware",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "performance",
+                  "weight": 10,
+                  "match_score": 0.65,
+                  "weighted_points": 6.5,
+                  "evidence_status": "verified",
+                  "reason": "Recognized verified performance hardware detected",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "software_support",
+                  "weight": 10,
+                  "match_score": 0.55,
+                  "weighted_points": 5.5,
+                  "evidence_status": "verified",
+                  "reason": "Verified support duration: 2.0 years",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "connectivity",
+                  "weight": 8,
+                  "match_score": 0.35,
+                  "weighted_points": 2.8,
+                  "evidence_status": "verified",
+                  "reason": "4G",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                }
+              ],
+              "eligibility": {
+                "eligible": true,
+                "hard_constraint_failures": []
+              },
+              "evidence": {
+                "official_source": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                "market_source": "https://www.amazon.in/dp/B0GPXTY8V5?tag=guru0906-21",
+                "price": {
+                  "price": 9099.0,
+                  "currency": "INR",
+                  "verified": true,
+                  "status": "verified_from_frozen_offer_snapshot",
+                  "source_type": "amazon_primary_buybox",
+                  "source_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+                  "source_host": "www.amazon.in",
+                  "verified_at": "2026-10-13T13:57:37.941273+00:00",
+                  "availability": "in_stock",
+                  "reason": "Exact-ASIN offer from committed frozen evidence snapshot",
+                  "evidence_method": "amazon_primary_buybox",
+                  "snapshot_id": "positive-2026-10-13-refresh",
+                  "identity_evidence_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite"
+                }
+              }
+            },
+            "battery_evidence": {
+              "match": 0.3144,
+              "status": "derived",
+              "reason": "Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+              "basis": "youtube_playback_hours",
+              "measurements": {
+                "youtube_playback_hours": [
+                  9.433333333333334
+                ],
+                "standby_hours": [
+                  340.0
+                ],
+                "talk_hours": [
+                  30.0
+                ],
+                "capacity_mah": [
+                  5000.0
+                ]
+              }
+            },
+            "why_it_fits": [
+              "budget: Verified price 9099 is within budget 30000"
+            ],
+            "tradeoffs": [
+              "battery: Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it"
+            ],
+            "unknown": [
+              "ease_of_use: Ease-of-use is not sufficiently verified"
+            ],
+            "best_offer": null
+          },
+          {
+            "product_id": "frozen-B0HG9SZ7HD",
+            "canonical_product_id": "cw-mobile-77",
+            "asin": "B0HG9SZ7HD",
+            "title": "Lava Virat V1",
+            "brand": "Lava",
+            "price": 9889.0,
+            "fit_percent": 50,
+            "raw_fit_percent": 56,
+            "evidence_coverage_percent": 90,
+            "quality_score": 39.97,
+            "quality_evidence_coverage_percent": 87,
+            "scoring_contract": "capability-with-separate-evidence-v1",
+            "score_trace": {
+              "policy_version": "capability-with-separate-evidence-v1",
+              "query": "mobile under 30000",
+              "priority_weights": {
+                "budget": 24,
+                "battery": 14,
+                "display": 14,
+                "ease_of_use": 10,
+                "camera": 10,
+                "performance": 10,
+                "software_support": 10,
+                "connectivity": 8
+              },
+              "criteria": [
+                {
+                  "criterion": "budget",
+                  "weight": 24,
+                  "match_score": 1.0,
+                  "weighted_points": 24.0,
+                  "evidence_status": "verified",
+                  "reason": "Verified price 9889 is within budget 30000",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+                  "observed_at": "2026-10-13T13:57:40.862981+00:00"
+                },
+                {
+                  "criterion": "battery",
+                  "weight": 14,
+                  "match_score": 0.3417,
+                  "weighted_points": 4.78,
+                  "evidence_status": "derived",
+                  "reason": "Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+                  "evidence_type": "youtube_playback_hours",
+                  "verified_value": {
+                    "youtube_playback_hours": [
+                      10.25
+                    ],
+                    "standby_hours": [
+                      340.0
+                    ],
+                    "talk_hours": [
+                      30.0
+                    ],
+                    "capacity_mah": [
+                      5000.0
+                    ]
+                  },
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "display",
+                  "weight": 14,
+                  "match_score": 0.45,
+                  "weighted_points": 6.3,
+                  "evidence_status": "verified",
+                  "reason": "6.75-inch class display",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "ease_of_use",
+                  "weight": 10,
+                  "match_score": null,
+                  "weighted_points": 0.0,
+                  "evidence_status": "unknown",
+                  "reason": "Ease-of-use is not sufficiently verified",
+                  "evidence_type": "unknown",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "camera",
+                  "weight": 10,
+                  "match_score": 0.05,
+                  "weighted_points": 0.5,
+                  "evidence_status": "verified",
+                  "reason": "verified 13MP camera hardware",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "performance",
+                  "weight": 10,
+                  "match_score": 0.65,
+                  "weighted_points": 6.5,
+                  "evidence_status": "verified",
+                  "reason": "Recognized verified performance hardware detected",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "software_support",
+                  "weight": 10,
+                  "match_score": 0.55,
+                  "weighted_points": 5.5,
+                  "evidence_status": "verified",
+                  "reason": "Verified support duration: 2.0 years",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "connectivity",
+                  "weight": 8,
+                  "match_score": 0.35,
+                  "weighted_points": 2.8,
+                  "evidence_status": "verified",
+                  "reason": "4G",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                }
+              ],
+              "eligibility": {
+                "eligible": true,
+                "hard_constraint_failures": []
+              },
+              "evidence": {
+                "official_source": "https://www.lavamobiles.com/smartphones/virat-v1",
+                "market_source": "https://www.amazon.in/dp/B0HG9SZ7HD?tag=guru0906-21",
+                "price": {
+                  "price": 9889.0,
+                  "currency": "INR",
+                  "verified": true,
+                  "status": "verified_from_frozen_offer_snapshot",
+                  "source_type": "amazon_primary_buybox",
+                  "source_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+                  "source_host": "www.amazon.in",
+                  "verified_at": "2026-10-13T13:57:40.862981+00:00",
+                  "availability": "in_stock",
+                  "reason": "Exact-ASIN offer from committed frozen evidence snapshot",
+                  "evidence_method": "amazon_primary_buybox",
+                  "snapshot_id": "positive-2026-10-13-refresh",
+                  "identity_evidence_url": "https://www.lavamobiles.com/smartphones/virat-v1"
+                }
+              }
+            },
+            "battery_evidence": {
+              "match": 0.3417,
+              "status": "derived",
+              "reason": "Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+              "basis": "youtube_playback_hours",
+              "measurements": {
+                "youtube_playback_hours": [
+                  10.25
+                ],
+                "standby_hours": [
+                  340.0
+                ],
+                "talk_hours": [
+                  30.0
+                ],
+                "capacity_mah": [
+                  5000.0
+                ]
+              }
+            },
+            "why_it_fits": [
+              "budget: Verified price 9889 is within budget 30000"
+            ],
+            "tradeoffs": [
+              "battery: Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it"
+            ],
+            "unknown": [
+              "ease_of_use: Ease-of-use is not sufficiently verified"
+            ],
+            "best_offer": null
+          }
+        ],
+        "market_quality_status": "VERIFIED_SCOPE",
+        "completion_status": "INCOMPLETE"
+      },
+      "rejection_summary": []
+    },
+    {
+      "id": "PILOT-04",
+      "query": "mobile under 30k",
+      "status": "EXECUTED_WITH_RESULTS",
+      "snapshot_source_query": "FROZEN_CATALOGUE_INTEGRATION",
+      "semantic": {
+        "query": "mobile under 30k",
+        "intent": {
+          "intent": "recommendation",
+          "category": "smartphone",
+          "budget_min": null,
+          "budget_max": 30000,
+          "features": [],
+          "brands": [],
+          "compare": false,
+          "keywords": [
+            "mobile",
+            "under",
+            "30k"
+          ],
+          "user_profile": null,
+          "use_case": [],
+          "hard_constraints": [
+            "budget_max"
+          ],
+          "must_have": [],
+          "preferred": [],
+          "avoid": [],
+          "priority_weights": {
+            "budget": 24,
+            "battery": 14,
+            "display": 14,
+            "ease_of_use": 10,
+            "camera": 10,
+            "performance": 10,
+            "software_support": 10,
+            "connectivity": 8
+          },
+          "tv_requirements": {}
+        },
+        "stage_counts": {
+          "discovered": 34,
+          "identity_prepared": 34,
+          "identity_verified": 34,
+          "official_verified": 15,
+          "evidence_ready": 34,
+          "fit_scored": 34,
+          "qualifying_50_plus_raw": 2,
+          "qualifying_unique_models": 2,
+          "qualifying_50_plus": 2,
+          "recommendations_returned": 2
+        },
+        "recommendations": [
+          {
+            "product_id": "frozen-B0GPXTY8V5",
+            "canonical_product_id": "cw-mobile-79",
+            "asin": "B0GPXTY8V5",
+            "title": "lava Bold N2 Lite",
+            "brand": "lava",
+            "price": 9099.0,
+            "fit_percent": 51,
+            "raw_fit_percent": 57,
+            "evidence_coverage_percent": 90,
+            "quality_score": 40.91,
+            "quality_evidence_coverage_percent": 87,
+            "scoring_contract": "capability-with-separate-evidence-v1",
+            "score_trace": {
+              "policy_version": "capability-with-separate-evidence-v1",
+              "query": "mobile under 30k",
+              "priority_weights": {
+                "budget": 24,
+                "battery": 14,
+                "display": 14,
+                "ease_of_use": 10,
+                "camera": 10,
+                "performance": 10,
+                "software_support": 10,
+                "connectivity": 8
+              },
+              "criteria": [
+                {
+                  "criterion": "budget",
+                  "weight": 24,
+                  "match_score": 1.0,
+                  "weighted_points": 24.0,
+                  "evidence_status": "verified",
+                  "reason": "Verified price 9099 is within budget 30000",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+                  "observed_at": "2026-10-13T13:57:37.941273+00:00"
+                },
+                {
+                  "criterion": "battery",
+                  "weight": 14,
+                  "match_score": 0.3144,
+                  "weighted_points": 4.4,
+                  "evidence_status": "derived",
+                  "reason": "Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+                  "evidence_type": "youtube_playback_hours",
+                  "verified_value": {
+                    "youtube_playback_hours": [
+                      9.433333333333334
+                    ],
+                    "standby_hours": [
+                      340.0
+                    ],
+                    "talk_hours": [
+                      30.0
+                    ],
+                    "capacity_mah": [
+                      5000.0
+                    ]
+                  },
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "display",
+                  "weight": 14,
+                  "match_score": 0.45,
+                  "weighted_points": 6.3,
+                  "evidence_status": "verified",
+                  "reason": "6.75-inch class display",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "ease_of_use",
+                  "weight": 10,
+                  "match_score": null,
+                  "weighted_points": 0.0,
+                  "evidence_status": "unknown",
+                  "reason": "Ease-of-use is not sufficiently verified",
+                  "evidence_type": "unknown",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "camera",
+                  "weight": 10,
+                  "match_score": 0.15000000000000002,
+                  "weighted_points": 1.5,
+                  "evidence_status": "verified",
+                  "reason": "verified multi-camera system; verified 13MP camera hardware",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "performance",
+                  "weight": 10,
+                  "match_score": 0.65,
+                  "weighted_points": 6.5,
+                  "evidence_status": "verified",
+                  "reason": "Recognized verified performance hardware detected",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "software_support",
+                  "weight": 10,
+                  "match_score": 0.55,
+                  "weighted_points": 5.5,
+                  "evidence_status": "verified",
+                  "reason": "Verified support duration: 2.0 years",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "connectivity",
+                  "weight": 8,
+                  "match_score": 0.35,
+                  "weighted_points": 2.8,
+                  "evidence_status": "verified",
+                  "reason": "4G",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                  "observed_at": null
+                }
+              ],
+              "eligibility": {
+                "eligible": true,
+                "hard_constraint_failures": []
+              },
+              "evidence": {
+                "official_source": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+                "market_source": "https://www.amazon.in/dp/B0GPXTY8V5?tag=guru0906-21",
+                "price": {
+                  "price": 9099.0,
+                  "currency": "INR",
+                  "verified": true,
+                  "status": "verified_from_frozen_offer_snapshot",
+                  "source_type": "amazon_primary_buybox",
+                  "source_url": "https://www.amazon.in/dp/B0GPXTY8V5",
+                  "source_host": "www.amazon.in",
+                  "verified_at": "2026-10-13T13:57:37.941273+00:00",
+                  "availability": "in_stock",
+                  "reason": "Exact-ASIN offer from committed frozen evidence snapshot",
+                  "evidence_method": "amazon_primary_buybox",
+                  "snapshot_id": "positive-2026-10-13-refresh",
+                  "identity_evidence_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite"
+                }
+              }
+            },
+            "battery_evidence": {
+              "match": 0.3144,
+              "status": "derived",
+              "reason": "Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+              "basis": "youtube_playback_hours",
+              "measurements": {
+                "youtube_playback_hours": [
+                  9.433333333333334
+                ],
+                "standby_hours": [
+                  340.0
+                ],
+                "talk_hours": [
+                  30.0
+                ],
+                "capacity_mah": [
+                  5000.0
+                ]
+              }
+            },
+            "why_it_fits": [
+              "budget: Verified price 9099 is within budget 30000"
+            ],
+            "tradeoffs": [
+              "battery: Reported youtube playback hours: 9.43333 hours; active-use fit heuristic, test conditions may differ; capacity does not override it"
+            ],
+            "unknown": [
+              "ease_of_use: Ease-of-use is not sufficiently verified"
+            ],
+            "best_offer": null
+          },
+          {
+            "product_id": "frozen-B0HG9SZ7HD",
+            "canonical_product_id": "cw-mobile-77",
+            "asin": "B0HG9SZ7HD",
+            "title": "Lava Virat V1",
+            "brand": "Lava",
+            "price": 9889.0,
+            "fit_percent": 50,
+            "raw_fit_percent": 56,
+            "evidence_coverage_percent": 90,
+            "quality_score": 39.97,
+            "quality_evidence_coverage_percent": 87,
+            "scoring_contract": "capability-with-separate-evidence-v1",
+            "score_trace": {
+              "policy_version": "capability-with-separate-evidence-v1",
+              "query": "mobile under 30k",
+              "priority_weights": {
+                "budget": 24,
+                "battery": 14,
+                "display": 14,
+                "ease_of_use": 10,
+                "camera": 10,
+                "performance": 10,
+                "software_support": 10,
+                "connectivity": 8
+              },
+              "criteria": [
+                {
+                  "criterion": "budget",
+                  "weight": 24,
+                  "match_score": 1.0,
+                  "weighted_points": 24.0,
+                  "evidence_status": "verified",
+                  "reason": "Verified price 9889 is within budget 30000",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+                  "observed_at": "2026-10-13T13:57:40.862981+00:00"
+                },
+                {
+                  "criterion": "battery",
+                  "weight": 14,
+                  "match_score": 0.3417,
+                  "weighted_points": 4.78,
+                  "evidence_status": "derived",
+                  "reason": "Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+                  "evidence_type": "youtube_playback_hours",
+                  "verified_value": {
+                    "youtube_playback_hours": [
+                      10.25
+                    ],
+                    "standby_hours": [
+                      340.0
+                    ],
+                    "talk_hours": [
+                      30.0
+                    ],
+                    "capacity_mah": [
+                      5000.0
+                    ]
+                  },
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "display",
+                  "weight": 14,
+                  "match_score": 0.45,
+                  "weighted_points": 6.3,
+                  "evidence_status": "verified",
+                  "reason": "6.75-inch class display",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "ease_of_use",
+                  "weight": 10,
+                  "match_score": null,
+                  "weighted_points": 0.0,
+                  "evidence_status": "unknown",
+                  "reason": "Ease-of-use is not sufficiently verified",
+                  "evidence_type": "unknown",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "camera",
+                  "weight": 10,
+                  "match_score": 0.05,
+                  "weighted_points": 0.5,
+                  "evidence_status": "verified",
+                  "reason": "verified 13MP camera hardware",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "performance",
+                  "weight": 10,
+                  "match_score": 0.65,
+                  "weighted_points": 6.5,
+                  "evidence_status": "verified",
+                  "reason": "Recognized verified performance hardware detected",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "software_support",
+                  "weight": 10,
+                  "match_score": 0.55,
+                  "weighted_points": 5.5,
+                  "evidence_status": "verified",
+                  "reason": "Verified support duration: 2.0 years",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                },
+                {
+                  "criterion": "connectivity",
+                  "weight": 8,
+                  "match_score": 0.35,
+                  "weighted_points": 2.8,
+                  "evidence_status": "verified",
+                  "reason": "4G",
+                  "evidence_type": "verified",
+                  "verified_value": null,
+                  "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+                  "observed_at": null
+                }
+              ],
+              "eligibility": {
+                "eligible": true,
+                "hard_constraint_failures": []
+              },
+              "evidence": {
+                "official_source": "https://www.lavamobiles.com/smartphones/virat-v1",
+                "market_source": "https://www.amazon.in/dp/B0HG9SZ7HD?tag=guru0906-21",
+                "price": {
+                  "price": 9889.0,
+                  "currency": "INR",
+                  "verified": true,
+                  "status": "verified_from_frozen_offer_snapshot",
+                  "source_type": "amazon_primary_buybox",
+                  "source_url": "https://www.amazon.in/dp/B0HG9SZ7HD",
+                  "source_host": "www.amazon.in",
+                  "verified_at": "2026-10-13T13:57:40.862981+00:00",
+                  "availability": "in_stock",
+                  "reason": "Exact-ASIN offer from committed frozen evidence snapshot",
+                  "evidence_method": "amazon_primary_buybox",
+                  "snapshot_id": "positive-2026-10-13-refresh",
+                  "identity_evidence_url": "https://www.lavamobiles.com/smartphones/virat-v1"
+                }
+              }
+            },
+            "battery_evidence": {
+              "match": 0.3417,
+              "status": "derived",
+              "reason": "Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it",
+              "basis": "youtube_playback_hours",
+              "measurements": {
+                "youtube_playback_hours": [
+                  10.25
+                ],
+                "standby_hours": [
+                  340.0
+                ],
+                "talk_hours": [
+                  30.0
+                ],
+                "capacity_mah": [
+                  5000.0
+                ]
+              }
+            },
+            "why_it_fits": [
+              "budget: Verified price 9889 is within budget 30000"
+            ],
+            "tradeoffs": [
+              "battery: Reported youtube playback hours: 10.25 hours; active-use fit heuristic, test conditions may differ; capacity does not override it"
+            ],
+            "unknown": [
+              "ease_of_use: Ease-of-use is not sufficiently verified"
+            ],
+            "best_offer": null
+          }
+        ],
+        "market_quality_status": "VERIFIED_SCOPE",
+        "completion_status": "INCOMPLETE"
+      },
+      "rejection_summary": []
+    }
+  ],
+  "counts": {
+    "executed": 4,
+    "with_results": 4,
+    "incomplete": 0,
+    "technical_failure": 0,
+    "fixture_gap": 0,
+    "deterministic_matches": 4,
+    "deterministic_mismatches": 0
+  },
+  "mismatch_ids": [],
+  "quality_review_cases": [],
+  "quality_review_status": "PROPOSED_NOT_INDEPENDENTLY_APPROVED"
+}

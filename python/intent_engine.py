@@ -6,6 +6,8 @@ Intent Engine v2.0
 
 from __future__ import annotations
 import re
+import json
+import hashlib
 from dataclasses import dataclass, asdict, field
 
 
@@ -27,6 +29,60 @@ class ShoppingIntent:
     preferred: list[str] = field(default_factory=list)
     avoid: list[str] = field(default_factory=list)
     priority_weights: dict[str, int] = field(default_factory=dict)
+
+
+# This version identifies the semantic fields used by downstream discovery,
+# eligibility and ranking.  ``keywords`` and the original query text are
+# deliberately excluded because spacing, punctuation and budget shorthand can
+# differ while the shopper's requirements remain identical.
+CANONICAL_INTENT_SIGNATURE_VERSION = "intent-signature-v1"
+_SEMANTIC_INTENT_FIELDS = (
+    "intent", "category", "budget_min", "budget_max", "features", "brands",
+    "compare", "user_profile", "use_case", "hard_constraints", "must_have",
+    "preferred", "avoid", "priority_weights", "tv_requirements",
+)
+_ORDER_INSENSITIVE_INTENT_FIELDS = {
+    "features", "brands", "use_case", "hard_constraints", "must_have",
+    "preferred", "avoid",
+}
+_OPTIONAL_IDENTITY_FIELDS = (
+    "model", "model_context", "exact_model", "variant", "variant_signature",
+    "ram_gb", "storage_gb", "brand_context",
+)
+
+
+def canonical_intent_signature(intent_or_query: dict | str) -> str:
+    """Return a stable semantic signature for equivalent shopping intents.
+
+    The existing parsed intent is the source of truth.  Lists that represent
+    sets of constraints are sorted for lexical-equivalence stability; ordered
+    ranking weights and scalar constraints are preserved.  Raw keywords are
+    excluded so ``30k`` and ``30 k`` cannot become different cache keys.
+    """
+    parsed = parse_query(intent_or_query) if isinstance(intent_or_query, str) else dict(intent_or_query or {})
+    fields: dict[str, object] = {}
+    keys = list(_SEMANTIC_INTENT_FIELDS)
+    keys.extend(key for key in _OPTIONAL_IDENTITY_FIELDS if key in parsed)
+    for key in keys:
+        value = parsed.get(key)
+        if key in _ORDER_INSENSITIVE_INTENT_FIELDS:
+            value = sorted({str(item) for item in (value or [])})
+        elif key == "priority_weights":
+            value = {str(name): int(weight) for name, weight in sorted((value or {}).items())}
+        elif key == "tv_requirements":
+            value = {str(name): value[name] for name in sorted((value or {}))}
+        fields[key] = value
+    return json.dumps(
+        {"version": CANONICAL_INTENT_SIGNATURE_VERSION, "intent": fields},
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    )
+
+
+def canonical_intent_signature_hash(intent_or_query: dict | str) -> str:
+    """Return the compact identifier used in reports and receipts."""
+    return hashlib.sha256(canonical_intent_signature(intent_or_query).encode("utf-8")).hexdigest()
 
 
 def normalize(text: str) -> str:

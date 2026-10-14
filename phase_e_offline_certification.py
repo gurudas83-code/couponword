@@ -22,7 +22,7 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "python"))
 
-from intent_engine import parse_query
+from intent_engine import canonical_intent_signature, parse_query
 try:
     from market_discovery import get_candidate_snapshot
     import shopping_intelligence_pipeline as pipeline
@@ -159,15 +159,6 @@ def discovery_for(query: str, intent: dict[str, Any], max_candidates: int, *, al
     # Reuse only a snapshot whose structured intent constraints are identical.
     # Lexical wording may differ, but budget, category, brand, variant and
     # preference constraints must match exactly.
-    def signature(parsed: dict[str, Any]) -> tuple[Any, ...]:
-        return (
-            parsed.get("category"), parsed.get("budget_min"), parsed.get("budget_max"),
-            tuple(sorted(parsed.get("brands") or [])),
-            tuple(sorted(parsed.get("must_have") or [])),
-            tuple(sorted(parsed.get("preferred") or [])),
-            tuple(sorted(parsed.get("avoid") or [])),
-        )
-
     global _DISCOVERY_CACHE
     if _DISCOVERY_CACHE is None:
         _DISCOVERY_CACHE = __import__("market_discovery").load_discovery_cache()
@@ -178,7 +169,7 @@ def discovery_for(query: str, intent: dict[str, Any], max_candidates: int, *, al
             continue
         snapshot_query = key[len(prefix):-len(f"::{max_candidates}")]
         snapshot_intent = parse_query(snapshot_query)
-        if signature(snapshot_intent) != signature(intent):
+        if canonical_intent_signature(snapshot_intent) != canonical_intent_signature(intent):
             continue
         candidate = get_candidate_snapshot(
             query=snapshot_query,
