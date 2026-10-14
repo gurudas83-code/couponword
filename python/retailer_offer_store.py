@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import os
+import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -31,15 +33,37 @@ def load_offer_database() -> dict[str, Any]:
 
 def save_offer_database(data: dict[str, Any]) -> None:
     OFFERS_DB.parent.mkdir(parents=True, exist_ok=True)
-
-    OFFERS_DB.write_text(
-        json.dumps(
-            data,
-            indent=2,
-            ensure_ascii=False,
-        ),
-        encoding="utf-8",
+    payload = json.dumps(
+        data,
+        indent=2,
+        ensure_ascii=False,
     )
+
+    # Replace the authoritative file only after a complete, flushed JSON
+    # document exists.  This keeps a process interruption from leaving a
+    # truncated offer store that the API cannot parse after restart.
+    temporary_path: str | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            dir=OFFERS_DB.parent,
+            prefix=f".{OFFERS_DB.name}.",
+            suffix=".tmp",
+            delete=False,
+        ) as handle:
+            handle.write(payload)
+            handle.flush()
+            os.fsync(handle.fileno())
+            temporary_path = handle.name
+        os.replace(temporary_path, OFFERS_DB)
+        temporary_path = None
+    finally:
+        if temporary_path:
+            try:
+                os.unlink(temporary_path)
+            except FileNotFoundError:
+                pass
 
 
 def add_verified_offer(
