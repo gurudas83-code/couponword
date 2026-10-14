@@ -624,3 +624,66 @@ Production readiness: NO.**
 or verified against the allow-listed Actions artifact. **Next action:** obtain
 separate authorization to push the reviewed 42-commit release, run the artifact
 workflow, switch Pages to Actions, and complete staging smoke verification.
+
+## Post-push frozen-offer handoff and score-trace verification (2026-10-14)
+
+The reviewed 42-commit release is already present on `origin/main` at
+`2db6534eb4dba1cdb6f18df46bf2275e0a9b0d1e`. This local change is a scoped
+follow-up and has not been pushed. It fixes the frozen Phase-E integration lane
+by handing only the committed exact-ASIN offer snapshot
+`data/phase_e_positive_offer_snapshot_2026-10-13-refresh.json` into the normal
+price-evidence adapter, and by disabling persistent evidence writes during
+catalogue-mode replay. Production persistence outside catalogue mode is
+unchanged.
+
+The frozen `mobile under 50000` replay now executes the real identity, evidence,
+eligibility, scoring, ranking and serialization path and is deterministic on
+repeat (1/1). Its exact verified Top-3 is:
+
+| Rank | Exact variant | ASIN | Verified price | Fit | Raw fit | Evidence coverage |
+|---|---|---|---:|---:|---:|---:|
+| 1 | Samsung Galaxy A56 5G 8GB/128GB | B0H1WY55ZL | ₹31,999 | 62 | 77 | 80% |
+| 2 | Lava Bold N2 Lite 3GB/64GB | B0GPXTY8V5 | ₹9,099 | 51 | 57 | 90% |
+| 3 | Lava Virat V1 4GB/64GB | B0HG9SZ7HD | ₹9,889 | 50 | 56 | 90% |
+
+The `best battery under 20000` replay is an honest executed incomplete result:
+34 candidates reached identity, evidence and scoring, but none reached the
+fit threshold (`qualifying_50_plus_raw=0`). The closest verified candidates
+were Lava Virat V1 and Lava Bold N2 Lite at fit 49 with 91% evidence coverage;
+their available battery evidence is playback/capacity-derived and does not
+establish the active-use endurance required by the battery policy. Samsung
+Galaxy A56 was rejected for the ₹20,000 hard budget. No threshold or identity
+guard was changed, and no third phone was invented.
+
+Focused verification after this fix:
+
+| Check | Result |
+|---|---|
+| Frozen offer exact-ASIN/source guard | 7/7 PASS |
+| Battery evidence guards | 11/11 PASS |
+| Battery eligibility guards | 3/3 PASS |
+| Gate-3 API tests | 7/7 PASS |
+| Identity/canonical/price regressions | 8/8 PASS |
+| Frontend offer/price/premium checks | 6/6 PASS |
+| `node --check app.js` | PASS |
+| Offline harness | 5 PASS, 1 FAIL (preserved historical `FIXTURE_GAP`) |
+
+The historical three-result fixture remains visible and failed because its
+immutable evidence is unrecoverable; the owner-approved genuine two-result
+successor remains the applicable regression. The battery result is a verified
+coverage/quality gap, not a proven engine defect. Live Render, GitHub Pages
+workflow execution and production smoke verification remain **UNVERIFIED**;
+no deployment was performed. Local engine acceptance is **PASS under the
+approved supersession**, while full market-quality/production acceptance is
+**INCOMPLETE** until the battery evidence gap and live smoke checks are closed.
+
+The earlier closure paragraph's remote-workflow `404` observation is historical.
+The current `origin/main` now contains `.github/workflows/public-pages-artifact.yml`
+with `workflow_dispatch` only; the workflow has not been run, so live Pages
+publication remains unverified.
+
+Current local release receipt is one scoped commit ahead of
+`origin/main=2db6534eb4dba1cdb6f18df46bf2275e0a9b0d1e`; Git is the source of
+the exact local `HEAD` SHA and no push was performed. The pre-existing modified caches, research files,
+zip backup and `outputs/` receipts remain untracked or unstaged and were not
+included in this commit.

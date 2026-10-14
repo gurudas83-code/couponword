@@ -8,6 +8,7 @@ from pathlib import Path
 from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parent / 'python'))
 import product_evidence_store as store
+from retail_price_evidence import build_price_evidence
 
 class ReleaseEvidenceTests(unittest.TestCase):
     def test_public_pages_artifact_excludes_admin_and_internal_files(self):
@@ -52,6 +53,27 @@ class ReleaseEvidenceTests(unittest.TestCase):
         for row in under_10000:
             self.assertTrue(row["identity_evidence_url"].startswith("https://"))
             self.assertTrue(row["observed_at"])
+
+    def test_frozen_offer_price_requires_exact_asin_and_verified_source(self):
+        snapshot = json.loads(
+            (Path(__file__).resolve().parent / "data" /
+             "phase_e_positive_offer_snapshot_2026-10-13-refresh.json")
+            .read_text(encoding="utf-8")
+        )
+        offer = snapshot["offers"][0]
+        candidate = {
+            "source": "FROZEN_CATALOGUE_INTEGRATION",
+            "asin": offer["retailer_product_id"],
+            "frozen_offer": {**offer, "snapshot_id": snapshot["snapshot_id"]},
+        }
+        evidence = build_price_evidence(candidate)
+        self.assertTrue(evidence["verified"])
+        self.assertEqual(evidence["price"], offer["price"])
+        self.assertEqual(evidence["verified_at"], offer["observed_at"])
+        self.assertEqual(evidence["evidence_method"], "amazon_primary_buybox")
+
+        mismatched = dict(candidate, asin="B000000000")
+        self.assertFalse(build_price_evidence(mismatched)["verified"])
 
     def test_admin_review_is_read_only_and_public_api_has_no_mutation_route(self):
         root = Path(__file__).resolve().parent

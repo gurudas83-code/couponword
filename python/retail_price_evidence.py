@@ -118,6 +118,57 @@ def unique_prices(values: list[object]) -> list[float]:
 
     return found
 
+
+def _frozen_offer_price_evidence(candidate: dict[str, Any]) -> dict[str, Any] | None:
+    """Accept only the committed exact-ASIN offer used by offline replay."""
+    if candidate.get("source") != "FROZEN_CATALOGUE_INTEGRATION":
+        return None
+
+    offer = candidate.get("frozen_offer")
+    if not isinstance(offer, dict):
+        return None
+
+    candidate_asin = clean(candidate.get("asin")).upper()
+    offer_asin = clean(offer.get("retailer_product_id")).upper()
+    source_url = clean(offer.get("product_url"))
+    parsed = urlparse(source_url)
+    path_asin = clean((parsed.path or "").rstrip("/").rsplit("/", 1)[-1]).upper()
+    try:
+        price = float(offer.get("price"))
+    except (TypeError, ValueError):
+        return None
+
+    if (
+        not candidate_asin
+        or candidate_asin != offer_asin
+        or path_asin != offer_asin
+        or parsed.scheme != "https"
+        or (parsed.hostname or "").lower() != "www.amazon.in"
+        or offer.get("retailer") != "amazon"
+        or offer.get("evidence_method") != "amazon_primary_buybox"
+        or offer.get("availability") not in {"in_stock", "out_of_stock"}
+        or price <= 0
+        or not clean(offer.get("observed_at"))
+        or not clean(offer.get("identity_evidence_url")).startswith("https://")
+    ):
+        return None
+
+    return {
+        "price": price,
+        "currency": "INR",
+        "verified": True,
+        "status": "verified_from_frozen_offer_snapshot",
+        "source_type": "amazon_primary_buybox",
+        "source_url": source_url,
+        "source_host": "www.amazon.in",
+        "verified_at": clean(offer.get("observed_at")),
+        "availability": offer.get("availability"),
+        "reason": "Exact-ASIN offer from committed frozen evidence snapshot",
+        "evidence_method": "amazon_primary_buybox",
+        "snapshot_id": clean(offer.get("snapshot_id")),
+        "identity_evidence_url": clean(offer.get("identity_evidence_url")),
+    }
+
 def extract_price_mentions(text: str) -> list[float]:
     values: list[object] = []
 
@@ -551,6 +602,10 @@ def fetch_structured_price(url: str) -> dict[str, Any]:
     return result
 
 def build_price_evidence(candidate: dict[str, Any]) -> dict[str, Any]:
+    frozen = _frozen_offer_price_evidence(candidate)
+    if frozen is not None:
+        return frozen
+
     source_url = clean(candidate.get("source_url"))
     source_host = clean(candidate.get("source_host"))
     snippet = clean(candidate.get("snippet"))

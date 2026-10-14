@@ -17,6 +17,7 @@ import requests
 import urllib.request
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "python"))
@@ -35,9 +36,57 @@ CORPUS = ROOT / "data" / "mobile_query_corpus_1000.json"
 DEFAULT_OUTPUT = ROOT / "data" / "phase_e_offline_certification.json"
 QUALITY_TAGS = {"camera", "battery", "gaming", "display", "brand", "ram", "storage", "exact_model"}
 OFFLINE_FIXTURE_MANIFEST = ROOT / "data" / "phase_e_offline_fixture_manifest.json"
+POSITIVE_OFFER_SNAPSHOT = ROOT / "data" / "phase_e_positive_offer_snapshot_2026-10-13-refresh.json"
 _DISCOVERY_CACHE: dict[str, Any] | None = None
 _CATALOGUE_CANDIDATES: list[dict[str, Any]] | None = None
+_FROZEN_OFFERS: dict[str, dict[str, Any]] | None = None
 CATALOGUE_MODE = False
+
+def frozen_verified_offers() -> dict[str, dict[str, Any]]:
+    """Load only the committed exact-ASIN offers for the offline lane."""
+    global _FROZEN_OFFERS
+    if _FROZEN_OFFERS is not None:
+        return _FROZEN_OFFERS
+
+    _FROZEN_OFFERS = {}
+    try:
+        payload = json.loads(POSITIVE_OFFER_SNAPSHOT.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return _FROZEN_OFFERS
+
+    snapshot_id = str(payload.get("snapshot_id") or "").strip()
+    if not snapshot_id or payload.get("schema_version") != "phase_e_positive_offer_snapshot.v1":
+        return _FROZEN_OFFERS
+
+    for raw in payload.get("offers") or []:
+        if not isinstance(raw, dict):
+            continue
+        asin = str(raw.get("retailer_product_id") or "").strip().upper()
+        url = str(raw.get("product_url") or "").strip()
+        try:
+            price = float(raw.get("price"))
+        except (TypeError, ValueError):
+            continue
+        parsed = urlparse(url)
+        path_asin = str(parsed.path.rsplit("/", 1)[-1] or "").upper()
+        if (
+            not asin
+            or path_asin != asin
+            or parsed.scheme != "https"
+            or (parsed.hostname or "").lower() != "www.amazon.in"
+            or raw.get("retailer") != "amazon"
+            or raw.get("evidence_method") != "amazon_primary_buybox"
+            or raw.get("availability") not in {"in_stock", "out_of_stock"}
+            or price <= 0
+            or not str(raw.get("observed_at") or "").strip()
+            or not str(raw.get("identity_evidence_url") or "").startswith("https://")
+        ):
+            continue
+        offer = dict(raw)
+        offer["snapshot_id"] = snapshot_id
+        _FROZEN_OFFERS[asin] = offer
+    return _FROZEN_OFFERS
+
 
 def frozen_catalogue_candidates() -> list[dict[str, Any]]:
     global _CATALOGUE_CANDIDATES
@@ -51,17 +100,22 @@ def frozen_catalogue_candidates() -> list[dict[str, Any]]:
                 owned.add(str(retailer["retailer_product_id"]).upper())
     catalogue = json.loads((ROOT / "coupons.json").read_text(encoding="utf-8-sig"))
     catalogue = catalogue if isinstance(catalogue, list) else catalogue.get("products", [])
+    frozen_offers = frozen_verified_offers()
     rows = []
     for item in catalogue:
         asin = str(item.get("asin") or "").upper()
         if asin not in owned or "mobile" not in str(item.get("category") or "").lower() and "phone" not in str(item.get("title") or "").lower():
             continue
-        rows.append({
+        row = {
             "candidate_id": f"frozen-{asin}", "asin": asin,
             "title": item.get("title"), "source_title": item.get("title"),
             "brand": item.get("brand"), "source_url": item.get("link"),
             "market_source_url": item.get("link"), "source": "FROZEN_CATALOGUE_INTEGRATION",
-        })
+        }
+        offer = frozen_offers.get(asin)
+        if offer is not None:
+            row["frozen_offer"] = dict(offer)
+        rows.append(row)
     _CATALOGUE_CANDIDATES = rows
     return rows
 
@@ -192,7 +246,10 @@ def run_once(items: list[dict[str, Any]], max_candidates: int) -> tuple[list[dic
                 payload = pipeline._run_pipeline_once(
                     query, max_candidates=max_candidates, max_results=3,
                     live_fast=True, _discovery=snapshot, _save_discovery_memory=False,
-                    _allow_evidence_writes=CATALOGUE_MODE,
+                    # Frozen replay must never persist extracted evidence into
+                    # the mutable runtime cache. The committed snapshot is the
+                    # only source for this lane.
+                    _allow_evidence_writes=False,
                 )
             execution_class = (
                 "EXECUTED_WITH_RESULTS" if payload.get("recommendations")
