@@ -1422,37 +1422,9 @@ def runtime_profile_from_extraction(
 
     features = normalized_features
 
-    existing_commerce_price = resolved.get("commerce_evidence")
-
-    # The live resolver just checked this exact listing in this request.
-    # Repeating a failed network lookup here adds another timeout without
-    # additional evidence. Keep the failure unknown; never persist a negative
-    # price cache or reuse it for another listing/deep resolver.
-    checked_live_failure = (
-        isinstance(existing_commerce_price, dict)
-        and existing_commerce_price.get("verified") is False
-        and resolved.get("status") == "retailer_identity_verified"
-        and bool(clean(candidate.get("source_url")))
-        and normalize_url(existing_commerce_price.get("source_url") or "")
-            == normalize_url(candidate.get("source_url") or "")
-    )
-    if (
-        isinstance(existing_commerce_price, dict)
-        and ((existing_commerce_price.get("verified") is True
-              and existing_commerce_price.get("price") is not None)
-             or checked_live_failure)
-    ):
-        price_evidence = existing_commerce_price
-    else:
-        price_evidence = build_price_evidence(candidate)
-
-    verified_market_price = (
-        price_evidence.get("price")
-        if price_evidence.get("verified") is True
-        else None
-    )
-
-    # Canonical retailer identity hydration: recover stable identity from exact retailer URLs.
+    # Resolve the exact canonical owner before selecting a current offer.  The
+    # Amazon ASIN remains the identity anchor; a separate first-party offer
+    # may supply the current price without being treated as an Amazon ID.
     candidate_asin = clean(
         candidate.get("asin")
         or identity.get("asin")
@@ -1487,6 +1459,85 @@ def runtime_profile_from_extraction(
                 retailer_product_id=candidate_asin,
             )
         )
+
+    existing_commerce_price = resolved.get("commerce_evidence")
+
+    # The live resolver just checked this exact listing in this request.
+    # Repeating a failed network lookup here adds another timeout without
+    # additional evidence. Keep the failure unknown; never persist a negative
+    # price cache or reuse it for another listing/deep resolver.
+    checked_live_failure = (
+        isinstance(existing_commerce_price, dict)
+        and existing_commerce_price.get("verified") is False
+        and resolved.get("status") == "retailer_identity_verified"
+        and bool(clean(candidate.get("source_url")))
+        and normalize_url(existing_commerce_price.get("source_url") or "")
+            == normalize_url(candidate.get("source_url") or "")
+    )
+    if (
+        isinstance(existing_commerce_price, dict)
+        and ((existing_commerce_price.get("verified") is True
+              and existing_commerce_price.get("price") is not None)
+             or checked_live_failure)
+    ):
+        price_evidence = existing_commerce_price
+    else:
+        price_evidence = build_price_evidence(candidate)
+
+    # A durable, exact first-party offer is a safe fallback only when the
+    # candidate listing has no usable current price.  It must match the
+    # canonical model/variant and remain within the existing freshness gate.
+    if (
+        canonical_product_id
+        and not (
+            price_evidence.get("verified") is True
+            and price_evidence.get("price") is not None
+            and str(price_evidence.get("availability") or "").strip().lower()
+                == "in_stock"
+        )
+    ):
+        from retailer_offer_store import find_fresh_verified_offer
+
+        stored_offer = find_fresh_verified_offer(
+            product_id=canonical_product_id,
+            brand=clean(identity.get("brand")),
+            model=clean(identity.get("model")),
+            variant=clean(
+                identity.get("original_title")
+                or identity.get("search_name")
+                or candidate.get("source_title")
+            ),
+            require_in_stock=True,
+        )
+        if stored_offer:
+            price_evidence = {
+                "price": stored_offer.get("price"),
+                "currency": stored_offer.get("currency") or "INR",
+                "verified": True,
+                "status": "verified_from_stored_first_party_offer",
+                "source_type": stored_offer.get("evidence_method"),
+                "source_url": stored_offer.get("source_url"),
+                "source_host": (urlparse(
+                    stored_offer.get("source_url") or ""
+                ).hostname or ""),
+                "verified_at": stored_offer.get("verified_at"),
+                "availability": stored_offer.get("availability"),
+                "reason": (
+                    "Exact canonical first-party offer from the verified "
+                    "retailer offer store"
+                ),
+                "evidence_method": stored_offer.get("evidence_method"),
+                "retailer": stored_offer.get("retailer"),
+                "retailer_product_id": stored_offer.get(
+                    "retailer_product_id"
+                ),
+            }
+
+    verified_market_price = (
+        price_evidence.get("price")
+        if price_evidence.get("verified") is True
+        else None
+    )
 
     # Promote compact mobile variant capacity into structured evidence only
     # after canonical retailer identity and exact live-retailer identity pass.
