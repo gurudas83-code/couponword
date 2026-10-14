@@ -19,7 +19,7 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlparse, urlunparse
+from urllib.parse import parse_qs, urlparse, urlunparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -50,6 +50,8 @@ ALLOWED_RETAIL_HOSTS = (
 ALLOWED_MANUFACTURER_HOSTS = (
     "oneplus.in",
     "samsung.com",
+    "shop.vivo.com",
+    "shop.lavamobiles.com",
 )
 
 REQUEST_HEADERS = {
@@ -206,6 +208,26 @@ def manufacturer_product_url_allowed(url: str) -> bool:
 
     if host.endswith("samsung.com"):
         return path.startswith("/in/smartphones/") and "/buy" in path
+
+    # First-party vivo store pages expose a selected SKU in the query.  Keep
+    # that exact-SKU requirement so a generic product page cannot become a
+    # current offer for an arbitrary RAM/storage variant.
+    if host.endswith("shop.vivo.com"):
+        sku_id = parse_qs(parsed.query).get("skuId", [""])[0]
+        return bool(
+            re.fullmatch(r"/in/product/\d+", path)
+            and re.fullmatch(r"\d+", sku_id)
+        )
+
+    # Lava's first-party Shopify product pages identify the selected variant
+    # with a numeric variant query.  A collection, search or support page is
+    # never an offer source.
+    if host.endswith("shop.lavamobiles.com"):
+        variant_id = parse_qs(parsed.query).get("variant", [""])[0]
+        return bool(
+            re.fullmatch(r"/products/[a-z0-9][a-z0-9-]*", path)
+            and re.fullmatch(r"\d+", variant_id)
+        )
 
     return False
 

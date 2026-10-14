@@ -5115,8 +5115,13 @@ def extract_one(
             )
         ):
             requested_capacity = listing_capacity
-        extract_vivo_selected_capacity(soup, specifications, official_url, identity,
-                                       research_result.get("verified"))
+        extract_vivo_selected_capacity(
+            soup,
+            specifications,
+            official_url,
+            identity,
+            research_result.get("verified"),
+        )
         page_capacity = variant_signature_from_specifications(specifications)
         model_name = clean_text(
             f"{identity.get('brand')} {identity.get('model')}"
@@ -5124,6 +5129,23 @@ def extract_one(
         model_score = page_identity_score(
             model_name, page_title, canonical_url
         )
+
+        # The selected-SKU heading is the strongest identity signal on the
+        # vivo store page, whose title intentionally omits the brand.  Once
+        # the existing exact-capacity gate has bound both physical fields,
+        # do not demote that verified page to manual review merely because
+        # the generic title score lacks the word "vivo".
+        vivo_selected_sku = (
+            clean_text(identity.get("brand")).casefold() == "vivo"
+            and hostname(official_url) == "shop.vivo.com"
+            and re.fullmatch(r"/in/product/\d+", urlparse(official_url).path)
+            and specifications.get("ram", {}).get("source")
+            == "official_selected_sku_heading"
+            and specifications.get("storage", {}).get("source")
+            == "official_selected_sku_heading"
+        )
+        if vivo_selected_sku:
+            model_score = max(model_score, 1.0)
         # Lava labels these exact official model pages without repeating
         # the maker in the HTML title. The
         # missing brand token lowers the generic score even when the

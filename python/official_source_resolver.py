@@ -931,6 +931,41 @@ def direct_official_product_search(
         if model_slug in {"bold-n2", "bold-n2-lite"}:
             path_patterns = (f"/smartphones/{model_slug}",) + path_patterns
 
+    # Manufacturer product URLs normally omit physical capacities from the
+    # slug.  Probe that canonical model slug as a bounded fallback while
+    # retaining the existing page-level identity gate.  This is required for
+    # pages such as Xiaomi's /in/product/redmi-note-17-pro-max-5g/.
+    capacity_free_text = re.sub(
+        r"\b\d+\s*(?:gb|tb)\s*(?:ram|storage|rom)?\b",
+        "",
+        normalized_title,
+        flags=re.I,
+    ).strip()
+    capacity_free_slug = re.sub(
+        r"[^a-z0-9]+", "-", capacity_free_text
+    ).strip("-")
+    if capacity_free_slug and capacity_free_slug != slug:
+        path_patterns = (
+            f"/in/product/{capacity_free_slug}/",
+            f"/in/product/{capacity_free_slug}/specs/",
+            f"/product/{capacity_free_slug}/",
+            f"/product/{capacity_free_slug}/specs/",
+        ) + path_patterns
+
+    # vivo's public product pages use /in/products/<model> rather than the
+    # generic /in/product/<slug> family.  Keep both the 5G and shortened
+    # forms because the official site uses both for the same model family.
+    if normalize_text(brand) == "vivo":
+        vivo_slug = re.sub(r"^vivo-", "", capacity_free_slug or slug)
+        vivo_slugs = [vivo_slug]
+        if vivo_slug.endswith("-5g"):
+            vivo_slugs.append(vivo_slug[:-3].rstrip("-"))
+        path_patterns = tuple(
+            f"/in/products/{candidate_slug}"
+            for candidate_slug in dict.fromkeys(vivo_slugs)
+            if candidate_slug
+        ) + path_patterns
+
     headers = {
         "User-Agent": "Mozilla/5.0",
         "Accept": "text/html,*/*",
