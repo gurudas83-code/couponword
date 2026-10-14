@@ -137,6 +137,49 @@ class ManufacturerOfferAdmissionTests(unittest.TestCase):
             "in_stock",
         )
 
+    def test_existing_manufacturer_offer_is_exposed_in_retailer_trace(self):
+        observed = datetime.now(timezone.utc).isoformat()
+        profile = {
+            "product_id": "cw-mobile-96",
+            "brand": "Vivo",
+            "title": "vivo T5 Pro 5G 8GB RAM 128GB Storage",
+            "asin": "B0H6F4KZGF",
+            "category": "smartphone",
+            "attributes": {"ram": "8GB", "storage": "128GB"},
+            "provenance": {"price_evidence": {}},
+        }
+        identity = {
+            "brand": "Vivo",
+            "model": "T5 Pro 5G",
+            "search_name": "vivo T5 Pro 5G",
+            "original_title": "vivo T5 Pro 5G (Cosmic Black, 8GB RAM, 128GB Storage)",
+        }
+
+        class EmptyLiveOrchestrator:
+            def run(self, *args, **kwargs):
+                return {"offers": [], "comparison": {"status": "no_offers"}}
+
+        with patch.object(
+            offers,
+            "load_offer_database",
+            return_value={"offers": [_offer(observed)]},
+        ), patch.object(
+            pipeline,
+            "MultiRetailerOrchestrator",
+            return_value=EmptyLiveOrchestrator(),
+        ):
+            result = pipeline.enrich_with_multi_retailer(
+                profile=profile,
+                identity=identity,
+                assessment={"criteria": []},
+            )
+
+        self.assertEqual(len(result["retailer_offers"]), 1)
+        self.assertEqual(result["retailer_offers"][0]["retailer"], "vivo")
+        self.assertEqual(result["retailer_offers"][0]["retailer_product_id"], "19410")
+        self.assertEqual(result["retailer_offers"][0]["price"], 41999.0)
+        self.assertEqual(result["retailer_comparison_status"], "no_comparable_price")
+
 
 if __name__ == "__main__":
     unittest.main()

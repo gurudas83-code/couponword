@@ -324,6 +324,65 @@ def enrich_with_multi_retailer(
             seed_evidence=seed_evidence,
         )
 
+        # The common offer store may contain an exact, fresh first-party
+        # offer even when the live connector set has no manufacturer adapter.
+        # Surface that existing offer without treating one retailer as a
+        # multi-retailer "best" comparison or changing Core fit/rank.
+        from retailer_offer_store import find_fresh_verified_offer
+
+        stored_offer = find_fresh_verified_offer(
+            product_id=canonical.product_id,
+            brand=canonical.brand,
+            model=canonical.model,
+            variant=canonical.variant,
+            require_in_stock=True,
+        )
+        if stored_offer:
+            from retailer_contract import RetailerOffer
+            from multi_retailer_engine import compare_offers
+
+            stored_model = RetailerOffer(
+                retailer=stored_offer.get("retailer", ""),
+                product_id=stored_offer.get("product_id", ""),
+                retailer_product_id=stored_offer.get("retailer_product_id", ""),
+                brand=stored_offer.get("brand", ""),
+                model=stored_offer.get("model", ""),
+                variant=stored_offer.get("variant", ""),
+                title=stored_offer.get("title", ""),
+                price=stored_offer.get("price"),
+                mrp=stored_offer.get("mrp"),
+                currency=stored_offer.get("currency", "INR"),
+                availability=stored_offer.get("availability", "unknown"),
+                product_url=stored_offer.get("product_url", ""),
+                affiliate_url=stored_offer.get("affiliate_url", ""),
+                source=stored_offer.get("source", ""),
+                confidence=float(stored_offer.get("confidence", 0.0) or 0.0),
+                last_checked=stored_offer.get("last_checked", ""),
+                metadata=stored_offer.get("metadata", {}),
+            )
+            existing_offers = list(retailer_result.get("offers") or [])
+            stored_key = (
+                stored_model.retailer,
+                stored_model.retailer_product_id,
+            )
+            if not any(
+                (
+                    str(row.get("retailer", "")).strip().lower(),
+                    str(row.get("retailer_product_id", "")).strip(),
+                ) == stored_key
+                for row in existing_offers
+                if isinstance(row, dict)
+            ):
+                existing_offers.append(stored_model.to_dict())
+                retailer_result["offers"] = existing_offers
+                retailer_result["comparison"] = compare_offers(
+                    [
+                        RetailerOffer(**row)
+                        for row in existing_offers
+                        if isinstance(row, dict)
+                    ]
+                )
+
         comparison = retailer_result.get("comparison") or {}
 
         public_offers = []
