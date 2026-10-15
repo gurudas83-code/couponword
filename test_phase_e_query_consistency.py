@@ -38,6 +38,13 @@ class PhaseEQueryConsistencyTests(unittest.TestCase):
         second = dict(base, model="Galaxy S25", ram_gb="12", storage_gb="256")
         self.assertNotEqual(canonical_intent_signature(first), canonical_intent_signature(second))
 
+    def test_named_models_do_not_share_a_budget_only_signature(self):
+        galaxy = parse_query("exact model Galaxy F05 phone under 10000")
+        iphone = parse_query("exact model iPhone 13 phone under 10000")
+        self.assertEqual(galaxy["exact_model"], "galaxy f05")
+        self.assertEqual(iphone["exact_model"], "iphone 13")
+        self.assertNotEqual(canonical_intent_signature(galaxy), canonical_intent_signature(iphone))
+
 
 if __name__ == "__main__":
     unittest.main()

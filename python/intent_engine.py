@@ -15,6 +15,7 @@ from dataclasses import dataclass, asdict, field
 class ShoppingIntent:
     intent: str = "recommendation"
     category: str | None = None
+    exact_model: str | None = None
     budget_min: int | None = None
     budget_max: int | None = None
     features: list[str] = field(default_factory=list)
@@ -323,6 +324,25 @@ def detect_brands(text: str) -> list[str]:
         if any(re.search(rf"\b{re.escape(alias)}\b", text, re.I) for alias in aliases):
             found.append(canonical)
     return found
+
+
+def detect_exact_model(text: str) -> str | None:
+    """Capture only an explicitly named exact-model requirement.
+
+    Discovery and identity remain authoritative for validation.  This field is
+    used to keep semantic signatures from treating different named models as
+    equivalent merely because their category and budget match.
+    """
+    match = re.search(
+        r"\bexact\s+model\s+(.+?)(?=\s+(?:phone|mobile|smartphone|"
+        r"under|below|upto|up\s+to|with|for)\b|$)",
+        text,
+        re.I,
+    )
+    if not match:
+        return None
+    value = re.sub(r"\s+", " ", match.group(1)).strip(" -")
+    return value or None
 
 
 def detect_intent(text: str) -> tuple[str, bool]:
@@ -1502,6 +1522,7 @@ def parse_query(query: str) -> dict:
         ShoppingIntent(
             intent=intent,
             category=category,
+            exact_model=detect_exact_model(text),
             budget_min=budget_min,
             budget_max=budget_max,
             features=detect_features(text),

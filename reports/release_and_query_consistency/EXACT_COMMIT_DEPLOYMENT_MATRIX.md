@@ -8,12 +8,13 @@ No push or deployment was run.
 |---|---|
 | Local/remote ancestry | Local is ahead by 6, behind by 0 |
 | 42 historical commits | Exact on `origin/main` (`5167712..origin/main` = 42; `git cherry` all `+`) |
-| Current seven commits | Six pre-existing local commits plus the scoped query-consistency commit; all local-only and unpushed |
+| Current eight commits | Six pre-existing integration commits plus the semantic-signature and exact-model corrections; all local-only and unpushed |
 | Worktree | Dirty runtime JSON, caches, backups, ZIP and audit files preserved |
 
-The six pre-existing commits and the scoped query-consistency commit are listed
-in `RELEASE_MANIFEST_AND_PENDING_ACTIONS.md`. The 42-commit historical release
-is therefore present on GitHub, while these seven newer commits are not.
+The six pre-existing commits and the two scoped query-consistency corrections
+are listed in `RELEASE_MANIFEST_AND_PENDING_ACTIONS.md`. The 42-commit
+historical release is therefore present on GitHub, while these eight newer
+commits are not.
 
 ## Deployment surfaces
 

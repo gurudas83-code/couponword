@@ -5,7 +5,7 @@
 - Local baseline: `78553b1a9eb895f417eea869af01e987d93503bb`
 - `origin/main`: `2db6534eb4dba1cdb6f18df46bf2275e0a9b0d1e`
 - Historical reviewed commits on remote: 42
-- Local-only commits pending push: 7 (six pre-existing plus this scoped query-consistency commit)
+- Local-only commits pending push: 8 (six pre-existing plus two scoped query-consistency corrections)
 - Push/deploy: NO
 
 ## Six local-only commits
@@ -18,6 +18,8 @@
 - `78553b1` Record Phase G integration closure
 - Scoped query-consistency commit `Add semantic query consistency release audit`
   (current local HEAD; report files are included)
+- Scoped exact-model correction `Preserve exact models in query signatures`
+  (current local HEAD; corpus map and regression are included)
 
 ## Scoped query-consistency changes in this working tree
 
