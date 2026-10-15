@@ -247,6 +247,12 @@
         "product_url": "https://www.amazon.in/dp/B0H6F4KZGF",
         "confidence": 0.99,
         "source": "live-amazon-exact-page+mobile-exact-identity-gate-v1"
+      },
+      "vivo": {
+        "retailer_product_id": "19410",
+        "product_url": "https://shop.vivo.com/in/product/10344?skuId=19410",
+        "confidence": 0.98,
+        "source": "vivo-official-selected-sku-jsonld"
       }
     },
     "cw-mobile-97": {
