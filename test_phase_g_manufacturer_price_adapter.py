@@ -39,7 +39,7 @@ class ManufacturerPriceAdapterTests(unittest.TestCase):
         </script>'''
         get.return_value = SimpleNamespace(
             status_code=200,
-            url="https://shop.vivo.com/in/product/10344",
+            url="https://shop.vivo.com/in/product/10344?skuId=19410",
             text=html,
         )
         result = prices.fetch_structured_price(

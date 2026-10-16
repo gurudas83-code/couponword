@@ -44,6 +44,21 @@ class SecurityAuditTests(unittest.TestCase):
             400,
         )
 
+    def test_api_cors_allows_public_frontend_only(self):
+        client = shopping_api.app.test_client()
+        with patch.object(shopping_api, "run_pipeline", return_value={"status": "ok"}):
+            allowed = client.get(
+                "/api/recommend?q=mobile",
+                headers={"Origin": "https://coupon-world.in"},
+            )
+            denied = client.get(
+                "/api/recommend?q=mobile",
+                headers={"Origin": "https://evil.example"},
+            )
+
+        self.assertEqual(allowed.headers.get("Access-Control-Allow-Origin"), "https://coupon-world.in")
+        self.assertIsNone(denied.headers.get("Access-Control-Allow-Origin"))
+
     def test_frontend_link_guard_and_attribute_escaping_are_present(self):
         source = (ROOT / "app.js").read_text(encoding="utf-8")
         self.assertIn('!["http:", "https:"]', source)
@@ -85,23 +100,45 @@ class SecurityAuditTests(unittest.TestCase):
             self.assertEqual(leaked, [])
             self.assertFalse((output / "data" / "retailer_product_registry.json").exists())
 
-    def test_retail_price_redirect_is_rejected_after_following_redirects(self):
-        class RedirectedResponse:
-            status_code = 200
-            url = "https://127.0.0.1/internal"
-            text = '{"@type":"Product","offers":{"price":"19999"}}'
+    def test_retail_price_redirect_is_rejected_before_second_request(self):
+        class InitialResponse:
+            status_code = 302
+            url = "https://www.amazon.in/dp/B000000000"
+            headers = {"Location": "https://127.0.0.1/internal"}
+            text = ""
 
         with patch.object(
             retail_price_evidence.requests,
             "get",
-            return_value=RedirectedResponse(),
-        ):
-            result = retail_price_evidence.fetch_structured_price(
-                "https://www.amazon.in/dp/B000000000"
-            )
+            return_value=InitialResponse(),
+        ) as request:
+            with patch.object(
+                retail_price_evidence,
+                "_public_dns_addresses",
+                return_value=(True, ""),
+            ):
+                result = retail_price_evidence.fetch_structured_price(
+                    "https://www.amazon.in/dp/B000000000"
+                )
 
         self.assertEqual(result["status"], "rejected")
-        self.assertIn("approved HTTPS source", result["reason"])
+        self.assertIn("approved", result["reason"])
+        request.assert_called_once()
+
+    def test_private_dns_is_rejected_before_network_request(self):
+        with patch.object(
+            retail_price_evidence,
+            "_public_dns_addresses",
+            return_value=(False, "Retail source resolves to a non-public network"),
+        ):
+            with patch.object(retail_price_evidence.requests, "get") as request:
+                result = retail_price_evidence.fetch_structured_price(
+                    "https://www.amazon.in/dp/B000000000"
+                )
+
+        self.assertEqual(result["status"], "rejected")
+        self.assertIn("non-public", result["reason"])
+        request.assert_not_called()
 
 
 if __name__ == "__main__":
