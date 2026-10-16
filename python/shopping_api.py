@@ -172,13 +172,13 @@ def recommend():
             max_results=3,
             live_fast=True,
         )
-    except Exception as error:
+    except Exception:
+        app.logger.exception("Shopping intelligence pipeline failed")
         return (
             jsonify(
                 {
                     "status": "error",
                     "error": "Shopping intelligence pipeline failed",
-                    "detail": str(error),
                 }
             ),
             500,

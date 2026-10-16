@@ -125,7 +125,7 @@ function renderFeaturedDeal() {
     <h2>${escapeHTML(deal.title || "Hot Deal")}</h2>
     <p>${escapeHTML(deal.discount || "Latest offer")} • ${escapeHTML(deal.category || "Deal")}</p>
     ${deal.cta_eligible === true
-      ? `<a href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">View Deal</a>`
+      ? `<a href="${escapeHTML(safeLink(deal.link))}" target="_blank" rel="nofollow sponsored noopener">View Deal</a>`
       : `<span class="shop-button disabled">Offer verification unavailable</span>`}
   `;
 }
@@ -169,7 +169,7 @@ function renderDeals() {
       </div>
 
       ${deal.cta_eligible === true
-        ? `<a class="shop-button" href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">Get Deal →</a>`
+        ? `<a class="shop-button" href="${escapeHTML(safeLink(deal.link))}" target="_blank" rel="nofollow sponsored noopener">Get Deal →</a>`
         : `<span class="shop-button disabled">Offer verification unavailable</span>`}
 
       <div class="card-note">Price and availability may change on the retailer site</div>
@@ -229,7 +229,23 @@ function applySearch(value) {
 }
 
 function safeLink(link) {
-  return link || "#";
+  const raw = String(link || "").trim();
+  if (!raw) {
+    return "#";
+  }
+
+  try {
+    const parsed = new URL(raw, window.location.href);
+    if (!["http:", "https:"].includes(parsed.protocol)) {
+      return "#";
+    }
+    if (window.location.protocol === "https:" && parsed.protocol === "http:") {
+      return "#";
+    }
+    return parsed.href;
+  } catch (error) {
+    return "#";
+  }
 }
 
 function trackAnalyticsEvent(eventName, params = {}) {
@@ -541,7 +557,7 @@ async function loadShoppingRecommendation(query) {
           <td>${escapeHTML(match)}</td>
           <td>${escapeHTML(points)}</td>
           <td>${escapeHTML(criterion.evidence_status || "unknown")}</td>
-          <td>${criterion.source_url ? `<a href="${safeLink(criterion.source_url)}" target="_blank" rel="noopener">source</a>` : "UNKNOWN"}</td>
+          <td>${criterion.source_url ? `<a href="${escapeHTML(safeLink(criterion.source_url))}" target="_blank" rel="noopener">source</a>` : "UNKNOWN"}</td>
           <td>${escapeHTML(criterion.observed_at || "UNKNOWN")}</td>
           <td>${escapeHTML(criterion.reason || "No reliable evidence available")}</td>
         </tr>`;
@@ -669,15 +685,15 @@ async function loadShoppingRecommendation(query) {
       // retailer_offers and best_offer are sanitized by the backend.
       // Prefer that exact retailer URL so displayed retailer, price
       // and CTA all refer to the same offer.
-      const informationalLink = safeLink(
+      const informationalLink = escapeHTML(safeLink(
         primaryOffer.product_url ||
         priceEvidence.source_url ||
         p.market_source ||
         p.official_source ||
         p.link
-      );
+      ));
       const productLink = purchaseCtaEligible
-        ? safeLink(primaryOffer.product_url)
+        ? escapeHTML(safeLink(primaryOffer.product_url))
         : informationalLink;
 
       const offerCtaLabel = bestOffer
@@ -741,7 +757,7 @@ async function loadShoppingRecommendation(query) {
                 <div class="ai-result-image-wrap">
                   <img
                     class="ai-result-image"
-                    src="${imageUrl}"
+                    src="${escapeHTML(imageUrl)}"
                     alt="${title}"
                     loading="lazy"
                   />
