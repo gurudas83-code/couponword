@@ -93,4 +93,3 @@ These remain in the owner's original worktree and were not staged.
    internal files.
 5. Verify live API, frontend, score explanations and refreshed T5 Pro offer.
 6. Roll back to 2db6534eb4dba1cdb6f18df46bf2275e0a9b0d1e if any live gate fails.
-

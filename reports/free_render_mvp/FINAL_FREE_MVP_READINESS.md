@@ -142,4 +142,3 @@ Authorize review and deployment of the candidate only after confirming the appro
 ### D. Smallest safe next step
 
 Review this report and the candidate diff, then perform one owner-approved Free-tier staging smoke using packaged Product DNA. Keep current-price claims disabled until a permitted fresh offer is independently observed.
-

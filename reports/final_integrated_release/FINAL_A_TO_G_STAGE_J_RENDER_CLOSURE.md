@@ -1,7 +1,7 @@
 # Coupon World — Consolidated Phase A–G, Stage-J, Render and GitHub Pages Closure
 
-**Review scope:** existing eight development commits plus the reviewed candidate data package.  
-**Review date:** 2026-10-15 (Asia/Calcutta).  
+**Review scope:** existing eight development commits plus the reviewed candidate data package.
+**Review date:** 2026-10-15 (Asia/Calcutta).
 **Rules applied:** no new engine, ranker, parser, registry, retailer adapter or database; no push or deploy; main worktree and dirty research data preserved.
 
 ## A. Current Git and branch state
@@ -188,4 +188,3 @@ The eight existing main commits remain unchanged.  Their source path is the auth
 **Exact source/data ready for review:** the eight main commits through `b3b6539` plus reviewed candidate commit `4fb3faa` and this report-only commit once created.  Main dirty research/cache files are excluded and preserved.
 
 **Evidence required before declaring live:** Pages workflow run and deployed SHA; live 404s for all internal paths; Render `/health` revision equal to the approved candidate; persistent-store restart receipt; authorized fresh offer-refresh receipt with timestamps and availability; frontend/API/score-explanation smoke; and a documented rollback result.
-
