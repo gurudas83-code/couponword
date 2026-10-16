@@ -442,6 +442,16 @@ def fetch_structured_price(url: str) -> dict[str, Any]:
         )
         return result
 
+    # A trusted starting host must not be allowed to redirect the fetcher to
+    # an unapproved destination or a clear-text URL.  Re-check the final URL
+    # after requests follows redirects before parsing any response data.
+    final_url = str(getattr(response, "url", "") or "").strip()
+    final_parsed = urlparse(final_url)
+    if final_parsed.scheme != "https" or not retailer_host_allowed(final_url):
+        result["status"] = "rejected"
+        result["reason"] = "Retail page redirected outside an approved HTTPS source"
+        return result
+
     try:
         soup = BeautifulSoup(response.text, "lxml")
     except Exception:
