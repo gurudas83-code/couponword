@@ -207,16 +207,17 @@ def render_multi_retailer_section(product, multi_products):
 
 MULTI_RETAILER_CSS = """
 .multi-retailer-heading h2{margin:0 0 6px}
-.multi-retailer-heading p{margin:0;color:#68707d}
+.multi-retailer-heading p{margin:0;color:#667085}
 .retailer-offer-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}
-.retailer-offer{border:1px solid #e5e7eb;border-radius:16px;padding:18px;display:grid;gap:10px}
+.retailer-offer{border:1px solid #dbe3ef;border-radius:16px;padding:18px;display:grid;gap:10px;background:linear-gradient(180deg,#fff,#f8fbff);box-shadow:0 8px 18px rgba(16,24,40,.05)}
 .offer-top{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
 .offer-price{font-size:27px;font-weight:900}
 .offer-availability{color:#68707d;font-weight:700}
 .offer-best{font-size:12px;font-weight:800;background:#ecfdf3;color:#067647;padding:5px 8px;border-radius:999px}
 .offer-fresh{font-size:12px;font-weight:800;background:#eef4ff;color:#3538cd;padding:5px 8px;border-radius:999px}
-.offer-cta{display:inline-flex;width:max-content;padding:10px 14px;border-radius:10px;background:#111827;color:#fff;text-decoration:none;font-weight:800}
-.multi-retailer-note{font-size:13px;color:#68707d;margin-top:14px}
+.offer-cta{display:inline-flex;width:max-content;padding:10px 14px;border-radius:10px;background:#13233b;color:#fff;text-decoration:none;font-weight:900;transition:background .18s ease}
+.offer-cta:hover{background:#1d4f85}
+.multi-retailer-note{font-size:13px;color:#667085;margin-top:14px}
 @media(max-width:760px){.retailer-offer-grid{grid-template-columns:1fr}}
 """
 
