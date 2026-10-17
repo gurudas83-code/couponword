@@ -656,6 +656,7 @@ async function loadShoppingRecommendation(query) {
       ].map(({ key, label }) => {
         const offer = offers.find(item =>
           String(item.retailer || "").trim().toLowerCase() === key &&
+          String(item.availability || "").trim().toLowerCase() === "in_stock" &&
           safeLink(item.product_url) !== "#"
         );
         if (!offer) {
