@@ -647,6 +647,26 @@ async function loadShoppingRecommendation(query) {
           ? "Check Verified Retailer \u2192"
           : "Check Price \u2192";
 
+      // Keep the requested retailer choices visible without inventing links
+      // or prices. A button is active only for an exact sanitized offer.
+      const retailerButtonsHTML = [
+        { key: "amazon", label: "Amazon" },
+        { key: "flipkart", label: "Flipkart" },
+        { key: "croma", label: "Croma" }
+      ].map(({ key, label }) => {
+        const offer = offers.find(item =>
+          String(item.retailer || "").trim().toLowerCase() === key &&
+          safeLink(item.product_url) !== "#"
+        );
+        if (!offer) {
+          return `<span class="retailer-choice retailer-choice-disabled" aria-disabled="true">${label}<small>Not verified</small></span>`;
+        }
+        const offerPrice = offer.price != null && offer.price !== ""
+          ? ` · ₹${escapeHTML(offer.price)}`
+          : "";
+        return `<a class="retailer-choice" href="${safeLink(offer.product_url)}" target="_blank" rel="nofollow sponsored noopener" data-ai-retailer-click="1" data-ai-rank="${escapeHTML(p.rank || "")}" data-ai-product-id="${escapeHTML(offer.product_id || p.product_id || "")}" data-ai-retailer="${label}">${label}${offerPrice}</a>`;
+      }).join("");
+
       const why = Array.isArray(p.why_it_fits)
         ? p.why_it_fits
         : [];
@@ -777,6 +797,10 @@ async function loadShoppingRecommendation(query) {
           ${tradeoffsHTML}
           ${unknownsHTML}
 
+          <div class="retailer-choice-group" aria-label="Verified retailer choices">
+            ${retailerButtonsHTML}
+          </div>
+
           ${
             productLink !== "#"
               ? `
@@ -834,7 +858,7 @@ async function loadShoppingRecommendation(query) {
     }
 
     card
-      .querySelectorAll('a.shop-button[data-ai-retailer-click="1"]')
+      .querySelectorAll('a[data-ai-retailer-click="1"]')
       .forEach(link => {
         link.addEventListener("click", () => {
           trackAnalyticsEvent("retailer_click", {
