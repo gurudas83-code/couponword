@@ -171,7 +171,7 @@ def render_multi_retailer_section(product, multi_products):
                 f'href="{html.escape(url)}" '
                 'target="_blank" '
                 'rel="nofollow sponsored noopener">'
-                f'View on {html.escape(retailer_name(retailer))}'
+                'View verified offer'
                 '</a>'
             )
 

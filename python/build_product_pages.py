@@ -504,6 +504,12 @@ def render(product, products):
     description = clean(product.get("description")) or (
         f"{title} is listed on Coupon World. Check the retailer site for current details."
     )
+    # Product pages use neutral wording; retailer names remain available in
+    # verified recommendation cards and are never copied into public SEO text.
+    for term in ("Amazon India", "Amazon IN", "View on Amazon",
+                 "Check latest price on Amazon", "Check price on Amazon",
+                 "latest Amazon deals"):
+        description = description.replace(term, "the retailer")
     asin = clean(product.get("asin")).upper()
     image = clean(product.get("image"))
     link = clean(product.get("link"))
