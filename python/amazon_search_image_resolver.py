@@ -27,7 +27,7 @@ HEADERS = {
     "Accept-Language": "en-IN,en;q=0.9",
 }
 
-AFFILIATE_TAG = "guru0906-21"
+AFFILIATE_TAG = "guru07cc-21"
 
 
 def clean(v):

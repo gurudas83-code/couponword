@@ -2,7 +2,7 @@ import json, shutil, re
 from pathlib import Path
 from urllib.parse import quote_plus
 
-AFFILIATE_TAG = "guru0906-21"
+AFFILIATE_TAG = "guru07cc-21"
 JSON_FILE = Path("coupons.json")
 BACKUP_FILE = Path("coupons.backup.json")
 

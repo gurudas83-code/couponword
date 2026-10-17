@@ -12,7 +12,7 @@ from product_engine import (
     generate_description, load_json, save_json,
 )
 
-AFFILIATE_TAG = "guru0906-21"
+AFFILIATE_TAG = "guru07cc-21"
 SUPPORTED_HOSTS = {"amazon.in", "www.amazon.in"}
 ASIN_PATTERNS = (
     re.compile(r"/dp/([A-Z0-9]{10})(?:[/?]|$)", re.I),

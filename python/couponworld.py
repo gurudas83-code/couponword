@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 
 """
 Coupon World Control Center v1
@@ -38,8 +38,8 @@ COUPONS_FILE = ROOT / "coupons.json"
 PRODUCTS_DIR = ROOT / "products"
 SITEMAP_FILE = ROOT / "sitemap.xml"
 
-CORRECT_AFFILIATE_TAG = "guru0906-21"
-WRONG_AFFILIATE_TAGS = {"guru07cc-21"}
+CORRECT_AFFILIATE_TAG = "guru07cc-21"
+WRONG_AFFILIATE_TAGS = {"guru0906-21"}
 
 # Preserve previously published URLs when titles change.
 LEGACY_PRODUCT_PATHS = {
@@ -407,12 +407,19 @@ def check_command() -> int:
             for folder in (
                 ".branding_backups",
                 ".compliance_backups",
+                ".identity_backups",
+                "reports",
             )
         ):
             continue
 
         name_lower = path.name.lower()
         relative_lower = str(path.relative_to(ROOT)).lower()
+
+        # Runtime caches preserve source observations for audit/recovery and
+        # are not active public affiliate configuration.
+        if "cache" in name_lower:
+            continue
 
         # Ignore historical backups/audit artifacts in repository-wide
         # affiliate-tag hygiene checks. Active site/data/code validation

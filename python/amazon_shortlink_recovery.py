@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 
 from __future__ import annotations
 
@@ -113,7 +113,7 @@ def normalize_exact_url(url, asin):
 
     return (
         f"https://www.amazon.in/dp/{asin}"
-        "?tag=guru0906-21"
+        "?tag=guru07cc-21"
     )
 
 

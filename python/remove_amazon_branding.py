@@ -159,7 +159,7 @@ def main():
         print(f"  - {path}")
 
     print(f"\nBackup: {BACKUP}")
-    print("Affiliate URLs and guru0906-21 tag were preserved.")
+    print("Affiliate URLs and guru07cc-21 tag were preserved.")
 
 
 if __name__ == "__main__":
