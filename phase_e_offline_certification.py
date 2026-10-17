@@ -190,6 +190,19 @@ def discovery_for(query: str, intent: dict[str, Any], max_candidates: int, *, al
 
 
 def semantic(payload: dict[str, Any]) -> dict[str, Any]:
+    sections = payload.get("recommendation_sections") or {}
+
+    def section_rows(name: str) -> list[dict[str, Any]]:
+        rows = sections.get(name) or []
+        return [
+            {
+                key: item.get(key)
+                for key in ("product_id", "canonical_product_id", "asin", "price", "fit_percent", "quality_score", "budget_band")
+            }
+            for item in rows
+            if isinstance(item, dict)
+        ]
+
     return {
         "query": payload.get("query"),
         "intent": payload.get("intent"),
@@ -201,6 +214,12 @@ def semantic(payload: dict[str, Any]) -> dict[str, Any]:
             }
             for item in payload.get("recommendations") or []
         ],
+        "recommendation_sections": {
+            "mode": sections.get("mode"),
+            "primary_floor": sections.get("primary_floor"),
+            "primary": section_rows("primary_recommendations"),
+            "value": section_rows("value_recommendations"),
+        },
         "market_quality_status": payload.get("market_quality_status"),
         "completion_status": payload.get("completion_status"),
     }

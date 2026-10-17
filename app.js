@@ -407,6 +407,22 @@ async function loadShoppingRecommendation(query) {
       ? data.recommendations
       : [];
 
+    // The backend keeps the legacy ranked pool for API compatibility and
+    // exposes an auditable presentation split for generic under-budget
+    // searches. Primary and value sections never relax the hard eligibility
+    // or evidence gates.
+    const recommendationSections = data.recommendation_sections &&
+      typeof data.recommendation_sections === "object"
+      ? data.recommendation_sections
+      : {};
+    const budgetBandMode = recommendationSections.mode === "budget_band";
+    const primaryRecommendations = Array.isArray(data.primary_recommendations)
+      ? data.primary_recommendations
+      : recommendations;
+    const valueRecommendations = Array.isArray(data.value_recommendations)
+      ? data.value_recommendations
+      : [];
+
     const exactModelQuery =
       Boolean(data.exact_model_scope) &&
       data.exact_model_scope.active === true;
@@ -497,7 +513,7 @@ async function loadShoppingRecommendation(query) {
       return;
     }
 
-    card.innerHTML = recommendations.map((p) => {
+    const renderRecommendation = (p) => {
       const title = escapeHTML(p.title || "Recommended Product");
       const brand = escapeHTML(p.brand || "Not available");
       const fitNumber =
@@ -844,9 +860,34 @@ async function loadShoppingRecommendation(query) {
           }
         </article>
       `;
-    }).join("");
+    };
+
+    const primaryCards = primaryRecommendations
+      .map(renderRecommendation)
+      .join("");
+    const valueCards = valueRecommendations
+      .map(renderRecommendation)
+      .join("");
+
+    card.innerHTML = `
+      ${budgetBandMode
+        ? `<section class="ai-recommendation-section ai-primary-section">
+            <h2>${escapeHTML(recommendationSections.primary_title || "Top verified phones")}</h2>
+            <p class="ai-section-note">Capability ranking is unchanged; this section keeps primary picks close to your declared budget.</p>
+            ${primaryCards || `<p class="card-note">No verified phone currently meets this primary price band.</p>`}
+          </section>`
+        : primaryCards}
+      ${budgetBandMode && valueCards
+        ? `<section class="ai-recommendation-section ai-value-section">
+            <h2>${escapeHTML(recommendationSections.value_title || "Best Value Alternatives")}</h2>
+            <p class="ai-section-note">These verified phones are below the primary band and are shown separately as value alternatives.</p>
+            ${valueCards}
+          </section>`
+        : ""}
+    `;
 
     if (
+      !budgetBandMode &&
       !exactModelQuery &&
       String(data.intent && data.intent.category || "").toLowerCase() === "smartphone" &&
       recommendations.length < 3
