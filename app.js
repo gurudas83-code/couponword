@@ -681,7 +681,7 @@ async function loadShoppingRecommendation(query) {
         const offerPrice = offer.price != null && offer.price !== ""
           ? ` · ₹${escapeHTML(offer.price)}`
           : "";
-        return `<a class="retailer-choice" href="${safeLink(offer.product_url)}" target="_blank" rel="nofollow sponsored noopener" data-ai-retailer-click="1" data-ai-rank="${escapeHTML(p.rank || "")}" data-ai-product-id="${escapeHTML(offer.product_id || p.product_id || "")}" data-ai-retailer="${label}">${label}${offerPrice}</a>`;
+        return `<a class="retailer-choice" href="${escapeHTML(safeLink(offer.product_url))}" target="_blank" rel="nofollow sponsored noopener" data-ai-retailer-click="1" data-ai-rank="${escapeHTML(p.rank || "")}" data-ai-product-id="${escapeHTML(offer.product_id || p.product_id || "")}" data-ai-retailer="${label}">${label}${offerPrice}</a>`;
       }).join("");
 
       const why = Array.isArray(p.why_it_fits)
