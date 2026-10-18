@@ -154,7 +154,8 @@ versus Best Value presentation. Ranking weights, hard-budget gates, identity,
 freshness and security behavior are unchanged. Product pages and secondary
 deal categories remain available.
 
-The final scoped checks after the UI change were **47 PASS, 0 FAIL, 0 ERROR**
-for the mobile UI, security, retailer, ranking, API, Phase-D and Phase-E
-regressions. Python compilation, JavaScript syntax, Pages artifact exclusion
-and `git diff --check` also passed.
+The final scoped checks after the UI change were **129 PASS, 0 FAIL, 0 ERROR**
+across the mobile UI, security, retailer, ranking, API, Phase-D and Phase-E
+regressions. Python compilation, JavaScript syntax, clean API import, Pages
+artifact exclusion, high-confidence secret scan and `git diff --check` also
+passed.
