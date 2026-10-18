@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-10-18T07:38:17.091403+00:00",
+  "generated_at": "2026-10-18T07:39:30.672949+00:00",
   "scope": "Coverage gap generated from existing source-backed manifests and current durable stores. Unverified rows are not recommendation eligible.",
   "source_manifest": "data\\mobile_universe_2023_2026.json",
   "known_canonical_mobile_ids": 34,

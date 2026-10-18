@@ -172,6 +172,8 @@ def exact_signature(record: dict[str, Any]) -> tuple[int | None, int | None]:
 
 
 def build_manifests() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    from retailer_offer_store import find_fresh_verified_offer
+
     models, evidence_payload, dna_payload = build_sources()
     evidence_rows = evidence_payload.get("records", [])
     dna_rows = dna_payload.get("products", {})
@@ -242,6 +244,20 @@ def build_manifests() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
                 blocker = "EXACT_VARIANT_IDENTITY_GAP"
             else:
                 blocker = "MISSING_OFFICIAL_EVIDENCE"
+            offer_variant = (
+                f"{variant['ram_gb']}GB/{variant['storage_gb']}GB"
+                if variant["ram_gb"] is not None and variant["storage_gb"] is not None
+                else str(variant.get("variant_text") or "")
+            )
+            fresh_offer = bool(
+                canonical_id
+                and find_fresh_verified_offer(
+                    product_id=canonical_id,
+                    brand=item["brand"],
+                    model=item["model"],
+                    variant=offer_variant,
+                )
+            )
             if status == "EXISTING_CANONICAL":
                 action = "Verify a fresh exact in_stock offer before recommendation admission."
             elif status == "EXISTING_PRIVATE_DNA":
@@ -262,7 +278,7 @@ def build_manifests() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
                 "private_dna_id": dna_id,
                 "official_evidence_record_ids": sorted(set(exact_evidence or model_evidence)),
                 "official_evidence_exact": bool(exact_evidence),
-                "current_fresh_offer": False,
+                "current_fresh_offer": fresh_offer,
                 "coverage_status": status,
                 "blocker_code": blocker,
                 "required_admission_action": action,
@@ -305,7 +321,7 @@ def build_manifests() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
             "existing_private_dna_rows": sum(x["coverage_status"] == "EXISTING_PRIVATE_DNA" for x in gaps),
             "official_evidence_only_rows": sum(x["coverage_status"] == "OFFICIAL_EVIDENCE_ONLY" for x in gaps),
             "research_only_rows": sum(x["coverage_status"] == "RESEARCH_ONLY" for x in gaps),
-            "fresh_in_stock_offer_rows": 0,
+            "fresh_in_stock_offer_rows": sum(x["current_fresh_offer"] for x in gaps),
         },
     }
     return master, gap, {"known_ids": known_ids, "gaps": gaps, "models": master_models}
@@ -346,7 +362,7 @@ def main() -> int:
             "verified_exact_variants": sum(bool(x["private_dna_id"] or x["official_evidence_exact"]) for x in gap["gaps"]),
             "private_dna_total": len(read_json(DNA_PATH).get("products", {})),
             "canonical_mobile_ids": len(state["known_ids"]),
-            "fresh_in_stock_offers": 0,
+            "fresh_in_stock_offers": sum(x["current_fresh_offer"] for x in gap["gaps"]),
             "new_product_dna_admissions": 0,
             "blockers_still_open": sum(x["coverage_status"] == "RESEARCH_ONLY" for x in gap["gaps"]),
         },
