@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-10-18T07:49:49.057568+00:00",
+  "generated_at": "2026-10-18T09:03:22.663741+00:00",
   "scope": "Coverage gap generated from existing source-backed manifests and current durable stores. Unverified rows are not recommendation eligible.",
   "source_manifest": "data\\mobile_universe_2023_2026.json",
   "known_canonical_mobile_ids": 34,
@@ -1168,16 +1168,18 @@
       "variant_key": "6gb/128gb",
       "ram_gb": 6,
       "storage_gb": 128,
-      "present_in_backend": false,
+      "present_in_backend": true,
       "existing_canonical_id": null,
-      "private_dna_id": null,
-      "official_evidence_record_ids": [],
-      "official_evidence_exact": false,
+      "private_dna_id": "dna-samsung-galaxy-f70-pro-5g-6gb-128gb",
+      "official_evidence_record_ids": [
+        "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/"
+      ],
+      "official_evidence_exact": true,
       "current_fresh_offer": false,
-      "coverage_status": "RESEARCH_ONLY",
-      "blocker_code": "MISSING_OFFICIAL_EVIDENCE",
-      "required_admission_action": "Verify the exact India variant through the existing official-source pipeline.",
-      "next_automated_recovery_action": "bounded_official_evidence_retry"
+      "coverage_status": "EXISTING_PRIVATE_DNA",
+      "blocker_code": "CANONICAL_MAPPING_GAP",
+      "required_admission_action": "Resolve an existing canonical mapping; retain DNA without a buyable claim.",
+      "next_automated_recovery_action": "review_existing_pipeline_gate"
     },
     {
       "model_key": "tecno|pova curve 2",
@@ -1456,16 +1458,18 @@
       "variant_key": "6gb/128gb",
       "ram_gb": 6,
       "storage_gb": 128,
-      "present_in_backend": false,
+      "present_in_backend": true,
       "existing_canonical_id": null,
-      "private_dna_id": null,
-      "official_evidence_record_ids": [],
-      "official_evidence_exact": false,
+      "private_dna_id": "dna-samsung-galaxy-m47-5g-6gb-128gb",
+      "official_evidence_record_ids": [
+        "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/"
+      ],
+      "official_evidence_exact": true,
       "current_fresh_offer": false,
-      "coverage_status": "RESEARCH_ONLY",
-      "blocker_code": "MISSING_OFFICIAL_EVIDENCE",
-      "required_admission_action": "Verify the exact India variant through the existing official-source pipeline.",
-      "next_automated_recovery_action": "bounded_official_evidence_retry"
+      "coverage_status": "EXISTING_PRIVATE_DNA",
+      "blocker_code": "CANONICAL_MAPPING_GAP",
+      "required_admission_action": "Resolve an existing canonical mapping; retain DNA without a buyable claim.",
+      "next_automated_recovery_action": "review_existing_pipeline_gate"
     },
     {
       "model_key": "nothing|phone 4b",
@@ -1762,16 +1766,18 @@
       "variant_key": "8gb/128gb",
       "ram_gb": 8,
       "storage_gb": 128,
-      "present_in_backend": false,
+      "present_in_backend": true,
       "existing_canonical_id": null,
-      "private_dna_id": null,
-      "official_evidence_record_ids": [],
-      "official_evidence_exact": false,
+      "private_dna_id": "dna-samsung-galaxy-a37-5g-8gb-128gb",
+      "official_evidence_record_ids": [
+        "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a37-5g-awesome-charcoal-128gb-sm-a376ezadins/"
+      ],
+      "official_evidence_exact": true,
       "current_fresh_offer": false,
-      "coverage_status": "RESEARCH_ONLY",
-      "blocker_code": "MISSING_OFFICIAL_EVIDENCE",
-      "required_admission_action": "Verify the exact India variant through the existing official-source pipeline.",
-      "next_automated_recovery_action": "bounded_official_evidence_retry"
+      "coverage_status": "EXISTING_PRIVATE_DNA",
+      "blocker_code": "CANONICAL_MAPPING_GAP",
+      "required_admission_action": "Resolve an existing canonical mapping; retain DNA without a buyable claim.",
+      "next_automated_recovery_action": "review_existing_pipeline_gate"
     },
     {
       "model_key": "tecno|camon 50 ultra",
@@ -1946,16 +1952,18 @@
       "variant_key": "8gb/128gb",
       "ram_gb": 8,
       "storage_gb": 128,
-      "present_in_backend": false,
+      "present_in_backend": true,
       "existing_canonical_id": null,
-      "private_dna_id": null,
-      "official_evidence_record_ids": [],
-      "official_evidence_exact": false,
+      "private_dna_id": "dna-samsung-galaxy-s25-fe-8gb-128gb",
+      "official_evidence_record_ids": [
+        "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s25-fe-navy-128gb-sm-s731bdbbins/"
+      ],
+      "official_evidence_exact": true,
       "current_fresh_offer": false,
-      "coverage_status": "RESEARCH_ONLY",
-      "blocker_code": "MISSING_OFFICIAL_EVIDENCE",
-      "required_admission_action": "Verify the exact India variant through the existing official-source pipeline.",
-      "next_automated_recovery_action": "bounded_official_evidence_retry"
+      "coverage_status": "EXISTING_PRIVATE_DNA",
+      "blocker_code": "CANONICAL_MAPPING_GAP",
+      "required_admission_action": "Resolve an existing canonical mapping; retain DNA without a buyable claim.",
+      "next_automated_recovery_action": "review_existing_pipeline_gate"
     },
     {
       "model_key": "poco|x8 pro max",
@@ -2090,16 +2098,18 @@
       "variant_key": "8gb/256gb",
       "ram_gb": 8,
       "storage_gb": 256,
-      "present_in_backend": false,
+      "present_in_backend": true,
       "existing_canonical_id": null,
-      "private_dna_id": null,
-      "official_evidence_record_ids": [],
-      "official_evidence_exact": false,
+      "private_dna_id": "dna-samsung-galaxy-a57-5g-8gb-256gb",
+      "official_evidence_record_ids": [
+        "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/"
+      ],
+      "official_evidence_exact": true,
       "current_fresh_offer": false,
-      "coverage_status": "RESEARCH_ONLY",
-      "blocker_code": "MISSING_OFFICIAL_EVIDENCE",
-      "required_admission_action": "Verify the exact India variant through the existing official-source pipeline.",
-      "next_automated_recovery_action": "bounded_official_evidence_retry"
+      "coverage_status": "EXISTING_PRIVATE_DNA",
+      "blocker_code": "CANONICAL_MAPPING_GAP",
+      "required_admission_action": "Resolve an existing canonical mapping; retain DNA without a buyable claim.",
+      "next_automated_recovery_action": "review_existing_pipeline_gate"
     },
     {
       "model_key": "samsung|galaxy s24 5g",
@@ -2108,16 +2118,18 @@
       "variant_key": "8gb/256gb",
       "ram_gb": 8,
       "storage_gb": 256,
-      "present_in_backend": false,
+      "present_in_backend": true,
       "existing_canonical_id": null,
       "private_dna_id": null,
-      "official_evidence_record_ids": [],
-      "official_evidence_exact": false,
+      "official_evidence_record_ids": [
+        "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s24-onyx-black-256gb-sm-s921ezkwins/"
+      ],
+      "official_evidence_exact": true,
       "current_fresh_offer": false,
-      "coverage_status": "RESEARCH_ONLY",
-      "blocker_code": "MISSING_OFFICIAL_EVIDENCE",
-      "required_admission_action": "Verify the exact India variant through the existing official-source pipeline.",
-      "next_automated_recovery_action": "bounded_official_evidence_retry"
+      "coverage_status": "OFFICIAL_EVIDENCE_ONLY",
+      "blocker_code": "CANONICAL_MAPPING_GAP",
+      "required_admission_action": "Run the existing identity/admission workflow; do not invent an ID.",
+      "next_automated_recovery_action": "review_existing_pipeline_gate"
     },
     {
       "model_key": "oneplus|15r",
@@ -2308,16 +2320,18 @@
       "variant_key": "12gb/256gb",
       "ram_gb": 12,
       "storage_gb": 256,
-      "present_in_backend": false,
+      "present_in_backend": true,
       "existing_canonical_id": null,
-      "private_dna_id": null,
-      "official_evidence_record_ids": [],
-      "official_evidence_exact": false,
+      "private_dna_id": "dna-samsung-galaxy-s26-ultra-12gb-256gb",
+      "official_evidence_record_ids": [
+        "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s26-ultra-black-256gb-certified-re-newed-sm5s948bzkbins/"
+      ],
+      "official_evidence_exact": true,
       "current_fresh_offer": false,
-      "coverage_status": "RESEARCH_ONLY",
-      "blocker_code": "MISSING_OFFICIAL_EVIDENCE",
-      "required_admission_action": "Verify the exact India variant through the existing official-source pipeline.",
-      "next_automated_recovery_action": "bounded_official_evidence_retry"
+      "coverage_status": "EXISTING_PRIVATE_DNA",
+      "blocker_code": "CANONICAL_MAPPING_GAP",
+      "required_admission_action": "Resolve an existing canonical mapping; retain DNA without a buyable claim.",
+      "next_automated_recovery_action": "review_existing_pipeline_gate"
     },
     {
       "model_key": "samsung|galaxy s24",
@@ -4352,9 +4366,9 @@
   "counts": {
     "total_variant_rows": 237,
     "existing_canonical_rows": 2,
-    "existing_private_dna_rows": 21,
-    "official_evidence_only_rows": 17,
-    "research_only_rows": 197,
+    "existing_private_dna_rows": 27,
+    "official_evidence_only_rows": 18,
+    "research_only_rows": 190,
     "fresh_in_stock_offer_rows": 0
   }
 }

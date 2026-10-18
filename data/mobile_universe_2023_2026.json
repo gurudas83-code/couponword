@@ -4,7 +4,7 @@
   "category": "smartphone",
   "period_start": "2023-01-01",
   "period_end": "2026-10-18",
-  "generated_at": "2026-10-18T07:49:49.056594+00:00",
+  "generated_at": "2026-10-18T09:03:22.663514+00:00",
   "denominator_status": "COVERAGE_DENOMINATOR_UNVERIFIED",
   "scope": "Union of existing 126-candidate coverage, 187-entry priority discovery and saved manufacturer launch evidence; not a complete market census.",
   "sources": [
@@ -4916,7 +4916,7 @@
       "launch_year": null,
       "launch_date": null,
       "manufacturer_model_id": null,
-      "official_product_url": null,
+      "official_product_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a37-5g-awesome-charcoal-128gb-sm-a376ezadins/",
       "india_launch_sources": [],
       "variants": [
         {
@@ -4926,14 +4926,15 @@
           "variant_text": "8GB/128GB",
           "manufacturer_sku": null,
           "identity_status": "EXACT_SEED_VARIANT",
-          "official_evidence_status": "PENDING",
+          "official_evidence_status": "VERIFIED_EXACT",
           "source_type": "priority_research_seed"
         }
       ],
       "discovery_sources": [
-        "https://www.91mobiles.com/list-of-phones/top-10-samsung-galaxy-series-mobiles-in-india"
+        "https://www.91mobiles.com/list-of-phones/top-10-samsung-galaxy-series-mobiles-in-india",
+        "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a37-5g-awesome-charcoal-128gb-sm-a376ezadins/"
       ],
-      "india_market_status": "UNVERIFIED_RESEARCH",
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -5019,7 +5020,7 @@
       "launch_year": null,
       "launch_date": null,
       "manufacturer_model_id": null,
-      "official_product_url": null,
+      "official_product_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/",
       "india_launch_sources": [],
       "variants": [
         {
@@ -5029,14 +5030,15 @@
           "variant_text": "8GB/256GB",
           "manufacturer_sku": null,
           "identity_status": "EXACT_SEED_VARIANT",
-          "official_evidence_status": "PENDING",
+          "official_evidence_status": "VERIFIED_EXACT",
           "source_type": "priority_research_seed"
         }
       ],
       "discovery_sources": [
-        "https://www.91mobiles.com/list-of-phones/samsung-mobiles-with-8gb-ram-and-256gb-rom"
+        "https://www.91mobiles.com/list-of-phones/samsung-mobiles-with-8gb-ram-and-256gb-rom",
+        "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/"
       ],
-      "india_market_status": "UNVERIFIED_RESEARCH",
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -5269,7 +5271,7 @@
       "launch_year": null,
       "launch_date": null,
       "manufacturer_model_id": null,
-      "official_product_url": null,
+      "official_product_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/",
       "india_launch_sources": [],
       "variants": [
         {
@@ -5279,14 +5281,15 @@
           "variant_text": "6GB/128GB",
           "manufacturer_sku": null,
           "identity_status": "EXACT_SEED_VARIANT",
-          "official_evidence_status": "PENDING",
+          "official_evidence_status": "VERIFIED_EXACT",
           "source_type": "priority_research_seed"
         }
       ],
       "discovery_sources": [
-        "https://www.91mobiles.com/list-of-phones/SAMSUNG-mobile-price-list-in-india"
+        "https://www.91mobiles.com/list-of-phones/SAMSUNG-mobile-price-list-in-india",
+        "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/"
       ],
-      "india_market_status": "UNVERIFIED_RESEARCH",
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -5678,7 +5681,7 @@
       "launch_year": null,
       "launch_date": null,
       "manufacturer_model_id": null,
-      "official_product_url": null,
+      "official_product_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/",
       "india_launch_sources": [],
       "variants": [
         {
@@ -5688,14 +5691,15 @@
           "variant_text": "6GB/128GB",
           "manufacturer_sku": null,
           "identity_status": "EXACT_SEED_VARIANT",
-          "official_evidence_status": "PENDING",
+          "official_evidence_status": "VERIFIED_EXACT",
           "source_type": "priority_research_seed"
         }
       ],
       "discovery_sources": [
-        "https://www.91mobiles.com/list-of-phones/SAMSUNG-mobile-price-list-in-india"
+        "https://www.91mobiles.com/list-of-phones/SAMSUNG-mobile-price-list-in-india",
+        "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/"
       ],
-      "india_market_status": "UNVERIFIED_RESEARCH",
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -5756,7 +5760,7 @@
       "launch_year": null,
       "launch_date": null,
       "manufacturer_model_id": null,
-      "official_product_url": null,
+      "official_product_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s24-onyx-black-256gb-sm-s921ezkwins/",
       "india_launch_sources": [],
       "variants": [
         {
@@ -5766,14 +5770,15 @@
           "variant_text": "8GB/256GB",
           "manufacturer_sku": null,
           "identity_status": "EXACT_SEED_VARIANT",
-          "official_evidence_status": "PENDING",
+          "official_evidence_status": "VERIFIED_EXACT",
           "source_type": "priority_research_seed"
         }
       ],
       "discovery_sources": [
-        "https://www.91mobiles.com/list-of-phones/samsung-mobiles-with-8gb-ram-and-256gb-rom"
+        "https://www.91mobiles.com/list-of-phones/samsung-mobiles-with-8gb-ram-and-256gb-rom",
+        "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s24-onyx-black-256gb-sm-s921ezkwins/"
       ],
-      "india_market_status": "UNVERIFIED_RESEARCH",
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -5929,12 +5934,13 @@
           "variant_text": "8GB/128GB",
           "manufacturer_sku": null,
           "identity_status": "EXACT_SEED_VARIANT",
-          "official_evidence_status": "PENDING",
+          "official_evidence_status": "VERIFIED_EXACT",
           "source_type": "priority_research_seed"
         }
       ],
       "discovery_sources": [
-        "https://www.91mobiles.com/list-of-phones/SAMSUNG-mobile-price-list-in-india"
+        "https://www.91mobiles.com/list-of-phones/SAMSUNG-mobile-price-list-in-india",
+        "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s25-fe-navy-128gb-sm-s731bdbbins/"
       ],
       "india_market_status": "LAUNCH_EVIDENCE_VERIFIED",
       "coverage_status": "RESEARCH_ONLY"
@@ -6097,12 +6103,13 @@
           "variant_text": "12GB/256GB",
           "manufacturer_sku": null,
           "identity_status": "EXACT_SEED_VARIANT",
-          "official_evidence_status": "PENDING",
+          "official_evidence_status": "VERIFIED_EXACT",
           "source_type": "priority_research_seed"
         }
       ],
       "discovery_sources": [
-        "https://www.91mobiles.com/list-of-phones/SAMSUNG-mobile-price-list-in-india"
+        "https://www.91mobiles.com/list-of-phones/SAMSUNG-mobile-price-list-in-india",
+        "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s26-ultra-black-256gb-certified-re-newed-sm5s948bzkbins/"
       ],
       "india_market_status": "LAUNCH_EVIDENCE_VERIFIED",
       "coverage_status": "RESEARCH_ONLY"

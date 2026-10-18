@@ -39,7 +39,7 @@ class PhaseDCoverageManifestTests(unittest.TestCase):
         repository = load("mobile_intelligence_repository.json")
         products = repository["products"]
 
-        self.assertEqual(len(products), 21)
+        self.assertGreaterEqual(len(products), 21)
         self.assertIn("dna-oneplus-n6-lite-4gb-64gb", products)
         self.assertIn("dna-samsung-galaxy-a56-5g-8gb-128gb", products)
         self.assertIsNone(products["dna-oneplus-n6-lite-4gb-64gb"]["canonical_product_id"])

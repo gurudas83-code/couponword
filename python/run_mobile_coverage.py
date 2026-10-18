@@ -28,6 +28,7 @@ OFFERS_PATH = ROOT / "data" / "retailer_offers.json"
 MASTER_PATH = ROOT / "data" / "mobile_universe_2023_2026.json"
 GAP_PATH = ROOT / "data" / "mobile_coverage_gap_2023_2026.json"
 PROGRESS_PATH = ROOT / "data" / "mobile_coverage_progress.json"
+SOURCE_CHECKPOINT_PATH = ROOT / "outputs" / "phase_d_official_verification.json"
 BASELINE_PRIVATE_DNA_TOTAL = 9
 
 
@@ -225,6 +226,7 @@ def admit_exact_evidence(*, execute: bool) -> list[dict[str, Any]]:
     evidence_rows = read_json(EVIDENCE_PATH).get("records", [])
     existing = load_repository().get("products", {})
     existing_keys: set[tuple[str, str, int, int]] = set()
+    existing_source_keys: dict[tuple[str, str, str], str] = {}
     for wrapper in existing.values():
         dna = wrapper.get("dna", {}) if isinstance(wrapper, dict) else {}
         brand = text_value(dna.get("brand"))
@@ -233,6 +235,15 @@ def admit_exact_evidence(*, execute: bool) -> list[dict[str, Any]]:
         storage = text_value(dna.get("storage_gb"))
         if brand and model and ram not in (None, "") and storage not in (None, ""):
             existing_keys.add((norm(brand), norm(model), int(ram), int(storage)))
+            for field in dna.values():
+                if isinstance(field, dict) and field.get("source_url"):
+                    existing_source_keys[
+                        (
+                            str(field["source_url"]).strip().rstrip("/"),
+                            str(ram),
+                            str(storage),
+                        )
+                    ] = str(wrapper.get("product_id") or "")
 
     results: list[dict[str, Any]] = []
     for index, row in enumerate(evidence_rows):
@@ -271,6 +282,17 @@ def admit_exact_evidence(*, execute: bool) -> list[dict[str, Any]]:
         identity_key = (norm(brand), norm(model), ram, storage)
         if identity_key in existing_keys:
             base.update(status="DUPLICATE_REUSED", reason="exact variant already exists in private DNA")
+            results.append(base)
+            continue
+        source_key = (source_url.rstrip("/"), str(ram), str(storage))
+        if source_key in existing_source_keys:
+            base.update(
+                status="DUPLICATE_REUSED",
+                reason=(
+                    "official source URL and exact physical variant already "
+                    f"belong to {existing_source_keys[source_key]}"
+                ),
+            )
             results.append(base)
             continue
         product_id = evidence_product_id(brand, model, ram, storage)
@@ -317,6 +339,201 @@ def admit_exact_evidence(*, execute: bool) -> list[dict[str, Any]]:
             base.update(status="ADMISSION_FAILED", product_id=product_id, reason=reason)
         results.append(base)
     return results
+
+
+def _coverage_row_key(row: dict[str, Any]) -> str:
+    return "|".join(
+        (
+            norm(row.get("brand")),
+            norm(row.get("model")),
+            str(row.get("ram_gb") or ""),
+            str(row.get("storage_gb") or ""),
+        )
+    )
+
+
+def _requested_signature(row: dict[str, Any]) -> dict[str, str]:
+    return {
+        "ram_gb": str(row.get("ram_gb")),
+        "storage_gb": str(row.get("storage_gb")),
+    }
+
+
+def _normalise_signature(signature: Any) -> dict[str, str]:
+    if not isinstance(signature, dict):
+        return {}
+    return {
+        key: str(signature.get(key))
+        for key in ("ram_gb", "storage_gb")
+        if signature.get(key) not in (None, "")
+    }
+
+
+def verify_research_sources(
+    *,
+    execute: bool,
+    resume: bool,
+    limit: int | None = None,
+) -> dict[str, Any]:
+    """Run the existing official resolver/extractor for research-only rows.
+
+    This is deliberately a thin coordinator: resolver identity, extractor
+    evidence quality and the existing evidence/DNA stores remain authoritative.
+    Every row is checkpointed before the next network attempt, and a failed or
+    ambiguous source never enters durable evidence.
+    """
+    from official_source_resolver import resolve_product
+    from official_spec_extractor import extract_one
+    from product_evidence_store import (
+        save_verified_evidence,
+        variant_signature_from_specifications,
+    )
+
+    SOURCE_CHECKPOINT_PATH.parent.mkdir(parents=True, exist_ok=True)
+    source_code_hash = hashlib.sha256(
+        b"".join(
+            path.read_bytes()
+            for path in (
+                ROOT / "python" / "run_mobile_coverage.py",
+                ROOT / "python" / "official_source_resolver.py",
+                ROOT / "python" / "resolver_engine.py",
+                ROOT / "python" / "official_spec_extractor.py",
+            )
+        )
+    ).hexdigest()
+    if resume and SOURCE_CHECKPOINT_PATH.exists():
+        try:
+            checkpoint = read_json(SOURCE_CHECKPOINT_PATH)
+        except (OSError, ValueError):
+            checkpoint = {}
+    else:
+        checkpoint = {}
+
+    previous = checkpoint.get("results", {}) if isinstance(checkpoint, dict) else {}
+    if not isinstance(previous, dict):
+        previous = {}
+    if previous and checkpoint.get("source_code_hash") != source_code_hash:
+        checkpoint.setdefault("superseded_results", []).append(previous)
+        previous = {}
+
+    _, gap, _ = build_manifests()
+    queue = [
+        row for row in gap["gaps"]
+        if row.get("coverage_status") == "RESEARCH_ONLY"
+    ]
+    queue.sort(key=lambda row: _coverage_row_key(row))
+    selected = [
+        row for row in queue
+        if _coverage_row_key(row) not in previous
+    ]
+    if limit is not None and limit >= 0:
+        selected = selected[:limit]
+
+    for row in selected:
+        key = _coverage_row_key(row)
+        requested = _requested_signature(row)
+        title = (
+            f"{row['brand']} {row['model']} "
+            f"{row.get('ram_gb')}GB RAM {row.get('storage_gb')}GB"
+        )
+        product = {
+            "product_id": f"coverage-{key}",
+            "title": title,
+            "brand": row["brand"],
+            "asin": "",
+        }
+        identity = {
+            "brand": row["brand"],
+            "model": row["model"],
+            "title": title,
+            "search_name": title,
+            "original_title": title,
+            "asin": "",
+        }
+        result: dict[str, Any] = {
+            "row_key": key,
+            "brand": row["brand"],
+            "model": row["model"],
+            "variant_key": row["variant_key"],
+            "requested_signature": requested,
+            "attempted_at": iso_now(),
+        }
+        try:
+            resolved = resolve_product(None, product)
+            result.update({
+                "resolver_status": resolved.get("status"),
+                "resolver_reason": resolved.get("reason"),
+                "resolver_verified": resolved.get("verified") is True,
+                "official_url": resolved.get("official_url"),
+                "official_title": resolved.get("official_title"),
+                "identity_score": resolved.get("identity_score"),
+                "search_provider": resolved.get("search_provider"),
+            })
+            if resolved.get("verified") is not True or not resolved.get("official_url"):
+                result["status"] = "OFFICIAL_SOURCE_BLOCKED"
+            else:
+                extracted = extract_one(resolved, identity)
+                result.update({
+                    "fetch_status": extracted.get("fetch_status"),
+                    "page_identity_score": extracted.get("page_identity_score"),
+                    "review_status": (extracted.get("review") or {}).get("status"),
+                    "specification_count": len(extracted.get("specifications") or {}),
+                })
+                actual = _normalise_signature(
+                    variant_signature_from_specifications(
+                        extracted.get("specifications")
+                    )
+                )
+                result["extracted_signature"] = actual
+                if extracted.get("fetch_status") != "success":
+                    result["status"] = "OFFICIAL_PAGE_BLOCKED"
+                elif actual != requested:
+                    result["status"] = "EXACT_VARIANT_BLOCKED"
+                    result["reason"] = "official page did not independently expose the requested RAM/storage"
+                else:
+                    saved, reason = save_verified_evidence(
+                        identity=identity,
+                        extraction=extracted,
+                    )
+                    result["status"] = "EVIDENCE_SAVED" if saved else "EVIDENCE_BLOCKED"
+                    result["reason"] = reason
+        except Exception as error:  # bounded per-candidate failure; continue queue
+            result["status"] = "VERIFICATION_ERROR"
+            result["reason"] = f"{type(error).__name__}: {error}"
+
+        previous[key] = result
+        write_json(
+            SOURCE_CHECKPOINT_PATH,
+            {
+                "schema_version": "1.0",
+                "generated_at": iso_now(),
+                "source_code_hash": source_code_hash,
+                "queue_total_at_start": len(queue),
+                "results": previous,
+                "superseded_results": checkpoint.get("superseded_results", []),
+            },
+        )
+
+    admission_results = admit_exact_evidence(execute=execute)
+    counts = {
+        "queue_total": len(queue),
+        "attempted_this_run": len(selected),
+        "checkpointed": len(previous),
+        "remaining": max(len(queue) - len(previous), 0),
+        "official_source_verified": sum(
+            value.get("resolver_verified") is True
+            for value in previous.values()
+            if isinstance(value, dict)
+        ),
+        "evidence_saved": sum(
+            value.get("status") == "EVIDENCE_SAVED"
+            for value in previous.values()
+            if isinstance(value, dict)
+        ),
+        "admitted": sum(x.get("status") == "ADMITTED" for x in admission_results),
+        "duplicates_reused": sum(x.get("status") == "DUPLICATE_REUSED" for x in admission_results),
+    }
+    return {"counts": counts, "admission_results": admission_results}
 
 
 def build_manifests() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
@@ -484,12 +701,29 @@ def main() -> int:
     parser.add_argument("--until-exhausted", action="store_true")
     parser.add_argument("--execute", action="store_true", help="admit exact resolver-verified official evidence into private DNA")
     parser.add_argument("--dry-run", action="store_true", help="show exact evidence admission candidates without writing")
+    parser.add_argument("--verify-sources", action="store_true", help="run the existing official resolver and extractor for research-only rows")
+    parser.add_argument("--limit", type=int, default=None, help="bound this source-verification run; omit to process all pending rows")
     args = parser.parse_args()
     if args.market.upper() != "IN":
         raise SystemExit("Only the existing IN source manifests are supported.")
     if args.execute and args.dry_run:
         raise SystemExit("Choose either --execute or --dry-run, not both.")
-    admission_results = admit_exact_evidence(execute=args.execute) if (args.execute or args.dry_run) else []
+    if args.verify_sources and args.dry_run:
+        raise SystemExit("--verify-sources cannot be combined with --dry-run.")
+    source_run = (
+        verify_research_sources(
+            execute=args.execute,
+            resume=args.resume,
+            limit=args.limit,
+        )
+        if args.verify_sources
+        else None
+    )
+    admission_results = (
+        source_run.get("admission_results", [])
+        if source_run is not None
+        else (admit_exact_evidence(execute=args.execute) if (args.execute or args.dry_run) else [])
+    )
     master, gap, state = build_manifests()
     write_json(MASTER_PATH, master)
     write_json(GAP_PATH, gap)
@@ -505,8 +739,14 @@ def main() -> int:
         "cursor": cursor,
         "queue_total": total,
         "queue_remaining": max(total - cursor, 0),
-        "processing_mode": "manifest_and_existing_store_reconciliation",
-        "status": "EXHAUSTED_MANIFEST_WITH_VERIFICATION_BLOCKERS" if cursor == total else "CHECKPOINTED",
+        "processing_mode": "official_source_verification_and_admission" if args.verify_sources else "manifest_and_existing_store_reconciliation",
+        "status": (
+            "SOURCE_VERIFICATION_CHECKPOINTED"
+            if args.verify_sources and source_run and source_run["counts"]["remaining"]
+            else "EXHAUSTED_MANIFEST_WITH_VERIFICATION_BLOCKERS"
+            if cursor == total
+            else "CHECKPOINTED"
+        ),
         "admission_run": {
             "mode": "execute" if args.execute else ("dry_run" if args.dry_run else "reconcile_only"),
             "records_considered": len(admission_results),
@@ -534,8 +774,9 @@ def main() -> int:
             ),
             "blockers_still_open": sum(x["coverage_status"] == "RESEARCH_ONLY" for x in gap["gaps"]),
         },
-        "resume_command": "py python/run_mobile_coverage.py --market IN --start-year 2023 --end-year 2026 --resume --until-exhausted",
-        "note": "--execute admits only exact resolver-verified official evidence. Research-only rows remain pending until an authorized official source is verified.",
+        "resume_command": "py python/run_mobile_coverage.py --market IN --start-year 2023 --end-year 2026 --resume --verify-sources --execute --until-exhausted",
+        "source_verification": source_run.get("counts") if source_run else None,
+        "note": "--verify-sources uses only the existing official resolver, extractor, evidence store and Product DNA admission gates. Research-only rows remain blocked when an exact official source or exact variant cannot be verified.",
     }
     write_json(PROGRESS_PATH, progress)
     print(json.dumps({"master": master["counts"], "gap": gap["counts"], "progress": progress["counts"], "status": progress["status"]}, indent=2))

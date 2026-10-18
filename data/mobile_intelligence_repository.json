@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-10-18T07:49:16.081757+00:00",
+  "updated_at": "2026-10-18T09:02:35.873427+00:00",
   "products": {
     "dna-iqoo-neo-10-12gb-256gb": {
       "product_id": "dna-iqoo-neo-10-12gb-256gb",
@@ -2638,6 +2638,762 @@
       },
       "created_at": "2026-10-18T07:49:16.081326+00:00",
       "updated_at": "2026-10-18T07:49:16.081477+00:00"
+    },
+    "dna-samsung-galaxy-a37-5g-8gb-128gb": {
+      "product_id": "dna-samsung-galaxy-a37-5g-8gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-a37-5g-8gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a37-5g-awesome-charcoal-128gb-sm-a376ezadins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy A37 5G",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a37-5g-awesome-charcoal-128gb-sm-a376ezadins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 8,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a37-5g-awesome-charcoal-128gb-sm-a376ezadins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a37-5g-awesome-charcoal-128gb-sm-a376ezadins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": "2.75 GHz, 2 GHz",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a37-5g-awesome-charcoal-128gb-sm-a376ezadins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T09:02:35.729451+00:00",
+      "updated_at": "2026-10-18T09:02:35.729545+00:00"
+    },
+    "dna-samsung-galaxy-a57-5g-8gb-256gb": {
+      "product_id": "dna-samsung-galaxy-a57-5g-8gb-256gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-a57-5g-8gb-256gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy A57 5G",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 8,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 256,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": "2.9 GHz, 2.6 GHz, 1.9 GHz",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T09:02:35.779197+00:00",
+      "updated_at": "2026-10-18T09:02:35.779296+00:00"
+    },
+    "dna-samsung-galaxy-f70-pro-5g-6gb-128gb": {
+      "product_id": "dna-samsung-galaxy-f70-pro-5g-6gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-f70-pro-5g-6gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy F70 Pro 5G",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 6,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": "2.4 GHz, 1.8 GHz",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T09:02:35.798387+00:00",
+      "updated_at": "2026-10-18T09:02:35.798485+00:00"
+    },
+    "dna-samsung-galaxy-m47-5g-6gb-128gb": {
+      "product_id": "dna-samsung-galaxy-m47-5g-6gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-m47-5g-6gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy M47 5G",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 6,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": "2.4 GHz, 1.8 GHz",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T09:02:35.816715+00:00",
+      "updated_at": "2026-10-18T09:02:35.816921+00:00"
+    },
+    "dna-samsung-galaxy-s25-fe-8gb-128gb": {
+      "product_id": "dna-samsung-galaxy-s25-fe-8gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-s25-fe-8gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s25-fe-navy-128gb-sm-s731bdbbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy S25 FE",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s25-fe-navy-128gb-sm-s731bdbbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 8,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s25-fe-navy-128gb-sm-s731bdbbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s25-fe-navy-128gb-sm-s731bdbbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T09:02:35.853425+00:00",
+      "updated_at": "2026-10-18T09:02:35.853530+00:00"
+    },
+    "dna-samsung-galaxy-s26-ultra-12gb-256gb": {
+      "product_id": "dna-samsung-galaxy-s26-ultra-12gb-256gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-s26-ultra-12gb-256gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s26-ultra-black-256gb-certified-re-newed-sm5s948bzkbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy S26 Ultra",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s26-ultra-black-256gb-certified-re-newed-sm5s948bzkbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 12,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s26-ultra-black-256gb-certified-re-newed-sm5s948bzkbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 256,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s26-ultra-black-256gb-certified-re-newed-sm5s948bzkbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": "4.74 GHz, 3.6 GHz",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s26-ultra-black-256gb-certified-re-newed-sm5s948bzkbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T09:02:35.873052+00:00",
+      "updated_at": "2026-10-18T09:02:35.873148+00:00"
     }
   }
 }

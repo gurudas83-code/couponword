@@ -636,6 +636,24 @@ def model_score(
             if not any(char.isdigit() for char in token)
         }
 
+        # A shared model number alone is insufficient when the product
+        # family token changes (for example iPhone 11 versus iPad 11).
+        # Require at least one alphabetic model token to agree whenever the
+        # expected identity contains one. This keeps numeric model codes
+        # such as MK240 and T5x conservative without allowing cross-family
+        # official pages to pass the identity gate.
+        if expected_alpha and not expected_alpha.intersection(candidate_alpha):
+            reasons.append("No alphabetic model-family token matched")
+            return 0, False, reasons
+
+        # Apple uses the shared SE generation number across iPhone and iPad
+        # lines. Keep that family boundary explicit so an iPad/watch page
+        # cannot verify an iPhone merely because the number and "SE" match.
+        for family in ("iphone", "ipad"):
+            if family in expected_alpha and family not in candidate_alpha:
+                reasons.append(f"Expected Apple family token missing: {family}")
+                return 0, False, reasons
+
         if expected_alpha:
             shared_alpha = expected_alpha.intersection(candidate_alpha)
 
