@@ -28,6 +28,7 @@ OFFERS_PATH = ROOT / "data" / "retailer_offers.json"
 MASTER_PATH = ROOT / "data" / "mobile_universe_2023_2026.json"
 GAP_PATH = ROOT / "data" / "mobile_coverage_gap_2023_2026.json"
 PROGRESS_PATH = ROOT / "data" / "mobile_coverage_progress.json"
+BASELINE_PRIVATE_DNA_TOTAL = 9
 
 
 def norm(value: Any) -> str:
@@ -68,6 +69,8 @@ def build_sources() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     coverage = read_json(SEED_PATH)
     launch_rows = coverage.get("verified_india_launch_inventory", [])
     compat_rows = read_json(SEED_COMPAT_PATH).get("products", [])
+    evidence_payload = read_json(EVIDENCE_PATH)
+    evidence_rows = evidence_payload.get("records", [])
     models: dict[str, dict[str, Any]] = {}
 
     def ensure_model(brand: Any, model: Any) -> dict[str, Any]:
@@ -149,6 +152,29 @@ def build_sources() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
             item["official_product_url"] = source_url
         item["india_market_status"] = "LAUNCH_EVIDENCE_VERIFIED"
 
+    # Evidence rows are also discovery records.  Include them in the master
+    # universe so a newly admitted DNA record cannot disappear from the gap
+    # manifest simply because its original research seed used another alias.
+    for record in evidence_rows:
+        if not isinstance(record, dict):
+            continue
+        signature = record.get("variant_signature") if isinstance(record.get("variant_signature"), dict) else {}
+        evidence_record = dict(record)
+        evidence_record["ram_gb"] = signature.get("ram_gb")
+        evidence_record["storage_gb"] = signature.get("storage_gb")
+        evidence_record["variant"] = (
+            f"{signature.get('ram_gb')}GB/{signature.get('storage_gb')}GB"
+            if signature.get("ram_gb") and signature.get("storage_gb")
+            else ""
+        )
+        evidence_record["source_reference"] = record.get("official_url")
+        add_variant(evidence_record, "official_evidence_cache")
+        item = ensure_model(record.get("brand"), record.get("model"))
+        if item["official_product_url"] is None and record.get("official_url"):
+            item["official_product_url"] = record.get("official_url")
+        if item["india_market_status"] == "UNVERIFIED_RESEARCH":
+            item["india_market_status"] = "OFFICIAL_EVIDENCE_ONLY"
+
     for item in models.values():
         if not item["variants"]:
             item["variants"].append({
@@ -169,6 +195,128 @@ def exact_signature(record: dict[str, Any]) -> tuple[int | None, int | None]:
     if isinstance(sig, dict):
         return sig.get("ram_gb"), sig.get("storage_gb")
     return parse_variant(record.get("search_name") or record.get("model"))
+
+
+def text_value(value: Any) -> Any:
+    if isinstance(value, dict):
+        return value.get("value")
+    return value
+
+
+def evidence_product_id(brand: str, model: str, ram: int, storage: int) -> str:
+    slug = re.sub(
+        r"[^a-z0-9]+",
+        "-",
+        f"{brand}-{model}-{ram}gb-{storage}gb".lower(),
+    ).strip("-")
+    return f"dna-{slug}"
+
+
+def admit_exact_evidence(*, execute: bool) -> list[dict[str, Any]]:
+    """Admit only exact, resolver-verified official evidence rows.
+
+    This is intentionally narrower than discovery: a current offer and a
+    canonical shopping ID are not required for private DNA, but exact variant
+    identity and a successful official source fetch are mandatory.
+    """
+    from mobile_intelligence_repository import load_repository, save_mobile_dna
+    from mobile_product_dna import EvidenceValue, MobileProductDNA
+
+    evidence_rows = read_json(EVIDENCE_PATH).get("records", [])
+    existing = load_repository().get("products", {})
+    existing_keys: set[tuple[str, str, int, int]] = set()
+    for wrapper in existing.values():
+        dna = wrapper.get("dna", {}) if isinstance(wrapper, dict) else {}
+        brand = text_value(dna.get("brand"))
+        model = text_value(dna.get("model"))
+        ram = text_value(dna.get("ram_gb"))
+        storage = text_value(dna.get("storage_gb"))
+        if brand and model and ram not in (None, "") and storage not in (None, ""):
+            existing_keys.add((norm(brand), norm(model), int(ram), int(storage)))
+
+    results: list[dict[str, Any]] = []
+    for index, row in enumerate(evidence_rows):
+        if not isinstance(row, dict):
+            continue
+        ram_raw, storage_raw = exact_signature(row)
+        brand = str(row.get("brand") or "").strip()
+        model = str(row.get("model") or "").strip()
+        source_url = str(row.get("official_url") or "").strip()
+        base = {
+            "record": str(row.get("asin") or source_url or f"evidence-{index}"),
+            "brand": brand,
+            "model": model,
+            "ram_gb": ram_raw,
+            "storage_gb": storage_raw,
+            "source_url": source_url,
+        }
+        if ram_raw is None or storage_raw is None:
+            continue
+        ram, storage = int(ram_raw), int(storage_raw)
+        if not brand or not model or not source_url.startswith("https://"):
+            base.update(status="BLOCKED_MISSING_OFFICIAL_EVIDENCE", reason="missing exact identity or HTTPS official URL")
+            results.append(base)
+            continue
+        if row.get("resolver_verified") is not True or str(row.get("fetch_status") or "").lower() != "success":
+            base.update(status="BLOCKED_SOURCE_NOT_VERIFIED", reason="resolver/fetch verification is not successful")
+            results.append(base)
+            continue
+        specs = row.get("specifications") if isinstance(row.get("specifications"), dict) else {}
+        name_value = str(text_value(specs.get("name")) or "")
+        declared_memory = re.search(r"\b(\d{1,2})\s*gb\s*(?:memory|ram)\b", name_value, re.I)
+        if declared_memory and int(declared_memory.group(1)) != ram:
+            base.update(status="BLOCKED_IDENTITY_CONFLICT", reason=f"official name declares {declared_memory.group(1)}GB while requested variant is {ram}GB")
+            results.append(base)
+            continue
+        identity_key = (norm(brand), norm(model), ram, storage)
+        if identity_key in existing_keys:
+            base.update(status="DUPLICATE_REUSED", reason="exact variant already exists in private DNA")
+            results.append(base)
+            continue
+        product_id = evidence_product_id(brand, model, ram, storage)
+        def ev(value: Any) -> EvidenceValue:
+            return EvidenceValue(
+                value=value,
+                source="official_product_evidence_cache",
+                source_url=source_url,
+                confidence="high",
+                verified=True,
+            )
+
+        dna = MobileProductDNA(
+            product_id=product_id,
+            canonical_product_id=None,
+            brand=ev(brand),
+            model=ev(model),
+            ram_gb=ev(ram),
+            storage_gb=ev(storage),
+            warnings=[
+                "Private Product DNA admitted from exact official evidence.",
+                "No canonical shopping ID or current retailer offer was asserted.",
+            ],
+        )
+        processor = text_value(specs.get("processor") or specs.get("chipset"))
+        if processor:
+            dna.chipset = ev(processor)
+        battery = text_value(specs.get("battery_capacity_mah"))
+        battery_match = re.search(r"\b(\d{3,5})\s*mAh\b", str(battery or ""), re.I)
+        if battery_match:
+            dna.battery_mah = ev(int(battery_match.group(1)))
+        os_value = text_value(specs.get("operating_system"))
+        if os_value:
+            dna.operating_system = ev(os_value)
+        if not execute:
+            base.update(status="READY_FOR_ADMISSION", product_id=product_id, reason="exact official evidence passed identity gates")
+            results.append(base)
+            continue
+        saved, reason = save_mobile_dna(dna)
+        if saved:
+            existing_keys.add(identity_key)
+            base.update(status="ADMITTED", product_id=product_id, reason=reason)
+        else:
+            base.update(status="ADMISSION_FAILED", product_id=product_id, reason=reason)
+        results.append(base)
+    return results
 
 
 def build_manifests() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
@@ -334,9 +482,14 @@ def main() -> int:
     parser.add_argument("--end-year", type=int, default=2026)
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--until-exhausted", action="store_true")
+    parser.add_argument("--execute", action="store_true", help="admit exact resolver-verified official evidence into private DNA")
+    parser.add_argument("--dry-run", action="store_true", help="show exact evidence admission candidates without writing")
     args = parser.parse_args()
     if args.market.upper() != "IN":
         raise SystemExit("Only the existing IN source manifests are supported.")
+    if args.execute and args.dry_run:
+        raise SystemExit("Choose either --execute or --dry-run, not both.")
+    admission_results = admit_exact_evidence(execute=args.execute) if (args.execute or args.dry_run) else []
     master, gap, state = build_manifests()
     write_json(MASTER_PATH, master)
     write_json(GAP_PATH, gap)
@@ -354,6 +507,16 @@ def main() -> int:
         "queue_remaining": max(total - cursor, 0),
         "processing_mode": "manifest_and_existing_store_reconciliation",
         "status": "EXHAUSTED_MANIFEST_WITH_VERIFICATION_BLOCKERS" if cursor == total else "CHECKPOINTED",
+        "admission_run": {
+            "mode": "execute" if args.execute else ("dry_run" if args.dry_run else "reconcile_only"),
+            "records_considered": len(admission_results),
+            "admitted": sum(x["status"] == "ADMITTED" for x in admission_results),
+            "ready_for_admission": sum(x["status"] == "READY_FOR_ADMISSION" for x in admission_results),
+            "duplicates_reused": sum(x["status"] == "DUPLICATE_REUSED" for x in admission_results),
+            "identity_conflicts": sum(x["status"] == "BLOCKED_IDENTITY_CONFLICT" for x in admission_results),
+            "failed": sum(x["status"].endswith("FAILED") for x in admission_results),
+            "results": admission_results,
+        },
         "counts": {
             "discovered_unique_models": master["counts"]["discovered_unique_models"],
             "discovered_exact_variants": master["counts"]["discovered_exact_variants"],
@@ -363,11 +526,16 @@ def main() -> int:
             "private_dna_total": len(read_json(DNA_PATH).get("products", {})),
             "canonical_mobile_ids": len(state["known_ids"]),
             "fresh_in_stock_offers": sum(x["current_fresh_offer"] for x in gap["gaps"]),
-            "new_product_dna_admissions": 0,
+            "private_dna_total_before_execution": BASELINE_PRIVATE_DNA_TOTAL,
+            "private_dna_total_after_execution": len(read_json(DNA_PATH).get("products", {})),
+            "new_product_dna_admissions": max(
+                0,
+                len(read_json(DNA_PATH).get("products", {})) - BASELINE_PRIVATE_DNA_TOTAL,
+            ),
             "blockers_still_open": sum(x["coverage_status"] == "RESEARCH_ONLY" for x in gap["gaps"]),
         },
         "resume_command": "py python/run_mobile_coverage.py --market IN --start-year 2023 --end-year 2026 --resume --until-exhausted",
-        "note": "This command reconciles existing manifests and stores. It does not fabricate evidence, call blocked retailers, or admit unverified Product DNA.",
+        "note": "--execute admits only exact resolver-verified official evidence. Research-only rows remain pending until an authorized official source is verified.",
     }
     write_json(PROGRESS_PATH, progress)
     print(json.dumps({"master": master["counts"], "gap": gap["counts"], "progress": progress["counts"], "status": progress["status"]}, indent=2))

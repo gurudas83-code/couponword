@@ -4,7 +4,7 @@
   "category": "smartphone",
   "period_start": "2023-01-01",
   "period_end": "2026-10-18",
-  "generated_at": "2026-10-18T07:39:30.672686+00:00",
+  "generated_at": "2026-10-18T07:49:49.056594+00:00",
   "denominator_status": "COVERAGE_DENOMINATOR_UNVERIFIED",
   "scope": "Union of existing 126-candidate coverage, 187-entry priority discovery and saved manufacturer launch evidence; not a complete market census.",
   "sources": [
@@ -1367,7 +1367,7 @@
       "launch_year": null,
       "launch_date": null,
       "manufacturer_model_id": null,
-      "official_product_url": null,
+      "official_product_url": "https://shop.vivo.com/in/product/10325?skuId=19299",
       "india_launch_sources": [],
       "variants": [
         {
@@ -1379,12 +1379,23 @@
           "identity_status": "EXACT_SEED_VARIANT",
           "official_evidence_status": "MODEL_ONLY",
           "source_type": "priority_research_seed"
+        },
+        {
+          "variant_key": "12gb/256gb",
+          "ram_gb": "12",
+          "storage_gb": "256",
+          "variant_text": "12GB/256GB",
+          "manufacturer_sku": null,
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
         }
       ],
       "discovery_sources": [
-        "https://www.91mobiles.com/list-of-phones/iqoo-mobile-price-list-in-india"
+        "https://www.91mobiles.com/list-of-phones/iqoo-mobile-price-list-in-india",
+        "https://shop.vivo.com/in/product/10325?skuId=19299"
       ],
-      "india_market_status": "UNVERIFIED_RESEARCH",
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -1649,6 +1660,35 @@
       "coverage_status": "RESEARCH_ONLY"
     },
     {
+      "model_key": "lava|bold n2",
+      "market": "IN",
+      "brand": "lava",
+      "model": "Bold N2",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.lavamobiles.com/smartphones/bold-n2",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "4gb/64gb",
+          "ram_gb": "4",
+          "storage_gb": "64",
+          "variant_text": "4GB/64GB",
+          "manufacturer_sku": null,
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.lavamobiles.com/smartphones/bold-n2"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
       "model_key": "lava|bold n2 5g",
       "market": "IN",
       "brand": "Lava",
@@ -1678,6 +1718,64 @@
       "coverage_status": "RESEARCH_ONLY"
     },
     {
+      "model_key": "lava|bold n2 lite",
+      "market": "IN",
+      "brand": "lava",
+      "model": "Bold N2 Lite",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "3gb/64gb",
+          "ram_gb": "3",
+          "storage_gb": "64",
+          "variant_text": "3GB/64GB",
+          "manufacturer_sku": null,
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.lavamobiles.com/smartphones/bold-n2-lite"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
+      "model_key": "lava|virat v1",
+      "market": "IN",
+      "brand": "Lava",
+      "model": "Virat V1",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "4gb/64gb",
+          "ram_gb": "4",
+          "storage_gb": "64",
+          "variant_text": "4GB/64GB",
+          "manufacturer_sku": null,
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.lavamobiles.com/smartphones/virat-v1"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
       "model_key": "lava|virat v1 5g",
       "market": "IN",
       "brand": "Lava",
@@ -1686,7 +1784,7 @@
       "launch_year": null,
       "launch_date": null,
       "manufacturer_model_id": null,
-      "official_product_url": null,
+      "official_product_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
       "india_launch_sources": [],
       "variants": [
         {
@@ -1701,9 +1799,10 @@
         }
       ],
       "discovery_sources": [
-        "https://www.91mobiles.com/list-of-phones/lava-mobile-price-list-in-india"
+        "https://www.91mobiles.com/list-of-phones/lava-mobile-price-list-in-india",
+        "https://www.lavamobiles.com/smartphones/virat-v1-5g"
       ],
-      "india_market_status": "UNVERIFIED_RESEARCH",
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -2026,6 +2125,35 @@
       "coverage_status": "RESEARCH_ONLY"
     },
     {
+      "model_key": "motorola|signature",
+      "market": "IN",
+      "brand": "Motorola",
+      "model": "Signature",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.motorola.in/smartphones-motorola-signature/p?skuId=609",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "12gb/256gb",
+          "ram_gb": "12",
+          "storage_gb": "256",
+          "variant_text": "12GB/256GB",
+          "manufacturer_sku": null,
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.motorola.in/smartphones-motorola-signature/p?skuId=609"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
       "model_key": "nothing|phone 2a",
       "market": "IN",
       "brand": "Nothing",
@@ -2296,7 +2424,7 @@
       "launch_year": null,
       "launch_date": null,
       "manufacturer_model_id": null,
-      "official_product_url": null,
+      "official_product_url": "https://www.oneplus.in/13/specs",
       "india_launch_sources": [],
       "variants": [
         {
@@ -2311,9 +2439,10 @@
         }
       ],
       "discovery_sources": [
-        "https://www.91mobiles.com/list-of-phones/oneplus-flagship-phones"
+        "https://www.91mobiles.com/list-of-phones/oneplus-flagship-phones",
+        "https://www.oneplus.in/13/specs"
       ],
-      "india_market_status": "UNVERIFIED_RESEARCH",
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -2325,7 +2454,7 @@
       "launch_year": null,
       "launch_date": null,
       "manufacturer_model_id": null,
-      "official_product_url": null,
+      "official_product_url": "https://www.oneplus.in/13r/specs",
       "india_launch_sources": [],
       "variants": [
         {
@@ -2337,12 +2466,23 @@
           "identity_status": "UNVERIFIED",
           "official_evidence_status": "MODEL_ONLY",
           "source_type": "priority_research_seed"
+        },
+        {
+          "variant_key": "12gb/256gb",
+          "ram_gb": "12",
+          "storage_gb": "256",
+          "variant_text": "12GB/256GB",
+          "manufacturer_sku": null,
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
         }
       ],
       "discovery_sources": [
-        "India_Smartphone_Specifications_2023_2026.xlsx#Smartphones!A50:O50"
+        "India_Smartphone_Specifications_2023_2026.xlsx#Smartphones!A50:O50",
+        "https://www.oneplus.in/13r/specs"
       ],
-      "india_market_status": "UNVERIFIED_RESEARCH",
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -2488,6 +2628,35 @@
         "https://www.91mobiles.com/list-of-phones/OnePlus-mobile-price-list-in-india"
       ],
       "india_market_status": "UNVERIFIED_RESEARCH",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
+      "model_key": "oneplus|n6 lite",
+      "market": "IN",
+      "brand": "OnePlus",
+      "model": "N6 Lite",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.oneplus.in/n6-lite/specs",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "4gb/64gb",
+          "ram_gb": "4",
+          "storage_gb": "64",
+          "variant_text": "4GB/64GB",
+          "manufacturer_sku": null,
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.oneplus.in/n6-lite/specs"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -3738,6 +3907,35 @@
       "coverage_status": "RESEARCH_ONLY"
     },
     {
+      "model_key": "realme|c83 5g",
+      "market": "IN",
+      "brand": "realme",
+      "model": "C83 5G",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.realme.com/in/realme-c83",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "4gb/64gb",
+          "ram_gb": "4",
+          "storage_gb": "64",
+          "variant_text": "4GB/64GB",
+          "manufacturer_sku": null,
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.realme.com/in/realme-c83"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
       "model_key": "realme|gt 6",
       "market": "IN",
       "brand": "realme",
@@ -3854,6 +4052,122 @@
       "coverage_status": "RESEARCH_ONLY"
     },
     {
+      "model_key": "realme|narzo 100 lite 5g frost",
+      "market": "IN",
+      "brand": "realme",
+      "model": "narzo 100 Lite 5G Frost",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.realme.com/in/realme-narzo-100-lite-5g/specs",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "unknown",
+          "ram_gb": null,
+          "storage_gb": null,
+          "variant_text": null,
+          "manufacturer_sku": null,
+          "identity_status": "UNVERIFIED",
+          "official_evidence_status": "MODEL_ONLY",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.realme.com/in/realme-narzo-100-lite-5g/specs"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
+      "model_key": "realme|narzo 100 lite 5g thunder",
+      "market": "IN",
+      "brand": "realme",
+      "model": "narzo 100 Lite 5G Thunder",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.realme.com/in/realme-narzo-100-lite-5g/specs",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "unknown",
+          "ram_gb": null,
+          "storage_gb": null,
+          "variant_text": null,
+          "manufacturer_sku": null,
+          "identity_status": "UNVERIFIED",
+          "official_evidence_status": "MODEL_ONLY",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.realme.com/in/realme-narzo-100-lite-5g/specs"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
+      "model_key": "realme|narzo 100x 5g midnight",
+      "market": "IN",
+      "brand": "realme",
+      "model": "NARZO 100x 5G Midnight",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.realme.com/in/realme-narzo-100x-5g/specs",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "unknown",
+          "ram_gb": null,
+          "storage_gb": null,
+          "variant_text": null,
+          "manufacturer_sku": null,
+          "identity_status": "UNVERIFIED",
+          "official_evidence_status": "MODEL_ONLY",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.realme.com/in/realme-narzo-100x-5g/specs"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
+      "model_key": "realme|narzo 80 lite 4g see",
+      "market": "IN",
+      "brand": "realme",
+      "model": "narzo 80 Lite 4G See",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.realme.com/in/realme-narzo-80-lite/specs",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "unknown",
+          "ram_gb": null,
+          "storage_gb": null,
+          "variant_text": null,
+          "manufacturer_sku": null,
+          "identity_status": "UNVERIFIED",
+          "official_evidence_status": "MODEL_ONLY",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.realme.com/in/realme-narzo-80-lite/specs"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
       "model_key": "realme|p3",
       "market": "IN",
       "brand": "realme",
@@ -3909,6 +4223,35 @@
         "India_Smartphone_Specifications_2023_2026.xlsx#Smartphones!A55:O55"
       ],
       "india_market_status": "UNVERIFIED_RESEARCH",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
+      "model_key": "realme|p4 lite 5g",
+      "market": "IN",
+      "brand": "realme",
+      "model": "P4 Lite 5G",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.realme.com/in/realme-p4-lite-5g/specs",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "unknown",
+          "ram_gb": null,
+          "storage_gb": null,
+          "variant_text": null,
+          "manufacturer_sku": null,
+          "identity_status": "UNVERIFIED",
+          "official_evidence_status": "MODEL_ONLY",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.realme.com/in/realme-p4-lite-5g/specs"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -3996,6 +4339,35 @@
         "https://www.91mobiles.com/list-of-phones/realme-mobile-price-list-in-india"
       ],
       "india_market_status": "UNVERIFIED_RESEARCH",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
+      "model_key": "realme|p4r 5g smartphone",
+      "market": "IN",
+      "brand": "realme",
+      "model": "P4R 5G Smartphone",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.realme.com/in/realme-p4r-5g/specs",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "unknown",
+          "ram_gb": null,
+          "storage_gb": null,
+          "variant_text": null,
+          "manufacturer_sku": null,
+          "identity_status": "UNVERIFIED",
+          "official_evidence_status": "MODEL_ONLY",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.realme.com/in/realme-p4r-5g/specs"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -4399,6 +4771,35 @@
       "coverage_status": "RESEARCH_ONLY"
     },
     {
+      "model_key": "samsung|galaxy a06 5g light",
+      "market": "IN",
+      "brand": "Samsung",
+      "model": "Galaxy A06 5G Light",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a06-5g-light-gray-64gb-sm-a066bzadins/",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "4gb/64gb",
+          "ram_gb": "4",
+          "storage_gb": "64",
+          "variant_text": "4GB/64GB",
+          "manufacturer_sku": null,
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a06-5g-light-gray-64gb-sm-a066bzadins/"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
       "model_key": "samsung|galaxy a27 5g",
       "market": "IN",
       "brand": "Samsung",
@@ -4593,17 +4994,19 @@
       ],
       "variants": [
         {
-          "variant_key": "unknown",
-          "ram_gb": null,
-          "storage_gb": null,
-          "variant_text": null,
+          "variant_key": "8gb/128gb",
+          "ram_gb": "8",
+          "storage_gb": "128",
+          "variant_text": "8GB/128GB",
           "manufacturer_sku": null,
-          "identity_status": "UNVERIFIED",
-          "official_evidence_status": "MODEL_ONLY",
-          "source_type": "launch_evidence_only"
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
         }
       ],
-      "discovery_sources": [],
+      "discovery_sources": [
+        "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/"
+      ],
       "india_market_status": "LAUNCH_EVIDENCE_VERIFIED",
       "coverage_status": "RESEARCH_ONLY"
     },
@@ -4645,7 +5048,7 @@
       "launch_year": null,
       "launch_date": null,
       "manufacturer_model_id": null,
-      "official_product_url": null,
+      "official_product_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/",
       "india_launch_sources": [],
       "variants": [
         {
@@ -4660,9 +5063,68 @@
         }
       ],
       "discovery_sources": [
-        "https://www.91mobiles.com/list-of-phones/samsung-4g-phones"
+        "https://www.91mobiles.com/list-of-phones/samsung-4g-phones",
+        "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/"
       ],
-      "india_market_status": "UNVERIFIED_RESEARCH",
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
+      "model_key": "samsung|galaxy f06 5g",
+      "market": "IN",
+      "brand": "Samsung",
+      "model": "Galaxy F06 5G",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-blue-128gb-sm-e066bzbgins/",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "unknown",
+          "ram_gb": null,
+          "storage_gb": null,
+          "variant_text": null,
+          "manufacturer_sku": null,
+          "identity_status": "UNVERIFIED",
+          "official_evidence_status": "MODEL_ONLY",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-blue-128gb-sm-e066bzbgins/"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
+      "model_key": "samsung|galaxy f06 5g bahama",
+      "market": "IN",
+      "brand": "Samsung",
+      "model": "Galaxy F06 5G Bahama",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-bahama-blue-64gb-sm-e066bzbdins/",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "unknown",
+          "ram_gb": null,
+          "storage_gb": null,
+          "variant_text": null,
+          "manufacturer_sku": null,
+          "identity_status": "UNVERIFIED",
+          "official_evidence_status": "MODEL_ONLY",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-bahama-blue-64gb-sm-e066bzbdins/"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -4731,6 +5193,74 @@
       "coverage_status": "RESEARCH_ONLY"
     },
     {
+      "model_key": "samsung|galaxy f36 5g",
+      "market": "IN",
+      "brand": "Samsung",
+      "model": "Galaxy F36 5G",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f36-5g-red-128gb-sm-e366bzrdins/",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "unknown",
+          "ram_gb": null,
+          "storage_gb": null,
+          "variant_text": null,
+          "manufacturer_sku": null,
+          "identity_status": "UNVERIFIED",
+          "official_evidence_status": "MODEL_ONLY",
+          "source_type": "official_evidence_cache"
+        },
+        {
+          "variant_key": "8gb/128gb",
+          "ram_gb": "8",
+          "storage_gb": "128",
+          "variant_text": "8GB/128GB",
+          "manufacturer_sku": null,
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f36-5g-red-128gb-sm-e366bzrdins/"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
+      "model_key": "samsung|galaxy f36 5g violet",
+      "market": "IN",
+      "brand": "Samsung",
+      "model": "Galaxy F36 5G Violet",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f36-5g-luxe-violet-128gb-sm-e366bzvbins/",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "unknown",
+          "ram_gb": null,
+          "storage_gb": null,
+          "variant_text": null,
+          "manufacturer_sku": null,
+          "identity_status": "UNVERIFIED",
+          "official_evidence_status": "MODEL_ONLY",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f36-5g-luxe-violet-128gb-sm-e366bzvbins/"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
       "model_key": "samsung|galaxy f70 pro 5g",
       "market": "IN",
       "brand": "Samsung",
@@ -4757,6 +5287,35 @@
         "https://www.91mobiles.com/list-of-phones/SAMSUNG-mobile-price-list-in-india"
       ],
       "india_market_status": "UNVERIFIED_RESEARCH",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
+      "model_key": "samsung|galaxy f70e 5g",
+      "market": "IN",
+      "brand": "Samsung",
+      "model": "Galaxy F70e 5G",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70e-5g-spotlight-blue-128gb-sm-e076bdbbins/",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "6gb/128gb",
+          "ram_gb": "6",
+          "storage_gb": "128",
+          "variant_text": "6GB/128GB",
+          "manufacturer_sku": null,
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70e-5g-spotlight-blue-128gb-sm-e076bdbbins/"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -4940,6 +5499,35 @@
       ],
       "variants": [
         {
+          "variant_key": "4gb/128gb",
+          "ram_gb": "4",
+          "storage_gb": "128",
+          "variant_text": "4GB/128GB",
+          "manufacturer_sku": null,
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/"
+      ],
+      "india_market_status": "LAUNCH_EVIDENCE_VERIFIED",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
+      "model_key": "samsung|galaxy m17 5g mobile moonlight",
+      "market": "IN",
+      "brand": "samsung",
+      "model": "Galaxy M17 5G Mobile Moonlight",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-moonlight-silver-128gb-sm-m176bzsains/",
+      "india_launch_sources": [],
+      "variants": [
+        {
           "variant_key": "unknown",
           "ram_gb": null,
           "storage_gb": null,
@@ -4947,11 +5535,42 @@
           "manufacturer_sku": null,
           "identity_status": "UNVERIFIED",
           "official_evidence_status": "MODEL_ONLY",
-          "source_type": "launch_evidence_only"
+          "source_type": "official_evidence_cache"
         }
       ],
-      "discovery_sources": [],
-      "india_market_status": "LAUNCH_EVIDENCE_VERIFIED",
+      "discovery_sources": [
+        "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-moonlight-silver-128gb-sm-m176bzsains/"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
+      "model_key": "samsung|galaxy m17 5g mobile sapphire",
+      "market": "IN",
+      "brand": "samsung",
+      "model": "Galaxy M17 5G Mobile Sapphire",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "unknown",
+          "ram_gb": null,
+          "storage_gb": null,
+          "variant_text": null,
+          "manufacturer_sku": null,
+          "identity_status": "UNVERIFIED",
+          "official_evidence_status": "MODEL_ONLY",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -4976,17 +5595,19 @@
       ],
       "variants": [
         {
-          "variant_key": "unknown",
-          "ram_gb": null,
-          "storage_gb": null,
-          "variant_text": null,
+          "variant_key": "4gb/128gb",
+          "ram_gb": "4",
+          "storage_gb": "128",
+          "variant_text": "4GB/128GB",
           "manufacturer_sku": null,
-          "identity_status": "UNVERIFIED",
-          "official_evidence_status": "MODEL_ONLY",
-          "source_type": "launch_evidence_only"
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
         }
       ],
-      "discovery_sources": [],
+      "discovery_sources": [
+        "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/"
+      ],
       "india_market_status": "LAUNCH_EVIDENCE_VERIFIED",
       "coverage_status": "RESEARCH_ONLY"
     },
@@ -5017,6 +5638,35 @@
         "amazon_asin:B0FDBB2VRC"
       ],
       "india_market_status": "UNVERIFIED_RESEARCH",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
+      "model_key": "samsung|galaxy m36 5g mobile velvet",
+      "market": "IN",
+      "brand": "Samsung",
+      "model": "Galaxy M36 5G Mobile Velvet",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m36-5g-velvet-black-128gb-sm-m366bzkbins/",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "unknown",
+          "ram_gb": null,
+          "storage_gb": null,
+          "variant_text": null,
+          "manufacturer_sku": null,
+          "identity_status": "UNVERIFIED",
+          "official_evidence_status": "MODEL_ONLY",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m36-5g-velvet-black-128gb-sm-m366bzkbins/"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -5078,10 +5728,21 @@
           "identity_status": "UNVERIFIED",
           "official_evidence_status": "MODEL_ONLY",
           "source_type": "priority_research_seed"
+        },
+        {
+          "variant_key": "8gb/256gb",
+          "ram_gb": "8",
+          "storage_gb": "256",
+          "variant_text": "8GB/256GB",
+          "manufacturer_sku": null,
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
         }
       ],
       "discovery_sources": [
-        "India_Smartphone_Specifications_2023_2026.xlsx#Smartphones!A2:O2"
+        "India_Smartphone_Specifications_2023_2026.xlsx#Smartphones!A2:O2",
+        "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s24-onyx-black-256gb-sm-s921ezkwins/"
       ],
       "india_market_status": "LAUNCH_EVIDENCE_VERIFIED",
       "coverage_status": "RESEARCH_ONLY"
@@ -5679,6 +6340,35 @@
       "coverage_status": "RESEARCH_ONLY"
     },
     {
+      "model_key": "vivo|t4x 5g",
+      "market": "IN",
+      "brand": "vivo",
+      "model": "T4x 5G",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://shop.vivo.com/in/product/10303?skuId=19292",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "6gb/128gb",
+          "ram_gb": "6",
+          "storage_gb": "128",
+          "variant_text": "6GB/128GB",
+          "manufacturer_sku": null,
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://shop.vivo.com/in/product/10303?skuId=19292"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
       "model_key": "vivo|t5 5g",
       "market": "IN",
       "brand": "vivo",
@@ -5737,6 +6427,35 @@
       "coverage_status": "RESEARCH_ONLY"
     },
     {
+      "model_key": "vivo|t5 pro 5g",
+      "market": "IN",
+      "brand": "vivo",
+      "model": "T5 Pro 5G",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://shop.vivo.com/in/product/10344?skuId=19410",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "8gb/128gb",
+          "ram_gb": "8",
+          "storage_gb": "128",
+          "variant_text": "8GB/128GB",
+          "manufacturer_sku": null,
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://shop.vivo.com/in/product/10344?skuId=19410"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
       "model_key": "vivo|t5x",
       "market": "IN",
       "brand": "vivo",
@@ -5763,6 +6482,35 @@
         "https://www.91mobiles.com/list-of-phones/vivo-mobile-price-list-in-india"
       ],
       "india_market_status": "UNVERIFIED_RESEARCH",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
+      "model_key": "vivo|t5x 5g",
+      "market": "IN",
+      "brand": "vivo",
+      "model": "T5x 5G",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://shop.vivo.com/in/product/10339?skuId=19387",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "6gb/128gb",
+          "ram_gb": "6",
+          "storage_gb": "128",
+          "variant_text": "6GB/128GB",
+          "manufacturer_sku": null,
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://shop.vivo.com/in/product/10339?skuId=19387"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -5821,6 +6569,35 @@
         "India_Smartphone_Specifications_2023_2026.xlsx#Smartphones!A32:O32"
       ],
       "india_market_status": "UNVERIFIED_RESEARCH",
+      "coverage_status": "RESEARCH_ONLY"
+    },
+    {
+      "model_key": "vivo|v60",
+      "market": "IN",
+      "brand": "vivo",
+      "model": "V60",
+      "generation": null,
+      "launch_year": null,
+      "launch_date": null,
+      "manufacturer_model_id": null,
+      "official_product_url": "https://shop.vivo.com/in/product/10320?skuId=19255",
+      "india_launch_sources": [],
+      "variants": [
+        {
+          "variant_key": "12gb/256gb",
+          "ram_gb": "12",
+          "storage_gb": "256",
+          "variant_text": "12GB/256GB",
+          "manufacturer_sku": null,
+          "identity_status": "EXACT_SEED_VARIANT",
+          "official_evidence_status": "VERIFIED_EXACT",
+          "source_type": "official_evidence_cache"
+        }
+      ],
+      "discovery_sources": [
+        "https://shop.vivo.com/in/product/10320?skuId=19255"
+      ],
+      "india_market_status": "OFFICIAL_EVIDENCE_ONLY",
       "coverage_status": "RESEARCH_ONLY"
     },
     {
@@ -6202,8 +6979,8 @@
     }
   ],
   "counts": {
-    "discovered_unique_models": 207,
-    "discovered_exact_variants": 128,
+    "discovered_unique_models": 232,
+    "discovered_exact_variants": 147,
     "launch_evidence_model_rows": 22
   }
 }
