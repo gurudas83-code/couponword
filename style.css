@@ -374,6 +374,139 @@ img{max-width:100%;display:block}
   .footer-links{justify-content:flex-start}
 }
 
+/* Final mobile-first release skin: light, spacious and evidence-led. */
+body.clean-ui{
+  --bg:#f6f8fb;
+  --panel:#ffffff;
+  --panel-2:#f8fafc;
+  --panel-3:#eef3f8;
+  --text:#172235;
+  --muted:#5c6a7b;
+  --soft:#314158;
+  --line:#dce4ed;
+  --shadow:0 18px 48px rgba(29,45,66,.10);
+  color:var(--text);
+  background:#f6f8fb;
+}
+
+body.clean-ui .page-glow{display:none}
+body.clean-ui .site-header{
+  background:rgba(255,255,255,.94);
+  border-bottom-color:#e4eaf1;
+  box-shadow:0 4px 18px rgba(29,45,66,.06);
+}
+body.clean-ui .desktop-nav a{color:#526176}
+body.clean-ui .desktop-nav a:hover{color:#172235;background:#eef4f8}
+body.clean-ui .brand{color:#172235}
+body.clean-ui .brand small{color:#6b7788}
+body.clean-ui .hero h1,
+body.clean-ui .section-heading h2,
+body.clean-ui .browse-header h2,
+body.clean-ui .why-card h2{color:#172235}
+body.clean-ui .hero-copy>p,
+body.clean-ui .section-heading p,
+body.clean-ui .browse-header p,
+body.clean-ui .why-card p{color:#5c6a7b}
+body.clean-ui .hero-search,
+body.clean-ui .spotlight,
+body.clean-ui .section-panel,
+body.clean-ui .browse-shell,
+body.clean-ui .drop-card,
+body.clean-ui .value-strip a,
+body.clean-ui .category-tiles a,
+body.clean-ui .why-card,
+body.clean-ui .faq details,
+body.clean-ui .deal-card{
+  background:#fff;
+  border-color:#dce4ed;
+  box-shadow:0 14px 36px rgba(29,45,66,.08);
+}
+body.clean-ui .spotlight-card,
+body.clean-ui .deal-image,
+body.clean-ui .spotlight-image{background:#f3f7fb;border-color:#dce4ed}
+body.clean-ui .hero-search input,
+body.clean-ui .search-box input,
+body.clean-ui .filter-bar select{background:#fff;color:#172235;border-color:#d3dde8}
+body.clean-ui .btn-ghost{background:#fff;color:#26364b;border-color:#cbd7e3}
+body.clean-ui .trending-strip,
+body.clean-ui .view-switch{background:#f8fafc;border-color:#dce4ed}
+body.clean-ui .trending-strip button,
+body.clean-ui .budget-grid button,
+body.clean-ui .chip{background:#fff;color:#314158;border-color:#ccd8e4}
+body.clean-ui .drop-card b,
+body.clean-ui .category-tiles b,
+body.clean-ui .value-strip b,
+body.clean-ui .deal-title,
+body.clean-ui .why-card b,
+body.clean-ui .faq summary{color:#172235}
+body.clean-ui .drop-card small,
+body.clean-ui .category-tiles small,
+body.clean-ui .value-strip small,
+body.clean-ui .description,
+body.clean-ui .card-note{color:#657488}
+body.clean-ui .drop-card strong{color:#167357}
+body.clean-ui .state-card strong{color:#172235}
+body.clean-ui .ai-result-card{
+  background:#fff;
+  border-color:#dce4ed;
+  box-shadow:0 16px 38px rgba(29,45,66,.09);
+}
+body.clean-ui .ai-result-card h3,
+body.clean-ui .ai-result-card p strong,
+body.clean-ui .ai-meta-chip strong,
+body.clean-ui .ai-meter-row strong{color:#172235}
+body.clean-ui .ai-result-card p,
+body.clean-ui .ai-detail-block li,
+body.clean-ui .ai-reasons li{color:#5c6a7b}
+body.clean-ui .ai-meta-chip{background:#f8fafc;border-color:#dce4ed}
+body.clean-ui .ai-result-rank{background:#eaf4ff;color:#1769aa}
+body.clean-ui .ai-meter-track{background:#e7edf3}
+body.clean-ui .retailer-choice{color:#25364a;border-color:#cbd7e3;background:#fff}
+body.clean-ui .retailer-choice-disabled{color:#718096;background:#f8fafc}
+body.clean-ui .retailer-availability-note{
+  margin:8px 0 0;
+  color:#66758a;
+  font-size:.75rem;
+  line-height:1.45;
+}
+body.clean-ui .footer-brand{color:#172235}
+body.clean-ui .footer{border-top-color:#dce4ed}
+
+.mobile-budget-chips{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:10px 0 2px;
+}
+.mobile-budget-chips span{
+  color:#5c6a7b;
+  font-size:.78rem;
+  font-weight:900;
+  margin-right:2px;
+}
+.mobile-budget-chips button{
+  border:1px solid #cbd7e3;
+  border-radius:999px;
+  background:#fff;
+  color:#1f5d78;
+  padding:8px 12px;
+  font-size:.78rem;
+  font-weight:900;
+}
+.mobile-budget-chips button:hover,
+.mobile-budget-chips button:focus-visible{
+  border-color:#20a57d;
+  background:#eafaf4;
+  outline:2px solid rgba(32,165,125,.2);
+  outline-offset:2px;
+}
+
+@media(max-width:540px){
+  .mobile-budget-chips{align-items:flex-start}
+  .mobile-budget-chips span{width:100%;margin-bottom:1px}
+}
+
 /* Unavailable Amazon products */
 .deal-card-unavailable {
   opacity: 0.58;

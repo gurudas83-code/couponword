@@ -319,6 +319,18 @@ document.querySelectorAll("[data-quick]").forEach(el => {
   el.addEventListener("click", () => applySearch(el.dataset.quick));
 });
 
+// Mobile budget shortcuts use the same recommendation endpoint as the hero
+// search. They do not alter ranking or eligibility; they only provide a clear
+// customer-facing way to submit the existing query contract.
+document.querySelectorAll("[data-mobile-query]").forEach(el => {
+  el.addEventListener("click", () => {
+    const query = String(el.dataset.mobileQuery || "").trim();
+    if (!query) return;
+    heroSearch.value = query;
+    loadShoppingRecommendation(query);
+  });
+});
+
 document.querySelectorAll("[data-view]").forEach(btn => {
   btn.addEventListener("click", () => {
     activeView = btn.dataset.view;
@@ -833,6 +845,9 @@ async function loadShoppingRecommendation(query) {
           <div class="retailer-choice-group" aria-label="Verified retailer choices">
             ${retailerButtonsHTML}
           </div>
+          <p class="retailer-availability-note">
+            Amazon, Flipkart and Croma links activate only when this exact variant has a fresh verified in-stock offer.
+          </p>
 
           ${
             productLink !== "#"

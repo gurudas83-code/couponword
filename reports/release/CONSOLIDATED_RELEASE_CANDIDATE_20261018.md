@@ -98,3 +98,63 @@ reset or cache cleanup was performed.
 
 Rollback is the base SHA `e6fbf8b307c942045035b92d35492f3394bb5859`; the release
 can be reverted without touching the preserved dirty research worktrees.
+
+## Final mobile release verification
+
+The clean candidate contains 27 private Product DNA records. The canonical
+shopping registry contains 34 mobile IDs; the private DNA records correctly
+keep `canonical_product_id: null` until a separate exact retailer identity and
+current offer are verified. No duplicate DNA keys were found.
+
+| Product DNA record | Exact variant |
+|---|---|
+| iQOO Neo 10 | 12GB/256GB |
+| vivo V60 | 12GB/256GB |
+| OnePlus 13R | 12GB/256GB |
+| OnePlus 13 | 12GB/256GB |
+| Samsung Galaxy S24 | 8GB/256GB |
+| Samsung Galaxy F05 | 4GB/64GB |
+| vivo T4x 5G | 6GB/128GB |
+| vivo T5x 5G | 6GB/128GB |
+| vivo T5 Pro 5G | 8GB/128GB |
+| OnePlus N6 Lite | 4GB/64GB |
+| Lava Bold N2 | 4GB/64GB |
+| Lava Bold N2 Lite | 3GB/64GB |
+| Samsung Galaxy A06 5G Light | 4GB/64GB |
+| Samsung Galaxy F70e 5G | 6GB/128GB |
+| Lava Virat V1 | 4GB/64GB |
+| Lava Virat V1 5G | 4GB/64GB |
+| realme C83 5G | 4GB/64GB |
+| Samsung Galaxy A56 5G | 8GB/128GB |
+| Samsung Galaxy M17e 5G | 4GB/128GB |
+| Samsung Galaxy M17 5G | 4GB/128GB |
+| Motorola Signature | 12GB/256GB |
+| Samsung Galaxy A37 5G | 8GB/128GB |
+| Samsung Galaxy A57 5G | 8GB/256GB |
+| Samsung Galaxy F70 Pro 5G | 6GB/128GB |
+| Samsung Galaxy M47 5G | 6GB/128GB |
+| Samsung Galaxy S25 FE | 8GB/128GB |
+| Samsung Galaxy S26 Ultra | 12GB/256GB |
+
+Offer-store reconciliation: Amazon has 4 historical rows, Flipkart 3, and
+Croma 0. Two rows carry a raw `in_stock` label, but all stored observations
+are older than the six-hour freshness window, so fresh Amazon, Flipkart and
+Croma offers are each **0**. The frontend therefore shows all three retailer
+choices consistently and disables unverified choices with `Not verified`.
+
+The Flipkart issue was an offer freshness/data issue, not a missing button:
+`retailer_offer_store.find_fresh_verified_offer()` rejects the old Flipkart
+observations before API serialization. The scoped UI correction adds an
+explicit explanation beside the three choices and keeps links clickable only
+for an exact fresh `in_stock` offer. No price, URL or stock state was invented.
+
+The homepage now has a light, spacious mobile-first skin, direct ₹10k–₹60k+
+mobile query chips, clearer evidence-led hero copy and the existing primary
+versus Best Value presentation. Ranking weights, hard-budget gates, identity,
+freshness and security behavior are unchanged. Product pages and secondary
+deal categories remain available.
+
+The final scoped checks after the UI change were **47 PASS, 0 FAIL, 0 ERROR**
+for the mobile UI, security, retailer, ranking, API, Phase-D and Phase-E
+regressions. Python compilation, JavaScript syntax, Pages artifact exclusion
+and `git diff --check` also passed.
