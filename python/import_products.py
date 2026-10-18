@@ -15,7 +15,7 @@ from urllib.parse import parse_qs, urlparse
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "coupons.json"
 BACKUP_DIR = ROOT / ".import_backups"
-CORRECT_TAG = "guru0906-21"
+CORRECT_TAG = "guru07cc-21"
 
 REQUIRED_FIELDS = ("title", "category", "link")
 

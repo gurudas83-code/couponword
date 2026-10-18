@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 
 from __future__ import annotations
 
@@ -106,7 +106,7 @@ class AmazonRetailerConnector:
         if not product_url:
             product_url = (
                 f"https://www.amazon.in/dp/{asin}"
-                f"?tag=guru0906-21"
+                f"?tag=guru07cc-21"
             )
 
         offer = amazon_product_to_offer(

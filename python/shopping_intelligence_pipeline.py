@@ -1858,6 +1858,82 @@ def premium_market_quality_status(intent: dict[str, Any], discovery: dict[str, A
     return "VERIFIED_SCOPE", None
 
 
+BUDGET_PRIMARY_BAND_RATIO = 0.80
+
+
+def build_budget_presentation(
+    ranked_recommendations: list[dict[str, Any]],
+    intent: dict[str, Any],
+    query: str,
+    *,
+    exact_model_query: bool = False,
+) -> dict[str, Any]:
+    """Split generic under-budget results without changing eligibility or scores.
+
+    ``ranked_recommendations`` is already hard-constraint and evidence checked.
+    This presentation layer only separates near-budget primary picks from
+    cheaper value alternatives; it never admits or removes a product from the
+    underlying ranked recommendation pool.
+    """
+    base = {
+        "mode": "quality_ranked",
+        "primary_title": "Verified recommendations",
+        "value_title": None,
+        "no_primary_message": "No currently verified phones found in the primary range.",
+        "budget_max": intent.get("budget_max"),
+        "primary_floor": None,
+        "primary_status": "PASS" if ranked_recommendations else "PARTIAL",
+        "primary_recommendations": list(ranked_recommendations[:3]),
+        "value_recommendations": [],
+    }
+
+    budget = intent.get("budget_max")
+    text = clean(query).lower()
+    value_language = re.search(r"\b(?:cheap(?:est)?|value|budget[- ]friendly)\b", text)
+    if (
+        clean(intent.get("category")) != "smartphone"
+        or budget in (None, "")
+        or intent.get("budget_min") not in (None, "")
+        or exact_model_query
+        or value_language
+    ):
+        return base
+
+    try:
+        budget_value = float(budget)
+    except (TypeError, ValueError):
+        return base
+    if budget_value <= 0:
+        return base
+
+    floor = int(round(budget_value * BUDGET_PRIMARY_BAND_RATIO))
+    primary: list[dict[str, Any]] = []
+    value: list[dict[str, Any]] = []
+    for item in ranked_recommendations:
+        try:
+            price = float(item.get("price"))
+        except (TypeError, ValueError):
+            continue
+        if floor <= price <= budget_value:
+            primary.append(dict(item, budget_band="primary"))
+        elif 0 < price < floor:
+            value.append(dict(item, budget_band="value"))
+
+    base.update({
+        "mode": "budget_band",
+        "primary_title": f"Top Phones Between ₹{floor:,} and ₹{int(budget_value):,}",
+        "value_title": f"Best Value Phones Below ₹{floor:,}",
+        "no_primary_message": (
+            f"No currently verified phones found in the ₹{floor:,}–₹{int(budget_value):,} primary range."
+        ),
+        "primary_floor": floor,
+        "primary_status": "PASS" if len(primary) >= DEFAULT_MIN_RESULTS else "PARTIAL",
+        "primary_recommendations": primary[:3],
+        "value_recommendations": value[:3],
+    })
+    return base
+
+
 def run_pipeline(
     query: str,
     max_candidates: int = 15,
@@ -3085,9 +3161,9 @@ def _run_pipeline_once(
             )
 
 
-    recommendations: list[dict[str, Any]] = []
+    all_recommendations: list[dict[str, Any]] = []
 
-    for rank, item in enumerate(qualifying[:max_results], start=1):
+    for rank, item in enumerate(qualifying, start=1):
         assessment = item["fit_assessment"]
         profile = item["profile"]
         strong, tradeoffs, unknown = criterion_groups(assessment)
@@ -3165,7 +3241,7 @@ def _run_pipeline_once(
             },
         }
 
-        recommendations.append({
+        all_recommendations.append({
             "rank": rank,
             "product_id": profile.get("product_id"),
             "canonical_product_id": canonical_product_id,
@@ -3212,6 +3288,17 @@ def _run_pipeline_once(
                 "unavailable",
             ),
         })
+
+    # Keep the existing ranked recommendation field and max-results contract
+    # intact. The presentation layer below can inspect the full eligible pool
+    # without changing scoring, eligibility or deterministic ranking.
+    recommendations = all_recommendations[:max_results]
+    recommendation_sections = build_budget_presentation(
+        all_recommendations,
+        intent,
+        query,
+        exact_model_query=exact_model_query,
+    )
 
     failure_counter = Counter()
 
@@ -3365,6 +3452,10 @@ def _run_pipeline_once(
             "recommendations_returned": len(recommendations),
         },
         "recommendations": recommendations,
+        "recommendation_sections": recommendation_sections,
+        "primary_recommendations": recommendation_sections["primary_recommendations"],
+        "value_recommendations": recommendation_sections["value_recommendations"],
+        "presentation_status": recommendation_sections["primary_status"],
         "closest_matches": closest_matches,
         "relaxation_options": relaxation_options,
         "fit_diagnostics": fit_diagnostics,

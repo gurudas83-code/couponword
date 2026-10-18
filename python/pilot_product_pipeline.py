@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 
 from __future__ import annotations
 
@@ -54,7 +54,7 @@ def build_amazon_offer(
         availability="unknown",
         product_url=(
             "https://www.amazon.in/dp/"
-            f"{asin}?tag=guru0906-21"
+            f"{asin}?tag=guru07cc-21"
         ),
         confidence=0.95,
     )

@@ -114,7 +114,7 @@ function renderFeaturedDeal() {
     ${renderImage(deal, "spotlight-image")}
     <h2>${escapeHTML(deal.title || "Hot Deal")}</h2>
     <p>${escapeHTML(deal.discount || "Latest offer")} • ${escapeHTML(deal.category || "Deal")}</p>
-    <a href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">View Deal</a>
+    <a href="${escapeHTML(safeLink(deal.link))}" target="_blank" rel="nofollow sponsored noopener">View Deal</a>
   `;
 }
 
@@ -156,7 +156,7 @@ function renderDeals() {
         <span>${escapeHTML(deal.expiry || "Limited Time")}</span>
       </div>
 
-      <a class="shop-button" href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">
+      <a class="shop-button" href="${escapeHTML(safeLink(deal.link))}" target="_blank" rel="nofollow sponsored noopener">
         Get Deal →
       </a>
 
@@ -217,7 +217,23 @@ function applySearch(value) {
 }
 
 function safeLink(link) {
-  return link || "#";
+  const raw = String(link || "").trim();
+  if (!raw) {
+    return "#";
+  }
+
+  try {
+    const parsed = new URL(raw, window.location.href);
+    if (!["http:", "https:"].includes(parsed.protocol)) {
+      return "#";
+    }
+    if (window.location.protocol === "https:" && parsed.protocol === "http:") {
+      return "#";
+    }
+    return parsed.href;
+  } catch (error) {
+    return "#";
+  }
 }
 
 function trackAnalyticsEvent(eventName, params = {}) {
@@ -301,6 +317,18 @@ document.querySelectorAll("[data-search]").forEach(el => {
 
 document.querySelectorAll("[data-quick]").forEach(el => {
   el.addEventListener("click", () => applySearch(el.dataset.quick));
+});
+
+// Mobile budget shortcuts use the same recommendation endpoint as the hero
+// search. They do not alter ranking or eligibility; they only provide a clear
+// customer-facing way to submit the existing query contract.
+document.querySelectorAll("[data-mobile-query]").forEach(el => {
+  el.addEventListener("click", () => {
+    const query = String(el.dataset.mobileQuery || "").trim();
+    if (!query) return;
+    heroSearch.value = query;
+    loadShoppingRecommendation(query);
+  });
 });
 
 document.querySelectorAll("[data-view]").forEach(btn => {
@@ -389,6 +417,22 @@ async function loadShoppingRecommendation(query) {
 
     const recommendations = Array.isArray(data.recommendations)
       ? data.recommendations
+      : [];
+
+    // The backend keeps the legacy ranked pool for API compatibility and
+    // exposes an auditable presentation split for generic under-budget
+    // searches. Primary and value sections never relax the hard eligibility
+    // or evidence gates.
+    const recommendationSections = data.recommendation_sections &&
+      typeof data.recommendation_sections === "object"
+      ? data.recommendation_sections
+      : {};
+    const budgetBandMode = recommendationSections.mode === "budget_band";
+    const primaryRecommendations = Array.isArray(data.primary_recommendations)
+      ? data.primary_recommendations
+      : recommendations;
+    const valueRecommendations = Array.isArray(data.value_recommendations)
+      ? data.value_recommendations
       : [];
 
     const exactModelQuery =
@@ -481,7 +525,7 @@ async function loadShoppingRecommendation(query) {
       return;
     }
 
-    card.innerHTML = recommendations.map((p) => {
+    const renderRecommendation = (p) => {
       const title = escapeHTML(p.title || "Recommended Product");
       const brand = escapeHTML(p.brand || "Not available");
       const fitNumber =
@@ -528,7 +572,7 @@ async function loadShoppingRecommendation(query) {
           <td>${escapeHTML(match)}</td>
           <td>${escapeHTML(points)}</td>
           <td>${escapeHTML(criterion.evidence_status || "unknown")}</td>
-          <td>${criterion.source_url ? `<a href="${safeLink(criterion.source_url)}" target="_blank" rel="noopener">source</a>` : "UNKNOWN"}</td>
+          <td>${criterion.source_url ? `<a href="${escapeHTML(safeLink(criterion.source_url))}" target="_blank" rel="noopener">source</a>` : "UNKNOWN"}</td>
           <td>${escapeHTML(criterion.observed_at || "UNKNOWN")}</td>
           <td>${escapeHTML(criterion.reason || "No reliable evidence available")}</td>
         </tr>`;
@@ -633,13 +677,13 @@ async function loadShoppingRecommendation(query) {
       // retailer_offers and best_offer are sanitized by the backend.
       // Prefer that exact retailer URL so displayed retailer, price
       // and CTA all refer to the same offer.
-      const productLink = safeLink(
+      const productLink = escapeHTML(safeLink(
         primaryOffer.product_url ||
         priceEvidence.source_url ||
         p.market_source ||
         p.official_source ||
         p.link
-      );
+      ));
 
       const offerCtaLabel = bestOffer
         ? "View Best Verified Offer \u2192"
@@ -665,7 +709,7 @@ async function loadShoppingRecommendation(query) {
         const offerPrice = offer.price != null && offer.price !== ""
           ? ` · ₹${escapeHTML(offer.price)}`
           : "";
-        return `<a class="retailer-choice" href="${safeLink(offer.product_url)}" target="_blank" rel="nofollow sponsored noopener" data-ai-retailer-click="1" data-ai-rank="${escapeHTML(p.rank || "")}" data-ai-product-id="${escapeHTML(offer.product_id || p.product_id || "")}" data-ai-retailer="${label}">${label}${offerPrice}</a>`;
+        return `<a class="retailer-choice" href="${escapeHTML(safeLink(offer.product_url))}" target="_blank" rel="nofollow sponsored noopener" data-ai-retailer-click="1" data-ai-rank="${escapeHTML(p.rank || "")}" data-ai-product-id="${escapeHTML(offer.product_id || p.product_id || "")}" data-ai-retailer="${label}">${label}${offerPrice}</a>`;
       }).join("");
 
       const why = Array.isArray(p.why_it_fits)
@@ -723,7 +767,7 @@ async function loadShoppingRecommendation(query) {
                 <div class="ai-result-image-wrap">
                   <img
                     class="ai-result-image"
-                    src="${imageUrl}"
+                    src="${escapeHTML(imageUrl)}"
                     alt="${title}"
                     loading="lazy"
                   />
@@ -801,6 +845,9 @@ async function loadShoppingRecommendation(query) {
           <div class="retailer-choice-group" aria-label="Verified retailer choices">
             ${retailerButtonsHTML}
           </div>
+          <p class="retailer-availability-note">
+            Amazon, Flipkart and Croma links activate only when this exact variant has a fresh verified in-stock offer.
+          </p>
 
           ${
             productLink !== "#"
@@ -828,9 +875,34 @@ async function loadShoppingRecommendation(query) {
           }
         </article>
       `;
-    }).join("");
+    };
+
+    const primaryCards = primaryRecommendations
+      .map(renderRecommendation)
+      .join("");
+    const valueCards = valueRecommendations
+      .map(renderRecommendation)
+      .join("");
+
+    card.innerHTML = `
+      ${budgetBandMode
+        ? `<section class="ai-recommendation-section ai-primary-section">
+            <h2>${escapeHTML(recommendationSections.primary_title || "Top verified phones")}</h2>
+            <p class="ai-section-note">Capability ranking is unchanged; this section keeps primary picks close to your declared budget.</p>
+            ${primaryCards || `<p class="card-note">${escapeHTML(recommendationSections.no_primary_message || "No currently verified phones found in the primary range.")}</p>`}
+          </section>`
+        : primaryCards}
+      ${budgetBandMode && valueCards
+        ? `<section class="ai-recommendation-section ai-value-section">
+            <h2>${escapeHTML(recommendationSections.value_title || "Best Value Alternatives")}</h2>
+            <p class="ai-section-note">These verified phones are below the primary band and are shown separately as value alternatives.</p>
+            ${valueCards}
+          </section>`
+        : ""}
+    `;
 
     if (
+      !budgetBandMode &&
       !exactModelQuery &&
       String(data.intent && data.intent.category || "").toLowerCase() === "smartphone" &&
       recommendations.length < 3

@@ -112,9 +112,19 @@ def mobile_scoped_query(query: str) -> str:
 
 app = Flask(__name__)
 
-# Development only.
-# Production CORS will later be restricted to coupon-world.in.
-CORS(app)
+# The public frontend is the only browser client for this read-only endpoint.
+# Keep same-origin requests working while avoiding a wildcard CORS policy.
+CORS(
+    app,
+    resources={
+        r"/api/*": {
+            "origins": ["https://coupon-world.in"],
+            "methods": ["GET"],
+            "allow_headers": [],
+            "supports_credentials": False,
+        }
+    },
+)
 
 
 @app.get("/health")
@@ -171,13 +181,13 @@ def recommend():
             max_results=3,
             live_fast=True,
         )
-    except Exception as error:
+    except Exception:
+        app.logger.exception("Shopping intelligence pipeline failed")
         return (
             jsonify(
                 {
                     "status": "error",
                     "error": "Shopping intelligence pipeline failed",
-                    "detail": str(error),
                 }
             ),
             500,

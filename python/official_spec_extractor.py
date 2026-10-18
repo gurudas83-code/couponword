@@ -429,6 +429,58 @@ def extract_oneplus_15_meta_specs(
     return len(specifications) - before
 
 
+def extract_oneplus_13_configuration_specs(
+    soup: BeautifulSoup,
+    official_url: str,
+    specifications: dict[str, dict[str, Any]],
+) -> int:
+    """Bind OnePlus 13's exact configuration text on its official India page.
+
+    The page exposes the available configuration in stable visible text while
+    the normal label/value parser does not emit RAM and storage fields. Keep
+    this route and model check narrow; it must never reuse 13R or another
+    OnePlus model's configuration.
+    """
+    parsed = urlparse(official_url)
+    if (
+        parsed.hostname not in {"oneplus.in", "www.oneplus.in"}
+        or parsed.path.rstrip("/").lower() != "/13/specs"
+    ):
+        return 0
+
+    title = clean_text(soup.title.get_text(" ", strip=True) if soup.title else "")
+    page_text = clean_text(soup.get_text(" ", strip=True))
+    combined = f"{title} {page_text}"
+    if not re.search(r"\boneplus\s+13\b", combined, re.I):
+        return 0
+    if re.search(r"\boneplus\s+13r\b", combined, re.I):
+        return 0
+
+    match = re.search(r"12\s*GB\s*\+\s*256\s*GB", combined, re.I)
+    if not match:
+        return 0
+
+    before = len(specifications)
+    observed_at = utc_now()
+    for key, value, label in (
+        ("ram", "12 GB", "RAM (12GB+256GB configuration)"),
+        ("storage", "256 GB", "Storage (12GB+256GB configuration)"),
+    ):
+        add_specification(
+            specifications,
+            key,
+            value,
+            "oneplus_official_configuration",
+            95,
+        )
+        specifications[normalize_key(key)].update(
+            label=label,
+            source_url=official_url,
+            observed_at=observed_at,
+        )
+    return len(specifications) - before
+
+
 def add_specification(
     specifications: dict[str, dict[str, Any]],
     key: str,
@@ -765,12 +817,19 @@ def extract_label_value_blocks(
 
 
 def extract_vivo_selected_capacity(soup, specifications, official_url, identity, verified):
-    """Bind capacity only to the official store's one selected SKU heading."""
+    """Bind capacity only to the official store's one selected SKU heading.
+
+    The iQOO India store is served by the same shop.vivo.com storefront and
+    uses the same exact-SKU heading contract. Keep this exception narrow to
+    the two brands whose product pages are actually hosted by that store;
+    retailer or model-level pages still fail closed.
+    """
     from urllib.parse import parse_qs
     from mobile_exact_identity_gate import AUTO_REUSE, classify_mobile_identity_reuse
     from product_evidence_store import variant_signature_from_text, variant_signature_from_specifications, variant_text_is_ambiguous
     parsed = urlparse(official_url)
-    if (verified is not True or clean_text(identity.get("brand")).casefold() != "vivo"
+    brand_key = clean_text(identity.get("brand")).casefold()
+    if (verified is not True or brand_key not in {"vivo", "iqoo"}
             or not clean_text(identity.get("model"))
             or parsed.hostname != "shop.vivo.com"
             or not re.fullmatch(r"/in/product/\d+", parsed.path)
@@ -789,9 +848,14 @@ def extract_vivo_selected_capacity(soup, specifications, official_url, identity,
             or (existing and existing != capacity)):
         return
     # The verified manufacturer's store heading omits its own brand.
-    expected_model = (f"vivo {identity['model']} {capacity['ram_gb']}GB RAM "
+    expected_model = (f"{brand_key} {identity['model']} {capacity['ram_gb']}GB RAM "
                       f"{capacity['storage_gb']}GB Storage")
-    if classify_mobile_identity_reuse(expected_model, "vivo " + heading, official_url, "vivo")["status"] != AUTO_REUSE:
+    if classify_mobile_identity_reuse(
+        expected_model,
+        brand_key + " " + heading,
+        official_url,
+        brand_key,
+    )["status"] != AUTO_REUSE:
         return
     for label, key in (("RAM", "ram_gb"), ("Storage", "storage_gb")):
         add_specification(specifications, label, capacity[key] + " GB", "official_selected_sku_heading", 95)
@@ -5021,14 +5085,28 @@ def extract_one(
 
     json_ld_products = parse_json_ld(soup)
     meta = extract_meta(soup)
+    specifications: dict[str, dict[str, Any]] = {}
+
+    # Capture an exact manufacturer-store SKU heading before page-wide
+    # chrome removal.  vivo/iQOO store pages place the selected RAM/storage
+    # only in the h1, which can otherwise be removed with navigation markup.
+    extract_vivo_selected_capacity(
+        soup,
+        specifications,
+        official_url,
+        identity,
+        research_result.get("verified"),
+    )
 
     for tag in soup(["script", "style", "noscript", "svg"]):
         tag.decompose()
 
     remove_page_chrome(soup)
 
-    specifications: dict[str, dict[str, Any]] = {}
     oneplus_meta_count = extract_oneplus_15_meta_specs(
+        soup, official_url, specifications
+    )
+    oneplus_13_configuration_count = extract_oneplus_13_configuration_specs(
         soup, official_url, specifications
     )
     json_ld_count = extract_json_ld_specs(json_ld_products, specifications)
@@ -5136,7 +5214,7 @@ def extract_one(
         # do not demote that verified page to manual review merely because
         # the generic title score lacks the word "vivo".
         vivo_selected_sku = (
-            clean_text(identity.get("brand")).casefold() == "vivo"
+            clean_text(identity.get("brand")).casefold() in {"vivo", "iqoo"}
             and hostname(official_url) == "shop.vivo.com"
             and re.fullmatch(r"/in/product/\d+", urlparse(official_url).path)
             and specifications.get("ram", {}).get("source")
@@ -5198,6 +5276,7 @@ def extract_one(
         "embedded_state_specifications": embedded_state_count,
         "shopify_oxygen_specifications": shopify_oxygen_count,
         "oneplus_official_meta_specifications": oneplus_meta_count,
+        "oneplus_official_configuration_specifications": oneplus_13_configuration_count,
         "apple_techspecs_specifications": apple_techspecs_count,
         "total_specifications": len(specifications),
         "feature_items": len(features),

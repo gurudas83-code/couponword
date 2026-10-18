@@ -233,7 +233,7 @@ def inspect_coupon_db() -> dict[str, Any]:
         )
 
         if "amazon." in link or "amzn." in link:
-            if "tag=guru0906-21" in link:
+            if "tag=guru07cc-21" in link:
                 result["affiliate_tag_matches"] += 1
             else:
                 result["affiliate_tag_missing"] += 1

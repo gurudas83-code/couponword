@@ -1,0 +1,3399 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-10-18T09:02:35.873427+00:00",
+  "products": {
+    "dna-iqoo-neo-10-12gb-256gb": {
+      "product_id": "dna-iqoo-neo-10-12gb-256gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-iqoo-neo-10-12gb-256gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "iQOO",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://shop.vivo.com/in/product/10325?skuId=19299",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Neo 10",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://shop.vivo.com/in/product/10325?skuId=19299",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 12,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://shop.vivo.com/in/product/10325?skuId=19299",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 256,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://shop.vivo.com/in/product/10325?skuId=19299",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T05:35:44.000816+00:00",
+      "updated_at": "2026-10-18T05:35:44.000939+00:00"
+    },
+    "dna-vivo-v60-12gb-256gb": {
+      "product_id": "dna-vivo-v60-12gb-256gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-vivo-v60-12gb-256gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "vivo",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://shop.vivo.com/in/product/10320?skuId=19255",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "V60",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://shop.vivo.com/in/product/10320?skuId=19255",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 12,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://shop.vivo.com/in/product/10320?skuId=19255",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 256,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://shop.vivo.com/in/product/10320?skuId=19255",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T05:35:44.050657+00:00",
+      "updated_at": "2026-10-18T05:35:44.050767+00:00"
+    },
+    "dna-oneplus-13r-12gb-256gb": {
+      "product_id": "dna-oneplus-13r-12gb-256gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-oneplus-13r-12gb-256gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "OnePlus",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.oneplus.in/13r/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "13R",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.oneplus.in/13r/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 12,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.oneplus.in/13r/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 256,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.oneplus.in/13r/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T05:35:44.067070+00:00",
+      "updated_at": "2026-10-18T05:35:44.067180+00:00"
+    },
+    "dna-oneplus-13-12gb-256gb": {
+      "product_id": "dna-oneplus-13-12gb-256gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-oneplus-13-12gb-256gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "OnePlus",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.oneplus.in/13/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "13",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.oneplus.in/13/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 12,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.oneplus.in/13/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 256,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.oneplus.in/13/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T05:35:44.085892+00:00",
+      "updated_at": "2026-10-18T05:35:44.086008+00:00"
+    },
+    "dna-samsung-galaxy-s24-8gb-256gb": {
+      "product_id": "dna-samsung-galaxy-s24-8gb-256gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-s24-8gb-256gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s24-onyx-black-256gb-sm-s921ezkwins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy S24",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s24-onyx-black-256gb-sm-s921ezkwins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 8,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s24-onyx-black-256gb-sm-s921ezkwins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 256,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s24-onyx-black-256gb-sm-s921ezkwins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T05:35:44.103661+00:00",
+      "updated_at": "2026-10-18T05:35:44.103908+00:00"
+    },
+    "dna-samsung-galaxy-f05-4gb-64gb": {
+      "product_id": "dna-samsung-galaxy-f05-4gb-64gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-f05-4gb-64gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "phase_d_official_extractor",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy F05",
+          "source": "phase_d_official_extractor",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 4,
+          "source": "phase_d_official_extractor",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 64,
+          "source": "phase_d_official_extractor",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T07:00:28.449777+00:00",
+      "updated_at": "2026-10-18T07:00:28.449923+00:00"
+    },
+    "dna-vivo-t4x-6gb-128gb": {
+      "product_id": "dna-vivo-t4x-6gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-vivo-t4x-6gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "vivo",
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10303?skuId=19292",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "T4x 5G",
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10303?skuId=19292",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 6,
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10303?skuId=19292",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10303?skuId=19292",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T07:00:31.636808+00:00",
+      "updated_at": "2026-10-18T07:00:31.636972+00:00"
+    },
+    "dna-vivo-t5x-6gb-128gb": {
+      "product_id": "dna-vivo-t5x-6gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-vivo-t5x-6gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "vivo",
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10339?skuId=19387",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "T5x 5G",
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10339?skuId=19387",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 6,
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10339?skuId=19387",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10339?skuId=19387",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T07:00:34.880213+00:00",
+      "updated_at": "2026-10-18T07:00:34.880357+00:00"
+    },
+    "dna-vivo-t5-pro-8gb-128gb": {
+      "product_id": "dna-vivo-t5-pro-8gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-vivo-t5-pro-8gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "vivo",
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10344?skuId=19410",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "T5 Pro 5G",
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10344?skuId=19410",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 8,
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10344?skuId=19410",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10344?skuId=19410",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T07:00:36.590695+00:00",
+      "updated_at": "2026-10-18T07:00:36.591833+00:00"
+    },
+    "dna-oneplus-n6-lite-4gb-64gb": {
+      "product_id": "dna-oneplus-n6-lite-4gb-64gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-oneplus-n6-lite-4gb-64gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "OnePlus",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.oneplus.in/n6-lite/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "N6 Lite",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.oneplus.in/n6-lite/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 4,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.oneplus.in/n6-lite/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 64,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.oneplus.in/n6-lite/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": "UNISOC T7250 octa-core processor",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.oneplus.in/n6-lite/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T07:49:15.836966+00:00",
+      "updated_at": "2026-10-18T07:49:15.837200+00:00"
+    },
+    "dna-lava-bold-n2-4gb-64gb": {
+      "product_id": "dna-lava-bold-n2-4gb-64gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-lava-bold-n2-4gb-64gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "lava",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/bold-n2",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Bold N2",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/bold-n2",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 4,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/bold-n2",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 64,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/bold-n2",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": "UNISOC 9863a Octa-core Processor",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/bold-n2",
+          "confidence": "high",
+          "verified": true
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": "Android 15 Go",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/bold-n2",
+          "confidence": "high",
+          "verified": true
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T07:49:15.882609+00:00",
+      "updated_at": "2026-10-18T07:49:15.882722+00:00"
+    },
+    "dna-lava-bold-n2-lite-3gb-64gb": {
+      "product_id": "dna-lava-bold-n2-lite-3gb-64gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-lava-bold-n2-lite-3gb-64gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "lava",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Bold N2 Lite",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 3,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 64,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": "UNISOC 98663a Octa-core Processor",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+          "confidence": "high",
+          "verified": true
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": "Android 15Go",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+          "confidence": "high",
+          "verified": true
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T07:49:15.900125+00:00",
+      "updated_at": "2026-10-18T07:49:15.900279+00:00"
+    },
+    "dna-samsung-galaxy-a06-5g-light-4gb-64gb": {
+      "product_id": "dna-samsung-galaxy-a06-5g-light-4gb-64gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-a06-5g-light-4gb-64gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a06-5g-light-gray-64gb-sm-a066bzadins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy A06 5G Light",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a06-5g-light-gray-64gb-sm-a066bzadins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 4,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a06-5g-light-gray-64gb-sm-a066bzadins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 64,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a06-5g-light-gray-64gb-sm-a066bzadins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": "2.4GHz, 2GHz",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a06-5g-light-gray-64gb-sm-a066bzadins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T07:49:15.919479+00:00",
+      "updated_at": "2026-10-18T07:49:15.919644+00:00"
+    },
+    "dna-samsung-galaxy-f70e-5g-6gb-128gb": {
+      "product_id": "dna-samsung-galaxy-f70e-5g-6gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-f70e-5g-6gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70e-5g-spotlight-blue-128gb-sm-e076bdbbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy F70e 5G",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70e-5g-spotlight-blue-128gb-sm-e076bdbbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 6,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70e-5g-spotlight-blue-128gb-sm-e076bdbbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70e-5g-spotlight-blue-128gb-sm-e076bdbbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T07:49:15.939754+00:00",
+      "updated_at": "2026-10-18T07:49:15.939857+00:00"
+    },
+    "dna-lava-virat-v1-4gb-64gb": {
+      "product_id": "dna-lava-virat-v1-4gb-64gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-lava-virat-v1-4gb-64gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Lava",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Virat V1",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 4,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 64,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": "UNISOC 9863a Octa-core Processor",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+          "confidence": "high",
+          "verified": true
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": "Android 15 Go",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+          "confidence": "high",
+          "verified": true
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T07:49:15.957689+00:00",
+      "updated_at": "2026-10-18T07:49:15.958067+00:00"
+    },
+    "dna-lava-virat-v1-5g-4gb-64gb": {
+      "product_id": "dna-lava-virat-v1-5g-4gb-64gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-lava-virat-v1-5g-4gb-64gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Lava",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Virat V1 5G",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 4,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 64,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": "UNISOC T8200 Octa-core Processor",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "confidence": "high",
+          "verified": true
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": "Android 16",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+          "confidence": "high",
+          "verified": true
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T07:49:15.979494+00:00",
+      "updated_at": "2026-10-18T07:49:15.979597+00:00"
+    },
+    "dna-realme-c83-5g-4gb-64gb": {
+      "product_id": "dna-realme-c83-5g-4gb-64gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-realme-c83-5g-4gb-64gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "realme",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.realme.com/in/realme-c83",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "C83 5G",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.realme.com/in/realme-c83",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 4,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.realme.com/in/realme-c83",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 64,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.realme.com/in/realme-c83",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": "realme UI 7.0 based on Android 16",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.realme.com/in/realme-c83",
+          "confidence": "high",
+          "verified": true
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T07:49:16.001126+00:00",
+      "updated_at": "2026-10-18T07:49:16.001245+00:00"
+    },
+    "dna-samsung-galaxy-a56-5g-8gb-128gb": {
+      "product_id": "dna-samsung-galaxy-a56-5g-8gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-a56-5g-8gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy A56 5G",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 8,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T07:49:16.020591+00:00",
+      "updated_at": "2026-10-18T07:49:16.020703+00:00"
+    },
+    "dna-samsung-galaxy-m17e-5g-4gb-128gb": {
+      "product_id": "dna-samsung-galaxy-m17e-5g-4gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-m17e-5g-4gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy M17e 5G",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 4,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T07:49:16.039390+00:00",
+      "updated_at": "2026-10-18T07:49:16.039491+00:00"
+    },
+    "dna-samsung-galaxy-m17-5g-4gb-128gb": {
+      "product_id": "dna-samsung-galaxy-m17-5g-4gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-m17-5g-4gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy M17 5G",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 4,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T07:49:16.058225+00:00",
+      "updated_at": "2026-10-18T07:49:16.058344+00:00"
+    },
+    "dna-motorola-signature-12gb-256gb": {
+      "product_id": "dna-motorola-signature-12gb-256gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-motorola-signature-12gb-256gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Motorola",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.motorola.in/smartphones-motorola-signature/p?skuId=609",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Signature",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.motorola.in/smartphones-motorola-signature/p?skuId=609",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 12,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.motorola.in/smartphones-motorola-signature/p?skuId=609",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 256,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.motorola.in/smartphones-motorola-signature/p?skuId=609",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": "Snapdragon 8 Gen 5",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.motorola.in/smartphones-motorola-signature/p?skuId=609",
+          "confidence": "high",
+          "verified": true
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T07:49:16.081326+00:00",
+      "updated_at": "2026-10-18T07:49:16.081477+00:00"
+    },
+    "dna-samsung-galaxy-a37-5g-8gb-128gb": {
+      "product_id": "dna-samsung-galaxy-a37-5g-8gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-a37-5g-8gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a37-5g-awesome-charcoal-128gb-sm-a376ezadins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy A37 5G",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a37-5g-awesome-charcoal-128gb-sm-a376ezadins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 8,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a37-5g-awesome-charcoal-128gb-sm-a376ezadins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a37-5g-awesome-charcoal-128gb-sm-a376ezadins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": "2.75 GHz, 2 GHz",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a37-5g-awesome-charcoal-128gb-sm-a376ezadins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T09:02:35.729451+00:00",
+      "updated_at": "2026-10-18T09:02:35.729545+00:00"
+    },
+    "dna-samsung-galaxy-a57-5g-8gb-256gb": {
+      "product_id": "dna-samsung-galaxy-a57-5g-8gb-256gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-a57-5g-8gb-256gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy A57 5G",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 8,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 256,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": "2.9 GHz, 2.6 GHz, 1.9 GHz",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T09:02:35.779197+00:00",
+      "updated_at": "2026-10-18T09:02:35.779296+00:00"
+    },
+    "dna-samsung-galaxy-f70-pro-5g-6gb-128gb": {
+      "product_id": "dna-samsung-galaxy-f70-pro-5g-6gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-f70-pro-5g-6gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy F70 Pro 5G",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 6,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": "2.4 GHz, 1.8 GHz",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T09:02:35.798387+00:00",
+      "updated_at": "2026-10-18T09:02:35.798485+00:00"
+    },
+    "dna-samsung-galaxy-m47-5g-6gb-128gb": {
+      "product_id": "dna-samsung-galaxy-m47-5g-6gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-m47-5g-6gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy M47 5G",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 6,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": "2.4 GHz, 1.8 GHz",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T09:02:35.816715+00:00",
+      "updated_at": "2026-10-18T09:02:35.816921+00:00"
+    },
+    "dna-samsung-galaxy-s25-fe-8gb-128gb": {
+      "product_id": "dna-samsung-galaxy-s25-fe-8gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-s25-fe-8gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s25-fe-navy-128gb-sm-s731bdbbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy S25 FE",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s25-fe-navy-128gb-sm-s731bdbbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 8,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s25-fe-navy-128gb-sm-s731bdbbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s25-fe-navy-128gb-sm-s731bdbbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T09:02:35.853425+00:00",
+      "updated_at": "2026-10-18T09:02:35.853530+00:00"
+    },
+    "dna-samsung-galaxy-s26-ultra-12gb-256gb": {
+      "product_id": "dna-samsung-galaxy-s26-ultra-12gb-256gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-s26-ultra-12gb-256gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s26-ultra-black-256gb-certified-re-newed-sm5s948bzkbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy S26 Ultra",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s26-ultra-black-256gb-certified-re-newed-sm5s948bzkbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 12,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s26-ultra-black-256gb-certified-re-newed-sm5s948bzkbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 256,
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s26-ultra-black-256gb-certified-re-newed-sm5s948bzkbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": "4.74 GHz, 3.6 GHz",
+          "source": "official_product_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s26-ultra-black-256gb-certified-re-newed-sm5s948bzkbins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "Private Product DNA admitted from exact official evidence.",
+          "No canonical shopping ID or current retailer offer was asserted."
+        ]
+      },
+      "created_at": "2026-10-18T09:02:35.873052+00:00",
+      "updated_at": "2026-10-18T09:02:35.873148+00:00"
+    }
+  }
+}

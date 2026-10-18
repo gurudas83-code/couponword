@@ -15,11 +15,13 @@ a hard budget constraint when they contain mixed commerce content.
 from __future__ import annotations
 
 import json
+import ipaddress
 import re
+import socket
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from urllib.parse import parse_qs, urlparse, urlunparse
+from urllib.parse import parse_qs, urljoin, urlparse, urlunparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -182,7 +184,7 @@ def extract_price_mentions(text: str) -> list[float]:
 
 def retailer_host_allowed(url: str) -> bool:
     try:
-        host = (urlparse(url).hostname or "").lower()
+        host = _canonical_hostname(urlparse(url).hostname)
     except Exception:
         return False
 
@@ -194,7 +196,7 @@ def retailer_host_allowed(url: str) -> bool:
 def manufacturer_product_url_allowed(url: str) -> bool:
     try:
         parsed = urlparse(url)
-        host = (parsed.hostname or "").lower()
+        host = _canonical_hostname(parsed.hostname)
         path = (parsed.path or "").lower().rstrip("/")
     except Exception:
         return False
@@ -230,6 +232,126 @@ def manufacturer_product_url_allowed(url: str) -> bool:
         )
 
     return False
+
+
+REDIRECT_STATUSES = {301, 302, 303, 307, 308}
+MAX_SAFE_REDIRECTS = 5
+
+
+def _canonical_hostname(host: object) -> str:
+    """Return the ASCII, lower-case hostname used by the allow-list."""
+    value = str(host or "").strip().rstrip(".").lower()
+    if not value:
+        return ""
+    try:
+        return value.encode("idna").decode("ascii")
+    except (UnicodeError, AttributeError):
+        return ""
+
+
+def _public_dns_addresses(host: str, port: int) -> tuple[bool, str]:
+    """Reject private, loopback and otherwise non-public DNS destinations."""
+    try:
+        records = socket.getaddrinfo(
+            host,
+            port,
+            type=socket.SOCK_STREAM,
+        )
+    except (OSError, socket.gaierror):
+        return False, "Retail source DNS resolution failed"
+
+    addresses = {
+        str(record[4][0]).split("%", 1)[0]
+        for record in records
+        if len(record) > 4 and record[4]
+    }
+    if not addresses:
+        return False, "Retail source DNS returned no addresses"
+
+    for address in addresses:
+        try:
+            parsed = ipaddress.ip_address(address)
+        except ValueError:
+            return False, "Retail source DNS returned an invalid address"
+        if not parsed.is_global:
+            return False, "Retail source resolves to a non-public network"
+
+    return True, ""
+
+
+def _safe_retailer_destination(url: str) -> tuple[bool, str]:
+    """Validate a URL before any request is made to it."""
+    try:
+        parsed = urlparse(clean(url))
+        host = _canonical_hostname(parsed.hostname)
+        port = parsed.port
+    except (ValueError, TypeError):
+        return False, "Retail source URL is malformed"
+
+    if parsed.scheme.lower() != "https":
+        return False, "Retail source must use HTTPS"
+    if not host or parsed.username or parsed.password or parsed.fragment:
+        return False, "Retail source URL contains an unsafe destination"
+    if port not in (None, 443):
+        return False, "Retail source must use HTTPS port 443"
+
+    canonical_url = urlunparse(
+        (
+            "https",
+            host if port in (None, 443) else f"{host}:{port}",
+            parsed.path,
+            parsed.params,
+            parsed.query,
+            "",
+        )
+    )
+    if not retailer_host_allowed(canonical_url):
+        return False, "URL is not an approved retail price source"
+
+    return _public_dns_addresses(host, port or 443)
+
+
+def _get_with_safe_redirects(url: str) -> tuple[Any | None, str, str]:
+    """Fetch an approved page while authorizing every redirect hop first."""
+    current_url = clean(url)
+
+    for _ in range(MAX_SAFE_REDIRECTS + 1):
+        allowed, reason = _safe_retailer_destination(current_url)
+        if not allowed:
+            return None, current_url, f"REJECTED: {reason}"
+
+        try:
+            response = requests.get(
+                current_url,
+                headers=REQUEST_HEADERS,
+                timeout=(4, 8),
+                allow_redirects=False,
+            )
+        except requests.RequestException as error:
+            return None, current_url, (
+                f"Retail page fetch failed safely: "
+                f"{type(error).__name__}: {error}"
+            )
+
+        response_url = str(getattr(response, "url", "") or current_url).strip()
+        if response_url != current_url:
+            response_allowed, response_reason = _safe_retailer_destination(
+                response_url
+            )
+            if not response_allowed:
+                return None, response_url, f"REJECTED: {response_reason}"
+
+        if response.status_code not in REDIRECT_STATUSES:
+            return response, response_url, ""
+
+        location = str(
+            getattr(response, "headers", {}).get("Location", "") or ""
+        ).strip()
+        if not location:
+            return None, current_url, "REJECTED: Retail redirect omitted a destination"
+        current_url = urljoin(response_url or current_url, location)
+
+    return None, current_url, "REJECTED: Retail source exceeded the safe redirect limit"
 
 def load_cache() -> dict[str, Any]:
     if not CACHE_PATH.exists():
@@ -413,24 +535,17 @@ def fetch_structured_price(url: str) -> dict[str, Any]:
         "evidence_method": None,
     }
 
-    if not retailer_host_allowed(url):
+    allowed, reason = _safe_retailer_destination(url)
+    if not allowed:
         result["status"] = "rejected"
-        result["reason"] = "URL is not an approved retail price source"
+        result["reason"] = reason
         return result
 
-    try:
-        response = requests.get(
-            url,
-            headers=REQUEST_HEADERS,
-            timeout=(4, 8),
-            allow_redirects=True,
-        )
-    except requests.RequestException as error:
-        result["status"] = "fetch_error"
-        result["reason"] = (
-            f"Retail page fetch failed safely: "
-            f"{type(error).__name__}: {error}"
-        )
+    response, final_url, fetch_reason = _get_with_safe_redirects(url)
+    if response is None:
+        rejected = fetch_reason.startswith("REJECTED:")
+        result["status"] = "rejected" if rejected else "fetch_error"
+        result["reason"] = fetch_reason.removeprefix("REJECTED: ").strip()
         return result
 
     result["http_status"] = response.status_code
@@ -440,6 +555,12 @@ def fetch_structured_price(url: str) -> dict[str, Any]:
         result["reason"] = (
             f"Retail page returned HTTP {response.status_code}"
         )
+        return result
+
+    final_allowed, final_reason = _safe_retailer_destination(final_url)
+    if not final_allowed:
+        result["status"] = "rejected"
+        result["reason"] = final_reason
         return result
 
     try:

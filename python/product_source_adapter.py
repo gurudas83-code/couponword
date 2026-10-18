@@ -7,7 +7,7 @@ import csv
 from pathlib import Path
 from urllib.parse import parse_qs, urlencode, urlparse, urlunparse
 
-AFFILIATE_TAG = "guru0906-21"
+AFFILIATE_TAG = "guru07cc-21"
 
 OUTPUT_FIELDS = [
     "title",

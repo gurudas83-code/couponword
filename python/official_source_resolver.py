@@ -29,16 +29,28 @@ QUEUE_FILE = ROOT / "data" / "research_queue.json"
 OUTPUT_FILE = ROOT / "data" / "research_results.json"
 MIN_MODEL_SCORE = 0.70
 
+# A failed sitemap crawl should not be repeated for every model in one
+# coverage run. This is process-local only; the durable sitemap cache remains
+# authoritative when a domain returns usable URLs.
+_SITEMAP_DOMAIN_ATTEMPTS: set[str] = set()
+
 
 BRAND_DOMAINS: dict[str, list[str]] = {
     "redmi": ["mi.com", "xiaomi.com"],
+    "xiaomiredmi": ["mi.com", "xiaomi.com"],
+    "poco": ["po.co", "mi.com", "xiaomi.com"],
     "xiaomi": ["mi.com", "xiaomi.com"],
     "realme": ["realme.com"],
     "vivo": ["vivo.com"],
+    "iqoo": ["iqoo.com", "vivo.com"],
     "apple": ["apple.com"],
     "samsung": ["samsung.com"],
     "motorola": ["motorola.in", "motorola.com"],
     "lava": ["lavamobiles.com"],
+    "oppo": ["oppo.com"],
+    "infinix": ["infinixmobility.com"],
+    "tecno": ["tecno-mobile.com"],
+    "google": ["store.google.com", "google.com"],
     "itel": ["itel-india.com"],
     "boat": ["boat-lifestyle.com"],
     "noise": ["gonoise.com"],
@@ -48,6 +60,7 @@ BRAND_DOMAINS: dict[str, list[str]] = {
     "nutrilite": ["amway.in", "amway.com"],
     "amway": ["amway.in", "amway.com"],
     "nothing": ["in.nothing.tech", "nothing.tech"],
+    "cmf": ["in.nothing.tech", "nothing.tech"],
     "asus": ["asus.com"],
     "sony": ["sony.co.in", "sony.com"],
     "dell": ["dell.com"],
@@ -405,11 +418,16 @@ def official_sitemap_search(
                     if str(url).strip()
                 ]
 
+        if not cached_urls and domain in _SITEMAP_DOMAIN_ATTEMPTS:
+            continue
+
         if not cached_urls:
 
             urls, visited = crawl_domain(
                 domain
             )
+
+            _SITEMAP_DOMAIN_ATTEMPTS.add(domain)
 
             if urls:
                 cache[domain] = {
@@ -930,6 +948,28 @@ def direct_official_product_search(
         model_slug = re.sub(r"^lava-", "", model_slug)
         if model_slug in {"bold-n2", "bold-n2-lite"}:
             path_patterns = (f"/smartphones/{model_slug}",) + path_patterns
+
+    # A small set of manufacturer paths is known from the blocked coverage
+    # receipt.  Keep these as deterministic probes; they still pass through
+    # the existing approved-domain and strict identity gates below.
+    preferred_paths: list[str] = []
+    brand_key = normalize_brand(brand)
+    if brand_key in {"xiaomiredmi", "redmi"} and re.search(
+        r"\bredmi\s+13\s+5g\b", normalized_title, re.I
+    ):
+        preferred_paths.append("/in/product/redmi-13-5g/specs/")
+    if brand_key == "motorola" and re.search(
+        r"\bedge\s+60\s+fusion\b", normalized_title, re.I
+    ):
+        preferred_paths.append(
+            "/smartphones-motorola-edge-60-fusion/p?skuId=491"
+        )
+    if brand_key == "poco" and re.search(
+        r"\bx7\s+pro\b", normalized_title, re.I
+    ):
+        preferred_paths.append("/global/product/poco-x7-pro/specs/")
+    if preferred_paths:
+        path_patterns = tuple(dict.fromkeys(preferred_paths + list(path_patterns)))
 
     # Manufacturer product URLs normally omit physical capacities from the
     # slug.  Probe that canonical model slug as a bounded fallback while

@@ -1,0 +1,341 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-18T09:03:22.686632+00:00",
+  "market": "IN",
+  "period": {
+    "start_year": 2023,
+    "end_year": 2026
+  },
+  "source_hashes": {
+    "data\\india_three_year_coverage.json": "3ac3d7ba55b118d5b8fd97d6300363d48c64fab9b3b23021f0646f13103b58a8",
+    "data\\mobile_universe_priority_126.json": "928f240fd3c6e7bcea27a461cf265ed94834950e780880b9f0f9d6681d06e98a",
+    "data\\mobile_universe_seed.json": "f1b2a40a087b2fcf7ea0333f1290e27ee29e295a0d39e642dfdfc93e6ae6a77a",
+    "data\\verified_product_evidence_cache.json": "ad3633e54f89a46b5925a61e7f992e16a22cb91cc66aab479162825132bec3f9",
+    "data\\mobile_intelligence_repository.json": "895a5816c341c6894c0a975d789e94b3a7edd1bdbc014014a124b5f867631290",
+    "data\\retailer_product_registry.json": "769d192f9e69b9d013261935e17e132449f66d0bb43244c42faff4781a0f611b",
+    "data\\retailer_offers.json": "9bf487d44be20e62d5064983a4202fccbf061447069e3681e16dcb3516eff7ac"
+  },
+  "cursor": 237,
+  "queue_total": 237,
+  "queue_remaining": 0,
+  "processing_mode": "manifest_and_existing_store_reconciliation",
+  "status": "EXHAUSTED_MANIFEST_WITH_VERIFICATION_BLOCKERS",
+  "admission_run": {
+    "mode": "execute",
+    "records_considered": 29,
+    "admitted": 0,
+    "ready_for_admission": 0,
+    "duplicates_reused": 28,
+    "identity_conflicts": 1,
+    "failed": 0,
+    "results": [
+      {
+        "record": "B0FT834QNK",
+        "brand": "Samsung",
+        "model": "Galaxy F36 5G",
+        "ram_gb": "8",
+        "storage_gb": "128",
+        "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f36-5g-red-128gb-sm-e366bzrdins/",
+        "status": "BLOCKED_IDENTITY_CONFLICT",
+        "reason": "official name declares 6GB while requested variant is 8GB"
+      },
+      {
+        "record": "B0HBPQJN54",
+        "brand": "OnePlus",
+        "model": "N6 Lite",
+        "ram_gb": "4",
+        "storage_gb": "64",
+        "source_url": "https://www.oneplus.in/n6-lite/specs",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "B0GL1WGHJX",
+        "brand": "lava",
+        "model": "Bold N2",
+        "ram_gb": "4",
+        "storage_gb": "64",
+        "source_url": "https://www.lavamobiles.com/smartphones/bold-n2",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "B0GPXTY8V5",
+        "brand": "lava",
+        "model": "Bold N2 Lite",
+        "ram_gb": "3",
+        "storage_gb": "64",
+        "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "https://shop.vivo.com/in/product/10325?skuId=19299",
+        "brand": "iQOO",
+        "model": "Neo 10",
+        "ram_gb": "12",
+        "storage_gb": "256",
+        "source_url": "https://shop.vivo.com/in/product/10325?skuId=19299",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "https://shop.vivo.com/in/product/10320?skuId=19255",
+        "brand": "vivo",
+        "model": "V60",
+        "ram_gb": "12",
+        "storage_gb": "256",
+        "source_url": "https://shop.vivo.com/in/product/10320?skuId=19255",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "https://www.oneplus.in/13r/specs",
+        "brand": "OnePlus",
+        "model": "13R",
+        "ram_gb": "12",
+        "storage_gb": "256",
+        "source_url": "https://www.oneplus.in/13r/specs",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "https://www.oneplus.in/13/specs",
+        "brand": "OnePlus",
+        "model": "13",
+        "ram_gb": "12",
+        "storage_gb": "256",
+        "source_url": "https://www.oneplus.in/13/specs",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s24-onyx-black-256gb-sm-s921ezkwins/",
+        "brand": "Samsung",
+        "model": "Galaxy S24",
+        "ram_gb": "8",
+        "storage_gb": "256",
+        "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s24-onyx-black-256gb-sm-s921ezkwins/",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "B0GM69XM7R",
+        "brand": "Samsung",
+        "model": "Galaxy A06 5G Light",
+        "ram_gb": "4",
+        "storage_gb": "64",
+        "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a06-5g-light-gray-64gb-sm-a066bzadins/",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "B0GNZPHXGN",
+        "brand": "Samsung",
+        "model": "Galaxy F70e 5G",
+        "ram_gb": "6",
+        "storage_gb": "128",
+        "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70e-5g-spotlight-blue-128gb-sm-e076bdbbins/",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "B0HG9SZ7HD",
+        "brand": "Lava",
+        "model": "Virat V1",
+        "ram_gb": "4",
+        "storage_gb": "64",
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "https://shop.vivo.com/in/product/10339?skuId=19387",
+        "brand": "vivo",
+        "model": "T5x 5G",
+        "ram_gb": "6",
+        "storage_gb": "128",
+        "source_url": "https://shop.vivo.com/in/product/10339?skuId=19387",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "B0HCNQPXRY",
+        "brand": "Lava",
+        "model": "Virat V1 5G",
+        "ram_gb": "4",
+        "storage_gb": "64",
+        "source_url": "https://www.lavamobiles.com/smartphones/virat-v1-5g",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "B0GPWRYNM1",
+        "brand": "realme",
+        "model": "C83 5G",
+        "ram_gb": "4",
+        "storage_gb": "64",
+        "source_url": "https://www.realme.com/in/realme-c83",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "B0H1WY55ZL",
+        "brand": "Samsung",
+        "model": "Galaxy A56 5G",
+        "ram_gb": "8",
+        "storage_gb": "128",
+        "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-graphite-128gb-sm-a566ezkzins/",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "B0GN24SV22",
+        "brand": "Samsung",
+        "model": "Galaxy M17e 5G",
+        "ram_gb": "4",
+        "storage_gb": "128",
+        "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17e-5g-blitz-blue-128gb-sm-m076blbains/",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "B0H5BRHZBX",
+        "brand": "Samsung",
+        "model": "Galaxy M17 5G",
+        "ram_gb": "4",
+        "storage_gb": "128",
+        "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "B0GKB38XWZ",
+        "brand": "Motorola",
+        "model": "Signature",
+        "ram_gb": "12",
+        "storage_gb": "256",
+        "source_url": "https://www.motorola.in/smartphones-motorola-signature/p?skuId=609",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/",
+        "brand": "Samsung",
+        "model": "Galaxy F05",
+        "ram_gb": "4",
+        "storage_gb": "64",
+        "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "https://shop.vivo.com/in/product/10303?skuId=19292",
+        "brand": "vivo",
+        "model": "T4x 5G",
+        "ram_gb": "6",
+        "storage_gb": "128",
+        "source_url": "https://shop.vivo.com/in/product/10303?skuId=19292",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "https://shop.vivo.com/in/product/10344?skuId=19410",
+        "brand": "vivo",
+        "model": "T5 Pro 5G",
+        "ram_gb": "8",
+        "storage_gb": "128",
+        "source_url": "https://shop.vivo.com/in/product/10344?skuId=19410",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a37-5g-awesome-charcoal-128gb-sm-a376ezadins/",
+        "brand": "Samsung",
+        "model": "Galaxy A37 5G",
+        "ram_gb": "8",
+        "storage_gb": "128",
+        "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a37-5g-awesome-charcoal-128gb-sm-a376ezadins/",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/",
+        "brand": "Samsung",
+        "model": "Galaxy A57 5G",
+        "ram_gb": "8",
+        "storage_gb": "256",
+        "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/",
+        "brand": "Samsung",
+        "model": "Galaxy F70 Pro 5G",
+        "ram_gb": "6",
+        "storage_gb": "128",
+        "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/",
+        "brand": "Samsung",
+        "model": "Galaxy M47 5G",
+        "ram_gb": "6",
+        "storage_gb": "128",
+        "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s24-onyx-black-256gb-sm-s921ezkwins/",
+        "brand": "Samsung",
+        "model": "Galaxy S24 5G",
+        "ram_gb": "8",
+        "storage_gb": "256",
+        "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s24-onyx-black-256gb-sm-s921ezkwins/",
+        "status": "DUPLICATE_REUSED",
+        "reason": "official source URL and exact physical variant already belong to dna-samsung-galaxy-s24-8gb-256gb"
+      },
+      {
+        "record": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s25-fe-navy-128gb-sm-s731bdbbins/",
+        "brand": "Samsung",
+        "model": "Galaxy S25 FE",
+        "ram_gb": "8",
+        "storage_gb": "128",
+        "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s25-fe-navy-128gb-sm-s731bdbbins/",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      },
+      {
+        "record": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s26-ultra-black-256gb-certified-re-newed-sm5s948bzkbins/",
+        "brand": "Samsung",
+        "model": "Galaxy S26 Ultra",
+        "ram_gb": "12",
+        "storage_gb": "256",
+        "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s26-ultra-black-256gb-certified-re-newed-sm5s948bzkbins/",
+        "status": "DUPLICATE_REUSED",
+        "reason": "exact variant already exists in private DNA"
+      }
+    ]
+  },
+  "counts": {
+    "discovered_unique_models": 232,
+    "discovered_exact_variants": 147,
+    "existing_backend_models": 43,
+    "missing_models_identified": 189,
+    "verified_exact_variants": 29,
+    "private_dna_total": 27,
+    "canonical_mobile_ids": 34,
+    "fresh_in_stock_offers": 0,
+    "private_dna_total_before_execution": 9,
+    "private_dna_total_after_execution": 27,
+    "new_product_dna_admissions": 18,
+    "blockers_still_open": 190
+  },
+  "resume_command": "py python/run_mobile_coverage.py --market IN --start-year 2023 --end-year 2026 --resume --verify-sources --execute --until-exhausted",
+  "source_verification": null,
+  "note": "--verify-sources uses only the existing official resolver, extractor, evidence store and Product DNA admission gates. Research-only rows remain blocked when an exact official source or exact variant cannot be verified."
+}
