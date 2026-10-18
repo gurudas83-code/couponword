@@ -96,7 +96,9 @@ Excluded generated or runtime-only files: `data/retail_price_cache.json`, `data/
 
 ## Decision and next action
 
-**Phase-D coverage expansion status: PARTIAL.** The extractor correction is verified and three exact official Product DNA records are durable. Recommendation coverage did not increase because no new candidate has both a canonical mapping and a fresh, in-stock exact retailer offer.
+**Phase-D coverage expansion status: PARTIAL.** The extractor corrections are verified and five exact official Product DNA records are durable. Recommendation coverage did not increase because no new candidate has both a canonical mapping and a fresh, in-stock exact retailer offer.
+
+The subsequent canonical-admission trace durably stored all five verified exact variants in the existing private Product DNA repository with `canonical_product_id: null`; it did not create retailer owners or buyable offers. See [PHASE_D_CANONICAL_ADMISSION_INVESTIGATION.md](PHASE_D_CANONICAL_ADMISSION_INVESTIGATION.md) for the gate-by-gate result.
 
 **Next smallest safe action:** obtain one authorized exact in-stock Amazon, Flipkart, Croma or official-store offer for an existing Product DNA record, bind it through the canonical admission workflow with its observed timestamp, and rerun only the corresponding identity/offer/API tests. Do not add an ID or current price until that evidence is available.
 

@@ -126,6 +126,30 @@ class PhaseDCoverageTests(unittest.TestCase):
             self.assertTrue(row.get("official_url", "").startswith("https://"))
             self.assertTrue(row.get("resolver_verified"))
 
+    def test_verified_dna_records_are_durable_but_unresolved_for_shopping(self):
+        repository = json.loads(
+            (ROOT / "data" / "mobile_intelligence_repository.json")
+            .read_text(encoding="utf-8")
+        )
+        products = repository.get("products", {})
+        expected = {
+            "dna-iqoo-neo-10-12gb-256gb": ("iQOO", "Neo 10", 12, 256),
+            "dna-vivo-v60-12gb-256gb": ("vivo", "V60", 12, 256),
+            "dna-oneplus-13r-12gb-256gb": ("OnePlus", "13R", 12, 256),
+            "dna-oneplus-13-12gb-256gb": ("OnePlus", "13", 12, 256),
+            "dna-samsung-galaxy-s24-8gb-256gb": ("Samsung", "Galaxy S24", 8, 256),
+        }
+        self.assertTrue(set(expected).issubset(products))
+        for product_id, (brand, model, ram, storage) in expected.items():
+            record = products[product_id]
+            self.assertIsNone(record.get("canonical_product_id"))
+            dna = record["dna"]
+            self.assertEqual(dna["brand"]["value"], brand)
+            self.assertEqual(dna["model"]["value"], model)
+            self.assertEqual(dna["ram_gb"]["value"], ram)
+            self.assertEqual(dna["storage_gb"]["value"], storage)
+            self.assertIn("not recommendation eligible", dna["warnings"][0])
+
 
 if __name__ == "__main__":
     unittest.main()

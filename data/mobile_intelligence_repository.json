@@ -1,0 +1,631 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-10-18T05:35:44.104449+00:00",
+  "products": {
+    "dna-iqoo-neo-10-12gb-256gb": {
+      "product_id": "dna-iqoo-neo-10-12gb-256gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-iqoo-neo-10-12gb-256gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "iQOO",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://shop.vivo.com/in/product/10325?skuId=19299",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Neo 10",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://shop.vivo.com/in/product/10325?skuId=19299",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 12,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://shop.vivo.com/in/product/10325?skuId=19299",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 256,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://shop.vivo.com/in/product/10325?skuId=19299",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T05:35:44.000816+00:00",
+      "updated_at": "2026-10-18T05:35:44.000939+00:00"
+    },
+    "dna-vivo-v60-12gb-256gb": {
+      "product_id": "dna-vivo-v60-12gb-256gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-vivo-v60-12gb-256gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "vivo",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://shop.vivo.com/in/product/10320?skuId=19255",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "V60",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://shop.vivo.com/in/product/10320?skuId=19255",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 12,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://shop.vivo.com/in/product/10320?skuId=19255",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 256,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://shop.vivo.com/in/product/10320?skuId=19255",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T05:35:44.050657+00:00",
+      "updated_at": "2026-10-18T05:35:44.050767+00:00"
+    },
+    "dna-oneplus-13r-12gb-256gb": {
+      "product_id": "dna-oneplus-13r-12gb-256gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-oneplus-13r-12gb-256gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "OnePlus",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.oneplus.in/13r/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "13R",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.oneplus.in/13r/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 12,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.oneplus.in/13r/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 256,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.oneplus.in/13r/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T05:35:44.067070+00:00",
+      "updated_at": "2026-10-18T05:35:44.067180+00:00"
+    },
+    "dna-oneplus-13-12gb-256gb": {
+      "product_id": "dna-oneplus-13-12gb-256gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-oneplus-13-12gb-256gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "OnePlus",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.oneplus.in/13/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "13",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.oneplus.in/13/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 12,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.oneplus.in/13/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 256,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.oneplus.in/13/specs",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T05:35:44.085892+00:00",
+      "updated_at": "2026-10-18T05:35:44.086008+00:00"
+    },
+    "dna-samsung-galaxy-s24-8gb-256gb": {
+      "product_id": "dna-samsung-galaxy-s24-8gb-256gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-s24-8gb-256gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s24-onyx-black-256gb-sm-s921ezkwins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy S24",
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s24-onyx-black-256gb-sm-s921ezkwins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 8,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s24-onyx-black-256gb-sm-s921ezkwins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 256,
+          "source": "phase_d_official_evidence_cache",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-s/galaxy-s24-onyx-black-256gb-sm-s921ezkwins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T05:35:44.103661+00:00",
+      "updated_at": "2026-10-18T05:35:44.103908+00:00"
+    }
+  }
+}
