@@ -889,14 +889,16 @@ async function loadShoppingRecommendation(query) {
         ? `<section class="ai-recommendation-section ai-primary-section">
             <h2>${escapeHTML(recommendationSections.primary_title || "Top verified phones")}</h2>
             <p class="ai-section-note">Capability ranking is unchanged; this section keeps primary picks close to your declared budget.</p>
-            ${primaryCards || `<p class="card-note">${escapeHTML(recommendationSections.no_primary_message || "No currently verified phones found in the primary range.")}</p>`}
+            <div class="ai-section-card-grid">
+              ${primaryCards || `<p class="card-note">${escapeHTML(recommendationSections.no_primary_message || "No currently verified phones found in the primary range.")}</p>`}
+            </div>
           </section>`
-        : primaryCards}
+        : `<div class="ai-section-card-grid">${primaryCards}</div>`}
       ${budgetBandMode && valueCards
         ? `<section class="ai-recommendation-section ai-value-section">
             <h2>${escapeHTML(recommendationSections.value_title || "Best Value Alternatives")}</h2>
             <p class="ai-section-note">These verified phones are below the primary band and are shown separately as value alternatives.</p>
-            ${valueCards}
+            <div class="ai-section-card-grid">${valueCards}</div>
           </section>`
         : ""}
     `;

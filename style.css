@@ -586,9 +586,7 @@ body.clean-ui .footer{border-top-color:#dce4ed}
    ============================================================ */
 
 #shoppingBrainCard{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:18px;
+  display:block;
 }
 
 .ai-result-card{
@@ -596,7 +594,8 @@ body.clean-ui .footer{border-top-color:#dce4ed}
   display:flex;
   flex-direction:column;
   gap:10px;
-  min-height:100%;
+  min-height:0;
+  height:auto;
   padding:22px;
   border:1px solid rgba(255,255,255,.12);
   border-radius:24px;
@@ -608,6 +607,17 @@ body.clean-ui .footer{border-top-color:#dce4ed}
 
 .ai-recommendation-section{
   margin: 1.25rem 0;
+}
+
+.ai-section-card-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(340px,1fr));
+  align-items:start;
+  gap:18px;
+}
+
+.ai-section-card-grid > .card-note{
+  grid-column:1 / -1;
 }
 
 .ai-recommendation-section h2{
@@ -867,7 +877,7 @@ body.clean-ui .footer{border-top-color:#dce4ed}
 }
 
 @media (max-width:850px){
-  #shoppingBrainCard{
+  .ai-section-card-grid{
     grid-template-columns:1fr;
   }
 }
