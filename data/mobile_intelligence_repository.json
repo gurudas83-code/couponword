@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-10-18T05:35:44.104449+00:00",
+  "updated_at": "2026-10-18T07:00:36.592711+00:00",
   "products": {
     "dna-iqoo-neo-10-12gb-256gb": {
       "product_id": "dna-iqoo-neo-10-12gb-256gb",
@@ -626,6 +626,506 @@
       },
       "created_at": "2026-10-18T05:35:44.103661+00:00",
       "updated_at": "2026-10-18T05:35:44.103908+00:00"
+    },
+    "dna-samsung-galaxy-f05-4gb-64gb": {
+      "product_id": "dna-samsung-galaxy-f05-4gb-64gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-samsung-galaxy-f05-4gb-64gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "Samsung",
+          "source": "phase_d_official_extractor",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "Galaxy F05",
+          "source": "phase_d_official_extractor",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 4,
+          "source": "phase_d_official_extractor",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 64,
+          "source": "phase_d_official_extractor",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T07:00:28.449777+00:00",
+      "updated_at": "2026-10-18T07:00:28.449923+00:00"
+    },
+    "dna-vivo-t4x-6gb-128gb": {
+      "product_id": "dna-vivo-t4x-6gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-vivo-t4x-6gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "vivo",
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10303?skuId=19292",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "T4x 5G",
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10303?skuId=19292",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 6,
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10303?skuId=19292",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10303?skuId=19292",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T07:00:31.636808+00:00",
+      "updated_at": "2026-10-18T07:00:31.636972+00:00"
+    },
+    "dna-vivo-t5x-6gb-128gb": {
+      "product_id": "dna-vivo-t5x-6gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-vivo-t5x-6gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "vivo",
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10339?skuId=19387",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "T5x 5G",
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10339?skuId=19387",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 6,
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10339?skuId=19387",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10339?skuId=19387",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T07:00:34.880213+00:00",
+      "updated_at": "2026-10-18T07:00:34.880357+00:00"
+    },
+    "dna-vivo-t5-pro-8gb-128gb": {
+      "product_id": "dna-vivo-t5-pro-8gb-128gb",
+      "canonical_product_id": null,
+      "dna": {
+        "product_id": "dna-vivo-t5-pro-8gb-128gb",
+        "canonical_product_id": null,
+        "brand": {
+          "value": "vivo",
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10344?skuId=19410",
+          "confidence": "high",
+          "verified": true
+        },
+        "model": {
+          "value": "T5 Pro 5G",
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10344?skuId=19410",
+          "confidence": "high",
+          "verified": true
+        },
+        "ram_gb": {
+          "value": 8,
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10344?skuId=19410",
+          "confidence": "high",
+          "verified": true
+        },
+        "storage_gb": {
+          "value": 128,
+          "source": "phase_d_official_extractor",
+          "source_url": "https://shop.vivo.com/in/product/10344?skuId=19410",
+          "confidence": "high",
+          "verified": true
+        },
+        "display_size_inch": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "display_type": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "refresh_rate_hz": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "chipset": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "main_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "ultrawide_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "selfie_camera_mp": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "battery_mah": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "charging_w": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "operating_system": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "update_policy": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "supports_5g": {
+          "value": null,
+          "source": null,
+          "source_url": null,
+          "confidence": "unknown",
+          "verified": false
+        },
+        "warnings": [
+          "No canonical retailer identity or current offer; not recommendation eligible."
+        ]
+      },
+      "created_at": "2026-10-18T07:00:36.590695+00:00",
+      "updated_at": "2026-10-18T07:00:36.591833+00:00"
     }
   }
 }

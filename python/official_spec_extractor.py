@@ -5085,13 +5085,24 @@ def extract_one(
 
     json_ld_products = parse_json_ld(soup)
     meta = extract_meta(soup)
+    specifications: dict[str, dict[str, Any]] = {}
+
+    # Capture an exact manufacturer-store SKU heading before page-wide
+    # chrome removal.  vivo/iQOO store pages place the selected RAM/storage
+    # only in the h1, which can otherwise be removed with navigation markup.
+    extract_vivo_selected_capacity(
+        soup,
+        specifications,
+        official_url,
+        identity,
+        research_result.get("verified"),
+    )
 
     for tag in soup(["script", "style", "noscript", "svg"]):
         tag.decompose()
 
     remove_page_chrome(soup)
 
-    specifications: dict[str, dict[str, Any]] = {}
     oneplus_meta_count = extract_oneplus_15_meta_specs(
         soup, official_url, specifications
     )
