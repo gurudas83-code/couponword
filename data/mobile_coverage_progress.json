@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-18T07:38:17.115800+00:00",
+  "market": "IN",
+  "period": {
+    "start_year": 2023,
+    "end_year": 2026
+  },
+  "source_hashes": {
+    "data\\india_three_year_coverage.json": "3ac3d7ba55b118d5b8fd97d6300363d48c64fab9b3b23021f0646f13103b58a8",
+    "data\\mobile_universe_priority_126.json": "928f240fd3c6e7bcea27a461cf265ed94834950e780880b9f0f9d6681d06e98a",
+    "data\\mobile_universe_seed.json": "f1b2a40a087b2fcf7ea0333f1290e27ee29e295a0d39e642dfdfc93e6ae6a77a",
+    "data\\verified_product_evidence_cache.json": "7880d0aac38490901ac5144cd09f1208b84884e16c2d9554356b1853cec476d8",
+    "data\\mobile_intelligence_repository.json": "4271fb76cecc78606f0e6b6646ff76a6d0dcf59860143043da036d3ff6d172f7",
+    "data\\retailer_product_registry.json": "769d192f9e69b9d013261935e17e132449f66d0bb43244c42faff4781a0f611b",
+    "data\\retailer_offers.json": "9bf487d44be20e62d5064983a4202fccbf061447069e3681e16dcb3516eff7ac"
+  },
+  "cursor": 208,
+  "queue_total": 208,
+  "queue_remaining": 0,
+  "processing_mode": "manifest_and_existing_store_reconciliation",
+  "status": "EXHAUSTED_MANIFEST_WITH_VERIFICATION_BLOCKERS",
+  "counts": {
+    "discovered_unique_models": 207,
+    "discovered_exact_variants": 128,
+    "existing_backend_models": 11,
+    "missing_models_identified": 196,
+    "verified_exact_variants": 3,
+    "private_dna_total": 9,
+    "canonical_mobile_ids": 34,
+    "fresh_in_stock_offers": 0,
+    "new_product_dna_admissions": 0,
+    "blockers_still_open": 197
+  },
+  "resume_command": "py python/run_mobile_coverage.py --market IN --start-year 2023 --end-year 2026 --resume --until-exhausted",
+  "note": "This command reconciles existing manifests and stores. It does not fabricate evidence, call blocked retailers, or admit unverified Product DNA."
+}
