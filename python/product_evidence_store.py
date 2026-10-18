@@ -104,6 +104,24 @@ def _capacity_gb(value: Any) -> str:
     return ""
 
 
+def _single_capacity_gb(value: Any) -> str:
+    """Return a capacity only when the field names one physical value.
+
+    Manufacturer ``memory`` rows often contain several selectable RAM/ROM
+    options and expandable-storage text.  Treating the first TB/GB token as
+    a field value can turn an expandable 1TB mention into a false RAM or
+    storage identity.  Compound rows are handled by the strict parser below.
+    """
+    raw = value.get("value") if isinstance(value, dict) else value
+    text = clean(raw).lower()
+    if not text:
+        return ""
+    capacities = re.findall(r"\b\d+(?:\.\d+)?\s*(?:gb|tb)\b", text, re.I)
+    if len(capacities) != 1:
+        return ""
+    return _capacity_gb(text)
+
+
 def variant_signature_from_text(*values: Any) -> dict[str, str]:
     """
     Extract only variant-sensitive capacity identity.
@@ -256,7 +274,7 @@ def variant_signature_from_specifications(
         if key not in specifications:
             continue
 
-        value = _capacity_gb(specifications.get(key))
+        value = _single_capacity_gb(specifications.get(key))
 
         if value:
             signature["ram_gb"] = value
@@ -273,7 +291,7 @@ def variant_signature_from_specifications(
         if key not in specifications:
             continue
 
-        value = _capacity_gb(specifications.get(key))
+        value = _single_capacity_gb(specifications.get(key))
 
         if value:
             signature["storage_gb"] = value

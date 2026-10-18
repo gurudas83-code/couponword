@@ -73,6 +73,10 @@ ACCEPTABLE_EQUIVALENTS = {
 BRAND_ALIASES = {
     "redmi": {"redmi", "xiaomi"},
     "xiaomi": {"xiaomi", "redmi"},
+    # Research manifests use ``Xiaomi/Redmi`` as one manufacturer label.
+    # Keep that combined hint equivalent to the existing Redmi/Xiaomi
+    # aliases instead of failing the strict brand gate before model checks.
+    "xiaomi redmi": {"xiaomi redmi", "xiaomi", "redmi"},
     "realme": {"realme"},
     "apple": {"apple"},
     "logitech": {"logitech"},
@@ -532,6 +536,13 @@ def parse_identity(
         "htm",
         "page",
     }
+
+    # Coverage queue titles append physical capacity labels (for example
+    # ``6GB RAM 128GB Storage``).  Those labels are variant constraints, not
+    # model-family identity.  Remove the words only when a capacity token was
+    # actually parsed, preserving ordinary model names in other categories.
+    if ram_tokens or storage_tokens:
+        identity_noise_tokens.update({"ram", "storage", "memory", "internal", "rom"})
 
     excluded = (
         STOP_WORDS

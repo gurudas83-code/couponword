@@ -196,3 +196,59 @@ py python/run_mobile_coverage.py --market IN --start-year 2023 --end-year 2026 -
 
 Because every current row is checkpointed, this command will skip completed
 source attempts and only process newly added or explicitly retried rows.
+
+## 9. Targeted source-recovery pass (18 October 2026)
+
+The later 190-row queue was reconciled from the preserved 197-row receipt and
+only the four rows covered by confirmed manufacturer URL defects were reopened.
+The old receipt remains under `superseded_results`; no cache or evidence record
+was deleted.
+
+Three resolver defects were corrected in the existing path:
+
+- `Xiaomi/Redmi` is now treated as the existing Redmi/Xiaomi brand alias.
+- POCO now probes its official `po.co` specifications host, and the Motorola
+  Edge 60 Fusion SKU URL is a bounded manufacturer path.
+- Mixed `memory`/`storage_ram` fields no longer turn expandable or alternate
+  capacities into a physical RAM/storage signature.  The identity parser also
+  ignores capacity labels (`RAM`, `Storage`) when they are appended to a queue
+  title.
+
+Focused source-recovery tests: **3/3 PASS**; the combined relevant Phase-D
+set in this run: **23/23 PASS** (including the new recovery tests).
+
+| Reopened exact row | Resolver/source result | Exact variant result | Decision |
+| --- | --- | --- | --- |
+| Xiaomi/Redmi Redmi 13 5G 6/128 | Verified; `https://www.mi.com/in/product/redmi-13-5g/specs/` | Page lists 6/128 and 8/128 plus expandable 1TB; no selected SKU | BLOCKED — exact variant not independently bound |
+| Motorola Edge 60 Fusion 8/128 | Verified; `https://www.motorola.in/smartphones-motorola-edge-60-fusion/p?skuId=491` | SKU 491 identifies 12/256; no 8/128 offer/spec binding | BLOCKED — requested physical variant absent |
+| POCO X7 Pro 5G 8/256 | Verified; `https://www.po.co/global/product/poco-x7-pro/specs/` | Global page lists 8/256, 12/256 and 12/512 together | BLOCKED — no selected variant and India-market confirmation |
+| POCO X7 Pro 8/256 | Same official global page | Same multi-variant limitation | BLOCKED — no selected variant and India-market confirmation |
+
+The corrected queue receipt now covers all **190/190** research-only rows:
+
+| Current result | Count |
+| --- | ---: |
+| Resolver-verified official sources | 57 |
+| Exact-variant blocked | 55 |
+| Official-page fetch blocked | 2 |
+| Official source blocked/not found | 133 |
+| New exact evidence records in this recovery pass | 0 |
+| New private Product DNA admissions in this recovery pass | 0 |
+| Private Product DNA total | 27 |
+
+The source resolver now recovers the three specified manufacturer pages, but
+strict exact-variant and India-market gates correctly prevent those pages from
+becoming Product DNA. No price, stock, canonical ID or retailer link was
+invented. The remaining 133 source gaps and 55 exact-variant gaps require
+additional authoritative manufacturer evidence; they are not evidence of a
+ranking or admission-code defect.
+
+The resumable command remains:
+
+```text
+py python/run_mobile_coverage.py --market IN --start-year 2023 --end-year 2026 --resume --verify-sources --execute --until-exhausted
+```
+
+This run is **INCOMPLETE for market coverage**: the known queue is checkpointed,
+but private DNA remains 27 because no additional exact official variant was
+verified. Push, merge and deployment were not performed.

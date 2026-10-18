@@ -38,7 +38,7 @@ _SITEMAP_DOMAIN_ATTEMPTS: set[str] = set()
 BRAND_DOMAINS: dict[str, list[str]] = {
     "redmi": ["mi.com", "xiaomi.com"],
     "xiaomiredmi": ["mi.com", "xiaomi.com"],
-    "poco": ["mi.com", "xiaomi.com"],
+    "poco": ["po.co", "mi.com", "xiaomi.com"],
     "xiaomi": ["mi.com", "xiaomi.com"],
     "realme": ["realme.com"],
     "vivo": ["vivo.com"],
@@ -948,6 +948,28 @@ def direct_official_product_search(
         model_slug = re.sub(r"^lava-", "", model_slug)
         if model_slug in {"bold-n2", "bold-n2-lite"}:
             path_patterns = (f"/smartphones/{model_slug}",) + path_patterns
+
+    # A small set of manufacturer paths is known from the blocked coverage
+    # receipt.  Keep these as deterministic probes; they still pass through
+    # the existing approved-domain and strict identity gates below.
+    preferred_paths: list[str] = []
+    brand_key = normalize_brand(brand)
+    if brand_key in {"xiaomiredmi", "redmi"} and re.search(
+        r"\bredmi\s+13\s+5g\b", normalized_title, re.I
+    ):
+        preferred_paths.append("/in/product/redmi-13-5g/specs/")
+    if brand_key == "motorola" and re.search(
+        r"\bedge\s+60\s+fusion\b", normalized_title, re.I
+    ):
+        preferred_paths.append(
+            "/smartphones-motorola-edge-60-fusion/p?skuId=491"
+        )
+    if brand_key == "poco" and re.search(
+        r"\bx7\s+pro\b", normalized_title, re.I
+    ):
+        preferred_paths.append("/global/product/poco-x7-pro/specs/")
+    if preferred_paths:
+        path_patterns = tuple(dict.fromkeys(preferred_paths + list(path_patterns)))
 
     # Manufacturer product URLs normally omit physical capacities from the
     # slug.  Probe that canonical model slug as a bounded fallback while
