@@ -1879,6 +1879,7 @@ def build_budget_presentation(
         "mode": "quality_ranked",
         "primary_title": "Verified recommendations",
         "value_title": None,
+        "no_primary_message": "No currently verified phones found in the primary range.",
         "budget_max": intent.get("budget_max"),
         "primary_floor": None,
         "primary_status": "PASS" if ranked_recommendations else "PARTIAL",
@@ -1922,6 +1923,9 @@ def build_budget_presentation(
         "mode": "budget_band",
         "primary_title": f"Top Phones Between ₹{floor:,} and ₹{int(budget_value):,}",
         "value_title": f"Best Value Phones Below ₹{floor:,}",
+        "no_primary_message": (
+            f"No currently verified phones found in the ₹{floor:,}–₹{int(budget_value):,} primary range."
+        ),
         "primary_floor": floor,
         "primary_status": "PASS" if len(primary) >= DEFAULT_MIN_RESULTS else "PARTIAL",
         "primary_recommendations": primary[:3],

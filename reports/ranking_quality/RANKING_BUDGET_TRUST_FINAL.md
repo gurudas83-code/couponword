@@ -32,7 +32,7 @@ The approved frozen Phase-E receipt (`reports/phase_e/final_certification.md`) s
 | Lava Bold N2 Lite | 3GB/64GB | ₹9,099 | 51 | Passed the same hard budget/evidence/fit gates |
 | Lava Virat V1 | 4GB/64GB | ₹9,889 | 50 | Passed the same hard budget/evidence/fit gates |
 
-This was a **selection/presentation policy gap**, not a hard-budget defect: the budget gate correctly rejects prices above the maximum, but the sort key did not distinguish an upper-band primary pick from a much cheaper value alternative. The frozen receipt did not reproduce a verified ₹84,000 recommendation. A controlled fit test now proves a ₹84,000 offer is rejected with `Price 84000 exceeds hard budget limit 50000`. If a live page ever displays that price, the remaining investigation must trace the exact API payload/cache; it is not admitted by the current hard gate.
+The previous report row saying A56 was PRIMARY was incorrect: it was a report-data classification error. The implementation now reproduces the exact fixture as VALUE. The underlying historical list was a **selection/presentation policy gap**, not a hard-budget defect: the budget gate correctly rejects prices above the maximum, but the sort key did not distinguish an upper-band primary pick from a much cheaper value alternative. The frozen receipt did not reproduce a verified ₹84,000 recommendation. A controlled fit test now proves a ₹84,000 offer is rejected with `Price 84000 exceeds hard budget limit 50000`. If a live page ever displays that price, the remaining investigation must trace the exact API payload/cache; it is not admitted by the current hard gate.
 
 The current local working-tree replay also contains dirty, non-release price/evidence caches and therefore is not used as release evidence. Its frozen catalogue replay remains deterministic and shows the new section split. No research seed was promoted and no score/threshold was changed.
 
@@ -46,15 +46,15 @@ For a generic `mobile under B` query, primary band is `0.80 × B ≤ verified pr
 |---|---|---|---|---|
 | under ₹20k | Bold N2 Lite, Virat V1 (mixed list) | none in the ₹16k–₹20k band | Bold N2 Lite ₹9,099; Virat V1 ₹9,889 | verified frozen rows; primary coverage gap |
 | under ₹30k | Bold N2 Lite, Virat V1 | none in ₹24k–₹30k | Bold N2 Lite; Virat V1 | verified frozen rows; primary coverage gap |
-| under ₹40k | A56, Bold N2 Lite, Virat V1 | A56 ₹31,999 | Bold N2 Lite; Virat V1 | verified frozen rows |
-| under ₹50k | A56, Bold N2 Lite, Virat V1 | A56 ₹31,999 | Bold N2 Lite; Virat V1 | verified frozen rows |
+| under ₹40k | A56, Bold N2 Lite, Virat V1 | none in ₹32k–₹40k | A56 ₹31,999; Bold N2 Lite; Virat V1 | verified frozen rows; A56 is ₹1 below the floor |
+| under ₹50k | A56, Bold N2 Lite, Virat V1 | none in ₹40k–₹50k | A56 ₹31,999; Bold N2 Lite; Virat V1 | verified frozen rows; primary coverage gap |
 | under ₹60k | no approved upper-band evidence in the historical receipt | none in ₹48k–₹60k from this frozen pool | A56, Bold N2 Lite, Virat V1 | coverage gap; no fabricated candidate |
 
-A controlled presentation replay with the same three approved rows returned the same primary/value membership on repeated execution. The current catalogue-mode run executed 1/1 and matched deterministically 1/1; its legacy top three were A36 ₹26,399, Redmi Note 17 Pro Max ₹49,998 and A56 ₹31,999, while the primary section contained only the ₹49,998 row and the value section contained the lower priced rows. Those prices came from the local dirty cache and are explicitly **not** a release or live-market claim.
+A controlled presentation replay with the same three approved rows returned the same primary/value membership on repeated execution. The final catalogue-mode run executed 1/1 and matched deterministically 1/1; with the preserved local dirty cache, its primary section was empty and its value section contained A56 ₹31,999, Bold N2 Lite ₹9,099 and Virat V1 ₹9,889. Those runtime prices came from local dirty cache state and are explicitly **not** a release or live-market claim.
 
 ## D. Customer explanation
 
-For `mobile under 50000`, the page now says **“Top Phones Between ₹40,000 and ₹50,000”** and shows only verified candidates in that band. It then says **“Best Value Phones Below ₹40,000”** for cheaper verified alternatives. Each card keeps exact variant, current offer status, score trace, evidence coverage, source and last-checked time. If the primary band has fewer than three verified candidates, the page says so instead of filling slots with unrelated cheaper phones.
+For `mobile under 50000`, the page says **“Top Phones Between ₹40,000 and ₹50,000”** and, for the exact approved three-row fixture, shows **“No currently verified phones found in the ₹40,000–₹50,000 primary range.”** It then shows **“Best Value Phones Below ₹40,000”** with A56 and the two Lava alternatives. Each card keeps exact variant, current offer status, score trace, evidence coverage, source and last-checked time. If the primary band has fewer than three verified candidates, the page says so instead of filling slots with unrelated cheaper phones.
 
 ## E. Coverage funnel (current working tree, read-only counts)
 
@@ -80,7 +80,7 @@ For `mobile under 50000`, the page now says **“Top Phones Between ₹40,000 an
 - `phase_e_offline_certification.py`: includes primary/value membership in the existing semantic determinism comparison.
 - `app.js`: renders primary and value sections while preserving existing card/security/retailer rendering.
 - `style.css`: minimal section headings and separation styles.
-- `test_phase_g_budget_presentation.py`: focused hard-budget and presentation regressions.
+- `test_phase_g_budget_presentation.py`: focused hard-budget and presentation regressions.\n- `test_phase_g_budget_band_contract.py`: independent API serialization and frontend section assertions.
 - `reports/ranking_quality/RANKING_BUDGET_TRUST_FINAL.md`: this report.
 
 Dirty `data/retail_price_cache.json`, `data/verified_product_evidence_cache.json`, `data/runtime_shopping_intelligence.json`, `data/market_discovery_cache.json` and `data/official_sitemap_cache.json` were preserved and are excluded from the release commit.

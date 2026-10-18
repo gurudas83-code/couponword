@@ -217,6 +217,9 @@ def semantic(payload: dict[str, Any]) -> dict[str, Any]:
         "recommendation_sections": {
             "mode": sections.get("mode"),
             "primary_floor": sections.get("primary_floor"),
+            "primary_title": sections.get("primary_title"),
+            "value_title": sections.get("value_title"),
+            "no_primary_message": sections.get("no_primary_message"),
             "primary": section_rows("primary_recommendations"),
             "value": section_rows("value_recommendations"),
         },
