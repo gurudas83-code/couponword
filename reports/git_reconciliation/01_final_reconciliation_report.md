@@ -15,6 +15,9 @@ Date: 2026-10-23 (IST)
 | Review branch | `review/couponworld-unified-20261023` |
 | Existing unpushed commits before work | 0 |
 | New review commits | 4, including this reconciliation report |
+| Final local HEAD | `83dfe028d936e43bc59dd4069832c162a4121b4e` |
+| Verified remote review-branch HEAD | `83dfe028d936e43bc59dd4069832c162a4121b4e` |
+| Normal non-force push | SUCCESS; remote SHA matches local HEAD |
 
 33 local worktrees were inspected. Protected main/release worktrees were not moved or edited. The large `integrate/multi-retailer-final` branch was not cherry-picked because it is a divergent data-heavy branch, not a patch-equivalent subset of this reviewed candidate.
 
@@ -46,5 +49,6 @@ Date: 2026-10-23 (IST)
 - Fresh verified buyable offers: **0**.
 - Auto-deployment risk: **CLEAR** for this review branch; workflows are scheduled/manual-only and no push-triggered deploy or Render config is present.
 - Production deployment: **UNCHANGED**.
+- Final tracked working-tree changes: **0**; 65 untracked status entries remain under deliberately excluded historical/generated report trees.
 
-The branch is suitable for review, not production merge or deployment. Remote SHA must be verified after the normal non-force push and reported separately with the final local HEAD.
+The branch is suitable for review, not production merge or deployment. The normal non-force push was completed and independently verified with `git ls-remote`; the remote SHA exactly matches the final local HEAD above.
