@@ -280,17 +280,17 @@ img{max-width:100%;display:block}
 .deal-image img{width:100%;height:100%;object-fit:contain;padding:10px}
 .placeholder{text-align:center;font-size:2.65rem;color:var(--yellow)}
 .placeholder small{display:block;color:var(--muted);font-size:.7rem;margin-top:6px}
-.deal-meta{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.deal-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;min-width:0}
 .store{font-size:.75rem;color:var(--yellow);font-weight:1000}
 .category-pill{font-size:.68rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 8px;max-width:145px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.deal-title{font-size:1rem;line-height:1.36;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.deal-title{font-size:1rem;line-height:1.36;margin:0;overflow-wrap:anywhere;word-break:break-word}
 .discount{font-size:1.28rem;font-weight:1000;color:var(--green)}
 .price-row{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
 .price{font-weight:1000;font-size:1.25rem}
 .mrp{text-decoration:line-through;color:var(--muted);font-size:.84rem}
 .save{font-size:.72rem;font-weight:1000;color:#03110b;background:var(--green);border-radius:999px;padding:4px 8px}
 .description{color:var(--muted);font-size:.82rem;margin:0;line-height:1.5;min-height:38px}
-.code-row{display:flex;justify-content:space-between;gap:8px;border:1px dashed rgba(255,255,255,.25);border-radius:14px;padding:9px 10px;color:var(--muted);font-size:.78rem}
+.code-row{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;border:1px dashed rgba(255,255,255,.25);border-radius:14px;padding:9px 10px;color:var(--muted);font-size:.78rem;overflow-wrap:anywhere;word-break:break-word}
 .shop-button{
   margin-top:auto;text-align:center;background:linear-gradient(135deg,var(--orange),var(--yellow));
   color:#201000;padding:13px;border-radius:17px;font-weight:1000
@@ -516,12 +516,15 @@ img{max-width:100%;display:block}
   margin:4px 0 2px;
   font-size:1.15rem;
   line-height:1.35;
+  overflow-wrap:anywhere;
+  word-break:break-word;
 }
 
 .ai-result-card p{
   margin:0;
   color:var(--muted);
   line-height:1.45;
+  overflow-wrap:anywhere;
 }
 
 .ai-result-card p strong{

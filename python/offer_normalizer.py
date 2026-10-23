@@ -42,6 +42,10 @@ def normalize_offer(
     """Convert retailer-specific raw data into Coupon World RetailerOffer."""
 
     retailer_name = normalize_retailer_name(retailer)
+    metadata = raw.get("metadata") if isinstance(raw.get("metadata"), dict) else {}
+    # Normalizing/replaying a record is not a new source observation.
+    observed_at = (metadata.get("evidence_observed_at") or raw.get("observed_at")
+                   or raw.get("last_checked") or "")
 
     return RetailerOffer(
         retailer=retailer_name,
@@ -119,8 +123,10 @@ def normalize_offer(
         ),
 
         metadata={
+            **metadata,
             "raw_retailer": retailer,
         },
+        last_checked=str(observed_at).strip(),
     )
 
 

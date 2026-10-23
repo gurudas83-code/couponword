@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+import math
 
 from price_evidence import PriceEvidence
 from retailer_contract import RetailerOffer
@@ -41,6 +42,10 @@ def validate_price_evidence(
 ) -> tuple[bool, list[str]]:
 
     errors: list[str] = []
+
+    # A failed/partial refresh must not erase a previously valid observation.
+    if evidence.price is None or not math.isfinite(evidence.price) or evidence.price <= 0:
+        errors.append("invalid_price")
 
     if evidence.product_id != offer.product_id:
         errors.append(

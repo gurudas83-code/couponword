@@ -5,7 +5,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 
 
-DEFAULT_MAX_AGE_HOURS = 24
+DEFAULT_MAX_AGE_HOURS = 6
 
 
 def parse_timestamp(value: str) -> datetime | None:
@@ -22,7 +22,7 @@ def parse_timestamp(value: str) -> datetime | None:
         return None
 
     if dt.tzinfo is None:
-        dt = dt.replace(tzinfo=timezone.utc)
+        return None
 
     return dt.astimezone(timezone.utc)
 
@@ -37,10 +37,7 @@ def evidence_age_hours(last_checked: str) -> float | None:
 
     age = now - checked
 
-    return max(
-        0.0,
-        age.total_seconds() / 3600,
-    )
+    return age.total_seconds() / 3600
 
 
 def is_offer_fresh(
@@ -49,13 +46,14 @@ def is_offer_fresh(
 ) -> bool:
 
     age = evidence_age_hours(
-        getattr(offer, "last_checked", "")
+        (getattr(offer, "metadata", {}) or {}).get("evidence_observed_at")
+        or getattr(offer, "last_checked", "")
     )
 
     if age is None:
         return False
 
-    return age <= max_age_hours
+    return 0 <= age <= max_age_hours
 
 
 def freshness_status(
@@ -64,10 +62,11 @@ def freshness_status(
 ) -> str:
 
     age = evidence_age_hours(
-        getattr(offer, "last_checked", "")
+        (getattr(offer, "metadata", {}) or {}).get("evidence_observed_at")
+        or getattr(offer, "last_checked", "")
     )
 
-    if age is None:
+    if age is None or age < 0:
         return "unknown"
 
     if age <= max_age_hours:

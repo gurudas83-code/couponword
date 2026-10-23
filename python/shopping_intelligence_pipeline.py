@@ -22,6 +22,7 @@ Main changes:
 
 from __future__ import annotations
 import time
+from datetime import datetime, timezone
 
 import argparse
 import ast
@@ -188,7 +189,12 @@ def clean_public_retailer_url(value: Any) -> str:
     return url
 
 
-def public_retailer_offer(value: Any) -> dict[str, Any] | None:
+def public_retailer_offer(
+    value: Any,
+    *,
+    product_id: str = "",
+    variant: str = "",
+) -> dict[str, Any] | None:
     """
     Sanitize only the user-facing retailer offer payload.
     """
@@ -201,6 +207,18 @@ def public_retailer_offer(value: Any) -> dict[str, Any] | None:
         public.get("product_url")
     )
     public["affiliate_url"] = ""
+
+    # One explicit fail-closed result is carried to every API consumer.
+    # This does not refresh evidence and does not treat an affiliate URL as
+    # proof of price or stock.
+    from cta_eligibility import attach_cta_eligibility
+
+    public = attach_cta_eligibility(
+        public,
+        product_id=product_id,
+        variant=variant,
+        now=datetime.now(timezone.utc),
+    ) or public
 
     return public
 
@@ -388,14 +406,20 @@ def enrich_with_multi_retailer(
         public_offers = []
 
         for offer in retailer_result.get("offers") or []:
-            public_offer = public_retailer_offer(offer)
+            public_offer = public_retailer_offer(
+                offer,
+                product_id=canonical.product_id,
+                variant=canonical.variant,
+            )
 
             if public_offer is not None:
                 public_offers.append(public_offer)
 
         result["retailer_offers"] = public_offers
         result["best_offer"] = public_retailer_offer(
-            comparison.get("best_offer")
+            comparison.get("best_offer"),
+            product_id=canonical.product_id,
+            variant=canonical.variant,
         )
         result["retailer_comparison_status"] = (
             comparison.get("status") or "unavailable"

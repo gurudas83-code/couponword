@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 import os
 import tempfile
 from datetime import datetime, timezone
@@ -156,7 +157,7 @@ def find_fresh_verified_offer(
             price = float(record.get("price"))
         except (TypeError, ValueError):
             continue
-        if price <= 0:
+        if not math.isfinite(price) or price <= 0:
             continue
 
         metadata = record.get("metadata") if isinstance(record.get("metadata"), dict) else {}

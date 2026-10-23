@@ -18,6 +18,7 @@ PYTHON_DIR = ROOT / "python"
 if str(PYTHON_DIR) not in sys.path:
     sys.path.insert(0, str(PYTHON_DIR))
 
+from api_contract import apply_response_contract
 from intent_engine import parse_query
 from shopping_intelligence_pipeline import run_pipeline
 
@@ -188,7 +189,7 @@ def recommend():
     if pipeline_query != query:
         payload["query"] = query
 
-    return jsonify(payload)
+    return jsonify(apply_response_contract(payload, requested_query=query))
 
 
 if __name__ == "__main__":

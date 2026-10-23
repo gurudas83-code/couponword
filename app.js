@@ -1,5 +1,15 @@
 const DEALS_FILE = "/coupons.json?v=" + Date.now();
 
+// Keep the published site on the approved Render API while making the
+// existing frontend route testable against the local backend.  The override
+// is intentionally limited to loopback hosts and does not rewrite unrelated
+// production requests.
+const API_BASE_URL = ["127.0.0.1", "localhost"].includes(
+  window.location.hostname
+)
+  ? "http://127.0.0.1:8000"
+  : "https://couponword.onrender.com";
+
 let allDeals = [];
 let activeCategory = "All";
 let activeView = "grid";
@@ -114,7 +124,9 @@ function renderFeaturedDeal() {
     ${renderImage(deal, "spotlight-image")}
     <h2>${escapeHTML(deal.title || "Hot Deal")}</h2>
     <p>${escapeHTML(deal.discount || "Latest offer")} • ${escapeHTML(deal.category || "Deal")}</p>
-    <a href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">View Deal</a>
+    ${deal.cta_eligible === true
+      ? `<a href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">View Deal</a>`
+      : `<span class="shop-button disabled">Offer verification unavailable</span>`}
   `;
 }
 
@@ -156,9 +168,9 @@ function renderDeals() {
         <span>${escapeHTML(deal.expiry || "Limited Time")}</span>
       </div>
 
-      <a class="shop-button" href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">
-        Get Deal →
-      </a>
+      ${deal.cta_eligible === true
+        ? `<a class="shop-button" href="${safeLink(deal.link)}" target="_blank" rel="nofollow sponsored noopener">Get Deal →</a>`
+        : `<span class="shop-button disabled">Offer verification unavailable</span>`}
 
       <div class="card-note">Price and availability may change on the retailer site</div>
     </article>
@@ -374,7 +386,8 @@ async function loadShoppingRecommendation(query) {
 
   try {
     const endpoint =
-      "https://couponword.onrender.com/api/recommend?q=" +
+      API_BASE_URL +
+      "/api/recommend?q=" +
       encodeURIComponent(cleanQuery);
 
     const response = await fetch(endpoint);
@@ -542,8 +555,19 @@ async function loadShoppingRecommendation(query) {
           </details>`
         : "";
 
+      const hasExplicitOfferContract = Object.prototype.hasOwnProperty.call(
+        p,
+        "current_offer_verified"
+      );
+      const currentOfferVerified = hasExplicitOfferContract &&
+        p.current_offer_verified === true;
       const offers = Array.isArray(p.retailer_offers)
-        ? p.retailer_offers.filter(offer => offer && offer.price != null && offer.price !== "" && Number.isFinite(Number(offer.price)) && Number(offer.price) > 0)
+        ? p.retailer_offers.filter(offer =>
+            offer &&
+            offer.cta_eligibility &&
+            offer.cta_eligibility.eligible === true &&
+            (!hasExplicitOfferContract || currentOfferVerified)
+          )
         : [];
 
       // Respect the backend comparison contract:
@@ -551,9 +575,16 @@ async function loadShoppingRecommendation(query) {
       // retailer offers are available. A single verified offer is
       // still useful, but must not be presented as "best".
       const bestOffer =
-        p.best_offer && typeof p.best_offer === "object" && p.best_offer.price != null && Number.isFinite(Number(p.best_offer.price)) && Number(p.best_offer.price) > 0
+        p.best_offer &&
+        typeof p.best_offer === "object" &&
+        p.best_offer.cta_eligibility &&
+        p.best_offer.cta_eligibility.eligible === true &&
+        (!hasExplicitOfferContract || currentOfferVerified)
           ? p.best_offer
           : null;
+      const purchaseCtaEligible = hasExplicitOfferContract
+        ? p.purchase_cta_eligible === true && currentOfferVerified
+        : Boolean(bestOffer || offers.length > 0);
 
       const primaryOffer = bestOffer || offers[0] || {};
       const priceEvidence =
@@ -572,11 +603,13 @@ async function loadShoppingRecommendation(query) {
         ? escapeHTML(primaryOffer.retailer)
         : "Not available";
 
-      const retailerHeading = bestOffer
+      const retailerHeading = currentOfferVerified && bestOffer
         ? "Best verified retailer"
-        : offers.length > 0
+        : currentOfferVerified && offers.length > 0
           ? "Verified retailer"
-          : "Retailer";
+          : hasExplicitOfferContract
+            ? "Retailer information"
+            : "Retailer";
 
       const lastChecked = primaryOffer.last_checked
         ? escapeHTML(primaryOffer.last_checked)
@@ -588,7 +621,9 @@ async function loadShoppingRecommendation(query) {
 
       let priceStatusRaw;
 
-      if (offers.length > 0) {
+      if (p.price_status) {
+        priceStatusRaw = p.price_status;
+      } else if (offers.length > 0) {
         if (
           primaryOffer.price != null &&
           primaryOffer.price !== ""
@@ -602,9 +637,7 @@ async function loadShoppingRecommendation(query) {
           priceStatusRaw = "price unavailable";
         }
       } else {
-        priceStatusRaw =
-          priceEvidence.status ||
-          (p.price != null ? "available" : "unavailable");
+        priceStatusRaw = priceEvidence.status || "CURRENT_OFFER_UNAVAILABLE";
       }
 
       const priceStatus = escapeHTML(
@@ -622,24 +655,30 @@ async function loadShoppingRecommendation(query) {
         primaryOffer.price != null &&
         primaryOffer.price !== ""
           ? primaryOffer.price
-          : p.price;
+          : purchaseCtaEligible ? p.price : null;
 
       const price =
+        purchaseCtaEligible &&
         selectedPrice != null &&
         selectedPrice !== ""
           ? `\u20B9${escapeHTML(selectedPrice)}`
-          : "Check latest price";
+          : "Current price unavailable";
+      // The former "Check latest price" label was intentionally replaced:
+      // unverified historical values must never look current or purchase-ready.
 
       // retailer_offers and best_offer are sanitized by the backend.
       // Prefer that exact retailer URL so displayed retailer, price
       // and CTA all refer to the same offer.
-      const productLink = safeLink(
+      const informationalLink = safeLink(
         primaryOffer.product_url ||
         priceEvidence.source_url ||
         p.market_source ||
         p.official_source ||
         p.link
       );
+      const productLink = purchaseCtaEligible
+        ? safeLink(primaryOffer.product_url)
+        : informationalLink;
 
       const offerCtaLabel = bestOffer
         ? "View Best Verified Offer \u2192"
@@ -778,7 +817,7 @@ async function loadShoppingRecommendation(query) {
           ${unknownsHTML}
 
           ${
-            productLink !== "#"
+            productLink !== "#" && purchaseCtaEligible
               ? `
                 <a
                   class="shop-button"
@@ -795,6 +834,17 @@ async function loadShoppingRecommendation(query) {
                   ${offerCtaLabel}
                 </a>
               `
+              : productLink !== "#"
+                ? `
+                <a
+                  class="card-note"
+                  href="${productLink}"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  View product information →
+                </a>
+                `
               : `
                 <p class="card-note">
                   Retailer link is currently unavailable.
@@ -804,6 +854,21 @@ async function loadShoppingRecommendation(query) {
         </article>
       `;
     }).join("");
+
+    const categoryResults = data.category_results && typeof data.category_results === "object"
+      ? data.category_results
+      : {};
+    const unavailableCategories = ["camera", "battery", "gaming"].filter(name =>
+      categoryResults[name] &&
+      categoryResults[name].status === "CATEGORY_EVIDENCE_UNAVAILABLE"
+    );
+    if (unavailableCategories.length) {
+      card.insertAdjacentHTML("beforeend", `
+        <p class="card-note">
+          Specialist sections unavailable: ${escapeHTML(unavailableCategories.join(", "))}. No unsupported category winners were added.
+        </p>
+      `);
+    }
 
     if (
       !exactModelQuery &&

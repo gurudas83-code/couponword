@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
-from datetime import datetime, timezone
 
 
 @dataclass(slots=True)
@@ -26,10 +25,8 @@ class PriceEvidence:
 
     def __post_init__(self):
 
-        if not self.observed_at:
-            self.observed_at = datetime.now(
-                timezone.utc
-            ).isoformat()
+        # The source/collector owns observation time. Missing time must remain
+        # missing so validate_price_evidence rejects it instead of rejuvenating it.
 
         self.retailer = (
             self.retailer
