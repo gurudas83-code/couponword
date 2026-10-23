@@ -8,6 +8,8 @@ sys.path.insert(0, str(Path(__file__).parent / "python"))
 from budget_benchmark import (  # noqa: E402
     BENCHMARK_VERSION,
     build_budget_benchmark,
+    build_budget_reference_snapshots,
+    build_metric_reference_matrix,
     constraint_signature,
     invalidate_affected_snapshots,
     normalize_budget_ceiling,
@@ -54,7 +56,7 @@ class BudgetBenchmarkTests(unittest.TestCase):
         for p in blocked: p["fit_signals"] = {"budget": {"match": 1}, "battery": {"match": .8}}
         snap = build_budget_benchmark(blocked, intent(10000), [], evidence_version="e1", generated_at="fixed")
         self.assertEqual(snap["eligible_variant_ids"], [])
-        self.assertEqual(snap["verification_status"], "no_verified_current_offer")
+        self.assertEqual(snap["verification_status"], "LIVE_ELIGIBLE_POOL_EMPTY")
 
     def test_capacity_relative_best_is_100(self):
         snap = build_budget_benchmark(self.products, intent(20000), [{"name": "capacity_mah", "unit": "mAh"}], evidence_version="e1", generated_at="fixed")
@@ -120,6 +122,60 @@ class BudgetBenchmarkTests(unittest.TestCase):
         expected = build_budget_benchmark(self.products, intent(18000), [{"name": "capacity_mah"}], evidence_version="e1", generated_at="fixed")
         for _ in range(50):
             self.assertEqual(expected, build_budget_benchmark(copy.deepcopy(self.products), intent(18000), [{"name": "capacity_mah"}], evidence_version="e1", generated_at="fixed"))
+
+    def test_standard_budget_bundle_has_fifteen_cumulative_ceilings(self):
+        bundle = build_budget_reference_snapshots(
+            self.products,
+            intent(1),
+            [{"name": "capacity_mah", "unit": "mAh"}],
+            evidence_version="e1",
+            generated_at="fixed",
+        )
+        self.assertEqual(bundle["budgets"], [10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000, 130000, 140000, 150000])
+        self.assertEqual(bundle["snapshots"][1]["eligible_variant_ids"], ["a", "b", "c"])
+
+    def test_arbitrary_budget_is_cumulative(self):
+        bundle = build_budget_reference_snapshots(
+            self.products,
+            intent(1),
+            [{"name": "capacity_mah"}],
+            budgets=[12000, 18000],
+            evidence_version="e1",
+            generated_at="fixed",
+        )
+        self.assertEqual(bundle["snapshots"][0]["eligible_variant_ids"], ["a", "b"])
+        self.assertEqual(bundle["snapshots"][1]["eligible_variant_ids"], ["a", "b", "c"])
+
+    def test_metric_leaders_are_independent_and_matrix_is_traceable(self):
+        metrics = [
+            {"name": "capacity_mah", "unit": "mAh"},
+            {"name": "camera_resolution_mp", "unit": "MP"},
+            {"name": "latency_ms", "unit": "ms", "direction": "lower_is_better"},
+        ]
+        for product, latency in zip(self.products, (100, 50, 25)):
+            product["verified_metrics"]["latency_ms"] = latency
+            product["exact_variant_id"] = product["product_id"] + "-8-128"
+        self.products[0]["verified_metrics"]["capacity_mah"] = 9000
+        self.products[1]["verified_metrics"]["camera_resolution_mp"] = 300
+        bundle = build_budget_reference_snapshots(self.products, intent(18000), metrics, budgets=[18000], evidence_version="e1", generated_at="fixed")
+        rows = build_metric_reference_matrix(bundle)
+        self.assertEqual({row["reference_product_id"] for row in rows}, {"a", "b", "c"})
+        self.assertEqual([row["eligible_sample_count"] for row in rows], [3, 3, 3])
+
+    def test_structured_metric_record_requires_compatible_verified_group(self):
+        self.products[0]["metric_records"] = [{
+            "metric_name": "measured_endurance_hours", "metric_value": 20,
+            "verification_status": "VERIFIED_INDEPENDENT_MEASUREMENT",
+            "comparable_group_id": "protocol-a", "source_name": "Lab A",
+        }]
+        self.products[1]["metric_records"] = [{
+            "metric_name": "measured_endurance_hours", "metric_value": 18,
+            "verification_status": "VERIFIED_INDEPENDENT_MEASUREMENT",
+            "comparable_group_id": "protocol-b", "source_name": "Lab B",
+        }]
+        snap = build_budget_benchmark(self.products, intent(18000), [{"name": "measured_endurance_hours", "comparable_group_id": "protocol-a"}], evidence_version="e1", generated_at="fixed")
+        self.assertEqual(snap["metrics"][0]["sample_size"], 1)
+        self.assertEqual(snap["metrics"][0]["reference_product_id"], "a")
 
 
 if __name__ == "__main__":
