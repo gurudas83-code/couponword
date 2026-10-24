@@ -886,6 +886,43 @@ async function loadShoppingRecommendation(query) {
       `);
     }
 
+    const dynamicReference = data.dynamic_reference &&
+      typeof data.dynamic_reference === "object"
+      ? data.dynamic_reference
+      : null;
+    if (dynamicReference) {
+      const requestedSnapshot = dynamicReference.requested_snapshot &&
+        typeof dynamicReference.requested_snapshot === "object"
+        ? dynamicReference.requested_snapshot
+        : {};
+      const referenceRows = Array.isArray(requestedSnapshot.metrics)
+        ? requestedSnapshot.metrics.filter(metric => metric && metric.sample_size > 0)
+        : [];
+      const referenceStatus = String(dynamicReference.reference_status || "LIVE_ELIGIBLE_POOL_EMPTY");
+      const statusLabel = referenceStatus === "LIVE_VERIFIED_BUYABLE"
+        ? "Live verified reference"
+        : referenceStatus === "RESEARCH_REFERENCE_ONLY"
+          ? "Research reference only"
+          : "Live reference unavailable";
+      const rowsHTML = referenceRows.map(metric => `
+        <tr>
+          <td>${escapeHTML(metric.metric_name || "metric")}</td>
+          <td>${escapeHTML(metric.reference_product_id || "UNAVAILABLE")}</td>
+          <td>${escapeHTML(String(metric.metric_reference_value ?? "UNAVAILABLE"))} ${escapeHTML(metric.metric_unit || "")}</td>
+          <td>${escapeHTML(String(metric.sample_size ?? 0))}</td>
+        </tr>
+      `).join("");
+      card.insertAdjacentHTML("beforeend", `
+        <section class="ai-detail-block ai-dynamic-reference" aria-label="Dynamic benchmark reference">
+          <div class="ai-detail-title">Budget benchmark reference</div>
+          <p><strong>${escapeHTML(statusLabel)}</strong> · Budget ₹${escapeHTML(String(dynamicReference.requested_budget_inr ?? "Not available"))} · Version ${escapeHTML(String(dynamicReference.benchmark_version || "Not available"))}</p>
+          ${referenceRows.length
+            ? `<table><thead><tr><th>Metric</th><th>Reference</th><th>Value</th><th>Sample</th></tr></thead><tbody>${rowsHTML}</tbody></table>`
+            : `<p class="card-note">No comparable verified metric reference is available for the current live eligible pool. Research-only values are not shown as buyable recommendations.</p>`}
+        </section>
+      `);
+    }
+
     if (
       !exactModelQuery &&
       String(data.intent && data.intent.category || "").toLowerCase() === "smartphone" &&

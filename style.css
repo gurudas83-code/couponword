@@ -633,6 +633,11 @@ img{max-width:100%;display:block}
   color:#dce7e3;
   line-height:1.4;
 }
+.ai-dynamic-reference{overflow-x:auto}
+.ai-dynamic-reference table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.78rem}
+.ai-dynamic-reference th,.ai-dynamic-reference td{padding:8px 7px;border-bottom:1px solid rgba(255,255,255,.10);text-align:left;vertical-align:top}
+.ai-dynamic-reference th{color:#fff;font-weight:800}
+.ai-dynamic-reference td{color:#dce7e3}
 
 .ai-positive{
   border-color:rgba(32,224,159,.16);

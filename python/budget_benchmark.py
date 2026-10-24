@@ -207,6 +207,7 @@ def build_budget_benchmark(products: list[dict[str, Any]], intent: dict[str, Any
                 "model": p.get("model") or p.get("title"),
                 "physical_ram_gb": p.get("physical_ram_gb"),
                 "storage_gb": p.get("storage_gb"),
+                "source_lane": p.get("source_lane", "RESEARCH_REFERENCE_ONLY"),
             }
             for p in eligible
         ],
