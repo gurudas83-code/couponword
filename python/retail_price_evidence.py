@@ -68,6 +68,22 @@ REQUEST_HEADERS = {
 def clean(value: object) -> str:
     return " ".join(str(value or "").split())
 
+
+def _amazon_live_offer_fetch_available(source_url: str) -> bool:
+    """Allow Amazon page fetches only when its configured provider is live."""
+    try:
+        host = (_canonical_hostname(urlparse(clean(source_url)).hostname) or "")
+    except Exception:
+        host = ""
+    if not (host == "amazon.in" or host.endswith(".amazon.in")):
+        return True
+    try:
+        from amazon_data_provider import get_default_provider
+
+        return bool(get_default_provider().api_available)
+    except Exception:
+        return False
+
 def utc_now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -858,6 +874,14 @@ def build_price_evidence(candidate: dict[str, Any]) -> dict[str, Any]:
             "cached_evidence": cached,
         })
 
+        return result
+
+    if not _amazon_live_offer_fetch_available(source_url):
+        result["status"] = "provider_unavailable"
+        result["reason"] = (
+            "Authorized Amazon provider is unavailable; current retailer "
+            "page retrieval was skipped"
+        )
         return result
 
     page_result = fetch_structured_price(source_url)

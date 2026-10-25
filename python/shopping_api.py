@@ -119,7 +119,14 @@ CORS(
     app,
     resources={
         r"/api/*": {
-            "origins": ["https://coupon-world.in"],
+            # Keep the production origin explicit and permit only the two
+            # exact loopback origins used by the approved local E2E harness.
+            # This is not a wildcard and does not grant credentialed access.
+            "origins": [
+                "https://coupon-world.in",
+                "http://127.0.0.1:4173",
+                "http://localhost:4173",
+            ],
             "methods": ["GET"],
             "allow_headers": [],
             "supports_credentials": False,

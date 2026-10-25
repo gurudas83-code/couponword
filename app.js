@@ -874,7 +874,7 @@ async function loadShoppingRecommendation(query) {
     const categoryResults = data.category_results && typeof data.category_results === "object"
       ? data.category_results
       : {};
-    const unavailableCategories = ["camera", "battery", "gaming"].filter(name =>
+    const unavailableCategories = ["camera", "battery", "gaming", "performance"].filter(name =>
       categoryResults[name] &&
       categoryResults[name].status === "CATEGORY_EVIDENCE_UNAVAILABLE"
     );
@@ -903,7 +903,7 @@ async function loadShoppingRecommendation(query) {
         ? "Live verified reference"
         : referenceStatus === "RESEARCH_REFERENCE_ONLY"
           ? "Research reference only"
-          : "Live reference unavailable";
+        : `Live reference unavailable (${referenceStatus})`;
       const rowsHTML = referenceRows.map(metric => `
         <tr>
           <td>${escapeHTML(metric.metric_name || "metric")}</td>
