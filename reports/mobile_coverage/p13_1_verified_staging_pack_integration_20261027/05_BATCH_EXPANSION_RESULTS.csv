@@ -1,0 +1,5 @@
+model,distinct_model_status,variants,new_records,upgraded
+A56,NEW,3,3,0
+A36,EXISTING_UPGRADED,3,0,3
+Nothing 3a,NEW,1,1,0
+Redmi Note 14 5G,NEW,3,1,2

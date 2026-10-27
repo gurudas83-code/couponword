@@ -1,0 +1,5 @@
+model,owner_action,result
+A56,matched/created approved private staging IDs,PASS
+A36,reused existing P4 Product DNA IDs,PASS
+Nothing 3a,created stable private staging ID,PASS
+Redmi Note 14 5G,created 6/128 and reused 8/128|8/256 IDs,PASS
