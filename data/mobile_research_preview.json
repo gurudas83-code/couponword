@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "mode": "OPT_IN_TECHNICAL_RESEARCH_PREVIEW",
-  "default_enabled": false,
+  "mode": "PUBLIC_TECHNICAL_RESEARCH_PREVIEW",
+  "default_enabled": true,
   "notice": "Research evidence only. No current prices, stock, purchase links or ranking claims are included.",
   "products": [
     {

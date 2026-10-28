@@ -1,4 +1,4 @@
-"""Publish-safety checks for the opt-in mobile research preview."""
+"""Publish-safety checks for the public mobile research preview."""
 
 import json
 import unittest
@@ -48,12 +48,18 @@ class PublicMobileResearchPreviewTests(unittest.TestCase):
         self.assertEqual(len(redmi), 3)
         self.assertTrue(all(row["specifications"]["rear_main_mp"]["value"] == 50 for row in redmi))
 
-    def test_preview_is_opt_in_in_frontend(self):
+    def test_preview_is_public_and_safe_in_frontend(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
         script = (ROOT / "mobile-research-preview.js").read_text(encoding="utf-8")
+        payload = json.loads(PREVIEW.read_text(encoding="utf-8"))
         self.assertIn('id="mobileResearchPreview"', html)
-        self.assertIn('new URLSearchParams(window.location.search).get("research") === "1"', script)
-        self.assertIn("section.hidden = true", script)
+        self.assertIn("Compare 4 Verified Smartphones", html)
+        self.assertIn('href="#mobileResearchPreview"', html)
+        self.assertIn('src="/mobile-research-preview.js?v=2"', html)
+        self.assertIn("section.hidden = false", script)
+        self.assertNotIn("section.hidden = true", script)
+        self.assertTrue(payload["default_enabled"])
+        self.assertEqual(payload["mode"], "PUBLIC_TECHNICAL_RESEARCH_PREVIEW")
 
 
 if __name__ == "__main__":

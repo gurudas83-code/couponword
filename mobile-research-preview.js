@@ -1,17 +1,15 @@
 (function () {
   "use strict";
 
-  // The research preview is deliberately opt-in. Live shopping remains on the
-  // existing /api/recommend path and never consumes this dataset.
+  // This is a public, read-only research comparison. Live shopping remains on
+  // the existing /api/recommend path and never consumes this dataset.
   var section = document.getElementById("mobileResearchPreview");
   var grid = document.getElementById("mobileResearchGrid");
   if (!section || !grid) return;
 
-  var enabled = new URLSearchParams(window.location.search).get("research") === "1";
-  if (!enabled) {
-    section.hidden = true;
-    return;
-  }
+  // The dataset has already passed the publish-safety checks. Keep the section
+  // visible for normal visitors; commerce gates remain in the rendered cards.
+  section.hidden = false;
 
   function escapeHtml(value) {
     return String(value == null ? "" : value)
