@@ -18,6 +18,7 @@ import html
 import json
 import re
 import shutil
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -38,6 +39,7 @@ from multi_retailer_page_renderer import (
     load_multi_retailer_products,
     render_multi_retailer_section,
 )
+from cta_eligibility import evaluate_offer
 
 MULTI_RETAILER_PRODUCTS = load_multi_retailer_products()
 
@@ -521,8 +523,13 @@ def render(product, products):
         except (TypeError, ValueError):
             return None
 
-    price = valid_number(product.get("price"))
-    mrp = valid_number(product.get("mrp"))
+    is_mobile = category.lower().strip() in {
+        "mobile", "mobiles", "smartphone", "smartphones"
+    }
+    # A catalogue number is not current retailer evidence. Mobile selling
+    # prices are supplied only by an eligible exact-variant offer below.
+    price = None if is_mobile else valid_number(product.get("price"))
+    mrp = None if is_mobile else valid_number(product.get("mrp"))
 
     discount_percent = None
     if price is not None and mrp is not None and mrp > price:
@@ -622,8 +629,8 @@ def render(product, products):
 
     cta = (
         f'<a class="cta" href="{html.escape(link)}" target="_blank" '
-        'rel="nofollow sponsored noopener">Check Latest Offer &rarr;</a>'
-        if active and link else
+        'rel="nofollow sponsored noopener">Check Latest Offer â†’</a>'
+        if active and link and not is_mobile else
         '<span class="cta disabled">Currently unavailable</span>'
     )
 
@@ -639,7 +646,14 @@ def render(product, products):
         if isinstance(multi_data, dict) else None
     )
 
-    if isinstance(best_multi_offer, dict):
+    best_decision = evaluate_offer(
+        best_multi_offer,
+        product_id=multi_product_id,
+        variant=str((multi_data or {}).get("variant") or ""),
+        now=datetime.now(timezone.utc),
+    ) if isinstance(best_multi_offer, dict) else {"eligible": False}
+
+    if isinstance(best_multi_offer, dict) and best_decision.get("eligible"):
         best_price = best_multi_offer.get("price")
         best_retailer = str(
             best_multi_offer.get("retailer") or ""

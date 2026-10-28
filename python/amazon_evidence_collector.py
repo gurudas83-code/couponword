@@ -60,6 +60,12 @@ class AmazonEvidenceCollector(
             category=product.category,
         )
 
+        if str(getattr(live, "asin", "")).strip().upper() != asin:
+            return None
+        observed_at = str(getattr(live, "observed_at", "") or "").strip()
+        if not observed_at:
+            return None
+
         price = getattr(
             live,
             "price",
@@ -107,6 +113,7 @@ class AmazonEvidenceCollector(
                 )
             ),
             confidence=0.95,
+            observed_at=observed_at,
             notes=(
                 "Evidence supplied by configured "
                 "Amazon data provider."

@@ -1,0 +1,5 @@
+model,before,after,reload,idempotency
+A56,3 staged variants,3 integrated variants,PASS,PASS
+A36,3 partial variants,3 upgraded variants,PASS,PASS
+Nothing 3a,none,1 integrated variant,PASS,PASS
+Redmi Note 14 5G,2 existing variants,3 integrated variants,PASS,PASS

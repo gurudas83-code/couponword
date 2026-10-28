@@ -23,6 +23,7 @@ class PriceTimestampTests(unittest.TestCase):
     def test_fresh_page_has_price_source_timestamp_and_stock(self):
         with patch.object(prices, "get_recent_cached_price", return_value=None), \
              patch.object(prices, "cache_verified_price"), \
+             patch.object(prices, "_amazon_live_offer_fetch_available", return_value=True), \
              patch.object(prices, "fetch_structured_price", return_value={"status": "verified", "price": 7999,
                  "availability": "in_stock", "evidence_method": "amazon_primary_buybox"}):
             result = prices.build_price_evidence(self.candidate)
@@ -33,6 +34,7 @@ class PriceTimestampTests(unittest.TestCase):
 
     def test_failed_page_without_fresh_cache_is_not_verified(self):
         with patch.object(prices, "get_recent_cached_price", return_value=None), \
+             patch.object(prices, "_amazon_live_offer_fetch_available", return_value=True), \
              patch.object(prices, "fetch_structured_price", return_value={"status": "blocked"}):
             result = prices.build_price_evidence(self.candidate)
         self.assertFalse(result["verified"])

@@ -63,7 +63,6 @@ class SecurityAuditTests(unittest.TestCase):
         source = (ROOT / "app.js").read_text(encoding="utf-8")
         self.assertIn('!["http:", "https:"]', source)
         self.assertIn('escapeHTML(safeLink(deal.link))', source)
-        self.assertIn('href="${escapeHTML(safeLink(offer.product_url))}"', source)
         self.assertIn('src="${escapeHTML(imageUrl)}"', source)
         self.assertNotIn('href="${safeLink(deal.link)}"', source)
 

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+from datetime import datetime, timezone
 from html import unescape
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -24,9 +25,12 @@ class FlipkartEvidenceCollector(RetailerEvidenceCollector):
         "AppleWebKit/537.36 Chrome/151 Safari/537.36"
     )
 
-    def __init__(self, provider=None, timeout: int = 20):
+    def __init__(self, provider=None, timeout: int = 20, *, allow_product_page: bool = False):
         self.provider = provider
         self.timeout = timeout
+        # Domain allow-listing is not permission to fetch retailer pages.
+        # Callers may opt in only when separate page-access permission exists.
+        self.allow_product_page = allow_product_page
 
     @property
     def api_available(self) -> bool:
@@ -51,6 +55,12 @@ class FlipkartEvidenceCollector(RetailerEvidenceCollector):
             brand=product.brand,
             category=product.category,
         )
+
+        if str(getattr(live, "retailer_product_id", "")).strip() != retailer_product_id:
+            return None
+        observed_at = str(getattr(live, "observed_at", "") or "").strip()
+        if not observed_at:
+            return None
 
         price = getattr(live, "price", None)
 
@@ -85,6 +95,7 @@ class FlipkartEvidenceCollector(RetailerEvidenceCollector):
                 or "flipkart-provider"
             ),
             confidence=0.95,
+            observed_at=observed_at,
             notes=(
                 "Evidence supplied by configured "
                 "Flipkart data provider."
@@ -365,6 +376,7 @@ class FlipkartEvidenceCollector(RetailerEvidenceCollector):
             source_url=source_url,
             source_type="flipkart-product-jsonld",
             confidence=0.90,
+            observed_at=datetime.now(timezone.utc).isoformat(),
             notes=(
                 "Price and availability observed from "
                 "Flipkart Product JSON-LD."
@@ -396,6 +408,9 @@ class FlipkartEvidenceCollector(RetailerEvidenceCollector):
         if evidence is not None:
             return evidence
 
+        if not self.allow_product_page or self.api_available:
+            return None
+
         return self._collect_from_product_page(
             product,
             offer,
@@ -409,4 +424,4 @@ if __name__ == "__main__":
     print()
     print("COUPON WORLD FLIPKART EVIDENCE COLLECTOR")
     print("API available :", collector.api_available)
-    print("HTTP fallback :", "enabled")
+    print("HTTP fallback :", collector.allow_product_page)

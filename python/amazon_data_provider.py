@@ -29,6 +29,8 @@ class AmazonProductData:
     mrp: str = ""
     discount: str = ""
     source: str = "manual"
+    availability: str = "unknown"
+    observed_at: str = ""
 
 
 class AmazonDataProvider(Protocol):

@@ -4,7 +4,13 @@ from __future__ import annotations
 
 import html
 import json
+from datetime import datetime, timezone
 from pathlib import Path
+
+try:
+    from cta_eligibility import evaluate_offer, VERIFIED_BUYABLE
+except ImportError:  # package-style test imports
+    from .cta_eligibility import evaluate_offer, VERIFIED_BUYABLE
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -120,9 +126,16 @@ def render_multi_retailer_section(product, multi_products):
             offer.get("retailer") or ""
         ).strip().lower()
 
-        price = format_price(
-            offer.get("price")
+        decision_offer = dict(offer)
+        decision_offer.setdefault("product_id", product_id)
+        decision_offer.setdefault("variant", str(multi.get("variant") or product.get("variant") or ""))
+        decision = evaluate_offer(
+            decision_offer,
+            product_id=product_id,
+            variant=str(multi.get("variant") or product.get("variant") or ""),
+            now=datetime.now(timezone.utc),
         )
+        price = format_price(offer.get("price")) if decision["status"] == VERIFIED_BUYABLE else "Price unavailable"
 
         availability = availability_label(
             offer.get("availability")
@@ -153,7 +166,6 @@ def render_multi_retailer_section(product, multi_products):
             )
 
         # Static pages must not describe an old snapshot as "recent" forever.
-        from datetime import datetime, timezone
         try:
             observed = datetime.fromisoformat(str(offer.get("last_checked") or ""))
             if observed.tzinfo is not None:
@@ -165,7 +177,7 @@ def render_multi_retailer_section(product, multi_products):
 
         button = ""
 
-        if url:
+        if url and decision["eligible"]:
             button = (
                 f'<a class="offer-cta" '
                 f'href="{html.escape(url)}" '

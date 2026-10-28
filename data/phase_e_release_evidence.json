@@ -3677,6 +3677,85 @@
         "reason": "Reviewed exact retailer variant plus model-only manufacturer hardware facts. Regional software support and mixed-use52h claim excluded."
       },
       "saved_at": "2026-10-10T16:42:43.837402+00:00"
+    },
+    {
+      "asin": "B0H6F4KZGF",
+      "brand": "Vivo",
+      "model": "T5 Pro 5G",
+      "search_name": "vivo T5 Pro 5G 8GB RAM 128GB Storage",
+      "model_key": "vivo|t5 pro 5g",
+      "variant_signature": {
+        "ram_gb": "8",
+        "storage_gb": "128"
+      },
+      "official_url": "https://shop.vivo.com/in/product/10344?skuId=19410",
+      "resolver_verified": true,
+      "fetch_status": "success",
+      "page_identity_score": 1.0,
+      "specifications": {
+        "name": {
+          "value": "T5 Pro 5G",
+          "label": "name",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "sku": {
+          "value": "19410",
+          "label": "sku",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "brand": {
+          "value": "vivo",
+          "label": "brand",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "description": {
+          "value": "9020 mAh Battery | Snapdragon 7s Gen 4 | Upto 120FPS Gaming | 7k VC Cooling system | 144Hz 1.5K AMOLED Display",
+          "label": "description",
+          "source": "json_ld",
+          "confidence": 90
+        },
+        "ram": {
+          "value": "8 GB",
+          "label": "RAM",
+          "source": "official_selected_sku_heading",
+          "confidence": 95,
+          "source_url": "https://shop.vivo.com/in/product/10344?skuId=19410",
+          "observed_at": "2026-10-14T17:45:11.766090+00:00",
+          "identity_match": {
+            "heading": "T5 Pro 5G 8GB+128GB Cosmic Black",
+            "variant": {
+              "ram_gb": "8",
+              "storage_gb": "128"
+            }
+          }
+        },
+        "storage": {
+          "value": "128 GB",
+          "label": "Storage",
+          "source": "official_selected_sku_heading",
+          "confidence": 95,
+          "source_url": "https://shop.vivo.com/in/product/10344?skuId=19410",
+          "observed_at": "2026-10-14T17:45:11.766131+00:00",
+          "identity_match": {
+            "heading": "T5 Pro 5G 8GB+128GB Cosmic Black",
+            "variant": {
+              "ram_gb": "8",
+              "storage_gb": "128"
+            }
+          }
+        }
+      },
+      "features": [],
+      "review": {
+        "approved": false,
+        "status": "candidate_ready",
+        "reason": "Page identity and extracted evidence are strong enough for review"
+      },
+      "saved_at": "2026-10-14T17:45:11.770162+00:00"
     }
-  ]
+  ],
+  "updated_at": "2026-10-14T17:45:11.770162+00:00"
 }

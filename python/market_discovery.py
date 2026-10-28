@@ -46,6 +46,16 @@ from official_source_resolver import (
     duckduckgo_official_search,
 )
 
+
+def _amazon_live_search_available() -> bool:
+    """Return whether the configured Amazon provider may make live calls."""
+    try:
+        from amazon_data_provider import get_default_provider
+
+        return bool(get_default_provider().api_available)
+    except Exception:
+        return False
+
 COMMERCE_DOMAINS = [
     "amazon.in",
     "flipkart.com",
@@ -1406,14 +1416,23 @@ def fallback_search_channel(
         # Continue into the live Amazon search-card lane so current
         # exact-ASIN price evidence can be refreshed.
 
-    # Amazon remains an optional independent discovery lane.
-    try:
-        raw_results = search_asins(
-            query,
-            max_cards=max(3, min(max_results, 20)),
-        )
-    except Exception:
-        raw_results = []
+    # Do not scrape a retailer when its configured authorized provider is
+    # unavailable. This is the normal zero-offer path and must not block the
+    # API on unauthorized external I/O. An approved provider can re-enable
+    # this lane without changing downstream evidence gates.
+    raw_results: list[dict[str, Any]] = []
+    availability_check = globals().get("_amazon_live_search_available")
+    live_search_available = (
+        True if availability_check is None else bool(availability_check())
+    )
+    if live_search_available:
+        try:
+            raw_results = search_asins(
+                query,
+                max_cards=max(3, min(max_results, 20)),
+            )
+        except Exception:
+            raw_results = []
 
     # Keep recent cached identities alongside local knowledge.
     # get_recent_discovery_cache() has already cleared stale price fields.
@@ -2535,28 +2554,33 @@ def discover_market(
                 for item in candidates if clean(item.get("asin"))
             }
             refreshed_asins: set[str] = set()
-            for search_query in queries:
-                try:
-                    cards = search_asins(search_query, max_cards=20)
-                except Exception:
-                    cards = []
-                for card in cards:
-                    if not isinstance(card, dict):
-                        continue
-                    asin = clean(card.get("asin")).upper()
-                    item = by_asin.get(asin)
-                    if (
-                        item is None
-                        or not clean(card.get("search_price_text"))
-                        or not clean(card.get("search_price_evidence_method"))
-                    ):
-                        continue
-                    for field in (
-                        "search_price_text", "search_price_currency",
-                        "search_price_evidence_method",
-                    ):
-                        item[field] = clean(card.get(field))
-                    refreshed_asins.add(asin)
+            availability_check = globals().get("_amazon_live_search_available")
+            live_search_available = (
+                True if availability_check is None else bool(availability_check())
+            )
+            if live_search_available:
+                for search_query in queries:
+                    try:
+                        cards = search_asins(search_query, max_cards=20)
+                    except Exception:
+                        cards = []
+                    for card in cards:
+                        if not isinstance(card, dict):
+                            continue
+                        asin = clean(card.get("asin")).upper()
+                        item = by_asin.get(asin)
+                        if (
+                            item is None
+                            or not clean(card.get("search_price_text"))
+                            or not clean(card.get("search_price_evidence_method"))
+                        ):
+                            continue
+                        for field in (
+                            "search_price_text", "search_price_currency",
+                            "search_price_evidence_method",
+                        ):
+                            item[field] = clean(card.get(field))
+                        refreshed_asins.add(asin)
             # A snapshot pins identity, not price. If none of its ASINs
             # obtained a current exact-card price, it cannot provide a
             # useful budget answer. Continue through normal discovery so

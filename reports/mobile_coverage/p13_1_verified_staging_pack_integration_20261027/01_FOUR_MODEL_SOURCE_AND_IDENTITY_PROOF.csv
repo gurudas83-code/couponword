@@ -1,0 +1,5 @@
+model,variant,source_accessible,existing_owner,backend_status,counted
+Samsung Galaxy A56 5G,8/128|8/256|12/256,YES,new private IDs,INTEGRATED,NEW_MODEL
+Samsung Galaxy A36 5G,8/128|8/256|12/256,YES,existing p4 IDs,INTEGRATED,UPGRADED_EXISTING
+Nothing Phone (3a),8/128,YES,new private ID,INTEGRATED,NEW_MODEL
+Redmi Note 14 5G,6/128|8/128|8/256,YES,existing/new private IDs,INTEGRATED,NEW_MODEL

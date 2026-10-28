@@ -18,6 +18,7 @@ PYTHON_DIR = ROOT / "python"
 if str(PYTHON_DIR) not in sys.path:
     sys.path.insert(0, str(PYTHON_DIR))
 
+from api_contract import apply_response_contract
 from intent_engine import parse_query
 from shopping_intelligence_pipeline import run_pipeline
 
@@ -118,7 +119,14 @@ CORS(
     app,
     resources={
         r"/api/*": {
-            "origins": ["https://coupon-world.in"],
+            # Keep the production origin explicit and permit only the two
+            # exact loopback origins used by the approved local E2E harness.
+            # This is not a wildcard and does not grant credentialed access.
+            "origins": [
+                "https://coupon-world.in",
+                "http://127.0.0.1:4173",
+                "http://localhost:4173",
+            ],
             "methods": ["GET"],
             "allow_headers": [],
             "supports_credentials": False,
@@ -198,7 +206,7 @@ def recommend():
     if pipeline_query != query:
         payload["query"] = query
 
-    return jsonify(payload)
+    return jsonify(apply_response_contract(payload, requested_query=query))
 
 
 if __name__ == "__main__":
