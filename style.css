@@ -663,6 +663,38 @@ img{max-width:100%;display:block}
   font-size:.74rem;
 }
 
+.mobile-research-section[hidden]{display:none}
+.mobile-research-section .section-heading{align-items:flex-start}
+.research-badge,.research-status,.research-id{
+  display:inline-flex;
+  align-items:center;
+  border-radius:999px;
+  padding:5px 9px;
+  font-size:.68rem;
+  font-weight:800;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+}
+.research-badge{color:#d9fff0;background:rgba(32,224,159,.12);border:1px solid rgba(32,224,159,.28)}
+.mobile-research-notice{margin:0 0 18px;color:#b8cac5;font-size:.86rem;line-height:1.55}
+.mobile-research-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.mobile-research-card{display:flex;flex-direction:column;gap:9px;min-width:0;padding:17px;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:rgba(8,22,24,.55)}
+.mobile-research-card-top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.research-id{color:#b8cac5;background:rgba(255,255,255,.06);font-family:ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:none;letter-spacing:0}
+.research-status{color:#d9fff0;background:rgba(32,224,159,.1);border:1px solid rgba(32,224,159,.2)}
+.mobile-research-card h3{margin:0;color:#fff;font-size:1.08rem}
+.mobile-research-variant,.mobile-research-lane,.mobile-research-evidence p,.mobile-research-gate{margin:0;color:#c8d7d3;font-size:.78rem;line-height:1.45}
+.mobile-research-specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:0;padding:0;list-style:none}
+.mobile-research-specs li{display:flex;flex-direction:column;gap:2px;padding:8px 9px;border-radius:10px;background:rgba(255,255,255,.045)}
+.mobile-research-specs span{color:#9fb3ae;font-size:.68rem}
+.mobile-research-specs strong{color:#fff;font-size:.78rem}
+.mobile-research-evidence{display:grid;gap:6px;padding-top:4px;border-top:1px solid rgba(255,255,255,.08)}
+.research-scope{color:#9fb3ae}
+.mobile-research-sources{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:3px}
+.mobile-research-link{color:#79e5bd;font-size:.74rem;text-decoration:none}
+.mobile-research-link:hover{text-decoration:underline}
+.mobile-research-gate{color:#ffcb83;font-size:.7rem}
+
 .ai-result-card .shop-button{
   display:flex;
   align-items:center;
@@ -682,6 +714,8 @@ img{max-width:100%;display:block}
   #shoppingBrainCard{
     grid-template-columns:1fr;
   }
+
+  .mobile-research-grid{grid-template-columns:1fr}
 }
 
 @media (max-width:520px){

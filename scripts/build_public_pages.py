@@ -10,10 +10,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_FILES = (
-    "index.html", "style.css", "app.js", "coupons.json", "CNAME",
+    "index.html", "style.css", "app.js", "mobile-research-preview.js", "coupons.json", "CNAME",
     "robots.txt", "sitemap.xml", "buying-guides.html", "buying-guides.js",
 )
-PUBLIC_DATA_FILES = ("data/seo-pages.json",)
+PUBLIC_DATA_FILES = ("data/seo-pages.json", "data/mobile_research_preview.json")
 PUBLIC_DIRECTORIES = ("assets", "products", "seo")
 FORBIDDEN_NAMES = {
     "admin.html", "validator.html", "python", "reports", "outputs",

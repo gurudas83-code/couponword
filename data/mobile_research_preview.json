@@ -1,0 +1,1322 @@
+{
+  "schema_version": 1,
+  "mode": "OPT_IN_TECHNICAL_RESEARCH_PREVIEW",
+  "default_enabled": false,
+  "notice": "Research evidence only. No current prices, stock, purchase links or ranking claims are included.",
+  "products": [
+    {
+      "canonical_product_id": "cw-mobile-93",
+      "brand": "Samsung",
+      "model": "Galaxy A36 5G",
+      "region": "IN",
+      "ram_gb": 8,
+      "storage_gb": 128,
+      "manufacturer_spec_status": "VERIFIED",
+      "technical_lane": "TECHNICAL_RESEARCH",
+      "official_source": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+      "source_provenance": {
+        "identity_source": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+        "checked_date": "2026-10-27"
+      },
+      "specifications": {
+        "chipset": {
+          "label": "Chipset",
+          "value": "Qualcomm Snapdragon 6 Gen 3",
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_type": {
+          "label": "Display",
+          "value": "Super AMOLED",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_inches": {
+          "label": "Display size",
+          "value": 6.7,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_refresh_max_hz": {
+          "label": "Refresh rate",
+          "value": 120,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_main_mp": {
+          "label": "Main camera",
+          "value": 50,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_ultrawide_mp": {
+          "label": "Ultrawide camera",
+          "value": 8,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "front_mp": {
+          "label": "Front camera",
+          "value": 12,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "battery_mah_typical": {
+          "label": "Battery capacity",
+          "value": 5000,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "wired_charging_max_w": {
+          "label": "Wired charging",
+          "value": 45,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "launch_android": {
+          "label": "Launch Android",
+          "value": 15,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "os_upgrade_generations": {
+          "label": "OS updates",
+          "value": 6,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "security_support_years": {
+          "label": "Security updates",
+          "value": 6,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        }
+      },
+      "battery_evidence": {
+        "status": "MODEL_LEVEL_MEASUREMENTS",
+        "metrics": [
+          "active_use_score",
+          "charging_time_0_to_100"
+        ],
+        "source_urls": [
+          "https://www.gsmarena.com/samsung_galaxy_a36-review-2814p3.php"
+        ],
+        "applicability": "MODEL_CONTEXT_NOT_VARIANT_SPECIFIC"
+      },
+      "camera_evidence": {
+        "status": "QUALITATIVE_ONLY",
+        "observation_types": [
+          "daylight",
+          "low_light",
+          "video_quality"
+        ],
+        "source_urls": [
+          "https://www.gsmarena.com/samsung_galaxy_a36_vs_samsung_galaxy_a56_review_battery_camera_price_compared-news-67174.php"
+        ],
+        "scope": [
+          "model_context"
+        ]
+      },
+      "gaming_evidence": {
+        "status": "HOLD",
+        "reason": "No accepted complete independent gaming protocol for this exact India configuration."
+      },
+      "commerce": {
+        "price": null,
+        "stock": null,
+        "purchase_cta_eligible": false,
+        "publication_eligible": false
+      }
+    },
+    {
+      "canonical_product_id": "cw-mobile-100",
+      "brand": "Samsung",
+      "model": "Galaxy A56 5G",
+      "region": "IN",
+      "ram_gb": 8,
+      "storage_gb": 128,
+      "manufacturer_spec_status": "VERIFIED",
+      "technical_lane": "TECHNICAL_RESEARCH",
+      "official_source": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+      "source_provenance": {
+        "identity_source": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+        "checked_date": "2026-10-27"
+      },
+      "specifications": {
+        "chipset": {
+          "label": "Chipset",
+          "value": "Samsung Exynos 1580",
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_type": {
+          "label": "Display",
+          "value": "Super AMOLED",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_inches": {
+          "label": "Display size",
+          "value": 6.7,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_refresh_max_hz": {
+          "label": "Refresh rate",
+          "value": 120,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_main_mp": {
+          "label": "Main camera",
+          "value": 50,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_ultrawide_mp": {
+          "label": "Ultrawide camera",
+          "value": 12,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "front_mp": {
+          "label": "Front camera",
+          "value": 12,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "battery_mah_typical": {
+          "label": "Battery capacity",
+          "value": 5000,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "wired_charging_max_w": {
+          "label": "Wired charging",
+          "value": 45,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "launch_android": {
+          "label": "Launch Android",
+          "value": 15,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "os_upgrade_generations": {
+          "label": "OS updates",
+          "value": 6,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "security_support_years": {
+          "label": "Security updates",
+          "value": 6,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        }
+      },
+      "battery_evidence": {
+        "status": "MODEL_LEVEL_MEASUREMENTS",
+        "metrics": [
+          "active_use_score",
+          "charging_time_0_to_100"
+        ],
+        "source_urls": [
+          "https://www.gsmarena.com/samsung_galaxy_a56-review-2812p3.php"
+        ],
+        "applicability": "MODEL_CONTEXT_NOT_VARIANT_SPECIFIC"
+      },
+      "camera_evidence": {
+        "status": "QUALITATIVE_ONLY",
+        "observation_types": [
+          "daylight",
+          "low_light",
+          "video_quality"
+        ],
+        "source_urls": [
+          "https://www.gsmarena.com/samsung_galaxy_a36_vs_samsung_galaxy_a56_review_battery_camera_price_compared-news-67174.php"
+        ],
+        "scope": [
+          "model_context"
+        ]
+      },
+      "gaming_evidence": {
+        "status": "HOLD",
+        "reason": "No accepted complete independent gaming protocol for this exact India configuration."
+      },
+      "commerce": {
+        "price": null,
+        "stock": null,
+        "purchase_cta_eligible": false,
+        "publication_eligible": false
+      }
+    },
+    {
+      "canonical_product_id": "cw-mobile-106",
+      "brand": "Samsung",
+      "model": "Galaxy A36 5G",
+      "region": "IN",
+      "ram_gb": 8,
+      "storage_gb": 256,
+      "manufacturer_spec_status": "VERIFIED",
+      "technical_lane": "TECHNICAL_RESEARCH",
+      "official_source": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+      "source_provenance": {
+        "identity_source": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+        "checked_date": "2026-10-27"
+      },
+      "specifications": {
+        "chipset": {
+          "label": "Chipset",
+          "value": "Qualcomm Snapdragon 6 Gen 3",
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_type": {
+          "label": "Display",
+          "value": "Super AMOLED",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_inches": {
+          "label": "Display size",
+          "value": 6.7,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_refresh_max_hz": {
+          "label": "Refresh rate",
+          "value": 120,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_main_mp": {
+          "label": "Main camera",
+          "value": 50,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_ultrawide_mp": {
+          "label": "Ultrawide camera",
+          "value": 8,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "front_mp": {
+          "label": "Front camera",
+          "value": 12,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "battery_mah_typical": {
+          "label": "Battery capacity",
+          "value": 5000,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "wired_charging_max_w": {
+          "label": "Wired charging",
+          "value": 45,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "launch_android": {
+          "label": "Launch Android",
+          "value": 15,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "os_upgrade_generations": {
+          "label": "OS updates",
+          "value": 6,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "security_support_years": {
+          "label": "Security updates",
+          "value": 6,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        }
+      },
+      "battery_evidence": {
+        "status": "MODEL_LEVEL_MEASUREMENTS",
+        "metrics": [
+          "active_use_score",
+          "charging_time_0_to_100"
+        ],
+        "source_urls": [
+          "https://www.gsmarena.com/samsung_galaxy_a36-review-2814p3.php"
+        ],
+        "applicability": "MODEL_CONTEXT_NOT_VARIANT_SPECIFIC"
+      },
+      "camera_evidence": {
+        "status": "QUALITATIVE_ONLY",
+        "observation_types": [
+          "daylight",
+          "low_light",
+          "video_quality"
+        ],
+        "source_urls": [
+          "https://www.gsmarena.com/samsung_galaxy_a36_vs_samsung_galaxy_a56_review_battery_camera_price_compared-news-67174.php"
+        ],
+        "scope": [
+          "model_context"
+        ]
+      },
+      "gaming_evidence": {
+        "status": "HOLD",
+        "reason": "No accepted complete independent gaming protocol for this exact India configuration."
+      },
+      "commerce": {
+        "price": null,
+        "stock": null,
+        "purchase_cta_eligible": false,
+        "publication_eligible": false
+      }
+    },
+    {
+      "canonical_product_id": "cw-mobile-107",
+      "brand": "Samsung",
+      "model": "Galaxy A36 5G",
+      "region": "IN",
+      "ram_gb": 12,
+      "storage_gb": 256,
+      "manufacturer_spec_status": "VERIFIED",
+      "technical_lane": "TECHNICAL_RESEARCH",
+      "official_source": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+      "source_provenance": {
+        "identity_source": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+        "checked_date": "2026-10-27"
+      },
+      "specifications": {
+        "chipset": {
+          "label": "Chipset",
+          "value": "Qualcomm Snapdragon 6 Gen 3",
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_type": {
+          "label": "Display",
+          "value": "Super AMOLED",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_inches": {
+          "label": "Display size",
+          "value": 6.7,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_refresh_max_hz": {
+          "label": "Refresh rate",
+          "value": 120,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_main_mp": {
+          "label": "Main camera",
+          "value": 50,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_ultrawide_mp": {
+          "label": "Ultrawide camera",
+          "value": 8,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "front_mp": {
+          "label": "Front camera",
+          "value": 12,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "battery_mah_typical": {
+          "label": "Battery capacity",
+          "value": 5000,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "wired_charging_max_w": {
+          "label": "Wired charging",
+          "value": 45,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "launch_android": {
+          "label": "Launch Android",
+          "value": 15,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "os_upgrade_generations": {
+          "label": "OS updates",
+          "value": 6,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "security_support_years": {
+          "label": "Security updates",
+          "value": 6,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        }
+      },
+      "battery_evidence": {
+        "status": "MODEL_LEVEL_MEASUREMENTS",
+        "metrics": [
+          "active_use_score",
+          "charging_time_0_to_100"
+        ],
+        "source_urls": [
+          "https://www.gsmarena.com/samsung_galaxy_a36-review-2814p3.php"
+        ],
+        "applicability": "MODEL_CONTEXT_NOT_VARIANT_SPECIFIC"
+      },
+      "camera_evidence": {
+        "status": "QUALITATIVE_ONLY",
+        "observation_types": [
+          "daylight",
+          "low_light",
+          "video_quality"
+        ],
+        "source_urls": [
+          "https://www.gsmarena.com/samsung_galaxy_a36_vs_samsung_galaxy_a56_review_battery_camera_price_compared-news-67174.php"
+        ],
+        "scope": [
+          "model_context"
+        ]
+      },
+      "gaming_evidence": {
+        "status": "HOLD",
+        "reason": "No accepted complete independent gaming protocol for this exact India configuration."
+      },
+      "commerce": {
+        "price": null,
+        "stock": null,
+        "purchase_cta_eligible": false,
+        "publication_eligible": false
+      }
+    },
+    {
+      "canonical_product_id": "cw-mobile-108",
+      "brand": "Samsung",
+      "model": "Galaxy A56 5G",
+      "region": "IN",
+      "ram_gb": 8,
+      "storage_gb": 256,
+      "manufacturer_spec_status": "VERIFIED",
+      "technical_lane": "TECHNICAL_RESEARCH",
+      "official_source": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+      "source_provenance": {
+        "identity_source": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+        "checked_date": "2026-10-27"
+      },
+      "specifications": {
+        "chipset": {
+          "label": "Chipset",
+          "value": "Samsung Exynos 1580",
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_type": {
+          "label": "Display",
+          "value": "Super AMOLED",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_inches": {
+          "label": "Display size",
+          "value": 6.7,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_refresh_max_hz": {
+          "label": "Refresh rate",
+          "value": 120,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_main_mp": {
+          "label": "Main camera",
+          "value": 50,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_ultrawide_mp": {
+          "label": "Ultrawide camera",
+          "value": 12,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "front_mp": {
+          "label": "Front camera",
+          "value": 12,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "battery_mah_typical": {
+          "label": "Battery capacity",
+          "value": 5000,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "wired_charging_max_w": {
+          "label": "Wired charging",
+          "value": 45,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "launch_android": {
+          "label": "Launch Android",
+          "value": 15,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "os_upgrade_generations": {
+          "label": "OS updates",
+          "value": 6,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "security_support_years": {
+          "label": "Security updates",
+          "value": 6,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        }
+      },
+      "battery_evidence": {
+        "status": "MODEL_LEVEL_MEASUREMENTS",
+        "metrics": [
+          "active_use_score",
+          "charging_time_0_to_100"
+        ],
+        "source_urls": [
+          "https://www.gsmarena.com/samsung_galaxy_a56-review-2812p3.php"
+        ],
+        "applicability": "MODEL_CONTEXT_NOT_VARIANT_SPECIFIC"
+      },
+      "camera_evidence": {
+        "status": "QUALITATIVE_ONLY",
+        "observation_types": [
+          "daylight",
+          "low_light",
+          "video_quality"
+        ],
+        "source_urls": [
+          "https://www.gsmarena.com/samsung_galaxy_a36_vs_samsung_galaxy_a56_review_battery_camera_price_compared-news-67174.php"
+        ],
+        "scope": [
+          "model_context"
+        ]
+      },
+      "gaming_evidence": {
+        "status": "HOLD",
+        "reason": "No accepted complete independent gaming protocol for this exact India configuration."
+      },
+      "commerce": {
+        "price": null,
+        "stock": null,
+        "purchase_cta_eligible": false,
+        "publication_eligible": false
+      }
+    },
+    {
+      "canonical_product_id": "cw-mobile-109",
+      "brand": "Samsung",
+      "model": "Galaxy A56 5G",
+      "region": "IN",
+      "ram_gb": 12,
+      "storage_gb": 256,
+      "manufacturer_spec_status": "VERIFIED",
+      "technical_lane": "TECHNICAL_RESEARCH",
+      "official_source": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+      "source_provenance": {
+        "identity_source": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+        "checked_date": "2026-10-27"
+      },
+      "specifications": {
+        "chipset": {
+          "label": "Chipset",
+          "value": "Samsung Exynos 1580",
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_type": {
+          "label": "Display",
+          "value": "Super AMOLED",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_inches": {
+          "label": "Display size",
+          "value": 6.7,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_refresh_max_hz": {
+          "label": "Refresh rate",
+          "value": 120,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_main_mp": {
+          "label": "Main camera",
+          "value": 50,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_ultrawide_mp": {
+          "label": "Ultrawide camera",
+          "value": 12,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "front_mp": {
+          "label": "Front camera",
+          "value": 12,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "battery_mah_typical": {
+          "label": "Battery capacity",
+          "value": 5000,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "wired_charging_max_w": {
+          "label": "Wired charging",
+          "value": 45,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "launch_android": {
+          "label": "Launch Android",
+          "value": 15,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "os_upgrade_generations": {
+          "label": "OS updates",
+          "value": 6,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "security_support_years": {
+          "label": "Security updates",
+          "value": 6,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        }
+      },
+      "battery_evidence": {
+        "status": "MODEL_LEVEL_MEASUREMENTS",
+        "metrics": [
+          "active_use_score",
+          "charging_time_0_to_100"
+        ],
+        "source_urls": [
+          "https://www.gsmarena.com/samsung_galaxy_a56-review-2812p3.php"
+        ],
+        "applicability": "MODEL_CONTEXT_NOT_VARIANT_SPECIFIC"
+      },
+      "camera_evidence": {
+        "status": "QUALITATIVE_ONLY",
+        "observation_types": [
+          "daylight",
+          "low_light",
+          "video_quality"
+        ],
+        "source_urls": [
+          "https://www.gsmarena.com/samsung_galaxy_a36_vs_samsung_galaxy_a56_review_battery_camera_price_compared-news-67174.php"
+        ],
+        "scope": [
+          "model_context"
+        ]
+      },
+      "gaming_evidence": {
+        "status": "HOLD",
+        "reason": "No accepted complete independent gaming protocol for this exact India configuration."
+      },
+      "commerce": {
+        "price": null,
+        "stock": null,
+        "purchase_cta_eligible": false,
+        "publication_eligible": false
+      }
+    },
+    {
+      "canonical_product_id": "cw-mobile-110",
+      "brand": "Nothing",
+      "model": "Phone (3a)",
+      "region": "IN",
+      "ram_gb": 8,
+      "storage_gb": 128,
+      "manufacturer_spec_status": "VERIFIED",
+      "technical_lane": "TECHNICAL_RESEARCH",
+      "official_source": "https://in.nothing.tech/products/phone-3a",
+      "source_provenance": {
+        "identity_source": "https://in.nothing.tech/products/phone-3a",
+        "checked_date": "2026-10-27"
+      },
+      "specifications": {
+        "chipset": {
+          "label": "Chipset",
+          "value": "Qualcomm Snapdragon 7s Gen 3",
+          "source_url": "https://nothing.community/en/d/27793-phone-3a-and-3a-pro-are-here",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_type": {
+          "label": "Display",
+          "value": "Flexible AMOLED",
+          "source_url": "https://in.nothing.tech/products/phone-3a",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_inches": {
+          "label": "Display size",
+          "value": 6.77,
+          "source_url": "https://in.nothing.tech/products/phone-3a",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_refresh_max_hz": {
+          "label": "Refresh rate",
+          "value": 120,
+          "source_url": "https://in.nothing.tech/products/phone-3a",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_main_mp": {
+          "label": "Main camera",
+          "value": 50,
+          "source_url": "https://in.nothing.tech/products/phone-3a",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_ultrawide_mp": {
+          "label": "Ultrawide camera",
+          "value": 8,
+          "source_url": "https://in.nothing.tech/products/phone-3a",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "front_mp": {
+          "label": "Front camera",
+          "value": 32,
+          "source_url": "https://in.nothing.tech/products/phone-3a",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "battery_mah_typical": {
+          "label": "Battery capacity",
+          "value": 5000,
+          "source_url": "https://nothing.community/en/d/27793-phone-3a-and-3a-pro-are-here",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "wired_charging_max_w": {
+          "label": "Wired charging",
+          "value": 50,
+          "source_url": "https://nothing.community/en/d/27793-phone-3a-and-3a-pro-are-here",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "launch_android": {
+          "label": "Launch Android",
+          "value": 15,
+          "source_url": "https://nothing.community/en/d/27793-phone-3a-and-3a-pro-are-here",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "security_support_years": {
+          "label": "Security updates",
+          "value": 6,
+          "source_url": "https://nothing.community/en/d/27793-phone-3a-and-3a-pro-are-here",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        }
+      },
+      "battery_evidence": {
+        "status": "MODEL_LEVEL_MEASUREMENTS",
+        "metrics": [
+          "active_use_score",
+          "charging_time_0_to_100"
+        ],
+        "source_urls": [
+          "https://www.gsmarena.com/nothing_phone_3a-review-2811p3.php"
+        ],
+        "applicability": "MODEL_CONTEXT_NOT_VARIANT_SPECIFIC"
+      },
+      "camera_evidence": {
+        "status": "NO_ACCEPTED_OBSERVATION",
+        "observation_types": [],
+        "source_urls": [],
+        "scope": [
+          "none"
+        ]
+      },
+      "gaming_evidence": {
+        "status": "HOLD",
+        "reason": "No accepted complete independent gaming protocol for this exact India configuration."
+      },
+      "commerce": {
+        "price": null,
+        "stock": null,
+        "purchase_cta_eligible": false,
+        "publication_eligible": false
+      }
+    },
+    {
+      "canonical_product_id": "cw-mobile-111",
+      "brand": "Redmi",
+      "model": "Note 14 5G",
+      "region": "IN",
+      "ram_gb": 6,
+      "storage_gb": 128,
+      "manufacturer_spec_status": "VERIFIED",
+      "technical_lane": "TECHNICAL_RESEARCH",
+      "official_source": "https://www.mi.com/in/event/redmi-note-14-5g-series/",
+      "source_provenance": {
+        "identity_source": "https://www.mi.com/in/event/redmi-note-14-5g-series/",
+        "checked_date": "2026-10-27"
+      },
+      "specifications": {
+        "chipset": {
+          "label": "Chipset",
+          "value": "MediaTek Dimensity 7025-Ultra",
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_type": {
+          "label": "Display",
+          "value": "AMOLED",
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/faq/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_inches": {
+          "label": "Display size",
+          "value": 6.67,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_refresh_max_hz": {
+          "label": "Refresh rate",
+          "value": 120,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_main_mp": {
+          "label": "Main camera",
+          "value": 50,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_ultrawide_mp": {
+          "label": "Ultrawide camera",
+          "value": 8,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "front_mp": {
+          "label": "Front camera",
+          "value": 20,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "battery_mah_typical": {
+          "label": "Battery capacity",
+          "value": 5110,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "wired_charging_max_w": {
+          "label": "Wired charging",
+          "value": 45,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "launch_android": {
+          "label": "Launch Android",
+          "value": 14,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "security_support_years": {
+          "label": "Security updates",
+          "value": 4,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        }
+      },
+      "battery_evidence": {
+        "status": "MODEL_LEVEL_MEASUREMENTS",
+        "metrics": [
+          "active_use_score",
+          "charging_time_0_to_100"
+        ],
+        "source_urls": [
+          "https://www.gsmarena.com/xiaomi_redmi_note_14_5g-review-2797p3.php"
+        ],
+        "applicability": "MODEL_CONTEXT_NOT_VARIANT_SPECIFIC"
+      },
+      "camera_evidence": {
+        "status": "QUALITATIVE_ONLY",
+        "observation_types": [
+          "daylight_main",
+          "portrait_selfie_lowlight",
+          "ultrawide"
+        ],
+        "source_urls": [
+          "https://www.91mobiles.com/hub/redmi-note-14-review/"
+        ],
+        "scope": [
+          "exact_variant"
+        ]
+      },
+      "gaming_evidence": {
+        "status": "HOLD",
+        "reason": "No accepted complete independent gaming protocol for this exact India configuration."
+      },
+      "commerce": {
+        "price": null,
+        "stock": null,
+        "purchase_cta_eligible": false,
+        "publication_eligible": false
+      }
+    },
+    {
+      "canonical_product_id": "cw-mobile-112",
+      "brand": "Redmi",
+      "model": "Note 14 5G",
+      "region": "IN",
+      "ram_gb": 8,
+      "storage_gb": 128,
+      "manufacturer_spec_status": "VERIFIED",
+      "technical_lane": "TECHNICAL_RESEARCH",
+      "official_source": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+      "source_provenance": {
+        "identity_source": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+        "checked_date": "2026-10-27"
+      },
+      "specifications": {
+        "chipset": {
+          "label": "Chipset",
+          "value": "MediaTek Dimensity 7025-Ultra",
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_type": {
+          "label": "Display",
+          "value": "AMOLED",
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/faq/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_inches": {
+          "label": "Display size",
+          "value": 6.67,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_refresh_max_hz": {
+          "label": "Refresh rate",
+          "value": 120,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_main_mp": {
+          "label": "Main camera",
+          "value": 50,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_ultrawide_mp": {
+          "label": "Ultrawide camera",
+          "value": 8,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "front_mp": {
+          "label": "Front camera",
+          "value": 20,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "battery_mah_typical": {
+          "label": "Battery capacity",
+          "value": 5110,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "wired_charging_max_w": {
+          "label": "Wired charging",
+          "value": 45,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "launch_android": {
+          "label": "Launch Android",
+          "value": 14,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "security_support_years": {
+          "label": "Security updates",
+          "value": 4,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        }
+      },
+      "battery_evidence": {
+        "status": "MODEL_LEVEL_MEASUREMENTS",
+        "metrics": [
+          "active_use_score",
+          "charging_time_0_to_100"
+        ],
+        "source_urls": [
+          "https://www.gsmarena.com/xiaomi_redmi_note_14_5g-review-2797p3.php"
+        ],
+        "applicability": "MODEL_CONTEXT_NOT_VARIANT_SPECIFIC"
+      },
+      "camera_evidence": {
+        "status": "NO_ACCEPTED_OBSERVATION",
+        "observation_types": [],
+        "source_urls": [],
+        "scope": [
+          "none"
+        ]
+      },
+      "gaming_evidence": {
+        "status": "HOLD",
+        "reason": "No accepted complete independent gaming protocol for this exact India configuration."
+      },
+      "commerce": {
+        "price": null,
+        "stock": null,
+        "purchase_cta_eligible": false,
+        "publication_eligible": false
+      }
+    },
+    {
+      "canonical_product_id": "cw-mobile-113",
+      "brand": "Redmi",
+      "model": "Note 14 5G",
+      "region": "IN",
+      "ram_gb": 8,
+      "storage_gb": 256,
+      "manufacturer_spec_status": "VERIFIED",
+      "technical_lane": "TECHNICAL_RESEARCH",
+      "official_source": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+      "source_provenance": {
+        "identity_source": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+        "checked_date": "2026-10-27"
+      },
+      "specifications": {
+        "chipset": {
+          "label": "Chipset",
+          "value": "MediaTek Dimensity 7025-Ultra",
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_type": {
+          "label": "Display",
+          "value": "AMOLED",
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/faq/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_inches": {
+          "label": "Display size",
+          "value": 6.67,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "display_refresh_max_hz": {
+          "label": "Refresh rate",
+          "value": 120,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_main_mp": {
+          "label": "Main camera",
+          "value": 50,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "rear_ultrawide_mp": {
+          "label": "Ultrawide camera",
+          "value": 8,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "front_mp": {
+          "label": "Front camera",
+          "value": 20,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "battery_mah_typical": {
+          "label": "Battery capacity",
+          "value": 5110,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "wired_charging_max_w": {
+          "label": "Wired charging",
+          "value": 45,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "launch_android": {
+          "label": "Launch Android",
+          "value": 14,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        },
+        "security_support_years": {
+          "label": "Security updates",
+          "value": 4,
+          "source_url": "https://www.mi.com/in/product/redmi-note-14-5g/specs/",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-10-27"
+        }
+      },
+      "battery_evidence": {
+        "status": "MODEL_LEVEL_MEASUREMENTS",
+        "metrics": [
+          "active_use_score",
+          "charging_time_0_to_100"
+        ],
+        "source_urls": [
+          "https://www.gsmarena.com/xiaomi_redmi_note_14_5g-review-2797p3.php"
+        ],
+        "applicability": "MODEL_CONTEXT_NOT_VARIANT_SPECIFIC"
+      },
+      "camera_evidence": {
+        "status": "NO_ACCEPTED_OBSERVATION",
+        "observation_types": [],
+        "source_urls": [],
+        "scope": [
+          "none"
+        ]
+      },
+      "gaming_evidence": {
+        "status": "HOLD",
+        "reason": "No accepted complete independent gaming protocol for this exact India configuration."
+      },
+      "commerce": {
+        "price": null,
+        "stock": null,
+        "purchase_cta_eligible": false,
+        "publication_eligible": false
+      }
+    }
+  ]
+}
