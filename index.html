@@ -175,6 +175,24 @@
       </div>
     </section>
 
+    <section class="container catalogue-discovery-section" id="catalogueDiscovery" aria-labelledby="catalogueDiscoveryTitle">
+      <div class="section-panel premium-panel">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">Catalogue reference</span>
+            <h2 id="catalogueDiscoveryTitle">Explore more products</h2>
+            <p><span id="catalogueDiscoveryCount">Loading catalogue references…</span> from the existing catalogue are shown for discovery only.</p>
+          </div>
+          <span class="research-badge catalogue-badge">No live offers</span>
+        </div>
+        <p class="catalogue-discovery-notice">These entries are catalogue references, not current deals. Prices, retailer names, stock claims and purchase actions are intentionally hidden until a fresh verified offer passes the existing checks.</p>
+        <div id="catalogueDiscoveryGrid" class="catalogue-discovery-grid" aria-live="polite">
+          Loading catalogue references…
+        </div>
+        <button id="catalogueDiscoveryMore" class="btn btn-ghost catalogue-more" type="button" hidden>Show all catalogue references</button>
+      </div>
+    </section>
+
     <!-- QUICK VALUE STRIP -->
 
     <!-- QUICK VALUE STRIP -->
@@ -422,7 +440,7 @@ Explore practical guides for smartphones, smartwatches and wireless audio.
 </footer>
 
   <script src="/app.js?v=15"></script>
-  <script src="/mobile-research-preview.js?v=2"></script>
+  <script src="/mobile-research-preview.js?v=3"></script>
   <!-- deployment-refresh: 2026-07-21T17:26:00.696191+00:00 -->
 </body>
 </html>

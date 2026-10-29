@@ -29,6 +29,9 @@ class ProductionRecoveryPublicTests(unittest.TestCase):
             preview = json.loads((output / "data/mobile_research_preview.json").read_text(encoding="utf-8"))
             self.assertEqual(len(preview["products"]), 10)
             self.assertTrue(all(not row["commerce"]["purchase_cta_eligible"] for row in preview["products"]))
+            catalogue = json.loads((output / "coupons.json").read_text(encoding="utf-8"))
+            self.assertEqual(len(catalogue), 105)
+            self.assertIn('mobile-research-preview.js?v=3', (output / "index.html").read_text(encoding="utf-8"))
 
     def test_homepage_exposes_research_and_accessibility_paths(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
@@ -108,6 +111,17 @@ class ProductionRecoveryPublicTests(unittest.TestCase):
         self.assertIn("isResearchComparisonQuery", app)
         self.assertIn("renderOfferUnavailable", app)
         self.assertIn("NO_CURRENT_VERIFIED_OFFER", (ROOT / "python/shopping_api.py").read_text(encoding="utf-8"))
+
+    def test_catalogue_discovery_is_reference_only(self):
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        preview = (ROOT / "mobile-research-preview.js").read_text(encoding="utf-8")
+        self.assertIn('id="catalogueDiscovery"', html)
+        self.assertIn('id="catalogueDiscoveryGrid"', html)
+        self.assertIn("safeCatalogueRows", preview)
+        self.assertIn("Historical / unverified reference", preview)
+        self.assertIn("Exact identity, price, stock and purchase eligibility are not asserted", preview)
+        self.assertNotIn("row.link", preview)
+        self.assertNotIn("row.store", preview)
 
 
 if __name__ == "__main__":

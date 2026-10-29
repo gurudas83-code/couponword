@@ -871,6 +871,17 @@ body.clean-ui .footer{border-top-color:#dce4ed}
 .mobile-research-link{color:#79e5bd;font-size:.74rem;text-decoration:none}
 .mobile-research-link:hover{text-decoration:underline}
 .mobile-research-gate{color:#ffcb83;font-size:.7rem}
+.catalogue-discovery-section{margin-top:18px}
+.catalogue-badge{color:#ffdfad;background:rgba(255,190,35,.1);border-color:rgba(255,190,35,.25)}
+.catalogue-discovery-notice{margin:0 0 18px;color:#b8cac5;font-size:.86rem;line-height:1.55}
+.catalogue-discovery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.catalogue-reference-card{display:flex;flex-direction:column;gap:7px;min-width:0;padding:14px;border:1px solid rgba(255,255,255,.09);border-radius:15px;background:rgba(8,22,24,.42)}
+.catalogue-reference-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.catalogue-reference-card h3{margin:0;color:#fff;font-size:.88rem;line-height:1.35}
+.catalogue-reference-card p{margin:0;color:#c8d7d3;font-size:.74rem;line-height:1.45}
+.catalogue-reference-note{margin-top:auto!important;color:#9fb3ae!important;font-size:.68rem!important}
+.catalogue-status{display:inline-flex;padding:4px 7px;border:1px solid rgba(255,190,35,.23);border-radius:999px;color:#ffdfad;font-size:.62rem;font-weight:800;line-height:1.2;text-align:right}
+.catalogue-more{display:block;margin:18px auto 0}
 .research-comparison-result{display:grid;gap:16px;padding:18px;border:1px solid #dce4ed;border-radius:20px;background:#f8fafc}
 .research-comparison-result h3{margin:0;color:#172235}
 .research-comparison-result>p{margin:0;color:#5c6a7b;line-height:1.55}
@@ -885,6 +896,7 @@ body.clean-ui .footer{border-top-color:#dce4ed}
 .research-comparison-specs dd{margin:2px 0 0;color:#172235;font-size:.78rem;font-weight:800}
 @media(max-width:540px){
   .research-comparison-grid,.research-comparison-specs{grid-template-columns:1fr}
+  .catalogue-discovery-grid{grid-template-columns:1fr}
 }
 
 .ai-result-card .shop-button{

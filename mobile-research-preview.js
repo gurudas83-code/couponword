@@ -7,6 +7,13 @@
   var grid = document.getElementById("mobileResearchGrid");
   if (!section || !grid) return;
 
+  var catalogueGrid = document.getElementById("catalogueDiscoveryGrid");
+  var catalogueCount = document.getElementById("catalogueDiscoveryCount");
+  var catalogueMore = document.getElementById("catalogueDiscoveryMore");
+  var catalogueRows = [];
+  var catalogueExpanded = false;
+  var CATALOGUE_INITIAL_LIMIT = 18;
+
   // The dataset has already passed the publish-safety checks. Keep the section
   // visible for normal visitors; commerce gates remain in the rendered cards.
   section.hidden = false;
@@ -43,6 +50,46 @@
     }).join(", ") || "No accepted measurement";
   }
 
+  function catalogueStatus(row) {
+    var identityVerified = row && (row.identity_verified === true || String(row.catalog_status || "").toLowerCase() === "verified");
+    return identityVerified ? "Identity verified · no current offer" : "Historical / unverified reference";
+  }
+
+  function safeCatalogueRows(rows) {
+    return (Array.isArray(rows) ? rows : []).filter(function (row) {
+      var keys = Object.keys(row || {});
+      return row && typeof row === "object" && row.id != null && String(row.title || "").trim() &&
+        !keys.some(function (key) { return /private|secret|credential|output|report/i.test(String(key)); });
+    }).map(function (row) {
+      return {
+        id: String(row.id),
+        title: String(row.title || "").trim().slice(0, 180),
+        brand: String(row.brand || "").trim().slice(0, 80),
+        category: String(row.category || "Catalogue").trim().slice(0, 80),
+        status: catalogueStatus(row)
+      };
+    });
+  }
+
+  function renderCatalogueRow(row) {
+    return '<article class="catalogue-reference-card">' +
+      '<div class="catalogue-reference-top"><span class="research-id">Catalogue #' + escapeHtml(row.id) + '</span><span class="catalogue-status">' + escapeHtml(row.status) + '</span></div>' +
+      '<h3>' + escapeHtml(row.title) + '</h3>' +
+      '<p><strong>' + escapeHtml(row.brand || "Brand not stated") + '</strong> · ' + escapeHtml(row.category) + '</p>' +
+      '<p class="catalogue-reference-note">Reference listing only. Exact identity, price, stock and purchase eligibility are not asserted.</p>' +
+      '</article>';
+  }
+
+  function renderCatalogueRows() {
+    if (!catalogueGrid) return;
+    var visible = catalogueExpanded ? catalogueRows : catalogueRows.slice(0, CATALOGUE_INITIAL_LIMIT);
+    catalogueGrid.innerHTML = visible.length ? visible.map(renderCatalogueRow).join("") : "<p>Catalogue references are currently unavailable.</p>";
+    if (catalogueMore) {
+      catalogueMore.hidden = catalogueRows.length <= CATALOGUE_INITIAL_LIMIT;
+      catalogueMore.textContent = catalogueExpanded ? "Show fewer catalogue references" : "Show all catalogue references";
+    }
+  }
+
   function renderProduct(product) {
     var specs = product.specifications || {};
     var specHtml = Object.keys(specs).map(function (key) {
@@ -77,4 +124,27 @@
     .catch(function () {
       grid.innerHTML = "<p>Verified mobile research is currently unavailable.</p>";
     });
+
+  if (catalogueGrid) {
+    fetch("/coupons.json", { credentials: "omit" })
+      .then(function (response) {
+        if (!response.ok) throw new Error("catalogue unavailable");
+        return response.json();
+      })
+      .then(function (rows) {
+        catalogueRows = safeCatalogueRows(rows);
+        if (catalogueCount) catalogueCount.textContent = catalogueRows.length + " catalogue references";
+        renderCatalogueRows();
+      })
+      .catch(function () {
+        if (catalogueCount) catalogueCount.textContent = "No catalogue references available";
+        catalogueGrid.innerHTML = "<p>Catalogue references are currently unavailable.</p>";
+      });
+    if (catalogueMore) {
+      catalogueMore.addEventListener("click", function () {
+        catalogueExpanded = !catalogueExpanded;
+        renderCatalogueRows();
+      });
+    }
+  }
 }());

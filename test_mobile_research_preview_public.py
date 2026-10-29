@@ -55,7 +55,7 @@ class PublicMobileResearchPreviewTests(unittest.TestCase):
         self.assertIn('id="mobileResearchPreview"', html)
         self.assertIn("Compare 4 Verified Smartphones", html)
         self.assertIn('href="#mobileResearchPreview"', html)
-        self.assertIn('src="/mobile-research-preview.js?v=2"', html)
+        self.assertIn('src="/mobile-research-preview.js?v=3"', html)
         self.assertIn("section.hidden = false", script)
         self.assertNotIn("section.hidden = true", script)
         self.assertTrue(payload["default_enabled"])
