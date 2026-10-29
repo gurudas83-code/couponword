@@ -1,4 +1,12 @@
-const DEALS_FILE = "/coupons.json?v=" + Date.now();
+// Keep the data URL stable so CDN/browser caches follow the deployed artifact
+// instead of forcing a new request on every page load.
+const DEALS_FILE = "/coupons.json";
+const DEAL_MAX_AGE_MS = 6 * 60 * 60 * 1000;
+const APPROVED_RETAILER_HOSTS = new Set([
+  "amazon.in", "www.amazon.in", "amzn.in", "www.amzn.in",
+  "flipkart.com", "www.flipkart.com", "croma.com", "www.croma.com"
+]);
+const RECOMMENDATION_TIMEOUT_MS = 15000;
 
 // Keep the published site on the approved Render API while making the
 // existing frontend route testable against the local backend.  The override
@@ -13,6 +21,8 @@ const API_BASE_URL = ["127.0.0.1", "localhost"].includes(
 let allDeals = [];
 let activeCategory = "All";
 let activeView = "grid";
+let recommendationRequestId = 0;
+let recommendationController = null;
 
 const grid = document.getElementById("dealsGrid");
 const searchInput = document.getElementById("searchInput");
@@ -21,22 +31,80 @@ const heroSearchButton = document.getElementById("heroSearchButton");
 const sortSelect = document.getElementById("sortSelect");
 const chipsBox = document.getElementById("categoryChips");
 const resultsCount = document.getElementById("resultsCount");
+const mobileNavToggle = document.querySelector(".mobile-nav-toggle");
+const mobileNav = document.getElementById("mobileNav");
+
+if (mobileNavToggle && mobileNav) {
+  mobileNavToggle.addEventListener("click", () => {
+    const open = mobileNav.hidden;
+    mobileNav.hidden = !open;
+    mobileNavToggle.setAttribute("aria-expanded", String(open));
+  });
+  mobileNav.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      mobileNav.hidden = true;
+      mobileNavToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+}
 
 async function loadDeals() {
   try {
     const res = await fetch(DEALS_FILE);
     if (!res.ok) throw new Error("coupons.json not found");
 
-    allDeals = await res.json();
+    const rawDeals = await res.json();
+    if (!Array.isArray(rawDeals)) throw new Error("Invalid public deal data");
+    allDeals = rawDeals.filter(isCurrentVerifiedDeal);
 
     updateStats();
     buildCategoryChips();
     renderFeaturedDeal();
     renderDeals();
   } catch (err) {
-    grid.innerHTML = `<div class="state-card"><strong>Unable to load deals</strong><span>Check coupons.json file.</span></div>`;
+    grid.innerHTML = `<div class="state-card"><strong>Verified offers are currently unavailable.</strong><span>Explore <a href="#mobileResearchPreview">verified smartphone research</a> instead.</span></div>`;
     resultsCount.textContent = "No deals loaded";
   }
+}
+
+function numericPrice(value) {
+  const match = String(value ?? "").replace(/,/g, "").match(/\d+(?:\.\d+)?/);
+  return match ? Number(match[0]) : 0;
+}
+
+function isRecentDeal(deal) {
+  const stamp = deal.last_checked || deal.verified_at || deal.checked_at;
+  const checkedAt = Date.parse(String(stamp || ""));
+  return Number.isFinite(checkedAt) && Date.now() - checkedAt >= 0 && Date.now() - checkedAt <= DEAL_MAX_AGE_MS;
+}
+
+function hasExplicitStock(deal) {
+  return ["in_stock", "in stock", "available", "available_now"].includes(
+    normalize(deal.availability)
+  );
+}
+
+function hasApprovedRetailerLink(deal) {
+  try {
+    const parsed = new URL(String(deal.link || ""), window.location.href);
+    return parsed.protocol === "https:" && APPROVED_RETAILER_HOSTS.has(parsed.hostname.toLowerCase());
+  } catch (error) {
+    return false;
+  }
+}
+
+function isCurrentVerifiedDeal(deal) {
+  if (!deal || typeof deal !== "object") return false;
+  const identityVerified = deal.identity_verified === true ||
+    normalize(deal.catalog_status) === "verified" ||
+    normalize(deal.identity_decision) === "verified";
+  return deal.active === true &&
+    deal.cta_eligible === true &&
+    identityVerified &&
+    numericPrice(deal.price) > 0 &&
+    hasExplicitStock(deal) &&
+    isRecentDeal(deal) &&
+    hasApprovedRetailerLink(deal);
 }
 
 function normalize(text) {
@@ -118,7 +186,15 @@ function renderFeaturedDeal() {
   const box = document.getElementById("featuredDeal");
   const deal = allDeals[0];
 
-  if (!deal) return;
+  if (!deal) {
+    box.innerHTML = `
+      <div class="spotlight-image placeholder-big" aria-hidden="true">📱</div>
+      <h2>Verified offers are currently unavailable.</h2>
+      <p>Explore verified smartphone research while fresh retailer checks are unavailable.</p>
+      <a href="#mobileResearchPreview">Explore smartphone research</a>
+    `;
+    return;
+  }
 
   box.innerHTML = `
     ${renderImage(deal, "spotlight-image")}
@@ -136,7 +212,7 @@ function renderDeals() {
   resultsCount.textContent = `${deals.length} deal${deals.length !== 1 ? "s" : ""} found`;
 
   if (!deals.length) {
-    grid.innerHTML = `<div class="state-card"><strong>No matching deals found</strong><span>Try another keyword or category.</span></div>`;
+    grid.innerHTML = `<div class="state-card"><strong>Verified offers are currently unavailable.</strong><span>Explore <a href="#mobileResearchPreview">verified smartphone research</a> instead.</span></div>`;
     return;
   }
 
@@ -392,6 +468,11 @@ async function loadShoppingRecommendation(query) {
   const analyticsQuery = analyticsSearchTerm(cleanQuery);
 
   if (!cleanQuery) {
+    recommendationRequestId += 1;
+    if (recommendationController) {
+      recommendationController.abort();
+      recommendationController = null;
+    }
     card.innerHTML = `
       <h3>Ask Coupon World</h3>
       <p>Search for a product above to get personalized AI recommendations.</p>
@@ -402,6 +483,15 @@ async function loadShoppingRecommendation(query) {
   trackAnalyticsEvent("ai_search_submit", {
     search_term: analyticsQuery
   });
+
+  if (recommendationController) recommendationController.abort();
+  const requestId = ++recommendationRequestId;
+  const controller = new AbortController();
+  recommendationController = controller;
+  const timeoutHandle = window.setTimeout(
+    () => controller.abort(),
+    RECOMMENDATION_TIMEOUT_MS
+  );
 
   card.innerHTML = `
     <h3>Finding the best matches...</h3>
@@ -418,13 +508,15 @@ async function loadShoppingRecommendation(query) {
       "/api/recommend?q=" +
       encodeURIComponent(cleanQuery);
 
-    const response = await fetch(endpoint);
+    const response = await fetch(endpoint, { signal: controller.signal });
 
     if (!response.ok) {
       throw new Error(`Shopping API returned HTTP ${response.status}`);
     }
 
     const data = await response.json();
+
+    if (requestId !== recommendationRequestId) return;
 
     console.log("Shopping Brain live response:", data);
 
@@ -599,20 +691,20 @@ async function loadShoppingRecommendation(query) {
           </details>`
         : "";
 
+      const offers = Array.isArray(p.retailer_offers)
+        ? p.retailer_offers.filter(offer =>
+            offer &&
+            offer.cta_eligibility &&
+            offer.cta_eligibility.eligible === true &&
+            (!Object.prototype.hasOwnProperty.call(p, "current_offer_verified") || p.current_offer_verified === true)
+          )
+        : [];
       const hasExplicitOfferContract = Object.prototype.hasOwnProperty.call(
         p,
         "current_offer_verified"
       );
       const currentOfferVerified = hasExplicitOfferContract &&
         p.current_offer_verified === true;
-      const offers = Array.isArray(p.retailer_offers)
-        ? p.retailer_offers.filter(offer =>
-            offer &&
-            offer.cta_eligibility &&
-            offer.cta_eligibility.eligible === true &&
-            (!hasExplicitOfferContract || currentOfferVerified)
-          )
-        : [];
 
       // Respect the backend comparison contract:
       // best_offer exists only when enough trustworthy comparable
@@ -1048,6 +1140,7 @@ async function loadShoppingRecommendation(query) {
       });
 
   } catch (error) {
+    if (requestId !== recommendationRequestId) return;
     console.error("Unable to load Shopping Brain response:", error);
 
     trackAnalyticsEvent("ai_search_error", {
@@ -1055,12 +1148,25 @@ async function loadShoppingRecommendation(query) {
       error_type: String(error && error.name || "Error").slice(0, 40)
     });
 
+    const timedOut = error && error.name === "AbortError";
+    const message = timedOut
+      ? "The recommendation service took too long to respond."
+      : error && /^Shopping API returned HTTP 4/.test(error.message || "")
+        ? "Please check the search and try again."
+        : error && /^Shopping API returned HTTP 5/.test(error.message || "")
+          ? "The recommendation service is temporarily unavailable."
+          : "We could not reach the recommendation service.";
     card.innerHTML = `
       <h3>Recommendation temporarily unavailable</h3>
-      <p>${escapeHTML(
-        error.message || "Unable to reach Coupon World Shopping Intelligence."
-      )}</p>
+      <p>${escapeHTML(message)}</p>
+      <button type="button" class="btn btn-ghost" data-retry-recommendation>Try again</button>
     `;
+    card.querySelector("[data-retry-recommendation]")?.addEventListener("click", () => {
+      loadShoppingRecommendation(cleanQuery);
+    });
+  } finally {
+    window.clearTimeout(timeoutHandle);
+    if (recommendationController === controller) recommendationController = null;
   }
 }
 

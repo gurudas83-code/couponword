@@ -17,10 +17,16 @@
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://coupon-world.in/" />
 
-  <meta property="og:title" content="Coupon World — Hot Online Store Deals" />
-  <meta property="og:description" content="Browse trending Online Store deals, coupons, price drops and hot offers." />
+  <meta name="theme-color" content="#f6f8fb" />
+  <meta property="og:title" content="Coupon World — Verified Mobile Research & Deals" />
+  <meta property="og:description" content="Compare verified India smartphone variants and browse fresh retailer offers when available." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://coupon-world.in/" />
+  <meta property="og:image" content="https://coupon-world.in/assets/coupon-world-og.svg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Coupon World — Verified Mobile Research & Deals" />
+  <meta name="twitter:description" content="Evidence-led smartphone comparison and verified deal discovery in India." />
+  <link rel="icon" href="/assets/coupon-world-og.svg" type="image/svg+xml" />
 
   <link rel="stylesheet" href="/style.css?v=10">
 
@@ -40,6 +46,7 @@
 </head>
 
 <body class="clean-ui">
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="page-glow page-glow-one"></div>
   <div class="page-glow page-glow-two"></div>
 
@@ -54,17 +61,25 @@
       </a>
 
       <nav class="desktop-nav" aria-label="Main navigation">
-        <a href="#aiRecommendation">Mobile Picks</a>
+        <a href="#mobileResearchPreview">Mobile Picks</a>
         <a href="#under-budget">Budget Search</a>
         <a href="#categories">Categories</a>
         <a href="#why-us">Why Us</a>
       </nav>
 
+      <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="mobileNav">Menu</button>
+
       <a class="header-action" href="#browse">Start Saving</a>
     </div>
+    <nav id="mobileNav" class="mobile-nav" aria-label="Mobile navigation" hidden>
+      <a href="#mobileResearchPreview">Mobile Picks</a>
+      <a href="#under-budget">Budget Search</a>
+      <a href="#categories">Categories</a>
+      <a href="#why-us">Why Us</a>
+    </nav>
   </header>
 
-  <main>
+  <main id="main-content">
     <!-- HERO -->
     <section class="hero" id="top">
       <div class="container hero-grid">
@@ -100,15 +115,15 @@
           </div>
 
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#browse">🔥 Browse Hot Deals</a>
+            <a class="btn btn-primary" href="#browse">🔎 Browse verified offers</a>
             <a class="btn btn-ghost" href="#mobileResearchPreview">Compare 4 Verified Smartphones</a>
             <a class="btn btn-ghost" href="#why-us">Why Coupon World?</a>
           </div>
 
           <div class="hero-stats">
-            <div><strong id="statDeals">--</strong><span>Deals loaded</span></div>
+            <div><strong id="statDeals">--</strong><span>Verified offers</span></div>
             <div><strong id="statCategories">--</strong><span>Categories</span></div>
-            <div><strong>100%</strong><span>Affiliate ready</span></div>
+            <div><strong>4</strong><span>Verified phone models</span></div>
           </div>
         </div>
 
@@ -137,7 +152,7 @@
           </div>
         </div>
 
-        <div id="shoppingBrainCard">
+        <div id="shoppingBrainCard" aria-live="polite" aria-atomic="true">
           Loading AI recommendation...
         </div>
       </div>
@@ -193,19 +208,19 @@
       <div class="section-panel premium-panel">
         <div class="section-heading">
           <div>
-            <span class="section-kicker">🔥 Deal Discovery</span>
-            <h2>Today’s Biggest Price Drops</h2>
-            <p>Fast entry points that make visitors browse instead of leaving the homepage.</p>
+          <span class="section-kicker">🧭 Explore the catalogue</span>
+          <h2>Browse popular categories</h2>
+          <p>Start with a category or search term. Purchase links appear only for fresh verified offers.</p>
           </div>
           <a href="#browse" class="small-action">View all deals →</a>
         </div>
 
         <div class="drop-grid">
-          <a href="#browse" class="drop-card hot" data-search="discount">
-            <span>🔥</span>
-            <b>Big Discount Deals</b>
-            <small>Sort by highest visible discount.</small>
-            <strong>Explore now</strong>
+          <a href="#browse" class="drop-card hot" data-search="Mobiles">
+            <span>✅</span>
+            <b>Verified offers</b>
+            <small>Show only current, checked retailer offers.</small>
+            <strong>Check status</strong>
           </a>
           <a href="#browse" class="drop-card" data-search="Smartwatch">
             <span>⌚</span>
@@ -269,7 +284,7 @@
 
         <div class="chips" id="categoryChips"></div>
 
-        <div class="deal-grid" id="dealsGrid">
+        <div class="deal-grid" id="dealsGrid" aria-live="polite" aria-atomic="true">
           <div class="state-card">
             <strong>Loading deals...</strong>
             <span>Fetching Coupon World deals.</span>

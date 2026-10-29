@@ -20,7 +20,22 @@ if str(PYTHON_DIR) not in sys.path:
 
 from api_contract import apply_response_contract
 from intent_engine import parse_query
-from shopping_intelligence_pipeline import run_pipeline
+
+# Keep the health endpoint import-light.  The recommendation pipeline loads
+# retailer/evidence adapters and can take several seconds on a cold Render
+# instance, so importing it at module startup made a health probe look dead.
+# Tests may still patch ``shopping_api.run_pipeline``; the lazy loader only
+# fills it when the recommendation route is actually used.
+run_pipeline = None
+
+
+def _load_pipeline():
+    global run_pipeline
+    if run_pipeline is None:
+        from shopping_intelligence_pipeline import run_pipeline as pipeline
+
+        run_pipeline = pipeline
+    return run_pipeline
 
 
 MOBILE_UNIVERSE_FILE = (
@@ -179,7 +194,7 @@ def recommend():
     pipeline_query = mobile_scoped_query(query)
 
     try:
-        payload = run_pipeline(
+        payload = _load_pipeline()(
             query=pipeline_query,
             # Mobile benchmark target:
             # enough discovery depth for Best-3 plus additional
@@ -211,8 +226,8 @@ def recommend():
 
 if __name__ == "__main__":
     app.run(
-        host="127.0.0.1",
-        port=8000,
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", "8000")),
         debug=False,
     )
 

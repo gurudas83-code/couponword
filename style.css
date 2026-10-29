@@ -38,6 +38,8 @@ button,input,select{font:inherit}
 button{cursor:pointer}
 img{max-width:100%;display:block}
 .container{max-width:1220px;margin:0 auto;padding:0 18px}
+.skip-link{position:fixed;left:12px;top:10px;z-index:1000;transform:translateY(-180%);padding:10px 14px;border-radius:10px;background:#172235;color:#fff;font-weight:800}
+.skip-link:focus{transform:translateY(0)}
 
 .page-glow{position:fixed;border-radius:50%;filter:blur(45px);opacity:.3;pointer-events:none;z-index:-1}
 .page-glow-one{width:280px;height:280px;background:var(--orange);top:90px;left:-140px}
@@ -71,6 +73,7 @@ img{max-width:100%;display:block}
   color:#04120d;font-weight:1000;
   padding:11px 15px;border-radius:999px;
 }
+.mobile-nav-toggle,.mobile-nav{display:none}
 
 /* Hero */
 .hero{padding:48px 0 24px}
@@ -355,6 +358,11 @@ img{max-width:100%;display:block}
   .category-tiles{grid-template-columns:repeat(3,1fr)}
   .section-heading,.browse-header{align-items:flex-start;flex-direction:column}
   .desktop-nav{display:none}
+  .mobile-nav-toggle{display:inline-flex;align-items:center;justify-content:center;padding:9px 12px;border:1px solid #cbd7e3;border-radius:12px;background:#fff;color:#26364b;font-weight:800}
+  .mobile-nav{display:grid;gap:4px;padding:8px 18px 12px;border-top:1px solid #e4eaf1;background:#fff}
+  .mobile-nav[hidden]{display:none}
+  .mobile-nav a{padding:10px 12px;border-radius:10px;color:#314158;font-weight:800}
+  .mobile-nav a:focus,.mobile-nav a:hover{background:#eef4f8}
 }
 @media(max-width:720px){
   .filter-bar,.hero-search-row{grid-template-columns:1fr}
@@ -372,6 +380,11 @@ img{max-width:100%;display:block}
   .deal-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr}
   .footer-links{justify-content:flex-start}
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
 /* Final mobile-first release skin: light, spacious and evidence-led. */

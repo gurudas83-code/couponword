@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Coupon World — Verified mobile research</title>
+  <desc id="desc">Coupon World evidence-led smartphone comparison and deal discovery.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6f8fb"/>
+      <stop offset="1" stop-color="#dff7ec"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff8a00"/>
+      <stop offset="1" stop-color="#ffd43b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" rx="48" fill="url(#bg)"/>
+  <rect x="74" y="104" width="170" height="170" rx="52" fill="url(#mark)"/>
+  <text x="159" y="215" text-anchor="middle" font-family="Arial, sans-serif" font-size="86" font-weight="900" fill="#211000">CW</text>
+  <text x="290" y="220" font-family="Arial, sans-serif" font-size="64" font-weight="900" fill="#172235">Coupon World</text>
+  <text x="294" y="290" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#526176">Verified mobile research and deals in India</text>
+  <rect x="294" y="370" width="470" height="76" rx="38" fill="#172235"/>
+  <text x="529" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="800" fill="#ffffff">Compare 4 verified smartphones</text>
+</svg>
