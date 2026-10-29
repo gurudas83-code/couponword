@@ -104,6 +104,8 @@ class ProductionRecoveryPublicTests(unittest.TestCase):
         app = (ROOT / "app.js").read_text(encoding="utf-8")
         self.assertIn("renderResearchComparison", app)
         self.assertIn("Evidence-backed A36 vs A56 comparison", app)
+        self.assertIn("loadResearchComparisonFallback", app)
+        self.assertIn("isResearchComparisonQuery", app)
         self.assertIn("renderOfferUnavailable", app)
         self.assertIn("NO_CURRENT_VERIFIED_OFFER", (ROOT / "python/shopping_api.py").read_text(encoding="utf-8"))
 

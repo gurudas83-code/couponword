@@ -508,6 +508,62 @@ function renderResearchComparison(comparison) {
   </section>`;
 }
 
+function isResearchComparisonQuery(query) {
+  const normalized = normalize(query);
+  return (normalized.includes("compare") || normalized.includes(" vs ")) &&
+    normalized.includes("a36") && normalized.includes("a56") &&
+    normalized.includes("galaxy");
+}
+
+function comparisonFromPreviewPayload(payload, query) {
+  const products = Array.isArray(payload?.products) ? payload.products : [];
+  const models = ["Galaxy A36 5G", "Galaxy A56 5G"].map(model => {
+    const rows = products.filter(row => row.brand === "Samsung" && row.model === model);
+    if (!rows.length) return null;
+    const base = rows[0];
+    return {
+      brand: base.brand,
+      model: base.model,
+      manufacturer_spec_status: base.manufacturer_spec_status,
+      official_source: base.official_source,
+      specifications: base.specifications || {},
+      battery_evidence: base.battery_evidence || {},
+      camera_evidence: base.camera_evidence || {},
+      variants: rows.map(row => ({
+        canonical_product_id: row.canonical_product_id,
+        ram_gb: row.ram_gb,
+        storage_gb: row.storage_gb
+      }))
+    };
+  }).filter(Boolean);
+  return models.length === 2 ? {
+    status: "RESEARCH_REFERENCE_ONLY",
+    query,
+    models,
+    source_dataset: "P13.1O_PUBLIC_TECHNICAL_RESEARCH_PREVIEW",
+    commerce: {
+      price: null,
+      stock: null,
+      purchase_cta_eligible: false,
+      publication_eligible: false
+    }
+  } : null;
+}
+
+async function loadResearchComparisonFallback(query, signal) {
+  if (!isResearchComparisonQuery(query)) return null;
+  try {
+    const response = await fetch("/data/mobile_research_preview.json", {
+      credentials: "omit",
+      signal
+    });
+    if (!response.ok) return null;
+    return comparisonFromPreviewPayload(await response.json(), query);
+  } catch (error) {
+    return null;
+  }
+}
+
 function renderOfferUnavailable() {
   return `<section class="ai-detail-block ai-unknowns" aria-label="Verified offer status">
     <h3>Verified offers are currently unavailable</h3>
@@ -686,6 +742,13 @@ async function loadShoppingRecommendation(query) {
 
       if (data.research_comparison && data.request_route === "research_comparison") {
         card.innerHTML = renderResearchComparison(data.research_comparison);
+      } else if (isResearchComparisonQuery(cleanQuery)) {
+        const fallbackComparison = await loadResearchComparisonFallback(cleanQuery, controller.signal);
+        if (fallbackComparison) {
+          card.innerHTML = renderResearchComparison(fallbackComparison);
+          return;
+        }
+        card.innerHTML = `<h3>Verified smartphone research is temporarily unavailable</h3><p>Please try the comparison again.</p>`;
       } else if (String(data.market_data_status || "").toUpperCase() === "CURRENT_OFFERS_UNAVAILABLE") {
         card.innerHTML = renderOfferUnavailable();
       } else {
@@ -1215,6 +1278,11 @@ async function loadShoppingRecommendation(query) {
       error_type: String(error && error.name || "Error").slice(0, 40)
     });
 
+    const fallbackComparison = await loadResearchComparisonFallback(cleanQuery);
+    if (fallbackComparison) {
+      card.innerHTML = renderResearchComparison(fallbackComparison);
+      return;
+    }
     const timedOut = error && error.name === "AbortError";
     const message = timedOut
       ? "The recommendation service took too long to respond."
