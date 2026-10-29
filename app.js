@@ -455,6 +455,67 @@ document.addEventListener("DOMContentLoaded", removeUnverifiedDiscounts);
 
 // Also run after dynamically rendered products.
 setTimeout(removeUnverifiedDiscounts, 300);
+
+function renderResearchComparison(comparison) {
+  const models = Array.isArray(comparison?.models) ? comparison.models : [];
+  if (models.length < 2) return "";
+  const modelCards = models.map(model => {
+    const specs = model.specifications && typeof model.specifications === "object"
+      ? model.specifications
+      : {};
+    const chipset = specs.chipset?.value || "Not available";
+    const battery = specs.battery_mah_typical?.value != null
+      ? `${specs.battery_mah_typical.value} mAh`
+      : "Not available";
+    const mainCamera = specs.rear_main_mp?.value != null
+      ? `${specs.rear_main_mp.value} MP main camera`
+      : "Not available";
+    const ultrawide = specs.rear_ultrawide_mp?.value != null
+      ? `${specs.rear_ultrawide_mp.value} MP ultrawide`
+      : "Not available";
+    const variants = Array.isArray(model.variants)
+      ? model.variants.map(variant =>
+        `${escapeHTML(variant.ram_gb)}GB/${escapeHTML(variant.storage_gb)}GB (${escapeHTML(variant.canonical_product_id)})`
+      ).join(", ")
+      : "Not available";
+    const batteryEvidence = model.battery_evidence || {};
+    const cameraEvidence = model.camera_evidence || {};
+    const cameraTypes = Array.isArray(cameraEvidence.observation_types)
+      ? cameraEvidence.observation_types.join(", ").replaceAll("_", " ")
+      : "No accepted observation";
+    const official = safeLink(model.official_source);
+    return `<article class="research-comparison-card">
+      <div class="research-comparison-card-top">
+        <h4>${escapeHTML(model.brand || "")} ${escapeHTML(model.model || "")}</h4>
+        <span class="research-status">${escapeHTML(model.manufacturer_spec_status || "VERIFIED")}</span>
+      </div>
+      <p><strong>Verified India variants:</strong> ${variants}</p>
+      <dl class="research-comparison-specs">
+        <div><dt>Processor</dt><dd>${escapeHTML(chipset)}</dd></div>
+        <div><dt>Battery</dt><dd>${escapeHTML(battery)}</dd></div>
+        <div><dt>Camera hardware</dt><dd>${escapeHTML(mainCamera)} · ${escapeHTML(ultrawide)}</dd></div>
+      </dl>
+      <p><strong>Battery evidence:</strong> ${escapeHTML(batteryEvidence.status || "Unavailable")} <span class="research-scope">(${escapeHTML(batteryEvidence.applicability || "model context")})</span></p>
+      <p><strong>Camera evidence:</strong> ${escapeHTML(cameraEvidence.status || "Unavailable")} · ${escapeHTML(cameraTypes)} <span class="research-scope">(qualitative/model context)</span></p>
+      ${official !== "#" ? `<a class="mobile-research-link" href="${escapeHTML(official)}" target="_blank" rel="noopener">Official source ↗</a>` : ""}
+    </article>`;
+  }).join("");
+  return `<section class="research-comparison-result" aria-label="Evidence-backed smartphone comparison">
+    <h3>Evidence-backed A36 vs A56 comparison</h3>
+    <p>Research reference only. This comparison uses verified India specifications and labelled model-level battery/camera evidence. It contains no price, offer, ranking or purchase claim.</p>
+    <div class="research-comparison-grid">${modelCards}</div>
+    <a class="btn btn-ghost" href="#mobileResearchPreview">View all 10 verified smartphone variants</a>
+  </section>`;
+}
+
+function renderOfferUnavailable() {
+  return `<section class="ai-detail-block ai-unknowns" aria-label="Verified offer status">
+    <h3>Verified offers are currently unavailable</h3>
+    <p>No current in-stock retailer offer passed the existing price, identity and freshness gates for this shopping query.</p>
+    <a class="btn btn-ghost" href="#mobileResearchPreview">Explore verified smartphone research</a>
+  </section>`;
+}
+
 async function loadShoppingRecommendation(query) {
   const card = document.getElementById("shoppingBrainCard");
   const section = document.getElementById("aiRecommendation");
@@ -623,10 +684,16 @@ async function loadShoppingRecommendation(query) {
         exact_model_query: exactModelQuery ? 1 : 0
       });
 
-      card.innerHTML = `
-        <h3>No strong match found</h3>
-        <p>Try changing the budget, RAM, storage, brand or other requirements.</p>
-      `;
+      if (data.research_comparison && data.request_route === "research_comparison") {
+        card.innerHTML = renderResearchComparison(data.research_comparison);
+      } else if (String(data.market_data_status || "").toUpperCase() === "CURRENT_OFFERS_UNAVAILABLE") {
+        card.innerHTML = renderOfferUnavailable();
+      } else {
+        card.innerHTML = `
+          <h3>No strong match found</h3>
+          <p>Try changing the budget, RAM, storage, brand or other requirements.</p>
+        `;
+      }
       return;
     }
 

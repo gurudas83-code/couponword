@@ -41,6 +41,7 @@ def _load_pipeline():
 MOBILE_UNIVERSE_FILE = (
     ROOT / "data" / "mobile_universe_priority_126.json"
 )
+RESEARCH_PREVIEW_FILE = ROOT / "data" / "mobile_research_preview.json"
 
 
 def _normalise_route_text(value: str) -> str:
@@ -84,6 +85,81 @@ def _load_mobile_brand_aliases() -> set[str]:
 
 
 MOBILE_BRAND_ALIASES = _load_mobile_brand_aliases()
+
+
+def _load_public_research_preview() -> dict:
+    try:
+        payload = json.loads(RESEARCH_PREVIEW_FILE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    if payload.get("mode") != "PUBLIC_TECHNICAL_RESEARCH_PREVIEW":
+        return {}
+    products = payload.get("products")
+    if not isinstance(products, list) or len(products) != 10:
+        return {}
+    if len({item.get("canonical_product_id") for item in products}) != len(products):
+        return {}
+    return payload
+
+
+def _comparison_models(query: str) -> list[str]:
+    normalized = _normalise_route_text(query)
+    if "compare" not in normalized and " vs " not in f" {normalized} ":
+        return []
+    # Keep this route deliberately narrow: it reuses the frozen P13.1O
+    # dataset for named Samsung A36/A56 comparisons and never broadens the
+    # shopping candidate pool or invents a comparison engine.
+    if "a36" in normalized and "a56" in normalized and "galaxy" in normalized:
+        return ["Galaxy A36 5G", "Galaxy A56 5G"]
+    return []
+
+
+def _research_comparison(query: str, intent: dict) -> dict | None:
+    models = _comparison_models(query)
+    if not models:
+        return None
+    payload = _load_public_research_preview()
+    products = payload.get("products") or []
+    model_rows = []
+    for model in models:
+        rows = [
+            row for row in products
+            if row.get("brand") == "Samsung" and row.get("model") == model
+        ]
+        if not rows:
+            return None
+        base = rows[0]
+        model_rows.append({
+            "brand": base.get("brand"),
+            "model": base.get("model"),
+            "manufacturer_spec_status": base.get("manufacturer_spec_status"),
+            "technical_lane": base.get("technical_lane"),
+            "official_source": base.get("official_source"),
+            "specifications": base.get("specifications") or {},
+            "battery_evidence": base.get("battery_evidence") or {},
+            "camera_evidence": base.get("camera_evidence") or {},
+            "variants": [
+                {
+                    "canonical_product_id": row.get("canonical_product_id"),
+                    "ram_gb": row.get("ram_gb"),
+                    "storage_gb": row.get("storage_gb"),
+                }
+                for row in rows
+            ],
+        })
+    return {
+        "status": "RESEARCH_REFERENCE_ONLY",
+        "query": query,
+        "intent": intent,
+        "models": model_rows,
+        "source_dataset": "P13.1O_PUBLIC_TECHNICAL_RESEARCH_PREVIEW",
+        "commerce": {
+            "price": None,
+            "stock": None,
+            "purchase_cta_eligible": False,
+            "publication_eligible": False,
+        },
+    }
 
 
 def mobile_scoped_query(query: str) -> str:
@@ -193,6 +269,48 @@ def recommend():
 
     pipeline_query = mobile_scoped_query(query)
 
+    parsed_intent = parse_query(query)
+    research_comparison = _research_comparison(query, parsed_intent)
+    if research_comparison is not None:
+        # Comparison research is intentionally served from the existing
+        # frozen P13.1O dataset. It never calls discovery, ranking or retailer
+        # offer code, so strict shopping gates remain unchanged.
+        output = apply_response_contract(
+            {
+                "query": query,
+                "intent": parsed_intent,
+                "recommendations": [],
+                "result_status": "RESEARCH_REFERENCE_ONLY",
+                "status": "RESEARCH_REFERENCE_ONLY",
+                "completion_status": "PASS",
+                "completion_reason": "Evidence-backed comparison served from the public research preview.",
+                "exact_model_scope": {
+                    "active": True,
+                    "model_tokens": ["a36", "a56"],
+                    "numeric_brand_pairs": [],
+                },
+                "stage_counts": {
+                    "discovered": 0,
+                    "identity_prepared": 0,
+                    "identity_verified": 0,
+                    "official_verified": 2,
+                    "evidence_ready": 2,
+                    "fit_scored": 0,
+                    "qualifying_50_plus": 0,
+                    "qualifying_unique_models": 0,
+                    "recommendations_returned": 0,
+                },
+                "research_comparison": research_comparison,
+                "market_data_status": "CURRENT_OFFERS_UNAVAILABLE",
+            },
+            requested_query=query,
+        )
+        output["request_route"] = "research_comparison"
+        output["candidate_pool_entered"] = False
+        output["hard_gate_rejections"] = []
+        output["response_reason"] = "RESEARCH_COMPARISON"
+        return jsonify(output)
+
     try:
         payload = _load_pipeline()(
             query=pipeline_query,
@@ -221,7 +339,28 @@ def recommend():
     if pipeline_query != query:
         payload["query"] = query
 
-    return jsonify(apply_response_contract(payload, requested_query=query))
+    output = apply_response_contract(payload, requested_query=query)
+    output["request_route"] = "shopping_candidate_pool"
+    output["candidate_pool_entered"] = True
+    gate_rejections = output.get("failures") or []
+    if (
+        not output.get("recommendations")
+        and output.get("market_data_status") == "CURRENT_OFFERS_UNAVAILABLE"
+    ):
+        gate_rejections = [
+            {
+                "code": "NO_CURRENT_VERIFIED_OFFER",
+                "stage": "commerce_gate",
+                "reason": "No current in-stock retailer offer passed the existing price, identity and freshness gates.",
+            }
+        ] + gate_rejections
+    output["hard_gate_rejections"] = gate_rejections
+    output["response_reason"] = (
+        "NO_CURRENT_VERIFIED_OFFER"
+        if gate_rejections and gate_rejections[0].get("code") == "NO_CURRENT_VERIFIED_OFFER"
+        else None
+    )
+    return jsonify(output)
 
 
 if __name__ == "__main__":

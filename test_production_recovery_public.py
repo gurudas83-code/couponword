@@ -6,6 +6,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 
@@ -62,6 +63,49 @@ class ProductionRecoveryPublicTests(unittest.TestCase):
         source = (ROOT / "python/shopping_api.py").read_text(encoding="utf-8")
         self.assertIn('host="0.0.0.0"', source)
         self.assertIn('os.environ.get("PORT", "8000")', source)
+
+    def test_named_a36_a56_comparison_uses_research_route(self):
+        sys.path.insert(0, str(ROOT / "python"))
+        import shopping_api
+
+        query = "Compare Samsung Galaxy A36 5G and Galaxy A56 5G based on battery, camera and processor."
+        with patch.object(shopping_api, "run_pipeline", side_effect=AssertionError("shopping pool must not run")):
+            response = shopping_api.app.test_client().get("/api/recommend", query_string={"q": query})
+        self.assertEqual(response.status_code, 200)
+        body = response.get_json()
+        self.assertEqual(body["request_route"], "research_comparison")
+        self.assertFalse(body["candidate_pool_entered"])
+        self.assertEqual(body["response_reason"], "RESEARCH_COMPARISON")
+        self.assertEqual([item["model"] for item in body["research_comparison"]["models"]], ["Galaxy A36 5G", "Galaxy A56 5G"])
+        self.assertEqual([len(item["variants"]) for item in body["research_comparison"]["models"]], [3, 3])
+        self.assertFalse(body["research_comparison"]["commerce"]["purchase_cta_eligible"])
+
+    def test_zero_offer_shopping_response_exposes_gate_reason(self):
+        sys.path.insert(0, str(ROOT / "python"))
+        import shopping_api
+
+        payload = {
+            "query": "mobile under 20000",
+            "intent": {"category": "smartphone", "budget_max": 20000},
+            "recommendations": [],
+            "result_status": "PARTIAL",
+            "market_data_status": "CURRENT_OFFERS_UNAVAILABLE",
+            "stage_counts": {"discovered": 30, "recommendations_returned": 0},
+        }
+        with patch.object(shopping_api, "run_pipeline", return_value=payload):
+            response = shopping_api.app.test_client().get("/api/recommend", query_string={"q": "mobile under 20000"})
+        body = response.get_json()
+        self.assertEqual(body["request_route"], "shopping_candidate_pool")
+        self.assertTrue(body["candidate_pool_entered"])
+        self.assertEqual(body["response_reason"], "NO_CURRENT_VERIFIED_OFFER")
+        self.assertEqual(body["hard_gate_rejections"][0]["code"], "NO_CURRENT_VERIFIED_OFFER")
+
+    def test_frontend_renders_research_and_offer_gate_states(self):
+        app = (ROOT / "app.js").read_text(encoding="utf-8")
+        self.assertIn("renderResearchComparison", app)
+        self.assertIn("Evidence-backed A36 vs A56 comparison", app)
+        self.assertIn("renderOfferUnavailable", app)
+        self.assertIn("NO_CURRENT_VERIFIED_OFFER", (ROOT / "python/shopping_api.py").read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":
