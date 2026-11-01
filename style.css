@@ -900,6 +900,7 @@ body.clean-ui .footer{border-top-color:#dce4ed}
 .mobile-research-inventory-placeholder{display:flex;align-items:center;justify-content:center;padding:8px;color:#9fb3ae;font-size:.62rem;line-height:1.3;text-align:center}
 .mobile-research-inventory-body{display:flex;flex-direction:column;gap:6px;min-width:0}
 .mobile-research-inventory-body h3{margin:0;color:#fff;font-size:.9rem;line-height:1.3}
+.mobile-research-launch{margin:0;color:#c8d7d3;font-size:.72rem;line-height:1.4}
  .mobile-research-model-card{align-items:start}
  .mobile-research-variant-list{display:grid;gap:4px;margin:0;padding:0 0 0 16px;color:#c8d7d3;font-size:.7rem;line-height:1.4}
  .mobile-research-variant-list li::marker{color:#79e5bd}

@@ -205,11 +205,12 @@
     var sources = sourceUrls.slice(0, 3).map(function (url, index) { return link(url, index ? "Source" : "Official/source evidence"); }).join("");
     var counts = (discoveryRows.length ? discoveryRows.length + " research record" + (discoveryRows.length === 1 ? "" : "s") : "No discovery record") +
       (frozenRows.length ? " · " + frozenRows.length + " frozen exact variant" + (frozenRows.length === 1 ? "" : "s") : "");
+    var launch = card.india_launch_date ? '<p class="mobile-research-launch"><strong>Verified India launch:</strong> ' + escapeHtml(card.india_launch_date) + '</p>' : '';
     return '<article class="mobile-research-inventory-card mobile-research-model-card" data-mobile-model-card="' + escapeHtml(card.model_key) + '">' +
       inventoryImage(card) +
       '<div class="mobile-research-inventory-body">' +
       '<div class="mobile-research-card-top"><span class="research-status inventory-status-' + escapeHtml(statusLabel.toLowerCase()) + '">' + escapeHtml(statusLabel) + '</span></div>' +
-      '<h3>' + escapeHtml(card.brand + " " + card.model) + '</h3>' +
+      '<h3>' + escapeHtml(card.brand + " " + card.model) + '</h3>' + launch +
       '<p class="mobile-research-variant">' + escapeHtml(counts || "Model research reference") + '</p>' +
       '<ul class="mobile-research-variant-list">' + (variantItems || "<li>Variant details are not specified in the source universe.</li>") + '</ul>' +
       '<p class="mobile-research-inventory-fields"><strong>Verified fields:</strong> ' + escapeHtml(fields) + '</p>' +
@@ -436,10 +437,13 @@
       var item = card.specifications[key] || {};
       return '<li><span>' + escapeHtml(item.label || key.replace(/_/g, " ")) + '</span><strong>' + escapeHtml(specValue(key, item)) + '</strong></li>';
     }).join("");
+    var launch = card.india_launch_date ? '<p class="mobile-research-launch"><strong>Verified India launch:</strong> ' + escapeHtml(card.india_launch_date) + '</p>' : '';
+    var launchSource = card.india_launch_source ? link(card.india_launch_source, "India launch source") : "";
     return '<article class="mobile-research-inventory-card mobile-research-result-card" data-mobile-model-card="' + escapeHtml(card.model_key) + '">' +
       inventoryImage(card) + '<div class="mobile-research-inventory-body"><div class="mobile-research-card-top"><span class="research-status">' + escapeHtml(status) + '</span><span class="research-status">Research only</span></div>' +
-      '<h3>' + escapeHtml(card.brand + " " + card.model) + '</h3><p class="mobile-research-variant">Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join(" · ")) + '</p>' +
+      '<h3>' + escapeHtml(card.brand + " " + card.model) + '</h3>' + launch + '<p class="mobile-research-variant">Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join(" · ")) + '</p>' +
       (specs ? '<ul class="mobile-research-model-specs">' + specs + '</ul>' : '<p>Technical specifications are pending verification.</p>') +
+      '<div class="mobile-research-sources">' + launchSource + '</div>' +
       '<button type="button" class="btn btn-ghost mobile-research-detail-button" data-research-detail="' + escapeHtml(card.model_key) + '">View details</button>' +
       '<p class="mobile-research-gate">No price · no stock · no purchase action</p></div></article>';
   }

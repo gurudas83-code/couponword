@@ -89,13 +89,43 @@ EVIDENCE_FIELD_ALIASES = {
 # placeholders until explicit usage rights are recorded.
 PUBLIC_IMAGE_RIGHTS_CLEARED = False
 
-
 def _read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
 def _norm(value: Any) -> str:
     return re.sub(r"[^a-z0-9]+", " ", str(value or "").casefold()).strip()
+
+
+# Official India newsroom launch evidence reviewed for the New & Noteworthy
+# research section. These dates are model-level launch evidence only; they do
+# not assert current stock, price or purchase eligibility.
+RECENT_INDIA_LAUNCHES = {
+    (_norm("Samsung"), _norm("Galaxy F70e 5G")): {
+        "india_launch_date": "2026-02-09",
+        "india_launch_source": "https://news.samsung.com/in/samsung-india-unveils-galaxy-f70e-5g-with-showstopper-camera-ultra-smooth-display-premium-leather-finish",
+    },
+    (_norm("Samsung"), _norm("Galaxy M17e 5G")): {
+        "india_launch_date": "2026-03-18",
+        "india_launch_source": "https://news.samsung.com/in/samsung-launches-galaxy-m17e-5g-redefining-the-smartphone-experience-for-indias-young-on-the-go-generation",
+    },
+    (_norm("Samsung"), _norm("Galaxy A37 5G")): {
+        "india_launch_date": "2026-03-26",
+        "india_launch_source": "https://news.samsung.com/in/samsung-unveils-galaxy-a57-5g-and-galaxy-a37-5g-packing-pro-level-features-in-camera-and-ai",
+    },
+    (_norm("Samsung"), _norm("Galaxy A57 5G")): {
+        "india_launch_date": "2026-03-26",
+        "india_launch_source": "https://news.samsung.com/in/samsung-unveils-galaxy-a57-5g-and-galaxy-a37-5g-packing-pro-level-features-in-camera-and-ai",
+    },
+    (_norm("Samsung"), _norm("Galaxy S26 Ultra")): {
+        "india_launch_date": "2026-02-26",
+        "india_launch_source": "https://news.samsung.com/in/samsung-india-launches-its-most-advanced-ai-phone-the-galaxy-s26-series-pre-order-now-for-exciting-offers",
+    },
+    (_norm("Samsung"), _norm("Galaxy S26 FE")): {
+        "india_launch_date": "2026-09-14",
+        "india_launch_source": "https://news.samsung.com/in/samsung-launches-galaxy-s26-fe-in-india-bringing-flagship-camera-galaxy-ai-and-powerful-performance",
+    },
+}
 
 
 def _number(value: Any) -> int | None:
@@ -434,6 +464,14 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
             "source_urls": [],
             "image_status": "PLACEHOLDER",
         }
+        launch = RECENT_INDIA_LAUNCHES.get(identity)
+        if launch:
+            card.update({
+                "india_launch_date": launch["india_launch_date"],
+                "india_launch_source": launch["india_launch_source"],
+                "india_launch_evidence_status": "VERIFIED_SOURCE",
+            })
+            card["source_urls"].append(launch["india_launch_source"])
         cards_by_identity[identity] = card
         model_cards.append(card)
 
