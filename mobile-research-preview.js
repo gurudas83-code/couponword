@@ -7,6 +7,18 @@
   var grid = document.getElementById("mobileResearchGrid");
   if (!section || !grid) return;
 
+  var searchSection = document.getElementById("mobileResearchSearch");
+  var researchQuery = document.getElementById("mobileResearchQuery");
+  var researchSearchButton = document.getElementById("mobileResearchSearchButton");
+  var researchResults = document.getElementById("mobileResearchResults");
+  var researchResultsMore = document.getElementById("mobileResearchResultsMore");
+  var researchSearchStatus = document.getElementById("mobileResearchSearchStatus");
+  var researchNewSection = document.getElementById("mobileResearchNew");
+  var researchNewGrid = document.getElementById("mobileResearchNewGrid");
+  var detailSection = document.getElementById("mobileResearchDetail");
+  var detailContent = document.getElementById("mobileResearchDetailContent");
+  var detailTitle = document.getElementById("mobileResearchDetailTitle");
+
   var catalogueGrid = document.getElementById("catalogueDiscoveryGrid");
   var catalogueCount = document.getElementById("catalogueDiscoveryCount");
   var catalogueMore = document.getElementById("catalogueDiscoveryMore");
@@ -25,6 +37,12 @@
   var inventorySourceCounts = {};
   var verifiedRows = [];
   var CATALOGUE_INITIAL_LIMIT = 18;
+  var INVENTORY_PAGE_SIZE = 18;
+  var MAX_SEARCH_RESULTS = 6;
+  var inventoryExpanded = false;
+  var searchExpanded = false;
+  var lastSearchQuery = "";
+  var lastSearchMatches = [];
   var TECHNICAL_FIELD_LABELS = {
     chipset: "Chipset",
     gpu: "GPU",
@@ -58,9 +76,11 @@
     durability: "Durability"
   };
 
-  // The dataset has already passed the publish-safety checks. Keep the section
-  // visible for normal visitors; commerce gates remain in the rendered cards.
-  section.hidden = false;
+  // Keep the research catalogue out of the idle homepage. It is revealed by an
+  // explicit search, comparison link, or Browse All action.
+  section.hidden = true;
+  var catalogueSection = document.getElementById("mobileResearchCatalogue");
+  if (catalogueSection) catalogueSection.hidden = true;
 
   function escapeHtml(value) {
     return String(value == null ? "" : value)
@@ -210,8 +230,12 @@
         inventorySourceCounts.visible_model_cards + " smartphone models · " + (inventorySourceCounts.deduplicated_discovery_records || inventoryRows.length) + " research records · " + (inventorySourceCounts.frozen_verified_variants || verifiedRows.length) + " frozen exact variants" :
         filtered.length + " smartphone models · " + matchingVariants + " matching research/frozen variants";
     }
-    inventoryGrid.innerHTML = filtered.length ? filtered.map(renderInventoryCard).join("") : "<p>No smartphone models match these filters.</p>";
-    if (inventoryMore) inventoryMore.hidden = true;
+    var visible = inventoryExpanded ? filtered : filtered.slice(0, INVENTORY_PAGE_SIZE);
+    inventoryGrid.innerHTML = visible.length ? visible.map(renderInventoryCard).join("") : "<p>No smartphone models match these filters.</p>";
+    if (inventoryMore) {
+      inventoryMore.hidden = filtered.length <= INVENTORY_PAGE_SIZE;
+      inventoryMore.textContent = inventoryExpanded ? "Show fewer research models" : "Load more research models";
+    }
   }
 
   function refreshInventoryControls() {
@@ -237,6 +261,8 @@
         inventoryCards = Array.isArray(payload.model_cards) ? payload.model_cards : [];
         inventorySourceCounts = payload.source_counts || {};
         refreshInventoryControls();
+        renderNewNoteworthy();
+        handleResearchHash();
       })
       .catch(function () {
         if (inventoryCount) inventoryCount.textContent = "Research catalogue unavailable";
@@ -324,6 +350,191 @@
       '</article>';
   }
 
+  function normalizeResearch(value) {
+    return String(value == null ? "" : value).toLowerCase()
+      .replace(/[’']/g, "")
+      .replace(/[^a-z0-9\u0900-\u097f]+/g, " ")
+      .replace(/\s+/g, " ").trim();
+  }
+
+  function researchRowsFor(card, query) {
+    var rows = inventoryRowsForCard(card);
+    var numbers = [];
+    var match;
+    var numberPattern = /\b(\d{1,2}|\d{3,4})\s*gb\b/gi;
+    while ((match = numberPattern.exec(String(query || "")))) numbers.push(Number(match[1]));
+    var ramMatch = String(query || "").match(/(\d{1,2})\s*gb\s*ram/i);
+    var storageMatch = String(query || "").match(/(\d{2,4})\s*gb\s*(?:storage|rom)/i);
+    var ram = ramMatch ? Number(ramMatch[1]) : (numbers.length > 1 ? numbers[0] : null);
+    var storage = storageMatch ? Number(storageMatch[1]) : (numbers.length > 1 ? numbers[1] : null);
+    if (ram == null && storage == null) return rows;
+    return rows.filter(function (row) {
+      var ramOK = ram == null || Number(row.ram_gb) === ram;
+      var storageOK = storage == null || Number(row.storage_gb) === storage;
+      return ramOK && storageOK;
+    });
+  }
+
+  function excludedBrand(query) {
+    var beforeMarker = String(query || "").match(/\b([a-z][a-z0-9/&-]*)\s+(?:ko\s+)?(?:chhodkar|chhod|छोड़कर|छोड़|हटाकर|के\s+बिना|बिना)\b/i);
+    if (beforeMarker) return normalizeResearch(beforeMarker[1]);
+    var match = String(query || "").match(/(?:exclude|excluding|without|except|no|chhodkar|chhod|छोड़कर|छोड़|हटाकर|के बिना)\s+([a-z][a-z0-9/& -]{1,30})/i);
+    if (!match) return "";
+    return normalizeResearch(match[1]).split(" ")[0];
+  }
+
+  function researchFeatureKeys(query) {
+    var text = normalizeResearch(query);
+    var keys = [];
+    var groups = [
+      [/camera|कैमरा/, ["rear_main_mp", "rear_camera_system", "front_camera_system", "ois"]],
+      [/battery|बैटरी/, ["battery_mah_typical", "battery_capacity_description", "battery_and_charging", "wired_charging_max_w"]],
+      [/gaming|game|गेमिंग/, ["gpu", "chipset"]],
+      [/software|android|update|support|सॉफ्टवेयर/, ["operating_system", "launch_android", "os_upgrade_generations", "security_update_policy", "security_support_years"]],
+      [/display|screen|डिस्प्ले/, ["display_type", "display_inches", "display_resolution", "display_refresh_max_hz"]]
+    ];
+    groups.forEach(function (group) { if (group[0].test(text)) keys = keys.concat(group[1]); });
+    return Array.from(new Set(keys));
+  }
+
+  function researchSpecKeys(card, rows) {
+    var keys = Object.keys(card.specifications || {});
+    (rows || []).forEach(function (row) { keys = keys.concat(Object.keys(row.specifications || {})); });
+    return keys;
+  }
+
+  function researchMatches(card, query) {
+    var text = normalizeResearch(query);
+    var excluded = excludedBrand(text);
+    var brand = normalizeResearch(card.brand);
+    if (excluded && brand.indexOf(excluded) >= 0) return [];
+    var rows = researchRowsFor(card, query);
+    if (!rows.length) return [];
+    var haystack = normalizeResearch(card.brand + " " + card.model + " " + rows.map(function (row) {
+      return row.variant_text || ((row.ram_gb || "") + "gb " + (row.storage_gb || "") + "gb");
+    }).join(" "));
+    var featureKeys = researchFeatureKeys(text);
+    var stop = /^(best|good|phone|mobile|smartphone|under|below|within|price|in|the|and|with|ram|storage|camera|battery|gaming|game|software|support|display|screen|ko|ke|bina|chhodkar|chhod|का|के|में|अच्छा|फोन|मोबाइल)$/;
+    var modelTokens = text.split(" ").filter(function (token) { return token && !stop.test(token) && !/^\d+$/.test(token) && token !== "gb" && token !== "exclude" && token !== "excluding" && token !== "without" && token !== "except" && token !== "no"; });
+    var identityTokens = modelTokens.filter(function (token) { return !/^(chhodkar|chhod|छोड़कर|छोड़|हटाकर|के|बिना)$/.test(token) && token !== excluded && !/^\d+gb$/.test(token); });
+    var identityMatch = identityTokens.length > 0 && identityTokens.every(function (token) { return haystack.indexOf(token) >= 0; });
+    var broadMatch = featureKeys.length > 0 && featureKeys.some(function (key) { return researchSpecKeys(card, rows).indexOf(key) >= 0; });
+    var brandOnly = identityTokens.length === 1 && (brand.indexOf(identityTokens[0]) >= 0 || haystack.indexOf(identityTokens[0]) >= 0);
+    var hardVariantOnly = /\b\d{1,2}\s*gb(?:\s*ram)?\b/i.test(String(query || "")) || /\b\d{2,4}\s*gb\s*(?:storage|rom)?\b/i.test(String(query || ""));
+    var exclusionOnly = Boolean(excluded) && identityTokens.length === 0 && featureKeys.length === 0;
+    if (!identityMatch && !broadMatch && !brandOnly && !(hardVariantOnly && identityTokens.length === 0) && !exclusionOnly) return [];
+    if (featureKeys.length && !broadMatch && !identityMatch) return [];
+    return rows;
+  }
+
+  function renderResearchResultCard(card, rows) {
+    var status = card.status || "RESEARCH_ONLY";
+    var variants = rows.map(function (row) {
+      return (row.ram_gb != null ? row.ram_gb + "GB RAM" : "RAM not specified") + " · " + (row.storage_gb != null ? row.storage_gb + "GB storage" : "storage not specified");
+    });
+    var specs = Object.keys(card.specifications || {}).slice(0, 4).map(function (key) {
+      var item = card.specifications[key] || {};
+      return '<li><span>' + escapeHtml(item.label || key.replace(/_/g, " ")) + '</span><strong>' + escapeHtml(specValue(key, item)) + '</strong></li>';
+    }).join("");
+    return '<article class="mobile-research-inventory-card mobile-research-result-card" data-mobile-model-card="' + escapeHtml(card.model_key) + '">' +
+      inventoryImage(card) + '<div class="mobile-research-inventory-body"><div class="mobile-research-card-top"><span class="research-status">' + escapeHtml(status) + '</span><span class="research-status">Research only</span></div>' +
+      '<h3>' + escapeHtml(card.brand + " " + card.model) + '</h3><p class="mobile-research-variant">Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join(" · ")) + '</p>' +
+      (specs ? '<ul class="mobile-research-model-specs">' + specs + '</ul>' : '<p>Technical specifications are pending verification.</p>') +
+      '<button type="button" class="btn btn-ghost mobile-research-detail-button" data-research-detail="' + escapeHtml(card.model_key) + '">View details</button>' +
+      '<p class="mobile-research-gate">No price · no stock · no purchase action</p></div></article>';
+  }
+
+  function sortResearchMatches(matches, query) {
+    var text = normalizeResearch(query);
+    return matches.slice().sort(function (a, b) {
+      var aExact = normalizeResearch(a.card.brand + " " + a.card.model) === text ? 1 : 0;
+      var bExact = normalizeResearch(b.card.brand + " " + b.card.model) === text ? 1 : 0;
+      if (aExact !== bExact) return bExact - aExact;
+      var aEvidence = Object.keys(a.card.specifications || {}).length;
+      var bEvidence = Object.keys(b.card.specifications || {}).length;
+      return bEvidence - aEvidence || String(a.card.model).localeCompare(String(b.card.model));
+    });
+  }
+
+  function searchResearch(query) {
+    lastSearchQuery = String(query || "").trim();
+    searchExpanded = false;
+    if (!lastSearchQuery) {
+      if (researchResults) { researchResults.hidden = true; researchResults.innerHTML = ""; }
+      if (researchResultsMore) researchResultsMore.hidden = true;
+      if (researchSearchStatus) researchSearchStatus.textContent = "";
+      return [];
+    }
+    revealSearch();
+    if (/\b(?:compare|vs|versus)\b/i.test(lastSearchQuery)) {
+      if (researchResults) {
+        researchResults.hidden = false;
+        researchResults.innerHTML = '<p class="mobile-research-empty">Comparison queries use the existing evidence-backed comparison route below. No shopping ranking or price claim is added.</p>';
+      }
+      if (researchSearchStatus) researchSearchStatus.textContent = "Comparison request routed to evidence-backed research";
+      if (researchResultsMore) researchResultsMore.hidden = true;
+      return [];
+    }
+    var matches = sortResearchMatches(inventoryCards.map(function (card) {
+      var rows = researchMatches(card, lastSearchQuery);
+      return rows.length ? { card: card, rows: rows } : null;
+    }).filter(Boolean), lastSearchQuery);
+    lastSearchMatches = matches;
+    var visible = searchExpanded ? matches : matches.slice(0, MAX_SEARCH_RESULTS);
+    if (researchResults) {
+      researchResults.hidden = false;
+      researchResults.innerHTML = visible.length ? visible.map(function (item) { return renderResearchResultCard(item.card, item.rows); }).join("") : '<p class="mobile-research-empty">No matching research model was found. Try a model name, feature or Browse All Research.</p>';
+    }
+    if (researchSearchStatus) {
+      var budget = /(?:under|below|within|ke|andar)\s*₹?\s*[0-9]/i.test(lastSearchQuery);
+      researchSearchStatus.textContent = matches.length + " matching research model" + (matches.length === 1 ? "" : "s") + " · showing " + visible.length + (budget ? " · prices/offers are unavailable, so this is unpriced research only" : "");
+    }
+    if (researchResultsMore) { researchResultsMore.hidden = matches.length <= MAX_SEARCH_RESULTS; researchResultsMore.textContent = searchExpanded ? "Show fewer results" : "Load more research results"; }
+    return matches;
+  }
+
+  function revealSearch() {
+    if (searchSection) searchSection.hidden = false;
+  }
+
+  function revealPreview() {
+    section.hidden = false;
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function revealCatalogue() {
+    if (catalogueSection) catalogueSection.hidden = false;
+    if (catalogueSection) catalogueSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function showDetail(modelKey) {
+    var card = inventoryCards.find(function (item) { return item.model_key === modelKey; });
+    if (!card || !detailSection || !detailContent) return;
+    detailSection.hidden = false;
+    if (detailTitle) detailTitle.textContent = card.brand + " " + card.model;
+    detailContent.innerHTML = renderInventoryCard(card) + '<p class="mobile-research-gate">Research detail only · no current offer, price or purchase action.</p>';
+    detailSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function handleResearchHash() {
+    var hash = String(window.location.hash || "");
+    if (hash === "#mobileResearchPreview") revealPreview();
+    if (hash === "#mobileResearchCatalogue") revealCatalogue();
+    if (hash.indexOf("#mobileResearchDetail/") === 0) showDetail(decodeURIComponent(hash.slice("#mobileResearchDetail/".length)));
+  }
+
+  function renderNewNoteworthy() {
+    if (!researchNewSection || !researchNewGrid) return;
+    var now = Date.now();
+    var recent = inventoryCards.filter(function (card) {
+      var date = card.india_launch_date || card.launch_date_india || card.launch_date;
+      var time = Date.parse(String(date || ""));
+      return card.status === "OFFICIAL_VERIFIED" && Number.isFinite(time) && now - time >= 0 && now - time <= 365 * 24 * 60 * 60 * 1000 && (card.source_urls || []).length;
+    }).sort(function (a, b) { return Date.parse(b.india_launch_date || b.launch_date_india || b.launch_date) - Date.parse(a.india_launch_date || a.launch_date_india || a.launch_date); }).slice(0, 6);
+    researchNewSection.hidden = recent.length === 0;
+    researchNewGrid.innerHTML = recent.map(function (card) { return renderResearchResultCard(card, inventoryRowsForCard(card)); }).join("");
+  }
+
   fetch("/data/mobile_research_preview.json", { credentials: "omit" })
     .then(function (response) {
       if (!response.ok) throw new Error("research preview unavailable");
@@ -334,6 +545,8 @@
       verifiedRows = products;
       grid.innerHTML = products.length ? products.map(renderProduct).join("") : "<p>Verified mobile research is currently unavailable.</p>";
       refreshInventoryControls();
+      renderNewNoteworthy();
+      handleResearchHash();
     })
     .catch(function () {
       grid.innerHTML = "<p>Verified mobile research is currently unavailable.</p>";
@@ -363,9 +576,38 @@
   }
 
   [inventoryQuery, inventoryBrand, inventoryRam, inventoryStorage, inventoryStatus].forEach(function (control) {
-    if (control) control.addEventListener("input", renderInventory);
-    if (control && control.tagName === "SELECT") control.addEventListener("change", renderInventory);
+    if (control) control.addEventListener("input", function () { inventoryExpanded = false; renderInventory(); });
+    if (control && control.tagName === "SELECT") control.addEventListener("change", function () { inventoryExpanded = false; renderInventory(); });
   });
-  if (inventoryMore) inventoryMore.hidden = true;
+  if (inventoryMore) inventoryMore.addEventListener("click", function () { inventoryExpanded = !inventoryExpanded; renderInventory(); });
+  if (researchSearchButton) researchSearchButton.addEventListener("click", function () { searchResearch(researchQuery && researchQuery.value); });
+  if (researchQuery) researchQuery.addEventListener("keydown", function (event) { if (event.key === "Enter") searchResearch(researchQuery.value); });
+  document.querySelectorAll("[data-mobile-research-query]").forEach(function (button) {
+    button.addEventListener("click", function () { if (researchQuery) researchQuery.value = button.getAttribute("data-mobile-research-query") || ""; searchResearch(researchQuery && researchQuery.value); });
+  });
+  if (researchResultsMore) researchResultsMore.addEventListener("click", function () { searchExpanded = !searchExpanded; searchResearch(lastSearchQuery); });
+  document.addEventListener("click", function (event) {
+    var detail = event.target.closest("[data-research-detail]");
+    if (detail) {
+      event.preventDefault();
+      window.location.hash = "mobileResearchDetail/" + encodeURIComponent(detail.getAttribute("data-research-detail"));
+      showDetail(detail.getAttribute("data-research-detail"));
+    }
+    var linkTarget = event.target.closest('a[href="#mobileResearchPreview"], a[href="#mobileResearchCatalogue"]');
+    if (linkTarget) {
+      if (linkTarget.getAttribute("href") === "#mobileResearchPreview") revealPreview();
+      if (linkTarget.getAttribute("href") === "#mobileResearchCatalogue") revealCatalogue();
+    }
+  });
+  window.addEventListener("hashchange", handleResearchHash);
+  window.CouponWorldMobileResearch = {
+    isResearchQuery: function (value) {
+      return /(?:phone|mobile|smartphone|galaxy|samsung|iphone|pixel|redmi|oneplus|nothing|realme|vivo|oppo|xiaomi|motorola|poco|iqoo|lava|tecno|infinix|camera|battery|gaming|display|software|android|ram|storage|फोन|मोबाइल|कैमरा|बैटरी|गेमिंग|सैमसंग|अच्छा)/i.test(String(value || ""));
+    },
+    search: searchResearch,
+    clear: function () { if (researchQuery) researchQuery.value = ""; searchResearch(""); },
+    revealPreview: revealPreview,
+    revealCatalogue: revealCatalogue
+  };
   loadInventoryCatalogue();
 }());

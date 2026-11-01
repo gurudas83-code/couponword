@@ -385,8 +385,15 @@ function escapeHTML(value) {
 searchInput.addEventListener("input", renderDeals);
 sortSelect.addEventListener("change", renderDeals);
 
+function submitMobileResearchIfApplicable(query) {
+  if (window.CouponWorldMobileResearch && typeof window.CouponWorldMobileResearch.isResearchQuery === "function" && window.CouponWorldMobileResearch.isResearchQuery(query)) {
+    window.CouponWorldMobileResearch.search(query);
+  }
+}
+
 heroSearchButton.addEventListener("click", () => {
   const query = heroSearch.value;
+  submitMobileResearchIfApplicable(query);
   applySearch(query);
   loadShoppingRecommendation(query);
 });
@@ -394,6 +401,7 @@ heroSearchButton.addEventListener("click", () => {
 heroSearch.addEventListener("keydown", e => {
   if (e.key === "Enter") {
     const query = heroSearch.value;
+    submitMobileResearchIfApplicable(query);
     applySearch(query);
     loadShoppingRecommendation(query);
   }
@@ -415,6 +423,7 @@ document.querySelectorAll("[data-mobile-query]").forEach(el => {
     const query = String(el.dataset.mobileQuery || "").trim();
     if (!query) return;
     heroSearch.value = query;
+    submitMobileResearchIfApplicable(query);
     loadShoppingRecommendation(query);
   });
 });
