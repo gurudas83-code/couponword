@@ -79,6 +79,17 @@ class MobileResearchInventoryVisibilityTests(unittest.TestCase):
         self.assertTrue(all(row["image_status"] == "PLACEHOLDER" for row in rows))
         self.assertTrue(all(row["image_url"] is None for row in rows))
 
+    def test_cards_expose_existing_specs_and_explicit_pending_fields(self):
+        cards = build_public_catalogue(ROOT)["model_cards"]
+        self.assertTrue(all("specifications" in card for card in cards))
+        self.assertTrue(all("missing_specifications" in card for card in cards))
+        samsung = [card for card in cards if card["brand"] == "Samsung" and card["model"] == "Galaxy A36 5G"]
+        self.assertEqual(len(samsung), 1)
+        self.assertIn("chipset", samsung[0]["specifications"])
+        self.assertIn("gpu", samsung[0]["missing_specifications"])
+        pending = [card for card in cards if not card["specifications"]]
+        self.assertGreater(len(pending), 150)
+
 
 if __name__ == "__main__":
     unittest.main()

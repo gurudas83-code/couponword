@@ -25,6 +25,38 @@
   var inventorySourceCounts = {};
   var verifiedRows = [];
   var CATALOGUE_INITIAL_LIMIT = 18;
+  var TECHNICAL_FIELD_LABELS = {
+    chipset: "Chipset",
+    gpu: "GPU",
+    display_type: "Display technology",
+    display_inches: "Display size",
+    display_resolution: "Display resolution",
+    display_size_description: "Display size",
+    display_resolution_description: "Display resolution",
+    display_refresh_max_hz: "Refresh rate",
+    display_refresh_description: "Refresh rate",
+    display_type_description: "Display technology",
+    rear_main_mp: "Main camera",
+    rear_ultrawide_mp: "Ultrawide camera",
+    rear_telephoto_mp: "Telephoto camera",
+    front_mp: "Front camera",
+    ois: "OIS",
+    battery_mah_typical: "Battery capacity",
+    wired_charging_max_w: "Wired charging",
+    launch_android: "Launch Android",
+    os_upgrade_generations: "OS updates",
+    security_support_years: "Security updates",
+    ip_rating: "IP rating",
+    network_support: "5G/network support",
+    rear_camera_system: "Rear camera system",
+    front_camera_system: "Front camera system",
+    battery_capacity_description: "Battery capacity",
+    charging_description: "Charging support",
+    battery_and_charging: "Battery and charging",
+    operating_system: "Operating system",
+    security_update_policy: "Security update policy",
+    durability: "Durability"
+  };
 
   // The dataset has already passed the publish-safety checks. Keep the section
   // visible for normal visitors; commerce gates remain in the rendered cards.
@@ -105,7 +137,7 @@
     var discoveryRows = rows.filter(function (row) { return !row.canonical_product_id; });
     var frozenRows = rows.filter(function (row) { return !!row.canonical_product_id; });
     var statuses = Array.from(new Set(rows.map(inventoryVariantStatus)));
-    var statusLabel = statuses.length === 1 ? statuses[0] : "MIXED_EVIDENCE";
+    var statusLabel = card.status || (statuses.length === 1 ? statuses[0] : "MIXED_EVIDENCE");
     var variantItems = rows.map(function (row) {
       var ram = row.ram_gb != null ? row.ram_gb + "GB RAM" : "RAM not specified";
       var storage = row.storage_gb != null ? row.storage_gb + "GB storage" : "storage not specified";
@@ -116,6 +148,12 @@
     discoveryRows.forEach(function (row) { (row.verified_fields || []).forEach(function (field) { fieldSet[String(field).replace(/_/g, " ")] = true; }); });
     var fields = Object.keys(fieldSet).join(", ") || "No exact fields verified in discovery record";
     var specSet = {};
+    Object.keys(card.specifications || {}).forEach(function (key) {
+      var item = card.specifications[key] || {};
+      var label = String(item.label || key).replace(/_/g, " ");
+      var value = specValue(key, item);
+      if (value != null && value !== "") specSet[label + "|" + String(value)] = true;
+    });
     frozenRows.forEach(function (row) {
       Object.keys(row.specifications || {}).forEach(function (key) {
         var item = row.specifications[key] || {};
@@ -128,9 +166,21 @@
       var separator = entry.indexOf("|");
       return '<li><span>' + escapeHtml(entry.slice(0, separator)) + '</span><strong>' + escapeHtml(entry.slice(separator + 1)) + '</strong></li>';
     }).join("");
-    var details = frozenSpecs ? '<ul class="mobile-research-model-specs">' + frozenSpecs + '</ul>' : '<p>Verification pending for detailed manufacturer specifications.</p>';
+    var knownLabels = {};
+    Object.keys(specSet).forEach(function (entry) {
+      var separator = entry.indexOf("|");
+      if (separator > 0) knownLabels[entry.slice(0, separator).toLowerCase()] = true;
+    });
+    var missingSpecs = [];
+    (card.missing_specifications || []).forEach(function (key) {
+      var label = TECHNICAL_FIELD_LABELS[key] || String(key).replace(/_/g, " ");
+      if (!knownLabels[String(label).toLowerCase()] && missingSpecs.indexOf(label) < 0) missingSpecs.push(label);
+    });
+    var pending = missingSpecs.length ? '<p class="mobile-research-pending"><strong>Verification pending:</strong> ' + escapeHtml(missingSpecs.join(", ")) + '</p>' : '';
+    var details = frozenSpecs ? '<p class="mobile-research-known"><strong>Source-backed specifications:</strong></p><ul class="mobile-research-model-specs">' + frozenSpecs + '</ul>' + pending : '<p>Source-backed technical specifications are not yet available for this model.</p>' + pending;
     var sourceUrls = [];
     discoveryRows.forEach(function (row) { (row.source_urls || []).forEach(function (url) { if (sourceUrls.indexOf(url) < 0) sourceUrls.push(url); }); });
+    (card.source_urls || []).forEach(function (url) { if (sourceUrls.indexOf(url) < 0) sourceUrls.push(url); });
     frozenRows.forEach(function (row) { if (row.official_source && sourceUrls.indexOf(row.official_source) < 0) sourceUrls.push(row.official_source); });
     var sources = sourceUrls.slice(0, 3).map(function (url, index) { return link(url, index ? "Source" : "Official/source evidence"); }).join("");
     var counts = (discoveryRows.length ? discoveryRows.length + " research record" + (discoveryRows.length === 1 ? "" : "s") : "No discovery record") +

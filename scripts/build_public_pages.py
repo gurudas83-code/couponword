@@ -101,6 +101,17 @@ def _validate_public_content(output: Path) -> None:
     model_keys = [card.get("model_key") for card in model_cards]
     if any(not key for key in model_keys) or len(model_keys) != len(set(model_keys)):
         raise RuntimeError("public mobile research catalogue contains duplicate or missing model card keys")
+    required_card_fields = {"brand", "model", "status", "specifications", "missing_specifications", "source_urls", "image_status"}
+    for card in model_cards:
+        if not required_card_fields <= set(card):
+            raise RuntimeError("public model card is missing technical coverage metadata")
+        if card.get("image_status") != "PLACEHOLDER":
+            raise RuntimeError("public model card image rights are not explicitly cleared")
+        for key, item in (card.get("specifications") or {}).items():
+            if not isinstance(item, dict) or not str(item.get("source_url") or "").startswith("https://"):
+                raise RuntimeError("public model card contains an unsupported specification source")
+        if not isinstance(card.get("missing_specifications"), list):
+            raise RuntimeError("public model card missing-specification list is invalid")
     keys = [row.get("record_key") for row in discovery_rows]
     if any(not key for key in keys) or len(keys) != len(set(keys)):
         raise RuntimeError("public mobile research catalogue contains duplicate or missing record keys")

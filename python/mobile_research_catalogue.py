@@ -11,6 +11,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+from urllib.parse import urlparse
 from pathlib import Path
 from typing import Any
 
@@ -20,6 +21,67 @@ STATUS_ORDER = {
     "RESEARCH_ONLY": 1,
     "PARTIALLY_VERIFIED": 2,
     "OFFICIAL_VERIFIED": 3,
+}
+
+# These are the approved technical fields already used by the frozen P13.1
+# research preview.  The public catalogue may expose a value only when that
+# preview contains source-backed evidence for the same normalized model.
+# Everything else remains explicitly pending; discovery rows never acquire
+# guessed specifications.
+TECHNICAL_FIELD_LABELS = {
+    "chipset": "Chipset",
+    "gpu": "GPU",
+    "display_type": "Display technology",
+    "display_inches": "Display size",
+    "display_resolution": "Display resolution",
+    "display_refresh_max_hz": "Refresh rate",
+    "rear_main_mp": "Main camera",
+    "rear_ultrawide_mp": "Ultrawide camera",
+    "rear_telephoto_mp": "Telephoto camera",
+    "front_mp": "Front camera",
+    "ois": "OIS",
+    "battery_mah_typical": "Battery capacity",
+    "wired_charging_max_w": "Wired charging",
+    "launch_android": "Launch Android",
+    "os_upgrade_generations": "OS updates",
+    "security_support_years": "Security updates",
+    "ip_rating": "IP rating",
+    "network_support": "5G/network support",
+    "display_size_description": "Display size",
+    "display_resolution_description": "Display resolution",
+    "display_type_description": "Display technology",
+    "display_refresh_description": "Refresh rate",
+    "rear_camera_system": "Rear camera system",
+    "front_camera_system": "Front camera system",
+    "battery_capacity_description": "Battery capacity",
+    "charging_description": "Charging support",
+    "battery_and_charging": "Battery and charging",
+    "operating_system": "Operating system",
+    "security_update_policy": "Security update policy",
+    "durability": "Durability",
+}
+
+EVIDENCE_FIELD_ALIASES = {
+    "processor": "chipset",
+    "resolution_main_display": "display_resolution_description",
+    "resolution": "display_resolution_description",
+    "size_main_display": "display_size_description",
+    "display_size": "display_size_description",
+    "technology_main_display": "display_type_description",
+    "display": "display_type_description",
+    "max_refresh_rate_main_display": "display_refresh_description",
+    "rear_camera_resolution_multiple": "rear_camera_system",
+    "primary_camera_rear_camera": "rear_camera_system",
+    "front_camera_resolution": "front_camera_system",
+    "secondary_camera_front_camera": "front_camera_system",
+    "battery_capacity_mah_typical": "battery_capacity_description",
+    "charging": "charging_description",
+    "battery_and_charging": "battery_and_charging",
+    "operating_system": "operating_system",
+    "security_update_period_valid_until": "security_update_policy",
+    "cellular_network": "network_support",
+    "network": "network_support",
+    "durability": "durability",
 }
 
 # Existing catalogue provenance is retained privately, but it is not a legal
@@ -136,6 +198,96 @@ def _exact_variant(variant: dict[str, Any]) -> bool:
     return _number(variant.get("ram_gb")) is not None and _number(variant.get("storage_gb")) is not None
 
 
+def _public_spec_value(item: Any) -> dict[str, Any] | None:
+    """Return one source-backed spec item safe for the public catalogue."""
+    if not isinstance(item, dict):
+        return None
+    value = item.get("value")
+    source_url = item.get("source_url")
+    if value in (None, "", [], {}) or not isinstance(source_url, str) or not source_url.startswith("https://"):
+        return None
+    return {
+        "label": str(item.get("label") or "").strip(),
+        "value": value,
+        "source_url": source_url,
+        "applicability": str(item.get("applicability") or "MODEL_SHARED"),
+        "checked_date": str(item.get("checked_date") or ""),
+    }
+
+
+def _merge_model_specs(products: list[dict[str, Any]]) -> tuple[dict[str, dict[str, Any]], list[str]]:
+    """Merge only identical model-level values from frozen evidence.
+
+    A disagreement between physical variants is intentionally withheld rather
+    than silently selecting one value.  That keeps a model card useful while
+    preserving the exact-variant safety boundary.
+    """
+    merged: dict[str, dict[str, Any]] = {}
+    conflicts: set[str] = set()
+    for product in products:
+        for key, raw_item in (product.get("specifications") or {}).items():
+            if key not in TECHNICAL_FIELD_LABELS:
+                continue
+            item = _public_spec_value(raw_item)
+            if item is None:
+                continue
+            previous = merged.get(key)
+            if previous is None:
+                merged[key] = item
+            elif str(previous.get("value")) != str(item.get("value")):
+                conflicts.add(key)
+    for key in conflicts:
+        merged.pop(key, None)
+    missing = [key for key in TECHNICAL_FIELD_LABELS if key not in merged]
+    return merged, missing
+
+
+def _load_existing_source_specs(root: Path) -> dict[tuple[str, str], list[dict[str, Any]]]:
+    """Adapt already-reviewed official evidence into public model-level fields.
+
+    The source files contain retailer identifiers and offer observations too;
+    this adapter reads only technical values whose source is an official
+    manufacturer host and drops all offer/identity metadata.
+    """
+    result: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    evidence_files = (root / "data/phase_e_release_evidence.json", root / "data/verified_product_evidence_cache.json")
+    for path in evidence_files:
+        if not path.is_file():
+            continue
+        payload = _read_json(path)
+        for record in payload.get("records") or []:
+            identity = (_norm(record.get("brand")), _norm(record.get("model")))
+            if not identity[0] or not identity[1]:
+                continue
+            official_url = str(record.get("official_url") or "")
+            official_host = (urlparse(official_url).hostname or "").casefold()
+            if not official_url.startswith("https://") or not official_host or official_host.endswith("amazon.in"):
+                continue
+            mapped: dict[str, dict[str, Any]] = {}
+            for raw_key, raw_item in (record.get("specifications") or {}).items():
+                key = EVIDENCE_FIELD_ALIASES.get(str(raw_key))
+                if not key or key not in TECHNICAL_FIELD_LABELS or not isinstance(raw_item, dict):
+                    continue
+                value = raw_item.get("value")
+                if value in (None, "", [], {}):
+                    continue
+                source_url = str(raw_item.get("source_url") or official_url)
+                source_host = (urlparse(source_url).hostname or "").casefold()
+                if not source_url.startswith("https://") or source_host.endswith("amazon.in"):
+                    continue
+                observed = str(raw_item.get("observed_at") or record.get("observed_at") or "")
+                mapped[key] = {
+                    "label": TECHNICAL_FIELD_LABELS[key],
+                    "value": value,
+                    "source_url": source_url,
+                    "applicability": "MODEL_SHARED",
+                    "checked_date": observed[:10] if observed else "",
+                }
+            if mapped:
+                result.setdefault(identity, []).append({"specifications": mapped})
+    return result
+
+
 def build_public_catalogue(root: Path) -> dict[str, Any]:
     priority_payload = _read_json(root / "data/mobile_universe_priority_126.json")
     universe_payload = _read_json(root / "data/mobile_universe_2023_2026.json")
@@ -219,6 +371,12 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
             "model": str(model.get("model") or "Unknown model"),
             "discovery_record_keys": [],
             "frozen_variant_ids": [],
+            "status": "RESEARCH_ONLY",
+            "status_reason": "Source-backed technical evidence is incomplete for this model.",
+            "specifications": {},
+            "missing_specifications": list(TECHNICAL_FIELD_LABELS),
+            "source_urls": [],
+            "image_status": "PLACEHOLDER",
         }
         cards_by_identity[identity] = card
         model_cards.append(card)
@@ -234,6 +392,16 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
         card["brand"] = str(product.get("brand") or card["brand"])
         card["model"] = str(product.get("model") or card["model"])
         card["frozen_variant_ids"].append(str(product.get("canonical_product_id") or ""))
+        if STATUS_ORDER.get("OFFICIAL_VERIFIED", 0) > STATUS_ORDER.get(card["status"], 0):
+            card["status"] = "OFFICIAL_VERIFIED"
+            card["status_reason"] = "Manufacturer-backed technical evidence is available for the frozen India research variants."
+        source = product.get("official_source")
+        if isinstance(source, str) and source.startswith("https://") and source not in card["source_urls"]:
+            card["source_urls"].append(source)
+        for spec in (product.get("specifications") or {}).values():
+            source_url = spec.get("source_url") if isinstance(spec, dict) else None
+            if isinstance(source_url, str) and source_url.startswith("https://") and source_url not in card["source_urls"]:
+                card["source_urls"].append(source_url)
 
     for row in rows:
         identity = (_norm(row.get("brand")), _norm(row.get("model")))
@@ -241,6 +409,38 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
         if card is None:
             raise ValueError(f"discovery row is absent from source universe: {identity}")
         card["discovery_record_keys"].append(str(row["record_key"]))
+        if STATUS_ORDER.get(row.get("status"), 0) > STATUS_ORDER.get(card["status"], 0):
+            card["status"] = str(row["status"])
+            card["status_reason"] = str(row.get("status_reason") or card["status_reason"])
+        for source in row.get("source_urls") or []:
+            if isinstance(source, str) and source.startswith("https://") and source not in card["source_urls"]:
+                card["source_urls"].append(source)
+
+    # Attach only model-shared fields that are identical across the frozen
+    # variants.  Discovery records remain identity/variant evidence and do not
+    # gain specifications merely because a model has a similarly named row.
+    preview_by_identity: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for product in preview:
+        identity = (_norm(product.get("brand")), _norm(product.get("model")))
+        preview_by_identity.setdefault(identity, []).append(product)
+    source_specs_by_identity = _load_existing_source_specs(root)
+    for identity, card in cards_by_identity.items():
+        preview_products = preview_by_identity.get(identity, [])
+        preview_keys = {
+            key for product in preview_products for key in (product.get("specifications") or {})
+        }
+        # Frozen P13.1 evidence is authoritative for its models. Existing
+        # manufacturer evidence fills only fields that the frozen records do
+        # not already cover; conflicting evidence is withheld by the merge.
+        supplemental = [
+            {"specifications": {key: item for key, item in (product.get("specifications") or {}).items() if key not in preview_keys}}
+            for product in source_specs_by_identity.get(identity, [])
+        ]
+        specs, missing = _merge_model_specs(preview_products + supplemental)
+        card["specifications"] = specs
+        card["missing_specifications"] = missing
+        card["available_specification_fields"] = [TECHNICAL_FIELD_LABELS[key] for key in specs]
+        card["source_urls"] = list(dict.fromkeys(card["source_urls"]))
 
     model_cards.sort(key=lambda card: (_norm(card["brand"]), _norm(card["model"]), card["model_key"]))
     if len(model_cards) != len(models):

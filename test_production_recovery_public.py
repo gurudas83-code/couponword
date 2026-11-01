@@ -31,7 +31,7 @@ class ProductionRecoveryPublicTests(unittest.TestCase):
             self.assertTrue(all(not row["commerce"]["purchase_cta_eligible"] for row in preview["products"]))
             catalogue = json.loads((output / "coupons.json").read_text(encoding="utf-8"))
             self.assertEqual(len(catalogue), 105)
-            self.assertIn('mobile-research-preview.js?v=5', (output / "index.html").read_text(encoding="utf-8"))
+            self.assertIn('mobile-research-preview.js?v=6', (output / "index.html").read_text(encoding="utf-8"))
 
     def test_homepage_exposes_research_and_accessibility_paths(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
