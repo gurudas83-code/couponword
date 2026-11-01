@@ -514,6 +514,19 @@ def detect_requirements(
         for brand in detect_brands(text)
     ]
 
+    # Model exclusions use the existing ``avoid`` channel alongside brand
+    # exclusions. Keep the marker structured so discovery removes the named
+    # family before ranking without adding another filter engine.
+    model_avoid_match = re.search(
+        r"\b(?:excluding|without|except)\s+"
+        r"((?:[a-z]+\s+)?[a-z]*\d+[a-z]*)\b",
+        text,
+        re.I,
+    )
+    if model_avoid_match:
+        model_value = re.sub(r"\s+", "_", model_avoid_match.group(1).strip().lower())
+        add(avoid, f"model_{model_value}")
+
     for brand in detected_brands:
         marker = f"brand_{brand}"
 
@@ -527,8 +540,12 @@ def detect_requirements(
         avoid_brand_patterns = (
             rf"\bno\s+{re.escape(brand)}\b",
             rf"\bwithout\s+{re.escape(brand)}\b",
+            rf"\bexcluding\s+{re.escape(brand)}\b",
+            rf"\bexcept\s+{re.escape(brand)}\b",
             rf"\b{re.escape(brand)}\s+nahi\b",
             rf"\b{re.escape(brand)}\s+nahi\s+chahiye\b",
+            rf"\b{re.escape(brand)}\s+mat\s+dikh(?:ana|ao)\b",
+            rf"\b{re.escape(brand)}\s+ko\s+chhodkar\b",
             rf"\bdont\s+want\s+{re.escape(brand)}\b",
             rf"\bdon't\s+want\s+{re.escape(brand)}\b",
         )
@@ -690,6 +707,23 @@ def detect_requirements(
             add(
                 must_have,
                 f"{bare_memory_pair.group(2)}gb_storage",
+            )
+
+        # Preserve the same exact-variant contract when storage is written
+        # in terabytes, for example ``16GB 1TB``. Convert the supported TB
+        # unit into the existing GB requirement vocabulary used by the
+        # downstream discovery and fit gates.
+        tb_memory_pair = re.search(
+            r"\b(2|3|4|6|8|12|16|18|24)\s*gb\s+"
+            r"(1|2|4)\s*tb\b",
+            text,
+            re.I,
+        )
+        if category == "smartphone" and tb_memory_pair:
+            add(must_have, f"{tb_memory_pair.group(1)}gb_ram")
+            add(
+                must_have,
+                f"{int(tb_memory_pair.group(2)) * 1024}gb_storage",
             )
         ram_match = re.search(
             r"\b(2|3|4|6|8|12|16|18|24|32|64)\s*gb\s*(?:of\s*)?ram\b",
@@ -1449,6 +1483,11 @@ def parse_query(query: str) -> dict:
     smartphone_spec_context = bool(
         re.search(
             r"\b(?:"
+            # Explicit physical memory/storage forms: 8/256, 8GB 256GB,
+            # 8 GB / 256 GB and 8GB RAM 256GB storage.
+            r"\d+\s*gb\s+(?:ram\s*)?\d+\s*gb|"
+            r"\d+\s*gb\s+(?:ram\s*)?\d+\s*tb|"
+            r"\d+\s*gb\s*(?:/|\+)\s*\d+\s*gb?|"
             r"\d+\s*(?:/|\+)\s*\d+|"
             r"\d+\s+\d+\s+(?:wala|wali|variant)|"
             r"\d{4,5}\s*mah|"

@@ -14,7 +14,19 @@ class ActiveRouteTests(unittest.TestCase):
         with patch.object(shopping_api, "run_pipeline", return_value=payload) as pipeline:
             response = shopping_api.app.test_client().get("/api/recommend?q=mobile+under+50000")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.get_json(), payload)
+        body = response.get_json()
+        # Issue 17 is the approved additive response contract. Preserve the
+        # pipeline's order and stage facts while asserting its normalized API
+        # boundary fields.
+        self.assertEqual(
+            [item.get("product_id") for item in body["recommendations"]],
+            [item.get("product_id") for item in payload["recommendations"]],
+        )
+        self.assertEqual(body["result_status"], payload["result_status"])
+        self.assertEqual(body["stage_counts"], payload["stage_counts"])
+        self.assertEqual(body["api_contract_version"], "issue17-v1")
+        self.assertEqual(body["request_route"], "shopping_candidate_pool")
+        self.assertTrue(body["candidate_pool_entered"])
         pipeline.assert_called_once_with(query="mobile under 50000", max_candidates=15,
                                          max_results=3, live_fast=True)
 

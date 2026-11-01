@@ -40,6 +40,7 @@ from multi_retailer_page_renderer import (
     render_multi_retailer_section,
 )
 from cta_eligibility import evaluate_offer
+from retailer_product_registry import get_retailer_product
 
 MULTI_RETAILER_PRODUCTS = load_multi_retailer_products()
 
@@ -627,12 +628,11 @@ def render(product, products):
         'loading="eager" fetchpriority="high" decoding="async">'
     )
 
-    cta = (
-        f'<a class="cta" href="{html.escape(link)}" target="_blank" '
-        'rel="nofollow sponsored noopener">Check Latest Offer â†’</a>'
-        if active and link and not is_mobile else
-        '<span class="cta disabled">Currently unavailable</span>'
-    )
+    # A catalogue link is not a current offer. Keep the page fail-closed
+    # until the existing exact-variant/retailer/freshness/stock validator
+    # below returns VERIFIED_BUYABLE.
+    cta = '<span class="cta disabled">Current price and stock not verified.</span>'
+
 
     multi_product_id = couponworld_product_id(product)
 
@@ -646,14 +646,19 @@ def render(product, products):
         if isinstance(multi_data, dict) else None
     )
 
+    best_retailer = str((best_multi_offer or {}).get("retailer") or "").strip().lower()
+    registry_record = get_retailer_product(multi_product_id, best_retailer) or {}
     best_decision = evaluate_offer(
         best_multi_offer,
         product_id=multi_product_id,
         variant=str((multi_data or {}).get("variant") or ""),
         now=datetime.now(timezone.utc),
+        expected_retailer_product_id=registry_record.get("retailer_product_id"),
     ) if isinstance(best_multi_offer, dict) else {"eligible": False}
 
-    if isinstance(best_multi_offer, dict) and best_decision.get("eligible"):
+    verified_offer = isinstance(best_multi_offer, dict) and best_decision.get("eligible") is True
+
+    if verified_offer:
         best_price = best_multi_offer.get("price")
         best_retailer = str(
             best_multi_offer.get("retailer") or ""
@@ -825,10 +830,10 @@ footer{{padding:32px 0 44px;color:#667085;font-size:14px}}
 <div class="meta">
 {f'<span>Brand: {html.escape(brand)}</span>' if brand else ''}
 {f'<span>ASIN: {html.escape(asin)}</span>' if asin else ''}
-<span>Status: {html.escape(availability)}</span>
+<span>Status: {html.escape(availability if verified_offer else ('Currently unavailable' if not active else 'Current price and stock not verified.'))}</span>
 </div>
 {price_html}
-<div class="status">{html.escape(availability) if best_multi_offer else ('Check Latest Offer' if active else 'Currently unavailable')}</div>
+<div class="status">{html.escape(availability) if verified_offer else ('Currently unavailable' if not active else 'Current price and stock not verified.')}</div>
 {cta}
 <div class="note">Displayed price is based on the latest verified data available to Coupon World. Final price and availability are confirmed on the retailer site.</div>
 </div>

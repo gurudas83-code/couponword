@@ -175,6 +175,31 @@
       </div>
     </section>
 
+    <section class="container mobile-research-catalogue-section" id="mobileResearchCatalogue" aria-labelledby="mobileResearchCatalogueTitle">
+      <div class="section-panel premium-panel">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">Existing mobile inventory</span>
+            <h2 id="mobileResearchCatalogueTitle">Explore All Mobiles</h2>
+            <p><span id="mobileResearchCatalogueCount">Loading research records…</span> from the existing discovery universe.</p>
+          </div>
+          <span class="research-badge catalogue-badge">Research browsing</span>
+        </div>
+        <p class="mobile-research-catalogue-notice">These records are for comparison research only. <strong>OFFICIAL_VERIFIED means manufacturer-backed evidence is available for the displayed record; it does not certify complete Product DNA, current availability, ranking or purchase eligibility.</strong> Missing price, stock, retailer and purchase information stays unavailable.</p>
+        <div class="mobile-research-catalogue-filters" role="search" aria-label="Filter mobile research records">
+          <label>Search model<input id="mobileResearchCatalogueQuery" type="search" placeholder="Brand or model"></label>
+          <label>Brand<select id="mobileResearchCatalogueBrand"><option value="">All brands</option></select></label>
+          <label>RAM<select id="mobileResearchCatalogueRam"><option value="">All RAM</option></select></label>
+          <label>Storage<select id="mobileResearchCatalogueStorage"><option value="">All storage</option></select></label>
+          <label>Evidence<select id="mobileResearchCatalogueStatus"><option value="">All evidence statuses</option></select></label>
+        </div>
+        <div id="mobileResearchCatalogueGrid" class="mobile-research-catalogue-grid" aria-live="polite">
+          Loading existing mobile research…
+        </div>
+        <button id="mobileResearchCatalogueMore" class="btn btn-ghost catalogue-more" type="button" hidden>Show all research records</button>
+      </div>
+    </section>
+
     <section class="container catalogue-discovery-section" id="catalogueDiscovery" aria-labelledby="catalogueDiscoveryTitle">
       <div class="section-panel premium-panel">
         <div class="section-heading">
@@ -440,7 +465,7 @@ Explore practical guides for smartphones, smartwatches and wireless audio.
 </footer>
 
   <script src="/app.js?v=15"></script>
-  <script src="/mobile-research-preview.js?v=3"></script>
+  <script src="/mobile-research-preview.js?v=4"></script>
   <!-- deployment-refresh: 2026-07-21T17:26:00.696191+00:00 -->
 </body>
 </html>

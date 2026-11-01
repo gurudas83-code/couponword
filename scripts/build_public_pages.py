@@ -7,16 +7,21 @@ import argparse
 import json
 import re
 import shutil
+import sys
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+for import_path in (ROOT, ROOT / "python"):
+    if str(import_path) not in sys.path:
+        sys.path.insert(0, str(import_path))
 PUBLIC_FILES = (
     "index.html", "style.css", "app.js", "mobile-research-preview.js", "coupons.json", "CNAME",
     "robots.txt", "sitemap.xml", "buying-guides.html", "buying-guides.js",
 )
 PUBLIC_DATA_FILES = ("data/seo-pages.json", "data/mobile_research_preview.json")
-PUBLIC_DIRECTORIES = ("assets", "products", "seo", "guides")
+PUBLIC_DIRECTORIES = ("assets", "seo", "guides")
+PUBLIC_SOURCE_DIRECTORIES = ("assets", "products", "seo", "guides")
 FORBIDDEN_NAMES = {
     "admin.html", "validator.html", "python", "reports", "outputs",
     "backups", ".git", "phase_e_current.zip",
@@ -37,6 +42,34 @@ def _copy_file(relative: str, destination: Path) -> None:
     shutil.copy2(source, target)
 
 
+def _generate_product_pages(destination: Path) -> None:
+    """Render product pages from current catalogue data into the artifact."""
+    from python import build_product_pages as product_pages
+
+    products = product_pages.load_products()
+    pages_root = destination / "products"
+    for product in products:
+        relative = product_pages.page_dir(product).relative_to(product_pages.OUT)
+        target = pages_root / relative
+        target.mkdir(parents=True, exist_ok=True)
+        (target / "index.html").write_text(
+            product_pages.render(product, products),
+            encoding="utf-8",
+        )
+
+
+def _generate_research_catalogue(destination: Path) -> None:
+    """Write a sanitized discovery index derived from existing research files."""
+    from python.mobile_research_catalogue import build_public_catalogue
+
+    target = destination / "data" / "mobile_research_catalogue.json"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(
+        json.dumps(build_public_catalogue(ROOT), ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
 def _validate_public_content(output: Path) -> None:
     preview_path = output / "data" / "mobile_research_preview.json"
     preview = json.loads(preview_path.read_text(encoding="utf-8"))
@@ -54,6 +87,26 @@ def _validate_public_content(output: Path) -> None:
             raise RuntimeError("research preview exposes commerce data")
         if commerce.get("purchase_cta_eligible") or commerce.get("publication_eligible"):
             raise RuntimeError("research preview exposes a commerce CTA")
+
+    catalogue_path = output / "data" / "mobile_research_catalogue.json"
+    catalogue = json.loads(catalogue_path.read_text(encoding="utf-8"))
+    discovery_rows = catalogue.get("records")
+    if catalogue.get("mode") != "PUBLIC_MOBILE_RESEARCH_CATALOGUE" or not isinstance(discovery_rows, list):
+        raise RuntimeError("public mobile research catalogue has an invalid mode or record list")
+    keys = [row.get("record_key") for row in discovery_rows]
+    if any(not key for key in keys) or len(keys) != len(set(keys)):
+        raise RuntimeError("public mobile research catalogue contains duplicate or missing record keys")
+    allowed_statuses = {"OFFICIAL_VERIFIED", "PARTIALLY_VERIFIED", "RESEARCH_ONLY", "NEEDS_VERIFICATION"}
+    for row in discovery_rows:
+        if row.get("status") not in allowed_statuses:
+            raise RuntimeError("public mobile research catalogue contains an unknown evidence status")
+        commerce = row.get("commerce") or {}
+        if any(commerce.get(key) not in (None, False, "") for key in ("price", "stock")):
+            raise RuntimeError("public mobile research catalogue exposes commerce data")
+        if commerce.get("purchase_cta_eligible") or commerce.get("publication_eligible"):
+            raise RuntimeError("public mobile research catalogue exposes a commerce CTA")
+        if row.get("status") == "OFFICIAL_VERIFIED" and not set(("brand", "model", "ram_gb", "storage_gb")) <= set(row.get("verified_fields") or []):
+            raise RuntimeError("officially verified discovery row is missing exact variant fields")
 
     coupons_path = output / "coupons.json"
     coupons = json.loads(coupons_path.read_text(encoding="utf-8"))
@@ -84,13 +137,19 @@ def _validate_public_content(output: Path) -> None:
         for pattern in SECRET_PATTERNS:
             if pattern.search(text):
                 raise RuntimeError(f"sensitive content pattern found in public artifact: {path.relative_to(output)}")
+        if "products" in path.relative_to(output).parts:
+            # Product pages must not carry an active CTA beside an
+            # unavailable price. Verified offer pages are allowed only
+            # through the renderer's explicit offer decision.
+            if re.search(r"price-unavailable.*?<a class=\"cta\" href=", text, re.S):
+                raise RuntimeError(f"stale active CTA beside unavailable price: {path.relative_to(output)}")
 
 
 def build(output: Path) -> Path:
     output = output.resolve()
     if output == ROOT or output in ROOT.parents:
         raise ValueError("public artifact output cannot replace the repository")
-    source_paths = [ROOT / item for item in PUBLIC_FILES + PUBLIC_DIRECTORIES]
+    source_paths = [ROOT / item for item in PUBLIC_FILES + PUBLIC_SOURCE_DIRECTORIES]
     if any(output == source or source in output.parents for source in source_paths):
         raise ValueError("public artifact output cannot overlap a source path")
     if output.exists():
@@ -104,6 +163,12 @@ def build(output: Path) -> Path:
         if not source.is_dir():
             raise FileNotFoundError(f"required public directory is missing: {relative}")
         shutil.copytree(source, output / relative)
+
+    _generate_research_catalogue(output)
+
+    # Product pages are generated from the same fail-closed renderer used
+    # for local review. Never copy stale HTML from the source checkout.
+    _generate_product_pages(output)
 
     leaked = []
     for path in output.rglob("*"):

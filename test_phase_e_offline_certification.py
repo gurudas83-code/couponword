@@ -20,7 +20,8 @@ class OfflineCertificationHarnessTests(unittest.TestCase):
         self.assertIn("fixture_gap", payload["counts"])
         self.assertEqual(payload["quality_review_status"], "PROPOSED_NOT_INDEPENDENTLY_APPROVED")
 
-    def test_existing_snapshot_reaches_real_pipeline(self):
+    def test_missing_snapshot_is_reported_as_fixture_gap(self):
+        """Absent frozen inputs remain an honest offline fixture gap."""
         root = Path(__file__).resolve().parent
         output = root / "outputs" / "phase_e_offline_pilot_test.json"
         result = subprocess.run(
@@ -29,9 +30,10 @@ class OfflineCertificationHarnessTests(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0)
         payload = json.loads(output.read_text(encoding="utf-8"))
-        self.assertEqual(payload["counts"]["executed"], 1)
-        self.assertEqual(payload["counts"]["deterministic_matches"], 1)
-        self.assertEqual(payload["run_1"][0]["semantic"]["stage_counts"]["recommendations_returned"], 3)
+        self.assertEqual(payload["counts"]["executed"], 0)
+        self.assertEqual(payload["counts"]["fixture_gap"], 1)
+        self.assertEqual(payload["counts"]["deterministic_matches"], 0)
+        self.assertEqual(payload["run_1"][0]["status"], "FIXTURE_GAP")
 
     def test_frozen_catalogue_lane_reaches_real_pipeline(self):
         root = Path(__file__).resolve().parent

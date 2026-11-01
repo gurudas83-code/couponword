@@ -9,8 +9,10 @@ from pathlib import Path
 
 try:
     from cta_eligibility import evaluate_offer, VERIFIED_BUYABLE
+    from retailer_product_registry import get_retailer_product
 except ImportError:  # package-style test imports
     from .cta_eligibility import evaluate_offer, VERIFIED_BUYABLE
+    from .retailer_product_registry import get_retailer_product
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -129,11 +131,14 @@ def render_multi_retailer_section(product, multi_products):
         decision_offer = dict(offer)
         decision_offer.setdefault("product_id", product_id)
         decision_offer.setdefault("variant", str(multi.get("variant") or product.get("variant") or ""))
+        registry_record = get_retailer_product(product_id, retailer) or {}
+        expected_retailer_product_id = registry_record.get("retailer_product_id")
         decision = evaluate_offer(
             decision_offer,
             product_id=product_id,
             variant=str(multi.get("variant") or product.get("variant") or ""),
             now=datetime.now(timezone.utc),
+            expected_retailer_product_id=expected_retailer_product_id,
         )
         price = format_price(offer.get("price")) if decision["status"] == VERIFIED_BUYABLE else "Price unavailable"
 

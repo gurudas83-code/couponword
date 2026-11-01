@@ -76,6 +76,7 @@ def evaluate_offer(
     variant: str,
     now: datetime,
     provider_error: bool = False,
+    expected_retailer_product_id: str | None = None,
 ) -> dict[str, Any]:
     """Return one authoritative, fail-closed decision for a purchase CTA."""
     if provider_error:
@@ -86,8 +87,11 @@ def evaluate_offer(
     offer_product = _text(offer.get("product_id") or offer.get("canonical_product_id"))
     if offer_product and offer_product != _text(product_id):
         return {"eligible": False, "status": EXACT_VARIANT_UNVERIFIED, "reason": "wrong_product"}
-    if not _text(offer.get("retailer_product_id")) or not _text(offer.get("variant")):
+    retailer_product_id = _text(offer.get("retailer_product_id"))
+    if not retailer_product_id or not _text(offer.get("variant")):
         return {"eligible": False, "status": EXACT_VARIANT_UNVERIFIED, "reason": "missing_exact_listing_identity"}
+    if expected_retailer_product_id and retailer_product_id.casefold() != _text(expected_retailer_product_id).casefold():
+        return {"eligible": False, "status": EXACT_VARIANT_UNVERIFIED, "reason": "wrong_retailer_product_id"}
     if _variant(offer.get("variant")) != _variant(variant):
         return {"eligible": False, "status": EXACT_VARIANT_UNVERIFIED, "reason": "wrong_ram_or_storage"}
 

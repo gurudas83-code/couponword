@@ -9,6 +9,7 @@ if str(PYTHON_DIR) not in sys.path:
     sys.path.insert(0, str(PYTHON_DIR))
 
 import shopping_intelligence_pipeline as pipeline
+import retailer_product_registry as retailer_registry
 
 
 def _verified_identity():
@@ -132,6 +133,9 @@ def test_live_fast_verified_identity_survives_missing_price():
         patch.object(pipeline, "call_build_identity", return_value=identity),
         patch.object(pipeline, "repair_identity", return_value=identity),
         patch.object(pipeline, "compare_identity", return_value=_verified_identity()),
+        # The fixture is an existing exact catalogue identity; keep that
+        # prerequisite explicit while exercising the missing-price path.
+        patch.object(retailer_registry, "find_catalogued_mobile_id", return_value="cw-mobile-test"),
         patch.object(pipeline, "build_price_evidence", return_value=missing_price),
         patch.object(pipeline, "find_verified_evidence", return_value=None),
         patch.object(pipeline, "runtime_profile_from_extraction", side_effect=_runtime_profile),

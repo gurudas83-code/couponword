@@ -2783,6 +2783,12 @@ def discover_market(
         if token
     }
 
+    avoided_model_tokens = {
+        normalize_key(value)[len("model "):]
+        for value in intent.get("avoid", [])
+        if normalize_key(value).startswith("model ")
+    }
+
     exact_query_model_tokens = {
         token
         for index, token in enumerate(query_model_parts)
@@ -2797,6 +2803,10 @@ def discover_market(
                 and index > 0
                 and query_model_parts[index - 1] in explicit_brand_tokens
             )
+        )
+        and not any(
+            token in model.split()
+            for model in avoided_model_tokens
         )
         and token not in {"5g", "4g", "3g", "2g"}
         and not re.fullmatch(r"\d+(?:\.\d+)?k", token, re.I)
@@ -2923,6 +2933,12 @@ def discover_market(
 
                 if not numeric_family_match:
                     continue
+
+        if avoided_model_tokens and any(
+            all(token in normalized_title.split() for token in model.split())
+            for model in avoided_model_tokens
+        ):
+            continue
         # Explicit/bare brand scope is hard. Preferred brands are ranked
         # downstream and therefore must not narrow discovery.
         #

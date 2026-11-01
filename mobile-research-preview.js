@@ -10,9 +10,20 @@
   var catalogueGrid = document.getElementById("catalogueDiscoveryGrid");
   var catalogueCount = document.getElementById("catalogueDiscoveryCount");
   var catalogueMore = document.getElementById("catalogueDiscoveryMore");
+  var inventoryGrid = document.getElementById("mobileResearchCatalogueGrid");
+  var inventoryCount = document.getElementById("mobileResearchCatalogueCount");
+  var inventoryMore = document.getElementById("mobileResearchCatalogueMore");
+  var inventoryQuery = document.getElementById("mobileResearchCatalogueQuery");
+  var inventoryBrand = document.getElementById("mobileResearchCatalogueBrand");
+  var inventoryRam = document.getElementById("mobileResearchCatalogueRam");
+  var inventoryStorage = document.getElementById("mobileResearchCatalogueStorage");
+  var inventoryStatus = document.getElementById("mobileResearchCatalogueStatus");
   var catalogueRows = [];
   var catalogueExpanded = false;
+  var inventoryRows = [];
+  var inventoryExpanded = false;
   var CATALOGUE_INITIAL_LIMIT = 18;
+  var INVENTORY_INITIAL_LIMIT = 24;
 
   // The dataset has already passed the publish-safety checks. Keep the section
   // visible for normal visitors; commerce gates remain in the rendered cards.
@@ -30,6 +41,94 @@
   function link(url, label) {
     if (!/^https:\/\//i.test(String(url || ""))) return "";
     return '<a class="mobile-research-link" href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(label) + " ↗</a>";
+  }
+
+  function optionValues(rows, key) {
+    var values = {};
+    (rows || []).forEach(function (row) {
+      if (row && row[key] != null && row[key] !== "") values[String(row[key])] = true;
+    });
+    return Object.keys(values).sort(function (a, b) { return Number(a) - Number(b) || a.localeCompare(b); });
+  }
+
+  function fillSelect(select, values, label) {
+    if (!select) return;
+    select.innerHTML = '<option value="">' + escapeHtml(label) + '</option>' + values.map(function (value) {
+      return '<option value="' + escapeHtml(value) + '">' + escapeHtml(value) + '</option>';
+    }).join("");
+  }
+
+  function inventoryMatches(row) {
+    var query = String(inventoryQuery && inventoryQuery.value || "").trim().toLowerCase();
+    var brand = String(inventoryBrand && inventoryBrand.value || "");
+    var ram = String(inventoryRam && inventoryRam.value || "");
+    var storage = String(inventoryStorage && inventoryStorage.value || "");
+    var status = String(inventoryStatus && inventoryStatus.value || "");
+    var haystack = (String(row.brand || "") + " " + String(row.model || "") + " " + String(row.variant_text || "")).toLowerCase();
+    return (!query || haystack.indexOf(query) >= 0) &&
+      (!brand || String(row.brand || "") === brand) &&
+      (!ram || String(row.ram_gb || "") === ram) &&
+      (!storage || String(row.storage_gb || "") === storage) &&
+      (!status || String(row.status || "") === status);
+  }
+
+  function inventoryImage(row) {
+    if (row.image_status === "VERIFIED_MATCH" && /^https:\/\//i.test(String(row.image_url || ""))) {
+      return '<img class="mobile-research-inventory-image" src="' + escapeHtml(row.image_url) + '" alt="' + escapeHtml(row.brand + " " + row.model) + ' product image" loading="lazy">';
+    }
+    return '<div class="mobile-research-inventory-placeholder" role="img" aria-label="Product image not safely verified">Phone image unavailable</div>';
+  }
+
+  function renderInventoryRow(row) {
+    var variant = row.variant_confidence === "official_exact" ?
+      "India exact variant · " + (row.ram_gb || "") + "GB RAM · " + (row.storage_gb || "") + "GB storage" :
+      "Research variant · " + escapeHtml(row.variant_text || "Variant not specified") + " (not verified)";
+    var fields = (row.verified_fields || []).map(function (field) { return String(field).replace(/_/g, " "); }).join(", ") || "No verified fields";
+    var sources = (row.source_urls || []).slice(0, 2).map(function (url, index) { return link(url, index ? "Discovery source" : "Source"); }).join("");
+    return '<article class="mobile-research-inventory-card">' +
+      inventoryImage(row) +
+      '<div class="mobile-research-inventory-body">' +
+      '<div class="mobile-research-card-top"><span class="research-status inventory-status-' + escapeHtml(String(row.status || "").toLowerCase()) + '">' + escapeHtml(row.status || "NEEDS_VERIFICATION") + '</span></div>' +
+      '<h3>' + escapeHtml(row.brand + " " + row.model) + '</h3>' +
+      '<p class="mobile-research-variant">' + variant + '</p>' +
+      '<p class="mobile-research-inventory-fields"><strong>Verified fields:</strong> ' + escapeHtml(fields) + '</p>' +
+      '<p class="mobile-research-inventory-reason">' + escapeHtml(row.status_reason || "Evidence status not stated") + '</p>' +
+      '<div class="mobile-research-sources">' + sources + '</div>' +
+      '<p class="mobile-research-gate">Research only · no price · no stock · no purchase action</p>' +
+      '</div></article>';
+  }
+
+  function renderInventory() {
+    if (!inventoryGrid) return;
+    var filtered = inventoryRows.filter(inventoryMatches);
+    var visible = inventoryExpanded ? filtered : filtered.slice(0, INVENTORY_INITIAL_LIMIT);
+    inventoryGrid.innerHTML = visible.length ? visible.map(renderInventoryRow).join("") : "<p>No research records match these filters.</p>";
+    if (inventoryCount) inventoryCount.textContent = filtered.length + " research records";
+    if (inventoryMore) {
+      inventoryMore.hidden = filtered.length <= INVENTORY_INITIAL_LIMIT;
+      inventoryMore.textContent = inventoryExpanded ? "Show fewer research records" : "Show all research records";
+    }
+  }
+
+  function loadInventoryCatalogue() {
+    if (!inventoryGrid) return;
+    fetch("/data/mobile_research_catalogue.json", { credentials: "omit" })
+      .then(function (response) {
+        if (!response.ok) throw new Error("research catalogue unavailable");
+        return response.json();
+      })
+      .then(function (payload) {
+        inventoryRows = Array.isArray(payload.records) ? payload.records : [];
+        fillSelect(inventoryBrand, Array.from(new Set(inventoryRows.map(function (row) { return row.brand; }))).sort(), "All brands");
+        fillSelect(inventoryRam, optionValues(inventoryRows, "ram_gb"), "All RAM");
+        fillSelect(inventoryStorage, optionValues(inventoryRows, "storage_gb"), "All storage");
+        fillSelect(inventoryStatus, ["OFFICIAL_VERIFIED", "PARTIALLY_VERIFIED", "RESEARCH_ONLY", "NEEDS_VERIFICATION"], "All evidence statuses");
+        renderInventory();
+      })
+      .catch(function () {
+        if (inventoryCount) inventoryCount.textContent = "Research catalogue unavailable";
+        inventoryGrid.innerHTML = "<p>Existing research records are currently unavailable.</p>";
+      });
   }
 
   function specValue(key, item) {
@@ -147,4 +246,16 @@
       });
     }
   }
+
+  [inventoryQuery, inventoryBrand, inventoryRam, inventoryStorage, inventoryStatus].forEach(function (control) {
+    if (control) control.addEventListener("input", renderInventory);
+    if (control && control.tagName === "SELECT") control.addEventListener("change", renderInventory);
+  });
+  if (inventoryMore) {
+    inventoryMore.addEventListener("click", function () {
+      inventoryExpanded = !inventoryExpanded;
+      renderInventory();
+    });
+  }
+  loadInventoryCatalogue();
 }());

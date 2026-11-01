@@ -18,13 +18,15 @@ const core = {price:7999, market_source:'https://amazon.in/dp/EXACT',
  provenance:{price_evidence:{source_url:'https://amazon.in/dp/EXACT',verified_at:'original-time'}},
  retailer_offers:[{price:null,product_url:'https://other.example/different',last_checked:'new-time'}]};
 const result = render(core,String,String);
-assert.strictEqual(result.selectedPrice,7999);
+// A source price without the explicit current-offer contract is historical
+// context only and must not be displayed as a current purchase price.
+assert.strictEqual(result.selectedPrice,null);
 assert.strictEqual(result.productLink,'https://amazon.in/dp/EXACT');
 assert.strictEqual(result.lastChecked,'original-time');
 assert.strictEqual(result.variant,'4GB/64GB');
 assert.strictEqual(result.retailerHeading,'Retailer');
-const offer={price:7899,product_url:'https://retailer.example/exact',variant:'4GB/64GB',last_checked:'offer-time',retailer:'example'};
-const alternate=render({...core,retailer_offers:[offer]},String,String);
+const offer={price:7899,product_url:'https://retailer.example/exact',variant:'4GB/64GB',last_checked:'offer-time',retailer:'example',cta_eligibility:{eligible:true}};
+const alternate=render({...core,current_offer_verified:true,purchase_cta_eligible:true,best_offer:offer,retailer_offers:[offer]},String,String);
 assert.strictEqual(alternate.selectedPrice,7899);
 assert.strictEqual(alternate.productLink,offer.product_url);
 assert.strictEqual(alternate.lastChecked,offer.last_checked);

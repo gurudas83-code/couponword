@@ -354,12 +354,41 @@ def recommend():
                 "reason": "No current in-stock retailer offer passed the existing price, identity and freshness gates.",
             }
         ] + gate_rejections
-    output["hard_gate_rejections"] = gate_rejections
-    output["response_reason"] = (
-        "NO_CURRENT_VERIFIED_OFFER"
-        if gate_rejections and gate_rejections[0].get("code") == "NO_CURRENT_VERIFIED_OFFER"
-        else None
+
+    # An explicit physical RAM/storage request must not be reported only as
+    # a generic offer gap when the exact identity itself is unverified.
+    # Reuse the existing failure trace and response contract; do not invent
+    # a candidate or relax the commerce gate.
+    requested_variant = any(
+        str(item or "").lower().endswith(("gb_ram", "gb_storage"))
+        for item in (parsed_intent.get("must_have") or [])
     )
+    # A rejected sibling must not override a matching recommendation. The
+    # exact-variant-unavailable reason is reserved for an empty result where
+    # no accepted candidate survived the existing identity gate.
+    if requested_variant and not output.get("recommendations"):
+        gate_rejections = [{
+            "code": "EXACT_VARIANT_UNAVAILABLE",
+            "stage": "variant_identity",
+            "reason": "The requested exact RAM/storage variant has no unique verified catalogue owner.",
+        }] + gate_rejections
+
+    output["hard_gate_rejections"] = gate_rejections
+    if output.get("recommendations"):
+        # A research/identity match can still lack a current retailer offer.
+        # Keep that commerce state explicit without calling the identity
+        # unavailable or making the candidate buyable.
+        output["response_reason"] = (
+            "NO_CURRENT_VERIFIED_OFFER"
+            if requested_variant and output.get("market_data_status") == "CURRENT_OFFERS_UNAVAILABLE"
+            else None
+        )
+    else:
+        output["response_reason"] = (
+            gate_rejections[0].get("code")
+            if gate_rejections and gate_rejections[0].get("code") in {"NO_CURRENT_VERIFIED_OFFER", "EXACT_VARIANT_UNAVAILABLE"}
+            else None
+        )
     return jsonify(output)
 
 
