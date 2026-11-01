@@ -21,9 +21,10 @@
   var catalogueRows = [];
   var catalogueExpanded = false;
   var inventoryRows = [];
-  var inventoryExpanded = false;
+  var inventoryCards = [];
+  var inventorySourceCounts = {};
+  var verifiedRows = [];
   var CATALOGUE_INITIAL_LIMIT = 18;
-  var INVENTORY_INITIAL_LIMIT = 24;
 
   // The dataset has already passed the publish-safety checks. Keep the section
   // visible for normal visitors; commerce gates remain in the rendered cards.
@@ -58,41 +59,92 @@
     }).join("");
   }
 
-  function inventoryMatches(row) {
+  function inventoryVariantStatus(row) {
+    if (row && row.status) return String(row.status);
+    if (row && String(row.manufacturer_spec_status || "").toUpperCase() === "VERIFIED") return "OFFICIAL_VERIFIED";
+    return "RESEARCH_ONLY";
+  }
+
+  function inventoryRowsForCard(card) {
+    var discovery = (card.discovery_record_keys || []).map(function (key) {
+      return inventoryRows.find(function (row) { return row.record_key === key; });
+    }).filter(Boolean);
+    var frozen = (card.frozen_variant_ids || []).map(function (id) {
+      return verifiedRows.find(function (row) { return row.canonical_product_id === id; });
+    }).filter(Boolean);
+    return discovery.concat(frozen);
+  }
+
+  function inventoryAllVariantRows() {
+    return inventoryCards.reduce(function (all, card) { return all.concat(inventoryRowsForCard(card)); }, []);
+  }
+
+  function inventoryMatches(card) {
     var query = String(inventoryQuery && inventoryQuery.value || "").trim().toLowerCase();
     var brand = String(inventoryBrand && inventoryBrand.value || "");
     var ram = String(inventoryRam && inventoryRam.value || "");
     var storage = String(inventoryStorage && inventoryStorage.value || "");
     var status = String(inventoryStatus && inventoryStatus.value || "");
-    var haystack = (String(row.brand || "") + " " + String(row.model || "") + " " + String(row.variant_text || "")).toLowerCase();
+    var rows = inventoryRowsForCard(card);
+    var haystack = (String(card.brand || "") + " " + String(card.model || "") + " " + rows.map(function (row) {
+      return row.variant_text || ((row.ram_gb || "") + "GB " + (row.storage_gb || "") + "GB");
+    }).join(" ")).toLowerCase();
     return (!query || haystack.indexOf(query) >= 0) &&
-      (!brand || String(row.brand || "") === brand) &&
-      (!ram || String(row.ram_gb || "") === ram) &&
-      (!storage || String(row.storage_gb || "") === storage) &&
-      (!status || String(row.status || "") === status);
+      (!brand || String(card.brand || "") === brand) &&
+      (!ram || rows.some(function (row) { return String(row.ram_gb || "") === ram; })) &&
+      (!storage || rows.some(function (row) { return String(row.storage_gb || "") === storage; })) &&
+      (!status || rows.some(function (row) { return inventoryVariantStatus(row) === status; }));
   }
 
-  function inventoryImage(row) {
-    if (row.image_status === "VERIFIED_MATCH" && /^https:\/\//i.test(String(row.image_url || ""))) {
-      return '<img class="mobile-research-inventory-image" src="' + escapeHtml(row.image_url) + '" alt="' + escapeHtml(row.brand + " " + row.model) + ' product image" loading="lazy">';
-    }
+  function inventoryImage() {
     return '<div class="mobile-research-inventory-placeholder" role="img" aria-label="Product image not safely verified">Phone image unavailable</div>';
   }
 
-  function renderInventoryRow(row) {
-    var variant = row.variant_confidence === "official_exact" ?
-      "India exact variant · " + (row.ram_gb || "") + "GB RAM · " + (row.storage_gb || "") + "GB storage" :
-      "Research variant · " + escapeHtml(row.variant_text || "Variant not specified") + " (not verified)";
-    var fields = (row.verified_fields || []).map(function (field) { return String(field).replace(/_/g, " "); }).join(", ") || "No verified fields";
-    var sources = (row.source_urls || []).slice(0, 2).map(function (url, index) { return link(url, index ? "Discovery source" : "Source"); }).join("");
-    return '<article class="mobile-research-inventory-card">' +
-      inventoryImage(row) +
+  function renderInventoryCard(card) {
+    var rows = inventoryRowsForCard(card);
+    var discoveryRows = rows.filter(function (row) { return !row.canonical_product_id; });
+    var frozenRows = rows.filter(function (row) { return !!row.canonical_product_id; });
+    var statuses = Array.from(new Set(rows.map(inventoryVariantStatus)));
+    var statusLabel = statuses.length === 1 ? statuses[0] : "MIXED_EVIDENCE";
+    var variantItems = rows.map(function (row) {
+      var ram = row.ram_gb != null ? row.ram_gb + "GB RAM" : "RAM not specified";
+      var storage = row.storage_gb != null ? row.storage_gb + "GB storage" : "storage not specified";
+      if (row.canonical_product_id) return '<li><strong>Verified India variant</strong> · ' + escapeHtml(ram + " · " + storage) + ' · ' + escapeHtml(row.canonical_product_id) + '</li>';
+      return '<li>Research variant · ' + escapeHtml(row.variant_text || (ram + " · " + storage)) + ' · ' + escapeHtml(inventoryVariantStatus(row)) + '</li>';
+    }).join("");
+    var fieldSet = {};
+    discoveryRows.forEach(function (row) { (row.verified_fields || []).forEach(function (field) { fieldSet[String(field).replace(/_/g, " ")] = true; }); });
+    var fields = Object.keys(fieldSet).join(", ") || "No exact fields verified in discovery record";
+    var specSet = {};
+    frozenRows.forEach(function (row) {
+      Object.keys(row.specifications || {}).forEach(function (key) {
+        var item = row.specifications[key] || {};
+        var label = String(item.label || key).replace(/_/g, " ");
+        var value = specValue(key, item);
+        if (value != null && value !== "") specSet[label + "|" + String(value)] = true;
+      });
+    });
+    var frozenSpecs = Object.keys(specSet).slice(0, 8).map(function (entry) {
+      var separator = entry.indexOf("|");
+      return '<li><span>' + escapeHtml(entry.slice(0, separator)) + '</span><strong>' + escapeHtml(entry.slice(separator + 1)) + '</strong></li>';
+    }).join("");
+    var details = frozenSpecs ? '<ul class="mobile-research-model-specs">' + frozenSpecs + '</ul>' : '<p>Verification pending for detailed manufacturer specifications.</p>';
+    var sourceUrls = [];
+    discoveryRows.forEach(function (row) { (row.source_urls || []).forEach(function (url) { if (sourceUrls.indexOf(url) < 0) sourceUrls.push(url); }); });
+    frozenRows.forEach(function (row) { if (row.official_source && sourceUrls.indexOf(row.official_source) < 0) sourceUrls.push(row.official_source); });
+    var sources = sourceUrls.slice(0, 3).map(function (url, index) { return link(url, index ? "Source" : "Official/source evidence"); }).join("");
+    var counts = (discoveryRows.length ? discoveryRows.length + " research record" + (discoveryRows.length === 1 ? "" : "s") : "No discovery record") +
+      (frozenRows.length ? " · " + frozenRows.length + " frozen exact variant" + (frozenRows.length === 1 ? "" : "s") : "");
+    return '<article class="mobile-research-inventory-card mobile-research-model-card" data-mobile-model-card="' + escapeHtml(card.model_key) + '">' +
+      inventoryImage(card) +
       '<div class="mobile-research-inventory-body">' +
-      '<div class="mobile-research-card-top"><span class="research-status inventory-status-' + escapeHtml(String(row.status || "").toLowerCase()) + '">' + escapeHtml(row.status || "NEEDS_VERIFICATION") + '</span></div>' +
-      '<h3>' + escapeHtml(row.brand + " " + row.model) + '</h3>' +
-      '<p class="mobile-research-variant">' + variant + '</p>' +
+      '<div class="mobile-research-card-top"><span class="research-status inventory-status-' + escapeHtml(statusLabel.toLowerCase()) + '">' + escapeHtml(statusLabel) + '</span></div>' +
+      '<h3>' + escapeHtml(card.brand + " " + card.model) + '</h3>' +
+      '<p class="mobile-research-variant">' + escapeHtml(counts || "Model research reference") + '</p>' +
+      '<ul class="mobile-research-variant-list">' + (variantItems || "<li>Variant details are not specified in the source universe.</li>") + '</ul>' +
       '<p class="mobile-research-inventory-fields"><strong>Verified fields:</strong> ' + escapeHtml(fields) + '</p>' +
-      '<p class="mobile-research-inventory-reason">' + escapeHtml(row.status_reason || "Evidence status not stated") + '</p>' +
+      '<details class="mobile-research-model-details"><summary>View specifications / details</summary>' + details + '</details>' +
+      '<p class="mobile-research-inventory-reason">Model card groups source-backed discovery records and frozen exact variants. It does not certify availability or purchase eligibility.</p>' +
       '<div class="mobile-research-sources">' + sources + '</div>' +
       '<p class="mobile-research-gate">Research only · no price · no stock · no purchase action</p>' +
       '</div></article>';
@@ -100,14 +152,25 @@
 
   function renderInventory() {
     if (!inventoryGrid) return;
-    var filtered = inventoryRows.filter(inventoryMatches);
-    var visible = inventoryExpanded ? filtered : filtered.slice(0, INVENTORY_INITIAL_LIMIT);
-    inventoryGrid.innerHTML = visible.length ? visible.map(renderInventoryRow).join("") : "<p>No research records match these filters.</p>";
-    if (inventoryCount) inventoryCount.textContent = filtered.length + " research records";
-    if (inventoryMore) {
-      inventoryMore.hidden = filtered.length <= INVENTORY_INITIAL_LIMIT;
-      inventoryMore.textContent = inventoryExpanded ? "Show fewer research records" : "Show all research records";
+    var filtered = inventoryCards.filter(inventoryMatches);
+    var matchingVariants = filtered.reduce(function (count, card) { return count + inventoryRowsForCard(card).length; }, 0);
+    var isUnfiltered = !(inventoryQuery && inventoryQuery.value) && !(inventoryBrand && inventoryBrand.value) && !(inventoryRam && inventoryRam.value) && !(inventoryStorage && inventoryStorage.value) && !(inventoryStatus && inventoryStatus.value);
+    if (inventoryCount) {
+      inventoryCount.textContent = isUnfiltered && inventorySourceCounts.visible_model_cards ?
+        inventorySourceCounts.visible_model_cards + " smartphone models · " + (inventorySourceCounts.deduplicated_discovery_records || inventoryRows.length) + " research records · " + (inventorySourceCounts.frozen_verified_variants || verifiedRows.length) + " frozen exact variants" :
+        filtered.length + " smartphone models · " + matchingVariants + " matching research/frozen variants";
     }
+    inventoryGrid.innerHTML = filtered.length ? filtered.map(renderInventoryCard).join("") : "<p>No smartphone models match these filters.</p>";
+    if (inventoryMore) inventoryMore.hidden = true;
+  }
+
+  function refreshInventoryControls() {
+    var rows = inventoryAllVariantRows();
+    fillSelect(inventoryBrand, Array.from(new Set(inventoryCards.map(function (card) { return card.brand; }))).sort(), "All brands");
+    fillSelect(inventoryRam, optionValues(rows, "ram_gb"), "All RAM");
+    fillSelect(inventoryStorage, optionValues(rows, "storage_gb"), "All storage");
+    fillSelect(inventoryStatus, ["OFFICIAL_VERIFIED", "PARTIALLY_VERIFIED", "RESEARCH_ONLY", "NEEDS_VERIFICATION"], "All evidence statuses");
+    renderInventory();
   }
 
   function loadInventoryCatalogue() {
@@ -119,11 +182,9 @@
       })
       .then(function (payload) {
         inventoryRows = Array.isArray(payload.records) ? payload.records : [];
-        fillSelect(inventoryBrand, Array.from(new Set(inventoryRows.map(function (row) { return row.brand; }))).sort(), "All brands");
-        fillSelect(inventoryRam, optionValues(inventoryRows, "ram_gb"), "All RAM");
-        fillSelect(inventoryStorage, optionValues(inventoryRows, "storage_gb"), "All storage");
-        fillSelect(inventoryStatus, ["OFFICIAL_VERIFIED", "PARTIALLY_VERIFIED", "RESEARCH_ONLY", "NEEDS_VERIFICATION"], "All evidence statuses");
-        renderInventory();
+        inventoryCards = Array.isArray(payload.model_cards) ? payload.model_cards : [];
+        inventorySourceCounts = payload.source_counts || {};
+        refreshInventoryControls();
       })
       .catch(function () {
         if (inventoryCount) inventoryCount.textContent = "Research catalogue unavailable";
@@ -218,7 +279,9 @@
     })
     .then(function (payload) {
       var products = Array.isArray(payload.products) ? payload.products : [];
+      verifiedRows = products;
       grid.innerHTML = products.length ? products.map(renderProduct).join("") : "<p>Verified mobile research is currently unavailable.</p>";
+      refreshInventoryControls();
     })
     .catch(function () {
       grid.innerHTML = "<p>Verified mobile research is currently unavailable.</p>";
@@ -251,11 +314,6 @@
     if (control) control.addEventListener("input", renderInventory);
     if (control && control.tagName === "SELECT") control.addEventListener("change", renderInventory);
   });
-  if (inventoryMore) {
-    inventoryMore.addEventListener("click", function () {
-      inventoryExpanded = !inventoryExpanded;
-      renderInventory();
-    });
-  }
+  if (inventoryMore) inventoryMore.hidden = true;
   loadInventoryCatalogue();
 }());

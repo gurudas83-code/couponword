@@ -202,6 +202,58 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
 
     rows = sorted(records.values(), key=lambda row: (_norm(row["brand"]), _norm(row["model"]), row["ram_gb"] or 0, row["storage_gb"] or 0))
     status_counts = {status: sum(row["status"] == status for row in rows) for status in STATUS_ORDER}
+
+    # Keep the source universe's model identities as the public card boundary.
+    # Discovery rows are variant records, so their count (235) is intentionally
+    # different from the 232 model cards. Frozen exact variants are attached to
+    # the same normalized model identity and remain separate evidence records.
+    model_cards: list[dict[str, Any]] = []
+    cards_by_identity: dict[tuple[str, str], dict[str, Any]] = {}
+    for model in models:
+        identity = (_norm(model.get("brand")), _norm(model.get("model")))
+        if identity in cards_by_identity:
+            raise ValueError(f"duplicate source model identity: {identity}")
+        card = {
+            "model_key": str(model.get("model_key") or f"{identity[0]}|{identity[1]}"),
+            "brand": str(model.get("brand") or "Unknown"),
+            "model": str(model.get("model") or "Unknown model"),
+            "discovery_record_keys": [],
+            "frozen_variant_ids": [],
+        }
+        cards_by_identity[identity] = card
+        model_cards.append(card)
+
+    # Prefer the frozen display name where punctuation differs from the source
+    # model label (for example, Nothing Phone (3a) versus Phone 3a). This keeps
+    # the model card customer-readable without changing the source identity.
+    for product in preview:
+        identity = (_norm(product.get("brand")), _norm(product.get("model")))
+        card = cards_by_identity.get(identity)
+        if card is None:
+            raise ValueError(f"frozen model is absent from source universe: {identity}")
+        card["brand"] = str(product.get("brand") or card["brand"])
+        card["model"] = str(product.get("model") or card["model"])
+        card["frozen_variant_ids"].append(str(product.get("canonical_product_id") or ""))
+
+    for row in rows:
+        identity = (_norm(row.get("brand")), _norm(row.get("model")))
+        card = cards_by_identity.get(identity)
+        if card is None:
+            raise ValueError(f"discovery row is absent from source universe: {identity}")
+        card["discovery_record_keys"].append(str(row["record_key"]))
+
+    model_cards.sort(key=lambda card: (_norm(card["brand"]), _norm(card["model"]), card["model_key"]))
+    if len(model_cards) != len(models):
+        raise ValueError("public model card count diverges from source model count")
+    if len({card["model_key"] for card in model_cards}) != len(model_cards):
+        raise ValueError("public model cards contain duplicate model keys")
+    if sum(len(card["discovery_record_keys"]) for card in model_cards) != len(rows):
+        raise ValueError("public model cards do not retain every discovery record")
+    if sum(len(card["frozen_variant_ids"]) for card in model_cards) != len(preview):
+        raise ValueError("public model cards do not retain every frozen variant")
+
+    discovery_identities = {(_norm(row.get("brand")), _norm(row.get("model"))) for row in rows}
+    frozen_identities = {(_norm(row.get("brand")), _norm(row.get("model"))) for row in preview}
     return {
         "schema_version": 1,
         "mode": "PUBLIC_MOBILE_RESEARCH_CATALOGUE",
@@ -214,7 +266,12 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
             "frozen_verified_variants": len(preview),
             "deduplicated_discovery_records": len(rows),
             "excluded_verified_section_duplicates": excluded_verified_duplicates,
+            "discovery_model_names": len(discovery_identities),
+            "frozen_model_names": len(frozen_identities),
+            "model_name_overlaps": len(discovery_identities & frozen_identities),
+            "visible_model_cards": len(model_cards),
         },
         "status_counts": status_counts,
+        "model_cards": model_cards,
         "records": rows,
     }

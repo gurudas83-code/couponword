@@ -93,6 +93,14 @@ def _validate_public_content(output: Path) -> None:
     discovery_rows = catalogue.get("records")
     if catalogue.get("mode") != "PUBLIC_MOBILE_RESEARCH_CATALOGUE" or not isinstance(discovery_rows, list):
         raise RuntimeError("public mobile research catalogue has an invalid mode or record list")
+    model_cards = catalogue.get("model_cards")
+    if not isinstance(model_cards, list) or len(model_cards) != 232:
+        raise RuntimeError("public mobile research catalogue must expose 232 primary model cards")
+    if catalogue.get("source_counts", {}).get("visible_model_cards") != len(model_cards):
+        raise RuntimeError("public model card count does not match source reconciliation")
+    model_keys = [card.get("model_key") for card in model_cards]
+    if any(not key for key in model_keys) or len(model_keys) != len(set(model_keys)):
+        raise RuntimeError("public mobile research catalogue contains duplicate or missing model card keys")
     keys = [row.get("record_key") for row in discovery_rows]
     if any(not key for key in keys) or len(keys) != len(set(keys)):
         raise RuntimeError("public mobile research catalogue contains duplicate or missing record keys")
@@ -107,6 +115,13 @@ def _validate_public_content(output: Path) -> None:
             raise RuntimeError("public mobile research catalogue exposes a commerce CTA")
         if row.get("status") == "OFFICIAL_VERIFIED" and not set(("brand", "model", "ram_gb", "storage_gb")) <= set(row.get("verified_fields") or []):
             raise RuntimeError("officially verified discovery row is missing exact variant fields")
+    card_record_keys = [key for card in model_cards for key in (card.get("discovery_record_keys") or [])]
+    if sorted(card_record_keys) != sorted(keys):
+        raise RuntimeError("public model cards do not retain each discovery record exactly once")
+    preview_ids = [row.get("canonical_product_id") for row in rows]
+    card_preview_ids = [key for card in model_cards for key in (card.get("frozen_variant_ids") or [])]
+    if sorted(card_preview_ids) != sorted(preview_ids):
+        raise RuntimeError("public model cards do not retain each frozen variant exactly once")
 
     coupons_path = output / "coupons.json"
     coupons = json.loads(coupons_path.read_text(encoding="utf-8"))

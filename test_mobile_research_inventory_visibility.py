@@ -50,6 +50,21 @@ class MobileResearchInventoryVisibilityTests(unittest.TestCase):
         self.assertIn("/data/mobile_research_catalogue.json", script)
         self.assertIn("no price", script.lower())
 
+    def test_all_232_models_are_primary_cards_with_variants_retained(self):
+        payload = build_public_catalogue(ROOT)
+        cards = payload["model_cards"]
+        self.assertEqual(len(cards), 232)
+        self.assertEqual(payload["source_counts"]["visible_model_cards"], 232)
+        self.assertEqual(payload["source_counts"]["discovery_model_names"], 230)
+        self.assertEqual(payload["source_counts"]["frozen_model_names"], 4)
+        self.assertEqual(payload["source_counts"]["model_name_overlaps"], 2)
+        record_keys = [key for card in cards for key in card["discovery_record_keys"]]
+        self.assertEqual(sorted(record_keys), sorted(row["record_key"] for row in payload["records"]))
+        frozen = json.loads((ROOT / "data/mobile_research_preview.json").read_text(encoding="utf-8"))["products"]
+        frozen_ids = [key for card in cards for key in card["frozen_variant_ids"]]
+        self.assertEqual(sorted(frozen_ids), sorted(row["canonical_product_id"] for row in frozen))
+        self.assertEqual(sum(bool(card["frozen_variant_ids"]) for card in cards), 4)
+
     def test_research_filters_have_real_matches(self):
         rows = build_public_catalogue(ROOT)["records"]
         self.assertTrue([row for row in rows if "a36" in (row["brand"] + " " + row["model"]).lower()])

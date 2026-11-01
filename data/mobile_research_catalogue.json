@@ -9,7 +9,11 @@
     "priority_rows_represented": 187,
     "frozen_verified_variants": 10,
     "deduplicated_discovery_records": 235,
-    "excluded_verified_section_duplicates": 2
+    "excluded_verified_section_duplicates": 2,
+    "discovery_model_names": 230,
+    "frozen_model_names": 4,
+    "model_name_overlaps": 2,
+    "visible_model_cards": 232
   },
   "status_counts": {
     "NEEDS_VERIFICATION": 59,
@@ -17,6 +21,2111 @@
     "PARTIALLY_VERIFIED": 32,
     "OFFICIAL_VERIFIED": 28
   },
+  "model_cards": [
+    {
+      "model_key": "apple|iphone 11",
+      "brand": "Apple",
+      "model": "iPhone 11",
+      "discovery_record_keys": [
+        "research-8304627bf9b3cf3c"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 13",
+      "brand": "Apple",
+      "model": "iPhone 13",
+      "discovery_record_keys": [
+        "research-44eb8428e79d6515"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 15",
+      "brand": "Apple",
+      "model": "iPhone 15",
+      "discovery_record_keys": [
+        "research-5e1b6b0b836d0bde"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 15 256gb",
+      "brand": "Apple",
+      "model": "iPhone 15 256GB",
+      "discovery_record_keys": [
+        "research-e672b2230abc57aa"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 15 512gb",
+      "brand": "Apple",
+      "model": "iPhone 15 512GB",
+      "discovery_record_keys": [
+        "research-cf4bf064d381181e"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 15 plus",
+      "brand": "Apple",
+      "model": "iPhone 15 Plus",
+      "discovery_record_keys": [
+        "research-af56b88f3babcf55"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 15 plus 256gb",
+      "brand": "Apple",
+      "model": "iPhone 15 Plus 256GB",
+      "discovery_record_keys": [
+        "research-a46b2254a1fb991d"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 16",
+      "brand": "Apple",
+      "model": "iPhone 16",
+      "discovery_record_keys": [
+        "research-066a41bd4b191825"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 16 plus",
+      "brand": "Apple",
+      "model": "iPhone 16 Plus",
+      "discovery_record_keys": [
+        "research-8856ddc97d2e9079"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 16 pro",
+      "brand": "Apple",
+      "model": "iPhone 16 Pro",
+      "discovery_record_keys": [
+        "research-8da8dd9c8ceae7f7"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 16 pro max",
+      "brand": "Apple",
+      "model": "iPhone 16 Pro Max",
+      "discovery_record_keys": [
+        "research-b94df2562d47344f"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 16e 256gb",
+      "brand": "Apple",
+      "model": "iPhone 16E 256GB",
+      "discovery_record_keys": [
+        "research-5806ff21f5573adf"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 16e iphone se 4",
+      "brand": "Apple",
+      "model": "iPhone 16E (iPhone SE 4)",
+      "discovery_record_keys": [
+        "research-4b6817525307551d"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 17",
+      "brand": "Apple",
+      "model": "iPhone 17",
+      "discovery_record_keys": [
+        "research-f20f492b3f1436a4"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 17 pro",
+      "brand": "Apple",
+      "model": "iPhone 17 Pro",
+      "discovery_record_keys": [
+        "research-46e4315f816cbb40"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 17 pro max",
+      "brand": "Apple",
+      "model": "iPhone 17 Pro Max",
+      "discovery_record_keys": [
+        "research-d7103ad72cbf6fcb"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 17e",
+      "brand": "Apple",
+      "model": "iPhone 17e",
+      "discovery_record_keys": [
+        "research-bc596ba07a1bc6c6",
+        "research-f5e963bcdc976b07"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 17e 512gb",
+      "brand": "Apple",
+      "model": "iPhone 17e 512GB",
+      "discovery_record_keys": [
+        "research-7ad01e011127e45d"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 18 pro",
+      "brand": "Apple",
+      "model": "iPhone 18 Pro",
+      "discovery_record_keys": [
+        "research-46acc3bc26208b09"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone 18 pro max",
+      "brand": "Apple",
+      "model": "iPhone 18 Pro Max",
+      "discovery_record_keys": [
+        "research-bca9dc866b99161d"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone air",
+      "brand": "Apple",
+      "model": "iPhone Air",
+      "discovery_record_keys": [
+        "research-f8538675655495aa"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "apple|iphone se 2022 iphone se 3",
+      "brand": "Apple",
+      "model": "iPhone SE 2022 (iPhone SE 3)",
+      "discovery_record_keys": [
+        "research-91eba7ab21cc1c69"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "cmf|phone 1",
+      "brand": "CMF",
+      "model": "Phone 1",
+      "discovery_record_keys": [
+        "research-d9de2779b2760be3"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "google|pixel 10",
+      "brand": "Google",
+      "model": "Pixel 10",
+      "discovery_record_keys": [
+        "research-01c03bdf9ee35635"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "google|pixel 10a",
+      "brand": "Google",
+      "model": "Pixel 10A",
+      "discovery_record_keys": [
+        "research-6bf76a9954ee337c"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "google|pixel 11",
+      "brand": "Google",
+      "model": "Pixel 11",
+      "discovery_record_keys": [
+        "research-1dbeabdb28739f2c"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "google|pixel 11 pro",
+      "brand": "Google",
+      "model": "Pixel 11 Pro",
+      "discovery_record_keys": [
+        "research-2e5de2a422d0bbee"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "google|pixel 7a",
+      "brand": "Google",
+      "model": "Pixel 7A",
+      "discovery_record_keys": [
+        "research-46835866950f2037"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "google|pixel 8a",
+      "brand": "Google",
+      "model": "Pixel 8a",
+      "discovery_record_keys": [
+        "research-9d481ee18505d16c"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "google|pixel 9",
+      "brand": "Google",
+      "model": "Pixel 9",
+      "discovery_record_keys": [
+        "research-a136243a2311ab7a"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "google|pixel 9 pro",
+      "brand": "Google",
+      "model": "Pixel 9 Pro",
+      "discovery_record_keys": [
+        "research-db8e7e8292460dce"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "google|pixel 9 pro xl",
+      "brand": "Google",
+      "model": "Pixel 9 Pro XL",
+      "discovery_record_keys": [
+        "research-44fe839c69fe2a2b"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "google|pixel 9a",
+      "brand": "Google",
+      "model": "Pixel 9a",
+      "discovery_record_keys": [
+        "research-ffc7502600240556"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "infinix|gt 30 pro",
+      "brand": "Infinix",
+      "model": "GT 30 Pro",
+      "discovery_record_keys": [
+        "research-94c7078223e76e89"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "infinix|hot 11",
+      "brand": "Infinix",
+      "model": "Hot 11",
+      "discovery_record_keys": [
+        "research-27b92f498ce55464"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "infinix|hot 30i",
+      "brand": "Infinix",
+      "model": "Hot 30i",
+      "discovery_record_keys": [
+        "research-9fdaf9224a1fb541"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "infinix|hot 50 5g",
+      "brand": "Infinix",
+      "model": "Hot 50 5G",
+      "discovery_record_keys": [
+        "research-ee07398f714a00a4"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "infinix|hot 70 pro 5g",
+      "brand": "Infinix",
+      "model": "Hot 70 Pro 5G",
+      "discovery_record_keys": [
+        "research-6dbbb15811694662"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "infinix|note 50x",
+      "brand": "Infinix",
+      "model": "Note 50X",
+      "discovery_record_keys": [
+        "research-1ce1a5eb01128cd1"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "infinix|note 60 pro 5g",
+      "brand": "Infinix",
+      "model": "Note 60 Pro 5G",
+      "discovery_record_keys": [
+        "research-4ebda333ab40020f"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "infinix|smart 20 4g",
+      "brand": "Infinix",
+      "model": "Smart 20 4G",
+      "discovery_record_keys": [
+        "research-56751c6b9236d9e3"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "infinix|smart 8 128gb",
+      "brand": "Infinix",
+      "model": "Smart 8 128GB",
+      "discovery_record_keys": [
+        "research-4b937215bdeaf396"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "infinix|smart 8 hd",
+      "brand": "Infinix",
+      "model": "Smart 8 HD",
+      "discovery_record_keys": [
+        "research-69cc3b1ad624a8a5"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "iqoo|13",
+      "brand": "iQOO",
+      "model": "13",
+      "discovery_record_keys": [
+        "research-980aca8ce6fe035a"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "iqoo|15",
+      "brand": "iQOO",
+      "model": "15",
+      "discovery_record_keys": [
+        "research-0ad61bd622b36699"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "iqoo|15r",
+      "brand": "iQOO",
+      "model": "15R",
+      "discovery_record_keys": [
+        "research-ad268f4aec1d57bf"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "iqoo|neo 10",
+      "brand": "iQOO",
+      "model": "Neo 10",
+      "discovery_record_keys": [
+        "research-724699150ead2442",
+        "research-dd0c673d78fceca4"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "iqoo|neo 9 pro",
+      "brand": "iQOO",
+      "model": "Neo 9 Pro",
+      "discovery_record_keys": [
+        "research-23c53f21a95c780c"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "iqoo|z10r",
+      "brand": "iQOO",
+      "model": "Z10R",
+      "discovery_record_keys": [
+        "research-f30f356ceba84cc3"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "iqoo|z11 5g",
+      "brand": "iQOO",
+      "model": "Z11 5G",
+      "discovery_record_keys": [
+        "research-0d375a10318c1d67"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "iqoo|z11 lite 5g",
+      "brand": "iQOO",
+      "model": "Z11 Lite 5G",
+      "discovery_record_keys": [
+        "research-7bf75cd01291bb0b"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "iqoo|z11x",
+      "brand": "iQOO",
+      "model": "Z11x",
+      "discovery_record_keys": [
+        "research-18afdc091affb6f1"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "iqoo|z9 5g",
+      "brand": "iQOO",
+      "model": "Z9 5G",
+      "discovery_record_keys": [
+        "research-e6f4388cfc20c2b2"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "iqoo|z9x 5g",
+      "brand": "iQOO",
+      "model": "Z9x 5G",
+      "discovery_record_keys": [
+        "research-0ae893f672363141"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "lava|agni 4",
+      "brand": "Lava",
+      "model": "Agni 4",
+      "discovery_record_keys": [
+        "research-993e20db297971c1"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "lava|blaze duo 3",
+      "brand": "Lava",
+      "model": "Blaze Duo 3",
+      "discovery_record_keys": [
+        "research-aaea2e8d909d2822"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "lava|bold n2",
+      "brand": "lava",
+      "model": "Bold N2",
+      "discovery_record_keys": [
+        "research-3a43e1541ae96b6d"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "lava|bold n2 5g",
+      "brand": "Lava",
+      "model": "Bold N2 5G",
+      "discovery_record_keys": [
+        "research-2f4c8a3363547012"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "lava|bold n2 lite",
+      "brand": "lava",
+      "model": "Bold N2 Lite",
+      "discovery_record_keys": [
+        "research-38d42df2191d1868"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "lava|virat v1",
+      "brand": "Lava",
+      "model": "Virat V1",
+      "discovery_record_keys": [
+        "research-41910565e5f0bcaf"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "lava|virat v1 5g",
+      "brand": "Lava",
+      "model": "Virat V1 5G",
+      "discovery_record_keys": [
+        "research-e04ddcaeea3354b3"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "lava|virat v1 pro 5g",
+      "brand": "Lava",
+      "model": "Virat V1 Pro 5G",
+      "discovery_record_keys": [
+        "research-4c291cccd7ccdb2d"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "lava|yuva 5g 128gb",
+      "brand": "Lava",
+      "model": "Yuva 5G 128GB",
+      "discovery_record_keys": [
+        "research-d966a5e7045ddd5d"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "motorola|edge 50 fusion",
+      "brand": "Motorola",
+      "model": "Edge 50 Fusion",
+      "discovery_record_keys": [
+        "research-5fc15c943e1da24b"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "motorola|edge 50 pro",
+      "brand": "Motorola",
+      "model": "Edge 50 Pro",
+      "discovery_record_keys": [
+        "research-20fe2fd8c532625d"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "motorola|edge 50 ultra",
+      "brand": "Motorola",
+      "model": "Edge 50 Ultra",
+      "discovery_record_keys": [
+        "research-60c10ea26652d28b"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "motorola|edge 60 fusion",
+      "brand": "Motorola",
+      "model": "Edge 60 Fusion",
+      "discovery_record_keys": [
+        "research-1339888ce9e55557"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "motorola|edge 60 pro",
+      "brand": "Motorola",
+      "model": "Edge 60 Pro",
+      "discovery_record_keys": [
+        "research-762061ef9d03179e"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "motorola|edge 70",
+      "brand": "Motorola",
+      "model": "Edge 70",
+      "discovery_record_keys": [
+        "research-cd14282d9d88c0c1"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "motorola|edge 70 fusion",
+      "brand": "Motorola",
+      "model": "Edge 70 Fusion",
+      "discovery_record_keys": [
+        "research-2a0991088ddb2659"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "motorola|edge 70 max",
+      "brand": "Motorola",
+      "model": "Edge 70 Max",
+      "discovery_record_keys": [
+        "research-e6254e99b44ddfa5"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "motorola|moto g86 power",
+      "brand": "Motorola",
+      "model": "Moto G86 Power",
+      "discovery_record_keys": [
+        "research-c97cf5e3ddc53a8e"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "motorola|signature",
+      "brand": "Motorola",
+      "model": "Signature",
+      "discovery_record_keys": [
+        "research-c48e61070cc7a558"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "nothing|phone 2a",
+      "brand": "Nothing",
+      "model": "Phone (2a)",
+      "discovery_record_keys": [
+        "research-ec402f3984a4ad20"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "nothing|phone 2a plus",
+      "brand": "Nothing",
+      "model": "Phone (2a) Plus",
+      "discovery_record_keys": [
+        "research-068acbc36488a094"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "nothing|phone 3",
+      "brand": "Nothing",
+      "model": "Phone 3",
+      "discovery_record_keys": [
+        "research-8fdc665c416d8dfd"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "nothing|phone 3a",
+      "brand": "Nothing",
+      "model": "Phone (3a)",
+      "discovery_record_keys": [],
+      "frozen_variant_ids": [
+        "cw-mobile-110"
+      ]
+    },
+    {
+      "model_key": "nothing|phone 3a pro",
+      "brand": "Nothing",
+      "model": "Phone 3a Pro",
+      "discovery_record_keys": [
+        "research-1a01f6842e448025"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "nothing|phone 4a pro",
+      "brand": "Nothing",
+      "model": "Phone 4a Pro",
+      "discovery_record_keys": [
+        "research-aada4d07633a97c1"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "nothing|phone 4b",
+      "brand": "Nothing",
+      "model": "Phone 4b",
+      "discovery_record_keys": [
+        "research-7c3e3c506c67b57e"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oneplus|12",
+      "brand": "OnePlus",
+      "model": "12",
+      "discovery_record_keys": [
+        "research-44f30e78935f7369"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oneplus|12r",
+      "brand": "OnePlus",
+      "model": "12R",
+      "discovery_record_keys": [
+        "research-03a56c6d611d782b"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oneplus|13",
+      "brand": "OnePlus",
+      "model": "13",
+      "discovery_record_keys": [
+        "research-43089a6ceca4fbae"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oneplus|13r",
+      "brand": "OnePlus",
+      "model": "13R",
+      "discovery_record_keys": [
+        "research-0cc98387ecbe1d4b",
+        "research-4be882165db1aa23"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oneplus|13s",
+      "brand": "OnePlus",
+      "model": "13s",
+      "discovery_record_keys": [
+        "research-9a3b271e41d812eb"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oneplus|15",
+      "brand": "OnePlus",
+      "model": "15",
+      "discovery_record_keys": [
+        "research-6f313f1f8c0e3d80"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oneplus|15r",
+      "brand": "OnePlus",
+      "model": "15R",
+      "discovery_record_keys": [
+        "research-875d826f2e15f155"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oneplus|15r 16gb 512gb",
+      "brand": "OnePlus",
+      "model": "15R 16GB 512GB",
+      "discovery_record_keys": [
+        "research-e425b0a590fce15e"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oneplus|n6 5g",
+      "brand": "OnePlus",
+      "model": "N6 5G",
+      "discovery_record_keys": [
+        "research-2c4bef8fed23be3e"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oneplus|n6 lite",
+      "brand": "OnePlus",
+      "model": "N6 Lite",
+      "discovery_record_keys": [
+        "research-9bc72832e84e47c5"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oneplus|n6x 5g",
+      "brand": "OnePlus",
+      "model": "N6x 5G",
+      "discovery_record_keys": [
+        "research-b7d520840c63121f"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oneplus|nord 4",
+      "brand": "OnePlus",
+      "model": "Nord 4",
+      "discovery_record_keys": [
+        "research-d4f980e9630ca700"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oneplus|nord 5",
+      "brand": "OnePlus",
+      "model": "Nord 5",
+      "discovery_record_keys": [
+        "research-86cc13ea7d503d31"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oneplus|nord 6",
+      "brand": "OnePlus",
+      "model": "Nord 6",
+      "discovery_record_keys": [
+        "research-b3a53f3f207fa299"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oneplus|nord ce 6 5g",
+      "brand": "OnePlus",
+      "model": "Nord CE 6 5G",
+      "discovery_record_keys": [
+        "research-c3f3a7e1ec607dbe"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oneplus|nord ce 6 lite 5g",
+      "brand": "OnePlus",
+      "model": "Nord CE 6 Lite 5G",
+      "discovery_record_keys": [
+        "research-04fff4b7b314322f"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oneplus|nord ce4",
+      "brand": "OnePlus",
+      "model": "Nord CE4",
+      "discovery_record_keys": [
+        "research-74fa16021f184407"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|a17",
+      "brand": "OPPO",
+      "model": "A17",
+      "discovery_record_keys": [
+        "research-f1868f8fccf8675d"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|a38",
+      "brand": "OPPO",
+      "model": "A38",
+      "discovery_record_keys": [
+        "research-a3c9fc1ca3e08f66"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|a3x 128gb",
+      "brand": "OPPO",
+      "model": "A3X 128GB",
+      "discovery_record_keys": [
+        "research-783389c9ed4e6110"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|a5 5g",
+      "brand": "OPPO",
+      "model": "A5 5G",
+      "discovery_record_keys": [
+        "research-c97751852cfe3033"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|a5x",
+      "brand": "OPPO",
+      "model": "A5x",
+      "discovery_record_keys": [
+        "research-adee174c77857365"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|a6 pro",
+      "brand": "OPPO",
+      "model": "A6 Pro",
+      "discovery_record_keys": [
+        "research-6105f0dcb280beb9"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|a6c 4g",
+      "brand": "OPPO",
+      "model": "A6c 4G",
+      "discovery_record_keys": [
+        "research-052e7cf9334207db"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|f31",
+      "brand": "OPPO",
+      "model": "F31",
+      "discovery_record_keys": [
+        "research-5de4e8f958d2c411"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|f31 pro plus",
+      "brand": "OPPO",
+      "model": "F31 Pro Plus",
+      "discovery_record_keys": [
+        "research-9f423543a1dbfc5f"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|f33 pro 5g",
+      "brand": "OPPO",
+      "model": "F33 Pro 5G",
+      "discovery_record_keys": [
+        "research-880f96b2e12024b7"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|find x9 5g",
+      "brand": "OPPO",
+      "model": "Find X9 5G",
+      "discovery_record_keys": [
+        "research-d5e5b5da5e200bd7"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|k12x",
+      "brand": "OPPO",
+      "model": "K12x",
+      "discovery_record_keys": [
+        "research-dc98a47de700b49a"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|k13 5g",
+      "brand": "OPPO",
+      "model": "K13 5G",
+      "discovery_record_keys": [
+        "research-515ae4497214ee9e"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|k13 turbo",
+      "brand": "OPPO",
+      "model": "K13 Turbo",
+      "discovery_record_keys": [
+        "research-a4316f7109c2222c"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|k13 turbo 5g",
+      "brand": "OPPO",
+      "model": "K13 Turbo 5G",
+      "discovery_record_keys": [
+        "research-9987fce6445d6e79"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|k14x 5g",
+      "brand": "OPPO",
+      "model": "K14x 5G",
+      "discovery_record_keys": [
+        "research-6e8818e49818e178"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|reno 11 pro",
+      "brand": "OPPO",
+      "model": "Reno 11 Pro",
+      "discovery_record_keys": [
+        "research-f519099813751966"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|reno 12 pro",
+      "brand": "OPPO",
+      "model": "Reno 12 Pro",
+      "discovery_record_keys": [
+        "research-ba6562e2a3628da2"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|reno12",
+      "brand": "OPPO",
+      "model": "Reno12",
+      "discovery_record_keys": [
+        "research-ad48bb8a40eba7f4"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|reno14",
+      "brand": "OPPO",
+      "model": "Reno14",
+      "discovery_record_keys": [
+        "research-c881d3b288f8dced"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|reno16 5g",
+      "brand": "OPPO",
+      "model": "Reno16 5G",
+      "discovery_record_keys": [
+        "research-ddff9893c11f70e2"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "oppo|reno16c 5g",
+      "brand": "OPPO",
+      "model": "Reno16c 5G",
+      "discovery_record_keys": [
+        "research-ec5152e18c9f4d35"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "poco|f6 5g",
+      "brand": "POCO",
+      "model": "F6 5G",
+      "discovery_record_keys": [
+        "research-ced1516e7206aa55"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "poco|f7",
+      "brand": "POCO",
+      "model": "F7",
+      "discovery_record_keys": [
+        "research-9c65c10a592ff5ba"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "poco|m7 pro",
+      "brand": "POCO",
+      "model": "M7 Pro",
+      "discovery_record_keys": [
+        "research-e99ada363dfa18ca"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "poco|m8 power 5g",
+      "brand": "POCO",
+      "model": "M8 Power 5G",
+      "discovery_record_keys": [
+        "research-b07e23d46f32e4ba"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "poco|x6 pro 5g",
+      "brand": "POCO",
+      "model": "X6 Pro 5G",
+      "discovery_record_keys": [
+        "research-cc84933c8420d256"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "poco|x7 pro",
+      "brand": "POCO",
+      "model": "X7 Pro",
+      "discovery_record_keys": [
+        "research-7f6b284ba398c00e"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "poco|x7 pro 5g",
+      "brand": "POCO",
+      "model": "X7 Pro 5G",
+      "discovery_record_keys": [
+        "research-5673ba84cc596c57"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "poco|x8 5g",
+      "brand": "POCO",
+      "model": "X8 5G",
+      "discovery_record_keys": [
+        "research-8b262ff424ee0cfc"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "poco|x8 power 5g",
+      "brand": "POCO",
+      "model": "X8 Power 5G",
+      "discovery_record_keys": [
+        "research-ae520b2d721b426e"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "poco|x8 pro max",
+      "brand": "POCO",
+      "model": "X8 Pro Max",
+      "discovery_record_keys": [
+        "research-bd681c60be536957"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|12 pro plus",
+      "brand": "realme",
+      "model": "12 Pro Plus",
+      "discovery_record_keys": [
+        "research-dd103eef7ba24974"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|13 pro plus",
+      "brand": "realme",
+      "model": "13 Pro Plus",
+      "discovery_record_keys": [
+        "research-447724ad83160dc7"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|16x 5g",
+      "brand": "realme",
+      "model": "16x 5G",
+      "discovery_record_keys": [
+        "research-cc1be92a2759d02c"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|c61 6gb ram",
+      "brand": "realme",
+      "model": "C61 6GB RAM",
+      "discovery_record_keys": [
+        "research-7d5932cc0f765d6d"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|c83 5g",
+      "brand": "realme",
+      "model": "C83 5G",
+      "discovery_record_keys": [
+        "research-808634dc112e440e"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|gt 6",
+      "brand": "realme",
+      "model": "GT 6",
+      "discovery_record_keys": [
+        "research-f6c7d2e95af2e91d"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|gt 6t",
+      "brand": "realme",
+      "model": "GT 6T",
+      "discovery_record_keys": [
+        "research-62bd5e9ca97a1948"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|gt 7",
+      "brand": "realme",
+      "model": "GT 7",
+      "discovery_record_keys": [
+        "research-de2a7f4a7894760c"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|gt 7 pro",
+      "brand": "realme",
+      "model": "GT 7 Pro",
+      "discovery_record_keys": [
+        "research-ee79cc71613b862f"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|narzo 100 lite 5g frost",
+      "brand": "realme",
+      "model": "narzo 100 Lite 5G Frost",
+      "discovery_record_keys": [
+        "research-4798087d3b6df05c"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|narzo 100 lite 5g thunder",
+      "brand": "realme",
+      "model": "narzo 100 Lite 5G Thunder",
+      "discovery_record_keys": [
+        "research-11260fb36e6f9b9b"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|narzo 100x 5g midnight",
+      "brand": "realme",
+      "model": "NARZO 100x 5G Midnight",
+      "discovery_record_keys": [
+        "research-92a4ce73b2e7fc87"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|narzo 80 lite 4g see",
+      "brand": "realme",
+      "model": "narzo 80 Lite 4G See",
+      "discovery_record_keys": [
+        "research-861518192cecd2db"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|p3",
+      "brand": "realme",
+      "model": "P3",
+      "discovery_record_keys": [
+        "research-64f4ef263325db7b"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|p3 ultra",
+      "brand": "realme",
+      "model": "P3 Ultra",
+      "discovery_record_keys": [
+        "research-f97915a140d2cb71"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|p4 lite 5g",
+      "brand": "realme",
+      "model": "P4 Lite 5G",
+      "discovery_record_keys": [
+        "research-9caadbf070fd2bd1"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|p4 power",
+      "brand": "realme",
+      "model": "P4 Power",
+      "discovery_record_keys": [
+        "research-edf4a5774233f419"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|p4 pro",
+      "brand": "realme",
+      "model": "P4 Pro",
+      "discovery_record_keys": [
+        "research-3e14461856c7c3cd"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|p4r 5g",
+      "brand": "realme",
+      "model": "P4R 5G",
+      "discovery_record_keys": [
+        "research-7955b56d3838481f"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|p4r 5g smartphone",
+      "brand": "realme",
+      "model": "P4R 5G Smartphone",
+      "discovery_record_keys": [
+        "research-b7e384f86090e4a2"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|p4s 5g",
+      "brand": "realme",
+      "model": "P4s 5G",
+      "discovery_record_keys": [
+        "research-00a6675e229dd9ef"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "realme|p4x",
+      "brand": "realme",
+      "model": "P4x",
+      "discovery_record_keys": [
+        "research-bb6320c8223d1675"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "redmi|13 5g",
+      "brand": "Redmi",
+      "model": "13 5G",
+      "discovery_record_keys": [
+        "research-faead0f96954e814"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "redmi|a3",
+      "brand": "Redmi",
+      "model": "A3",
+      "discovery_record_keys": [
+        "research-1ad531c8e6191324"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "redmi|a3x",
+      "brand": "Redmi",
+      "model": "A3x",
+      "discovery_record_keys": [
+        "research-1582c209716afe9f"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "redmi|note 13 5g",
+      "brand": "Redmi",
+      "model": "Note 13 5G",
+      "discovery_record_keys": [
+        "research-c1b2531ca6e7abf1"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "redmi|note 13 pro 5g",
+      "brand": "Redmi",
+      "model": "Note 13 Pro 5G",
+      "discovery_record_keys": [
+        "research-de2d1d1f66f2a37f"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "redmi|note 13 pro plus 5g",
+      "brand": "Redmi",
+      "model": "Note 13 Pro Plus 5G",
+      "discovery_record_keys": [
+        "research-7b69ad186be325c2"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "redmi|note 14 5g",
+      "brand": "Redmi",
+      "model": "Note 14 5G",
+      "discovery_record_keys": [
+        "research-a89c049952d8e8c8"
+      ],
+      "frozen_variant_ids": [
+        "cw-mobile-111",
+        "cw-mobile-112",
+        "cw-mobile-113"
+      ]
+    },
+    {
+      "model_key": "redmi|redmi 13 5g",
+      "brand": "Redmi",
+      "model": "Redmi 13 5G",
+      "discovery_record_keys": [
+        "research-7b71cd174ff2354b"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "redmi|redmi note 15 5g",
+      "brand": "Redmi",
+      "model": "Redmi Note 15 5G",
+      "discovery_record_keys": [
+        "research-773ce8f192cb9b48"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy a06 5g",
+      "brand": "Samsung",
+      "model": "Galaxy A06 5G",
+      "discovery_record_keys": [
+        "research-f64249bcbe97c559"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy a06 5g light",
+      "brand": "Samsung",
+      "model": "Galaxy A06 5G Light",
+      "discovery_record_keys": [
+        "research-b9c927a5ebdf7c6a"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy a27 5g",
+      "brand": "Samsung",
+      "model": "Galaxy A27 5G",
+      "discovery_record_keys": [
+        "research-023c0b106a2c8a84"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy a35 5g",
+      "brand": "Samsung",
+      "model": "Galaxy A35 5G",
+      "discovery_record_keys": [
+        "research-3dfc7bb61926841e"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy a36 5g",
+      "brand": "Samsung",
+      "model": "Galaxy A36 5G",
+      "discovery_record_keys": [
+        "research-786a55259341013d"
+      ],
+      "frozen_variant_ids": [
+        "cw-mobile-93",
+        "cw-mobile-106",
+        "cw-mobile-107"
+      ]
+    },
+    {
+      "model_key": "samsung|galaxy a37 5g",
+      "brand": "Samsung",
+      "model": "Galaxy A37 5G",
+      "discovery_record_keys": [
+        "research-37f5c5281d8b2357"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy a55 5g",
+      "brand": "Samsung",
+      "model": "Galaxy A55 5G",
+      "discovery_record_keys": [
+        "research-59dd314eb5191cee"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy a56 5g",
+      "brand": "Samsung",
+      "model": "Galaxy A56 5G",
+      "discovery_record_keys": [],
+      "frozen_variant_ids": [
+        "cw-mobile-100",
+        "cw-mobile-108",
+        "cw-mobile-109"
+      ]
+    },
+    {
+      "model_key": "samsung|galaxy a57 5g",
+      "brand": "Samsung",
+      "model": "Galaxy A57 5G",
+      "discovery_record_keys": [
+        "research-1858ad9c3ccbbb57"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy f05",
+      "brand": "Samsung",
+      "model": "Galaxy F05",
+      "discovery_record_keys": [
+        "research-64f87c08da9687d4"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy f06 5g",
+      "brand": "Samsung",
+      "model": "Galaxy F06 5G",
+      "discovery_record_keys": [
+        "research-a2dd6f930077818e"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy f06 5g bahama",
+      "brand": "Samsung",
+      "model": "Galaxy F06 5G Bahama",
+      "discovery_record_keys": [
+        "research-195293e93d9e4c18"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy f16 5g",
+      "brand": "Samsung",
+      "model": "Galaxy F16 5G",
+      "discovery_record_keys": [
+        "research-b69b9093bfb185da"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy f22",
+      "brand": "Samsung",
+      "model": "Galaxy F22",
+      "discovery_record_keys": [
+        "research-3391a2e46fd2f5af"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy f36 5g",
+      "brand": "Samsung",
+      "model": "Galaxy F36 5G",
+      "discovery_record_keys": [
+        "research-26b0780220b72bfb",
+        "research-bc278dd815e143ae"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy f36 5g violet",
+      "brand": "Samsung",
+      "model": "Galaxy F36 5G Violet",
+      "discovery_record_keys": [
+        "research-0b33d568e2285b6c"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy f70 pro 5g",
+      "brand": "Samsung",
+      "model": "Galaxy F70 Pro 5G",
+      "discovery_record_keys": [
+        "research-7b981de9358a8701"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy f70e 5g",
+      "brand": "Samsung",
+      "model": "Galaxy F70e 5G",
+      "discovery_record_keys": [
+        "research-ae7460a4bb7b96b1"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy m04",
+      "brand": "Samsung",
+      "model": "Galaxy M04",
+      "discovery_record_keys": [
+        "research-30b67bc1001d0453"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy m04 128gb",
+      "brand": "Samsung",
+      "model": "Galaxy M04 128GB",
+      "discovery_record_keys": [
+        "research-5baeef53d9dea9f6"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy m06 5g",
+      "brand": "Samsung",
+      "model": "Galaxy M06 5G",
+      "discovery_record_keys": [
+        "research-1a611c189dd046fb"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy m14 4g",
+      "brand": "Samsung",
+      "model": "Galaxy M14 4G",
+      "discovery_record_keys": [
+        "research-e78897a9d6347e8d"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy m16 5g",
+      "brand": "Samsung",
+      "model": "Galaxy M16 5G",
+      "discovery_record_keys": [
+        "research-a7d95fbf1e8e0d16"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy m17 5g",
+      "brand": "Samsung",
+      "model": "Galaxy M17 5G",
+      "discovery_record_keys": [
+        "research-6b1fa8f7ce85582f"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy m17 5g mobile moonlight",
+      "brand": "samsung",
+      "model": "Galaxy M17 5G Mobile Moonlight",
+      "discovery_record_keys": [
+        "research-83461c1009f5d541"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy m17 5g mobile sapphire",
+      "brand": "samsung",
+      "model": "Galaxy M17 5G Mobile Sapphire",
+      "discovery_record_keys": [
+        "research-f101ab4c867dce1c"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy m17e 5g",
+      "brand": "Samsung",
+      "model": "Galaxy M17e 5G",
+      "discovery_record_keys": [
+        "research-80552de9d4e98777"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy m36 5g",
+      "brand": "Samsung",
+      "model": "Galaxy M36 5G",
+      "discovery_record_keys": [
+        "research-4876e617c4b65ae4"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy m36 5g mobile velvet",
+      "brand": "Samsung",
+      "model": "Galaxy M36 5G Mobile Velvet",
+      "discovery_record_keys": [
+        "research-f552be498d4da71e"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy m47 5g",
+      "brand": "Samsung",
+      "model": "Galaxy M47 5G",
+      "discovery_record_keys": [
+        "research-42c6088ca7f1ac1c"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy s24",
+      "brand": "Samsung",
+      "model": "Galaxy S24",
+      "discovery_record_keys": [
+        "research-cd10f1c561c86ea2",
+        "research-aee8bfd235a1d807"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy s24 5g",
+      "brand": "Samsung",
+      "model": "Galaxy S24 5G",
+      "discovery_record_keys": [
+        "research-1da4b1ee9d34f998"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy s24 plus",
+      "brand": "Samsung",
+      "model": "Galaxy S24 Plus",
+      "discovery_record_keys": [
+        "research-307be1e0fcac0042"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy s24 ultra",
+      "brand": "Samsung",
+      "model": "Galaxy S24 Ultra",
+      "discovery_record_keys": [
+        "research-213bd6b637c53d4d"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy s25",
+      "brand": "Samsung",
+      "model": "Galaxy S25",
+      "discovery_record_keys": [
+        "research-d620e76896844e83"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy s25 edge",
+      "brand": "Samsung",
+      "model": "Galaxy S25 Edge",
+      "discovery_record_keys": [
+        "research-25c02ad59d281088"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy s25 fe",
+      "brand": "Samsung",
+      "model": "Galaxy S25 FE",
+      "discovery_record_keys": [
+        "research-c2bf74cafb1ec50f"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy s25 plus",
+      "brand": "Samsung",
+      "model": "Galaxy S25 Plus",
+      "discovery_record_keys": [
+        "research-baf3823b225113cf"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy s25 ultra",
+      "brand": "Samsung",
+      "model": "Galaxy S25 Ultra",
+      "discovery_record_keys": [
+        "research-2b8cb3dde0e03a16"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy s26",
+      "brand": "Samsung",
+      "model": "Galaxy S26",
+      "discovery_record_keys": [
+        "research-31733b6d52561e14"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy s26 fe",
+      "brand": "Samsung",
+      "model": "Galaxy S26 FE",
+      "discovery_record_keys": [
+        "research-6531e0aca3db94a3"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy s26 ultra",
+      "brand": "Samsung",
+      "model": "Galaxy S26 Ultra",
+      "discovery_record_keys": [
+        "research-b67caea2c9d11042"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "samsung|galaxy z fold 8",
+      "brand": "Samsung",
+      "model": "Galaxy Z Fold 8",
+      "discovery_record_keys": [
+        "research-35508b4df9196eee"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "tecno|camon 50 ultra",
+      "brand": "Tecno",
+      "model": "Camon 50 Ultra",
+      "discovery_record_keys": [
+        "research-b7f2b68f14548e05"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "tecno|pova 8 5g",
+      "brand": "Tecno",
+      "model": "Pova 8 5G",
+      "discovery_record_keys": [
+        "research-80b61dc82b750a19"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "tecno|pova 8 pro 5g",
+      "brand": "Tecno",
+      "model": "Pova 8 Pro 5G",
+      "discovery_record_keys": [
+        "research-af3a54efba11602c"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "tecno|pova curve 2",
+      "brand": "Tecno",
+      "model": "Pova Curve 2",
+      "discovery_record_keys": [
+        "research-1e318344790a88a7"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "tecno|spark 50 5g",
+      "brand": "Tecno",
+      "model": "Spark 50 5G",
+      "discovery_record_keys": [
+        "research-c00726609355b394"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "vivo|s2 5g",
+      "brand": "vivo",
+      "model": "S2 5G",
+      "discovery_record_keys": [
+        "research-5f185c0972f8df88"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "vivo|t4x",
+      "brand": "vivo",
+      "model": "T4X",
+      "discovery_record_keys": [
+        "research-05a0afd9858a2f97"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "vivo|t4x 5g",
+      "brand": "vivo",
+      "model": "T4x 5G",
+      "discovery_record_keys": [
+        "research-787da63487e3d221"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "vivo|t5 5g",
+      "brand": "vivo",
+      "model": "T5 5G",
+      "discovery_record_keys": [
+        "research-da7873cbe7fc0e60"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "vivo|t5 pro",
+      "brand": "vivo",
+      "model": "T5 Pro",
+      "discovery_record_keys": [
+        "research-468b859b304ac998"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "vivo|t5 pro 5g",
+      "brand": "vivo",
+      "model": "T5 Pro 5G",
+      "discovery_record_keys": [
+        "research-60ecbcf6879d2387"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "vivo|t5x",
+      "brand": "vivo",
+      "model": "T5x",
+      "discovery_record_keys": [
+        "research-40d4936f398d28ab"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "vivo|t5x 5g",
+      "brand": "vivo",
+      "model": "T5x 5G",
+      "discovery_record_keys": [
+        "research-93aa97cf7bcfa82c"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "vivo|v30 pro",
+      "brand": "vivo",
+      "model": "V30 Pro",
+      "discovery_record_keys": [
+        "research-0ec616854272c728"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "vivo|v40 pro",
+      "brand": "vivo",
+      "model": "V40 Pro",
+      "discovery_record_keys": [
+        "research-97bcf1c522678e4c"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "vivo|v60",
+      "brand": "vivo",
+      "model": "V60",
+      "discovery_record_keys": [
+        "research-84d1ee22b8f33b97"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "vivo|v70 elite",
+      "brand": "vivo",
+      "model": "V70 Elite",
+      "discovery_record_keys": [
+        "research-d3fa697099e53ce6"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "vivo|x200 fe",
+      "brand": "vivo",
+      "model": "X200 FE",
+      "discovery_record_keys": [
+        "research-2ccf1fbca47d312e"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "vivo|x200 pro",
+      "brand": "vivo",
+      "model": "X200 Pro",
+      "discovery_record_keys": [
+        "research-d84fc9cdf3a141c0"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "vivo|x300 ultra",
+      "brand": "vivo",
+      "model": "X300 Ultra",
+      "discovery_record_keys": [
+        "research-10c333b3816c1a87"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "xiaomi|14",
+      "brand": "Xiaomi",
+      "model": "14",
+      "discovery_record_keys": [
+        "research-38e7797ff8fb3792"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "xiaomi|14 civi",
+      "brand": "Xiaomi",
+      "model": "14 Civi",
+      "discovery_record_keys": [
+        "research-1ec34b83bada0f0c"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "xiaomi|14 ultra",
+      "brand": "Xiaomi",
+      "model": "14 Ultra",
+      "discovery_record_keys": [
+        "research-e93ef9f8f64f70c1"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "xiaomi|17 ultra",
+      "brand": "Xiaomi",
+      "model": "17 Ultra",
+      "discovery_record_keys": [
+        "research-b6fe83a3d6fe116c"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "xiaomi redmi|redmi 13 5g",
+      "brand": "Xiaomi/Redmi",
+      "model": "Redmi 13 5G",
+      "discovery_record_keys": [
+        "research-0af14654f22448b5"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "xiaomi redmi|redmi 17 5g",
+      "brand": "Xiaomi/Redmi",
+      "model": "Redmi 17 5G",
+      "discovery_record_keys": [
+        "research-e4d998db27aec67b"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "xiaomi redmi|redmi note 15",
+      "brand": "Xiaomi/Redmi",
+      "model": "Redmi Note 15",
+      "discovery_record_keys": [
+        "research-acda1126d93b2733"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "xiaomi redmi|redmi note 17 5g",
+      "brand": "Xiaomi/Redmi",
+      "model": "Redmi Note 17 5G",
+      "discovery_record_keys": [
+        "research-83823b4ffa6de3df"
+      ],
+      "frozen_variant_ids": []
+    },
+    {
+      "model_key": "xiaomi redmi|redmi turbo 5",
+      "brand": "Xiaomi/Redmi",
+      "model": "Redmi Turbo 5",
+      "discovery_record_keys": [
+        "research-24b7d8574e04aa87"
+      ],
+      "frozen_variant_ids": []
+    }
+  ],
   "records": [
     {
       "record_key": "research-8304627bf9b3cf3c",
