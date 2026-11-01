@@ -250,7 +250,10 @@ def _load_existing_source_specs(root: Path) -> dict[tuple[str, str], list[dict[s
     manufacturer host and drops all offer/identity metadata.
     """
     result: dict[tuple[str, str], list[dict[str, Any]]] = {}
-    evidence_files = (root / "data/phase_e_release_evidence.json", root / "data/verified_product_evidence_cache.json")
+    evidence_files = (
+        root / "data/phase_e_release_evidence.json",
+        root / "data/verified_product_evidence_cache.json",
+    )
     for path in evidence_files:
         if not path.is_file():
             continue
@@ -282,6 +285,59 @@ def _load_existing_source_specs(root: Path) -> dict[tuple[str, str], list[dict[s
                     "source_url": source_url,
                     "applicability": "MODEL_SHARED",
                     "checked_date": observed[:10] if observed else "",
+                }
+            if mapped:
+                result.setdefault(identity, []).append({"specifications": mapped})
+
+    # The official extractor also produces a deliberately sanitized,
+    # model-level ledger for manufacturer pages that do not expose a safe
+    # exact RAM/storage pairing.  It is kept separate from private Product
+    # DNA and is admitted only after the same HTTPS, manufacturer-host and
+    # evidence-status checks above.  Model-level facts never create a
+    # physical variant claim.
+    ledger_path = root / "data/mobile_official_spec_evidence.json"
+    if ledger_path.is_file():
+        payload = _read_json(ledger_path)
+        for record in payload.get("records") or []:
+            if not isinstance(record, dict):
+                continue
+            identity = (_norm(record.get("brand")), _norm(record.get("model")))
+            official_url = str(record.get("official_url") or "")
+            official_host = (urlparse(official_url).hostname or "").casefold()
+            if (
+                not identity[0]
+                or not identity[1]
+                or not official_url.startswith("https://")
+                or not official_host
+                or official_host.endswith("amazon.in")
+                or record.get("review_status") != "candidate_ready"
+                or record.get("evidence_status") != "VERIFIED_SOURCE"
+            ):
+                continue
+            mapped: dict[str, dict[str, Any]] = {}
+            for key, raw_item in (record.get("specifications") or {}).items():
+                if key not in TECHNICAL_FIELD_LABELS or not isinstance(raw_item, dict):
+                    continue
+                if raw_item.get("applicability") != "MODEL_SHARED":
+                    continue
+                if raw_item.get("evidence_status") != "VERIFIED_SOURCE":
+                    continue
+                value = raw_item.get("value")
+                source_url = str(raw_item.get("source_url") or official_url)
+                source_host = (urlparse(source_url).hostname or "").casefold()
+                if (
+                    value in (None, "", [], {})
+                    or not source_url.startswith("https://")
+                    or not source_host
+                    or source_host.endswith("amazon.in")
+                ):
+                    continue
+                mapped[key] = {
+                    "label": str(raw_item.get("label") or TECHNICAL_FIELD_LABELS[key]),
+                    "value": value,
+                    "source_url": source_url,
+                    "applicability": "MODEL_SHARED",
+                    "checked_date": str(raw_item.get("checked_date") or ""),
                 }
             if mapped:
                 result.setdefault(identity, []).append({"specifications": mapped})

@@ -1,0 +1,576 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Sanitized model-level technical evidence extracted by the existing official specification adapter from manufacturer URLs already present in the mobile universe. Physical RAM/storage pairings are not asserted unless separately verified. Retailer, price, stock, purchase and private Product DNA fields are excluded.",
+  "generated_at": "2026-11-01T16:38:11.648885+00:00",
+  "source_method": "official_spec_extractor.extract_one",
+  "records": [
+    {
+      "brand": "Redmi",
+      "model": "13 5G",
+      "official_url": "https://www.mi.com/in/product/redmi-13-5g/specs/",
+      "source_type": "official_manufacturer_page",
+      "page_identity_score": 1.0,
+      "review_status": "candidate_ready",
+      "evidence_status": "VERIFIED_SOURCE",
+      "checked_date": "2026-11-01",
+      "specifications": {
+        "display_type_description": {
+          "label": "Display technology",
+          "value": "6.79\" FHD+ Display Max refresh rate: 120Hz AdaptiveSync Touch sampling Rate: 240Hz Brightness: 550nits (HBM)",
+          "source_url": "https://www.mi.com/in/product/redmi-13-5g/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "rear_camera_system": {
+          "label": "Rear camera system",
+          "value": "108MP rear camera, f/1.75, 1.92 um, 9-in-1 super pixel) , 2MP Macro camera 2MP Macro Lens Dynamic Ring Flash Photography features: Portrait | Night | Video | 108MP mode | Google Lens | HDR Voice shutter | Tilt-shift | Timed burst | Time Lapse | Timer Video Resolution: 1080@30fps, 720p@30fps Classic Film Filters: KC64, V-250, H-400, KPI60, FC400, C-50D, KG200 | Film Frame",
+          "source_url": "https://www.mi.com/in/product/redmi-13-5g/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "front_camera_system": {
+          "label": "Front camera system",
+          "value": "13MP front camera ,F/2.45 Photography features - Video | Photo | Beautify | Portrait | Time-lapse | Voice shutter Palm shutter | Movie frame | Timed burst",
+          "source_url": "https://www.mi.com/in/product/redmi-13-5g/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "operating_system": {
+          "label": "Operating system",
+          "value": "Android 14, Xiaomi HyperOS 36 Months Lag Free Experience Software Policy: 2 Major Android Updates + 4 Years of Security Updates",
+          "source_url": "https://www.mi.com/in/product/redmi-13-5g/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        }
+      }
+    },
+    {
+      "brand": "Redmi",
+      "model": "A3",
+      "official_url": "https://www.mi.com/in/product/redmi-a3/specs/",
+      "source_type": "official_manufacturer_page",
+      "page_identity_score": 1.0,
+      "review_status": "candidate_ready",
+      "evidence_status": "VERIFIED_SOURCE",
+      "checked_date": "2026-11-01",
+      "specifications": {
+        "chipset": {
+          "label": "Chipset",
+          "value": ": MediaTek Helio G36 | Higher clock speed up to 2.2GHz",
+          "source_url": "https://www.mi.com/in/product/redmi-a3/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "display_type_description": {
+          "label": "Display technology",
+          "value": "Size : 17.04cm(6.71-inch) Resolution : 1650 x 720 Max refresh rate : Touch Sampling rate : Peak Brightness : Display : : 90Hz : 180Hz : 500nits : Corning® Gorilla® Glass 3",
+          "source_url": "https://www.mi.com/in/product/redmi-a3/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "display_resolution_description": {
+          "label": "Display resolution",
+          "value": ": 1650 x 720",
+          "source_url": "https://www.mi.com/in/product/redmi-a3/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "rear_camera_system": {
+          "label": "Rear camera system",
+          "value": "Rear Cameras : 8MP AI Dual Camera Flash & type : LED flash, monochrome,portrait modes and film filters",
+          "source_url": "https://www.mi.com/in/product/redmi-a3/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        }
+      }
+    },
+    {
+      "brand": "Redmi",
+      "model": "A3x",
+      "official_url": "https://www.mi.com/in/product/redmi-a3x/specs/",
+      "source_type": "official_manufacturer_page",
+      "page_identity_score": 1.0,
+      "review_status": "candidate_ready",
+      "evidence_status": "VERIFIED_SOURCE",
+      "checked_date": "2026-11-01",
+      "specifications": {
+        "display_type_description": {
+          "label": "Display technology",
+          "value": "6.71\" Dot Drop display 1650x720, 268 ppi Contrast ratio: 1500:1 Color depth: 8-bit Brightness: 500 nits Refresh rate: Up to 90Hz* *Refresh rate can be adjusted to up to 90Hz for supported apps. DC dimming *Data obtained from Xiaomi Internal Labs. Actual results may vary. Corning® Gorilla® Glass protected",
+          "source_url": "https://www.mi.com/in/product/redmi-a3x/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "battery_and_charging": {
+          "label": "Battery and charging",
+          "value": "5000mAh battery (typ) Supports 10W charging* USB Type-C",
+          "source_url": "https://www.mi.com/in/product/redmi-a3x/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "operating_system": {
+          "label": "Operating system",
+          "value": "Android 14 2 Android major updates 3 years of security patch updates",
+          "source_url": "https://www.mi.com/in/product/redmi-a3x/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        }
+      }
+    },
+    {
+      "brand": "Redmi",
+      "model": "Note 13 5G",
+      "official_url": "https://www.mi.com/in/product/redmi-note-13-5g/specs/",
+      "source_type": "official_manufacturer_page",
+      "page_identity_score": 1.0,
+      "review_status": "candidate_ready",
+      "evidence_status": "VERIFIED_SOURCE",
+      "checked_date": "2026-11-01",
+      "specifications": {
+        "display_type_description": {
+          "label": "Display technology",
+          "value": "Super Thin Bezels - 93.3% Screen-to-Body Ratio",
+          "source_url": "https://www.mi.com/in/product/redmi-note-13-5g/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "battery_and_charging": {
+          "label": "Battery and charging",
+          "value": "5000mAh (typ) Li Polymer",
+          "source_url": "https://www.mi.com/in/product/redmi-note-13-5g/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "rear_camera_system": {
+          "label": "Rear camera system",
+          "value": "108MP Main Camera(f/1.75)",
+          "source_url": "https://www.mi.com/in/product/redmi-note-13-5g/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "front_camera_system": {
+          "label": "Front camera system",
+          "value": "16MP",
+          "source_url": "https://www.mi.com/in/product/redmi-note-13-5g/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "operating_system": {
+          "label": "Operating system",
+          "value": "MIUI 14 , Android 13",
+          "source_url": "https://www.mi.com/in/product/redmi-note-13-5g/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        }
+      }
+    },
+    {
+      "brand": "Redmi",
+      "model": "Note 13 Pro 5G",
+      "official_url": "https://www.mi.com/in/product/redmi-note-13-pro-5g/specs/",
+      "source_type": "official_manufacturer_page",
+      "page_identity_score": 0.86,
+      "review_status": "candidate_ready",
+      "evidence_status": "VERIFIED_SOURCE",
+      "checked_date": "2026-11-01",
+      "specifications": {
+        "rear_camera_system": {
+          "label": "Rear camera system",
+          "value": "Photography Features 200MP Mode 2X, 4X In-Sensor Lossless Zoom Night Mode Documents Mode Portrait Mode with Beautify, Depth Control AI Camera Timed burst Tilt-shift AI Beautify Pro Mode Panorama Macro Voice Shutter Assist cam Long Exposure Xiaomi Pro Cut",
+          "source_url": "https://www.mi.com/in/product/redmi-note-13-pro-5g/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "front_camera_system": {
+          "label": "Front camera system",
+          "value": "Photography Features AI Beautify Mode Night Mode Selfie Timer Screen Ringlight Voice Shutter Palm Shutter Timed burst Portrait Mode Panorama selfies Add Time Stamp on Photos Assist Cam",
+          "source_url": "https://www.mi.com/in/product/redmi-note-13-pro-5g/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "chipset": {
+          "label": "Chipset",
+          "value": "Snapdragon® 7s Gen 2 Mobile Platform",
+          "source_url": "https://www.mi.com/in/product/redmi-note-13-pro-5g/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "battery_and_charging": {
+          "label": "Battery and charging",
+          "value": "67W Turbo Charge",
+          "source_url": "https://www.mi.com/in/product/redmi-note-13-pro-5g/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "operating_system": {
+          "label": "Operating system",
+          "value": "MIUI 14 based on Android 13",
+          "source_url": "https://www.mi.com/in/product/redmi-note-13-pro-5g/specs/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        }
+      }
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy F06 5G",
+      "official_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-blue-128gb-sm-e066bzbgins/",
+      "source_type": "official_manufacturer_page",
+      "page_identity_score": 0.925,
+      "review_status": "candidate_ready",
+      "evidence_status": "VERIFIED_SOURCE",
+      "checked_date": "2026-11-01",
+      "specifications": {
+        "display_size_description": {
+          "label": "Display size",
+          "value": "17.13 cm full rectangle / 16.73 cm rounded corners",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-blue-128gb-sm-e066bzbgins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "display_resolution_description": {
+          "label": "Display resolution",
+          "value": "720 x 1600 (HD+)",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-blue-128gb-sm-e066bzbgins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "display_refresh_description": {
+          "label": "Refresh rate",
+          "value": "90 Hz",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-blue-128gb-sm-e066bzbgins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "rear_camera_system": {
+          "label": "Rear camera system",
+          "value": "50.0 MP + 2.0 MP",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-blue-128gb-sm-e066bzbgins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "front_camera_system": {
+          "label": "Front camera system",
+          "value": "8.0 MP",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-blue-128gb-sm-e066bzbgins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "battery_capacity_description": {
+          "label": "Battery capacity",
+          "value": "5000 mAh",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-blue-128gb-sm-e066bzbgins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "security_update_policy": {
+          "label": "Security update policy",
+          "value": "31 March 2030",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-blue-128gb-sm-e066bzbgins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        }
+      }
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy F06 5G Bahama",
+      "official_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-bahama-blue-64gb-sm-e066bzbdins/",
+      "source_type": "official_manufacturer_page",
+      "page_identity_score": 0.8,
+      "review_status": "candidate_ready",
+      "evidence_status": "VERIFIED_SOURCE",
+      "checked_date": "2026-11-01",
+      "specifications": {
+        "display_size_description": {
+          "label": "Display size",
+          "value": "17.13 cm full rectangle / 16.73 cm rounded corners",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-bahama-blue-64gb-sm-e066bzbdins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "display_resolution_description": {
+          "label": "Display resolution",
+          "value": "720 x 1600 (HD+)",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-bahama-blue-64gb-sm-e066bzbdins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "display_refresh_description": {
+          "label": "Refresh rate",
+          "value": "90 Hz",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-bahama-blue-64gb-sm-e066bzbdins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "rear_camera_system": {
+          "label": "Rear camera system",
+          "value": "50.0 MP + 2.0 MP",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-bahama-blue-64gb-sm-e066bzbdins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "front_camera_system": {
+          "label": "Front camera system",
+          "value": "8.0 MP",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-bahama-blue-64gb-sm-e066bzbdins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "battery_capacity_description": {
+          "label": "Battery capacity",
+          "value": "5000 mAh",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-bahama-blue-64gb-sm-e066bzbdins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "security_update_policy": {
+          "label": "Security update policy",
+          "value": "31 March 2030",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-bahama-blue-64gb-sm-e066bzbdins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        }
+      }
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy F36 5G Violet",
+      "official_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f36-5g-luxe-violet-128gb-sm-e366bzvbins/",
+      "source_type": "official_manufacturer_page",
+      "page_identity_score": 1.0,
+      "review_status": "candidate_ready",
+      "evidence_status": "VERIFIED_SOURCE",
+      "checked_date": "2026-11-01",
+      "specifications": {
+        "display_size_description": {
+          "label": "Display size",
+          "value": "16.91 cm full rectangle / 16.45 cm rounded corners",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f36-5g-luxe-violet-128gb-sm-e366bzvbins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "display_resolution_description": {
+          "label": "Display resolution",
+          "value": "1080 x 2340 (FHD+)",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f36-5g-luxe-violet-128gb-sm-e366bzvbins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "display_refresh_description": {
+          "label": "Refresh rate",
+          "value": "120 Hz",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f36-5g-luxe-violet-128gb-sm-e366bzvbins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "rear_camera_system": {
+          "label": "Rear camera system",
+          "value": "50.0 MP + 8.0 MP + 2.0 MP",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f36-5g-luxe-violet-128gb-sm-e366bzvbins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "front_camera_system": {
+          "label": "Front camera system",
+          "value": "13.0 MP",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f36-5g-luxe-violet-128gb-sm-e366bzvbins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "battery_capacity_description": {
+          "label": "Battery capacity",
+          "value": "5000 mAh",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f36-5g-luxe-violet-128gb-sm-e366bzvbins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "security_update_policy": {
+          "label": "Security update policy",
+          "value": "31 December 2031",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f36-5g-luxe-violet-128gb-sm-e366bzvbins/",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        }
+      }
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy S26 FE",
+      "official_url": "https://news.samsung.com/in/samsung-launches-galaxy-s26-fe-in-india-bringing-flagship-camera-galaxy-ai-and-powerful-performance",
+      "source_type": "official_manufacturer_page",
+      "page_identity_score": 1.0,
+      "review_status": "candidate_ready",
+      "evidence_status": "VERIFIED_SOURCE",
+      "checked_date": "2026-11-01",
+      "specifications": {
+        "display_type_description": {
+          "label": "Display technology",
+          "value": "6.7-inch FHD+ Dynamic AMOLED 2X Display 120 Hz refresh rate (60/120Hz) 1,900 nits",
+          "source_url": "https://news.samsung.com/in/samsung-launches-galaxy-s26-fe-in-india-bringing-flagship-camera-galaxy-ai-and-powerful-performance",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "chipset": {
+          "label": "Chipset",
+          "value": "Exynos 2500 (3nm AP)",
+          "source_url": "https://news.samsung.com/in/samsung-launches-galaxy-s26-fe-in-india-bringing-flagship-camera-galaxy-ai-and-powerful-performance",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "charging_description": {
+          "label": "Charging support",
+          "value": "45 W wired charging: Up to 69% charge in around 30 mins with 45 W Adapter 15 W Fast Wireless Charging Wireless PowerShare",
+          "source_url": "https://news.samsung.com/in/samsung-launches-galaxy-s26-fe-in-india-bringing-flagship-camera-galaxy-ai-and-powerful-performance",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        },
+        "operating_system": {
+          "label": "Operating system",
+          "value": "Android 17 One UI 9",
+          "source_url": "https://news.samsung.com/in/samsung-launches-galaxy-s26-fe-in-india-bringing-flagship-camera-galaxy-ai-and-powerful-performance",
+          "source_type": "official_manufacturer_page",
+          "applicability": "MODEL_SHARED",
+          "checked_date": "2026-11-01",
+          "evidence_status": "VERIFIED_SOURCE",
+          "conflict": ""
+        }
+      }
+    }
+  ]
+}

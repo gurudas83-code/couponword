@@ -225,7 +225,9 @@
 
   function loadInventoryCatalogue() {
     if (!inventoryGrid) return;
-    fetch("/data/mobile_research_catalogue.json", { credentials: "omit" })
+    // Version the generated data URL so a reviewed catalogue refresh cannot
+    // be hidden by a stale GitHub Pages/browser cache.
+    fetch("/data/mobile_research_catalogue.json?v=20261101-1", { credentials: "omit" })
       .then(function (response) {
         if (!response.ok) throw new Error("research catalogue unavailable");
         return response.json();
