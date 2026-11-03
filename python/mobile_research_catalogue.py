@@ -374,6 +374,54 @@ def _load_existing_source_specs(root: Path) -> dict[tuple[str, str], list[dict[s
     return result
 
 
+
+def _apply_workbook_research(root, model_cards):
+    """Add dated model research; never mutate frozen variants or shopping gates."""
+    from urllib.parse import urlparse
+    path = root / "data" / "mobile_workbook_research.json"
+    if not path.exists():
+        return
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if payload.get("mode") != "DATED_RESEARCH_NOT_LIVE_OFFERS":
+        raise ValueError("invalid workbook research mode")
+    cards = {card["model_key"]: card for card in model_cards}
+    entries = payload.get("models", [])
+    if len(entries) != len(cards) or {item["model_key"] for item in entries} != set(cards):
+        raise ValueError("workbook research must reconcile all model keys exactly")
+    official_hosts = {"apple.com", "nothing.tech", "google.com", "infinixmobiles.in", "iqoo.com", "lavamobiles.com", "motorola.com", "motorola.in", "oneplus.in", "oppo.com", "mi.com", "po.co", "realme.com", "samsung.com", "tecno-mobile.in", "tecno-mobile.com", "vivo.com"}
+    retailer_hosts = {"www.amazon.in", "www.flipkart.com", "www.croma.com", "www.reliancedigital.in", "www.vijaysales.com", "www.poorvika.com"}
+    for entry in entries:
+        card = cards[entry["model_key"]]
+        for key, item in entry.get("specifications", {}).items():
+            parsed = urlparse(item.get("source_url", ""))
+            if key not in TECHNICAL_FIELD_LABELS or parsed.scheme != "https" or not any(parsed.hostname == host or (parsed.hostname or "").endswith("." + host) for host in official_hosts):
+                raise ValueError("unsupported workbook specification source")
+            # Existing frozen and admitted source values retain precedence.
+            if key not in card["specifications"]:
+                card["specifications"][key] = item
+            if item["source_url"] not in card["source_urls"]:
+                card["source_urls"].append(item["source_url"])
+        card["missing_specifications"] = [key for key in TECHNICAL_FIELD_LABELS if key not in card["specifications"]]
+        card["available_specification_fields"] = [TECHNICAL_FIELD_LABELS[key] for key in card["specifications"]]
+        if card["specifications"] and card["status"] != "OFFICIAL_VERIFIED":
+            card["status"] = "PARTIALLY_VERIFIED"
+            card["status_reason"] = "Manufacturer research is available; exact variant and current availability are not certified."
+        links = entry.get("retailer_search_links", [])
+        for item in links:
+            parsed = urlparse(item.get("url", ""))
+            if parsed.scheme != "https" or parsed.hostname not in retailer_hosts:
+                raise ValueError("unsupported retailer research link")
+        card["retailer_search_links"] = links
+        card["physical_variant_note"] = entry.get("physical_variant_note", "")
+        ref = entry.get("research_budget_reference")
+        if ref:
+            parsed = urlparse(ref.get("source_url", ""))
+            negative = any(word in str(ref.get("stock_indication", "")).upper() for word in ("OUT_OF_STOCK", "OUT OF STOCK", "UNAVAILABLE", "SOLD_OUT", "DISCONTINUED"))
+            if parsed.scheme != "https" or parsed.hostname not in retailer_hosts or negative or not isinstance(ref.get("reference_price_inr"), (float, int)) or ref["reference_price_inr"] <= 0 or not ref.get("storage_gb") or ref.get("ranking_weight") != 0 or ref.get("live_offer") is not False:
+                raise ValueError("invalid research budget reference")
+        card["research_budget_reference"] = ref
+        card["research_checked_at"] = payload["research_as_of"]
+
 def build_public_catalogue(root: Path) -> dict[str, Any]:
     priority_payload = _read_json(root / "data/mobile_universe_priority_126.json")
     universe_payload = _read_json(root / "data/mobile_universe_2023_2026.json")
@@ -535,6 +583,8 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
         card["missing_specifications"] = missing
         card["available_specification_fields"] = [TECHNICAL_FIELD_LABELS[key] for key in specs]
         card["source_urls"] = list(dict.fromkeys(card["source_urls"]))
+
+    _apply_workbook_research(root, model_cards)
 
     model_cards.sort(key=lambda card: (_norm(card["brand"]), _norm(card["model"]), card["model_key"]))
     if len(model_cards) != len(models):

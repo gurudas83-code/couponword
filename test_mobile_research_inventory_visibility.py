@@ -88,7 +88,8 @@ class MobileResearchInventoryVisibilityTests(unittest.TestCase):
         self.assertIn("chipset", samsung[0]["specifications"])
         self.assertIn("gpu", samsung[0]["missing_specifications"])
         pending = [card for card in cards if not card["specifications"]]
-        self.assertGreater(len(pending), 150)
+        self.assertEqual(len(pending), 7)
+        self.assertGreaterEqual(sum(bool(card["specifications"]) for card in cards), 225)
 
 
 if __name__ == "__main__":

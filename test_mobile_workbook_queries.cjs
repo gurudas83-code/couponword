@@ -1,0 +1,51 @@
+const fs = require('node:fs');
+const vm = require('node:vm');
+const assert = require('node:assert/strict');
+const path = require('node:path');
+const root = __dirname;
+const catalogue = JSON.parse(fs.readFileSync(path.join(root, 'public/data/mobile_research_catalogue.json')));
+const preview = JSON.parse(fs.readFileSync(path.join(root, 'data/mobile_research_preview.json')));
+const elements = new Map();
+function element(id) {
+  if (!elements.has(id)) elements.set(id, {id, value:'', innerHTML:'', textContent:'', hidden:false, tagName:'DIV', events:{}, addEventListener(name, f) {this.events[name]=f;}, scrollIntoView(){}});
+  return elements.get(id);
+}
+const document = {getElementById:element, querySelectorAll:()=>[], addEventListener(){}};
+const window = {location:{hash:''}, addEventListener(){}};
+const context = vm.createContext({document, window, console, URLSearchParams, fetch:async url=>({ok:true,json:async()=>url.includes('mobile_research_catalogue')?catalogue:url.includes('mobile_research_preview')?preview:[]})});
+vm.runInContext(fs.readFileSync(path.join(root, 'mobile-research-preview.js'),'utf8'),context);
+setImmediate(()=> {
+ const api=window.CouponWorldMobileResearch;
+ let checks=0;
+ function check(name, fn){fn();checks++;console.log('PASS '+name);}
+ const search=q=>api.search(q);
+ check('232 model identities retained',()=>assert.equal(catalogue.model_cards.length,232));
+ check('235 discovery rows retained',()=>assert.equal(catalogue.records.length,235));
+ check('10 frozen variants retained',()=>assert.equal(preview.products.length,10));
+ check('225 model cards have technical specifications',()=>assert.equal(catalogue.model_cards.filter(c=>Object.keys(c.specifications).length).length,225));
+ check('86 references exclude negative stock',()=>{let rows=catalogue.model_cards.filter(c=>c.research_budget_reference);assert.equal(rows.length,86);assert(rows.every(c=>!/(OUT.OF.STOCK|UNAVAILABLE|DISCONTINUED)/i.test(c.research_budget_reference.stock_indication)));});
+ check('budget is strict and nonempty',()=>{let r=search('phone under 20000');assert(r.length>0);assert(r.every(x=>x.card.research_budget_reference.reference_price_inr<20000));});
+ check('20k equals 20000',()=>assert.deepEqual(search('phone under 20k').map(x=>x.card.model_key),search('phone under 20000').map(x=>x.card.model_key)));
+ check('Hindi budget matches English',()=>assert.deepEqual(search('20000 के अंदर मोबाइल').map(x=>x.card.model_key),search('phone under 20000').map(x=>x.card.model_key)));
+ check('Hindi numerals match English',()=>assert.deepEqual(search('२०००० के अंदर मोबाइल').map(x=>x.card.model_key),search('phone under 20000').map(x=>x.card.model_key)));
+ check('Hinglish budget matches English',()=>assert.deepEqual(search('mujhe 20 hazar ke andar mobile chahiye').map(x=>x.card.model_key),search('phone under 20000').map(x=>x.card.model_key)));
+ check('best camera respects budget',()=>{let r=search('best camera phone under 20000');assert(r.length);assert(r.every(x=>x.card.research_budget_reference.reference_price_inr<20000));assert(element('mobileResearchSearchStatus').textContent.includes('not a performance ranking'));});
+ check('Samsung exclusion',()=>{let r=search('phone under 30000 exclude Samsung');assert(r.length);assert(r.every(x=>x.card.brand.toLowerCase()!=='samsung'));});
+ check('Hinglish Samsung exclusion',()=>{let r=search('Samsung ko chhodkar mobile under 30000');assert(r.length);assert(r.every(x=>x.card.brand.toLowerCase()!=='samsung'));});
+ check('exact Galaxy A36 variant',()=>{let r=search('Galaxy A36 8GB 256GB');assert.equal(r.length,1);assert(r[0].rows.every(x=>x.ram_gb===8&&x.storage_gb===256));});
+ check('unsupported variant has zero results',()=>assert.equal(search('Galaxy A36 16GB 1TB').length,0));
+ check('single storage is a hard constraint',()=>{let r=search('Galaxy A36 256GB');assert(r.length);assert(r.every(x=>x.rows.every(v=>v.storage_gb===256)));});
+ check('model digits cannot select a sibling',()=>{let r=search('Pixel 9');assert(r.length);assert(r.every(x=>/\b9\b/.test(x.card.model)));});
+ check('identity is not overridden by feature query',()=>{let r=search('Samsung camera phone');assert(r.length);assert(r.every(x=>x.card.brand.toLowerCase()==='samsung'));});
+ check('unmatched identity is not broadened',()=>assert.equal(search('Imaginaryphone 999 camera').length,0));
+ check('numeric battery constraint',()=>{let r=search('5000mah battery phone under 30000');assert(r.length);assert(r.every(x=>Number(x.card.specifications.battery_mah_typical.value)>=5000));});
+ check('refresh constraint',()=>{let r=search('120hz display phone under 30000');assert(r.length);assert(r.every(x=>Number(x.card.specifications.display_refresh_max_hz.value)>=120));});
+ check('explicit comparison returns both models',()=>{let r=search('Galaxy A36 vs Galaxy A56');assert.equal(r.length,2);assert(element('mobileResearchResults').innerHTML.includes('no performance winner'));});
+ check('budget pagination expands',()=>{search('phone under 100000');assert(!element('mobileResearchResultsMore').hidden);element('mobileResearchResultsMore').events.click();assert((element('mobileResearchResults').innerHTML.match(/data-mobile-model-card=/g)||[]).length>6);});
+ check('reference amounts hidden from result text',()=>{search('phone under 20000');assert(!/reference_price_inr|₹\s*\d|INR\s*\d/.test(element('mobileResearchResults').innerHTML));});
+ check('retailer search links visible',()=>{search('Galaxy A36');let html=element('mobileResearchResults').innerHTML;assert(html.includes('Search Amazon'));assert(html.includes('Search Flipkart'));assert(html.includes('Browse Croma'));});
+ check('main search recognizes bare budget',()=>assert(api.isResearchQuery('under 20k')));
+ check('strict boundary excludes equality',()=>{let ref=catalogue.model_cards.find(c=>c.research_budget_reference).research_budget_reference;assert(search('phone under '+ref.reference_price_inr).every(x=>x.card.research_budget_reference.reference_price_inr<ref.reference_price_inr));});
+ check('repeated queries deterministic',()=>{let first=search('camera phone under 30000').map(x=>x.card.model_key);for(let i=0;i<20;i++)assert.deepEqual(search('camera phone under 30000').map(x=>x.card.model_key),first);});
+ console.log(checks+' checks passed');
+});

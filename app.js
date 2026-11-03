@@ -387,23 +387,31 @@ sortSelect.addEventListener("change", renderDeals);
 
 function submitMobileResearchIfApplicable(query) {
   if (window.CouponWorldMobileResearch && typeof window.CouponWorldMobileResearch.isResearchQuery === "function" && window.CouponWorldMobileResearch.isResearchQuery(query)) {
+    recommendationRequestId += 1;
+    if (recommendationController) { recommendationController.abort(); recommendationController = null; }
     window.CouponWorldMobileResearch.search(query);
+    const researchSection = document.getElementById("mobileResearchSearch");
+    if (researchSection) researchSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    return true;
   }
+  return false;
 }
 
 heroSearchButton.addEventListener("click", () => {
   const query = heroSearch.value;
-  submitMobileResearchIfApplicable(query);
-  applySearch(query);
-  loadShoppingRecommendation(query);
+  if (!submitMobileResearchIfApplicable(query)) {
+    applySearch(query);
+    loadShoppingRecommendation(query);
+  }
 });
 
 heroSearch.addEventListener("keydown", e => {
   if (e.key === "Enter") {
     const query = heroSearch.value;
-    submitMobileResearchIfApplicable(query);
-    applySearch(query);
-    loadShoppingRecommendation(query);
+    if (!submitMobileResearchIfApplicable(query)) {
+      applySearch(query);
+      loadShoppingRecommendation(query);
+    }
   }
 });
 
@@ -423,8 +431,7 @@ document.querySelectorAll("[data-mobile-query]").forEach(el => {
     const query = String(el.dataset.mobileQuery || "").trim();
     if (!query) return;
     heroSearch.value = query;
-    submitMobileResearchIfApplicable(query);
-    loadShoppingRecommendation(query);
+    if (!submitMobileResearchIfApplicable(query)) loadShoppingRecommendation(query);
   });
 });
 

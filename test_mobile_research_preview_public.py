@@ -55,7 +55,7 @@ class PublicMobileResearchPreviewTests(unittest.TestCase):
         self.assertIn('id="mobileResearchPreview"', html)
         self.assertIn("Compare 4 Verified Smartphones", html)
         self.assertIn('href="#mobileResearchPreview"', html)
-        self.assertIn('src="/mobile-research-preview.js?v=8"', html)
+        self.assertIn('src="/mobile-research-preview.js?v=20261103-1"', html)
         self.assertIn('Explore 232 Smartphone Models', html)
         self.assertIn('data-mobile-model-card', script)
         self.assertNotIn('INVENTORY_INITIAL_LIMIT', script)
