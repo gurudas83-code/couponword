@@ -376,6 +376,12 @@
       var m = prefix || suffix || currency;
       if (m) { budget = value(m[1], m[2]); inclusive = /within|upto|up to|तक/.test(m[0]); text = text.replace(m[0], " "); }
     }
+    // Generic upper-budget searches use the requested nearby price band.
+    // An explicit range keeps its own lower bound. Never silently widen an
+    // empty band to cheaper phones.
+    if (budget != null && lower == null) {
+      lower = Math.max(0, budget - (budget <= 30000 ? 5000 : 10000));
+    }
     var ram = null, storage = null;
     text = text.replace(/\b(\d{1,2})\s*\/\s*(\d{2,4})\b/g, function (_, r, t) { ram = Number(r); storage = Number(t); return " "; });
     text = text.replace(/\b(\d+(?:\.\d+)?)\s*(gb|tb)\s*(ram|storage|rom)?\b/g, function (_, n, unit, type) {
@@ -536,7 +542,7 @@
       researchResults.hidden = false;
       researchResults.innerHTML = (comparison ? '<p class="mobile-research-gate">Specification comparison; no performance winner is asserted.' + (missingComparison ? ' At least one requested model or memory variant could not be matched.' : '') + '</p>' : '') + (visible.length ? visible.map(function (item) { return renderResearchResultCard(item.card, item.rows); }).join("") : '<p class="mobile-research-empty">No documented match for these constraints. Try a model name or a wider budget. Missing prices and recorded out-of-stock references are excluded from budget results.</p>');
     }
-    if (researchSearchStatus) researchSearchStatus.textContent = matches.length + " matching research model" + (matches.length === 1 ? "" : "s") + " · showing " + visible.length + (c.budget != null ? " · dated reference budget filter; current price and delivery unverified" : "") + (/best|अच्छा|अच्छे/i.test(lastSearchQuery) ? " · evidence coverage order, not a performance ranking" : "");
+    if (researchSearchStatus) researchSearchStatus.textContent = matches.length + " matching research model" + (matches.length === 1 ? "" : "s") + " · showing " + visible.length + (c.budget != null ? " · requested range ₹" + Number(c.lower).toLocaleString("en-IN") + " to " + (c.inclusive ? "₹" : "below ₹") + Number(c.budget).toLocaleString("en-IN") + " · dated references; current price and delivery unverified" : "") + (/best|अच्छा|अच्छे/i.test(lastSearchQuery) ? " · evidence coverage order, not a performance ranking" : "");
     if (researchResultsMore) { researchResultsMore.hidden = matches.length <= MAX_SEARCH_RESULTS; researchResultsMore.textContent = searchExpanded ? "Show fewer results" : "Load more research results"; }
     return matches;
   }
