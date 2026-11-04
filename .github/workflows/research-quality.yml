@@ -38,6 +38,38 @@ jobs:
           node test_mobile_workbook_queries.cjs
           node test_standard_guide_fallback.cjs
           node test_search_discovery.cjs
+      - name: Smoke-test the live public site (scheduled and manual only)
+        if: github.event_name != 'pull_request'
+        run: |
+          python - <<'PY'
+          import json
+          import time
+          from urllib.request import Request, urlopen
+          urls = {
+              'homepage': 'https://coupon-world.in/',
+              'catalogue': 'https://coupon-world.in/data/mobile_research_catalogue.json',
+              'guide': 'https://coupon-world.in/guides/phone-budget-guides/',
+          }
+          for name, url in urls.items():
+              for attempt in range(3):
+                  try:
+                      with urlopen(Request(url, headers={'User-Agent': 'CouponWorldQualityMonitor/1.0'}), timeout=25) as response:
+                          content = response.read()
+                          assert response.status == 200, (name, response.status)
+                      if name == 'homepage':
+                          assert b'mobileResearchSearch' in content, 'Homepage research form missing'
+                      elif name == 'catalogue':
+                          data = json.loads(content)
+                          assert len(data['model_cards']) == 232, 'Production catalogue incomplete'
+                      else:
+                          assert b'phone' in content.lower(), 'Buying guide content missing'
+                      print('LIVE PASS:', name, len(content), 'bytes')
+                      break
+                  except Exception as exc:
+                      if attempt == 2:
+                          raise RuntimeError('LIVE FAIL: ' + name) from exc
+                      time.sleep(3)
+          PY
       - name: Confirm browser script syntax
         run: |
           node --check app.js
