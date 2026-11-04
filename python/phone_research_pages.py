@@ -132,6 +132,9 @@ def html_doc(title: str, description: str, path: str, body: str, structured: dic
 <meta property="og:url" content="{esc(canonical)}">
 <meta property="og:image" content="{esc(FALLBACK_IMAGE)}">
 <meta name="twitter:card" content="summary">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-921WL91ZGW"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag("js",new Date());gtag("config","G-921WL91ZGW");</script>
+<script defer src="/assets/discovery-analytics.js?v=20261104"></script>
 <link rel="stylesheet" href="/assets/phone-guides.css?v=20261104">
 <style>
 .page-shell{{max-width:1050px;margin:0 auto;padding:1rem}}
