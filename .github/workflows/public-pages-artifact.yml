@@ -32,6 +32,14 @@ jobs:
           python-version: "3.12"
       - name: Build allow-listed public artifact
         run: python scripts/build_public_pages.py --output public
+      - name: Check public research and budget contracts
+        run: python scripts/quality_audit.py --root public --report quality-audit.json
+      - name: Run smartphone recommendation and evidence regression tests
+        run: |
+          python -m unittest -v             test_phase_g_ranking_contract             test_mobile_research_inventory_visibility             test_mobile_independent_tests             test_phone_guides_release             test_recommendation_timeout_guard
+          node test_mobile_workbook_queries.cjs
+          node test_standard_guide_fallback.cjs
+          node test_search_discovery.cjs
       - name: Verify public artifact has no private or generated files
         shell: bash
         run: |
