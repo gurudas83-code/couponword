@@ -85,3 +85,30 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+      - name: Verify published phone SEO pages and canonical sitemap
+        run: |
+          python - <<'PY'
+          import time
+          from urllib.request import Request, urlopen
+          origin = "https://coupon-world.in"
+          targets = {
+              "/": (b'href="/phones/"',),
+              "/phones/": (b"Smartphone specifications with original sources", b"/phones/samsung-galaxy-a56-5g/"),
+              "/phones/samsung-galaxy-a56-5g/": (b"Manufacturer source", b"Unknowns and purchasing limitations"),
+              "/seo/phones-under-15000.html": (b"Phones Under",),
+              "/sitemap.xml": (b"https://coupon-world.in/phones/samsung-galaxy-a56-5g/",),
+          }
+          for path, markers in targets.items():
+              for attempt in range(10):
+                  try:
+                      with urlopen(Request(origin+path, headers={"User-Agent":"CouponWorldReleaseMonitor/1.0"}), timeout=20) as res:
+                          body = res.read()
+                          assert res.status == 200, (path,res.status)
+                      assert all(marker in body for marker in markers), "published content not yet updated"
+                      print("LIVE PUBLISHED PASS:", path, len(body), "bytes", flush=True)
+                      break
+                  except Exception as exc:
+                      if attempt == 9:
+                          raise RuntimeError("LIVE PUBLISHED FAIL: "+path) from exc
+                      time.sleep(5)
+          PY
