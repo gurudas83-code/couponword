@@ -45,6 +45,7 @@
   var lastSearchQuery = "";
   var lastSearchMatches = [];
   var guidedControls = ["researchGuidedBudget", "researchGuidedPriority", "researchGuidedRam", "researchGuidedStorage", "researchGuidedExclude"].map(function (id) { return document.getElementById(id); });
+  var guidedScope = document.getElementById("researchGuidedScope");
   var appliedFilters = document.getElementById("researchAppliedFilters");
   var clearSearchButton = document.getElementById("researchClearSearch");
   var guidedApply = document.getElementById("researchGuidedApply");
@@ -379,6 +380,9 @@
     text = text.replace(/सैमसंग/g, "samsung").replace(/आईफोन/g, "iphone").replace(/रेडमी/g, "redmi").replace(/वनप्लस/g, "oneplus");
     var amount = "([0-9]+(?:\\.[0-9]+)?)\\s*(k|thousand|hazar|hazaar|हजार|हज़ार|lakh|lac|लाख)?";
     function value(n, unit) { return Number(n) * (/^(k|thousand|hazar|hazaar|हजार|हज़ार)$/.test(unit || "") ? 1000 : /^(lakh|lac|लाख)$/.test(unit || "") ? 100000 : 1); }
+    // Explicit full-range research never weakens identity/evidence gates.
+    var fullBudget = /\bfull\s+budget\b|पूरे\s*बजट/i.test(text);
+    text = text.replace(/\bfull\s+budget\b|पूरे\s*बजट/gi, " ");
     var budget = null, lower = null, inclusive = false;
     var between = text.match(new RegExp("(?:between|from)\\s*(?:rs\\.?|inr|₹)?\\s*" + amount + "\\s*(?:and|to|-)\\s*(?:rs\\.?|inr|₹)?\\s*" + amount));
     if (between) { lower = value(between[1], between[2] || between[4]); budget = value(between[3], between[4]); inclusive = true; text = text.replace(between[0], " "); }
@@ -393,7 +397,7 @@
     // An explicit range keeps its own lower bound. Never silently widen an
     // empty band to cheaper phones.
     if (budget != null && lower == null) {
-      lower = Math.max(0, budget - (budget <= 30000 ? 5000 : 10000));
+      lower = fullBudget ? 0 : Math.max(0, budget - (budget <= 30000 ? 5000 : 10000));
     }
     var ram = null, storage = null;
     text = text.replace(/\b(\d{1,2})\s*\/\s*(\d{2,4})\b/g, function (_, r, t) { ram = Number(r); storage = Number(t); return " "; });
@@ -600,10 +604,17 @@
 
   function sortResearchMatches(matches, query) {
     var text = normalizeResearch(query);
+    var priorityKeys = researchFeatureKeys(query);
+    function relevantEvidenceCount(card) {
+      return priorityKeys.filter(function (key) { return Object.prototype.hasOwnProperty.call(card.specifications || {}, key); }).length;
+    }
     return matches.slice().sort(function (a, b) {
       var aExact = normalizeResearch(a.card.brand + " " + a.card.model) === text ? 1 : 0;
       var bExact = normalizeResearch(b.card.brand + " " + b.card.model) === text ? 1 : 0;
       if (aExact !== bExact) return bExact - aExact;
+      // Documentation relevance, not an inferred performance or value score.
+      var aRelevant = relevantEvidenceCount(a.card), bRelevant = relevantEvidenceCount(b.card);
+      if (aRelevant !== bRelevant) return bRelevant - aRelevant;
       var aEvidence = Object.keys(a.card.specifications || {}).length;
       var bEvidence = Object.keys(b.card.specifications || {}).length;
       return bEvidence - aEvidence || String(a.card.model).localeCompare(String(b.card.model));
@@ -778,7 +789,7 @@
     var values = guidedControls.map(function (control) { return String(control && control.value || ""); });
     if (!values.some(Boolean)) { if (guidedStatus) guidedStatus.textContent = "Choose a budget, priority, exact memory or brand exclusion to start."; return; }
     var query = (values[1] ? values[1] + " " : "") + "phone";
-    if (values[0]) query += " under " + values[0];
+    if (values[0]) query += " under " + values[0] + (guidedScope && guidedScope.value === "all" ? " full budget" : "");
     if (values[2]) query += " " + values[2] + "GB physical RAM";
     if (values[3]) query += " " + values[3] + "GB storage";
     if (values[4]) query += " exclude " + values[4];
@@ -788,6 +799,7 @@
   });
   if (clearSearchButton) clearSearchButton.addEventListener("click", function () {
     guidedControls.forEach(function (control) { if (control) control.value = ""; });
+    if (guidedScope) guidedScope.value = "band";
     if (guidedStatus) guidedStatus.textContent = "";
     var hero = document.getElementById("heroSearch"); if (hero) hero.value = "";
     searchResearch("");
