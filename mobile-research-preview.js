@@ -43,6 +43,11 @@
   var searchExpanded = false;
   var lastSearchQuery = "";
   var lastSearchMatches = [];
+  var guidedControls = ["researchGuidedBudget", "researchGuidedPriority", "researchGuidedRam", "researchGuidedStorage", "researchGuidedExclude"].map(function (id) { return document.getElementById(id); });
+  var appliedFilters = document.getElementById("researchAppliedFilters");
+  var clearSearchButton = document.getElementById("researchClearSearch");
+  var guidedApply = document.getElementById("researchGuidedApply");
+  var guidedStatus = document.getElementById("researchGuidedStatus");
   var comparisonSelection = [];
   var comparePanel = document.getElementById("mobileResearchCompare");
   var TECHNICAL_FIELD_LABELS = {
@@ -385,7 +390,7 @@
     }
     var ram = null, storage = null;
     text = text.replace(/\b(\d{1,2})\s*\/\s*(\d{2,4})\b/g, function (_, r, t) { ram = Number(r); storage = Number(t); return " "; });
-    text = text.replace(/\b(\d+(?:\.\d+)?)\s*(gb|tb)\s*(ram|storage|rom)?\b/g, function (_, n, unit, type) {
+    text = text.replace(/\b(\d+(?:\.\d+)?)\s*(gb|tb)\s*(?:(?:physical|internal)\s+)?(ram|storage|rom)?\b/g, function (_, n, unit, type) {
       var size = Number(n) * (unit === "tb" ? 1024 : 1);
       if (type === "ram" || (!type && size <= 24)) ram = size; else storage = size;
       return " ";
@@ -428,7 +433,8 @@
       [/battery|बैटरी/, ["battery_mah_typical", "battery_capacity_description", "battery_and_charging", "wired_charging_max_w"]],
       [/gaming|game|गेमिंग/, ["gpu", "chipset"]],
       [/software|android|update|support|सॉफ्टवेयर/, ["operating_system", "launch_android", "os_upgrade_generations", "security_update_policy", "security_support_years"]],
-      [/display|screen|डिस्प्ले/, ["display_type", "display_inches", "display_resolution", "display_refresh_max_hz"]]
+      [/display|screen|डिस्प्ले/, ["display_type", "display_inches", "display_resolution", "display_refresh_max_hz"]],
+      [/build|reliability|durability/, ["ip_rating", "durability"]]
     ];
     groups.forEach(function (group) { if (group[0].test(text)) keys = keys.concat(group[1]); });
     return Array.from(new Set(keys));
@@ -454,7 +460,7 @@
     if (c.minimumRefresh != null && !(Number(spec("display_refresh_max_hz")) >= c.minimumRefresh)) return [];
     if (c.needOis && !/^(yes|true|supported)$/i.test(String(spec("ois") || ""))) return [];
     if (c.need5g && !/5g/i.test(String(spec("network_support") || "") + " " + card.model)) return [];
-    var stop = /^(best|good|phone|phones|mobile|mobiles|smartphone|smartphones|under|below|within|price|in|the|and|with|ram|storage|camera|battery|gaming|game|software|support|display|screen|android|update|updates|ko|ke|ka|ki|bina|chhodkar|chhod|mujhe|mujhko|chahiye|batao|dikhao|achha|acha|accha|wala|wali|mein|me|se|kam|tak|rs|inr|rupees|minimum|least|at|above|over|more|than|का|की|के|में|मुझे|चाहिए|बताओ|दिखाओ|अच्छा|अच्छे|वाला|वाले|फोन|मोबाइल|कैमरा|बैटरी|गेमिंग|डिस्प्ले|छोड़कर|छोड़|हटाकर|बिना|exclude|excluding|without|except|no)$/;
+    var stop = /^(best|good|phone|phones|mobile|mobiles|smartphone|smartphones|under|below|within|price|in|the|and|with|ram|storage|camera|battery|gaming|game|software|support|display|screen|build|reliability|durability|android|update|updates|ko|ke|ka|ki|bina|chhodkar|chhod|mujhe|mujhko|chahiye|batao|dikhao|achha|acha|accha|wala|wali|mein|me|se|kam|tak|rs|inr|rupees|minimum|least|at|above|over|more|than|का|की|के|में|मुझे|चाहिए|बताओ|दिखाओ|अच्छा|अच्छे|वाला|वाले|फोन|मोबाइल|कैमरा|बैटरी|गेमिंग|डिस्प्ले|छोड़कर|छोड़|हटाकर|बिना|exclude|excluding|without|except|no)$/;
     var tokens = text.split(" ").filter(function (token) { return token && !stop.test(token) && token !== excluded; });
     var aliases = { "सैमसंग": "samsung", "आईफोन": "iphone", "रेडमी": "redmi", "पोको": "poco", "वनप्लस": "oneplus" };
     tokens = tokens.map(function (token) { return aliases[token] || token; });
@@ -512,7 +518,7 @@
       ["chipset"], ["display_type", "display_type_description"], ["display_refresh_max_hz", "display_refresh_description"],
       ["rear_main_mp", "rear_camera_system"], ["ois"], ["battery_mah_typical", "battery_capacity_description", "battery_and_charging"],
       ["wired_charging_max_w", "charging_description"], ["security_support_years", "security_update_policy", "operating_system"],
-      ["display_resolution", "display_resolution_description"], ["gpu"]
+      ["display_resolution", "display_resolution_description"], ["gpu"], ["ip_rating", "durability"]
     ];
     var priorities = researchFeatureKeys(query), keys = [];
     groups.forEach(function (group) { var key = group.find(function (k) { return specs[k] && specs[k].value !== "" && specs[k].value != null; }); if (key) keys.push(key); });
@@ -535,6 +541,9 @@
     } else if (/gaming|game|गेमिंग/.test(text)) {
       fact = "Processor and GPU specifications are shown where documented.";
       caution = "Chipset names alone do not establish sustained FPS, heating or gaming endurance.";
+    } else if (/build|reliability|durability/.test(text)) {
+      fact = specs.ip_rating ? "Documented ingress-protection rating: " + specs.ip_rating.value + "." : "An ingress-protection rating is not confirmed in this record.";
+      caution = "An IP rating does not establish drop resistance or long-term reliability. Check warranty conditions and repair support.";
     } else if (/software|support|update|android/.test(text)) {
       fact = "Check the documented operating system and update policy below.";
       caution = "An update promise is not the remaining support period. Confirm launch and support-end dates.";
@@ -587,11 +596,39 @@
   }
 
 
+
+  function showAppliedConditions(query) {
+    var c = researchConstraints(query), labels = [];
+    if (query) {
+      [["Camera", /camera|कैमरा/], ["Battery", /battery|बैटरी/], ["Gaming", /gaming|game|गेमिंग/], ["Display", /display|screen|डिस्प्ले/], ["Software support", /software|support|update|android/], ["Build / reliability", /build|reliability|durability/]].forEach(function (item) { if (item[1].test(c.text)) labels.push("Priority: " + item[0]); });
+      if (c.budget != null) labels.push("Reference range: ₹" + Number(c.lower).toLocaleString("en-IN") + " to " + (c.inclusive ? "₹" : "below ₹") + Number(c.budget).toLocaleString("en-IN"));
+      if (c.ram != null) labels.push("Exact physical RAM: " + c.ram + "GB");
+      if (c.storage != null) labels.push("Exact storage: " + c.storage + "GB");
+      var excluded = excludedBrand(c.text); if (excluded) labels.push("Exclude: " + excluded);
+      if (c.need5g) labels.push("5G required");
+      if (c.needOis) labels.push("OIS required");
+      if (c.minimumBattery != null) labels.push("Battery capacity ≥ " + c.minimumBattery + "mAh");
+      if (c.minimumRefresh != null) labels.push("Refresh rate ≥ " + c.minimumRefresh + "Hz");
+    }
+    if (appliedFilters) { appliedFilters.hidden = labels.length === 0; appliedFilters.innerHTML = labels.map(function (label) { return '<span class="research-condition">' + escapeHtml(label) + '</span>'; }).join(''); }
+    if (clearSearchButton) clearSearchButton.hidden = !query;
+  }
+
+  function emptyResearchResult(query) {
+    var c = researchConstraints(query);
+    var message = "No documented match in our saved research for this request.";
+    if (c.lower != null && c.budget != null && c.lower > c.budget) message = "The lower budget is higher than the upper budget. Please correct the range.";
+    else if (c.ram != null || c.storage != null) message += " We cannot confirm the requested exact memory variant with all these conditions.";
+    else if (c.budget != null) message += " No matching record passes this price band and the other conditions. Missing references and recorded out-of-stock entries are excluded.";
+    return '<div class="mobile-research-empty"><p>' + escapeHtml(message) + '</p><p>This is a research coverage gap, not proof that no suitable phone exists. No constraint has been relaxed.</p><a href="#mobileResearchCatalogue">Browse the full research catalogue</a></div>';
+  }
+
   function searchResearch(query) {
     var nextQuery = String(query || "").trim();
     var queryChanged = nextQuery !== lastSearchQuery;
     if (queryChanged) searchExpanded = false;
     lastSearchQuery = nextQuery;
+    showAppliedConditions(lastSearchQuery);
     if (researchQuery && researchQuery.value !== nextQuery) researchQuery.value = nextQuery;
     if (!lastSearchQuery) {
       if (researchResults) { researchResults.hidden = true; researchResults.innerHTML = ""; }
@@ -623,7 +660,7 @@
     if (comparison && queryChanged) { comparisonSelection = matches.slice(0, 3); renderSelectedComparison(); }
     if (researchResults) {
       researchResults.hidden = false;
-      researchResults.innerHTML = (comparison ? '<p class="mobile-research-gate">Specification comparison; no performance winner is asserted.' + (missingComparison ? ' At least one requested model or memory variant could not be matched.' : '') + '</p>' : '') + (visible.length ? visible.map(function (item) { return renderResearchResultCard(item.card, item.rows, item.group_size); }).join("") : '<p class="mobile-research-empty">No documented match for these constraints. Try a model name or a wider budget. Missing prices and recorded out-of-stock references are excluded from budget results.</p>');
+      researchResults.innerHTML = (comparison ? '<p class="mobile-research-gate">Specification comparison; no performance winner is asserted.' + (missingComparison ? ' At least one requested model or memory variant could not be matched.' : '') + '</p>' : '') + (visible.length ? visible.map(function (item) { return renderResearchResultCard(item.card, item.rows, item.group_size); }).join("") : emptyResearchResult(lastSearchQuery));
     }
     if (researchSearchStatus) researchSearchStatus.textContent = matches.length + " matching research model" + (matches.length === 1 ? "" : "s") + " · showing " + visible.length + (c.budget != null ? " · requested range ₹" + Number(c.lower).toLocaleString("en-IN") + " to " + (c.inclusive ? "₹" : "below ₹") + Number(c.budget).toLocaleString("en-IN") + " · dated references; current price and delivery unverified" : "") + (/best|अच्छा|अच्छे/i.test(lastSearchQuery) ? " · evidence coverage order, not a performance ranking" : "");
     if (researchResultsMore) { researchResultsMore.hidden = matches.length <= MAX_SEARCH_RESULTS; researchResultsMore.textContent = searchExpanded ? "Show fewer results" : "Load more research results"; }
@@ -717,6 +754,25 @@
     if (control && control.tagName === "SELECT") control.addEventListener("change", function () { inventoryExpanded = false; renderInventory(); });
   });
   if (inventoryMore) inventoryMore.addEventListener("click", function () { inventoryExpanded = !inventoryExpanded; renderInventory(); });
+
+  if (guidedApply) guidedApply.addEventListener("click", function () {
+    var values = guidedControls.map(function (control) { return String(control && control.value || ""); });
+    if (!values.some(Boolean)) { if (guidedStatus) guidedStatus.textContent = "Choose a budget, priority, exact memory or brand exclusion to start."; return; }
+    var query = (values[1] ? values[1] + " " : "") + "phone";
+    if (values[0]) query += " under " + values[0];
+    if (values[2]) query += " " + values[2] + "GB physical RAM";
+    if (values[3]) query += " " + values[3] + "GB storage";
+    if (values[4]) query += " exclude " + values[4];
+    if (guidedStatus) guidedStatus.textContent = "Search built from your selected conditions.";
+    var hero = document.getElementById("heroSearch"); if (hero) hero.value = query;
+    searchResearch(query);
+  });
+  if (clearSearchButton) clearSearchButton.addEventListener("click", function () {
+    guidedControls.forEach(function (control) { if (control) control.value = ""; });
+    if (guidedStatus) guidedStatus.textContent = "";
+    var hero = document.getElementById("heroSearch"); if (hero) hero.value = "";
+    searchResearch("");
+  });
   if (researchSearchButton) researchSearchButton.addEventListener("click", function () { searchResearch(researchQuery && researchQuery.value); });
   if (researchQuery) researchQuery.addEventListener("keydown", function (event) { if (event.key === "Enter") searchResearch(researchQuery.value); });
   document.querySelectorAll("[data-mobile-research-query]").forEach(function (button) {
@@ -763,7 +819,7 @@
   window.addEventListener("hashchange", handleResearchHash);
   window.CouponWorldMobileResearch = {
     isResearchQuery: function (value) {
-      return researchConstraints(value).budget != null || /(?:phone|mobile|smartphone|galaxy|samsung|iphone|pixel|redmi|oneplus|nothing|realme|vivo|oppo|xiaomi|motorola|poco|iqoo|lava|tecno|infinix|camera|battery|gaming|display|software|android|ram|storage|फोन|मोबाइल|कैमरा|बैटरी|गेमिंग|सैमसंग|अच्छा)/i.test(String(value || ""));
+      return researchConstraints(value).budget != null || /(?:phone|mobile|smartphone|galaxy|samsung|iphone|pixel|redmi|oneplus|nothing|realme|vivo|oppo|xiaomi|motorola|poco|iqoo|lava|tecno|infinix|camera|battery|gaming|display|software|build|reliability|durability|android|ram|storage|फोन|मोबाइल|कैमरा|बैटरी|गेमिंग|सैमसंग|अच्छा)/i.test(String(value || ""));
     },
     search: searchResearch,
     clear: function () { if (researchQuery) researchQuery.value = ""; searchResearch(""); },

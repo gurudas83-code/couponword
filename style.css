@@ -1105,3 +1105,18 @@ body.clean-ui .hero-stats div{padding:12px;background:#fff;min-width:0}
 body.clean-ui .hero-stats strong{color:#172235}
 body.clean-ui .hero-stats span{display:block;line-height:1.5}
 body.clean-ui #mobileResearchCompare{scroll-margin-top:96px}
+
+/* Optional guided controls produce the same existing research query. */
+body.clean-ui .research-guided-search{padding:14px 16px;border:1px solid #ccd9e5;border-radius:12px;background:#f7fafc;color:#172235}
+body.clean-ui .research-guided-search summary{font-size:.9rem;font-weight:650;cursor:pointer;min-height:30px;line-height:1.6;color:#18466b}
+body.clean-ui .research-guided-search p{font-size:.8rem;line-height:1.6;color:#475569;margin:8px 0}
+body.clean-ui .research-guided-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0}
+body.clean-ui .research-guided-fields label{display:grid;gap:6px;min-width:0;font-size:.8rem;line-height:1.5;color:#334155}
+body.clean-ui .research-guided-fields select{width:100%;min-width:0;min-height:44px;padding:9px;border:1px solid #aebfd0;border-radius:8px;background:#fff;color:#172235;font:inherit}
+body.clean-ui .research-applied-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+body.clean-ui #researchAppliedFilters{display:flex;gap:6px;flex-wrap:wrap;flex:1;min-width:0}
+body.clean-ui .research-condition{display:inline-block;padding:6px 9px;background:#eaf2f8;border:1px solid #c2d4e4;border-radius:8px;color:#18466b;font-size:.75rem;line-height:1.5}
+body.clean-ui #researchClearSearch{padding:9px 12px;min-height:42px;font-size:.8rem}
+body.clean-ui .mobile-research-empty a{color:#155c8c;text-decoration:underline}
+@media(max-width:850px){body.clean-ui .research-guided-fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){body.clean-ui .research-guided-fields{grid-template-columns:1fr}body.clean-ui .research-guided-search{padding:12px}body.clean-ui #researchGuidedApply{width:100%}}
