@@ -98,6 +98,7 @@ jobs:
               "/phones/google-pixel-10/": (b"Google Pixel 10", b"Manufacturer source"),
               "/phones/samsung-galaxy-f05/": (b"4G LTE", b"Manufacturer source"),
               "/products/oneplus-nord-ce-30/": (b"noindex,follow", b"Current price and stock not verified"),
+              "/google54faf165096b5622.html": (b"google-site-verification: google54faf165096b5622.html",),
               "/seo/phones-under-15000.html": (b"Phones Under",),
               "/sitemap.xml": (b"https://coupon-world.in/phones/samsung-galaxy-a56-5g/",),
           }
