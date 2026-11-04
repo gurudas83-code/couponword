@@ -22,7 +22,7 @@
       "minimum_source_fields": 10,
       "editorial_group": "official_evidence_addition",
       "model_label": "Samsung Galaxy A57 5G",
-      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+      "known_limitations": "Samsung's manufacturer source confirms Exynos 1680. A CPU-frequency string was incorrectly saved as chipset; now corrected."
     },
     {
       "model_key": "samsung|galaxy f05",
@@ -44,7 +44,7 @@
       "minimum_source_fields": 10,
       "editorial_group": "official_evidence_addition",
       "model_label": "Samsung Galaxy F70 Pro 5G",
-      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+      "known_limitations": "Samsung's manufacturer page identifies Snapdragon 6 Gen 3; prior CPU-clock-frequency string is corrected."
     },
     {
       "model_key": "samsung|galaxy m47 5g",
@@ -55,7 +55,7 @@
       "minimum_source_fields": 10,
       "editorial_group": "official_evidence_addition",
       "model_label": "Samsung Galaxy M47 5G",
-      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+      "known_limitations": "Samsung's India product page identifies Snapdragon 6 Gen 3; prior CPU-clock-frequency string is corrected."
     },
     {
       "model_key": "samsung|galaxy a06 5g",
@@ -286,7 +286,7 @@
       "minimum_source_fields": 10,
       "editorial_group": "source_research_addition",
       "model_label": "POCO X7 Pro",
-      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+      "known_limitations": "India model differs from generic/global technical page: Xiaomi's official FAQ states 6,550 mAh typical in India vs 6,000 mAh global. This India-specific field now points to manufacturer's FAQ."
     },
     {
       "model_key": "xiaomi|14 ultra",
@@ -297,7 +297,7 @@
       "minimum_source_fields": 10,
       "editorial_group": "source_research_addition",
       "model_label": "Xiaomi 14 Ultra",
-      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+      "known_limitations": "Manufacturer India specs include 5G SA/NSA bands. Incorrect 4G-only classification has been corrected in workbook."
     },
     {
       "model_key": "motorola|edge 60 fusion",
