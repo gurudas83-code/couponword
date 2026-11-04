@@ -53,7 +53,10 @@ def run(root: Path):
                     )
                     assert page.locator("#mobileResearchResults [data-mobile-model-card]").count() > 0, width
                     assert page.locator("#mobileResearchResults").is_visible(), width
-                    assert "Research only" in page.locator("#mobileResearchResults").inner_text(), width
+                    research_text = page.locator("#mobileResearchResults").text_content() or ""
+                    visible_text = page.locator("#mobileResearchResults").inner_text()
+                    print("RESEARCH-DIAGNOSTIC", width, "DOM:", repr(research_text[:180]), "visible:", repr(visible_text[:180]), flush=True)
+                    assert "Research only" in research_text, width
 
                     page.evaluate("window.CouponWorldMobileResearch.search('Galaxy A36 8GB 256GB')")
                     names = page.locator("#mobileResearchResults [data-mobile-model-card]")
