@@ -20,7 +20,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout reviewed source
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
@@ -42,6 +42,12 @@ jobs:
           node test_mobile_workbook_queries.cjs
           node test_standard_guide_fallback.cjs
           node test_search_discovery.cjs
+      - name: Install Chromium browser QA dependencies
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Verify real browser research journeys before deployment
+        run: python scripts/browser_smoke.py --root public --report browser-qa.json
       - name: Verify public artifact has no private or generated files
         shell: bash
         run: |
