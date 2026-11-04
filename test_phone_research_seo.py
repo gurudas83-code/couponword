@@ -71,7 +71,7 @@ class ResearchSeoTests(unittest.TestCase):
         self.assertEqual(hub_page.canonicals, [SITE + HUB])
         self.assertEqual(hub_page.h1s, 1)
         self.assertIn(SITE + HUB, self.sitemap)
-        self.assertIn("not a current", hub_html.lower() + " not a current")  # no fabricated commercial status
+        self.assertIn("certified live offer", hub_html.lower())
         descriptions = set()
         for card in self.selected:
             name = model_title(card)
@@ -85,7 +85,7 @@ class ResearchSeoTests(unittest.TestCase):
             self.assertEqual(page.canonicals, [url])
             self.assertEqual(page.h1s, 1)
             self.assertIn(name, html)
-            self.assertGreaterEqual(len([a for a in page.links if "Manufacturer source" in html]), 1)
+            self.assertGreaterEqual(html.count(">Manufacturer source</a>"), len(accepted_specs(card)))
             self.assertGreater(len(" ".join(page.text_bits).split()), 170)
             self.assertIn("Unknowns and purchasing limitations", html)
             self.assertIn("No physical hands-on testing", html)
