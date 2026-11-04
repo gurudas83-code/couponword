@@ -22,7 +22,7 @@ HUB = "/phones/"
 # Editorial selection from the existing official-evidence registry. Curated
 # for actual smartphone-search intent, not generated from keyword permutations.
 # A key can still be withheld by the strict source/field gate below.
-EDITORIAL_MODEL_KEYS = (
+CORE_EDITORIAL_KEYS = (
     "iqoo|neo 10",
     "motorola|signature",
     "nothing|phone 3a",
@@ -44,6 +44,24 @@ EDITORIAL_MODEL_KEYS = (
     "vivo|t5x 5g",
     "vivo|v60",
 )
+
+# The reviewed additions are a *source allow-list*, not an SEO keyword
+# multiplier or a change to the existing shopping identity/ranking engines.
+# Each addition has a specific official manufacturer URL, explicit research
+# limitations and a minimum substantial technical-data threshold. A partially
+# verified research record is not promoted to exact-variant certification.
+ROOT = Path(__file__).resolve().parents[1]
+_REVIEW_FILE = ROOT / "data" / "phone_seo_editorial_reviews.json"
+_REVIEW_PAYLOAD = json.loads(_REVIEW_FILE.read_text(encoding="utf-8"))
+if _REVIEW_PAYLOAD.get("schema_version") != 1:
+    raise RuntimeError("Unrecognized curated phone SEO source-review schema")
+_REVIEW_ITEMS = _REVIEW_PAYLOAD.get("additions") or []
+REVIEWED_ADDITIONS = {item["model_key"]: item for item in _REVIEW_ITEMS}
+if len(REVIEWED_ADDITIONS) != 30 or len(_REVIEW_ITEMS) != 30:
+    raise RuntimeError("Exactly 30 distinct additional manufacturer-source review records are required")
+EDITORIAL_MODEL_KEYS = CORE_EDITORIAL_KEYS + tuple(REVIEWED_ADDITIONS)
+if len(set(EDITORIAL_MODEL_KEYS)) != 50:
+    raise RuntimeError("Phone SEO publication list must have 50 distinct model keys")
 
 # Not all official-source research is an independently tested India-market
 # device. Display only source-linked factual fields, never price/rank claims.
@@ -97,9 +115,28 @@ def accepted_specs(card: dict) -> list[tuple[str, dict]]:
 
 
 def eligible(card: dict) -> bool:
-    # This is the source catalogue's evidence label. The page itself carefully
-    # distinguishes model-level specifications from exact variant certification.
-    return card.get("status") == "OFFICIAL_VERIFIED" and len(accepted_specs(card)) >= MIN_DOCUMENTED_FIELDS
+    # Existing 20 publisher-approved records preserve the original evidence
+    # status contract. Additional models require a separately reviewed
+    # manufacturer page and a stronger technical coverage gate, while retaining
+    # their original public PARTIALLY_VERIFIED status and full limitations.
+    key = card.get("model_key")
+    specs = accepted_specs(card)
+    if key in CORE_EDITORIAL_KEYS:
+        return card.get("status") == "OFFICIAL_VERIFIED" and len(specs) >= MIN_DOCUMENTED_FIELDS
+    review = REVIEWED_ADDITIONS.get(key)
+    if not review or card.get("status") not in {"PARTIALLY_VERIFIED", "OFFICIAL_VERIFIED"}:
+        return False
+    if review.get("manufacturer_page_verified") is not True:
+        return False
+    if review.get("model_label") != model_title(card):
+        return False
+    source = str(review.get("manufacturer_source_url") or "")
+    parsed = urlsplit(source)
+    if parsed.scheme != REQUIRED_SOURCE_SCHEME or not parsed.hostname:
+        return False
+    if len(specs) < int(review.get("minimum_source_fields") or 10):
+        return False
+    return source in {str(item.get("source_url") or "") for _, item in specs}
 
 
 def link(href: str, label: object, rel: str = "") -> str:
@@ -190,6 +227,16 @@ def render_model(card: dict, related: list[dict]) -> str:
     specs = accepted_specs(card)
     published_check = dated(card.get("research_checked_at"))
     date_label = f'<p class="mobile-fact-small">Sources reviewed in research on <time datetime="{esc(published_check)}">{esc(published_check)}</time>. A check date is not a new market price or lab-test date.</p>' if published_check else '<p class="mobile-fact-small">Research check date not available.</p>'
+    review = REVIEWED_ADDITIONS.get(card["model_key"])
+    checked_sources = ""
+    if review:
+        checked_sources = (
+            '<p class="mobile-fact-small">Additional manufacturer source checked '
+            + esc(review["review_date"])
+            + ' for model identity. The individual field values remain saved manufacturer-source '
+              'research and are not a new hands-on verification. '
+            + esc(review["known_limitations"]) + '</p>'
+        )
     headline = f"{title} specifications in India"
     description = f"Explore documented {title} specifications, original manufacturer source links, missing evidence and exact-variant cautions. No live price or stock claims."
     rows = []
@@ -228,6 +275,7 @@ def render_model(card: dict, related: list[dict]) -> str:
 <div class="mobile-fact-note"><strong>Research, not a purchase recommendation.</strong>
 <p>Manufacturer-linked model facts appear below. A source-linked model specification does not certify every India RAM/storage configuration, hands-on performance, current availability or an exact retail listing. These pages never rank phones by dated prices.</p></div>
 {date_label}
+{checked_sources}
 <section><h2>Key documented facts</h2><ul>{facts}</ul>
 <p>Use the exact source links in the table; a headline battery capacity or megapixel count does not establish real-world battery or camera quality.</p></section>
 <section><h2>Specifications and original sources</h2>
@@ -296,8 +344,9 @@ def render_phone_research_pages(destination: Path) -> list[str]:
         card = all_cards.get(key)
         if card and eligible(card):
             selected.append(card)
-    if not 15 <= len(selected) <= len(EDITORIAL_MODEL_KEYS):
-        raise RuntimeError(f"Source-backed editorial phone pages below quality gate: {len(selected)}")
+    if len(selected) != 50:
+        missing = sorted(set(EDITORIAL_MODEL_KEYS) - {card["model_key"] for card in selected})
+        raise RuntimeError(f"50 curated phone pages required; rejected {len(missing)} sources: {missing}")
     if len({slug_for(c) for c in selected}) != len(selected):
         raise RuntimeError("Canonical phone research slugs conflict; publication blocked")
 

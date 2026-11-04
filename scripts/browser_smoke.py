@@ -113,8 +113,16 @@ def run(root: Path):
                         f"Phone research page overflows {width}px viewport: {document_width}"
                     )
                     page.goto(url + "phones/", wait_until="domcontentloaded", timeout=30000)
-                    assert page.locator(".mobile-fact-card").count() == 20, width
+                    assert page.locator(".mobile-fact-card").count() == 50, width
                     assert page.locator('a[href="/phones/samsung-galaxy-a56-5g/"]').count() >= 1, width
+                    assert page.locator('a[href="/phones/apple-iphone-17/"]').count() >= 1, width
+                    assert page.locator('a[href="/phones/google-pixel-10/"]').count() >= 1, width
+                    page.goto(url + "phones/samsung-galaxy-f05/", wait_until="domcontentloaded", timeout=30000)
+                    assert "4G LTE" in page.locator(".mobile-fact-table").inner_text(), width
+                    assert "5G" not in page.locator(".mobile-fact-table").inner_text(), width
+                    page.goto(url + "phones/google-pixel-10/", wait_until="domcontentloaded", timeout=30000)
+                    assert page.locator(".mobile-fact-table tbody tr").count() >= 10, width
+                    assert not page.locator(".shop-button").count(), width
                     assert not page_errors, f"{width}px uncaught JS errors: {page_errors}"
                     results.append({"width": width, "search": "PASS", "full_budget_opt_in": "PASS", "exact_variant": "PASS",
                                     "comparison": "PASS", "engine_handoff": "PASS",

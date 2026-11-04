@@ -375,6 +375,20 @@ def _load_existing_source_specs(root: Path) -> dict[tuple[str, str], list[dict[s
 
 
 
+# Model-shared manufacturer corrections. Only approved non-frozen variants
+# may override an older incorrect imported fact; identity, rank and price stay
+# unchanged. Unknown 'corrected' fields fail publication rather than silently
+# superseding existing source evidence.
+APPROVED_SPEC_CORRECTIONS = {
+    ("samsung|galaxy f05", "network_support"): ("4G LTE", "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/"),
+    ("xiaomi|14 ultra", "network_support"): ("5G", "https://www.mi.com/in/product/xiaomi-14-ultra/specs/"),
+    ("poco|x7 pro", "battery_mah_typical"): (6550, "https://www.mi.com/global/support/faq/details/KA-522489/"),
+    ("samsung|galaxy a57 5g", "chipset"): ("Exynos 1680", "https://news.samsung.com/sg/samsung-unveils-galaxy-a57-5g-and-galaxy-a37-5g-packing-pro-level-features-at-awesome-price"),
+    ("samsung|galaxy f70 pro 5g", "chipset"): ("Qualcomm Snapdragon 6 Gen 3", "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/"),
+    ("samsung|galaxy m47 5g", "chipset"): ("Qualcomm Snapdragon 6 Gen 3", "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/"),
+}
+
+
 def _apply_workbook_research(root, model_cards):
     """Add dated model research; never mutate frozen variants or shopping gates."""
     from urllib.parse import urlparse
@@ -396,8 +410,16 @@ def _apply_workbook_research(root, model_cards):
             parsed = urlparse(item.get("source_url", ""))
             if key not in TECHNICAL_FIELD_LABELS or parsed.scheme != "https" or not any(parsed.hostname == host or (parsed.hostname or "").endswith("." + host) for host in official_hosts):
                 raise ValueError("unsupported workbook specification source")
-            # Existing frozen and admitted source values retain precedence.
-            if key not in card["specifications"]:
+            # Existing frozen facts retain precedence, except for individually
+            # reviewed source corrections on models with no frozen variants.
+            correction = APPROVED_SPEC_CORRECTIONS.get((entry["model_key"], key))
+            if item.get("evidence_status") == "MANUFACTURER_CORRECTED":
+                if (correction is None or item.get("value") != correction[0]
+                        or item.get("source_url") != correction[1]
+                        or card.get("frozen_variant_ids")):
+                    raise ValueError("unapproved corrected manufacturer fact or frozen-variant overwrite")
+                card["specifications"][key] = item
+            elif key not in card["specifications"]:
                 card["specifications"][key] = item
             if item["source_url"] not in card["source_urls"]:
                 card["source_urls"].append(item["source_url"])

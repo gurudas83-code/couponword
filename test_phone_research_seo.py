@@ -13,7 +13,7 @@ from urllib.parse import unquote, urlsplit
 from xml.etree import ElementTree as ET
 
 from python.phone_research_pages import (
-    EDITORIAL_MODEL_KEYS, HUB, SITE, accepted_specs, eligible, model_title, slug_for,
+    EDITORIAL_MODEL_KEYS, CORE_EDITORIAL_KEYS, REVIEWED_ADDITIONS, HUB, SITE, accepted_specs, eligible, model_title, slug_for,
 )
 
 ROOT = Path(__file__).resolve().parent
@@ -53,15 +53,59 @@ class ResearchSeoTests(unittest.TestCase):
 
     def test_editorial_curation_and_source_quality(self):
         self.assertEqual(len(self.cards), 232)
-        self.assertGreaterEqual(len(self.selected), 15)
-        self.assertLessEqual(len(self.selected), 20)
+        self.assertEqual(len(EDITORIAL_MODEL_KEYS), 50)
+        self.assertEqual(len(REVIEWED_ADDITIONS), 30)
+        self.assertEqual(len(self.selected), 50)
         self.assertEqual(len({slug_for(c) for c in self.selected}), len(self.selected))
         for card in self.selected:
-            self.assertEqual(card["status"], "OFFICIAL_VERIFIED")
+            self.assertIn(card["status"], {"OFFICIAL_VERIFIED", "PARTIALLY_VERIFIED"})
+            if card["model_key"] in CORE_EDITORIAL_KEYS:
+                self.assertEqual(card["status"], "OFFICIAL_VERIFIED")
+            else:
+                review = REVIEWED_ADDITIONS[card["model_key"]]
+                self.assertTrue(review["manufacturer_page_verified"])
+                self.assertGreaterEqual(
+                    len(accepted_specs(card)), review["minimum_source_fields"]
+                )
+                self.assertIn(
+                    review["manufacturer_source_url"],
+                    {item["source_url"] for _, item in accepted_specs(card)},
+                )
             specs = accepted_specs(card)
             self.assertGreaterEqual(len(specs), 8)
             for field, item in specs:
                 self.assertTrue(item["source_url"].startswith("https://"), (card["model_key"], field))
+
+    def test_corrections_and_no_duplicate_phone_identities(self):
+        f05 = self.cards["samsung|galaxy f05"]
+        self.assertEqual(f05["specifications"]["network_support"]["value"], "4G LTE")
+        self.assertEqual(self.cards["xiaomi|14 ultra"]["specifications"]["network_support"]["value"], "5G")
+        poco = self.cards["poco|x7 pro"]["specifications"]["battery_mah_typical"]
+        self.assertEqual(poco["value"], 6550)
+        self.assertEqual(poco["applicability"], "INDIA_MARKET_ONLY")
+        self.assertEqual(poco["source_url"], "https://www.mi.com/global/support/faq/details/KA-522489/")
+        self.assertEqual(self.cards["samsung|galaxy a57 5g"]["specifications"]["chipset"]["value"], "Exynos 1680")
+        for key in ("samsung|galaxy f70 pro 5g", "samsung|galaxy m47 5g"):
+            self.assertEqual(self.cards[key]["specifications"]["chipset"]["value"], "Qualcomm Snapdragon 6 Gen 3")
+        a06 = SITE + HUB + "samsung-galaxy-a06-5g/"
+        self.assertIn(a06, self.sitemap)
+        self.assertFalse((PUBLIC / "phones/samsung-galaxy-a06-5g-light/").exists())
+        self.assertFalse((PUBLIC / "phones/samsung-galaxy-s24-5g/").exists())
+        self.assertEqual(len([u for u in self.sitemap if u.startswith(SITE + HUB + "samsung-galaxy-s24")]),1)
+
+    def test_exactly_50_distinct_phones_with_original_sources(self):
+        by_source = {}
+        for card in self.selected:
+            for key, spec in accepted_specs(card):
+                self.assertTrue(spec["source_url"].startswith("https://"), key)
+            by_source[card["model_key"]] = card["status"]
+        self.assertEqual(len(by_source),50)
+        self.assertEqual(len(CORE_EDITORIAL_KEYS),20)
+        self.assertEqual(len(REVIEWED_ADDITIONS),30)
+        self.assertTrue(any(card["brand"]=="Apple" for card in self.selected))
+        self.assertTrue(any(card["brand"]=="Google" for card in self.selected))
+        self.assertTrue(any(card["brand"]=="Samsung" for card in self.selected))
+        self.assertTrue(any(card["brand"]=="Redmi" for card in self.selected))
 
     def test_hub_and_model_pages_are_crawlable_and_distinct(self):
         hub = PUBLIC / "phones" / "index.html"

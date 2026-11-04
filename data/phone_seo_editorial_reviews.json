@@ -1,0 +1,346 @@
+{
+  "schema_version": 1,
+  "description": "Editorially gated source-linked smartphone SEO additions, reviewed 4 November 2026; these are model-level research pages, not live offers or fully audited field-by-field device specs.",
+  "additions": [
+    {
+      "model_key": "oneplus|n6 lite",
+      "manufacturer_source_url": "https://www.oneplus.in/n6-lite/specs",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "official_evidence_addition",
+      "model_label": "OnePlus N6 Lite",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "samsung|galaxy a57 5g",
+      "manufacturer_source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "official_evidence_addition",
+      "model_label": "Samsung Galaxy A57 5G",
+      "known_limitations": "Samsung's manufacturer source confirms Exynos 1680. A CPU-frequency string was incorrectly saved as chipset; now corrected."
+    },
+    {
+      "model_key": "samsung|galaxy f05",
+      "manufacturer_source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "official_evidence_addition",
+      "model_label": "Samsung Galaxy F05",
+      "known_limitations": "Official India specifications confirm LTE/4G; erroneous 5G label corrected in source workbook."
+    },
+    {
+      "model_key": "samsung|galaxy f70 pro 5g",
+      "manufacturer_source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "official_evidence_addition",
+      "model_label": "Samsung Galaxy F70 Pro 5G",
+      "known_limitations": "Samsung's manufacturer page identifies Snapdragon 6 Gen 3; prior CPU-clock-frequency string is corrected."
+    },
+    {
+      "model_key": "samsung|galaxy m47 5g",
+      "manufacturer_source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "official_evidence_addition",
+      "model_label": "Samsung Galaxy M47 5G",
+      "known_limitations": "Samsung's India product page identifies Snapdragon 6 Gen 3; prior CPU-clock-frequency string is corrected."
+    },
+    {
+      "model_key": "samsung|galaxy a06 5g",
+      "manufacturer_source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a06-5g-light-green-128gb-sm-a066blghins/",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "partial_evidence_addition",
+      "model_label": "Samsung Galaxy A06 5G",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "samsung|galaxy a35 5g",
+      "manufacturer_source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a35-5g-awesome-navy-256gb-sm-a356ezkkins/",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "partial_evidence_addition",
+      "model_label": "Samsung Galaxy A35 5G",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "samsung|galaxy a55 5g",
+      "manufacturer_source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a55-5g-awesome-iceblue-256gb-sm-a556elbgins/",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "partial_evidence_addition",
+      "model_label": "Samsung Galaxy A55 5G",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "samsung|galaxy a27 5g",
+      "manufacturer_source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a27-5g-black-128gb-sm-a276bzkgins/",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "partial_evidence_addition",
+      "model_label": "Samsung Galaxy A27 5G",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "redmi|13 5g",
+      "manufacturer_source_url": "https://www.mi.com/in/product/redmi-13-5g/specs/",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "partial_evidence_addition",
+      "model_label": "Redmi 13 5G",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "redmi|note 13 5g",
+      "manufacturer_source_url": "https://www.mi.com/in/product/redmi-note-13-5g/specs/",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "partial_evidence_addition",
+      "model_label": "Redmi Note 13 5G",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "redmi|note 13 pro 5g",
+      "manufacturer_source_url": "https://www.mi.com/in/product/redmi-note-13-pro-5g/specs/",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "partial_evidence_addition",
+      "model_label": "Redmi Note 13 Pro 5G",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "redmi|a3x",
+      "manufacturer_source_url": "https://www.mi.com/in/product/redmi-a3x/specs/",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 9,
+      "editorial_group": "partial_evidence_addition",
+      "model_label": "Redmi A3x",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "realme|p4 lite 5g",
+      "manufacturer_source_url": "https://www.realme.com/in/realme-p4-lite-5g/specs",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "partial_evidence_addition",
+      "model_label": "realme P4 Lite 5G",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "apple|iphone 17",
+      "manufacturer_source_url": "https://support.apple.com/en-in/125089",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "source_research_addition",
+      "model_label": "Apple iPhone 17",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "apple|iphone 17 pro",
+      "manufacturer_source_url": "https://support.apple.com/en-in/125090",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "source_research_addition",
+      "model_label": "Apple iPhone 17 Pro",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "apple|iphone 17 pro max",
+      "manufacturer_source_url": "https://support.apple.com/en-in/125091",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "source_research_addition",
+      "model_label": "Apple iPhone 17 Pro Max",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "apple|iphone 16",
+      "manufacturer_source_url": "https://www.apple.com/in/iphone-16/specs/",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "source_research_addition",
+      "model_label": "Apple iPhone 16",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "apple|iphone 16 pro",
+      "manufacturer_source_url": "https://support.apple.com/en-in/121031",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "source_research_addition",
+      "model_label": "Apple iPhone 16 Pro",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "google|pixel 10",
+      "manufacturer_source_url": "https://store.google.com/in/product/pixel_10_specs?hl=en-IN",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "source_research_addition",
+      "model_label": "Google Pixel 10",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "google|pixel 10a",
+      "manufacturer_source_url": "https://store.google.com/in/product/pixel_10a_specs?hl=en-IN",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "source_research_addition",
+      "model_label": "Google Pixel 10A",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "google|pixel 9a",
+      "manufacturer_source_url": "https://store.google.com/in/product/pixel_9a_specs?hl=en-IN",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "source_research_addition",
+      "model_label": "Google Pixel 9a",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "oneplus|12",
+      "manufacturer_source_url": "https://www.oneplus.in/12/specs",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "source_research_addition",
+      "model_label": "OnePlus 12",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "oneplus|nord 4",
+      "manufacturer_source_url": "https://www.oneplus.in/nord-4/specs",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "source_research_addition",
+      "model_label": "OnePlus Nord 4",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "iqoo|13",
+      "manufacturer_source_url": "https://www.iqoo.com/in/products/param/iqoo13",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "source_research_addition",
+      "model_label": "iQOO 13",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "poco|x7 pro",
+      "manufacturer_source_url": "https://www.po.co/global/product/poco-x7-pro/specs/",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "source_research_addition",
+      "model_label": "POCO X7 Pro",
+      "known_limitations": "India model differs from generic/global technical page: Xiaomi's official FAQ states 6,550 mAh typical in India vs 6,000 mAh global. This India-specific field now points to manufacturer's FAQ."
+    },
+    {
+      "model_key": "xiaomi|14 ultra",
+      "manufacturer_source_url": "https://www.mi.com/in/product/xiaomi-14-ultra/specs/",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "source_research_addition",
+      "model_label": "Xiaomi 14 Ultra",
+      "known_limitations": "Manufacturer India specs include 5G SA/NSA bands. Incorrect 4G-only classification has been corrected in workbook."
+    },
+    {
+      "model_key": "motorola|edge 60 fusion",
+      "manufacturer_source_url": "https://www.motorola.in/smartphones-motorola-edge-60-fusion/p?skuId=491",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "source_research_addition",
+      "model_label": "Motorola Edge 60 Fusion",
+      "known_limitations": "Manufacturer product URL is oversized for general text fetching; corresponding model technical details appeared in manufacturer-indexed source search."
+    },
+    {
+      "model_key": "oppo|find x9 5g",
+      "manufacturer_source_url": "https://www.oppo.com/in/smartphones/series-find-x/find-x9/specs/",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "source_research_addition",
+      "model_label": "OPPO Find X9 5G",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    },
+    {
+      "model_key": "vivo|x200 pro",
+      "manufacturer_source_url": "https://www.vivo.com/in/products/param/x200-pro",
+      "review_date": "2026-11-04",
+      "manufacturer_page_verified": true,
+      "source_review_scope": "Model and official source page identified; individual fields remain upstream manufacturer-research data, not independent device tests",
+      "minimum_source_fields": 10,
+      "editorial_group": "source_research_addition",
+      "model_label": "vivo X200 Pro",
+      "known_limitations": "No certified live offer, full exact-variant or independent hands-on test from this editorial record."
+    }
+  ],
+  "excluded_identity_overlaps": [
+    {
+      "model_key": "samsung|galaxy a06 5g light",
+      "reason": "Colour 'Light Gray' was ingested as model suffix; use canonical Galaxy A06 5G model page instead."
+    },
+    {
+      "model_key": "samsung|galaxy s24 5g",
+      "reason": "Same Samsung Galaxy S24 device as existing published Galaxy S24 page; avoid duplicate SEO identity."
+    }
+  ]
+}
