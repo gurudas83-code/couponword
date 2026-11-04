@@ -10,7 +10,7 @@ function element(id) {
   if (!elements.has(id)) elements.set(id, {id, value:'', innerHTML:'', textContent:'', hidden:false, tagName:'DIV', events:{}, addEventListener(name, f) {this.events[name]=f;}, scrollIntoView(){}});
   return elements.get(id);
 }
-const document = {getElementById:element, querySelectorAll:()=>[], addEventListener(){}};
+const document = {getElementById:element, querySelectorAll:()=>[], events:{}, addEventListener(name, f){this.events[name]=f;}};
 const window = {location:{hash:''}, addEventListener(){}};
 const context = vm.createContext({document, window, console, URLSearchParams, fetch:async url=>({ok:true,json:async()=>url.includes('mobile_research_catalogue')?catalogue:url.includes('mobile_research_preview')?preview:[]})});
 vm.runInContext(fs.readFileSync(path.join(root, 'mobile-research-preview.js'),'utf8'),context);
@@ -53,5 +53,19 @@ setImmediate(()=> {
  check('explicit price range retains requested floor',()=>{let r=search('phone between 15000 and 30000');assert(r.length);assert(r.every(x=>x.card.research_budget_reference.reference_price_inr>=15000&&x.card.research_budget_reference.reference_price_inr<=30000));assert(r.some(x=>x.card.research_budget_reference.reference_price_inr<25000));});
  check('empty price band does not fall back to cheaper phones',()=>assert.equal(search('phone under 10000000').length,0));
  check('band boundaries include floor and exclude strict cap',()=>{let card=catalogue.model_cards.find(c=>c.research_budget_reference);let ref=card.research_budget_reference;let old=ref.reference_price_inr;try{for(let [price,expected] of [[39999,false],[40000,true],[49999,true],[50000,false]]){ref.reference_price_inr=price;assert.equal(search('phone under 50000').some(x=>x.card.model_key===card.model_key),expected);}}finally{ref.reference_price_inr=old;}});
+
+ function clickAction(selector, key) { document.events.click({target:{closest(s){return s===selector?{getAttribute(){return key;}}:null;}}}); }
+ check('M17 colour listings form one result',()=>{let r=search('camera phone under 30000');assert.equal(r.filter(x=>/galaxy m17 5g/.test(x.card.model.toLowerCase())).length,1);assert(element('mobileResearchResults').innerHTML.includes('matching catalogue entries grouped'));});
+ check('Narzo colour listings form one result',()=>assert.equal(search('narzo 100 lite under 20000').length,1));
+ check('Pro models are not merged with base models',()=>{let r=search('iPhone 16');assert(r.some(x=>x.card.model==='iPhone 16'));assert(r.some(x=>x.card.model==='iPhone 16 Pro'));assert(r.some(x=>x.card.model==='iPhone 16 Pro Max'));});
+ check('4G and 5G identities remain separate',()=>{let r=search('Lava Bold N2');assert(r.some(x=>x.card.model==='Bold N2'));assert(r.some(x=>x.card.model==='Bold N2 5G'));});
+ check('source evidence and checked date on results',()=>{search('Galaxy A36');let html=element('mobileResearchResults').innerHTML;assert(html.includes('Specification source'));assert(html.includes('Research checked:'));assert(html.includes('What to consider'));assert(html.includes('Before choosing'));});
+ check('camera guidance avoids an unsupported winner',()=>{search('camera phone under 30000');assert(element('mobileResearchResults').innerHTML.includes('Megapixels alone do not establish photo quality'));});
+ check('repeated brand prefix is removed from display',()=>{search('Redmi Note 15');assert(!element('mobileResearchResults').innerHTML.includes('Redmi Redmi'));});
+ check('CPU clocks are not mislabelled as chipset names',()=>{search('Samsung S26 Ultra');assert(element('mobileResearchResults').innerHTML.includes('CPU clock (chipset name unconfirmed)'));});
+ check('comparison query produces a real specification table',()=>{search('Galaxy A36 vs Galaxy A56');assert(element('mobileResearchCompare').innerHTML.includes('<table'));assert(element('mobileResearchCompare').innerHTML.includes('Battery'));assert(element('mobileResearchCompare').innerHTML.includes('Galaxy A36'));assert(element('mobileResearchCompare').innerHTML.includes('Galaxy A56'));});
+ check('comparison can be cleared without automatic re-selection',()=>{clickAction('[data-research-compare-clear]');assert(element('mobileResearchCompare').hidden);});
+ check('manual comparison adds and removes exact selected rows',()=>{let r=search('Galaxy A36 8GB 256GB');clickAction('[data-research-compare]',r[0].card.model_key);assert(!element('mobileResearchCompare').hidden);assert(element('mobileResearchCompare').innerHTML.includes('8GB / 256GB'));clickAction('[data-research-compare]',r[0].card.model_key);assert(element('mobileResearchCompare').hidden);});
+ check('comparison limits selection to three phones',()=>{let r=search('phone between 0 and 100000');for(let item of r.slice(0,4))clickAction('[data-research-compare]',item.card.model_key);assert(element('mobileResearchCompare').innerHTML.includes('(3/3)'));assert(element('mobileResearchSearchStatus').textContent.includes('Compare up to 3'));clickAction('[data-research-compare-clear]');});
  console.log(checks+' checks passed');
 });

@@ -48,6 +48,16 @@ if (mobileNavToggle && mobileNav) {
   });
 }
 
+// Keep empty commerce panels out of the research-first homepage.
+function setOfferSectionsVisible(visible) {
+  ["catalogueDiscovery", "hot-deals", "browse", "categories", "under-budget", "legacyCategories"].forEach(id => {
+    const section = document.getElementById(id);
+    if (section) section.hidden = !visible;
+  });
+  const featured = document.getElementById("featuredDeal");
+  if (featured && featured.closest("aside")) featured.closest("aside").hidden = !visible;
+}
+
 async function loadDeals() {
   try {
     const res = await fetch(DEALS_FILE);
@@ -56,12 +66,14 @@ async function loadDeals() {
     const rawDeals = await res.json();
     if (!Array.isArray(rawDeals)) throw new Error("Invalid public deal data");
     allDeals = rawDeals.filter(isCurrentVerifiedDeal);
+    setOfferSectionsVisible(allDeals.length > 0);
 
     updateStats();
     buildCategoryChips();
     renderFeaturedDeal();
     renderDeals();
   } catch (err) {
+    setOfferSectionsVisible(false);
     grid.innerHTML = `<div class="state-card"><strong>Verified offers are currently unavailable.</strong><span>Explore <a href="#mobileResearchPreview">verified smartphone research</a> instead.</span></div>`;
     resultsCount.textContent = "No deals loaded";
   }
@@ -389,6 +401,8 @@ function submitMobileResearchIfApplicable(query) {
   if (window.CouponWorldMobileResearch && typeof window.CouponWorldMobileResearch.isResearchQuery === "function" && window.CouponWorldMobileResearch.isResearchQuery(query)) {
     recommendationRequestId += 1;
     if (recommendationController) { recommendationController.abort(); recommendationController = null; }
+    const shoppingSection = document.getElementById("aiRecommendation");
+    if (shoppingSection) shoppingSection.hidden = true;
     window.CouponWorldMobileResearch.search(query);
     const researchSection = document.getElementById("mobileResearchSearch");
     if (researchSection) researchSection.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -613,6 +627,7 @@ async function loadShoppingRecommendation(query) {
     return;
   }
 
+  if (section) section.hidden = false;
   trackAnalyticsEvent("ai_search_submit", {
     search_term: analyticsQuery
   });

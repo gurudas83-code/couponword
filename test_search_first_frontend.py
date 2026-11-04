@@ -45,8 +45,8 @@ class SearchFirstFrontendTests(unittest.TestCase):
         self.assertEqual(counts["visible_model_cards"], 232)
         self.assertEqual(counts["deduplicated_discovery_records"], 235)
         self.assertEqual(counts["frozen_verified_variants"], 10)
-        self.assertEqual(sum(bool(card.get("specifications")) for card in self.payload["model_cards"]), 40)
-        self.assertEqual(sum(len(card.get("specifications", {})) for card in self.payload["model_cards"]), 260)
+        self.assertEqual(sum(bool(card.get("specifications")) for card in self.payload["model_cards"]), 225)
+        self.assertEqual(sum(len(card.get("specifications", {})) for card in self.payload["model_cards"]), 2479)
         self.assertNotIn("purchase_cta_eligible: true", self.html.lower())
         self.assertNotIn("top 3", self.script.lower())
 

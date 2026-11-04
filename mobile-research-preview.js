@@ -43,6 +43,8 @@
   var searchExpanded = false;
   var lastSearchQuery = "";
   var lastSearchMatches = [];
+  var comparisonSelection = [];
+  var comparePanel = document.getElementById("mobileResearchCompare");
   var TECHNICAL_FIELD_LABELS = {
     chipset: "Chipset",
     gpu: "GPU",
@@ -143,8 +145,7 @@
     }).join(" ")).toLowerCase();
     return (!query || haystack.indexOf(query) >= 0) &&
       (!brand || String(card.brand || "") === brand) &&
-      (!ram || rows.some(function (row) { return String(row.ram_gb || "") === ram; })) &&
-      (!storage || rows.some(function (row) { return String(row.storage_gb || "") === storage; })) &&
+      rows.some(function (row) { return (!ram || String(row.ram_gb || "") === ram) && (!storage || String(row.storage_gb || "") === storage); }) &&
       (!status || rows.some(function (row) { return inventoryVariantStatus(row) === status; }));
   }
 
@@ -170,14 +171,14 @@
     var specSet = {};
     Object.keys(card.specifications || {}).forEach(function (key) {
       var item = card.specifications[key] || {};
-      var label = String(item.label || key).replace(/_/g, " ");
+      var label = String(specificationLabel(key, item)).replace(/_/g, " ");
       var value = specValue(key, item);
       if (value != null && value !== "") specSet[label + "|" + String(value)] = true;
     });
     frozenRows.forEach(function (row) {
       Object.keys(row.specifications || {}).forEach(function (key) {
         var item = row.specifications[key] || {};
-        var label = String(item.label || key).replace(/_/g, " ");
+        var label = String(specificationLabel(key, item)).replace(/_/g, " ");
         var value = specValue(key, item);
         if (value != null && value !== "") specSet[label + "|" + String(value)] = true;
       });
@@ -210,7 +211,7 @@
       inventoryImage(card) +
       '<div class="mobile-research-inventory-body">' +
       '<div class="mobile-research-card-top"><span class="research-status inventory-status-' + escapeHtml(statusLabel.toLowerCase()) + '">' + escapeHtml(statusLabel) + '</span></div>' +
-      '<h3>' + escapeHtml(card.brand + " " + card.model) + '</h3>' + launch +
+      '<h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch +
       '<p class="mobile-research-variant">' + escapeHtml(counts || "Model research reference") + '</p>' +
       '<ul class="mobile-research-variant-list">' + (variantItems || "<li>Variant details are not specified in the source universe.</li>") + '</ul>' +
       '<p class="mobile-research-inventory-fields"><strong>Verified fields:</strong> ' + escapeHtml(fields) + '</p>' +
@@ -228,8 +229,8 @@
     var isUnfiltered = !(inventoryQuery && inventoryQuery.value) && !(inventoryBrand && inventoryBrand.value) && !(inventoryRam && inventoryRam.value) && !(inventoryStorage && inventoryStorage.value) && !(inventoryStatus && inventoryStatus.value);
     if (inventoryCount) {
       inventoryCount.textContent = isUnfiltered && inventorySourceCounts.visible_model_cards ?
-        inventorySourceCounts.visible_model_cards + " smartphone models · " + (inventorySourceCounts.deduplicated_discovery_records || inventoryRows.length) + " research records · " + (inventorySourceCounts.frozen_verified_variants || verifiedRows.length) + " frozen exact variants" :
-        filtered.length + " smartphone models · " + matchingVariants + " matching research/frozen variants";
+        inventorySourceCounts.visible_model_cards + " catalogue entries · " + (inventorySourceCounts.deduplicated_discovery_records || inventoryRows.length) + " research records · " + (inventorySourceCounts.frozen_verified_variants || verifiedRows.length) + " frozen exact variants" :
+        filtered.length + " catalogue entries · " + matchingVariants + " matching research/frozen variants";
     }
     var visible = inventoryExpanded ? filtered : filtered.slice(0, INVENTORY_PAGE_SIZE);
     inventoryGrid.innerHTML = visible.length ? visible.map(renderInventoryCard).join("") : "<p>No smartphone models match these filters.</p>";
@@ -466,28 +467,111 @@
   }
 
 
-  function retailerResearchLinks(card) {
-    return '<div class="mobile-research-sources">' + (card.retailer_search_links || []).map(function (item) { return link(item.url, (item.retailer === "Croma" ? "Browse " : "Search ") + item.retailer); }).join(" ") + '</div><p class="mobile-research-gate">Retailer search/browse links. Confirm model, memory, current price and delivery on the retailer.</p>';
+
+  function displayPhoneName(card) {
+    var brand = String(card.brand || "");
+    if (brand.toLowerCase() === "samsung") brand = "Samsung";
+    if (normalizeResearch(brand) === "xiaomi redmi") brand = "Redmi";
+    var model = String(card.model || "");
+    if (normalizeResearch(model).indexOf(normalizeResearch(brand) + " ") === 0) return model;
+    return brand + " " + model;
   }
 
-  function renderResearchResultCard(card, rows) {
-    var status = card.status || "RESEARCH_ONLY";
-    var variants = rows.map(function (row) {
-      return (row.ram_gb != null ? row.ram_gb + "GB RAM" : "RAM not specified") + " · " + (row.storage_gb != null ? row.storage_gb + "GB storage" : "storage not specified");
+  function researchGroupKey(card) {
+    // Display grouping only. No source row, price or variant is transferred.
+    var name = normalizeResearch(displayPhoneName(card))
+      .replace(/\s+(?:mobile\s+)?(?:moonlight|sapphire|frost|thunder|light|bahama|violet|velvet)(?:\s+(?:silver|black|blue))?$/, "")
+      .replace(/\s+smartphone$/, "")
+      .replace(/\s+\d+\s*gb(?:\s+ram)?/g, "").trim();
+    // These spelling aliases share the manufacturer's exact specification URL.
+    var aliases = {"vivo t5x": "vivo t5x 5g", "oppo k13 turbo": "oppo k13 turbo 5g"};
+    return aliases[name] || name;
+  }
+
+  function groupResearchMatches(matches) {
+    var seen = {}, result = [];
+    matches.forEach(function (item) {
+      var key = researchGroupKey(item.card);
+      if (seen[key]) { seen[key].group_size += 1; return; }
+      var copy = {card: item.card, rows: item.rows, group_size: 1};
+      seen[key] = copy; result.push(copy);
     });
-    var specs = researchFeatureKeys(lastSearchQuery).concat(Object.keys(card.specifications || {})).filter(function (key, index, all) { return card.specifications[key] && all.indexOf(key) === index; }).slice(0, 6).map(function (key) {
-      var item = card.specifications[key] || {};
-      return '<li><span>' + escapeHtml(item.label || key.replace(/_/g, " ")) + '</span><strong>' + escapeHtml(specValue(key, item)) + '</strong></li>';
-    }).join("");
-    var launch = card.india_launch_date ? '<p class="mobile-research-launch"><strong>Verified India launch:</strong> ' + escapeHtml(card.india_launch_date) + '</p>' : '';
-    var launchSource = card.india_launch_source ? link(card.india_launch_source, "India launch source") : "";
-    return '<article class="mobile-research-inventory-card mobile-research-result-card" data-mobile-model-card="' + escapeHtml(card.model_key) + '">' +
-      inventoryImage(card) + '<div class="mobile-research-inventory-body"><div class="mobile-research-card-top"><span class="research-status">' + escapeHtml(status) + '</span><span class="research-status">Research only</span></div>' +
-      '<h3>' + escapeHtml(card.brand + " " + card.model) + '</h3>' + launch + '<p class="mobile-research-variant">Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join(" · ")) + '</p>' +
-      (specs ? '<ul class="mobile-research-model-specs">' + specs + '</ul>' : '<p>Technical specifications are pending verification.</p>') +
-      '<div class="mobile-research-sources">' + launchSource + '</div>' + retailerResearchLinks(card) +
-      '<button type="button" class="btn btn-ghost mobile-research-detail-button" data-research-detail="' + escapeHtml(card.model_key) + '">View details</button>' +
-      (researchConstraints(lastSearchQuery).budget != null ? '<p class="mobile-research-gate">Within your budget using a dated reference checked ' + escapeHtml(card.research_budget_reference && card.research_budget_reference.checked_at || '') + '. Current price and delivery are unverified.</p>' : '<p class="mobile-research-gate">Specification research. Current price and delivery are unverified.</p>') + '</div></article>';
+    return result;
+  }
+
+  function specificationLabel(key, item) {
+    var value = String(item && item.value || "");
+    if (key === "chipset" && /ghz/i.test(value) && !/snapdragon|exynos|dimensity|bionic|tensor|mediatek|unisoc/i.test(value)) return "CPU clock (chipset name unconfirmed)";
+    if (/display_type/.test(key) && /colou?r depth|16m/i.test(value)) return "Display colour depth";
+    return item.label || TECHNICAL_FIELD_LABELS[key] || key.replace(/_/g, " ");
+  }
+
+  function compactSpecRows(card, query) {
+    var specs = card.specifications || {};
+    var groups = [
+      ["chipset"], ["display_type", "display_type_description"], ["display_refresh_max_hz", "display_refresh_description"],
+      ["rear_main_mp", "rear_camera_system"], ["ois"], ["battery_mah_typical", "battery_capacity_description", "battery_and_charging"],
+      ["wired_charging_max_w", "charging_description"], ["security_support_years", "security_update_policy", "operating_system"],
+      ["display_resolution", "display_resolution_description"], ["gpu"]
+    ];
+    var priorities = researchFeatureKeys(query), keys = [];
+    groups.forEach(function (group) { var key = group.find(function (k) { return specs[k] && specs[k].value !== "" && specs[k].value != null; }); if (key) keys.push(key); });
+    keys.sort(function (a, b) { return (priorities.indexOf(a) < 0 ? 100 : priorities.indexOf(a)) - (priorities.indexOf(b) < 0 ? 100 : priorities.indexOf(b)); });
+    return keys.slice(0, 6).map(function (key) { return {key:key, label:specificationLabel(key, specs[key]), value:specValue(key, specs[key])}; });
+  }
+
+  function documentedContext(card, query) {
+    var specs = card.specifications || {};
+    var text = normalizeResearch(query), fact = "Compare these documented specifications with your everyday needs.";
+    var caution = "Current price, exact listing and delivery need retailer confirmation.";
+    if (/camera|कैमरा/.test(text)) {
+      var ois = specs.ois && String(specs.ois.value);
+      fact = /^(yes|true|supported)$/i.test(ois || "") ? "Optical image stabilization (OIS) is listed in the source." : "Optical image stabilization is not confirmed in this record.";
+      caution = "Megapixels alone do not establish photo quality. Check camera samples and independent tests.";
+    } else if (/battery|बैटरी/.test(text)) {
+      var battery = specs.battery_mah_typical;
+      fact = battery ? "Listed battery capacity: " + specValue("battery_mah_typical", battery) + "." : "Battery capacity needs confirmation from the source.";
+      caution = "Capacity is not measured battery life. Usage, signal and charging tests also matter.";
+    } else if (/gaming|game|गेमिंग/.test(text)) {
+      fact = "Processor and GPU specifications are shown where documented.";
+      caution = "Chipset names alone do not establish sustained FPS, heating or gaming endurance.";
+    } else if (/software|support|update|android/.test(text)) {
+      fact = "Check the documented operating system and update policy below.";
+      caution = "An update promise is not the remaining support period. Confirm launch and support-end dates.";
+    }
+    return '<div class="research-context"><p><strong>What to consider</strong> ' + escapeHtml(fact) + '</p><p><strong>Before choosing</strong> ' + escapeHtml(caution) + '</p></div>';
+  }
+
+  function retailerResearchLinks(card) {
+    return '<div class="mobile-research-sources retailer-search-links">' + (card.retailer_search_links || []).map(function (item) { return link(item.url, (item.retailer === "Croma" ? "Browse " : "Search ") + item.retailer); }).join(" ") + '</div>';
+  }
+
+  function renderResearchResultCard(card, rows, groupSize) {
+    var variants = Array.from(new Set(rows.map(function (row) { return (row.ram_gb != null ? row.ram_gb + "GB RAM" : "RAM not specified") + " · " + (row.storage_gb != null ? row.storage_gb + "GB storage" : "storage not specified"); })));
+    var facts = compactSpecRows(card, lastSearchQuery);
+    var specs = facts.map(function (item) { var value = String(item.value); return '<li><span>' + escapeHtml(item.label) + '</span><strong title="' + escapeHtml(value) + '">' + escapeHtml(value.length > 160 ? value.slice(0, 157) + "…" : value) + '</strong></li>'; }).join("");
+    var sourceItem = Object.values(card.specifications || {}).find(function (item) { return /^https:\/\//.test(item.source_url || ""); });
+    var status = card.status === "OFFICIAL_VERIFIED" ? "Manufacturer evidence" : card.status === "PARTIALLY_VERIFIED" ? "Partial specifications" : "Needs verification";
+    var selected = comparisonSelection.some(function (item) { return researchGroupKey(item.card) === researchGroupKey(card); });
+    var launch = card.india_launch_date ? '<p class="mobile-research-launch">India launch: ' + escapeHtml(card.india_launch_date) + '</p>' : '';
+    return '<article class="mobile-research-inventory-card mobile-research-result-card" data-mobile-model-card="' + escapeHtml(card.model_key) + '"><div class="mobile-research-inventory-body">' +
+      '<div class="mobile-research-card-top"><span class="research-status">' + escapeHtml(status) + '</span><span class="research-status">Research only</span></div>' +
+      '<h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch + '<p class="mobile-research-variant">Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join("; ")) + '</p>' +
+      (groupSize > 1 ? '<p class="research-group-note">' + groupSize + ' matching catalogue entries grouped. Specifications below belong to the displayed record.</p>' : '') +
+      (specs ? '<ul class="mobile-research-model-specs">' + specs + '</ul>' : '<p>Technical specifications are pending verification.</p>') + documentedContext(card, lastSearchQuery) +
+      '<p class="research-source-note">' + (sourceItem ? link(sourceItem.source_url, "Specification source") : 'Specification source pending') + ' · Research checked: ' + escapeHtml(card.research_checked_at || sourceItem && (sourceItem.checked_at || sourceItem.checked_date) || 'date unavailable') + '</p>' +
+      '<div class="research-card-actions"><button type="button" class="btn btn-ghost mobile-research-detail-button" data-research-detail="' + escapeHtml(card.model_key) + '">All specifications</button>' +
+      '<button type="button" class="btn btn-ghost" data-research-compare="' + escapeHtml(card.model_key) + '" aria-pressed="' + selected + '">' + (selected ? 'Remove comparison' : 'Compare') + '</button></div>' + retailerResearchLinks(card) +
+      '<p class="mobile-research-gate">Retailer search links; confirm current price, memory variant and delivery there.</p></div></article>';
+  }
+
+  function renderSelectedComparison() {
+    if (!comparePanel) return;
+    comparePanel.hidden = comparisonSelection.length === 0;
+    if (!comparisonSelection.length) { comparePanel.innerHTML = ""; return; }
+    var fields = [ ["Processor", ["chipset"]], ["Display", ["display_type", "display_type_description"]], ["Refresh rate", ["display_refresh_max_hz", "display_refresh_description"]], ["Main camera", ["rear_main_mp", "rear_camera_system"]], ["Optical stabilization", ["ois"]], ["Battery", ["battery_mah_typical", "battery_capacity_description", "battery_and_charging"]], ["Charging", ["wired_charging_max_w", "charging_description"]], ["Software / updates", ["security_support_years", "security_update_policy", "operating_system"]] ];
+    function value(card, keys) { var key = keys.find(function (key) { return card.specifications && card.specifications[key]; }); if (!key) return "Not confirmed"; var item = card.specifications[key]; return (key === "chipset" && /ghz/i.test(String(item.value)) ? specificationLabel(key, item) + ": " : "") + specValue(key, item); }
+    comparePanel.innerHTML = '<div class="research-comparison-heading"><h3>Compare your shortlist (' + comparisonSelection.length + '/3)</h3><button type="button" class="btn btn-ghost" data-research-compare-clear>Clear comparison</button></div><p>Model specifications side by side; no performance winner is asserted. Unknown fields remain explicit.</p><div class="research-table-scroll" role="region" aria-label="Phone specification comparison" tabindex="0"><table class="research-spec-table"><caption>Documented specifications for the selected records</caption><thead><tr><th scope="col">Specification</th>' + comparisonSelection.map(function (item) { return '<th scope="col">' + escapeHtml(displayPhoneName(item.card)) + '<br><small>' + escapeHtml(item.rows.map(function (row) { return (row.ram_gb || '?') + 'GB / ' + (row.storage_gb || '?') + 'GB'; }).join('; ')) + '</small></th>'; }).join('') + '</tr></thead><tbody>' + fields.map(function (field) { return '<tr><th scope="row">' + field[0] + '</th>' + comparisonSelection.map(function (item) { return '<td>' + escapeHtml(value(item.card, field[1])) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div><p>Use All specifications for each phone\'s original source and remaining gaps.</p>';
   }
 
   function sortResearchMatches(matches, query) {
@@ -505,7 +589,8 @@
 
   function searchResearch(query) {
     var nextQuery = String(query || "").trim();
-    if (nextQuery !== lastSearchQuery) searchExpanded = false;
+    var queryChanged = nextQuery !== lastSearchQuery;
+    if (queryChanged) searchExpanded = false;
     lastSearchQuery = nextQuery;
     if (researchQuery && researchQuery.value !== nextQuery) researchQuery.value = nextQuery;
     if (!lastSearchQuery) {
@@ -532,15 +617,13 @@
       matches = sortResearchMatches(inventoryCards.map(function (card) { var rows = researchMatches(card, lastSearchQuery); return rows.length ? {card: card, rows: rows} : null; }).filter(Boolean), lastSearchQuery);
     }
     var c = researchConstraints(lastSearchQuery);
-    if (c.budget != null && !comparison) {
-      var groups = {};
-      matches = matches.filter(function (item) { var key = item.card.research_budget_reference.hardware_group_key; if (groups[key]) return false; groups[key] = true; return true; });
-    }
+    matches = groupResearchMatches(matches);
     lastSearchMatches = matches;
     var visible = searchExpanded ? matches : matches.slice(0, MAX_SEARCH_RESULTS);
+    if (comparison && queryChanged) { comparisonSelection = matches.slice(0, 3); renderSelectedComparison(); }
     if (researchResults) {
       researchResults.hidden = false;
-      researchResults.innerHTML = (comparison ? '<p class="mobile-research-gate">Specification comparison; no performance winner is asserted.' + (missingComparison ? ' At least one requested model or memory variant could not be matched.' : '') + '</p>' : '') + (visible.length ? visible.map(function (item) { return renderResearchResultCard(item.card, item.rows); }).join("") : '<p class="mobile-research-empty">No documented match for these constraints. Try a model name or a wider budget. Missing prices and recorded out-of-stock references are excluded from budget results.</p>');
+      researchResults.innerHTML = (comparison ? '<p class="mobile-research-gate">Specification comparison; no performance winner is asserted.' + (missingComparison ? ' At least one requested model or memory variant could not be matched.' : '') + '</p>' : '') + (visible.length ? visible.map(function (item) { return renderResearchResultCard(item.card, item.rows, item.group_size); }).join("") : '<p class="mobile-research-empty">No documented match for these constraints. Try a model name or a wider budget. Missing prices and recorded out-of-stock references are excluded from budget results.</p>');
     }
     if (researchSearchStatus) researchSearchStatus.textContent = matches.length + " matching research model" + (matches.length === 1 ? "" : "s") + " · showing " + visible.length + (c.budget != null ? " · requested range ₹" + Number(c.lower).toLocaleString("en-IN") + " to " + (c.inclusive ? "₹" : "below ₹") + Number(c.budget).toLocaleString("en-IN") + " · dated references; current price and delivery unverified" : "") + (/best|अच्छा|अच्छे/i.test(lastSearchQuery) ? " · evidence coverage order, not a performance ranking" : "");
     if (researchResultsMore) { researchResultsMore.hidden = matches.length <= MAX_SEARCH_RESULTS; researchResultsMore.textContent = searchExpanded ? "Show fewer results" : "Load more research results"; }
@@ -565,7 +648,7 @@
     var card = inventoryCards.find(function (item) { return item.model_key === modelKey; });
     if (!card || !detailSection || !detailContent) return;
     detailSection.hidden = false;
-    if (detailTitle) detailTitle.textContent = card.brand + " " + card.model;
+    if (detailTitle) detailTitle.textContent = displayPhoneName(card);
     detailContent.innerHTML = renderInventoryCard(card) + '<p class="mobile-research-gate">Research detail only · no current offer, price or purchase action.</p>';
     detailSection.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -637,10 +720,34 @@
   if (researchSearchButton) researchSearchButton.addEventListener("click", function () { searchResearch(researchQuery && researchQuery.value); });
   if (researchQuery) researchQuery.addEventListener("keydown", function (event) { if (event.key === "Enter") searchResearch(researchQuery.value); });
   document.querySelectorAll("[data-mobile-research-query]").forEach(function (button) {
-    button.addEventListener("click", function () { if (researchQuery) researchQuery.value = button.getAttribute("data-mobile-research-query") || ""; searchResearch(researchQuery && researchQuery.value); });
+    button.addEventListener("click", function () { var requested = button.getAttribute("data-mobile-research-query") || "";
+      var current = researchQuery && researchQuery.value || "";
+      if (current && researchConstraints(current).budget != null && researchConstraints(requested).budget == null) {
+        var constraintsOnly = current.replace(/camera|battery|gaming|game|software|support|display|screen|कैमरा|बैटरी|गेमिंग/gi, " ");
+        requested = requested + " " + constraintsOnly;
+      }
+      if (researchQuery) researchQuery.value = requested;
+      searchResearch(requested); });
   });
   if (researchResultsMore) researchResultsMore.addEventListener("click", function () { searchExpanded = !searchExpanded; searchResearch(lastSearchQuery); });
   document.addEventListener("click", function (event) {
+    var compareButton = event.target.closest("[data-research-compare]");
+    if (compareButton) {
+      var candidate = lastSearchMatches.find(function (item) { return item.card.model_key === compareButton.getAttribute("data-research-compare"); });
+      if (!candidate) {
+        var sourceCard = inventoryCards.find(function (card) { return card.model_key === compareButton.getAttribute("data-research-compare"); });
+        if (sourceCard) candidate = {card: sourceCard, rows: inventoryRowsForCard(sourceCard)};
+      }
+      if (candidate) {
+        var existing = comparisonSelection.findIndex(function (item) { return researchGroupKey(item.card) === researchGroupKey(candidate.card); });
+        if (existing >= 0) comparisonSelection.splice(existing, 1);
+        else if (comparisonSelection.length < 3) comparisonSelection.push(candidate);
+        else { if (researchSearchStatus) researchSearchStatus.textContent = "Compare up to 3 phones. Remove one before adding another."; return; }
+        renderSelectedComparison(); searchResearch(lastSearchQuery);
+        if (comparisonSelection.length >= 2 && comparePanel) comparePanel.scrollIntoView({behavior: "smooth", block: "start"});
+      }
+    }
+    if (event.target.closest("[data-research-compare-clear]")) { comparisonSelection = []; renderSelectedComparison(); searchResearch(lastSearchQuery); }
     var detail = event.target.closest("[data-research-detail]");
     if (detail) {
       event.preventDefault();

@@ -44,7 +44,7 @@ class MobileResearchInventoryVisibilityTests(unittest.TestCase):
         script = (ROOT / "mobile-research-preview.js").read_text(encoding="utf-8")
         self.assertIn('id="mobileResearchPreview"', html)
         self.assertIn('id="mobileResearchCatalogue"', html)
-        self.assertIn("Explore 232 Smartphone Models", html)
+        self.assertIn("Explore 232 Smartphone Entries", html)
         self.assertIn("235 research records", html)
         self.assertIn("10 frozen verified exact variants", html)
         self.assertIn("/data/mobile_research_catalogue.json", script)
