@@ -12969,12 +12969,12 @@
           "applicability": "MODEL_SHARED"
         },
         "battery_mah_typical": {
-          "value": 6000,
+          "value": 6550,
           "label": "Battery capacity",
-          "source_url": "https://www.po.co/global/product/poco-x7-pro/specs/",
-          "checked_at": "2026-11-03",
-          "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
-          "applicability": "MODEL_SHARED"
+          "source_url": "https://www.mi.com/global/support/faq/details/KA-522489/",
+          "checked_at": "2026-11-04",
+          "evidence_status": "MANUFACTURER_CORRECTED",
+          "applicability": "INDIA_MARKET_ONLY"
         },
         "wired_charging_max_w": {
           "value": 90,
@@ -17793,11 +17793,11 @@
       "model_key": "samsung|galaxy a57 5g",
       "specifications": {
         "chipset": {
-          "value": "2.9 GHz, 2.6 GHz, 1.9 GHz",
+          "value": "Exynos 1680",
           "label": "Chipset",
-          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/",
-          "checked_at": "2026-11-03",
-          "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
+          "source_url": "https://news.samsung.com/sg/samsung-unveils-galaxy-a57-5g-and-galaxy-a37-5g-packing-pro-level-features-at-awesome-price",
+          "checked_at": "2026-11-04",
+          "evidence_status": "MANUFACTURER_CORRECTED",
           "applicability": "MODEL_SHARED"
         },
         "display_type": {
@@ -18536,11 +18536,11 @@
       "model_key": "samsung|galaxy f70 pro 5g",
       "specifications": {
         "chipset": {
-          "value": "2.4 GHz, 1.8 GHz",
+          "value": "Qualcomm Snapdragon 6 Gen 3",
           "label": "Chipset",
           "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/",
-          "checked_at": "2026-11-03",
-          "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
+          "checked_at": "2026-11-04",
+          "evidence_status": "MANUFACTURER_CORRECTED",
           "applicability": "MODEL_SHARED"
         },
         "display_type": {
@@ -19759,11 +19759,11 @@
       "model_key": "samsung|galaxy m47 5g",
       "specifications": {
         "chipset": {
-          "value": "2.4 GHz, 1.8 GHz",
+          "value": "Qualcomm Snapdragon 6 Gen 3",
           "label": "Chipset",
           "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/",
-          "checked_at": "2026-11-03",
-          "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
+          "checked_at": "2026-11-04",
+          "evidence_status": "MANUFACTURER_CORRECTED",
           "applicability": "MODEL_SHARED"
         },
         "display_type": {
@@ -23579,11 +23579,11 @@
           "applicability": "MODEL_SHARED"
         },
         "network_support": {
-          "value": "4G LTE",
+          "value": "5G",
           "label": "Network support",
           "source_url": "https://www.mi.com/in/product/xiaomi-14-ultra/specs/",
-          "checked_at": "2026-11-03",
-          "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
+          "checked_at": "2026-11-04",
+          "evidence_status": "MANUFACTURER_CORRECTED",
           "applicability": "MODEL_SHARED"
         }
       },
