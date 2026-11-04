@@ -646,7 +646,7 @@ def render(product, products):
         expected_retailer_product_id=registry_record.get("retailer_product_id"),
     ) if isinstance(best_multi_offer, dict) else {"eligible": False}
 
-    verified_offer = isinstance(best_multi_offer, dict) and best_decision.get("eligible") is True
+    verified_offer = active and isinstance(best_multi_offer, dict) and best_decision.get("eligible") is True
 
     if verified_offer and active:
         # The existing eligibility gate checks identity, retailer, stock,
