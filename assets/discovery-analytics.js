@@ -38,7 +38,7 @@
   }
   var source = arrival();
   var path = window.location.pathname;
-  send('discovery_landing', {discovery_source:source, landing_path:path, page_kind:path.indexOf('/seo/') === 0 ? 'phone_guide' : path.indexOf('/guides/') === 0 ? 'guide_collection' : 'research'});
+  send('discovery_landing', {discovery_source:source, landing_path:path, page_kind:path.indexOf('/phones/') === 0 ? 'phone_specification' : path.indexOf('/seo/') === 0 ? 'phone_guide' : path.indexOf('/guides/') === 0 ? 'guide_collection' : 'research'});
   document.addEventListener('click', function (event) {
     var anchor = event.target.closest && event.target.closest('a[href]');
     if (!anchor) return;
@@ -46,7 +46,8 @@
     try { target = new URL(anchor.href, window.location.href); } catch (_) { return; }
     var kind = '';
     if (target.origin === window.location.origin) {
-      if (target.pathname.indexOf('/seo/') === 0) kind = 'open_guide';
+      if (target.pathname.indexOf('/phones/') === 0) kind = 'open_phone_specification';
+      else if (target.pathname.indexOf('/seo/') === 0) kind = 'open_guide';
       else if (target.pathname === '/' && target.hash === '#mobileResearchSearch') kind = 'start_research';
     } else if (['amazon.in','www.amazon.in','flipkart.com','www.flipkart.com','croma.com','www.croma.com'].includes(target.hostname)) kind = 'retailer_research';
     if (kind) send('discovery_action', {discovery_source:source, action_kind:kind, landing_path:path, destination_host:target.hostname, destination_path:target.pathname});
