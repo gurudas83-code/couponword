@@ -586,7 +586,7 @@
       '<p class="research-source-note">' + (sourceItem ? link(sourceItem.source_url, "Specification source") : 'Specification source pending') + ' · Research checked: ' + escapeHtml(card.research_checked_at || sourceItem && (sourceItem.checked_at || sourceItem.checked_date) || 'date unavailable') + '</p>' +
       '<div class="research-card-actions"><button type="button" class="btn btn-ghost mobile-research-detail-button" data-research-detail="' + escapeHtml(card.model_key) + '">All specifications</button>' +
       '<button type="button" class="btn btn-ghost" data-research-compare="' + escapeHtml(card.model_key) + '" aria-pressed="' + selected + '">' + (selected ? 'Remove comparison' : 'Compare') + '</button></div>' + retailerResearchLinks(card) +
-      '<p class="mobile-research-gate">Retailer search links; confirm current price, memory variant and delivery there.</p></div></article>';
+      '<p class="mobile-research-gate">Retailer search/browse links only (Croma may open a general category); confirm the exact model, price, stock and delivery on each retailer site.</p></div></article>';
   }
 
   function renderSelectedComparison() {
@@ -642,6 +642,14 @@
     return '<div class="mobile-research-empty"><p>' + escapeHtml(message) + '</p><p>This is a research coverage gap, not proof that no suitable phone exists. No constraint has been relaxed.</p><a href="#mobileResearchCatalogue">Browse the full research catalogue</a>' + researchGuideFallback() + '</div>';
   }
 
+  function verifiedRecommendationBridge(query, isComparison) {
+    var c = researchConstraints(query);
+    if (isComparison || c.budget == null) return "";
+    return '<div class="research-context research-verified-recommendations">' +
+      '<p><strong>Need a performance-based recommendation?</strong> This list is ordered by research coverage, not proven camera, gaming or battery performance. Check the existing recommendation engine separately; it will show results only when its evidence and eligibility rules pass.</p>' +
+      '<button type="button" class="btn btn-ghost" data-research-verified-recommend>Check eligible recommendations</button></div>';
+  }
+
   function searchResearch(query) {
     var nextQuery = String(query || "").trim();
     var queryChanged = nextQuery !== lastSearchQuery;
@@ -679,7 +687,7 @@
     if (comparison && queryChanged) { comparisonSelection = matches.slice(0, 3); renderSelectedComparison(); }
     if (researchResults) {
       researchResults.hidden = false;
-      researchResults.innerHTML = (comparison ? '<p class="mobile-research-gate">Specification comparison; no performance winner is asserted.' + (missingComparison ? ' At least one requested model or memory variant could not be matched.' : '') + '</p>' : '') + (visible.length ? visible.map(function (item) { return renderResearchResultCard(item.card, item.rows, item.group_size); }).join("") : emptyResearchResult(lastSearchQuery));
+      researchResults.innerHTML = verifiedRecommendationBridge(lastSearchQuery, comparison) + (comparison ? '<p class="mobile-research-gate">Specification comparison; no performance winner is asserted.' + (missingComparison ? ' At least one requested model or memory variant could not be matched.' : '') + '</p>' : '') + (visible.length ? visible.map(function (item) { return renderResearchResultCard(item.card, item.rows, item.group_size); }).join("") : emptyResearchResult(lastSearchQuery));
     }
     if (researchSearchStatus) researchSearchStatus.textContent = matches.length + " matching research model" + (matches.length === 1 ? "" : "s") + " · showing " + visible.length + (c.budget != null ? " · requested range ₹" + Number(c.lower).toLocaleString("en-IN") + " to " + (c.inclusive ? "₹" : "below ₹") + Number(c.budget).toLocaleString("en-IN") + " · dated references; current price and delivery unverified" : "") + (/best|अच्छा|अच्छे/i.test(lastSearchQuery) ? " · evidence coverage order, not a performance ranking" : "");
     if (researchResultsMore) { researchResultsMore.hidden = matches.length <= MAX_SEARCH_RESULTS; researchResultsMore.textContent = searchExpanded ? "Show fewer results" : "Load more research results"; }
@@ -806,6 +814,14 @@
   });
   if (researchResultsMore) researchResultsMore.addEventListener("click", function () { searchExpanded = !searchExpanded; searchResearch(lastSearchQuery); });
   document.addEventListener("click", function (event) {
+    if (event.target.closest("[data-research-verified-recommend]")) {
+      if (typeof window.CouponWorldShoppingRecommend === "function" && lastSearchQuery) {
+        window.CouponWorldShoppingRecommend(lastSearchQuery);
+      } else if (researchSearchStatus) {
+        researchSearchStatus.textContent = "Recommendation service is unavailable. Research results remain accessible.";
+      }
+      return;
+    }
     var compareButton = event.target.closest("[data-research-compare]");
     if (compareButton) {
       var candidate = lastSearchMatches.find(function (item) { return item.card.model_key === compareButton.getAttribute("data-research-compare"); });
