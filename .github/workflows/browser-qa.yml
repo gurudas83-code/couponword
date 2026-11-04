@@ -1,0 +1,30 @@
+name: Browser journey QA
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  chromium-research-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout reviewed source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.12"
+      - name: Install isolated browser QA dependencies
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Build exact GitHub Pages artifact
+        run: python scripts/build_public_pages.py --output public
+      - name: Real browser test at mobile, tablet and desktop widths
+        run: python scripts/browser_smoke.py --root public --report browser-qa.json
