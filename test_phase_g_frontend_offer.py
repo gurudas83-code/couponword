@@ -12,7 +12,7 @@ const start = source.indexOf('      const offers = Array.isArray(p.retailer_offe
 const end = source.indexOf('      const why = Array.isArray(p.why_it_fits)', start);
 assert(start >= 0 && end > start);
 const render = new Function('p', 'escapeHTML', 'safeLink', source.slice(start,end) +
-  '\nreturn {selectedPrice,productLink,variant,lastChecked,retailerHeading};');
+  '\nreturn {selectedPrice,productLink,variant,lastChecked,retailerHeading,price,retailerButtonsHTML};');
 const core = {price:7999, market_source:'https://amazon.in/dp/EXACT',
  identity_evidence:{variant:{ram_gb:'4',storage_gb:'64'}},
  provenance:{price_evidence:{source_url:'https://amazon.in/dp/EXACT',verified_at:'original-time'}},
@@ -30,6 +30,13 @@ const alternate=render({...core,current_offer_verified:true,purchase_cta_eligibl
 assert.strictEqual(alternate.selectedPrice,7899);
 assert.strictEqual(alternate.productLink,offer.product_url);
 assert.strictEqual(alternate.lastChecked,offer.last_checked);
+assert.strictEqual(result.price,'Current price unavailable');
+assert.strictEqual(alternate.price,'Check current price with retailer');
+const amazonOffer={...offer,retailer:'amazon',product_url:'https://www.amazon.in/dp/EXACT'};
+const amazonView=render({...core,current_offer_verified:true,purchase_cta_eligible:true,best_offer:amazonOffer,retailer_offers:[amazonOffer]},String,String);
+assert(amazonView.retailerButtonsHTML.includes('>Amazon</a>'));
+assert(!amazonView.retailerButtonsHTML.includes('7899'));
+assert(!amazonView.retailerButtonsHTML.includes('₹'));
 '''
         result = subprocess.run(["node", "-e", script], cwd=Path(__file__).resolve().parent,
                                 capture_output=True, text=True, timeout=20)
