@@ -1,0 +1,53 @@
+"""Render the curated phone-guide collection; never generate offers or scores."""
+import html
+import json
+from pathlib import Path
+from urllib.parse import urlencode
+from xml.etree import ElementTree as ET
+
+ROOT = Path(__file__).resolve().parents[1]
+BASE = 'https://coupon-world.in'
+HUB = '/guides/phone-budget-guides/'
+
+def esc(value):
+    return html.escape(str(value), quote=True)
+
+def render_phone_guides(destination):
+    data = json.loads((ROOT / 'data/phone-guides.json').read_text())
+    pages = data['pages']
+    if len(pages) != 20 or len({p['slug'] for p in pages}) != 20:
+        raise ValueError('curated guide set must have 20 distinct topics')
+    def document(title, description, path, content, schema):
+        return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{esc(title)} | Coupon World</title><meta name="description" content="{esc(description)}"><meta name="robots" content="index,follow"><link rel="canonical" href="{BASE+path}"><meta property="og:type" content="article"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{BASE+path}"><meta property="og:image" content="{BASE}/assets/coupon-world-og.svg"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="{esc(title)}"><link rel="stylesheet" href="/assets/phone-guides.css?v=20261104"><script type="application/ld+json">{json.dumps(schema,ensure_ascii=False).replace('<','\\u003c')}</script></head><body><a class="skip" href="#content">Skip to content</a><header><nav aria-label="Main navigation"><a class="brand" href="/">CW <span>Coupon World<small>Find your next phone</small></span></a><a href="{HUB}">Phone guides</a><a href="/#mobileResearchSearch">Find a phone ↗</a></nav></header><main id="content">{content}</main><footer><a href="{HUB}">All phone buying guides</a> · <a href="/guides/smartphone-buying-guide/">Standard Buying Guide</a><p>As an Amazon Associate I earn from qualifying purchases. Retailer search links do not confirm a current price, stock or delivery. We may earn commission from qualifying purchases through tagged Amazon links.</p></footer></body></html>'''
+    def cards(items):
+        return '<div class="guide-grid">'+''.join(f'<a class="guide-card" href="/seo/{p["slug"]}.html"><h3>{esc(p["title"])}</h3><p>{esc(p["intro"])}</p><span>Read guide →</span></a>' for p in items)+'</div>'
+    for i,p in enumerate(pages):
+        path=f'/seo/{p["slug"]}.html'
+        query='/?'+urlencode({'q':p['query']})+'#mobileResearchSearch'
+        sections=''.join(f'<section id="section-{n}"><h2>{esc(s["heading"])}</h2><p>{esc(s["text"])}</p></section>' for n,s in enumerate(p['sections'],1))
+        toc='<nav class="contents" aria-label="On this page">'+''.join(f'<a href="#section-{n}">{esc(s["heading"])}</a>' for n,s in enumerate(p['sections'],1))+'</nav>'
+        amazon='https://www.amazon.in/s?'+urlencode({'k':p['query'],'tag':'guru07cc-21'})
+        related=[pages[(i+j)%len(pages)] for j in (1,5,11)]
+        evidence_links = ''
+        if 'camera' in p['slug']:
+            evidence_links = '<li><a href="https://www.phonearena.com/phones/benchmarks/camera" rel="noopener noreferrer" target="_blank">PhoneArena original camera tests and methodology</a></li>'
+        elif any(term in p['slug'] for term in ('battery', 'gaming', 'charging')):
+            ledger = json.loads((ROOT / 'data/mobile_independent_test_evidence.json').read_text())
+            review = ledger['models'][1]['metrics'][0]['source_url']
+            evidence_links = '<li><a href="'+esc(review)+'" rel="noopener noreferrer" target="_blank">Notebookcheck Galaxy A56 review — original lab test context</a></li>'
+        content=f'''<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="{HUB}">Phone guides</a> / Guide</nav><article><div class="eyebrow">THE PHONE EDIT / BUYING GUIDE</div><h1>{esc(p['title'])}</h1><p class="lead">{esc(p['intro'])}</p><p class="byline">By {esc(data['editor'])} · Updated <time datetime="{data['updated']}">4 November 2026</time></p><aside class="note"><strong>Research, with the limits visible.</strong><p>This is an editorial buying guide based on saved research, not a hands-on review or a live-offer list. Budget references are dated. No current price, stock or performance winner is certified here.</p></aside>{toc}{sections}<section class="action"><h2>Turn the guide into a shortlist</h2><p>Open the existing research tool with “{esc(p['query'])}”. Add your budget, physical RAM, storage or excluded brand. Inspect each source and any missing information, then compare up to three matching phones. No condition is silently relaxed.</p><a class="button" href="{esc(query)}">Explore matching research ↗</a><p><a href="{esc(amazon)}" rel="sponsored nofollow noopener" target="_blank">Search Amazon (affiliate link)</a> · Confirm the selected variant and current offer at the retailer.</p></section><section><h2>Sources and how to verify</h2><p>Follow the specification sources on each research card for the exact model. Independent measurements retain their original source, tested unit and conditions. A research checking date does not imply that a lab test or retailer price was measured that day.</p><ul><li><a href="/guides/smartphone-buying-guide/">Standard smartphone buying checklist</a></li><li><a href="/seo/phone-research-evidence-method.html">Coupon World evidence method and limitations</a></li>{evidence_links}</ul></section></article><section class="related"><h2>Continue your research</h2>{cards(related)}</section>'''
+        article={'@context':'https://schema.org','@graph':[{'@type':'Article','headline':p['title'],'description':p['intro'],'dateModified':data['updated'],'datePublished':data['updated'],'author':{'@type':'Organization','name':data['editor']},'publisher':{'@type':'Organization','name':'Coupon World'},'mainEntityOfPage':BASE+path},{'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Home','item':BASE+'/'},{'@type':'ListItem','position':2,'name':'Phone guides','item':BASE+HUB},{'@type':'ListItem','position':3,'name':p['title'],'item':BASE+path}]}]}
+        target=destination/path.lstrip('/');target.parent.mkdir(parents=True,exist_ok=True)
+        description=p['intro'].split('. ')[0]+'.'
+        target.write_text(document(p['title'],description,path,content,article),encoding='utf-8')
+    hub=destination/HUB.lstrip('/');hub.mkdir(parents=True,exist_ok=True)
+    content='<div class="eyebrow">COUPON WORLD / SMARTPHONE RESEARCH</div><h1>Make a more informed phone choice.</h1><p class="lead">20 practical guides. Start with your budget, explore a priority, or resolve a specific buying question. Every guide links back to the existing research and comparison tool.</p><aside class="note">Updated 4 November 2026. These guides explain documented features and evidence gaps; they do not claim live prices or tested winners.</aside>'
+    for title,items in [('Start with your budget',pages[:5]),('Choose what matters most',pages[5:11]),('Get the details right',pages[11:])]:content+=f'<section><h2>{title}</h2>{cards(items)}</section>'
+    (hub/'index.html').write_text(document('Smartphone Budget and Buying Guides','Explore 20 practical India phone guides for budgets, camera, battery, gaming, memory and exact-variant comparisons.',HUB,content,{'@context':'https://schema.org','@type':'CollectionPage','name':'Coupon World phone guides','url':BASE+HUB}),encoding='utf-8')
+    sitemap=destination/'sitemap.xml'
+    ns='http://www.sitemaps.org/schemas/sitemap/0.9';ET.register_namespace('',ns)
+    tree=ET.parse(sitemap);root=tree.getroot();existing={x.text for x in root.findall(f'{{{ns}}}url/{{{ns}}}loc')}
+    for path in [HUB]+[f'/seo/{p["slug"]}.html' for p in pages]:
+        if BASE+path in existing:continue
+        node=ET.SubElement(root,f'{{{ns}}}url');ET.SubElement(node,f'{{{ns}}}loc').text=BASE+path;ET.SubElement(node,f'{{{ns}}}lastmod').text=data['updated']
+    tree.write(sitemap,encoding='utf-8',xml_declaration=True)

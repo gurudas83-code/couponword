@@ -7,6 +7,7 @@ Generates SEO pages inside /seo/
 from pathlib import Path
 import json
 import html
+import sys
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -28,6 +29,10 @@ def generate_page(template, page):
     return output
 
 def main():
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+    from python.phone_guides import render_phone_guides
+    render_phone_guides(ROOT)
     OUTPUT_FOLDER.mkdir(exist_ok=True)
 
     pages = json.loads(DATA_FILE.read_text(encoding="utf-8"))

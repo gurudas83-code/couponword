@@ -324,6 +324,7 @@ function safeLink(link) {
 
   try {
     const parsed = new URL(raw, window.location.href);
+    if (["amazon.in", "www.amazon.in"].includes(parsed.hostname) && parsed.protocol === "https:") parsed.searchParams.set("tag", "guru07cc-21");
     if (!["http:", "https:"].includes(parsed.protocol)) {
       return "#";
     }

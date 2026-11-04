@@ -12,7 +12,7 @@ function element(id) {
 }
 const document = {getElementById:element, querySelectorAll:()=>[], events:{}, addEventListener(name, f){this.events[name]=f;}};
 const window = {location:{hash:''}, addEventListener(){}};
-const context = vm.createContext({document, window, console, URLSearchParams, fetch:async url=>({ok:true,json:async()=>url.includes('mobile_research_catalogue')?catalogue:url.includes('mobile_research_preview')?preview:[]})});
+const context = vm.createContext({document, window, console, URL, URLSearchParams, fetch:async url=>({ok:true,json:async()=>url.includes('mobile_research_catalogue')?catalogue:url.includes('mobile_research_preview')?preview:[]})});
 vm.runInContext(fs.readFileSync(path.join(root, 'mobile-research-preview.js'),'utf8'),context);
 setImmediate(()=> {
  const api=window.CouponWorldMobileResearch;

@@ -196,6 +196,12 @@ def build(output: Path) -> Path:
     # for local review. Never copy stale HTML from the source checkout.
     _generate_product_pages(output)
 
+    from python.phone_guides import render_phone_guides
+    render_phone_guides(output)
+
+    from python.affiliate_links import tag_public_artifact
+    tag_public_artifact(output)
+
     leaked = []
     for path in output.rglob("*"):
         parts = path.relative_to(output).parts

@@ -7,7 +7,7 @@ async function scenario(fail) {
  const el = id => {if (!els.has(id)) els.set(id,{id,value:'',innerHTML:'',textContent:'',hidden:false,events:{},addEventListener(k,v){this.events[k]=v},scrollIntoView(){}});return els.get(id)};
  const window = {location:{hash:'',search:''},addEventListener(){}};
  const document={getElementById:el,querySelectorAll:()=>[],addEventListener(){}};
- const context = vm.createContext({window,document,console,URLSearchParams,fetch:async url=>{if(fail)throw new Error('offline');return {ok:true,json:async()=>url.includes('catalogue')?{records:[],model_cards:[]}:url.includes('preview')?{products:[]}:[]}}});
+ const context = vm.createContext({window,document,console,URL,URLSearchParams,fetch:async url=>{if(fail)throw new Error('offline');return {ok:true,json:async()=>url.includes('catalogue')?{records:[],model_cards:[]}:url.includes('preview')?{products:[]}:[]}}});
  vm.runInContext(script,context);
  window.CouponWorldMobileResearch.search('phone under 30000');
  assert(el('mobileResearchResults').innerHTML.includes('Standard Buying Guide'));

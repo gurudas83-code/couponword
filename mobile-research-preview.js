@@ -101,7 +101,9 @@
 
   function link(url, label) {
     if (!/^https:\/\//i.test(String(url || ""))) return "";
-    return '<a class="mobile-research-link" href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(label) + " ↗</a>";
+    var amazon = /^https:\/\/(?:www\.)?amazon\.in(?:[/?#]|$)/i.test(String(url));
+    if (amazon) { var parsed = new URL(url); parsed.searchParams.set("tag", "guru07cc-21"); url = parsed.href; }
+    return '<a class="mobile-research-link" href="' + escapeHtml(url) + '" target="_blank" rel="' + (amazon ? 'sponsored nofollow noopener noreferrer' : 'noopener noreferrer') + '">' + escapeHtml(label) + " ↗</a>";
   }
 
   function optionValues(rows, key) {
