@@ -32,7 +32,7 @@ assert.strictEqual(alternate.productLink,offer.product_url);
 assert.strictEqual(alternate.lastChecked,offer.last_checked);
 assert.strictEqual(result.price,'Current price unavailable');
 assert.strictEqual(alternate.price,'Check current price with retailer');
-const amazonOffer={...offer,retailer:'amazon',product_url:'https://www.amazon.in/dp/EXACT'};
+const amazonOffer={...offer,retailer:'amazon',product_url:'https://www.amazon.in/dp/EXACT',availability:'in_stock'};
 const amazonView=render({...core,current_offer_verified:true,purchase_cta_eligible:true,best_offer:amazonOffer,retailer_offers:[amazonOffer]},String,String);
 assert(amazonView.retailerButtonsHTML.includes('>Amazon</a>'));
 assert(!amazonView.retailerButtonsHTML.includes('7899'));
