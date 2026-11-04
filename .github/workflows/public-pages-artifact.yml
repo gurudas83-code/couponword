@@ -30,8 +30,18 @@ jobs:
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.12"
+      - name: Install test dependencies
+        run: python -m pip install -r requirements.txt
       - name: Build allow-listed public artifact
         run: python scripts/build_public_pages.py --output public
+      - name: Check public research and budget contracts
+        run: python scripts/quality_audit.py --root public --report quality-audit.json
+      - name: Run smartphone recommendation and evidence regression tests
+        run: |
+          python -m unittest -v             test_phase_g_ranking_contract             test_mobile_research_inventory_visibility             test_mobile_independent_tests             test_phone_guides_release             test_recommendation_timeout_guard
+          node test_mobile_workbook_queries.cjs
+          node test_standard_guide_fallback.cjs
+          node test_search_discovery.cjs
       - name: Verify public artifact has no private or generated files
         shell: bash
         run: |
