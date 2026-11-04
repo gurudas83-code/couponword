@@ -89,6 +89,8 @@ class ResearchSeoTests(unittest.TestCase):
             self.assertGreater(len(" ".join(page.text_bits).split()), 170)
             self.assertIn("Unknowns and purchasing limitations", html)
             self.assertIn("No physical hands-on testing", html)
+            self.assertIn("/assets/discovery-analytics.js", html)
+            self.assertIn("G-921WL91ZGW", html)
             self.assertNotIn('"@type": "Offer"', html)
             self.assertNotIn('"@type": "AggregateRating"', html)
             self.assertNotIn("https://schema.org/InStock", html)
