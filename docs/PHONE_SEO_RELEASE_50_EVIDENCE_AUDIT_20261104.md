@@ -27,6 +27,20 @@ The 30 additions are specifically named in the JSON editorial-review file, inclu
 
 Manufacturer source: https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/
 
+## Additional India-region and mislabeled-chipset corrections
+
+A further source spot-check found five more significant errors in saved workbook facts. The existing public catalogue source merge now accepts **only these six explicitly identified non-frozen corrections**, including F05 above. No general override of frozen or approved source data was permitted.
+
+| Model | Incorrect research value | Corrected value | Authoritative manufacturer source |
+|---|---|---|---|
+| Xiaomi 14 Ultra | Network marked 4G LTE | **5G** with manufacturer-listed SA/NSA bands | https://www.mi.com/in/product/xiaomi-14-ultra/specs/ |
+| POCO X7 Pro (India) | Global typical battery 6,000 mAh | **India typical 6,550 mAh** | https://www.mi.com/global/support/faq/details/KA-522489/ |
+| Galaxy A57 5G | CPU frequency string mislabeled as chipset | **Exynos 1680** | https://news.samsung.com/sg/samsung-unveils-galaxy-a57-5g-and-galaxy-a37-5g-packing-pro-level-features-at-awesome-price |
+| Galaxy F70 Pro 5G | CPU frequency string mislabeled as chipset | **Qualcomm Snapdragon 6 Gen 3** | https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-alpha-black-128gb-sm-e476bzkdins/ |
+| Galaxy M47 5G | CPU frequency string mislabeled as chipset | **Qualcomm Snapdragon 6 Gen 3** | https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/ |
+
+Other fields are **not** certified as field-by-field tested. Where original manufacturer source applies to a global configuration, regional differences must be explicitly corrected with the region-specific manufacturer source. A pure static-source count alone is not proof of all-India specification accuracy.
+
 ## Explicitly excluded from distinct SEO routes
 
 1. `samsung|galaxy a06 5g light` — "Light Gray" appears in the original product colour/variant name, not a separately certified Galaxy A06 5G model. Use **Samsung Galaxy A06 5G** as the canonical editorial model instead.
