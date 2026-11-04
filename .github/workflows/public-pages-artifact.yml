@@ -20,7 +20,8 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    # Playwright 1.56 Chromium supports Ubuntu 24.04, not GitHub's 26.04 latest image.
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout reviewed source
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
