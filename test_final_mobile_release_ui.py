@@ -16,7 +16,11 @@ class FinalMobileReleaseUITests(unittest.TestCase):
                               ("₹30k", "mobile under 30000"),
                               ("₹40k", "mobile under 40000"),
                               ("₹50k", "mobile under 50000"),
-                              ("₹60k+", "mobile under 60000")):
+                              ("₹60k", "mobile under 60000"),
+                              ("₹70k", "mobile under 70000"),
+                              ("₹80k", "mobile under 80000"),
+                              ("₹90k", "mobile under 90000"),
+                              ("₹1L", "mobile under 100000")):
             self.assertRegex(
                 source,
                 rf'data-mobile-query="{re.escape(query)}">{re.escape(budget)}',
