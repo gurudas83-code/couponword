@@ -44,6 +44,12 @@ jobs:
           node test_mobile_workbook_queries.cjs
           node test_standard_guide_fallback.cjs
           node test_search_discovery.cjs
+      - name: Prepare Chromium mobile and desktop release QA
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Exercise actual search, variants, comparison and backend handoff in Chromium
+        run: python scripts/browser_smoke.py --root public --report browser-qa.json
       - name: Verify public artifact has no private or generated files
         shell: bash
         run: |
