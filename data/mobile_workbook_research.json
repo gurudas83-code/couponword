@@ -17987,11 +17987,11 @@
           "applicability": "MODEL_SHARED"
         },
         "network_support": {
-          "value": "5G",
+          "value": "4G LTE",
           "label": "Network support",
           "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/",
-          "checked_at": "2026-11-03",
-          "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
+          "checked_at": "2026-11-04",
+          "evidence_status": "MANUFACTURER_CORRECTED",
           "applicability": "MODEL_SHARED"
         }
       },
