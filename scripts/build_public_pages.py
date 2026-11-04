@@ -199,6 +199,11 @@ def build(output: Path) -> Path:
     from python.phone_guides import render_phone_guides
     render_phone_guides(output)
 
+    # Publish only an editorially selected subset of the same source-linked
+    # mobile research catalogue. No ranking, new engines or offers are added.
+    from python.phone_research_pages import render_phone_research_pages
+    render_phone_research_pages(output)
+
     from python.affiliate_links import tag_public_artifact
     tag_public_artifact(output)
 
