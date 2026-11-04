@@ -112,6 +112,17 @@ class ResearchSeoTests(unittest.TestCase):
         self.assertEqual(len([url for url in self.sitemap if url.startswith(SITE + HUB)]),
                          len(self.selected) + 1)
 
+    def test_outdated_thin_mobile_page_consolidates_into_real_guide(self):
+        old_url = SITE + "/seo/best-mobile-under-15000.html"
+        target_url = SITE + "/seo/phones-under-15000.html"
+        legacy = (PUBLIC / "seo/best-mobile-under-15000.html").read_text(encoding="utf-8")
+        self.assertIn('http-equiv="refresh"', legacy)
+        self.assertIn("0; url=" + target_url, legacy)
+        self.assertIn('rel="canonical" href="' + target_url + '"', legacy)
+        self.assertNotIn(old_url, self.sitemap)
+        self.assertIn(target_url, self.sitemap)
+        self.assertTrue((PUBLIC / "seo/phones-under-15000.html").is_file())
+
     def test_no_unreviewed_records_silently_get_seo_pages(self):
         allowed = {slug_for(card) for card in self.selected}
         produced = {p.name for p in (PUBLIC / "phones").iterdir() if p.is_dir()}
