@@ -34,7 +34,7 @@ jobs:
         run: python scripts/quality_audit.py --root public --report quality-audit.json
       - name: Preserve existing ranking and research contracts
         run: |
-          python -m unittest -v test_phase_g_ranking_contract test_mobile_research_inventory_visibility test_mobile_independent_tests test_phone_guides_release test_recommendation_timeout_guard
+          python -m unittest -v test_phase_g_ranking_contract test_mobile_research_inventory_visibility test_mobile_independent_tests test_phone_guides_release test_recommendation_timeout_guard test_phase_g_frontend_offer test_frontend_recommendation_layout test_final_mobile_release_ui
           node test_mobile_workbook_queries.cjs
           node test_standard_guide_fallback.cjs
           node test_search_discovery.cjs
