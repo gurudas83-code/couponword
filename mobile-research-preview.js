@@ -34,6 +34,7 @@
   var catalogueExpanded = false;
   var inventoryRows = [];
   var inventoryCards = [];
+  var inventoryLoadFailed = false;
   var inventorySourceCounts = {};
   var verifiedRows = [];
   var CATALOGUE_INITIAL_LIMIT = 18;
@@ -264,6 +265,7 @@
         return response.json();
       })
       .then(function (payload) {
+        inventoryLoadFailed = false;
         inventoryRows = Array.isArray(payload.records) ? payload.records : [];
         inventoryCards = Array.isArray(payload.model_cards) ? payload.model_cards : [];
         inventorySourceCounts = payload.source_counts || {};
@@ -274,8 +276,11 @@
         if (initialQuery) searchResearch(initialQuery);
       })
       .catch(function () {
+        inventoryLoadFailed = true;
+        if (researchSearchStatus) researchSearchStatus.textContent = "Saved smartphone research is temporarily unavailable. Use the Standard Buying Guide below.";
+        if (researchResults) { researchResults.hidden = false; researchResults.innerHTML = researchGuideFallback(); }
         if (inventoryCount) inventoryCount.textContent = "Research catalogue unavailable";
-        inventoryGrid.innerHTML = "<p>Existing research records are currently unavailable.</p>";
+        inventoryGrid.innerHTML = "<p>Existing research records are currently unavailable.</p>" + researchGuideFallback();
       });
   }
 
@@ -622,13 +627,17 @@
     if (clearSearchButton) clearSearchButton.hidden = !query;
   }
 
+  function researchGuideFallback() {
+    return '<p class="standard-guide-fallback"><a class="btn btn-ghost" href="/guides/smartphone-buying-guide/">Standard Buying Guide</a></p>';
+  }
+
   function emptyResearchResult(query) {
     var c = researchConstraints(query);
     var message = "No documented match in our saved research for this request.";
     if (c.lower != null && c.budget != null && c.lower > c.budget) message = "The lower budget is higher than the upper budget. Please correct the range.";
     else if (c.ram != null || c.storage != null) message += " We cannot confirm the requested exact memory variant with all these conditions.";
     else if (c.budget != null) message += " No matching record passes this price band and the other conditions. Missing references and recorded out-of-stock entries are excluded.";
-    return '<div class="mobile-research-empty"><p>' + escapeHtml(message) + '</p><p>This is a research coverage gap, not proof that no suitable phone exists. No constraint has been relaxed.</p><a href="#mobileResearchCatalogue">Browse the full research catalogue</a></div>';
+    return '<div class="mobile-research-empty"><p>' + escapeHtml(message) + '</p><p>This is a research coverage gap, not proof that no suitable phone exists. No constraint has been relaxed.</p><a href="#mobileResearchCatalogue">Browse the full research catalogue</a>' + researchGuideFallback() + '</div>';
   }
 
   function searchResearch(query) {
@@ -645,7 +654,7 @@
       return [];
     }
     revealSearch();
-    if (!inventoryCards.length) { if (researchSearchStatus) researchSearchStatus.textContent = "Loading smartphone research…"; return []; }
+    if (!inventoryCards.length) { if (researchSearchStatus) researchSearchStatus.textContent = inventoryLoadFailed ? "Saved smartphone research is temporarily unavailable." : "Loading smartphone research…"; if (researchResults) { researchResults.hidden = false; researchResults.innerHTML = researchGuideFallback(); } return []; }
     var parts = lastSearchQuery.replace(/^compare\s+/i, "").split(/\s+(?:vs\.?|versus|और|compare)\s+/i);
     if (/^compare\s/i.test(lastSearchQuery) && parts.length === 1) parts = parts[0].split(/\s+and\s+/i);
     var comparison = parts.length > 1;

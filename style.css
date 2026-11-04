@@ -1204,3 +1204,5 @@ body.clean-ui :is(button,a,input,select,summary):focus-visible{outline:3px solid
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.mobile-research-result-card{transition:none!important}}
 
 @media(max-width:640px){body.clean-ui .hero h1{font-size:3rem}body.clean-ui .brand small{display:block;font-size:.51rem;letter-spacing:.1em}body.clean-ui .brand{gap:9px}}
+
+.always-guide{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px;margin:0 0 20px;background:#f0f5e8;border:1px solid #d7e3cb;border-radius:12px;color:#294e38}.always-guide strong{font-size:.9rem}.always-guide p{font-size:.78rem;line-height:1.65;margin:5px 0 0;max-width:620px;color:#5a7054}.always-guide .btn{flex-shrink:0;background:#fff;border:1px solid #bfd0b3;color:#31563c;font-size:.8rem}.standard-guide-fallback{display:flex;gap:10px;flex-wrap:wrap}.standard-guide-fallback .btn{background:#fff;color:#31563c;border:1px solid #bfd0b3}@media(max-width:640px){.always-guide{align-items:start;flex-direction:column;gap:12px}.always-guide .btn{width:100%}}

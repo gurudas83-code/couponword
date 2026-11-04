@@ -594,11 +594,15 @@ async function loadResearchComparisonFallback(query, signal) {
   }
 }
 
+function standardBuyingGuideFallback() {
+  return '<p class="standard-guide-fallback"><a class="btn btn-ghost" href="/guides/smartphone-buying-guide/">Standard Buying Guide</a> <a class="btn btn-ghost" href="#mobileResearchSearch">Browse saved smartphone research</a></p><p>Saved research is dated context; current price, stock and delivery require retailer confirmation.</p>';
+}
+
 function renderOfferUnavailable() {
   return `<section class="ai-detail-block ai-unknowns" aria-label="Verified offer status">
     <h3>Verified offers are currently unavailable</h3>
     <p>No current in-stock retailer offer passed the existing price, identity and freshness gates for this shopping query.</p>
-    <a class="btn btn-ghost" href="#mobileResearchPreview">Explore verified smartphone research</a>
+    ${standardBuyingGuideFallback()}
   </section>`;
 }
 
@@ -642,8 +646,9 @@ async function loadShoppingRecommendation(query) {
   );
 
   card.innerHTML = `
-    <h3>Finding the best matches...</h3>
-    <p>Coupon World AI is checking products, prices and fit for your request.</p>
+    <h3>Finding verified matches...</h3>
+    <p>Checking for verified matches. You can use the standard guide while this request completes.</p>
+    ${standardBuyingGuideFallback()}
   `;
 
   if (section) {
@@ -779,13 +784,14 @@ async function loadShoppingRecommendation(query) {
           card.innerHTML = renderResearchComparison(fallbackComparison);
           return;
         }
-        card.innerHTML = `<h3>Verified smartphone research is temporarily unavailable</h3><p>Please try the comparison again.</p>`;
+        card.innerHTML = `<h3>Verified smartphone research is temporarily unavailable</h3><p>Please try the comparison again.</p>${standardBuyingGuideFallback()}`;
       } else if (String(data.market_data_status || "").toUpperCase() === "CURRENT_OFFERS_UNAVAILABLE") {
         card.innerHTML = renderOfferUnavailable();
       } else {
         card.innerHTML = `
           <h3>No strong match found</h3>
           <p>Try changing the budget, RAM, storage, brand or other requirements.</p>
+          ${standardBuyingGuideFallback()}
         `;
       }
       return;
@@ -1325,6 +1331,7 @@ async function loadShoppingRecommendation(query) {
     card.innerHTML = `
       <h3>Recommendation temporarily unavailable</h3>
       <p>${escapeHTML(message)}</p>
+      ${standardBuyingGuideFallback()}
       <button type="button" class="btn btn-ghost" data-retry-recommendation>Try again</button>
     `;
     card.querySelector("[data-retry-recommendation]")?.addEventListener("click", () => {
