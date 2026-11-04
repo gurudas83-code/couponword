@@ -98,6 +98,23 @@ def run(root: Path):
 
                     # Front-end research does not turn historical budgets into purchase CTAs.
                     assert page.locator("#mobileResearchResults .shop-button").count() == 0, width
+                    # The evidence-rich pages must also work without submitting
+                    # any JavaScript search or relying on generated hidden data.
+                    page.goto(url + "phones/samsung-galaxy-a56-5g/", wait_until="domcontentloaded", timeout=30000)
+                    assert "Galaxy A56 5G" in page.locator("h1").inner_text(), width
+                    assert page.locator(".mobile-fact-table tbody tr").count() >= 8, width
+                    assert page.locator('a:has-text("Manufacturer source")').count() >= 8, width
+                    assert page.locator('link[rel="canonical"]').get_attribute("href") == (
+                        "https://coupon-world.in/phones/samsung-galaxy-a56-5g/"
+                    ), width
+                    assert not page.locator(".shop-button").count(), width
+                    document_width = page.evaluate("document.documentElement.scrollWidth")
+                    assert document_width <= width + 8, (
+                        f"Phone research page overflows {width}px viewport: {document_width}"
+                    )
+                    page.goto(url + "phones/", wait_until="domcontentloaded", timeout=30000)
+                    assert page.locator(".mobile-fact-card").count() == 20, width
+                    assert page.locator('a[href="/phones/samsung-galaxy-a56-5g/"]').count() >= 1, width
                     assert not page_errors, f"{width}px uncaught JS errors: {page_errors}"
                     results.append({"width": width, "search": "PASS", "full_budget_opt_in": "PASS", "exact_variant": "PASS",
                                     "comparison": "PASS", "engine_handoff": "PASS",
