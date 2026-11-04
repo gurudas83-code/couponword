@@ -51,6 +51,8 @@ jobs:
               'guide': 'https://coupon-world.in/guides/phone-budget-guides/',
               'phone_hub': 'https://coupon-world.in/phones/',
               'phone_model': 'https://coupon-world.in/phones/samsung-galaxy-a56-5g/',
+              'phone_pixel': 'https://coupon-world.in/phones/google-pixel-10/',
+              'phone_f05': 'https://coupon-world.in/phones/samsung-galaxy-f05/',
               'backend_health': 'https://couponword.onrender.com/health',
           }
           for name, url in urls.items():
@@ -66,6 +68,10 @@ jobs:
                           assert len(data['model_cards']) == 232, 'Production catalogue incomplete'
                       elif name == 'phone_hub':
                           assert b'/phones/samsung-galaxy-a56-5g/' in content, 'Crawlable phone hub link missing'
+                      elif name == 'phone_pixel':
+                          assert b'Google Pixel 10' in content and b'Manufacturer source' in content, 'Pixel manufacturer evidence page missing'
+                      elif name == 'phone_f05':
+                          assert b'4G LTE' in content, 'F05 4G network correction not published'
                       elif name == 'phone_model':
                           assert b'Manufacturer source' in content, 'Original manufacturer links missing'
                       elif name == 'backend_health':
