@@ -75,6 +75,8 @@ jobs:
         # The daily check fails and alerts if the production API is unreachable.
         continue-on-error: ${{ github.event_name == 'pull_request' }}
         run: python scripts/verify_runtime_health.py
+      - name: Unit-test remote probe contract
+        run: python -m unittest -v test_runtime_health_probe
       - name: Confirm browser script syntax
         run: |
           node --check app.js
