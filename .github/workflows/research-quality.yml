@@ -34,7 +34,7 @@ jobs:
         run: python scripts/quality_audit.py --root public --report quality-audit.json
       - name: Preserve existing ranking and research contracts
         run: |
-          python -m unittest -v test_phase_g_ranking_contract test_mobile_research_inventory_visibility test_mobile_independent_tests test_phone_guides_release test_recommendation_timeout_guard
+          python -m unittest -v test_phase_g_ranking_contract test_mobile_research_inventory_visibility test_mobile_independent_tests test_phone_guides_release test_recommendation_timeout_guard test_phase_g_frontend_offer test_frontend_recommendation_layout test_final_mobile_release_ui
           node test_mobile_workbook_queries.cjs
           node test_standard_guide_fallback.cjs
           node test_search_discovery.cjs
@@ -76,6 +76,13 @@ jobs:
                           raise RuntimeError('LIVE FAIL: ' + name) from exc
                       time.sleep(3)
           PY
+      - name: Verify Render backend health and safe recommendation route
+        # PR checks report a remote outage without blocking a static site fix.
+        # The daily check fails and alerts if the production API is unreachable.
+        continue-on-error: ${{ github.event_name == 'pull_request' }}
+        run: python scripts/verify_runtime_health.py
+      - name: Unit-test remote probe contract
+        run: python -m unittest -v test_runtime_health_probe
       - name: Confirm browser script syntax
         run: |
           node --check app.js
