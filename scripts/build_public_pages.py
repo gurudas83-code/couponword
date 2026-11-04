@@ -9,6 +9,8 @@ import re
 import shutil
 import sys
 from pathlib import Path
+from urllib.parse import urlsplit
+from xml.etree import ElementTree as ET
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,7 +19,7 @@ for import_path in (ROOT, ROOT / "python"):
         sys.path.insert(0, str(import_path))
 PUBLIC_FILES = (
     "index.html", "style.css", "app.js", "mobile-research-preview.js", "coupons.json", "CNAME",
-    "robots.txt", "sitemap.xml", "buying-guides.html", "buying-guides.js",
+    "robots.txt", "sitemap.xml", "google54faf165096b5622.html", "buying-guides.html", "buying-guides.js",
 )
 PUBLIC_DATA_FILES = ("data/seo-pages.json", "data/mobile_research_preview.json")
 PUBLIC_DIRECTORIES = ("assets", "seo", "guides")
@@ -56,6 +58,43 @@ def _generate_product_pages(destination: Path) -> None:
             product_pages.render(product, products),
             encoding="utf-8",
         )
+
+
+
+def _prune_unverified_product_sitemap_entries(destination: Path) -> None:
+    """Only offer-verified, indexable legacy pages belong in the live sitemap.
+
+    This is a publication gate on the existing artifact, not a new catalogue,
+    identity or recommendation engine. Preserve all old URLs for bookmarks.
+    """
+    ns = "http://www.sitemaps.org/schemas/sitemap/0.9"
+    ET.register_namespace("", ns)
+    sitemap = destination / "sitemap.xml"
+    tree = ET.parse(sitemap)
+    root = tree.getroot()
+    removed = 0
+    retained = 0
+    for entry in list(root.findall(f"{{{ns}}}url")):
+        location = entry.find(f"{{{ns}}}loc")
+        url = urlsplit(str(location.text or "") if location is not None else "")
+        if url.hostname != "coupon-world.in" or not url.path.startswith("/products/"):
+            continue
+        if not url.path.endswith("/") or url.query or url.fragment:
+            raise RuntimeError(f"Invalid canonical product URL in sitemap: {url.geturl()}")
+        page_path = destination / url.path.lstrip("/") / "index.html"
+        if not page_path.is_file():
+            raise RuntimeError(f"Sitemap refers to missing product page: {url.geturl()}")
+        page = page_path.read_text(encoding="utf-8")
+        meta = re.search(r'<meta[ ]+name="robots"[ ]+content="([^"]+)"', page, flags=re.I)
+        if not meta:
+            raise RuntimeError(f"Product page missing robots instruction: {page_path}")
+        if "noindex" in meta.group(1).casefold():
+            root.remove(entry)
+            removed += 1
+        else:
+            retained += 1
+    tree.write(sitemap, encoding="utf-8", xml_declaration=True)
+    print(f"Legacy product sitemap gate: {retained} verified indexable; {removed} unverified omitted")
 
 
 def _generate_research_catalogue(destination: Path) -> None:
@@ -203,6 +242,10 @@ def build(output: Path) -> Path:
     # mobile research catalogue. No ranking, new engines or offers are added.
     from python.phone_research_pages import render_phone_research_pages
     render_phone_research_pages(output)
+
+    # The source sitemap still lists historical catalogue URLs. Keep those
+    # pages online, but do not encourage indexing without current offer proof.
+    _prune_unverified_product_sitemap_entries(output)
 
     from python.affiliate_links import tag_public_artifact
     tag_public_artifact(output)

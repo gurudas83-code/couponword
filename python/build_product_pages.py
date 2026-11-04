@@ -524,13 +524,11 @@ def render(product, products):
         except (TypeError, ValueError):
             return None
 
-    is_mobile = category.lower().strip() in {
-        "mobile", "mobiles", "smartphone", "smartphones"
-    }
-    # A catalogue number is not current retailer evidence. Mobile selling
-    # prices are supplied only by an eligible exact-variant offer below.
-    price = None if is_mobile else valid_number(product.get("price"))
-    mrp = None if is_mobile else valid_number(product.get("mrp"))
+    # Historical catalogue prices must never be presented as current offers.
+    # Only the existing verified exact-variant retailer decision below may
+    # supply a public selling price or Google Offer structured data.
+    price = None
+    mrp = None
 
     discount_percent = None
     if price is not None and mrp is not None and mrp > price:
@@ -589,12 +587,13 @@ def render(product, products):
         f"../../assets/images/categories/{placeholder_file}"
     )
     active = product.get("active") is not False
-    availability = clean(product.get("availability")) or (
-        "available" if active else "unavailable"
-    )
+    # Legacy stock labels are not proof of current retailer availability.
+    availability = "Current price and stock not verified"
 
     canonical = page_url(product)
-    robots = "index,follow" if active else "noindex,follow"
+    # Legacy pages remain available via direct URLs and internal links, but
+    # should not compete with reviewed phone pages for Google indexing.
+    robots = "noindex,follow"
     meta = excerpt(description)
 
     schema = {
@@ -610,15 +609,6 @@ def render(product, products):
         schema["brand"] = {"@type": "Brand", "name": brand}
     if image:
         schema["image"] = image
-
-    if price is not None and active and link:
-        schema["offers"] = {
-            "@type": "Offer",
-            "priceCurrency": "INR",
-            "price": f"{price:.2f}",
-            "availability": "https://schema.org/InStock",
-            "url": link,
-        }
 
     display_image = image or placeholder_image
 
@@ -656,9 +646,13 @@ def render(product, products):
         expected_retailer_product_id=registry_record.get("retailer_product_id"),
     ) if isinstance(best_multi_offer, dict) else {"eligible": False}
 
-    verified_offer = isinstance(best_multi_offer, dict) and best_decision.get("eligible") is True
+    verified_offer = active and isinstance(best_multi_offer, dict) and best_decision.get("eligible") is True
 
-    if verified_offer:
+    if verified_offer and active:
+        # The existing eligibility gate checks identity, retailer, stock,
+        # evidence freshness and exact variant. No new scoring or offer
+        # policy is introduced here.
+        robots = "index,follow"
         best_price = best_multi_offer.get("price")
         best_retailer = str(
             best_multi_offer.get("retailer") or ""
@@ -669,6 +663,15 @@ def render(product, products):
             or best_multi_offer.get("product_url")
             or ""
         )
+
+        if best_url and valid_number(best_price) is not None:
+            schema["offers"] = {
+                "@type": "Offer",
+                "priceCurrency": "INR",
+                "price": f"{float(best_price):.2f}",
+                "availability": "https://schema.org/InStock",
+                "url": best_url,
+            }
 
         if best_price is not None:
             price_html = (

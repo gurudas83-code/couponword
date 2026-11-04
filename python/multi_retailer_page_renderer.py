@@ -142,8 +142,11 @@ def render_multi_retailer_section(product, multi_products):
         )
         price = format_price(offer.get("price")) if decision["status"] == VERIFIED_BUYABLE else "Price unavailable"
 
-        availability = availability_label(
-            offer.get("availability")
+        # A historical stock label is not current retailer verification.
+        availability = (
+            availability_label(offer.get("availability"))
+            if decision["status"] == VERIFIED_BUYABLE
+            else "Availability not verified"
         )
 
         freshness = str(
@@ -163,10 +166,10 @@ def render_multi_retailer_section(product, multi_products):
 
         badges = []
 
-        if is_best:
+        if is_best and decision["status"] == VERIFIED_BUYABLE:
             badges.append(
                 '<span class="offer-best">'
-                'Lowest observed price'
+                'Lowest verified offer'
                 '</span>'
             )
 
@@ -208,8 +211,8 @@ def render_multi_retailer_section(product, multi_products):
         '<section class="multi-retailer">'
         '<div class="multi-retailer-heading">'
         '<div>'
-        '<h2>Compare retailer offers</h2>'
-        '<p>Recorded prices and availability are shown with their observation dates.</p>'
+        '<h2>Retailer offer verification</h2>'
+        '<p>Historical observations are not current stock or prices. Amounts appear only after exact-variant, retailer and freshness verification.</p>'
         '</div>'
         '</div>'
         '<div class="retailer-offer-grid">'
