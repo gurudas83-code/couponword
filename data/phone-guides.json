@@ -20,7 +20,9 @@
           "heading": "Use the budget band correctly",
           "text": "The lower edge is intentional: this shortcut looks near your budget rather than filling the page with much cheaper phones. If you want a wider range, type an explicit query such as “phone between 1000 and 10000”. A missing result can mean the saved price reference or exact variant is unavailable in our research. It does not establish that the phone is unavailable in India. Change a condition explicitly rather than assuming the site has relaxed it."
         }
-      ]
+      ],
+      "reader_question": "How should I choose a phone under ₹10,000?",
+      "quick_answer": "Start with your essential apps, physical RAM, storage and the exact India variant. Our shortcut searches dated references from ₹5,000 to below ₹10,000; confirm today’s payable price with the retailer."
     },
     {
       "slug": "phones-under-15000",
@@ -40,7 +42,9 @@
           "heading": "Use the budget band correctly",
           "text": "The lower edge is intentional: this shortcut looks near your budget rather than filling the page with much cheaper phones. If you want a wider range, type an explicit query such as “phone between 5000 and 15000”. A missing result can mean the saved price reference or exact variant is unavailable in our research. It does not establish that the phone is unavailable in India. Change a condition explicitly rather than assuming the site has relaxed it."
         }
-      ]
+      ],
+      "reader_question": "What should I check in a phone under ₹15,000?",
+      "quick_answer": "Compare the exact RAM/storage combination, required features and update policy. Check whether a retailer price needs exchange or a bank card before treating it as your price."
     },
     {
       "slug": "phones-under-20000",
@@ -60,7 +64,9 @@
           "heading": "Use the budget band correctly",
           "text": "The lower edge is intentional: this shortcut looks near your budget rather than filling the page with much cheaper phones. If you want a wider range, type an explicit query such as “phone between 5000 and 20000”. A missing result can mean the saved price reference or exact variant is unavailable in our research. It does not establish that the phone is unavailable in India. Change a condition explicitly rather than assuming the site has relaxed it."
         }
-      ]
+      ],
+      "reader_question": "How do I compare phones under ₹20,000?",
+      "quick_answer": "Choose your main use first: everyday work, photography or gaming. Compare the exact configurations and relevant evidence rather than picking the largest headline specification."
     },
     {
       "slug": "phones-under-30000",
@@ -80,7 +86,9 @@
           "heading": "Use the budget band correctly",
           "text": "The lower edge is intentional: this shortcut looks near your budget rather than filling the page with much cheaper phones. If you want a wider range, type an explicit query such as “phone between 10000 and 30000”. A missing result can mean the saved price reference or exact variant is unavailable in our research. It does not establish that the phone is unavailable in India. Change a condition explicitly rather than assuming the site has relaxed it."
         }
-      ]
+      ],
+      "reader_question": "Which camera or gaming phone should I research under ₹30,000?",
+      "quick_answer": "Choose your priority, then filter the ₹25,000 to below ₹30,000 saved reference band. Inspect relevant camera tests or game-specific FPS evidence before treating a candidate as a performance winner."
     },
     {
       "slug": "phones-under-50000",
@@ -100,7 +108,9 @@
           "heading": "Use the budget band correctly",
           "text": "The lower edge is intentional: this shortcut looks near your budget rather than filling the page with much cheaper phones. If you want a wider range, type an explicit query such as “phone between 10000 and 50000”. A missing result can mean the saved price reference or exact variant is unavailable in our research. It does not establish that the phone is unavailable in India. Change a condition explicitly rather than assuming the site has relaxed it."
         }
-      ]
+      ],
+      "reader_question": "What matters when choosing a phone under ₹50,000?",
+      "quick_answer": "Identify what the extra spending buys for your own use. Compare the exact item condition, memory configuration, camera evidence and remaining software support, then verify the current offer."
     },
     {
       "slug": "camera-phone-buying-guide",
@@ -120,7 +130,9 @@
           "heading": "Build a camera shortlist",
           "text": "Inspect stabilization, available camera modes and the manufacturer specifications for your exact variant. Then read the original review to understand its conditions and limitations. Keep missing low-light or video evidence visible. If two phones were not tested comparably, a precise numerical winner would add certainty the evidence does not support."
         }
-      ]
+      ],
+      "reader_question": "How can I compare camera quality between phones?",
+      "quick_answer": "Start with the scenes you shoot and the camera module you use. Compare relevant independent tests within the same publisher’s method; megapixels alone do not establish image quality."
     },
     {
       "slug": "battery-phone-buying-guide",
@@ -140,7 +152,9 @@
           "heading": "Check the complete charging setup",
           "text": "Consider how often you can charge and what equipment is included. Confirm supported charging, the charger in the box and any required cable. A large advertised wattage does not describe the full charging curve. Look for a measured charging duration with its starting level and test conditions before comparing it with another phone."
         }
-      ]
+      ],
+      "reader_question": "How can I find a phone with good battery life?",
+      "quick_answer": "Look for measured runtime under a workload close to your use, with the test unit and settings visible. Battery capacity alone cannot promise all-day runtime."
     },
     {
       "slug": "gaming-phone-buying-guide",
@@ -160,7 +174,9 @@
           "heading": "Choose an exact configuration",
           "text": "Keep physical RAM and storage separate from virtual-memory marketing. Verify the region and configuration tested, especially where storage types or cooling details may differ. Use the shortlist to identify candidates, then check the game-specific evidence and current retailer listing before buying. Unknown sustained performance remains an unknown."
         }
-      ]
+      ],
+      "reader_question": "What evidence matters for a gaming phone?",
+      "quick_answer": "Look for measured FPS in your game, graphics preset and version, plus sustained-session context. A display refresh rate or chipset name is not a measured gameplay result."
     },
     {
       "slug": "phone-display-buying-guide",
@@ -180,7 +196,9 @@
           "heading": "Check comfort directly when possible",
           "text": "Readability preferences vary. If eye comfort, reflections or one-handed use are priorities, inspect the exact device in person when possible. Use published measurements as context and distinguish a missing measurement from a measured problem. Do not infer viewing comfort solely from the display technology name."
         }
-      ]
+      ],
+      "reader_question": "What makes a phone display useful outdoors?",
+      "quick_answer": "Check a relevant measured brightness test and its settings, along with screen size and your viewing needs. Keep manufacturer peak claims separate from different lab measurement conditions."
     },
     {
       "slug": "phone-software-support-guide",
@@ -200,7 +218,9 @@
           "heading": "Review the everyday software experience",
           "text": "Check the operating-system version, features you need and compatibility with important work or banking apps. Review accessibility options if relevant to you. An update commitment is valuable context, but it does not certify every application or eliminate the need to check the exact device and current software."
         }
-      ]
+      ],
+      "reader_question": "How do I check a phone’s remaining software support?",
+      "quick_answer": "Read the official policy for the exact model and region. Keep operating-system upgrades separate from security support, and check the commitment’s starting point rather than assuming it starts at purchase."
     },
     {
       "slug": "phone-build-reliability-guide",
@@ -220,7 +240,9 @@
           "heading": "Look for evidence over impressions",
           "text": "Separate a reviewer’s short handling impression from measured durability testing and long-term failure data. A solid feel is not a measured reliability rate. If systematic evidence is absent, list the documented features and the unanswered questions instead of assigning a reassuring score."
         }
-      ]
+      ],
+      "reader_question": "Does an IP rating prove that a phone is reliable?",
+      "quick_answer": "An IP rating describes documented protection under specified conditions. It does not establish drop resistance, long-term failure rates or warranty coverage for every type of damage."
     },
     {
       "slug": "physical-ram-vs-virtual-ram",
@@ -240,7 +262,9 @@
           "heading": "Use an exact search",
           "text": "Try “phone 8GB physical RAM 256GB storage”. The site treats the memory requirements as hard conditions. If a result is missing, it may mean the exact combination is not documented in our saved research. We do not silently substitute a sibling configuration or count virtual memory toward the physical requirement."
         }
-      ]
+      ],
+      "reader_question": "Does virtual RAM count as physical RAM?",
+      "quick_answer": "Treat the physical RAM specification separately from virtual-memory expansion. An exact 8GB physical-RAM requirement should match documented physical memory, not a combined marketing number."
     },
     {
       "slug": "128gb-vs-256gb-phone-storage",
@@ -260,7 +284,9 @@
           "heading": "Compare like-for-like listings",
           "text": "Use the same physical RAM and internal storage combination when checking shops. A lower headline price may belong to a smaller-storage variant. Coupon World exact-storage searches retain that requirement; unsupported combinations produce a coverage-gap explanation rather than a cheaper substitute."
         }
-      ]
+      ],
+      "reader_question": "Should I choose 128GB or 256GB phone storage?",
+      "quick_answer": "Estimate the apps, photographs, videos and offline files you keep. Verify expansion support and the exact configuration; storage and RAM are different resources."
     },
     {
       "slug": "5g-phone-india-checklist",
@@ -280,7 +306,9 @@
           "heading": "Look beyond the mobile-network label",
           "text": "Review SIM configuration, Wi-Fi, Bluetooth and physical connector information if those matter to your use. Verify exact features such as eSIM rather than assuming they accompany 5G. Before buying, match the retailer’s selected configuration to the manufacturer record you used for research."
         }
-      ]
+      ],
+      "reader_question": "Does a 5G phone guarantee fast service in my area?",
+      "quick_answer": "No. Check the exact region variant and network support, then confirm local coverage and plan requirements with your operator. Device capability does not establish coverage at your location."
     },
     {
       "slug": "compare-phones-exact-variants",
@@ -300,7 +328,9 @@
           "heading": "Use the site comparison",
           "text": "Search for two model names with “vs”, or select Compare on up to three research cards. Review the specification table and its gaps, then open the sources for the exact features that drive your decision. The table does not declare a performance winner when comparable evidence is missing."
         }
-      ]
+      ],
+      "reader_question": "How do I compare two exact phone variants?",
+      "quick_answer": "Match complete model names, physical RAM and storage first. Keep unknown fields visible and distinguish documented features from performance measurements."
     },
     {
       "slug": "phone-price-stock-verification",
@@ -320,7 +350,9 @@
           "heading": "Understand retailer search links",
           "text": "Amazon, Flipkart and Croma links are research destinations, not evidence that a matching listing is currently buyable. Amazon links may include our affiliate tag. Commission eligibility is determined by the retailer program; adding a tag does not verify stock, price, account approval or a successful order."
         }
-      ]
+      ],
+      "reader_question": "Are Coupon World budget references live prices?",
+      "quick_answer": "No. Saved references help filter research. Verify the exact variant, item condition, seller, eligibility conditions, current payable amount and stock at the retailer before buying."
     },
     {
       "slug": "phone-research-evidence-method",
@@ -340,7 +372,9 @@
           "heading": "Commerce evidence has separate gates",
           "text": "A recommendation to buy requires current exact-variant price, availability and freshness verification. Dated references remain research context and have no ranking weight. Our generated guides explain the available evidence and link to the research tool; they are not hands-on reviews or claims that our team tested every phone."
         }
-      ]
+      ],
+      "reader_question": "How does Coupon World decide what its phone evidence means?",
+      "quick_answer": "Manufacturer specifications, independent measurements and retailer offers are separate evidence types. Exact-variant and protocol gaps stay visible, and research context does not certify a live buying recommendation."
     },
     {
       "slug": "camera-megapixels-vs-quality",
@@ -360,7 +394,9 @@
           "heading": "Connect the evidence to your photographs",
           "text": "If you mainly photograph moving subjects indoors, prioritize evidence for that situation. If you record video, check the specific recording mode and stabilization behavior. Use specifications to identify candidates and relevant tests to investigate performance. This keeps the shortlist useful without making unsupported winners."
         }
-      ]
+      ],
+      "reader_question": "Does a higher megapixel count mean a better camera?",
+      "quick_answer": "No single camera specification establishes overall image quality. Check the module, mode and relevant image or video tests for the scenes you actually shoot."
     },
     {
       "slug": "battery-mah-vs-real-runtime",
@@ -380,7 +416,9 @@
           "heading": "Plan around your charging routine",
           "text": "Think about your longest time away from a charger and the applications used during it. Search for evidence that resembles that workload and keep a margin for uncertainty. A missing test is not proof of poor endurance, and a large capacity is not sufficient evidence to assign a battery champion."
         }
-      ]
+      ],
+      "reader_question": "Does a larger mAh number guarantee longer runtime?",
+      "quick_answer": "No. Compare the exact battery configuration and measured workload. Test settings, software and regional capacity differences limit what a runtime result can establish."
     },
     {
       "slug": "phone-charging-watts-vs-time",
@@ -400,7 +438,9 @@
           "heading": "Balance convenience with the rest of the phone",
           "text": "Consider whether your routine needs a short top-up, overnight charging or occasional access to a charger. Compare charging evidence alongside relevant runtime data and your other priorities. Do not let a single large wattage number override missing information about battery life, accessories or the exact variant."
         }
-      ]
+      ],
+      "reader_question": "Does higher charging wattage mean a shorter full charge?",
+      "quick_answer": "Maximum charging support does not by itself establish a full-cycle duration. Check compatible equipment and a measured start-to-end charging test with its conditions."
     }
   ]
 }
