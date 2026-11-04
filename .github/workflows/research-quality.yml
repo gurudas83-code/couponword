@@ -49,6 +49,8 @@ jobs:
               'homepage': 'https://coupon-world.in/',
               'catalogue': 'https://coupon-world.in/data/mobile_research_catalogue.json',
               'guide': 'https://coupon-world.in/guides/phone-budget-guides/',
+              'phone_hub': 'https://coupon-world.in/phones/',
+              'phone_model': 'https://coupon-world.in/phones/samsung-galaxy-a56-5g/',
               'backend_health': 'https://couponword.onrender.com/health',
           }
           for name, url in urls.items():
@@ -62,6 +64,10 @@ jobs:
                       elif name == 'catalogue':
                           data = json.loads(content)
                           assert len(data['model_cards']) == 232, 'Production catalogue incomplete'
+                      elif name == 'phone_hub':
+                          assert b'/phones/samsung-galaxy-a56-5g/' in content, 'Crawlable phone hub link missing'
+                      elif name == 'phone_model':
+                          assert b'Manufacturer source' in content, 'Original manufacturer links missing'
                       elif name == 'backend_health':
                           health = json.loads(content)
                           assert health.get('status') == 'ok', 'Render backend reported unhealthy status'
