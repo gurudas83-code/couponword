@@ -19,7 +19,7 @@ for import_path in (ROOT, ROOT / "python"):
         sys.path.insert(0, str(import_path))
 PUBLIC_FILES = (
     "index.html", "style.css", "app.js", "mobile-research-preview.js", "coupons.json", "CNAME",
-    "robots.txt", "sitemap.xml", "buying-guides.html", "buying-guides.js",
+    "robots.txt", "sitemap.xml", "google54faf165096b5622.html", "buying-guides.html", "buying-guides.js",
 )
 PUBLIC_DATA_FILES = ("data/seo-pages.json", "data/mobile_research_preview.json")
 PUBLIC_DIRECTORIES = ("assets", "seo", "guides")
