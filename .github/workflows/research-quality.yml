@@ -49,6 +49,7 @@ jobs:
               'homepage': 'https://coupon-world.in/',
               'catalogue': 'https://coupon-world.in/data/mobile_research_catalogue.json',
               'guide': 'https://coupon-world.in/guides/phone-budget-guides/',
+              'backend_health': 'https://couponword.onrender.com/health',
           }
           for name, url in urls.items():
               for attempt in range(3):
@@ -61,6 +62,11 @@ jobs:
                       elif name == 'catalogue':
                           data = json.loads(content)
                           assert len(data['model_cards']) == 232, 'Production catalogue incomplete'
+                      elif name == 'backend_health':
+                          health = json.loads(content)
+                          assert health.get('status') == 'ok', 'Render backend reported unhealthy status'
+                          assert health.get('service') == 'coupon-world-shopping-intelligence', 'Unexpected backend service'
+                          print('BACKEND REVISION:', health.get('revision') or 'not exposed')
                       else:
                           assert b'phone' in content.lower(), 'Buying guide content missing'
                       print('LIVE PASS:', name, len(content), 'bytes')
