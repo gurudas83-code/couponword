@@ -41,7 +41,7 @@ jobs:
         run: python -m unittest -v test_runtime_health_probe
       - name: Run smartphone recommendation and evidence regression tests
         run: |
-          python -m unittest -v             test_phase_g_ranking_contract             test_mobile_research_inventory_visibility             test_mobile_independent_tests             test_phone_guides_release test_phone_research_seo             test_recommendation_timeout_guard test_phase_g_frontend_offer test_frontend_recommendation_layout test_final_mobile_release_ui
+          python -m unittest -v             test_phase_g_ranking_contract             test_mobile_research_inventory_visibility             test_mobile_independent_tests             test_phone_guides_release test_phone_research_seo test_seo_index_hygiene             test_recommendation_timeout_guard test_phase_g_frontend_offer test_frontend_recommendation_layout test_final_mobile_release_ui
           node test_mobile_workbook_queries.cjs
           node test_standard_guide_fallback.cjs
           node test_search_discovery.cjs
@@ -97,6 +97,7 @@ jobs:
               "/phones/samsung-galaxy-a56-5g/": (b"Manufacturer source", b"Unknowns and purchasing limitations"),
               "/phones/google-pixel-10/": (b"Google Pixel 10", b"Manufacturer source"),
               "/phones/samsung-galaxy-f05/": (b"4G LTE", b"Manufacturer source"),
+              "/products/oneplus-nord-ce-30/": (b"noindex,follow", b"Current price and stock not verified"),
               "/seo/phones-under-15000.html": (b"Phones Under",),
               "/sitemap.xml": (b"https://coupon-world.in/phones/samsung-galaxy-a56-5g/",),
           }
