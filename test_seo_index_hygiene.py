@@ -61,6 +61,10 @@ class SearchTrustHygiene(unittest.TestCase):
                 self.assertNotIn('<span class="current-price">', page)
                 self.assertNotIn("View Best Verified Offer", page)
 
+    def test_google_search_console_ownership_file_is_published(self):
+        token = (PUBLIC / "google54faf165096b5622.html").read_text(encoding="utf-8").strip()
+        self.assertEqual(token, "google-site-verification: google54faf165096b5622.html")
+
     def test_crawl_is_open_so_noindex_can_be_observed(self):
         robots = (PUBLIC / "robots.txt").read_text(encoding="utf-8")
         self.assertIn("Allow: /", robots)
