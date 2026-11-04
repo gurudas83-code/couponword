@@ -57,6 +57,21 @@ def run(root: Path):
                     visible_text = page.locator("#mobileResearchResults").inner_text()
                     print("RESEARCH-DIAGNOSTIC", width, "DOM:", repr(research_text[:180]), "visible:", repr(visible_text[:180]), flush=True)
                     assert "Research only" in research_text, width
+                    # The normal upper-budget shortcut remains a nearby band.
+                    nearby = page.evaluate("""() => window.CouponWorldMobileResearch.search('phone under 30000').map(x => x.card.research_budget_reference.reference_price_inr)""")
+                    assert nearby and all(25000 <= price < 30000 for price in nearby), width
+                    # Full-budget search is a deliberate visitor choice, never a silent fallback.
+                    details = page.locator("details.research-guided-search")
+                    details.locator("summary").click()
+                    page.locator("#researchGuidedBudget").select_option("30000")
+                    page.locator("#researchGuidedScope").select_option("all")
+                    page.locator("#researchGuidedApply").click()
+                    assert "full budget" in page.locator("#mobileResearchQuery").input_value(), width
+                    expanded = page.evaluate("""() => window.CouponWorldMobileResearch.search('phone under 30000 full budget').map(x => x.card.research_budget_reference.reference_price_inr)""")
+                    assert len(expanded) > len(nearby), width
+                    assert all(0 < price < 30000 for price in expanded), width
+                    assert any(price < 25000 for price in expanded), width
+
 
                     page.evaluate("window.CouponWorldMobileResearch.search('Galaxy A36 8GB 256GB')")
                     names = page.locator("#mobileResearchResults [data-mobile-model-card]")
@@ -84,7 +99,7 @@ def run(root: Path):
                     # Front-end research does not turn historical budgets into purchase CTAs.
                     assert page.locator("#mobileResearchResults .shop-button").count() == 0, width
                     assert not page_errors, f"{width}px uncaught JS errors: {page_errors}"
-                    results.append({"width": width, "search": "PASS", "exact_variant": "PASS",
+                    results.append({"width": width, "search": "PASS", "full_budget_opt_in": "PASS", "exact_variant": "PASS",
                                     "comparison": "PASS", "engine_handoff": "PASS",
                                     "page_errors": len(page_errors)})
                     print(f"PASS {width}px responsive smartphone research, comparison and engine handoff")
