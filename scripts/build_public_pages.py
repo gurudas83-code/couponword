@@ -85,7 +85,7 @@ def _prune_unverified_product_sitemap_entries(destination: Path) -> None:
         if not page_path.is_file():
             raise RuntimeError(f"Sitemap refers to missing product page: {url.geturl()}")
         page = page_path.read_text(encoding="utf-8")
-        meta = re.search(r'<meta\\s+name="robots"\\s+content="([^"]+)"', page, flags=re.I)
+        meta = re.search(r'<meta[ ]+name="robots"[ ]+content="([^"]+)"', page, flags=re.I)
         if not meta:
             raise RuntimeError(f"Product page missing robots instruction: {page_path}")
         if "noindex" in meta.group(1).casefold():
