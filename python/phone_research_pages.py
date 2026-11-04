@@ -156,7 +156,7 @@ def html_doc(title: str, description: str, path: str, body: str, structured: dic
 <a href="/#mobileResearchSearch">Find a phone</a></nav></header>
 <main id="content" class="page-shell">{body}</main>
 <footer class="page-shell"><p>{link("/", "Home")} · {link(HUB, "Phone specification hub")} · {link("/seo/phone-research-evidence-method.html", "Evidence methodology")}</p>
-<p class="mobile-fact-small">Editorial research only. No physical hands-on testing, current retailer price, stock or purchase eligibility is asserted. Retailer searches may contain affiliate links.</p></footer></body></html>'''
+<p class="mobile-fact-small">Editorial research only. No physical hands-on testing, current retailer price, stock or purchase eligibility is asserted. As an Amazon Associate I earn from qualifying purchases. Retailer searches may contain affiliate links; verify exact variants and prices on the retailer.</p></footer></body></html>'''
 
 
 def summary_fields(card: dict, maximum: int = 3) -> list[tuple[str, str]]:
