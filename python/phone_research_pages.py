@@ -318,6 +318,14 @@ def render_phone_research_pages(destination: Path) -> list[str]:
     sitemap = destination / "sitemap.xml"
     tree = ET.parse(sitemap)
     root = tree.getroot()
+    # The old generic under-15k keyword page now redirects immediately to
+    # the current substantive guide. Omit the obsolete source URL from the
+    # published sitemap while retaining the redirect for old bookmarks.
+    legacy_url = SITE + "/seo/best-mobile-under-15000.html"
+    for item in list(root.findall(f"{{{ns}}}url")):
+        loc = item.find(f"{{{ns}}}loc")
+        if loc is not None and loc.text == legacy_url:
+            root.remove(item)
     existing = {str(node.text) for node in root.findall(f"{{{ns}}}url/{{{ns}}}loc")}
     for url in urls:
         if url in existing:
