@@ -422,6 +422,27 @@ def _apply_workbook_research(root, model_cards):
         card["research_budget_reference"] = ref
         card["research_checked_at"] = payload["research_as_of"]
 
+def _apply_independent_tests(root, model_cards):
+    path = root / "data" / "mobile_independent_test_evidence.json"
+    if not path.exists():
+        return
+    evidence = json.loads(path.read_text(encoding="utf-8"))
+    by_key = {item["model_key"]: item for item in evidence["models"]}
+    if len(by_key) != len(evidence["models"]):
+        raise ValueError("duplicate independent test model")
+    for card in model_cards:
+        item = by_key.get(card["model_key"])
+        if not item:
+            continue
+        for metric in item["metrics"]:
+            if metric.get("ranking_eligible") is not False or metric.get("scope") not in {"SOURCE_TEST_UNIT_ONLY", "MODEL_CONTEXT_ONLY"}:
+                raise ValueError("independent research tests cannot enter ranking")
+            if urlparse(metric["source_url"]).hostname not in {"www.notebookcheck.net", "www.phonearena.com"}:
+                raise ValueError("unapproved independent test source")
+        card["independent_tests"] = item["metrics"]
+        card["independent_test_limitation"] = item["limitation"]
+
+
 def build_public_catalogue(root: Path) -> dict[str, Any]:
     priority_payload = _read_json(root / "data/mobile_universe_priority_126.json")
     universe_payload = _read_json(root / "data/mobile_universe_2023_2026.json")
@@ -585,6 +606,7 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
         card["source_urls"] = list(dict.fromkeys(card["source_urls"]))
 
     _apply_workbook_research(root, model_cards)
+    _apply_independent_tests(root, model_cards)
 
     model_cards.sort(key=lambda card: (_norm(card["brand"]), _norm(card["model"]), card["model_key"]))
     if len(model_cards) != len(models):

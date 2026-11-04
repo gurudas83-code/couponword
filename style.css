@@ -1120,3 +1120,8 @@ body.clean-ui #researchClearSearch{padding:9px 12px;min-height:42px;font-size:.8
 body.clean-ui .mobile-research-empty a{color:#155c8c;text-decoration:underline}
 @media(max-width:850px){body.clean-ui .research-guided-fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:540px){body.clean-ui .research-guided-fields{grid-template-columns:1fr}body.clean-ui .research-guided-search{padding:12px}body.clean-ui #researchGuidedApply{width:100%}}
+
+.research-independent-tests { margin: 14px 0; overflow-wrap: anywhere; }
+.research-independent-tests summary { cursor: pointer; font-weight: 700; }
+.research-lab-measurement { padding: 8px 0; border-top: 1px solid #dce4ee; }
+.research-lab-measurement p { margin: 6px 0; font-size: .88rem; }

@@ -555,6 +555,14 @@
     return '<div class="mobile-research-sources retailer-search-links">' + (card.retailer_search_links || []).map(function (item) { return link(item.url, (item.retailer === "Croma" ? "Browse " : "Search ") + item.retailer); }).join(" ") + '</div>';
   }
 
+  function independentTestContext(card) {
+    var tests = card.independent_tests || [];
+    if (!tests.length) return "";
+    return '<details class="research-independent-tests"><summary>Independent lab tests (' + tests.length + ')</summary><p>' + escapeHtml(card.independent_test_limitation) + '</p>' + tests.map(function (test) {
+      return '<div class="research-lab-measurement"><p><strong>' + escapeHtml(test.label) + ': ' + escapeHtml(test.value) + ' ' + escapeHtml(test.unit) + '</strong></p><p>Tested: ' + escapeHtml(test.tested_unit) + '</p><p>' + escapeHtml(test.protocol) + ' · Version: ' + escapeHtml(test.test_version || 'not reported') + ' · ' + escapeHtml(test.conditions) + '</p><p>' + link(test.source_url, test.source_name + ' test source') + ' · Source checked: ' + escapeHtml(test.checked_at) + ' · Measurement date: ' + escapeHtml(test.observed_at || 'not separately reported') + '</p></div>';
+    }).join('') + '<p>Source-specific measurements; excluded from Best 3 scoring. Missing tests on other phones do not mean worse performance.</p></details>';
+  }
+
   function renderResearchResultCard(card, rows, groupSize) {
     var variants = Array.from(new Set(rows.map(function (row) { return (row.ram_gb != null ? row.ram_gb + "GB RAM" : "RAM not specified") + " · " + (row.storage_gb != null ? row.storage_gb + "GB storage" : "storage not specified"); })));
     var facts = compactSpecRows(card, lastSearchQuery);
@@ -567,7 +575,7 @@
       '<div class="mobile-research-card-top"><span class="research-status">' + escapeHtml(status) + '</span><span class="research-status">Research only</span></div>' +
       '<h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch + '<p class="mobile-research-variant">Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join("; ")) + '</p>' +
       (groupSize > 1 ? '<p class="research-group-note">' + groupSize + ' matching catalogue entries grouped. Specifications below belong to the displayed record.</p>' : '') +
-      (specs ? '<ul class="mobile-research-model-specs">' + specs + '</ul>' : '<p>Technical specifications are pending verification.</p>') + documentedContext(card, lastSearchQuery) +
+      (specs ? '<ul class="mobile-research-model-specs">' + specs + '</ul>' : '<p>Technical specifications are pending verification.</p>') + documentedContext(card, lastSearchQuery) + independentTestContext(card) +
       '<p class="research-source-note">' + (sourceItem ? link(sourceItem.source_url, "Specification source") : 'Specification source pending') + ' · Research checked: ' + escapeHtml(card.research_checked_at || sourceItem && (sourceItem.checked_at || sourceItem.checked_date) || 'date unavailable') + '</p>' +
       '<div class="research-card-actions"><button type="button" class="btn btn-ghost mobile-research-detail-button" data-research-detail="' + escapeHtml(card.model_key) + '">All specifications</button>' +
       '<button type="button" class="btn btn-ghost" data-research-compare="' + escapeHtml(card.model_key) + '" aria-pressed="' + selected + '">' + (selected ? 'Remove comparison' : 'Compare') + '</button></div>' + retailerResearchLinks(card) +

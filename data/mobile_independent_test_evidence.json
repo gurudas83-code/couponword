@@ -1,0 +1,304 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-04",
+  "models": [
+    {
+      "model_key": "samsung|galaxy a36 5g",
+      "metrics": [
+        {
+          "category": "battery",
+          "label": "Wi-Fi web browsing runtime",
+          "value": "14h 48m",
+          "unit": "hours / minutes",
+          "protocol": "Notebookcheck Wi-Fi v1.3",
+          "test_version": null,
+          "conditions": "Chrome 135",
+          "source_name": "Notebookcheck",
+          "source_url": "https://www.notebookcheck.net/Samsung-Galaxy-A36-5G-review-The-affordable-smartphone-focuses-on-security-a-premium-feel.1013221.0.html",
+          "tested_unit": "6GB / 256GB \u00b7 Germany",
+          "checked_at": "2026-11-04",
+          "observed_at": null,
+          "scope": "SOURCE_TEST_UNIT_ONLY",
+          "ranking_eligible": false
+        },
+        {
+          "category": "gaming",
+          "label": "Genshin Impact average frame rate",
+          "value": 24,
+          "unit": "fps",
+          "protocol": "GameBench",
+          "test_version": null,
+          "conditions": "Highest graphics preset",
+          "source_name": "Notebookcheck",
+          "source_url": "https://www.notebookcheck.net/Samsung-Galaxy-A36-5G-review-The-affordable-smartphone-focuses-on-security-a-premium-feel.1013221.0.html",
+          "tested_unit": "6GB / 256GB \u00b7 Germany",
+          "checked_at": "2026-11-04",
+          "observed_at": null,
+          "scope": "SOURCE_TEST_UNIT_ONLY",
+          "ranking_eligible": false
+        },
+        {
+          "category": "camera",
+          "label": "Photo score",
+          "value": 126,
+          "unit": "PhoneArena points (not a percentage)",
+          "protocol": "PhoneArena Camera Score",
+          "test_version": null,
+          "conditions": "Default camera settings; protocol version and exact memory variant not identified",
+          "source_name": "PhoneArena",
+          "source_url": "https://www.phonearena.com/phones/benchmarks/camera",
+          "tested_unit": "Model-level result; exact RAM/storage and region not reported",
+          "checked_at": "2026-11-04",
+          "observed_at": null,
+          "scope": "MODEL_CONTEXT_ONLY",
+          "ranking_eligible": false
+        }
+      ],
+      "limitation": "Historical lab results for the stated test unit. Exact India variant, firmware and compatible protocols are not all verified; excluded from ranking."
+    },
+    {
+      "model_key": "samsung|galaxy a56 5g",
+      "metrics": [
+        {
+          "category": "battery",
+          "label": "Wi-Fi web browsing runtime",
+          "value": "19h 59m",
+          "unit": "hours / minutes",
+          "protocol": "Notebookcheck Wi-Fi v1.3",
+          "test_version": null,
+          "conditions": "Chrome 134",
+          "source_name": "Notebookcheck",
+          "source_url": "https://www.notebookcheck.net/Loads-of-innovations-in-the-premium-mid-range-Samsung-Galaxy-A56-5G-review.1020512.0.html",
+          "tested_unit": "8GB / 128GB \u00b7 European review unit",
+          "checked_at": "2026-11-04",
+          "observed_at": null,
+          "scope": "SOURCE_TEST_UNIT_ONLY",
+          "ranking_eligible": false
+        },
+        {
+          "category": "gaming",
+          "label": "Genshin Impact average frame rate",
+          "value": 47.3,
+          "unit": "fps",
+          "protocol": "GameBench",
+          "test_version": null,
+          "conditions": "Highest graphics preset",
+          "source_name": "Notebookcheck",
+          "source_url": "https://www.notebookcheck.net/Loads-of-innovations-in-the-premium-mid-range-Samsung-Galaxy-A56-5G-review.1020512.0.html",
+          "tested_unit": "8GB / 128GB \u00b7 European review unit",
+          "checked_at": "2026-11-04",
+          "observed_at": null,
+          "scope": "SOURCE_TEST_UNIT_ONLY",
+          "ranking_eligible": false
+        },
+        {
+          "category": "camera",
+          "label": "Photo score",
+          "value": 131,
+          "unit": "PhoneArena points (not a percentage)",
+          "protocol": "PhoneArena Camera Score",
+          "test_version": null,
+          "conditions": "Default camera settings; protocol version and exact memory variant not identified",
+          "source_name": "PhoneArena",
+          "source_url": "https://www.phonearena.com/phones/benchmarks/camera",
+          "tested_unit": "Model-level result; exact RAM/storage and region not reported",
+          "checked_at": "2026-11-04",
+          "observed_at": null,
+          "scope": "MODEL_CONTEXT_ONLY",
+          "ranking_eligible": false
+        }
+      ],
+      "limitation": "Historical lab results for the stated test unit. Exact India variant, firmware and compatible protocols are not all verified; excluded from ranking."
+    },
+    {
+      "model_key": "google|pixel 9a",
+      "metrics": [
+        {
+          "category": "battery",
+          "label": "Wi-Fi web browsing runtime",
+          "value": "21h 13m",
+          "unit": "hours / minutes",
+          "protocol": "Notebookcheck Wi-Fi v1.3",
+          "test_version": null,
+          "conditions": "Chrome 137",
+          "source_name": "Notebookcheck",
+          "source_url": "https://www.notebookcheck.net/Great-battery-life-and-a-handy-size-Google-Pixel-9a-review.1039364.0.html",
+          "tested_unit": "8GB / 128GB \u00b7 Germany",
+          "checked_at": "2026-11-04",
+          "observed_at": null,
+          "scope": "SOURCE_TEST_UNIT_ONLY",
+          "ranking_eligible": false
+        },
+        {
+          "category": "gaming",
+          "label": "PUBG Mobile average frame rate",
+          "value": 53.8,
+          "unit": "fps",
+          "protocol": "GameBench",
+          "test_version": "3.8.0",
+          "conditions": "HD",
+          "source_name": "Notebookcheck",
+          "source_url": "https://www.notebookcheck.net/Great-battery-life-and-a-handy-size-Google-Pixel-9a-review.1039364.0.html",
+          "tested_unit": "8GB / 128GB \u00b7 Germany",
+          "checked_at": "2026-11-04",
+          "observed_at": null,
+          "scope": "SOURCE_TEST_UNIT_ONLY",
+          "ranking_eligible": false
+        },
+        {
+          "category": "camera",
+          "label": "Photo score",
+          "value": 143,
+          "unit": "PhoneArena points (not a percentage)",
+          "protocol": "PhoneArena Camera Score",
+          "test_version": null,
+          "conditions": "Default camera settings; protocol version and exact memory variant not identified",
+          "source_name": "PhoneArena",
+          "source_url": "https://www.phonearena.com/phones/benchmarks/camera",
+          "tested_unit": "Model-level result; exact RAM/storage and region not reported",
+          "checked_at": "2026-11-04",
+          "observed_at": null,
+          "scope": "MODEL_CONTEXT_ONLY",
+          "ranking_eligible": false
+        }
+      ],
+      "limitation": "Historical lab results for the stated test unit. Exact India variant, firmware and compatible protocols are not all verified; excluded from ranking."
+    },
+    {
+      "model_key": "nothing|phone 3a",
+      "metrics": [
+        {
+          "category": "battery",
+          "label": "Wi-Fi web browsing runtime",
+          "value": "20h 33m",
+          "unit": "hours / minutes",
+          "protocol": "Notebookcheck Wi-Fi v1.3",
+          "test_version": null,
+          "conditions": "Chrome 134.0.6998.135",
+          "source_name": "Notebookcheck",
+          "source_url": "https://www.notebookcheck.net/The-elegant-all-rounder-presses-all-the-right-buttons-Nothing-Phone-3a-review.994680.0.html",
+          "tested_unit": "12GB / 256GB \u00b7 review unit; India applicability unverified",
+          "checked_at": "2026-11-04",
+          "observed_at": null,
+          "scope": "SOURCE_TEST_UNIT_ONLY",
+          "ranking_eligible": false
+        },
+        {
+          "category": "gaming",
+          "label": "Genshin Impact average frame rate",
+          "value": 41,
+          "unit": "fps",
+          "protocol": "GameBench",
+          "test_version": "5.5.0_31400259_31451966",
+          "conditions": "Highest graphics preset",
+          "source_name": "Notebookcheck",
+          "source_url": "https://www.notebookcheck.net/The-elegant-all-rounder-presses-all-the-right-buttons-Nothing-Phone-3a-review.994680.0.html",
+          "tested_unit": "12GB / 256GB \u00b7 review unit; India applicability unverified",
+          "checked_at": "2026-11-04",
+          "observed_at": null,
+          "scope": "SOURCE_TEST_UNIT_ONLY",
+          "ranking_eligible": false
+        },
+        {
+          "category": "camera",
+          "label": "Photo score",
+          "value": 135,
+          "unit": "PhoneArena points (not a percentage)",
+          "protocol": "PhoneArena Camera Score",
+          "test_version": null,
+          "conditions": "Default camera settings; protocol version and exact memory variant not identified",
+          "source_name": "PhoneArena",
+          "source_url": "https://www.phonearena.com/phones/benchmarks/camera",
+          "tested_unit": "Model-level result; exact RAM/storage and region not reported",
+          "checked_at": "2026-11-04",
+          "observed_at": null,
+          "scope": "MODEL_CONTEXT_ONLY",
+          "ranking_eligible": false
+        }
+      ],
+      "limitation": "Historical lab results for the stated test unit. Exact India variant, firmware and compatible protocols are not all verified; excluded from ranking."
+    },
+    {
+      "model_key": "oneplus|nord 4",
+      "metrics": [
+        {
+          "category": "battery",
+          "label": "Wi-Fi web browsing runtime",
+          "value": "16h 38m",
+          "unit": "hours / minutes",
+          "protocol": "Notebookcheck Wi-Fi v1.3",
+          "test_version": null,
+          "conditions": "Browser version not reported in runtime table",
+          "source_name": "Notebookcheck",
+          "source_url": "https://www.notebookcheck.net/OnePlus-Nord-4-smartphone-review-Unibody-case-for-little-money-gives-the-upper-class-the-jitters.882775.0.html",
+          "tested_unit": "16GB / 512GB \u00b7 Europe",
+          "checked_at": "2026-11-04",
+          "observed_at": null,
+          "scope": "SOURCE_TEST_UNIT_ONLY",
+          "ranking_eligible": false
+        },
+        {
+          "category": "gaming",
+          "label": "Genshin Impact average frame rate",
+          "value": 40.7,
+          "unit": "fps",
+          "protocol": "GameBench",
+          "test_version": null,
+          "conditions": "Highest graphics preset",
+          "source_name": "Notebookcheck",
+          "source_url": "https://www.notebookcheck.net/OnePlus-Nord-4-smartphone-review-Unibody-case-for-little-money-gives-the-upper-class-the-jitters.882775.0.html",
+          "tested_unit": "16GB / 512GB \u00b7 Europe",
+          "checked_at": "2026-11-04",
+          "observed_at": null,
+          "scope": "SOURCE_TEST_UNIT_ONLY",
+          "ranking_eligible": false
+        }
+      ],
+      "limitation": "Historical lab results for the stated test unit. Exact India variant, firmware and compatible protocols are not all verified; excluded from ranking."
+    },
+    {
+      "model_key": "poco|x7 pro",
+      "metrics": [
+        {
+          "category": "battery",
+          "label": "Wi-Fi web browsing runtime",
+          "value": "19h 43m",
+          "unit": "hours / minutes",
+          "protocol": "Notebookcheck Wi-Fi v1.3",
+          "test_version": null,
+          "conditions": "Browser version not reported in runtime table",
+          "source_name": "Notebookcheck",
+          "source_url": "https://www.notebookcheck.net/Xiaomi-Poco-X7-Pro-Smartphone-Review-Dimensity-8400-Ultra-debut-with-software-updates-until-2029-for-under-EUR400.960243.0.html",
+          "tested_unit": "12GB / 512GB \u00b7 global 6000mAh unit",
+          "checked_at": "2026-11-04",
+          "observed_at": null,
+          "scope": "SOURCE_TEST_UNIT_ONLY",
+          "ranking_eligible": false
+        },
+        {
+          "category": "gaming",
+          "label": "Genshin Impact average frame rate",
+          "value": 59.5,
+          "unit": "fps",
+          "protocol": "GameBench",
+          "test_version": "5.3.0_29183395_29332470",
+          "conditions": "Highest graphics preset",
+          "source_name": "Notebookcheck",
+          "source_url": "https://www.notebookcheck.net/Xiaomi-Poco-X7-Pro-Smartphone-Review-Dimensity-8400-Ultra-debut-with-software-updates-until-2029-for-under-EUR400.960243.0.html",
+          "tested_unit": "12GB / 512GB \u00b7 global 6000mAh unit",
+          "checked_at": "2026-11-04",
+          "observed_at": null,
+          "scope": "SOURCE_TEST_UNIT_ONLY",
+          "ranking_eligible": false
+        }
+      ],
+      "limitation": "Global 6000mAh battery test does not establish India 6550mAh runtime. Historical lab results for the stated test unit. Exact India variant, firmware and compatible protocols are not all verified; excluded from ranking."
+    }
+  ],
+  "held_sources": [
+    {
+      "source_url": "https://www.gsmarena.com/nothing_phone_3a-review-2811p3.php",
+      "reason": "Conflicting active-use runtime values; withheld pending reconciliation"
+    }
+  ]
+}
