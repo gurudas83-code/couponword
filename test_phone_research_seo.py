@@ -79,6 +79,14 @@ class ResearchSeoTests(unittest.TestCase):
     def test_corrections_and_no_duplicate_phone_identities(self):
         f05 = self.cards["samsung|galaxy f05"]
         self.assertEqual(f05["specifications"]["network_support"]["value"], "4G LTE")
+        self.assertEqual(self.cards["xiaomi|14 ultra"]["specifications"]["network_support"]["value"], "5G")
+        poco = self.cards["poco|x7 pro"]["specifications"]["battery_mah_typical"]
+        self.assertEqual(poco["value"], 6550)
+        self.assertEqual(poco["applicability"], "INDIA_MARKET_ONLY")
+        self.assertEqual(poco["source_url"], "https://www.mi.com/global/support/faq/details/KA-522489/")
+        self.assertEqual(self.cards["samsung|galaxy a57 5g"]["specifications"]["chipset"]["value"], "Exynos 1680")
+        for key in ("samsung|galaxy f70 pro 5g", "samsung|galaxy m47 5g"):
+            self.assertEqual(self.cards[key]["specifications"]["chipset"]["value"], "Qualcomm Snapdragon 6 Gen 3")
         a06 = SITE + HUB + "samsung-galaxy-a06-5g/"
         self.assertIn(a06, self.sitemap)
         self.assertFalse((PUBLIC / "phones/samsung-galaxy-a06-5g-light/").exists())
