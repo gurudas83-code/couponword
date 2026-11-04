@@ -216,7 +216,7 @@
       inventoryImage(card) +
       '<div class="mobile-research-inventory-body">' +
       '<div class="mobile-research-card-top"><span class="research-status inventory-status-' + escapeHtml(statusLabel.toLowerCase()) + '">' + escapeHtml(statusLabel) + '</span></div>' +
-      '<h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch +
+      '<div class="research-phone-visual" aria-hidden="true"><img src="/assets/phone-study.svg" width="600" height="540" alt="" loading="lazy"><span>' + escapeHtml(card.brand) + ' / PHONE RESEARCH</span></div><p class="research-illustration-label">Illustration · not a product photo</p><h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch +
       '<p class="mobile-research-variant">' + escapeHtml(counts || "Model research reference") + '</p>' +
       '<ul class="mobile-research-variant-list">' + (variantItems || "<li>Variant details are not specified in the source universe.</li>") + '</ul>' +
       '<p class="mobile-research-inventory-fields"><strong>Verified fields:</strong> ' + escapeHtml(fields) + '</p>' +
@@ -573,7 +573,7 @@
     var launch = card.india_launch_date ? '<p class="mobile-research-launch">India launch: ' + escapeHtml(card.india_launch_date) + '</p>' : '';
     return '<article class="mobile-research-inventory-card mobile-research-result-card" data-mobile-model-card="' + escapeHtml(card.model_key) + '"><div class="mobile-research-inventory-body">' +
       '<div class="mobile-research-card-top"><span class="research-status">' + escapeHtml(status) + '</span><span class="research-status">Research only</span></div>' +
-      '<h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch + '<p class="mobile-research-variant">Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join("; ")) + '</p>' +
+      '<div class="research-phone-visual" aria-hidden="true"><img src="/assets/phone-study.svg" width="600" height="540" alt="" loading="lazy"><span>' + escapeHtml(card.brand) + ' / PHONE RESEARCH</span></div><p class="research-illustration-label">Illustration · not a product photo</p><h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch + '<p class="mobile-research-variant">Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join("; ")) + '</p>' +
       (groupSize > 1 ? '<p class="research-group-note">' + groupSize + ' matching catalogue entries grouped. Specifications below belong to the displayed record.</p>' : '') +
       (specs ? '<ul class="mobile-research-model-specs">' + specs + '</ul>' : '<p>Technical specifications are pending verification.</p>') + documentedContext(card, lastSearchQuery) + independentTestContext(card) +
       '<p class="research-source-note">' + (sourceItem ? link(sourceItem.source_url, "Specification source") : 'Specification source pending') + ' · Research checked: ' + escapeHtml(card.research_checked_at || sourceItem && (sourceItem.checked_at || sourceItem.checked_date) || 'date unavailable') + '</p>' +
