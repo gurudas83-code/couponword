@@ -461,6 +461,12 @@ document.querySelectorAll("[data-view]").forEach(btn => {
   });
 });
 
+ // Reuse the existing verified backend recommendation route from research.
+ // Do not bypass the backend's identity, quality, offer or freshness gates.
+ window.CouponWorldShoppingRecommend = function (query) {
+   return loadShoppingRecommendation(query);
+ };
+
 loadDeals();
 // Hide unverified discount labels from all product cards.
 function removeUnverifiedDiscounts() {
