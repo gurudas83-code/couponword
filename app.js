@@ -967,12 +967,8 @@ async function loadShoppingRecommendation(query) {
           ? primaryOffer.price
           : purchaseCtaEligible ? p.price : null;
 
-      const price =
-        purchaseCtaEligible &&
-        selectedPrice != null &&
-        selectedPrice !== ""
-          ? `\u20B9${escapeHTML(selectedPrice)}`
-          : "Current price unavailable";
+      // Preserve internally validated offers but do not display prices.
+      const price = purchaseCtaEligible ? "Check current price with retailer" : "Current price unavailable";
       // The former "Check latest price" label was intentionally replaced:
       // unverified historical values must never look current or purchase-ready.
 
@@ -1011,10 +1007,8 @@ async function loadShoppingRecommendation(query) {
         if (!offer) {
           return `<span class="retailer-choice retailer-choice-disabled" aria-disabled="true">${label}<small>Not verified</small></span>`;
         }
-        const offerPrice = offer.price != null && offer.price !== ""
-          ? ` · ₹${escapeHTML(offer.price)}`
-          : "";
-        return `<a class="retailer-choice" href="${escapeHTML(safeLink(offer.product_url))}" target="_blank" rel="nofollow sponsored noopener" data-ai-retailer-click="1" data-ai-rank="${escapeHTML(p.rank || "")}" data-ai-product-id="${escapeHTML(offer.product_id || p.product_id || "")}" data-ai-retailer="${label}">${label}${offerPrice}</a>`;
+        // Only retailer labels are shown; price is checked on the retailer site.
+        return `<a class="retailer-choice" href="${escapeHTML(safeLink(offer.product_url))}" target="_blank" rel="nofollow sponsored noopener" data-ai-retailer-click="1" data-ai-rank="${escapeHTML(p.rank || "")}" data-ai-product-id="${escapeHTML(offer.product_id || p.product_id || "")}" data-ai-retailer="${label}">${label}</a>`;
       }).join("");
 
       const why = Array.isArray(p.why_it_fits)
