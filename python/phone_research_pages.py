@@ -164,6 +164,8 @@ def html_doc(title: str, description: str, path: str, body: str, structured: dic
 <meta name="description" content="{esc(description)}">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="{esc(canonical)}">
+<link rel="alternate" hreflang="en-IN" href="{esc(canonical)}">
+<link rel="alternate" hreflang="hi-IN" href="{esc(SITE + "/hi" + path)}">
 <meta property="og:type" content="website"><meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(description)}">
 <meta property="og:url" content="{esc(canonical)}">
@@ -189,7 +191,7 @@ def html_doc(title: str, description: str, path: str, body: str, structured: dic
 <script type="application/ld+json">{js}</script>
 </head><body><a class="skip" href="#content">Skip to content</a>
 <header><nav aria-label="Main navigation"><a class="brand" href="/">CW <span>Coupon World</span></a>
-<a href="/phones/">Phone specifications</a><a href="/guides/phone-budget-guides/">Buying guides</a>
+<a href="/phones/">Phone specifications</a><a href="/hi{path}" lang="hi">हिंदी</a><a href="/guides/phone-budget-guides/">Buying guides</a>
 <a href="/#mobileResearchSearch">Find a phone</a></nav></header>
 <main id="content" class="page-shell">{body}</main>
 <footer class="page-shell"><p>{link("/", "Home")} · {link(HUB, "Phone specification hub")} · {link("/seo/phone-research-evidence-method.html", "Evidence methodology")}</p>
