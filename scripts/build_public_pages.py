@@ -243,6 +243,11 @@ def build(output: Path) -> Path:
     from python.phone_research_pages import render_phone_research_pages
     render_phone_research_pages(output)
 
+    # Extend the same evidence-first static publication path to both adjacent
+    # categories. Research pages do not change core recommendation/offer gates.
+    from python.category_research_pages import publish_category_research_pages
+    publish_category_research_pages(output)
+
     # The source sitemap still lists historical catalogue URLs. Keep those
     # pages online, but do not encourage indexing without current offer proof.
     _prune_unverified_product_sitemap_entries(output)
