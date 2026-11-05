@@ -634,13 +634,13 @@
           "checkout_eligible": false
         },
         "croma": {
-          "price_inr": 97990,
+          "price_inr": 98290,
           "checked_at": "2026-11-05",
-          "observation_source_url": "https://www.croma.com/l/samsung-120hz-55-inch-tv-0asz00a.html",
+          "observation_source_url": "https://www.croma.com/l/samsung-quantum-dot-55-inch-tv-0asz00a.html",
           "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
           "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
           "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Exact QN80H 55; 2026 public listing",
+          "price_note": "QN80H 55-inch public listing dated 2026-11-05, location-dependent",
           "stock_status": "UNKNOWN",
           "live_offer": false,
           "checkout_eligible": false
@@ -2104,13 +2104,13 @@
           "checkout_eligible": false
         },
         "croma": {
-          "price_inr": 1999,
+          "price_inr": 1849,
           "checked_at": "2026-11-05",
-          "observation_source_url": "https://www.croma.com/oneplus-truly-wireless-earbuds/bc/b-0948-611",
+          "observation_source_url": "https://www.croma.com/oneplus-phones-%26-wearables/bc/b-0948-1",
           "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
           "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
           "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Nord Buds 3r variant black",
+          "price_note": "Nord Buds 3r public listing dated 2026-11-05; verify selected colour",
           "stock_status": "UNKNOWN",
           "live_offer": false,
           "checkout_eligible": false
