@@ -57,6 +57,22 @@ jobs:
               payload = json.loads(offer_store.read_text(encoding="utf-8-sig"))
               stored_rows = len(payload.get("offers", []))
 
+          # Monitor the imported 20+20 research records, without promoting
+          # dated workbook quotations into six-hour verified merchant offers.
+          research_path = Path("data/india_tv_earbuds_40_catalogue.json")
+          research = json.loads(research_path.read_text(encoding="utf-8"))
+          models = research.get("records") or []
+          if len(models) != 40:
+              raise RuntimeError("Expected 40 TV/earbuds research records")
+          research_prices = {
+              store: sum(bool(item.get("retailers", {}).get(store, {}).get("price_inr")) for item in models)
+              for store in ("amazon", "flipkart", "croma")
+          }
+          research_tvs = sum(item.get("category") == "tvs" for item in models)
+          research_earbuds = sum(item.get("category") == "accessories" for item in models)
+          if (research_tvs, research_earbuds) != (20, 20):
+              raise RuntimeError("TV/earbuds research inventory is incomplete")
+
           report = {
               "checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "schedule_hours": 6,
@@ -69,6 +85,8 @@ jobs:
                   "authorized_live_feed_configured": flipkart_live,
               },
               "stored_offer_rows_not_necessarily_fresh": stored_rows,
+              "tv_earbuds_research_rows": {"tvs": research_tvs, "earbuds": research_earbuds},
+              "dated_quotes_not_live_prices": research_prices,
               "prices_refreshed_by_this_monitor": 0,
               "price_data_modified": False,
           }
@@ -86,6 +104,8 @@ jobs:
                   handle.write(f"- Amazon authorized live feed: {'YES' if amazon_live else 'NO'}\n")
                   handle.write(f"- Flipkart authorized live feed: {'YES' if flipkart_live else 'NO'}\n")
                   handle.write(f"- Stored offer rows (not freshness-verified): {stored_rows}\n")
+                  handle.write(f"- TV/earbud research rows: {research_tvs} + {research_earbuds}\n")
+                  handle.write(f"- Dated research quotes, not live: {research_prices}\n")
                   handle.write("- New verified prices from monitor: **0**\n")
                   handle.write("- No price, ranking, or product data changed.\n")
           PY
