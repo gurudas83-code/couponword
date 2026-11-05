@@ -1,0 +1,469 @@
+{
+  "schema_version": "1.0",
+  "mode": "CATEGORY_RESEARCH_ONLY",
+  "market": "India",
+  "reviewed_at": "2026-11-05",
+  "disclosure": "Manufacturer-referenced model research, not lab testing or a verified current merchant offer. Category pages do not feed the certified live-buyable phone ranking.",
+  "categories": {
+    "accessories": {
+      "title": "Mobile accessories",
+      "description": "Source-backed research for chargers, earbuds and power banks. Compatibility is device-specific.",
+      "buyer_checks": [
+        "Check connection, USB PD/PPS and device-specific charging protocols.",
+        "Do not treat battery or ANC marketing figures as independent comparative tests.",
+        "Verify charger cable ratings, model fit, warranty and region with the retailer."
+      ]
+    },
+    "tvs": {
+      "title": "Televisions",
+      "description": "Source-backed TV research by exact model and screen size, with honest gaming and panel caveats.",
+      "buyer_checks": [
+        "Native refresh is distinct from motion-processing marketing figures.",
+        "Match screen size, panel, platform, HDMI and audio ports to your room and usage.",
+        "Check region, exact model code, installation, delivery and warranty."
+      ]
+    }
+  },
+  "records": [
+    {
+      "category": "accessories",
+      "slug": "oneplus-buds-3",
+      "brand": "OnePlus",
+      "model": "OnePlus Buds 3",
+      "product_type": "Earbuds",
+      "source_url": "https://www.oneplus.in/oneplus-buds-3/specs",
+      "reviewed_at": "2026-11-05",
+      "manufacturer_model_code": "",
+      "review_status": "MANUFACTURER_SOURCE_REVIEWED_MODEL",
+      "specifications": [
+        {
+          "label": "Driver arrangement",
+          "value": "10.4 mm woofer + 6 mm tweeter",
+          "source_url": "https://www.oneplus.in/oneplus-buds-3/specs"
+        },
+        {
+          "label": "Adaptive noise cancellation",
+          "value": "Up to 49 dB",
+          "source_url": "https://www.oneplus.in/oneplus-buds-3/specs"
+        },
+        {
+          "label": "Bluetooth",
+          "value": "5.3",
+          "source_url": "https://www.oneplus.in/oneplus-buds-3/specs"
+        },
+        {
+          "label": "Audio codecs",
+          "value": "LHDC / AAC / SBC",
+          "source_url": "https://www.oneplus.in/oneplus-buds-3/specs"
+        },
+        {
+          "label": "Earbud water resistance",
+          "value": "IP55",
+          "source_url": "https://www.oneplus.in/oneplus-buds-3/specs"
+        },
+        {
+          "label": "Playback claim, ANC off",
+          "value": "Up to 10 h earbuds / 44 h with case (AAC; 50% volume)",
+          "source_url": "https://www.oneplus.in/oneplus-buds-3/specs"
+        },
+        {
+          "label": "Charging interface",
+          "value": "USB Type-C",
+          "source_url": "https://www.oneplus.in/oneplus-buds-3/specs"
+        }
+      ],
+      "decision_note": "ANC and battery claims come from maker test conditions; not a measured performance ranking.",
+      "compatibility_caution": "Check exact-phone codec and app features; IP55 is stated for earbuds, not the case.",
+      "unknowns": [
+        "Independent comparable performance testing",
+        "Current India price and verified in-stock offer",
+        "Retailer-specific warranty and delivery eligibility"
+      ]
+    },
+    {
+      "category": "accessories",
+      "slug": "samsung-ep-t2510-25w",
+      "brand": "Samsung",
+      "model": "Samsung EP-T2510 25W USB-C Adapter (no cable)",
+      "product_type": "Chargers",
+      "source_url": "https://www.samsung.com/in/mobile-accessories/25w-power-adapter-white-ep-t2510nwngin/",
+      "reviewed_at": "2026-11-05",
+      "manufacturer_model_code": "EP-T2510NWNGIN",
+      "review_status": "MANUFACTURER_SOURCE_REVIEWED_MODEL",
+      "specifications": [
+        {
+          "label": "Maximum charge power",
+          "value": "25 W",
+          "source_url": "https://www.samsung.com/in/mobile-accessories/25w-power-adapter-white-ep-t2510nwngin/"
+        },
+        {
+          "label": "Output interface",
+          "value": "USB Type-C",
+          "source_url": "https://www.samsung.com/in/mobile-accessories/25w-power-adapter-white-ep-t2510nwngin/"
+        },
+        {
+          "label": "USB PD / PPS",
+          "value": "PD 3.0 PPS",
+          "source_url": "https://www.samsung.com/in/mobile-accessories/25w-power-adapter-white-ep-t2510nwngin/"
+        },
+        {
+          "label": "Box contents",
+          "value": "Wall charger and leaflet",
+          "source_url": "https://www.samsung.com/in/mobile-accessories/25w-power-adapter-white-ep-t2510nwngin/"
+        },
+        {
+          "label": "Input voltage",
+          "value": "100–240 V",
+          "source_url": "https://www.samsung.com/in/mobile-accessories/25w-power-adapter-white-ep-t2510nwngin/"
+        },
+        {
+          "label": "Product weight",
+          "value": "73 g",
+          "source_url": "https://www.samsung.com/in/mobile-accessories/25w-power-adapter-white-ep-t2510nwngin/"
+        },
+        {
+          "label": "Colour",
+          "value": "White",
+          "source_url": "https://www.samsung.com/in/mobile-accessories/25w-power-adapter-white-ep-t2510nwngin/"
+        }
+      ],
+      "decision_note": "The phone negotiates its charging power; headline adapter wattage does not establish charging time.",
+      "compatibility_caution": "Check phone PPS/USB PD compatibility and purchase an appropriate cable separately.",
+      "unknowns": [
+        "Independent comparable performance testing",
+        "Current India price and verified in-stock offer",
+        "Retailer-specific warranty and delivery eligibility"
+      ]
+    },
+    {
+      "category": "accessories",
+      "slug": "apple-20w-usb-c-adapter",
+      "brand": "Apple",
+      "model": "Apple 20W USB-C Power Adapter",
+      "product_type": "Chargers",
+      "source_url": "https://www.apple.com/in/shop/product/muvr3hn/a/20w-usb-c-power-adapter",
+      "reviewed_at": "2026-11-05",
+      "manufacturer_model_code": "MUVR3HN/A",
+      "review_status": "MANUFACTURER_SOURCE_REVIEWED_MODEL",
+      "specifications": [
+        {
+          "label": "Output connector",
+          "value": "USB-C",
+          "source_url": "https://www.apple.com/in/shop/product/muvr3hn/a/20w-usb-c-power-adapter"
+        },
+        {
+          "label": "Rated charging power",
+          "value": "20 W",
+          "source_url": "https://www.apple.com/in/shop/product/muvr3hn/a/20w-usb-c-power-adapter"
+        },
+        {
+          "label": "Box contents",
+          "value": "20W USB-C Power Adapter",
+          "source_url": "https://www.apple.com/in/shop/product/muvr3hn/a/20w-usb-c-power-adapter"
+        },
+        {
+          "label": "Charging cable",
+          "value": "Sold separately",
+          "source_url": "https://www.apple.com/in/shop/product/muvr3hn/a/20w-usb-c-power-adapter"
+        },
+        {
+          "label": "Phone support described by maker",
+          "value": "Fast charging for iPhone 8 and later",
+          "source_url": "https://www.apple.com/in/shop/product/muvr3hn/a/20w-usb-c-power-adapter"
+        }
+      ],
+      "decision_note": "Maker describes fast charging under specific conditions; this is not an independent cross-device score.",
+      "compatibility_caution": "Check exact cable type for the phone or iPad, especially Lightning versus USB-C.",
+      "unknowns": [
+        "Independent comparable performance testing",
+        "Current India price and verified in-stock offer",
+        "Retailer-specific warranty and delivery eligibility"
+      ]
+    },
+    {
+      "category": "accessories",
+      "slug": "xiaomi-power-bank-4i-20000-33w",
+      "brand": "Xiaomi",
+      "model": "Xiaomi Power Bank 4i 20,000mAh 33W",
+      "product_type": "Power banks",
+      "source_url": "https://www.mi.com/in/product/xiaomi-power-bank-4i-20000mah-33w-sonic-charge/specs/",
+      "reviewed_at": "2026-11-05",
+      "manufacturer_model_code": "PB2030IN",
+      "review_status": "MANUFACTURER_SOURCE_REVIEWED_MODEL",
+      "specifications": [
+        {
+          "label": "Advertised capacity",
+          "value": "20,000 mAh (2 × 10,000 mAh)",
+          "source_url": "https://www.mi.com/in/product/xiaomi-power-bank-4i-20000mah-33w-sonic-charge/specs/"
+        },
+        {
+          "label": "Energy rating",
+          "value": "74 Wh",
+          "source_url": "https://www.mi.com/in/product/xiaomi-power-bank-4i-20000mah-33w-sonic-charge/specs/"
+        },
+        {
+          "label": "Maximum output",
+          "value": "33 W",
+          "source_url": "https://www.mi.com/in/product/xiaomi-power-bank-4i-20000mah-33w-sonic-charge/specs/"
+        },
+        {
+          "label": "Output ports",
+          "value": "USB-C × 1; USB-A × 2",
+          "source_url": "https://www.mi.com/in/product/xiaomi-power-bank-4i-20000mah-33w-sonic-charge/specs/"
+        },
+        {
+          "label": "Charging input",
+          "value": "USB-C, up to 30 W",
+          "source_url": "https://www.mi.com/in/product/xiaomi-power-bank-4i-20000mah-33w-sonic-charge/specs/"
+        },
+        {
+          "label": "Weight",
+          "value": "440 g",
+          "source_url": "https://www.mi.com/in/product/xiaomi-power-bank-4i-20000mah-33w-sonic-charge/specs/"
+        },
+        {
+          "label": "Maker model code",
+          "value": "PB2030IN",
+          "source_url": "https://www.mi.com/in/product/xiaomi-power-bank-4i-20000mah-33w-sonic-charge/specs/"
+        }
+      ],
+      "decision_note": "Power-bank mAh capacity is not the actual delivered capacity to a phone; compare comparable measured tests.",
+      "compatibility_caution": "Confirm exact device protocol and cable ratings; 33W is a maximum, not a universal phone charging rate.",
+      "unknowns": [
+        "Independent comparable performance testing",
+        "Current India price and verified in-stock offer",
+        "Retailer-specific warranty and delivery eligibility"
+      ]
+    },
+    {
+      "category": "tvs",
+      "slug": "lg-43ut80506la",
+      "brand": "LG",
+      "model": "LG UT80 43-inch 4K Smart TV",
+      "product_type": "Televisions",
+      "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
+      "reviewed_at": "2026-11-05",
+      "manufacturer_model_code": "43UT80506LA",
+      "review_status": "MANUFACTURER_SOURCE_REVIEWED_MODEL",
+      "specifications": [
+        {
+          "label": "Display size",
+          "value": "43 in",
+          "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 × 2160 (4K UHD)",
+          "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/"
+        },
+        {
+          "label": "Backlight / panel",
+          "value": "Direct backlit 4K UHD",
+          "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/"
+        },
+        {
+          "label": "Native refresh",
+          "value": "60 Hz",
+          "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/"
+        },
+        {
+          "label": "HDR support",
+          "value": "HDR10 / HLG",
+          "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/"
+        },
+        {
+          "label": "Platform",
+          "value": "webOS 24",
+          "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/"
+        },
+        {
+          "label": "HDMI inputs",
+          "value": "3, supports eARC and ALLM",
+          "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/"
+        },
+        {
+          "label": "Audio output",
+          "value": "20 W, 2.0 channel",
+          "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/"
+        }
+      ],
+      "decision_note": "ALLM does not establish 120Hz or VRR gaming. Native refresh is a separate property.",
+      "compatibility_caution": "Verify exact regional suffix, model warranty, stand/wall mount and paid installation.",
+      "unknowns": [
+        "Independent comparable performance testing",
+        "Current India price and verified in-stock offer",
+        "Retailer-specific warranty and delivery eligibility"
+      ]
+    },
+    {
+      "category": "tvs",
+      "slug": "sony-k-43s20-bravia-2",
+      "brand": "Sony",
+      "model": "Sony BRAVIA 2 K-43S20 43-inch",
+      "product_type": "Televisions",
+      "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
+      "reviewed_at": "2026-11-05",
+      "manufacturer_model_code": "K-43S20",
+      "review_status": "MANUFACTURER_SOURCE_REVIEWED_MODEL",
+      "specifications": [
+        {
+          "label": "Display size",
+          "value": "43 in (42.5 in measured)",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 × 2160 (4K UHD)",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "LCD / Direct LED",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications"
+        },
+        {
+          "label": "Native panel refresh",
+          "value": "50 Hz",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications"
+        },
+        {
+          "label": "HDR support",
+          "value": "HDR10 / HLG",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications"
+        },
+        {
+          "label": "Platform",
+          "value": "Google TV",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications"
+        },
+        {
+          "label": "HDMI inputs",
+          "value": "3; ALLM on HDMI 3",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications"
+        },
+        {
+          "label": "Audio output",
+          "value": "10 W + 10 W",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications"
+        }
+      ],
+      "decision_note": "Sony's native 50Hz figure must not be replaced by Motionflow's marketing number.",
+      "compatibility_caution": "Check K-43S20 regional package, HDMI mode and installation before buying.",
+      "unknowns": [
+        "Independent comparable performance testing",
+        "Current India price and verified in-stock offer",
+        "Retailer-specific warranty and delivery eligibility"
+      ]
+    },
+    {
+      "category": "tvs",
+      "slug": "xiaomi-tv-a-2025-43",
+      "brand": "Xiaomi",
+      "model": "Xiaomi Smart TV A Series 2025 43-inch",
+      "product_type": "Televisions",
+      "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
+      "reviewed_at": "2026-11-05",
+      "manufacturer_model_code": "",
+      "review_status": "MANUFACTURER_SOURCE_REVIEWED_MODEL",
+      "specifications": [
+        {
+          "label": "Display size",
+          "value": "43 in",
+          "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/"
+        },
+        {
+          "label": "Resolution",
+          "value": "1920 × 1080 (Full HD)",
+          "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/"
+        },
+        {
+          "label": "Native refresh",
+          "value": "60 Hz",
+          "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/"
+        },
+        {
+          "label": "Audio output",
+          "value": "20 W",
+          "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/"
+        },
+        {
+          "label": "HDMI inputs",
+          "value": "2",
+          "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/"
+        },
+        {
+          "label": "USB inputs",
+          "value": "2 × USB 2.0",
+          "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/"
+        },
+        {
+          "label": "Software layer",
+          "value": "PatchWall / Xiaomi TV+",
+          "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/"
+        },
+        {
+          "label": "Wall mount",
+          "value": "200 × 200 mm",
+          "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/"
+        }
+      ],
+      "decision_note": "The listed 43-inch model is Full HD, not 4K; do not mix the 32-inch HD specification into it.",
+      "compatibility_caution": "Confirm screen size, exact variant, platform apps and regional after-sales service.",
+      "unknowns": [
+        "Independent comparable performance testing",
+        "Current India price and verified in-stock offer",
+        "Retailer-specific warranty and delivery eligibility"
+      ]
+    },
+    {
+      "category": "tvs",
+      "slug": "tcl-c655-43",
+      "brand": "TCL",
+      "model": "TCL C655 QLED 43-inch",
+      "product_type": "Televisions",
+      "source_url": "https://www.tcl.com/in/en/tvs/c655",
+      "reviewed_at": "2026-11-05",
+      "manufacturer_model_code": "43C655",
+      "review_status": "MANUFACTURER_SOURCE_REVIEWED_MODEL",
+      "specifications": [
+        {
+          "label": "Screen size option",
+          "value": "43 in listed in C655 family",
+          "source_url": "https://www.tcl.com/in/en/tvs/c655"
+        },
+        {
+          "label": "Display technology",
+          "value": "QLED PRO",
+          "source_url": "https://www.tcl.com/in/en/tvs/c655"
+        },
+        {
+          "label": "Picture processor",
+          "value": "AiPQ PRO",
+          "source_url": "https://www.tcl.com/in/en/tvs/c655"
+        },
+        {
+          "label": "HDR feature",
+          "value": "HDR10+ (family page)",
+          "source_url": "https://www.tcl.com/in/en/tvs/c655"
+        },
+        {
+          "label": "Dolby Vision",
+          "value": "Advertised on C655 family page",
+          "source_url": "https://www.tcl.com/in/en/tvs/c655"
+        },
+        {
+          "label": "Motion feature",
+          "value": "DLG 120Hz marketing claim (not native 120Hz)",
+          "source_url": "https://www.tcl.com/in/en/tvs/c655"
+        }
+      ],
+      "decision_note": "Family-page features may vary with size. The ONKYO 2.1-channel setup is explicitly limited to 55-inch and above, not this 43-inch entry.",
+      "compatibility_caution": "43-inch native panel refresh, audio ports and exact India SKU require further independent verification.",
+      "unknowns": [
+        "Independent comparable performance testing",
+        "Current India price and verified in-stock offer",
+        "Retailer-specific warranty and delivery eligibility"
+      ]
+    }
+  ]
+}

@@ -140,6 +140,56 @@ def audit(root):
     guide_files = list((root / "seo").glob("*.html"))
     require(len(guide_files) >= 20, "Buying guide HTML pages are missing")
 
+    # Both new categories have only manufacturer research today. Verify the
+    # published pages, source links and sitemap but forbid fake merchant schema.
+    category_counts, category_fields = {}, 0
+    sitemap_text = (root / "sitemap.xml").read_text(encoding="utf-8")
+    homepage_text = (root / "index.html").read_text(encoding="utf-8")
+    for category in ("accessories", "tvs"):
+        hub_path = root / category / "index.html"
+        require(hub_path.is_file(), f"Missing research hub /{category}/")
+        require(f'href="/{category}/"' in homepage_text, f"No homepage path to /{category}/")
+        require(f"https://coupon-world.in/{category}/" in sitemap_text, f"No /{category}/ sitemap entry")
+        if not hub_path.is_file():
+            continue
+        hub_text = hub_path.read_text(encoding="utf-8")
+        match = re.search(r'<script type="application/json" id="cr-payload">(.*?)</script>', hub_text, re.S)
+        if not match:
+            errors.append(f"Missing verifiable research data in /{category}/")
+            continue
+        try:
+            published = json.loads(match.group(1))
+        except ValueError:
+            errors.append(f"Invalid research-data payload /{category}/")
+            continue
+        items = published.get("records") or []
+        category_counts[category] = len(items)
+        require(len(items) >= 4, f"Insufficient published /{category}/ records")
+        require(hub_text.count('data-model="') == len(items), f"Unreachable /{category}/ cards")
+        for item in items:
+            fields = item.get("specifications") or []
+            category_fields += len(fields)
+            require(len(fields) >= 5 and all(
+                str(field.get("source_url") or "").startswith("https://")
+                for field in fields
+            ), f"Unbacked {category} fields in {item.get('slug')}")
+            route = category + "/" + item.get("slug", "") + "/"
+            page_file = root / route / "index.html"
+            require(page_file.is_file(), f"Missing category research route {route}")
+            require("https://coupon-world.in/" + route in sitemap_text, f"Not in sitemap: {route}")
+            if not page_file.is_file():
+                continue
+            page_text = page_file.read_text(encoding="utf-8")
+            require(page_text.count("Maker source") >= len(fields), f"Missing per-field sources: {route}")
+            require('name="robots" content="index,follow"' in page_text, f"Category page noindex: {route}")
+            require('rel="canonical"' in page_text, f"Missing canonical URL: {route}")
+            require(not re.search(r'"@type"\s*:\s*"(Product|Offer|AggregateRating)"', page_text),
+                    f"Fabricated merchant schema: {route}")
+            require(not re.search(r'class="(?:purchase-cta|shop-button)"', page_text),
+                    f"Unverified purchase CTA on {route}")
+    require(category_counts.get("accessories", 0) >= 4 and category_counts.get("tvs", 0) >= 4,
+            "Source-backed category coverage disappeared")
+
     result = {
         "result": "PASS" if not errors else "FAIL",
         "checked_at_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -155,6 +205,8 @@ def audit(root):
             "retailer_search_links": dict(retailers),
             "budget_band_counts": bands,
             "guide_html_files": len(guide_files),
+            "source_reviewed_category_models": category_counts,
+            "category_documented_fields": category_fields,
         },
         "warnings": warnings,
         "errors": errors,

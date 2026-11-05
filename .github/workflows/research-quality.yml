@@ -32,6 +32,11 @@ jobs:
         run: python scripts/build_public_pages.py --output public
       - name: Audit source-backed public research and dated budgets
         run: python scripts/quality_audit.py --root public --report quality-audit.json
+      - name: Verify accessories and TV evidence, pages and comparison script
+        run: |
+          python -m unittest -v test_category_research_release
+          python -m py_compile python/category_research_pages.py
+          node --check assets/category-research.js
       - name: Preserve existing ranking and research contracts
         run: |
           python -m unittest -v test_phase_g_ranking_contract test_mobile_research_inventory_visibility test_mobile_independent_tests test_phone_guides_release test_phone_research_seo test_seo_index_hygiene test_recommendation_timeout_guard test_phase_g_frontend_offer test_frontend_recommendation_layout test_final_mobile_release_ui

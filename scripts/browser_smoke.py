@@ -123,6 +123,34 @@ def run(root: Path):
                     page.goto(url + "phones/google-pixel-10/", wait_until="domcontentloaded", timeout=30000)
                     assert page.locator(".mobile-fact-table tbody tr").count() >= 10, width
                     assert not page.locator(".shop-button").count(), width
+                    # New research categories must work in the same public
+                    # artifact at mobile, tablet and desktop widths.
+                    for category in ("accessories", "tvs"):
+                        page.goto(url + category + "/", wait_until="domcontentloaded", timeout=30000)
+                        page.locator("#cr-grid .cr-card").first.wait_for(timeout=10000)
+                        assert page.locator("#cr-grid .cr-card").count() == 4, (width, category)
+                        page.locator("#cr-query").fill("Sony" if category == "tvs" else "Apple")
+                        assert page.locator("#cr-grid .cr-card:visible").count() == 1, (width, category)
+                        page.locator("#cr-query").fill("")
+                        if category == "accessories":
+                            candidates = page.locator('#cr-grid .cr-card[data-type="Chargers"] input[data-compare]')
+                        else:
+                            candidates = page.locator('#cr-grid input[data-compare]')
+                        candidates.nth(0).check()
+                        candidates.nth(1).check()
+                        assert page.locator("#cr-comparison").is_visible(), (width, category)
+                        assert page.locator("#cr-comparison-table table tbody tr").count() >= 5
+                        assert page.locator(".shop-button, .purchase-cta").count() == 0
+                        cr_width = page.evaluate("document.documentElement.scrollWidth")
+                        assert cr_width <= width + 8, (category, width, cr_width)
+                        page.goto(url + category + "/" + (
+                            "samsung-ep-t2510-25w" if category == "accessories" else "sony-k-43s20-bravia-2"
+                        ) + "/", wait_until="domcontentloaded", timeout=30000)
+                        assert page.locator(".cr-detail-facts .cr-fact").count() >= 5
+                        assert page.locator('a:has-text("Maker source")').count() >= 5
+                        assert page.locator(".purchase-cta, .shop-button").count() == 0
+                        cr_width = page.evaluate("document.documentElement.scrollWidth")
+                        assert cr_width <= width + 8, (category, width, cr_width)
                     assert not page_errors, f"{width}px uncaught JS errors: {page_errors}"
                     results.append({"width": width, "search": "PASS", "full_budget_opt_in": "PASS", "exact_variant": "PASS",
                                     "comparison": "PASS", "engine_handoff": "PASS",

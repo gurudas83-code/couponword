@@ -1209,3 +1209,17 @@ body.clean-ui :is(button,a,input,select,summary):focus-visible{outline:3px solid
 /* A single phone-research story, with the method easy to inspect. */
 body.clean-ui .research-trust{display:grid;grid-template-columns:.9fr 1.5fr;gap:36px;padding-top:45px;padding-bottom:45px;margin-top:36px;border-top:1px solid #dce3d4;border-bottom:1px solid #dce3d4}
 .trust-intro h2{font-size:2.1rem;line-height:1.15;letter-spacing:-.045em;font-weight:650;color:#234b36;margin:14px 0}.trust-intro p{font-size:.9rem;line-height:1.85;color:#60725c}.research-trust a{color:#355d3e;font-size:.8rem;text-decoration:underline;text-underline-offset:4px}.trust-proof-grid{display:grid;gap:0}.trust-proof-grid article{padding:19px 0;border-bottom:1px solid #dce4d3}.trust-proof-grid article:first-child{padding-top:0}.trust-proof-grid article:last-child{border:0}.trust-proof-grid article>span{font-size:.6rem;letter-spacing:.13em;color:#718568}.trust-proof-grid h3{font-size:1.15rem;color:#2a503a;margin:8px 0;font-weight:650;letter-spacing:-.025em}.trust-proof-grid p{font-size:.83rem;line-height:1.8;color:#62735c;margin:0 0 8px}body.clean-ui .positioning-guides{max-width:1184px;background:#e9efdf;border:1px solid #dce4d1;border-radius:18px;padding:30px;margin-top:35px}.positioning-guides h2{font-family:Georgia,serif;color:#244b35;font-size:2rem;font-weight:400;margin:12px 0}.positioning-guides p{max-width:700px;color:#5d7256;font-size:.9rem;line-height:1.8}.positioning-guides a{color:#315d3b;font-weight:650;text-decoration:underline;text-underline-offset:4px}body.clean-ui .hero h1{font-size:clamp(3rem,5vw,4.5rem)}@media(max-width:700px){body.clean-ui .research-trust{grid-template-columns:1fr;gap:20px;padding-top:28px;padding-bottom:28px}.trust-intro h2{font-size:1.8rem}body.clean-ui .positioning-guides{margin-left:18px;margin-right:18px;padding:23px}body.clean-ui .hero h1{font-size:3rem}}
+
+
+/* Category expansion: complement the frozen smartphone search, never re-label it. */
+body.clean-ui .cw-research-categories{padding-top:28px;padding-bottom:38px}
+body.clean-ui .cw-research-categories .section-heading p{color:#526176;max-width:720px}
+body.clean-ui .cw-research-category-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+body.clean-ui .cw-research-category{background:#fff;border:1px solid #dce6df;border-radius:18px;padding:24px;display:flex;flex-direction:column;align-items:flex-start;box-shadow:0 6px 24px #17223509}
+body.clean-ui .cw-research-category-label{font-size:.73rem;font-weight:850;letter-spacing:.09em;color:#346d58}
+body.clean-ui .cw-research-category h3{font-size:1.35rem;color:#172235;letter-spacing:-.02em;margin:12px 0 7px}
+body.clean-ui .cw-research-category p{font-size:.92rem;color:#526176;line-height:1.6;flex:1}
+body.clean-ui .cw-research-category a{font-weight:800;font-size:.91rem;color:#176355;text-decoration:underline;text-underline-offset:4px}
+body.clean-ui .cw-category-research-disclaimer{color:#526176;font-size:.84rem;margin:14px 0 0}
+@media(max-width:980px){body.clean-ui .cw-research-category-grid{grid-template-columns:1fr}}
+@media(min-width:981px) and (max-width:1180px){body.clean-ui .desktop-nav{gap:2px}body.clean-ui .desktop-nav a{font-size:.76rem;padding:8px 6px}}
