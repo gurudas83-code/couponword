@@ -243,6 +243,11 @@ def build(output: Path) -> Path:
     from python.phone_research_pages import render_phone_research_pages
     render_phone_research_pages(output)
 
+    # Hindi pages reuse exactly the same curated English guide/model sources;
+    # category budget pages stay noindex until strict ranked evidence exists.
+    from python.phone_hindi_pages import build as render_hindi_phone_pages
+    render_hindi_phone_pages(output)
+
     # Extend the same evidence-first static publication path to both adjacent
     # categories. Research pages do not change core recommendation/offer gates.
     from python.category_research_pages import publish_category_research_pages
