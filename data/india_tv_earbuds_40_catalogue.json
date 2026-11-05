@@ -1,0 +1,3846 @@
+{
+  "schema_version": "1.0",
+  "market": "India",
+  "mode": "DATED_RESEARCH_ONLY_NO_LIVE_OFFERS",
+  "source_workbook": "CouponWorld_India_20_TVs_20_Earbuds_3_Retailer_Comparison_2026-11-05.xlsx",
+  "reviewed_at": "2026-11-05",
+  "disclosure": "Model-level research; specifications may be manufacturer, retailer, or editorial; not all exact-variant or fields verified. Prices are dated public quotes or attributed observations, not real-time API feeds. No stock or purchase eligibility certified.",
+  "counts": {
+    "total": 40,
+    "tvs": 20,
+    "earbuds": 20,
+    "retailer_quote_counts": {
+      "amazon": 2,
+      "flipkart": 11,
+      "croma": 14
+    }
+  },
+  "records": [
+    {
+      "id": "TV01",
+      "category": "tvs",
+      "brand": "Xiaomi",
+      "model": "S Mini LED 2026 55 (L55MC-IN)",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "QD Mini-LED",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Native Hz",
+          "value": "60",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Google TV",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDR formats",
+          "value": "Dolby Vision, HDR10+",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "3",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Speaker W",
+          "value": "34",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Value Mini-LED",
+      "evidence_caveat": "DLG 120Hz is not native 120Hz; 308 zones for 55in",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Xiaomi+S+Mini+LED+2026+55+%28L55MC-IN%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": 54990,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://1.www.flipkart.com/q/mi-55-inch-tv",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi+S+Mini+LED+2026+55+%28L55MC-IN%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "Exact L55MC-IN; source page updated 2026-11-05",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV02",
+      "category": "tvs",
+      "brand": "Xiaomi",
+      "model": "S Mini LED 2026 65",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "65",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "QD Mini-LED",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Native Hz",
+          "value": "60",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Google TV",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDR formats",
+          "value": "Dolby Vision, HDR10+",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "3",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Speaker W",
+          "value": "34",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Large bright living room",
+      "evidence_caveat": "DLG ≠ native 120Hz; 384 zones for 65in",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Xiaomi+S+Mini+LED+2026+65",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi+S+Mini+LED+2026+65",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV03",
+      "category": "tvs",
+      "brand": "Xiaomi",
+      "model": "S Mini LED 2026 75",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "75",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "QD Mini-LED",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Native Hz",
+          "value": "60",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Google TV",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDR formats",
+          "value": "Dolby Vision, HDR10+",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "3",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Speaker W",
+          "value": "34",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Big-screen budget Mini-LED",
+      "evidence_caveat": "512 zones for 75in; DLG not native 120Hz",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Xiaomi+S+Mini+LED+2026+75",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi+S+Mini+LED+2026+75",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV04",
+      "category": "tvs",
+      "brand": "Xiaomi",
+      "model": "FX Mini LED Fire TV 55",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "QD Mini-LED",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Native Hz",
+          "value": "60",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Fire TV",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDR formats",
+          "value": "HDR10+",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "3",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Speaker W",
+          "value": "20",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Budget Mini-LED, Alexa",
+      "evidence_caveat": "DLG 120Hz not panel rate; family specs vary by size",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Xiaomi+FX+Mini+LED+Fire+TV+55",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": 44999,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi+FX+Mini+LED+Fire+TV+55",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "Xiaomi FX 55 L55MC-FSMIN; listing snapshot dated 2026-09-11; historical",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV05",
+      "category": "tvs",
+      "brand": "Xiaomi",
+      "model": "FX Mini LED Fire TV 65",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "65",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "QD Mini-LED",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Native Hz",
+          "value": "60",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Fire TV",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDR formats",
+          "value": "HDR10+",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "3",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Speaker W",
+          "value": "20",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "65-inch value TV",
+      "evidence_caveat": "Check Alexa vs Google TV; Fire TV software",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Xiaomi+FX+Mini+LED+Fire+TV+65",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi+FX+Mini+LED+Fire+TV+65",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV06",
+      "category": "tvs",
+      "brand": "Samsung",
+      "model": "QN80H 55 (QA55QN80HAULXL)",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "Neo QLED Mini-LED",
+          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Native Hz",
+          "value": "144",
+          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Tizen",
+          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDR formats",
+          "value": "HDR10+, NQ HDR+",
+          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "4",
+          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Speaker W",
+          "value": "30",
+          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Bright-room high-refresh gaming",
+      "evidence_caveat": "144Hz listed VRR, verify console modes",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Samsung+QN80H+55+%28QA55QN80HAULXL%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": 84781,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.flipkart.com/q/samsung-neo-qled-tv",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung+QN80H+55+%28QA55QN80HAULXL%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "Exact QA55QN80HAULXL identified on Flipkart category results; location-dependent",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": 98290,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.croma.com/l/samsung-quantum-dot-55-inch-tv-0asz00a.html",
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "QN80H 55-inch public listing dated 2026-11-05, location-dependent",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV07",
+      "category": "tvs",
+      "brand": "LG",
+      "model": "UT80 43 (43UT80506LA)",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "43",
+          "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "Direct LED LCD",
+          "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Native Hz",
+          "value": "60",
+          "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "webOS 24",
+          "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDR formats",
+          "value": "HDR10, HLG",
+          "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "3",
+          "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Speaker W",
+          "value": "20",
+          "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Budget 43-inch 4K",
+      "evidence_caveat": "Native 60Hz; ALLM is not VRR",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=LG+UT80+43+%2843UT80506LA%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=LG+UT80+43+%2843UT80506LA%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV08",
+      "category": "tvs",
+      "brand": "Sony",
+      "model": "BRAVIA 8 II 55 (K-55XR80M2)",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "OLED",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Native Hz",
+          "value": "120",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Google TV",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDR formats",
+          "value": "Dolby Vision, HDR10",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "4",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Premium movies and PS5",
+      "evidence_caveat": "2025 model; manufacturer states VRR HDMI 3/4",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Sony+BRAVIA+8+II+55+%28K-55XR80M2%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=Sony+BRAVIA+8+II+55+%28K-55XR80M2%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": 259990,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.croma.com/campaign/exchange-deals-tv/c/7042",
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "Sony BRAVIA 8 II 55; 2025 model listing",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV09",
+      "category": "tvs",
+      "brand": "Samsung",
+      "model": "Crystal UE81 43 (UA43UE81AFULXL)",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
+      "source_grade": "Retailer model listing",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "43",
+          "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "LED LCD",
+          "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Native Hz",
+          "value": "60",
+          "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Tizen",
+          "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDR formats",
+          "value": "HDR10+",
+          "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "3",
+          "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Speaker W",
+          "value": "20",
+          "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Entry 43-inch 4K",
+      "evidence_caveat": "Retailer-listed spec; check exact suffix before buying",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Samsung+Crystal+UE81+43+%28UA43UE81AFULXL%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": 30490,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung+Crystal+UE81+43+%28UA43UE81AFULXL%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "Exact UA43UE81AFULXL; listing snapshot",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": 30490,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.croma.com/campaign/limited-time-exchange-offers-tv/c/7098",
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "Samsung UE81A 43; exact series; suffix recheck",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV10",
+      "category": "tvs",
+      "brand": "Samsung",
+      "model": "QEF6 55 (QA55QEF6AULXL)",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.flipkart.com/q/samsung-55-inch-smart-tv",
+      "source_grade": "Retailer exact model listing",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.flipkart.com/q/samsung-55-inch-smart-tv",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "QLED",
+          "source_url": "https://www.flipkart.com/q/samsung-55-inch-smart-tv",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.flipkart.com/q/samsung-55-inch-smart-tv",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Native Hz",
+          "value": "60",
+          "source_url": "https://www.flipkart.com/q/samsung-55-inch-smart-tv",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Tizen",
+          "source_url": "https://www.flipkart.com/q/samsung-55-inch-smart-tv",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDR formats",
+          "value": "HDR10+",
+          "source_url": "https://www.flipkart.com/q/samsung-55-inch-smart-tv",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "3",
+          "source_url": "https://www.flipkart.com/q/samsung-55-inch-smart-tv",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Speaker W",
+          "value": "20",
+          "source_url": "https://www.flipkart.com/q/samsung-55-inch-smart-tv",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "55-inch value QLED",
+      "evidence_caveat": "QEF1 vs QEF6 naming differs; verify code",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Samsung+QEF6+55+%28QA55QEF6AULXL%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": 42760,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.flipkart.com/q/samsung-55-inch-smart-tv",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung+QEF6+55+%28QA55QEF6AULXL%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "Exact QA55QEF6AULXL; listing snapshot",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV11",
+      "category": "tvs",
+      "brand": "TCL",
+      "model": "C6K 55 (55C6K)",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
+      "source_grade": "Retailer exact model listing",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "QD Mini-LED",
+          "source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Native Hz",
+          "value": "120",
+          "source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Google TV",
+          "source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDR formats",
+          "value": "Dolby Vision IQ, HDR10+",
+          "source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "4",
+          "source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Speaker W",
+          "value": "40",
+          "source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Budget higher-refresh Mini-LED",
+      "evidence_caveat": "Croma lists 120Hz; HDMI/gaming compatibility check",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=TCL+C6K+55+%2855C6K%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=TCL+C6K+55+%2855C6K%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": 61990,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "Exact 55C6K",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV12",
+      "category": "tvs",
+      "brand": "TCL",
+      "model": "P6L 55 (55P6L)",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
+      "source_grade": "Retailer exact model listing",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "LED LCD",
+          "source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Google TV",
+          "source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDR formats",
+          "value": "Dolby Vision",
+          "source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Speaker W",
+          "value": "28",
+          "source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Entry 55-inch TV",
+      "evidence_caveat": "Native panel refresh not certified in this workbook",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=TCL+P6L+55+%2855P6L%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": 30999,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://1.www.flipkart.com/q/mi-55-inch-tv",
+          "retailer_research_url": "https://www.flipkart.com/search?q=TCL+P6L+55+%2855P6L%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "Exact TCL 55P6L; page updated 2026-11-05",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV13",
+      "category": "tvs",
+      "brand": "LG",
+      "model": "OLED evo C6 55",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
+      "source_grade": "Editorial specification",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "OLED evo",
+          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Native Hz",
+          "value": "120",
+          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "webOS 26",
+          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDR formats",
+          "value": "Dolby Vision",
+          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "4",
+          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "OLED gaming and cinema",
+      "evidence_caveat": "165Hz VRR claim depends on input; check exact model code",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=LG+OLED+evo+C6+55",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=LG+OLED+evo+C6+55",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV14",
+      "category": "tvs",
+      "brand": "LG",
+      "model": "OLED evo G6 55",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
+      "source_grade": "Editorial specification",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "Tandem OLED evo",
+          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Native Hz",
+          "value": "120",
+          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "webOS 26",
+          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDR formats",
+          "value": "Dolby Vision",
+          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Premium bright-room OLED",
+      "evidence_caveat": "Confirm wall-mount / stand and precise SKU",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=LG+OLED+evo+G6+55",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=LG+OLED+evo+G6+55",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV15",
+      "category": "tvs",
+      "brand": "Sony",
+      "model": "BRAVIA 2 K-43S20 43",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "43",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "Direct LED LCD",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Native Hz",
+          "value": "50",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Google TV",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDR formats",
+          "value": "HDR10, HLG",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "3",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Speaker W",
+          "value": "20",
+          "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Small-room 4K movies",
+      "evidence_caveat": "Motionflow marketing not native refresh",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Sony+BRAVIA+2+K-43S20+43",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=Sony+BRAVIA+2+K-43S20+43",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV16",
+      "category": "tvs",
+      "brand": "Samsung",
+      "model": "H4500F 32 (UA32H4500FUXXL)",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.gadgets360.com/tv/tv-finder",
+      "source_grade": "Editorial model listing",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "32",
+          "source_url": "https://www.gadgets360.com/tv/tv-finder",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "LED LCD",
+          "source_url": "https://www.gadgets360.com/tv/tv-finder",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "HD Ready",
+          "source_url": "https://www.gadgets360.com/tv/tv-finder",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Tizen",
+          "source_url": "https://www.gadgets360.com/tv/tv-finder",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Low-cost bedroom TV",
+      "evidence_caveat": "HD Ready only; native Hz / ports not verified",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Samsung+H4500F+32+%28UA32H4500FUXXL%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung+H4500F+32+%28UA32H4500FUXXL%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV17",
+      "category": "tvs",
+      "brand": "Xiaomi",
+      "model": "A Series 2025 43 FHD",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "43",
+          "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "LED LCD",
+          "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "Full HD",
+          "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Native Hz",
+          "value": "60",
+          "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Google TV",
+          "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "2",
+          "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Speaker W",
+          "value": "20",
+          "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "43-inch low-cost smart",
+      "evidence_caveat": "Full HD, not 4K; confirm Google/patchwall edition",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Xiaomi+A+Series+2025+43+FHD",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": 21999,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi+A+Series+2025+43+FHD",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "Exact Xiaomi A Series 43 L43MB-AFIN; historical Sep snapshot",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV18",
+      "category": "tvs",
+      "brand": "TCL",
+      "model": "Q6C 65 QD Mini-LED",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.mysmartprice.com/gear/appliances/best-65-inch-tvs-for-picture-quality-in-india-2026/",
+      "source_grade": "Editorial spec",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "65",
+          "source_url": "https://www.mysmartprice.com/gear/appliances/best-65-inch-tvs-for-picture-quality-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "QD Mini-LED",
+          "source_url": "https://www.mysmartprice.com/gear/appliances/best-65-inch-tvs-for-picture-quality-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.mysmartprice.com/gear/appliances/best-65-inch-tvs-for-picture-quality-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Native Hz",
+          "value": "144",
+          "source_url": "https://www.mysmartprice.com/gear/appliances/best-65-inch-tvs-for-picture-quality-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Google TV",
+          "source_url": "https://www.mysmartprice.com/gear/appliances/best-65-inch-tvs-for-picture-quality-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "4",
+          "source_url": "https://www.mysmartprice.com/gear/appliances/best-65-inch-tvs-for-picture-quality-in-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "65-inch gaming/value Mini-LED",
+      "evidence_caveat": "Native refresh from secondary test; model matching needed",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=TCL+Q6C+65+QD+Mini-LED",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=TCL+Q6C+65+QD+Mini-LED",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV19",
+      "category": "tvs",
+      "brand": "LG",
+      "model": "QNED70 55 2026",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.croma.com/l/55-inch-high-definition-tv-0asz00a.html",
+      "source_grade": "Retailer listing",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.croma.com/l/55-inch-high-definition-tv-0asz00a.html",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "QNED Mini-LED",
+          "source_url": "https://www.croma.com/l/55-inch-high-definition-tv-0asz00a.html",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.croma.com/l/55-inch-high-definition-tv-0asz00a.html",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "webOS",
+          "source_url": "https://www.croma.com/l/55-inch-high-definition-tv-0asz00a.html",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Midrange QNED display",
+      "evidence_caveat": "Native panel Hz not independently confirmed",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=LG+QNED70+55+2026",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=LG+QNED70+55+2026",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": 57690,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.croma.com/l/55-inch-high-definition-tv-0asz00a.html",
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "LG QNED70 55, 2026",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "TV20",
+      "category": "tvs",
+      "brand": "Samsung",
+      "model": "QN90F 55 (2025)",
+      "model_code": "",
+      "product_type": "Television",
+      "source_url": "https://www.91mobiles.com/reviews/best-qled-mini-led-tvs-india-2026/",
+      "source_grade": "Editorial specification",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.91mobiles.com/reviews/best-qled-mini-led-tvs-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "Neo QLED Mini-LED",
+          "source_url": "https://www.91mobiles.com/reviews/best-qled-mini-led-tvs-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.91mobiles.com/reviews/best-qled-mini-led-tvs-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Native Hz",
+          "value": "144",
+          "source_url": "https://www.91mobiles.com/reviews/best-qled-mini-led-tvs-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Tizen",
+          "source_url": "https://www.91mobiles.com/reviews/best-qled-mini-led-tvs-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "HDR formats",
+          "value": "HDR10+",
+          "source_url": "https://www.91mobiles.com/reviews/best-qled-mini-led-tvs-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Speaker W",
+          "value": "60",
+          "source_url": "https://www.91mobiles.com/reviews/best-qled-mini-led-tvs-india-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Bright-room gaming & sport",
+      "evidence_caveat": "144Hz from family/editorial; confirm Indian SKU",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Samsung+QN90F+55+%282025%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": 117831,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.flipkart.com/q/samsung-neo-qled-tv",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung+QN90F+55+%282025%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "Exact 55-inch QN90F model family; verify exact suffix",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": 120890,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.croma.com/l/samsung-quantum-dot-55-inch-tv-0asz00a.html",
+          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "Samsung QN90F 55, 2025",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB01",
+      "category": "accessories",
+      "brand": "OnePlus",
+      "model": "Nord Buds 3r",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.oneplus.in/store/audio?from=foot",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "No active ANC",
+          "source_url": "https://www.oneplus.in/store/audio?from=foot",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Drivers",
+          "value": "12.4mm",
+          "source_url": "https://www.oneplus.in/store/audio?from=foot",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Bluetooth version",
+          "value": "5.4",
+          "source_url": "https://www.oneplus.in/store/audio?from=foot",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "IP rating",
+          "value": "IP55",
+          "source_url": "https://www.oneplus.in/store/audio?from=foot",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds+case ANC off (h)",
+          "value": "54",
+          "source_url": "https://www.oneplus.in/store/audio?from=foot",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Yes",
+          "source_url": "https://www.oneplus.in/store/audio?from=foot",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Budget / battery",
+      "evidence_caveat": "AI call noise reduction is not ANC",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=OnePlus+Nord+Buds+3r",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": 1749,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.flipkart.com/audio-video/headset/earphones/oneplus~brand/pr?sid=0pm%2Cfcn%2C821",
+          "retailer_research_url": "https://www.flipkart.com/search?q=OnePlus+Nord+Buds+3r",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "OnePlus Nord Buds 3r listing",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": 1849,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.croma.com/oneplus-phones-%26-wearables/bc/b-0948-1",
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "Nord Buds 3r public listing dated 2026-11-05; verify selected colour",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB02",
+      "category": "accessories",
+      "brand": "realme",
+      "model": "Buds T310",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.itechguides.com/best-true-wireless-earbuds-in-india-prices-and-what-to-choose-october-2026/",
+      "source_grade": "Editorial specification",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "Hybrid ANC",
+          "source_url": "https://www.itechguides.com/best-true-wireless-earbuds-in-india-prices-and-what-to-choose-october-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Claimed max ANC dB",
+          "value": "46",
+          "source_url": "https://www.itechguides.com/best-true-wireless-earbuds-in-india-prices-and-what-to-choose-october-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Drivers",
+          "value": "Dynamic",
+          "source_url": "https://www.itechguides.com/best-true-wireless-earbuds-in-india-prices-and-what-to-choose-october-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "IP rating",
+          "value": "IP55",
+          "source_url": "https://www.itechguides.com/best-true-wireless-earbuds-in-india-prices-and-what-to-choose-october-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds+case ANC off (h)",
+          "value": "40",
+          "source_url": "https://www.itechguides.com/best-true-wireless-earbuds-in-india-prices-and-what-to-choose-october-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds+case ANC on (h)",
+          "value": "26",
+          "source_url": "https://www.itechguides.com/best-true-wireless-earbuds-in-india-prices-and-what-to-choose-october-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Unverified",
+          "source_url": "https://www.itechguides.com/best-true-wireless-earbuds-in-india-prices-and-what-to-choose-october-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Low cost ANC",
+      "evidence_caveat": "Battery maker claims use different ANC settings",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=realme+Buds+T310",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=realme+Buds+T310",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": 2399,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "Realme T310 black",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB03",
+      "category": "accessories",
+      "brand": "Noise",
+      "model": "ALT Buds(S)",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.gadgets360.com/audio/truly-wireless-earphones",
+      "source_grade": "Market listing",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "Unknown",
+          "source_url": "https://www.gadgets360.com/audio/truly-wireless-earphones",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Unverified",
+          "source_url": "https://www.gadgets360.com/audio/truly-wireless-earphones",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Entry budget",
+      "evidence_caveat": "ANC/IP/battery not source-verified here",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Noise+ALT+Buds%28S%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=Noise+ALT+Buds%28S%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB04",
+      "category": "accessories",
+      "brand": "CMF",
+      "model": "Buds Neo",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.gadgets360.com/audio/truly-wireless-earphones",
+      "source_grade": "Market listing",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "Unknown",
+          "source_url": "https://www.gadgets360.com/audio/truly-wireless-earphones",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Unverified",
+          "source_url": "https://www.gadgets360.com/audio/truly-wireless-earphones",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Low-cost design",
+      "evidence_caveat": "Battery, ANC and codecs need maker verification",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=CMF+Buds+Neo",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=CMF+Buds+Neo",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB05",
+      "category": "accessories",
+      "brand": "OnePlus",
+      "model": "Nord Buds 4",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.oneplus.in/store/audio?from=foot",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "Adaptive ANC",
+          "source_url": "https://www.oneplus.in/store/audio?from=foot",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Claimed max ANC dB",
+          "value": "52",
+          "source_url": "https://www.oneplus.in/store/audio?from=foot",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "IP rating",
+          "value": "IP55",
+          "source_url": "https://www.oneplus.in/store/audio?from=foot",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Unverified",
+          "source_url": "https://www.oneplus.in/store/audio?from=foot",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Under ₹4k ANC",
+      "evidence_caveat": "Confirm exact earbuds model vs Pro",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=OnePlus+Nord+Buds+4",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": 3099,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.flipkart.com/audio-video/headset/earphones/oneplus~brand/pr?sid=0pm%2Cfcn%2C821",
+          "retailer_research_url": "https://www.flipkart.com/search?q=OnePlus+Nord+Buds+4",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "OnePlus Nord Buds 4 listing; confirm selected colour",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": 3199,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.croma.com/oneplus-mobile-accessories/bc/b-0948-943",
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "OnePlus Nord Buds 4 E522A model in store catalogue",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB06",
+      "category": "accessories",
+      "brand": "OnePlus",
+      "model": "Nord Buds 4 Pro",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.oneplus.in/oneplus-nord-buds-4-pro",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "Dynamic ANC",
+          "source_url": "https://www.oneplus.in/oneplus-nord-buds-4-pro",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Claimed max ANC dB",
+          "value": "55",
+          "source_url": "https://www.oneplus.in/oneplus-nord-buds-4-pro",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Drivers",
+          "value": "12mm",
+          "source_url": "https://www.oneplus.in/oneplus-nord-buds-4-pro",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Bluetooth version",
+          "value": "6",
+          "source_url": "https://www.oneplus.in/oneplus-nord-buds-4-pro",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "IP rating",
+          "value": "IP55",
+          "source_url": "https://www.oneplus.in/oneplus-nord-buds-4-pro",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds battery ANC off (h)",
+          "value": "13",
+          "source_url": "https://www.oneplus.in/oneplus-nord-buds-4-pro",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds+case ANC off (h)",
+          "value": "54",
+          "source_url": "https://www.oneplus.in/oneplus-nord-buds-4-pro",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Yes",
+          "source_url": "https://www.oneplus.in/oneplus-nord-buds-4-pro",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Sub-₹5k commute ANC",
+      "evidence_caveat": "54h claim ANC off; case not IP55",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=OnePlus+Nord+Buds+4+Pro",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": 4099,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.flipkart.com/audio-video/headset/earphones/oneplus~brand/pr?sid=0pm%2Cfcn%2C821",
+          "retailer_research_url": "https://www.flipkart.com/search?q=OnePlus+Nord+Buds+4+Pro",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "OnePlus Nord Buds 4 Pro listing; confirm selected colour",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": 4199,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.croma.com/oneplus-mobile-accessories/bc/b-0948-943",
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "OnePlus Nord Buds 4 Pro, Raven Black listed",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB07",
+      "category": "accessories",
+      "brand": "OPPO",
+      "model": "Enco Air5 Pro (ETEL1)",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.oppo.com/in/accessories/enco-air5-pro/specs/",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "Active ANC",
+          "source_url": "https://www.oppo.com/in/accessories/enco-air5-pro/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Claimed max ANC dB",
+          "value": "55",
+          "source_url": "https://www.oppo.com/in/accessories/enco-air5-pro/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Drivers",
+          "value": "12mm",
+          "source_url": "https://www.oppo.com/in/accessories/enco-air5-pro/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Bluetooth version",
+          "value": "6",
+          "source_url": "https://www.oppo.com/in/accessories/enco-air5-pro/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Codecs",
+          "value": "LHDC 5.0/AAC/SBC",
+          "source_url": "https://www.oppo.com/in/accessories/enco-air5-pro/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "IP rating",
+          "value": "IP55",
+          "source_url": "https://www.oppo.com/in/accessories/enco-air5-pro/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds battery ANC off (h)",
+          "value": "13",
+          "source_url": "https://www.oppo.com/in/accessories/enco-air5-pro/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds+case ANC off (h)",
+          "value": "54",
+          "source_url": "https://www.oppo.com/in/accessories/enco-air5-pro/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds+case ANC on (h)",
+          "value": "29",
+          "source_url": "https://www.oppo.com/in/accessories/enco-air5-pro/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Yes",
+          "source_url": "https://www.oppo.com/in/accessories/enco-air5-pro/specs/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Calls / 2-device",
+      "evidence_caveat": "ANC claim is a maker-lab ceiling, not a standard test",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=OPPO+Enco+Air5+Pro+%28ETEL1%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=OPPO+Enco+Air5+Pro+%28ETEL1%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB08",
+      "category": "accessories",
+      "brand": "realme",
+      "model": "Buds Air 8",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.itechguides.com/best-true-wireless-earbuds-in-india-prices-and-what-to-choose-october-2026/",
+      "source_grade": "Editorial specification",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "ANC",
+          "source_url": "https://www.itechguides.com/best-true-wireless-earbuds-in-india-prices-and-what-to-choose-october-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Claimed max ANC dB",
+          "value": "55",
+          "source_url": "https://www.itechguides.com/best-true-wireless-earbuds-in-india-prices-and-what-to-choose-october-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds+case ANC off (h)",
+          "value": "58",
+          "source_url": "https://www.itechguides.com/best-true-wireless-earbuds-in-india-prices-and-what-to-choose-october-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Unverified",
+          "source_url": "https://www.itechguides.com/best-true-wireless-earbuds-in-india-prices-and-what-to-choose-october-2026/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Battery / budget",
+      "evidence_caveat": "58h based on maker/secondary reference; not lab tested",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=realme+Buds+Air+8",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=realme+Buds+Air+8",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB09",
+      "category": "accessories",
+      "brand": "realme",
+      "model": "Buds Air 8 Pro",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.gadgets360.com/audio/truly-wireless-earphones",
+      "source_grade": "Market listing",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "Unknown",
+          "source_url": "https://www.gadgets360.com/audio/truly-wireless-earphones",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Unverified",
+          "source_url": "https://www.gadgets360.com/audio/truly-wireless-earphones",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Midrange features",
+      "evidence_caveat": "Confirm India variant and ANC spec with maker",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=realme+Buds+Air+8+Pro",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=realme+Buds+Air+8+Pro",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB10",
+      "category": "accessories",
+      "brand": "realme",
+      "model": "Buds Air 7 Pro",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.livemint.com/gadgets-and-appliances/10-best-truly-wireless-earbuds-under-rs-10-000-in-india-top-anc-and-battery-life-picks-for-2026-11792770390024.html",
+      "source_grade": "Editorial specification",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "ANC",
+          "source_url": "https://www.livemint.com/gadgets-and-appliances/10-best-truly-wireless-earbuds-under-rs-10-000-in-india-top-anc-and-battery-life-picks-for-2026-11792770390024.html",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Claimed max ANC dB",
+          "value": "53",
+          "source_url": "https://www.livemint.com/gadgets-and-appliances/10-best-truly-wireless-earbuds-under-rs-10-000-in-india-top-anc-and-battery-life-picks-for-2026-11792770390024.html",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "IP rating",
+          "value": "IP55",
+          "source_url": "https://www.livemint.com/gadgets-and-appliances/10-best-truly-wireless-earbuds-under-rs-10-000-in-india-top-anc-and-battery-life-picks-for-2026-11792770390024.html",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds+case ANC off (h)",
+          "value": "48",
+          "source_url": "https://www.livemint.com/gadgets-and-appliances/10-best-truly-wireless-earbuds-under-rs-10-000-in-india-top-anc-and-battery-life-picks-for-2026-11792770390024.html",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Unverified",
+          "source_url": "https://www.livemint.com/gadgets-and-appliances/10-best-truly-wireless-earbuds-under-rs-10-000-in-india-top-anc-and-battery-life-picks-for-2026-11792770390024.html",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Midrange commute",
+      "evidence_caveat": "48h claimed battery; exact test mode unknown",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=realme+Buds+Air+7+Pro",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=realme+Buds+Air+7+Pro",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB11",
+      "category": "accessories",
+      "brand": "OnePlus",
+      "model": "Buds 4 (E513A)",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.oneplus.in/oneplus-buds-4",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "Dynamic ANC",
+          "source_url": "https://www.oneplus.in/oneplus-buds-4",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Claimed max ANC dB",
+          "value": "55",
+          "source_url": "https://www.oneplus.in/oneplus-buds-4",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Drivers",
+          "value": "11+6mm",
+          "source_url": "https://www.oneplus.in/oneplus-buds-4",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Bluetooth version",
+          "value": "5.4",
+          "source_url": "https://www.oneplus.in/oneplus-buds-4",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Codecs",
+          "value": "LHDC 5.0/AAC/SBC",
+          "source_url": "https://www.oneplus.in/oneplus-buds-4",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "IP rating",
+          "value": "IP55",
+          "source_url": "https://www.oneplus.in/oneplus-buds-4",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds battery ANC off (h)",
+          "value": "11",
+          "source_url": "https://www.oneplus.in/oneplus-buds-4",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds+case ANC off (h)",
+          "value": "45",
+          "source_url": "https://www.oneplus.in/oneplus-buds-4",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds+case ANC on (h)",
+          "value": "24",
+          "source_url": "https://www.oneplus.in/oneplus-buds-4",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Yes",
+          "source_url": "https://www.oneplus.in/oneplus-buds-4",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Music / midrange ANC",
+      "evidence_caveat": "LHDC requires compatible Android phone; 45h ANC off",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=OnePlus+Buds+4+%28E513A%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=OnePlus+Buds+4+%28E513A%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": 6099,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.croma.com/oneplus-mobile-accessories/bc/b-0948-943",
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "E513A OnePlus Buds 4 retailer result",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB12",
+      "category": "accessories",
+      "brand": "OnePlus",
+      "model": "Buds Pro 3",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.oneplus.in/oneplus-buds-pro-3",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "Adaptive ANC",
+          "source_url": "https://www.oneplus.in/oneplus-buds-pro-3",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Claimed max ANC dB",
+          "value": "50",
+          "source_url": "https://www.oneplus.in/oneplus-buds-pro-3",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Drivers",
+          "value": "11+6mm",
+          "source_url": "https://www.oneplus.in/oneplus-buds-pro-3",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Bluetooth version",
+          "value": "5.4",
+          "source_url": "https://www.oneplus.in/oneplus-buds-pro-3",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Codecs",
+          "value": "LHDC 5.0/AAC/SBC",
+          "source_url": "https://www.oneplus.in/oneplus-buds-pro-3",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "IP rating",
+          "value": "IP55",
+          "source_url": "https://www.oneplus.in/oneplus-buds-pro-3",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds battery ANC off (h)",
+          "value": "10",
+          "source_url": "https://www.oneplus.in/oneplus-buds-pro-3",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds+case ANC off (h)",
+          "value": "43",
+          "source_url": "https://www.oneplus.in/oneplus-buds-pro-3",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds+case ANC on (h)",
+          "value": "25",
+          "source_url": "https://www.oneplus.in/oneplus-buds-pro-3",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Yes",
+          "source_url": "https://www.oneplus.in/oneplus-buds-pro-3",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Hi-res / premium features",
+      "evidence_caveat": "Spatial head tracking device-specific; 43h ANC off",
+      "retailers": {
+        "amazon": {
+          "price_inr": 10899,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://dealspe.com/deal/oneplus-buds-pro-3-bluetooth-tws-in-ear-buds-dual-driver-hx75c4/",
+          "retailer_research_url": "https://www.amazon.in/s?k=OnePlus+Buds+Pro+3",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "Attributed Amazon price; third-party feed, timestamp 2026-11-05 12:41 IST",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=OnePlus+Buds+Pro+3",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB13",
+      "category": "accessories",
+      "brand": "Nothing",
+      "model": "Ear (a)",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.livemint.com/gadgets-and-appliances/10-best-truly-wireless-earbuds-under-rs-10-000-in-india-top-anc-and-battery-life-picks-for-2026-11792770390024.html",
+      "source_grade": "Editorial specification",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "ANC",
+          "source_url": "https://www.livemint.com/gadgets-and-appliances/10-best-truly-wireless-earbuds-under-rs-10-000-in-india-top-anc-and-battery-life-picks-for-2026-11792770390024.html",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Claimed max ANC dB",
+          "value": "45",
+          "source_url": "https://www.livemint.com/gadgets-and-appliances/10-best-truly-wireless-earbuds-under-rs-10-000-in-india-top-anc-and-battery-life-picks-for-2026-11792770390024.html",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "IP rating",
+          "value": "IP54",
+          "source_url": "https://www.livemint.com/gadgets-and-appliances/10-best-truly-wireless-earbuds-under-rs-10-000-in-india-top-anc-and-battery-life-picks-for-2026-11792770390024.html",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds battery ANC off (h)",
+          "value": "9.5",
+          "source_url": "https://www.livemint.com/gadgets-and-appliances/10-best-truly-wireless-earbuds-under-rs-10-000-in-india-top-anc-and-battery-life-picks-for-2026-11792770390024.html",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Unverified",
+          "source_url": "https://www.livemint.com/gadgets-and-appliances/10-best-truly-wireless-earbuds-under-rs-10-000-in-india-top-anc-and-battery-life-picks-for-2026-11792770390024.html",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Value ANC / style",
+      "evidence_caveat": "IP rating and playback are manufacturer claims",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Nothing+Ear+%28a%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=Nothing+Ear+%28a%29",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB14",
+      "category": "accessories",
+      "brand": "Samsung",
+      "model": "Galaxy Buds3 Pro",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.samsung.com/in/audio-sound/galaxy-buds/galaxy-buds3-pro-white-sm-r630nzwainu/",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "ANC",
+          "source_url": "https://www.samsung.com/in/audio-sound/galaxy-buds/galaxy-buds3-pro-white-sm-r630nzwainu/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "IP rating",
+          "value": "IP57",
+          "source_url": "https://www.samsung.com/in/audio-sound/galaxy-buds/galaxy-buds3-pro-white-sm-r630nzwainu/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds battery ANC off (h)",
+          "value": "7",
+          "source_url": "https://www.samsung.com/in/audio-sound/galaxy-buds/galaxy-buds3-pro-white-sm-r630nzwainu/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds+case ANC off (h)",
+          "value": "30",
+          "source_url": "https://www.samsung.com/in/audio-sound/galaxy-buds/galaxy-buds3-pro-white-sm-r630nzwainu/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds+case ANC on (h)",
+          "value": "26",
+          "source_url": "https://www.samsung.com/in/audio-sound/galaxy-buds/galaxy-buds3-pro-white-sm-r630nzwainu/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Unverified",
+          "source_url": "https://www.samsung.com/in/audio-sound/galaxy-buds/galaxy-buds3-pro-white-sm-r630nzwainu/",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Galaxy ecosystem / premium ANC",
+      "evidence_caveat": "Advanced Samsung features need compatible Galaxy devices",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Samsung+Galaxy+Buds3+Pro",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung+Galaxy+Buds3+Pro",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB15",
+      "category": "accessories",
+      "brand": "Apple",
+      "model": "AirPods 4 with ANC",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://support.apple.com/en-in/121204",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "ANC",
+          "source_url": "https://support.apple.com/en-in/121204",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Drivers",
+          "value": "Apple custom",
+          "source_url": "https://support.apple.com/en-in/121204",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Bluetooth version",
+          "value": "5.3",
+          "source_url": "https://support.apple.com/en-in/121204",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Codecs",
+          "value": "Apple proprietary",
+          "source_url": "https://support.apple.com/en-in/121204",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "IP rating",
+          "value": "IP54",
+          "source_url": "https://support.apple.com/en-in/121204",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds battery ANC off (h)",
+          "value": "5",
+          "source_url": "https://support.apple.com/en-in/121204",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds+case ANC off (h)",
+          "value": "30",
+          "source_url": "https://support.apple.com/en-in/121204",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds+case ANC on (h)",
+          "value": "20",
+          "source_url": "https://support.apple.com/en-in/121204",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Unverified",
+          "source_url": "https://support.apple.com/en-in/121204",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "iPhone / open-fit ANC",
+      "evidence_caveat": "ANC-on: 4h buds /20h case; ANC off shown",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Apple+AirPods+4+with+ANC",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=Apple+AirPods+4+with+ANC",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": 17900,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.croma.com/apple-truly-wireless-earbuds/bc/b-0025-611",
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "AirPods 4 ANC",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB16",
+      "category": "accessories",
+      "brand": "Sony",
+      "model": "WF-1000XM6",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.sony.co.in/electronics/support/wireless-headphones-bluetooth-headphones/wf-1000xm6/specifications",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "ANC",
+          "source_url": "https://www.sony.co.in/electronics/support/wireless-headphones-bluetooth-headphones/wf-1000xm6/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Drivers",
+          "value": "8.4mm",
+          "source_url": "https://www.sony.co.in/electronics/support/wireless-headphones-bluetooth-headphones/wf-1000xm6/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Bluetooth version",
+          "value": "5.3",
+          "source_url": "https://www.sony.co.in/electronics/support/wireless-headphones-bluetooth-headphones/wf-1000xm6/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Codecs",
+          "value": "LDAC/AAC/SBC/LC3",
+          "source_url": "https://www.sony.co.in/electronics/support/wireless-headphones-bluetooth-headphones/wf-1000xm6/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "IP rating",
+          "value": "IPX4",
+          "source_url": "https://www.sony.co.in/electronics/support/wireless-headphones-bluetooth-headphones/wf-1000xm6/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds battery ANC off (h)",
+          "value": "12",
+          "source_url": "https://www.sony.co.in/electronics/support/wireless-headphones-bluetooth-headphones/wf-1000xm6/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Yes",
+          "source_url": "https://www.sony.co.in/electronics/support/wireless-headphones-bluetooth-headphones/wf-1000xm6/specifications",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Premium travel ANC",
+      "evidence_caveat": "12h ANC off / 8h ANC on, not same as case total",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Sony+WF-1000XM6",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=Sony+WF-1000XM6",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB17",
+      "category": "accessories",
+      "brand": "JBL",
+      "model": "Live Beam 3",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.croma.com/l/jbl-live-beam-3-earbuds-0atz00a.html",
+      "source_grade": "Retailer model listing",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "Adaptive ANC",
+          "source_url": "https://www.croma.com/l/jbl-live-beam-3-earbuds-0atz00a.html",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "IP rating",
+          "value": "IP55",
+          "source_url": "https://www.croma.com/l/jbl-live-beam-3-earbuds-0atz00a.html",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Unverified",
+          "source_url": "https://www.croma.com/l/jbl-live-beam-3-earbuds-0atz00a.html",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Touchscreen case / ANC",
+      "evidence_caveat": "Maker/retailer spec; compare charging-case benefit",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=JBL+Live+Beam+3",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=JBL+Live+Beam+3",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": 11999,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.croma.com/l/jbl-live-beam-3-earbuds-0atz00a.html",
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "JBL Live Beam 3 Black/Silver/Blue",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB18",
+      "category": "accessories",
+      "brand": "JBL",
+      "model": "Tune Beam 2",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.croma.com/jbl-truly-wireless-earbuds/bc/b-0196-611",
+      "source_grade": "Retailer model listing",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "Adaptive ANC",
+          "source_url": "https://www.croma.com/jbl-truly-wireless-earbuds/bc/b-0196-611",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "IP rating",
+          "value": "IP54",
+          "source_url": "https://www.croma.com/jbl-truly-wireless-earbuds/bc/b-0196-611",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Unverified",
+          "source_url": "https://www.croma.com/jbl-truly-wireless-earbuds/bc/b-0196-611",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Mainstream ANC",
+      "evidence_caveat": "Check exact color/SKU and test conditions",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=JBL+Tune+Beam+2",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=JBL+Tune+Beam+2",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": 5499,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://www.croma.com/jbl-truly-wireless-earbuds/bc/b-0196-611",
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "JBL Tune Beam 2 Black",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB19",
+      "category": "accessories",
+      "brand": "Skullcandy",
+      "model": "Method 360 ANC",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://www.gadgets360.com/audio/truly-wireless-earphones",
+      "source_grade": "Market listing",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "ANC",
+          "source_url": "https://www.gadgets360.com/audio/truly-wireless-earphones",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Unverified",
+          "source_url": "https://www.gadgets360.com/audio/truly-wireless-earphones",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Distinctive premium choice",
+      "evidence_caveat": "No manufacturer-grade detailed evidence here",
+      "retailers": {
+        "amazon": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.amazon.in/s?k=Skullcandy+Method+360+ANC",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=Skullcandy+Method+360+ANC",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    },
+    {
+      "id": "EB20",
+      "category": "accessories",
+      "brand": "Samsung",
+      "model": "Galaxy Buds Core",
+      "model_code": "",
+      "product_type": "True wireless earbuds",
+      "source_url": "https://comparenow.in/product/samsung-galaxy-buds-core-black-galaxy-ai-enabled-in-ear-tws-with-anc-enriched-bass-6-mic-setup-ip54-35hrs-battery-touch-controls",
+      "source_grade": "Retailer-aggregated detail",
+      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "specifications": [
+        {
+          "label": "ANC type / status",
+          "value": "ANC",
+          "source_url": "https://comparenow.in/product/samsung-galaxy-buds-core-black-galaxy-ai-enabled-in-ear-tws-with-anc-enriched-bass-6-mic-setup-ip54-35hrs-battery-touch-controls",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "IP rating",
+          "value": "IP54",
+          "source_url": "https://comparenow.in/product/samsung-galaxy-buds-core-black-galaxy-ai-enabled-in-ear-tws-with-anc-enriched-bass-6-mic-setup-ip54-35hrs-battery-touch-controls",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Buds+case ANC off (h)",
+          "value": "35",
+          "source_url": "https://comparenow.in/product/samsung-galaxy-buds-core-black-galaxy-ai-enabled-in-ear-tws-with-anc-enriched-bass-6-mic-setup-ip54-35hrs-battery-touch-controls",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Dual connection",
+          "value": "Unverified",
+          "source_url": "https://comparenow.in/product/samsung-galaxy-buds-core-black-galaxy-ai-enabled-in-ear-tws-with-anc-enriched-bass-6-mic-setup-ip54-35hrs-battery-touch-controls",
+          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        }
+      ],
+      "buyer_use_case": "Budget Galaxy earbuds",
+      "evidence_caveat": "35h quoted total; compatibility/AI features vary",
+      "retailers": {
+        "amazon": {
+          "price_inr": 1999,
+          "checked_at": "2026-11-05",
+          "observation_source_url": "https://comparenow.in/product/samsung-galaxy-buds-core-black-galaxy-ai-enabled-in-ear-tws-with-anc-enriched-bass-6-mic-setup-ip54-35hrs-battery-touch-controls",
+          "retailer_research_url": "https://www.amazon.in/s?k=Samsung+Galaxy+Buds+Core",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
+          "price_note": "Attributed Amazon price; third-party tracker; verify exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "flipkart": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung+Galaxy+Buds+Core",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Search link only; no current-price evidence",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        },
+        "croma": {
+          "price_inr": null,
+          "checked_at": null,
+          "observation_source_url": null,
+          "retailer_research_url": "https://www.croma.com/computers-tablets/computer-audio/headphones-earphones/truly-wireless-earbuds/c/611",
+          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "price_status": "NOT_VERIFIED",
+          "price_note": "Browse-only link; NOT an exact SKU",
+          "stock_status": "UNKNOWN",
+          "live_offer": false,
+          "checkout_eligible": false
+        }
+      },
+      "product_status": "RESEARCH_ONLY",
+      "purchase_cta_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "reviewed_at": "2026-11-05"
+    }
+  ]
+}

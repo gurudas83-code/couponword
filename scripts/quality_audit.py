@@ -190,6 +190,35 @@ def audit(root):
     require(category_counts.get("accessories", 0) >= 4 and category_counts.get("tvs", 0) >= 4,
             "Source-backed category coverage disappeared")
 
+    # Dated workbook research is not a live merchant offer.
+    published_workbook_models = {}
+    for category, slug in (("tvs","india-20"),("accessories","earbuds-20")):
+        hub_path = root / category / slug / "index.html"
+        require(hub_path.is_file(), f"Missing 20-product {category} research page")
+        if not hub_path.is_file():
+            continue
+        hub_text = hub_path.read_text(encoding="utf-8")
+        require(f"https://coupon-world.in/{category}/{slug}/" in (root / "sitemap.xml").read_text(encoding="utf-8"),
+                f"Missing {category} research collection in sitemap")
+        require("dated" in hub_text.lower() and "not current offers" in hub_text.lower(),
+                f"Missing dated price disclosure on {category} collection")
+        require('id="cr-comparison"' in hub_text and 'id="cr-filters"' in hub_text,
+                f"Missing comparison/search controls on {category} hub")
+        actual=len(list((root / category / slug).glob("*/index.html")))
+        published_workbook_models[category] = actual
+        require(actual == 20, f"{category} research model count {actual} != 20")
+        for item_page in (root / category / slug).glob("*/index.html"):
+            html=item_page.read_text(encoding="utf-8")
+            route=item_page.relative_to(root).as_posix()
+            require('name="robots" content="noindex,follow"' in html,
+                    f"Unreviewed workbook detail escaped index gate: {route}")
+            require("Amazon, Flipkart and Croma" in html and "Dated quoted reference" in html,
+                    f"Missing three-retailer dated comparison: {route}")
+            require('"@type":"Offer"' not in html and '"@type": "Offer"' not in html,
+                    f"Unsupported Offer structured data: {route}")
+            require('class="shop-button"' not in html and 'class="purchase-cta"' not in html,
+                    f"Unverified merchant CTA: {route}")
+
     result = {
         "result": "PASS" if not errors else "FAIL",
         "checked_at_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -207,6 +236,7 @@ def audit(root):
             "guide_html_files": len(guide_files),
             "source_reviewed_category_models": category_counts,
             "category_documented_fields": category_fields,
+            "workbook_category_model_count": published_workbook_models,
         },
         "warnings": warnings,
         "errors": errors,

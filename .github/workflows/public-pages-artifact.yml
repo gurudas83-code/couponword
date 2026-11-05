@@ -40,6 +40,8 @@ jobs:
       - name: Verify accessories and TV evidence, pages and comparison script
         run: |
           python -m unittest -v test_category_research_release
+          python -m unittest -v test_tv_earbuds_40_release
+          python -m py_compile python/tv_earbuds_workbook_pages.py
           python -m py_compile python/category_research_pages.py
           node --check assets/category-research.js
       - name: Unit-test production health probe contract

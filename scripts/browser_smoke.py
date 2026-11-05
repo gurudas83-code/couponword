@@ -151,6 +151,14 @@ def run(root: Path):
                         assert page.locator(".purchase-cta, .shop-button").count() == 0
                         cr_width = page.evaluate("document.documentElement.scrollWidth")
                         assert cr_width <= width + 8, (category, width, cr_width)
+                    for new_path in ("tvs/india-20/", "accessories/earbuds-20/"):
+                        page.goto(url + new_path, wait_until="domcontentloaded", timeout=30000)
+                        page.locator("#cr-grid .cr-card").first.wait_for(timeout=10000)
+                        assert page.locator("#cr-grid .cr-card").count() == 20, (width, new_path)
+                        page.locator("#cr-grid input[data-compare]").nth(0).check()
+                        page.locator("#cr-grid input[data-compare]").nth(1).check()
+                        assert page.locator("#cr-comparison-table table tbody tr").count() >= 3
+                        assert page.locator(".purchase-cta, .shop-button").count() == 0
                     assert not page_errors, f"{width}px uncaught JS errors: {page_errors}"
                     results.append({"width": width, "search": "PASS", "full_budget_opt_in": "PASS", "exact_variant": "PASS",
                                     "comparison": "PASS", "engine_handoff": "PASS",

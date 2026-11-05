@@ -248,6 +248,11 @@ def build(output: Path) -> Path:
     from python.category_research_pages import publish_category_research_pages
     publish_category_research_pages(output)
 
+    # Import the 20-TV / 20-earbuds editorial workbook into dedicated research
+    # routes. No newly admitted live offers or price-weighted rankings.
+    from python.tv_earbuds_workbook_pages import publish_workbook_catalogue
+    publish_workbook_catalogue(output)
+
     # The source sitemap still lists historical catalogue URLs. Keep those
     # pages online, but do not encourage indexing without current offer proof.
     _prune_unverified_product_sitemap_entries(output)
