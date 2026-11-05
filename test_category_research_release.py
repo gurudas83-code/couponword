@@ -86,7 +86,7 @@ class CategoryResearchReleaseTests(unittest.TestCase):
         self.assertIn('href="/phones/"', homepage)
         self.assertIn('href="/accessories/"', homepage)
         self.assertIn('href="/tvs/"', homepage)
-        self.assertIn('0% price', (ROOT / "reports" / "release_readiness_20261104.md").read_text(encoding="utf-8"))
+        self.assertIn('0% ranking weight', (ROOT / "reports" / "release_readiness_20261104.md").read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":
