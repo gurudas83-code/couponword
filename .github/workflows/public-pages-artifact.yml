@@ -107,11 +107,15 @@ jobs:
               "/products/oneplus-nord-ce-30/": (b"noindex,follow", b"Current price and stock not verified"),
               "/google54faf165096b5622.html": (b"google-site-verification: google54faf165096b5622.html",),
               "/accessories/": (b"oneplus-buds-3/", b"Apple 20W USB-C Power Adapter"),
+              "/accessories/earbuds-20/": (b"Nord Buds 4 Pro", b"20 wireless earbuds"),
+              "/tvs/india-20/": (b"QN80H 55", b"20 TVs"),
+              "/accessories/earbuds-20/eb06/": (b"Amazon, Flipkart and Croma", b"noindex,follow"),
+              "/tvs/india-20/tv06/": (b"Amazon, Flipkart and Croma", b"noindex,follow"),
               "/tvs/": (b"sony-k-43s20-bravia-2/", b"LG UT80"),
               "/accessories/samsung-ep-t2510-25w/": (b"PD 3.0 PPS", b"Maker source"),
               "/tvs/sony-k-43s20-bravia-2/": (b"50 Hz", b"Maker source"),
               "/seo/phones-under-15000.html": (b"Phones Under",),
-              "/sitemap.xml": (b"https://coupon-world.in/phones/samsung-galaxy-a56-5g/",),
+              "/sitemap.xml": (b"https://coupon-world.in/phones/samsung-galaxy-a56-5g/", b"https://coupon-world.in/tvs/india-20/", b"https://coupon-world.in/accessories/earbuds-20/"),
           }
           for path, markers in targets.items():
               for attempt in range(10):
