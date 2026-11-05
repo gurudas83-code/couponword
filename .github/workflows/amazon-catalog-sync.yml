@@ -1,6 +1,10 @@
-name: Amazon Catalog Sync
+name: Amazon and Flipkart Retailer Source Monitor
 
 on:
+  # Every six hours: 05:47, 11:47, 17:47, 23:47 IST (UTC+05:30).
+  # GitHub Actions scheduled starts may be delayed; this is not a real-time SLA.
+  schedule:
+    - cron: "17 0,6,12,18 * * *"
   workflow_dispatch:
 
 permissions:
@@ -30,3 +34,58 @@ jobs:
 
       - name: Run Amazon catalog sync check
         run: python python/amazon_catalog_sync.py
+
+      - name: Report Amazon and Flipkart source readiness (no fabricated prices)
+        env:
+          PYTHONPATH: python
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          from amazon_data_provider import get_default_provider
+          from flipkart_retailer_connector import FlipkartRetailerConnector
+
+          amazon_provider = get_default_provider()
+          amazon_live = bool(getattr(amazon_provider, "api_available", False))
+          flipkart_live = bool(FlipkartRetailerConnector.live_data_available)
+          offer_store = Path("data/retailer_offers.json")
+          stored_rows = 0
+          if offer_store.is_file():
+              payload = json.loads(offer_store.read_text(encoding="utf-8-sig"))
+              stored_rows = len(payload.get("offers", []))
+
+          report = {
+              "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+              "schedule_hours": 6,
+              "mode": "READ_ONLY_SOURCE_READINESS",
+              "amazon": {
+                  "provider": getattr(amazon_provider, "name", "unknown"),
+                  "authorized_live_feed_configured": amazon_live,
+              },
+              "flipkart": {
+                  "authorized_live_feed_configured": flipkart_live,
+              },
+              "stored_offer_rows_not_necessarily_fresh": stored_rows,
+              "prices_refreshed_by_this_monitor": 0,
+              "price_data_modified": False,
+          }
+          print("RETAILER MONITOR REPORT:", json.dumps(report, sort_keys=True))
+          if not (amazon_live and flipkart_live):
+              print(
+                  "::warning::One or both authorized retailer price feeds are unavailable. "
+                  "Scheduled monitoring is active, but this run did NOT verify or refresh prices."
+              )
+
+          summary = os.environ.get("GITHUB_STEP_SUMMARY")
+          if summary:
+              with open(summary, "a", encoding="utf-8") as handle:
+                  handle.write("### Six-hour retailer monitor\n\n")
+                  handle.write(f"- Amazon authorized live feed: {'YES' if amazon_live else 'NO'}\n")
+                  handle.write(f"- Flipkart authorized live feed: {'YES' if flipkart_live else 'NO'}\n")
+                  handle.write(f"- Stored offer rows (not freshness-verified): {stored_rows}\n")
+                  handle.write("- New verified prices from monitor: **0**\n")
+                  handle.write("- No price, ranking, or product data changed.\n")
+          PY
