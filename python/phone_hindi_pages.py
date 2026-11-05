@@ -349,7 +349,7 @@ def build(destination: Path) -> dict:
          "₹10,000 से ₹1 लाख तक 19 मोबाइल बजट विकल्प और कैमरा, बैटरी तथा गेमिंग की प्रमाण स्थिति।",
          BUDGET_HUB, "", budget_main, schema_type="CollectionPage"))
     routes.append(BUDGET_HUB)
-    if len(routes) != 74: # 20 guides + guide hub + 50 models + phone hub + budget hub + 1? 
+    if len(routes) != 73: # 20 guides + guide hub + 50 models + phone hub + budget hub 
         raise RuntimeError(f"Unexpected Hindi indexable route count: {len(routes)}")
     append_sitemap(destination, routes, guides["updated"])
     return {"guide_pages": 20, "phone_pages": 50, "budget_pages": len(BUDGETS),
