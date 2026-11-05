@@ -67,7 +67,8 @@ def load_catalogue():
     return data
 
 def model_route(item):
-    category, folder, _, = (item["category"], *ROUTES[item["category"]][:1],)
+    category = item["category"]
+    folder = ROUTES[category][0]
     return "/" + category + "/" + folder + "/" + item["id"].lower() + "/"
 
 def list_route(category):
