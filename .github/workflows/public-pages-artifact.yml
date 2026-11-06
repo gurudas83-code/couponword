@@ -53,7 +53,7 @@ jobs:
         run: python -m unittest -v test_runtime_health_probe
       - name: Run smartphone recommendation and evidence regression tests
         run: |
-          python -m unittest -v             test_phase_g_ranking_contract             test_mobile_research_inventory_visibility             test_mobile_independent_tests             test_research_usability test_phone_guides_release test_phone_research_seo test_hindi_seo_quality test_seo_index_hygiene             test_recommendation_timeout_guard test_phase_g_frontend_offer test_frontend_recommendation_layout test_final_mobile_release_ui
+          python -m unittest -v             test_phase_g_ranking_contract             test_mobile_research_inventory_visibility             test_mobile_independent_tests             test_mobile_query_answers test_research_usability test_phone_guides_release test_phone_research_seo test_hindi_seo_quality test_seo_index_hygiene             test_recommendation_timeout_guard test_phase_g_frontend_offer test_frontend_recommendation_layout test_final_mobile_release_ui
           node test_mobile_workbook_queries.cjs
           node test_standard_guide_fallback.cjs
           node test_search_discovery.cjs
@@ -104,6 +104,10 @@ jobs:
           from urllib.request import Request, urlopen
           origin = "https://coupon-world.in"
           targets = {
+              "/answers/": (b"Phone buying questions", b"phone-under-25000-with-amoled-ois-and-8gb-ram/"),
+              "/answers/phone-under-25000-with-amoled-ois-and-8gb-ram/": (b"Optical image stabilization (OIS)", b"POCO X7 Pro", b"Samsung Galaxy A36 5G"),
+              "/hi/answers/phone-under-25000-with-amoled-ois-and-8gb-ram/": (b"POCO X7 Pro", b"Samsung Galaxy A36 5G", b"hi-IN"),
+              "/answers/best-apple-phone-under-7000/": (b"noindex,follow", b"not proof that no such phone"),
               "/": (b'href="/phones/"', b'href="/accessories/"', b'href="/tvs/"', b'href="/phones/india-market-demand-q3-2026/"'),
               "/phones/": (b"Browse 50 curated India smartphone research pages", b"/phones/apple-iphone-17/", b"/phones/google-pixel-10/"),
               "/phones/india-market-demand-q3-2026/": (b"6 were missing", b"NOT an official nationwide Top 10 ranking", b"Galaxy A07 5G"),
