@@ -15,6 +15,7 @@ from xml.etree import ElementTree as ET
 from python.phone_research_pages import (
     EDITORIAL_MODEL_KEYS, CORE_EDITORIAL_KEYS, REVIEWED_ADDITIONS, HUB, SITE, accepted_specs, eligible, model_title, slug_for,
 )
+from python.under25_seo_pages import EN as UNDER25_EN, CATEGORY_TEXT as UNDER25_CATEGORIES, valid_data as under25_data, pth as under25_path
 
 ROOT = Path(__file__).resolve().parent
 PUBLIC = ROOT / "public"
@@ -159,8 +160,21 @@ class ResearchSeoTests(unittest.TestCase):
         # its ten noindex model-intake details do not enter the sitemap.
         market = SITE + HUB + "india-market-demand-q3-2026/"
         self.assertIn(market, self.sitemap)
-        self.assertEqual(len([url for url in self.sitemap if url.startswith(SITE + HUB)]),
-                         len(self.selected) + 2)
+        # Preserve the original 50 models + two hubs, and strictly
+        # reconcile the independent source-reviewed under-25k SEO layer.
+        intake = under25_data()
+        expected_under25 = {
+            SITE + UNDER25_EN,
+            *(SITE + UNDER25_EN + "best-" + category + "/" for category in UNDER25_CATEGORIES),
+            *(SITE + under25_path(model) for model in intake["models"]
+              if model["manufacturer_scope"] != "MODEL_NAMING_ALIAS_REQUIRES_REVIEW"),
+        }
+        actual_under25 = {url for url in self.sitemap if url.startswith(SITE + UNDER25_EN)}
+        self.assertEqual(actual_under25, expected_under25)
+        self.assertEqual(
+            len([url for url in self.sitemap if url.startswith(SITE + HUB)]),
+            len(self.selected) + 2 + len(expected_under25),
+        )
         self.assertFalse(any(url.startswith(market) and url != market for url in self.sitemap))
 
     def test_outdated_thin_mobile_page_consolidates_into_real_guide(self):
@@ -177,7 +191,7 @@ class ResearchSeoTests(unittest.TestCase):
     def test_no_unreviewed_records_silently_get_seo_pages(self):
         allowed = {slug_for(card) for card in self.selected}
         produced = {p.name for p in (PUBLIC / "phones").iterdir() if p.is_dir()}
-        self.assertEqual(produced, allowed | {"india-market-demand-q3-2026"})
+        self.assertEqual(produced, allowed | {"india-market-demand-q3-2026", "under-25000"})
         for page in (PUBLIC / "phones" / "india-market-demand-q3-2026").glob("*/index.html"):
             self.assertIn('name="robots" content="noindex,follow"', page.read_text(encoding="utf-8"))
         self.assertFalse((PUBLIC / "phones" / "apple-iphone-11" / "index.html").exists())
