@@ -10,6 +10,7 @@ from xml.etree import ElementTree as ET
 
 from python.phone_research_pages import EDITORIAL_MODEL_KEYS, accepted_specs, eligible, slug_for
 from python.phone_hindi_pages import BUDGETS, GUIDE_COPY
+from python.under25_seo_pages import HI as UNDER25_HI, CATEGORY_TEXT as UNDER25_CATEGORIES, valid_data as under25_data, pth as under25_path
 
 ROOT = Path(__file__).resolve().parent
 PUBLIC = ROOT / "public"
@@ -88,7 +89,22 @@ class HindiSEOContracts(unittest.TestCase):
     def test_06_hindi_indexables_in_sitemap_and_no_english_duplicates(self):
         for route in self.routes:
             self.assertIn(SITE+route,self.sitemap,route)
-        self.assertEqual(len([u for u in self.sitemap if u.startswith(SITE+"/hi/")]),73)
+        # Original 73 Hindi pages plus the separately-reviewed under-25k
+        # pages. One naming-ambiguous model stays noindex in both languages.
+        expected_under25 = {
+            SITE + UNDER25_HI,
+            *(SITE + UNDER25_HI + "best-" + category + "/" for category in UNDER25_CATEGORIES),
+            *(SITE + under25_path(model, hi=True) for model in under25_data()["models"]
+              if model["manufacturer_scope"] != "MODEL_NAMING_ALIAS_REQUIRES_REVIEW"),
+        }
+        self.assertEqual(
+            {u for u in self.sitemap if u.startswith(SITE + UNDER25_HI)},
+            expected_under25,
+        )
+        self.assertEqual(
+            {u for u in self.sitemap if u.startswith(SITE + "/hi/")},
+            {SITE + route for route in self.routes} | expected_under25,
+        )
 
     def test_07_all_nineteen_budget_bands_exist_but_not_indexed(self):
         self.assertEqual(BUDGETS,tuple(range(10000,100001,5000)))
