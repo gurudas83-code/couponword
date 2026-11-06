@@ -188,7 +188,7 @@
       "id": 26,
       "left": "samsung|galaxy a57 5g",
       "right": "oneplus|13r",
-      "intent_en": "Compare manufacturer-supported midrange and performance-oriented approaches on practical tasks.",
+      "intent_en": "Compare manufacturer-supported midrange features against a performance-oriented OnePlus, with the tasks you actually perform in mind.",
       "intent_hi": "Samsung मिडरेंज और OnePlus प्रदर्शन-केंद्रित विकल्पों को व्यावहारिक काम के आधार पर देखें."
     },
     {
@@ -293,7 +293,7 @@
       "id": 41,
       "left": "poco|x7 pro",
       "right": "redmi|note 14 5g",
-      "intent_en": "Separate performance-focused hardware from more general-purpose Redmi positioning.",
+      "intent_en": "Separate performance-focused POCO hardware from more general-purpose Redmi positioning, checking actual sourced capabilities rather than labels.",
       "intent_hi": "परफॉर्मेंस-केंद्रित POCO और सामान्य उपयोग वाले Redmi को अलग जरूरतों पर परखें."
     },
     {
@@ -328,7 +328,7 @@
       "id": 46,
       "left": "nothing|phone 3a",
       "right": "oneplus|nord 4",
-      "intent_en": "Look beyond clean-interface branding to cameras, support and ergonomics.",
+      "intent_en": "Look beyond clean-interface branding to camera hardware, support commitments, everyday handling and exact Indian model evidence.",
       "intent_hi": "साफ़ इंटरफ़ेस की चर्चा से आगे कैमरा, सपोर्ट और पकड़ पर ध्यान दें."
     },
     {
