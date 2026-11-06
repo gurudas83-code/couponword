@@ -155,8 +155,13 @@ class ResearchSeoTests(unittest.TestCase):
     def test_navigation_and_sitemap_include_research_hub(self):
         homepage = (PUBLIC / "index.html").read_text(encoding="utf-8")
         self.assertGreaterEqual(homepage.count('href="/phones/"'), 3)
+        # The market-signal hub is one additional curated research collection;
+        # its ten noindex model-intake details do not enter the sitemap.
+        market = SITE + HUB + "india-market-demand-q3-2026/"
+        self.assertIn(market, self.sitemap)
         self.assertEqual(len([url for url in self.sitemap if url.startswith(SITE + HUB)]),
-                         len(self.selected) + 1)
+                         len(self.selected) + 2)
+        self.assertFalse(any(url.startswith(market) and url != market for url in self.sitemap))
 
     def test_outdated_thin_mobile_page_consolidates_into_real_guide(self):
         old_url = SITE + "/seo/best-mobile-under-15000.html"
@@ -172,7 +177,9 @@ class ResearchSeoTests(unittest.TestCase):
     def test_no_unreviewed_records_silently_get_seo_pages(self):
         allowed = {slug_for(card) for card in self.selected}
         produced = {p.name for p in (PUBLIC / "phones").iterdir() if p.is_dir()}
-        self.assertEqual(produced, allowed)
+        self.assertEqual(produced, allowed | {"india-market-demand-q3-2026"})
+        for page in (PUBLIC / "phones" / "india-market-demand-q3-2026").glob("*/index.html"):
+            self.assertIn('name="robots" content="noindex,follow"', page.read_text(encoding="utf-8"))
         self.assertFalse((PUBLIC / "phones" / "apple-iphone-11" / "index.html").exists())
 
 
