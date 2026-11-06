@@ -17,7 +17,7 @@ from xml.etree import ElementTree as ET
 from python.affiliate_links import AMAZON_TAG
 from python.phone_research_pages import (
     EDITORIAL_MODEL_KEYS, SITE, accepted_specs, eligible, model_title, slug_for,
-    value_text,
+    value_text, specification_label, specification_value,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -57,12 +57,14 @@ def spec_items(card: dict) -> dict[str, dict]:
     return {k: item for k, item in accepted_specs(card)}
 
 
-def source_cell(item: dict | None, hi: bool) -> str:
+def source_cell(item: dict | None, hi: bool, key: str = "") -> str:
     if item is None:
         return '<span class="unknown">' + (
             "इस मॉडल का मान स्रोत में नहीं मिला" if hi else "Not documented for this model"
         ) + "</span>"
-    value = value_text(item.get("value"))
+    value = specification_value(key, item)
+    if key == "chipset" and "ghz" in value.lower():
+        value = specification_label(key, item, hindi=hi) + ": " + value
     url = str(item["source_url"])
     return (f'<strong>{esc(value)}</strong> '
             f'<a class="source" href="{esc(url)}" target="_blank" rel="nofollow noopener noreferrer">'
@@ -86,9 +88,9 @@ def source_table(left: dict, right: dict, hi: bool) -> tuple[str, int, int]:
         ia, ib = a.get(key), b.get(key)
         if ia and ib and value_text(ia.get("value")).casefold() != value_text(ib.get("value")).casefold():
             differences += 1
-        label = (ia or ib or {}).get("label") or key.replace("_", " ").title()
+        label = ("Processor specification / CPU clock" if key == "chipset" and any("ghz" in value_text(x.get("value")).lower() for x in (ia, ib) if x) else (ia or ib or {}).get("label") or key.replace("_", " ").title())
         rows.append(f"<tr><th scope=\"row\">{esc(topic_label(str(label), hi))}</th>"
-                    f"<td>{source_cell(ia, hi)}</td><td>{source_cell(ib, hi)}</td></tr>")
+                    f"<td>{source_cell(ia, hi, key)}</td><td>{source_cell(ib, hi, key)}</td></tr>")
     table = ("<div class=\"table-wrap\"><table><thead><tr>"
              + "".join("<th scope=\"col\">" + esc(x) + "</th>" for x in headings)
              + "</tr></thead><tbody>" + "".join(rows) + "</tbody></table></div>")

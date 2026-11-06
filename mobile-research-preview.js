@@ -349,7 +349,7 @@
     var specs = product.specifications || {};
     var specHtml = Object.keys(specs).map(function (key) {
       var item = specs[key] || {};
-      return '<li><span>' + escapeHtml(item.label || key) + '</span><strong>' + escapeHtml(specValue(key, item)) + '</strong></li>';
+      return '<li><span>' + escapeHtml(specificationLabel(key, item)) + '</span><strong>' + escapeHtml(specValue(key, item)) + '</strong></li>';
     }).join("");
     var battery = product.battery_evidence || {};
     var camera = product.camera_evidence || {};
@@ -380,6 +380,8 @@
     text = text.replace(/सैमसंग/g, "samsung").replace(/आईफोन/g, "iphone").replace(/रेडमी/g, "redmi").replace(/वनप्लस/g, "oneplus");
     var amount = "([0-9]+(?:\\.[0-9]+)?)\\s*(k|thousand|hazar|hazaar|हजार|हज़ार|lakh|lac|लाख)?";
     function value(n, unit) { return Number(n) * (/^(k|thousand|hazar|hazaar|हजार|हज़ार)$/.test(unit || "") ? 1000 : /^(lakh|lac|लाख)$/.test(unit || "") ? 100000 : 1); }
+    var nearbyBudget = /\bnearby\s+(?:band|budget)\b/i.test(text);
+    text = text.replace(/\bnearby\s+(?:band|budget)\b/gi, " ");
     var fullBudget = /\bfull\s+budget\b|पूरे\s*बजट/i.test(text);
     text = text.replace(/\bfull\s+budget\b|पूरे\s*बजट/gi, " ");
     var budget = null, lower = null, inclusive = false;
@@ -392,11 +394,10 @@
       var m = prefix || suffix || currency;
       if (m) { budget = value(m[1], m[2]); inclusive = /within|upto|up to|तक/.test(m[0]); text = text.replace(m[0], " "); }
     }
-    // Generic upper-budget searches use the requested nearby price band.
-    // An explicit range keeps its own lower bound. Never silently widen an
-    // empty band to cheaper phones.
+    // Under-budget searches include every documented cheaper candidate.
+    // Only an explicit nearby-band choice or range adds a lower bound.
     if (budget != null && lower == null) {
-      lower = fullBudget ? 0 : Math.max(0, budget - (budget <= 30000 ? 5000 : 10000));
+      lower = nearbyBudget && !fullBudget ? Math.max(0, budget - (budget <= 30000 ? 5000 : 10000)) : 0;
     }
     var ram = null, storage = null;
     text = text.replace(/\b(\d{1,2})\s*\/\s*(\d{2,4})\b/g, function (_, r, t) { ram = Number(r); storage = Number(t); return " "; });
@@ -796,7 +797,7 @@
     var values = guidedControls.map(function (control) { return String(control && control.value || ""); });
     if (!values.some(Boolean)) { if (guidedStatus) guidedStatus.textContent = "Choose a budget, priority, exact memory or brand exclusion to start."; return; }
     var query = (values[1] ? values[1] + " " : "") + "phone";
-    if (values[0]) query += " under " + values[0] + (guidedScope && guidedScope.value === "all" ? " full budget" : "");
+    if (values[0]) query += " under " + values[0] + (guidedScope && guidedScope.value === "band" ? " nearby band" : " full budget");
     if (values[2]) query += " " + values[2] + "GB physical RAM";
     if (values[3]) query += " " + values[3] + "GB storage";
     if (values[4]) query += " exclude " + values[4];
@@ -806,7 +807,7 @@
   });
   if (clearSearchButton) clearSearchButton.addEventListener("click", function () {
     guidedControls.forEach(function (control) { if (control) control.value = ""; });
-    if (guidedScope) guidedScope.value = "band";
+    if (guidedScope) guidedScope.value = "all";
     if (guidedStatus) guidedStatus.textContent = "";
     var hero = document.getElementById("heroSearch"); if (hero) hero.value = "";
     searchResearch("");

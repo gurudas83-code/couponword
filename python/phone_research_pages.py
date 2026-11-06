@@ -94,6 +94,24 @@ def value_text(value: object) -> str:
     return str(value if value is not None else "").strip()
 
 
+def specification_label(key: str, item: dict, hindi: bool = False) -> str:
+    value = value_text(item.get("value"))
+    if key == "chipset" and re.search(r"ghz", value, re.I) and not re.search(r"snapdragon|exynos|dimensity|bionic|tensor|mediatek|unisoc", value, re.I):
+        return "CPU क्लॉक (चिपसेट नाम अपुष्ट)" if hindi else "CPU clock (chipset name unconfirmed)"
+    if "display_type" in key and re.search(r"colou?r depth|16m", value, re.I):
+        return "स्क्रीन रंग गहराई" if hindi else "Display colour depth"
+    return str(item.get("label") or key.replace("_", " ").title())
+
+
+def specification_value(key: str, item: dict) -> str:
+    value = value_text(item.get("value"))
+    units = {"display_inches": "in", "display_refresh_max_hz": "Hz", "rear_main_mp": "MP",
+             "rear_ultrawide_mp": "MP", "rear_telephoto_mp": "MP", "front_mp": "MP",
+             "battery_mah_typical": "mAh", "wired_charging_max_w": "W",
+             "security_support_years": "years", "os_upgrade_generations": "Android generations"}
+    return value + " " + units[key] if key in units and re.fullmatch(r"[0-9]+(?:\.[0-9]+)?", value) else value
+
+
 def dated(value: object) -> str | None:
     try:
         return date.fromisoformat(str(value or "")[:10]).isoformat()
@@ -208,7 +226,7 @@ def summary_fields(card: dict, maximum: int = 3) -> list[tuple[str, str]]:
     for key in wanted:
         value = specs.get(key)
         if isinstance(value, dict) and value_text(value.get("value")):
-            result.append((str(value.get("label") or key.replace("_", " ").title()), value_text(value["value"])))
+            result.append((specification_label(key, value), specification_value(key, value)))
         if len(result) == maximum:
             break
     return result
@@ -243,8 +261,8 @@ def render_model(card: dict, related: list[dict]) -> str:
     description = f"Explore documented {title} specifications, original manufacturer source links, missing evidence and exact-variant cautions. No live price or stock claims."
     rows = []
     for key, item in specs:
-        label = str(item.get("label") or key.replace("_", " ").title())
-        value = value_text(item.get("value"))
+        label = specification_label(key, item)
+        value = specification_value(key, item)
         source = str(item["source_url"])
         checked = dated(item.get("checked_at") or item.get("checked_date"))
         source_note = f'<span class="mobile-fact-small">Checked {esc(checked)}</span>' if checked else ""
