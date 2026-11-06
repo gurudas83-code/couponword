@@ -101,8 +101,10 @@ jobs:
           from urllib.request import Request, urlopen
           origin = "https://coupon-world.in"
           targets = {
-              "/": (b'href="/phones/"', b'href="/accessories/"', b'href="/tvs/"'),
+              "/": (b'href="/phones/"', b'href="/accessories/"', b'href="/tvs/"', b'href="/phones/india-market-demand-q3-2026/"'),
               "/phones/": (b"Browse 50 curated India smartphone research pages", b"/phones/apple-iphone-17/", b"/phones/google-pixel-10/"),
+              "/phones/india-market-demand-q3-2026/": (b"6 were missing", b"NOT an official nationwide Top 10 ranking", b"Galaxy A07 5G"),
+              "/phones/india-market-demand-q3-2026/samsung-galaxy-a07-5g/": (b"Galaxy A07 5G", b"Manufacturer source", b"noindex,follow"),
               "/phones/samsung-galaxy-a56-5g/": (b"Manufacturer source", b"Unknowns and purchasing limitations"),
               "/phones/google-pixel-10/": (b"Google Pixel 10", b"Manufacturer source"),
               "/phones/samsung-galaxy-f05/": (b"4G LTE", b"Manufacturer source"),
@@ -117,7 +119,7 @@ jobs:
               "/accessories/samsung-ep-t2510-25w/": (b"PD 3.0 PPS", b"Maker source"),
               "/tvs/sony-k-43s20-bravia-2/": (b"50 Hz", b"Maker source"),
               "/seo/phones-under-15000.html": (b"Phones Under",),
-              "/sitemap.xml": (b"https://coupon-world.in/phones/samsung-galaxy-a56-5g/", b"https://coupon-world.in/tvs/india-20/", b"https://coupon-world.in/accessories/earbuds-20/"),
+              "/sitemap.xml": (b"https://coupon-world.in/phones/samsung-galaxy-a56-5g/", b"https://coupon-world.in/tvs/india-20/", b"https://coupon-world.in/accessories/earbuds-20/", b"https://coupon-world.in/phones/india-market-demand-q3-2026/"),
           }
           for path, markers in targets.items():
               for attempt in range(10):
