@@ -27,11 +27,6 @@ async function loadBuyingGuides() {
           ${escapeHTML(page.metaDescription || "Read this Coupon World buying guide before shopping online.")}
         </p>
 
-        <div class="code-row">
-          <span>Keyword</span>
-          <span>${escapeHTML(page.keyword || "")}</span>
-        </div>
-
         <a class="shop-button" href="/seo/${escapeHTML(page.slug)}.html">
           Read Guide →
         </a>
@@ -42,7 +37,7 @@ async function loadBuyingGuides() {
     container.innerHTML = `
       <div class="state-card">
         <strong>Unable to load buying guides</strong>
-        <span>Please check data/seo-pages.json</span>
+        <span>Please open the phone buying guide directory from the navigation.</span>
       </div>
     `;
   }

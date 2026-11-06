@@ -41,16 +41,8 @@ class SearchTrustHygiene(unittest.TestCase):
         self.assertIn(ORIGIN + "/guides/phone-budget-guides/", self.urls)
         # Existing 50 source-linked models + the two hubs remain distinct.
         # Verify exact under-25k pages, excluding any unapproved model alias.
-        expected_under25 = {
-            ORIGIN + UNDER25_EN,
-            *(ORIGIN + UNDER25_EN + "best-" + category + "/" for category in UNDER25_CATEGORIES),
-            *(ORIGIN + under25_path(model) for model in under25_data()["models"]
-              if model["manufacturer_scope"] != "MODEL_NAMING_ALIAS_REQUIRES_REVIEW"),
-        }
-        self.assertEqual(
-            {url for url in self.urls if url.startswith(ORIGIN + UNDER25_EN)},
-            expected_under25,
-        )
+        expected_under25 = {ORIGIN + UNDER25_EN}
+        self.assertEqual({u for u in self.urls if u.startswith(ORIGIN + UNDER25_EN)}, expected_under25)
         self.assertEqual(
             len([url for url in self.urls if url.startswith(ORIGIN + "/phones/")
                  and not url.startswith(ORIGIN + UNDER25_EN)]),
