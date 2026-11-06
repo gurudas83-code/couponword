@@ -1,0 +1,363 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-06",
+  "india_search_evidence": {
+    "metric": "Google Keyword Planner historical model-level averages; not query pair volumes and not verified November real-time ranks",
+    "period": "2025-09-01 to 2026-08-31",
+    "source_file": "data/mobile_google_demand_ranked_126.json",
+    "freshness_signal": "Google Trends India trending now (6 November 2026), directional only"
+  },
+  "publication_policy": "50 uniquely selected buyer-relevant comparisons; source-fact tables only; no automatic winning scores, prices or offer claims",
+  "pairs": [
+    {
+      "id": 1,
+      "left": "apple|iphone 17",
+      "right": "apple|iphone 16",
+      "intent_en": "Decide whether the newer standard iPhone is useful for your display, camera and longevity needs.",
+      "intent_hi": "स्क्रीन, कैमरा और लंबे उपयोग की जरूरत के अनुसार नई और पुरानी सामान्य iPhone पीढ़ियों की तुलना करें."
+    },
+    {
+      "id": 2,
+      "left": "apple|iphone 17 pro",
+      "right": "apple|iphone 17",
+      "intent_en": "Check whether advanced camera and creation features are relevant before paying for the Pro label.",
+      "intent_hi": "Pro नाम के बजाय अपने वीडियो, ज़ूम और रोज़मर्रा के उपयोग की वास्तविक जरूरत जाँचें."
+    },
+    {
+      "id": 3,
+      "left": "apple|iphone 17 pro max",
+      "right": "apple|iphone 17 pro",
+      "intent_en": "Consider size, handling, imaging and endurance evidence rather than assuming the largest phone is best.",
+      "intent_hi": "सबसे बड़े मॉडल को श्रेष्ठ मानने से पहले आकार, पकड़, कैमरा और बैटरी के प्रमाण देखें."
+    },
+    {
+      "id": 4,
+      "left": "apple|iphone 17 pro max",
+      "right": "apple|iphone 16 pro",
+      "intent_en": "A cross-generation Pro decision needs a careful check of exact storage and supported features.",
+      "intent_hi": "अलग पीढ़ियों के Pro मॉडल चुनते समय सटीक स्टोरेज और उपलब्ध सुविधाएँ मिलाएँ."
+    },
+    {
+      "id": 5,
+      "left": "apple|iphone 17",
+      "right": "google|pixel 10",
+      "intent_en": "Choose an ecosystem deliberately: messaging transfer, camera workflow and software habits matter.",
+      "intent_hi": "iOS और Android का चुनाव कैमरा से आगे बढ़कर डेटा स्थानांतरण और रोज़मर्रा की ऐप आदतों पर निर्भर है."
+    },
+    {
+      "id": 6,
+      "left": "apple|iphone 17 pro",
+      "right": "samsung|galaxy s26 ultra",
+      "intent_en": "Compare high-end photo workflows, zoom needs, software and physical handling without declaring a lab winner.",
+      "intent_hi": "प्रीमियम कैमरा में ज़ूम, वीडियो, सॉफ़्टवेयर और पकड़ देखें; बिना समान परीक्षण विजेता तय न करें."
+    },
+    {
+      "id": 7,
+      "left": "google|pixel 10",
+      "right": "google|pixel 9a",
+      "intent_en": "Compare standard and A-series Pixels by documented display, camera and charging differences.",
+      "intent_hi": "Pixel सामान्य और A-सीरीज़ में स्क्रीन, कैमरा और चार्जिंग का वास्तविक अंतर जाँचें."
+    },
+    {
+      "id": 8,
+      "left": "google|pixel 10",
+      "right": "google|pixel 10a",
+      "intent_en": "Check which documented features justify moving beyond the A-series within Google's ecosystem.",
+      "intent_hi": "Google के इकोसिस्टम में A-सीरीज़ से ऊपर जाने का कारण स्रोत-आधारित फीचर्स से तय करें."
+    },
+    {
+      "id": 9,
+      "left": "google|pixel 10a",
+      "right": "google|pixel 9a",
+      "intent_en": "A same-family generational upgrade should solve a specific limitation, not merely change the model year.",
+      "intent_hi": "एक ही परिवार में नया वर्ष तभी मायने रखता है जब आपकी किसी वास्तविक समस्या का हल मिले."
+    },
+    {
+      "id": 10,
+      "left": "samsung|galaxy s26 ultra",
+      "right": "samsung|galaxy s25 fe",
+      "intent_en": "Distinguish Ultra flagship capabilities from Fan Edition practical features, with independent tests left unclaimed.",
+      "intent_hi": "Ultra और Fan Edition की विशेषताओं को अलग समझें; स्वतंत्र परीक्षण के बिना अनुभव का दावा न करें."
+    },
+    {
+      "id": 11,
+      "left": "samsung|galaxy s26 ultra",
+      "right": "samsung|galaxy s24",
+      "intent_en": "Compare device generations with explicit attention to remaining support and camera system differences.",
+      "intent_hi": "अलग पीढ़ियों में कैमरा सिस्टम और बाकी सॉफ़्टवेयर सपोर्ट की पुष्टि आवश्यक है."
+    },
+    {
+      "id": 12,
+      "left": "samsung|galaxy s25 fe",
+      "right": "samsung|galaxy s24",
+      "intent_en": "Compare Samsung's FE and older flagship on the specific features you actually use.",
+      "intent_hi": "Samsung FE और पुराने फ्लैगशिप में आपकी आवश्यक सुविधाओं का अंतर देखें."
+    },
+    {
+      "id": 13,
+      "left": "samsung|galaxy a57 5g",
+      "right": "samsung|galaxy a56 5g",
+      "intent_en": "A-generation upgrades should be judged using documented chipset, protection and support differences.",
+      "intent_hi": "Galaxy A की नई पीढ़ी को चिपसेट, सुरक्षा और अपडेट के सत्यापित अंतर से परखें."
+    },
+    {
+      "id": 14,
+      "left": "samsung|galaxy a56 5g",
+      "right": "samsung|galaxy a55 5g",
+      "intent_en": "Check whether moving from A55 to A56 addresses your camera, display or software priorities.",
+      "intent_hi": "A55 से A56 जाने का निर्णय कैमरा, स्क्रीन और सॉफ़्टवेयर जरूरत से करें."
+    },
+    {
+      "id": 15,
+      "left": "samsung|galaxy a36 5g",
+      "right": "samsung|galaxy a35 5g",
+      "intent_en": "Compare adjacent A-series generations without assuming newer model numbers guarantee better photos.",
+      "intent_hi": "सिर्फ नया मॉडल नंबर देखकर बेहतर फोटो का अनुमान न लगाएँ."
+    },
+    {
+      "id": 16,
+      "left": "samsung|galaxy a37 5g",
+      "right": "samsung|galaxy a36 5g",
+      "intent_en": "Pay attention to the actual update policy and battery/charging details, not marketing labels.",
+      "intent_hi": "विज्ञापन के बजाय अपडेट नीति, बैटरी और चार्जिंग के वास्तविक विवरण देखें."
+    },
+    {
+      "id": 17,
+      "left": "samsung|galaxy a57 5g",
+      "right": "samsung|galaxy a37 5g",
+      "intent_en": "Differentiate the two A-series tiers by screen, cameras and chipset information before shortlisting.",
+      "intent_hi": "A-सीरीज़ की अलग श्रेणियों के लिए स्क्रीन, कैमरा और चिपसेट डेटा देखें."
+    },
+    {
+      "id": 18,
+      "left": "samsung|galaxy a56 5g",
+      "right": "samsung|galaxy a36 5g",
+      "intent_en": "Decide whether camera versatility and performance capabilities matter more than feature overlap.",
+      "intent_hi": "समान फीचर्स से आगे कैमरा विकल्प और प्रदर्शन की जरूरत पहचानें."
+    },
+    {
+      "id": 19,
+      "left": "samsung|galaxy a55 5g",
+      "right": "samsung|galaxy a35 5g",
+      "intent_en": "Compare older midrange tiers while checking current software support rather than assuming equal support.",
+      "intent_hi": "पुराने मिडरेंज मॉडल में बचा हुआ सॉफ़्टवेयर सपोर्ट अलग से जाँचें."
+    },
+    {
+      "id": 20,
+      "left": "samsung|galaxy a27 5g",
+      "right": "samsung|galaxy a06 5g",
+      "intent_en": "Compare a mainstream A-series phone with an entry model using essential-use requirements.",
+      "intent_hi": "एंट्री और मिडरेंज Galaxy में कॉल, स्टोरेज और रोज़मर्रा की जरूरत का अंतर देखें."
+    },
+    {
+      "id": 21,
+      "left": "samsung|galaxy f36 5g",
+      "right": "samsung|galaxy m17 5g",
+      "intent_en": "Check Samsung F/M-series positioning and exact configuration before relying on a shared brand.",
+      "intent_hi": "Samsung की F और M सीरीज़ का सटीक वेरिएंट मिलाएँ; ब्रांड समान होने से फीचर समान नहीं होते."
+    },
+    {
+      "id": 22,
+      "left": "samsung|galaxy f70 pro 5g",
+      "right": "samsung|galaxy m47 5g",
+      "intent_en": "Similar brand-family naming can obscure distinct cameras, screens and software commitments.",
+      "intent_hi": "मिलते-जुलते नामों के पीछे कैमरा, स्क्रीन और अपडेट नीति में अंतर हो सकता है."
+    },
+    {
+      "id": 23,
+      "left": "samsung|galaxy f70e 5g",
+      "right": "samsung|galaxy m17e 5g",
+      "intent_en": "Compare two value-oriented Samsung families with special attention to exact network and storage variants.",
+      "intent_hi": "बजट Samsung विकल्पों में सटीक नेटवर्क और स्टोरेज वेरिएंट की पुष्टि करें."
+    },
+    {
+      "id": 24,
+      "left": "samsung|galaxy m17 5g",
+      "right": "samsung|galaxy m17e 5g",
+      "intent_en": "The e suffix may represent a different device: verify specification-level differences before ordering.",
+      "intent_hi": "मॉडल में e जोड़ने से अलग डिवाइस हो सकता है; खरीद से पहले विवरण मिलाएँ."
+    },
+    {
+      "id": 25,
+      "left": "samsung|galaxy a36 5g",
+      "right": "samsung|galaxy m17 5g",
+      "intent_en": "Balance update horizon, display quality and daily app needs without assuming category winners.",
+      "intent_hi": "सॉफ़्टवेयर सपोर्ट, स्क्रीन और सामान्य ऐप उपयोग के आधार पर निर्णय करें."
+    },
+    {
+      "id": 26,
+      "left": "samsung|galaxy a57 5g",
+      "right": "oneplus|13r",
+      "intent_en": "Compare manufacturer-supported midrange and performance-oriented approaches on practical tasks.",
+      "intent_hi": "Samsung मिडरेंज और OnePlus प्रदर्शन-केंद्रित विकल्पों को व्यावहारिक काम के आधार पर देखें."
+    },
+    {
+      "id": 27,
+      "left": "samsung|galaxy a56 5g",
+      "right": "nothing|phone 3a",
+      "intent_en": "Consider camera types, software interface and support evidence when switching brands.",
+      "intent_hi": "ब्रांड बदलते समय कैमरा प्रकार, सॉफ़्टवेयर अनुभव और अपडेट के प्रमाण देखें."
+    },
+    {
+      "id": 28,
+      "left": "samsung|galaxy a36 5g",
+      "right": "redmi|note 14 5g",
+      "intent_en": "Prioritise service policy, display and exact India network configuration over raw megapixels.",
+      "intent_hi": "मेगापिक्सल के बजाय सपोर्ट नीति, स्क्रीन और भारतीय नेटवर्क वेरिएंट को महत्व दें."
+    },
+    {
+      "id": 29,
+      "left": "samsung|galaxy a37 5g",
+      "right": "redmi|note 14 5g",
+      "intent_en": "Compare a newer Galaxy A-series phone with an established Redmi generation without inferring live price.",
+      "intent_hi": "नई Galaxy और Redmi पीढ़ी की विशेषताएँ मिलाएँ; आज की कीमत मानकर न चलें."
+    },
+    {
+      "id": 30,
+      "left": "samsung|galaxy a56 5g",
+      "right": "motorola|edge 60 fusion",
+      "intent_en": "Look at display ergonomics, durability ratings and software commitments alongside camera hardware.",
+      "intent_hi": "कर्व्ड स्क्रीन की पकड़, सुरक्षा रेटिंग और सॉफ़्टवेयर सपोर्ट को कैमरे के साथ जाँचें."
+    },
+    {
+      "id": 31,
+      "left": "samsung|galaxy s26 ultra",
+      "right": "apple|iphone 17 pro max",
+      "intent_en": "High-end platform selection should reflect your workflow, cameras and data ecosystem, not a universal best claim.",
+      "intent_hi": "प्रीमियम iPhone और Galaxy का चुनाव अपने काम, कैमरा और डेटा इकोसिस्टम से करें."
+    },
+    {
+      "id": 32,
+      "left": "oneplus|13",
+      "right": "oneplus|13r",
+      "intent_en": "Check what flagship and R-series documentation actually says about cameras, display and charging.",
+      "intent_hi": "OnePlus फ्लैगशिप और R-सीरीज़ में कैमरा, स्क्रीन और चार्जिंग के दस्तावेज़ देखें."
+    },
+    {
+      "id": 33,
+      "left": "oneplus|13",
+      "right": "oneplus|12",
+      "intent_en": "Compare flagship generations through documented capabilities and support periods, not launch-year alone.",
+      "intent_hi": "OnePlus की पीढ़ियाँ लॉन्च वर्ष से नहीं, सत्यापित फीचर्स और सपोर्ट से आँकें."
+    },
+    {
+      "id": 34,
+      "left": "oneplus|13r",
+      "right": "iqoo|13",
+      "intent_en": "Identify whether sustained gaming or camera flexibility matters most; no FPS winner without tests.",
+      "intent_hi": "गेमिंग की स्थिरता और कैमरा विकल्पों में अपनी प्राथमिकता तय करें; FPS का विजेता बिना टेस्ट न चुनें."
+    },
+    {
+      "id": 35,
+      "left": "iqoo|neo 10",
+      "right": "poco|x7 pro",
+      "intent_en": "Popular performance phones require comparable gaming FPS, heat and battery testing before a performance verdict.",
+      "intent_hi": "गेमिंग फोन में सिर्फ चिप नाम नहीं, समान FPS, तापमान और बैटरी परीक्षण जरूरी हैं."
+    },
+    {
+      "id": 36,
+      "left": "iqoo|neo 10",
+      "right": "iqoo|13",
+      "intent_en": "A Neo versus flagship comparison should focus on the tasks where higher-tier hardware matters.",
+      "intent_hi": "Neo और फ्लैगशिप का अंतर उन कामों से तय करें जहाँ अतिरिक्त हार्डवेयर उपयोगी हो."
+    },
+    {
+      "id": 37,
+      "left": "iqoo|13",
+      "right": "oneplus|13",
+      "intent_en": "Contrast high-end chip, camera and interface specifications without declaring a benchmark winner.",
+      "intent_hi": "चिप, कैमरा और इंटरफ़ेस के प्रमाण देखें; बिना तुलनीय बेंचमार्क विजेता तय न करें."
+    },
+    {
+      "id": 38,
+      "left": "oneplus|nord 4",
+      "right": "motorola|edge 60 fusion",
+      "intent_en": "Choose between display design, daily battery needs and the software interface you prefer.",
+      "intent_hi": "स्क्रीन डिजाइन, दैनिक बैटरी और पसंदीदा सॉफ़्टवेयर इंटरफ़ेस से चयन करें."
+    },
+    {
+      "id": 39,
+      "left": "oneplus|nord 4",
+      "right": "redmi|note 13 pro 5g",
+      "intent_en": "Compare charging, optics and supported software years, not only marketing processor names.",
+      "intent_hi": "चार्जिंग, कैमरा ऑप्टिक्स और सपोर्ट वर्ष की तुलना करें; केवल प्रोसेसर नाम न देखें."
+    },
+    {
+      "id": 40,
+      "left": "poco|x7 pro",
+      "right": "motorola|edge 60 fusion",
+      "intent_en": "Gaming-leaning and design-leaning devices need different evidence for a fair shortlist.",
+      "intent_hi": "गेमिंग-केंद्रित और डिज़ाइन-केंद्रित फोन में अलग प्रकार के प्रमाण आवश्यक हैं."
+    },
+    {
+      "id": 41,
+      "left": "poco|x7 pro",
+      "right": "redmi|note 14 5g",
+      "intent_en": "Separate performance-focused hardware from more general-purpose Redmi positioning.",
+      "intent_hi": "परफॉर्मेंस-केंद्रित POCO और सामान्य उपयोग वाले Redmi को अलग जरूरतों पर परखें."
+    },
+    {
+      "id": 42,
+      "left": "redmi|note 13 pro 5g",
+      "right": "redmi|note 14 5g",
+      "intent_en": "Compare Pro and non-Pro Redmi generations carefully; newer does not necessarily supersede higher-tier.",
+      "intent_hi": "Redmi Pro और सामान्य मॉडल में केवल नया वर्ष देखकर श्रेष्ठता तय न करें."
+    },
+    {
+      "id": 43,
+      "left": "redmi|note 13 5g",
+      "right": "redmi|note 14 5g",
+      "intent_en": "Use a feature-level comparison when deciding whether an annual Redmi upgrade is meaningful.",
+      "intent_hi": "Redmi की वार्षिक पीढ़ियों में वास्तविक फीचर अंतर से अपग्रेड तय करें."
+    },
+    {
+      "id": 44,
+      "left": "redmi|13 5g",
+      "right": "redmi|note 13 5g",
+      "intent_en": "Distinguish Redmi's numbered series from Note-branded devices at exact model level.",
+      "intent_hi": "Redmi सामान्य और Note सीरीज़ में सटीक मॉडल-स्तरीय अंतर देखें."
+    },
+    {
+      "id": 45,
+      "left": "nothing|phone 3a",
+      "right": "motorola|edge 60 fusion",
+      "intent_en": "Balance design choices against documented camera and practical software features.",
+      "intent_hi": "डिज़ाइन के साथ कैमरा और सॉफ़्टवेयर की प्रमाणित उपयोगिता देखें."
+    },
+    {
+      "id": 46,
+      "left": "nothing|phone 3a",
+      "right": "oneplus|nord 4",
+      "intent_en": "Look beyond clean-interface branding to cameras, support and ergonomics.",
+      "intent_hi": "साफ़ इंटरफ़ेस की चर्चा से आगे कैमरा, सपोर्ट और पकड़ पर ध्यान दें."
+    },
+    {
+      "id": 47,
+      "left": "vivo|t4x 5g",
+      "right": "vivo|t5x 5g",
+      "intent_en": "Verify chipset, capacity and charging differences for a battery-oriented Vivo upgrade.",
+      "intent_hi": "बैटरी पसंद करने वालों को vivo की पीढ़ियों में चिपसेट, क्षमता और चार्जिंग देखनी चाहिए."
+    },
+    {
+      "id": 48,
+      "left": "vivo|t5 pro 5g",
+      "right": "vivo|t5x 5g",
+      "intent_en": "Pro and x variants target different tradeoffs; check exact RAM and screen technology.",
+      "intent_hi": "vivo Pro और x मॉडल की RAM और स्क्रीन तकनीक मिलाएँ; नाम से निष्कर्ष न निकालें."
+    },
+    {
+      "id": 49,
+      "left": "vivo|v60",
+      "right": "vivo|x200 pro",
+      "intent_en": "A camera-focused V versus X-series comparison must consider lens options and independently tested results.",
+      "intent_hi": "कैमरा पसंद करने वालों को V और X-सीरीज़ में लेंस विकल्प व स्वतंत्र फोटो टेस्ट देखने चाहिए."
+    },
+    {
+      "id": 50,
+      "left": "vivo|x200 pro",
+      "right": "xiaomi|14 ultra",
+      "intent_en": "Compare premium camera hardware and software workflows, including zoom and video, without sample-based claims.",
+      "intent_hi": "प्रीमियम कैमरा फोन में ज़ूम और वीडियो वर्कफ़्लो देखें; असली नमूनों के बिना फोटो गुणवत्ता न बताएं."
+    }
+  ]
+}
