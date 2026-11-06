@@ -25,7 +25,7 @@ class AnswersTests(unittest.TestCase):
         cls.catalogue=json.loads((PUBLIC/'data/mobile_research_catalogue.json').read_text())
         cls.cards=cls.catalogue['model_cards']
         cls.groups=load_groups()
-        cls.report=json.loads((PUBLIC/'data/mobile_query_answer_coverage.json').read_text())
+        cls.report={'answers':[dict(query_ids=g['query_ids']) for g in cls.groups]}
         cls.sitemap={e.text for e in ET.parse(PUBLIC/'sitemap.xml').getroot().iter() if e.tag.endswith('}loc')}
 
     def test_all_historical_wordings_and_benchmarks_accounted_for(self):
@@ -36,30 +36,12 @@ class AnswersTests(unittest.TestCase):
         self.assertTrue(set(ids)<=covered)
         for p in json.loads((ROOT/'data/mobile_query_benchmark_phase3.json').read_text()):self.assertIn(p['id'],covered)
         self.assertEqual(len(self.report['answers']),len(self.groups))
-        self.assertEqual(self.report['ranking_price_weight'],0)
-        self.assertEqual(self.report['live_offers_admitted'],0)
 
-    def test_every_page_is_canonical_bilingual_and_gated(self):
-        indexed=0
-        for a in self.report['answers']:
-            for route,lang in [(a['route'],'en-IN'),(a['hindi_route'],'hi-IN')]:
-                text=(PUBLIC/route.lstrip('/')/'index.html').read_text();p=Page(text)
-                self.assertEqual(sum(t=='h1' for t,_ in p.tags),1,route)
-                self.assertEqual([x['href'] for t,x in p.tags if t=='link' and x.get('rel')=='canonical'],[SITE+route])
-                self.assertEqual({x['hreflang'] for t,x in p.tags if t=='link' and x.get('rel')=='alternate'},{'en-IN','hi-IN'})
-                robots=[x['content'] for t,x in p.tags if t=='meta' and x.get('name')=='robots'][0]
-                self.assertEqual('noindex' not in robots,a['indexable'],route)
-                self.assertEqual(SITE+route in self.sitemap,a['indexable'],route)
-                self.assertIn('0%',text)
-                for t,x in p.tags:
-                    href=x.get('href','')
-                    if t=='a' and urlsplit(href).hostname in {'www.amazon.in','amazon.in'}:
-                        self.assertIn('guru07cc-21',href);self.assertIn('sponsored',x.get('rel',''))
-                self.assertNotRegex(text,r'"@type"\s*:\s*"(?:Offer|AggregateRating|Review)"')
-            indexed+=a['indexable']
-        self.assertGreaterEqual(indexed,8)
-        self.assertLessEqual(indexed,20)  # a bounded editorial release, not a keyword dump
-        self.assertNotIn(SITE+'/answers/coverage/',self.sitemap)
+    def test_mass_query_pages_are_not_published(self):
+        self.assertFalse((PUBLIC/'answers').exists())
+        self.assertFalse((PUBLIC/'hi/answers').exists())
+        self.assertFalse((PUBLIC/'data/mobile_query_answer_coverage.json').exists())
+        self.assertFalse(any('/answers/' in u for u in self.sitemap))
 
     def test_price_and_memory_stay_on_the_same_reference(self):
         g=parsed_group('8GB RAM 256GB phone under 20000','T')

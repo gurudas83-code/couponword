@@ -263,20 +263,9 @@ def build(output: Path) -> Path:
     from python.india_sales_priority_pages import publish_sales_priority
     publish_sales_priority(output)
 
-    # Publish reviewed, bilingual under-25k editorial research and category guides.
-    # Does not admit new shopping candidates, alter rankings or claim live offers.
-    from python.under25_seo_pages import publish_under25
-    publish_under25(output)
-
-    # Add fifty separately curated evidence-led model comparisons in both
-    # languages; this neither creates a new scoring engine nor buyable offers.
-    from python.mobile_seo_comparisons import publish_comparisons
-    publish_comparisons(output)
-
-    # Recovered shopper questions are answered from existing research only.
-    # Thin/duplicate/unsupported answers stay noindex and outside the sitemap.
-    from python.mobile_query_answers import publish_answers
-    publish_answers(output)
+    # Consolidate repeated/unsupported landing-page batches into reviewed guides.
+    from python.publication_policy import apply_policy
+    apply_policy(output)
 
     # The source sitemap still lists historical catalogue URLs. Keep those
     # pages online, but do not encourage indexing without current offer proof.

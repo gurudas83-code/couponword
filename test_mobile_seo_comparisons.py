@@ -80,80 +80,15 @@ class ComparisonSEOContracts(unittest.TestCase):
             self.assertGreaterEqual(len(p["intent_hi"]), 45)
         self.assertEqual(len(seen), 50)
 
-    def test_exactly_102_indexable_canonical_urls(self):
-        expected = {SITE + EN, SITE + HI}
-        for item in self.items:
-            left, right = self.cards[item["left"]], self.cards[item["right"]]
-            expected.add(SITE + path_for(left, right))
-            expected.add(SITE + path_for(left, right, True))
-        self.assertEqual(len(expected), 102)
-        self.assertEqual(len(self.urls), len(set(self.urls)))
-        actual = {u for u in self.urls if u.startswith(SITE + EN) or u.startswith(SITE + HI)}
-        self.assertEqual(actual, expected)
-        for route in (EN,HI):
-            markup = self._page(route)
-            self.assertIn("50", markup)
-            self.assertEqual(markup.count('class="comparison-list"'), 1)
-            self.assertIn("not a claimed ranking" if route == EN else "सबसे अधिक खोजे गए", markup)
+    def test_only_consolidated_comparison_guides_are_published(self):
+        self.assertEqual({u for u in self.urls if u.startswith(SITE+EN) or u.startswith(SITE+HI)}, {SITE+EN,SITE+HI})
+        for base in (EN,HI):
+            self.assertEqual(len(list((PUBLIC/base.lstrip('/')).rglob('index.html'))),1)
+            page=self._page(base)
+            self.assertIn('Galaxy A36',page)
+            self.assertIn('Galaxy A56',page)
+            self.assertNotIn('comparison-list',page)
+            self.assertNotIn('50 Evidence-Based',page)
+            self.assertNotIn('"@type": "Offer"',page)
 
-    def test_source_links_no_fabricated_buyability_and_translation(self):
-        targets = []
-        seen_titles = set()
-        for item in self.items:
-            a, b = self.cards[item["left"]], self.cards[item["right"]]
-            for hi in (False,True):
-                route = path_for(a,b,hi)
-                content = self._page(route)
-                page = Page(content)
-                self.assertEqual(page.lang, "hi-IN" if hi else "en-IN")
-                self.assertEqual(page.h1, 1, route)
-                self.assertEqual(page.canonical, [SITE + route], route)
-                self.assertIn('name="robots" content="index,follow"', content, route)
-                self.assertIn(("hi-IN", SITE + path_for(a,b,True)), page.alternates)
-                self.assertIn(("en-IN", SITE + path_for(a,b,False)), page.alternates)
-                self.assertIn(item["intent_hi"] if hi else item["intent_en"], unescape(content))
-                self.assertIn("0%", content, route)
-                self.assertNotIn('"@type": "Offer"', content)
-                self.assertNotIn('"@type": "Product"', content)
-                self.assertNotIn('"@type": "AggregateRating"', content)
-                self.assertNotIn("price_inr", content)
-                self.assertNotIn('class="purchase-cta"', content)
-                self.assertIn('https://www.amazon.in/s?', content)
-                self.assertIn('tag=guru07cc-21', content.replace("&amp;","&"))
-                self.assertIn('https://www.flipkart.com/search?', content)
-                self.assertIn('https://www.croma.com/', content)
-                self.assertIn("source" if not hi else "स्रोत", content)
-                self.assertGreaterEqual(content.count('class="source"'), 8, route)
-                self.assertGreater(len(" ".join(page.body_text).split()), 260, route)
-                title = re.search(r"<title>(.*?)</title>", content)
-                self.assertIsNotNone(title)
-                self.assertNotIn((hi,title.group(1)),seen_titles)
-                seen_titles.add((hi,title.group(1)))
-                targets.extend([(route,a) for a in page.links])
-        self.assertEqual(len(seen_titles), 100)
-        for route, anchor in targets:
-            href = anchor.get("href") or ""
-            if not href.startswith("/") or href.startswith("//"):
-                continue
-            file = PUBLIC / unquote(urlsplit(href).path).lstrip("/")
-            self.assertTrue(file.is_file() or (file / "index.html").is_file(), (route,href))
-
-    def test_noindex_or_data_eligibility_shortcuts(self):
-        # The build must reject data with fewer than 50/50 vetted source records;
-        # do not silently publish only easy keyword permutations.
-        self.assertTrue((PUBLIC / "assets/compare-seo.css").is_file())
-        for source_page in ("/", "/phones/", "/hi/phones/"):
-            target = PUBLIC / source_page.lstrip("/") / "index.html"
-            self.assertTrue(target.exists(), source_page)
-            markup = target.read_text(encoding="utf-8")
-            self.assertIn('href="' + (HI if source_page.startswith("/hi") else EN) + '"', markup)
-        english_index = self._page(EN)
-        hindi_index = self._page(HI)
-        for item in self.items:
-            a, b = self.cards[item["left"]], self.cards[item["right"]]
-            self.assertIn(path_for(a,b), english_index)
-            self.assertIn(path_for(a,b,True), hindi_index)
-
-
-if __name__ == "__main__":
-    unittest.main()
+if __name__=='__main__': unittest.main()

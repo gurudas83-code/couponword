@@ -92,33 +92,13 @@ class HindiSEOContracts(unittest.TestCase):
     def test_06_hindi_indexables_in_sitemap_and_no_english_duplicates(self):
         for route in self.routes:
             self.assertIn(SITE+route,self.sitemap,route)
-        # Original 73 Hindi pages plus the separately-reviewed under-25k
-        # pages. One naming-ambiguous model stays noindex in both languages.
-        expected_under25 = {
-            SITE + UNDER25_HI,
-            *(SITE + UNDER25_HI + "best-" + category + "/" for category in UNDER25_CATEGORIES),
-            *(SITE + under25_path(model, hi=True) for model in under25_data()["models"]
-              if model["manufacturer_scope"] != "MODEL_NAMING_ALIAS_REQUIRES_REVIEW"),
-        }
-        self.assertEqual(
-            {u for u in self.sitemap if u.startswith(SITE + UNDER25_HI)},
-            expected_under25,
-        )
-        expected_compare = {
-            SITE + COMPARE_HI,
-            *(SITE + compare_path(self.cards[p["left"]], self.cards[p["right"]], True)
-              for p in self.comparison_intake),
-        }
-        self.assertEqual(len(expected_compare), 51)
-        self.assertEqual(
-            {u for u in self.sitemap if u.startswith(SITE + COMPARE_HI)},
-            expected_compare,
-        )
+        expected_under25 = {SITE + UNDER25_HI}
+        expected_compare = {SITE + COMPARE_HI}
+        self.assertEqual({u for u in self.sitemap if u.startswith(SITE + UNDER25_HI)}, expected_under25)
+        self.assertEqual({u for u in self.sitemap if u.startswith(SITE + COMPARE_HI)}, expected_compare)
         self.assertEqual(
             {u for u in self.sitemap if u.startswith(SITE + "/hi/")},
-            {SITE + route for route in self.routes} | expected_under25 | expected_compare
-            | {SITE+'/hi/answers/'}
-            | {SITE+x['hindi_route'] for x in json.loads((PUBLIC/'data/mobile_query_answer_coverage.json').read_text())['answers'] if x['indexable']},
+            {SITE + route for route in self.routes} | expected_under25 | expected_compare,
         )
 
     def test_07_all_nineteen_budget_bands_exist_but_not_indexed(self):

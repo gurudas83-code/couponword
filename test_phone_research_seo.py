@@ -162,13 +162,7 @@ class ResearchSeoTests(unittest.TestCase):
         self.assertIn(market, self.sitemap)
         # Preserve the original 50 models + two hubs, and strictly
         # reconcile the independent source-reviewed under-25k SEO layer.
-        intake = under25_data()
-        expected_under25 = {
-            SITE + UNDER25_EN,
-            *(SITE + UNDER25_EN + "best-" + category + "/" for category in UNDER25_CATEGORIES),
-            *(SITE + under25_path(model) for model in intake["models"]
-              if model["manufacturer_scope"] != "MODEL_NAMING_ALIAS_REQUIRES_REVIEW"),
-        }
+        expected_under25 = {SITE + UNDER25_EN}
         actual_under25 = {url for url in self.sitemap if url.startswith(SITE + UNDER25_EN)}
         self.assertEqual(actual_under25, expected_under25)
         self.assertEqual(
@@ -180,10 +174,7 @@ class ResearchSeoTests(unittest.TestCase):
     def test_outdated_thin_mobile_page_consolidates_into_real_guide(self):
         old_url = SITE + "/seo/best-mobile-under-15000.html"
         target_url = SITE + "/seo/phones-under-15000.html"
-        legacy = (PUBLIC / "seo/best-mobile-under-15000.html").read_text(encoding="utf-8")
-        self.assertIn('http-equiv="refresh"', legacy)
-        self.assertIn("0; url=" + target_url, legacy)
-        self.assertIn('rel="canonical" href="' + target_url + '"', legacy)
+        self.assertFalse((PUBLIC / "seo/best-mobile-under-15000.html").exists())
         self.assertNotIn(old_url, self.sitemap)
         self.assertIn(target_url, self.sitemap)
         self.assertTrue((PUBLIC / "seo/phones-under-15000.html").is_file())
