@@ -39,8 +39,10 @@ class SearchTrustHygiene(unittest.TestCase):
         self.assertIn(ORIGIN + "/guides/phone-budget-guides/", self.urls)
         self.assertEqual(
             len([url for url in self.urls if url.startswith(ORIGIN + "/phones/")]),
-            51,
+            52,  # 50 editorial models + phone hub + one sourced Q3 market hub
         )
+        self.assertIn(ORIGIN + "/phones/india-market-demand-q3-2026/", self.urls)
+        self.assertNotIn(ORIGIN + "/phones/india-market-demand-q3-2026/samsung-galaxy-a07-5g/", self.urls)
         self.assertNotIn(ORIGIN + "/seo/best-mobile-under-15000.html", self.urls)
 
     def test_legacy_products_are_available_but_not_indexed_without_verified_offer(self):

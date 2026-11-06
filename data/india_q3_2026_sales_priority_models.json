@@ -1,0 +1,551 @@
+{
+  "schema_version": 1,
+  "market": "India",
+  "created_date": "2026-11-06",
+  "source_period": "2026-Q3",
+  "mode": "RESEARCH_PRIORITY_SHIPMENT_DRIVERS_NO_MODEL_SALES_RANK",
+  "ranking_disclosure": "Omdia Q3 2026 reports named models/series contributing to vendor shipments, NOT an ordered India top-10 model unit-sales ranking. The ten below form an editorial coverage shortlist. Model family references do not attribute sales to a specific RAM/storage, 4G/5G variant or specific series member.",
+  "sales_evidence_url": "https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season",
+  "model_count": 10,
+  "existing_primary_catalogue_count": 4,
+  "missing_primary_catalogue_count": 6,
+  "original_primary_catalogue_model_count": 232,
+  "separation_policy": "New records are manufacturer-source-backed research intake, not automatically canonical variants, score-eligible, offer-eligible or merged into the frozen 232-model registry. Main ranking engine and 232-card regression contracts remain unchanged.",
+  "models": [
+    {
+      "brand": "Samsung",
+      "model": "Galaxy A07 5G",
+      "market_report_name": "Galaxy A07",
+      "official_spec_url": "https://www.samsung.com/in/multistore/in_corporate/feature.SM-A076BZKBINS/",
+      "fact_check_date": "2026-11-06",
+      "manufacturer_reference_status": "OFFICIAL_MODEL_SPEC_PAGE",
+      "model_scope": "INDIA_MARKET_MODEL_FAMILY_NOT_CERTIFIED_RETAILER_VARIANT",
+      "specs": [
+        {
+          "label": "Display",
+          "value": "6.7-inch PLS LCD, HD+ 720 × 1600",
+          "source_url": "https://www.samsung.com/in/multistore/in_corporate/feature.SM-A076BZKBINS/"
+        },
+        {
+          "label": "Refresh rate",
+          "value": "120 Hz",
+          "source_url": "https://www.samsung.com/in/multistore/in_corporate/feature.SM-A076BZKBINS/"
+        },
+        {
+          "label": "Rear cameras",
+          "value": "50 MP main + 2 MP depth",
+          "source_url": "https://www.samsung.com/in/multistore/in_corporate/feature.SM-A076BZKBINS/"
+        },
+        {
+          "label": "Front camera",
+          "value": "8 MP",
+          "source_url": "https://www.samsung.com/in/multistore/in_corporate/feature.SM-A076BZKBINS/"
+        },
+        {
+          "label": "Battery",
+          "value": "6,000 mAh typical",
+          "source_url": "https://www.samsung.com/in/multistore/in_corporate/feature.SM-A076BZKBINS/"
+        },
+        {
+          "label": "Maker-listed example RAM/storage",
+          "value": "4GB / 128GB",
+          "source_url": "https://www.samsung.com/in/multistore/in_corporate/feature.SM-A076BZKBINS/"
+        }
+      ],
+      "notes": "Omdia cites the A07 family, not the specific A07 5G retail configuration; this India 5G model is manufacturer-backed.",
+      "price_inr": null,
+      "stock": null,
+      "merchant_offer_eligible": false,
+      "performance_score": null,
+      "source_report_url": "https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season",
+      "repository_model_key": "samsung|galaxy a07 5g",
+      "repository_snapshot_status": "NEW_SOURCE_REVIEWED_INTAKE_ONLY",
+      "india_source_scope": "INDIA_MANUFACTURER_SPEC_SOURCE"
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy A17 5G",
+      "market_report_name": "Galaxy A17",
+      "official_spec_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a17-5g-blue-128gb-sm-a176bzbmins/",
+      "fact_check_date": "2026-11-06",
+      "manufacturer_reference_status": "OFFICIAL_MODEL_SPEC_PAGE",
+      "model_scope": "INDIA_MARKET_MODEL_FAMILY_NOT_CERTIFIED_RETAILER_VARIANT",
+      "specs": [
+        {
+          "label": "Display",
+          "value": "6.7-inch Super AMOLED, 1080 × 2340",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a17-5g-blue-128gb-sm-a176bzbmins/"
+        },
+        {
+          "label": "Refresh rate",
+          "value": "90 Hz",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a17-5g-blue-128gb-sm-a176bzbmins/"
+        },
+        {
+          "label": "Rear cameras",
+          "value": "50 MP + 5 MP + 2 MP; main OIS",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a17-5g-blue-128gb-sm-a176bzbmins/"
+        },
+        {
+          "label": "Front camera",
+          "value": "13 MP",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a17-5g-blue-128gb-sm-a176bzbmins/"
+        },
+        {
+          "label": "Battery",
+          "value": "5,000 mAh typical",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a17-5g-blue-128gb-sm-a176bzbmins/"
+        },
+        {
+          "label": "Maker-listed example RAM/storage",
+          "value": "8GB / 128GB",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a17-5g-blue-128gb-sm-a176bzbmins/"
+        }
+      ],
+      "notes": "Omdia cites the Galaxy A17 model family, not 5G-only unit shipments.",
+      "price_inr": null,
+      "stock": null,
+      "merchant_offer_eligible": false,
+      "performance_score": null,
+      "source_report_url": "https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season",
+      "repository_model_key": "samsung|galaxy a17 5g",
+      "repository_snapshot_status": "NEW_SOURCE_REVIEWED_INTAKE_ONLY",
+      "india_source_scope": "INDIA_MANUFACTURER_SPEC_SOURCE"
+    },
+    {
+      "brand": "Samsung",
+      "model": "Galaxy A27 5G",
+      "market_report_name": "Galaxy A27",
+      "official_spec_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a27-5g-black-128gb-sm-a276bzkgins/",
+      "fact_check_date": "2026-11-06",
+      "manufacturer_reference_status": "OFFICIAL_MODEL_SPEC_PAGE",
+      "model_scope": "INDIA_MARKET_MODEL_FAMILY_NOT_CERTIFIED_RETAILER_VARIANT",
+      "specs": [
+        {
+          "label": "Display",
+          "value": "6.7-inch Super AMOLED, 1080 × 2340",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a27-5g-black-128gb-sm-a276bzkgins/"
+        },
+        {
+          "label": "Refresh rate",
+          "value": "120 Hz",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a27-5g-black-128gb-sm-a276bzkgins/"
+        },
+        {
+          "label": "Rear cameras",
+          "value": "50 MP + 5 MP + 2 MP; main OIS",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a27-5g-black-128gb-sm-a276bzkgins/"
+        },
+        {
+          "label": "Front camera",
+          "value": "12 MP",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a27-5g-black-128gb-sm-a276bzkgins/"
+        },
+        {
+          "label": "Battery",
+          "value": "5,000 mAh typical",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a27-5g-black-128gb-sm-a276bzkgins/"
+        },
+        {
+          "label": "Maker-listed example RAM/storage",
+          "value": "8GB / 128GB",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a27-5g-black-128gb-sm-a276bzkgins/"
+        }
+      ],
+      "notes": "Already exists in the research catalogue; source is the exact India Samsung device page.",
+      "price_inr": null,
+      "stock": null,
+      "merchant_offer_eligible": false,
+      "performance_score": null,
+      "source_report_url": "https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season",
+      "repository_model_key": "samsung|galaxy a27 5g",
+      "repository_snapshot_status": "EXISTING_232_MODEL",
+      "india_source_scope": "INDIA_MANUFACTURER_SPEC_SOURCE"
+    },
+    {
+      "brand": "vivo",
+      "model": "Y11 5G",
+      "market_report_name": "Y11 5G",
+      "official_spec_url": "https://www.vivo.com/in/product/productSpecification?id=825",
+      "fact_check_date": "2026-11-06",
+      "manufacturer_reference_status": "OFFICIAL_MODEL_SPEC_PAGE",
+      "model_scope": "INDIA_MARKET_MODEL_FAMILY_NOT_CERTIFIED_RETAILER_VARIANT",
+      "specs": [
+        {
+          "label": "Processor",
+          "value": "MediaTek Dimensity 6300",
+          "source_url": "https://www.vivo.com/in/product/productSpecification?id=825"
+        },
+        {
+          "label": "Display",
+          "value": "6.74-inch LCD, 1600 × 720",
+          "source_url": "https://www.vivo.com/in/product/productSpecification?id=825"
+        },
+        {
+          "label": "Refresh rate",
+          "value": "Up to 120 Hz",
+          "source_url": "https://www.vivo.com/in/product/productSpecification?id=825"
+        },
+        {
+          "label": "Rear camera",
+          "value": "13 MP (maker parameter camera entry)",
+          "source_url": "https://www.vivo.com/in/product/productSpecification?id=825"
+        },
+        {
+          "label": "Battery",
+          "value": "6,500 mAh typical",
+          "source_url": "https://www.vivo.com/in/product/productSpecification?id=825"
+        },
+        {
+          "label": "Charging",
+          "value": "15 W",
+          "source_url": "https://www.vivo.com/in/product/productSpecification?id=825"
+        },
+        {
+          "label": "RAM/storage variants",
+          "value": "4GB+64GB; 4GB+128GB",
+          "source_url": "https://www.vivo.com/in/product/productSpecification?id=825"
+        }
+      ],
+      "notes": "Official vivo India page contains inconsistent camera auxiliary text; camera resolution here follows its primary camera specification entry. Validate before certified exact variant.",
+      "price_inr": null,
+      "stock": null,
+      "merchant_offer_eligible": false,
+      "performance_score": null,
+      "source_report_url": "https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season",
+      "repository_model_key": "vivo|y11 5g",
+      "repository_snapshot_status": "NEW_SOURCE_REVIEWED_INTAKE_ONLY",
+      "india_source_scope": "INDIA_MANUFACTURER_SPEC_SOURCE"
+    },
+    {
+      "brand": "vivo",
+      "model": "Y21 5G",
+      "market_report_name": "Y21 5G",
+      "official_spec_url": "https://www.vivo.com/in/products/param/y21-5g",
+      "fact_check_date": "2026-11-06",
+      "manufacturer_reference_status": "OFFICIAL_MODEL_SPEC_PAGE",
+      "model_scope": "INDIA_MARKET_MODEL_FAMILY_NOT_CERTIFIED_RETAILER_VARIANT",
+      "specs": [
+        {
+          "label": "Processor",
+          "value": "MediaTek Dimensity 6300",
+          "source_url": "https://www.vivo.com/in/products/param/y21-5g"
+        },
+        {
+          "label": "Display",
+          "value": "6.74-inch LCD, 1600 × 720",
+          "source_url": "https://www.vivo.com/in/products/param/y21-5g"
+        },
+        {
+          "label": "Refresh rate",
+          "value": "Up to 120 Hz",
+          "source_url": "https://www.vivo.com/in/products/param/y21-5g"
+        },
+        {
+          "label": "Rear main camera",
+          "value": "50 MP",
+          "source_url": "https://www.vivo.com/in/products/param/y21-5g"
+        },
+        {
+          "label": "Battery",
+          "value": "6,500 mAh typical",
+          "source_url": "https://www.vivo.com/in/products/param/y21-5g"
+        },
+        {
+          "label": "Charging",
+          "value": "44 W",
+          "source_url": "https://www.vivo.com/in/products/param/y21-5g"
+        },
+        {
+          "label": "RAM/storage variants",
+          "value": "4GB+128GB; 6GB+128GB; 8GB+128GB",
+          "source_url": "https://www.vivo.com/in/products/param/y21-5g"
+        }
+      ],
+      "notes": "Official India variants, but listings and delivery availability remain unverified.",
+      "price_inr": null,
+      "stock": null,
+      "merchant_offer_eligible": false,
+      "performance_score": null,
+      "source_report_url": "https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season",
+      "repository_model_key": "vivo|y21 5g",
+      "repository_snapshot_status": "NEW_SOURCE_REVIEWED_INTAKE_ONLY",
+      "india_source_scope": "INDIA_MANUFACTURER_SPEC_SOURCE"
+    },
+    {
+      "brand": "Redmi",
+      "model": "Redmi 15A 5G",
+      "market_report_name": "Redmi 15A",
+      "official_spec_url": "https://www.mi.com/in/product/redmi-15a-5g/specs/",
+      "fact_check_date": "2026-11-06",
+      "manufacturer_reference_status": "OFFICIAL_MODEL_SPEC_PAGE",
+      "model_scope": "INDIA_MARKET_MODEL_FAMILY_NOT_CERTIFIED_RETAILER_VARIANT",
+      "specs": [
+        {
+          "label": "Processor",
+          "value": "UNISOC T8300 5G, octa-core",
+          "source_url": "https://www.mi.com/in/product/redmi-15a-5g/specs/"
+        },
+        {
+          "label": "Display",
+          "value": "6.9-inch HD+",
+          "source_url": "https://www.mi.com/in/product/redmi-15a-5g/specs/"
+        },
+        {
+          "label": "Refresh rate",
+          "value": "Up to 120 Hz",
+          "source_url": "https://www.mi.com/in/product/redmi-15a-5g/specs/"
+        },
+        {
+          "label": "Rear camera",
+          "value": "32 MP",
+          "source_url": "https://www.mi.com/in/product/redmi-15a-5g/specs/"
+        },
+        {
+          "label": "Battery",
+          "value": "6,300 mAh typical",
+          "source_url": "https://www.mi.com/in/product/redmi-15a-5g/specs/"
+        },
+        {
+          "label": "Charging",
+          "value": "15 W",
+          "source_url": "https://www.mi.com/in/product/redmi-15a-5g/specs/"
+        },
+        {
+          "label": "RAM/storage variants",
+          "value": "4GB+64GB; 4GB+128GB; 6GB+128GB",
+          "source_url": "https://www.mi.com/in/product/redmi-15a-5g/specs/"
+        }
+      ],
+      "notes": "Omdia cites Redmi 15A; India manufacturer page is specifically 15A 5G.",
+      "price_inr": null,
+      "stock": null,
+      "merchant_offer_eligible": false,
+      "performance_score": null,
+      "source_report_url": "https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season",
+      "repository_model_key": "redmi|redmi 15a 5g",
+      "repository_snapshot_status": "NEW_SOURCE_REVIEWED_INTAKE_ONLY",
+      "india_source_scope": "INDIA_MANUFACTURER_SPEC_SOURCE"
+    },
+    {
+      "brand": "Redmi",
+      "model": "Redmi A7",
+      "market_report_name": "Redmi A7",
+      "official_spec_url": "https://www.mi.com/in/product/redmi-a7/specs/",
+      "fact_check_date": "2026-11-06",
+      "manufacturer_reference_status": "OFFICIAL_MODEL_SPEC_PAGE",
+      "model_scope": "INDIA_MARKET_MODEL_FAMILY_NOT_CERTIFIED_RETAILER_VARIANT",
+      "specs": [
+        {
+          "label": "Processor",
+          "value": "UNISOC T7250",
+          "source_url": "https://www.mi.com/in/product/redmi-a7/specs/"
+        },
+        {
+          "label": "Display",
+          "value": "6.88-inch, 720 × 1640",
+          "source_url": "https://www.mi.com/in/product/redmi-a7/specs/"
+        },
+        {
+          "label": "Refresh rate",
+          "value": "Up to 120 Hz",
+          "source_url": "https://www.mi.com/in/product/redmi-a7/specs/"
+        },
+        {
+          "label": "Rear camera",
+          "value": "13 MP",
+          "source_url": "https://www.mi.com/in/product/redmi-a7/specs/"
+        },
+        {
+          "label": "Battery",
+          "value": "5,200 mAh typical",
+          "source_url": "https://www.mi.com/in/product/redmi-a7/specs/"
+        },
+        {
+          "label": "Charging",
+          "value": "15 W",
+          "source_url": "https://www.mi.com/in/product/redmi-a7/specs/"
+        },
+        {
+          "label": "RAM/storage variant",
+          "value": "3GB+64GB",
+          "source_url": "https://www.mi.com/in/product/redmi-a7/specs/"
+        },
+        {
+          "label": "Mobile network",
+          "value": "4G LTE (not 5G)",
+          "source_url": "https://www.mi.com/in/product/redmi-a7/specs/"
+        }
+      ],
+      "notes": "India model is explicitly 4G, not Redmi A7 Pro or an unspecified 5G variant.",
+      "price_inr": null,
+      "stock": null,
+      "merchant_offer_eligible": false,
+      "performance_score": null,
+      "source_report_url": "https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season",
+      "repository_model_key": "redmi|redmi a7",
+      "repository_snapshot_status": "NEW_SOURCE_REVIEWED_INTAKE_ONLY",
+      "india_source_scope": "INDIA_MANUFACTURER_SPEC_SOURCE"
+    },
+    {
+      "brand": "OPPO",
+      "model": "Reno16 5G",
+      "market_report_name": "Reno16 series",
+      "official_spec_url": "https://www.oppo.com/in/smartphones/series-reno/reno16/specs/",
+      "fact_check_date": "2026-11-06",
+      "manufacturer_reference_status": "OFFICIAL_MODEL_SPEC_PAGE",
+      "model_scope": "INDIA_MARKET_MODEL_FAMILY_NOT_CERTIFIED_RETAILER_VARIANT",
+      "specs": [
+        {
+          "label": "Processor",
+          "value": "Qualcomm Snapdragon 7 Gen 4",
+          "source_url": "https://www.oppo.com/in/smartphones/series-reno/reno16/specs/"
+        },
+        {
+          "label": "Display",
+          "value": "AMOLED, 2640 × 1216",
+          "source_url": "https://www.oppo.com/in/smartphones/series-reno/reno16/specs/"
+        },
+        {
+          "label": "Refresh rate",
+          "value": "Up to 120 Hz",
+          "source_url": "https://www.oppo.com/in/smartphones/series-reno/reno16/specs/"
+        },
+        {
+          "label": "Rear camera",
+          "value": "50 MP main + 50 MP ultrawide + 50 MP telephoto",
+          "source_url": "https://www.oppo.com/in/smartphones/series-reno/reno16/specs/"
+        },
+        {
+          "label": "Battery",
+          "value": "6,700 mAh typical",
+          "source_url": "https://www.oppo.com/in/smartphones/series-reno/reno16/specs/"
+        },
+        {
+          "label": "Charging",
+          "value": "80 W SUPERVOOC",
+          "source_url": "https://www.oppo.com/in/smartphones/series-reno/reno16/specs/"
+        },
+        {
+          "label": "RAM/storage variants",
+          "value": "8GB+128GB; 8GB+256GB; 12GB+256GB (maker specification options)",
+          "source_url": "https://www.oppo.com/in/smartphones/series-reno/reno16/specs/"
+        }
+      ],
+      "notes": "Omdia groups the broader Reno16 series; this is one India model, not the series' exact share.",
+      "price_inr": null,
+      "stock": null,
+      "merchant_offer_eligible": false,
+      "performance_score": null,
+      "source_report_url": "https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season",
+      "repository_model_key": "oppo|reno16 5g",
+      "repository_snapshot_status": "EXISTING_232_MODEL",
+      "india_source_scope": "INDIA_MANUFACTURER_SPEC_SOURCE"
+    },
+    {
+      "brand": "Apple",
+      "model": "iPhone 17",
+      "market_report_name": "iPhone 17",
+      "official_spec_url": "https://www.apple.com/in/iphone-17/specs/",
+      "fact_check_date": "2026-11-06",
+      "manufacturer_reference_status": "OFFICIAL_MODEL_SPEC_PAGE",
+      "model_scope": "INDIA_MARKET_MODEL_FAMILY_NOT_CERTIFIED_RETAILER_VARIANT",
+      "specs": [
+        {
+          "label": "Chip",
+          "value": "Apple A19",
+          "source_url": "https://www.apple.com/in/iphone-17/specs/"
+        },
+        {
+          "label": "Display",
+          "value": "6.3-inch OLED, 2622 × 1206",
+          "source_url": "https://www.apple.com/in/iphone-17/specs/"
+        },
+        {
+          "label": "Refresh rate",
+          "value": "ProMotion up to 120 Hz",
+          "source_url": "https://www.apple.com/in/iphone-17/specs/"
+        },
+        {
+          "label": "Storage options",
+          "value": "256GB; 512GB",
+          "source_url": "https://www.apple.com/in/iphone-17/specs/"
+        },
+        {
+          "label": "Weight",
+          "value": "177 g",
+          "source_url": "https://www.apple.com/in/iphone-17/specs/"
+        },
+        {
+          "label": "Ingress protection",
+          "value": "IP68",
+          "source_url": "https://www.apple.com/in/iphone-17/specs/"
+        }
+      ],
+      "notes": "Omdia cites base iPhone 17 demand; no individual unit rank supplied.",
+      "price_inr": null,
+      "stock": null,
+      "merchant_offer_eligible": false,
+      "performance_score": null,
+      "source_report_url": "https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season",
+      "repository_model_key": "apple|iphone 17",
+      "repository_snapshot_status": "EXISTING_232_MODEL",
+      "india_source_scope": "INDIA_MANUFACTURER_SPEC_SOURCE"
+    },
+    {
+      "brand": "POCO",
+      "model": "X8 5G",
+      "market_report_name": "POCO X8",
+      "official_spec_url": "https://www.mi.com/global/product/poco-x8/specs/",
+      "fact_check_date": "2026-11-06",
+      "manufacturer_reference_status": "OFFICIAL_MODEL_SPEC_PAGE",
+      "model_scope": "INDIA_MARKET_MODEL_FAMILY_NOT_CERTIFIED_RETAILER_VARIANT",
+      "specs": [
+        {
+          "label": "Processor",
+          "value": "Qualcomm Snapdragon 6s Gen 4",
+          "source_url": "https://www.mi.com/global/product/poco-x8/specs/"
+        },
+        {
+          "label": "Display",
+          "value": "6.83-inch AMOLED, 2772 × 1280",
+          "source_url": "https://www.mi.com/global/product/poco-x8/specs/"
+        },
+        {
+          "label": "Refresh rate",
+          "value": "Up to 120 Hz",
+          "source_url": "https://www.mi.com/global/product/poco-x8/specs/"
+        },
+        {
+          "label": "Rear main camera",
+          "value": "50 MP with OIS",
+          "source_url": "https://www.mi.com/global/product/poco-x8/specs/"
+        },
+        {
+          "label": "Battery",
+          "value": "8,340 mAh typical (global specification)",
+          "source_url": "https://www.mi.com/global/product/poco-x8/specs/"
+        },
+        {
+          "label": "Charging",
+          "value": "67 W HyperCharge",
+          "source_url": "https://www.mi.com/global/product/poco-x8/specs/"
+        },
+        {
+          "label": "RAM/storage options",
+          "value": "6GB+128GB; 8GB+256GB; 12GB+256GB (global)",
+          "source_url": "https://www.mi.com/global/product/poco-x8/specs/"
+        }
+      ],
+      "notes": "Omdia cites POCO X8; maker source is GLOBAL, not a certified India configuration. India exact variant and battery require verification.",
+      "price_inr": null,
+      "stock": null,
+      "merchant_offer_eligible": false,
+      "performance_score": null,
+      "source_report_url": "https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season",
+      "repository_model_key": "poco|x8 5g",
+      "repository_snapshot_status": "EXISTING_232_MODEL",
+      "india_source_scope": "GLOBAL_MANUFACTURER_SPEC_NEEDS_INDIA_MATCH"
+    }
+  ]
+}

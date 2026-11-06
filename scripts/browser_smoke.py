@@ -159,6 +159,17 @@ def run(root: Path):
                         page.locator("#cr-grid input[data-compare]").nth(1).check()
                         assert page.locator("#cr-comparison-table table tbody tr").count() >= 3
                         assert page.locator(".purchase-cta, .shop-button").count() == 0
+                    page.goto(url + "phones/india-market-demand-q3-2026/", wait_until="domcontentloaded", timeout=30000)
+                    assert page.locator(".cr-grid .cr-card").count() == 10
+                    assert "NOT an official nationwide Top 10 ranking" in page.locator("main").inner_text()
+                    assert "6 were missing" in page.locator("main").inner_text()
+                    assert page.locator("a[href*='galaxy-a07-5g/']").count() >= 1
+                    assert page.evaluate("document.documentElement.scrollWidth") <= width + 8, width
+                    page.goto(url + "phones/india-market-demand-q3-2026/samsung-galaxy-a07-5g/", wait_until="domcontentloaded", timeout=30000)
+                    assert "Galaxy A07 5G" in page.locator("h1").inner_text()
+                    assert page.locator(".cr-detail-facts .cr-fact").count() >= 5
+                    assert page.locator('meta[name="robots"]').get_attribute("content") == "noindex,follow"
+                    assert not page.locator(".shop-button,.purchase-cta").count()
                     assert not page_errors, f"{width}px uncaught JS errors: {page_errors}"
                     results.append({"width": width, "search": "PASS", "full_budget_opt_in": "PASS", "exact_variant": "PASS",
                                     "comparison": "PASS", "engine_handoff": "PASS",

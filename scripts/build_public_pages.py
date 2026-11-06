@@ -258,6 +258,11 @@ def build(output: Path) -> Path:
     from python.tv_earbuds_workbook_pages import publish_workbook_catalogue
     publish_workbook_catalogue(output)
 
+    # Add source-supported Q3 India market-demand research from the same
+    # reviewed public Pages path. The 232-phone core remains unchanged.
+    from python.india_sales_priority_pages import publish_sales_priority
+    publish_sales_priority(output)
+
     # The source sitemap still lists historical catalogue URLs. Keep those
     # pages online, but do not encourage indexing without current offer proof.
     _prune_unverified_product_sitemap_entries(output)
