@@ -10,6 +10,8 @@ import unittest
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
+from python.under25_seo_pages import EN as UNDER25_EN, CATEGORY_TEXT as UNDER25_CATEGORIES, valid_data as under25_data, pth as under25_path
+
 
 ROOT = Path(__file__).resolve().parent
 PUBLIC = ROOT / "public"
@@ -37,9 +39,22 @@ class SearchTrustHygiene(unittest.TestCase):
         self.assertIn(ORIGIN + "/", self.urls)
         self.assertIn(ORIGIN + "/phones/", self.urls)
         self.assertIn(ORIGIN + "/guides/phone-budget-guides/", self.urls)
+        # Existing 50 source-linked models + the two hubs remain distinct.
+        # Verify exact under-25k pages, excluding any unapproved model alias.
+        expected_under25 = {
+            ORIGIN + UNDER25_EN,
+            *(ORIGIN + UNDER25_EN + "best-" + category + "/" for category in UNDER25_CATEGORIES),
+            *(ORIGIN + under25_path(model) for model in under25_data()["models"]
+              if model["manufacturer_scope"] != "MODEL_NAMING_ALIAS_REQUIRES_REVIEW"),
+        }
         self.assertEqual(
-            len([url for url in self.urls if url.startswith(ORIGIN + "/phones/")]),
-            52,  # 50 editorial models + phone hub + one sourced Q3 market hub
+            {url for url in self.urls if url.startswith(ORIGIN + UNDER25_EN)},
+            expected_under25,
+        )
+        self.assertEqual(
+            len([url for url in self.urls if url.startswith(ORIGIN + "/phones/")
+                 and not url.startswith(ORIGIN + UNDER25_EN)]),
+            52,
         )
         self.assertIn(ORIGIN + "/phones/india-market-demand-q3-2026/", self.urls)
         self.assertNotIn(ORIGIN + "/phones/india-market-demand-q3-2026/samsung-galaxy-a07-5g/", self.urls)
