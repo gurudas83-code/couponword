@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "market": "India",
+  "source_period": "2026-Q2",
+  "observed_on": "2026-11-06",
+  "ranking_type": "COUNTERPOINT_ESTIMATED_MODEL_SALES_SHARE_IN_INDIA",
+  "source_url": "https://counterpointresearch.com/en/insights/top-5-smartphone-model-share-8-countries",
+  "disclosure": "Source provides the publicly available top five model shares for Q2 2026, not an all-India top ten for Q3 2026 or sales on 6 Nov 2026. Numbers are rounded and pertain to model-family shares; do not assign to a RAM/storage/colour variant.",
+  "canonical_registry_policy": "RESEARCH_ONLY; manufacturer facts do not certify exact retailer SKU, current price, stock, profitability, performance score, ranking eligibility or purchase offer. Existing 232 model catalogue frozen and unchanged.",
+  "existing_primary_catalogue_count": 3,
+  "missing_primary_catalogue_count": 2,
+  "missing_research_intake_models": [
+    "OPPO A6x 5G",
+    "vivo Y31 5G"
+  ],
+  "related_recent_market_priority_file": "data/india_q3_2026_sales_priority_models.json",
+  "models": [
+    {
+      "rank": 1,
+      "brand": "OPPO",
+      "model": "A6x 5G",
+      "india_model_sales_share_percent": 4,
+      "repository_model_key": "oppo|a6x 5g",
+      "primary_catalogue_snapshot_status": "MISSING",
+      "official_spec_url": "https://www.oppo.com/in/smartphones/series-a/a6x-5g/specs/",
+      "manufacturer_model_identifier": "CPH2823",
+      "verified_manufacturer_facts": [
+        {
+          "field": "SoC",
+          "value": "MediaTek Dimensity 6300",
+          "source_url": "https://www.oppo.com/in/smartphones/series-a/a6x-5g/specs/"
+        },
+        {
+          "field": "Display",
+          "value": "17.15 cm LCD, 1570 × 720, up to 120 Hz",
+          "source_url": "https://www.oppo.com/in/smartphones/series-a/a6x-5g/specs/"
+        },
+        {
+          "field": "Battery",
+          "value": "6500 mAh typical",
+          "source_url": "https://www.oppo.com/in/smartphones/series-a/a6x-5g/specs/"
+        },
+        {
+          "field": "Charging",
+          "value": "45 W SUPERVOOC maximum",
+          "source_url": "https://www.oppo.com/in/smartphones/series-a/a6x-5g/specs/"
+        },
+        {
+          "field": "Rear camera",
+          "value": "13 MP",
+          "source_url": "https://www.oppo.com/in/smartphones/series-a/a6x-5g/specs/"
+        },
+        {
+          "field": "India manufacturer-listed configurations",
+          "value": "4GB/64GB, 4GB/128GB, 6GB/128GB",
+          "source_url": "https://www.oppo.com/in/smartphones/series-a/a6x-5g/specs/"
+        }
+      ],
+      "source_report_url": "https://counterpointresearch.com/en/insights/top-5-smartphone-model-share-8-countries",
+      "research_intake_only": true,
+      "price_inr": null,
+      "stock": null,
+      "performance_score": null,
+      "current_offer_eligible": false,
+      "exact_variant_sales_rank_verified": false,
+      "notes": "India Q2 2026 model-level estimate only. Maker facts are not a current offer or an exact SKU sale."
+    },
+    {
+      "rank": 2,
+      "brand": "Apple",
+      "model": "iPhone 17",
+      "india_model_sales_share_percent": 3,
+      "repository_model_key": "apple|iphone 17",
+      "primary_catalogue_snapshot_status": "EXISTING_RESEARCH_ONLY",
+      "official_spec_url": "https://www.apple.com/in/iphone-17/specs/",
+      "manufacturer_model_identifier": null,
+      "verified_manufacturer_facts": [
+        {
+          "field": "Chip",
+          "value": "A19",
+          "source_url": "https://www.apple.com/in/iphone-17/specs/"
+        },
+        {
+          "field": "Display",
+          "value": "6.3-inch OLED, up to 120 Hz",
+          "source_url": "https://www.apple.com/in/iphone-17/specs/"
+        },
+        {
+          "field": "Capacity",
+          "value": "256GB, 512GB",
+          "source_url": "https://www.apple.com/in/iphone-17/specs/"
+        }
+      ],
+      "source_report_url": "https://counterpointresearch.com/en/insights/top-5-smartphone-model-share-8-countries",
+      "research_intake_only": false,
+      "price_inr": null,
+      "stock": null,
+      "performance_score": null,
+      "current_offer_eligible": false,
+      "exact_variant_sales_rank_verified": false,
+      "notes": "India Q2 2026 model-level estimate only. Maker facts are not a current offer or an exact SKU sale."
+    },
+    {
+      "rank": 3,
+      "brand": "Apple",
+      "model": "iPhone 16",
+      "india_model_sales_share_percent": 3,
+      "repository_model_key": "apple|iphone 16",
+      "primary_catalogue_snapshot_status": "EXISTING_RESEARCH_ONLY",
+      "official_spec_url": "https://www.apple.com/in/iphone-16/specs/",
+      "manufacturer_model_identifier": null,
+      "verified_manufacturer_facts": [
+        {
+          "field": "Chip",
+          "value": "A18",
+          "source_url": "https://www.apple.com/in/iphone-16/specs/"
+        },
+        {
+          "field": "Display",
+          "value": "6.1-inch OLED",
+          "source_url": "https://www.apple.com/in/iphone-16/specs/"
+        },
+        {
+          "field": "Capacity",
+          "value": "128GB listed on current Apple India specs",
+          "source_url": "https://www.apple.com/in/iphone-16/specs/"
+        }
+      ],
+      "source_report_url": "https://counterpointresearch.com/en/insights/top-5-smartphone-model-share-8-countries",
+      "research_intake_only": false,
+      "price_inr": null,
+      "stock": null,
+      "performance_score": null,
+      "current_offer_eligible": false,
+      "exact_variant_sales_rank_verified": false,
+      "notes": "India Q2 2026 model-level estimate only. Maker facts are not a current offer or an exact SKU sale."
+    },
+    {
+      "rank": 4,
+      "brand": "Samsung",
+      "model": "Galaxy M17 5G",
+      "india_model_sales_share_percent": 2,
+      "repository_model_key": "samsung|galaxy m17 5g",
+      "primary_catalogue_snapshot_status": "EXISTING_OFFICIAL_VERIFIED",
+      "official_spec_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-moonlight-silver-128gb-sm-m176bzsdins/",
+      "manufacturer_model_identifier": null,
+      "verified_manufacturer_facts": [
+        {
+          "field": "Chip",
+          "value": "Exynos 1330",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-moonlight-silver-128gb-sm-m176bzsdins/"
+        },
+        {
+          "field": "Display",
+          "value": "Super AMOLED, 1080 × 2340, up to 90 Hz",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-moonlight-silver-128gb-sm-m176bzsdins/"
+        },
+        {
+          "field": "Battery",
+          "value": "5000 mAh typical",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-moonlight-silver-128gb-sm-m176bzsdins/"
+        },
+        {
+          "field": "Camera",
+          "value": "50 MP + 5 MP + 2 MP",
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-moonlight-silver-128gb-sm-m176bzsdins/"
+        }
+      ],
+      "source_report_url": "https://counterpointresearch.com/en/insights/top-5-smartphone-model-share-8-countries",
+      "research_intake_only": false,
+      "price_inr": null,
+      "stock": null,
+      "performance_score": null,
+      "current_offer_eligible": false,
+      "exact_variant_sales_rank_verified": false,
+      "notes": "India Q2 2026 model-level estimate only. Maker facts are not a current offer or an exact SKU sale."
+    },
+    {
+      "rank": 5,
+      "brand": "vivo",
+      "model": "Y31 5G",
+      "india_model_sales_share_percent": 2,
+      "repository_model_key": "vivo|y31 5g",
+      "primary_catalogue_snapshot_status": "MISSING",
+      "official_spec_url": "https://www.vivo.com/in/products/param/y31-5g?id=767",
+      "manufacturer_model_identifier": null,
+      "verified_manufacturer_facts": [
+        {
+          "field": "SoC",
+          "value": "Snapdragon 4 Gen 2",
+          "source_url": "https://www.vivo.com/in/products/param/y31-5g?id=767"
+        },
+        {
+          "field": "Battery",
+          "value": "6500 mAh typical",
+          "source_url": "https://www.vivo.com/in/products/param/y31-5g?id=767"
+        },
+        {
+          "field": "Display",
+          "value": "6.68-inch LCD, 1608 × 720",
+          "source_url": "https://www.vivo.com/in/products/param/y31-5g?id=767"
+        },
+        {
+          "field": "Rear camera",
+          "value": "50 MP + 0.08 MP",
+          "source_url": "https://www.vivo.com/in/products/param/y31-5g?id=767"
+        },
+        {
+          "field": "Maker RAM/storage examples",
+          "value": "4GB/128GB, 6GB/128GB",
+          "source_url": "https://www.vivo.com/in/products/param/y31-5g?id=767"
+        }
+      ],
+      "source_report_url": "https://counterpointresearch.com/en/insights/top-5-smartphone-model-share-8-countries",
+      "research_intake_only": true,
+      "price_inr": null,
+      "stock": null,
+      "performance_score": null,
+      "current_offer_eligible": false,
+      "exact_variant_sales_rank_verified": false,
+      "notes": "India Q2 2026 model-level estimate only. Maker facts are not a current offer or an exact SKU sale."
+    }
+  ]
+}
