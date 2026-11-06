@@ -37,6 +37,8 @@ jobs:
           python -m unittest -v test_category_research_release
           python -m unittest -v test_tv_earbuds_40_release
           python -m unittest -v test_india_sales_priority_release
+          python -m unittest -v test_mobile_seo_comparisons
+          python -m py_compile python/mobile_seo_comparisons.py
           python -m py_compile python/india_sales_priority_pages.py
           python -m py_compile python/tv_earbuds_workbook_pages.py
           python -m py_compile python/category_research_pages.py

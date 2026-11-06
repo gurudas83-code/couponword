@@ -11,6 +11,7 @@ from xml.etree import ElementTree as ET
 from python.phone_research_pages import EDITORIAL_MODEL_KEYS, accepted_specs, eligible, slug_for
 from python.phone_hindi_pages import BUDGETS, GUIDE_COPY
 from python.under25_seo_pages import HI as UNDER25_HI, CATEGORY_TEXT as UNDER25_CATEGORIES, valid_data as under25_data, pth as under25_path
+from python.mobile_seo_comparisons import HI as COMPARE_HI, SOURCE as COMPARE_SOURCE, path_for as compare_path
 
 ROOT = Path(__file__).resolve().parent
 PUBLIC = ROOT / "public"
@@ -41,6 +42,8 @@ class HindiSEOContracts(unittest.TestCase):
         catalogue=json.loads((PUBLIC/"data/mobile_research_catalogue.json").read_text(encoding="utf-8"))
         cards={c["model_key"]: c for c in catalogue["model_cards"]}
         cls.phones=[cards[k] for k in EDITORIAL_MODEL_KEYS if k in cards and eligible(cards[k])]
+        cls.cards=cards
+        cls.comparison_intake=json.loads(COMPARE_SOURCE.read_text(encoding="utf-8"))["pairs"]
         cls.routes=["/hi/seo/"+g["slug"]+".html" for g in cls.guides]
         cls.routes+=["/hi/phones/"+slug_for(card)+"/" for card in cls.phones]
         cls.routes+=["/hi/guides/phone-budget-guides/","/hi/phones/","/hi/budgets/"]
@@ -101,9 +104,19 @@ class HindiSEOContracts(unittest.TestCase):
             {u for u in self.sitemap if u.startswith(SITE + UNDER25_HI)},
             expected_under25,
         )
+        expected_compare = {
+            SITE + COMPARE_HI,
+            *(SITE + compare_path(self.cards[p["left"]], self.cards[p["right"]], True)
+              for p in self.comparison_intake),
+        }
+        self.assertEqual(len(expected_compare), 51)
+        self.assertEqual(
+            {u for u in self.sitemap if u.startswith(SITE + COMPARE_HI)},
+            expected_compare,
+        )
         self.assertEqual(
             {u for u in self.sitemap if u.startswith(SITE + "/hi/")},
-            {SITE + route for route in self.routes} | expected_under25,
+            {SITE + route for route in self.routes} | expected_under25 | expected_compare,
         )
 
     def test_07_all_nineteen_budget_bands_exist_but_not_indexed(self):
