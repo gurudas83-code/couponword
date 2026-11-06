@@ -219,6 +219,34 @@ def audit(root):
             require('class="shop-button"' not in html and 'class="purchase-cta"' not in html,
                     f"Unverified merchant CTA: {route}")
 
+    # Independent industry shipment signals are a separate research intake:
+    # do not silently add them to the 232 official catalogue or ranking pool.
+    sales_dir = root / "phones" / "india-market-demand-q3-2026"
+    market_hub = sales_dir / "index.html"
+    require(market_hub.is_file(), "India Q3 2026 market coverage hub missing")
+    market_details = list(sales_dir.glob("*/index.html")) if sales_dir.is_dir() else []
+    require(len(market_details) == 10, f"Market-signal model research page count {len(market_details)} != 10")
+    if market_hub.is_file():
+        hub = market_hub.read_text(encoding="utf-8")
+        require("NOT an official nationwide Top 10 ranking" in hub,
+                "National model-specific rankings falsely asserted")
+        require("6 were missing" in hub and "4 already included" in hub,
+                "Market audit missing 4-existing / 6-new reconciliation")
+        require('href="/phones/india-market-demand-q3-2026/"' in (
+            root / "index.html").read_text(encoding="utf-8"),
+            "Market coverage has no internal homepage link")
+        require("https://coupon-world.in/phones/india-market-demand-q3-2026/" in (
+            root / "sitemap.xml").read_text(encoding="utf-8"),
+            "Market coverage hub missing from sitemap")
+    for detail in market_details:
+        content=detail.read_text(encoding="utf-8")
+        require('name="robots" content="noindex,follow"' in content,
+                f"Unreviewed research detail escaped indexing gate: {detail}")
+        require("Manufacturer source" in content and "Omdia India Q3 2026 report" in content,
+                f"Research detail missing original evidence: {detail}")
+        require('"@type": "Offer"' not in content and 'class="shop-button"' not in content,
+                f"Unverified commerce on industry model research page: {detail}")
+
     result = {
         "result": "PASS" if not errors else "FAIL",
         "checked_at_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -237,6 +265,7 @@ def audit(root):
             "source_reviewed_category_models": category_counts,
             "category_documented_fields": category_fields,
             "workbook_category_model_count": published_workbook_models,
+            "india_market_sales_model_research_pages": len(market_details),
         },
         "warnings": warnings,
         "errors": errors,
