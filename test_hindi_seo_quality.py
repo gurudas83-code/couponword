@@ -116,7 +116,9 @@ class HindiSEOContracts(unittest.TestCase):
         )
         self.assertEqual(
             {u for u in self.sitemap if u.startswith(SITE + "/hi/")},
-            {SITE + route for route in self.routes} | expected_under25 | expected_compare,
+            {SITE + route for route in self.routes} | expected_under25 | expected_compare
+            | {SITE+'/hi/answers/'}
+            | {SITE+x['hindi_route'] for x in json.loads((PUBLIC/'data/mobile_query_answer_coverage.json').read_text())['answers'] if x['indexable']},
         )
 
     def test_07_all_nineteen_budget_bands_exist_but_not_indexed(self):

@@ -273,6 +273,11 @@ def build(output: Path) -> Path:
     from python.mobile_seo_comparisons import publish_comparisons
     publish_comparisons(output)
 
+    # Recovered shopper questions are answered from existing research only.
+    # Thin/duplicate/unsupported answers stay noindex and outside the sitemap.
+    from python.mobile_query_answers import publish_answers
+    publish_answers(output)
+
     # The source sitemap still lists historical catalogue URLs. Keep those
     # pages online, but do not encourage indexing without current offer proof.
     _prune_unverified_product_sitemap_entries(output)

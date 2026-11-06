@@ -173,6 +173,19 @@ def run(root: Path):
                     assert page.locator(".cr-detail-facts .cr-fact").count() >= 5
                     assert page.locator('meta[name="robots"]').get_attribute("content") == "noindex,follow"
                     assert not page.locator(".shop-button,.purchase-cta").count()
+                    for answer_prefix in ("answers/", "hi/answers/"):
+                        page.goto(url+answer_prefix+"phone-under-25000-with-amoled-ois-and-8gb-ram/", wait_until="domcontentloaded")
+                        assert page.locator('.answer-model').count() == 2
+                        assert 'CMF Phone 1' not in page.locator('main').inner_text()
+                        assert 'POCO X7 Pro 5G' not in page.locator('main').inner_text()
+                        assert page.locator('link[rel="alternate"]').count() == 2
+                        assert 'noindex' not in page.locator('meta[name="robots"]').get_attribute('content')
+                        assert page.locator('table tbody tr').count() >= 16
+                        assert page.evaluate('document.documentElement.scrollWidth') <= width+8
+                    page.goto(url+"answers/best-apple-phone-under-7000/", wait_until="domcontentloaded")
+                    assert page.locator('meta[name="robots"]').get_attribute('content') == 'noindex,follow'
+                    assert page.locator('.answer-model').count() == 0
+                    assert 'not proof' in page.locator('.quick-answer').inner_text()
                     assert not page_errors, f"{width}px uncaught JS errors: {page_errors}"
                     results.append({"width": width, "search": "PASS", "full_budget_opt_in": "PASS", "exact_variant": "PASS",
                                     "comparison": "PASS", "engine_handoff": "PASS",

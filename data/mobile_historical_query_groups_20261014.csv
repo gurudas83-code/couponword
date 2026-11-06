@@ -1,0 +1,335 @@
+index,Protected Group ID,Query Count,Intent Action,Category,Budget Min,Budget Max,Brand Filter,Must Have,Preferred,Avoid,Target Model,Persona,Extra Qualifier,Example Query,Query IDs,Verified Identical Ranking
+0,P6bde28cf3,11,recommendation,smartphone,,10000.0,,,,,,,,best phone under 10000,"MQ0361, MQ0362, MQ0363, MQ0364, MQ0365, MQ0366, MQ0367, MQ0368, MQ0931, MQ0932, MQ0933",NOT_TESTED
+1,Peb032ac81,8,recommendation,smartphone,,10000.0,apple,,,,,,,best Apple phone under 10000,"MQ0377, MQ0378, MQ0379, MQ0380, MQ0381, MQ0382, MQ0383, MQ0384",NOT_TESTED
+2,Pa9aac36db,8,recommendation,smartphone,,10000.0,motorola,,,,,,,best Motorola phone under 10000,"MQ0417, MQ0418, MQ0419, MQ0420, MQ0421, MQ0422, MQ0423, MQ0424",NOT_TESTED
+3,P78954e3e8,8,recommendation,smartphone,,10000.0,oneplus,,,,,,,best OnePlus phone under 10000,"MQ0409, MQ0410, MQ0411, MQ0412, MQ0413, MQ0414, MQ0415, MQ0416",NOT_TESTED
+4,P378bbb681,8,recommendation,smartphone,,10000.0,realme,,,,,,,best realme phone under 10000,"MQ0393, MQ0394, MQ0395, MQ0396, MQ0397, MQ0398, MQ0399, MQ0400",NOT_TESTED
+5,Pbffeea720,8,recommendation,smartphone,,10000.0,redmi,,,,,,,best Redmi phone under 10000,"MQ0385, MQ0386, MQ0387, MQ0388, MQ0389, MQ0390, MQ0391, MQ0392",NOT_TESTED
+6,P932fff487,8,recommendation,smartphone,,10000.0,samsung,,,,,,,best Samsung phone under 10000,"MQ0369, MQ0370, MQ0371, MQ0372, MQ0373, MQ0374, MQ0375, MQ0376",NOT_TESTED
+7,P1133609e5,8,recommendation,smartphone,,10000.0,vivo,,,,,,,best vivo phone under 10000,"MQ0401, MQ0402, MQ0403, MQ0404, MQ0405, MQ0406, MQ0407, MQ0408",NOT_TESTED
+8,P9c0c53ef1,8,recommendation,smartphone,,7000.0,,,,,,,,best phone under 7000,"MQ0001, MQ0002, MQ0003, MQ0004, MQ0005, MQ0006, MQ0007, MQ0008",NOT_TESTED
+9,Pcf9df817d,8,recommendation,smartphone,,7000.0,apple,,,,,,,best Apple phone under 7000,"MQ0017, MQ0018, MQ0019, MQ0020, MQ0021, MQ0022, MQ0023, MQ0024",NOT_TESTED
+10,P6469ced40,8,recommendation,smartphone,,7000.0,google pixel,,,,,,,best Google Pixel phone under 7000,"MQ0089, MQ0090, MQ0091, MQ0092, MQ0093, MQ0094, MQ0095, MQ0096",NOT_TESTED
+11,P63bc87a5f,8,recommendation,smartphone,,7000.0,iqoo,,,,,,,best iQOO phone under 7000,"MQ0073, MQ0074, MQ0075, MQ0076, MQ0077, MQ0078, MQ0079, MQ0080",NOT_TESTED
+12,P299a04790,8,recommendation,smartphone,,7000.0,lava,,,,,,,best Lava phone under 7000,"MQ0113, MQ0114, MQ0115, MQ0116, MQ0117, MQ0118, MQ0119, MQ0120",NOT_TESTED
+13,P9d45ae09f,8,recommendation,smartphone,,7000.0,motorola,,,,,,,best Motorola phone under 7000,"MQ0057, MQ0058, MQ0059, MQ0060, MQ0061, MQ0062, MQ0063, MQ0064",NOT_TESTED
+14,P1cae10e04,8,recommendation,smartphone,,7000.0,nothing,,,,,,,best Nothing phone under 7000,"MQ0081, MQ0082, MQ0083, MQ0084, MQ0085, MQ0086, MQ0087, MQ0088",NOT_TESTED
+15,P10fa447be,8,recommendation,smartphone,,7000.0,oneplus,,,,,,,best OnePlus phone under 7000,"MQ0049, MQ0050, MQ0051, MQ0052, MQ0053, MQ0054, MQ0055, MQ0056",NOT_TESTED
+16,Pc59805f14,8,recommendation,smartphone,,7000.0,oppo,,,,,,,best OPPO phone under 7000,"MQ0097, MQ0098, MQ0099, MQ0100, MQ0101, MQ0102, MQ0103, MQ0104",NOT_TESTED
+17,Pbbdfc37d9,8,recommendation,smartphone,,7000.0,poco,,,,,,,best POCO phone under 7000,"MQ0065, MQ0066, MQ0067, MQ0068, MQ0069, MQ0070, MQ0071, MQ0072",NOT_TESTED
+18,P1e802d5d1,8,recommendation,smartphone,,7000.0,realme,,,,,,,best realme phone under 7000,"MQ0033, MQ0034, MQ0035, MQ0036, MQ0037, MQ0038, MQ0039, MQ0040",NOT_TESTED
+19,Pd4814890a,8,recommendation,smartphone,,7000.0,redmi,,,,,,,best Redmi phone under 7000,"MQ0025, MQ0026, MQ0027, MQ0028, MQ0029, MQ0030, MQ0031, MQ0032",NOT_TESTED
+20,P24f19a3cb,8,recommendation,smartphone,,7000.0,samsung,,,,,,,best Samsung phone under 7000,"MQ0009, MQ0010, MQ0011, MQ0012, MQ0013, MQ0014, MQ0015, MQ0016",NOT_TESTED
+21,P8ae69ec17,8,recommendation,smartphone,,7000.0,tecno,,,,,,,best Tecno phone under 7000,"MQ0105, MQ0106, MQ0107, MQ0108, MQ0109, MQ0110, MQ0111, MQ0112",NOT_TESTED
+22,P4d1566ae6,8,recommendation,smartphone,,7000.0,vivo,,,,,,,best vivo phone under 7000,"MQ0041, MQ0042, MQ0043, MQ0044, MQ0045, MQ0046, MQ0047, MQ0048",NOT_TESTED
+23,Pdad49f842,8,recommendation,smartphone,,8000.0,,,,,,,,best phone under 8000,"MQ0121, MQ0122, MQ0123, MQ0124, MQ0125, MQ0126, MQ0127, MQ0128",NOT_TESTED
+24,P3f169e338,8,recommendation,smartphone,,8000.0,apple,,,,,,,best Apple phone under 8000,"MQ0137, MQ0138, MQ0139, MQ0140, MQ0141, MQ0142, MQ0143, MQ0144",NOT_TESTED
+25,Pf49fc66c2,8,recommendation,smartphone,,8000.0,google pixel,,,,,,,best Google Pixel phone under 8000,"MQ0209, MQ0210, MQ0211, MQ0212, MQ0213, MQ0214, MQ0215, MQ0216",NOT_TESTED
+26,Pc82184593,8,recommendation,smartphone,,8000.0,iqoo,,,,,,,best iQOO phone under 8000,"MQ0193, MQ0194, MQ0195, MQ0196, MQ0197, MQ0198, MQ0199, MQ0200",NOT_TESTED
+27,P49a861408,8,recommendation,smartphone,,8000.0,lava,,,,,,,best Lava phone under 8000,"MQ0233, MQ0234, MQ0235, MQ0236, MQ0237, MQ0238, MQ0239, MQ0240",NOT_TESTED
+28,Pdb919124b,8,recommendation,smartphone,,8000.0,motorola,,,,,,,best Motorola phone under 8000,"MQ0177, MQ0178, MQ0179, MQ0180, MQ0181, MQ0182, MQ0183, MQ0184",NOT_TESTED
+29,Pa6ccfb4ca,8,recommendation,smartphone,,8000.0,nothing,,,,,,,best Nothing phone under 8000,"MQ0201, MQ0202, MQ0203, MQ0204, MQ0205, MQ0206, MQ0207, MQ0208",NOT_TESTED
+30,P324700db0,8,recommendation,smartphone,,8000.0,oneplus,,,,,,,best OnePlus phone under 8000,"MQ0169, MQ0170, MQ0171, MQ0172, MQ0173, MQ0174, MQ0175, MQ0176",NOT_TESTED
+31,P90174193c,8,recommendation,smartphone,,8000.0,oppo,,,,,,,best OPPO phone under 8000,"MQ0217, MQ0218, MQ0219, MQ0220, MQ0221, MQ0222, MQ0223, MQ0224",NOT_TESTED
+32,Pbdb53f8bd,8,recommendation,smartphone,,8000.0,poco,,,,,,,best POCO phone under 8000,"MQ0185, MQ0186, MQ0187, MQ0188, MQ0189, MQ0190, MQ0191, MQ0192",NOT_TESTED
+33,P048112b57,8,recommendation,smartphone,,8000.0,realme,,,,,,,best realme phone under 8000,"MQ0153, MQ0154, MQ0155, MQ0156, MQ0157, MQ0158, MQ0159, MQ0160",NOT_TESTED
+34,P039bee3bc,8,recommendation,smartphone,,8000.0,redmi,,,,,,,best Redmi phone under 8000,"MQ0145, MQ0146, MQ0147, MQ0148, MQ0149, MQ0150, MQ0151, MQ0152",NOT_TESTED
+35,Pa29879a03,8,recommendation,smartphone,,8000.0,samsung,,,,,,,best Samsung phone under 8000,"MQ0129, MQ0130, MQ0131, MQ0132, MQ0133, MQ0134, MQ0135, MQ0136",NOT_TESTED
+36,P3ba4515e7,8,recommendation,smartphone,,8000.0,tecno,,,,,,,best Tecno phone under 8000,"MQ0225, MQ0226, MQ0227, MQ0228, MQ0229, MQ0230, MQ0231, MQ0232",NOT_TESTED
+37,P4b2e8cd2d,8,recommendation,smartphone,,8000.0,vivo,,,,,,,best vivo phone under 8000,"MQ0161, MQ0162, MQ0163, MQ0164, MQ0165, MQ0166, MQ0167, MQ0168",NOT_TESTED
+38,P2fa3e9662,8,recommendation,smartphone,,9000.0,,,,,,,,best phone under 9000,"MQ0241, MQ0242, MQ0243, MQ0244, MQ0245, MQ0246, MQ0247, MQ0248",NOT_TESTED
+39,Pc9a742941,8,recommendation,smartphone,,9000.0,apple,,,,,,,best Apple phone under 9000,"MQ0257, MQ0258, MQ0259, MQ0260, MQ0261, MQ0262, MQ0263, MQ0264",NOT_TESTED
+40,P23ce58386,8,recommendation,smartphone,,9000.0,google pixel,,,,,,,best Google Pixel phone under 9000,"MQ0329, MQ0330, MQ0331, MQ0332, MQ0333, MQ0334, MQ0335, MQ0336",NOT_TESTED
+41,P7d43f91af,8,recommendation,smartphone,,9000.0,iqoo,,,,,,,best iQOO phone under 9000,"MQ0313, MQ0314, MQ0315, MQ0316, MQ0317, MQ0318, MQ0319, MQ0320",NOT_TESTED
+42,P6dad48fdb,8,recommendation,smartphone,,9000.0,lava,,,,,,,best Lava phone under 9000,"MQ0353, MQ0354, MQ0355, MQ0356, MQ0357, MQ0358, MQ0359, MQ0360",NOT_TESTED
+43,P8e560d5bf,8,recommendation,smartphone,,9000.0,motorola,,,,,,,best Motorola phone under 9000,"MQ0297, MQ0298, MQ0299, MQ0300, MQ0301, MQ0302, MQ0303, MQ0304",NOT_TESTED
+44,Pbd73ff6b5,8,recommendation,smartphone,,9000.0,nothing,,,,,,,best Nothing phone under 9000,"MQ0321, MQ0322, MQ0323, MQ0324, MQ0325, MQ0326, MQ0327, MQ0328",NOT_TESTED
+45,P1be20c400,8,recommendation,smartphone,,9000.0,oneplus,,,,,,,best OnePlus phone under 9000,"MQ0289, MQ0290, MQ0291, MQ0292, MQ0293, MQ0294, MQ0295, MQ0296",NOT_TESTED
+46,P57645f8c4,8,recommendation,smartphone,,9000.0,oppo,,,,,,,best OPPO phone under 9000,"MQ0337, MQ0338, MQ0339, MQ0340, MQ0341, MQ0342, MQ0343, MQ0344",NOT_TESTED
+47,Pb1e8feef9,8,recommendation,smartphone,,9000.0,poco,,,,,,,best POCO phone under 9000,"MQ0305, MQ0306, MQ0307, MQ0308, MQ0309, MQ0310, MQ0311, MQ0312",NOT_TESTED
+48,P3068b1b56,8,recommendation,smartphone,,9000.0,realme,,,,,,,best realme phone under 9000,"MQ0273, MQ0274, MQ0275, MQ0276, MQ0277, MQ0278, MQ0279, MQ0280",NOT_TESTED
+49,P5b5b1ed0d,8,recommendation,smartphone,,9000.0,redmi,,,,,,,best Redmi phone under 9000,"MQ0265, MQ0266, MQ0267, MQ0268, MQ0269, MQ0270, MQ0271, MQ0272",NOT_TESTED
+50,P2c358e853,8,recommendation,smartphone,,9000.0,samsung,,,,,,,best Samsung phone under 9000,"MQ0249, MQ0250, MQ0251, MQ0252, MQ0253, MQ0254, MQ0255, MQ0256",NOT_TESTED
+51,Pe8418d932,8,recommendation,smartphone,,9000.0,tecno,,,,,,,best Tecno phone under 9000,"MQ0345, MQ0346, MQ0347, MQ0348, MQ0349, MQ0350, MQ0351, MQ0352",NOT_TESTED
+52,P56c79c95b,8,recommendation,smartphone,,9000.0,vivo,,,,,,,best vivo phone under 9000,"MQ0281, MQ0282, MQ0283, MQ0284, MQ0285, MQ0286, MQ0287, MQ0288",NOT_TESTED
+53,Pa49cdb1ac,6,recommendation,smartphone,,10000.0,poco,,,,,,,best POCO phone under 10000,"MQ0425, MQ0426, MQ0427, MQ0428, MQ0429, MQ0430",NOT_TESTED
+54,P29f4ec6fd,4,recommendation,smartphone,,7000.0,,,battery,,,,,best phone under 7000 with best battery,"MQ0439, MQ0440, MQ0441, MQ0442",NOT_TESTED
+55,P734f23171,4,recommendation,smartphone,,7000.0,,,camera,,,,,best phone under 7000 with good camera,"MQ0435, MQ0436, MQ0437, MQ0438",NOT_TESTED
+56,Pca39b5f9e,4,recommendation,smartphone,,7000.0,,,compact,,,,,best phone under 7000 with compact phone,"MQ0467, MQ0468, MQ0469, MQ0470",NOT_TESTED
+57,P45a9f7977,4,recommendation,smartphone,,7000.0,,,fast_charging,,,,,best phone under 7000 with fast charging,"MQ0459, MQ0460, MQ0461, MQ0462",NOT_TESTED
+58,P38be4e1d6,4,recommendation,smartphone,,7000.0,,,gaming,,,,,best phone under 7000 with gaming,"MQ0443, MQ0444, MQ0445, MQ0446",NOT_TESTED
+59,P329bf2300,4,recommendation,smartphone,,7000.0,,,software_support,,,,,best phone under 7000 with long software updates,"MQ0463, MQ0464, MQ0465, MQ0466",NOT_TESTED
+60,Ped8687197,4,recommendation,smartphone,,7000.0,apple,,battery,,,,,best Apple phone under 7000 with best battery,"MQ0535, MQ0536, MQ0537, MQ0538",NOT_TESTED
+61,P2c4ac9571,4,recommendation,smartphone,,7000.0,apple,,camera,,,,,best Apple phone under 7000 with good camera,"MQ0531, MQ0532, MQ0533, MQ0534",NOT_TESTED
+62,P6e9b39029,4,recommendation,smartphone,,7000.0,apple,,compact,,,,,best Apple phone under 7000 with compact phone,"MQ0563, MQ0564, MQ0565, MQ0566",NOT_TESTED
+63,Pb3e2f974b,4,recommendation,smartphone,,7000.0,apple,,fast_charging,,,,,best Apple phone under 7000 with fast charging,"MQ0555, MQ0556, MQ0557, MQ0558",NOT_TESTED
+64,P59e2ed862,4,recommendation,smartphone,,7000.0,apple,,gaming,,,,,best Apple phone under 7000 with gaming,"MQ0539, MQ0540, MQ0541, MQ0542",NOT_TESTED
+65,P8871564f5,4,recommendation,smartphone,,7000.0,apple,,software_support,,,,,best Apple phone under 7000 with long software updates,"MQ0559, MQ0560, MQ0561, MQ0562",NOT_TESTED
+66,P63f309ebb,4,recommendation,smartphone,,7000.0,motorola,,battery,,,,,best Motorola phone under 7000 with best battery,"MQ0775, MQ0776, MQ0777, MQ0778",NOT_TESTED
+67,P6c876027c,4,recommendation,smartphone,,7000.0,motorola,,camera,,,,,best Motorola phone under 7000 with good camera,"MQ0771, MQ0772, MQ0773, MQ0774",NOT_TESTED
+68,P99a79d65e,4,recommendation,smartphone,,7000.0,motorola,,compact,,,,,best Motorola phone under 7000 with compact phone,"MQ0803, MQ0804, MQ0805, MQ0806",NOT_TESTED
+69,Pf63fe3c0e,4,recommendation,smartphone,,7000.0,motorola,,fast_charging,,,,,best Motorola phone under 7000 with fast charging,"MQ0795, MQ0796, MQ0797, MQ0798",NOT_TESTED
+70,Pefe9f7721,4,recommendation,smartphone,,7000.0,motorola,,gaming,,,,,best Motorola phone under 7000 with gaming,"MQ0779, MQ0780, MQ0781, MQ0782",NOT_TESTED
+71,P757d02a2c,4,recommendation,smartphone,,7000.0,motorola,,software_support,,,,,best Motorola phone under 7000 with long software updates,"MQ0799, MQ0800, MQ0801, MQ0802",NOT_TESTED
+72,P703222d48,4,recommendation,smartphone,,7000.0,oneplus,,battery,,,,,best OnePlus phone under 7000 with best battery,"MQ0727, MQ0728, MQ0729, MQ0730",NOT_TESTED
+73,P7c3dedc1b,4,recommendation,smartphone,,7000.0,oneplus,,camera,,,,,best OnePlus phone under 7000 with good camera,"MQ0723, MQ0724, MQ0725, MQ0726",NOT_TESTED
+74,Ped2325275,4,recommendation,smartphone,,7000.0,oneplus,,compact,,,,,best OnePlus phone under 7000 with compact phone,"MQ0755, MQ0756, MQ0757, MQ0758",NOT_TESTED
+75,Pfaeeaad55,4,recommendation,smartphone,,7000.0,oneplus,,fast_charging,,,,,best OnePlus phone under 7000 with fast charging,"MQ0747, MQ0748, MQ0749, MQ0750",NOT_TESTED
+76,Pca71fedc7,4,recommendation,smartphone,,7000.0,oneplus,,gaming,,,,,best OnePlus phone under 7000 with gaming,"MQ0731, MQ0732, MQ0733, MQ0734",NOT_TESTED
+77,P3809f7b72,4,recommendation,smartphone,,7000.0,oneplus,,software_support,,,,,best OnePlus phone under 7000 with long software updates,"MQ0751, MQ0752, MQ0753, MQ0754",NOT_TESTED
+78,Pcab8c4bc1,4,recommendation,smartphone,,7000.0,realme,,battery,,,,,best realme phone under 7000 with best battery,"MQ0631, MQ0632, MQ0633, MQ0634",NOT_TESTED
+79,Pa36461e5b,4,recommendation,smartphone,,7000.0,realme,,camera,,,,,best realme phone under 7000 with good camera,"MQ0627, MQ0628, MQ0629, MQ0630",NOT_TESTED
+80,Pdc98d8a3d,4,recommendation,smartphone,,7000.0,realme,,compact,,,,,best realme phone under 7000 with compact phone,"MQ0659, MQ0660, MQ0661, MQ0662",NOT_TESTED
+81,P03f1ad199,4,recommendation,smartphone,,7000.0,realme,,fast_charging,,,,,best realme phone under 7000 with fast charging,"MQ0651, MQ0652, MQ0653, MQ0654",NOT_TESTED
+82,P9bc27db68,4,recommendation,smartphone,,7000.0,realme,,gaming,,,,,best realme phone under 7000 with gaming,"MQ0635, MQ0636, MQ0637, MQ0638",NOT_TESTED
+83,P8e8539718,4,recommendation,smartphone,,7000.0,realme,,software_support,,,,,best realme phone under 7000 with long software updates,"MQ0655, MQ0656, MQ0657, MQ0658",NOT_TESTED
+84,P72b106a4f,4,recommendation,smartphone,,7000.0,redmi,,battery,,,,,best Redmi phone under 7000 with best battery,"MQ0583, MQ0584, MQ0585, MQ0586",NOT_TESTED
+85,Pc2474896e,4,recommendation,smartphone,,7000.0,redmi,,camera,,,,,best Redmi phone under 7000 with good camera,"MQ0579, MQ0580, MQ0581, MQ0582",NOT_TESTED
+86,P8c74a1de8,4,recommendation,smartphone,,7000.0,redmi,,compact,,,,,best Redmi phone under 7000 with compact phone,"MQ0611, MQ0612, MQ0613, MQ0614",NOT_TESTED
+87,Pf34037f8e,4,recommendation,smartphone,,7000.0,redmi,,fast_charging,,,,,best Redmi phone under 7000 with fast charging,"MQ0603, MQ0604, MQ0605, MQ0606",NOT_TESTED
+88,P3db7b469a,4,recommendation,smartphone,,7000.0,redmi,,gaming,,,,,best Redmi phone under 7000 with gaming,"MQ0587, MQ0588, MQ0589, MQ0590",NOT_TESTED
+89,P9db83ec07,4,recommendation,smartphone,,7000.0,redmi,,software_support,,,,,best Redmi phone under 7000 with long software updates,"MQ0607, MQ0608, MQ0609, MQ0610",NOT_TESTED
+90,P64f4267a1,4,recommendation,smartphone,,7000.0,samsung,,battery,,,,,best Samsung phone under 7000 with best battery,"MQ0487, MQ0488, MQ0489, MQ0490",NOT_TESTED
+91,P68836f0cb,4,recommendation,smartphone,,7000.0,samsung,,camera,,,,,best Samsung phone under 7000 with good camera,"MQ0483, MQ0484, MQ0485, MQ0486",NOT_TESTED
+92,Pb7cb301ce,4,recommendation,smartphone,,7000.0,samsung,,compact,,,,,best Samsung phone under 7000 with compact phone,"MQ0515, MQ0516, MQ0517, MQ0518",NOT_TESTED
+93,Pc24c4e33e,4,recommendation,smartphone,,7000.0,samsung,,fast_charging,,,,,best Samsung phone under 7000 with fast charging,"MQ0507, MQ0508, MQ0509, MQ0510",NOT_TESTED
+94,Pa5bbea49e,4,recommendation,smartphone,,7000.0,samsung,,gaming,,,,,best Samsung phone under 7000 with gaming,"MQ0491, MQ0492, MQ0493, MQ0494",NOT_TESTED
+95,P929d2a5ad,4,recommendation,smartphone,,7000.0,samsung,,software_support,,,,,best Samsung phone under 7000 with long software updates,"MQ0511, MQ0512, MQ0513, MQ0514",NOT_TESTED
+96,P993bb0b3f,4,recommendation,smartphone,,7000.0,vivo,,battery,,,,,best vivo phone under 7000 with best battery,"MQ0679, MQ0680, MQ0681, MQ0682",NOT_TESTED
+97,Pd24537870,4,recommendation,smartphone,,7000.0,vivo,,camera,,,,,best vivo phone under 7000 with good camera,"MQ0675, MQ0676, MQ0677, MQ0678",NOT_TESTED
+98,P109b8f063,4,recommendation,smartphone,,7000.0,vivo,,compact,,,,,best vivo phone under 7000 with compact phone,"MQ0707, MQ0708, MQ0709, MQ0710",NOT_TESTED
+99,P08360393e,4,recommendation,smartphone,,7000.0,vivo,,fast_charging,,,,,best vivo phone under 7000 with fast charging,"MQ0699, MQ0700, MQ0701, MQ0702",NOT_TESTED
+100,P420bbbcd4,4,recommendation,smartphone,,7000.0,vivo,,gaming,,,,,best vivo phone under 7000 with gaming,"MQ0683, MQ0684, MQ0685, MQ0686",NOT_TESTED
+101,Pcc57361bd,4,recommendation,smartphone,,7000.0,vivo,,software_support,,,,,best vivo phone under 7000 with long software updates,"MQ0703, MQ0704, MQ0705, MQ0706",NOT_TESTED
+102,P101a0e32c,3,recommendation,smartphone,,60000.0,apple,,,,,,,iPhone below 60000,"MQ0936, MQ0937, MQ0939",NOT_TESTED
+103,P4ad8651ee,3,recommendation,smartphone,,7000.0,,120hz_display,,,,,,best phone under 7000 with 120Hz display,"MQ0475, MQ0476, MQ0477",NOT_TESTED
+104,Pf7f7617fd,3,recommendation,smartphone,,7000.0,,256gb_storage,,,,,,best phone under 7000 with 256GB storage,"MQ0455, MQ0456, MQ0457",NOT_TESTED
+105,P76dfd760f,3,recommendation,smartphone,,7000.0,,5g,,,,,,best phone under 7000 with 5G,"MQ0431, MQ0432, MQ0433",NOT_TESTED
+106,Pc737f70d3,3,recommendation,smartphone,,7000.0,,8gb_ram,,,,,,best phone under 7000 with 8GB RAM,"MQ0451, MQ0452, MQ0453",NOT_TESTED
+107,P62abf6d0a,3,recommendation,smartphone,,7000.0,,amoled_display,,,,,,best phone under 7000 with AMOLED display,"MQ0447, MQ0448, MQ0449",NOT_TESTED
+108,P6fa4c8392,3,recommendation,smartphone,,7000.0,,ois,camera,,,,,best phone under 7000 with OIS camera,"MQ0471, MQ0472, MQ0473",NOT_TESTED
+109,P96dbb6cd9,3,recommendation,smartphone,,7000.0,apple,120hz_display,,,,,,best Apple phone under 7000 with 120Hz display,"MQ0571, MQ0572, MQ0573",NOT_TESTED
+110,P7d2b5d6a3,3,recommendation,smartphone,,7000.0,apple,256gb_storage,,,,,,best Apple phone under 7000 with 256GB storage,"MQ0551, MQ0552, MQ0553",NOT_TESTED
+111,P4648bff6b,3,recommendation,smartphone,,7000.0,apple,5g,,,,,,best Apple phone under 7000 with 5G,"MQ0527, MQ0528, MQ0529",NOT_TESTED
+112,P620d25ed6,3,recommendation,smartphone,,7000.0,apple,8gb_ram,,,,,,best Apple phone under 7000 with 8GB RAM,"MQ0547, MQ0548, MQ0549",NOT_TESTED
+113,Pc60666b4b,3,recommendation,smartphone,,7000.0,apple,amoled_display,,,,,,best Apple phone under 7000 with AMOLED display,"MQ0543, MQ0544, MQ0545",NOT_TESTED
+114,P307bf4a8b,3,recommendation,smartphone,,7000.0,apple,ois,camera,,,,,best Apple phone under 7000 with OIS camera,"MQ0567, MQ0568, MQ0569",NOT_TESTED
+115,P3d6d45963,3,recommendation,smartphone,,7000.0,motorola,120hz_display,,,,,,best Motorola phone under 7000 with 120Hz display,"MQ0811, MQ0812, MQ0813",NOT_TESTED
+116,P3a5ab1e27,3,recommendation,smartphone,,7000.0,motorola,256gb_storage,,,,,,best Motorola phone under 7000 with 256GB storage,"MQ0791, MQ0792, MQ0793",NOT_TESTED
+117,Pa08e81391,3,recommendation,smartphone,,7000.0,motorola,5g,,,,,,best Motorola phone under 7000 with 5G,"MQ0767, MQ0768, MQ0769",NOT_TESTED
+118,P900c0f903,3,recommendation,smartphone,,7000.0,motorola,8gb_ram,,,,,,best Motorola phone under 7000 with 8GB RAM,"MQ0787, MQ0788, MQ0789",NOT_TESTED
+119,P9dd16088e,3,recommendation,smartphone,,7000.0,motorola,amoled_display,,,,,,best Motorola phone under 7000 with AMOLED display,"MQ0783, MQ0784, MQ0785",NOT_TESTED
+120,P94ad1733f,3,recommendation,smartphone,,7000.0,motorola,ois,camera,,,,,best Motorola phone under 7000 with OIS camera,"MQ0807, MQ0808, MQ0809",NOT_TESTED
+121,P1decc30c8,3,recommendation,smartphone,,7000.0,oneplus,120hz_display,,,,,,best OnePlus phone under 7000 with 120Hz display,"MQ0763, MQ0764, MQ0765",NOT_TESTED
+122,P599da97c4,3,recommendation,smartphone,,7000.0,oneplus,256gb_storage,,,,,,best OnePlus phone under 7000 with 256GB storage,"MQ0743, MQ0744, MQ0745",NOT_TESTED
+123,P5bcc278cb,3,recommendation,smartphone,,7000.0,oneplus,5g,,,,,,best OnePlus phone under 7000 with 5G,"MQ0719, MQ0720, MQ0721",NOT_TESTED
+124,Pd3effbc00,3,recommendation,smartphone,,7000.0,oneplus,8gb_ram,,,,,,best OnePlus phone under 7000 with 8GB RAM,"MQ0739, MQ0740, MQ0741",NOT_TESTED
+125,P9c7a74e77,3,recommendation,smartphone,,7000.0,oneplus,amoled_display,,,,,,best OnePlus phone under 7000 with AMOLED display,"MQ0735, MQ0736, MQ0737",NOT_TESTED
+126,Pcf05f947a,3,recommendation,smartphone,,7000.0,oneplus,ois,camera,,,,,best OnePlus phone under 7000 with OIS camera,"MQ0759, MQ0760, MQ0761",NOT_TESTED
+127,Peb3924eb4,3,recommendation,smartphone,,7000.0,poco,5g,,,,,,best POCO phone under 7000 with 5G,"MQ0815, MQ0816, MQ0817",NOT_TESTED
+128,P325e5a9fb,3,recommendation,smartphone,,7000.0,realme,120hz_display,,,,,,best realme phone under 7000 with 120Hz display,"MQ0667, MQ0668, MQ0669",NOT_TESTED
+129,P79cb7bd7e,3,recommendation,smartphone,,7000.0,realme,256gb_storage,,,,,,best realme phone under 7000 with 256GB storage,"MQ0647, MQ0648, MQ0649",NOT_TESTED
+130,P4fcbbf2ba,3,recommendation,smartphone,,7000.0,realme,5g,,,,,,best realme phone under 7000 with 5G,"MQ0623, MQ0624, MQ0625",NOT_TESTED
+131,Pc8254c6bb,3,recommendation,smartphone,,7000.0,realme,8gb_ram,,,,,,best realme phone under 7000 with 8GB RAM,"MQ0643, MQ0644, MQ0645",NOT_TESTED
+132,Pdbfdadd5d,3,recommendation,smartphone,,7000.0,realme,amoled_display,,,,,,best realme phone under 7000 with AMOLED display,"MQ0639, MQ0640, MQ0641",NOT_TESTED
+133,P71ec25d19,3,recommendation,smartphone,,7000.0,realme,ois,camera,,,,,best realme phone under 7000 with OIS camera,"MQ0663, MQ0664, MQ0665",NOT_TESTED
+134,P68154d59d,3,recommendation,smartphone,,7000.0,redmi,120hz_display,,,,,,best Redmi phone under 7000 with 120Hz display,"MQ0619, MQ0620, MQ0621",NOT_TESTED
+135,Pb8869537e,3,recommendation,smartphone,,7000.0,redmi,256gb_storage,,,,,,best Redmi phone under 7000 with 256GB storage,"MQ0599, MQ0600, MQ0601",NOT_TESTED
+136,P0ae0ca652,3,recommendation,smartphone,,7000.0,redmi,5g,,,,,,best Redmi phone under 7000 with 5G,"MQ0575, MQ0576, MQ0577",NOT_TESTED
+137,Pd8ebe2bd1,3,recommendation,smartphone,,7000.0,redmi,8gb_ram,,,,,,best Redmi phone under 7000 with 8GB RAM,"MQ0595, MQ0596, MQ0597",NOT_TESTED
+138,P6e5fbe8cb,3,recommendation,smartphone,,7000.0,redmi,amoled_display,,,,,,best Redmi phone under 7000 with AMOLED display,"MQ0591, MQ0592, MQ0593",NOT_TESTED
+139,P771138294,3,recommendation,smartphone,,7000.0,redmi,ois,camera,,,,,best Redmi phone under 7000 with OIS camera,"MQ0615, MQ0616, MQ0617",NOT_TESTED
+140,P98200285a,3,recommendation,smartphone,,7000.0,samsung,120hz_display,,,,,,best Samsung phone under 7000 with 120Hz display,"MQ0523, MQ0524, MQ0525",NOT_TESTED
+141,P4cd33e594,3,recommendation,smartphone,,7000.0,samsung,256gb_storage,,,,,,best Samsung phone under 7000 with 256GB storage,"MQ0503, MQ0504, MQ0505",NOT_TESTED
+142,P4b0d953af,3,recommendation,smartphone,,7000.0,samsung,5g,,,,,,best Samsung phone under 7000 with 5G,"MQ0479, MQ0480, MQ0481",NOT_TESTED
+143,P2034047a7,3,recommendation,smartphone,,7000.0,samsung,8gb_ram,,,,,,best Samsung phone under 7000 with 8GB RAM,"MQ0499, MQ0500, MQ0501",NOT_TESTED
+144,P15b543a2b,3,recommendation,smartphone,,7000.0,samsung,amoled_display,,,,,,best Samsung phone under 7000 with AMOLED display,"MQ0495, MQ0496, MQ0497",NOT_TESTED
+145,P5b11178e7,3,recommendation,smartphone,,7000.0,samsung,ois,camera,,,,,best Samsung phone under 7000 with OIS camera,"MQ0519, MQ0520, MQ0521",NOT_TESTED
+146,Pbd846a0c7,3,recommendation,smartphone,,7000.0,vivo,120hz_display,,,,,,best vivo phone under 7000 with 120Hz display,"MQ0715, MQ0716, MQ0717",NOT_TESTED
+147,P2d537c834,3,recommendation,smartphone,,7000.0,vivo,256gb_storage,,,,,,best vivo phone under 7000 with 256GB storage,"MQ0695, MQ0696, MQ0697",NOT_TESTED
+148,P4cab66508,3,recommendation,smartphone,,7000.0,vivo,5g,,,,,,best vivo phone under 7000 with 5G,"MQ0671, MQ0672, MQ0673",NOT_TESTED
+149,P7e0c5e908,3,recommendation,smartphone,,7000.0,vivo,8gb_ram,,,,,,best vivo phone under 7000 with 8GB RAM,"MQ0691, MQ0692, MQ0693",NOT_TESTED
+150,P6bfb4f42b,3,recommendation,smartphone,,7000.0,vivo,amoled_display,,,,,,best vivo phone under 7000 with AMOLED display,"MQ0687, MQ0688, MQ0689",NOT_TESTED
+151,P82c410e50,3,recommendation,smartphone,,7000.0,vivo,ois,camera,,,,,best vivo phone under 7000 with OIS camera,"MQ0711, MQ0712, MQ0713",NOT_TESTED
+152,Pd16e195dc,2,compare_against_model,smartphone,,10000.0,,,,,galaxy f05,,,compare Galaxy F05 with alternatives under 10000,"MQ0915, MQ0916",NOT_TESTED
+153,Pb4bc35916,2,compare_against_model,smartphone,,10000.0,,,,,iphone 13,,,compare iPhone 13 with alternatives under 10000,"MQ0825, MQ0826",NOT_TESTED
+154,P51c9f49e3,2,compare_against_model,smartphone,,10000.0,,,,,iphone 15,,,compare iPhone 15 with alternatives under 10000,"MQ0843, MQ0844",NOT_TESTED
+155,Pa0e9ef493,2,compare_against_model,smartphone,,10000.0,,,,,iphone 16e,,,compare iPhone 16E with alternatives under 10000,"MQ0861, MQ0862",NOT_TESTED
+156,P10c2df9bc,2,compare_against_model,smartphone,,10000.0,,,,,iphone 17,,,compare iPhone 17 with alternatives under 10000,"MQ0897, MQ0898",NOT_TESTED
+157,P100e4529b,2,compare_against_model,smartphone,,10000.0,,,,,iphone 17e,,,compare iPhone 17e with alternatives under 10000,"MQ0879, MQ0880",NOT_TESTED
+158,P45234b73f,2,compare_against_model,smartphone,,100000.0,,,,,galaxy f05,,,compare Galaxy F05 with alternatives under 100000,"MQ0927, MQ0928",NOT_TESTED
+159,Paf0d5bd67,2,compare_against_model,smartphone,,100000.0,,,,,iphone 13,,,compare iPhone 13 with alternatives under 100000,"MQ0837, MQ0838",NOT_TESTED
+160,P5d9225aff,2,compare_against_model,smartphone,,100000.0,,,,,iphone 15,,,compare iPhone 15 with alternatives under 100000,"MQ0855, MQ0856",NOT_TESTED
+161,P35f707f5d,2,compare_against_model,smartphone,,100000.0,,,,,iphone 16e,,,compare iPhone 16E with alternatives under 100000,"MQ0873, MQ0874",NOT_TESTED
+162,P9b9ebeb87,2,compare_against_model,smartphone,,100000.0,,,,,iphone 17,,,compare iPhone 17 with alternatives under 100000,"MQ0909, MQ0910",NOT_TESTED
+163,P7420ae4da,2,compare_against_model,smartphone,,100000.0,,,,,iphone 17e,,,compare iPhone 17e with alternatives under 100000,"MQ0891, MQ0892",NOT_TESTED
+164,Pf4d208e64,2,compare_against_model,smartphone,,20000.0,,,,,galaxy f05,,,compare Galaxy F05 with alternatives under 20000,"MQ0917, MQ0918",NOT_TESTED
+165,P58b47a929,2,compare_against_model,smartphone,,20000.0,,,,,iphone 13,,,compare iPhone 13 with alternatives under 20000,"MQ0827, MQ0828",NOT_TESTED
+166,P7d948a794,2,compare_against_model,smartphone,,20000.0,,,,,iphone 15,,,compare iPhone 15 with alternatives under 20000,"MQ0845, MQ0846",NOT_TESTED
+167,P1a96a65a5,2,compare_against_model,smartphone,,20000.0,,,,,iphone 16e,,,compare iPhone 16E with alternatives under 20000,"MQ0863, MQ0864",NOT_TESTED
+168,P600f97fe4,2,compare_against_model,smartphone,,20000.0,,,,,iphone 17,,,compare iPhone 17 with alternatives under 20000,"MQ0899, MQ0900",NOT_TESTED
+169,P222ee06b8,2,compare_against_model,smartphone,,20000.0,,,,,iphone 17e,,,compare iPhone 17e with alternatives under 20000,"MQ0881, MQ0882",NOT_TESTED
+170,P7621a3433,2,compare_against_model,smartphone,,30000.0,,,,,galaxy f05,,,compare Galaxy F05 with alternatives under 30000,"MQ0919, MQ0920",NOT_TESTED
+171,P657d2e352,2,compare_against_model,smartphone,,30000.0,,,,,iphone 13,,,compare iPhone 13 with alternatives under 30000,"MQ0829, MQ0830",NOT_TESTED
+172,Pdc5723a09,2,compare_against_model,smartphone,,30000.0,,,,,iphone 15,,,compare iPhone 15 with alternatives under 30000,"MQ0847, MQ0848",NOT_TESTED
+173,Pdc2814880,2,compare_against_model,smartphone,,30000.0,,,,,iphone 16e,,,compare iPhone 16E with alternatives under 30000,"MQ0865, MQ0866",NOT_TESTED
+174,Pb0652c103,2,compare_against_model,smartphone,,30000.0,,,,,iphone 17,,,compare iPhone 17 with alternatives under 30000,"MQ0901, MQ0902",NOT_TESTED
+175,Pa14f1d1d8,2,compare_against_model,smartphone,,30000.0,,,,,iphone 17e,,,compare iPhone 17e with alternatives under 30000,"MQ0883, MQ0884",NOT_TESTED
+176,P542a8f93d,2,compare_against_model,smartphone,,50000.0,,,,,galaxy f05,,,compare Galaxy F05 with alternatives under 50000,"MQ0921, MQ0922",NOT_TESTED
+177,Pf5c6902c6,2,compare_against_model,smartphone,,50000.0,,,,,iphone 13,,,compare iPhone 13 with alternatives under 50000,"MQ0831, MQ0832",NOT_TESTED
+178,P8a58cd67e,2,compare_against_model,smartphone,,50000.0,,,,,iphone 15,,,compare iPhone 15 with alternatives under 50000,"MQ0849, MQ0850",NOT_TESTED
+179,P2737d67c2,2,compare_against_model,smartphone,,50000.0,,,,,iphone 16e,,,compare iPhone 16E with alternatives under 50000,"MQ0867, MQ0868",NOT_TESTED
+180,P14aa97117,2,compare_against_model,smartphone,,50000.0,,,,,iphone 17,,,compare iPhone 17 with alternatives under 50000,"MQ0903, MQ0904",NOT_TESTED
+181,Pfff286fe9,2,compare_against_model,smartphone,,50000.0,,,,,iphone 17e,,,compare iPhone 17e with alternatives under 50000,"MQ0885, MQ0886",NOT_TESTED
+182,Pf66fe561b,2,compare_against_model,smartphone,,60000.0,,,,,galaxy f05,,,compare Galaxy F05 with alternatives under 60000,"MQ0923, MQ0924",NOT_TESTED
+183,P2b695f9c4,2,compare_against_model,smartphone,,60000.0,,,,,iphone 13,,,compare iPhone 13 with alternatives under 60000,"MQ0833, MQ0834",NOT_TESTED
+184,P2e7db91d2,2,compare_against_model,smartphone,,60000.0,,,,,iphone 15,,,compare iPhone 15 with alternatives under 60000,"MQ0851, MQ0852",NOT_TESTED
+185,P93acd1afc,2,compare_against_model,smartphone,,60000.0,,,,,iphone 16e,,,compare iPhone 16E with alternatives under 60000,"MQ0869, MQ0870",NOT_TESTED
+186,Pe242fa8a6,2,compare_against_model,smartphone,,60000.0,,,,,iphone 17,,,compare iPhone 17 with alternatives under 60000,"MQ0905, MQ0906",NOT_TESTED
+187,P2158192ed,2,compare_against_model,smartphone,,60000.0,,,,,iphone 17e,,,compare iPhone 17e with alternatives under 60000,"MQ0887, MQ0888",NOT_TESTED
+188,P2ccc54286,2,compare_against_model,smartphone,,70000.0,,,,,galaxy f05,,,compare Galaxy F05 with alternatives under 70000,"MQ0925, MQ0926",NOT_TESTED
+189,P3966f7d7b,2,compare_against_model,smartphone,,70000.0,,,,,iphone 13,,,compare iPhone 13 with alternatives under 70000,"MQ0835, MQ0836",NOT_TESTED
+190,P639f51f4f,2,compare_against_model,smartphone,,70000.0,,,,,iphone 15,,,compare iPhone 15 with alternatives under 70000,"MQ0853, MQ0854",NOT_TESTED
+191,Pedfd1cb03,2,compare_against_model,smartphone,,70000.0,,,,,iphone 16e,,,compare iPhone 16E with alternatives under 70000,"MQ0871, MQ0872",NOT_TESTED
+192,P0477395d0,2,compare_against_model,smartphone,,70000.0,,,,,iphone 17,,,compare iPhone 17 with alternatives under 70000,"MQ0907, MQ0908",NOT_TESTED
+193,Pab334f2b2,2,compare_against_model,smartphone,,70000.0,,,,,iphone 17e,,,compare iPhone 17e with alternatives under 70000,"MQ0889, MQ0890",NOT_TESTED
+194,Pb8f42a7bf,2,recommendation,smartphone,,7000.0,poco,,camera,,,,,best POCO phone under 7000 with good camera,"MQ0819, MQ0820",NOT_TESTED
+195,Pbba729692,1,named_model_buy_decision,smartphone,,,,,,,galaxy f05,,,Galaxy F05 lena sahi rahega kya,MQ0912,NOT_TESTED
+196,P55d7cc419,1,named_model_buy_decision,smartphone,,,,,,,galaxy s25 fe,,,Galaxy S25 FE lena sahi rahega kya,MQ0930,NOT_TESTED
+197,P3400f6e9f,1,named_model_buy_decision,smartphone,,,,,,,iphone 13,,,iPhone 13 lena sahi rahega kya,MQ0822,NOT_TESTED
+198,Paa791b399,1,named_model_buy_decision,smartphone,,,,,,,iphone 15,,,iPhone 15 lena sahi rahega kya,MQ0840,NOT_TESTED
+199,P37cc36d42,1,named_model_buy_decision,smartphone,,,,,,,iphone 16e,,,iPhone 16E lena sahi rahega kya,MQ0858,NOT_TESTED
+200,Pf694b675b,1,named_model_buy_decision,smartphone,,,,,,,iphone 17,,,iPhone 17 lena sahi rahega kya,MQ0894,NOT_TESTED
+201,Pee3c83017,1,named_model_buy_decision,smartphone,,,,,,,iphone 17e,,,iPhone 17e lena sahi rahega kya,MQ0876,NOT_TESTED
+202,P36d090ad5,1,named_model_camera_review,smartphone,,,,,,,galaxy f05,,,Galaxy F05 ka camera kaisa hai,MQ0914,NOT_TESTED
+203,P3f91478ee,1,named_model_camera_review,smartphone,,,,,,,iphone 13,,,iPhone 13 ka camera kaisa hai,MQ0824,NOT_TESTED
+204,Pae0892cb0,1,named_model_camera_review,smartphone,,,,,,,iphone 15,,,iPhone 15 ka camera kaisa hai,MQ0842,NOT_TESTED
+205,Pf5ee986cf,1,named_model_camera_review,smartphone,,,,,,,iphone 16e,,,iPhone 16E ka camera kaisa hai,MQ0860,NOT_TESTED
+206,P35a4009dc,1,named_model_camera_review,smartphone,,,,,,,iphone 17,,,iPhone 17 ka camera kaisa hai,MQ0896,NOT_TESTED
+207,Pea52703db,1,named_model_camera_review,smartphone,,,,,,,iphone 17e,,,iPhone 17e ka camera kaisa hai,MQ0878,NOT_TESTED
+208,P2c1a639b7,1,named_model_gaming_review,smartphone,,,,,,,galaxy f05,,,is Galaxy F05 good for gaming,MQ0913,NOT_TESTED
+209,P02723ab17,1,named_model_gaming_review,smartphone,,,,,,,iphone 13,,,is iPhone 13 good for gaming,MQ0823,NOT_TESTED
+210,P7d9d0d9f7,1,named_model_gaming_review,smartphone,,,,,,,iphone 15,,,is iPhone 15 good for gaming,MQ0841,NOT_TESTED
+211,Pae3bb0967,1,named_model_gaming_review,smartphone,,,,,,,iphone 16e,,,is iPhone 16E good for gaming,MQ0859,NOT_TESTED
+212,Pf78a34de3,1,named_model_gaming_review,smartphone,,,,,,,iphone 17,,,is iPhone 17 good for gaming,MQ0895,NOT_TESTED
+213,P095e4e479,1,named_model_gaming_review,smartphone,,,,,,,iphone 17e,,,is iPhone 17e good for gaming,MQ0877,NOT_TESTED
+214,P0e3f8e467,1,named_model_price_deal,smartphone,,,,,,,galaxy f05,,,Galaxy F05 price and best deal,MQ0911,NOT_TESTED
+215,P7bc93baa9,1,named_model_price_deal,smartphone,,,,,,,galaxy s25 fe,,,Galaxy S25 FE price and best deal,MQ0929,NOT_TESTED
+216,Pf50afb83c,1,named_model_price_deal,smartphone,,,,,,,iphone 13,,,iPhone 13 price and best deal,MQ0821,NOT_TESTED
+217,P34601833e,1,named_model_price_deal,smartphone,,,,,,,iphone 15,,,iPhone 15 price and best deal,MQ0839,NOT_TESTED
+218,P368ece0c4,1,named_model_price_deal,smartphone,,,,,,,iphone 16e,,,iPhone 16E price and best deal,MQ0857,NOT_TESTED
+219,P0b57fca76,1,named_model_price_deal,smartphone,,,,,,,iphone 17,,,iPhone 17 price and best deal,MQ0893,NOT_TESTED
+220,P86e3b2b02,1,named_model_price_deal,smartphone,,,,,,,iphone 17e,,,iPhone 17e price and best deal,MQ0875,NOT_TESTED
+221,Pba89afe73,1,recommendation,smartphone,,10000.0,,amoled_display,,,,office,,AMOLED display phone under 10000 office use,MQ0966,NOT_TESTED
+222,Pb9f4621c9,1,recommendation,smartphone,,10000.0,iqoo,,gaming,,,daily_use,,10000 tak iQOO gaming mobile daily use,MQ0949,NOT_TESTED
+223,Paf7e95c5d,1,recommendation,smartphone,,10000.0,oneplus,8gb_ram,,,,,reviews,10000 tak OnePlus 8GB RAM mobile good reviews,MQ0983,NOT_TESTED
+224,P6f4e0401e,1,recommendation,smartphone,,10000.0,oppo,256gb_storage,,,,parents,,OPPO 256GB storage phone under 10000 parents ke liye,MQ1000,NOT_TESTED
+225,P4c85fd1de,1,recommendation,smartphone,,100000.0,,,gaming,,,,latest,100000 tak gaming mobile latest model,MQ0961,NOT_TESTED
+226,P56c3834ed,1,recommendation,smartphone,,100000.0,oneplus,amoled_display,,,,college,,OnePlus AMOLED display phone under 100000 college use,MQ0978,NOT_TESTED
+227,Pb22afbd7c,1,recommendation,smartphone,,100000.0,oppo,8gb_ram,,,,,value,100000 tak OPPO 8GB RAM mobile value for money,MQ0995,NOT_TESTED
+228,P97c9773fb,1,recommendation,smartphone,,12000.0,iqoo,ois,camera,,,daily_use,,iQOO OIS camera phone under 12000 daily use,MQ0984,NOT_TESTED
+229,Pd6b459db8,1,recommendation,smartphone,,12000.0,oppo,,software_support,,,college,,OPPO long software updates phone under 12000 college use,MQ0950,NOT_TESTED
+230,Pd7f1be8e9,1,recommendation,smartphone,,12000.0,redmi,,compact,,,,value,12000 tak Redmi compact phone mobile value for money,MQ0967,NOT_TESTED
+231,Paa2f99035,1,recommendation,smartphone,,15000.0,,,battery,,,,,battery mast ho 15k tak,MQ0945,NOT_TESTED
+232,Pb3af10a4d,1,recommendation,smartphone,,15000.0,,,camera,,,parents,,15000 tak good camera mobile parents ke liye,MQ0951,NOT_TESTED
+233,P3baecf764,1,recommendation,smartphone,,15000.0,oneplus,,battery,,,,latest,OnePlus best battery phone under 15000 latest model,MQ0968,NOT_TESTED
+234,Paff1cd9bf,1,recommendation,smartphone,,15000.0,oppo,,gaming,,,college,,15000 tak OPPO gaming mobile college use,MQ0985,NOT_TESTED
+235,P311eed8ee,1,recommendation,smartphone,,150000.0,,ois,camera,,,,latest,OIS camera phone under 150000 latest model,MQ0996,NOT_TESTED
+236,P34bfe3395,1,recommendation,smartphone,,150000.0,iqoo,,compact,,,parents,,150000 tak iQOO compact phone mobile parents ke liye,MQ0979,NOT_TESTED
+237,P5c23dbcd0,1,recommendation,smartphone,,150000.0,redmi,,software_support,,,,reviews,Redmi long software updates phone under 150000 good reviews,MQ0962,NOT_TESTED
+238,Pbe98f5d52,1,recommendation,smartphone,,18000.0,,,software_support,,,parents,,long software updates phone under 18000 parents ke liye,MQ0986,NOT_TESTED
+239,Pc7427b8df,1,recommendation,smartphone,,18000.0,iqoo,,fast_charging,,,,reviews,18000 tak iQOO fast charging mobile good reviews,MQ0969,NOT_TESTED
+240,P6eb82912b,1,recommendation,smartphone,,18000.0,redmi,256gb_storage,,,,office,,Redmi 256GB storage phone under 18000 office use,MQ0952,NOT_TESTED
+241,P75e1d55c1,1,recommendation,smartphone,,20000.0,,"8gb_ram,128gb_storage",,,,,,8 128 wala phone 20k,MQ0941,NOT_TESTED
+242,Pea3ae743b,1,recommendation,smartphone,,20000.0,oneplus,120hz_display,,,,,value,20000 tak OnePlus 120Hz display mobile value for money,MQ0953,NOT_TESTED
+243,P2dfb333f3,1,recommendation,smartphone,,20000.0,oppo,5g,,,,daily_use,,OPPO 5G phone under 20000 daily use,MQ0970,NOT_TESTED
+244,P6a85f9c94,1,recommendation,smartphone,,20000.0,redmi,,camera,,,office,,20000 tak Redmi good camera mobile office use,MQ0987,NOT_TESTED
+245,P5eb4c9689,1,recommendation,smartphone,,25000.0,,,,,,,,gaming phone 25k tak,MQ0943,NOT_TESTED
+246,Pbaed9268f,1,recommendation,smartphone,,25000.0,,8gb_ram,,,,college,,25000 tak 8GB RAM mobile college use,MQ0971,NOT_TESTED
+247,P89e175ff4,1,recommendation,smartphone,,25000.0,iqoo,amoled_display,,,,,latest,iQOO AMOLED display phone under 25000 latest model,MQ0954,NOT_TESTED
+248,Pbb579f621,1,recommendation,smartphone,,25000.0,oneplus,256gb_storage,,,,,value,OnePlus 256GB storage phone under 25000 value for money,MQ0988,NOT_TESTED
+249,Paf15dc7ff,1,recommendation,smartphone,,30000.0,,,camera,,,,,camera sabse acha under 30k,MQ0942,NOT_TESTED
+250,Pbf2a324bc,1,recommendation,smartphone,,30000.0,iqoo,120hz_display,,,,,latest,30000 tak iQOO 120Hz display mobile latest model,MQ0989,NOT_TESTED
+251,Pdce7bed9c,1,recommendation,smartphone,,30000.0,oppo,,compact,,,,reviews,30000 tak OPPO compact phone mobile good reviews,MQ0955,NOT_TESTED
+252,Pff49985a0,1,recommendation,smartphone,,30000.0,redmi,ois,camera,,,parents,,Redmi OIS camera phone under 30000 parents ke liye,MQ0972,NOT_TESTED
+253,P15eea1f0a,1,recommendation,smartphone,,35000.0,,,battery,,,daily_use,,best battery phone under 35000 daily use,MQ0956,NOT_TESTED
+254,P3a1e3d239,1,recommendation,smartphone,,35000.0,oneplus,,gaming,,,office,,35000 tak OnePlus gaming mobile office use,MQ0973,NOT_TESTED
+255,P1b32f5cea,1,recommendation,smartphone,,35000.0,oppo,amoled_display,,,,,reviews,OPPO AMOLED display phone under 35000 good reviews,MQ0990,NOT_TESTED
+256,Pdcbb6e852,1,recommendation,smartphone,,40000.0,,,compact,,,daily_use,,40000 tak compact phone mobile daily use,MQ0991,NOT_TESTED
+257,Pd05979b1c,1,recommendation,smartphone,,40000.0,,,software_support,,,,,phone with long updates under 40000,MQ0944,NOT_TESTED
+258,P4a084c100,1,recommendation,smartphone,,40000.0,iqoo,,software_support,,,,value,iQOO long software updates phone under 40000 value for money,MQ0974,NOT_TESTED
+259,Pf01f2ddd0,1,recommendation,smartphone,,40000.0,redmi,,fast_charging,,,college,,40000 tak Redmi fast charging mobile college use,MQ0957,NOT_TESTED
+260,Pf3576f726,1,recommendation,smartphone,,50000.0,apple,,,,,,,Apple phone under 50000,MQ0935,NOT_TESTED
+261,P7df0e4666,1,recommendation,smartphone,,50000.0,oneplus,5g,,,,parents,,OnePlus 5G phone under 50000 parents ke liye,MQ0958,NOT_TESTED
+262,P1459828a9,1,recommendation,smartphone,,50000.0,oppo,,camera,,,,latest,50000 tak OPPO good camera mobile latest model,MQ0975,NOT_TESTED
+263,P96a99c04b,1,recommendation,smartphone,,50000.0,redmi,,battery,,,college,,Redmi best battery phone under 50000 college use,MQ0992,NOT_TESTED
+264,P66f6f04be,1,recommendation,smartphone,,60000.0,,256gb_storage,,,,,reviews,256GB storage phone under 60000 good reviews,MQ0976,NOT_TESTED
+265,Paef7fe790,1,recommendation,smartphone,,60000.0,iqoo,8gb_ram,,,,office,,60000 tak iQOO 8GB RAM mobile office use,MQ0959,NOT_TESTED
+266,P806fe602a,1,recommendation,smartphone,,60000.0,oneplus,,fast_charging,,,parents,,60000 tak OnePlus fast charging mobile parents ke liye,MQ0993,NOT_TESTED
+267,P0daa4604e,1,recommendation,smartphone,,7000.0,,,120hz_display,,,,,"smartphone below 7000, prefer 120Hz display",MQ0478,NOT_TESTED
+268,P8b9ee2a08,1,recommendation,smartphone,,7000.0,,,256gb_storage,,,,,"smartphone below 7000, prefer 256GB storage",MQ0458,NOT_TESTED
+269,Pe67b25b90,1,recommendation,smartphone,,7000.0,,,5g,,,,,"smartphone below 7000, prefer 5G",MQ0434,NOT_TESTED
+270,P7c733756e,1,recommendation,smartphone,,7000.0,,,8gb_ram,,,,,"smartphone below 7000, prefer 8GB RAM",MQ0454,NOT_TESTED
+271,Pcab1c0fd8,1,recommendation,smartphone,,7000.0,,,amoled_display,,,,,"smartphone below 7000, prefer AMOLED display",MQ0450,NOT_TESTED
+272,P36473dc56,1,recommendation,smartphone,,7000.0,,,"camera,ois",,,,,"smartphone below 7000, prefer OIS camera",MQ0474,NOT_TESTED
+273,P00b8fb7c8,1,recommendation,smartphone,,7000.0,,5g,,,,,value,5G phone under 7000 value for money,MQ0946,NOT_TESTED
+274,Pfe4233a52,1,recommendation,smartphone,,7000.0,apple,,120hz_display,,,,,"Apple smartphone below 7000, prefer 120Hz display",MQ0574,NOT_TESTED
+275,Pac3e1d5c0,1,recommendation,smartphone,,7000.0,apple,,256gb_storage,,,,,"Apple smartphone below 7000, prefer 256GB storage",MQ0554,NOT_TESTED
+276,P108cb1c49,1,recommendation,smartphone,,7000.0,apple,,5g,,,,,"Apple smartphone below 7000, prefer 5G",MQ0530,NOT_TESTED
+277,Pfddf028d0,1,recommendation,smartphone,,7000.0,apple,,8gb_ram,,,,,"Apple smartphone below 7000, prefer 8GB RAM",MQ0550,NOT_TESTED
+278,P9401f323a,1,recommendation,smartphone,,7000.0,apple,,amoled_display,,,,,"Apple smartphone below 7000, prefer AMOLED display",MQ0546,NOT_TESTED
+279,Pf3bffa4ab,1,recommendation,smartphone,,7000.0,apple,,"camera,ois",,,,,"Apple smartphone below 7000, prefer OIS camera",MQ0570,NOT_TESTED
+280,P3c12f7901,1,recommendation,smartphone,,7000.0,motorola,,120hz_display,,,,,"Motorola smartphone below 7000, prefer 120Hz display",MQ0814,NOT_TESTED
+281,Pc170e46b6,1,recommendation,smartphone,,7000.0,motorola,,256gb_storage,,,,,"Motorola smartphone below 7000, prefer 256GB storage",MQ0794,NOT_TESTED
+282,P4849d4f41,1,recommendation,smartphone,,7000.0,motorola,,5g,,,,,"Motorola smartphone below 7000, prefer 5G",MQ0770,NOT_TESTED
+283,Pe70ef0e20,1,recommendation,smartphone,,7000.0,motorola,,8gb_ram,,,,,"Motorola smartphone below 7000, prefer 8GB RAM",MQ0790,NOT_TESTED
+284,P31ace6e16,1,recommendation,smartphone,,7000.0,motorola,,amoled_display,,,,,"Motorola smartphone below 7000, prefer AMOLED display",MQ0786,NOT_TESTED
+285,Pd35e89a7b,1,recommendation,smartphone,,7000.0,motorola,,"camera,ois",,,,,"Motorola smartphone below 7000, prefer OIS camera",MQ0810,NOT_TESTED
+286,P3e289d6e3,1,recommendation,smartphone,,7000.0,oneplus,,120hz_display,,,,,"OnePlus smartphone below 7000, prefer 120Hz display",MQ0766,NOT_TESTED
+287,Pdb591662d,1,recommendation,smartphone,,7000.0,oneplus,,256gb_storage,,,,,"OnePlus smartphone below 7000, prefer 256GB storage",MQ0746,NOT_TESTED
+288,Pfe8c2fbc9,1,recommendation,smartphone,,7000.0,oneplus,,5g,,,,,"OnePlus smartphone below 7000, prefer 5G",MQ0722,NOT_TESTED
+289,Pd00ef266c,1,recommendation,smartphone,,7000.0,oneplus,,8gb_ram,,,,,"OnePlus smartphone below 7000, prefer 8GB RAM",MQ0742,NOT_TESTED
+290,P131271a71,1,recommendation,smartphone,,7000.0,oneplus,,amoled_display,,,,,"OnePlus smartphone below 7000, prefer AMOLED display",MQ0738,NOT_TESTED
+291,P5a4c37680,1,recommendation,smartphone,,7000.0,oneplus,,camera,,,daily_use,,7000 tak OnePlus good camera mobile daily use,MQ0963,NOT_TESTED
+292,P951de5179,1,recommendation,smartphone,,7000.0,oneplus,,"camera,ois",,,,,"OnePlus smartphone below 7000, prefer OIS camera",MQ0762,NOT_TESTED
+293,Pc8ed0c2e5,1,recommendation,smartphone,,7000.0,oppo,,battery,,,office,,OPPO best battery phone under 7000 office use,MQ0980,NOT_TESTED
+294,P8c7d8645d,1,recommendation,smartphone,,7000.0,poco,,5g,,,,,"POCO smartphone below 7000, prefer 5G",MQ0818,NOT_TESTED
+295,P818d7447b,1,recommendation,smartphone,,7000.0,realme,,120hz_display,,,,,"realme smartphone below 7000, prefer 120Hz display",MQ0670,NOT_TESTED
+296,Pe5cb3f10f,1,recommendation,smartphone,,7000.0,realme,,256gb_storage,,,,,"realme smartphone below 7000, prefer 256GB storage",MQ0650,NOT_TESTED
+297,Pe0802064c,1,recommendation,smartphone,,7000.0,realme,,5g,,,,,"realme smartphone below 7000, prefer 5G",MQ0626,NOT_TESTED
+298,Pd40291438,1,recommendation,smartphone,,7000.0,realme,,8gb_ram,,,,,"realme smartphone below 7000, prefer 8GB RAM",MQ0646,NOT_TESTED
+299,Pca88434af,1,recommendation,smartphone,,7000.0,realme,,amoled_display,,,,,"realme smartphone below 7000, prefer AMOLED display",MQ0642,NOT_TESTED
+300,P177f692ef,1,recommendation,smartphone,,7000.0,realme,,"camera,ois",,,,,"realme smartphone below 7000, prefer OIS camera",MQ0666,NOT_TESTED
+301,P2cc9281f0,1,recommendation,smartphone,,7000.0,redmi,,120hz_display,,,,,"Redmi smartphone below 7000, prefer 120Hz display",MQ0622,NOT_TESTED
+302,P3a9d150bb,1,recommendation,smartphone,,7000.0,redmi,,256gb_storage,,,,,"Redmi smartphone below 7000, prefer 256GB storage",MQ0602,NOT_TESTED
+303,P89a0ab748,1,recommendation,smartphone,,7000.0,redmi,,5g,,,,,"Redmi smartphone below 7000, prefer 5G",MQ0578,NOT_TESTED
+304,Pbff8b4cd3,1,recommendation,smartphone,,7000.0,redmi,,8gb_ram,,,,,"Redmi smartphone below 7000, prefer 8GB RAM",MQ0598,NOT_TESTED
+305,Pb6ce3c25b,1,recommendation,smartphone,,7000.0,redmi,,amoled_display,,,,,"Redmi smartphone below 7000, prefer AMOLED display",MQ0594,NOT_TESTED
+306,P974758432,1,recommendation,smartphone,,7000.0,redmi,,"camera,ois",,,,,"Redmi smartphone below 7000, prefer OIS camera",MQ0618,NOT_TESTED
+307,P8052305c1,1,recommendation,smartphone,,7000.0,redmi,,gaming,,,,reviews,7000 tak Redmi gaming mobile good reviews,MQ0997,NOT_TESTED
+308,Pf02d5099c,1,recommendation,smartphone,,7000.0,samsung,,120hz_display,,,,,"Samsung smartphone below 7000, prefer 120Hz display",MQ0526,NOT_TESTED
+309,Pe1fa3905a,1,recommendation,smartphone,,7000.0,samsung,,256gb_storage,,,,,"Samsung smartphone below 7000, prefer 256GB storage",MQ0506,NOT_TESTED
+310,P8419fdf18,1,recommendation,smartphone,,7000.0,samsung,,5g,,,,,"Samsung smartphone below 7000, prefer 5G",MQ0482,NOT_TESTED
+311,P709d39952,1,recommendation,smartphone,,7000.0,samsung,,8gb_ram,,,,,"Samsung smartphone below 7000, prefer 8GB RAM",MQ0502,NOT_TESTED
+312,P06c730df2,1,recommendation,smartphone,,7000.0,samsung,,amoled_display,,,,,"Samsung smartphone below 7000, prefer AMOLED display",MQ0498,NOT_TESTED
+313,P3a1569d65,1,recommendation,smartphone,,7000.0,samsung,,"camera,ois",,,,,"Samsung smartphone below 7000, prefer OIS camera",MQ0522,NOT_TESTED
+314,P2d2875561,1,recommendation,smartphone,,7000.0,vivo,,120hz_display,,,,,"vivo smartphone below 7000, prefer 120Hz display",MQ0718,NOT_TESTED
+315,Pab9aad9c5,1,recommendation,smartphone,,7000.0,vivo,,256gb_storage,,,,,"vivo smartphone below 7000, prefer 256GB storage",MQ0698,NOT_TESTED
+316,P7c7181d00,1,recommendation,smartphone,,7000.0,vivo,,5g,,,,,"vivo smartphone below 7000, prefer 5G",MQ0674,NOT_TESTED
+317,Paabda06ed,1,recommendation,smartphone,,7000.0,vivo,,8gb_ram,,,,,"vivo smartphone below 7000, prefer 8GB RAM",MQ0694,NOT_TESTED
+318,P7ef402382,1,recommendation,smartphone,,7000.0,vivo,,amoled_display,,,,,"vivo smartphone below 7000, prefer AMOLED display",MQ0690,NOT_TESTED
+319,P81b564f6a,1,recommendation,smartphone,,7000.0,vivo,,"camera,ois",,,,,"vivo smartphone below 7000, prefer OIS camera",MQ0714,NOT_TESTED
+320,Pcfa526f40,1,recommendation,smartphone,,70000.0,apple,,,,,,,iPhone under 70000,MQ0938,NOT_TESTED
+321,Pf031f0f9b,1,recommendation,smartphone,,70000.0,iqoo,5g,,,,office,,iQOO 5G phone under 70000 office use,MQ0994,NOT_TESTED
+322,Pd495838a9,1,recommendation,smartphone,,70000.0,oppo,ois,camera,,,,value,OPPO OIS camera phone under 70000 value for money,MQ0960,NOT_TESTED
+323,Pacd710d1a,1,recommendation,smartphone,,70000.0,redmi,120hz_display,,,,daily_use,,70000 tak Redmi 120Hz display mobile daily use,MQ0977,NOT_TESTED
+324,Pbfb52bc8a,1,recommendation,smartphone,,8000.0,,,fast_charging,,,,value,8000 tak fast charging mobile value for money,MQ0981,NOT_TESTED
+325,P92ff43845,1,recommendation,smartphone,,8000.0,iqoo,256gb_storage,,,,college,,iQOO 256GB storage phone under 8000 college use,MQ0964,NOT_TESTED
+326,P27f7d669e,1,recommendation,smartphone,,8000.0,oneplus,,software_support,,,daily_use,,OnePlus long software updates phone under 8000 daily use,MQ0998,NOT_TESTED
+327,Pa7c423c93,1,recommendation,smartphone,,8000.0,redmi,8gb_ram,,,,,latest,8000 tak Redmi 8GB RAM mobile latest model,MQ0947,NOT_TESTED
+328,P36d3c9e82,1,recommendation,smartphone,,9000.0,,5g,,,,,,9k ka 5g phone,MQ0934,NOT_TESTED
+329,Pe29ec1aae,1,recommendation,smartphone,,9000.0,iqoo,,camera,,,college,,9000 tak iQOO good camera mobile college use,MQ0999,NOT_TESTED
+330,P07d751e23,1,recommendation,smartphone,,9000.0,oneplus,ois,camera,,,,reviews,OnePlus OIS camera phone under 9000 good reviews,MQ0948,NOT_TESTED
+331,P7bb1b1e11,1,recommendation,smartphone,,9000.0,oppo,120hz_display,,,,parents,,9000 tak OPPO 120Hz display mobile parents ke liye,MQ0965,NOT_TESTED
+332,P6a06960b5,1,recommendation,smartphone,,9000.0,redmi,5g,,,,,latest,Redmi 5G phone under 9000 latest model,MQ0982,NOT_TESTED
+333,Pa0ce2fc92,1,recommendation,smartphone,50000.0,60000.0,,,,,,,,best phone 50000 to 60000,MQ0940,NOT_TESTED
