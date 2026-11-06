@@ -28,7 +28,7 @@
   <meta name="twitter:description" content="Source-backed smartphone research and comparison in India." />
   <link rel="icon" href="/assets/coupon-world-og.svg?v=1" type="image/svg+xml" />
 
-  <link rel="stylesheet" href="/style.css?v=positioning-20261104-a">
+  <link rel="stylesheet" href="/style.css?v=usability-20261106">
 
   <script type="application/ld+json">
   {
@@ -148,6 +148,46 @@
       </div>
     </section>
 
+    <section class="container mobile-research-search-section" id="mobileResearchSearch" aria-labelledby="mobileResearchSearchTitle">
+      <div class="section-panel premium-panel mobile-research-search-panel">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">Smartphone research</span>
+            <h2 id="mobileResearchSearchTitle">Find the right smartphone</h2>
+            <p>Search by budget, model, camera, battery, gaming, software, RAM or storage. Budget results use dated reference prices; current price and delivery need retailer confirmation.</p>
+          </div>
+          <span class="research-badge">Research only</span>
+        </div>
+        <aside class="always-guide" aria-label="Smartphone buying help"><div><strong>Not sure where to start?</strong><p>Our standard guide covers camera, battery, memory and software. Available while offers or research are loading.</p></div><a class="btn btn-ghost" href="/guides/smartphone-buying-guide/">Standard Buying Guide ↗</a></aside>
+        <details class="research-secondary-search"><summary>Edit search text</summary><div class="mobile-research-search-row" role="search">
+          <label class="sr-only" for="mobileResearchQuery">Search smartphone research</label>
+          <input id="mobileResearchQuery" type="search" placeholder="Try camera phone under 20000 or Galaxy A36 8GB 256GB" autocomplete="off" />
+          <button id="mobileResearchSearchButton" class="btn btn-primary" type="button">Search smartphones</button>
+        </div>
+        </details>
+        <details class="research-guided-search"><summary>Choose filters instead of typing</summary><p>Build a new search. All documented phones below your budget are included by default; choose nearby band to narrow the range. To keep a specific model name, edit the search text above instead.</p><div class="research-guided-fields">
+<label>Budget range<select id="researchGuidedBudget"><option value="">No budget filter</option><option value="10000">Under ₹10,000</option><option value="15000">Under ₹15,000</option><option value="20000">Under ₹20,000</option><option value="25000">Under ₹25,000</option><option value="30000">Under ₹30,000</option><option value="35000">Under ₹35,000</option><option value="40000">Under ₹40,000</option><option value="50000">Under ₹50,000</option><option value="60000">Under ₹60,000</option><option value="70000">Under ₹70,000</option><option value="80000">Under ₹80,000</option><option value="90000">Under ₹90,000</option><option value="100000">Under ₹100,000</option></select></label>
+<label>Budget search scope<select id="researchGuidedScope"><option value="all">All phones below my budget (default)</option><option value="band">Nearby price band only</option></select></label>
+<label>What matters most<select id="researchGuidedPriority"><option value="">Any priority</option><option value="camera">Camera</option><option value="battery">Battery</option><option value="gaming">Gaming</option><option value="display">Display</option><option value="software support">Software support</option><option value="build reliability">Build / reliability</option></select></label>
+<label>Exact physical RAM<select id="researchGuidedRam"><option value="">Any documented RAM</option><option value="4">4GB physical RAM</option><option value="6">6GB physical RAM</option><option value="8">8GB physical RAM</option><option value="12">12GB physical RAM</option><option value="16">16GB physical RAM</option><option value="24">24GB physical RAM</option></select></label>
+<label>Exact storage<select id="researchGuidedStorage"><option value="">Any documented storage</option><option value="64">64GB</option><option value="128">128GB</option><option value="256">256GB</option><option value="512">512GB</option><option value="1024">1024GB</option></select></label>
+<label>Exclude a brand<select id="researchGuidedExclude"><option value="">No brand excluded</option><option value="Samsung">Samsung</option><option value="Apple">Apple</option><option value="Google">Google</option><option value="OnePlus">OnePlus</option><option value="Redmi">Redmi</option><option value="Xiaomi">Xiaomi</option><option value="Motorola">Motorola</option><option value="Nothing">Nothing</option><option value="CMF">CMF</option><option value="OPPO">OPPO</option><option value="realme">realme</option><option value="vivo">vivo</option><option value="iQOO">iQOO</option><option value="POCO">POCO</option><option value="Lava">Lava</option><option value="Infinix">Infinix</option><option value="Tecno">Tecno</option></select></label></div><button id="researchGuidedApply" type="button" class="btn btn-primary">Find matching phones</button><p id="researchGuidedStatus" role="status"></p></details>
+        <div class="research-applied-row"><div id="researchAppliedFilters" hidden aria-label="Applied search conditions"></div><button id="researchClearSearch" class="btn btn-ghost" type="button" hidden>Clear search</button></div>
+        <div class="mobile-research-shortcuts" aria-label="Smartphone research shortcuts">
+          <button type="button" data-mobile-research-query="camera phone">Camera</button>
+          <button type="button" data-mobile-research-query="battery phone">Battery</button>
+          <button type="button" data-mobile-research-query="gaming phone">Gaming</button>
+          <button type="button" data-mobile-research-query="software support phone">Software support</button>
+        </div>
+        <p class="research-help">Try a model and exact memory variant, or “5000mah battery phone under 30000”. “Under” includes all documented phones below your cap. Add “nearby band” to narrow the range. Compare up to 3 documented models; ordering reflects evidence coverage, not a tested performance winner.</p>
+        <div id="mobileResearchCompare" hidden aria-live="polite"></div>
+        <p id="mobileResearchSearchStatus" class="mobile-research-search-status" aria-live="polite"></p>
+        <div id="mobileResearchResults" class="mobile-research-results" aria-live="polite" hidden></div>
+        <button id="mobileResearchResultsMore" class="btn btn-ghost" type="button" hidden>Load more research results</button>
+        <a id="mobileResearchBrowse" class="small-action" href="#mobileResearchCatalogue">Browse all research models →</a>
+      </div>
+    </section>
+
     <section class="container cw-research-categories" id="researchCategories" aria-labelledby="researchCategoriesTitle">
       <div class="section-heading standalone">
         <div>
@@ -160,7 +200,7 @@
         <article class="cw-research-category">
           <span class="cw-research-category-label">01 / SMARTPHONES</span>
           <h3>Choose a phone</h3>
-          <p>Explore 232 research model cards, exact memory filters and 50 curated manufacturer-source pages. The existing recommendation engine remains separate.</p>
+          <p>Explore 232 research model cards, exact memory filters and 50 curated manufacturer-source pages. Compare documented features and check the exact memory variant before choosing.</p>
           <a href="/phones/">Explore smartphone specifications →</a>
           <a href="/phones/india-market-demand-q3-2026/">India 2026 sales-report model coverage →</a>
         </article>
@@ -183,7 +223,7 @@
     </section>
 
     <section class="container decision-path" aria-label="How it works">
-      <div><span class="path-number">01</span><p><strong>Set your budget</strong><span>₹30k searches ₹25–30k; ₹50k searches ₹40–50k.</span></p></div>
+      <div><span class="path-number">01</span><p><strong>Set your budget</strong><span>Under ₹30k includes documented phones below ₹30k. Narrow the range with filters.</span></p></div>
       <div><span class="path-number">02</span><p><strong>Look beyond the headline</strong><span>Sourced specs, independent tests and clearly marked gaps.</span></p></div>
       <div><span class="path-number">03</span><p><strong>Make your shortlist</strong><span>Compare up to 3 phones. Check current offers at the retailer.</span></p></div>
     </section>
@@ -204,44 +244,7 @@
       </div>
     </section>
 
-    <section class="container mobile-research-search-section" id="mobileResearchSearch" aria-labelledby="mobileResearchSearchTitle">
-      <div class="section-panel premium-panel mobile-research-search-panel">
-        <div class="section-heading">
-          <div>
-            <span class="section-kicker">Smartphone research</span>
-            <h2 id="mobileResearchSearchTitle">Find the right smartphone</h2>
-            <p>Search by budget, model, camera, battery, gaming, software, RAM or storage. Budget results use dated reference prices; current price and delivery need retailer confirmation.</p>
-          </div>
-          <span class="research-badge">Research only</span>
-        </div>
-        <aside class="always-guide" aria-label="Smartphone buying help"><div><strong>Not sure where to start?</strong><p>Our standard guide covers camera, battery, memory and software. Available while offers or research are loading.</p></div><a class="btn btn-ghost" href="/guides/smartphone-buying-guide/">Standard Buying Guide ↗</a></aside>
-        <div class="mobile-research-search-row" role="search">
-          <label class="sr-only" for="mobileResearchQuery">Search smartphone research</label>
-          <input id="mobileResearchQuery" type="search" placeholder="Try camera phone under 20000 or Galaxy A36 8GB 256GB" autocomplete="off" />
-          <button id="mobileResearchSearchButton" class="btn btn-primary" type="button">Search smartphones</button>
-        </div>
-        <details class="research-guided-search"><summary>Choose filters instead of typing</summary><p>Build a new search. Nearby band is the default; choose the full-budget option to include documented cheaper options too. To keep a specific model name, edit the search text above instead.</p><div class="research-guided-fields">
-<label>Budget range<select id="researchGuidedBudget"><option value="">No budget filter</option><option value="10000">₹5,000 to below ₹10,000</option><option value="15000">₹10,000 to below ₹15,000</option><option value="20000">₹15,000 to below ₹20,000</option><option value="25000">₹20,000 to below ₹25,000</option><option value="30000">₹25,000 to below ₹30,000</option><option value="40000">₹30,000 to below ₹40,000</option><option value="50000">₹40,000 to below ₹50,000</option><option value="60000">₹50,000 to below ₹60,000</option><option value="70000">₹60,000 to below ₹70,000</option><option value="80000">₹70,000 to below ₹80,000</option><option value="90000">₹80,000 to below ₹90,000</option><option value="100000">₹90,000 to below ₹100,000</option></select></label>
-<label>Budget search scope<select id="researchGuidedScope"><option value="band">Nearby price band (default)</option><option value="all">All researched phones below my budget</option></select></label>
-<label>What matters most<select id="researchGuidedPriority"><option value="">Any priority</option><option value="camera">Camera</option><option value="battery">Battery</option><option value="gaming">Gaming</option><option value="display">Display</option><option value="software support">Software support</option><option value="build reliability">Build / reliability</option></select></label>
-<label>Exact physical RAM<select id="researchGuidedRam"><option value="">Any documented RAM</option><option value="4">4GB physical RAM</option><option value="6">6GB physical RAM</option><option value="8">8GB physical RAM</option><option value="12">12GB physical RAM</option><option value="16">16GB physical RAM</option><option value="24">24GB physical RAM</option></select></label>
-<label>Exact storage<select id="researchGuidedStorage"><option value="">Any documented storage</option><option value="64">64GB</option><option value="128">128GB</option><option value="256">256GB</option><option value="512">512GB</option><option value="1024">1024GB</option></select></label>
-<label>Exclude a brand<select id="researchGuidedExclude"><option value="">No brand excluded</option><option value="Samsung">Samsung</option><option value="Apple">Apple</option><option value="Google">Google</option><option value="OnePlus">OnePlus</option><option value="Redmi">Redmi</option><option value="Xiaomi">Xiaomi</option><option value="Motorola">Motorola</option><option value="Nothing">Nothing</option><option value="CMF">CMF</option><option value="OPPO">OPPO</option><option value="realme">realme</option><option value="vivo">vivo</option><option value="iQOO">iQOO</option><option value="POCO">POCO</option><option value="Lava">Lava</option><option value="Infinix">Infinix</option><option value="Tecno">Tecno</option></select></label></div><button id="researchGuidedApply" type="button" class="btn btn-primary">Find matching phones</button><p id="researchGuidedStatus" role="status"></p></details>
-        <div class="research-applied-row"><div id="researchAppliedFilters" hidden aria-label="Applied search conditions"></div><button id="researchClearSearch" class="btn btn-ghost" type="button" hidden>Clear search</button></div>
-        <div class="mobile-research-shortcuts" aria-label="Smartphone research shortcuts">
-          <button type="button" data-mobile-research-query="camera phone">Camera</button>
-          <button type="button" data-mobile-research-query="battery phone">Battery</button>
-          <button type="button" data-mobile-research-query="gaming phone">Gaming</button>
-          <button type="button" data-mobile-research-query="software support phone">Software support</button>
-        </div>
-        <p class="research-help">Try a model and exact memory variant, or “5000mah battery phone under 30000”. Add “full budget” to a typed query to include all researched phones below the cap. Compare up to 3 documented models; ordering reflects evidence coverage, not a tested performance winner.</p>
-        <div id="mobileResearchCompare" hidden aria-live="polite"></div>
-        <p id="mobileResearchSearchStatus" class="mobile-research-search-status" aria-live="polite"></p>
-        <div id="mobileResearchResults" class="mobile-research-results" aria-live="polite" hidden></div>
-        <button id="mobileResearchResultsMore" class="btn btn-ghost" type="button" hidden>Load more research results</button>
-        <a id="mobileResearchBrowse" class="small-action" href="#mobileResearchCatalogue">Browse all research models →</a>
-      </div>
-    </section>
+
 
     <section class="container research-trust" id="why-us" aria-labelledby="researchTrustTitle">
       <div class="trust-intro"><span class="section-kicker">OUR RESEARCH PROMISE</span><h2 id="researchTrustTitle">Know what supports your choice.</h2><p>Coupon World is an independent smartphone research and comparison guide for India. We help you narrow the options; the original evidence and its limits stay visible.</p><a href="/guides/about-coupon-world/">About Coupon World →</a></div>
@@ -546,8 +549,8 @@ Start with your budget, camera, battery or gaming needs. Our 20 phone guides exp
 </footer>
 
   <script defer src="/assets/discovery-analytics.js?v=20261104"></script>
-  <script src="/app.js?v=positioning-20261104-a"></script>
-  <script src="/mobile-research-preview.js?v=positioning-20261104-a"></script>
+  <script src="/app.js?v=usability-20261106"></script>
+  <script src="/mobile-research-preview.js?v=usability-20261106"></script>
   <!-- deployment-refresh: 2026-07-21T17:26:00.696191+00:00 -->
 </body>
 </html>

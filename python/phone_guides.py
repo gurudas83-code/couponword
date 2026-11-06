@@ -12,6 +12,40 @@ HUB = '/guides/phone-budget-guides/'
 def esc(value):
     return html.escape(str(value), quote=True)
 
+def budget_examples(destination, guide, hindi=False):
+    import re
+    from python.phone_research_pages import eligible, model_title, slug_for, summary_fields
+    match = re.fullmatch(r"phones-under-(\d+)", guide["slug"])
+    if not match:
+        return ""
+    cap = int(match[1])
+    catalogue = json.loads((Path(destination) / "data/mobile_research_catalogue.json").read_text())
+    selected = []
+    for card in catalogue["model_cards"]:
+        ref = card.get("research_budget_reference") or {}
+        price = ref.get("reference_price_inr")
+        if eligible(card) and isinstance(price, (int, float)) and 0 < price < cap and ref.get("checked_at"):
+            selected.append(card)
+    selected.sort(key=lambda c: model_title(c).casefold())
+    if not selected:
+        return ""
+    heading = "शोध शुरू करने के लिए मॉडल" if hindi else "Models to start researching"
+    note = ("पुरानी कीमत के प्रमाण पर आधारित उदाहरण; नाम के क्रम में, प्रदर्शन रैंकिंग नहीं। आज की कीमत और सटीक RAM/स्टोरेज विक्रेता पर जाँचें।" if hindi else
+            "Examples with dated budget evidence, in alphabetical order, not a performance ranking. Confirm today’s price and exact RAM/storage at the retailer. Prices do not affect performance scores.")
+    parts = []
+    for card in selected[:6]:
+        title = model_title(card)
+        path = ("/hi" if hindi else "") + "/phones/" + slug_for(card) + "/"
+        facts = " · ".join(f"{esc(k)}: {esc(v)}" for k,v in summary_fields(card, 3))
+        ref = card["research_budget_reference"]
+        date_label = "बजट प्रमाण की जाँच" if hindi else "Budget evidence checked"
+        date = esc(ref["checked_at"])
+        parts.append(f'<li><h3><a href="{path}">{esc(title)}</a></h3><p>{facts}</p><p>{date_label}: {date}. '
+                     + ("सीमा: वास्तविक बैटरी रनटाइम और कैमरा गुणवत्ता सिर्फ इन आँकड़ों से तय नहीं होते।" if hindi else "Trade-off to check: these specifications do not establish real battery runtime or camera quality.")
+                     + '</p></li>')
+    return f'<section class="budget-examples"><h2>{heading}</h2><p>{note}</p><ul>'+"".join(parts)+'</ul></section>'
+
+
 def render_phone_guides(destination):
     data = json.loads((ROOT / 'data/phone-guides.json').read_text())
     pages = data['pages']
@@ -35,7 +69,7 @@ def render_phone_guides(destination):
             ledger = json.loads((ROOT / 'data/mobile_independent_test_evidence.json').read_text())
             review = ledger['models'][1]['metrics'][0]['source_url']
             evidence_links = '<li><a href="'+esc(review)+'" rel="noopener noreferrer" target="_blank">Notebookcheck Galaxy A56 review — original lab test context</a></li>'
-        content=f'''<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="{HUB}">Phone guides</a> / Guide</nav><article><div class="eyebrow">THE PHONE EDIT / BUYING GUIDE</div><h1>{esc(p['title'])}</h1><p class="lead">{esc(p['intro'])}</p><p class="byline">By {esc(data['editor'])} · Updated <time datetime="{data['updated']}">4 November 2026</time></p><aside class="note"><strong>Research, with the limits visible.</strong><p>This is an editorial buying guide based on saved research, not a hands-on review or a live-offer list. Budget references are dated. No current price, stock or performance winner is certified here.</p></aside><section class="quick-answer" aria-label="Quick answer"><h2>{esc(p["reader_question"])}</h2><p>{esc(p["quick_answer"])}</p></section>{toc}{sections}<section class="action"><h2>Turn the guide into a shortlist</h2><p>Open the existing research tool with “{esc(p['query'])}”. Add your budget, physical RAM, storage or excluded brand. Inspect each source and any missing information, then compare up to three matching phones. No condition is silently relaxed.</p><a class="button" href="{esc(query)}">Explore matching research ↗</a><p><a href="{esc(amazon)}" rel="sponsored nofollow noopener" target="_blank">Search Amazon (affiliate link)</a> · Confirm the selected variant and current offer at the retailer.</p></section><section><h2>Sources and how to verify</h2><p>Follow the specification sources on each research card for the exact model. Independent measurements retain their original source, tested unit and conditions. A research checking date does not imply that a lab test or retailer price was measured that day.</p><ul><li><a href="/guides/smartphone-buying-guide/">Standard smartphone buying checklist</a></li><li><a href="/seo/phone-research-evidence-method.html">Coupon World evidence method and limitations</a></li><li><a href="/phones/">Curated phone specifications with original sources</a></li>{evidence_links}</ul></section></article><section class="related"><h2>Continue your research</h2>{cards(related)}</section>'''
+        content=f'''<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="{HUB}">Phone guides</a> / Guide</nav><article><div class="eyebrow">THE PHONE EDIT / BUYING GUIDE</div><h1>{esc(p['title'])}</h1><p class="lead">{esc(p['intro'])}</p><p class="byline">By {esc(data['editor'])} · Updated <time datetime="{data['updated']}">{esc(data['updated'])}</time></p><aside class="note"><strong>Research, with the limits visible.</strong><p>This is an editorial buying guide based on saved research, not a hands-on review or a live-offer list. Budget references are dated. No current price, stock or performance winner is certified here.</p></aside><section class="quick-answer" aria-label="Quick answer"><h2>{esc(p["reader_question"])}</h2><p>{esc(p["quick_answer"])}</p></section>{toc}{sections}{budget_examples(destination, p)}<section class="action"><h2>Turn the guide into a shortlist</h2><p>Open the existing research tool with “{esc(p['query'])}”. Add your budget, physical RAM, storage or excluded brand. Inspect each source and any missing information, then compare up to three matching phones. No condition is silently relaxed.</p><a class="button" href="{esc(query)}">Explore matching research ↗</a><p><a href="{esc(amazon)}" rel="sponsored nofollow noopener" target="_blank">Search Amazon (affiliate link)</a> · Confirm the selected variant and current offer at the retailer.</p></section><section><h2>Sources and how to verify</h2><p>Follow the specification sources on each research card for the exact model. Independent measurements retain their original source, tested unit and conditions. A research checking date does not imply that a lab test or retailer price was measured that day.</p><ul><li><a href="/guides/smartphone-buying-guide/">Standard smartphone buying checklist</a></li><li><a href="/seo/phone-research-evidence-method.html">Coupon World evidence method and limitations</a></li><li><a href="/phones/">Curated phone specifications with original sources</a></li>{evidence_links}</ul></section></article><section class="related"><h2>Continue your research</h2>{cards(related)}</section>'''
         article={'@context':'https://schema.org','@graph':[{'@type':'Article','headline':p['title'],'description':p['intro'],'dateModified':data['updated'],'datePublished':data['updated'],'author':{'@type':'Organization','name':data['editor']},'publisher':{'@type':'Organization','name':'Coupon World'},'mainEntityOfPage':BASE+path},{'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Home','item':BASE+'/'},{'@type':'ListItem','position':2,'name':'Phone guides','item':BASE+HUB},{'@type':'ListItem','position':3,'name':p['title'],'item':BASE+path}]}]}
         target=destination/path.lstrip('/');target.parent.mkdir(parents=True,exist_ok=True)
         description=p['intro'].split('. ')[0]+'.'
