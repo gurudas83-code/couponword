@@ -263,6 +263,11 @@ def build(output: Path) -> Path:
     from python.india_sales_priority_pages import publish_sales_priority
     publish_sales_priority(output)
 
+    # Publish reviewed, bilingual under-25k editorial research and category guides.
+    # Does not admit new shopping candidates, alter rankings or claim live offers.
+    from python.under25_seo_pages import publish_under25
+    publish_under25(output)
+
     # The source sitemap still lists historical catalogue URLs. Keep those
     # pages online, but do not encourage indexing without current offer proof.
     _prune_unverified_product_sitemap_entries(output)
