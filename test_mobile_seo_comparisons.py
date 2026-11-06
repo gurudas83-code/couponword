@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import re
 import unittest
+from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
@@ -110,7 +111,7 @@ class ComparisonSEOContracts(unittest.TestCase):
                 self.assertIn('name="robots" content="index,follow"', content, route)
                 self.assertIn(("hi-IN", SITE + path_for(a,b,True)), page.alternates)
                 self.assertIn(("en-IN", SITE + path_for(a,b,False)), page.alternates)
-                self.assertIn(item["intent_hi"] if hi else item["intent_en"], content)
+                self.assertIn(item["intent_hi"] if hi else item["intent_en"], unescape(content))
                 self.assertIn("0%", content, route)
                 self.assertNotIn('"@type": "Offer"', content)
                 self.assertNotIn('"@type": "Product"', content)
