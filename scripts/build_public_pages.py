@@ -208,7 +208,11 @@ def _validate_public_content(output: Path) -> None:
     for card in model_cards:
         if not required_card_fields <= set(card):
             raise RuntimeError("public model card is missing technical coverage metadata")
-        if card.get("image_status") != "PLACEHOLDER":
+        photo = card.get("photo")
+        if card["image_status"] == "VERIFIED_MATCH":
+            if not photo or not (output / photo["url"].lstrip("/")).is_file():
+                raise RuntimeError("approved model photo missing from the public artifact")
+        elif card["image_status"] != "PLACEHOLDER" or photo:
             raise RuntimeError("public model card image rights are not explicitly cleared")
         for key, item in (card.get("specifications") or {}).items():
             if not isinstance(item, dict) or not str(item.get("source_url") or "").startswith("https://"):

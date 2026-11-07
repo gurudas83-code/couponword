@@ -287,6 +287,33 @@ def render_model(card: dict, related: list[dict]) -> str:
     query = urlencode({"q": title})
     search = f"/?{query}#mobileResearchSearch"
     facts = "".join(f"<li>{esc(k)}: <strong>{esc(v)}</strong></li>" for k,v in summary_fields(card, maximum=3))
+    photo = card.get("photo")
+    photo_html = ""
+    if photo:
+        credit = f'{photo["title"]} by {photo["author"]}' if photo.get("title") else photo["author"]
+        photo_html = (
+            f'<figure><img src="{esc(photo["url"])}" width="{photo["width"]}" height="{photo["height"]}" '
+            f'alt="{esc(title)}" loading="lazy" decoding="async" style="max-width:100%;height:auto">'
+            f'<figcaption>Model photo: {link(photo["source"], credit)} · '
+            f'{link(photo["license_url"], photo["license"])} · resized</figcaption></figure>'
+        )
+    variants = card.get("verified_india_variants") or []
+    variant_html = ""
+    if variants:
+        entries = []
+        for item in variants:
+            ram, storage = item["ram_gb"], item["storage_gb"]
+            variant_query = urlencode({"q": f"{title} {ram}GB RAM {storage}GB storage"})
+            entries.append(
+                f'<li id="variant-{ram}-{storage}"><strong>{ram} GB RAM / {storage} GB storage</strong> · '
+                f'{link(item["source_url"], "Manufacturer India source")} · '
+                f'{link("/?" + variant_query + "#mobileResearchSearch", "Open in comparison tool")}</li>'
+            )
+        variant_html = (
+            '<section><h2>Manufacturer-listed India configurations</h2><p>Memory options listed '
+            'for India. The model photo shows the handset design. Confirm current price, stock and '
+            'the exact listing with the retailer.</p><ul>' + "".join(entries) + '</ul></section>'
+        )
     similar = "".join(render_card(item) for item in related)
     body = f'''<nav class="crumbs" aria-label="Breadcrumb">{link("/", "Home")} / {link(HUB, "Phone specifications")} / {esc(title)}</nav>
 <article><div class="eyebrow">INDIA SMARTPHONE RESEARCH / MANUFACTURER SOURCES</div>
@@ -296,6 +323,8 @@ def render_model(card: dict, related: list[dict]) -> str:
 <p>Manufacturer-linked model facts appear below. A source-linked model specification does not certify every India RAM/storage configuration, hands-on performance, current availability or an exact retail listing. These pages never rank phones by dated prices.</p></div>
 {date_label}
 {checked_sources}
+{photo_html}
+{variant_html}
 <section><h2>Key documented facts</h2><ul>{facts}</ul>
 <p>Use the exact source links in the table; a headline battery capacity or megapixel count does not establish real-world battery or camera quality.</p></section>
 <section><h2>Specifications and original sources</h2>

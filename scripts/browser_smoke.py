@@ -126,6 +126,14 @@ def run(root: Path):
                     assert names.count() == 1, f"{width}: exact-variant result count {names.count()}"
                     assert "8GB RAM" in names.first.inner_text(), width
                     assert "256GB storage" in names.first.inner_text(), width
+                    photo = names.first.locator("figure.research-phone-photo")
+                    assert photo.locator("img").get_attribute("src") == "/assets/phone-photos/samsung-galaxy-a36-5g.jpg", width
+                    assert photo.locator("figcaption a").count() == 2, width
+                    assert page.request.get(url + "assets/phone-photos/samsung-galaxy-a36-5g.jpg").ok, width
+                    variants = page.evaluate("""() => window.CouponWorldMobileResearch.search(
+                        'OnePlus 13 24GB RAM 1TB storage'
+                    ).map(item => item.card.model_key)""")
+                    assert variants == ["oneplus|13"], (width, variants)
 
                     page.evaluate("window.CouponWorldMobileResearch.search('Galaxy A36 vs Galaxy A56')")
                     assert page.locator("#mobileResearchCompare table").count() == 1, width
@@ -149,6 +157,8 @@ def run(root: Path):
                     # The evidence-rich pages must also work without submitting
                     # any JavaScript search or relying on generated hidden data.
                     page.goto(url + "phones/samsung-galaxy-a56-5g/", wait_until="domcontentloaded", timeout=30000)
+                    assert page.locator("#variant-12-256").get_by_text("Manufacturer India source").is_visible(), width
+                    assert page.locator("figcaption").get_by_text("CC BY-SA 4.0").is_visible(), width
                     assert "Galaxy A56 5G" in page.locator("h1").inner_text(), width
                     assert page.locator(".mobile-fact-table tbody tr").count() >= 8, width
                     assert page.locator('a:has-text("Manufacturer source")').count() >= 8, width

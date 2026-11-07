@@ -1,0 +1,540 @@
+{
+  "apple|iphone 11": {
+    "url": "/assets/phone-photos/apple-iphone-11.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_11_RED.jpg",
+    "author": "Ahmadkurdi44",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 406
+  },
+  "apple|iphone 13": {
+    "url": "/assets/phone-photos/apple-iphone-13.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_13.jpg",
+    "author": "Kskhh",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "title": "IPhone 13.jpg",
+    "width": 330,
+    "height": 440
+  },
+  "apple|iphone 15": {
+    "url": "/assets/phone-photos/apple-iphone-15.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Back_of_iPhone_15.jpg",
+    "author": "ThePhotoGraphIc",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "apple|iphone 15 256gb": {
+    "url": "/assets/phone-photos/apple-iphone-15.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Back_of_iPhone_15.jpg",
+    "author": "ThePhotoGraphIc",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440,
+    "same_model_as": "apple|iphone 15"
+  },
+  "apple|iphone 15 512gb": {
+    "url": "/assets/phone-photos/apple-iphone-15.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Back_of_iPhone_15.jpg",
+    "author": "ThePhotoGraphIc",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440,
+    "same_model_as": "apple|iphone 15"
+  },
+  "apple|iphone 15 plus": {
+    "url": "/assets/phone-photos/apple-iphone-15-plus.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_15_Plus_2024.jpg",
+    "author": "Captainmorlypogi1959",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "title": "IPhone 15 Plus 2024.jpg",
+    "width": 330,
+    "height": 441
+  },
+  "apple|iphone 15 plus 256gb": {
+    "url": "/assets/phone-photos/apple-iphone-15-plus.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_15_Plus_2024.jpg",
+    "author": "Captainmorlypogi1959",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "title": "IPhone 15 Plus 2024.jpg",
+    "width": 330,
+    "height": 441,
+    "same_model_as": "apple|iphone 15 plus"
+  },
+  "apple|iphone 16": {
+    "url": "/assets/phone-photos/apple-iphone-16.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Back_of_iPhone_16.jpg",
+    "author": "Kyu3a",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "apple|iphone 16 plus": {
+    "url": "/assets/phone-photos/apple-iphone-16-plus.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Back_view_of_iPhone_16_Plus_Teal.jpg",
+    "author": "メイド理世",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "apple|iphone 16 pro": {
+    "url": "/assets/phone-photos/apple-iphone-16-pro.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Back_view_of_iPhone_16_Pro_White_Titanium.jpg",
+    "author": "メイド理世",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "apple|iphone 16 pro max": {
+    "url": "/assets/phone-photos/apple-iphone-16-pro-max.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Back_view_of_iPhone_16_Pro_Max_Natural_Titanium.jpg",
+    "author": "メイド理世",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "apple|iphone 16e 256gb": {
+    "url": "/assets/phone-photos/apple-iphone-16e-256gb.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_16e_black_rear_view.jpg",
+    "author": "茅野ふたば",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "title": "IPhone 16e black rear view.jpg",
+    "width": 330,
+    "height": 440
+  },
+  "apple|iphone 17": {
+    "url": "/assets/phone-photos/apple-iphone-17.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Sage_iPhone_17.jpg",
+    "author": "Ahmad Ali Karim",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "width": 330,
+    "height": 495
+  },
+  "apple|iphone 17 pro": {
+    "url": "/assets/phone-photos/apple-iphone-17-pro.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_17_Pro_(2025-12-28).jpg",
+    "author": "Olgierd Rudak",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "width": 330,
+    "height": 247
+  },
+  "apple|iphone 17 pro max": {
+    "url": "/assets/phone-photos/apple-iphone-17-pro-max.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_17_Pro_Max_backside_(Silver)_(Oct_1,_2025).jpg",
+    "author": "茅野ふたば",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "title": "IPhone 17 Pro Max backside (Silver) (Oct 1, 2025).jpg",
+    "width": 330,
+    "height": 440
+  },
+  "apple|iphone 17e": {
+    "url": "/assets/phone-photos/apple-iphone-17e.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_17e_backside.jpg",
+    "author": "茅野ふたば",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440,
+    "title": "IPhone 17e backside.jpg"
+  },
+  "apple|iphone 17e 512gb": {
+    "url": "/assets/phone-photos/apple-iphone-17e.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_17e_backside.jpg",
+    "author": "茅野ふたば",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440,
+    "title": "IPhone 17e backside.jpg",
+    "same_model_as": "apple|iphone 17e"
+  },
+  "apple|iphone air": {
+    "url": "/assets/phone-photos/apple-iphone-air.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_Air_(Cloud_White)_-_Backside.jpg",
+    "author": "AzureSaturn",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "title": "IPhone Air (Cloud White) - Backside.jpg",
+    "width": 330,
+    "height": 495
+  },
+  "cmf|phone 1": {
+    "url": "/assets/phone-photos/cmf-phone-1.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:CMF_Phone_1.jpg",
+    "author": "Saketh938",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 247
+  },
+  "google|pixel 7a": {
+    "url": "/assets/phone-photos/google-pixel-7a.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Google_Pixel_7a,_shown_in_Shibuya_Stream.jpg",
+    "author": "Syced",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "width": 330,
+    "height": 438
+  },
+  "google|pixel 8a": {
+    "url": "/assets/phone-photos/google-pixel-8a.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Rear_view_of_Pixel_8a.jpg",
+    "author": "Miyako Fujimiya",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "width": 330,
+    "height": 330
+  },
+  "google|pixel 9": {
+    "url": "/assets/phone-photos/google-pixel-9.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Pixel_9.jpg",
+    "author": "Miyako Fujimiya",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "title": "Pixel 9.jpg",
+    "width": 330,
+    "height": 330
+  },
+  "google|pixel 9 pro xl": {
+    "url": "/assets/phone-photos/google-pixel-9-pro-xl.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Google_Pixel_9_Pro_XL_(back).jpg",
+    "author": "D.328",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 219
+  },
+  "google|pixel 9a": {
+    "url": "/assets/phone-photos/google-pixel-9a.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Pixel_9a_back.jpg",
+    "author": "Maksdroider",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "width": 330,
+    "height": 587
+  },
+  "infinix|gt 30 pro": {
+    "url": "/assets/phone-photos/infinix-gt-30-pro.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Infinix_GT_30_Pro.jpg",
+    "author": "Meniirtjakarintan",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "iqoo|15": {
+    "url": "/assets/phone-photos/iqoo-15.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Vivo_iQOO_15_%22Lingyun%22_Back_Panel.jpg",
+    "author": "X-SHLIED",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "motorola|edge 60 pro": {
+    "url": "/assets/phone-photos/motorola-edge-60-pro.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Motorola_Edge_60_Pro.jpg",
+    "author": "Meniirtjakarintan",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "nothing|phone 2a": {
+    "url": "/assets/phone-photos/nothing-phone-2a.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Nothing_phone_(2a).jpg",
+    "author": "Kyu3a",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 587
+  },
+  "nothing|phone 3": {
+    "url": "/assets/phone-photos/nothing-phone-3.png",
+    "source": "https://commons.wikimedia.org/wiki/File:%E5%8D%8A%E5%A4%9C%E9%A6%96%E5%8F%91%EF%BC%81%E7%AC%AC%E4%B8%80%E6%89%8B%E6%8B%BF%E5%88%B0%E4%BA%86Nothing_Phone_(3)_%EF%BC%81%E7%81%AF%E6%9D%A1%E6%B2%A1%E4%BA%86%E3%80%81%E8%83%8C%E5%90%8E%E5%A4%9A%E4%B8%80%E4%B8%AAscreen%EF%BC%81-00.00.11.457.png",
+    "author": "可恩Ke En",
+    "license": "CC BY 3.0",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/",
+    "width": 330,
+    "height": 186
+  },
+  "nothing|phone 3a pro": {
+    "url": "/assets/phone-photos/nothing-phone-3a-pro.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Nothing_Phone_(3a)_Pro_20250628.jpg",
+    "author": "Steven Sun",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440,
+    "title": "Nothing Phone (3a) Pro 20250628.jpg"
+  },
+  "oneplus|13": {
+    "url": "/assets/phone-photos/oneplus-13.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:OnePlus_13_back.jpg",
+    "author": "Maksdroider",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 660
+  },
+  "oneplus|13r": {
+    "url": "/assets/phone-photos/oneplus-13r.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:OnePlus_13R_back.jpg",
+    "author": "Maksdroider",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 687
+  },
+  "oneplus|13s": {
+    "url": "/assets/phone-photos/oneplus-13s.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:OnePlus_13s_back.jpg",
+    "author": "Saiphani02",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 617
+  },
+  "oneplus|15": {
+    "url": "/assets/phone-photos/oneplus-15.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:OnePlus_15_back.jpg",
+    "author": "Maksdroider",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 587
+  },
+  "oneplus|nord 5": {
+    "url": "/assets/phone-photos/oneplus-nord-5.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:OnePlus_Nord_5_back.jpg",
+    "author": "Maksdroider",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 587
+  },
+  "oppo|a38": {
+    "url": "/assets/phone-photos/oppo-a38.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:OPPO_A38_in_Glowing_Gold.jpg",
+    "author": "Danielrayyan09",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "oppo|k13 turbo": {
+    "url": "/assets/phone-photos/oppo-k13-turbo.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Oppo_K13_Turbo_in_Purple.jpg",
+    "author": "X-SHLIED",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "redmi|redmi note 15 5g": {
+    "url": "/assets/phone-photos/redmi-redmi-note-15-5g.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:REDMI_Note_15_5G_back.jpg",
+    "author": "Maksdroider",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 330
+  },
+  "samsung|galaxy a06 5g": {
+    "url": "/assets/phone-photos/samsung-galaxy-a06-5g.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_A06_5G_2025_(1).jpg",
+    "author": "Captainmorlypogi1959",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 441
+  },
+  "samsung|galaxy a27 5g": {
+    "url": "/assets/phone-photos/samsung-galaxy-a27-5g.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_A27_5G_front_panel.jpg",
+    "author": "JGBlue1509",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "width": 330,
+    "height": 733
+  },
+  "samsung|galaxy a35 5g": {
+    "url": "/assets/phone-photos/samsung-galaxy-a35-5g.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_A35_5G_2024_(1).jpg",
+    "author": "Captainmorlypogi1959",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 441
+  },
+  "samsung|galaxy a36 5g": {
+    "url": "/assets/phone-photos/samsung-galaxy-a36-5g.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_A36_5G_2025.jpg",
+    "author": "Captainmorlypogi1959",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "samsung|galaxy a37 5g": {
+    "url": "/assets/phone-photos/samsung-galaxy-a37-5g.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Galaxy_A37_5G_Charcoal.jpg",
+    "author": "เวียร์",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "samsung|galaxy a55 5g": {
+    "url": "/assets/phone-photos/samsung-galaxy-a55-5g.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_A55_5G_2024.jpg",
+    "author": "Captainmorlypogi1959",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 441
+  },
+  "samsung|galaxy a56 5g": {
+    "url": "/assets/phone-photos/samsung-galaxy-a56-5g.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_A56_5G_2025.jpg",
+    "author": "Captainmorlypogi1959",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "samsung|galaxy a57 5g": {
+    "url": "/assets/phone-photos/samsung-galaxy-a57-5g.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Galaxy_A57_back.jpg",
+    "author": "Maksdroider",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "width": 330,
+    "height": 586
+  },
+  "samsung|galaxy s24": {
+    "url": "/assets/phone-photos/samsung-galaxy-s24.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S24.jpg",
+    "author": "Vis M",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "samsung|galaxy s24 plus": {
+    "url": "/assets/phone-photos/samsung-galaxy-s24-plus.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S24%2B.jpg",
+    "author": "Vis M",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "title": "Samsung Galaxy S24+.jpg",
+    "width": 330,
+    "height": 458
+  },
+  "samsung|galaxy s24 ultra": {
+    "url": "/assets/phone-photos/samsung-galaxy-s24-ultra.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Back_view_of_Samsung_Galaxy_S24_Ultra_Black.jpg",
+    "author": "メイド理世",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "samsung|galaxy s25": {
+    "url": "/assets/phone-photos/samsung-galaxy-s25.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:20250124_%EC%82%BC%EC%84%B1_%EA%B0%A4%EB%9F%AD%EC%8B%9C_s25.jpg",
+    "author": "Striker9498",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "width": 330,
+    "height": 440
+  },
+  "samsung|galaxy s25 edge": {
+    "url": "/assets/phone-photos/samsung-galaxy-s25-edge.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S25_Edge.jpg",
+    "author": "Miyako Fujimiya",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 247
+  },
+  "samsung|galaxy s25 plus": {
+    "url": "/assets/phone-photos/samsung-galaxy-s25-plus.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S25%2B.jpg",
+    "author": "Jakub CA",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "title": "Samsung Galaxy S25+.jpg",
+    "width": 330,
+    "height": 247
+  },
+  "samsung|galaxy s25 ultra": {
+    "url": "/assets/phone-photos/samsung-galaxy-s25-ultra.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S25_Ultra_Titanium_Silverblue.jpg",
+    "author": "Alvis Jean",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "samsung|galaxy s26": {
+    "url": "/assets/phone-photos/samsung-galaxy-s26.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Galaxy_S26.jpg",
+    "author": "Kyu3a",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "samsung|galaxy s26 ultra": {
+    "url": "/assets/phone-photos/samsung-galaxy-s26-ultra.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Galaxy_S26_Ultra_lavender.jpg",
+    "author": "เวียร์",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "samsung|galaxy z fold 8": {
+    "url": "/assets/phone-photos/samsung-galaxy-z-fold-8.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Galaxy_Z_Fold8_-_1.jpg",
+    "author": "Kyu3a",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "xiaomi|14": {
+    "url": "/assets/phone-photos/xiaomi-14.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Xiaomi_14_rear_(July_10,_2026).jpg",
+    "author": "茅野ふたば",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440
+  },
+  "xiaomi|17 ultra": {
+    "url": "/assets/phone-photos/xiaomi-17-ultra.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Xiaomi_17_Ultra_rear.jpg",
+    "author": "茅野ふたば",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440
+  }
+}
