@@ -29,7 +29,7 @@ class SearchFirstFrontendTests(unittest.TestCase):
         self.assertIn("data-research-detail", self.script)
         self.assertIn("mobileResearchDetail", self.html)
         self.assertIn("submitMobileResearchIfApplicable", self.app)
-        self.assertIn("window.CouponWorldMobileResearch.search(query)", self.app)
+        self.assertIn("research.submit(query)", self.app)
 
     def test_new_noteworthy_uses_explicit_india_launch_date(self):
         self.assertIn("india_launch_date", self.script)
