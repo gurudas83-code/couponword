@@ -6,65 +6,203 @@
       "name": "Motorola Signature 27",
       "source": "https://www.motorola.in/smartphones-motorola-signature-27/p?skuId=780",
       "evidence": "India product page found. Local sale and stock remain unconfirmed.",
-      "context": "https://www.motorola.com/in/blogs/press-news/motorola-signature-27"
+      "context": "https://www.motorola.com/in/blogs/press-news/motorola-signature-27",
+      "photo_reuse": {
+        "status": "WRITTEN_PERMISSION_REQUIRED",
+        "review_source": "https://www.motorola.in/legal/terms-of-use"
+      }
     },
     {
       "name": "Karbonn Rebel",
       "source": "https://karbonnr-bel.com/",
-      "facts": ["7,000 mAh battery", "18 W charging", "50 MP main camera"],
-      "evidence": "Manufacturer product and photo page verified. Exact Amazon listing remains unconfirmed."
+      "facts": [
+        "7,000 mAh battery",
+        "18 W charging",
+        "50 MP main camera"
+      ],
+      "evidence": "Manufacturer product and photo page verified. Exact Amazon listing remains unconfirmed.",
+      "photo_reuse": {
+        "status": "REUSE_GRANT_NOT_FOUND",
+        "review_source": "https://karbonnr-bel.com/"
+      }
     },
     {
       "name": "Karbonn Rebel Pro",
       "source": "https://karbonnr-bel.com/rebel-pro",
-      "facts": ["6,000 mAh battery", "20 W charging", "120 Hz display"],
-      "evidence": "Manufacturer product and photo page verified. Exact Amazon listing remains unconfirmed."
+      "facts": [
+        "6,000 mAh battery",
+        "20 W charging",
+        "120 Hz display"
+      ],
+      "evidence": "Manufacturer product and photo page verified. Exact Amazon listing remains unconfirmed.",
+      "photo_reuse": {
+        "status": "REUSE_GRANT_NOT_FOUND",
+        "review_source": "https://karbonnr-bel.com/"
+      }
     },
     {
       "name": "OPPO Find X10",
       "source": "https://www.oppo.com/in/articles/find-x10-series/find-x10-details/",
       "store": "https://www.oppo.com/in/product/find-x10.P.P1110185",
-      "evidence": "Exact model listed on OPPO India’s official store."
+      "evidence": "Exact model listed on OPPO India’s official store.",
+      "photo_reuse": {
+        "status": "WRITTEN_PERMISSION_REQUIRED",
+        "review_source": "https://www.oppo.com/in/store/contents/legal/terms-of-use/"
+      }
     },
     {
       "name": "OPPO Find X10 Pro Max",
       "source": "https://www.oppo.com/in/articles/find-x10-series/find-x10-pro-max-details/",
       "store": "https://www.oppo.com/in/product/find-x10-pro-max.P.P1110186",
-      "evidence": "Exact model listed on OPPO India’s official store."
+      "evidence": "Exact model listed on OPPO India’s official store.",
+      "photo_reuse": {
+        "status": "WRITTEN_PERMISSION_REQUIRED",
+        "review_source": "https://www.oppo.com/in/store/contents/legal/terms-of-use/"
+      }
     },
     {
       "name": "OPPO F35 5G",
       "source": "https://www.oppo.com/in/smartphones/series-f/f35-5g/specs/",
       "store": "https://www.oppo.com/in/product/f35-5g.P.P1110179",
-      "facts": ["MediaTek Dimensity 6360 MAX", "8,000 mAh typical battery"],
-      "evidence": "Exact model listed on OPPO India’s official store."
+      "facts": [
+        "MediaTek Dimensity 6360 MAX",
+        "8,000 mAh typical battery"
+      ],
+      "evidence": "Exact model listed on OPPO India’s official store.",
+      "photo_reuse": {
+        "status": "WRITTEN_PERMISSION_REQUIRED",
+        "review_source": "https://www.oppo.com/in/store/contents/legal/terms-of-use/"
+      }
     },
     {
       "name": "OPPO F35 Pro 5G",
       "source": "https://www.oppo.com/in/smartphones/series-f/f35-pro-5g/specs/",
       "store": "https://www.oppo.com/in/product/f35-pro-5g.P.P1110180",
-      "facts": ["8,000 mAh typical battery"],
-      "evidence": "Exact Pro model listed on OPPO India’s official store."
+      "facts": [
+        "8,000 mAh typical battery"
+      ],
+      "evidence": "Exact Pro model listed on OPPO India’s official store.",
+      "photo_reuse": {
+        "status": "WRITTEN_PERMISSION_REQUIRED",
+        "review_source": "https://www.oppo.com/in/store/contents/legal/terms-of-use/"
+      }
     },
     {
       "name": "vivo V80",
       "source": "https://www.vivo.com/in/products/param/v80",
-      "facts": ["7,200 mAh typical battery"],
-      "evidence": "India specifications verified. The e-store page could not be opened for a fresh availability check."
+      "facts": [
+        "7,200 mAh typical battery"
+      ],
+      "evidence": "India specifications verified. The e-store page could not be opened for a fresh availability check.",
+      "photo_reuse": {
+        "status": "COMMERCIAL_PERMISSION_NOT_ESTABLISHED",
+        "review_source": "https://vivonewsroom.in/press-release/vivo-next-2026-marks-a-new-chapter-in-vivos-premium-journey-with-v80-x-fold6-s2-fe-originos-7-and-vivo-vision-discovery-edition12-mixed-reality-mr-headset/"
+      }
     },
     {
       "name": "vivo X Fold6",
       "source": "https://www.vivo.com/in/products/param/x-fold6",
       "context": "https://vivonewsroom.in/press-release/vivo-x-fold6-with-flagship-productivity-zeiss-imaging5-and-originos-7-now-on-sale-with-easy-emi-and-exchange-offers/",
-      "facts": ["6,900 mAh typical battery"],
-      "evidence": "vivo announced India sales on 13 October 2026. Current stock is unconfirmed."
+      "facts": [
+        "6,900 mAh typical battery"
+      ],
+      "evidence": "vivo announced India sales on 13 October 2026. Current stock is unconfirmed.",
+      "photo_reuse": {
+        "status": "COMMERCIAL_PERMISSION_NOT_ESTABLISHED",
+        "review_source": "https://vivonewsroom.in/press-release/vivo-next-2026-marks-a-new-chapter-in-vivos-premium-journey-with-v80-x-fold6-s2-fe-originos-7-and-vivo-vision-discovery-edition12-mixed-reality-mr-headset/"
+      }
     },
     {
       "name": "vivo S2 FE",
       "source": "https://www.vivo.com/in/products/param/s2-fe",
       "store": "https://shop.vivo.com/in/product/10374",
-      "facts": ["10,000 mAh typical battery"],
-      "evidence": "Exact model listed on vivo India’s official store."
+      "facts": [
+        "10,000 mAh typical battery"
+      ],
+      "evidence": "Exact model listed on vivo India’s official store.",
+      "photo_reuse": {
+        "status": "COMMERCIAL_PERMISSION_NOT_ESTABLISHED",
+        "review_source": "https://vivonewsroom.in/press-release/vivo-next-2026-marks-a-new-chapter-in-vivos-premium-journey-with-v80-x-fold6-s2-fe-originos-7-and-vivo-vision-discovery-edition12-mixed-reality-mr-headset/"
+      }
+    }
+  ],
+  "answers": [
+    {
+      "title": "Gaming POCO phone up to ₹15,000",
+      "query_id": "MQ0125",
+      "answer": "Flipkart listed the POCO M7 Pro 5G in Lunar Dust, 6 GB RAM and 128 GB storage, at ₹14,999 on 7 November 2026. The listing is a dated budget reference. Confirm delivery, stock and the final amount for your PIN code. The display refresh rate alone does not establish sustained game FPS.",
+      "sources": [
+        {
+          "url": "https://www.flipkart.com/x/p/itm59a079d57519a",
+          "label": "Exact Flipkart variant"
+        },
+        {
+          "url": "https://www.po.co/global/product/poco-m7-pro-5g/specs/",
+          "label": "POCO global hardware specs"
+        }
+      ]
+    },
+    {
+      "title": "OnePlus AMOLED phone below ₹7,000",
+      "query_id": "P9c7a74e77",
+      "answer": "No qualifying offer was verified in this review. OnePlus documents an AMOLED display for the Nord CE4 5G, but the manufacturer specifications do not establish a current price below ₹7,000.",
+      "sources": [
+        {
+          "url": "https://www.oneplus.in/nord-ce4-5g",
+          "label": "OnePlus India specifications"
+        }
+      ]
+    },
+    {
+      "title": "Top 3 overall",
+      "answer": "A verified Top 3 is unavailable in this review. Overall picks need exact India variants, a budget match and enough verified performance evidence. Current stock and payable price must be confirmed for a shopping recommendation.",
+      "sources": []
+    },
+    {
+      "title": "Top 3 for battery",
+      "answer": "A verified Top 3 is unavailable. The linked battery runtimes apply to the specific review units. Check their browser, test conditions and regional configuration before comparing.",
+      "sources": [
+        {
+          "url": "https://www.notebookcheck.net/Great-battery-life-and-a-handy-size-Google-Pixel-9a-review.1039364.0.html",
+          "label": "Pixel 9a test"
+        },
+        {
+          "url": "https://www.notebookcheck.net/The-elegant-all-rounder-presses-all-the-right-buttons-Nothing-Phone-3a-review.994680.0.html",
+          "label": "Nothing Phone (3a) test"
+        },
+        {
+          "url": "https://www.notebookcheck.net/Loads-of-innovations-in-the-premium-mid-range-Samsung-Galaxy-A56-5G-review.1020512.0.html",
+          "label": "Galaxy A56 5G test"
+        }
+      ]
+    },
+    {
+      "title": "Top 3 for camera",
+      "answer": "A verified Top 3 is unavailable. PhoneArena scores are model-level context. The exact India variants and common test version were not established for this comparison.",
+      "sources": [
+        {
+          "url": "https://www.phonearena.com/phones/benchmarks/camera",
+          "label": "PhoneArena camera benchmark"
+        }
+      ]
+    },
+    {
+      "title": "Top 3 for gaming",
+      "answer": "A verified Top 3 is unavailable. Compare the same game, graphics preset, session length and device software. The linked reviews show why results from different settings cannot be combined into one ranking.",
+      "sources": [
+        {
+          "url": "https://www.notebookcheck.net/Xiaomi-Poco-X7-Pro-Smartphone-Review-Dimensity-8400-Ultra-debut-with-software-updates-until-2029-for-under-EUR400.960243.0.html",
+          "label": "POCO X7 Pro test"
+        },
+        {
+          "url": "https://www.notebookcheck.net/Great-battery-life-and-a-handy-size-Google-Pixel-9a-review.1039364.0.html",
+          "label": "Pixel 9a test"
+        },
+        {
+          "url": "https://www.notebookcheck.net/Loads-of-innovations-in-the-premium-mid-range-Samsung-Galaxy-A56-5G-review.1020512.0.html",
+          "label": "Galaxy A56 5G test"
+        }
+      ]
     }
   ]
 }

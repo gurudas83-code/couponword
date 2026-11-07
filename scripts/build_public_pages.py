@@ -110,7 +110,7 @@ def _render_recent_phone_sources(destination: Path) -> None:
         parsed = urlsplit(url)
         if parsed.scheme != "https" or not parsed.hostname or parsed.username is not None:
             raise ValueError(f"invalid phone source: {url}")
-        return f'<a class="mobile-research-link" href="{escape(url)}">{label} ↗</a>'
+        return f'<a class="mobile-research-link" href="{escape(url)}">{escape(label)} ↗</a>'
 
     cards = []
     names = set()
@@ -132,6 +132,16 @@ def _render_recent_phone_sources(destination: Path) -> None:
             + f'<p>{" · ".join(links)}</p></article>'
         )
 
+    answers = []
+    for answer in data["answers"]:
+        links = [source_link(source["url"], source["label"]) for source in answer["sources"]]
+        answers.append(
+            f'<article class="mobile-research-result-card"><h3>{escape(answer["title"])}</h3>'
+            f'<p>{escape(answer["answer"])}</p>'
+            + (f'<p>{" · ".join(links)}</p>' if links else "")
+            + "</article>"
+        )
+
     section = (
         '<section id="indiaPhoneSources" class="container mobile-research-new-section" '
         'aria-labelledby="indiaPhoneSourcesTitle"><div class="section-panel premium-panel">'
@@ -140,7 +150,8 @@ def _render_recent_phone_sources(destination: Path) -> None:
         f'<p>Source check: <time datetime="{checked.isoformat()}">{checked:%d %B %Y}</time>. '
         'Open the manufacturer or store to see product photos and check current price and delivery.</p>'
         '</div></div><div class="mobile-research-results">'
-        + "".join(cards) + "</div></div></section>"
+        + "".join(cards) + '</div><h3>Source-checked phone answers</h3>'
+        '<div class="mobile-research-results">' + "".join(answers) + "</div></div></section>"
     )
     home = destination / "index.html"
     html = home.read_text(encoding="utf-8")
