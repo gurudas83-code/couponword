@@ -489,7 +489,11 @@
     tokens = tokens.map(function (token) { return aliases[token] || token; });
     if (!tokens.length && !featureKeys.length && !excluded && c.budget == null && c.ram == null && c.storage == null && !c.need5g) return [];
     var matches = [];
-    inventoryCards.forEach(function (card) {
+    // A full model name with a memory constraint must not select a sibling.
+    var exactCard = (c.ram != null || c.storage != null) && inventoryCards.find(function (card) {
+      return normalizeResearch(displayPhoneName(card).replace(/\b5g\b/ig, "")) === text;
+    });
+    (exactCard ? [exactCard] : inventoryCards).forEach(function (card) {
       if (excluded && normalizeResearch(card.brand).indexOf(excluded) >= 0) return;
       var rows = researchRowsFor(card, c);
       if (!rows.length) return;
