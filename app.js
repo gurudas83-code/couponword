@@ -415,7 +415,7 @@ function submitMobileResearchIfApplicable(query) {
   if (!research || !research.isResearchQuery(query)) return false;
   research.submit(query);
   const section = document.getElementById("mobileResearchSearch");
-  if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (section) section.scrollIntoView({ behavior: "instant", block: "start" });
   return true;
 }
 

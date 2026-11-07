@@ -262,7 +262,7 @@
     if (!inventoryGrid) return;
     // Version the generated data URL so a reviewed catalogue refresh cannot
     // be hidden by a stale GitHub Pages/browser cache.
-    fetch("/data/mobile_research_catalogue.json?v=20261103-workbook6", { credentials: "omit" })
+    fetch("/data/mobile_research_catalogue.json?v=20261103-workbook6", { credentials: "same-origin" })
       .then(function (response) {
         if (!response.ok) throw new Error("research catalogue unavailable");
         return response.json();
@@ -415,15 +415,16 @@
   }
 
 
-  function researchRowsFor(card, query) {
-    var c = researchConstraints(query);
-    var rows = inventoryRowsForCard(card);
+  function researchRowsFor(card, c) {
+    var rows;
     if (c.budget != null) {
       var ref = card.research_budget_reference;
       if (!ref || ref.live_offer !== false || !(ref.reference_price_inr > 0)) return [];
       if (c.inclusive ? ref.reference_price_inr > c.budget : ref.reference_price_inr >= c.budget) return [];
       if (c.lower != null && ref.reference_price_inr < c.lower) return [];
       rows = [{ ram_gb: ref.ram_gb, storage_gb: ref.storage_gb, variant_text: (ref.ram_gb == null ? "RAM not officially specified" : ref.ram_gb + "GB RAM") + " / " + ref.storage_gb + "GB storage", research_reference: true }];
+    } else {
+      rows = inventoryRowsForCard(card);
     }
     return rows.filter(function (row) { return (c.ram == null || Number(row.ram_gb) === c.ram) && (c.storage == null || Number(row.storage_gb) === c.storage); });
   }
@@ -458,29 +459,36 @@
   }
 
 
-  function researchMatches(card, query) {
+  function findResearchMatches(query) {
     var c = researchConstraints(query), text = c.text;
-    var excluded = excludedBrand(text), brand = normalizeResearch(card.brand);
-    if (excluded && brand.indexOf(excluded) >= 0) return [];
-    var rows = researchRowsFor(card, query);
-    if (!rows.length) return [];
-    var haystack = normalizeResearch(card.brand + " " + card.model);
-    var featureKeys = researchFeatureKeys(text), specs = card.specifications || {};
-    function spec(key) { return specs[key] && specs[key].value; }
-    if (c.minimumBattery != null && !(Number(spec("battery_mah_typical")) >= c.minimumBattery)) return [];
-    if (c.minimumRefresh != null && !(Number(spec("display_refresh_max_hz")) >= c.minimumRefresh)) return [];
-    if (c.needOis && !/^(yes|true|supported)$/i.test(String(spec("ois") || ""))) return [];
-    if (c.need5g && !/5g/i.test(String(spec("network_support") || "") + " " + card.model)) return [];
+    var excluded = excludedBrand(text), featureKeys = researchFeatureKeys(text);
     var stop = /^(best|good|phone|phones|mobile|mobiles|smartphone|smartphones|under|below|within|price|in|the|and|with|ram|storage|camera|battery|gaming|game|software|support|display|screen|build|reliability|durability|android|update|updates|ko|ke|ka|ki|bina|chhodkar|chhod|mujhe|mujhko|chahiye|batao|dikhao|achha|acha|accha|wala|wali|mein|me|se|kam|tak|rs|inr|rupees|minimum|least|at|above|over|more|than|का|की|के|में|मुझे|चाहिए|बताओ|दिखाओ|अच्छा|अच्छे|वाला|वाले|फोन|मोबाइल|कैमरा|बैटरी|गेमिंग|डिस्प्ले|छोड़कर|छोड़|हटाकर|बिना|exclude|excluding|without|except|no)$/;
     var tokens = text.split(" ").filter(function (token) { return token && !stop.test(token) && token !== excluded; });
     var aliases = { "सैमसंग": "samsung", "आईफोन": "iphone", "रेडमी": "redmi", "पोको": "poco", "वनप्लस": "oneplus" };
     tokens = tokens.map(function (token) { return aliases[token] || token; });
-    var hayTokens = haystack.split(" ");
-    if (tokens.length && !tokens.every(function (token) { return hayTokens.indexOf(token) >= 0; })) return [];
-    var keys = researchSpecKeys(card, rows);
-    if (featureKeys.length && !featureKeys.some(function (key) { return keys.indexOf(key) >= 0; })) return [];
     if (!tokens.length && !featureKeys.length && !excluded && c.budget == null && c.ram == null && c.storage == null && !c.need5g) return [];
-    return rows;
+    var matches = [];
+    inventoryCards.forEach(function (card) {
+      if (excluded && normalizeResearch(card.brand).indexOf(excluded) >= 0) return;
+      var rows = researchRowsFor(card, c);
+      if (!rows.length) return;
+      var specs = card.specifications || {};
+      function spec(key) { return specs[key] && specs[key].value; }
+      if (c.minimumBattery != null && !(Number(spec("battery_mah_typical")) >= c.minimumBattery)) return;
+      if (c.minimumRefresh != null && !(Number(spec("display_refresh_max_hz")) >= c.minimumRefresh)) return;
+      if (c.needOis && !/^(yes|true|supported)$/i.test(String(spec("ois") || ""))) return;
+      if (c.need5g && !/5g/i.test(String(spec("network_support") || "") + " " + card.model)) return;
+      if (tokens.length) {
+        var hayTokens = normalizeResearch(card.brand + " " + card.model).split(" ");
+        if (!tokens.every(function (token) { return hayTokens.indexOf(token) >= 0; })) return;
+      }
+      if (featureKeys.length) {
+        var keys = researchSpecKeys(card, rows);
+        if (!featureKeys.some(function (key) { return keys.indexOf(key) >= 0; })) return;
+      }
+      matches.push({card: card, rows: rows});
+    });
+    return sortResearchMatches(matches, query);
   }
 
 
@@ -689,12 +697,12 @@
     if (comparison) {
       matches = [];
       parts.slice(0, 4).forEach(function (part) {
-        var group = sortResearchMatches(inventoryCards.map(function (card) { var rows = researchMatches(card, part); return rows.length ? {card: card, rows: rows} : null; }).filter(Boolean), part);
+        var group = findResearchMatches(part);
         if (!group.length) missingComparison = true;
         group.slice(0, 1).forEach(function (item) { if (!matches.some(function (existing) { return existing.card.model_key === item.card.model_key; })) matches.push(item); });
       });
     } else {
-      matches = sortResearchMatches(inventoryCards.map(function (card) { var rows = researchMatches(card, lastSearchQuery); return rows.length ? {card: card, rows: rows} : null; }).filter(Boolean), lastSearchQuery);
+      matches = findResearchMatches(lastSearchQuery);
     }
     var c = researchConstraints(lastSearchQuery);
     matches = groupResearchMatches(matches);
