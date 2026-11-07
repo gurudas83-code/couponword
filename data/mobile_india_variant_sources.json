@@ -1,0 +1,120 @@
+{
+  "oneplus|13": [
+    {
+      "ram_gb": 12,
+      "storage_gb": 256,
+      "source_url": "https://www.oneplus.in/13/specs"
+    },
+    {
+      "ram_gb": 16,
+      "storage_gb": 512,
+      "source_url": "https://www.oneplus.in/13/specs"
+    },
+    {
+      "ram_gb": 24,
+      "storage_gb": 1024,
+      "source_url": "https://www.oneplus.in/13/specs"
+    }
+  ],
+  "oneplus|13r": [
+    {
+      "ram_gb": 12,
+      "storage_gb": 256,
+      "source_url": "https://www.oneplus.in/13r/specs"
+    },
+    {
+      "ram_gb": 16,
+      "storage_gb": 512,
+      "source_url": "https://www.oneplus.in/13r/specs"
+    }
+  ],
+  "samsung|galaxy a27 5g": [
+    {
+      "ram_gb": 6,
+      "storage_gb": 128,
+      "source_url": "https://news.samsung.com/in/samsung-galaxy-a27-5g-launches-in-india-at-inr-28999-with-cashback-and-zero-down-payment-emi-schemes"
+    },
+    {
+      "ram_gb": 8,
+      "storage_gb": 128,
+      "source_url": "https://news.samsung.com/in/samsung-galaxy-a27-5g-launches-in-india-at-inr-28999-with-cashback-and-zero-down-payment-emi-schemes"
+    },
+    {
+      "ram_gb": 8,
+      "storage_gb": 256,
+      "source_url": "https://news.samsung.com/in/samsung-galaxy-a27-5g-launches-in-india-at-inr-28999-with-cashback-and-zero-down-payment-emi-schemes"
+    }
+  ],
+  "samsung|galaxy a36 5g": [
+    {
+      "ram_gb": 8,
+      "storage_gb": 128,
+      "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability"
+    },
+    {
+      "ram_gb": 8,
+      "storage_gb": 256,
+      "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability"
+    },
+    {
+      "ram_gb": 12,
+      "storage_gb": 256,
+      "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability"
+    }
+  ],
+  "samsung|galaxy a37 5g": [
+    {
+      "ram_gb": 8,
+      "storage_gb": 128,
+      "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a37-5g-awesome-charcoal-128gb-sm-a376ezadins/"
+    }
+  ],
+  "samsung|galaxy a56 5g": [
+    {
+      "ram_gb": 8,
+      "storage_gb": 128,
+      "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability"
+    },
+    {
+      "ram_gb": 8,
+      "storage_gb": 256,
+      "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability"
+    },
+    {
+      "ram_gb": 12,
+      "storage_gb": 256,
+      "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability"
+    }
+  ],
+  "samsung|galaxy a57 5g": [
+    {
+      "ram_gb": 8,
+      "storage_gb": 256,
+      "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbfins/"
+    },
+    {
+      "ram_gb": 12,
+      "storage_gb": 256,
+      "source_url": "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a57-5g-awesome-navy-256gb-sm-a576bdbgins/"
+    }
+  ],
+  "samsung|galaxy s24": [
+    {
+      "ram_gb": 8,
+      "storage_gb": 256,
+      "source_url": "https://news.samsung.com/in/samsung-ushers-in-mobile-ai-era-launches-galaxy-s24-series-in-india-pre-book-now-for-exciting-offers"
+    },
+    {
+      "ram_gb": 8,
+      "storage_gb": 512,
+      "source_url": "https://news.samsung.com/in/samsung-ushers-in-mobile-ai-era-launches-galaxy-s24-series-in-india-pre-book-now-for-exciting-offers"
+    }
+  ],
+  "samsung|galaxy s26 ultra": [
+    {
+      "ram_gb": 12,
+      "storage_gb": 256,
+      "source_url": "https://news.samsung.com/in/samsung-india-launches-its-most-advanced-ai-phone-the-galaxy-s26-series-pre-order-now-for-exciting-offers"
+    }
+  ]
+}

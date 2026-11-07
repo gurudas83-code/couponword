@@ -74,10 +74,20 @@ class MobileResearchInventoryVisibilityTests(unittest.TestCase):
         self.assertTrue([row for row in rows if row["status"] == "OFFICIAL_VERIFIED"])
 
     def test_public_images_require_explicit_rights_clearance(self):
-        rows = build_public_catalogue(ROOT)["records"]
-        self.assertTrue(rows)
-        self.assertTrue(all(row["image_status"] == "PLACEHOLDER" for row in rows))
-        self.assertTrue(all(row["image_url"] is None for row in rows))
+        payload = build_public_catalogue(ROOT)
+        registry = json.loads((ROOT / "data/mobile_model_photos.json").read_text())
+        by_record = {}
+        for card in payload["model_cards"]:
+            photo = registry.get(card["model_key"])
+            self.assertEqual(card.get("photo"), photo)
+            self.assertEqual(card["image_status"], "VERIFIED_MATCH" if photo else "PLACEHOLDER")
+            if photo:
+                self.assertTrue((ROOT / photo["url"].lstrip("/")).is_file())
+            for key in card["discovery_record_keys"]:
+                by_record[key] = photo
+        for row in payload["records"]:
+            photo = by_record[row["record_key"]]
+            self.assertEqual(row["image_url"], photo["url"] if photo else None)
 
     def test_cards_expose_existing_specs_and_explicit_pending_fields(self):
         cards = build_public_catalogue(ROOT)["model_cards"]

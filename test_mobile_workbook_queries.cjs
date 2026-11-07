@@ -33,6 +33,20 @@ setImmediate(()=> {
  check('Samsung exclusion',()=>{let r=search('phone under 30000 exclude Samsung');assert(r.length);assert(r.every(x=>x.card.brand.toLowerCase()!=='samsung'));});
  check('Hinglish Samsung exclusion',()=>{let r=search('Samsung ko chhodkar mobile under 30000');assert(r.length);assert(r.every(x=>x.card.brand.toLowerCase()!=='samsung'));});
  check('exact Galaxy A36 variant',()=>{let r=search('Galaxy A36 8GB 256GB');assert.equal(r.length,1);assert(r[0].rows.every(x=>x.ram_gb===8&&x.storage_gb===256));});
+ check('P1 manufacturer-listed configurations match exact model and memory',()=>{
+   let count=0;
+   for (const card of catalogue.model_cards) {
+     for (const variant of card.verified_india_variants || []) {
+       const query = `${card.brand} ${card.model} ${variant.ram_gb}GB RAM ${variant.storage_gb}GB storage`;
+       const matches = search(query);
+       assert.deepEqual(Array.from(matches, item => item.card.model_key), [card.model_key], query);
+       assert(matches[0].rows.some(row => row.ram_gb === variant.ram_gb && row.storage_gb === variant.storage_gb), query);
+       assert(element('mobileResearchResults').innerHTML.includes(card.photo.url), query);
+       count++;
+     }
+   }
+   assert.equal(count,20);
+ });
  check('unsupported variant has zero results',()=>assert.equal(search('Galaxy A36 16GB 1TB').length,0));
  check('single storage is a hard constraint',()=>{let r=search('Galaxy A36 256GB');assert(r.length);assert(r.every(x=>x.rows.every(v=>v.storage_gb===256)));});
  check('model digits cannot select a sibling',()=>{let r=search('Pixel 9');assert(r.length);assert(r.every(x=>/\b9\b/.test(x.card.model)));});
