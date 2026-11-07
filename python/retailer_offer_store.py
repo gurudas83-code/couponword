@@ -122,6 +122,7 @@ def find_fresh_verified_offer(
     variant: str = "",
     now: datetime | None = None,
     require_in_stock: bool = True,
+    _records: list | None = None,
 ) -> dict[str, Any] | None:
     """Return one exact, recent offer from the authoritative offer store.
 
@@ -139,7 +140,8 @@ def find_fresh_verified_offer(
         return None
 
     current_time = now or datetime.now(timezone.utc)
-    for record in load_offer_database().get("offers", []):
+    records = load_offer_database().get("offers", []) if _records is None else _records
+    for record in records:
         if not isinstance(record, dict) or str(record.get("product_id") or "").strip() != product_id:
             continue
 
@@ -196,6 +198,18 @@ def find_fresh_verified_offer(
         return result
 
     return None
+
+
+def has_fresh_verified_offer() -> bool:
+    """Check one store snapshot without contacting retailer providers."""
+    records = load_offer_database().get("offers", [])
+    if not isinstance(records, list):
+        raise ValueError("Invalid retailer offer store")
+    now = datetime.now(timezone.utc)
+    return any(
+        find_fresh_verified_offer(product_id=record.get("product_id"), now=now, _records=[record])
+        for record in records if isinstance(record, dict)
+    )
 
 
 if __name__ == "__main__":

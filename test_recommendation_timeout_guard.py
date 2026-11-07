@@ -1,4 +1,5 @@
 import sys
+from datetime import datetime, timedelta, timezone
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -11,6 +12,34 @@ import shopping_api
 
 
 class RecommendationTimeoutGuardTests(unittest.TestCase):
+    def test_background_query_skips_pipeline_when_store_offer_expired(self):
+        stale = {
+            "product_id": "cw-mobile-test", "price": 14999, "availability": "in_stock",
+            "last_checked": (datetime.now(timezone.utc) - timedelta(hours=7)).isoformat(),
+            "product_url": "https://www.flipkart.com/test/p/itmtest",
+        }
+        with patch("retailer_offer_store.load_offer_database", return_value={"offers": [stale]}), \
+             patch.object(shopping_api, "_load_pipeline", side_effect=AssertionError("external pipeline entered")):
+            response = shopping_api.app.test_client().get("/api/recommend?q=phone+under+25000&offer_check=background")
+        self.assertEqual(response.status_code, 200)
+        body = response.get_json()
+        self.assertFalse(body["candidate_pool_entered"])
+        self.assertEqual(body["response_reason"], "NO_FRESH_STORED_OFFER")
+        self.assertEqual(body["recommendations"], [])
+
+    def test_fresh_store_offer_preserves_existing_pipeline(self):
+        fresh = {
+            "product_id": "cw-mobile-test", "price": 14999, "availability": "in_stock",
+            "last_checked": datetime.now(timezone.utc).isoformat(),
+            "product_url": "https://www.flipkart.com/test/p/itmtest",
+        }
+        with patch("retailer_offer_store.load_offer_database", return_value={"offers": [fresh]}), \
+             patch.object(shopping_api, "run_pipeline", return_value={"recommendations": []}) as pipeline:
+            response = shopping_api.app.test_client().get("/api/recommend?q=phone+under+25000&offer_check=background")
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.get_json()["candidate_pool_entered"])
+        pipeline.assert_called_once()
+
     def test_provider_disabled_skips_amazon_search_cards(self):
         with patch.object(market_discovery, "_amazon_live_search_available", return_value=False), \
              patch.object(market_discovery, "search_asins", side_effect=AssertionError("unauthorized search")):
