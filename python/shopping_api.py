@@ -311,6 +311,30 @@ def recommend():
         output["response_reason"] = "RESEARCH_COMPARISON"
         return jsonify(output)
 
+    if request.args.get("offer_check") == "background" and parsed_intent.get("category") == "smartphone":
+        from retailer_offer_store import has_fresh_verified_offer
+
+        try:
+            has_stored_offer = has_fresh_verified_offer()
+        except (OSError, ValueError, AttributeError):
+            app.logger.exception("Unable to read retailer offer store")
+            return jsonify({"status": "error", "error": "Stored offer check unavailable"}), 503
+        if not has_stored_offer:
+            output = apply_response_contract({
+                "query": query,
+                "intent": parsed_intent,
+                "recommendations": [],
+                "status": "PARTIAL",
+                "result_status": "PARTIAL",
+                "completion_status": "PARTIAL",
+                "completion_reason": "No fresh verified offer is present in the local retailer store.",
+                "request_route": "background_offer_check",
+                "candidate_pool_entered": False,
+                "hard_gate_rejections": [],
+                "response_reason": "NO_FRESH_STORED_OFFER",
+            }, requested_query=query)
+            return jsonify(output)
+
     try:
         payload = _load_pipeline()(
             query=pipeline_query,

@@ -675,7 +675,8 @@ async function loadShoppingRecommendation(query, { background = false } = {}) {
     const endpoint =
       API_BASE_URL +
       "/api/recommend?q=" +
-      encodeURIComponent(cleanQuery);
+      encodeURIComponent(cleanQuery) +
+      (background ? "&offer_check=background" : "");
 
     const response = await fetch(endpoint, { signal: controller.signal });
 
