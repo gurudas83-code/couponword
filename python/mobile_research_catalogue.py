@@ -149,24 +149,36 @@ def _load_model_photos(root: Path, models: list[dict[str, Any]]) -> dict[str, di
     """Load reviewed photos by exact catalogue model key."""
     photos = _read_json(root / "data/mobile_model_photos.json")
     model_keys = {model["model_key"] for model in models}
-    used_assets = set()
+    used_assets: set[str] = set()
     for key, photo in photos.items():
         asset = photo["url"]
-        if key not in model_keys or asset in used_assets:
-            raise ValueError(f"invalid or duplicate model photo assignment: {key}")
-        if not re.fullmatch(r"/assets/phone-photos/[a-z0-9-]+\.jpg", asset):
+        if key not in model_keys:
+            raise ValueError(f"unknown model photo assignment: {key}")
+        alias = photo.get("same_model_as")
+        if alias:
+            original = photos.get(alias)
+            if (
+                original is None or original.get("same_model_as")
+                or not re.fullmatch(re.escape(alias) + r" [1-9][0-9]*gb", key)
+                or {name: value for name, value in photo.items() if name != "same_model_as"} != original
+            ):
+                raise ValueError(f"invalid storage-only model photo alias: {key}")
+        elif asset in used_assets:
+            raise ValueError(f"duplicate model photo assignment: {key}")
+        if not re.fullmatch(r"/assets/phone-photos/[a-z0-9-]+\.(?:jpg|png)", asset):
             raise ValueError(f"invalid local phone photo path: {asset}")
         if not (root / asset.lstrip("/")).is_file():
             raise ValueError(f"phone photo asset missing: {asset}")
         if not photo["source"].startswith("https://commons.wikimedia.org/wiki/File:"):
             raise ValueError(f"phone photo source missing: {key}")
-        if not photo["author"].strip() or photo["license"] not in {"CC BY 4.0", "CC BY-SA 4.0", "CC0"}:
+        if not photo["author"].strip() or photo["license"] not in {"CC BY 3.0", "CC BY 4.0", "CC BY-SA 4.0", "CC0"}:
             raise ValueError(f"phone photo attribution or reuse license missing: {key}")
         if not photo["license_url"].startswith("https://creativecommons.org/"):
             raise ValueError(f"phone photo license URL missing: {key}")
         if not all(isinstance(photo[axis], int) and photo[axis] > 0 for axis in ("width", "height")):
             raise ValueError(f"phone photo dimensions missing: {key}")
-        used_assets.add(asset)
+        if not alias:
+            used_assets.add(asset)
     return photos
 
 

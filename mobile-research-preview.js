@@ -165,7 +165,7 @@
         '" width="' + escapeHtml(photo.width) + '" height="' + escapeHtml(photo.height) +
         '" loading="lazy" decoding="async" alt="' + escapeHtml(displayPhoneName(card)) +
         '"><figcaption>Photo: <a href="' + escapeHtml(photo.source) + '">' +
-        escapeHtml(photo.author) + '</a> · <a href="' + escapeHtml(photo.license_url) +
+        (photo.title ? escapeHtml(photo.title) + " by " : "") + escapeHtml(photo.author) + '</a> · <a href="' + escapeHtml(photo.license_url) +
         '">' + escapeHtml(photo.license) + '</a> · resized</figcaption></figure>';
     }
     return '<div class="research-phone-visual" aria-hidden="true"><img src="/assets/phone-study.svg" width="600" height="540" alt="" loading="lazy"><span>' + escapeHtml(card.brand) + ' / PHONE RESEARCH</span></div><p class="research-illustration-label">Illustration · not a product photo</p>';
@@ -270,7 +270,7 @@
     if (!inventoryGrid) return;
     // Version the generated data URL so a reviewed catalogue refresh cannot
     // be hidden by a stale GitHub Pages/browser cache.
-    fetch("/data/mobile_research_catalogue.json?v=phone-photos-20261107", { credentials: "omit" })
+    fetch("/data/mobile_research_catalogue.json?v=phone-photos-20261107-2", { credentials: "omit" })
       .then(function (response) {
         if (!response.ok) throw new Error("research catalogue unavailable");
         return response.json();

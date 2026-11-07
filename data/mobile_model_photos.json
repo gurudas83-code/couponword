@@ -71,6 +71,27 @@
     "width": 330,
     "height": 247
   },
+  "apple|iphone 17e": {
+    "url": "/assets/phone-photos/apple-iphone-17e.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_17e_backside.jpg",
+    "author": "茅野ふたば",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440,
+    "title": "IPhone 17e backside.jpg"
+  },
+  "apple|iphone 17e 512gb": {
+    "url": "/assets/phone-photos/apple-iphone-17e.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_17e_backside.jpg",
+    "author": "茅野ふたば",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440,
+    "title": "IPhone 17e backside.jpg",
+    "same_model_as": "apple|iphone 17e"
+  },
   "cmf|phone 1": {
     "url": "/assets/phone-photos/cmf-phone-1.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:CMF_Phone_1.jpg",
@@ -151,6 +172,25 @@
     "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
     "width": 330,
     "height": 587
+  },
+  "nothing|phone 3": {
+    "url": "/assets/phone-photos/nothing-phone-3.png",
+    "source": "https://commons.wikimedia.org/wiki/File:%E5%8D%8A%E5%A4%9C%E9%A6%96%E5%8F%91%EF%BC%81%E7%AC%AC%E4%B8%80%E6%89%8B%E6%8B%BF%E5%88%B0%E4%BA%86Nothing_Phone_(3)_%EF%BC%81%E7%81%AF%E6%9D%A1%E6%B2%A1%E4%BA%86%E3%80%81%E8%83%8C%E5%90%8E%E5%A4%9A%E4%B8%80%E4%B8%AAscreen%EF%BC%81-00.00.11.457.png",
+    "author": "可恩Ke En",
+    "license": "CC BY 3.0",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/",
+    "width": 330,
+    "height": 186
+  },
+  "nothing|phone 3a pro": {
+    "url": "/assets/phone-photos/nothing-phone-3a-pro.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Nothing_Phone_(3a)_Pro_20250628.jpg",
+    "author": "Steven Sun",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440,
+    "title": "Nothing Phone (3a) Pro 20250628.jpg"
   },
   "oneplus|13": {
     "url": "/assets/phone-photos/oneplus-13.jpg",
