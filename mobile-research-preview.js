@@ -33,6 +33,8 @@
   var catalogueRows = [];
   var catalogueExpanded = false;
   var inventoryRows = [];
+  var inventoryByKey = new Map();
+  var verifiedById = new Map();
   var inventoryCards = [];
   var inventoryLoadFailed = false;
   var inventorySourceCounts = {};
@@ -130,10 +132,10 @@
 
   function inventoryRowsForCard(card) {
     var discovery = (card.discovery_record_keys || []).map(function (key) {
-      return inventoryRows.find(function (row) { return row.record_key === key; });
+      return inventoryByKey.get(key);
     }).filter(Boolean);
     var frozen = (card.frozen_variant_ids || []).map(function (id) {
-      return verifiedRows.find(function (row) { return row.canonical_product_id === id; });
+      return verifiedById.get(id);
     }).filter(Boolean);
     return discovery.concat(frozen);
   }
@@ -270,6 +272,7 @@
       .then(function (payload) {
         inventoryLoadFailed = false;
         inventoryRows = Array.isArray(payload.records) ? payload.records : [];
+        inventoryByKey = new Map(inventoryRows.map(function (row) { return [row.record_key, row]; }));
         inventoryCards = Array.isArray(payload.model_cards) ? payload.model_cards : [];
         inventorySourceCounts = payload.source_counts || {};
         refreshInventoryControls();
@@ -777,6 +780,7 @@
     .then(function (payload) {
       var products = Array.isArray(payload.products) ? payload.products : [];
       verifiedRows = products;
+      verifiedById = new Map(products.map(function (row) { return [row.canonical_product_id, row]; }));
       grid.innerHTML = products.length ? products.map(renderProduct).join("") : "<p>Verified mobile research is currently unavailable.</p>";
       refreshInventoryControls();
       renderNewNoteworthy();
