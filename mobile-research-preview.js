@@ -158,8 +158,17 @@
       (!status || rows.some(function (row) { return inventoryVariantStatus(row) === status; }));
   }
 
-  function inventoryImage() {
-    return '<div class="mobile-research-inventory-placeholder" role="img" aria-label="Product image not safely verified">Phone image unavailable</div>';
+  function researchPhoneImage(card) {
+    var photo = card.image_status === "VERIFIED_MATCH" && card.photo;
+    if (photo) {
+      return '<figure class="research-phone-photo"><img src="' + escapeHtml(photo.url) +
+        '" width="' + escapeHtml(photo.width) + '" height="' + escapeHtml(photo.height) +
+        '" loading="lazy" decoding="async" alt="' + escapeHtml(displayPhoneName(card)) +
+        '"><figcaption>Photo: <a href="' + escapeHtml(photo.source) + '">' +
+        (photo.title ? escapeHtml(photo.title) + " by " : "") + escapeHtml(photo.author) + '</a> · <a href="' + escapeHtml(photo.license_url) +
+        '">' + escapeHtml(photo.license) + '</a> · resized</figcaption></figure>';
+    }
+    return '<div class="research-phone-visual" aria-hidden="true"><img src="/assets/phone-study.svg" width="600" height="540" alt="" loading="lazy"><span>' + escapeHtml(card.brand) + ' / PHONE RESEARCH</span></div><p class="research-illustration-label">Illustration · not a product photo</p>';
   }
 
   function renderInventoryCard(card) {
@@ -217,10 +226,9 @@
       (frozenRows.length ? " · " + frozenRows.length + " frozen exact variant" + (frozenRows.length === 1 ? "" : "s") : "");
     var launch = card.india_launch_date ? '<p class="mobile-research-launch"><strong>Verified India launch:</strong> ' + escapeHtml(card.india_launch_date) + '</p>' : '';
     return '<article class="mobile-research-inventory-card mobile-research-model-card" data-mobile-model-card="' + escapeHtml(card.model_key) + '">' +
-      inventoryImage(card) +
       '<div class="mobile-research-inventory-body">' +
       '<div class="mobile-research-card-top"><span class="research-status inventory-status-' + escapeHtml(statusLabel.toLowerCase()) + '">' + escapeHtml(statusLabel) + '</span></div>' +
-      '<div class="research-phone-visual" aria-hidden="true"><img src="/assets/phone-study.svg" width="600" height="540" alt="" loading="lazy"><span>' + escapeHtml(card.brand) + ' / PHONE RESEARCH</span></div><p class="research-illustration-label">Illustration · not a product photo</p><h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch +
+      researchPhoneImage(card) + '<h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch +
       '<p class="mobile-research-variant">' + escapeHtml(counts || "Model research reference") + '</p>' +
       '<ul class="mobile-research-variant-list">' + (variantItems || "<li>Variant details are not specified in the source universe.</li>") + '</ul>' +
       '<p class="mobile-research-inventory-fields"><strong>Verified fields:</strong> ' + escapeHtml(fields) + '</p>' +
@@ -262,7 +270,7 @@
     if (!inventoryGrid) return;
     // Version the generated data URL so a reviewed catalogue refresh cannot
     // be hidden by a stale GitHub Pages/browser cache.
-    fetch("/data/mobile_research_catalogue.json?v=20261103-workbook6", { credentials: "omit" })
+    fetch("/data/mobile_research_catalogue.json?v=phone-photos-20261107-3", { credentials: "omit" })
       .then(function (response) {
         if (!response.ok) throw new Error("research catalogue unavailable");
         return response.json();
@@ -584,7 +592,7 @@
     var launch = card.india_launch_date ? '<p class="mobile-research-launch">India launch: ' + escapeHtml(card.india_launch_date) + '</p>' : '';
     return '<article class="mobile-research-inventory-card mobile-research-result-card" data-mobile-model-card="' + escapeHtml(card.model_key) + '"><div class="mobile-research-inventory-body">' +
       '<div class="mobile-research-card-top"><span class="research-status">' + escapeHtml(status) + '</span><span class="research-status">Research only</span></div>' +
-      '<div class="research-phone-visual" aria-hidden="true"><img src="/assets/phone-study.svg" width="600" height="540" alt="" loading="lazy"><span>' + escapeHtml(card.brand) + ' / PHONE RESEARCH</span></div><p class="research-illustration-label">Illustration · not a product photo</p><h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch + '<p class="mobile-research-variant">Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join("; ")) + '</p>' +
+      researchPhoneImage(card) + '<h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch + '<p class="mobile-research-variant">Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join("; ")) + '</p>' +
       (groupSize > 1 ? '<p class="research-group-note">' + groupSize + ' matching catalogue entries grouped. Specifications below belong to the displayed record.</p>' : '') +
       (specs ? '<ul class="mobile-research-model-specs">' + specs + '</ul>' : '<p>Technical specifications are pending verification.</p>') + documentedContext(card, lastSearchQuery) + independentTestContext(card) +
       '<p class="research-source-note">' + (sourceItem ? link(sourceItem.source_url, "Specification source") : 'Specification source pending') + ' · Research checked: ' + escapeHtml(card.research_checked_at || sourceItem && (sourceItem.checked_at || sourceItem.checked_date) || 'date unavailable') + '</p>' +
