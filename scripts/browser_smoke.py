@@ -2,9 +2,7 @@
 """End-to-end smoke test of the *generated public site*, not a mocked DOM.
 
 Requires: pip install playwright && python -m playwright install chromium
-Runs against a loopback static server, so no live retailer/API credentials
-are used. The backend recommendation handoff is stubbed after the public
-app.js handler loads; only its correct argument routing is asserted here.
+Runs against a loopback static server with controlled offer and API responses.
 """
 from __future__ import annotations
 
@@ -44,6 +42,8 @@ def run(root: Path):
                     page.on("pageerror", lambda error: page_errors.append(str(error)))
                     # Tracking, not the application, is excluded from deterministic QA.
                     page.route("https://www.googletagmanager.com/**", lambda route: route.abort())
+                    pending_offers = []
+                    page.route("**/api/recommend?*", lambda route: pending_offers.append(route))
                     page.goto(url, wait_until="domcontentloaded", timeout=30000)
                     page.wait_for_function("() => !!window.CouponWorldMobileResearch", timeout=15000)
                     # Wait for the real fetch->catalogue->browser filtering chain.
@@ -57,6 +57,43 @@ def run(root: Path):
                     visible_text = page.locator("#mobileResearchResults").inner_text()
                     print("RESEARCH-DIAGNOSTIC", width, "DOM:", repr(research_text[:180]), "visible:", repr(visible_text[:180]), flush=True)
                     assert "Research only" in research_text, width
+                    assert page.locator("#browse").is_hidden(), width
+                    assert page.locator("#hot-deals").is_hidden(), width
+                    assert "Browse Hot Deals" not in page.content(), width
+
+                    # Hold the offer request while proving local results render.
+                    page.locator("#heroSearch").fill("phone under 25000")
+                    with page.expect_request("**/api/recommend?*"):
+                        page.locator("#heroSearchButton").click()
+                    assert page.locator("#mobileResearchResults [data-mobile-model-card]").count() > 0, width
+                    assert page.locator("#aiRecommendation").is_hidden(), width
+                    pending_offers.pop().fulfill(status=503, headers={"Access-Control-Allow-Origin": "*"})
+                    assert page.locator("#mobileResearchResults [data-mobile-model-card]").first.is_visible(), width
+                    assert page.locator("#aiRecommendation").is_hidden(), width
+                    page.unroute("**/api/recommend?*")
+                    page.route("**/api/recommend?*", lambda route: route.fulfill(
+                        json={"recommendations": [
+                            {"title": "Unverified fixture", "current_offer_verified": False},
+                            {"title": "Verified offer fixture", "current_offer_verified": True,
+                             "purchase_cta_eligible": True, "retailer_offers": [{
+                                 "retailer": "flipkart", "price": 14999, "availability": "in_stock",
+                                 "product_url": "https://www.flipkart.com/test/p/itmfixture",
+                                 "cta_eligibility": {"eligible": True},
+                             }]},
+                        ]},
+                        headers={"Access-Control-Allow-Origin": "*"},
+                    ))
+                    page.locator("#heroSearchButton").click()
+                    page.locator("#aiRecommendation").wait_for(state="visible", timeout=10000)
+                    assert "Verified offer fixture" in page.locator("#aiRecommendation").inner_text(), width
+                    assert "Unverified fixture" not in page.locator("#aiRecommendation").inner_text(), width
+                    assert page.locator("#mobileResearchResults [data-mobile-model-card]").first.is_visible(), width
+                    page.locator("#researchClearSearch").click()
+                    assert page.locator("#aiRecommendation").is_hidden(), width
+                    page.unroute("**/api/recommend?*")
+                    page.route("**/api/recommend?*", lambda route: route.fulfill(
+                        json={"recommendations": []}, headers={"Access-Control-Allow-Origin": "*"}
+                    ))
                     # Nearby-band narrowing must be explicit.
                     nearby = page.evaluate("""() => window.CouponWorldMobileResearch.search('phone under 30000 nearby band').map(x => x.card.research_budget_reference.reference_price_inr)""")
                     assert nearby and all(25000 <= price < 30000 for price in nearby), width

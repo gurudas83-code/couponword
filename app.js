@@ -312,7 +312,7 @@ function renderImage(deal, className) {
 
 function applySearch(value) {
   searchInput.value = value || "";
-  document.getElementById("browse").scrollIntoView({ behavior: "smooth" });
+  if (allDeals.length) document.getElementById("browse").scrollIntoView({ behavior: "smooth" });
   renderDeals();
 }
 
@@ -398,18 +398,25 @@ function escapeHTML(value) {
 searchInput.addEventListener("input", renderDeals);
 sortSelect.addEventListener("change", renderDeals);
 
-function submitMobileResearchIfApplicable(query) {
-  if (window.CouponWorldMobileResearch && typeof window.CouponWorldMobileResearch.isResearchQuery === "function" && window.CouponWorldMobileResearch.isResearchQuery(query)) {
-    recommendationRequestId += 1;
-    if (recommendationController) { recommendationController.abort(); recommendationController = null; }
-    const shoppingSection = document.getElementById("aiRecommendation");
-    if (shoppingSection) shoppingSection.hidden = true;
-    window.CouponWorldMobileResearch.search(query);
-    const researchSection = document.getElementById("mobileResearchSearch");
-    if (researchSection) researchSection.scrollIntoView({ behavior: "smooth", block: "start" });
-    return true;
+function cancelShoppingRecommendation() {
+  recommendationRequestId += 1;
+  if (recommendationController) {
+    recommendationController.abort();
+    recommendationController = null;
   }
-  return false;
+  const section = document.getElementById("aiRecommendation");
+  if (section) section.hidden = true;
+}
+
+window.CouponWorldCancelShoppingRecommendation = cancelShoppingRecommendation;
+
+function submitMobileResearchIfApplicable(query) {
+  const research = window.CouponWorldMobileResearch;
+  if (!research || !research.isResearchQuery(query)) return false;
+  research.submit(query);
+  const section = document.getElementById("mobileResearchSearch");
+  if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
+  return true;
 }
 
 heroSearchButton.addEventListener("click", () => {
@@ -463,8 +470,8 @@ document.querySelectorAll("[data-view]").forEach(btn => {
 
  // Reuse the existing verified backend recommendation route from research.
  // Do not bypass the backend's identity, quality, offer or freshness gates.
- window.CouponWorldShoppingRecommend = function (query) {
-   return loadShoppingRecommendation(query);
+ window.CouponWorldShoppingRecommend = function (query, options) {
+   return loadShoppingRecommendation(query, options);
  };
 
 loadDeals();
@@ -613,7 +620,17 @@ function renderOfferUnavailable() {
   </section>`;
 }
 
-async function loadShoppingRecommendation(query) {
+function verifiedBackgroundRecommendation(product) {
+  if (!product || product.current_offer_verified !== true || product.purchase_cta_eligible !== true) return null;
+  const eligible = offer => offer?.cta_eligibility?.eligible === true &&
+    hasExplicitStock(offer) && numericPrice(offer.price) > 0 &&
+    hasApprovedRetailerLink({link: offer.product_url});
+  const offers = Array.isArray(product.retailer_offers) ? product.retailer_offers.filter(eligible) : [];
+  const best = eligible(product.best_offer) ? product.best_offer : null;
+  return best || offers.length ? {...product, retailer_offers: offers, best_offer: best} : null;
+}
+
+async function loadShoppingRecommendation(query, { background = false } = {}) {
   const card = document.getElementById("shoppingBrainCard");
   const section = document.getElementById("aiRecommendation");
 
@@ -626,19 +643,11 @@ async function loadShoppingRecommendation(query) {
   const analyticsQuery = analyticsSearchTerm(cleanQuery);
 
   if (!cleanQuery) {
-    recommendationRequestId += 1;
-    if (recommendationController) {
-      recommendationController.abort();
-      recommendationController = null;
-    }
-    card.innerHTML = `
-      <h3>Ask Coupon World</h3>
-      <p>Search for a product above to get personalized AI recommendations.</p>
-    `;
+    cancelShoppingRecommendation();
     return;
   }
 
-  if (section) section.hidden = false;
+  if (section) section.hidden = background;
   trackAnalyticsEvent("ai_search_submit", {
     search_term: analyticsQuery
   });
@@ -652,13 +661,13 @@ async function loadShoppingRecommendation(query) {
     RECOMMENDATION_TIMEOUT_MS
   );
 
-  card.innerHTML = `
+  if (!background) card.innerHTML = `
     <h3>Finding verified matches...</h3>
     <p>Checking for verified matches. You can use the standard guide while this request completes.</p>
     ${standardBuyingGuideFallback()}
   `;
 
-  if (section) {
+  if (section && !background) {
     section.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -680,9 +689,10 @@ async function loadShoppingRecommendation(query) {
 
     console.log("Shopping Brain live response:", data);
 
-    const recommendations = Array.isArray(data.recommendations)
-      ? data.recommendations
+    const eligibleResults = items => Array.isArray(items)
+      ? (background ? items.map(verifiedBackgroundRecommendation).filter(Boolean) : items)
       : [];
+    const recommendations = eligibleResults(data.recommendations);
 
     // The backend keeps the legacy ranked pool for API compatibility and
     // exposes an auditable presentation split for generic under-budget
@@ -694,10 +704,10 @@ async function loadShoppingRecommendation(query) {
       : {};
     const budgetBandMode = recommendationSections.mode === "budget_band";
     const primaryRecommendations = Array.isArray(data.primary_recommendations)
-      ? data.primary_recommendations
+      ? eligibleResults(data.primary_recommendations)
       : recommendations;
     const valueRecommendations = Array.isArray(data.value_recommendations)
-      ? data.value_recommendations
+      ? eligibleResults(data.value_recommendations)
       : [];
 
     const exactModelQuery =
@@ -736,6 +746,7 @@ async function loadShoppingRecommendation(query) {
     }
 
     trackAnalyticsEvent("ai_search_result", resultAnalytics);
+    if (background && recommendations.length === 0) return;
 
     if (recommendations.length > 0) {
       const topRecommendation = recommendations[0] || {};
@@ -787,6 +798,7 @@ async function loadShoppingRecommendation(query) {
         card.innerHTML = renderResearchComparison(data.research_comparison);
       } else if (isResearchComparisonQuery(cleanQuery)) {
         const fallbackComparison = await loadResearchComparisonFallback(cleanQuery, controller.signal);
+        if (requestId !== recommendationRequestId) return;
         if (fallbackComparison) {
           card.innerHTML = renderResearchComparison(fallbackComparison);
           return;
@@ -1307,6 +1319,7 @@ async function loadShoppingRecommendation(query) {
         });
       });
 
+    if (background && section) section.hidden = false;
   } catch (error) {
     if (requestId !== recommendationRequestId) return;
     console.error("Unable to load Shopping Brain response:", error);
@@ -1316,7 +1329,9 @@ async function loadShoppingRecommendation(query) {
       error_type: String(error && error.name || "Error").slice(0, 40)
     });
 
+    if (background) return;
     const fallbackComparison = await loadResearchComparisonFallback(cleanQuery);
+    if (requestId !== recommendationRequestId) return;
     if (fallbackComparison) {
       card.innerHTML = renderResearchComparison(fallbackComparison);
       return;
