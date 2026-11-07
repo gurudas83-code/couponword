@@ -276,7 +276,7 @@
         renderNewNoteworthy();
         handleResearchHash();
         var initialQuery = lastSearchQuery || new URLSearchParams(window.location.search || "").get("q");
-        if (initialQuery) searchResearch(initialQuery);
+        if (initialQuery) submitResearch(initialQuery);
       })
       .catch(function () {
         inventoryLoadFailed = true;
@@ -712,7 +712,7 @@
 
   function submitResearch(query) {
     searchResearch(query);
-    if (researchConstraints(query).budget != null &&
+    if (inventoryCards.length && researchConstraints(query).budget != null &&
         !/\b(?:compare|vs\.?|versus)\b|और/i.test(String(query || "")) &&
         typeof window.CouponWorldShoppingRecommend === "function") {
       window.CouponWorldShoppingRecommend(query, {background: true});
