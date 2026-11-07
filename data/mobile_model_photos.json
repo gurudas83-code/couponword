@@ -8,6 +8,16 @@
     "width": 330,
     "height": 406
   },
+  "apple|iphone 13": {
+    "url": "/assets/phone-photos/apple-iphone-13.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_13.jpg",
+    "author": "Kskhh",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "title": "IPhone 13.jpg",
+    "width": 330,
+    "height": 440
+  },
   "apple|iphone 15": {
     "url": "/assets/phone-photos/apple-iphone-15.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Back_of_iPhone_15.jpg",
@@ -16,6 +26,47 @@
     "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
     "width": 330,
     "height": 440
+  },
+  "apple|iphone 15 256gb": {
+    "url": "/assets/phone-photos/apple-iphone-15.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Back_of_iPhone_15.jpg",
+    "author": "ThePhotoGraphIc",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440,
+    "same_model_as": "apple|iphone 15"
+  },
+  "apple|iphone 15 512gb": {
+    "url": "/assets/phone-photos/apple-iphone-15.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Back_of_iPhone_15.jpg",
+    "author": "ThePhotoGraphIc",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 440,
+    "same_model_as": "apple|iphone 15"
+  },
+  "apple|iphone 15 plus": {
+    "url": "/assets/phone-photos/apple-iphone-15-plus.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_15_Plus_2024.jpg",
+    "author": "Captainmorlypogi1959",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "title": "IPhone 15 Plus 2024.jpg",
+    "width": 330,
+    "height": 441
+  },
+  "apple|iphone 15 plus 256gb": {
+    "url": "/assets/phone-photos/apple-iphone-15-plus.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_15_Plus_2024.jpg",
+    "author": "Captainmorlypogi1959",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "title": "IPhone 15 Plus 2024.jpg",
+    "width": 330,
+    "height": 441,
+    "same_model_as": "apple|iphone 15 plus"
   },
   "apple|iphone 16": {
     "url": "/assets/phone-photos/apple-iphone-16.jpg",
@@ -53,6 +104,16 @@
     "width": 330,
     "height": 440
   },
+  "apple|iphone 16e 256gb": {
+    "url": "/assets/phone-photos/apple-iphone-16e-256gb.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_16e_black_rear_view.jpg",
+    "author": "茅野ふたば",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "title": "IPhone 16e black rear view.jpg",
+    "width": 330,
+    "height": 440
+  },
   "apple|iphone 17": {
     "url": "/assets/phone-photos/apple-iphone-17.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Sage_iPhone_17.jpg",
@@ -70,6 +131,16 @@
     "license_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
     "width": 330,
     "height": 247
+  },
+  "apple|iphone 17 pro max": {
+    "url": "/assets/phone-photos/apple-iphone-17-pro-max.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_17_Pro_Max_backside_(Silver)_(Oct_1,_2025).jpg",
+    "author": "茅野ふたば",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "title": "IPhone 17 Pro Max backside (Silver) (Oct 1, 2025).jpg",
+    "width": 330,
+    "height": 440
   },
   "apple|iphone 17e": {
     "url": "/assets/phone-photos/apple-iphone-17e.jpg",
@@ -91,6 +162,16 @@
     "height": 440,
     "title": "IPhone 17e backside.jpg",
     "same_model_as": "apple|iphone 17e"
+  },
+  "apple|iphone air": {
+    "url": "/assets/phone-photos/apple-iphone-air.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_Air_(Cloud_White)_-_Backside.jpg",
+    "author": "AzureSaturn",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "title": "IPhone Air (Cloud White) - Backside.jpg",
+    "width": 330,
+    "height": 495
   },
   "cmf|phone 1": {
     "url": "/assets/phone-photos/cmf-phone-1.jpg",
@@ -116,6 +197,16 @@
     "author": "Miyako Fujimiya",
     "license": "CC BY 4.0",
     "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "width": 330,
+    "height": 330
+  },
+  "google|pixel 9": {
+    "url": "/assets/phone-photos/google-pixel-9.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Pixel_9.jpg",
+    "author": "Miyako Fujimiya",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "title": "Pixel 9.jpg",
     "width": 330,
     "height": 330
   },
@@ -345,6 +436,16 @@
     "width": 330,
     "height": 440
   },
+  "samsung|galaxy s24 plus": {
+    "url": "/assets/phone-photos/samsung-galaxy-s24-plus.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S24%2B.jpg",
+    "author": "Vis M",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "title": "Samsung Galaxy S24+.jpg",
+    "width": 330,
+    "height": 458
+  },
   "samsung|galaxy s24 ultra": {
     "url": "/assets/phone-photos/samsung-galaxy-s24-ultra.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Back_view_of_Samsung_Galaxy_S24_Ultra_Black.jpg",
@@ -369,6 +470,16 @@
     "author": "Miyako Fujimiya",
     "license": "CC BY-SA 4.0",
     "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 330,
+    "height": 247
+  },
+  "samsung|galaxy s25 plus": {
+    "url": "/assets/phone-photos/samsung-galaxy-s25-plus.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S25%2B.jpg",
+    "author": "Jakub CA",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "title": "Samsung Galaxy S25+.jpg",
     "width": 330,
     "height": 247
   },

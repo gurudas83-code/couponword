@@ -270,7 +270,7 @@
     if (!inventoryGrid) return;
     // Version the generated data URL so a reviewed catalogue refresh cannot
     // be hidden by a stale GitHub Pages/browser cache.
-    fetch("/data/mobile_research_catalogue.json?v=phone-photos-20261107-2", { credentials: "omit" })
+    fetch("/data/mobile_research_catalogue.json?v=phone-photos-20261107-3", { credentials: "omit" })
       .then(function (response) {
         if (!response.ok) throw new Error("research catalogue unavailable");
         return response.json();
