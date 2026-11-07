@@ -1,0 +1,70 @@
+{
+  "checked_on": "2026-11-07",
+  "market": "India",
+  "models": [
+    {
+      "name": "Motorola Signature 27",
+      "source": "https://www.motorola.in/smartphones-motorola-signature-27/p?skuId=780",
+      "evidence": "India product page found. Local sale and stock remain unconfirmed.",
+      "context": "https://www.motorola.com/in/blogs/press-news/motorola-signature-27"
+    },
+    {
+      "name": "Karbonn Rebel",
+      "source": "https://karbonnr-bel.com/",
+      "facts": ["7,000 mAh battery", "18 W charging", "50 MP main camera"],
+      "evidence": "Manufacturer product and photo page verified. Exact Amazon listing remains unconfirmed."
+    },
+    {
+      "name": "Karbonn Rebel Pro",
+      "source": "https://karbonnr-bel.com/rebel-pro",
+      "facts": ["6,000 mAh battery", "20 W charging", "120 Hz display"],
+      "evidence": "Manufacturer product and photo page verified. Exact Amazon listing remains unconfirmed."
+    },
+    {
+      "name": "OPPO Find X10",
+      "source": "https://www.oppo.com/in/articles/find-x10-series/find-x10-details/",
+      "store": "https://www.oppo.com/in/product/find-x10.P.P1110185",
+      "evidence": "Exact model listed on OPPO India’s official store."
+    },
+    {
+      "name": "OPPO Find X10 Pro Max",
+      "source": "https://www.oppo.com/in/articles/find-x10-series/find-x10-pro-max-details/",
+      "store": "https://www.oppo.com/in/product/find-x10-pro-max.P.P1110186",
+      "evidence": "Exact model listed on OPPO India’s official store."
+    },
+    {
+      "name": "OPPO F35 5G",
+      "source": "https://www.oppo.com/in/smartphones/series-f/f35-5g/specs/",
+      "store": "https://www.oppo.com/in/product/f35-5g.P.P1110179",
+      "facts": ["MediaTek Dimensity 6360 MAX", "8,000 mAh typical battery"],
+      "evidence": "Exact model listed on OPPO India’s official store."
+    },
+    {
+      "name": "OPPO F35 Pro 5G",
+      "source": "https://www.oppo.com/in/smartphones/series-f/f35-pro-5g/specs/",
+      "store": "https://www.oppo.com/in/product/f35-pro-5g.P.P1110180",
+      "facts": ["8,000 mAh typical battery"],
+      "evidence": "Exact Pro model listed on OPPO India’s official store."
+    },
+    {
+      "name": "vivo V80",
+      "source": "https://www.vivo.com/in/products/param/v80",
+      "facts": ["7,200 mAh typical battery"],
+      "evidence": "India specifications verified. The e-store page could not be opened for a fresh availability check."
+    },
+    {
+      "name": "vivo X Fold6",
+      "source": "https://www.vivo.com/in/products/param/x-fold6",
+      "context": "https://vivonewsroom.in/press-release/vivo-x-fold6-with-flagship-productivity-zeiss-imaging5-and-originos-7-now-on-sale-with-easy-emi-and-exchange-offers/",
+      "facts": ["6,900 mAh typical battery"],
+      "evidence": "vivo announced India sales on 13 October 2026. Current stock is unconfirmed."
+    },
+    {
+      "name": "vivo S2 FE",
+      "source": "https://www.vivo.com/in/products/param/s2-fe",
+      "store": "https://shop.vivo.com/in/product/10374",
+      "facts": ["10,000 mAh typical battery"],
+      "evidence": "Exact model listed on vivo India’s official store."
+    }
+  ]
+}

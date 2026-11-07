@@ -8,6 +8,8 @@ import json
 import re
 import shutil
 import sys
+from datetime import date
+from html import escape
 from pathlib import Path
 from urllib.parse import urlsplit
 from xml.etree import ElementTree as ET
@@ -95,6 +97,57 @@ def _prune_unverified_product_sitemap_entries(destination: Path) -> None:
             retained += 1
     tree.write(sitemap, encoding="utf-8", xml_declaration=True)
     print(f"Legacy product sitemap gate: {retained} verified indexable; {removed} unverified omitted")
+
+
+def _render_recent_phone_sources(destination: Path) -> None:
+    """Expose reviewed India model links without generating retail offers."""
+    data = json.loads((ROOT / "data/india_recent_phone_sources.json").read_text(encoding="utf-8"))
+    checked = date.fromisoformat(data["checked_on"])
+    if data["market"] != "India":
+        raise ValueError("recent phone sources must be scoped to India")
+
+    def source_link(url: str, label: str) -> str:
+        parsed = urlsplit(url)
+        if parsed.scheme != "https" or not parsed.hostname or parsed.username is not None:
+            raise ValueError(f"invalid phone source: {url}")
+        return f'<a class="mobile-research-link" href="{escape(url)}">{label} ↗</a>'
+
+    cards = []
+    names = set()
+    for model in data["models"]:
+        name = model["name"]
+        if not name.strip() or name.casefold() in names:
+            raise ValueError(f"missing or repeated phone name: {name}")
+        names.add(name.casefold())
+        links = [source_link(model["source"], "Manufacturer page")]
+        if model.get("store"):
+            links.append(source_link(model["store"], "Official store listing"))
+        if model.get("context"):
+            links.append(source_link(model["context"], "Brand announcement"))
+        facts = " · ".join(model.get("facts", []))
+        cards.append(
+            '<article class="mobile-research-result-card">'
+            f'<h3>{escape(name)}</h3><p>{escape(model["evidence"])}</p>'
+            + (f'<p>{escape(facts)}</p>' if facts else "")
+            + f'<p>{" · ".join(links)}</p></article>'
+        )
+
+    section = (
+        '<section id="indiaPhoneSources" class="container mobile-research-new-section" '
+        'aria-labelledby="indiaPhoneSourcesTitle"><div class="section-panel premium-panel">'
+        '<div class="section-heading"><div><span class="section-kicker">INDIA PRODUCT SOURCES</span>'
+        '<h2 id="indiaPhoneSourcesTitle">Recent phones in India</h2>'
+        f'<p>Source check: <time datetime="{checked.isoformat()}">{checked:%d %B %Y}</time>. '
+        'Open the manufacturer or store to see product photos and check current price and delivery.</p>'
+        '</div></div><div class="mobile-research-results">'
+        + "".join(cards) + "</div></div></section>"
+    )
+    home = destination / "index.html"
+    html = home.read_text(encoding="utf-8")
+    placeholder = "<!-- REVIEWED_INDIA_PHONE_SOURCES -->"
+    if html.count(placeholder) != 1:
+        raise RuntimeError("missing or repeated recent phone source section")
+    home.write_text(html.replace(placeholder, section), encoding="utf-8")
 
 
 def _generate_research_catalogue(destination: Path) -> None:
@@ -230,6 +283,7 @@ def build(output: Path) -> Path:
         shutil.copytree(source, output / relative)
 
     _generate_research_catalogue(output)
+    _render_recent_phone_sources(output)
 
     # Product pages are generated from the same fail-closed renderer used
     # for local review. Never copy stale HTML from the source checkout.
