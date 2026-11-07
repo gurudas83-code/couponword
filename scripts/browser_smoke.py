@@ -64,7 +64,15 @@ def run(root: Path):
                     # Hold the offer request while proving local results render.
                     page.locator("#heroSearch").fill("phone under 25000")
                     with page.expect_request("**/api/recommend?*"):
-                        page.locator("#heroSearchButton").click()
+                        research_visible_ms = page.evaluate("""() => new Promise(resolve => {
+                            const started = performance.now();
+                            document.getElementById("heroSearchButton").click();
+                            requestAnimationFrame(() => requestAnimationFrame(
+                                () => resolve(performance.now() - started)
+                            ));
+                        })""")
+                    print(f"Search click to next painted frame at {width}px: {research_visible_ms:.1f} ms", flush=True)
+                    assert research_visible_ms < 300, (width, research_visible_ms)
                     assert page.locator("#mobileResearchResults [data-mobile-model-card]").count() > 0, width
                     assert page.locator("#aiRecommendation").is_hidden(), width
                     pending_offers.pop().fulfill(status=503, headers={"Access-Control-Allow-Origin": "*"})
