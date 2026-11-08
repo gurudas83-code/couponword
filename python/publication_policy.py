@@ -41,11 +41,90 @@ def doc(path,title,body,hi=False,index=True):
 def write(root,path,content):
     file=route_file(root,path);file.parent.mkdir(parents=True,exist_ok=True);file.write_text(content,encoding='utf-8')
 
+def evidence_comparison_matrix(root: Path, hi: bool = False) -> str:
+    """Show documented A36/A56 facts, retaining source provenance in each cell.
+
+    This is a factual table on the retained guide, not a benchmark or a new
+    ranking/offer engine. Require publisher-approved exact model identities.
+    """
+    from python.phone_research_pages import (
+        accepted_specs, eligible, model_title, specification_value,
+    )
+
+    catalogue = json.loads((root / "data/mobile_research_catalogue.json").read_text(encoding="utf-8"))
+    by_key = {card["model_key"]: card for card in catalogue["model_cards"]}
+    models = [
+        by_key["samsung|galaxy a36 5g"],
+        by_key["samsung|galaxy a56 5g"],
+    ]
+    if any(not eligible(card) for card in models):
+        raise ValueError("Retained comparison guide needs two eligible manufacturer-backed phones")
+    documented = [dict(accepted_specs(card)) for card in models]
+    keys = (
+        ("chipset", "Processor", "प्रोसेसर"),
+        ("display_type", "Display technology", "स्क्रीन तकनीक"),
+        ("display_inches", "Screen diagonal", "स्क्रीन आकार"),
+        ("display_refresh_max_hz", "Maximum refresh rate", "अधिकतम रिफ्रेश रेट"),
+        ("rear_main_mp", "Main camera resolution", "मुख्य कैमरा रिज़ॉल्यूशन"),
+        ("rear_ultrawide_mp", "Ultrawide camera resolution", "अल्ट्रावाइड कैमरा रिज़ॉल्यूशन"),
+        ("front_mp", "Front camera resolution", "फ्रंट कैमरा रिज़ॉल्यूशन"),
+        ("battery_mah_typical", "Typical battery capacity", "सामान्य बैटरी क्षमता"),
+        ("wired_charging_max_w", "Maximum wired charging", "अधिकतम वायर्ड चार्जिंग"),
+        ("launch_android", "Android at launch", "लॉन्च के समय एंड्रॉयड"),
+        ("os_upgrade_generations", "Promised OS upgrades", "घोषित OS अपडेट"),
+        ("security_support_years", "Promised security support", "घोषित सुरक्षा अपडेट"),
+    )
+    if sum(all(key in fields for fields in documented) for key, _, _ in keys) < 10:
+        raise ValueError("Insufficient comparable verified specifications for the retained guide")
+
+    def cell(key: str, values: dict) -> str:
+        item = values.get(key)
+        if not item:
+            return "<td>" + ("अभी स्रोत उपलब्ध नहीं" if hi else "Source not documented") + "</td>"
+        url = str(item["source_url"])
+        value = specification_value(key, item)
+        source_label = "मूल स्रोत" if hi else "Original source"
+        return (
+            "<td><strong>" + esc(value) + "</strong> "
+            '<a href="' + esc(url) +
+            '" rel="nofollow noopener noreferrer" target="_blank">' + source_label +
+            "</a></td>"
+        )
+
+    rows = "".join(
+        "<tr><th scope=\"row\">" + esc(label_hi if hi else label_en) + "</th>" +
+        cell(key, documented[0]) + cell(key, documented[1]) + "</tr>"
+        for key, label_en, label_hi in keys
+    )
+    lead = (
+        "एक ही पंक्ति में दोनों निर्माता-स्रोतों के तकनीकी तथ्य दिए हैं। "
+        "मॉडल-स्तर की जानकारी को सटीक भारतीय RAM/स्टोरेज वेरिएंट की खरीद पुष्टि न मानें। "
+        "मेगापिक्सल, बैटरी क्षमता और प्रोसेसर नाम वास्तविक फोटो, गेम FPS या रनटाइम के परीक्षण नहीं हैं।"
+        if hi else
+        "Compare twelve comparable manufacturer-backed facts with the original source beside each value. "
+        "These model-level facts do not certify a specific India RAM/storage SKU. "
+        "Megapixels, capacity and processor names are not independently tested photo quality, sustained FPS or battery runtime."
+    )
+    title = "मूल स्रोतों के साथ तकनीकी तुलना" if hi else "Side-by-side specifications with manufacturer sources"
+    first, second = (esc(model_title(card)) for card in models)
+    return (
+        '<section id="manufacturer-evidence" aria-labelledby="manufacturer-evidence-title">'
+        '<h2 id="manufacturer-evidence-title">' + title + "</h2>"
+        "<p>" + lead + "</p>"
+        '<div class="table-wrap"><table>'
+        "<caption>" + ("प्रत्येक तथ्य के लिए स्रोत उपलब्ध" if hi else "Manufacturer-backed recorded values; check regional SKU applicability") + "</caption>"
+        "<thead><tr><th scope=\"col\">" + ("विशेषता" if hi else "Feature") + "</th>"
+        '<th scope="col">' + first + '</th><th scope="col">' + second +
+        "</th></tr></thead><tbody>" + rows + "</tbody></table></div></section>"
+    )
+
+
 def comparison_guide(root,hi=False):
     path='/hi/compare/' if hi else '/compare/'
     title='दो फोन की उपयोगी तुलना कैसे करें' if hi else 'How to compare two phones for your own needs'
     body=('''<p>पहले दोनों सटीक मॉडल और भौतिक RAM/स्टोरेज तय करें। नाम में Pro, Plus या 5G बदलने पर दूसरा उपकरण हो सकता है। अपने काम—कॉल, फोटो, गेमिंग या पढ़ाई—को प्राथमिकता दें।</p><h2>एक वास्तविक उदाहरण: Galaxy A36 5G और A56 5G</h2><p>निर्माता के रिकॉर्ड में A36 का Snapdragon 6 Gen 3 और A56 का Exynos 1580 अलग हैं। इससे अपने-आप वास्तविक गेमिंग FPS या कैमरा विजेता तय नहीं होता। दोनों के लिए दर्ज 5000 mAh क्षमता और 45 W अधिकतम चार्जिंग समान होने पर भी रनटाइम और चार्जिंग समय की गारंटी समान नहीं है।</p>''' if hi else '''<p>Start with the two exact model names and physical RAM/storage configurations. Pro, Plus and 5G suffixes can identify different devices. Then name the task that matters most: calls, photographs, games or study.</p><h2>A concrete example: Galaxy A36 5G and Galaxy A56 5G</h2><p>The documented A36 Snapdragon 6 Gen 3 and A56 Exynos 1580 are different processors. That difference alone cannot identify a real gaming-FPS or camera winner. Both records list 5000 mAh typical batteries and 45 W maximum wired charging, but equal headline numbers do not guarantee equal runtime or charging duration.</p>''')
     body+='<p><a href="/phones/samsung-galaxy-a36-5g/">Galaxy A36: original specification sources</a> · <a href="/phones/samsung-galaxy-a56-5g/">Galaxy A56: original specification sources</a></p>'
+    body+=evidence_comparison_matrix(root,hi)
     if hi:
         body+='''<h2>तुलना का क्रम</h2><ol><li>भारतीय SKU, भौतिक RAM और स्टोरेज समान संदर्भ में रखें। दूसरे वेरिएंट की कीमत न लें।</li><li>जरूरी शर्त और पसंद अलग लिखें। OIS जरूरी है तो बिना स्रोत पुष्टि वाला फोन बाहर रखें।</li><li>कैमरे के लिए एक जैसी परिस्थितियों के नमूने, गेमिंग के लिए समान सेटिंग के लंबे सत्र और बैटरी के लिए समान काम का रनटाइम देखें।</li><li>OS पीढ़ियाँ और सुरक्षा अपडेट के वर्ष अलग मिलाएँ; शेष समर्थन की शुरुआत या अंतिम तारीख भी देखें।</li><li>अंत में उसी वेरिएंट का विक्रेता, वारंटी, अंतिम भुगतान और डिलीवरी जाँचें।</li></ol><h2>क्या निष्कर्ष निकाला जा सकता है?</h2><p>निर्माता की तालिका हार्डवेयर अंतर दिखाती है। समान परीक्षण के बिना कैमरा, FPS या बैटरी का प्रमाणित विजेता नहीं चुना जा सकता। अलग प्रकाश, गेम सेटिंग या रनटाइम पद्धति के स्कोर सीधे न जोड़ें।</p>'''
     else:
