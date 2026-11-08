@@ -99,6 +99,37 @@ def _prune_unverified_product_sitemap_entries(destination: Path) -> None:
     print(f"Legacy product sitemap gate: {retained} verified indexable; {removed} unverified omitted")
 
 
+def _render_verified_homepage_counts(destination: Path) -> None:
+    """Never publish stale marketing counts when the generated research data changes.
+
+    These are model research coverage counts, not performance-ranked models,
+    validated retail SKUs, offers, or current-buyability totals.
+    """
+    catalogue = json.loads(
+        (destination / "data/mobile_research_catalogue.json").read_text(encoding="utf-8")
+    )
+    cards = catalogue["model_cards"]
+    if len({card["model_key"] for card in cards}) != len(cards):
+        raise RuntimeError("Duplicate public model identity in homepage metrics")
+    counts = {
+        "Phone research entries": len(cards),
+        "With sourced specifications": sum(bool(card.get("specifications")) for card in cards),
+        "Practical buying guides": len(
+            json.loads((ROOT / "data/phone-guides.json").read_text(encoding="utf-8"))["pages"]
+        ),
+    }
+    home = destination / "index.html"
+    content = home.read_text(encoding="utf-8")
+    for label, correct in counts.items():
+        # Fail closed on structural drift; do not replace unrelated numeric text.
+        pattern = r'(<strong>)\d+(</strong><span>' + re.escape(label) + r'</span>)'
+        content, matches = re.subn(pattern, lambda m: m.group(1) + str(correct) + m.group(2), content)
+        if matches != 1:
+            raise RuntimeError("Cannot safely set homepage research count: " + label)
+    home.write_text(content, encoding="utf-8")
+    print("Homepage research counts verified against generated catalogue:", counts)
+
+
 def _render_recent_phone_sources(destination: Path) -> None:
     """Expose reviewed India model links without generating retail offers."""
     data = json.loads((ROOT / "data/india_recent_phone_sources.json").read_text(encoding="utf-8"))
@@ -298,6 +329,7 @@ def build(output: Path) -> Path:
         shutil.copytree(source, output / relative)
 
     _generate_research_catalogue(output)
+    _render_verified_homepage_counts(output)
     _render_recent_phone_sources(output)
 
     # Product pages are generated from the same fail-closed renderer used
