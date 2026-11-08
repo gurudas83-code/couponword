@@ -292,10 +292,13 @@ def _add_hub_link(destination: Path, path: str, hi: bool = False) -> None:
         return
     if "</main>" not in content:
         raise ValueError(f"Cannot place comparison navigation in {path}")
-    label = "50 स्रोत-सहित फोन तुलनाएँ" if hi else "50 manufacturer-sourced phone comparisons"
+    # These navigation links remain after the publication-quality cleanup
+    # replaces the original 100 thin pair pages with one substantive guide per
+    # language. Never advertise fifty individual comparisons that are 404.
+    label = "स्रोत-आधारित फोन तुलना गाइड" if hi else "Evidence-backed phone comparison guide"
     section = '<section class="comparison-discovery"><h2><a href="' + href + '">' + label + '</a></h2><p>' + (
-        "भारत के लोकप्रिय मोबाइल मॉडल की जानकारी, अंतर और शोध सीमाएँ देखें।" if hi
-        else "Explore exact model-to-model specifications, buyer tradeoffs and openly documented evidence gaps."
+        "Galaxy A36 और A56 के स्रोत-सहित तथ्य और दूसरे फोन चुनने की तुलना-पद्धति देखें।" if hi
+        else "See sourced Galaxy A36/A56 facts and learn the checks needed for other exact India variants."
     ) + '</p></section>'
     file.write_text(content.replace("</main>", section + "</main>", 1), encoding="utf-8")
 
