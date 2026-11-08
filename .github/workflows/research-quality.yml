@@ -94,12 +94,12 @@ jobs:
                       time.sleep(3)
           PY
       - name: Verify Render backend health and safe recommendation route
-        # The previous public-site step checks only static GitHub Pages URLs.
-        # Render cold starts can exceed a short page-fetch timeout; this separate
-        # contract probe uses longer retries and still FAILS scheduled checks
-        # for persistent outages or unsafe research-comparison responses.
-        # PR checks report remote outages without blocking a static site fix.
-        continue-on-error: ${{ github.event_name == 'pull_request' }}
+        # A remote production API can cold-start slowly. It is not the PR's
+        # candidate code, so do not hold every unrelated PR for a remote call.
+        # Scheduled/manual runs FAIL if Render remains down or unsafe, using
+        # the dedicated long-retry strict probe. The next step tests probe logic
+        # on all events, including pull requests.
+        if: github.event_name != 'pull_request'
         run: python scripts/verify_runtime_health.py
       - name: Unit-test remote probe contract
         run: python -m unittest -v test_runtime_health_probe
