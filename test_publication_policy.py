@@ -77,6 +77,18 @@ class PublicationPolicyTests(unittest.TestCase):
                 home,
             )
 
+    def test_discovery_manifest_cites_exact_generated_sitemap_not_google_indexing(self):
+        manifest = json.loads((PUBLIC / "data/discovery_release_status.json").read_text(encoding="utf-8"))
+        urls = [n.text for n in ET.parse(PUBLIC / "sitemap.xml").getroot().iter()
+                if n.tag.endswith("}loc")]
+        self.assertEqual(manifest["generated_sitemap_url_count"], len(urls))
+        self.assertEqual(sum(manifest["generated_sitemap_categories"].values()), len(urls))
+        self.assertEqual(manifest["google_search_console_status"], "NOT_MEASURED")
+        self.assertIsNone(manifest["google_indexed_url_count"])
+        for url in manifest["priority_urls_verified_in_generated_sitemap"]:
+            self.assertIn(url, urls)
+        self.assertEqual(len(manifest["priority_urls_verified_in_generated_sitemap"]), 4)
+
     def test_no_unsubstantiated_review_or_offer_schema(self):
         for p in PUBLIC.rglob('*.html'):
             self.assertNotRegex(p.read_text(),r'"@type"\s*:\s*"(?:Offer|AggregateRating|Review)"',p)
