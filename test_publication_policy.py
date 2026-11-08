@@ -61,6 +61,24 @@ class PublicationPolicyTests(unittest.TestCase):
             self.assertNotIn('"@type": "Offer"', page)
             self.assertNotIn('>Buy now<', page)
 
+    def test_comparison_nav_does_not_advertise_retired_pair_pages(self):
+        # The earlier hundred template comparison URLs were retired as thin
+        # content. Existing navigation must accurately describe the retained
+        # English/Hindi methodology guides rather than promise 50 live pairs.
+        for relative, old_label, current_label in (
+            ("index.html", "50 manufacturer-sourced phone comparisons",
+             "Evidence-backed phone comparison guide"),
+            ("phones/index.html", "50 manufacturer-sourced phone comparisons",
+             "Evidence-backed phone comparison guide"),
+            ("hi/phones/index.html", "50 स्रोत-सहित फोन तुलनाएँ",
+             "स्रोत-आधारित फोन तुलना गाइड"),
+        ):
+            html = (PUBLIC / relative).read_text(encoding="utf-8")
+            self.assertNotIn(old_label, html, relative)
+            self.assertIn(current_label, html, relative)
+        self.assertTrue((PUBLIC / "compare/index.html").is_file())
+        self.assertTrue((PUBLIC / "hi/compare/index.html").is_file())
+
     def test_homepage_numbers_match_generated_public_research(self):
         home = (PUBLIC / "index.html").read_text(encoding="utf-8")
         data = json.loads((PUBLIC / "data/mobile_research_catalogue.json").read_text(encoding="utf-8"))

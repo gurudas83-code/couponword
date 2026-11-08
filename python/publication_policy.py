@@ -151,6 +151,38 @@ class Links(HTMLParser):
         a=dict(attrs)
         if tag=='a' and a.get('href'):self.links.append(a['href'])
 
+def link_retained_comparison_guide(root):
+    """Add crawlable, truthful navigation to the retained EN/HI guide.
+
+    The 100 old pairwise comparison pages are intentionally retired; only the
+    two useful guides remain. Generate entry links after those guides exist.
+    """
+    entries = (
+        ("index.html", "/compare/", "Evidence-backed phone comparison guide",
+         "Learn how to compare documented India phone variants with original sources."),
+        ("phones/index.html", "/compare/", "Evidence-backed phone comparison guide",
+         "See source-backed Galaxy A36 and A56 facts, then compare your own exact models."),
+        ("hi/phones/index.html", "/hi/compare/", "स्रोत-आधारित फोन तुलना गाइड",
+         "Galaxy A36 और A56 के प्रमाण तथा सही भारतीय वेरिएंट चुनने की जाँच-पद्धति देखें।"),
+    )
+    for relative, href, label, description in entries:
+        file = root / relative
+        if not file.is_file():
+            raise FileNotFoundError("Comparison guide navigation missing source: " + relative)
+        page = file.read_text(encoding="utf-8")
+        marker = 'id="cw-comparison-guide-entry"'
+        if marker in page:
+            raise ValueError("Comparison guide navigation was added twice: " + relative)
+        if "</main>" not in page:
+            raise ValueError("Comparison guide navigation needs main landmark: " + relative)
+        section = (
+            '<section class="comparison-discovery" id="cw-comparison-guide-entry">'
+            '<h2><a href="' + href + '">' + html.escape(label) + '</a></h2>'
+            '<p>' + html.escape(description) + '</p></section>'
+        )
+        file.write_text(page.replace("</main>", section + "</main>", 1), encoding="utf-8")
+
+
 def apply_policy(destination):
     root=Path(destination)
     # No page-per-query or arbitrary pair/budget permutation publishing.
@@ -160,6 +192,7 @@ def apply_policy(destination):
     for hi in (False,True):
         for renderer in (comparison_guide,budget_guide):
             path,content=renderer(root,hi);write(root,path,content)
+    link_retained_comparison_guide(root)
     guides=json.loads((ROOT/'data/phone-guides.json').read_text())['pages']
     approved={g['slug']+'.html' for g in guides}
     for file in (root/'seo').glob('*.html'):

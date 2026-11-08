@@ -49,7 +49,7 @@ jobs:
           node test_mobile_workbook_queries.cjs
           node test_standard_guide_fallback.cjs
           node test_search_discovery.cjs
-      - name: Smoke-test the live public site (scheduled and manual only)
+      - name: Smoke-test live GitHub Pages content (scheduled and manual only)
         if: github.event_name != 'pull_request'
         run: |
           python - <<'PY'
@@ -64,7 +64,6 @@ jobs:
               'phone_model': 'https://coupon-world.in/phones/samsung-galaxy-a56-5g/',
               'phone_pixel': 'https://coupon-world.in/phones/google-pixel-10/',
               'phone_f05': 'https://coupon-world.in/phones/samsung-galaxy-f05/',
-              'backend_health': 'https://couponword.onrender.com/health',
           }
           for name, url in urls.items():
               for attempt in range(3):
@@ -85,11 +84,6 @@ jobs:
                           assert b'4G LTE' in content, 'F05 4G network correction not published'
                       elif name == 'phone_model':
                           assert b'Manufacturer source' in content, 'Original manufacturer links missing'
-                      elif name == 'backend_health':
-                          health = json.loads(content)
-                          assert health.get('status') == 'ok', 'Render backend reported unhealthy status'
-                          assert health.get('service') == 'coupon-world-shopping-intelligence', 'Unexpected backend service'
-                          print('BACKEND REVISION:', health.get('revision') or 'not exposed')
                       else:
                           assert b'phone' in content.lower(), 'Buying guide content missing'
                       print('LIVE PASS:', name, len(content), 'bytes')
@@ -100,9 +94,12 @@ jobs:
                       time.sleep(3)
           PY
       - name: Verify Render backend health and safe recommendation route
-        # PR checks report a remote outage without blocking a static site fix.
-        # The daily check fails and alerts if the production API is unreachable.
-        continue-on-error: ${{ github.event_name == 'pull_request' }}
+        # A remote production API can cold-start slowly. It is not the PR's
+        # candidate code, so do not hold every unrelated PR for a remote call.
+        # Scheduled/manual runs FAIL if Render remains down or unsafe, using
+        # the dedicated long-retry strict probe. The next step tests probe logic
+        # on all events, including pull requests.
+        if: github.event_name != 'pull_request'
         run: python scripts/verify_runtime_health.py
       - name: Unit-test remote probe contract
         run: python -m unittest -v test_runtime_health_probe
