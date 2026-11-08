@@ -99,6 +99,107 @@ def _prune_unverified_product_sitemap_entries(destination: Path) -> None:
     print(f"Legacy product sitemap gate: {retained} verified indexable; {removed} unverified omitted")
 
 
+def _render_verified_homepage_counts(destination: Path) -> None:
+    """Never publish stale marketing counts when the generated research data changes.
+
+    These are model research coverage counts, not performance-ranked models,
+    validated retail SKUs, offers, or current-buyability totals.
+    """
+    catalogue = json.loads(
+        (destination / "data/mobile_research_catalogue.json").read_text(encoding="utf-8")
+    )
+    cards = catalogue["model_cards"]
+    if len({card["model_key"] for card in cards}) != len(cards):
+        raise RuntimeError("Duplicate public model identity in homepage metrics")
+    counts = {
+        "Phone research entries": len(cards),
+        "With sourced specifications": sum(bool(card.get("specifications")) for card in cards),
+        "Practical buying guides": len(
+            json.loads((ROOT / "data/phone-guides.json").read_text(encoding="utf-8"))["pages"]
+        ),
+    }
+    home = destination / "index.html"
+    content = home.read_text(encoding="utf-8")
+    for label, correct in counts.items():
+        # Fail closed on structural drift; do not replace unrelated numeric text.
+        pattern = r'(<strong>)\d+(</strong><span>' + re.escape(label) + r'</span>)'
+        content, matches = re.subn(pattern, lambda m: m.group(1) + str(correct) + m.group(2), content)
+        if matches != 1:
+            raise RuntimeError("Cannot safely set homepage research count: " + label)
+    home.write_text(content, encoding="utf-8")
+    print("Homepage research counts verified against generated catalogue:", counts)
+
+
+def _write_discovery_release_manifest(destination: Path) -> None:
+    """Record exactly what this release *offers* for crawling, not GSC indexing.
+
+    The checked-in root sitemap includes historical source entries. Only the
+    generated public sitemap after editorial and noindex gates is authoritative.
+    """
+    ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+    sitemap = destination / "sitemap.xml"
+    urls = [
+        node.text or ""
+        for node in ET.parse(sitemap).getroot().iter(ns + "loc")
+    ]
+    if not urls or len(urls) != len(set(urls)):
+        raise RuntimeError("Generated sitemap missing or contains duplicate locations")
+    count_by_type = {
+        "phone_research": 0,
+        "phone_guides_and_budget": 0,
+        "comparison_guides": 0,
+        "tv_and_accessories": 0,
+        "other": 0,
+    }
+    for url in urls:
+        path = urlsplit(url).path
+        if not url.startswith("https://coupon-world.in/"):
+            raise RuntimeError("Generated sitemap contains an external/non-HTTPS URL")
+        if path.startswith(("/phones/", "/hi/phones/")) and not path.startswith(
+            ("/phones/under-25000/", "/hi/phones/under-25000/")
+        ):
+            key = "phone_research"
+        elif path.startswith(("/seo/", "/guides/", "/hi/seo/", "/hi/guides/",
+                              "/phones/under-25000/", "/hi/phones/under-25000/")):
+            key = "phone_guides_and_budget"
+        elif path.startswith(("/compare/", "/hi/compare/")):
+            key = "comparison_guides"
+        elif path.startswith(("/tvs/", "/accessories/", "/hi/tvs/", "/hi/accessories/")):
+            key = "tv_and_accessories"
+        else:
+            key = "other"
+        count_by_type[key] += 1
+    for path in ("/", "/phones/", "/compare/", "/hi/compare/"):
+        if "https://coupon-world.in" + path not in urls:
+            raise RuntimeError("Priority discovery URL missing from generated sitemap: " + path)
+    robots = (destination / "robots.txt").read_text(encoding="utf-8")
+    if ("Allow: /" not in robots or
+            "Sitemap: https://coupon-world.in/sitemap.xml" not in robots):
+        raise RuntimeError("Public crawler and sitemap declarations are not valid")
+    manifest = {
+        "schema_version": 1,
+        "site": "https://coupon-world.in",
+        "generated_utc_date": date.today().isoformat(),
+        "sitemap_url": "https://coupon-world.in/sitemap.xml",
+        "generated_sitemap_url_count": len(urls),
+        "generated_sitemap_categories": count_by_type,
+        "priority_urls_verified_in_generated_sitemap": [
+            "https://coupon-world.in" + path
+            for path in ("/", "/phones/", "/compare/", "/hi/compare/")
+        ],
+        "google_search_console_status": "NOT_MEASURED",
+        "google_indexed_url_count": None,
+        "meaning": (
+            "Technical sitemap and crawl-readiness report only. This file does "
+            "not prove Google indexed, crawled, ranked, or accepted any URL."
+        ),
+    }
+    target = destination / "data/discovery_release_status.json"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print("PUBLIC SITEMAP RELEASE:", len(urls), count_by_type, "GSC indexing: NOT_MEASURED")
+
+
 def _render_recent_phone_sources(destination: Path) -> None:
     """Expose reviewed India model links without generating retail offers."""
     data = json.loads((ROOT / "data/india_recent_phone_sources.json").read_text(encoding="utf-8"))
@@ -298,6 +399,7 @@ def build(output: Path) -> Path:
         shutil.copytree(source, output / relative)
 
     _generate_research_catalogue(output)
+    _render_verified_homepage_counts(output)
     _render_recent_phone_sources(output)
 
     # Product pages are generated from the same fail-closed renderer used
@@ -339,6 +441,7 @@ def build(output: Path) -> Path:
     # The source sitemap still lists historical catalogue URLs. Keep those
     # pages online, but do not encourage indexing without current offer proof.
     _prune_unverified_product_sitemap_entries(output)
+    _write_discovery_release_manifest(output)
 
     from python.affiliate_links import tag_public_artifact
     tag_public_artifact(output)
