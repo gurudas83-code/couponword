@@ -16,8 +16,75 @@
       "indicative_price_inr": 43999,
       "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
       "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
-      "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+        },
+        {
+          "label": "Panel",
+          "value": "QLED",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+        },
+        {
+          "label": "Native refresh rate",
+          "value": "60Hz",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+        },
+        {
+          "label": "DLG game booster",
+          "value": "120Hz (not native 120Hz)",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+        },
+        {
+          "label": "Audio",
+          "value": "34W",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+        },
+        {
+          "label": "RAM",
+          "value": "2GB",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+        },
+        {
+          "label": "Storage",
+          "value": "32GB",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+        },
+        {
+          "label": "HDMI",
+          "value": "3 (1 eARC)",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+        },
+        {
+          "label": "USB",
+          "value": "2 x USB 2.0",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+        },
+        {
+          "label": "OS",
+          "value": "Google TV",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+        }
+      ],
+      "specification_status": "MAKER_55_INCH_VERIFIED_RETAILER_MODEL_CODE_MATCHED",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -26,18 +93,21 @@
           "scope": "SEARCH_ONLY"
         },
         "flipkart": {
-          "url": "https://www.flipkart.com/search?q=Xiaomi%20L55MB-APIN",
-          "scope": "SEARCH_ONLY"
+          "url": "https://www.flipkart.com/xiaomi-x-pro-cinemagiqled-138-cm-55-inch-qled-ultra-hd-4k-smart-google-tv-dolby-vision-hdr-10-32-gb-storage-34w-audio-sound-film-maker-mode-120-hz-game-booster-mi/p/itm89eea231e000a",
+          "scope": "EXACT_MODEL_CODE_MATCHED",
+          "evidence_url": "https://www.flipkart.com/xiaomi-x-pro-cinemagiqled-138-cm-55-inch-qled-ultra-hd-4k-smart-google-tv-dolby-vision-hdr-10-32-gb-storage-34w-audio-sound-film-maker-mode-120-hz-game-booster-mi/p/itm89eea231e000a"
         },
         "croma": {
-          "url": "https://www.croma.com/search/?text=Xiaomi%20L55MB-APIN",
-          "scope": "SEARCH_ONLY"
+          "url": "https://www.croma.com/Xiaomi-X-Pro-Series-139.7-cm-%2855-inch%29-4K-Ultra-HD-QLED-Smart-Google-TV-with-Google-Voice-Assistant-%282025-model%29-/p/315466",
+          "scope": "EXACT_MODEL_CODE_MATCHED",
+          "evidence_url": "https://www.croma.com/Xiaomi-X-Pro-Series-139.7-cm-%2855-inch%29-4K-Ultra-HD-QLED-Smart-Google-TV-with-Google-Voice-Assistant-%282025-model%29-/p/315466"
         }
       },
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "manufacturer_source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/"
     },
     {
       "id": "POPULAR_TV_02",
