@@ -18,73 +18,63 @@
       "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
       "specifications": [
         {
-          "label": "Size (in)",
-          "value": "55",
-          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
-        },
-        {
           "label": "Panel",
           "value": "QLED",
-          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
+          "verified_at": "2026-11-09"
         },
         {
           "label": "Resolution",
-          "value": "3840 x 2160",
-          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+          "value": "3840 x 2160 (4K UHD)",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
+          "verified_at": "2026-11-09"
         },
         {
-          "label": "Native refresh rate",
-          "value": "60Hz",
-          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
-        },
-        {
-          "label": "DLG game booster",
-          "value": "120Hz (not native 120Hz)",
-          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
-        },
-        {
-          "label": "Audio",
+          "label": "Audio output",
           "value": "34W",
-          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
+          "verified_at": "2026-11-09"
         },
         {
-          "label": "RAM",
-          "value": "2GB",
-          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
-        },
-        {
-          "label": "Storage",
-          "value": "32GB",
-          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+          "label": "RAM / storage",
+          "value": "2GB / 32GB",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
+          "verified_at": "2026-11-09"
         },
         {
           "label": "HDMI",
           "value": "3 (1 eARC)",
-          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
+          "verified_at": "2026-11-09"
         },
         {
           "label": "USB",
           "value": "2 x USB 2.0",
-          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
+          "verified_at": "2026-11-09"
         },
         {
-          "label": "OS",
+          "label": "Smart OS",
           "value": "Google TV",
-          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_55_INCH_2026-11-09"
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Game Booster",
+          "value": "120Hz booster (not proof of native 120Hz)",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
+          "verified_at": "2026-11-09"
         }
       ],
-      "specification_status": "MAKER_55_INCH_VERIFIED_RETAILER_MODEL_CODE_MATCHED",
+      "specification_status": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -107,7 +97,10 @@
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
-      "manufacturer_source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/"
+      "manufacturer_source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
+      "technical_source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+      "technical_reviewed_at": "2026-11-09",
+      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified."
     },
     {
       "id": "POPULAR_TV_02",
@@ -120,8 +113,51 @@
       "indicative_price_inr": 41999,
       "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
       "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
-      "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.smartprix.com/tvs/lumio_vision_7_2026_55_inch_ul_vs_motorola_55uhdgqmgbnq_55_inch_-cpd1ef8j5m65_pd171jethuy.php",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Panel",
+          "value": "QLED",
+          "source_url": "https://www.smartprix.com/tvs/lumio_vision_7_2026_55_inch_ul_vs_motorola_55uhdgqmgbnq_55_inch_-cpd1ef8j5m65_pd171jethuy.php",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160 (4K UHD)",
+          "source_url": "https://www.smartprix.com/tvs/lumio_vision_7_2026_55_inch_ul_vs_motorola_55uhdgqmgbnq_55_inch_-cpd1ef8j5m65_pd171jethuy.php",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Native refresh rate",
+          "value": "60Hz",
+          "source_url": "https://www.smartprix.com/tvs/lumio_vision_7_2026_55_inch_ul_vs_motorola_55uhdgqmgbnq_55_inch_-cpd1ef8j5m65_pd171jethuy.php",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "HDR",
+          "value": "HDR10, HLG, Dolby Vision",
+          "source_url": "https://www.smartprix.com/tvs/lumio_vision_7_2026_55_inch_ul_vs_motorola_55uhdgqmgbnq_55_inch_-cpd1ef8j5m65_pd171jethuy.php",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Brightness",
+          "value": "Up to 400 nits (third-party listing)",
+          "source_url": "https://www.smartprix.com/tvs/lumio_vision_7_2026_55_inch_ul_vs_motorola_55uhdgqmgbnq_55_inch_-cpd1ef8j5m65_pd171jethuy.php",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        }
+      ],
+      "specification_status": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -146,7 +182,10 @@
         "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
         "EXACT_RETAILER_SKU_NOT_CONFIRMED",
         "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+      ],
+      "technical_source_url": "https://www.smartprix.com/tvs/lumio_vision_7_2026_55_inch_ul_vs_motorola_55uhdgqmgbnq_55_inch_-cpd1ef8j5m65_pd171jethuy.php",
+      "technical_reviewed_at": "2026-11-09",
+      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified."
     },
     {
       "id": "POPULAR_TV_03",
@@ -159,8 +198,79 @@
       "indicative_price_inr": 18299,
       "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
       "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
-      "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "43",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Panel",
+          "value": "LED",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160 (4K UHD)",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Native refresh rate",
+          "value": "60Hz",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Google TV",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Audio output",
+          "value": "30W",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "HDMI",
+          "value": "3",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "USB",
+          "value": "2",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "RAM / storage",
+          "value": "2GB / 16GB",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "HDR",
+          "value": "HDR10",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        }
+      ],
+      "specification_status": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -185,7 +295,10 @@
         "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
         "EXACT_RETAILER_SKU_NOT_CONFIRMED",
         "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+      ],
+      "technical_source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+      "technical_reviewed_at": "2026-11-09",
+      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified."
     },
     {
       "id": "POPULAR_TV_04",
@@ -203,52 +316,60 @@
           "label": "Size (in)",
           "value": "55",
           "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
-          "evidence": "EXACT_SKU_RETAILER_LISTING_NOT_MANUFACTURER_CERTIFIED"
+          "evidence": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
         },
         {
           "label": "Resolution",
-          "value": "3840 x 2160",
+          "value": "3840 x 2160 (4K UHD)",
           "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
-          "evidence": "EXACT_SKU_RETAILER_LISTING_NOT_MANUFACTURER_CERTIFIED"
+          "evidence": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
         },
         {
-          "label": "Refresh rate",
-          "value": "50 Hz",
+          "label": "Native refresh rate",
+          "value": "50Hz (retailer stated)",
           "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
-          "evidence": "EXACT_SKU_RETAILER_LISTING_NOT_MANUFACTURER_CERTIFIED"
+          "evidence": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
         },
         {
-          "label": "Sound",
-          "value": "30 W",
+          "label": "Audio output",
+          "value": "30W",
           "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
-          "evidence": "EXACT_SKU_RETAILER_LISTING_NOT_MANUFACTURER_CERTIFIED"
+          "evidence": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
         },
         {
           "label": "HDMI",
           "value": "3",
           "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
-          "evidence": "EXACT_SKU_RETAILER_LISTING_NOT_MANUFACTURER_CERTIFIED"
+          "evidence": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
         },
         {
           "label": "USB",
           "value": "1",
           "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
-          "evidence": "EXACT_SKU_RETAILER_LISTING_NOT_MANUFACTURER_CERTIFIED"
+          "evidence": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
         },
         {
-          "label": "Operating system",
+          "label": "Smart OS",
           "value": "Tizen",
           "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
-          "evidence": "EXACT_SKU_RETAILER_LISTING_NOT_MANUFACTURER_CERTIFIED"
+          "evidence": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
         },
         {
           "label": "HDR",
           "value": "HDR10+",
           "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
-          "evidence": "EXACT_SKU_RETAILER_LISTING_NOT_MANUFACTURER_CERTIFIED"
+          "evidence": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
         }
       ],
-      "specification_status": "EXACT_AMAZON_SKU_VERIFIED_MANUFACTURER_FIELDS_PENDING",
+      "specification_status": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -276,7 +397,10 @@
         "statement": "Amazon page reports 5K+ bought in past month",
         "scope": "RETAILER_REPORTED_RECENT_PURCHASES_NOT_INDIA_WIDE_RANK",
         "observed_at": "2026-11-09"
-      }
+      },
+      "technical_source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
+      "technical_reviewed_at": "2026-11-09",
+      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified."
     },
     {
       "id": "POPULAR_TV_05",
@@ -289,8 +413,51 @@
       "indicative_price_inr": 34490,
       "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
       "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
-      "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "43",
+          "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Panel",
+          "value": "Mini LED (third-party)",
+          "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160 (4K UHD)",
+          "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Native refresh rate",
+          "value": "60Hz (third-party)",
+          "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "DLG mode",
+          "value": "120Hz DLG (not native 120Hz)",
+          "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "HDR",
+          "value": "HDR10, HDR10+, HLG",
+          "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
+          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "verified_at": "2026-11-09"
+        }
+      ],
+      "specification_status": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -315,7 +482,10 @@
         "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
         "EXACT_RETAILER_SKU_NOT_CONFIRMED",
         "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+      ],
+      "technical_source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
+      "technical_reviewed_at": "2026-11-09",
+      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified."
     },
     {
       "id": "POPULAR_TV_06",
@@ -933,6 +1103,12 @@
   "quality_gate": {
     "checked_at": "2026-11-09",
     "publishable_exact_sku_count": 0,
-    "reason": "No licensed product images and incomplete manufacturer + retailer SKU verification; do not label shortlist as verified bestsellers or deploy as purchase-ready."
+    "reason": "No licensed product images and incomplete manufacturer + retailer SKU verification; do not label shortlist as verified bestsellers or deploy as purchase-ready.",
+    "first_five_technical_records_reviewed": 5,
+    "first_five_official_manufacturer_sources": 1,
+    "first_five_exact_retailer_sku_sources": 2,
+    "first_five_third_party_only": 3,
+    "first_five_image_licenses_cleared": 0,
+    "production_admission": false
   }
 }
