@@ -112,7 +112,9 @@
         "croma": "NOT_CONFIRMED_LIVE_PRICE"
       },
       "verification_audit_at": "2026-11-09",
-      "exact_sku_all_retailers_verified": false
+      "exact_sku_all_retailers_verified": false,
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
     },
     {
       "id": "POPULAR_TV_02",
@@ -122,92 +124,95 @@
       "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
       "signal_source": "https://www.smartprix.com/tvs/most-popular-tvs",
       "observed_at": "2026-11-09",
-      "indicative_price_inr": 38999,
-      "price_source": "https://www.smartprix.com/tvs/55_inch-tag",
-      "price_status": "THIRD_PARTY_LISTED_2026_11_09_NOT_LIVE_CHECKOUT",
+      "indicative_price_inr": 42999,
+      "price_source": "https://store.lumio.co.in/vision7-55inch-2026",
+      "price_status": "MANUFACTURER_STOREFRONT_DISPLAYED_2026_11_09_NOT_CHECKOUT",
       "specifications": [
         {
-          "label": "Size (in)",
-          "value": "55",
-          "source_url": "https://lumio.co.in/faq",
-          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
-        },
-        {
-          "label": "Panel",
-          "value": "QLED",
-          "source_url": "https://lumio.co.in/faq",
-          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
+          "label": "Size",
+          "value": "55 inch",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
         },
         {
           "label": "Resolution",
           "value": "3840 x 2160",
-          "source_url": "https://lumio.co.in/faq",
-          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+        },
+        {
+          "label": "Panel",
+          "value": "QLED, IPS",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+        },
+        {
+          "label": "Native refresh rate",
+          "value": "60Hz",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+        },
+        {
+          "label": "Brightness",
+          "value": "400 nits",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+        },
+        {
+          "label": "Audio",
+          "value": "30W quad driver",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+        },
+        {
+          "label": "RAM",
+          "value": "3GB",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+        },
+        {
+          "label": "Storage",
+          "value": "64GB",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+        },
+        {
+          "label": "HDMI",
+          "value": "3 (one eARC)",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+        },
+        {
+          "label": "USB",
+          "value": "2 (one USB 3.0, one USB 2.0)",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
         },
         {
           "label": "Smart OS",
           "value": "Google TV",
-          "source_url": "https://lumio.co.in/faq",
-          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
-        },
-        {
-          "label": "HDR formats",
-          "value": "Dolby Vision, HDR10, HLG",
-          "source_url": "https://lumio.co.in/faq",
-          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
-        },
-        {
-          "label": "RAM / Storage",
-          "value": "Up to 3GB / 64GB (manufacturer series claim)",
-          "source_url": "https://lumio.co.in/faq",
-          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
-        },
-        {
-          "label": "HDMI",
-          "value": "3 (HDMI 3 eARC and ALLM)",
-          "source_url": "https://lumio.co.in/faq",
-          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
-        },
-        {
-          "label": "USB",
-          "value": "3 (1 USB 3.0 + 2 USB 2.0)",
-          "source_url": "https://lumio.co.in/faq",
-          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
-        },
-        {
-          "label": "Bluetooth",
-          "value": "5.0",
-          "source_url": "https://lumio.co.in/faq",
-          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
-        },
-        {
-          "label": "Brightness",
-          "value": "Up to 400 nits",
-          "source_url": "https://lumio.co.in/faq",
-          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
-        },
-        {
-          "label": "Satellite",
-          "value": "DVB-S2 (2026 model)",
-          "source_url": "https://lumio.co.in/faq",
-          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
         }
       ],
-      "specification_status": "OFFICIAL_2026_SERIES_CONFIRMED_EXACT_SKU_PENDING",
+      "specification_status": "OFFICIAL_2026_55_PRODUCT_VERIFIED",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
         "amazon": {
           "url": "https://www.amazon.in/s?k=Lumio%20FTW3-ADSJ",
-          "scope": "SEARCH_ONLY"
+          "scope": "SEARCH_ONLY_EXACT_SKU_NOT_VERIFIED"
         },
         "flipkart": {
-          "url": "https://www.flipkart.com/search?q=Lumio%20FTW3-ADSJ",
-          "scope": "SEARCH_ONLY"
+          "url": "https://www.flipkart.com/televisions/lumio~brand/pr?sid=ckf%2Cczl",
+          "scope": "BRAND_LISTING_EXACT_MODEL_FTW3-ADSJ_PRESENT_NOT_PRODUCT_DETAIL",
+          "observed_price_inr": 42999,
+          "price_source": "https://www.flipkart.com/televisions/lumio~brand/pr?sid=ckf%2Cczl",
+          "observed_at": "2026-11-09"
         },
         "croma": {
           "url": "https://www.croma.com/search/?text=Lumio%20FTW3-ADSJ",
-          "scope": "SEARCH_ONLY"
+          "scope": "SEARCH_ONLY_EXACT_SKU_NOT_VERIFIED"
         }
       },
       "live_offer": false,
@@ -221,8 +226,8 @@
       ],
       "technical_source_url": "https://www.smartprix.com/tvs/lumio_vision_7_2026_55_inch_ul_vs_motorola_55uhdgqmgbnq_55_inch_-cpd1ef8j5m65_pd171jethuy.php",
       "technical_reviewed_at": "2026-11-09",
-      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified.",
-      "manufacturer_source_url": "https://lumio.co.in/faq",
+      "technical_notes": "Manufacturer storefront explicitly lists 2 USB ports; third-party Smartprix lists 3. Manufacturer preferred; conflict logged.",
+      "manufacturer_source_url": "https://store.lumio.co.in/vision7-55inch-2026",
       "manufacturer_list_price_inr": 42999,
       "manufacturer_list_price_scope": "Vision 7 55 pre-discount FAQ; not current offer",
       "price_verification": {
@@ -232,7 +237,18 @@
         "croma": "NOT_CONFIRMED_LIVE_PRICE"
       },
       "verification_audit_at": "2026-11-09",
-      "exact_sku_all_retailers_verified": false
+      "exact_sku_all_retailers_verified": false,
+      "spec_conflicts": [
+        {
+          "field": "USB",
+          "manufacturer": "2",
+          "third_party": "3",
+          "third_party_url": "https://www.smartprix.com/tvs/lumio-vision-7-2026-55-inch-ultra-hd-4k-smart-ppd1ef8j5m65",
+          "resolution": "Manufacturer preferred"
+        }
+      ],
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
     },
     {
       "id": "POPULAR_TV_03",
@@ -353,7 +369,9 @@
         "croma": "NOT_CONFIRMED_LIVE_PRICE"
       },
       "verification_audit_at": "2026-11-09",
-      "exact_sku_all_retailers_verified": false
+      "exact_sku_all_retailers_verified": false,
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
     },
     {
       "id": "POPULAR_TV_04",
@@ -463,7 +481,9 @@
         "croma": "NOT_CONFIRMED_LIVE_PRICE"
       },
       "verification_audit_at": "2026-11-09",
-      "exact_sku_all_retailers_verified": false
+      "exact_sku_all_retailers_verified": false,
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
     },
     {
       "id": "POPULAR_TV_05",
@@ -556,7 +576,9 @@
         "croma": "NOT_CONFIRMED_LIVE_PRICE"
       },
       "verification_audit_at": "2026-11-09",
-      "exact_sku_all_retailers_verified": false
+      "exact_sku_all_retailers_verified": false,
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
     },
     {
       "id": "POPULAR_TV_06",
@@ -568,9 +590,9 @@
       "observed_at": "2026-11-09",
       "indicative_price_inr": 14999,
       "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
-      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_CHECKOUT_VERIFIED",
       "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specification_status": "RESEARCH_CANDIDATE_UNVERIFIED",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -592,10 +614,12 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "verification_blockers": [
-        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
-        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "OFFICIAL_EXACT_MANUFACTURER_MODEL_SPECIFICATIONS_NOT_VERIFIED",
+        "EXACT_RETAILER_PRODUCT_LINKS_NOT_VERIFIED",
         "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+      ],
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
     },
     {
       "id": "POPULAR_TV_07",
@@ -607,9 +631,9 @@
       "observed_at": "2026-11-09",
       "indicative_price_inr": 19999,
       "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
-      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_CHECKOUT_VERIFIED",
       "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specification_status": "RESEARCH_CANDIDATE_UNVERIFIED",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -631,10 +655,12 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "verification_blockers": [
-        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
-        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "OFFICIAL_EXACT_MANUFACTURER_MODEL_SPECIFICATIONS_NOT_VERIFIED",
+        "EXACT_RETAILER_PRODUCT_LINKS_NOT_VERIFIED",
         "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+      ],
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
     },
     {
       "id": "POPULAR_TV_08",
@@ -646,9 +672,9 @@
       "observed_at": "2026-11-09",
       "indicative_price_inr": 54990,
       "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
-      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_CHECKOUT_VERIFIED",
       "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specification_status": "RESEARCH_CANDIDATE_UNVERIFIED",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -670,10 +696,12 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "verification_blockers": [
-        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
-        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "OFFICIAL_EXACT_MANUFACTURER_MODEL_SPECIFICATIONS_NOT_VERIFIED",
+        "EXACT_RETAILER_PRODUCT_LINKS_NOT_VERIFIED",
         "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+      ],
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
     },
     {
       "id": "POPULAR_TV_09",
@@ -685,9 +713,9 @@
       "observed_at": "2026-11-09",
       "indicative_price_inr": 29759,
       "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
-      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_CHECKOUT_VERIFIED",
       "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specification_status": "RESEARCH_CANDIDATE_UNVERIFIED",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -709,10 +737,12 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "verification_blockers": [
-        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
-        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "OFFICIAL_EXACT_MANUFACTURER_MODEL_SPECIFICATIONS_NOT_VERIFIED",
+        "EXACT_RETAILER_PRODUCT_LINKS_NOT_VERIFIED",
         "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+      ],
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
     },
     {
       "id": "POPULAR_TV_10",
@@ -724,7 +754,7 @@
       "observed_at": "2026-11-09",
       "indicative_price_inr": 70290,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
-      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_CHECKOUT_VERIFIED",
       "specifications": [
         {
           "label": "Size (in)",
@@ -757,7 +787,7 @@
           "evidence": "OFFICIAL_MANUFACTURER_SERIES_AND_EXACT_SIZE_MODEL"
         }
       ],
-      "specification_status": "MANUFACTURER_MODEL_IDENTITY_AND_SELECTED_FIELDS_VERIFIED_RETAILER_SKU_PENDING",
+      "specification_status": "RESEARCH_CANDIDATE_UNVERIFIED",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -778,7 +808,14 @@
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
-      "manufacturer_source_url": "https://www.sony.co.in/bravia/products/bravia-2m2-s25m2"
+      "manufacturer_source_url": "https://www.sony.co.in/bravia/products/bravia-2m2-s25m2",
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "verification_blockers": [
+        "OFFICIAL_EXACT_MANUFACTURER_MODEL_SPECIFICATIONS_NOT_VERIFIED",
+        "EXACT_RETAILER_PRODUCT_LINKS_NOT_VERIFIED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     },
     {
       "id": "POPULAR_TV_11",
@@ -1184,6 +1221,9 @@
     "first_five_official_model_or_series_sources": 2,
     "first_five_exact_manufacturer_sku_fully_verified": 0,
     "first_five_retailer_live_prices_verified": 0,
-    "first_five_all_retailer_skus_verified": 0
+    "first_five_all_retailer_skus_verified": 0,
+    "first_ten_records_reviewed": 10,
+    "first_ten_exact_manufacturer_pages_verified": 2,
+    "first_ten_fully_verified_for_publication": 0
   }
 }
