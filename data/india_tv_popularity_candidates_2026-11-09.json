@@ -141,7 +141,12 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     },
     {
       "id": "POPULAR_TV_03",
@@ -175,7 +180,12 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     },
     {
       "id": "POPULAR_TV_04",
@@ -185,17 +195,68 @@
       "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
       "signal_source": "https://www.smartprix.com/tvs/most-popular-tvs",
       "observed_at": "2026-11-09",
-      "indicative_price_inr": 47490,
+      "indicative_price_inr": null,
       "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
-      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
-      "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "price_status": "NO_CURRENT_RETAILER_PRICE_VERIFIED",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
+          "evidence": "EXACT_SKU_RETAILER_LISTING_NOT_MANUFACTURER_CERTIFIED"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160",
+          "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
+          "evidence": "EXACT_SKU_RETAILER_LISTING_NOT_MANUFACTURER_CERTIFIED"
+        },
+        {
+          "label": "Refresh rate",
+          "value": "50 Hz",
+          "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
+          "evidence": "EXACT_SKU_RETAILER_LISTING_NOT_MANUFACTURER_CERTIFIED"
+        },
+        {
+          "label": "Sound",
+          "value": "30 W",
+          "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
+          "evidence": "EXACT_SKU_RETAILER_LISTING_NOT_MANUFACTURER_CERTIFIED"
+        },
+        {
+          "label": "HDMI",
+          "value": "3",
+          "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
+          "evidence": "EXACT_SKU_RETAILER_LISTING_NOT_MANUFACTURER_CERTIFIED"
+        },
+        {
+          "label": "USB",
+          "value": "1",
+          "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
+          "evidence": "EXACT_SKU_RETAILER_LISTING_NOT_MANUFACTURER_CERTIFIED"
+        },
+        {
+          "label": "Operating system",
+          "value": "Tizen",
+          "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
+          "evidence": "EXACT_SKU_RETAILER_LISTING_NOT_MANUFACTURER_CERTIFIED"
+        },
+        {
+          "label": "HDR",
+          "value": "HDR10+",
+          "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
+          "evidence": "EXACT_SKU_RETAILER_LISTING_NOT_MANUFACTURER_CERTIFIED"
+        }
+      ],
+      "specification_status": "EXACT_AMAZON_SKU_VERIFIED_MANUFACTURER_FIELDS_PENDING",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
         "amazon": {
-          "url": "https://www.amazon.in/s?k=Samsung%20UA55M2EHAULXL",
-          "scope": "SEARCH_ONLY"
+          "url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
+          "scope": "EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING",
+          "asin": "B0GXV5313B",
+          "verified_at": "2026-11-09"
         },
         "flipkart": {
           "url": "https://www.flipkart.com/search?q=Samsung%20UA55M2EHAULXL",
@@ -209,7 +270,13 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "sales_signal": {
+        "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
+        "statement": "Amazon page reports 5K+ bought in past month",
+        "scope": "RETAILER_REPORTED_RECENT_PURCHASES_NOT_INDIA_WIDE_RANK",
+        "observed_at": "2026-11-09"
+      }
     },
     {
       "id": "POPULAR_TV_05",
@@ -243,7 +310,12 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     },
     {
       "id": "POPULAR_TV_06",
@@ -277,7 +349,12 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     },
     {
       "id": "POPULAR_TV_07",
@@ -311,7 +388,12 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     },
     {
       "id": "POPULAR_TV_08",
@@ -345,7 +427,12 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     },
     {
       "id": "POPULAR_TV_09",
@@ -379,7 +466,12 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     },
     {
       "id": "POPULAR_TV_10",
@@ -392,8 +484,39 @@
       "indicative_price_inr": 70290,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
       "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
-      "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.sony.co.in/bravia/products/bravia-2m2-s25m2",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_AND_EXACT_SIZE_MODEL"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.sony.co.in/bravia/products/bravia-2m2-s25m2",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_AND_EXACT_SIZE_MODEL"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Google TV",
+          "source_url": "https://www.sony.co.in/bravia/products/bravia-2m2-s25m2",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_AND_EXACT_SIZE_MODEL"
+        },
+        {
+          "label": "Upscaling",
+          "value": "4K X-Reality PRO",
+          "source_url": "https://www.sony.co.in/bravia/products/bravia-2m2-s25m2",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_AND_EXACT_SIZE_MODEL"
+        },
+        {
+          "label": "Audio formats",
+          "value": "Dolby Atmos, DTS:X",
+          "source_url": "https://www.sony.co.in/bravia/products/bravia-2m2-s25m2",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_AND_EXACT_SIZE_MODEL"
+        }
+      ],
+      "specification_status": "MANUFACTURER_MODEL_IDENTITY_AND_SELECTED_FIELDS_VERIFIED_RETAILER_SKU_PENDING",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -413,7 +536,8 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "manufacturer_source_url": "https://www.sony.co.in/bravia/products/bravia-2m2-s25m2"
     },
     {
       "id": "POPULAR_TV_11",
@@ -447,7 +571,12 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     },
     {
       "id": "POPULAR_TV_12",
@@ -481,7 +610,12 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     },
     {
       "id": "POPULAR_TV_13",
@@ -515,7 +649,12 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     },
     {
       "id": "POPULAR_TV_14",
@@ -549,7 +688,12 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     },
     {
       "id": "POPULAR_TV_15",
@@ -583,7 +727,12 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     },
     {
       "id": "POPULAR_TV_16",
@@ -617,7 +766,12 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     },
     {
       "id": "POPULAR_TV_17",
@@ -651,7 +805,12 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     },
     {
       "id": "POPULAR_TV_18",
@@ -685,7 +844,12 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     },
     {
       "id": "POPULAR_TV_19",
@@ -719,7 +883,12 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     },
     {
       "id": "POPULAR_TV_20",
@@ -753,7 +922,17 @@
       "live_offer": false,
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
-      "price_ranking_weight": 0
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ]
     }
-  ]
+  ],
+  "quality_gate": {
+    "checked_at": "2026-11-09",
+    "publishable_exact_sku_count": 0,
+    "reason": "No licensed product images and incomplete manufacturer + retailer SKU verification; do not label shortlist as verified bestsellers or deploy as purchase-ready."
+  }
 }
