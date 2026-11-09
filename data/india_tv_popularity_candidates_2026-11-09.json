@@ -110,7 +110,9 @@
         "amazon": "NOT_CONFIRMED_LIVE_PRICE",
         "flipkart": "NOT_CONFIRMED_LIVE_PRICE",
         "croma": "NOT_CONFIRMED_LIVE_PRICE"
-      }
+      },
+      "verification_audit_at": "2026-11-09",
+      "exact_sku_all_retailers_verified": false
     },
     {
       "id": "POPULAR_TV_02",
@@ -120,72 +122,78 @@
       "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
       "signal_source": "https://www.smartprix.com/tvs/most-popular-tvs",
       "observed_at": "2026-11-09",
-      "indicative_price_inr": 41999,
-      "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
-      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "indicative_price_inr": 38999,
+      "price_source": "https://www.smartprix.com/tvs/55_inch-tag",
+      "price_status": "THIRD_PARTY_LISTED_2026_11_09_NOT_LIVE_CHECKOUT",
       "specifications": [
         {
           "label": "Size (in)",
           "value": "55",
           "source_url": "https://lumio.co.in/faq",
-          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
+          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
         },
         {
           "label": "Panel",
           "value": "QLED",
           "source_url": "https://lumio.co.in/faq",
-          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
+          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
         },
         {
           "label": "Resolution",
           "value": "3840 x 2160",
           "source_url": "https://lumio.co.in/faq",
-          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
+          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
         },
         {
           "label": "Smart OS",
           "value": "Google TV",
           "source_url": "https://lumio.co.in/faq",
-          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
+          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
         },
         {
-          "label": "HDR",
+          "label": "HDR formats",
           "value": "Dolby Vision, HDR10, HLG",
           "source_url": "https://lumio.co.in/faq",
-          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
+          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
+        },
+        {
+          "label": "RAM / Storage",
+          "value": "Up to 3GB / 64GB (manufacturer series claim)",
+          "source_url": "https://lumio.co.in/faq",
+          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
         },
         {
           "label": "HDMI",
           "value": "3 (HDMI 3 eARC and ALLM)",
           "source_url": "https://lumio.co.in/faq",
-          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
+          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
         },
         {
           "label": "USB",
-          "value": "3 (one USB 3.0, two USB 2.0)",
+          "value": "3 (1 USB 3.0 + 2 USB 2.0)",
           "source_url": "https://lumio.co.in/faq",
-          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
+          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
         },
         {
           "label": "Bluetooth",
           "value": "5.0",
           "source_url": "https://lumio.co.in/faq",
-          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
+          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
         },
         {
-          "label": "Storage",
-          "value": "64GB",
+          "label": "Brightness",
+          "value": "Up to 400 nits",
           "source_url": "https://lumio.co.in/faq",
-          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
+          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
         },
         {
-          "label": "RAM",
-          "value": "Up to 3GB (series claim, exact variant unconfirmed)",
+          "label": "Satellite",
+          "value": "DVB-S2 (2026 model)",
           "source_url": "https://lumio.co.in/faq",
-          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
+          "evidence": "MANUFACTURER_VISION_7_2026_SERIES"
         }
       ],
-      "specification_status": "OFFICIAL_SERIES_FIELDS_EXACT_2026_SKU_PENDING",
+      "specification_status": "OFFICIAL_2026_SERIES_CONFIRMED_EXACT_SKU_PENDING",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -216,13 +224,15 @@
       "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified.",
       "manufacturer_source_url": "https://lumio.co.in/faq",
       "manufacturer_list_price_inr": 42999,
-      "manufacturer_list_price_scope": "Vision 7 55 (not necessarily 2026 FTW3-ADSJ); pre-discount list price",
+      "manufacturer_list_price_scope": "Vision 7 55 pre-discount FAQ; not current offer",
       "price_verification": {
         "as_of": "2026-11-09",
         "amazon": "NOT_CONFIRMED_LIVE_PRICE",
         "flipkart": "NOT_CONFIRMED_LIVE_PRICE",
         "croma": "NOT_CONFIRMED_LIVE_PRICE"
-      }
+      },
+      "verification_audit_at": "2026-11-09",
+      "exact_sku_all_retailers_verified": false
     },
     {
       "id": "POPULAR_TV_03",
@@ -240,74 +250,74 @@
           "label": "Size (in)",
           "value": "43",
           "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
           "verified_at": "2026-11-09"
         },
         {
           "label": "Panel",
           "value": "LED",
           "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
           "verified_at": "2026-11-09"
         },
         {
           "label": "Resolution",
           "value": "3840 x 2160 (4K UHD)",
           "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
           "verified_at": "2026-11-09"
         },
         {
           "label": "Native refresh rate",
           "value": "60Hz",
           "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
           "verified_at": "2026-11-09"
         },
         {
           "label": "Smart OS",
           "value": "Google TV",
           "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
           "verified_at": "2026-11-09"
         },
         {
           "label": "Audio output",
           "value": "30W",
           "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
           "verified_at": "2026-11-09"
         },
         {
           "label": "HDMI",
           "value": "3",
           "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
           "verified_at": "2026-11-09"
         },
         {
           "label": "USB",
           "value": "2",
           "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
           "verified_at": "2026-11-09"
         },
         {
           "label": "RAM / storage",
           "value": "2GB / 16GB",
           "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
           "verified_at": "2026-11-09"
         },
         {
           "label": "HDR",
           "value": "HDR10",
           "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
           "verified_at": "2026-11-09"
         }
       ],
-      "specification_status": "THIRD_PARTY_OR_RETAILER_FIELDS_ONLY_MANUFACTURER_EXACT_MODEL_NOT_VERIFIED",
+      "specification_status": "THIRD_PARTY_ONLY_EXACT_MANUFACTURER_SPECS_PENDING",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -341,7 +351,9 @@
         "amazon": "NOT_CONFIRMED_LIVE_PRICE",
         "flipkart": "NOT_CONFIRMED_LIVE_PRICE",
         "croma": "NOT_CONFIRMED_LIVE_PRICE"
-      }
+      },
+      "verification_audit_at": "2026-11-09",
+      "exact_sku_all_retailers_verified": false
     },
     {
       "id": "POPULAR_TV_04",
@@ -449,7 +461,9 @@
         "amazon": "NOT_CONFIRMED_LIVE_PRICE",
         "flipkart": "NOT_CONFIRMED_LIVE_PRICE",
         "croma": "NOT_CONFIRMED_LIVE_PRICE"
-      }
+      },
+      "verification_audit_at": "2026-11-09",
+      "exact_sku_all_retailers_verified": false
     },
     {
       "id": "POPULAR_TV_05",
@@ -467,46 +481,46 @@
           "label": "Size (in)",
           "value": "43",
           "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
           "verified_at": "2026-11-09"
         },
         {
           "label": "Panel",
           "value": "Mini LED (third-party)",
           "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
           "verified_at": "2026-11-09"
         },
         {
           "label": "Resolution",
           "value": "3840 x 2160 (4K UHD)",
           "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
           "verified_at": "2026-11-09"
         },
         {
           "label": "Native refresh rate",
           "value": "60Hz (third-party)",
           "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
           "verified_at": "2026-11-09"
         },
         {
           "label": "DLG mode",
           "value": "120Hz DLG (not native 120Hz)",
           "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
           "verified_at": "2026-11-09"
         },
         {
           "label": "HDR",
           "value": "HDR10, HDR10+, HLG",
           "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
           "verified_at": "2026-11-09"
         }
       ],
-      "specification_status": "THIRD_PARTY_OR_RETAILER_FIELDS_ONLY_MANUFACTURER_EXACT_MODEL_NOT_VERIFIED",
+      "specification_status": "THIRD_PARTY_ONLY_EXACT_MANUFACTURER_SPECS_PENDING",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -540,7 +554,9 @@
         "amazon": "NOT_CONFIRMED_LIVE_PRICE",
         "flipkart": "NOT_CONFIRMED_LIVE_PRICE",
         "croma": "NOT_CONFIRMED_LIVE_PRICE"
-      }
+      },
+      "verification_audit_at": "2026-11-09",
+      "exact_sku_all_retailers_verified": false
     },
     {
       "id": "POPULAR_TV_06",
@@ -1158,7 +1174,7 @@
   "quality_gate": {
     "checked_at": "2026-11-09",
     "publishable_exact_sku_count": 0,
-    "reason": "No licensed product images and incomplete manufacturer + retailer SKU verification; do not label shortlist as verified bestsellers or deploy as purchase-ready.",
+    "reason": "Cannot publish manufacturer-certified five-TV shortlist with exact prices or licensed images until independent exact-SKU proof exists.",
     "first_five_technical_records_reviewed": 5,
     "first_five_official_manufacturer_sources": 1,
     "first_five_exact_retailer_sku_sources": 2,
@@ -1167,6 +1183,7 @@
     "production_admission": false,
     "first_five_official_model_or_series_sources": 2,
     "first_five_exact_manufacturer_sku_fully_verified": 0,
-    "first_five_retailer_live_prices_verified": 0
+    "first_five_retailer_live_prices_verified": 0,
+    "first_five_all_retailer_skus_verified": 0
   }
 }
