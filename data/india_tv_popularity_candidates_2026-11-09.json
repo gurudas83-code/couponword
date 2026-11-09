@@ -124,78 +124,84 @@
       "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
       "signal_source": "https://www.smartprix.com/tvs/most-popular-tvs",
       "observed_at": "2026-11-09",
-      "indicative_price_inr": 42999,
+      "indicative_price_inr": null,
       "price_source": "https://store.lumio.co.in/vision7-55inch-2026",
-      "price_status": "MANUFACTURER_STOREFRONT_DISPLAYED_2026_11_09_NOT_CHECKOUT",
+      "price_status": "CONFLICTING_MANUFACTURER_STOREFRONT_SNAPSHOTS_NO_SINGLE_VERIFIED_CURRENT_PRICE",
       "specifications": [
         {
-          "label": "Size",
-          "value": "55 inch",
+          "label": "Size (in)",
+          "value": "55",
           "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
-          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
-        },
-        {
-          "label": "Resolution",
-          "value": "3840 x 2160",
-          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
-          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
         },
         {
           "label": "Panel",
-          "value": "QLED, IPS",
+          "value": "IPS QLED",
           "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
-          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160 (4K UHD)",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
         },
         {
           "label": "Native refresh rate",
           "value": "60Hz",
           "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
-          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
         },
         {
           "label": "Brightness",
           "value": "400 nits",
           "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
-          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
         },
         {
           "label": "Audio",
-          "value": "30W quad driver",
+          "value": "30W quad-driver",
           "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
-          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
         },
         {
           "label": "RAM",
           "value": "3GB",
           "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
-          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
         },
         {
           "label": "Storage",
           "value": "64GB",
           "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
-          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
         },
         {
           "label": "HDMI",
           "value": "3 (one eARC)",
           "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
-          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
         },
         {
           "label": "USB",
           "value": "2 (one USB 3.0, one USB 2.0)",
           "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
-          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
         },
         {
           "label": "Smart OS",
           "value": "Google TV",
           "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
-          "evidence": "OFFICIAL_EXACT_2026_55_MANUFACTURER_PRODUCT_PAGE"
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
+        },
+        {
+          "label": "HDR",
+          "value": "Dolby Vision, HDR10, HLG",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
         }
       ],
-      "specification_status": "OFFICIAL_2026_55_PRODUCT_VERIFIED",
+      "specification_status": "OFFICIAL_EXACT_SERIES_AND_SIZE_CONFIRMED_MODEL_CODE_PENDING",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -248,7 +254,11 @@
         }
       ],
       "reviewed_at": "2026-11-09",
-      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "manufacturer_display_price_inr": 42999,
+      "manufacturer_price_source": "https://store.lumio.co.in/vision7-55inch-2026",
+      "manufacturer_price_observed_at": "2026-11-09",
+      "price_conflict_note": "Manufacturer main product page indexed at ₹42,999 while updated variant selector on Vision 7 II page shows Vision 7 2026 ₹40,999; not the same SKU as Vision 7 II. Do not use II price for original Vision 7. Current checkout price not independently verified."
     },
     {
       "id": "POPULAR_TV_03",
@@ -388,61 +398,61 @@
         {
           "label": "Size (in)",
           "value": "55",
-          "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
-          "evidence": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
+          "source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+          "evidence": "RETAILER_FIELD_REQUIRES_OFFICIAL_FIELD_CROSSCHECK",
           "verified_at": "2026-11-09"
         },
         {
           "label": "Resolution",
           "value": "3840 x 2160 (4K UHD)",
-          "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
-          "evidence": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
+          "source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+          "evidence": "RETAILER_FIELD_REQUIRES_OFFICIAL_FIELD_CROSSCHECK",
           "verified_at": "2026-11-09"
         },
         {
           "label": "Native refresh rate",
           "value": "50Hz (retailer stated)",
-          "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
-          "evidence": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
+          "source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+          "evidence": "RETAILER_FIELD_REQUIRES_OFFICIAL_FIELD_CROSSCHECK",
           "verified_at": "2026-11-09"
         },
         {
           "label": "Audio output",
           "value": "30W",
-          "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
-          "evidence": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
+          "source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+          "evidence": "RETAILER_FIELD_REQUIRES_OFFICIAL_FIELD_CROSSCHECK",
           "verified_at": "2026-11-09"
         },
         {
           "label": "HDMI",
           "value": "3",
-          "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
-          "evidence": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
+          "source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+          "evidence": "RETAILER_FIELD_REQUIRES_OFFICIAL_FIELD_CROSSCHECK",
           "verified_at": "2026-11-09"
         },
         {
           "label": "USB",
           "value": "1",
-          "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
-          "evidence": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
+          "source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+          "evidence": "RETAILER_FIELD_REQUIRES_OFFICIAL_FIELD_CROSSCHECK",
           "verified_at": "2026-11-09"
         },
         {
           "label": "Smart OS",
           "value": "Tizen",
-          "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
-          "evidence": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
+          "source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+          "evidence": "RETAILER_FIELD_REQUIRES_OFFICIAL_FIELD_CROSSCHECK",
           "verified_at": "2026-11-09"
         },
         {
           "label": "HDR",
           "value": "HDR10+",
-          "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
-          "evidence": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
+          "source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+          "evidence": "RETAILER_FIELD_REQUIRES_OFFICIAL_FIELD_CROSSCHECK",
           "verified_at": "2026-11-09"
         }
       ],
-      "specification_status": "THIRD_PARTY_OR_RETAILER_FIELDS_ONLY_MANUFACTURER_EXACT_MODEL_NOT_VERIFIED",
+      "specification_status": "OFFICIAL_MANUFACTURER_EXACT_SKU_CONFIRMED",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -473,7 +483,7 @@
       },
       "technical_source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
       "technical_reviewed_at": "2026-11-09",
-      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified.",
+      "technical_notes": "Exact model UA55M2EHAULXL manufacturer URL and support page confirmed; retailer specifications must not override manufacturer specs.",
       "price_verification": {
         "as_of": "2026-11-09",
         "amazon": "NOT_CONFIRMED_LIVE_PRICE",
@@ -483,7 +493,9 @@
       "verification_audit_at": "2026-11-09",
       "exact_sku_all_retailers_verified": false,
       "reviewed_at": "2026-11-09",
-      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "manufacturer_source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+      "manufacturer_model_identity_status": "VERIFIED_OFFICIAL_EXACT_MODEL"
     },
     {
       "id": "POPULAR_TV_05",
@@ -1224,6 +1236,14 @@
     "first_five_all_retailer_skus_verified": 0,
     "first_ten_records_reviewed": 10,
     "first_ten_exact_manufacturer_pages_verified": 2,
-    "first_ten_fully_verified_for_publication": 0
+    "first_ten_fully_verified_for_publication": 0,
+    "manufacturer_exact_sku_identity_confirmed": [
+      "POPULAR_TV_04"
+    ],
+    "manufacturer_exact_size_confirmed": [
+      "POPULAR_TV_01",
+      "POPULAR_TV_02"
+    ],
+    "blocked_on": "Missing exact merchant prices and image reuse permissions; do not merge as live commerce"
   }
 }
