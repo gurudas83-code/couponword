@@ -122,16 +122,18 @@
           "checkout_eligible": false
         },
         "flipkart": {
-          "price_inr": 54990,
+          "price_inr": null,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://1.www.flipkart.com/q/mi-55-inch-tv",
           "retailer_research_url": "https://www.flipkart.com/xiaomi-138-68-cm-55-inch-ultra-hd-4k-mini-led-smart-google-tv-2026/p/itma4f37a276700e",
           "link_scope": "EXACT_MODEL_LISTING_RESEARCH_NOT_LIVE_OFFER",
-          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Historical 2026-11-05 observation; exact model listing separately checked 2026-11-09; price not refreshed",
+          "price_status": "UNVERIFIED_HISTORICAL_PRICE_SUPPRESSED",
+          "price_note": "Historical workbook amount ₹54990 (dated 2026-11-05); source is category/search, not exact-SKU proof. Price suppressed pending SKU verification.",
           "stock_status": "UNKNOWN",
           "live_offer": false,
-          "checkout_eligible": false
+          "checkout_eligible": false,
+          "price_evidence_status": "CATEGORY_SOURCE_NOT_EXACT_SKU_PRICE_EVIDENCE",
+          "historical_unverified_price_inr": 54990
         },
         "croma": {
           "price_inr": null,
@@ -500,16 +502,18 @@
           "checkout_eligible": false
         },
         "flipkart": {
-          "price_inr": 44999,
+          "price_inr": null,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
           "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi%20FX%20Mini%20LED%20Fire%20TV%2055",
           "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
-          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Xiaomi FX 55 L55MC-FSMIN; listing snapshot dated 2026-09-11; historical | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
+          "price_status": "UNVERIFIED_HISTORICAL_PRICE_SUPPRESSED",
+          "price_note": "Historical workbook amount ₹44999 (dated 2026-11-05); source is category/search, not exact-SKU proof. Price suppressed pending SKU verification.",
           "stock_status": "UNKNOWN",
           "live_offer": false,
-          "checkout_eligible": false
+          "checkout_eligible": false,
+          "price_evidence_status": "CATEGORY_SOURCE_NOT_EXACT_SKU_PRICE_EVIDENCE",
+          "historical_unverified_price_inr": 44999
         },
         "croma": {
           "price_inr": null,
@@ -718,28 +722,32 @@
           "checkout_eligible": false
         },
         "flipkart": {
-          "price_inr": 84781,
+          "price_inr": null,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.flipkart.com/q/samsung-neo-qled-tv",
           "retailer_research_url": "https://www.flipkart.com/search?q=Samsung%20QA55QN80HAULXL",
           "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
-          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Exact QA55QN80HAULXL identified on Flipkart category results; location-dependent | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
+          "price_status": "UNVERIFIED_HISTORICAL_PRICE_SUPPRESSED",
+          "price_note": "Historical workbook amount ₹84781 (dated 2026-11-05); source is category/search, not exact-SKU proof. Price suppressed pending SKU verification.",
           "stock_status": "UNKNOWN",
           "live_offer": false,
-          "checkout_eligible": false
+          "checkout_eligible": false,
+          "price_evidence_status": "CATEGORY_SOURCE_NOT_EXACT_SKU_PRICE_EVIDENCE",
+          "historical_unverified_price_inr": 84781
         },
         "croma": {
-          "price_inr": 98290,
+          "price_inr": null,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.croma.com/l/samsung-quantum-dot-55-inch-tv-0asz00a.html",
           "retailer_research_url": "https://www.croma.com/search/?text=Samsung%20QA55QN80HAULXL",
           "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
-          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "QN80H 55-inch public listing dated 2026-11-05, location-dependent | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
+          "price_status": "UNVERIFIED_HISTORICAL_PRICE_SUPPRESSED",
+          "price_note": "Historical workbook amount ₹98290 (dated 2026-11-05); source is category/search, not exact-SKU proof. Price suppressed pending SKU verification.",
           "stock_status": "UNKNOWN",
           "live_offer": false,
-          "checkout_eligible": false
+          "checkout_eligible": false,
+          "price_evidence_status": "CATEGORY_SOURCE_NOT_EXACT_SKU_PRICE_EVIDENCE",
+          "historical_unverified_price_inr": 98290
         }
       },
       "product_status": "RESEARCH_ONLY",
@@ -756,56 +764,56 @@
       "model_code": "43UT80506LA",
       "product_type": "Television",
       "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
-      "source_grade": "Manufacturer / product",
-      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
+      "source_grade": "Manufacturer / model or series",
+      "source_status": "OFFICIAL_MODEL_IDENTITY_FOUND_FIELDS_PENDING_RECHECK_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
           "value": "43",
           "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Panel / backlight",
           "value": "Direct LED LCD",
           "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Resolution",
           "value": "4K UHD",
           "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Native Hz",
           "value": "60",
           "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Smart OS",
           "value": "webOS 24",
           "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "HDR formats",
           "value": "HDR10, HLG",
           "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "HDMI ports",
           "value": "3",
           "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Speaker W",
           "value": "20",
           "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         }
       ],
       "buyer_use_case": "Budget 43-inch 4K",
@@ -862,50 +870,50 @@
       "model_code": "K-55XR80M2",
       "product_type": "Television",
       "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
-      "source_grade": "Manufacturer / product",
-      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
+      "source_grade": "Manufacturer / model or series",
+      "source_status": "OFFICIAL_MODEL_IDENTITY_FOUND_FIELDS_PENDING_RECHECK_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
           "value": "55",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Panel / backlight",
           "value": "OLED",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Resolution",
           "value": "4K UHD",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Native Hz",
           "value": "120",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Smart OS",
           "value": "Google TV",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "HDR formats",
           "value": "Dolby Vision, HDR10",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "HDMI ports",
           "value": "4",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         }
       ],
       "buyer_use_case": "Premium movies and PS5",
@@ -936,16 +944,18 @@
           "checkout_eligible": false
         },
         "croma": {
-          "price_inr": 259990,
+          "price_inr": null,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.croma.com/campaign/exchange-deals-tv/c/7042",
           "retailer_research_url": "https://www.croma.com/search/?text=Sony%20K-55XR80M2",
           "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
-          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Sony BRAVIA 8 II 55; 2025 model listing | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
+          "price_status": "UNVERIFIED_HISTORICAL_PRICE_SUPPRESSED",
+          "price_note": "Historical workbook amount ₹259990 (dated 2026-11-05); source is category/search, not exact-SKU proof. Price suppressed pending SKU verification.",
           "stock_status": "UNKNOWN",
           "live_offer": false,
-          "checkout_eligible": false
+          "checkout_eligible": false,
+          "price_evidence_status": "CATEGORY_SOURCE_NOT_EXACT_SKU_PRICE_EVIDENCE",
+          "historical_unverified_price_inr": 259990
         }
       },
       "product_status": "RESEARCH_ONLY",
@@ -961,57 +971,57 @@
       "model": "Crystal UE81 43 (UA43UE81AFULXL)",
       "model_code": "UA43UE81AFULXL",
       "product_type": "Television",
-      "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
-      "source_grade": "Retailer model listing",
-      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
+      "source_url": "https://www.samsung.com/in/support/model/UA43UE81AFULXL/",
+      "source_grade": "Manufacturer / model or series",
+      "source_status": "OFFICIAL_MODEL_IDENTITY_FOUND_FIELDS_PENDING_RECHECK_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
           "value": "43",
-          "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.samsung.com/in/support/model/UA43UE81AFULXL/",
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Panel / backlight",
           "value": "LED LCD",
-          "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.samsung.com/in/support/model/UA43UE81AFULXL/",
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Resolution",
           "value": "4K UHD",
-          "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.samsung.com/in/support/model/UA43UE81AFULXL/",
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Native Hz",
           "value": "60",
-          "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.samsung.com/in/support/model/UA43UE81AFULXL/",
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Smart OS",
           "value": "Tizen",
-          "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.samsung.com/in/support/model/UA43UE81AFULXL/",
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "HDR formats",
           "value": "HDR10+",
-          "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.samsung.com/in/support/model/UA43UE81AFULXL/",
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "HDMI ports",
           "value": "3",
-          "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.samsung.com/in/support/model/UA43UE81AFULXL/",
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Speaker W",
           "value": "20",
-          "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.samsung.com/in/support/model/UA43UE81AFULXL/",
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         }
       ],
       "buyer_use_case": "Entry 43-inch 4K",
@@ -1030,28 +1040,32 @@
           "checkout_eligible": false
         },
         "flipkart": {
-          "price_inr": 30490,
+          "price_inr": null,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
           "retailer_research_url": "https://www.flipkart.com/search?q=Samsung%20UA43UE81AFULXL",
           "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
-          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Exact UA43UE81AFULXL; listing snapshot | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
+          "price_status": "UNVERIFIED_HISTORICAL_PRICE_SUPPRESSED",
+          "price_note": "Historical workbook amount ₹30490 (dated 2026-11-05); source is category/search, not exact-SKU proof. Price suppressed pending SKU verification.",
           "stock_status": "UNKNOWN",
           "live_offer": false,
-          "checkout_eligible": false
+          "checkout_eligible": false,
+          "price_evidence_status": "CATEGORY_SOURCE_NOT_EXACT_SKU_PRICE_EVIDENCE",
+          "historical_unverified_price_inr": 30490
         },
         "croma": {
-          "price_inr": 30490,
+          "price_inr": null,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.croma.com/campaign/limited-time-exchange-offers-tv/c/7098",
           "retailer_research_url": "https://www.croma.com/search/?text=Samsung%20UA43UE81AFULXL",
           "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
-          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Samsung UE81A 43; exact series; suffix recheck | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
+          "price_status": "UNVERIFIED_HISTORICAL_PRICE_SUPPRESSED",
+          "price_note": "Historical workbook amount ₹30490 (dated 2026-11-05); source is category/search, not exact-SKU proof. Price suppressed pending SKU verification.",
           "stock_status": "UNKNOWN",
           "live_offer": false,
-          "checkout_eligible": false
+          "checkout_eligible": false,
+          "price_evidence_status": "CATEGORY_SOURCE_NOT_EXACT_SKU_PRICE_EVIDENCE",
+          "historical_unverified_price_inr": 30490
         }
       },
       "product_status": "RESEARCH_ONLY",
@@ -1136,16 +1150,18 @@
           "checkout_eligible": false
         },
         "flipkart": {
-          "price_inr": 42760,
+          "price_inr": null,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.flipkart.com/q/samsung-55-inch-smart-tv",
           "retailer_research_url": "https://www.flipkart.com/search?q=Samsung%20QA55QEF6AULXL",
           "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
-          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Exact QA55QEF6AULXL; listing snapshot | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
+          "price_status": "UNVERIFIED_HISTORICAL_PRICE_SUPPRESSED",
+          "price_note": "Historical workbook amount ₹42760 (dated 2026-11-05); source is category/search, not exact-SKU proof. Price suppressed pending SKU verification.",
           "stock_status": "UNKNOWN",
           "live_offer": false,
-          "checkout_eligible": false
+          "checkout_eligible": false,
+          "price_evidence_status": "CATEGORY_SOURCE_NOT_EXACT_SKU_PRICE_EVIDENCE",
+          "historical_unverified_price_inr": 42760
         },
         "croma": {
           "price_inr": null,
@@ -1263,7 +1279,8 @@
           "price_note": "Exact 55C6K | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
           "stock_status": "UNKNOWN",
           "live_offer": false,
-          "checkout_eligible": false
+          "checkout_eligible": false,
+          "price_evidence_status": "EXACT_PRODUCT_PAGE_HISTORICAL_NOT_LIVE"
         }
       },
       "product_status": "RESEARCH_ONLY",
@@ -1336,16 +1353,18 @@
           "checkout_eligible": false
         },
         "flipkart": {
-          "price_inr": 30999,
+          "price_inr": null,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://1.www.flipkart.com/q/mi-55-inch-tv",
           "retailer_research_url": "https://www.flipkart.com/search?q=TCL%2055P6L",
           "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
-          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Exact TCL 55P6L; page updated 2026-11-05 | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
+          "price_status": "UNVERIFIED_HISTORICAL_PRICE_SUPPRESSED",
+          "price_note": "Historical workbook amount ₹30999 (dated 2026-11-05); source is category/search, not exact-SKU proof. Price suppressed pending SKU verification.",
           "stock_status": "UNKNOWN",
           "live_offer": false,
-          "checkout_eligible": false
+          "checkout_eligible": false,
+          "price_evidence_status": "MISMATCHED_CATEGORY_SOURCE_NOT_VALID_PRICE_EVIDENCE",
+          "historical_unverified_price_inr": 30999
         },
         "croma": {
           "price_inr": null,
@@ -1565,59 +1584,59 @@
       "category": "tvs",
       "brand": "Sony",
       "model": "BRAVIA 2 K-43S20 43",
-      "model_code": "",
+      "model_code": "K-43S20",
       "product_type": "Television",
       "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
-      "source_grade": "Manufacturer / product",
-      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
+      "source_grade": "Manufacturer / model or series",
+      "source_status": "OFFICIAL_MODEL_IDENTITY_FOUND_FIELDS_PENDING_RECHECK_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
           "value": "43",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Panel / backlight",
           "value": "Direct LED LCD",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Resolution",
           "value": "4K UHD",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Native Hz",
           "value": "50",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Smart OS",
           "value": "Google TV",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "HDR formats",
           "value": "HDR10, HLG",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "HDMI ports",
           "value": "3",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Speaker W",
           "value": "20",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         }
       ],
       "buyer_use_case": "Small-room 4K movies",
@@ -1756,50 +1775,50 @@
       "model_code": "",
       "product_type": "Television",
       "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
-      "source_grade": "Manufacturer / product",
-      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
+      "source_grade": "Manufacturer / model or series",
+      "source_status": "OFFICIAL_MODEL_IDENTITY_FOUND_FIELDS_PENDING_RECHECK_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
           "value": "43",
           "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Panel / backlight",
           "value": "LED LCD",
           "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Resolution",
           "value": "Full HD",
           "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Native Hz",
           "value": "60",
           "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Smart OS",
           "value": "Google TV",
           "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "HDMI ports",
           "value": "2",
           "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         },
         {
           "label": "Speaker W",
           "value": "20",
           "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
         }
       ],
       "buyer_use_case": "43-inch low-cost smart",
@@ -1818,16 +1837,18 @@
           "checkout_eligible": false
         },
         "flipkart": {
-          "price_inr": 21999,
+          "price_inr": null,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
           "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi%20A%20Series%202025%2043%20FHD",
           "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
-          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Exact Xiaomi A Series 43 L43MB-AFIN; historical Sep snapshot | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
+          "price_status": "UNVERIFIED_HISTORICAL_PRICE_SUPPRESSED",
+          "price_note": "Historical workbook amount ₹21999 (dated 2026-11-05); source is category/search, not exact-SKU proof. Price suppressed pending SKU verification.",
           "stock_status": "UNKNOWN",
           "live_offer": false,
-          "checkout_eligible": false
+          "checkout_eligible": false,
+          "price_evidence_status": "MISMATCHED_CATEGORY_SOURCE_NOT_VALID_PRICE_EVIDENCE",
+          "historical_unverified_price_inr": 21999
         },
         "croma": {
           "price_inr": null,
@@ -2006,16 +2027,18 @@
           "checkout_eligible": false
         },
         "croma": {
-          "price_inr": 57690,
+          "price_inr": null,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.croma.com/l/55-inch-high-definition-tv-0asz00a.html",
           "retailer_research_url": "https://www.croma.com/search/?text=LG%20QNED70%2055%202026",
           "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
-          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "LG QNED70 55, 2026 | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
+          "price_status": "UNVERIFIED_HISTORICAL_PRICE_SUPPRESSED",
+          "price_note": "Historical workbook amount ₹57690 (dated 2026-11-05); source is category/search, not exact-SKU proof. Price suppressed pending SKU verification.",
           "stock_status": "UNKNOWN",
           "live_offer": false,
-          "checkout_eligible": false
+          "checkout_eligible": false,
+          "price_evidence_status": "CATEGORY_SOURCE_NOT_EXACT_SKU_PRICE_EVIDENCE",
+          "historical_unverified_price_inr": 57690
         }
       },
       "product_status": "RESEARCH_ONLY",
@@ -2094,28 +2117,32 @@
           "checkout_eligible": false
         },
         "flipkart": {
-          "price_inr": 117831,
+          "price_inr": null,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.flipkart.com/q/samsung-neo-qled-tv",
           "retailer_research_url": "https://www.flipkart.com/search?q=Samsung%20QN90F%2055%20(2025)",
           "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
-          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Exact 55-inch QN90F model family; verify exact suffix | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
+          "price_status": "UNVERIFIED_HISTORICAL_PRICE_SUPPRESSED",
+          "price_note": "Historical workbook amount ₹117831 (dated 2026-11-05); source is category/search, not exact-SKU proof. Price suppressed pending SKU verification.",
           "stock_status": "UNKNOWN",
           "live_offer": false,
-          "checkout_eligible": false
+          "checkout_eligible": false,
+          "price_evidence_status": "CATEGORY_SOURCE_NOT_EXACT_SKU_PRICE_EVIDENCE",
+          "historical_unverified_price_inr": 117831
         },
         "croma": {
-          "price_inr": 120890,
+          "price_inr": null,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.croma.com/l/samsung-quantum-dot-55-inch-tv-0asz00a.html",
           "retailer_research_url": "https://www.croma.com/search/?text=Samsung%20QN90F%2055%20(2025)",
           "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
-          "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Samsung QN90F 55, 2025 | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
+          "price_status": "UNVERIFIED_HISTORICAL_PRICE_SUPPRESSED",
+          "price_note": "Historical workbook amount ₹120890 (dated 2026-11-05); source is category/search, not exact-SKU proof. Price suppressed pending SKU verification.",
           "stock_status": "UNKNOWN",
           "live_offer": false,
-          "checkout_eligible": false
+          "checkout_eligible": false,
+          "price_evidence_status": "CATEGORY_SOURCE_NOT_EXACT_SKU_PRICE_EVIDENCE",
+          "historical_unverified_price_inr": 120890
         }
       },
       "product_status": "RESEARCH_ONLY",
