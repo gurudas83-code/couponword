@@ -161,32 +161,8 @@
       "product_type": "Television",
       "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
       "source_grade": "Manufacturer / product",
-      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "source_status": "MANUFACTURER_FIELDS_PARTIALLY_VERIFIED_2026-11-09",
       "specifications": [
-        {
-          "label": "Size (in)",
-          "value": "65",
-          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
-        },
-        {
-          "label": "Panel / backlight",
-          "value": "QD Mini-LED",
-          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
-        },
-        {
-          "label": "Resolution",
-          "value": "4K UHD",
-          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
-        },
-        {
-          "label": "Native Hz",
-          "value": "60",
-          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
-        },
         {
           "label": "Smart OS",
           "value": "Google TV",
@@ -194,33 +170,87 @@
           "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
         },
         {
+          "label": "Size (in)",
+          "value": "65",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "QD Mini-LED",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160 (4K UHD)",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "Native Hz",
+          "value": "60",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
           "label": "HDR formats",
           "value": "Dolby Vision, HDR10+",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "HDMI ports",
-          "value": "3",
+          "value": "3 (1 eARC)",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "Speaker W",
           "value": "34",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "DLG gaming mode",
+          "value": "120Hz DLG (not native 120Hz)",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "Local dimming zones",
+          "value": "384 (65-inch)",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "Peak brightness (nits)",
+          "value": "1200",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "RAM / Storage",
+          "value": "2GB / 32GB",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "USB ports",
+          "value": "2 x USB 2.0",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         }
       ],
       "buyer_use_case": "Large bright living room",
-      "evidence_caveat": "DLG ≠ native 120Hz; 384 zones for 65in",
+      "evidence_caveat": "DLG ≠ native 120Hz; 384 zones for 65in; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=Xiaomi+S+Mini+LED+2026+65",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=Xiaomi%20S%20Mini%20LED%202026%2065",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -231,8 +261,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi+S+Mini+LED+2026+65",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi%20S%20Mini%20LED%202026%2065",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -243,8 +273,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=Xiaomi%20S%20Mini%20LED%202026%2065",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Browse-only link; NOT an exact SKU",
           "stock_status": "UNKNOWN",
@@ -267,32 +297,8 @@
       "product_type": "Television",
       "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
       "source_grade": "Manufacturer / product",
-      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "source_status": "MANUFACTURER_FIELDS_PARTIALLY_VERIFIED_2026-11-09",
       "specifications": [
-        {
-          "label": "Size (in)",
-          "value": "75",
-          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
-        },
-        {
-          "label": "Panel / backlight",
-          "value": "QD Mini-LED",
-          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
-        },
-        {
-          "label": "Resolution",
-          "value": "4K UHD",
-          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
-        },
-        {
-          "label": "Native Hz",
-          "value": "60",
-          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
-        },
         {
           "label": "Smart OS",
           "value": "Google TV",
@@ -300,33 +306,87 @@
           "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
         },
         {
+          "label": "Size (in)",
+          "value": "75",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "QD Mini-LED",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160 (4K UHD)",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "Native Hz",
+          "value": "60",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
           "label": "HDR formats",
           "value": "Dolby Vision, HDR10+",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "HDMI ports",
-          "value": "3",
+          "value": "3 (1 eARC)",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "Speaker W",
           "value": "34",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "DLG gaming mode",
+          "value": "120Hz DLG (not native 120Hz)",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "Local dimming zones",
+          "value": "512 (75-inch)",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "Peak brightness (nits)",
+          "value": "1200",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "RAM / Storage",
+          "value": "2GB / 32GB",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "USB ports",
+          "value": "2 x USB 2.0",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         }
       ],
       "buyer_use_case": "Big-screen budget Mini-LED",
-      "evidence_caveat": "512 zones for 75in; DLG not native 120Hz",
+      "evidence_caveat": "512 zones for 75in; DLG not native 120Hz; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=Xiaomi+S+Mini+LED+2026+75",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=Xiaomi%20S%20Mini%20LED%202026%2075",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -337,8 +397,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi+S+Mini+LED+2026+75",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi%20S%20Mini%20LED%202026%2075",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -349,8 +409,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=Xiaomi%20S%20Mini%20LED%202026%2075",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Browse-only link; NOT an exact SKU",
           "stock_status": "UNKNOWN",
@@ -373,7 +433,7 @@
       "product_type": "Television",
       "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
       "source_grade": "Manufacturer / product",
-      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
@@ -425,14 +485,14 @@
         }
       ],
       "buyer_use_case": "Budget Mini-LED, Alexa",
-      "evidence_caveat": "DLG 120Hz not panel rate; family specs vary by size",
+      "evidence_caveat": "DLG 120Hz not panel rate; family specs vary by size; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=Xiaomi+FX+Mini+LED+Fire+TV+55",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=Xiaomi%20FX%20Mini%20LED%20Fire%20TV%2055",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -443,10 +503,10 @@
           "price_inr": 44999,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
-          "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi+FX+Mini+LED+Fire+TV+55",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi%20FX%20Mini%20LED%20Fire%20TV%2055",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Xiaomi FX 55 L55MC-FSMIN; listing snapshot dated 2026-09-11; historical",
+          "price_note": "Xiaomi FX 55 L55MC-FSMIN; listing snapshot dated 2026-09-11; historical | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
           "stock_status": "UNKNOWN",
           "live_offer": false,
           "checkout_eligible": false
@@ -455,8 +515,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=Xiaomi%20FX%20Mini%20LED%20Fire%20TV%2055",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Browse-only link; NOT an exact SKU",
           "stock_status": "UNKNOWN",
@@ -479,7 +539,7 @@
       "product_type": "Television",
       "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
       "source_grade": "Manufacturer / product",
-      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
@@ -531,14 +591,14 @@
         }
       ],
       "buyer_use_case": "65-inch value TV",
-      "evidence_caveat": "Check Alexa vs Google TV; Fire TV software",
+      "evidence_caveat": "Check Alexa vs Google TV; Fire TV software; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=Xiaomi+FX+Mini+LED+Fire+TV+65",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=Xiaomi%20FX%20Mini%20LED%20Fire%20TV%2065",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -549,8 +609,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi+FX+Mini+LED+Fire+TV+65",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi%20FX%20Mini%20LED%20Fire%20TV%2065",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -561,8 +621,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=Xiaomi%20FX%20Mini%20LED%20Fire%20TV%2065",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Browse-only link; NOT an exact SKU",
           "stock_status": "UNKNOWN",
@@ -581,70 +641,76 @@
       "category": "tvs",
       "brand": "Samsung",
       "model": "QN80H 55 (QA55QN80HAULXL)",
-      "model_code": "",
+      "model_code": "QA55QN80HAULXL",
       "product_type": "Television",
-      "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
+      "source_url": "https://www.samsung.com/in/multistore/in_family/pd.QA55QN80HAULXL/",
       "source_grade": "Manufacturer / product",
-      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "source_status": "MANUFACTURER_FIELDS_PARTIALLY_VERIFIED_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
           "value": "55",
-          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.samsung.com/in/multistore/in_family/pd.QA55QN80HAULXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "Panel / backlight",
-          "value": "Neo QLED Mini-LED",
-          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "value": "Neo QLED Quantum Mini LED",
+          "source_url": "https://www.samsung.com/in/multistore/in_family/pd.QA55QN80HAULXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "Resolution",
-          "value": "4K UHD",
-          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "value": "3840 x 2160 (4K UHD)",
+          "source_url": "https://www.samsung.com/in/multistore/in_family/pd.QA55QN80HAULXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "Native Hz",
-          "value": "144",
-          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "value": "144 (VRR supported)",
+          "source_url": "https://www.samsung.com/in/multistore/in_family/pd.QA55QN80HAULXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "Smart OS",
           "value": "Tizen",
-          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.samsung.com/in/multistore/in_family/pd.QA55QN80HAULXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "HDR formats",
-          "value": "HDR10+, NQ HDR+",
-          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "value": "NQ HDR+, HDR10+",
+          "source_url": "https://www.samsung.com/in/multistore/in_family/pd.QA55QN80HAULXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "HDMI ports",
-          "value": "4",
-          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "value": "4 (4K 144Hz)",
+          "source_url": "https://www.samsung.com/in/multistore/in_family/pd.QA55QN80HAULXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "Speaker W",
           "value": "30",
-          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn80h-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn80haulxl/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.samsung.com/in/multistore/in_family/pd.QA55QN80HAULXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "USB ports",
+          "value": "2 x USB-A",
+          "source_url": "https://www.samsung.com/in/multistore/in_family/pd.QA55QN80HAULXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         }
       ],
       "buyer_use_case": "Bright-room high-refresh gaming",
-      "evidence_caveat": "144Hz listed VRR, verify console modes",
+      "evidence_caveat": "144Hz listed VRR, verify console modes; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=Samsung+QN80H+55+%28QA55QN80HAULXL%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=Samsung%20QA55QN80HAULXL",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -655,10 +721,10 @@
           "price_inr": 84781,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.flipkart.com/q/samsung-neo-qled-tv",
-          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung+QN80H+55+%28QA55QN80HAULXL%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung%20QA55QN80HAULXL",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Exact QA55QN80HAULXL identified on Flipkart category results; location-dependent",
+          "price_note": "Exact QA55QN80HAULXL identified on Flipkart category results; location-dependent | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
           "stock_status": "UNKNOWN",
           "live_offer": false,
           "checkout_eligible": false
@@ -667,10 +733,10 @@
           "price_inr": 98290,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.croma.com/l/samsung-quantum-dot-55-inch-tv-0asz00a.html",
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=Samsung%20QA55QN80HAULXL",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "QN80H 55-inch public listing dated 2026-11-05, location-dependent",
+          "price_note": "QN80H 55-inch public listing dated 2026-11-05, location-dependent | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
           "stock_status": "UNKNOWN",
           "live_offer": false,
           "checkout_eligible": false
@@ -687,11 +753,11 @@
       "category": "tvs",
       "brand": "LG",
       "model": "UT80 43 (43UT80506LA)",
-      "model_code": "",
+      "model_code": "43UT80506LA",
       "product_type": "Television",
       "source_url": "https://www.lg.com/in/tv-soundbars/4k-uhd-tvs/43ut80506la/",
       "source_grade": "Manufacturer / product",
-      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
@@ -743,14 +809,14 @@
         }
       ],
       "buyer_use_case": "Budget 43-inch 4K",
-      "evidence_caveat": "Native 60Hz; ALLM is not VRR",
+      "evidence_caveat": "Native 60Hz; ALLM is not VRR; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=LG+UT80+43+%2843UT80506LA%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=LG%2043UT80506LA",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -761,8 +827,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.flipkart.com/search?q=LG+UT80+43+%2843UT80506LA%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=LG%2043UT80506LA",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -773,8 +839,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=LG%2043UT80506LA",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Browse-only link; NOT an exact SKU",
           "stock_status": "UNKNOWN",
@@ -793,11 +859,11 @@
       "category": "tvs",
       "brand": "Sony",
       "model": "BRAVIA 8 II 55 (K-55XR80M2)",
-      "model_code": "",
+      "model_code": "K-55XR80M2",
       "product_type": "Television",
       "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
       "source_grade": "Manufacturer / product",
-      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
@@ -843,14 +909,14 @@
         }
       ],
       "buyer_use_case": "Premium movies and PS5",
-      "evidence_caveat": "2025 model; manufacturer states VRR HDMI 3/4",
+      "evidence_caveat": "2025 model; manufacturer states VRR HDMI 3/4; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=Sony+BRAVIA+8+II+55+%28K-55XR80M2%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=Sony%20K-55XR80M2",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -861,8 +927,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.flipkart.com/search?q=Sony+BRAVIA+8+II+55+%28K-55XR80M2%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Sony%20K-55XR80M2",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -873,10 +939,10 @@
           "price_inr": 259990,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.croma.com/campaign/exchange-deals-tv/c/7042",
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=Sony%20K-55XR80M2",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Sony BRAVIA 8 II 55; 2025 model listing",
+          "price_note": "Sony BRAVIA 8 II 55; 2025 model listing | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
           "stock_status": "UNKNOWN",
           "live_offer": false,
           "checkout_eligible": false
@@ -893,11 +959,11 @@
       "category": "tvs",
       "brand": "Samsung",
       "model": "Crystal UE81 43 (UA43UE81AFULXL)",
-      "model_code": "",
+      "model_code": "UA43UE81AFULXL",
       "product_type": "Television",
       "source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
       "source_grade": "Retailer model listing",
-      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
@@ -949,14 +1015,14 @@
         }
       ],
       "buyer_use_case": "Entry 43-inch 4K",
-      "evidence_caveat": "Retailer-listed spec; check exact suffix before buying",
+      "evidence_caveat": "Retailer-listed spec; check exact suffix before buying; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=Samsung+Crystal+UE81+43+%28UA43UE81AFULXL%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=Samsung%20UA43UE81AFULXL",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -967,10 +1033,10 @@
           "price_inr": 30490,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
-          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung+Crystal+UE81+43+%28UA43UE81AFULXL%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung%20UA43UE81AFULXL",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Exact UA43UE81AFULXL; listing snapshot",
+          "price_note": "Exact UA43UE81AFULXL; listing snapshot | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
           "stock_status": "UNKNOWN",
           "live_offer": false,
           "checkout_eligible": false
@@ -979,10 +1045,10 @@
           "price_inr": 30490,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.croma.com/campaign/limited-time-exchange-offers-tv/c/7098",
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=Samsung%20UA43UE81AFULXL",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Samsung UE81A 43; exact series; suffix recheck",
+          "price_note": "Samsung UE81A 43; exact series; suffix recheck | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
           "stock_status": "UNKNOWN",
           "live_offer": false,
           "checkout_eligible": false
@@ -999,11 +1065,11 @@
       "category": "tvs",
       "brand": "Samsung",
       "model": "QEF6 55 (QA55QEF6AULXL)",
-      "model_code": "",
+      "model_code": "QA55QEF6AULXL",
       "product_type": "Television",
       "source_url": "https://www.flipkart.com/q/samsung-55-inch-smart-tv",
       "source_grade": "Retailer exact model listing",
-      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
@@ -1055,14 +1121,14 @@
         }
       ],
       "buyer_use_case": "55-inch value QLED",
-      "evidence_caveat": "QEF1 vs QEF6 naming differs; verify code",
+      "evidence_caveat": "QEF1 vs QEF6 naming differs; verify code; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=Samsung+QEF6+55+%28QA55QEF6AULXL%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=Samsung%20QA55QEF6AULXL",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -1073,10 +1139,10 @@
           "price_inr": 42760,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.flipkart.com/q/samsung-55-inch-smart-tv",
-          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung+QEF6+55+%28QA55QEF6AULXL%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung%20QA55QEF6AULXL",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Exact QA55QEF6AULXL; listing snapshot",
+          "price_note": "Exact QA55QEF6AULXL; listing snapshot | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
           "stock_status": "UNKNOWN",
           "live_offer": false,
           "checkout_eligible": false
@@ -1085,8 +1151,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=Samsung%20QA55QEF6AULXL",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Browse-only link; NOT an exact SKU",
           "stock_status": "UNKNOWN",
@@ -1105,39 +1171,15 @@
       "category": "tvs",
       "brand": "TCL",
       "model": "C6K 55 (55C6K)",
-      "model_code": "",
+      "model_code": "55C6K",
       "product_type": "Television",
-      "source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
-      "source_grade": "Retailer exact model listing",
-      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "source_url": "https://www.tcl.com/in/en/tvs/55c6k",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MANUFACTURER_FIELDS_PARTIALLY_VERIFIED_2026-11-09",
       "specifications": [
-        {
-          "label": "Size (in)",
-          "value": "55",
-          "source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
-        },
-        {
-          "label": "Panel / backlight",
-          "value": "QD Mini-LED",
-          "source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
-        },
         {
           "label": "Resolution",
           "value": "4K UHD",
-          "source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
-        },
-        {
-          "label": "Native Hz",
-          "value": "120",
-          "source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
-        },
-        {
-          "label": "Smart OS",
-          "value": "Google TV",
           "source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
           "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
         },
@@ -1158,17 +1200,41 @@
           "value": "40",
           "source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
           "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.tcl.com/in/en/tvs/55c6k",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "QD Mini-LED",
+          "source_url": "https://www.tcl.com/in/en/tvs/55c6k",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "Native Hz",
+          "value": "144",
+          "source_url": "https://www.tcl.com/in/en/tvs/55c6k",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Google TV",
+          "source_url": "https://www.tcl.com/in/en/tvs/55c6k",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         }
       ],
       "buyer_use_case": "Budget higher-refresh Mini-LED",
-      "evidence_caveat": "Croma lists 120Hz; HDMI/gaming compatibility check",
+      "evidence_caveat": "Croma lists 120Hz; HDMI/gaming compatibility check; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=TCL+C6K+55+%2855C6K%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=TCL%2055C6K",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -1179,8 +1245,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.flipkart.com/search?q=TCL+C6K+55+%2855C6K%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=TCL%2055C6K",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -1191,10 +1257,10 @@
           "price_inr": 61990,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=TCL%2055C6K",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Exact 55C6K",
+          "price_note": "Exact 55C6K | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
           "stock_status": "UNKNOWN",
           "live_offer": false,
           "checkout_eligible": false
@@ -1211,11 +1277,11 @@
       "category": "tvs",
       "brand": "TCL",
       "model": "P6L 55 (55P6L)",
-      "model_code": "",
+      "model_code": "55P6L",
       "product_type": "Television",
       "source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
       "source_grade": "Retailer exact model listing",
-      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
@@ -1255,14 +1321,14 @@
         }
       ],
       "buyer_use_case": "Entry 55-inch TV",
-      "evidence_caveat": "Native panel refresh not certified in this workbook",
+      "evidence_caveat": "Native panel refresh not certified in this workbook; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=TCL+P6L+55+%2855P6L%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=TCL%2055P6L",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -1273,10 +1339,10 @@
           "price_inr": 30999,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://1.www.flipkart.com/q/mi-55-inch-tv",
-          "retailer_research_url": "https://www.flipkart.com/search?q=TCL+P6L+55+%2855P6L%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=TCL%2055P6L",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Exact TCL 55P6L; page updated 2026-11-05",
+          "price_note": "Exact TCL 55P6L; page updated 2026-11-05 | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
           "stock_status": "UNKNOWN",
           "live_offer": false,
           "checkout_eligible": false
@@ -1285,8 +1351,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=TCL%2055P6L",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Browse-only link; NOT an exact SKU",
           "stock_status": "UNKNOWN",
@@ -1309,7 +1375,7 @@
       "product_type": "Television",
       "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
       "source_grade": "Editorial specification",
-      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
@@ -1355,14 +1421,14 @@
         }
       ],
       "buyer_use_case": "OLED gaming and cinema",
-      "evidence_caveat": "165Hz VRR claim depends on input; check exact model code",
+      "evidence_caveat": "165Hz VRR claim depends on input; check exact model code; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=LG+OLED+evo+C6+55",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=LG%20OLED%20evo%20C6%2055",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -1373,8 +1439,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.flipkart.com/search?q=LG+OLED+evo+C6+55",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=LG%20OLED%20evo%20C6%2055",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -1385,8 +1451,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=LG%20OLED%20evo%20C6%2055",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Browse-only link; NOT an exact SKU",
           "stock_status": "UNKNOWN",
@@ -1407,31 +1473,13 @@
       "model": "OLED evo G6 55",
       "model_code": "",
       "product_type": "Television",
-      "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
-      "source_grade": "Editorial specification",
-      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "source_url": "https://www.lg.com/in/tv-soundbars/oled/",
+      "source_grade": "Manufacturer / product",
+      "source_status": "MANUFACTURER_SERIES_REFERENCE_PARTIAL_2026-11-09",
       "specifications": [
-        {
-          "label": "Size (in)",
-          "value": "55",
-          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
-        },
-        {
-          "label": "Panel / backlight",
-          "value": "Tandem OLED evo",
-          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
-        },
         {
           "label": "Resolution",
           "value": "4K UHD",
-          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
-        },
-        {
-          "label": "Native Hz",
-          "value": "120",
           "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
           "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
         },
@@ -1446,17 +1494,35 @@
           "value": "Dolby Vision",
           "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
           "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled/",
+          "evidence": "MANUFACTURER_SERIES_REFERENCE_2026-11-09"
+        },
+        {
+          "label": "Panel / backlight",
+          "value": "OLED evo",
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled/",
+          "evidence": "MANUFACTURER_SERIES_REFERENCE_2026-11-09"
+        },
+        {
+          "label": "Native Hz",
+          "value": "165 (supported gaming input)",
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled/",
+          "evidence": "MANUFACTURER_SERIES_REFERENCE_2026-11-09"
         }
       ],
       "buyer_use_case": "Premium bright-room OLED",
-      "evidence_caveat": "Confirm wall-mount / stand and precise SKU",
+      "evidence_caveat": "Confirm wall-mount / stand and precise SKU; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=LG+OLED+evo+G6+55",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=LG%20OLED%20evo%20G6%2055",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -1467,8 +1533,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.flipkart.com/search?q=LG+OLED+evo+G6+55",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=LG%20OLED%20evo%20G6%2055",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -1479,8 +1545,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=LG%20OLED%20evo%20G6%2055",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Browse-only link; NOT an exact SKU",
           "stock_status": "UNKNOWN",
@@ -1503,7 +1569,7 @@
       "product_type": "Television",
       "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-lcd-tvs-android-/k-43s20/specifications",
       "source_grade": "Manufacturer / product",
-      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
@@ -1555,14 +1621,14 @@
         }
       ],
       "buyer_use_case": "Small-room 4K movies",
-      "evidence_caveat": "Motionflow marketing not native refresh",
+      "evidence_caveat": "Motionflow marketing not native refresh; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=Sony+BRAVIA+2+K-43S20+43",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=Sony%20BRAVIA%202%20K-43S20%2043",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -1573,8 +1639,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.flipkart.com/search?q=Sony+BRAVIA+2+K-43S20+43",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Sony%20BRAVIA%202%20K-43S20%2043",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -1585,8 +1651,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=Sony%20BRAVIA%202%20K-43S20%2043",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Browse-only link; NOT an exact SKU",
           "stock_status": "UNKNOWN",
@@ -1605,11 +1671,11 @@
       "category": "tvs",
       "brand": "Samsung",
       "model": "H4500F 32 (UA32H4500FUXXL)",
-      "model_code": "",
+      "model_code": "UA32H4500FUXXL",
       "product_type": "Television",
       "source_url": "https://www.gadgets360.com/tv/tv-finder",
       "source_grade": "Editorial model listing",
-      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
@@ -1637,14 +1703,14 @@
         }
       ],
       "buyer_use_case": "Low-cost bedroom TV",
-      "evidence_caveat": "HD Ready only; native Hz / ports not verified",
+      "evidence_caveat": "HD Ready only; native Hz / ports not verified; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=Samsung+H4500F+32+%28UA32H4500FUXXL%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=Samsung%20UA32H4500FUXXL",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -1655,8 +1721,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung+H4500F+32+%28UA32H4500FUXXL%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung%20UA32H4500FUXXL",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -1667,8 +1733,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=Samsung%20UA32H4500FUXXL",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Browse-only link; NOT an exact SKU",
           "stock_status": "UNKNOWN",
@@ -1691,7 +1757,7 @@
       "product_type": "Television",
       "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
       "source_grade": "Manufacturer / product",
-      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
@@ -1737,14 +1803,14 @@
         }
       ],
       "buyer_use_case": "43-inch low-cost smart",
-      "evidence_caveat": "Full HD, not 4K; confirm Google/patchwall edition",
+      "evidence_caveat": "Full HD, not 4K; confirm Google/patchwall edition; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=Xiaomi+A+Series+2025+43+FHD",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=Xiaomi%20A%20Series%202025%2043%20FHD",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -1755,10 +1821,10 @@
           "price_inr": 21999,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
-          "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi+A+Series+2025+43+FHD",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi%20A%20Series%202025%2043%20FHD",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Exact Xiaomi A Series 43 L43MB-AFIN; historical Sep snapshot",
+          "price_note": "Exact Xiaomi A Series 43 L43MB-AFIN; historical Sep snapshot | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
           "stock_status": "UNKNOWN",
           "live_offer": false,
           "checkout_eligible": false
@@ -1767,8 +1833,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=Xiaomi%20A%20Series%202025%2043%20FHD",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Browse-only link; NOT an exact SKU",
           "stock_status": "UNKNOWN",
@@ -1791,7 +1857,7 @@
       "product_type": "Television",
       "source_url": "https://www.mysmartprice.com/gear/appliances/best-65-inch-tvs-for-picture-quality-in-india-2026/",
       "source_grade": "Editorial spec",
-      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
@@ -1831,14 +1897,14 @@
         }
       ],
       "buyer_use_case": "65-inch gaming/value Mini-LED",
-      "evidence_caveat": "Native refresh from secondary test; model matching needed",
+      "evidence_caveat": "Native refresh from secondary test; model matching needed; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=TCL+Q6C+65+QD+Mini-LED",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=TCL%20Q6C%2065%20QD%20Mini-LED",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -1849,8 +1915,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.flipkart.com/search?q=TCL+Q6C+65+QD+Mini-LED",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=TCL%20Q6C%2065%20QD%20Mini-LED",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -1861,8 +1927,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=TCL%20Q6C%2065%20QD%20Mini-LED",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Browse-only link; NOT an exact SKU",
           "stock_status": "UNKNOWN",
@@ -1885,7 +1951,7 @@
       "product_type": "Television",
       "source_url": "https://www.croma.com/l/55-inch-high-definition-tv-0asz00a.html",
       "source_grade": "Retailer listing",
-      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
@@ -1913,14 +1979,14 @@
         }
       ],
       "buyer_use_case": "Midrange QNED display",
-      "evidence_caveat": "Native panel Hz not independently confirmed",
+      "evidence_caveat": "Native panel Hz not independently confirmed; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=LG+QNED70+55+2026",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=LG%20QNED70%2055%202026",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -1931,8 +1997,8 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.flipkart.com/search?q=LG+QNED70+55+2026",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=LG%20QNED70%2055%202026",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -1943,10 +2009,10 @@
           "price_inr": 57690,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.croma.com/l/55-inch-high-definition-tv-0asz00a.html",
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=LG%20QNED70%2055%202026",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "LG QNED70 55, 2026",
+          "price_note": "LG QNED70 55, 2026 | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
           "stock_status": "UNKNOWN",
           "live_offer": false,
           "checkout_eligible": false
@@ -1967,7 +2033,7 @@
       "product_type": "Television",
       "source_url": "https://www.91mobiles.com/reviews/best-qled-mini-led-tvs-india-2026/",
       "source_grade": "Editorial specification",
-      "source_status": "SECONDARY_OR_RETAILER_REFERENCE",
+      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
@@ -2013,14 +2079,14 @@
         }
       ],
       "buyer_use_case": "Bright-room gaming & sport",
-      "evidence_caveat": "144Hz from family/editorial; confirm Indian SKU",
+      "evidence_caveat": "144Hz from family/editorial; confirm Indian SKU; exact SKU retailer links not verified; merchant links are model-targeted searches only",
       "retailers": {
         "amazon": {
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.amazon.in/s?k=Samsung+QN90F+55+%282025%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.amazon.in/s?k=Samsung%20QN90F%2055%20(2025)",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "NOT_VERIFIED",
           "price_note": "Search link only; no current-price evidence",
           "stock_status": "UNKNOWN",
@@ -2031,10 +2097,10 @@
           "price_inr": 117831,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.flipkart.com/q/samsung-neo-qled-tv",
-          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung+QN90F+55+%282025%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung%20QN90F%2055%20(2025)",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Exact 55-inch QN90F model family; verify exact suffix",
+          "price_note": "Exact 55-inch QN90F model family; verify exact suffix | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
           "stock_status": "UNKNOWN",
           "live_offer": false,
           "checkout_eligible": false
@@ -2043,10 +2109,10 @@
           "price_inr": 120890,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.croma.com/l/samsung-quantum-dot-55-inch-tv-0asz00a.html",
-          "retailer_research_url": "https://www.croma.com/entertainment/television/c/997",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/search/?text=Samsung%20QN90F%2055%20(2025)",
+          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
           "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Samsung QN90F 55, 2025",
+          "price_note": "Samsung QN90F 55, 2025 | Historical indicative quote; not a current exact-SKU offer; verify source before purchase",
           "stock_status": "UNKNOWN",
           "live_offer": false,
           "checkout_eligible": false
