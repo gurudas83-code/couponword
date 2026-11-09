@@ -727,7 +727,7 @@
       "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
       "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_CHECKOUT_VERIFIED",
       "specifications": [],
-      "specification_status": "RESEARCH_CANDIDATE_UNVERIFIED",
+      "specification_status": "OFFICIAL_MODEL_IDENTITY_ONLY_TECHNICAL_FIELDS_PENDING",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -749,12 +749,14 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "verification_blockers": [
-        "OFFICIAL_EXACT_MANUFACTURER_MODEL_SPECIFICATIONS_NOT_VERIFIED",
-        "EXACT_RETAILER_PRODUCT_LINKS_NOT_VERIFIED",
-        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+        "OFFICIAL_TECHNICAL_FIELDS_NOT_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
       ],
       "reviewed_at": "2026-11-09",
-      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "manufacturer_support_url": "https://www.samsung.com/in/support/model/UA43UE84AHULXL/",
+      "manufacturer_model_identity_status": "OFFICIAL_SAMSUNG_INDIA_SUPPORT_EXACT_SKU_CONFIRMED"
     },
     {
       "id": "POPULAR_TV_10",
@@ -827,7 +829,9 @@
         "OFFICIAL_EXACT_MANUFACTURER_MODEL_SPECIFICATIONS_NOT_VERIFIED",
         "EXACT_RETAILER_PRODUCT_LINKS_NOT_VERIFIED",
         "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+      ],
+      "manufacturer_series_source_url": "https://www.sony.co.in/bravia/products/bravia-2m2-s25m2",
+      "manufacturer_model_identity_status": "OFFICIAL_SERIES_SOURCE_55_INCH_VARIANT_PENDING"
     },
     {
       "id": "POPULAR_TV_11",
@@ -839,7 +843,7 @@
       "observed_at": "2026-11-09",
       "indicative_price_inr": 25990,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
-      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
       "specifications": [],
       "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
       "image_url": null,
@@ -863,10 +867,12 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "verification_blockers": [
-        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
-        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
-        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
     },
     {
       "id": "POPULAR_TV_12",
@@ -878,7 +884,7 @@
       "observed_at": "2026-11-09",
       "indicative_price_inr": 39090,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
-      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
       "specifications": [],
       "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
       "image_url": null,
@@ -902,10 +908,12 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "verification_blockers": [
-        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
-        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
-        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
     },
     {
       "id": "POPULAR_TV_13",
@@ -917,7 +925,7 @@
       "observed_at": "2026-11-09",
       "indicative_price_inr": 40990,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
-      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
       "specifications": [],
       "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
       "image_url": null,
@@ -941,10 +949,12 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "verification_blockers": [
-        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
-        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
-        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
     },
     {
       "id": "POPULAR_TV_14",
@@ -956,7 +966,7 @@
       "observed_at": "2026-11-09",
       "indicative_price_inr": 16990,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
-      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
       "specifications": [],
       "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
       "image_url": null,
@@ -980,10 +990,12 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "verification_blockers": [
-        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
-        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
-        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
     },
     {
       "id": "POPULAR_TV_15",
@@ -995,7 +1007,7 @@
       "observed_at": "2026-11-09",
       "indicative_price_inr": 90230,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
-      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
       "specifications": [],
       "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
       "image_url": null,
@@ -1019,10 +1031,12 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "verification_blockers": [
-        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
-        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
-        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
     },
     {
       "id": "POPULAR_TV_16",
@@ -1034,7 +1048,7 @@
       "observed_at": "2026-11-09",
       "indicative_price_inr": 45719,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
-      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
       "specifications": [],
       "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
       "image_url": null,
@@ -1058,10 +1072,12 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "verification_blockers": [
-        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
-        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
-        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
     },
     {
       "id": "POPULAR_TV_17",
@@ -1073,7 +1089,7 @@
       "observed_at": "2026-11-09",
       "indicative_price_inr": 56590,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
-      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
       "specifications": [],
       "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
       "image_url": null,
@@ -1097,10 +1113,12 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "verification_blockers": [
-        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
-        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
-        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
     },
     {
       "id": "POPULAR_TV_18",
@@ -1112,7 +1130,7 @@
       "observed_at": "2026-11-09",
       "indicative_price_inr": 43976,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
-      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
       "specifications": [],
       "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
       "image_url": null,
@@ -1136,10 +1154,12 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "verification_blockers": [
-        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
-        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
-        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
     },
     {
       "id": "POPULAR_TV_19",
@@ -1151,7 +1171,7 @@
       "observed_at": "2026-11-09",
       "indicative_price_inr": 128990,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
-      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
       "specifications": [],
       "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
       "image_url": null,
@@ -1175,10 +1195,12 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "verification_blockers": [
-        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
-        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
-        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
     },
     {
       "id": "POPULAR_TV_20",
@@ -1190,7 +1212,7 @@
       "observed_at": "2026-11-09",
       "indicative_price_inr": null,
       "price_source": null,
-      "price_status": "NOT_VERIFIED",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
       "specifications": [],
       "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
       "image_url": null,
@@ -1214,10 +1236,12 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "verification_blockers": [
-        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
-        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
-        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
-      ]
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
     }
   ],
   "quality_gate": {
@@ -1244,6 +1268,10 @@
       "POPULAR_TV_01",
       "POPULAR_TV_02"
     ],
-    "blocked_on": "Missing exact merchant prices and image reuse permissions; do not merge as live commerce"
+    "blocked_on": "Missing exact merchant prices and image reuse permissions; do not merge as live commerce",
+    "all_twenty_records_audited_for_publication_gates": true,
+    "next_ten_reviewed": 10,
+    "next_ten_verified_retailer_checkout_prices": 0,
+    "next_ten_licensed_images": 0
   }
 }
