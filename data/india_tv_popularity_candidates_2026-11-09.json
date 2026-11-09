@@ -18,63 +18,67 @@
       "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
       "specifications": [
         {
-          "label": "Panel",
-          "value": "QLED",
+          "label": "Size (in)",
+          "value": "55",
           "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
-          "verified_at": "2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
+        },
+        {
+          "label": "Panel",
+          "value": "4K QLED",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
         },
         {
           "label": "Resolution",
-          "value": "3840 x 2160 (4K UHD)",
+          "value": "3840 x 2160",
           "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
-          "verified_at": "2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
+        },
+        {
+          "label": "HDR",
+          "value": "Dolby Vision, HDR10+",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
         },
         {
           "label": "Audio output",
           "value": "34W",
           "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
-          "verified_at": "2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
         },
         {
-          "label": "RAM / storage",
+          "label": "RAM / Storage",
           "value": "2GB / 32GB",
           "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
-          "verified_at": "2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
         },
         {
           "label": "HDMI",
-          "value": "3 (1 eARC)",
+          "value": "3 (one eARC)",
           "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
-          "verified_at": "2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
         },
         {
           "label": "USB",
-          "value": "2 x USB 2.0",
+          "value": "2",
           "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
-          "verified_at": "2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
         },
         {
           "label": "Smart OS",
           "value": "Google TV",
           "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
-          "verified_at": "2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
         },
         {
           "label": "Game Booster",
-          "value": "120Hz booster (not proof of native 120Hz)",
+          "value": "120Hz booster; native refresh not established",
           "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
-          "evidence": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
-          "verified_at": "2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
         }
       ],
-      "specification_status": "OFFICIAL_MANUFACTURER_SERIES_EXACT_SIZE",
+      "specification_status": "MANUFACTURER_55_INCH_FIELDS_VERIFIED_NATIVE_REFRESH_UNCONFIRMED",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -97,10 +101,16 @@
       "checkout_eligible": false,
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
-      "manufacturer_source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/specs/",
+      "manufacturer_source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
       "technical_source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
       "technical_reviewed_at": "2026-11-09",
-      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified."
+      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified.",
+      "price_verification": {
+        "as_of": "2026-11-09",
+        "amazon": "NOT_CONFIRMED_LIVE_PRICE",
+        "flipkart": "NOT_CONFIRMED_LIVE_PRICE",
+        "croma": "NOT_CONFIRMED_LIVE_PRICE"
+      }
     },
     {
       "id": "POPULAR_TV_02",
@@ -117,47 +127,65 @@
         {
           "label": "Size (in)",
           "value": "55",
-          "source_url": "https://www.smartprix.com/tvs/lumio_vision_7_2026_55_inch_ul_vs_motorola_55uhdgqmgbnq_55_inch_-cpd1ef8j5m65_pd171jethuy.php",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
-          "verified_at": "2026-11-09"
+          "source_url": "https://lumio.co.in/faq",
+          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
         },
         {
           "label": "Panel",
           "value": "QLED",
-          "source_url": "https://www.smartprix.com/tvs/lumio_vision_7_2026_55_inch_ul_vs_motorola_55uhdgqmgbnq_55_inch_-cpd1ef8j5m65_pd171jethuy.php",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
-          "verified_at": "2026-11-09"
+          "source_url": "https://lumio.co.in/faq",
+          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
         },
         {
           "label": "Resolution",
-          "value": "3840 x 2160 (4K UHD)",
-          "source_url": "https://www.smartprix.com/tvs/lumio_vision_7_2026_55_inch_ul_vs_motorola_55uhdgqmgbnq_55_inch_-cpd1ef8j5m65_pd171jethuy.php",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
-          "verified_at": "2026-11-09"
+          "value": "3840 x 2160",
+          "source_url": "https://lumio.co.in/faq",
+          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
         },
         {
-          "label": "Native refresh rate",
-          "value": "60Hz",
-          "source_url": "https://www.smartprix.com/tvs/lumio_vision_7_2026_55_inch_ul_vs_motorola_55uhdgqmgbnq_55_inch_-cpd1ef8j5m65_pd171jethuy.php",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
-          "verified_at": "2026-11-09"
+          "label": "Smart OS",
+          "value": "Google TV",
+          "source_url": "https://lumio.co.in/faq",
+          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
         },
         {
           "label": "HDR",
-          "value": "HDR10, HLG, Dolby Vision",
-          "source_url": "https://www.smartprix.com/tvs/lumio_vision_7_2026_55_inch_ul_vs_motorola_55uhdgqmgbnq_55_inch_-cpd1ef8j5m65_pd171jethuy.php",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
-          "verified_at": "2026-11-09"
+          "value": "Dolby Vision, HDR10, HLG",
+          "source_url": "https://lumio.co.in/faq",
+          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
         },
         {
-          "label": "Brightness",
-          "value": "Up to 400 nits (third-party listing)",
-          "source_url": "https://www.smartprix.com/tvs/lumio_vision_7_2026_55_inch_ul_vs_motorola_55uhdgqmgbnq_55_inch_-cpd1ef8j5m65_pd171jethuy.php",
-          "evidence": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
-          "verified_at": "2026-11-09"
+          "label": "HDMI",
+          "value": "3 (HDMI 3 eARC and ALLM)",
+          "source_url": "https://lumio.co.in/faq",
+          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
+        },
+        {
+          "label": "USB",
+          "value": "3 (one USB 3.0, two USB 2.0)",
+          "source_url": "https://lumio.co.in/faq",
+          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
+        },
+        {
+          "label": "Bluetooth",
+          "value": "5.0",
+          "source_url": "https://lumio.co.in/faq",
+          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
+        },
+        {
+          "label": "Storage",
+          "value": "64GB",
+          "source_url": "https://lumio.co.in/faq",
+          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
+        },
+        {
+          "label": "RAM",
+          "value": "Up to 3GB (series claim, exact variant unconfirmed)",
+          "source_url": "https://lumio.co.in/faq",
+          "evidence": "OFFICIAL_MANUFACTURER_VISION_7_SERIES_NOT_EXACT_2026_SKU"
         }
       ],
-      "specification_status": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+      "specification_status": "OFFICIAL_SERIES_FIELDS_EXACT_2026_SKU_PENDING",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -185,7 +213,16 @@
       ],
       "technical_source_url": "https://www.smartprix.com/tvs/lumio_vision_7_2026_55_inch_ul_vs_motorola_55uhdgqmgbnq_55_inch_-cpd1ef8j5m65_pd171jethuy.php",
       "technical_reviewed_at": "2026-11-09",
-      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified."
+      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified.",
+      "manufacturer_source_url": "https://lumio.co.in/faq",
+      "manufacturer_list_price_inr": 42999,
+      "manufacturer_list_price_scope": "Vision 7 55 (not necessarily 2026 FTW3-ADSJ); pre-discount list price",
+      "price_verification": {
+        "as_of": "2026-11-09",
+        "amazon": "NOT_CONFIRMED_LIVE_PRICE",
+        "flipkart": "NOT_CONFIRMED_LIVE_PRICE",
+        "croma": "NOT_CONFIRMED_LIVE_PRICE"
+      }
     },
     {
       "id": "POPULAR_TV_03",
@@ -270,7 +307,7 @@
           "verified_at": "2026-11-09"
         }
       ],
-      "specification_status": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+      "specification_status": "THIRD_PARTY_OR_RETAILER_FIELDS_ONLY_MANUFACTURER_EXACT_MODEL_NOT_VERIFIED",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -298,7 +335,13 @@
       ],
       "technical_source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
       "technical_reviewed_at": "2026-11-09",
-      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified."
+      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified.",
+      "price_verification": {
+        "as_of": "2026-11-09",
+        "amazon": "NOT_CONFIRMED_LIVE_PRICE",
+        "flipkart": "NOT_CONFIRMED_LIVE_PRICE",
+        "croma": "NOT_CONFIRMED_LIVE_PRICE"
+      }
     },
     {
       "id": "POPULAR_TV_04",
@@ -369,7 +412,7 @@
           "verified_at": "2026-11-09"
         }
       ],
-      "specification_status": "EXACT_RETAILER_SKU_NOT_MANUFACTURER",
+      "specification_status": "THIRD_PARTY_OR_RETAILER_FIELDS_ONLY_MANUFACTURER_EXACT_MODEL_NOT_VERIFIED",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -400,7 +443,13 @@
       },
       "technical_source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
       "technical_reviewed_at": "2026-11-09",
-      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified."
+      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified.",
+      "price_verification": {
+        "as_of": "2026-11-09",
+        "amazon": "NOT_CONFIRMED_LIVE_PRICE",
+        "flipkart": "NOT_CONFIRMED_LIVE_PRICE",
+        "croma": "NOT_CONFIRMED_LIVE_PRICE"
+      }
     },
     {
       "id": "POPULAR_TV_05",
@@ -457,7 +506,7 @@
           "verified_at": "2026-11-09"
         }
       ],
-      "specification_status": "THIRD_PARTY_EXACT_MODEL_NOT_MANUFACTURER",
+      "specification_status": "THIRD_PARTY_OR_RETAILER_FIELDS_ONLY_MANUFACTURER_EXACT_MODEL_NOT_VERIFIED",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -485,7 +534,13 @@
       ],
       "technical_source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
       "technical_reviewed_at": "2026-11-09",
-      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified."
+      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified.",
+      "price_verification": {
+        "as_of": "2026-11-09",
+        "amazon": "NOT_CONFIRMED_LIVE_PRICE",
+        "flipkart": "NOT_CONFIRMED_LIVE_PRICE",
+        "croma": "NOT_CONFIRMED_LIVE_PRICE"
+      }
     },
     {
       "id": "POPULAR_TV_06",
@@ -1109,6 +1164,9 @@
     "first_five_exact_retailer_sku_sources": 2,
     "first_five_third_party_only": 3,
     "first_five_image_licenses_cleared": 0,
-    "production_admission": false
+    "production_admission": false,
+    "first_five_official_model_or_series_sources": 2,
+    "first_five_exact_manufacturer_sku_fully_verified": 0,
+    "first_five_retailer_live_prices_verified": 0
   }
 }
