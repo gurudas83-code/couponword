@@ -3,7 +3,7 @@
   "market": "India",
   "mode": "DATED_RESEARCH_ONLY_NO_LIVE_OFFERS",
   "source_workbook": "CouponWorld_India_20_TVs_20_Earbuds_3_Retailer_Comparison_2026-11-05.xlsx",
-  "reviewed_at": "2026-11-05",
+  "reviewed_at": "2026-11-09",
   "disclosure": "Model-level research; specifications may be manufacturer, retailer, or editorial; not all exact-variant or fields verified. Prices are dated public quotes or attributed observations, not real-time API feeds. No stock or purchase eligibility certified.",
   "counts": {
     "total": 40,
@@ -21,63 +21,93 @@
       "category": "tvs",
       "brand": "Xiaomi",
       "model": "S Mini LED 2026 55 (L55MC-IN)",
-      "model_code": "",
+      "model_code": "L55MC-IN",
       "product_type": "Television",
       "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
       "source_grade": "Manufacturer / product",
-      "source_status": "MAKER_REFERENCE_NOT_FIELD_CERTIFIED",
+      "source_status": "OFFICIAL_MANUFACTURER_FIELDS_VERIFIED_2026-11-09",
       "specifications": [
         {
           "label": "Size (in)",
           "value": "55",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "Panel / backlight",
           "value": "QD Mini-LED",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "Resolution",
-          "value": "4K UHD",
+          "value": "3840 x 2160 (4K UHD)",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "Native Hz",
           "value": "60",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "Smart OS",
           "value": "Google TV",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "HDR formats",
           "value": "Dolby Vision, HDR10+",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "HDMI ports",
-          "value": "3",
+          "value": "3 (1 eARC)",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         },
         {
           "label": "Speaker W",
           "value": "34",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "DLG gaming mode",
+          "value": "120Hz DLG (not native 120Hz)",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "Local dimming zones",
+          "value": "308 (55-inch)",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "Peak brightness (nits)",
+          "value": "1200",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "RAM / Storage",
+          "value": "2GB / 32GB",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+        },
+        {
+          "label": "USB ports",
+          "value": "2 x USB 2.0",
+          "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
         }
       ],
       "buyer_use_case": "Value Mini-LED",
-      "evidence_caveat": "DLG 120Hz is not native 120Hz; 308 zones for 55in",
+      "evidence_caveat": "India L55MC-IN matched to official Xiaomi India specification; DLG 120Hz is not native 120Hz; retailer price is dated, not live",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -95,10 +125,10 @@
           "price_inr": 54990,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://1.www.flipkart.com/q/mi-55-inch-tv",
-          "retailer_research_url": "https://www.flipkart.com/search?q=Xiaomi+S+Mini+LED+2026+55+%28L55MC-IN%29",
-          "link_scope": "SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/xiaomi-138-68-cm-55-inch-ultra-hd-4k-mini-led-smart-google-tv-2026/p/itma4f37a276700e",
+          "link_scope": "EXACT_MODEL_LISTING_RESEARCH_NOT_LIVE_OFFER",
           "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
-          "price_note": "Exact L55MC-IN; source page updated 2026-11-05",
+          "price_note": "Historical 2026-11-05 observation; exact model listing separately checked 2026-11-09; price not refreshed",
           "stock_status": "UNKNOWN",
           "live_offer": false,
           "checkout_eligible": false
