@@ -1287,8 +1287,8 @@
           "price_inr": null,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.flipkart.com/televisions/~samsung-uhd-tv/pr?sid=ckf%2Cczl",
-          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung%20UA43UE81AFULXL",
-          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/samsung-108-cm-43-inch-ultra-hd-4k-led-smart-tizen-tv-2025/p/itm19e7076f8c584",
+          "link_scope": "EXACT_MODEL_LISTING_RESEARCH_NOT_LIVE_OFFER",
           "price_status": "UNVERIFIED_HISTORICAL_PRICE_SUPPRESSED",
           "price_note": "Model-specific retailer search only; not a verified live product offer",
           "stock_status": "UNKNOWN",
@@ -1296,9 +1296,10 @@
           "checkout_eligible": false,
           "price_evidence_status": "CATEGORY_SOURCE_NOT_EXACT_SKU_PRICE_EVIDENCE",
           "historical_unverified_price_inr": 30490,
-          "exact_model_link_verified": false,
-          "link_audit_status": "SEARCH_LINK_ONLY_NOT_EXACT_PRODUCT_VERIFIED",
-          "link_audit_date": "2026-11-10"
+          "exact_model_link_verified": true,
+          "link_audit_status": "EXACT_MODEL_CODE_CONFIRMED_ON_FLIPKART_PRODUCT_PAGE",
+          "link_audit_date": "2026-11-10",
+          "exact_model_code_confirmed": "UA43UE81AFULXL"
         },
         "croma": {
           "price_inr": null,
