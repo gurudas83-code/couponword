@@ -164,6 +164,7 @@ def hub(category, items):
 <p>Research all 20 models from the Coupon World comparison workbook, check specifications and open independent retailer searches for Amazon, Flipkart and Croma.</p>
 <p><strong>Important:</strong> The reference prices are not live API quotes. No stock, exact purchase eligibility, independent sound/picture quality ranking, or retailer checkout is certified here.</p>
 <p><a href="/{esc(category)}/">Return to the source-reviewed category hub</a></p>
+{('<figure class="cw-licensed-tv-photo"><img src="https://c.pxhere.com/photos/af/b7/photo-156633.jpg!d" alt="Generic television in a room, CC0 public-domain editorial photograph; not one of the listed TV models" loading="lazy" decoding="async" referrerpolicy="no-referrer" width="960" height="640"><figcaption>Illustrative television photograph, not a listed model. <a href="https://pxhere.com/en/photo/156633" rel="noopener noreferrer nofollow" target="_blank">Photo source and CC0 public-domain license: PxHere</a>.</figcaption></figure><style>.cw-licensed-tv-photo{max-width:780px;margin:20px auto 24px}.cw-licensed-tv-photo img{width:100%;height:auto;max-height:360px;object-fit:cover;border-radius:18px;box-shadow:0 10px 28px #0002}.cw-licensed-tv-photo figcaption{font-size:12px;color:inherit;opacity:.82;margin-top:8px;text-align:center}</style>' if category == "tvs" else "")}
 </section>
 <section aria-labelledby="research-list"><h2 id="research-list">Search and compare all 20</h2>
 <form class="cr-filters" id="cr-filters" role="search">
