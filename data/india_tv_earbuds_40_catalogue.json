@@ -1976,11 +1976,11 @@
       "category": "tvs",
       "brand": "TCL",
       "model": "Q6C 65 QD Mini-LED",
-      "model_code": "",
+      "model_code": "65Q6C",
       "product_type": "Television",
-      "source_url": "https://www.mysmartprice.com/gear/appliances/best-65-inch-tvs-for-picture-quality-in-india-2026/",
-      "source_grade": "Editorial spec",
-      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
+      "source_url": "https://www.tcl.com/in/en/tvs/65q6c",
+      "source_grade": "Manufacturer / exact India model",
+      "source_status": "OFFICIAL_EXACT_MODEL_FIELDS_VERIFIED_2026-11-10",
       "specifications": [
         {
           "label": "Size (in)",
@@ -1991,8 +1991,8 @@
         {
           "label": "Panel / backlight",
           "value": "QD Mini-LED",
-          "source_url": "https://www.mysmartprice.com/gear/appliances/best-65-inch-tvs-for-picture-quality-in-india-2026/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.tcl.com/in/en/tvs/65q6c",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         },
         {
           "label": "Resolution",
@@ -2003,8 +2003,8 @@
         {
           "label": "Native Hz",
           "value": "144",
-          "source_url": "https://www.mysmartprice.com/gear/appliances/best-65-inch-tvs-for-picture-quality-in-india-2026/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.tcl.com/in/en/tvs/65q6c",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         },
         {
           "label": "Smart OS",
@@ -2017,10 +2017,22 @@
           "value": "4",
           "source_url": "https://www.mysmartprice.com/gear/appliances/best-65-inch-tvs-for-picture-quality-in-india-2026/",
           "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+        },
+        {
+          "label": "Processor",
+          "value": "AiPQ Pro",
+          "source_url": "https://www.tcl.com/in/en/tvs/65q6c",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
+        },
+        {
+          "label": "Audio",
+          "value": "ONKYO 2.1 channel / Dolby Atmos",
+          "source_url": "https://www.tcl.com/in/en/tvs/65q6c",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         }
       ],
       "buyer_use_case": "65-inch gaming/value Mini-LED",
-      "evidence_caveat": "Native refresh from secondary test; model matching needed; exact SKU retailer links not verified; merchant links are model-targeted searches only",
+      "evidence_caveat": "Native refresh from secondary test; model matching needed; exact SKU retailer links not verified; merchant links are model-targeted searches only | 2026-11-10: Exact India model code and listed fields verified on manufacturer site. Other legacy fields retain prior evidence status.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -2166,11 +2178,11 @@
       "category": "tvs",
       "brand": "Samsung",
       "model": "QN90F 55 (2025)",
-      "model_code": "",
+      "model_code": "QA55QN90FAULXL",
       "product_type": "Television",
-      "source_url": "https://www.91mobiles.com/reviews/best-qled-mini-led-tvs-india-2026/",
-      "source_grade": "Editorial specification",
-      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
+      "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn90f-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn90faulxl/",
+      "source_grade": "Manufacturer / exact India model",
+      "source_status": "OFFICIAL_EXACT_MODEL_FIELDS_VERIFIED_2026-11-10",
       "specifications": [
         {
           "label": "Size (in)",
@@ -2186,9 +2198,9 @@
         },
         {
           "label": "Resolution",
-          "value": "4K UHD",
-          "source_url": "https://www.91mobiles.com/reviews/best-qled-mini-led-tvs-india-2026/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "value": "3840 x 2160",
+          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn90f-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn90faulxl/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         },
         {
           "label": "Native Hz",
@@ -2211,12 +2223,30 @@
         {
           "label": "Speaker W",
           "value": "60",
-          "source_url": "https://www.91mobiles.com/reviews/best-qled-mini-led-tvs-india-2026/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn90f-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn90faulxl/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
+        },
+        {
+          "label": "Processor",
+          "value": "NQ4 AI Gen3",
+          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn90f-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn90faulxl/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
+        },
+        {
+          "label": "Motion technology",
+          "value": "Motion Xcelerator 165Hz",
+          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn90f-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn90faulxl/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "4",
+          "source_url": "https://www.samsung.com/in/tvs/qled-tv/qn90f-55-inch-neo-qled-4k-mini-led-smart-tv-qa55qn90faulxl/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         }
       ],
       "buyer_use_case": "Bright-room gaming & sport",
-      "evidence_caveat": "144Hz from family/editorial; confirm Indian SKU; exact SKU retailer links not verified; merchant links are model-targeted searches only",
+      "evidence_caveat": "144Hz from family/editorial; confirm Indian SKU; exact SKU retailer links not verified; merchant links are model-targeted searches only | 2026-11-10: Exact India model code and listed fields verified on manufacturer site. Other legacy fields retain prior evidence status.",
       "retailers": {
         "amazon": {
           "price_inr": null,
