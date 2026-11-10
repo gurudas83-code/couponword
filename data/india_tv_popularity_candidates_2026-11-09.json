@@ -1048,8 +1048,63 @@
       "indicative_price_inr": 40990,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
       "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
-      "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specifications": [
+        {
+          "label": "Screen size",
+          "value": "43 inch",
+          "source_url": "https://www.lg.com/in/tv-soundbars/qned/43qned70bla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_2026-11-10"
+        },
+        {
+          "label": "Display type",
+          "value": "4K QNED MiniLED",
+          "source_url": "https://www.lg.com/in/tv-soundbars/qned/43qned70bla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_2026-11-10"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160",
+          "source_url": "https://www.lg.com/in/tv-soundbars/qned/43qned70bla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_2026-11-10"
+        },
+        {
+          "label": "Native refresh rate",
+          "value": "60 Hz",
+          "source_url": "https://www.lg.com/in/tv-soundbars/qned/43qned70bla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_2026-11-10"
+        },
+        {
+          "label": "Picture processor",
+          "value": "Alpha 7 AI Processor 4K Gen9",
+          "source_url": "https://www.lg.com/in/tv-soundbars/qned/43qned70bla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_2026-11-10"
+        },
+        {
+          "label": "HDR",
+          "value": "HDR10 / HLG",
+          "source_url": "https://www.lg.com/in/tv-soundbars/qned/43qned70bla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_2026-11-10"
+        },
+        {
+          "label": "Audio output",
+          "value": "20 W",
+          "source_url": "https://www.lg.com/in/tv-soundbars/qned/43qned70bla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_2026-11-10"
+        },
+        {
+          "label": "Operating system",
+          "value": "webOS 26",
+          "source_url": "https://www.lg.com/in/tv-soundbars/qned/43qned70bla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_2026-11-10"
+        },
+        {
+          "label": "VRR",
+          "value": "Up to 60 Hz",
+          "source_url": "https://www.lg.com/in/tv-soundbars/qned/43qned70bla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_2026-11-10"
+        }
+      ],
+      "specification_status": "PARTIAL_OFFICIAL_MANUFACTURER_VERIFIED",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -1085,7 +1140,9 @@
         "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
         "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
         "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
-      }
+      },
+      "technical_source_url": "https://www.lg.com/in/tv-soundbars/qned/43qned70bla/",
+      "technical_reviewed_at": "2026-11-10"
     },
     {
       "id": "POPULAR_TV_14",
@@ -1198,8 +1255,39 @@
       "indicative_price_inr": 45719,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
       "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
-      "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specifications": [
+        {
+          "label": "Screen size",
+          "value": "43 inch",
+          "source_url": "https://www.sony.co.in/electronics/support/lcd-tvs-android-bravia-2-ii-s20m2-/k-43s22m2",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_2026-11-10"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K Ultra HD",
+          "source_url": "https://www.sony.co.in/electronics/support/lcd-tvs-android-bravia-2-ii-s20m2-/k-43s22m2",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_2026-11-10"
+        },
+        {
+          "label": "Picture processor",
+          "value": "4K Processor X1",
+          "source_url": "https://www.sony.co.in/electronics/support/lcd-tvs-android-bravia-2-ii-s20m2-/k-43s22m2",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_2026-11-10"
+        },
+        {
+          "label": "Smart TV platform",
+          "value": "Google TV",
+          "source_url": "https://www.sony.co.in/electronics/support/lcd-tvs-android-bravia-2-ii-s20m2-/k-43s22m2",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_2026-11-10"
+        },
+        {
+          "label": "HDR",
+          "value": "High Dynamic Range (HDR)",
+          "source_url": "https://www.sony.co.in/electronics/support/lcd-tvs-android-bravia-2-ii-s20m2-/k-43s22m2",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_2026-11-10"
+        }
+      ],
+      "specification_status": "PARTIAL_OFFICIAL_MANUFACTURER_VERIFIED",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -1235,7 +1323,9 @@
         "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
         "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
         "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
-      }
+      },
+      "technical_source_url": "https://www.sony.co.in/electronics/support/lcd-tvs-android-bravia-2-ii-s20m2-/k-43s22m2",
+      "technical_reviewed_at": "2026-11-10"
     },
     {
       "id": "POPULAR_TV_17",
