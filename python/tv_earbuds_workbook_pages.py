@@ -78,8 +78,10 @@ def research_specifications(item):
     # The quote is dated, not an official maker specification. Keep separate.
     return item["specifications"]
 
-def retailer_link(info, retailer):
+def retailer_link(info, retailer, category):
     exact = info.get("exact_model_link_verified") is True
+    if category == "tvs" and not exact:
+        return '<span class="cw-link-unverified" aria-label="Exact product link not verified">Exact product link unavailable</span>'
     label = ("Verified product on " if exact else "Search model on ") + retailer.title()
     return '<a href="' + esc(info["retailer_research_url"]) + \
         '" target="_blank" rel="noopener noreferrer nofollow" aria-label="' + esc(label) + '">' + esc(label) + '</a>'
@@ -126,7 +128,7 @@ def card(item):
     search = " ".join((item["brand"], item["model"], summary)).casefold()
     choices = "".join(
         "<li><b>" + esc(store.title()) + ":</b> " + quote_text(item["retailers"][store], store) +
-        " · " + retailer_link(item["retailers"][store], store) + "</li>"
+        " · " + retailer_link(item["retailers"][store], store, item["category"]) + "</li>"
         for store in ("amazon", "flipkart", "croma")
     )
     first = "".join("<dt>" + esc(f["label"]) + "</dt><dd>" + esc(f["value"]) + "</dd>"
@@ -201,7 +203,7 @@ def detail(item):
        if urlsplit(original_source).scheme == "https" else "No product-specific source certified"
     merchant=''.join(
         '<tr><th scope="row">'+esc(s.title())+'</th><td>'+quote_text(item["retailers"][s],s)+
-        '</td><td>'+retailer_link(item["retailers"][s],s)+'</td></tr>'
+        '</td><td>'+retailer_link(item["retailers"][s],s,item["category"])+'</td></tr>'
         for s in ("amazon","flipkart","croma")
     )
     body=f'''<p class="cr-crumb"><a href="/">Home</a> / <a href="/{esc(cat)}/">{esc(cat.title())}</a> / <a href="{esc(list_route(cat))}">20-model shortlist</a> / {esc(item["model"])}</p>
