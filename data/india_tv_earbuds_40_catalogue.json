@@ -251,7 +251,7 @@
         }
       ],
       "buyer_use_case": "Large bright living room",
-      "evidence_caveat": "DLG ≠ native 120Hz; 384 zones for 65in; exact SKU retailer links not verified; merchant links are model-targeted searches only | 2026-11-10: Exact India SKU code unresolved; do not substitute overseas model identifiers or infer from screen size.",
+      "evidence_caveat": "DLG ≠ native 120Hz; 384 zones for 65in; exact SKU retailer links not verified; merchant links are model-targeted searches only | 2026-11-10: Exact India SKU code unresolved; do not substitute overseas model identifiers or infer from screen size. | Official Xiaomi India confirms product series and screen size, but does not display an independently verified India part-number SKU in the consulted source. model_code intentionally left blank. Global regional codes must not be copied.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -294,7 +294,11 @@
       "purchase_cta_eligible": false,
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
-      "reviewed_at": "2026-11-05"
+      "reviewed_at": "2026-11-05",
+      "india_market_identity_status": "OFFICIAL_XIAOMI_INDIA_SERIES_AND_SIZE_CONFIRMED_MODEL_PART_NUMBER_NOT_PUBLISHED",
+      "india_market_identity_source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/buy/?gid=4224101093",
+      "india_market_identity_reviewed_at": "2026-11-10",
+      "manufacturer_india_research_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/buy/?gid=4224101093"
     },
     {
       "id": "TV03",
@@ -387,7 +391,7 @@
         }
       ],
       "buyer_use_case": "Big-screen budget Mini-LED",
-      "evidence_caveat": "512 zones for 75in; DLG not native 120Hz; exact SKU retailer links not verified; merchant links are model-targeted searches only | 2026-11-10: Exact India SKU code unresolved; do not substitute overseas model identifiers or infer from screen size.",
+      "evidence_caveat": "512 zones for 75in; DLG not native 120Hz; exact SKU retailer links not verified; merchant links are model-targeted searches only | 2026-11-10: Exact India SKU code unresolved; do not substitute overseas model identifiers or infer from screen size. | Official Xiaomi India confirms product series and screen size, but does not display an independently verified India part-number SKU in the consulted source. model_code intentionally left blank. Global regional codes must not be copied.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -430,7 +434,11 @@
       "purchase_cta_eligible": false,
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
-      "reviewed_at": "2026-11-05"
+      "reviewed_at": "2026-11-05",
+      "india_market_identity_status": "OFFICIAL_XIAOMI_INDIA_SERIES_AND_SIZE_CONFIRMED_MODEL_PART_NUMBER_NOT_PUBLISHED",
+      "india_market_identity_source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/buy/?gid=4224101093",
+      "india_market_identity_reviewed_at": "2026-11-10",
+      "manufacturer_india_research_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/buy/?gid=4224101093"
     },
     {
       "id": "TV04",
@@ -517,7 +525,7 @@
         }
       ],
       "buyer_use_case": "Budget Mini-LED, Alexa",
-      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers | 2026-11-10: India maker size-specific specs checked. India model code not established; overseas SKU codes must not be substituted.",
+      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers | 2026-11-10: India maker size-specific specs checked. India model code not established; overseas SKU codes must not be substituted. | Official Xiaomi India confirms product series and screen size, but does not display an independently verified India part-number SKU in the consulted source. model_code intentionally left blank. Global regional codes must not be copied.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -562,7 +570,11 @@
       "purchase_cta_eligible": false,
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
-      "reviewed_at": "2026-11-05"
+      "reviewed_at": "2026-11-05",
+      "india_market_identity_status": "OFFICIAL_XIAOMI_INDIA_SERIES_AND_SIZE_CONFIRMED_MODEL_PART_NUMBER_NOT_PUBLISHED",
+      "india_market_identity_source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+      "india_market_identity_reviewed_at": "2026-11-10",
+      "manufacturer_india_research_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/"
     },
     {
       "id": "TV05",
@@ -649,7 +661,7 @@
         }
       ],
       "buyer_use_case": "65-inch value TV",
-      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers | 2026-11-10: India maker size-specific specs checked. India model code not established; overseas SKU codes must not be substituted.",
+      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers | 2026-11-10: India maker size-specific specs checked. India model code not established; overseas SKU codes must not be substituted. | Official Xiaomi India confirms product series and screen size, but does not display an independently verified India part-number SKU in the consulted source. model_code intentionally left blank. Global regional codes must not be copied.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -692,7 +704,11 @@
       "purchase_cta_eligible": false,
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
-      "reviewed_at": "2026-11-05"
+      "reviewed_at": "2026-11-05",
+      "india_market_identity_status": "OFFICIAL_XIAOMI_INDIA_SERIES_AND_SIZE_CONFIRMED_MODEL_PART_NUMBER_NOT_PUBLISHED",
+      "india_market_identity_source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+      "india_market_identity_reviewed_at": "2026-11-10",
+      "manufacturer_india_research_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/"
     },
     {
       "id": "TV06",
@@ -1924,7 +1940,7 @@
         }
       ],
       "buyer_use_case": "43-inch low-cost smart",
-      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers | 2026-11-10: Exact India SKU code unresolved; do not substitute overseas model identifiers or infer from screen size.",
+      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers | 2026-11-10: Exact India SKU code unresolved; do not substitute overseas model identifiers or infer from screen size. | Official Xiaomi India confirms product series and screen size, but does not display an independently verified India part-number SKU in the consulted source. model_code intentionally left blank. Global regional codes must not be copied.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -1969,7 +1985,11 @@
       "purchase_cta_eligible": false,
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
-      "reviewed_at": "2026-11-05"
+      "reviewed_at": "2026-11-05",
+      "india_market_identity_status": "OFFICIAL_XIAOMI_INDIA_SERIES_AND_SIZE_CONFIRMED_MODEL_PART_NUMBER_NOT_PUBLISHED",
+      "india_market_identity_source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
+      "india_market_identity_reviewed_at": "2026-11-10",
+      "manufacturer_india_research_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/"
     },
     {
       "id": "TV18",
