@@ -1554,8 +1554,8 @@
         "croma": {
           "price_inr": 61990,
           "checked_at": "2026-11-05",
-          "observation_source_url": "https://www.croma.com/tcl-c6k-140-cm-55-inch-2-star-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
-          "retailer_research_url": "https://www.croma.com/tcl-c6k-139-7-cm-55-inch-qd-mini-led-4k-ultra-hd-smart-google-tv-with-google-voice-assistant-2025-model-/p/315575",
+          "observation_source_url": "https://www.croma.com/-/p/315575",
+          "retailer_research_url": "https://www.croma.com/-/p/315575",
           "link_scope": "EXACT_MODEL_LISTING_RESEARCH_NOT_LIVE_OFFER",
           "price_status": "DATED_PUBLIC_LISTING_OBSERVATION",
           "price_note": "Model-specific retailer search only; not a verified live product offer",
@@ -1564,7 +1564,7 @@
           "checkout_eligible": false,
           "price_evidence_status": "EXACT_PRODUCT_PAGE_HISTORICAL_NOT_LIVE",
           "exact_model_link_verified": true,
-          "link_audit_status": "EXACT_MODEL_CODE_CONFIRMED_ON_RETAILER_PAGE",
+          "link_audit_status": "EXACT_MODEL_55C6K_RETAILER_PRODUCT_ID_315575_CONFIRMED",
           "link_audit_date": "2026-11-10",
           "exact_model_code_confirmed": "55C6K"
         }
