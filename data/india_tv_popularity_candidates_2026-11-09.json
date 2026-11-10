@@ -648,8 +648,51 @@
       "indicative_price_inr": 14999,
       "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
       "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_CHECKOUT_VERIFIED",
-      "specifications": [],
-      "specification_status": "RESEARCH_CANDIDATE_UNVERIFIED",
+      "specifications": [
+        {
+          "label": "Screen size",
+          "value": "43 inch",
+          "source_url": "https://www.smartprix.com/tvs/vw-spectra-series-43-inch-full-hd-smart-qled-ppd1og9yacqe",
+          "evidence": "INDEPENDENT_CATALOGUE_EXACT_MODEL"
+        },
+        {
+          "label": "Panel",
+          "value": "QLED",
+          "source_url": "https://www.smartprix.com/tvs/vw-spectra-series-43-inch-full-hd-smart-qled-ppd1og9yacqe",
+          "evidence": "INDEPENDENT_CATALOGUE_EXACT_MODEL"
+        },
+        {
+          "label": "Resolution",
+          "value": "1920 x 1080",
+          "source_url": "https://www.smartprix.com/tvs/vw-spectra-series-43-inch-full-hd-smart-qled-ppd1og9yacqe",
+          "evidence": "INDEPENDENT_CATALOGUE_EXACT_MODEL"
+        },
+        {
+          "label": "Refresh rate",
+          "value": "60 Hz",
+          "source_url": "https://www.smartprix.com/tvs/vw-spectra-series-43-inch-full-hd-smart-qled-ppd1og9yacqe",
+          "evidence": "INDEPENDENT_CATALOGUE_EXACT_MODEL"
+        },
+        {
+          "label": "Sound output",
+          "value": "24 W",
+          "source_url": "https://www.smartprix.com/tvs/vw-spectra-series-43-inch-full-hd-smart-qled-ppd1og9yacqe",
+          "evidence": "INDEPENDENT_CATALOGUE_EXACT_MODEL"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "3",
+          "source_url": "https://www.smartprix.com/tvs/vw-spectra-series-43-inch-full-hd-smart-qled-ppd1og9yacqe",
+          "evidence": "INDEPENDENT_CATALOGUE_EXACT_MODEL"
+        },
+        {
+          "label": "USB ports",
+          "value": "1",
+          "source_url": "https://www.smartprix.com/tvs/vw-spectra-series-43-inch-full-hd-smart-qled-ppd1og9yacqe",
+          "evidence": "INDEPENDENT_CATALOGUE_EXACT_MODEL"
+        }
+      ],
+      "specification_status": "THIRD_PARTY_EXACT_MODEL_MANUFACTURER_PENDING",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -685,7 +728,10 @@
         "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
         "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
         "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
-      }
+      },
+      "technical_source_url": "https://www.smartprix.com/tvs/vw-spectra-series-43-inch-full-hd-smart-qled-ppd1og9yacqe",
+      "technical_reviewed_at": "2026-11-10",
+      "technical_notes": " | Evidence rechecked 2026-11-10; only source-backed fields admitted; no image redistribution rights established."
     },
     {
       "id": "POPULAR_TV_07",
@@ -698,8 +744,57 @@
       "indicative_price_inr": 19999,
       "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
       "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_CHECKOUT_VERIFIED",
-      "specifications": [],
-      "specification_status": "RESEARCH_CANDIDATE_UNVERIFIED",
+      "specifications": [
+        {
+          "label": "Screen size",
+          "value": "43 inch",
+          "source_url": "https://www.digit.in/news/tvs/acer-ultra-i-series-4k-uhd-tvs-launched-in-india-with-dolby-vision-atmos-google-tv-price-availability.html",
+          "evidence": "INDEPENDENT_EDITORIAL_EXACT_VARIANT"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160",
+          "source_url": "https://www.digit.in/news/tvs/acer-ultra-i-series-4k-uhd-tvs-launched-in-india-with-dolby-vision-atmos-google-tv-price-availability.html",
+          "evidence": "INDEPENDENT_EDITORIAL_EXACT_VARIANT"
+        },
+        {
+          "label": "Refresh rate",
+          "value": "60 Hz",
+          "source_url": "https://www.digit.in/news/tvs/acer-ultra-i-series-4k-uhd-tvs-launched-in-india-with-dolby-vision-atmos-google-tv-price-availability.html",
+          "evidence": "INDEPENDENT_EDITORIAL_EXACT_VARIANT"
+        },
+        {
+          "label": "HDR",
+          "value": "HDR10 and Dolby Vision",
+          "source_url": "https://www.digit.in/news/tvs/acer-ultra-i-series-4k-uhd-tvs-launched-in-india-with-dolby-vision-atmos-google-tv-price-availability.html",
+          "evidence": "INDEPENDENT_EDITORIAL_EXACT_VARIANT"
+        },
+        {
+          "label": "Audio output",
+          "value": "30 W",
+          "source_url": "https://www.digit.in/news/tvs/acer-ultra-i-series-4k-uhd-tvs-launched-in-india-with-dolby-vision-atmos-google-tv-price-availability.html",
+          "evidence": "INDEPENDENT_EDITORIAL_EXACT_VARIANT"
+        },
+        {
+          "label": "Operating system",
+          "value": "Google TV (Android 14)",
+          "source_url": "https://www.digit.in/news/tvs/acer-ultra-i-series-4k-uhd-tvs-launched-in-india-with-dolby-vision-atmos-google-tv-price-availability.html",
+          "evidence": "INDEPENDENT_EDITORIAL_EXACT_VARIANT"
+        },
+        {
+          "label": "RAM",
+          "value": "2 GB",
+          "source_url": "https://www.digit.in/news/tvs/acer-ultra-i-series-4k-uhd-tvs-launched-in-india-with-dolby-vision-atmos-google-tv-price-availability.html",
+          "evidence": "INDEPENDENT_EDITORIAL_EXACT_VARIANT"
+        },
+        {
+          "label": "Storage",
+          "value": "16 GB",
+          "source_url": "https://www.digit.in/news/tvs/acer-ultra-i-series-4k-uhd-tvs-launched-in-india-with-dolby-vision-atmos-google-tv-price-availability.html",
+          "evidence": "INDEPENDENT_EDITORIAL_EXACT_VARIANT"
+        }
+      ],
+      "specification_status": "EDITORIAL_EXACT_VARIANT_MANUFACTURER_PENDING",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -735,7 +830,10 @@
         "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
         "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
         "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
-      }
+      },
+      "technical_source_url": "https://www.digit.in/news/tvs/acer-ultra-i-series-4k-uhd-tvs-launched-in-india-with-dolby-vision-atmos-google-tv-price-availability.html",
+      "technical_reviewed_at": "2026-11-10",
+      "technical_notes": " | Evidence rechecked 2026-11-10; only source-backed fields admitted; no image redistribution rights established."
     },
     {
       "id": "POPULAR_TV_08",
@@ -748,8 +846,51 @@
       "indicative_price_inr": 54990,
       "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
       "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_CHECKOUT_VERIFIED",
-      "specifications": [],
-      "specification_status": "RESEARCH_CANDIDATE_UNVERIFIED",
+      "specifications": [
+        {
+          "label": "Screen size",
+          "value": "55 inch",
+          "source_url": "https://www.91mobiles.com/list-of-tvs/android-tv-india",
+          "evidence": "INDEPENDENT_CATALOGUE_EXACT_MODEL"
+        },
+        {
+          "label": "Panel",
+          "value": "QLED",
+          "source_url": "https://www.91mobiles.com/list-of-tvs/android-tv-india",
+          "evidence": "INDEPENDENT_CATALOGUE_EXACT_MODEL"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160",
+          "source_url": "https://www.91mobiles.com/list-of-tvs/android-tv-india",
+          "evidence": "INDEPENDENT_CATALOGUE_EXACT_MODEL"
+        },
+        {
+          "label": "Refresh rate",
+          "value": "60 Hz",
+          "source_url": "https://www.91mobiles.com/list-of-tvs/android-tv-india",
+          "evidence": "INDEPENDENT_CATALOGUE_EXACT_MODEL"
+        },
+        {
+          "label": "Sound output",
+          "value": "30 W",
+          "source_url": "https://www.91mobiles.com/list-of-tvs/android-tv-india",
+          "evidence": "INDEPENDENT_CATALOGUE_EXACT_MODEL"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "3",
+          "source_url": "https://www.91mobiles.com/list-of-tvs/android-tv-india",
+          "evidence": "INDEPENDENT_CATALOGUE_EXACT_MODEL"
+        },
+        {
+          "label": "USB ports",
+          "value": "2",
+          "source_url": "https://www.91mobiles.com/list-of-tvs/android-tv-india",
+          "evidence": "INDEPENDENT_CATALOGUE_EXACT_MODEL"
+        }
+      ],
+      "specification_status": "THIRD_PARTY_EXACT_MODEL_MANUFACTURER_PENDING",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -785,7 +926,10 @@
         "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
         "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
         "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
-      }
+      },
+      "technical_source_url": "https://www.91mobiles.com/list-of-tvs/android-tv-india",
+      "technical_reviewed_at": "2026-11-10",
+      "technical_notes": " | Evidence rechecked 2026-11-10; only source-backed fields admitted; no image redistribution rights established."
     },
     {
       "id": "POPULAR_TV_09",
@@ -1245,8 +1389,57 @@
       "indicative_price_inr": 16990,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
       "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
-      "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specifications": [
+        {
+          "label": "Screen size",
+          "value": "32 inch (80 cm)",
+          "source_url": "https://www.samsung.com/in/multistore/in_1001/pd.UA32H4610FUXXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "Resolution",
+          "value": "1366 x 768",
+          "source_url": "https://www.samsung.com/in/multistore/in_1001/pd.UA32H4610FUXXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "Picture engine",
+          "value": "Hyper Real",
+          "source_url": "https://www.samsung.com/in/multistore/in_1001/pd.UA32H4610FUXXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "HDR",
+          "value": "HDR10+ supported",
+          "source_url": "https://www.samsung.com/in/multistore/in_1001/pd.UA32H4610FUXXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "Sound output",
+          "value": "20 W",
+          "source_url": "https://www.samsung.com/in/multistore/in_1001/pd.UA32H4610FUXXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "Operating system",
+          "value": "Tizen Smart TV",
+          "source_url": "https://www.samsung.com/in/multistore/in_1001/pd.UA32H4610FUXXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "2",
+          "source_url": "https://www.samsung.com/in/multistore/in_1001/pd.UA32H4610FUXXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "USB ports",
+          "value": "1",
+          "source_url": "https://www.samsung.com/in/multistore/in_1001/pd.UA32H4610FUXXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        }
+      ],
+      "specification_status": "OFFICIAL_EXACT_MODEL_VERIFIED",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -1282,7 +1475,10 @@
         "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
         "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
         "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
-      }
+      },
+      "technical_source_url": "https://www.samsung.com/in/multistore/in_1001/pd.UA32H4610FUXXL/",
+      "technical_reviewed_at": "2026-11-10",
+      "technical_notes": " | Evidence rechecked 2026-11-10; only source-backed fields admitted; no image redistribution rights established."
     },
     {
       "id": "POPULAR_TV_15",
@@ -1546,8 +1742,57 @@
       "indicative_price_inr": 43976,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
       "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
-      "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specifications": [
+        {
+          "label": "Screen size",
+          "value": "55 inch",
+          "source_url": "https://www.reliancedigital.in/product/tcl-55t69d-1397-cm-55-inch-qled-google-tv-black-mp6u1r-10066342",
+          "evidence": "RETAILER_EXACT_MODEL"
+        },
+        {
+          "label": "Panel",
+          "value": "QLED",
+          "source_url": "https://www.reliancedigital.in/product/tcl-55t69d-1397-cm-55-inch-qled-google-tv-black-mp6u1r-10066342",
+          "evidence": "RETAILER_EXACT_MODEL"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160",
+          "source_url": "https://www.reliancedigital.in/product/tcl-55t69d-1397-cm-55-inch-qled-google-tv-black-mp6u1r-10066342",
+          "evidence": "RETAILER_EXACT_MODEL"
+        },
+        {
+          "label": "Refresh rate",
+          "value": "60 Hz",
+          "source_url": "https://www.reliancedigital.in/product/tcl-55t69d-1397-cm-55-inch-qled-google-tv-black-mp6u1r-10066342",
+          "evidence": "RETAILER_EXACT_MODEL"
+        },
+        {
+          "label": "Sound output",
+          "value": "24 W",
+          "source_url": "https://www.reliancedigital.in/product/tcl-55t69d-1397-cm-55-inch-qled-google-tv-black-mp6u1r-10066342",
+          "evidence": "RETAILER_EXACT_MODEL"
+        },
+        {
+          "label": "Operating system",
+          "value": "Google TV",
+          "source_url": "https://www.reliancedigital.in/product/tcl-55t69d-1397-cm-55-inch-qled-google-tv-black-mp6u1r-10066342",
+          "evidence": "RETAILER_EXACT_MODEL"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "3",
+          "source_url": "https://www.reliancedigital.in/product/tcl-55t69d-1397-cm-55-inch-qled-google-tv-black-mp6u1r-10066342",
+          "evidence": "RETAILER_EXACT_MODEL"
+        },
+        {
+          "label": "USB ports",
+          "value": "1",
+          "source_url": "https://www.reliancedigital.in/product/tcl-55t69d-1397-cm-55-inch-qled-google-tv-black-mp6u1r-10066342",
+          "evidence": "RETAILER_EXACT_MODEL"
+        }
+      ],
+      "specification_status": "RETAILER_EXACT_MODEL_MANUFACTURER_PENDING",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -1583,7 +1828,10 @@
         "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
         "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
         "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
-      }
+      },
+      "technical_source_url": "https://www.reliancedigital.in/product/tcl-55t69d-1397-cm-55-inch-qled-google-tv-black-mp6u1r-10066342",
+      "technical_reviewed_at": "2026-11-10",
+      "technical_notes": " | Evidence rechecked 2026-11-10; only source-backed fields admitted; no image redistribution rights established."
     },
     {
       "id": "POPULAR_TV_19",
@@ -1679,15 +1927,64 @@
       "id": "POPULAR_TV_20",
       "brand": "Samsung",
       "model": "U8400F 65",
-      "model_code": null,
+      "model_code": "UA65U8400FULXL",
       "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
       "signal_source": "https://www.croma.com/samsung-u8400f-165-cm-65-inch-4k-ultra-hd-led-smart-tizen-tv-with-alexa-google-assistant-2025-model-/p/315268",
       "observed_at": "2026-11-09",
       "indicative_price_inr": null,
       "price_source": null,
       "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
-      "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specifications": [
+        {
+          "label": "Screen size",
+          "value": "65 inch",
+          "source_url": "https://www.samsung.com/in/tvs/uhd-4k-tv/u8400f-65-inch-crystal-uhd-4k-smart-tv-ua65u8400fulxl/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160",
+          "source_url": "https://www.samsung.com/in/tvs/uhd-4k-tv/u8400f-65-inch-crystal-uhd-4k-smart-tv-ua65u8400fulxl/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "Processor",
+          "value": "Crystal Processor 4K",
+          "source_url": "https://www.samsung.com/in/tvs/uhd-4k-tv/u8400f-65-inch-crystal-uhd-4k-smart-tv-ua65u8400fulxl/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "Operating system",
+          "value": "Tizen Smart TV",
+          "source_url": "https://www.samsung.com/in/tvs/uhd-4k-tv/u8400f-65-inch-crystal-uhd-4k-smart-tv-ua65u8400fulxl/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "Sound output",
+          "value": "20 W",
+          "source_url": "https://www.samsung.com/in/tvs/uhd-4k-tv/u8400f-65-inch-crystal-uhd-4k-smart-tv-ua65u8400fulxl/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "HDMI ports",
+          "value": "3",
+          "source_url": "https://www.samsung.com/in/tvs/uhd-4k-tv/u8400f-65-inch-crystal-uhd-4k-smart-tv-ua65u8400fulxl/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "USB ports",
+          "value": "1",
+          "source_url": "https://www.samsung.com/in/tvs/uhd-4k-tv/u8400f-65-inch-crystal-uhd-4k-smart-tv-ua65u8400fulxl/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "HDR",
+          "value": "HDR10+ supported",
+          "source_url": "https://www.samsung.com/in/tvs/uhd-4k-tv/u8400f-65-inch-crystal-uhd-4k-smart-tv-ua65u8400fulxl/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        }
+      ],
+      "specification_status": "OFFICIAL_EXACT_MODEL_VERIFIED",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -1723,7 +2020,10 @@
         "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
         "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
         "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
-      }
+      },
+      "technical_source_url": "https://www.samsung.com/in/tvs/uhd-4k-tv/u8400f-65-inch-crystal-uhd-4k-smart-tv-ua65u8400fulxl/",
+      "technical_reviewed_at": "2026-11-10",
+      "technical_notes": " | Evidence rechecked 2026-11-10; only source-backed fields admitted; no image redistribution rights established."
     }
   ],
   "quality_gate": {
