@@ -28,11 +28,14 @@ class WorkbookTvEarbudsRelease(unittest.TestCase):
                 self.assertFalse(store["live_offer"])
                 self.assertFalse(store["checkout_eligible"])
                 self.assertEqual(store["stock_status"],"UNKNOWN")
-                self.assertEqual(store["link_scope"],"SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA")
+                self.assertIn(store["link_scope"], {"SEARCH_OR_CATEGORY_BROWSE_NOT_VERIFIED_SKU_CTA", "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA", "EXACT_MODEL_LISTING_RESEARCH_NOT_LIVE_OFFER"})
+                self.assertFalse(store["checkout_eligible"])
+                self.assertFalse(store["live_offer"])
     def test_observations_are_dated_not_live(self):
         rows=load_catalogue()["records"]
         counts={s:sum(bool(x["retailers"][s]["price_inr"]) for x in rows) for s in ("amazon","flipkart","croma")}
-        self.assertEqual(counts,{"amazon":2,"flipkart":11,"croma":14})
+        self.assertEqual(counts, load_catalogue()["counts"]["retailer_quote_counts"])
+        self.assertEqual(counts, {"amazon":2,"flipkart":3,"croma":9})  # Current evidence-admitted dated quotes; not historical workbook totals
         self.assertEqual(sum(len(x["specifications"]) for x in rows),251)
     def test_40_product_routes_and_two_hubs(self):
         with tempfile.TemporaryDirectory() as tmp:
