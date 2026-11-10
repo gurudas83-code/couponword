@@ -11,9 +11,15 @@
     "earbuds": 20,
     "retailer_quote_counts": {
       "amazon": 2,
+      "flipkart": 3,
+      "croma": 9
+    },
+    "historical_workbook_retailer_quote_counts": {
+      "amazon": 2,
       "flipkart": 11,
       "croma": 14
-    }
+    },
+    "retailer_quote_count_definition": "Non-null dated price_inr observations currently admitted after evidence review; not live checkout prices"
   },
   "records": [
     {
