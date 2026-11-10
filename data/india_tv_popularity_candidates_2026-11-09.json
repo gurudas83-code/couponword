@@ -795,9 +795,9 @@
       "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
       "signal_source": "https://www.smartprix.com/tvs/most-popular-tvs",
       "observed_at": "2026-11-09",
-      "indicative_price_inr": 29759,
-      "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
-      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_CHECKOUT_VERIFIED",
+      "indicative_price_inr": 30490,
+      "price_source": "https://www.flipkart.com/televisions/lcd~screentype/pr?sid=ckf%2Cczl",
+      "price_status": "DATED_RETAILER_CATEGORY_PRICE_NOT_CHECKOUT_VERIFIED",
       "specifications": [],
       "specification_status": "OFFICIAL_MODEL_IDENTITY_ONLY_TECHNICAL_FIELDS_PENDING",
       "image_url": null,
@@ -837,7 +837,21 @@
         "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
         "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
         "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
-      }
+      },
+      "retailer_observations": [
+        {
+          "retailer": "Flipkart",
+          "model_code": "UA43UE84AHULXL",
+          "observed_price_inr": 30490,
+          "observed_at": "2026-11-10",
+          "source_url": "https://www.flipkart.com/televisions/lcd~screentype/pr?sid=ckf%2Cczl",
+          "evidence_type": "RETAILER_CATEGORY_LISTING_EXACT_MODEL_TEXT",
+          "product_detail_url_verified": false,
+          "checkout_price_verified": false,
+          "ratings_count_displayed": 87213,
+          "ratings_scope": "RETAILER_LISTING_MAY_AGGREGATE_VARIANTS_NOT_UNIT_SALES"
+        }
+      ]
     },
     {
       "id": "POPULAR_TV_10",
@@ -1456,6 +1470,28 @@
     "market_research_updated_at": "2026-11-10",
     "verified_model_unit_sales_rankings": 0,
     "model_sales_ranking_publication_allowed": false,
-    "market_segment_priority": "43-inch first, 55-inch second; 32-inch and 65-inch coverage retained"
+    "market_segment_priority": "43-inch first, 55-inch second; 32-inch and 65-inch coverage retained",
+    "verified_national_model_sales_rankings": 0
+  },
+  "market_research_2026_11_10": {
+    "source": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+    "published": "2026-03-24",
+    "india_2025_size_leader_inches": 43,
+    "india_growth_sizes": "55-inch and larger",
+    "premium_price_band_inr": [
+      40000,
+      50000
+    ],
+    "qled_shipments": "nearly doubled year-on-year",
+    "source_metric": "sell-in shipments, not retail sell-through or model-wise sales",
+    "retailer_popularity_source": "https://www.flipkart.com/televisions/lcd~screentype/pr?sid=ckf%2Cczl",
+    "retailer_popularity_disclaimer": "Flipkart popularity sort and rating counts are platform-specific signals, not national units sold",
+    "editorial_priorities": [
+      "43-inch 4K LED/QLED",
+      "55-inch 4K QLED",
+      "55-inch Mini LED/OLED premium"
+    ],
+    "ranking_policy": "price only budget gate, zero weight in performance scoring",
+    "publication_policy": "Only publish verified claims; do not label any model as national bestseller"
   }
 }
