@@ -169,7 +169,7 @@
       "product_type": "Television",
       "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
       "source_grade": "Manufacturer / product",
-      "source_status": "MANUFACTURER_FIELDS_PARTIALLY_VERIFIED_2026-11-09",
+      "source_status": "OFFICIAL_SIZE_SPECIFIC_FIELDS_VERIFIED_EXACT_INDIA_CODE_PENDING_2026-11-10",
       "specifications": [
         {
           "label": "Smart OS",
@@ -181,25 +181,25 @@
           "label": "Size (in)",
           "value": "65",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_VERIFIED_2026-11-10"
         },
         {
           "label": "Panel / backlight",
           "value": "QD Mini-LED",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_VERIFIED_2026-11-10"
         },
         {
           "label": "Resolution",
-          "value": "3840 x 2160 (4K UHD)",
+          "value": "3840 x 2160",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_VERIFIED_2026-11-10"
         },
         {
           "label": "Native Hz",
-          "value": "60",
+          "value": "60 (DLG 120Hz is not native 120Hz)",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_VERIFIED_2026-11-10"
         },
         {
           "label": "HDR formats",
@@ -217,7 +217,7 @@
           "label": "Speaker W",
           "value": "34",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_VERIFIED_2026-11-10"
         },
         {
           "label": "DLG gaming mode",
@@ -227,9 +227,9 @@
         },
         {
           "label": "Local dimming zones",
-          "value": "384 (65-inch)",
+          "value": "384",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_VERIFIED_2026-11-10"
         },
         {
           "label": "Peak brightness (nits)",
@@ -305,7 +305,7 @@
       "product_type": "Television",
       "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
       "source_grade": "Manufacturer / product",
-      "source_status": "MANUFACTURER_FIELDS_PARTIALLY_VERIFIED_2026-11-09",
+      "source_status": "OFFICIAL_SIZE_SPECIFIC_FIELDS_VERIFIED_EXACT_INDIA_CODE_PENDING_2026-11-10",
       "specifications": [
         {
           "label": "Smart OS",
@@ -317,25 +317,25 @@
           "label": "Size (in)",
           "value": "75",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_VERIFIED_2026-11-10"
         },
         {
           "label": "Panel / backlight",
           "value": "QD Mini-LED",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_VERIFIED_2026-11-10"
         },
         {
           "label": "Resolution",
-          "value": "3840 x 2160 (4K UHD)",
+          "value": "3840 x 2160",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_VERIFIED_2026-11-10"
         },
         {
           "label": "Native Hz",
-          "value": "60",
+          "value": "60 (DLG 120Hz is not native 120Hz)",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_VERIFIED_2026-11-10"
         },
         {
           "label": "HDR formats",
@@ -353,7 +353,7 @@
           "label": "Speaker W",
           "value": "34",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_VERIFIED_2026-11-10"
         },
         {
           "label": "DLG gaming mode",
@@ -363,9 +363,9 @@
         },
         {
           "label": "Local dimming zones",
-          "value": "512 (75-inch)",
+          "value": "512",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_VERIFIED_2026-11-10"
         },
         {
           "label": "Peak brightness (nits)",
@@ -1456,41 +1456,41 @@
       "category": "tvs",
       "brand": "LG",
       "model": "OLED evo C6 55",
-      "model_code": "",
+      "model_code": "OLED55C6PLA",
       "product_type": "Television",
-      "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
-      "source_grade": "Editorial specification",
-      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
+      "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55c6pla/",
+      "source_grade": "Manufacturer / exact India model",
+      "source_status": "OFFICIAL_EXACT_MODEL_FIELDS_VERIFIED_2026-11-10",
       "specifications": [
         {
           "label": "Size (in)",
           "value": "55",
-          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55c6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         },
         {
           "label": "Panel / backlight",
           "value": "OLED evo",
-          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55c6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         },
         {
           "label": "Resolution",
-          "value": "4K UHD",
-          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "value": "3840 x 2160",
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55c6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         },
         {
           "label": "Native Hz",
-          "value": "120",
-          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "value": "120 (VRR up to 165 Hz)",
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55c6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         },
         {
           "label": "Smart OS",
           "value": "webOS 26",
-          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55c6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         },
         {
           "label": "HDR formats",
@@ -1501,12 +1501,18 @@
         {
           "label": "HDMI ports",
           "value": "4",
-          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55c6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
+        },
+        {
+          "label": "Speaker W",
+          "value": "40",
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55c6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         }
       ],
       "buyer_use_case": "OLED gaming and cinema",
-      "evidence_caveat": "165Hz VRR claim depends on input; check exact model code; exact SKU retailer links not verified; merchant links are model-targeted searches only",
+      "evidence_caveat": "165Hz VRR claim depends on input; check exact model code; exact SKU retailer links not verified; merchant links are model-targeted searches only | Exact model and newly admitted fields confirmed on official India product page 2026-11-10; remaining legacy fields retain original evidence labels.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -1556,17 +1562,17 @@
       "category": "tvs",
       "brand": "LG",
       "model": "OLED evo G6 55",
-      "model_code": "",
+      "model_code": "OLED55G6PLA",
       "product_type": "Television",
-      "source_url": "https://www.lg.com/in/tv-soundbars/oled/",
-      "source_grade": "Manufacturer / product",
-      "source_status": "MANUFACTURER_SERIES_ONLY_EXACT_G6_55_NOT_VERIFIED",
+      "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55g6pla/",
+      "source_grade": "Manufacturer / exact India model",
+      "source_status": "OFFICIAL_EXACT_MODEL_FIELDS_VERIFIED_2026-11-10",
       "specifications": [
         {
           "label": "Resolution",
-          "value": "4K UHD",
-          "source_url": "https://www.91mobiles.com/reviews/best-tvs-in-india-2026/",
-          "evidence": "SERIES_ONLY_NOT_EXACT_VARIANT_VERIFIED"
+          "value": "3840 x 2160",
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55g6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         },
         {
           "label": "Smart OS",
@@ -1583,24 +1589,30 @@
         {
           "label": "Size (in)",
           "value": "55",
-          "source_url": "https://www.lg.com/in/tv-soundbars/oled/",
-          "evidence": "SERIES_ONLY_NOT_EXACT_VARIANT_VERIFIED"
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55g6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         },
         {
           "label": "Panel / backlight",
           "value": "OLED evo",
-          "source_url": "https://www.lg.com/in/tv-soundbars/oled/",
-          "evidence": "SERIES_ONLY_NOT_EXACT_VARIANT_VERIFIED"
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55g6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         },
         {
           "label": "Native Hz",
-          "value": "165 (supported gaming input)",
-          "source_url": "https://www.lg.com/in/tv-soundbars/oled/",
-          "evidence": "SERIES_ONLY_NOT_EXACT_VARIANT_VERIFIED"
+          "value": "120 (VRR up to 165 Hz)",
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55g6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
+        },
+        {
+          "label": "Speaker W",
+          "value": "60",
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55g6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         }
       ],
       "buyer_use_case": "Premium bright-room OLED",
-      "evidence_caveat": "Confirm wall-mount / stand and precise SKU; exact SKU retailer links not verified; merchant links are model-targeted searches only",
+      "evidence_caveat": "Confirm wall-mount / stand and precise SKU; exact SKU retailer links not verified; merchant links are model-targeted searches only | Exact model and newly admitted fields confirmed on official India product page 2026-11-10; remaining legacy fields retain original evidence labels.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -2058,39 +2070,51 @@
       "category": "tvs",
       "brand": "LG",
       "model": "QNED70 55 2026",
-      "model_code": "",
+      "model_code": "55QNED70BLA",
       "product_type": "Television",
-      "source_url": "https://www.croma.com/l/55-inch-high-definition-tv-0asz00a.html",
-      "source_grade": "Retailer listing",
-      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
+      "source_url": "https://www.lg.com/in/tv-soundbars/qned/55qned70bla/",
+      "source_grade": "Manufacturer / exact India model",
+      "source_status": "OFFICIAL_EXACT_MODEL_FIELDS_VERIFIED_2026-11-10",
       "specifications": [
         {
           "label": "Size (in)",
           "value": "55",
-          "source_url": "https://www.croma.com/l/55-inch-high-definition-tv-0asz00a.html",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.lg.com/in/tv-soundbars/qned/55qned70bla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         },
         {
           "label": "Panel / backlight",
-          "value": "QNED (Mini-LED backlight unverified)",
-          "source_url": "https://www.croma.com/l/55-inch-high-definition-tv-0asz00a.html",
-          "evidence": "UNVERIFIED_PANEL_TECHNOLOGY"
+          "value": "QNED MiniLED",
+          "source_url": "https://www.lg.com/in/tv-soundbars/qned/55qned70bla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         },
         {
           "label": "Resolution",
-          "value": "4K UHD",
-          "source_url": "https://www.croma.com/l/55-inch-high-definition-tv-0asz00a.html",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "value": "3840 x 2160",
+          "source_url": "https://www.lg.com/in/tv-soundbars/qned/55qned70bla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         },
         {
           "label": "Smart OS",
-          "value": "webOS",
-          "source_url": "https://www.croma.com/l/55-inch-high-definition-tv-0asz00a.html",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "value": "webOS 26",
+          "source_url": "https://www.lg.com/in/tv-soundbars/qned/55qned70bla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
+        },
+        {
+          "label": "Native Hz",
+          "value": "60",
+          "source_url": "https://www.lg.com/in/tv-soundbars/qned/55qned70bla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
+        },
+        {
+          "label": "Speaker W",
+          "value": "20",
+          "source_url": "https://www.lg.com/in/tv-soundbars/qned/55qned70bla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_VERIFIED_2026-11-10"
         }
       ],
       "buyer_use_case": "Midrange QNED display",
-      "evidence_caveat": "Native panel Hz not independently confirmed; exact SKU retailer links not verified; merchant links are model-targeted searches only",
+      "evidence_caveat": "Native panel Hz not independently confirmed; exact SKU retailer links not verified; merchant links are model-targeted searches only | Exact model and newly admitted fields confirmed on official India product page 2026-11-10; remaining legacy fields retain original evidence labels.",
       "retailers": {
         "amazon": {
           "price_inr": null,
