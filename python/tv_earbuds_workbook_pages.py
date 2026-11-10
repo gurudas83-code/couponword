@@ -79,8 +79,10 @@ def research_specifications(item):
     return item["specifications"]
 
 def retailer_link(info, retailer):
+    exact = info.get("exact_model_link_verified") is True
+    label = ("Verified product on " if exact else "Search model on ") + retailer.title()
     return '<a href="' + esc(info["retailer_research_url"]) + \
-        '" target="_blank" rel="noopener noreferrer nofollow">Search ' + esc(retailer.title()) + '</a>'
+        '" target="_blank" rel="noopener noreferrer nofollow" aria-label="' + esc(label) + '">' + esc(label) + '</a>'
 
 def quote_text(info, store):
     if store == "amazon":
@@ -161,7 +163,7 @@ def hub(category, items):
 <section class="cr-hero">
 <p class="cr-eyebrow">India · 5 November 2026 · Dated research snapshot</p>
 <h1>{esc(title)}</h1>
-<p>Research all 20 models from the Coupon World comparison workbook, check specifications and open independent retailer searches for Amazon, Flipkart and Croma.</p>
+<p>Research all 20 models from the Coupon World comparison workbook, check specifications and open independently labelled verified-product links or retailer searches for Amazon, Flipkart and Croma.</p>
 <p><strong>Important:</strong> The reference prices are not live API quotes. No stock, exact purchase eligibility, independent sound/picture quality ranking, or retailer checkout is certified here.</p>
 <p><a href="/{esc(category)}/">Return to the source-reviewed category hub</a></p>
 {('<figure class="cw-licensed-tv-photo"><img src="https://c.pxhere.com/photos/af/b7/photo-156633.jpg!d" alt="Generic television in a room, CC0 public-domain editorial photograph; not one of the listed TV models" loading="lazy" decoding="async" referrerpolicy="no-referrer" width="960" height="640"><figcaption>Illustrative television photograph, not a listed model. <a href="https://pxhere.com/en/photo/156633" rel="noopener noreferrer nofollow" target="_blank">Photo source and CC0 public-domain license: PxHere</a>.</figcaption></figure><style>.cw-licensed-tv-photo{max-width:780px;margin:20px auto 24px}.cw-licensed-tv-photo img{width:100%;height:auto;max-height:360px;object-fit:cover;border-radius:18px;box-shadow:0 10px 28px #0002}.cw-licensed-tv-photo figcaption{font-size:12px;color:inherit;opacity:.82;margin-top:8px;text-align:center}</style>' if category == "tvs" else "")}
@@ -212,7 +214,7 @@ def detail(item):
 <dl class="cr-detail-facts">{fields}</dl>
 <p>These fields were compiled in the workbook and have not all been individually confirmed for the exact Indian retail SKU. {sources}</p>
 <section><h2>Amazon, Flipkart and Croma</h2>
-<p>Each link is a retailer search/browse destination, <strong>not</strong> a verified exact-product buy button. No current stock or shipping guarantee is made.</p>
+<p>Only links marked <strong>Verified product</strong> have an independently matched product identity. Links marked <strong>Search model</strong> are retailer searches, not exact-product buy buttons. No current stock or shipping guarantee is made.</p>
 <div class="cr-scroll"><table class="cr-compare-table"><thead><tr><th>Retailer</th><th>Dated quoted reference</th><th>Research link</th></tr></thead><tbody>{merchant}</tbody></table></div></section>
 <section><h2>Why this product may be considered</h2><p>{esc(item["buyer_use_case"] or "Model-specific suitability remains under review.")}</p></section>
 <section><h2>Important gaps and buyer checks</h2><p>{esc(item["evidence_caveat"])}</p>
