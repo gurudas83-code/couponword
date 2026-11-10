@@ -251,7 +251,7 @@
         }
       ],
       "buyer_use_case": "Large bright living room",
-      "evidence_caveat": "DLG ≠ native 120Hz; 384 zones for 65in; exact SKU retailer links not verified; merchant links are model-targeted searches only",
+      "evidence_caveat": "DLG ≠ native 120Hz; 384 zones for 65in; exact SKU retailer links not verified; merchant links are model-targeted searches only | 2026-11-10: Exact India SKU code unresolved; do not substitute overseas model identifiers or infer from screen size.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -387,7 +387,7 @@
         }
       ],
       "buyer_use_case": "Big-screen budget Mini-LED",
-      "evidence_caveat": "512 zones for 75in; DLG not native 120Hz; exact SKU retailer links not verified; merchant links are model-targeted searches only",
+      "evidence_caveat": "512 zones for 75in; DLG not native 120Hz; exact SKU retailer links not verified; merchant links are model-targeted searches only | 2026-11-10: Exact India SKU code unresolved; do not substitute overseas model identifiers or infer from screen size.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -441,37 +441,37 @@
       "product_type": "Television",
       "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
       "source_grade": "Manufacturer / exact model or size-specific series",
-      "source_status": "OFFICIAL_MANUFACTURER_FIELDS_VERIFIED_2026-11-09",
+      "source_status": "OFFICIAL_SIZE_SPECIFIC_FIELDS_VERIFIED_EXACT_INDIA_SKU_PENDING_2026-11-10",
       "specifications": [
         {
           "label": "Size (in)",
           "value": "55",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "Panel / backlight",
           "value": "QD Mini-LED",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "Resolution",
-          "value": "3840 x 2160 (4K UHD)",
+          "value": "3840 x 2160",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "Native Hz",
-          "value": "60",
+          "value": "60 (DLG 120Hz is not native 120Hz)",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "Smart OS",
           "value": "Fire TV",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "HDR formats",
@@ -483,13 +483,13 @@
           "label": "HDMI ports",
           "value": "3 (1 eARC)",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "Speaker W",
           "value": "20",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "DLG gaming mode",
@@ -501,23 +501,23 @@
           "label": "Peak brightness (nits)",
           "value": "Up to 600",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "RAM / Storage",
           "value": "2GB / 32GB",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "USB ports",
           "value": "2 x USB 2.0",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         }
       ],
       "buyer_use_case": "Budget Mini-LED, Alexa",
-      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers",
+      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers | 2026-11-10: India maker size-specific specs checked. India model code not established; overseas SKU codes must not be substituted.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -573,37 +573,37 @@
       "product_type": "Television",
       "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
       "source_grade": "Manufacturer / exact model or size-specific series",
-      "source_status": "OFFICIAL_MANUFACTURER_FIELDS_VERIFIED_2026-11-09",
+      "source_status": "OFFICIAL_SIZE_SPECIFIC_FIELDS_VERIFIED_EXACT_INDIA_SKU_PENDING_2026-11-10",
       "specifications": [
         {
           "label": "Size (in)",
           "value": "65",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "Panel / backlight",
           "value": "QD Mini-LED",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "Resolution",
-          "value": "3840 x 2160 (4K UHD)",
+          "value": "3840 x 2160",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "Native Hz",
-          "value": "60",
+          "value": "60 (DLG 120Hz is not native 120Hz)",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "Smart OS",
           "value": "Fire TV",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "HDR formats",
@@ -615,13 +615,13 @@
           "label": "HDMI ports",
           "value": "3 (1 eARC)",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "Speaker W",
           "value": "20",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "DLG gaming mode",
@@ -633,23 +633,23 @@
           "label": "Peak brightness (nits)",
           "value": "Up to 600",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "RAM / Storage",
           "value": "2GB / 32GB",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         },
         {
           "label": "USB ports",
           "value": "2 x USB 2.0",
           "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
-          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-09"
+          "evidence": "OFFICIAL_MANUFACTURER_SIZE_SPECIFIC_2026-11-10"
         }
       ],
       "buyer_use_case": "65-inch value TV",
-      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers",
+      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers | 2026-11-10: India maker size-specific specs checked. India model code not established; overseas SKU codes must not be substituted.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -1924,7 +1924,7 @@
         }
       ],
       "buyer_use_case": "43-inch low-cost smart",
-      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers",
+      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers | 2026-11-10: Exact India SKU code unresolved; do not substitute overseas model identifiers or infer from screen size.",
       "retailers": {
         "amazon": {
           "price_inr": null,
