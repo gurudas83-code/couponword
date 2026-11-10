@@ -165,7 +165,7 @@
       "category": "tvs",
       "brand": "Xiaomi",
       "model": "S Mini LED 2026 65",
-      "model_code": "",
+      "model_code": "L65MC-IN",
       "product_type": "Television",
       "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
       "source_grade": "Manufacturer / product",
@@ -251,7 +251,7 @@
         }
       ],
       "buyer_use_case": "Large bright living room",
-      "evidence_caveat": "DLG ≠ native 120Hz; 384 zones for 65in; exact SKU retailer links not verified; merchant links are model-targeted searches only | 2026-11-10: Exact India SKU code unresolved; do not substitute overseas model identifiers or infer from screen size. | Official Xiaomi India confirms product series and screen size, but does not display an independently verified India part-number SKU in the consulted source. model_code intentionally left blank. Global regional codes must not be copied.",
+      "evidence_caveat": "DLG ≠ native 120Hz; 384 zones for 65in; exact SKU retailer links not verified; merchant links are model-targeted searches only | 2026-11-10: Exact India SKU code unresolved; do not substitute overseas model identifiers or infer from screen size. | Official Xiaomi India confirms product series and screen size, but does not display an independently verified India part-number SKU in the consulted source. model_code intentionally left blank. Global regional codes must not be copied. | 2026-11-10: India code L65MC-IN from India retailer; not misrepresented as official manufacturer confirmation.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -295,17 +295,21 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "reviewed_at": "2026-11-05",
-      "india_market_identity_status": "OFFICIAL_XIAOMI_INDIA_SERIES_AND_SIZE_CONFIRMED_MODEL_PART_NUMBER_NOT_PUBLISHED",
+      "india_market_identity_status": "INDIA_CODE_MATCHED_EXACT_MODEL_RETAILER_PENDING_MANUFACTURER_CONFIRMATION",
       "india_market_identity_source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/buy/?gid=4224101093",
       "india_market_identity_reviewed_at": "2026-11-10",
-      "manufacturer_india_research_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/buy/?gid=4224101093"
+      "manufacturer_india_research_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/buy/?gid=4224101093",
+      "india_model_code_source_url": "https://www.vijaysales.com/plp?brand=Xiaomi",
+      "india_model_code_evidence": "INDIA_RETAILER_EXACT_MODEL_CODE_2026-11-10",
+      "india_model_code_reviewed_at": "2026-11-10",
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH"
     },
     {
       "id": "TV03",
       "category": "tvs",
       "brand": "Xiaomi",
       "model": "S Mini LED 2026 75",
-      "model_code": "",
+      "model_code": "L75MC-IN",
       "product_type": "Television",
       "source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/specs/",
       "source_grade": "Manufacturer / product",
@@ -391,7 +395,7 @@
         }
       ],
       "buyer_use_case": "Big-screen budget Mini-LED",
-      "evidence_caveat": "512 zones for 75in; DLG not native 120Hz; exact SKU retailer links not verified; merchant links are model-targeted searches only | 2026-11-10: Exact India SKU code unresolved; do not substitute overseas model identifiers or infer from screen size. | Official Xiaomi India confirms product series and screen size, but does not display an independently verified India part-number SKU in the consulted source. model_code intentionally left blank. Global regional codes must not be copied.",
+      "evidence_caveat": "512 zones for 75in; DLG not native 120Hz; exact SKU retailer links not verified; merchant links are model-targeted searches only | 2026-11-10: Exact India SKU code unresolved; do not substitute overseas model identifiers or infer from screen size. | Official Xiaomi India confirms product series and screen size, but does not display an independently verified India part-number SKU in the consulted source. model_code intentionally left blank. Global regional codes must not be copied. | 2026-11-10: India code L75MC-IN from India retailer; not misrepresented as official manufacturer confirmation.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -435,17 +439,21 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "reviewed_at": "2026-11-05",
-      "india_market_identity_status": "OFFICIAL_XIAOMI_INDIA_SERIES_AND_SIZE_CONFIRMED_MODEL_PART_NUMBER_NOT_PUBLISHED",
+      "india_market_identity_status": "INDIA_CODE_MATCHED_EXACT_MODEL_RETAILER_PENDING_MANUFACTURER_CONFIRMATION",
       "india_market_identity_source_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/buy/?gid=4224101093",
       "india_market_identity_reviewed_at": "2026-11-10",
-      "manufacturer_india_research_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/buy/?gid=4224101093"
+      "manufacturer_india_research_url": "https://www.mi.com/in/product/xiaomi-tv-s-mini-led-series/buy/?gid=4224101093",
+      "india_model_code_source_url": "https://www.vijaysales.com/plp?brand=Xiaomi",
+      "india_model_code_evidence": "INDIA_RETAILER_EXACT_MODEL_CODE_2026-11-10",
+      "india_model_code_reviewed_at": "2026-11-10",
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH"
     },
     {
       "id": "TV04",
       "category": "tvs",
       "brand": "Xiaomi",
       "model": "FX Mini LED Fire TV 55",
-      "model_code": "",
+      "model_code": "L55MC-FSMIN",
       "product_type": "Television",
       "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
       "source_grade": "Manufacturer / exact model or size-specific series",
@@ -525,7 +533,7 @@
         }
       ],
       "buyer_use_case": "Budget Mini-LED, Alexa",
-      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers | 2026-11-10: India maker size-specific specs checked. India model code not established; overseas SKU codes must not be substituted. | Official Xiaomi India confirms product series and screen size, but does not display an independently verified India part-number SKU in the consulted source. model_code intentionally left blank. Global regional codes must not be copied.",
+      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers | 2026-11-10: India maker size-specific specs checked. India model code not established; overseas SKU codes must not be substituted. | Official Xiaomi India confirms product series and screen size, but does not display an independently verified India part-number SKU in the consulted source. model_code intentionally left blank. Global regional codes must not be copied. | 2026-11-10: India code L55MC-FSMIN from India retailer; not misrepresented as official manufacturer confirmation.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -571,17 +579,21 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "reviewed_at": "2026-11-05",
-      "india_market_identity_status": "OFFICIAL_XIAOMI_INDIA_SERIES_AND_SIZE_CONFIRMED_MODEL_PART_NUMBER_NOT_PUBLISHED",
+      "india_market_identity_status": "INDIA_CODE_MATCHED_EXACT_MODEL_RETAILER_PENDING_MANUFACTURER_CONFIRMATION",
       "india_market_identity_source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
       "india_market_identity_reviewed_at": "2026-11-10",
-      "manufacturer_india_research_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/"
+      "manufacturer_india_research_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+      "india_model_code_source_url": "https://www.reliancedigital.in/product/xiaomi-1397-cm-55-inch-ultra-hd4k-fx-mini-led-fire-tv-l55mc-fsmin-msr65a-10409338",
+      "india_model_code_evidence": "INDIA_RETAILER_EXACT_MODEL_CODE_2026-11-10",
+      "india_model_code_reviewed_at": "2026-11-10",
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH"
     },
     {
       "id": "TV05",
       "category": "tvs",
       "brand": "Xiaomi",
       "model": "FX Mini LED Fire TV 65",
-      "model_code": "",
+      "model_code": "L65MC-FSMIN",
       "product_type": "Television",
       "source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
       "source_grade": "Manufacturer / exact model or size-specific series",
@@ -661,7 +673,7 @@
         }
       ],
       "buyer_use_case": "65-inch value TV",
-      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers | 2026-11-10: India maker size-specific specs checked. India model code not established; overseas SKU codes must not be substituted. | Official Xiaomi India confirms product series and screen size, but does not display an independently verified India part-number SKU in the consulted source. model_code intentionally left blank. Global regional codes must not be copied.",
+      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers | 2026-11-10: India maker size-specific specs checked. India model code not established; overseas SKU codes must not be substituted. | Official Xiaomi India confirms product series and screen size, but does not display an independently verified India part-number SKU in the consulted source. model_code intentionally left blank. Global regional codes must not be copied. | 2026-11-10: India code L65MC-FSMIN from India retailer; not misrepresented as official manufacturer confirmation.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -705,10 +717,14 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "reviewed_at": "2026-11-05",
-      "india_market_identity_status": "OFFICIAL_XIAOMI_INDIA_SERIES_AND_SIZE_CONFIRMED_MODEL_PART_NUMBER_NOT_PUBLISHED",
+      "india_market_identity_status": "INDIA_CODE_MATCHED_EXACT_MODEL_RETAILER_PENDING_MANUFACTURER_CONFIRMATION",
       "india_market_identity_source_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
       "india_market_identity_reviewed_at": "2026-11-10",
-      "manufacturer_india_research_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/"
+      "manufacturer_india_research_url": "https://www.mi.com/in/product/xiaomi-tv-fx-mini-led-series/specs/",
+      "india_model_code_source_url": "https://www.reliancedigital.in/product/xiaomi-1651-cm-65-inch-ultra-hd4k-fx-mini-led-fire-tv-l65mc-fsmin-msr65b-10409339",
+      "india_model_code_evidence": "INDIA_RETAILER_EXACT_MODEL_CODE_2026-11-10",
+      "india_model_code_reviewed_at": "2026-11-10",
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH"
     },
     {
       "id": "TV06",
@@ -1878,7 +1894,7 @@
       "category": "tvs",
       "brand": "Xiaomi",
       "model": "A Series 2025 43 FHD",
-      "model_code": "",
+      "model_code": "L43MB-AFIN",
       "product_type": "Television",
       "source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
       "source_grade": "Manufacturer / exact model or size-specific series",
@@ -1940,7 +1956,7 @@
         }
       ],
       "buyer_use_case": "43-inch low-cost smart",
-      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers | 2026-11-10: Exact India SKU code unresolved; do not substitute overseas model identifiers or infer from screen size. | Official Xiaomi India confirms product series and screen size, but does not display an independently verified India part-number SKU in the consulted source. model_code intentionally left blank. Global regional codes must not be copied.",
+      "evidence_caveat": "Fields verified from manufacturer official model or size-specific series specification; retailer links remain research searches, not checkout or live offers | 2026-11-10: Exact India SKU code unresolved; do not substitute overseas model identifiers or infer from screen size. | Official Xiaomi India confirms product series and screen size, but does not display an independently verified India part-number SKU in the consulted source. model_code intentionally left blank. Global regional codes must not be copied. | 2026-11-10: India code L43MB-AFIN from third-party catalogue; not misrepresented as official manufacturer confirmation.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -1986,10 +2002,14 @@
       "performance_ranking_eligible": false,
       "price_ranking_weight": 0,
       "reviewed_at": "2026-11-05",
-      "india_market_identity_status": "OFFICIAL_XIAOMI_INDIA_SERIES_AND_SIZE_CONFIRMED_MODEL_PART_NUMBER_NOT_PUBLISHED",
+      "india_market_identity_status": "INDIA_CODE_FOUND_THIRD_PARTY_PENDING_MANUFACTURER_OR_RETAILER",
       "india_market_identity_source_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
       "india_market_identity_reviewed_at": "2026-11-10",
-      "manufacturer_india_research_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/"
+      "manufacturer_india_research_url": "https://www.mi.com/in/product/xiaomi-smart-tv-a-series-2025/specs/",
+      "india_model_code_source_url": "https://www.smartprix.com/tvs_and_accessories/xiaomi-brand",
+      "india_model_code_evidence": "INDIA_THIRD_PARTY_CATALOGUE_MODEL_CODE_2026-11-10",
+      "india_model_code_reviewed_at": "2026-11-10",
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH"
     },
     {
       "id": "TV18",
