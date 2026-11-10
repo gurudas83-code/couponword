@@ -114,7 +114,16 @@
       "verification_audit_at": "2026-11-09",
       "exact_sku_all_retailers_verified": false,
       "reviewed_at": "2026-11-09",
-      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_02",
@@ -258,7 +267,16 @@
       "manufacturer_display_price_inr": 42999,
       "manufacturer_price_source": "https://store.lumio.co.in/vision7-55inch-2026",
       "manufacturer_price_observed_at": "2026-11-09",
-      "price_conflict_note": "Manufacturer main product page indexed at ₹42,999 while updated variant selector on Vision 7 II page shows Vision 7 2026 ₹40,999; not the same SKU as Vision 7 II. Do not use II price for original Vision 7. Current checkout price not independently verified."
+      "price_conflict_note": "Manufacturer main product page indexed at ₹42,999 while updated variant selector on Vision 7 II page shows Vision 7 2026 ₹40,999; not the same SKU as Vision 7 II. Do not use II price for original Vision 7. Current checkout price not independently verified.",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_03",
@@ -381,7 +399,16 @@
       "verification_audit_at": "2026-11-09",
       "exact_sku_all_retailers_verified": false,
       "reviewed_at": "2026-11-09",
-      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_04",
@@ -495,7 +522,16 @@
       "reviewed_at": "2026-11-09",
       "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
       "manufacturer_source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
-      "manufacturer_model_identity_status": "VERIFIED_OFFICIAL_EXACT_MODEL"
+      "manufacturer_model_identity_status": "VERIFIED_OFFICIAL_EXACT_MODEL",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_05",
@@ -590,7 +626,16 @@
       "verification_audit_at": "2026-11-09",
       "exact_sku_all_retailers_verified": false,
       "reviewed_at": "2026-11-09",
-      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_06",
@@ -631,7 +676,16 @@
         "IMAGE_REUSE_LICENSE_NOT_CLEARED"
       ],
       "reviewed_at": "2026-11-09",
-      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_07",
@@ -672,7 +726,16 @@
         "IMAGE_REUSE_LICENSE_NOT_CLEARED"
       ],
       "reviewed_at": "2026-11-09",
-      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_08",
@@ -713,7 +776,16 @@
         "IMAGE_REUSE_LICENSE_NOT_CLEARED"
       ],
       "reviewed_at": "2026-11-09",
-      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links."
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_09",
@@ -756,7 +828,16 @@
       "reviewed_at": "2026-11-09",
       "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
       "manufacturer_support_url": "https://www.samsung.com/in/support/model/UA43UE84AHULXL/",
-      "manufacturer_model_identity_status": "OFFICIAL_SAMSUNG_INDIA_SUPPORT_EXACT_SKU_CONFIRMED"
+      "manufacturer_model_identity_status": "OFFICIAL_SAMSUNG_INDIA_SUPPORT_EXACT_SKU_CONFIRMED",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_10",
@@ -831,7 +912,16 @@
         "IMAGE_REUSE_LICENSE_NOT_CLEARED"
       ],
       "manufacturer_series_source_url": "https://www.sony.co.in/bravia/products/bravia-2m2-s25m2",
-      "manufacturer_model_identity_status": "OFFICIAL_SERIES_SOURCE_55_INCH_VARIANT_PENDING"
+      "manufacturer_model_identity_status": "OFFICIAL_SERIES_SOURCE_55_INCH_VARIANT_PENDING",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_11",
@@ -872,7 +962,16 @@
         "IMAGE_LICENSE_NOT_CLEARED"
       ],
       "reviewed_at": "2026-11-09",
-      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_12",
@@ -913,7 +1012,16 @@
         "IMAGE_LICENSE_NOT_CLEARED"
       ],
       "reviewed_at": "2026-11-09",
-      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_13",
@@ -954,7 +1062,16 @@
         "IMAGE_LICENSE_NOT_CLEARED"
       ],
       "reviewed_at": "2026-11-09",
-      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_14",
@@ -995,7 +1112,16 @@
         "IMAGE_LICENSE_NOT_CLEARED"
       ],
       "reviewed_at": "2026-11-09",
-      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 32,
+        "segment_priority": 3,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_15",
@@ -1036,7 +1162,16 @@
         "IMAGE_LICENSE_NOT_CLEARED"
       ],
       "reviewed_at": "2026-11-09",
-      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_16",
@@ -1077,7 +1212,16 @@
         "IMAGE_LICENSE_NOT_CLEARED"
       ],
       "reviewed_at": "2026-11-09",
-      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_17",
@@ -1118,7 +1262,16 @@
         "IMAGE_LICENSE_NOT_CLEARED"
       ],
       "reviewed_at": "2026-11-09",
-      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_18",
@@ -1159,7 +1312,16 @@
         "IMAGE_LICENSE_NOT_CLEARED"
       ],
       "reviewed_at": "2026-11-09",
-      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_19",
@@ -1200,7 +1362,16 @@
         "IMAGE_LICENSE_NOT_CLEARED"
       ],
       "reviewed_at": "2026-11-09",
-      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     },
     {
       "id": "POPULAR_TV_20",
@@ -1241,7 +1412,16 @@
         "IMAGE_LICENSE_NOT_CLEARED"
       ],
       "reviewed_at": "2026-11-09",
-      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU"
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 65,
+        "segment_priority": 4,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
     }
   ],
   "quality_gate": {
@@ -1272,6 +1452,10 @@
     "all_twenty_records_audited_for_publication_gates": true,
     "next_ten_reviewed": 10,
     "next_ten_verified_retailer_checkout_prices": 0,
-    "next_ten_licensed_images": 0
+    "next_ten_licensed_images": 0,
+    "market_research_updated_at": "2026-11-10",
+    "verified_model_unit_sales_rankings": 0,
+    "model_sales_ranking_publication_allowed": false,
+    "market_segment_priority": "43-inch first, 55-inch second; 32-inch and 65-inch coverage retained"
   }
 }
