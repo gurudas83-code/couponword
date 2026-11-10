@@ -1783,16 +1783,17 @@
           "price_inr": null,
           "checked_at": null,
           "observation_source_url": null,
-          "retailer_research_url": "https://www.flipkart.com/search?q=LG%20OLED55C6PLA",
-          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/lg-139-cm-55-inch-oled-ultra-hd-4k-smart-webos-tv-2026/p/itm9c0e38fb14d1b",
+          "link_scope": "EXACT_MODEL_LISTING_RESEARCH_NOT_LIVE_OFFER",
           "price_status": "NOT_VERIFIED",
           "price_note": "Model-specific retailer search only; not a verified live product offer",
           "stock_status": "UNKNOWN",
           "live_offer": false,
           "checkout_eligible": false,
-          "exact_model_link_verified": false,
-          "link_audit_status": "SEARCH_LINK_ONLY_NOT_EXACT_PRODUCT_VERIFIED",
-          "link_audit_date": "2026-11-10"
+          "exact_model_link_verified": true,
+          "link_audit_status": "EXACT_MODEL_CODE_CONFIRMED_ON_RETAILER_PAGE",
+          "link_audit_date": "2026-11-10",
+          "exact_model_code_confirmed": "OLED55C6PLA"
         },
         "croma": {
           "price_inr": null,
