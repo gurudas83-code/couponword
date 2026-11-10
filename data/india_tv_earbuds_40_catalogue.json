@@ -918,8 +918,8 @@
           "price_inr": null,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.croma.com/l/samsung-quantum-dot-55-inch-tv-0asz00a.html",
-          "retailer_research_url": "https://www.croma.com/search/?text=Samsung%20QA55QN80HAULXL",
-          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.croma.com/samsung-qn80h-138-cm-55-inch-1-star-qled-4k-ultra-hd-smart-tizen-tv-with-samsung-vision-ai-companion-2026-model-/p/322451",
+          "link_scope": "EXACT_MODEL_LISTING_RESEARCH_NOT_LIVE_OFFER",
           "price_status": "UNVERIFIED_HISTORICAL_PRICE_SUPPRESSED",
           "price_note": "Model-specific retailer search only; not a verified live product offer",
           "stock_status": "UNKNOWN",
@@ -927,9 +927,10 @@
           "checkout_eligible": false,
           "price_evidence_status": "CATEGORY_SOURCE_NOT_EXACT_SKU_PRICE_EVIDENCE",
           "historical_unverified_price_inr": 98290,
-          "exact_model_link_verified": false,
-          "link_audit_status": "SEARCH_LINK_ONLY_NOT_EXACT_PRODUCT_VERIFIED",
-          "link_audit_date": "2026-11-10"
+          "exact_model_link_verified": true,
+          "link_audit_status": "EXACT_MODEL_CODE_CONFIRMED_ON_RETAILER_PAGE",
+          "link_audit_date": "2026-11-10",
+          "exact_model_code_confirmed": "QA55QN80HAULXL"
         }
       },
       "product_status": "RESEARCH_ONLY",
