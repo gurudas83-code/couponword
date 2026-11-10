@@ -798,8 +798,27 @@
       "indicative_price_inr": 30490,
       "price_source": "https://www.flipkart.com/televisions/lcd~screentype/pr?sid=ckf%2Cczl",
       "price_status": "DATED_RETAILER_CATEGORY_PRICE_NOT_CHECKOUT_VERIFIED",
-      "specifications": [],
-      "specification_status": "OFFICIAL_MODEL_IDENTITY_ONLY_TECHNICAL_FIELDS_PENDING",
+      "specifications": [
+        {
+          "label": "Screen size",
+          "value": "43 inch (1.08 m)",
+          "source_url": "https://www.samsung.com/in/support/model/UA43UE84AHULXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_SUPPORT"
+        },
+        {
+          "label": "Display category",
+          "value": "Crystal 4K UHD",
+          "source_url": "https://www.samsung.com/in/support/model/UA43UE84AHULXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_SUPPORT"
+        },
+        {
+          "label": "Model year",
+          "value": "2026",
+          "source_url": "https://www.samsung.com/in/support/model/UA43UE84AHULXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_SUPPORT"
+        }
+      ],
+      "specification_status": "PARTIAL_OFFICIAL_EXACT_MODEL_SUPPORT",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -851,7 +870,10 @@
           "ratings_count_displayed": 87213,
           "ratings_scope": "RETAILER_LISTING_MAY_AGGREGATE_VARIANTS_NOT_UNIT_SALES"
         }
-      ]
+      ],
+      "technical_source_url": "https://www.samsung.com/in/support/model/UA43UE84AHULXL/",
+      "technical_reviewed_at": "2026-11-10",
+      "technical_notes": " | 2026-11-10: Manufacturer evidence checked. Only listed fields admitted; exact SKU differentiation remains pending where noted."
     },
     {
       "id": "POPULAR_TV_10",
@@ -948,8 +970,45 @@
       "indicative_price_inr": 25990,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
       "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
-      "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specifications": [
+        {
+          "label": "Screen size",
+          "value": "43 inch",
+          "source_url": "https://www.lg.com/in/tv-soundbars/smart-tvs/43lb6500plb/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "Display resolution",
+          "value": "Full HD",
+          "source_url": "https://www.lg.com/in/tv-soundbars/smart-tvs/43lb6500plb/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "Processor",
+          "value": "Alpha 5 AI Processor Gen9",
+          "source_url": "https://www.lg.com/in/tv-soundbars/smart-tvs/43lb6500plb/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "HDR",
+          "value": "HDR10 Pro",
+          "source_url": "https://www.lg.com/in/tv-soundbars/smart-tvs/43lb6500plb/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "Smart platform",
+          "value": "webOS",
+          "source_url": "https://www.lg.com/in/tv-soundbars/smart-tvs/43lb6500plb/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "Audio technology",
+          "value": "Dolby Atmos",
+          "source_url": "https://www.lg.com/in/tv-soundbars/smart-tvs/43lb6500plb/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        }
+      ],
+      "specification_status": "PARTIAL_OFFICIAL_EXACT_MODEL",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -985,7 +1044,10 @@
         "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
         "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
         "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
-      }
+      },
+      "technical_source_url": "https://www.lg.com/in/tv-soundbars/smart-tvs/43lb6500plb/",
+      "technical_reviewed_at": "2026-11-10",
+      "technical_notes": " | 2026-11-10: Manufacturer evidence checked. Only listed fields admitted; exact SKU differentiation remains pending where noted."
     },
     {
       "id": "POPULAR_TV_12",
@@ -998,8 +1060,33 @@
       "indicative_price_inr": 39090,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
       "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
-      "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specifications": [
+        {
+          "label": "Display family",
+          "value": "Mini LED M70 series",
+          "source_url": "https://www.haier.com/in/about-haier/news/haier-india-introduces-mini-led-m70-series-with-ultra-vivid-picture-quality-and-theatre-like-sound-performance.shtml",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_ONLY_NOT_EXACT_SKU"
+        },
+        {
+          "label": "HDR family",
+          "value": "Dolby Vision / HDR10+",
+          "source_url": "https://www.haier.com/in/about-haier/news/haier-india-introduces-mini-led-m70-series-with-ultra-vivid-picture-quality-and-theatre-like-sound-performance.shtml",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_ONLY_NOT_EXACT_SKU"
+        },
+        {
+          "label": "Audio family",
+          "value": "50W 2.1 channel Dolby Atmos",
+          "source_url": "https://www.haier.com/in/about-haier/news/haier-india-introduces-mini-led-m70-series-with-ultra-vivid-picture-quality-and-theatre-like-sound-performance.shtml",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_ONLY_NOT_EXACT_SKU"
+        },
+        {
+          "label": "Memory family",
+          "value": "2GB RAM / 32GB storage",
+          "source_url": "https://www.haier.com/in/about-haier/news/haier-india-introduces-mini-led-m70-series-with-ultra-vivid-picture-quality-and-theatre-like-sound-performance.shtml",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_ONLY_NOT_EXACT_SKU"
+        }
+      ],
+      "specification_status": "SERIES_ONLY_VERIFIED_EXACT_MODEL_PENDING",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -1035,7 +1122,10 @@
         "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
         "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
         "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
-      }
+      },
+      "technical_source_url": "https://www.haier.com/in/about-haier/news/haier-india-introduces-mini-led-m70-series-with-ultra-vivid-picture-quality-and-theatre-like-sound-performance.shtml",
+      "technical_reviewed_at": "2026-11-10",
+      "technical_notes": " | 2026-11-10: Manufacturer evidence checked. Only listed fields admitted; exact SKU differentiation remains pending where noted."
     },
     {
       "id": "POPULAR_TV_13",
@@ -1205,8 +1295,45 @@
       "indicative_price_inr": 90230,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
       "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
-      "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specifications": [
+        {
+          "label": "Screen size",
+          "value": "55 inch (139 cm)",
+          "source_url": "https://www.sony.co.in/bravia/gallery?showModelPrices=true",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_LISTING"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K Ultra HD",
+          "source_url": "https://www.sony.co.in/bravia/gallery?showModelPrices=true",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_LISTING"
+        },
+        {
+          "label": "Processor",
+          "value": "XR Processor",
+          "source_url": "https://www.sony.co.in/bravia/gallery?showModelPrices=true",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_LISTING"
+        },
+        {
+          "label": "Smart TV platform",
+          "value": "Google TV",
+          "source_url": "https://www.sony.co.in/bravia/gallery?showModelPrices=true",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_LISTING"
+        },
+        {
+          "label": "Colour technology",
+          "value": "XR Triluminos Pro",
+          "source_url": "https://www.sony.co.in/bravia/gallery?showModelPrices=true",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_LISTING"
+        },
+        {
+          "label": "Audio technology",
+          "value": "Dolby Atmos / DTS:X",
+          "source_url": "https://www.sony.co.in/bravia/gallery?showModelPrices=true",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL_LISTING"
+        }
+      ],
+      "specification_status": "PARTIAL_OFFICIAL_EXACT_MODEL_LISTING",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -1242,7 +1369,10 @@
         "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
         "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
         "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
-      }
+      },
+      "technical_source_url": "https://www.sony.co.in/bravia/gallery?showModelPrices=true",
+      "technical_reviewed_at": "2026-11-10",
+      "technical_notes": " | 2026-11-10: Manufacturer evidence checked. Only listed fields admitted; exact SKU differentiation remains pending where noted."
     },
     {
       "id": "POPULAR_TV_16",
@@ -1338,8 +1468,33 @@
       "indicative_price_inr": 56590,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
       "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
-      "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specifications": [
+        {
+          "label": "Display family",
+          "value": "Mini LED M70 series",
+          "source_url": "https://www.haier.com/in/about-haier/news/haier-india-introduces-mini-led-m70-series-with-ultra-vivid-picture-quality-and-theatre-like-sound-performance.shtml",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_ONLY_NOT_EXACT_SKU"
+        },
+        {
+          "label": "HDR family",
+          "value": "Dolby Vision / HDR10+",
+          "source_url": "https://www.haier.com/in/about-haier/news/haier-india-introduces-mini-led-m70-series-with-ultra-vivid-picture-quality-and-theatre-like-sound-performance.shtml",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_ONLY_NOT_EXACT_SKU"
+        },
+        {
+          "label": "Audio family",
+          "value": "50W 2.1 channel Dolby Atmos",
+          "source_url": "https://www.haier.com/in/about-haier/news/haier-india-introduces-mini-led-m70-series-with-ultra-vivid-picture-quality-and-theatre-like-sound-performance.shtml",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_ONLY_NOT_EXACT_SKU"
+        },
+        {
+          "label": "Memory family",
+          "value": "2GB RAM / 32GB storage",
+          "source_url": "https://www.haier.com/in/about-haier/news/haier-india-introduces-mini-led-m70-series-with-ultra-vivid-picture-quality-and-theatre-like-sound-performance.shtml",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_ONLY_NOT_EXACT_SKU"
+        }
+      ],
+      "specification_status": "SERIES_ONLY_VERIFIED_EXACT_MODEL_PENDING",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -1375,7 +1530,10 @@
         "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
         "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
         "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
-      }
+      },
+      "technical_source_url": "https://www.haier.com/in/about-haier/news/haier-india-introduces-mini-led-m70-series-with-ultra-vivid-picture-quality-and-theatre-like-sound-performance.shtml",
+      "technical_reviewed_at": "2026-11-10",
+      "technical_notes": " | 2026-11-10: Manufacturer evidence checked. Only listed fields admitted; exact SKU differentiation remains pending where noted."
     },
     {
       "id": "POPULAR_TV_18",
@@ -1438,8 +1596,45 @@
       "indicative_price_inr": 128990,
       "price_source": "https://www.smartprix.com/tvs/croma-store",
       "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
-      "specifications": [],
-      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "specifications": [
+        {
+          "label": "Screen size",
+          "value": "55 inch (139 cm)",
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55c6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "Display",
+          "value": "OLED evo 4K",
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55c6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "Processor",
+          "value": "Alpha 11 AI Processor Gen3",
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55c6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "HDR",
+          "value": "Dolby Vision",
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55c6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "Audio technology",
+          "value": "Dolby Atmos",
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55c6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        },
+        {
+          "label": "Model year",
+          "value": "2026",
+          "source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55c6pla/",
+          "evidence": "OFFICIAL_MANUFACTURER_EXACT_MODEL"
+        }
+      ],
+      "specification_status": "PARTIAL_OFFICIAL_EXACT_MODEL",
       "image_url": null,
       "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
       "retailers": {
@@ -1475,7 +1670,10 @@
         "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
         "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
         "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
-      }
+      },
+      "technical_source_url": "https://www.lg.com/in/tv-soundbars/oled-evo/oled55c6pla/",
+      "technical_reviewed_at": "2026-11-10",
+      "technical_notes": " | 2026-11-10: Manufacturer evidence checked. Only listed fields admitted; exact SKU differentiation remains pending where noted."
     },
     {
       "id": "POPULAR_TV_20",
