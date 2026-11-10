@@ -1,0 +1,1497 @@
+{
+  "schema_version": "1.0",
+  "market": "India",
+  "observed_at": "2026-11-09",
+  "mode": "POPULARITY_RESEARCH_CANDIDATES_NOT_VERIFIED_BESTSELLERS",
+  "disclosure": "Third-party popularity/catalogue visibility is not unit-sales proof. Prices are third-party indicative snapshots; images require explicit license. Search links are not SKU listings. No commerce or ranking admission.",
+  "records": [
+    {
+      "id": "POPULAR_TV_01",
+      "brand": "Xiaomi",
+      "model": "X Pro 2025 55",
+      "model_code": "L55MB-APIN",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/most-popular-tvs",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": 43999,
+      "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
+      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
+        },
+        {
+          "label": "Panel",
+          "value": "4K QLED",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
+        },
+        {
+          "label": "HDR",
+          "value": "Dolby Vision, HDR10+",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
+        },
+        {
+          "label": "Audio output",
+          "value": "34W",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
+        },
+        {
+          "label": "RAM / Storage",
+          "value": "2GB / 32GB",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
+        },
+        {
+          "label": "HDMI",
+          "value": "3 (one eARC)",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
+        },
+        {
+          "label": "USB",
+          "value": "2",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Google TV",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
+        },
+        {
+          "label": "Game Booster",
+          "value": "120Hz booster; native refresh not established",
+          "source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+          "evidence": "OFFICIAL_MANUFACTURER_55_INCH_SERIES"
+        }
+      ],
+      "specification_status": "MANUFACTURER_55_INCH_FIELDS_VERIFIED_NATIVE_REFRESH_UNCONFIRMED",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=Xiaomi%20L55MB-APIN",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/xiaomi-x-pro-cinemagiqled-138-cm-55-inch-qled-ultra-hd-4k-smart-google-tv-dolby-vision-hdr-10-32-gb-storage-34w-audio-sound-film-maker-mode-120-hz-game-booster-mi/p/itm89eea231e000a",
+          "scope": "EXACT_MODEL_CODE_MATCHED",
+          "evidence_url": "https://www.flipkart.com/xiaomi-x-pro-cinemagiqled-138-cm-55-inch-qled-ultra-hd-4k-smart-google-tv-dolby-vision-hdr-10-32-gb-storage-34w-audio-sound-film-maker-mode-120-hz-game-booster-mi/p/itm89eea231e000a"
+        },
+        "croma": {
+          "url": "https://www.croma.com/Xiaomi-X-Pro-Series-139.7-cm-%2855-inch%29-4K-Ultra-HD-QLED-Smart-Google-TV-with-Google-Voice-Assistant-%282025-model%29-/p/315466",
+          "scope": "EXACT_MODEL_CODE_MATCHED",
+          "evidence_url": "https://www.croma.com/Xiaomi-X-Pro-Series-139.7-cm-%2855-inch%29-4K-Ultra-HD-QLED-Smart-Google-TV-with-Google-Voice-Assistant-%282025-model%29-/p/315466"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "manufacturer_source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+      "technical_source_url": "https://www.mi.com/in/product/xiaomi-x-pro-qled-tv/",
+      "technical_reviewed_at": "2026-11-09",
+      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified.",
+      "price_verification": {
+        "as_of": "2026-11-09",
+        "amazon": "NOT_CONFIRMED_LIVE_PRICE",
+        "flipkart": "NOT_CONFIRMED_LIVE_PRICE",
+        "croma": "NOT_CONFIRMED_LIVE_PRICE"
+      },
+      "verification_audit_at": "2026-11-09",
+      "exact_sku_all_retailers_verified": false,
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_02",
+      "brand": "Lumio",
+      "model": "Vision 7 2026 55",
+      "model_code": "FTW3-ADSJ",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/most-popular-tvs",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": null,
+      "price_source": "https://store.lumio.co.in/vision7-55inch-2026",
+      "price_status": "CONFLICTING_MANUFACTURER_STOREFRONT_SNAPSHOTS_NO_SINGLE_VERIFIED_CURRENT_PRICE",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
+        },
+        {
+          "label": "Panel",
+          "value": "IPS QLED",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160 (4K UHD)",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
+        },
+        {
+          "label": "Native refresh rate",
+          "value": "60Hz",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
+        },
+        {
+          "label": "Brightness",
+          "value": "400 nits",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
+        },
+        {
+          "label": "Audio",
+          "value": "30W quad-driver",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
+        },
+        {
+          "label": "RAM",
+          "value": "3GB",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
+        },
+        {
+          "label": "Storage",
+          "value": "64GB",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
+        },
+        {
+          "label": "HDMI",
+          "value": "3 (one eARC)",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
+        },
+        {
+          "label": "USB",
+          "value": "2 (one USB 3.0, one USB 2.0)",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Google TV",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
+        },
+        {
+          "label": "HDR",
+          "value": "Dolby Vision, HDR10, HLG",
+          "source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+          "evidence": "OFFICIAL_MANUFACTURER_2026_55_SIZE"
+        }
+      ],
+      "specification_status": "OFFICIAL_EXACT_SERIES_AND_SIZE_CONFIRMED_MODEL_CODE_PENDING",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=Lumio%20FTW3-ADSJ",
+          "scope": "SEARCH_ONLY_EXACT_SKU_NOT_VERIFIED"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/televisions/lumio~brand/pr?sid=ckf%2Cczl",
+          "scope": "BRAND_LISTING_EXACT_MODEL_FTW3-ADSJ_PRESENT_NOT_PRODUCT_DETAIL",
+          "observed_price_inr": 42999,
+          "price_source": "https://www.flipkart.com/televisions/lumio~brand/pr?sid=ckf%2Cczl",
+          "observed_at": "2026-11-09"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=Lumio%20FTW3-ADSJ",
+          "scope": "SEARCH_ONLY_EXACT_SKU_NOT_VERIFIED"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ],
+      "technical_source_url": "https://www.smartprix.com/tvs/lumio_vision_7_2026_55_inch_ul_vs_motorola_55uhdgqmgbnq_55_inch_-cpd1ef8j5m65_pd171jethuy.php",
+      "technical_reviewed_at": "2026-11-09",
+      "technical_notes": "Manufacturer storefront explicitly lists 2 USB ports; third-party Smartprix lists 3. Manufacturer preferred; conflict logged.",
+      "manufacturer_source_url": "https://store.lumio.co.in/vision7-55inch-2026",
+      "manufacturer_list_price_inr": 42999,
+      "manufacturer_list_price_scope": "Vision 7 55 pre-discount FAQ; not current offer",
+      "price_verification": {
+        "as_of": "2026-11-09",
+        "amazon": "NOT_CONFIRMED_LIVE_PRICE",
+        "flipkart": "NOT_CONFIRMED_LIVE_PRICE",
+        "croma": "NOT_CONFIRMED_LIVE_PRICE"
+      },
+      "verification_audit_at": "2026-11-09",
+      "exact_sku_all_retailers_verified": false,
+      "spec_conflicts": [
+        {
+          "field": "USB",
+          "manufacturer": "2",
+          "third_party": "3",
+          "third_party_url": "https://www.smartprix.com/tvs/lumio-vision-7-2026-55-inch-ultra-hd-4k-smart-ppd1ef8j5m65",
+          "resolution": "Manufacturer preferred"
+        }
+      ],
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "manufacturer_display_price_inr": 42999,
+      "manufacturer_price_source": "https://store.lumio.co.in/vision7-55inch-2026",
+      "manufacturer_price_observed_at": "2026-11-09",
+      "price_conflict_note": "Manufacturer main product page indexed at ₹42,999 while updated variant selector on Vision 7 II page shows Vision 7 2026 ₹40,999; not the same SKU as Vision 7 II. Do not use II price for original Vision 7. Current checkout price not independently verified.",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_03",
+      "brand": "Realme",
+      "model": "TechLife CineSonic 43",
+      "model_code": "43UHDGDRVS3E",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/most-popular-tvs",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": 18299,
+      "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
+      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "43",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Panel",
+          "value": "LED",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160 (4K UHD)",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Native refresh rate",
+          "value": "60Hz",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Google TV",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Audio output",
+          "value": "30W",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "HDMI",
+          "value": "3",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "USB",
+          "value": "2",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "RAM / storage",
+          "value": "2GB / 16GB",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "HDR",
+          "value": "HDR10",
+          "source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
+          "verified_at": "2026-11-09"
+        }
+      ],
+      "specification_status": "THIRD_PARTY_ONLY_EXACT_MANUFACTURER_SPECS_PENDING",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=Realme%2043UHDGDRVS3E",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=Realme%2043UHDGDRVS3E",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=Realme%2043UHDGDRVS3E",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ],
+      "technical_source_url": "https://www.smartprix.com/tvs/realme-techlife-cinesonic-43-inch-ultra-hd-ppd1gkuqmvvy",
+      "technical_reviewed_at": "2026-11-09",
+      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified.",
+      "price_verification": {
+        "as_of": "2026-11-09",
+        "amazon": "NOT_CONFIRMED_LIVE_PRICE",
+        "flipkart": "NOT_CONFIRMED_LIVE_PRICE",
+        "croma": "NOT_CONFIRMED_LIVE_PRICE"
+      },
+      "verification_audit_at": "2026-11-09",
+      "exact_sku_all_retailers_verified": false,
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_04",
+      "brand": "Samsung",
+      "model": "Vision AI M2EH 55",
+      "model_code": "UA55M2EHAULXL",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/most-popular-tvs",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": null,
+      "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
+      "price_status": "NO_CURRENT_RETAILER_PRICE_VERIFIED",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+          "evidence": "RETAILER_FIELD_REQUIRES_OFFICIAL_FIELD_CROSSCHECK",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160 (4K UHD)",
+          "source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+          "evidence": "RETAILER_FIELD_REQUIRES_OFFICIAL_FIELD_CROSSCHECK",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Native refresh rate",
+          "value": "50Hz (retailer stated)",
+          "source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+          "evidence": "RETAILER_FIELD_REQUIRES_OFFICIAL_FIELD_CROSSCHECK",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Audio output",
+          "value": "30W",
+          "source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+          "evidence": "RETAILER_FIELD_REQUIRES_OFFICIAL_FIELD_CROSSCHECK",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "HDMI",
+          "value": "3",
+          "source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+          "evidence": "RETAILER_FIELD_REQUIRES_OFFICIAL_FIELD_CROSSCHECK",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "USB",
+          "value": "1",
+          "source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+          "evidence": "RETAILER_FIELD_REQUIRES_OFFICIAL_FIELD_CROSSCHECK",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Tizen",
+          "source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+          "evidence": "RETAILER_FIELD_REQUIRES_OFFICIAL_FIELD_CROSSCHECK",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "HDR",
+          "value": "HDR10+",
+          "source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+          "evidence": "RETAILER_FIELD_REQUIRES_OFFICIAL_FIELD_CROSSCHECK",
+          "verified_at": "2026-11-09"
+        }
+      ],
+      "specification_status": "OFFICIAL_MANUFACTURER_EXACT_SKU_CONFIRMED",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
+          "scope": "EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING",
+          "asin": "B0GXV5313B",
+          "verified_at": "2026-11-09"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=Samsung%20UA55M2EHAULXL",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=Samsung%20UA55M2EHAULXL",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "sales_signal": {
+        "source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
+        "statement": "Amazon page reports 5K+ bought in past month",
+        "scope": "RETAILER_REPORTED_RECENT_PURCHASES_NOT_INDIA_WIDE_RANK",
+        "observed_at": "2026-11-09"
+      },
+      "technical_source_url": "https://www.amazon.in/Samsung-Speakers-Upscaling-Mini-LED-UA55M2EHAULXL/dp/B0GXV5313B",
+      "technical_reviewed_at": "2026-11-09",
+      "technical_notes": "Exact model UA55M2EHAULXL manufacturer URL and support page confirmed; retailer specifications must not override manufacturer specs.",
+      "price_verification": {
+        "as_of": "2026-11-09",
+        "amazon": "NOT_CONFIRMED_LIVE_PRICE",
+        "flipkart": "NOT_CONFIRMED_LIVE_PRICE",
+        "croma": "NOT_CONFIRMED_LIVE_PRICE"
+      },
+      "verification_audit_at": "2026-11-09",
+      "exact_sku_all_retailers_verified": false,
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "manufacturer_source_url": "https://www.samsung.com/in/tvs/mini-led-tv/m2eh-55-inch-4k-smart-tv-ua55m2ehaulxl/",
+      "manufacturer_model_identity_status": "VERIFIED_OFFICIAL_EXACT_MODEL",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_05",
+      "brand": "Samsung",
+      "model": "Vision AI M2EH 43",
+      "model_code": "UA43M2EHAULXL",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/most-popular-tvs",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": 34490,
+      "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
+      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_RETAILER_VERIFIED",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "43",
+          "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Panel",
+          "value": "Mini LED (third-party)",
+          "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Resolution",
+          "value": "3840 x 2160 (4K UHD)",
+          "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "Native refresh rate",
+          "value": "60Hz (third-party)",
+          "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "DLG mode",
+          "value": "120Hz DLG (not native 120Hz)",
+          "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "label": "HDR",
+          "value": "HDR10, HDR10+, HLG",
+          "source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
+          "evidence": "THIRD_PARTY_NOT_MANUFACTURER_VERIFIED",
+          "verified_at": "2026-11-09"
+        }
+      ],
+      "specification_status": "THIRD_PARTY_ONLY_EXACT_MANUFACTURER_SPECS_PENDING",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=Samsung%20UA43M2EHAULXL",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=Samsung%20UA43M2EHAULXL",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=Samsung%20UA43M2EHAULXL",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_MODEL_SPECIFICATION_NOT_CONFIRMED",
+        "EXACT_RETAILER_SKU_NOT_CONFIRMED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ],
+      "technical_source_url": "https://www.smartprix.com/tvs/samsung-vision-ai-m2eh-43-inch-ultra-hd-4k-ppd1cn4nejeq",
+      "technical_reviewed_at": "2026-11-09",
+      "technical_notes": "Only evidenced fields admitted. Native refresh is distinct from DLG/Game Booster. Third-party specs must not be labelled manufacturer-verified.",
+      "price_verification": {
+        "as_of": "2026-11-09",
+        "amazon": "NOT_CONFIRMED_LIVE_PRICE",
+        "flipkart": "NOT_CONFIRMED_LIVE_PRICE",
+        "croma": "NOT_CONFIRMED_LIVE_PRICE"
+      },
+      "verification_audit_at": "2026-11-09",
+      "exact_sku_all_retailers_verified": false,
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_06",
+      "brand": "VW",
+      "model": "Spectra 43",
+      "model_code": "VW43AQ3",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/most-popular-tvs",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": 14999,
+      "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
+      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_CHECKOUT_VERIFIED",
+      "specifications": [],
+      "specification_status": "RESEARCH_CANDIDATE_UNVERIFIED",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=VW%20VW43AQ3",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=VW%20VW43AQ3",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=VW%20VW43AQ3",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "OFFICIAL_EXACT_MANUFACTURER_MODEL_SPECIFICATIONS_NOT_VERIFIED",
+        "EXACT_RETAILER_PRODUCT_LINKS_NOT_VERIFIED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_07",
+      "brand": "Acer",
+      "model": "Ultra I 43",
+      "model_code": "AR43UDGGU2875BD",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/most-popular-tvs",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": 19999,
+      "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
+      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_CHECKOUT_VERIFIED",
+      "specifications": [],
+      "specification_status": "RESEARCH_CANDIDATE_UNVERIFIED",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=Acer%20AR43UDGGU2875BD",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=Acer%20AR43UDGGU2875BD",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=Acer%20AR43UDGGU2875BD",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "OFFICIAL_EXACT_MANUFACTURER_MODEL_SPECIFICATIONS_NOT_VERIFIED",
+        "EXACT_RETAILER_PRODUCT_LINKS_NOT_VERIFIED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_08",
+      "brand": "TCL",
+      "model": "T8D 55",
+      "model_code": "55T8D",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/most-popular-tvs",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": 54990,
+      "price_source": "https://www.smartprix.com/tvs/most-popular-tvs",
+      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_CHECKOUT_VERIFIED",
+      "specifications": [],
+      "specification_status": "RESEARCH_CANDIDATE_UNVERIFIED",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=TCL%2055T8D",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=TCL%2055T8D",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=TCL%2055T8D",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "OFFICIAL_EXACT_MANUFACTURER_MODEL_SPECIFICATIONS_NOT_VERIFIED",
+        "EXACT_RETAILER_PRODUCT_LINKS_NOT_VERIFIED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_09",
+      "brand": "Samsung",
+      "model": "UE84AH 43",
+      "model_code": "UA43UE84AHULXL",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/most-popular-tvs",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": 30490,
+      "price_source": "https://www.flipkart.com/televisions/lcd~screentype/pr?sid=ckf%2Cczl",
+      "price_status": "DATED_RETAILER_CATEGORY_PRICE_NOT_CHECKOUT_VERIFIED",
+      "specifications": [],
+      "specification_status": "OFFICIAL_MODEL_IDENTITY_ONLY_TECHNICAL_FIELDS_PENDING",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=Samsung%20UA43UE84AHULXL",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=Samsung%20UA43UE84AHULXL",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=Samsung%20UA43UE84AHULXL",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "OFFICIAL_TECHNICAL_FIELDS_NOT_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "manufacturer_support_url": "https://www.samsung.com/in/support/model/UA43UE84AHULXL/",
+      "manufacturer_model_identity_status": "OFFICIAL_SAMSUNG_INDIA_SUPPORT_EXACT_SKU_CONFIRMED",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      },
+      "retailer_observations": [
+        {
+          "retailer": "Flipkart",
+          "model_code": "UA43UE84AHULXL",
+          "observed_price_inr": 30490,
+          "observed_at": "2026-11-10",
+          "source_url": "https://www.flipkart.com/televisions/lcd~screentype/pr?sid=ckf%2Cczl",
+          "evidence_type": "RETAILER_CATEGORY_LISTING_EXACT_MODEL_TEXT",
+          "product_detail_url_verified": false,
+          "checkout_price_verified": false,
+          "ratings_count_displayed": 87213,
+          "ratings_scope": "RETAILER_LISTING_MAY_AGGREGATE_VARIANTS_NOT_UNIT_SALES"
+        }
+      ]
+    },
+    {
+      "id": "POPULAR_TV_10",
+      "brand": "Sony",
+      "model": "Bravia 2 II S25M2 55",
+      "model_code": "K-55S25M2",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/croma-store",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": 70290,
+      "price_source": "https://www.smartprix.com/tvs/croma-store",
+      "price_status": "THIRD_PARTY_DATED_REFERENCE_NOT_CHECKOUT_VERIFIED",
+      "specifications": [
+        {
+          "label": "Size (in)",
+          "value": "55",
+          "source_url": "https://www.sony.co.in/bravia/products/bravia-2m2-s25m2",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_AND_EXACT_SIZE_MODEL"
+        },
+        {
+          "label": "Resolution",
+          "value": "4K UHD",
+          "source_url": "https://www.sony.co.in/bravia/products/bravia-2m2-s25m2",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_AND_EXACT_SIZE_MODEL"
+        },
+        {
+          "label": "Smart OS",
+          "value": "Google TV",
+          "source_url": "https://www.sony.co.in/bravia/products/bravia-2m2-s25m2",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_AND_EXACT_SIZE_MODEL"
+        },
+        {
+          "label": "Upscaling",
+          "value": "4K X-Reality PRO",
+          "source_url": "https://www.sony.co.in/bravia/products/bravia-2m2-s25m2",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_AND_EXACT_SIZE_MODEL"
+        },
+        {
+          "label": "Audio formats",
+          "value": "Dolby Atmos, DTS:X",
+          "source_url": "https://www.sony.co.in/bravia/products/bravia-2m2-s25m2",
+          "evidence": "OFFICIAL_MANUFACTURER_SERIES_AND_EXACT_SIZE_MODEL"
+        }
+      ],
+      "specification_status": "RESEARCH_CANDIDATE_UNVERIFIED",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=Sony%20K-55S25M2",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=Sony%20K-55S25M2",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=Sony%20K-55S25M2",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "manufacturer_source_url": "https://www.sony.co.in/bravia/products/bravia-2m2-s25m2",
+      "reviewed_at": "2026-11-09",
+      "retailer_link_review": "Only EXACT_MODEL_CODE_MATCHED or EXACT_MODEL_CODE_MATCHED_RETAILER_LISTING scopes count as exact SKU; SEARCH_ONLY and category links are not verified SKU links.",
+      "verification_blockers": [
+        "OFFICIAL_EXACT_MANUFACTURER_MODEL_SPECIFICATIONS_NOT_VERIFIED",
+        "EXACT_RETAILER_PRODUCT_LINKS_NOT_VERIFIED",
+        "IMAGE_REUSE_LICENSE_NOT_CLEARED"
+      ],
+      "manufacturer_series_source_url": "https://www.sony.co.in/bravia/products/bravia-2m2-s25m2",
+      "manufacturer_model_identity_status": "OFFICIAL_SERIES_SOURCE_55_INCH_VARIANT_PENDING",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_11",
+      "brand": "LG",
+      "model": "LB65 43",
+      "model_code": "43LB6500PLB",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/croma-store",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": 25990,
+      "price_source": "https://www.smartprix.com/tvs/croma-store",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
+      "specifications": [],
+      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=LG%2043LB6500PLB",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=LG%2043LB6500PLB",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=LG%2043LB6500PLB",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_12",
+      "brand": "Haier",
+      "model": "M70 43",
+      "model_code": "43M70UHMINI",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/croma-store",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": 39090,
+      "price_source": "https://www.smartprix.com/tvs/croma-store",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
+      "specifications": [],
+      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=Haier%2043M70UHMINI",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=Haier%2043M70UHMINI",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=Haier%2043M70UHMINI",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_13",
+      "brand": "LG",
+      "model": "QNED70 43",
+      "model_code": "43QNED70BLA",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/croma-store",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": 40990,
+      "price_source": "https://www.smartprix.com/tvs/croma-store",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
+      "specifications": [],
+      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=LG%2043QNED70BLA",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=LG%2043QNED70BLA",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=LG%2043QNED70BLA",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_14",
+      "brand": "Samsung",
+      "model": "H4610F 32",
+      "model_code": "UA32H4610FUXXL",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/croma-store",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": 16990,
+      "price_source": "https://www.smartprix.com/tvs/croma-store",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
+      "specifications": [],
+      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=Samsung%20UA32H4610FUXXL",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=Samsung%20UA32H4610FUXXL",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=Samsung%20UA32H4610FUXXL",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 32,
+        "segment_priority": 3,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_15",
+      "brand": "Sony",
+      "model": "Bravia 3 II 55",
+      "model_code": "K-55XR35M2",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/croma-store",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": 90230,
+      "price_source": "https://www.smartprix.com/tvs/croma-store",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
+      "specifications": [],
+      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=Sony%20K-55XR35M2",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=Sony%20K-55XR35M2",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=Sony%20K-55XR35M2",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_16",
+      "brand": "Sony",
+      "model": "Bravia 2 II S22M2 43",
+      "model_code": "K-43S22M2",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/croma-store",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": 45719,
+      "price_source": "https://www.smartprix.com/tvs/croma-store",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
+      "specifications": [],
+      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=Sony%20K-43S22M2",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=Sony%20K-43S22M2",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=Sony%20K-43S22M2",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 43,
+        "segment_priority": 1,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_17",
+      "brand": "Haier",
+      "model": "M70 55",
+      "model_code": "55M70UHMINI",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/croma-store",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": 56590,
+      "price_source": "https://www.smartprix.com/tvs/croma-store",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
+      "specifications": [],
+      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=Haier%2055M70UHMINI",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=Haier%2055M70UHMINI",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=Haier%2055M70UHMINI",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_18",
+      "brand": "TCL",
+      "model": "T69D 55",
+      "model_code": "55T69D",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/croma-store",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": 43976,
+      "price_source": "https://www.smartprix.com/tvs/croma-store",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
+      "specifications": [],
+      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=TCL%2055T69D",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=TCL%2055T69D",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=TCL%2055T69D",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_19",
+      "brand": "LG",
+      "model": "evo AI C6 55",
+      "model_code": "OLED55C6PLA",
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.smartprix.com/tvs/croma-store",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": 128990,
+      "price_source": "https://www.smartprix.com/tvs/croma-store",
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
+      "specifications": [],
+      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=LG%20OLED55C6PLA",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=LG%20OLED55C6PLA",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=LG%20OLED55C6PLA",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 55,
+        "segment_priority": 2,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    },
+    {
+      "id": "POPULAR_TV_20",
+      "brand": "Samsung",
+      "model": "U8400F 65",
+      "model_code": null,
+      "signal": "THIRD_PARTY_POPULARITY_OR_RETAILER_CATALOGUE_NOT_SALES_VOLUME",
+      "signal_source": "https://www.croma.com/samsung-u8400f-165-cm-65-inch-4k-ultra-hd-led-smart-tizen-tv-with-alexa-google-assistant-2025-model-/p/315268",
+      "observed_at": "2026-11-09",
+      "indicative_price_inr": null,
+      "price_source": null,
+      "price_status": "HISTORICAL_OR_THIRD_PARTY_INDICATIVE_NOT_CURRENT_VERIFIED",
+      "specifications": [],
+      "specification_status": "PENDING_EXACT_MODEL_MANUFACTURER_VERIFICATION",
+      "image_url": null,
+      "image_license_status": "NOT_CLEARED_DO_NOT_PUBLISH",
+      "retailers": {
+        "amazon": {
+          "url": "https://www.amazon.in/s?k=Samsung%20U8400F%2065",
+          "scope": "SEARCH_ONLY"
+        },
+        "flipkart": {
+          "url": "https://www.flipkart.com/search?q=Samsung%20U8400F%2065",
+          "scope": "SEARCH_ONLY"
+        },
+        "croma": {
+          "url": "https://www.croma.com/search/?text=Samsung%20U8400F%2065",
+          "scope": "SEARCH_ONLY"
+        }
+      },
+      "live_offer": false,
+      "checkout_eligible": false,
+      "performance_ranking_eligible": false,
+      "price_ranking_weight": 0,
+      "verification_blockers": [
+        "EXACT_MANUFACTURER_SPEC_FIELDS_NOT_INDEPENDENTLY_CONFIRMED",
+        "RETAILER_EXACT_SKU_AND_CURRENT_PRICE_NOT_CONFIRMED",
+        "IMAGE_LICENSE_NOT_CLEARED"
+      ],
+      "reviewed_at": "2026-11-09",
+      "verification_status": "RESEARCH_ONLY_PENDING_EXACT_MANUFACTURER_AND_RETAILER_SKU",
+      "market_research_2026_11_10": {
+        "screen_size_inches": 65,
+        "segment_priority": 4,
+        "priority_basis": "India 2025 shipment size trends, NOT model sales",
+        "sales_rank_verified": false,
+        "market_evidence_url": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+        "consumer_survey_url": "https://www.91mobiles.com/hub/the-great-indian-smart-tv-survey-2026-summary/",
+        "disclosure": "Candidate popularity is not verified unit sales. Do not label as bestselling."
+      }
+    }
+  ],
+  "quality_gate": {
+    "checked_at": "2026-11-09",
+    "publishable_exact_sku_count": 0,
+    "reason": "Cannot publish manufacturer-certified five-TV shortlist with exact prices or licensed images until independent exact-SKU proof exists.",
+    "first_five_technical_records_reviewed": 5,
+    "first_five_official_manufacturer_sources": 1,
+    "first_five_exact_retailer_sku_sources": 2,
+    "first_five_third_party_only": 3,
+    "first_five_image_licenses_cleared": 0,
+    "production_admission": false,
+    "first_five_official_model_or_series_sources": 2,
+    "first_five_exact_manufacturer_sku_fully_verified": 0,
+    "first_five_retailer_live_prices_verified": 0,
+    "first_five_all_retailer_skus_verified": 0,
+    "first_ten_records_reviewed": 10,
+    "first_ten_exact_manufacturer_pages_verified": 2,
+    "first_ten_fully_verified_for_publication": 0,
+    "manufacturer_exact_sku_identity_confirmed": [
+      "POPULAR_TV_04"
+    ],
+    "manufacturer_exact_size_confirmed": [
+      "POPULAR_TV_01",
+      "POPULAR_TV_02"
+    ],
+    "blocked_on": "Missing exact merchant prices and image reuse permissions; do not merge as live commerce",
+    "all_twenty_records_audited_for_publication_gates": true,
+    "next_ten_reviewed": 10,
+    "next_ten_verified_retailer_checkout_prices": 0,
+    "next_ten_licensed_images": 0,
+    "market_research_updated_at": "2026-11-10",
+    "verified_model_unit_sales_rankings": 0,
+    "model_sales_ranking_publication_allowed": false,
+    "market_segment_priority": "43-inch first, 55-inch second; 32-inch and 65-inch coverage retained",
+    "verified_national_model_sales_rankings": 0
+  },
+  "market_research_2026_11_10": {
+    "source": "https://counterpointresearch.com/en/insights/India-Smart-TV-Shipments-Stayed-Largely-Flat-in-2025",
+    "published": "2026-03-24",
+    "india_2025_size_leader_inches": 43,
+    "india_growth_sizes": "55-inch and larger",
+    "premium_price_band_inr": [
+      40000,
+      50000
+    ],
+    "qled_shipments": "nearly doubled year-on-year",
+    "source_metric": "sell-in shipments, not retail sell-through or model-wise sales",
+    "retailer_popularity_source": "https://www.flipkart.com/televisions/lcd~screentype/pr?sid=ckf%2Cczl",
+    "retailer_popularity_disclaimer": "Flipkart popularity sort and rating counts are platform-specific signals, not national units sold",
+    "editorial_priorities": [
+      "43-inch 4K LED/QLED",
+      "55-inch 4K QLED",
+      "55-inch Mini LED/OLED premium"
+    ],
+    "ranking_policy": "price only budget gate, zero weight in performance scoring",
+    "publication_policy": "Only publish verified claims; do not label any model as national bestseller"
+  }
+}
