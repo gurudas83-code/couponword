@@ -2066,8 +2066,10 @@
           "live_offer": false,
           "checkout_eligible": false,
           "exact_model_link_verified": false,
-          "link_audit_status": "SEARCH_LINK_ONLY_NOT_EXACT_PRODUCT_VERIFIED",
-          "link_audit_date": "2026-11-10"
+          "link_audit_status": "REJECTED_SIMILAR_MODEL_K43S20B_NOT_K43S20",
+          "link_audit_date": "2026-11-10",
+          "link_audit_note": "Croma listing /p/308025 is model K-43S20B; catalogue identity is K-43S20. Similar series but not exact code; do not use as verified link.",
+          "rejected_candidate_url": "https://www.croma.com/sony-bravia-2-109-cm-43-inch-1-star-4k-ultra-hd-lcd-google-tv-with-live-colour-technology/p/308025"
         }
       },
       "product_status": "RESEARCH_ONLY",
