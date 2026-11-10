@@ -2650,8 +2650,8 @@
           "price_inr": null,
           "checked_at": "2026-11-05",
           "observation_source_url": "https://www.flipkart.com/q/samsung-neo-qled-tv",
-          "retailer_research_url": "https://www.flipkart.com/search?q=Samsung%20QA55QN90FAULXL",
-          "link_scope": "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
+          "retailer_research_url": "https://www.flipkart.com/samsung-mini-led-138-cm-55-inch-ultra-hd-4k-neo-qled-smart-tizen-tv/p/itm83db97b9bf172",
+          "link_scope": "EXACT_MODEL_LISTING_RESEARCH_NOT_LIVE_OFFER",
           "price_status": "UNVERIFIED_HISTORICAL_PRICE_SUPPRESSED",
           "price_note": "Model-specific retailer search only; not a verified live product offer",
           "stock_status": "UNKNOWN",
@@ -2659,9 +2659,10 @@
           "checkout_eligible": false,
           "price_evidence_status": "CATEGORY_SOURCE_NOT_EXACT_SKU_PRICE_EVIDENCE",
           "historical_unverified_price_inr": 117831,
-          "exact_model_link_verified": false,
-          "link_audit_status": "SEARCH_LINK_ONLY_NOT_EXACT_PRODUCT_VERIFIED",
-          "link_audit_date": "2026-11-10"
+          "exact_model_link_verified": true,
+          "link_audit_status": "EXACT_MODEL_CODE_CONFIRMED_ON_RETAILER_PAGE",
+          "link_audit_date": "2026-11-10",
+          "exact_model_code_confirmed": "QA55QN90FAULXL"
         },
         "croma": {
           "price_inr": null,
