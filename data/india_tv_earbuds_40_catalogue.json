@@ -1409,8 +1409,12 @@
           "live_offer": false,
           "checkout_eligible": false,
           "exact_model_link_verified": false,
-          "link_audit_status": "SEARCH_LINK_ONLY_NOT_EXACT_PRODUCT_VERIFIED",
-          "link_audit_date": "2026-11-10"
+          "link_audit_status": "AMAZON_ASIN_NOT_FOUND_EXACT_PRODUCT_LINK_WITHHELD",
+          "link_audit_date": "2026-11-10",
+          "exact_model_code_confirmed": null,
+          "manufacturer_model_verified": true,
+          "manufacturer_model_source_url": "https://www.samsung.com/in/support/model/QA55QEF6AULXL/",
+          "link_audit_note": "Official Samsung model QA55QEF6AULXL confirmed; no independently matched Amazon India ASIN/product page. Do not expose as verified product link."
         },
         "flipkart": {
           "price_inr": null,
