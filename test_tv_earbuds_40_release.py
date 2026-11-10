@@ -58,7 +58,9 @@ class WorkbookTvEarbudsRelease(unittest.TestCase):
                 if c == "tvs":
                     self.assertEqual(hub.count('class="cw-tv-visual"'),20)
                     self.assertIn("Illustration · not product photo",hub)
-                    self.assertNotIn("<img ",hub)
+                    self.assertEqual(hub.count("<img "),1)
+                    self.assertIn("CC0 public-domain",hub)
+                    self.assertIn("pxhere.com/en/photo/156633",hub)
                 for r in (x for x in load_catalogue()["records"] if x["category"]==c):
                     page=(base/c/slug/r["id"].lower()/"index.html").read_text(encoding="utf-8")
                     self.assertIn('name="robots" content="noindex,follow"',page)
