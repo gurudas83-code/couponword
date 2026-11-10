@@ -90,6 +90,33 @@ def quote_text(info, store):
     return "₹" + format(round(value), ",") + " · dated " + esc(info.get("checked_at")) \
         if value is not None else "Not verified"
 
+def research_visual(item):
+    """Original CSS/SVG-style television illustration, never a model photograph."""
+    if item.get("category") != "tvs":
+        return ""
+    import hashlib
+    palette = [("#123c64", "#42c4df"), ("#2d275f", "#d174e9"),
+               ("#143e43", "#6fe2a9"), ("#3d2850", "#f9a566")]
+    a, b = palette[int(hashlib.sha256(item["id"].encode()).hexdigest()[:2], 16) % len(palette)]
+    return (
+        '<div class="cw-tv-visual" role="img" aria-label="Illustrative television graphic, not an exact product photo" '
+        'style="--cw-tv-a:' + a + ';--cw-tv-b:' + b + '">'
+        '<div class="cw-tv-bezel"><div class="cw-tv-screen"><span class="cw-tv-glow"></span>'
+        '<span class="cw-tv-landscape"></span></div></div>'
+        '<div class="cw-tv-foot"></div><span class="cw-tv-visual-caption">Illustration · not product photo</span></div>'
+    )
+
+TV_VISUAL_CSS = """<style>
+.cw-tv-visual{width:100%;max-width:420px;box-sizing:border-box;display:flex;align-items:center;flex-direction:column;justify-content:center;padding:18px 18px 9px;border-radius:16px;background:linear-gradient(145deg,#f3f6fc,#e8edf5);margin:12px auto 16px}
+.cw-tv-bezel{width:90%;aspect-ratio:16/9;padding:5px;border-radius:9px;background:linear-gradient(135deg,#202937,#05080d);box-shadow:0 13px 23px #192c4836,0 2px 3px #15233d40}
+.cw-tv-screen{width:100%;height:100%;position:relative;overflow:hidden;border-radius:4px;background:linear-gradient(130deg,var(--cw-tv-a) 0%,#142e56 45%,var(--cw-tv-b) 100%)}
+.cw-tv-glow{position:absolute;inset:-30% -10%;background:radial-gradient(ellipse at 78% 23%,#ffffffaa,transparent 34%),radial-gradient(ellipse at 22% 80%,#50e4f5aa,transparent 48%);transform:rotate(-9deg)}
+.cw-tv-landscape{position:absolute;left:-10%;right:-10%;bottom:-25%;height:68%;border-radius:50% 45% 0 0;background:linear-gradient(155deg,#ffffff66,#121d5eaa);transform:rotate(-11deg)}
+.cw-tv-foot{width:27%;height:13px;border-bottom:4px solid #424a58;background:linear-gradient(90deg,transparent 44%,#525e6e 44%,#525e6e 56%,transparent 56%);border-radius:0 0 45% 45%}
+.cw-tv-visual-caption{font-size:10px;letter-spacing:.03em;color:#596778;margin-top:8px}
+@media(prefers-color-scheme:dark){.cw-tv-visual{background:linear-gradient(145deg,#252c39,#1c2431)}.cw-tv-visual-caption{color:#bdc7d7}}
+</style>"""
+
 def card(item):
     route = model_route(item)
     fields = research_specifications(item)
@@ -107,7 +134,7 @@ data-brand="{esc(item["brand"])}" data-type="{esc(item["product_type"])}"
 data-search="{esc(search)}">
 <div class="cr-card-head"><span class="cr-tag">{esc(item["brand"])}</span>
 <span class="cr-check">{esc(item["source_grade"])}</span></div>
-<h3><a href="{esc(route)}">{esc(item["model"])}</a></h3>
+{research_visual(item)}\n<h3><a href="{esc(route)}">{esc(item["model"])}</a></h3>
 <dl class="cr-facts">{first}</dl>
 <p class="cr-muted">Prices are dated research references, not current offers.</p>
 <ul class="cw-retailer-prices">{choices}</ul>
@@ -145,7 +172,7 @@ def hub(category, items):
 <label>Type <select id="cr-type"><option value="">All types</option><option value="{esc(items[0]["product_type"])}">{esc(items[0]["product_type"])}</option></select></label>
 <button type="reset">Clear</button></form>
 <p id="cr-status" role="status">20 researched models shown.</p>
-<div class="cr-grid" id="cr-grid">{''.join(card(x) for x in items)}</div>
+{TV_VISUAL_CSS if category == "tvs" else ""}\n<div class="cr-grid" id="cr-grid">{''.join(card(x) for x in items)}</div>
 <p id="cr-no-results" hidden>No matching model in this curated 20-product workbook.</p></section>
 <section class="cr-comparison" id="cr-comparison" hidden>
 <h2>Compare documented product specifications</h2><p id="cr-comparison-status" role="status"></p><div class="cr-scroll" id="cr-comparison-table"></div>
@@ -177,7 +204,7 @@ def detail(item):
     body=f'''<p class="cr-crumb"><a href="/">Home</a> / <a href="/{esc(cat)}/">{esc(cat.title())}</a> / <a href="{esc(list_route(cat))}">20-model shortlist</a> / {esc(item["model"])}</p>
 <article class="cr-detail">
 <p class="cr-eyebrow">{esc(item["brand"])} · Research-only model</p>
-<h1>{esc(item["model"])}</h1>
+<h1>{esc(item["model"])}</h1>\n{TV_VISUAL_CSS if cat == "tvs" else ""}\n{research_visual(item)}
 <p class="cr-lead">Specifications and dated retailer references from the comparison workbook. Not an independently tested recommendation or real-time buyable offer.</p>
 <p><b>Evidence grade:</b> {esc(item["source_grade"])} · <b>Model code:</b> {esc(item.get("model_code") or "Not established")}</p>
 <h2>Documented / researched specifications</h2>
