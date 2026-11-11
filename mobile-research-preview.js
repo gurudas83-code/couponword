@@ -451,6 +451,9 @@
   }
 
   function excludedBrand(query) {
+    // Common Hinglish negation: "vivo nahi chahiye".
+    var negative = String(query || "").match(/\b([a-z][a-z0-9/&-]*)\s+(?:nahi|nahin)\s+chahiye\b/i);
+    if (negative) return normalizeResearch(negative[1]);
     var beforeMarker = String(query || "").match(/\b([a-z][a-z0-9/&-]*)\s+(?:ko\s+)?(?:chhodkar|chhod|छोड़कर|छोड़|हटाकर|के\s+बिना|बिना)\b/i);
     if (beforeMarker) return normalizeResearch(beforeMarker[1]);
     var match = String(query || "").match(/(?:exclude|excluding|without|except|no|chhodkar|chhod|छोड़कर|छोड़|हटाकर|के बिना)\s+([a-z][a-z0-9/& -]{1,30})/i);
@@ -488,6 +491,22 @@
     var aliases = { "सैमसंग": "samsung", "आईफोन": "iphone", "रेडमी": "redmi", "पोको": "poco", "वनप्लस": "oneplus" };
     tokens = tokens.map(function (token) { return aliases[token] || token; });
     if (!tokens.length && !featureKeys.length && !excluded && c.budget == null && c.ram == null && c.storage == null && !c.need5g) return [];
+    // Natural-language instruction words are not product model tokens.
+    // Keep model suffixes (Pro/Plus/Max), RAM, storage and hard gates intact.
+    var queryNoise = new Set([
+      "exact", "model", "models", "priority", "priorities", "prefer", "preferred",
+      "recommend", "recommendation", "recommended", "suggest", "suggestion",
+      "please", "find", "show", "give", "need", "looking", "for",
+      "new", "latest", "best", "top", "quality", "overall", "performance",
+      "phone", "phones", "smartphone", "smartphones", "mobile", "mobiles",
+      "price", "budget", "range", "india", "indian", "available",
+      "as", "is", "it", "do", "does", "the", "what", "which", "that",
+      "ke", "liye", "pe", "par", "ko", "se", "ka", "ki",
+      "hai", "hain", "nahi", "nahin", "chahiye", "chahie", "mujhe",
+      "good", "better", "worth", "cheap", "sasta", "sasti",
+      "compromise", "without", "some", "any", "only", "just"
+    ]);
+    tokens = tokens.filter(function (token) { return !queryNoise.has(token); });
     var matches = [];
     // A full model name with a memory constraint must not select a sibling.
     var exactCard = (c.ram != null || c.storage != null) && inventoryCards.find(function (card) {
