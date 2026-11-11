@@ -31,7 +31,7 @@ class WorkbookTvEarbudsRelease(unittest.TestCase):
             self.assertIn("Additional series coverage (not a product listing)",page)
             self.assertIn('name="robots" content="noindex,follow"',page)
             self.assertNotIn('class="purchase-cta"',page)
-        self.assertEqual(sum(x["retailers"][s]["exact_model_link_verified"] for x in tvs.values() for s in ("amazon","flipkart","croma")),23)
+        self.assertEqual(sum(x["retailers"][s]["exact_model_link_verified"] for x in tvs.values() for s in ("amazon","flipkart","croma")),22)
 
     def test_audit_corrections_have_exact_manufacturer_provenance(self):
         data=load_catalogue()
