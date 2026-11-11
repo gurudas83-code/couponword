@@ -120,6 +120,7 @@ class WorkbookTvEarbudsRelease(unittest.TestCase):
                     if c == "tvs":
                         self.assertIn('class="cw-tv-visual"',page)
                         self.assertIn("not an exact product photo",page)
+                        self.assertNotIn("earbud",page.lower())
                         self.assertNotIn("<img ",page)
                     self.assertNotIn('"@type": "Offer"',page)
                     self.assertNotIn('class="shop-button"',page)
