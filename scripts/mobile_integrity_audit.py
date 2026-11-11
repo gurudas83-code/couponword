@@ -33,7 +33,7 @@ APPROVED_SUFFIXES = (
     "nothing.tech", "po.co", "tecno-mobile.com", "tecno-mobile.in",
     "infinixmobiles.in", "91mobiles.com", "smartprix.com",
     "reliancedigital.in", "notebookcheck.net", "phonearena.com",
-    "nothing.community", "vijaysales.com", "poorvika.com",
+    "nothing.community", "motorolanews.com", "vijaysales.com", "poorvika.com",
 )
 MERCHANTS = {
     "Amazon": ("www.amazon.in", "/s", "k"),
