@@ -201,6 +201,20 @@ def detail(item):
     original_source=clean_url(item.get("source_url"))
     sources='<a target="_blank" rel="noopener noreferrer nofollow" href="'+esc(original_source)+'">Review recorded source</a>' \
        if urlsplit(original_source).scheme == "https" else "No product-specific source certified"
+    # Editorial coverage must never be represented as an exact retailer SKU listing.
+    editorial = ""
+    for reference in item.get("editorial_references") or []:
+        ref_url = clean_url(reference.get("url"))
+        if urlsplit(ref_url).scheme != "https":
+            continue
+        if reference.get("source_kind") != "SERIES_LEVEL_EDITORIAL_LAUNCH_REFERENCE":
+            continue
+        editorial += (
+            '<p class="cr-editorial-reference"><b>Additional series coverage (not a product listing):</b> '
+            '<a href="' + esc(ref_url) + '" rel="noopener noreferrer nofollow" target="_blank">'
+            + esc(reference.get("publisher") or "Editorial source") + ' launch article</a>. '
+            'This article is not evidence of this model code, current Croma stock or a verified price.</p>'
+        )
     merchant=''.join(
         '<tr><th scope="row">'+esc(s.title())+'</th><td>'+quote_text(item["retailers"][s],s)+
         '</td><td>'+retailer_link(item["retailers"][s],s,item["category"])+'</td></tr>'
@@ -214,7 +228,7 @@ def detail(item):
 <p><b>Evidence grade:</b> {esc(item["source_grade"])} · <b>Model code:</b> {esc(item.get("model_code") or "Not established")}</p>
 <h2>Documented / researched specifications</h2>
 <dl class="cr-detail-facts">{fields}</dl>
-<p>These fields were compiled in the workbook and have not all been individually confirmed for the exact Indian retail SKU. {sources}</p>
+<p>These fields were compiled in the workbook and have not all been individually confirmed for the exact Indian retail SKU. {sources}</p>\n{editorial}
 <section><h2>Amazon, Flipkart and Croma</h2>
 <p>Only links marked <strong>Verified product</strong> have an independently matched product identity. Links marked <strong>Search model</strong> are retailer searches, not exact-product buy buttons. No current stock or shipping guarantee is made.</p>
 <div class="cr-scroll"><table class="cr-compare-table"><thead><tr><th>Retailer</th><th>Dated quoted reference</th><th>Research link</th></tr></thead><tbody>{merchant}</tbody></table></div></section>
