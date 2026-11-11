@@ -234,7 +234,7 @@ def detail(item):
 <div class="cr-scroll"><table class="cr-compare-table"><thead><tr><th>Retailer</th><th>Dated quoted reference</th><th>Research link</th></tr></thead><tbody>{merchant}</tbody></table></div></section>
 <section><h2>Why this product may be considered</h2><p>{esc(item["buyer_use_case"] or "Model-specific suitability remains under review.")}</p></section>
 <section><h2>Important gaps and buyer checks</h2><p>{esc(item["evidence_caveat"])}</p>
-<ul><li>Confirm the precise model suffix and screen size / earbud colour and features</li>
+<ul><li>Confirm the precise model suffix and screen size / variant features</li>
 <li>Check manufacturer model page and Indian warranty before purchase</li>
 <li>Verify current payable price, availability and delivery at the retailer</li>
 <li>Do not infer performance winners from manufacturer specs or dated price differences</li></ul></section>
