@@ -178,7 +178,18 @@
       "image_asset_reviewed_at": "2026-11-10",
       "image_attribution_required": "Rights holder permission or documented license required before copying, hotlinking, or publishing manufacturer/retailer image",
       "image_exact_model_visual_verified": false,
-      "image_publish_eligible": false
+      "image_publish_eligible": false,
+      "editorial_references": [
+        {
+          "publisher": "Croma Unboxed",
+          "title": "Xiaomi TV S Mini LED Series 2026 India launch announcement",
+          "url": "https://www.croma.com/unboxed/xiaomi-tv-s-mini-led-series-2026-india-launch-date-confirmed",
+          "source_kind": "SERIES_LEVEL_EDITORIAL_LAUNCH_REFERENCE",
+          "scope": "XIAOMI_S_MINI_LED_2026_SERIES_NOT_EXACT_SKU",
+          "content_verified": false,
+          "verification_note": "URL supplied by user. Publisher article returned HTTP 403 in independent check on 2026-11-11; do not use for exact SKU, retailer availability, price or product specifications."
+        }
+      ]
     },
     {
       "id": "TV02",
@@ -341,7 +352,18 @@
       "image_asset_reviewed_at": "2026-11-10",
       "image_attribution_required": "Rights holder permission or documented license required before copying, hotlinking, or publishing manufacturer/retailer image",
       "image_exact_model_visual_verified": false,
-      "image_publish_eligible": false
+      "image_publish_eligible": false,
+      "editorial_references": [
+        {
+          "publisher": "Croma Unboxed",
+          "title": "Xiaomi TV S Mini LED Series 2026 India launch announcement",
+          "url": "https://www.croma.com/unboxed/xiaomi-tv-s-mini-led-series-2026-india-launch-date-confirmed",
+          "source_kind": "SERIES_LEVEL_EDITORIAL_LAUNCH_REFERENCE",
+          "scope": "XIAOMI_S_MINI_LED_2026_SERIES_NOT_EXACT_SKU",
+          "content_verified": false,
+          "verification_note": "URL supplied by user. Publisher article returned HTTP 403 in independent check on 2026-11-11; do not use for exact SKU, retailer availability, price or product specifications."
+        }
+      ]
     },
     {
       "id": "TV03",
@@ -504,7 +526,18 @@
       "image_asset_reviewed_at": "2026-11-10",
       "image_attribution_required": "Rights holder permission or documented license required before copying, hotlinking, or publishing manufacturer/retailer image",
       "image_exact_model_visual_verified": false,
-      "image_publish_eligible": false
+      "image_publish_eligible": false,
+      "editorial_references": [
+        {
+          "publisher": "Croma Unboxed",
+          "title": "Xiaomi TV S Mini LED Series 2026 India launch announcement",
+          "url": "https://www.croma.com/unboxed/xiaomi-tv-s-mini-led-series-2026-india-launch-date-confirmed",
+          "source_kind": "SERIES_LEVEL_EDITORIAL_LAUNCH_REFERENCE",
+          "scope": "XIAOMI_S_MINI_LED_2026_SERIES_NOT_EXACT_SKU",
+          "content_verified": false,
+          "verification_note": "URL supplied by user. Publisher article returned HTTP 403 in independent check on 2026-11-11; do not use for exact SKU, retailer availability, price or product specifications."
+        }
+      ]
     },
     {
       "id": "TV04",
