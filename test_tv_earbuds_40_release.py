@@ -33,6 +33,30 @@ class WorkbookTvEarbudsRelease(unittest.TestCase):
             self.assertNotIn('class="purchase-cta"',page)
         self.assertEqual(sum(x["retailers"][s]["exact_model_link_verified"] for x in tvs.values() for s in ("amazon","flipkart","croma")),22)
 
+    def test_audit_corrections_have_exact_manufacturer_provenance(self):
+        data=load_catalogue()
+        by_id={row["id"]:row for row in data["records"]}
+        primary={
+            "TV08":"https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
+            "TV10":"https://www.samsung.com/in/support/model/QA55QEF6AULXL/",
+            "TV12":"https://www.tcl.com/in/en/support/model/55p6l",
+            "TV16":"https://www.samsung.com/in/support/model/UA32H4500FUXXL/",
+        }
+        for id,url in primary.items():
+            row=by_id[id]
+            self.assertEqual(row["source_url"],url)
+            self.assertIn("Manufacturer /",row["source_grade"])
+            self.assertTrue(any(s["evidence"]=="OFFICIAL_MANUFACTURER_VERIFIED_2026-11-11" for s in row["specifications"]))
+            self.assertFalse(row["purchase_cta_eligible"])
+            for merchant in ("amazon","flipkart","croma"):
+                self.assertFalse(row["retailers"][merchant]["live_offer"])
+        self.assertEqual(by_id["TV12"]["manufacturer_series_spec_url"],"https://www.tcl.com/in/en/tvs/p6l")
+        for spec in by_id["TV12"]["specifications"]:
+            self.assertNotIn("/q/mi-55-inch-tv",spec["source_url"])
+            if spec["label"] in ("HDR formats","Speaker W"):
+                self.assertIn("RETAILER_LISTING_RESEARCH_NOT_MANUFACTURER_VERIFIED",spec["evidence"])
+        self.assertEqual(sum(row["retailers"][s]["exact_model_link_verified"] for row in data["records"] if row["category"]=="tvs" for s in ("amazon","flipkart","croma")),22)
+
     def test_exact_40_research_rows_and_no_buyability(self):
         data=load_catalogue()
         rows=data["records"]
