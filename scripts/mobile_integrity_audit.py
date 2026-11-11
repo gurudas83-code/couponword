@@ -237,6 +237,7 @@ def main():
     status = "PASS" if not report["blocking_issue_count"] else "FAIL"
     print(json.dumps({"result": status, "inventory": report["inventory"],
                       "blocking": report["blocking_issue_count"],
+                      "blocking_examples": report["blocking_issues"][:12],
                       "diagnostics": report["diagnostic_counts"],
                       "network": (report.get("http_reachability") or {}).get("statuses")}, sort_keys=True))
     summary = os.getenv("GITHUB_STEP_SUMMARY")
