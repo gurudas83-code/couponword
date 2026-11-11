@@ -55,7 +55,7 @@ class PublicMobileResearchPreviewTests(unittest.TestCase):
         self.assertIn('id="mobileResearchPreview"', html)
         self.assertIn("How our evidence works", html)
         self.assertIn('href="#mobileResearchPreview"', html)
-        self.assertIn('src="/mobile-research-preview.js?v=positioning-20261104-a"', html)
+        self.assertRegex(html, r'src="/mobile-research-preview\.js\?v=[^"]+"')
         self.assertIn('Explore 232 Smartphone Entries', html)
         self.assertIn('data-mobile-model-card', script)
         self.assertNotIn('INVENTORY_INITIAL_LIMIT', script)

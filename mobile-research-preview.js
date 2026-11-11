@@ -618,7 +618,13 @@
   }
 
   function retailerResearchLinks(card) {
-    return '<div class="mobile-research-sources retailer-search-links">' + (card.retailer_search_links || []).map(function (item) { return link(item.url, "Search " + item.retailer + " for this model"); }).join(" ") + '</div>';
+    var exact = (card.verified_retailer_links || []).map(function (item) {
+      var label = "Exact " + String(item.retailer || "retailer") + " listing";
+      var variant = item.variant ? " (" + String(item.variant) + ")" : "";
+      return link(item.url, label + variant);
+    }).join(" ");
+    var searches = (card.retailer_search_links || []).map(function (item) { return link(item.url, "Search " + item.retailer + " for this model"); }).join(" ");
+    return '<div class="mobile-research-sources retailer-search-links">' + exact + (exact && searches ? " " : "") + searches + '</div>';
   }
 
   function independentTestContext(card) {
@@ -645,7 +651,7 @@
       '<p class="research-source-note">' + (sourceItem ? link(sourceItem.source_url, "Specification source") : 'Specification source pending') + ' · Specification research snapshot: ' + escapeHtml(card.research_checked_at || sourceItem && (sourceItem.checked_at || sourceItem.checked_date) || 'date unavailable') + ' (not a live check)</p>' + (card.research_budget_reference ? '<p class="research-source-note">Budget filter uses a dated retailer observation: ' + escapeHtml(String(card.research_budget_reference.checked_at || 'date unavailable').match(/\d{4}-\d{2}-\d{2}/)?.[0] || String(card.research_budget_reference.checked_at || 'date unavailable')) + '. Current price and stock not verified.</p>' : '') +
       '<div class="research-card-actions"><button type="button" class="btn btn-ghost mobile-research-detail-button" data-research-detail="' + escapeHtml(card.model_key) + '">All specifications</button>' +
       '<button type="button" class="btn btn-ghost" data-research-compare="' + escapeHtml(card.model_key) + '" aria-pressed="' + selected + '">' + (selected ? 'Remove comparison' : 'Compare') + '</button></div>' + retailerResearchLinks(card) +
-      '<p class="mobile-research-gate">Model-targeted retailer searches only, not exact-SKU purchase links. Confirm RAM/storage, current price, stock and delivery on retailer sites.</p></div></article>';
+      '<p class="mobile-research-gate">Exact listing links appear only where a retailer ID, model and physical variant were separately verified. Other retailer links are model searches. Confirm RAM/storage, current price, stock and delivery on retailer sites.</p></div></article>';
   }
 
   function renderSelectedComparison() {

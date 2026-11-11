@@ -145,6 +145,66 @@ def _https_urls(values: Any) -> list[str]:
     return list(dict.fromkeys(item for item in values if isinstance(item, str) and item.startswith("https://")))
 
 
+def _load_verified_mobile_retailer_links(root: Path) -> dict[tuple[str, str], list[dict[str, Any]]]:
+    """Load exact mobile listing evidence without turning it into a live offer.
+
+    The research catalogue may show a direct listing only when the existing
+    offer evidence binds retailer, listing ID, model and physical variant.
+    Price, stock and CTA eligibility deliberately remain outside this view.
+    """
+    offers_path = root / "data/retailer_offers.json"
+    coupons_path = root / "coupons.json"
+    if not offers_path.is_file() or not coupons_path.is_file():
+        return {}
+    offers = _read_json(offers_path).get("offers") or []
+    coupons = _read_json(coupons_path)
+    mobile_ids = {
+        f"cw-mobile-{item.get('id')}": item
+        for item in coupons
+        if isinstance(item, dict) and str(item.get("category") or "").casefold() in {"mobile", "mobiles", "phone", "phones"}
+    }
+    allowed_hosts = {
+        "amazon": {"amazon.in", "www.amazon.in"},
+        "flipkart": {"flipkart.com", "www.flipkart.com"},
+        "croma": {"croma.com", "www.croma.com"},
+    }
+    result: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for offer in offers:
+        if not isinstance(offer, dict) or offer.get("product_id") not in mobile_ids:
+            continue
+        retailer = str(offer.get("retailer") or "").casefold()
+        url = str(offer.get("product_url") or "")
+        parsed = urlparse(url)
+        listing_id = str(offer.get("retailer_product_id") or "").strip()
+        if (
+            retailer not in allowed_hosts
+            or parsed.scheme != "https"
+            or parsed.hostname not in allowed_hosts[retailer]
+            or not listing_id
+            or not offer.get("brand")
+            or not offer.get("model")
+            or not offer.get("variant")
+            or offer.get("source") not in {"retailer_page_verified", "amazon_primary_buybox", "retailer_price_observed"}
+        ):
+            continue
+        identity = (_norm(offer.get("brand")), _norm(offer.get("model")))
+        result.setdefault(identity, []).append({
+            "retailer": retailer,
+            "url": url,
+            "retailer_product_id": listing_id,
+            "variant": str(offer.get("variant")),
+            "source": str(offer.get("source")),
+            "confidence": offer.get("confidence"),
+            "checked_at": str(offer.get("last_checked") or offer.get("observed_at") or ""),
+            "exact_identity_verified": True,
+        })
+    for identity in result:
+        result[identity] = sorted(
+            result[identity], key=lambda item: (item["retailer"], item["variant"], item["url"])
+        )
+    return result
+
+
 def _load_model_photos(root: Path, models: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
     """Load reviewed photos by exact catalogue model key."""
     photos = _read_json(root / "data/mobile_model_photos.json")
@@ -615,6 +675,7 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
         identity = (_norm(product.get("brand")), _norm(product.get("model")))
         preview_by_identity.setdefault(identity, []).append(product)
     source_specs_by_identity = _load_existing_source_specs(root)
+    verified_retailer_links = _load_verified_mobile_retailer_links(root)
     for identity, card in cards_by_identity.items():
         preview_products = preview_by_identity.get(identity, [])
         preview_keys = {
@@ -632,6 +693,8 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
         card["missing_specifications"] = missing
         card["available_specification_fields"] = [TECHNICAL_FIELD_LABELS[key] for key in specs]
         card["source_urls"] = list(dict.fromkeys(card["source_urls"]))
+        if verified_retailer_links.get(identity):
+            card["verified_retailer_links"] = verified_retailer_links[identity]
 
     _apply_workbook_research(root, model_cards)
     _apply_independent_tests(root, model_cards)
