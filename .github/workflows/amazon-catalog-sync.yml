@@ -35,6 +35,9 @@ jobs:
       - name: Run Amazon catalog sync check
         run: python python/amazon_catalog_sync.py
 
+      - name: Run fail-closed six-hour publication gate
+        run: python python/retailer_publication_gate.py --max-age-hours 6
+
       - name: Report Amazon and Flipkart source readiness (no fabricated prices)
         env:
           PYTHONPATH: python
@@ -47,6 +50,7 @@ jobs:
 
           from amazon_data_provider import get_default_provider
           from flipkart_retailer_connector import FlipkartRetailerConnector
+          from retailer_publication_gate import evaluate_store
 
           amazon_provider = get_default_provider()
           amazon_live = bool(getattr(amazon_provider, "api_available", False))
@@ -90,6 +94,8 @@ jobs:
               "prices_refreshed_by_this_monitor": 0,
               "price_data_modified": False,
           }
+          publication = evaluate_store(Path("data/retailer_offers.json"), max_age_hours=6)
+          report["publication_gate"] = publication
           print("RETAILER MONITOR REPORT:", json.dumps(report, sort_keys=True))
           if not (amazon_live and flipkart_live):
               print(
@@ -107,5 +113,6 @@ jobs:
                   handle.write(f"- TV/earbud research rows: {research_tvs} + {research_earbuds}\n")
                   handle.write(f"- Dated research quotes, not live: {research_prices}\n")
                   handle.write("- New verified prices from monitor: **0**\n")
+                  handle.write(f"- Publication gate: **{publication['status']}** ({publication['publishable_offer_rows']} eligible offers)\n")
                   handle.write("- No price, ranking, or product data changed.\n")
           PY

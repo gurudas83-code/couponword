@@ -193,13 +193,13 @@ def apply_policy(destination):
         for renderer in (comparison_guide,budget_guide):
             path,content=renderer(root,hi);write(root,path,content)
     link_retained_comparison_guide(root)
-    guides=json.loads((ROOT/'data/phone-guides.json').read_text())['pages']
+    guides=json.loads((ROOT/'data/phone-guides.json').read_text(encoding='utf-8'))['pages']
     approved={g['slug']+'.html' for g in guides}
     for file in (root/'seo').glob('*.html'):
         if file.name not in approved:file.unlink()
     # The legacy guide directory must list real reviewed pages, not 50
     # ready-labelled keyword placeholders pointing to missing templates.
-    (root/'data/seo-pages.json').write_text(json.dumps([{'slug':g['slug'],'title':g['title'],'metaDescription':g['intro'],'category':'Smartphone','intent':'Research guide','priority':i,'status':'ready'} for i,g in enumerate(guides,1)],ensure_ascii=False,indent=2)+'\n')
+    (root/'data/seo-pages.json').write_text(json.dumps([{'slug':g['slug'],'title':g['title'],'metaDescription':g['intro'],'category':'Smartphone','intent':'Research guide','priority':i,'status':'ready'} for i,g in enumerate(guides,1)],ensure_ascii=False,indent=2)+'\n', encoding='utf-8')
     for filename in ('mobile_query_answer_coverage.json',):
         path=root/'data'/filename
         if path.exists():path.unlink()
@@ -211,19 +211,19 @@ def apply_policy(destination):
         loc=node.find(ns+'loc');url=urlsplit(loc.text or '') if loc is not None else None
         if url is None:continue
         path=route_file(root,url.path)
-        if not path.is_file() or re.search(r'name="robots"\s+content="[^"]*noindex',path.read_text(),re.I):sitemap.remove(node)
+        if not path.is_file() or re.search(r'name="robots"\s+content="[^"]*noindex',path.read_text(encoding='utf-8'),re.I):sitemap.remove(node)
     locations={n.text for n in sitemap.iter(ns+'loc')}
     for path in RETAINED_HUBS:
         if SITE+path not in locations:
             item=ET.SubElement(sitemap,ns+'url');ET.SubElement(item,ns+'loc').text=SITE+path
     tree.write(root/'sitemap.xml',encoding='utf-8',xml_declaration=True)
-    retired=json.loads(RETIRED.read_text())['routes']
+    retired=json.loads(RETIRED.read_text(encoding='utf-8'))['routes']
     for route in retired:
         if route_file(root,route).exists():raise ValueError('Retired page was republished: '+route)
     # Check all retained static internal navigation. A removed page must not
     # remain reachable from an active card, guide, sitemap or language link.
     for page in root.rglob('*.html'):
-        text=page.read_text()
+        text=page.read_text(encoding='utf-8')
         for href in Links(text).links:
             url=urlsplit(href)
             if url.netloc or not url.path.startswith('/'):continue

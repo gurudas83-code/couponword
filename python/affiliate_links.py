@@ -24,7 +24,7 @@ def _tag_json(value):
 
 def tag_public_artifact(root):
     for path in root.rglob('*.json'):
-        path.write_text(json.dumps(_tag_json(json.loads(path.read_text())), ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+        path.write_text(json.dumps(_tag_json(json.loads(path.read_text(encoding='utf-8'))), ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     for path in root.rglob('*.html'):
         text = path.read_text(encoding='utf-8')
         def tag_anchor(match):

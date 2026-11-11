@@ -468,6 +468,7 @@
       [/camera|कैमरा/, ["rear_main_mp", "rear_camera_system", "front_camera_system", "ois"]],
       [/battery|बैटरी/, ["battery_mah_typical", "battery_capacity_description", "battery_and_charging", "wired_charging_max_w"]],
       [/gaming|game|गेमिंग/, ["gpu", "chipset"]],
+      [/(?:student|study|college|school|स्टूडेंट|पढ़ाई)/, ["battery_mah_typical", "operating_system", "security_update_policy", "display_type", "display_refresh_max_hz"]],
       [/software|android|update|support|सॉफ्टवेयर/, ["operating_system", "launch_android", "os_upgrade_generations", "security_update_policy", "security_support_years"]],
       [/display|screen|डिस्प्ले/, ["display_type", "display_inches", "display_resolution", "display_refresh_max_hz"]],
       [/build|reliability|durability/, ["ip_rating", "durability"]]
@@ -487,7 +488,7 @@
     var c = researchConstraints(query), text = c.text;
     if (ignoreBudgetForUnpricedResearch === true) { c.budget = null; c.lower = null; }
     var excluded = excludedBrand(text), featureKeys = researchFeatureKeys(text);
-    var stop = /^(best|good|phone|phones|mobile|mobiles|smartphone|smartphones|under|below|within|price|in|the|and|with|ram|storage|camera|battery|gaming|game|software|support|display|screen|build|reliability|durability|android|update|updates|ko|ke|ka|ki|bina|chhodkar|chhod|mujhe|mujhko|chahiye|batao|dikhao|achha|acha|accha|wala|wali|mein|me|se|kam|tak|rs|inr|rupees|minimum|least|at|above|over|more|than|का|की|के|में|मुझे|चाहिए|बताओ|दिखाओ|अच्छा|अच्छे|वाला|वाले|फोन|मोबाइल|कैमरा|बैटरी|गेमिंग|डिस्प्ले|छोड़कर|छोड़|हटाकर|बिना|exclude|excluding|without|except|no)$/;
+    var stop = /^(best|good|phone|phones|mobile|mobiles|smartphone|smartphones|under|below|within|price|in|the|and|with|ram|storage|camera|battery|gaming|game|student|study|college|school|software|support|display|screen|build|reliability|durability|android|update|updates|ko|ke|ka|ki|bina|chhodkar|chhod|mujhe|mujhko|chahiye|batao|dikhao|achha|acha|accha|wala|wali|mein|me|se|kam|tak|rs|inr|rupees|minimum|least|at|above|over|more|than|का|की|के|में|मुझे|चाहिए|बताओ|दिखाओ|अच्छा|अच्छे|वाला|वाले|फोन|मोबाइल|कैमरा|बैटरी|गेमिंग|स्टूडेंट|पढ़ाई|डिस्प्ले|छोड़कर|छोड़|हटाकर|बिना|exclude|excluding|without|except|no)$/;
     var tokens = text.split(" ").filter(function (token) { return token && !stop.test(token) && token !== excluded; });
     var aliases = { "सैमसंग": "samsung", "आईफोन": "iphone", "रेडमी": "redmi", "पोको": "poco", "वनप्लस": "oneplus" };
     tokens = tokens.map(function (token) { return aliases[token] || token; });
@@ -505,6 +506,7 @@
       "ke", "liye", "pe", "par", "ko", "se", "ka", "ki",
       "hai", "hain", "nahi", "nahin", "chahiye", "chahie", "mujhe",
       "good", "better", "worth", "cheap", "sasta", "sasti",
+      "student", "study", "college", "school", "स्टूडेंट", "पढ़ाई",
       "compromise", "without", "some", "any", "only", "just"
     ]);
     tokens = tokens.filter(function (token) { return !queryNoise.has(token); });
@@ -793,6 +795,7 @@
   function submitResearch(query) {
     searchResearch(query);
     if (inventoryCards.length && researchConstraints(query).budget != null &&
+        findResearchMatches(query).length > 0 &&
         !/\b(?:compare|vs\.?|versus)\b|और/i.test(String(query || "")) &&
         typeof window.CouponWorldShoppingRecommend === "function") {
       window.CouponWorldShoppingRecommend(query, {background: true});

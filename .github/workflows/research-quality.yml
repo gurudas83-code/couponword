@@ -36,6 +36,7 @@ jobs:
         run: |
           python -m unittest -v test_category_research_release
           python -m unittest -v test_tv_earbuds_40_release
+          python -m unittest -v test_retailer_publication_gate
           python -m unittest -v test_india_sales_priority_release
           python -m unittest -v test_mobile_seo_comparisons
           python -m py_compile python/mobile_seo_comparisons.py
