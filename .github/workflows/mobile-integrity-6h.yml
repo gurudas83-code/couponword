@@ -41,8 +41,8 @@ jobs:
         run: python scripts/build_public_pages.py --output public
       - name: Validate all 235 discovery rows, 232 mobiles, 696 merchant searches and dates
         run: |
-          python -m unittest -v test_mobile_integrity_audit
           python scripts/mobile_integrity_audit.py --report mobile-integrity-audit.json
+          python -m unittest -v test_mobile_integrity_audit
       - name: Run all 1000 existing mobile question wordings through existing answer engine
         run: |
           node --check mobile-research-preview.js
