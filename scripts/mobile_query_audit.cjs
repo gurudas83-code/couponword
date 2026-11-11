@@ -45,7 +45,7 @@ setImmediate(() => {
   const app = window.CouponWorldMobileResearch;
   assert(app && typeof app.search === "function", "Existing mobile research API missing");
   const grouped = {}, zero = [], failures = [];
-  let withMatches = 0, totalReturned = 0, sourceSupported = 0;
+  let withMatches = 0, totalReturned = 0, sourceSupported = 0, zeroWithUnpricedLeads = 0;
   for (const item of tests) {
     let rows;
     try {
@@ -65,6 +65,7 @@ setImmediate(() => {
           Object.values(row.card.specifications || {}).some(v => v.source_url && v.source_url.startsWith("https://"))
         ).length;
       } else if (zero.length < 125) {
+        if (html.includes("research-unpriced-leads")) zeroWithUnpricedLeads++;
         zero.push({id:item.id, split:item.split, query:item.query, tags:item.tags || []});
       }
       for (const tag of item.tags || []) {
@@ -81,6 +82,7 @@ setImmediate(() => {
     corpus_total:tests.length,
     with_research_matches:withMatches,
     zero_research_matches:tests.length-withMatches-failures.length,
+    zero_with_separate_unpriced_research_leads:zeroWithUnpricedLeads,
     source_supported_result_count:sourceSupported,
     total_research_rows_returned:totalReturned,
     hard_runtime_failures:failures.length,
@@ -95,6 +97,7 @@ setImmediate(() => {
     corpus:result.corpus_total,
     with_research_matches:withMatches,
     zero_research_matches:result.zero_research_matches,
+    zero_with_separate_unpriced_research_leads:zeroWithUnpricedLeads,
     runtime_failures:result.hard_runtime_failures,
     source_supported_result_count:sourceSupported
   }));
