@@ -31,7 +31,7 @@ class WorkbookTvEarbudsRelease(unittest.TestCase):
             self.assertIn("Additional series coverage (not a product listing)",page)
             self.assertIn('name="robots" content="noindex,follow"',page)
             self.assertNotIn('class="purchase-cta"',page)
-        self.assertEqual(sum(x["retailers"][s]["exact_model_link_verified"] for x in tvs.values() for s in ("amazon","flipkart","croma")),22)
+        self.assertEqual(sum(x["retailers"][s]["exact_model_link_verified"] for x in tvs.values() for s in ("amazon","flipkart","croma")),23)
 
     def test_audit_corrections_have_exact_manufacturer_provenance(self):
         data=load_catalogue()
@@ -51,11 +51,17 @@ class WorkbookTvEarbudsRelease(unittest.TestCase):
             for merchant in ("amazon","flipkart","croma"):
                 self.assertFalse(row["retailers"][merchant]["live_offer"])
         self.assertEqual(by_id["TV12"]["manufacturer_series_spec_url"],"https://www.tcl.com/in/en/tvs/p6l")
+        self.assertFalse(any(s["label"]=="Speaker W" for s in by_id["TV12"]["specifications"]))
+        conflicts=by_id["TV12"]["specification_conflicts"]
+        self.assertEqual(len(conflicts),1)
+        self.assertEqual({v["value"] for v in conflicts[0]["observations"]},{"24 W","28 W"})
+        self.assertEqual(by_id["TV01"]["retailers"]["flipkart"]["exact_model_link_verified"],True)
+        self.assertFalse(by_id["TV01"]["retailers"]["flipkart"]["live_offer"])
         for spec in by_id["TV12"]["specifications"]:
             self.assertNotIn("/q/mi-55-inch-tv",spec["source_url"])
             if spec["label"] in ("HDR formats","Speaker W"):
                 self.assertIn("RETAILER_LISTING_RESEARCH_NOT_MANUFACTURER_VERIFIED",spec["evidence"])
-        self.assertEqual(sum(row["retailers"][s]["exact_model_link_verified"] for row in data["records"] if row["category"]=="tvs" for s in ("amazon","flipkart","croma")),22)
+        self.assertEqual(sum(row["retailers"][s]["exact_model_link_verified"] for row in data["records"] if row["category"]=="tvs" for s in ("amazon","flipkart","croma")),23)
 
     def test_exact_40_research_rows_and_no_buyability(self):
         data=load_catalogue()
