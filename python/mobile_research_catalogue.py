@@ -425,7 +425,15 @@ def _apply_workbook_research(root, model_cards):
             if parsed.scheme != "https" or parsed.hostname not in retailer_hosts or negative or not isinstance(ref.get("reference_price_inr"), (float, int)) or ref["reference_price_inr"] <= 0 or not ref.get("storage_gb") or ref.get("ranking_weight") != 0 or ref.get("live_offer") is not False:
                 raise ValueError("invalid research budget reference")
         card["research_budget_reference"] = ref
-        card["research_checked_at"] = payload["research_as_of"]
+        # Keep each model's latest documented fact-check date, not an unrelated
+        # site-build or scheduled link-probe timestamp. Six models have evidence
+        # reviewed after the workbook's 2026-11-03 baseline.
+        field_dates = [
+            str(spec.get("checked_at") or "")[:10]
+            for spec in entry.get("specifications", {}).values()
+            if isinstance(spec, dict) and str(spec.get("checked_at") or "")[:10] >= payload["research_as_of"]
+        ]
+        card["research_checked_at"] = max([payload["research_as_of"], *field_dates])
 
 def _apply_independent_tests(root, model_cards):
     path = root / "data" / "mobile_independent_test_evidence.json"
