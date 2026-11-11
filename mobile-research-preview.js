@@ -483,8 +483,9 @@
   }
 
 
-  function findResearchMatches(query) {
+  function findResearchMatches(query, ignoreBudgetForUnpricedResearch) {
     var c = researchConstraints(query), text = c.text;
+    if (ignoreBudgetForUnpricedResearch === true) { c.budget = null; c.lower = null; }
     var excluded = excludedBrand(text), featureKeys = researchFeatureKeys(text);
     var stop = /^(best|good|phone|phones|mobile|mobiles|smartphone|smartphones|under|below|within|price|in|the|and|with|ram|storage|camera|battery|gaming|game|software|support|display|screen|build|reliability|durability|android|update|updates|ko|ke|ka|ki|bina|chhodkar|chhod|mujhe|mujhko|chahiye|batao|dikhao|achha|acha|accha|wala|wali|mein|me|se|kam|tak|rs|inr|rupees|minimum|least|at|above|over|more|than|का|की|के|में|मुझे|चाहिए|बताओ|दिखाओ|अच्छा|अच्छे|वाला|वाले|फोन|मोबाइल|कैमरा|बैटरी|गेमिंग|डिस्प्ले|छोड़कर|छोड़|हटाकर|बिना|exclude|excluding|without|except|no)$/;
     var tokens = text.split(" ").filter(function (token) { return token && !stop.test(token) && token !== excluded; });
@@ -696,13 +697,40 @@
     return '<p class="standard-guide-fallback"><a class="btn btn-ghost" href="/guides/smartphone-buying-guide/">Standard Buying Guide</a></p>';
   }
 
+  function unpricedResearchLeads(query) {
+    var c = researchConstraints(query);
+    if (c.budget == null || (c.lower != null && c.lower > c.budget)) return "";
+    // Preserve model, RAM/storage, OIS, 5G, battery, refresh and brand filters.
+    // ONLY the budget reference gate is relaxed for a visibly separate panel.
+    var leads = findResearchMatches(query, true).filter(function (item) {
+      var ref = item.card.research_budget_reference;
+      if (ref && ref.reference_price_inr > 0 &&
+          (c.inclusive ? ref.reference_price_inr > c.budget : ref.reference_price_inr >= c.budget)) return false;
+      return Object.keys(item.card.specifications || {}).length >= 3;
+    }).slice(0, 3);
+    if (!leads.length) return "";
+    return '<section class="research-context research-unpriced-leads">' +
+      '<h3>Related research — NOT within-budget recommendations</h3>' +
+      '<p>These models match other documented conditions, but the requested budget has NOT been verified for their exact RAM/storage variant. They may cost more. No price, stock, ranking or purchase eligibility is implied.</p>' +
+      leads.map(function (item) {
+        var card = item.card;
+        var proof = Object.values(card.specifications || {}).find(function (field) {
+          return field && /^https:\/\//.test(field.source_url || "");
+        });
+        return '<div class="research-unpriced-item"><strong>' + escapeHtml(displayPhoneName(card)) + '</strong>' +
+          '<p>Specifications recorded: ' + escapeHtml(card.research_checked_at || 'date unavailable') +
+          ' · Budget status: not verified · ' + (proof ? link(proof.source_url, 'Original technical source') : 'Source unavailable') + '</p>' +
+          retailerResearchLinks(card) + '</div>';
+      }).join('') + '</section>';
+  }
+
   function emptyResearchResult(query) {
     var c = researchConstraints(query);
     var message = "No documented match in our saved research for this request.";
     if (c.lower != null && c.budget != null && c.lower > c.budget) message = "The lower budget is higher than the upper budget. Please correct the range.";
     else if (c.ram != null || c.storage != null) message += " We cannot confirm the requested exact memory variant with all these conditions.";
     else if (c.budget != null) message += " No matching record passes this price band and the other conditions. Missing references and recorded out-of-stock entries are excluded.";
-    return '<div class="mobile-research-empty"><p>' + escapeHtml(message) + '</p><p>This is a research coverage gap, not proof that no suitable phone exists. No constraint has been relaxed.</p><a href="#mobileResearchCatalogue">Browse the full research catalogue</a>' + researchGuideFallback() + '</div>';
+    return '<div class="mobile-research-empty"><p>' + escapeHtml(message) + '</p><p>This is a research coverage gap, not proof that no suitable phone exists. No constraint has been relaxed for budget-qualified results.</p><a href="#mobileResearchCatalogue">Browse the full research catalogue</a>' + researchGuideFallback() + unpricedResearchLeads(query) + '</div>';
   }
 
   function verifiedRecommendationBridge(query, isComparison) {
