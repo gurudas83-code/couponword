@@ -145,9 +145,11 @@
           "checkout_eligible": false,
           "price_evidence_status": "CATEGORY_SOURCE_NOT_EXACT_SKU_PRICE_EVIDENCE",
           "historical_unverified_price_inr": 54990,
-          "exact_model_link_verified": false,
-          "link_audit_status": "PREEXISTING_EXACT_LISTING_REQUIRES_INDEPENDENT_SKU_RECHECK",
-          "link_audit_date": "2026-11-10"
+          "exact_model_link_verified": true,
+          "link_audit_status": "EXACT_MODEL_CODE_AND_SIZE_CORROBORATED_ON_FLIPKART_LISTING_2026_11_11",
+          "link_audit_date": "2026-11-11",
+          "link_evidence_url": "https://www.flipkart.com/xiaomi-138-68-cm-55-inch-ultra-hd-4k-mini-led-smart-google-tv-2026/p/itma4f37a276700e",
+          "link_audit_note": "Exact Xiaomi S Series 2026 55-inch Flipkart product listing, linked from retailer category with explicit model ID L55MC-IN; direct product page also matches 55-inch, mini LED, 34W. Exact-model research link only; no live offer/stock/checkout certification."
         },
         "croma": {
           "price_inr": null,
@@ -1675,16 +1677,10 @@
           "value": "Dolby Vision",
           "source_url": "https://www.flipkart.com/tcl-p6l-138-cm-55-inch-ultra-hd-4k-led-smart-google-tv-2026-memc-dolby-vision-atmos-aipq-processor-game-master-hva-panel-metallic-bezel-less/p/itmce6cdbb288f2d",
           "evidence": "EXACT_RETAILER_LISTING_RESEARCH_NOT_MANUFACTURER_VERIFIED_2026-11-11"
-        },
-        {
-          "label": "Speaker W",
-          "value": "28",
-          "source_url": "https://www.flipkart.com/tcl-p6l-138-cm-55-inch-ultra-hd-4k-led-smart-google-tv-2026-memc-dolby-vision-atmos-aipq-processor-game-master-hva-panel-metallic-bezel-less/p/itmce6cdbb288f2d",
-          "evidence": "EXACT_RETAILER_LISTING_RESEARCH_NOT_MANUFACTURER_VERIFIED_2026-11-11"
         }
       ],
       "buyer_use_case": "Entry 55-inch TV",
-      "evidence_caveat": "TCL India official support identifies exact 55P6L model; India P6L series page verifies 4K Google TV and HVA panel. Dolby Vision and 28W speakers are supported by an exact-model Flipkart listing only, not manufacturer-certified in the reviewed source. No live price, stock, ranking or checkout eligibility is claimed.",
+      "evidence_caveat": "Official TCL India source confirms 55P6L model identity, 4K Google TV and HVA panel. Dolby Vision is currently retailer-claimed, not maker-certified. Important: Croma says 24W, Flipkart says 28W for this model; speaker wattage is withheld pending manufacturer confirmation. No live price, stock, ranking or checkout eligibility is claimed.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -1750,7 +1746,26 @@
       "image_attribution_required": "Rights holder permission or documented license required before copying, hotlinking, or publishing manufacturer/retailer image",
       "image_exact_model_visual_verified": false,
       "image_publish_eligible": false,
-      "manufacturer_series_spec_url": "https://www.tcl.com/in/en/tvs/p6l"
+      "manufacturer_series_spec_url": "https://www.tcl.com/in/en/tvs/p6l",
+      "specification_conflicts": [
+        {
+          "field": "Speaker W",
+          "status": "RETAILER_CONFLICT_UNRESOLVED_DO_NOT_PUBLISH_AS_FACT",
+          "checked_at": "2026-11-11",
+          "observations": [
+            {
+              "source": "Croma exact model 55P6L",
+              "value": "24 W",
+              "url": "https://www.croma.com/tcl-p-series-139-7-cm-55-inch-4-star-led-4k-super-ultra-hd-smart-google-tv-with-google-voice-assistant-2026-model-/p/322833"
+            },
+            {
+              "source": "Flipkart exact model 55P6L",
+              "value": "28 W",
+              "url": "https://www.flipkart.com/tcl-p6l-138-cm-55-inch-ultra-hd-4k-led-smart-google-tv-2026-memc-dolby-vision-atmos-aipq-processor-game-master-hva-panel-metallic-bezel-less/p/itmce6cdbb288f2d"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "TV13",
