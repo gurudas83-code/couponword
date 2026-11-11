@@ -135,9 +135,9 @@ setImmediate(()=> {
   search('Galaxy A36 vs Galaxy A56');
   assert(!element('mobileResearchResults').innerHTML.includes('data-research-verified-recommend'));
  });
- check('research retailer messaging labels generic browse destinations',()=>{
+ check('research retailer messaging distinguishes model searches from exact product offers',()=>{
   search('Galaxy A36');
-  assert(element('mobileResearchResults').innerHTML.includes('Croma may open a general category'));
+  assert(element('mobileResearchResults').innerHTML.includes('Model-targeted retailer searches only'));
  });
  console.log(checks+' checks passed');
 });
