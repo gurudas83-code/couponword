@@ -1,0 +1,63 @@
+name: Six-hour mobile source, link and answer integrity
+
+on:
+  # 07:09, 13:09, 19:09 and 01:09 India Standard Time.
+  # GitHub scheduled jobs can be delayed; this is NOT a real-time merchant feed.
+  schedule:
+    - cron: "39 1,7,13,19 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "data/mobile_workbook_research.json"
+      - "python/mobile_research_catalogue.py"
+      - "mobile-research-preview.js"
+      - "scripts/mobile_integrity_audit.py"
+      - "scripts/mobile_query_audit.cjs"
+      - "test_mobile_integrity_audit.py"
+      - ".github/workflows/mobile-integrity-6h.yml"
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  mobile-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - name: Checkout frozen research and current code
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - name: Set up Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.12"
+      - name: Set up Node 22
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22"
+      - name: Build the exact research artifact
+        run: python scripts/build_public_pages.py --output public
+      - name: Validate all 235 discovery rows, 232 mobiles, 696 merchant searches and dates
+        run: |
+          python -m unittest -v test_mobile_integrity_audit
+          python scripts/mobile_integrity_audit.py --report mobile-integrity-audit.json
+      - name: Run all 1000 existing mobile question wordings through existing answer engine
+        run: |
+          node --check mobile-research-preview.js
+          node test_mobile_workbook_queries.cjs
+          node scripts/mobile_query_audit.cjs --report mobile-query-audit.json
+      - name: Check external link HTTP reachability safely without scraping prices
+        if: github.event_name != 'pull_request'
+        run: python scripts/mobile_integrity_audit.py --probe --max-seconds 480 --report mobile-integrity-audit.json
+      - name: Upload audit evidence and unresolved query examples
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: mobile-integrity-evidence
+          path: |
+            mobile-integrity-audit.json
+            mobile-query-audit.json
+          if-no-files-found: warn
+          retention-days: 14
