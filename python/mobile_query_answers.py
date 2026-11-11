@@ -192,8 +192,8 @@ def signature(g):
 
 def load_groups():
     groups = historical_groups()
-    rows = json.loads((ROOT/"data/mobile_query_benchmark_phase3.json").read_text())
-    rows += [{"id":"S"+r["id"], "q":r["query"]} for r in json.loads((ROOT/"data/mobile_search_benchmark.json").read_text())]
+    rows = json.loads((ROOT/"data/mobile_query_benchmark_phase3.json").read_text(encoding="utf-8"))
+    rows += [{"id":"S"+r["id"], "q":r["query"]} for r in json.loads((ROOT/"data/mobile_search_benchmark.json").read_text(encoding="utf-8"))]
     rows += [{"id":f"MEM{i:03}", "q":q} for i,q in enumerate(MEMORY_QUERIES,1)]
     by_signature = {signature(g):g for g in groups}
     for r in rows:
@@ -425,8 +425,8 @@ def document(title,body,path,hi,indexed,canonical=None):
 
 def publish_answers(destination):
     dest=Path(destination)
-    cards=json.loads((dest/'data/mobile_research_catalogue.json').read_text())["model_cards"]
-    frozen={p['canonical_product_id']:p for p in json.loads((dest/'data/mobile_research_preview.json').read_text())['products']}
+    cards=json.loads((dest/'data/mobile_research_catalogue.json').read_text(encoding='utf-8'))["model_cards"]
+    frozen={p['canonical_product_id']:p for p in json.loads((dest/'data/mobile_research_preview.json').read_text(encoding='utf-8'))['products']}
     for card in cards:
         card['_frozen_variants']=[{'ram_gb':frozen[k]['ram_gb'],'storage_gb':frozen[k]['storage_gb']} for k in card.get('frozen_variant_ids',[]) if k in frozen]
     groups=load_groups()
@@ -499,6 +499,6 @@ def publish_answers(destination):
     tree.write(dest/'sitemap.xml',encoding='utf-8',xml_declaration=True)
     report={'reviewed_on':REVIEWED,'historical_groups':334,'historical_wordings':1000,'answer_groups':len(ledger),'indexable_groups':sum(x['indexable'] for x in ledger),'noindex_groups':sum(not x['indexable'] for x in ledger),'ranking_price_weight':0,'live_offers_admitted':0,'answers':ledger}
     (dest/'data/mobile_query_answer_coverage.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
-    homepage=dest/'index.html';text=homepage.read_text();text=text.replace('</main>','<section class="container"><h2><a href="/answers/">Phone buying questions, answered with evidence</a></h2><p>Exact requirements, documented alternatives and clearly explained evidence gaps.</p></section></main>');homepage.write_text(text)
+    homepage=dest/'index.html';text=homepage.read_text(encoding='utf-8');text=text.replace('</main>','<section class="container"><h2><a href="/answers/">Phone buying questions, answered with evidence</a></h2><p>Exact requirements, documented alternatives and clearly explained evidence gaps.</p></section></main>');homepage.write_text(text, encoding='utf-8')
     print(f'Question answers: {len(ledger)} EN/HI groups; {report["indexable_groups"]} indexable, {report["noindex_groups"]} held noindex')
     return report

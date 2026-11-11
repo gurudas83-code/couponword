@@ -19,7 +19,7 @@ def budget_examples(destination, guide, hindi=False):
     if not match:
         return ""
     cap = int(match[1])
-    catalogue = json.loads((Path(destination) / "data/mobile_research_catalogue.json").read_text())
+    catalogue = json.loads((Path(destination) / "data/mobile_research_catalogue.json").read_text(encoding="utf-8"))
     selected = []
     for card in catalogue["model_cards"]:
         ref = card.get("research_budget_reference") or {}
@@ -47,7 +47,7 @@ def budget_examples(destination, guide, hindi=False):
 
 
 def render_phone_guides(destination):
-    data = json.loads((ROOT / 'data/phone-guides.json').read_text())
+    data = json.loads((ROOT / 'data/phone-guides.json').read_text(encoding="utf-8"))
     pages = data['pages']
     if len(pages) != 20 or len({p['slug'] for p in pages}) != 20:
         raise ValueError('curated guide set must have 20 distinct topics')
@@ -66,7 +66,7 @@ def render_phone_guides(destination):
         if 'camera' in p['slug']:
             evidence_links = '<li><a href="https://www.phonearena.com/phones/benchmarks/camera" rel="noopener noreferrer" target="_blank">PhoneArena original camera tests and methodology</a></li>'
         elif any(term in p['slug'] for term in ('battery', 'gaming', 'charging')):
-            ledger = json.loads((ROOT / 'data/mobile_independent_test_evidence.json').read_text())
+            ledger = json.loads((ROOT / 'data/mobile_independent_test_evidence.json').read_text(encoding="utf-8"))
             review = ledger['models'][1]['metrics'][0]['source_url']
             evidence_links = '<li><a href="'+esc(review)+'" rel="noopener noreferrer" target="_blank">Notebookcheck Galaxy A56 review — original lab test context</a></li>'
         content=f'''<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="{HUB}">Phone guides</a> / Guide</nav><article><div class="eyebrow">THE PHONE EDIT / BUYING GUIDE</div><h1>{esc(p['title'])}</h1><p class="lead">{esc(p['intro'])}</p><p class="byline">By {esc(data['editor'])} · Updated <time datetime="{data['updated']}">{esc(data['updated'])}</time></p><aside class="note"><strong>Research, with the limits visible.</strong><p>This is an editorial buying guide based on saved research, not a hands-on review or a live-offer list. Budget references are dated. No current price, stock or performance winner is certified here.</p></aside><section class="quick-answer" aria-label="Quick answer"><h2>{esc(p["reader_question"])}</h2><p>{esc(p["quick_answer"])}</p></section>{toc}{sections}{budget_examples(destination, p)}<section class="action"><h2>Turn the guide into a shortlist</h2><p>Open the existing research tool with “{esc(p['query'])}”. Add your budget, physical RAM, storage or excluded brand. Inspect each source and any missing information, then compare up to three matching phones. No condition is silently relaxed.</p><a class="button" href="{esc(query)}">Explore matching research ↗</a><p><a href="{esc(amazon)}" rel="sponsored nofollow noopener" target="_blank">Search Amazon (affiliate link)</a> · Confirm the selected variant and current offer at the retailer.</p></section><section><h2>Sources and how to verify</h2><p>Follow the specification sources on each research card for the exact model. Independent measurements retain their original source, tested unit and conditions. A research checking date does not imply that a lab test or retailer price was measured that day.</p><ul><li><a href="/guides/smartphone-buying-guide/">Standard smartphone buying checklist</a></li><li><a href="/seo/phone-research-evidence-method.html">Coupon World evidence method and limitations</a></li><li><a href="/phones/">Curated phone specifications with original sources</a></li>{evidence_links}</ul></section></article><section class="related"><h2>Continue your research</h2>{cards(related)}</section>'''
