@@ -12,6 +12,27 @@ from python.tv_earbuds_workbook_pages import load_catalogue, publish_workbook_ca
 ROOT = Path(__file__).resolve().parent
 
 class WorkbookTvEarbudsRelease(unittest.TestCase):
+    def test_croma_unboxed_is_editorial_not_a_retailer_listing(self):
+        rows=load_catalogue()["records"]
+        url="https://www.croma.com/unboxed/xiaomi-tv-s-mini-led-series-2026-india-launch-date-confirmed"
+        tvs={x["id"]:x for x in rows if x["category"]=="tvs"}
+        for id in ("TV01","TV02","TV03"):
+            item=tvs[id]
+            refs=item.get("editorial_references") or []
+            self.assertEqual(len(refs),1)
+            self.assertEqual(refs[0]["url"],url)
+            self.assertEqual(refs[0]["scope"],"XIAOMI_S_MINI_LED_2026_SERIES_NOT_EXACT_SKU")
+            self.assertFalse(refs[0]["content_verified"])
+            self.assertFalse(item["retailers"]["croma"]["exact_model_link_verified"])
+            self.assertNotEqual(item["retailers"]["croma"]["retailer_research_url"],url)
+            from python.tv_earbuds_workbook_pages import detail
+            page=detail(item)
+            self.assertIn(url,page)
+            self.assertIn("Additional series coverage (not a product listing)",page)
+            self.assertIn('name="robots" content="noindex,follow"',page)
+            self.assertNotIn('class="purchase-cta"',page)
+        self.assertEqual(sum(x["retailers"][s]["exact_model_link_verified"] for x in tvs.values() for s in ("amazon","flipkart","croma")),22)
+
     def test_exact_40_research_rows_and_no_buyability(self):
         data=load_catalogue()
         rows=data["records"]
