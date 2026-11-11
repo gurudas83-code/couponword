@@ -1136,54 +1136,54 @@
       "model_code": "K-55XR80M2",
       "product_type": "Television",
       "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
-      "source_grade": "Manufacturer / model or series",
-      "source_status": "OFFICIAL_MODEL_IDENTITY_FOUND_FIELDS_PENDING_RECHECK_2026-11-09",
+      "source_grade": "Manufacturer / exact India Sony model",
+      "source_status": "OFFICIAL_MODEL_AND_SEVEN_FIELDS_VERIFIED_2026-11-11",
       "specifications": [
         {
           "label": "Size (in)",
           "value": "55",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
-          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-11"
         },
         {
           "label": "Panel / backlight",
           "value": "OLED",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
-          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-11"
         },
         {
           "label": "Resolution",
           "value": "4K UHD",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
-          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-11"
         },
         {
           "label": "Native Hz",
           "value": "120",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
-          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-11"
         },
         {
           "label": "Smart OS",
           "value": "Google TV",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
-          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-11"
         },
         {
           "label": "HDR formats",
           "value": "Dolby Vision, HDR10",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
-          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-11"
         },
         {
           "label": "HDMI ports",
           "value": "4",
           "source_url": "https://www.sony.co.in/electronics/support/televisions-projectors-oled-tvs-android-/k-55xr80m2-in/specifications",
-          "evidence": "MAKER_PAGE_IDENTIFIED_FIELD_NOT_REVERIFIED"
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-11"
         }
       ],
       "buyer_use_case": "Premium movies and PS5",
-      "evidence_caveat": "2025 model; manufacturer states VRR HDMI 3/4; exact SKU retailer links not verified; merchant links are model-targeted searches only",
+      "evidence_caveat": "Sony India's K-55XR80M2 IN page verifies 55-inch OLED, 4K, native 120Hz, Google TV, Dolby Vision/HDR10 and 4 HDMI ports; VRR applies to HDMI 3/4. Recorded Croma model-specific listing is research only; live price, stock and checkout remain unverified.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -1386,27 +1386,27 @@
       "model": "QEF6 55 (QA55QEF6AULXL)",
       "model_code": "QA55QEF6AULXL",
       "product_type": "Television",
-      "source_url": "https://www.flipkart.com/q/samsung-55-inch-smart-tv",
-      "source_grade": "Retailer exact model listing",
-      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
+      "source_url": "https://www.samsung.com/in/support/model/QA55QEF6AULXL/",
+      "source_grade": "Manufacturer / exact India model support",
+      "source_status": "OFFICIAL_EXACT_MODEL_IDENTITY_AND_SELECTED_FIELDS_VERIFIED_2026-11-11",
       "specifications": [
         {
           "label": "Size (in)",
           "value": "55",
-          "source_url": "https://www.flipkart.com/q/samsung-55-inch-smart-tv",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.samsung.com/in/support/model/QA55QEF6AULXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-11"
         },
         {
           "label": "Panel / backlight",
           "value": "QLED",
-          "source_url": "https://www.flipkart.com/q/samsung-55-inch-smart-tv",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.samsung.com/in/support/model/QA55QEF6AULXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-11"
         },
         {
           "label": "Resolution",
           "value": "4K UHD",
-          "source_url": "https://www.flipkart.com/q/samsung-55-inch-smart-tv",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.samsung.com/in/support/model/QA55QEF6AULXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-11"
         },
         {
           "label": "Native Hz",
@@ -1440,7 +1440,7 @@
         }
       ],
       "buyer_use_case": "55-inch value QLED",
-      "evidence_caveat": "QEF1 vs QEF6 naming differs; verify code; exact SKU retailer links not verified; merchant links are model-targeted searches only",
+      "evidence_caveat": "Samsung India official support confirms QA55QEF6AULXL as 55-inch QLED QEF6 4K TV. Remaining workbook refresh rate, OS, HDR format, HDMI count and speaker wattage are not independently reverified; no exact merchant product link or live price is certified.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -1642,49 +1642,49 @@
       "model": "P6L 55 (55P6L)",
       "model_code": "55P6L",
       "product_type": "Television",
-      "source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
-      "source_grade": "Retailer exact model listing",
-      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
+      "source_url": "https://www.tcl.com/in/en/support/model/55p6l",
+      "source_grade": "Manufacturer / exact model support and series specifications",
+      "source_status": "OFFICIAL_EXACT_MODEL_IDENTITY_AND_SELECTED_FIELDS_VERIFIED_2026-11-11",
       "specifications": [
         {
           "label": "Size (in)",
           "value": "55",
-          "source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.tcl.com/in/en/support/model/55p6l",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-11"
         },
         {
           "label": "Panel / backlight",
-          "value": "LED LCD",
-          "source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "value": "HVA Panel",
+          "source_url": "https://www.tcl.com/in/en/tvs/p6l",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-11"
         },
         {
           "label": "Resolution",
           "value": "4K UHD",
-          "source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.tcl.com/in/en/tvs/p6l",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-11"
         },
         {
           "label": "Smart OS",
           "value": "Google TV",
-          "source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.tcl.com/in/en/tvs/p6l",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-11"
         },
         {
           "label": "HDR formats",
           "value": "Dolby Vision",
-          "source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.flipkart.com/tcl-p6l-138-cm-55-inch-ultra-hd-4k-led-smart-google-tv-2026-memc-dolby-vision-atmos-aipq-processor-game-master-hva-panel-metallic-bezel-less/p/itmce6cdbb288f2d",
+          "evidence": "EXACT_RETAILER_LISTING_RESEARCH_NOT_MANUFACTURER_VERIFIED_2026-11-11"
         },
         {
           "label": "Speaker W",
           "value": "28",
-          "source_url": "https://www.flipkart.com/q/mi-55-inch-tv",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.flipkart.com/tcl-p6l-138-cm-55-inch-ultra-hd-4k-led-smart-google-tv-2026-memc-dolby-vision-atmos-aipq-processor-game-master-hva-panel-metallic-bezel-less/p/itmce6cdbb288f2d",
+          "evidence": "EXACT_RETAILER_LISTING_RESEARCH_NOT_MANUFACTURER_VERIFIED_2026-11-11"
         }
       ],
       "buyer_use_case": "Entry 55-inch TV",
-      "evidence_caveat": "Native panel refresh not certified in this workbook; exact SKU retailer links not verified; merchant links are model-targeted searches only",
+      "evidence_caveat": "TCL India official support identifies exact 55P6L model; India P6L series page verifies 4K Google TV and HVA panel. Dolby Vision and 28W speakers are supported by an exact-model Flipkart listing only, not manufacturer-certified in the reviewed source. No live price, stock, ranking or checkout eligibility is claimed.",
       "retailers": {
         "amazon": {
           "price_inr": null,
@@ -1749,7 +1749,8 @@
       "image_asset_reviewed_at": "2026-11-10",
       "image_attribution_required": "Rights holder permission or documented license required before copying, hotlinking, or publishing manufacturer/retailer image",
       "image_exact_model_visual_verified": false,
-      "image_publish_eligible": false
+      "image_publish_eligible": false,
+      "manufacturer_series_spec_url": "https://www.tcl.com/in/en/tvs/p6l"
     },
     {
       "id": "TV13",
@@ -2144,15 +2145,15 @@
       "model": "H4500F 32 (UA32H4500FUXXL)",
       "model_code": "UA32H4500FUXXL",
       "product_type": "Television",
-      "source_url": "https://www.gadgets360.com/tv/tv-finder",
-      "source_grade": "Editorial model listing",
-      "source_status": "UNVERIFIED_EXACT_VARIANT_OR_FIELDS_REVIEW_REQUIRED_2026-11-09",
+      "source_url": "https://www.samsung.com/in/support/model/UA32H4500FUXXL/",
+      "source_grade": "Manufacturer / exact India model support",
+      "source_status": "OFFICIAL_EXACT_MODEL_IDENTITY_AND_SELECTED_FIELDS_VERIFIED_2026-11-11",
       "specifications": [
         {
           "label": "Size (in)",
           "value": "32",
-          "source_url": "https://www.gadgets360.com/tv/tv-finder",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.samsung.com/in/support/model/UA32H4500FUXXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-11"
         },
         {
           "label": "Panel / backlight",
@@ -2163,8 +2164,8 @@
         {
           "label": "Resolution",
           "value": "HD Ready",
-          "source_url": "https://www.gadgets360.com/tv/tv-finder",
-          "evidence": "WORKBOOK_RESEARCH_NOT_INDEPENDENTLY_CERTIFIED"
+          "source_url": "https://www.samsung.com/in/support/model/UA32H4500FUXXL/",
+          "evidence": "OFFICIAL_MANUFACTURER_VERIFIED_2026-11-11"
         },
         {
           "label": "Smart OS",
@@ -2174,7 +2175,7 @@
         }
       ],
       "buyer_use_case": "Low-cost bedroom TV",
-      "evidence_caveat": "HD Ready only; native Hz / ports not verified; exact SKU retailer links not verified; merchant links are model-targeted searches only",
+      "evidence_caveat": "Samsung India confirms UA32H4500FUXXL as a 32-inch HD H4500 TV; panel technology and Tizen version are retained as unverified workbook research until cross-checked against exact model specifications. Do not imply native refresh rate or ports without evidence.",
       "retailers": {
         "amazon": {
           "price_inr": null,
