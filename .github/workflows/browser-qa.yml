@@ -23,7 +23,9 @@ jobs:
       - name: Install isolated browser QA dependencies
         run: |
           python -m pip install playwright==1.56.0
-          python -m playwright install --with-deps chromium
+          # GitHub ubuntu-24.04 image already provides the Chromium shared libraries.
+          # Avoid apt mirror outages blocking unrelated content deployments.
+          python -m playwright install chromium
       - name: Build exact GitHub Pages artifact
         run: python scripts/build_public_pages.py --output public
       - name: Real browser test at mobile, tablet and desktop widths

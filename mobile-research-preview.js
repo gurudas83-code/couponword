@@ -451,6 +451,9 @@
   }
 
   function excludedBrand(query) {
+    // Common Hinglish negation: "vivo nahi chahiye".
+    var negative = String(query || "").match(/\b([a-z][a-z0-9/&-]*)\s+(?:nahi|nahin)\s+chahiye\b/i);
+    if (negative) return normalizeResearch(negative[1]);
     var beforeMarker = String(query || "").match(/\b([a-z][a-z0-9/&-]*)\s+(?:ko\s+)?(?:chhodkar|chhod|छोड़कर|छोड़|हटाकर|के\s+बिना|बिना)\b/i);
     if (beforeMarker) return normalizeResearch(beforeMarker[1]);
     var match = String(query || "").match(/(?:exclude|excluding|without|except|no|chhodkar|chhod|छोड़कर|छोड़|हटाकर|के बिना)\s+([a-z][a-z0-9/& -]{1,30})/i);
@@ -480,14 +483,31 @@
   }
 
 
-  function findResearchMatches(query) {
+  function findResearchMatches(query, ignoreBudgetForUnpricedResearch) {
     var c = researchConstraints(query), text = c.text;
+    if (ignoreBudgetForUnpricedResearch === true) { c.budget = null; c.lower = null; }
     var excluded = excludedBrand(text), featureKeys = researchFeatureKeys(text);
     var stop = /^(best|good|phone|phones|mobile|mobiles|smartphone|smartphones|under|below|within|price|in|the|and|with|ram|storage|camera|battery|gaming|game|software|support|display|screen|build|reliability|durability|android|update|updates|ko|ke|ka|ki|bina|chhodkar|chhod|mujhe|mujhko|chahiye|batao|dikhao|achha|acha|accha|wala|wali|mein|me|se|kam|tak|rs|inr|rupees|minimum|least|at|above|over|more|than|का|की|के|में|मुझे|चाहिए|बताओ|दिखाओ|अच्छा|अच्छे|वाला|वाले|फोन|मोबाइल|कैमरा|बैटरी|गेमिंग|डिस्प्ले|छोड़कर|छोड़|हटाकर|बिना|exclude|excluding|without|except|no)$/;
     var tokens = text.split(" ").filter(function (token) { return token && !stop.test(token) && token !== excluded; });
     var aliases = { "सैमसंग": "samsung", "आईफोन": "iphone", "रेडमी": "redmi", "पोको": "poco", "वनप्लस": "oneplus" };
     tokens = tokens.map(function (token) { return aliases[token] || token; });
     if (!tokens.length && !featureKeys.length && !excluded && c.budget == null && c.ram == null && c.storage == null && !c.need5g) return [];
+    // Natural-language instruction words are not product model tokens.
+    // Keep model suffixes (Pro/Plus/Max), RAM, storage and hard gates intact.
+    var queryNoise = new Set([
+      "exact", "model", "models", "priority", "priorities", "prefer", "preferred",
+      "recommend", "recommendation", "recommended", "suggest", "suggestion",
+      "please", "find", "show", "give", "need", "looking", "for",
+      "new", "latest", "best", "top", "quality", "overall", "performance",
+      "phone", "phones", "smartphone", "smartphones", "mobile", "mobiles",
+      "price", "budget", "range", "india", "indian", "available",
+      "as", "is", "it", "do", "does", "the", "what", "which", "that",
+      "ke", "liye", "pe", "par", "ko", "se", "ka", "ki",
+      "hai", "hain", "nahi", "nahin", "chahiye", "chahie", "mujhe",
+      "good", "better", "worth", "cheap", "sasta", "sasti",
+      "compromise", "without", "some", "any", "only", "just"
+    ]);
+    tokens = tokens.filter(function (token) { return !queryNoise.has(token); });
     var matches = [];
     // A full model name with a memory constraint must not select a sibling.
     var exactCard = (c.ram != null || c.storage != null) && inventoryCards.find(function (card) {
@@ -596,7 +616,7 @@
   }
 
   function retailerResearchLinks(card) {
-    return '<div class="mobile-research-sources retailer-search-links">' + (card.retailer_search_links || []).map(function (item) { return link(item.url, (item.retailer === "Croma" ? "Browse " : "Search ") + item.retailer); }).join(" ") + '</div>';
+    return '<div class="mobile-research-sources retailer-search-links">' + (card.retailer_search_links || []).map(function (item) { return link(item.url, "Search " + item.retailer + " for this model"); }).join(" ") + '</div>';
   }
 
   function independentTestContext(card) {
@@ -620,10 +640,10 @@
       researchPhoneImage(card) + '<h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch + '<p class="mobile-research-variant">Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join("; ")) + '</p>' +
       (groupSize > 1 ? '<p class="research-group-note">' + groupSize + ' matching catalogue entries grouped. Specifications below belong to the displayed record.</p>' : '') +
       (specs ? '<ul class="mobile-research-model-specs">' + specs + '</ul>' : '<p>Technical specifications are pending verification.</p>') + documentedContext(card, lastSearchQuery) + independentTestContext(card) +
-      '<p class="research-source-note">' + (sourceItem ? link(sourceItem.source_url, "Specification source") : 'Specification source pending') + ' · Research checked: ' + escapeHtml(card.research_checked_at || sourceItem && (sourceItem.checked_at || sourceItem.checked_date) || 'date unavailable') + '</p>' +
+      '<p class="research-source-note">' + (sourceItem ? link(sourceItem.source_url, "Specification source") : 'Specification source pending') + ' · Specification research snapshot: ' + escapeHtml(card.research_checked_at || sourceItem && (sourceItem.checked_at || sourceItem.checked_date) || 'date unavailable') + ' (not a live check)</p>' + (card.research_budget_reference ? '<p class="research-source-note">Budget filter uses a dated retailer observation: ' + escapeHtml(String(card.research_budget_reference.checked_at || 'date unavailable').match(/\d{4}-\d{2}-\d{2}/)?.[0] || String(card.research_budget_reference.checked_at || 'date unavailable')) + '. Current price and stock not verified.</p>' : '') +
       '<div class="research-card-actions"><button type="button" class="btn btn-ghost mobile-research-detail-button" data-research-detail="' + escapeHtml(card.model_key) + '">All specifications</button>' +
       '<button type="button" class="btn btn-ghost" data-research-compare="' + escapeHtml(card.model_key) + '" aria-pressed="' + selected + '">' + (selected ? 'Remove comparison' : 'Compare') + '</button></div>' + retailerResearchLinks(card) +
-      '<p class="mobile-research-gate">Retailer search/browse links only (Croma may open a general category); confirm the exact model, price, stock and delivery on each retailer site.</p></div></article>';
+      '<p class="mobile-research-gate">Model-targeted retailer searches only, not exact-SKU purchase links. Confirm RAM/storage, current price, stock and delivery on retailer sites.</p></div></article>';
   }
 
   function renderSelectedComparison() {
@@ -677,13 +697,40 @@
     return '<p class="standard-guide-fallback"><a class="btn btn-ghost" href="/guides/smartphone-buying-guide/">Standard Buying Guide</a></p>';
   }
 
+  function unpricedResearchLeads(query) {
+    var c = researchConstraints(query);
+    if (c.budget == null || (c.lower != null && c.lower > c.budget)) return "";
+    // Preserve model, RAM/storage, OIS, 5G, battery, refresh and brand filters.
+    // ONLY the budget reference gate is relaxed for a visibly separate panel.
+    var leads = findResearchMatches(query, true).filter(function (item) {
+      var ref = item.card.research_budget_reference;
+      if (ref && ref.reference_price_inr > 0 &&
+          (c.inclusive ? ref.reference_price_inr > c.budget : ref.reference_price_inr >= c.budget)) return false;
+      return Object.keys(item.card.specifications || {}).length >= 3;
+    }).slice(0, 3);
+    if (!leads.length) return "";
+    return '<section class="research-context research-unpriced-leads">' +
+      '<h3>Related research — NOT within-budget recommendations</h3>' +
+      '<p>These models match other documented conditions, but the requested budget has NOT been verified for their exact RAM/storage variant. They may cost more. No price, stock, ranking or purchase eligibility is implied.</p>' +
+      leads.map(function (item) {
+        var card = item.card;
+        var proof = Object.values(card.specifications || {}).find(function (field) {
+          return field && /^https:\/\//.test(field.source_url || "");
+        });
+        return '<div class="research-unpriced-item"><strong>' + escapeHtml(displayPhoneName(card)) + '</strong>' +
+          '<p>Specifications recorded: ' + escapeHtml(card.research_checked_at || 'date unavailable') +
+          ' · Budget status: not verified · ' + (proof ? link(proof.source_url, 'Original technical source') : 'Source unavailable') + '</p>' +
+          retailerResearchLinks(card) + '</div>';
+      }).join('') + '</section>';
+  }
+
   function emptyResearchResult(query) {
     var c = researchConstraints(query);
     var message = "No documented match in our saved research for this request.";
     if (c.lower != null && c.budget != null && c.lower > c.budget) message = "The lower budget is higher than the upper budget. Please correct the range.";
     else if (c.ram != null || c.storage != null) message += " We cannot confirm the requested exact memory variant with all these conditions.";
     else if (c.budget != null) message += " No matching record passes this price band and the other conditions. Missing references and recorded out-of-stock entries are excluded.";
-    return '<div class="mobile-research-empty"><p>' + escapeHtml(message) + '</p><p>This is a research coverage gap, not proof that no suitable phone exists. No constraint has been relaxed.</p><a href="#mobileResearchCatalogue">Browse the full research catalogue</a>' + researchGuideFallback() + '</div>';
+    return '<div class="mobile-research-empty"><p>' + escapeHtml(message) + '</p><p>This is a research coverage gap, not proof that no suitable phone exists. No constraint has been relaxed for budget-qualified results.</p><a href="#mobileResearchCatalogue">Browse the full research catalogue</a>' + researchGuideFallback() + unpricedResearchLeads(query) + '</div>';
   }
 
   function verifiedRecommendationBridge(query, isComparison) {

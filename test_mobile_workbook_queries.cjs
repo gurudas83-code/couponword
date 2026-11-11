@@ -57,7 +57,26 @@ setImmediate(()=> {
  check('explicit comparison returns both models',()=>{let r=search('Galaxy A36 vs Galaxy A56');assert.equal(r.length,2);assert(element('mobileResearchResults').innerHTML.includes('no performance winner'));});
  check('budget pagination expands',()=>{search('phone between 0 and 100000');assert(!element('mobileResearchResultsMore').hidden);element('mobileResearchResultsMore').events.click();assert((element('mobileResearchResults').innerHTML.match(/data-mobile-model-card=/g)||[]).length>6);});
  check('reference amounts hidden from result text',()=>{search('phone under 20000');assert(!/reference_price_inr|₹\s*\d|INR\s*\d/.test(element('mobileResearchResults').innerHTML));});
- check('retailer search links visible',()=>{search('Galaxy A36');let html=element('mobileResearchResults').innerHTML;assert(html.includes('Search Amazon'));assert(html.includes('Search Flipkart'));assert(html.includes('Browse Croma'));});
+ check('232 Croma model targets replace generic category destinations',()=>{
+   const seen=new Set();
+   for(const card of catalogue.model_cards){
+     const links=card.retailer_search_links||[];
+     assert.equal(links.length,3);
+     for(const link of links)assert.equal(link.link_scope,'MODEL_TARGETED_SEARCH_NOT_VERIFIED_PRODUCT');
+     const retailer=links.find(x=>x.retailer==='Croma');
+     const dest=new URL(retailer.url);
+     assert.equal(dest.hostname,'www.croma.com');
+     assert.equal(dest.pathname,'/search/');
+     const q=(dest.searchParams.get('text')||'').toLowerCase();
+     for(const token of card.model_key.replace('|',' ').split(/[^a-z0-9]+/g).filter(Boolean)){
+       assert(q.includes(token),card.model_key+' -> '+q);
+     }
+     seen.add(retailer.url);
+   }
+   // Two legacy Redmi identities normalize to the same human product name.
+   assert.equal(seen.size,231);
+ });
+ check('retailer search links visible',()=>{search('Galaxy A36');let html=element('mobileResearchResults').innerHTML;assert(html.includes('Search Amazon'));assert(html.includes('Search Flipkart'));assert(html.includes('Search Croma for this model'));});
  check('main search recognizes bare budget',()=>assert(api.isResearchQuery('under 20k')));
  check('strict boundary excludes equality',()=>{let ref=catalogue.model_cards.find(c=>c.research_budget_reference).research_budget_reference;assert(search('phone under '+ref.reference_price_inr).every(x=>x.card.research_budget_reference.reference_price_inr<ref.reference_price_inr));});
  check('repeated queries deterministic',()=>{let first=search('camera phone under 30000').map(x=>x.card.model_key);for(let i=0;i<20;i++)assert.deepEqual(search('camera phone under 30000').map(x=>x.card.model_key),first);});
@@ -76,7 +95,7 @@ setImmediate(()=> {
  check('Narzo colour listings form one result',()=>assert.equal(search('narzo 100 lite under 20000').length,1));
  check('Pro models are not merged with base models',()=>{let r=search('iPhone 16');assert(r.some(x=>x.card.model==='iPhone 16'));assert(r.some(x=>x.card.model==='iPhone 16 Pro'));assert(r.some(x=>x.card.model==='iPhone 16 Pro Max'));});
  check('4G and 5G identities remain separate',()=>{let r=search('Lava Bold N2');assert(r.some(x=>x.card.model==='Bold N2'));assert(r.some(x=>x.card.model==='Bold N2 5G'));});
- check('source evidence and checked date on results',()=>{search('Galaxy A36');let html=element('mobileResearchResults').innerHTML;assert(html.includes('Specification source'));assert(html.includes('Research checked:'));assert(html.includes('What to consider'));assert(html.includes('Before choosing'));});
+ check('source evidence and checked date on results',()=>{search('Galaxy A36');let html=element('mobileResearchResults').innerHTML;assert(html.includes('Specification source'));assert(html.includes('Specification research snapshot:'));assert(html.includes('What to consider'));assert(html.includes('Before choosing'));});
  check('camera guidance avoids an unsupported winner',()=>{search('camera phone under 30000');assert(element('mobileResearchResults').innerHTML.includes('Megapixels alone do not establish photo quality'));});
  check('repeated brand prefix is removed from display',()=>{search('Redmi Note 15');assert(!element('mobileResearchResults').innerHTML.includes('Redmi Redmi'));});
  check('CPU clocks are not mislabelled as chipset names',()=>{search('Samsung S26 Ultra');assert(element('mobileResearchResults').innerHTML.includes('CPU clock (chipset name unconfirmed)'));});
@@ -116,9 +135,26 @@ setImmediate(()=> {
   search('Galaxy A36 vs Galaxy A56');
   assert(!element('mobileResearchResults').innerHTML.includes('data-research-verified-recommend'));
  });
- check('research retailer messaging labels generic browse destinations',()=>{
+ check('research retailer messaging distinguishes model searches from exact product offers',()=>{
   search('Galaxy A36');
-  assert(element('mobileResearchResults').innerHTML.includes('Croma may open a general category'));
+  assert(element('mobileResearchResults').innerHTML.includes('Model-targeted retailer searches only'));
+ });
+ check('natural-language query noise does not hide the exact model',()=>{
+   const plain=search('Samsung Galaxy A36');
+   const verbose=search('please suggest exact model Samsung Galaxy A36 for India');
+   assert.deepEqual(verbose.map(x=>x.card.model_key),plain.map(x=>x.card.model_key));
+ });
+ check('Hinglish avoid-brand grammar preserves exclusions',()=>{
+   const r=search('vivo nahi chahiye phone under 15000');
+   assert(r.every(x=>x.card.brand.toLowerCase()!=='vivo'));
+ });
+ check('budget zero results can show separated unpriced evidence without a false offer',()=>{
+   const r=search('Apple iPhone 11 under 7000');
+   assert.equal(r.length,0);
+   const h=element('mobileResearchResults').innerHTML;
+   assert(h.includes('Related research — NOT within-budget recommendations'));
+   assert(h.includes('Budget status: not verified'));
+   assert(!h.includes('purchase-cta'));
  });
  console.log(checks+' checks passed');
 });
