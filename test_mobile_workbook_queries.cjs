@@ -139,5 +139,22 @@ setImmediate(()=> {
   search('Galaxy A36');
   assert(element('mobileResearchResults').innerHTML.includes('Model-targeted retailer searches only'));
  });
+ check('natural-language query noise does not hide the exact model',()=>{
+   const plain=search('Samsung Galaxy A36');
+   const verbose=search('please suggest exact model Samsung Galaxy A36 for India');
+   assert.deepEqual(verbose.map(x=>x.card.model_key),plain.map(x=>x.card.model_key));
+ });
+ check('Hinglish avoid-brand grammar preserves exclusions',()=>{
+   const r=search('vivo nahi chahiye phone under 15000');
+   assert(r.every(x=>x.card.brand.toLowerCase()!=='vivo'));
+ });
+ check('budget zero results can show separated unpriced evidence without a false offer',()=>{
+   const r=search('Apple iPhone 11 under 7000');
+   assert.equal(r.length,0);
+   const h=element('mobileResearchResults').innerHTML;
+   assert(h.includes('Related research — NOT within-budget recommendations'));
+   assert(h.includes('Budget status: not verified'));
+   assert(!h.includes('purchase-cta'));
+ });
  console.log(checks+' checks passed');
 });
