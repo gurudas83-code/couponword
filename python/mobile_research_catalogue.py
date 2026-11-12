@@ -1119,6 +1119,64 @@ APPLE_MODEL_SUPPLEMENTS = {
         "battery_and_charging": "5150mAh battery with fast wired charging and 15W wireless charging.",
         "durability": "IP68 dust and water resistance.",
     },
+    "poco|f7": {
+        "display_type_description": "6.83-inch 1.5K 120Hz AMOLED display.",
+        "chipset": "Qualcomm Snapdragon 8s Gen 4.",
+        "rear_camera_system": "50MP Sony OIS main and 8MP ultra-wide cameras.",
+        "battery_and_charging": "6500mAh battery with 90W HyperCharge.",
+        "durability": "IP68 dust and water resistance.",
+    },
+    "poco|m7 pro": {
+        "display_type_description": "6.67-inch AMOLED display with up to 120Hz refresh rate and 2400 × 1080 resolution.",
+        "chipset": "MediaTek Dimensity 7025-Ultra.",
+        "rear_camera_system": "50MP OIS main and 2MP depth cameras.",
+        "front_camera_system": "20MP front camera.",
+        "battery_and_charging": "5110mAh battery with 45W turbo charging.",
+    },
+    "poco|x6 pro 5g": {
+        "display_type_description": "6.67-inch 1.5K 120Hz Flow AMOLED display.",
+        "chipset": "MediaTek Dimensity 8300-Ultra.",
+        "rear_camera_system": "64MP OIS main, 8MP ultra-wide and 2MP macro cameras.",
+        "front_camera_system": "16MP front camera.",
+        "battery_and_charging": "5000mAh battery with 67W turbo charging.",
+    },
+    "poco|x7 pro": {
+        "display_type_description": "6.67-inch 1.5K AMOLED display with up to 120Hz refresh rate.",
+        "chipset": "MediaTek Dimensity 8400-Ultra.",
+        "rear_camera_system": "50MP OIS main and 8MP ultra-wide cameras.",
+        "front_camera_system": "20MP front camera.",
+        "battery_and_charging": "6000mAh battery with 90W HyperCharge.",
+    },
+    "poco|x7 pro 5g": {
+        "display_type_description": "6.67-inch 1.5K AMOLED display with up to 120Hz refresh rate.",
+        "chipset": "MediaTek Dimensity 8400-Ultra.",
+        "rear_camera_system": "50MP OIS main and 8MP ultra-wide cameras.",
+        "front_camera_system": "20MP front camera.",
+        "battery_and_charging": "6000mAh battery with 90W HyperCharge.",
+    },
+    "poco|x8 5g": {
+        "display_type_description": "6.83-inch 1.5K AMOLED display with up to 120Hz refresh rate.",
+        "chipset": "Qualcomm Snapdragon 6s Gen 4.",
+        "rear_camera_system": "50MP OIS main and 2MP depth cameras.",
+        "front_camera_system": "16MP front camera.",
+        "battery_and_charging": "8340mAh battery with 67W HyperCharge.",
+        "durability": "IP66, IP68, IP69 and IP69K water and dust resistance.",
+    },
+    "poco|x8 pro max": {
+        "display_type_description": "6.83-inch 1.5K 120Hz ultra-bright AMOLED display.",
+        "chipset": "MediaTek Dimensity 9500s.",
+        "rear_camera_system": "50MP OIS main and 8MP ultra-wide cameras.",
+        "front_camera_system": "20MP front camera.",
+        "battery_and_charging": "8500mAh battery with 100W HyperCharge.",
+        "durability": "IP68 dust and water resistance.",
+    },
+    "realme|12 pro plus": {
+        "display_type_description": "6.7-inch curved 120Hz FHD+ display.",
+        "chipset": "Qualcomm Snapdragon 7s Gen 2.",
+        "rear_camera_system": "50MP Sony IMX890 OIS main, 64MP OIS periscope portrait and 8MP ultra-wide cameras.",
+        "front_camera_system": "32MP selfie camera.",
+        "battery_and_charging": "5000mAh battery with 67W SUPERVOOC charging.",
+    },
     "oppo|k13 turbo": {
         "display_type_description": "1.5K 120Hz flat display with 2800 × 1280 resolution.",
         "chipset": "MediaTek Dimensity 8450.",
@@ -1216,6 +1274,8 @@ def _apply_model_supplements(model_cards: list[dict[str, Any]]) -> None:
             "www.oneplus.in",
             "www.oppo.com",
             "www.mi.com", "mi.com",
+            "www.po.co", "po.co",
+            "www.realme.com", "realme.com",
         }
         source = next(
             (
