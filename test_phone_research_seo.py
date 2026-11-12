@@ -156,6 +156,15 @@ class ResearchSeoTests(unittest.TestCase):
     def test_navigation_and_sitemap_include_research_hub(self):
         homepage = (PUBLIC / "index.html").read_text(encoding="utf-8")
         self.assertGreaterEqual(homepage.count('href="/phones/"'), 3)
+        demand_page = PUBLIC / "seo" / "india-smartphone-search-demand.html"
+        self.assertTrue(demand_page.is_file())
+        demand_html = demand_page.read_text(encoding="utf-8")
+        self.assertIn("historical planning signal", demand_html)
+        self.assertIn('rel="canonical"', demand_html)
+        self.assertIn("/phones/vivo-t4x-5g/", demand_html)
+        self.assertIn("Coverage gap", demand_html)
+        self.assertIn(SITE + "/seo/india-smartphone-search-demand.html", self.sitemap)
+        self.assertIn('href="/seo/india-smartphone-search-demand.html"', homepage)
         # The market-signal hub is one additional curated research collection;
         # its ten noindex model-intake details do not enter the sitemap.
         market = SITE + HUB + "india-market-demand-q3-2026/"

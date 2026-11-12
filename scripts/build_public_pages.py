@@ -434,6 +434,10 @@ def build(output: Path) -> Path:
     from python.india_sales_priority_pages import publish_sales_priority
     publish_sales_priority(output)
 
+    # Use historical demand only to prioritize source-backed editorial coverage.
+    from python.search_demand_pages import publish_search_demand
+    publish_search_demand(output)
+
     # Consolidate repeated/unsupported landing-page batches into reviewed guides.
     from python.publication_policy import apply_policy
     apply_policy(output)
