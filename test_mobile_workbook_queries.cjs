@@ -22,7 +22,7 @@ setImmediate(()=> {
  check('232 model identities retained',()=>assert.equal(catalogue.model_cards.length,232));
  check('235 discovery rows retained',()=>assert.equal(catalogue.records.length,235));
  check('10 frozen variants retained',()=>assert.equal(preview.products.length,10));
- check('225 model cards have technical specifications',()=>assert.equal(catalogue.model_cards.filter(c=>Object.keys(c.specifications).length).length,225));
+ check('226 model cards have technical specifications',()=>assert.equal(catalogue.model_cards.filter(c=>Object.keys(c.specifications).length).length,226));
  check('86 references exclude negative stock',()=>{let rows=catalogue.model_cards.filter(c=>c.research_budget_reference);assert.equal(rows.length,86);assert(rows.every(c=>!/(OUT.OF.STOCK|UNAVAILABLE|DISCONTINUED)/i.test(c.research_budget_reference.stock_indication)));});
  check('budget is strict and nonempty',()=>{let r=search('phone under 20000');assert(r.length>0);assert(r.every(x=>x.card.research_budget_reference.reference_price_inr<20000));});
  check('20k equals 20000',()=>assert.deepEqual(search('phone under 20k').map(x=>x.card.model_key),search('phone under 20000').map(x=>x.card.model_key)));
