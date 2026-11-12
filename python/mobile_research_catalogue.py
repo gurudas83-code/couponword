@@ -885,6 +885,53 @@ APPLE_MODEL_SUPPLEMENTS = {
         "operating_system": "Android 16.",
         "durability": "IP69/IP68 protection with MIL-STD-810H certification.",
     },
+    "motorola|signature": {
+        "display_type_description": "6.8-inch Extreme AMOLED display with up to 165Hz refresh rate.",
+        "rear_camera_system": "50MP main, 50MP ultra-wide and 50MP 3x periscope telephoto cameras.",
+        "battery_and_charging": "5200mAh silicon-carbon battery with 90W wired and 50W wireless charging.",
+        "operating_system": "Android 16.",
+        "durability": "IP69/IP68 protection with MIL-STD-810H certification.",
+    },
+    "nothing|phone 2a": {
+        "display_type_description": "6.7-inch flexible AMOLED display with 120Hz adaptive refresh rate.",
+        "rear_camera_system": "50MP main and 50MP ultra-wide cameras with OIS/EIS on the main camera.",
+        "front_camera_system": "32MP front camera.",
+        "battery_and_charging": "5000mAh battery with 45W fast charging.",
+        "operating_system": "Nothing OS powered by Android 15.",
+        "durability": "IP54-rated dust and water resistance.",
+    },
+    "nothing|phone 2a plus": {
+        "display_type_description": "6.7-inch flexible AMOLED display with 120Hz adaptive refresh rate.",
+        "rear_camera_system": "50MP main and 50MP ultra-wide cameras with OIS/EIS on the main camera.",
+        "front_camera_system": "50MP front camera.",
+        "battery_and_charging": "5000mAh battery with 50W fast charging.",
+        "operating_system": "Nothing OS 2.6 powered by Android 14.",
+        "durability": "IP54-rated dust and water resistance.",
+    },
+    "nothing|phone 3a": {
+        "display_type_description": "6.77-inch FHD+ flexible AMOLED display with 120Hz adaptive refresh rate.",
+        "rear_camera_system": "50MP OIS main, 50MP 2x telephoto and 8MP ultra-wide cameras.",
+        "front_camera_system": "32MP front camera.",
+        "battery_and_charging": "5000mAh battery with 50W fast charging.",
+        "operating_system": "Nothing OS 3 powered by Android 15.",
+        "durability": "IP64-rated dust and water resistance.",
+    },
+    "nothing|phone 3a pro": {
+        "display_type_description": "6.77-inch FHD+ flexible AMOLED display with 120Hz adaptive refresh rate.",
+        "rear_camera_system": "50MP OIS main, 50MP 3x periscope telephoto and 8MP ultra-wide cameras.",
+        "front_camera_system": "50MP front camera.",
+        "battery_and_charging": "5000mAh battery with 50W fast charging.",
+        "operating_system": "Nothing OS 3 powered by Android 15.",
+        "durability": "IP64-rated dust and water resistance.",
+    },
+    "nothing|phone 4a pro": {
+        "rear_camera_system": "50MP OIS periscope camera with up to 140x ultra zoom; the cited page identifies a 3-camera system with a Sony sensor.",
+        "operating_system": "Nothing OS with Essential AI tools.",
+    },
+    "nothing|phone 4b": {
+        "rear_camera_system": "50MP main camera with 4K video recording.",
+        "operating_system": "Nothing OS with Essential AI tools.",
+    },
 }
 
 
@@ -900,6 +947,7 @@ def _apply_model_supplements(model_cards: list[dict[str, Any]]) -> None:
             "support.apple.com", "www.apple.com", "store.google.com",
             "support.google.com", "in.nothing.tech", "infinixmobiles.in",
             "www.iqoo.com", "shop.iqoo.com", "www.lavamobiles.com",
+            "checkout.nothing.tech",
             "en-in.support.motorola.com", "en-us.support.motorola.com",
         }
         source = next(
