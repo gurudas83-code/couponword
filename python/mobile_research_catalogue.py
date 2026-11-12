@@ -830,6 +830,61 @@ APPLE_MODEL_SUPPLEMENTS = {
         "battery_and_charging": "5000mAh battery with Type-C port and 10W charging.",
         "durability": "IP64-rated dust and water resistance.",
     },
+    "lava|virat v1 5g": {
+        "display_type_description": "6.75-inch HD+ display with 120Hz refresh rate.",
+        "battery_and_charging": "6000mAh battery with Type-C charging; 10W charging and 18W support.",
+        "durability": "IP64-rated dust and water resistance.",
+    },
+    "motorola|edge 50 fusion": {
+        "display_type_description": "6.67-inch pOLED Endless Edge display with 144Hz refresh rate.",
+        "battery_and_charging": "5000mAh battery with 68W TurboPower charging.",
+        "operating_system": "Android 14.",
+        "durability": "IP68-rated water and dust resistance.",
+    },
+    "motorola|edge 50 pro": {
+        "display_type_description": "6.7-inch 1.5K pOLED display with 144Hz refresh rate.",
+        "rear_camera_system": "50MP OIS main, 13MP ultra-wide/macro and 10MP 3x telephoto cameras.",
+        "front_camera_system": "50MP front camera with autofocus.",
+        "battery_and_charging": "4500mAh battery with 125W wired and up to 50W wireless charging.",
+        "operating_system": "Hello UI based on Android 14.",
+        "durability": "IP68-rated water resistance.",
+    },
+    "motorola|edge 50 ultra": {
+        "display_type_description": "6.7-inch 1.5K pOLED display with 144Hz refresh rate.",
+        "battery_and_charging": "4500mAh battery with 125W wired and up to 50W wireless charging.",
+        "operating_system": "Android 14.",
+        "durability": "IP68-rated water and dust resistance.",
+    },
+    "motorola|edge 60 fusion": {
+        "display_type_description": "6.67-inch 1.5K pOLED quad-curved display with 120Hz refresh rate.",
+        "battery_and_charging": "5500mAh battery with 68W TurboPower charging.",
+        "operating_system": "Android 15 with 3 OS upgrades and 4 years of security updates.",
+        "durability": "IP68/IP69 water resistance with MIL-STD-810H certification.",
+    },
+    "motorola|edge 60 pro": {
+        "display_type_description": "6.7-inch 1.5K pOLED quad-curved display with 120Hz refresh rate.",
+        "rear_camera_system": "50MP OIS main, 50MP ultra-wide/macro and 10MP 3x telephoto cameras.",
+        "front_camera_system": "50MP front camera.",
+        "battery_and_charging": "6000mAh battery with 90W wired and 15W wireless charging.",
+        "operating_system": "Android 16 with 3 OS upgrades and 4 years of security updates.",
+        "durability": "IP68/IP69 water and dust protection with MIL-STD-810H certification.",
+    },
+    "motorola|edge 70": {
+        "display_type_description": "6.67-inch Extreme AMOLED display with 120Hz refresh rate.",
+        "rear_camera_system": "50MP OIS main and 50MP ultra-wide cameras.",
+        "front_camera_system": "50MP front camera.",
+        "battery_and_charging": "5000mAh silicon-carbon battery with 68W wired and 15W wireless charging.",
+        "operating_system": "Android 16.",
+        "durability": "IP69/IP68 protection with MIL-STD-810H certification.",
+    },
+    "motorola|edge 70 fusion": {
+        "display_type_description": "6.8-inch Extreme AMOLED display with up to 144Hz refresh rate.",
+        "rear_camera_system": "50MP OIS main and 13MP ultra-wide/macro cameras.",
+        "front_camera_system": "32MP front camera.",
+        "battery_and_charging": "7000mAh battery with 68W TurboPower charging.",
+        "operating_system": "Android 16.",
+        "durability": "IP69/IP68 protection with MIL-STD-810H certification.",
+    },
 }
 
 
@@ -845,6 +900,7 @@ def _apply_model_supplements(model_cards: list[dict[str, Any]]) -> None:
             "support.apple.com", "www.apple.com", "store.google.com",
             "support.google.com", "in.nothing.tech", "infinixmobiles.in",
             "www.iqoo.com", "shop.iqoo.com", "www.lavamobiles.com",
+            "en-in.support.motorola.com", "en-us.support.motorola.com",
         }
         source = next(
             (
