@@ -75,7 +75,7 @@ class MobileResearchInventoryVisibilityTests(unittest.TestCase):
 
     def test_public_images_require_explicit_rights_clearance(self):
         payload = build_public_catalogue(ROOT)
-        registry = json.loads((ROOT / "data/mobile_model_photos.json").read_text())
+        registry = json.loads((ROOT / "data/mobile_model_photos.json").read_text(encoding="utf-8"))
         by_record = {}
         for card in payload["model_cards"]:
             photo = registry.get(card["model_key"])

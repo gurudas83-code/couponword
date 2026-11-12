@@ -11,12 +11,12 @@ PUBLIC=Path(__file__).resolve().parent/'public'
 
 class PublicationPolicyTests(unittest.TestCase):
     def test_retired_pages_are_absent_not_soft_404_or_redirect_placeholders(self):
-        routes=json.loads(RETIRED.read_text())['routes']
+        routes=json.loads(RETIRED.read_text(encoding="utf-8"))['routes']
         self.assertEqual(len(routes),977)
         self.assertTrue(all(not route_file(PUBLIC,r).exists() for r in routes))
         self.assertFalse((PUBLIC/'answers').exists())
         self.assertFalse((PUBLIC/'hi/answers').exists())
-        text=(PUBLIC/'404.html').read_text()
+        text=(PUBLIC/'404.html').read_text(encoding="utf-8")
         self.assertIn('noindex,follow',text)
         self.assertNotIn('refresh',text.lower())
         self.assertNotIn('window.location',text)
@@ -28,7 +28,7 @@ class PublicationPolicyTests(unittest.TestCase):
             self.assertTrue(url.startswith(SITE+'/'))
             p=route_file(PUBLIC,urlsplit(url).path)
             self.assertTrue(p.is_file(),url)
-            html=p.read_text()
+            html=p.read_text(encoding="utf-8")
             self.assertNotRegex(html,r'name="robots"\s+content="[^"]*noindex')
             canonical=re.search(r'<link\b[^>]*rel="canonical"\s+href="([^"]+)"',html,re.S)
             self.assertIsNotNone(canonical,url)
@@ -37,11 +37,11 @@ class PublicationPolicyTests(unittest.TestCase):
 
     def test_retained_internal_navigation_and_guide_inventory_are_real(self):
         for p in PUBLIC.rglob('*.html'):
-            for link in Links(p.read_text()).links:
+            for link in Links(p.read_text(encoding="utf-8")).links:
                 u=urlsplit(link)
                 if not u.netloc and u.path.startswith('/'):
                     self.assertTrue(route_file(PUBLIC,unquote(u.path)).is_file(),(p,link))
-        guides=json.loads((PUBLIC/'data/seo-pages.json').read_text())
+        guides=json.loads((PUBLIC/'data/seo-pages.json').read_text(encoding="utf-8"))
         self.assertEqual(len(guides),20)
         for g in guides:
             self.assertTrue((PUBLIC/'seo'/(g['slug']+'.html')).is_file())
@@ -109,6 +109,6 @@ class PublicationPolicyTests(unittest.TestCase):
 
     def test_no_unsubstantiated_review_or_offer_schema(self):
         for p in PUBLIC.rglob('*.html'):
-            self.assertNotRegex(p.read_text(),r'"@type"\s*:\s*"(?:Offer|AggregateRating|Review)"',p)
+            self.assertNotRegex(p.read_text(encoding="utf-8"),r'"@type"\s*:\s*"(?:Offer|AggregateRating|Review)"',p)
 
 if __name__=='__main__':unittest.main()

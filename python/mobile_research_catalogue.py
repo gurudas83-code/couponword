@@ -145,6 +145,66 @@ def _https_urls(values: Any) -> list[str]:
     return list(dict.fromkeys(item for item in values if isinstance(item, str) and item.startswith("https://")))
 
 
+def _load_verified_mobile_retailer_links(root: Path) -> dict[tuple[str, str], list[dict[str, Any]]]:
+    """Load exact mobile listing evidence without turning it into a live offer.
+
+    The research catalogue may show a direct listing only when the existing
+    offer evidence binds retailer, listing ID, model and physical variant.
+    Price, stock and CTA eligibility deliberately remain outside this view.
+    """
+    offers_path = root / "data/retailer_offers.json"
+    coupons_path = root / "coupons.json"
+    if not offers_path.is_file() or not coupons_path.is_file():
+        return {}
+    offers = _read_json(offers_path).get("offers") or []
+    coupons = _read_json(coupons_path)
+    mobile_ids = {
+        f"cw-mobile-{item.get('id')}": item
+        for item in coupons
+        if isinstance(item, dict) and str(item.get("category") or "").casefold() in {"mobile", "mobiles", "phone", "phones"}
+    }
+    allowed_hosts = {
+        "amazon": {"amazon.in", "www.amazon.in"},
+        "flipkart": {"flipkart.com", "www.flipkart.com"},
+        "croma": {"croma.com", "www.croma.com"},
+    }
+    result: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for offer in offers:
+        if not isinstance(offer, dict) or offer.get("product_id") not in mobile_ids:
+            continue
+        retailer = str(offer.get("retailer") or "").casefold()
+        url = str(offer.get("product_url") or "")
+        parsed = urlparse(url)
+        listing_id = str(offer.get("retailer_product_id") or "").strip()
+        if (
+            retailer not in allowed_hosts
+            or parsed.scheme != "https"
+            or parsed.hostname not in allowed_hosts[retailer]
+            or not listing_id
+            or not offer.get("brand")
+            or not offer.get("model")
+            or not offer.get("variant")
+            or offer.get("source") not in {"retailer_page_verified", "amazon_primary_buybox", "retailer_price_observed"}
+        ):
+            continue
+        identity = (_norm(offer.get("brand")), _norm(offer.get("model")))
+        result.setdefault(identity, []).append({
+            "retailer": retailer,
+            "url": url,
+            "retailer_product_id": listing_id,
+            "variant": str(offer.get("variant")),
+            "source": str(offer.get("source")),
+            "confidence": offer.get("confidence"),
+            "checked_at": str(offer.get("last_checked") or offer.get("observed_at") or ""),
+            "exact_identity_verified": True,
+        })
+    for identity in result:
+        result[identity] = sorted(
+            result[identity], key=lambda item: (item["retailer"], item["variant"], item["url"])
+        )
+    return result
+
+
 def _load_model_photos(root: Path, models: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
     """Load reviewed photos by exact catalogue model key."""
     photos = _read_json(root / "data/mobile_model_photos.json")
@@ -370,6 +430,101 @@ APPROVED_SPEC_CORRECTIONS = {
     ("samsung|galaxy f70 pro 5g", "chipset"): ("Qualcomm Snapdragon 6 Gen 3", "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/"),
     ("samsung|galaxy m47 5g", "chipset"): ("Qualcomm Snapdragon 6 Gen 3", "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m47-5g-rogue-red-128gb-sm-m476bzrbins/"),
 }
+
+
+# Small, source-bound supplements for the first Apple review batch. These are
+# model-shared facts explicitly documented by Apple; variant-specific memory,
+# battery capacity in mAh, and update-year promises remain pending when Apple
+# does not publish them on the cited technical page.
+APPLE_MODEL_SUPPLEMENTS = {
+    "apple|iphone 11": {
+        "display_type_description": "Liquid Retina HD display; 6.1-inch all-screen LCD with IPS technology.",
+        "rear_camera_system": "Dual 12MP Wide and Ultra Wide cameras; optical image stabilization on the Wide camera.",
+        "front_camera_system": "TrueDepth camera system with a 12MP front camera.",
+        "battery_and_charging": "Built-in rechargeable lithium-ion battery; fast-charge capable; Qi wireless charging supported.",
+        "operating_system": "iOS",
+        "durability": "IP68-rated splash, water and dust resistance.",
+    },
+    "apple|iphone 13": {
+        "display_type_description": "Super Retina XDR display; 6.1-inch all-screen OLED display.",
+        "rear_camera_system": "Dual 12MP Wide and Ultra Wide cameras; sensor-shift optical image stabilization on the Wide camera.",
+        "front_camera_system": "TrueDepth camera system with a 12MP front camera.",
+        "battery_and_charging": "Built-in rechargeable lithium-ion battery; fast-charge capable; MagSafe and Qi wireless charging supported.",
+        "operating_system": "iOS",
+        "durability": "IP68-rated splash, water and dust resistance.",
+    },
+    "apple|iphone 15": {
+        "display_type_description": "Super Retina XDR display; 6.1-inch all-screen OLED display.",
+        "rear_camera_system": "48MP Main and 12MP Ultra Wide cameras; sensor-shift optical image stabilization on the Main camera.",
+        "front_camera_system": "12MP TrueDepth front camera with autofocus.",
+        "battery_and_charging": "Built-in rechargeable lithium-ion battery; USB-C charging; MagSafe and Qi2 wireless charging supported.",
+        "operating_system": "iOS",
+        "durability": "IP68-rated splash, water and dust resistance.",
+    },
+    "apple|iphone 15 plus": {
+        "display_type_description": "Super Retina XDR display; 6.7-inch all-screen OLED display.",
+        "rear_camera_system": "48MP Main and 12MP Ultra Wide cameras; sensor-shift optical image stabilization on the Main camera.",
+        "front_camera_system": "12MP TrueDepth front camera with autofocus.",
+        "battery_and_charging": "Built-in rechargeable lithium-ion battery; USB-C charging; MagSafe and Qi2 wireless charging supported.",
+        "operating_system": "iOS",
+        "durability": "IP68-rated splash, water and dust resistance.",
+    },
+    "apple|iphone 16": {
+        "display_type_description": "Super Retina XDR display; 6.1-inch all-screen OLED display.",
+        "rear_camera_system": "48MP Fusion Main and 12MP Ultra Wide cameras; sensor-shift optical image stabilization.",
+        "front_camera_system": "12MP TrueDepth front camera with autofocus.",
+        "battery_and_charging": "Built-in rechargeable lithium-ion battery; USB-C charging; MagSafe and Qi2 wireless charging supported.",
+        "operating_system": "iOS",
+        "durability": "IP68-rated splash, water and dust resistance.",
+    },
+    "apple|iphone 16 plus": {
+        "display_type_description": "Super Retina XDR display; 6.7-inch all-screen OLED display.",
+        "rear_camera_system": "48MP Fusion Main and 12MP Ultra Wide cameras; sensor-shift optical image stabilization.",
+        "front_camera_system": "12MP TrueDepth front camera with autofocus.",
+        "battery_and_charging": "Built-in rechargeable lithium-ion battery; USB-C charging; MagSafe and Qi2 wireless charging supported.",
+        "operating_system": "iOS",
+        "durability": "IP68-rated splash, water and dust resistance.",
+    },
+    "apple|iphone 16 pro": {
+        "display_type_description": "Super Retina XDR display with ProMotion; 6.3-inch all-screen OLED display.",
+        "rear_camera_system": "48MP Fusion Main, 48MP Ultra Wide and 12MP 5x Telephoto cameras; second-generation sensor-shift optical image stabilization.",
+        "front_camera_system": "12MP TrueDepth front camera with autofocus.",
+        "battery_and_charging": "Built-in rechargeable lithium-ion battery; USB-C charging; MagSafe and Qi2 wireless charging supported.",
+        "operating_system": "iOS",
+        "durability": "IP68-rated splash, water and dust resistance.",
+    },
+}
+
+
+def _apply_model_supplements(model_cards: list[dict[str, Any]]) -> None:
+    """Add only documented model-level supplements for the active review batch."""
+    for card in model_cards:
+        identity = f"{_norm(card.get('brand'))}|{_norm(card.get('model'))}"
+        base = re.sub(r"\s+(?:256|512)gb$", "", identity)
+        supplements = APPLE_MODEL_SUPPLEMENTS.get(base)
+        if not supplements:
+            continue
+        source = next(
+            (
+                url for url in card.get("source_urls") or []
+                if (urlparse(url).hostname or "").casefold() in {"support.apple.com", "www.apple.com"}
+            ),
+            None,
+        )
+        if not source:
+            continue
+        for key, value in supplements.items():
+            if key not in card.get("specifications", {}):
+                card["specifications"][key] = {
+                    "label": TECHNICAL_FIELD_LABELS[key],
+                    "value": value,
+                    "source_url": source,
+                    "applicability": "MODEL_SHARED",
+                    "checked_date": "2026-11-12",
+                }
+        card["missing_specifications"] = [key for key in TECHNICAL_FIELD_LABELS if key not in card["specifications"]]
+        card["available_specification_fields"] = [TECHNICAL_FIELD_LABELS[key] for key in card["specifications"]]
+        card["source_urls"] = list(dict.fromkeys([*card.get("source_urls", []), source]))
 
 
 def _apply_workbook_research(root, model_cards):
@@ -615,6 +770,7 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
         identity = (_norm(product.get("brand")), _norm(product.get("model")))
         preview_by_identity.setdefault(identity, []).append(product)
     source_specs_by_identity = _load_existing_source_specs(root)
+    verified_retailer_links = _load_verified_mobile_retailer_links(root)
     for identity, card in cards_by_identity.items():
         preview_products = preview_by_identity.get(identity, [])
         preview_keys = {
@@ -632,8 +788,11 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
         card["missing_specifications"] = missing
         card["available_specification_fields"] = [TECHNICAL_FIELD_LABELS[key] for key in specs]
         card["source_urls"] = list(dict.fromkeys(card["source_urls"]))
+        if verified_retailer_links.get(identity):
+            card["verified_retailer_links"] = verified_retailer_links[identity]
 
     _apply_workbook_research(root, model_cards)
+    _apply_model_supplements(model_cards)
     _apply_independent_tests(root, model_cards)
 
     model_cards.sort(key=lambda card: (_norm(card["brand"]), _norm(card["model"]), card["model_key"]))
