@@ -783,6 +783,53 @@ APPLE_MODEL_SUPPLEMENTS = {
         "battery_and_charging": "7050mAh battery with 44W charging.",
         "operating_system": "OriginOS 6.0.",
     },
+    "iqoo|z11 lite 5g": {
+        "display_type_description": "6.74-inch LCD display with 1600 × 720 resolution.",
+        "rear_camera_system": "50MP rear camera with 0.08MP secondary camera.",
+        "front_camera_system": "5MP front camera.",
+        "battery_and_charging": "6500mAh battery with 44W fast charging.",
+        "operating_system": "OriginOS 6.0.",
+    },
+    "iqoo|z11x": {
+        "display_type_description": "6.76-inch LCD display with 2344 × 1080 resolution.",
+        "rear_camera_system": "50MP Sony IMX852 main and 2MP bokeh cameras.",
+        "front_camera_system": "32MP front camera.",
+        "battery_and_charging": "7200mAh battery with 44W charging.",
+        "operating_system": "OriginOS 6.0.",
+    },
+    "iqoo|z9 5g": {
+        "display_type_description": "6.67-inch 120Hz AMOLED display.",
+        "rear_camera_system": "50MP Sony IMX882 main camera with OIS.",
+        "battery_and_charging": "5000mAh battery.",
+        "operating_system": "Funtouch OS 14 based on Android 14.",
+        "durability": "IP54-rated dust and splash resistance.",
+    },
+    "iqoo|z9x 5g": {
+        "display_type_description": "6.72-inch LCD display with 2408 × 1080 resolution.",
+        "rear_camera_system": "50MP AI main and 2MP bokeh cameras.",
+        "front_camera_system": "8MP front camera.",
+        "battery_and_charging": "6000mAh typical battery (5870mAh minimum) with 44W fast charging.",
+        "operating_system": "Funtouch OS 14 based on Android 14.",
+    },
+    "lava|agni 4": {
+        "display_type_description": "6.67-inch flat AMOLED display with 120Hz refresh rate and 1220 × 2712 resolution.",
+        "rear_camera_system": "50MP OIS main and 8MP ultra-wide cameras.",
+        "front_camera_system": "50MP Samsung front camera with EIS.",
+        "battery_and_charging": "5000mAh Li-Po battery with 66W fast charging.",
+        "operating_system": "Android 15 with clean Android and zero bloatware.",
+    },
+    "lava|bold n2": {
+        "battery_and_charging": "5000mAh battery with Type-C port and 10W charging.",
+    },
+    "lava|bold n2 lite": {
+        "display_size_description": "17.13cm (6.75-inch) HD+ display.",
+        "battery_and_charging": "5000mAh battery with Type-C port and 10W charging.",
+    },
+    "lava|virat v1": {
+        "display_size_description": "17.13cm (6.75-inch) HD+ display.",
+        "battery_and_charging": "5000mAh battery with Type-C port and 10W charging.",
+        "durability": "IP64-rated dust and water resistance.",
+    },
 }
 
 
@@ -797,7 +844,7 @@ def _apply_model_supplements(model_cards: list[dict[str, Any]]) -> None:
         approved_hosts = {
             "support.apple.com", "www.apple.com", "store.google.com",
             "support.google.com", "in.nothing.tech", "infinixmobiles.in",
-            "www.iqoo.com",
+            "www.iqoo.com", "shop.iqoo.com", "www.lavamobiles.com",
         }
         source = next(
             (
