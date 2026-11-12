@@ -22,6 +22,7 @@ HI = "/hi/phones/under-25000/"
 CSS = "/assets/under25-seo.css?v=20261106"
 GADGETS = "https://www.gadgets360.com/mobiles/best-phone-under-25000"
 REVIEW = "https://www.91mobiles.com/reviews/best-phones-under-25000/"
+CONTENT_UPDATED = "2026-11-12"
 
 CATEGORY_TEXT = {
     "overall": {
@@ -141,7 +142,7 @@ def base_document(path,title,desc,body,hi=False,index=True,kind="WebPage",item_l
     alt="en-IN" if hi else "hi-IN"
     nodes=[
         {"@type":kind,"name":title,"description":desc,"url":BASE+path,
-         "dateModified":"2026-11-06","publisher":{"@type":"Organization","name":"Coupon World","url":BASE+"/"}},
+         "dateModified":CONTENT_UPDATED,"publisher":{"@type":"Organization","name":"Coupon World","url":BASE+"/"}},
         {"@type":"BreadcrumbList","itemListElement":[
             {"@type":"ListItem","position":1,"name":"Home","item":BASE+"/"},
             {"@type":"ListItem","position":2,"name":"Phones under ₹25,000","item":BASE+(HI if hi else EN)},
@@ -285,7 +286,13 @@ def category_page(category,rows,allmodels,hi=False):
           f'<a href="{REVIEW}">91mobiles tested picks (12 Oct 2026)</a> · '
           f'<a href="{GADGETS}">Gadgets360 25k shortlist (6 Nov 2026)</a>.</p></section>'
           f'<section class="panel"><h2>{"अभी और मोबाइल देखें" if hi else "Explore all 25 candidates"}</h2>'
-          f'<p><a href="{HI if hi else EN}">{"25 मोबाइल रिसर्च पेज" if hi else "Browse the complete 25-model research hub"}</a></p></section>')
+          f'<p><a href="{HI if hi else EN}">{"25 मोबाइल रिसर्च पेज" if hi else "Browse the complete 25-model research hub"}</a></p></section>'
+          f'<section class="panel"><h2>{"आम खरीद सवाल" if hi else "Questions people ask before buying"}</h2>'
+          f'<h3>{"कैमरा, गेमिंग या बैटरी में किसे चुनें?" if hi else "Should I start with camera, gaming or battery?"}</h3>'
+          f'<p>{"अपनी प्राथमिकता वाली गाइड खोलें। ये पेज स्रोत और सीमाएँ दिखाते हैं; समान लैब टेस्ट के बिना अंतिम विजेता घोषित नहीं किया गया है।" if hi else "Start with the priority guide that matches your use. Each guide keeps source context and evidence gaps visible; no final winner is claimed without one identical lab protocol across every model."}</p>'
+          f'<p><a href="/seo/camera-phone-buying-guide.html">{"कैमरा गाइड" if hi else "Camera guide"}</a> · <a href="/seo/gaming-phone-buying-guide.html">{"गेमिंग गाइड" if hi else "Gaming guide"}</a> · <a href="/seo/battery-phone-buying-guide.html">{"बैटरी गाइड" if hi else "Battery guide"}</a></p>'
+          f'<h3>{"क्या आज की कीमत और स्टॉक सत्यापित हैं?" if hi else "Are today’s price and stock verified?"}</h3>'
+          f'<p>{"नहीं। सभी retailer पर सही मॉडल, RAM, स्टोरेज, विक्रेता, वारंटी, पिनकोड और अंतिम कीमत खुद जाँचें।" if hi else "No. Confirm the exact model, RAM, storage, seller, warranty, postcode delivery and final payable price on the retailer before buying."}</p></section>')
     return base_document(path,title,description,body,hi,True,"CollectionPage",
                          [(display_name(m),pth(m,hi)) for m in rows])
 
