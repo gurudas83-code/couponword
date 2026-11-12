@@ -17,6 +17,8 @@ from pathlib import Path
 from urllib.parse import quote, urlencode, urlsplit
 from xml.etree import ElementTree as ET
 
+from python.page_feedback import markup as feedback_markup
+
 SITE = "https://coupon-world.in"
 HUB = "/phones/"
 # Editorial selection from the existing official-evidence registry. Curated
@@ -193,6 +195,7 @@ def html_doc(title: str, description: str, path: str, body: str, structured: dic
 <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag("js",new Date());gtag("config","G-921WL91ZGW");</script>
 <script defer src="/assets/discovery-analytics.js?v=20261104"></script>
 <link rel="stylesheet" href="/assets/phone-guides.css?v=20261104">
+<link rel="stylesheet" href="/assets/page-feedback.css?v=20261112">
 <style>
 .page-shell{{max-width:1050px;margin:0 auto;padding:1rem}}
 .mobile-fact-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}}
@@ -211,7 +214,8 @@ def html_doc(title: str, description: str, path: str, body: str, structured: dic
 <header><nav aria-label="Main navigation"><a class="brand" href="/">CW <span>Coupon World</span></a>
 <a href="/phones/">Phone specifications</a><a href="/hi{path}" lang="hi">हिंदी</a><a href="/guides/phone-budget-guides/">Buying guides</a>
 <a href="/#mobileResearchSearch">Find a phone</a></nav></header>
-<main id="content" class="page-shell">{body}</main>
+<main id="content" class="page-shell">{body}{feedback_markup("phone_specification")}</main>
+<script defer src="/assets/page-feedback.js?v=20261112"></script>
 <footer class="page-shell"><p>{link("/", "Home")} · {link(HUB, "Phone specification hub")} · {link("/seo/phone-research-evidence-method.html", "Evidence methodology")}</p>
 <p class="mobile-fact-small">Editorial research only. No physical hands-on testing, current retailer price, stock or purchase eligibility is asserted. As an Amazon Associate I earn from qualifying purchases. Retailer searches may contain affiliate links; verify exact variants and prices on the retailer.</p></footer></body></html>'''
 
