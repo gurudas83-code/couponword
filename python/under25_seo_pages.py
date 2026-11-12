@@ -286,7 +286,7 @@ def category_page(category,rows,allmodels,hi=False):
           f'<a href="{REVIEW}">91mobiles tested picks (12 Oct 2026)</a> · '
           f'<a href="{GADGETS}">Gadgets360 25k shortlist (6 Nov 2026)</a>.</p></section>'
           f'<section class="panel"><h2>{"अभी और मोबाइल देखें" if hi else "Explore all 25 candidates"}</h2>'
-          f'<p><a href="{HI if hi else EN}">{"25 मोबाइल रिसर्च पेज" if hi else "Browse the complete 25-model research hub"}</a></p></section>'
+          f'<p><a href="{HI if hi else EN}">{"25 मोबाइल रिसर्च पेज" if hi else "Browse the complete 25-model research hub"}</a> · <a href="/compare/">{"सटीक वेरिएंट की तुलना करें" if hi else "Compare exact variants"}</a></p>'
           f'<section class="panel"><h2>{"आम खरीद सवाल" if hi else "Questions people ask before buying"}</h2>'
           f'<h3>{"कैमरा, गेमिंग या बैटरी में किसे चुनें?" if hi else "Should I start with camera, gaming or battery?"}</h3>'
           f'<p>{"अपनी प्राथमिकता वाली गाइड खोलें। ये पेज स्रोत और सीमाएँ दिखाते हैं; समान लैब टेस्ट के बिना अंतिम विजेता घोषित नहीं किया गया है।" if hi else "Start with the priority guide that matches your use. Each guide keeps source context and evidence gaps visible; no final winner is claimed without one identical lab protocol across every model."}</p>'
