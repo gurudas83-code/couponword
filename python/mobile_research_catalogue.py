@@ -565,6 +565,85 @@ APPLE_MODEL_SUPPLEMENTS = {
         "operating_system": "iOS 27",
         "durability": "IP68-rated splash, water and dust resistance.",
     },
+    "apple|iphone air": {
+        "display_type_description": "Super Retina XDR display with ProMotion; 6.5-inch all-screen OLED display.",
+        "rear_camera_system": "48MP Fusion Main camera with an enabled 12MP optical-quality 2x Telephoto view; sensor-shift optical image stabilization.",
+        "front_camera_system": "18MP Center Stage front camera with autofocus.",
+        "battery_and_charging": "Built-in rechargeable lithium-ion battery; USB-C charging; MagSafe and Qi2 wireless charging supported.",
+        "operating_system": "iOS 27",
+        "durability": "IP68-rated splash, water and dust resistance.",
+    },
+    "apple|iphone se 2022 iphone se 3": {
+        "display_type_description": "Retina HD display; 4.7-inch widescreen LCD with IPS technology.",
+        "rear_camera_system": "12MP Main camera with optical image stabilization.",
+        "front_camera_system": "7MP FaceTime HD front camera.",
+        "battery_and_charging": "Built-in rechargeable lithium-ion battery; fast-charge capable; Qi wireless charging supported.",
+        "operating_system": "iOS",
+        "durability": "IP67-rated splash, water and dust resistance.",
+    },
+    "cmf|phone 1": {
+        "display_type_description": "6.67-inch Super AMOLED display with adaptive refresh rate up to 120Hz.",
+        "rear_camera_system": "50MP Sony rear camera system with Nothing's TrueLens Engine computational photography.",
+        "front_camera_system": "16MP front camera.",
+        "battery_and_charging": "5000mAh battery with 33W wired charging.",
+        "operating_system": "Nothing OS, Android-based.",
+    },
+    "google|pixel 10": {
+        "display_type_description": "6.3-inch Actua OLED display with Smooth Display from 60Hz to 120Hz.",
+        "rear_camera_system": "48MP wide, 13MP ultrawide and 10.8MP 5x telephoto cameras; optical and electronic stabilization on wide and telephoto.",
+        "front_camera_system": "10.5MP Dual PD selfie camera with autofocus.",
+        "battery_and_charging": "Typical 4970mAh battery; 30W USB-C PPS fast charging; Pixelsnap Qi2 wireless charging up to 15W.",
+        "operating_system": "Android.",
+        "durability": "IP68 dust and water resistance.",
+    },
+    "google|pixel 10a": {
+        "display_type_description": "160mm Actua pOLED display with Smooth Display from 60Hz to 120Hz.",
+        "rear_camera_system": "48MP wide and 13MP ultrawide cameras; optical and electronic stabilization on the wide camera.",
+        "front_camera_system": "13MP selfie camera.",
+        "battery_and_charging": "Typical 5100mAh battery; up to 50% in about 30 minutes with 45W USB-C PPS charging; Qi wireless charging.",
+        "operating_system": "Android.",
+        "durability": "IP68 dust and water resistance.",
+    },
+    "google|pixel 11": {
+        "display_type_description": "6.3-inch Actua OLED display with Smooth Display from 60Hz to 120Hz.",
+        "rear_camera_system": "48MP wide, 13MP ultrawide and 10.8MP 5x telephoto cameras; optical and electronic stabilization on wide and telephoto.",
+        "front_camera_system": "10.5MP Dual PD selfie camera with autofocus.",
+        "battery_and_charging": "Typical 4985mAh battery; up to 55% in about 30 minutes with 30W USB-C PPS charging; Pixelsnap Qi2.2 wireless charging up to 25W.",
+        "operating_system": "Android 17.",
+        "durability": "IP68 dust and water resistance.",
+    },
+    "google|pixel 11 pro": {
+        "display_type_description": "6.3-inch Super Actua LTPO OLED display with Smooth Display from 1Hz to 120Hz.",
+        "rear_camera_system": "50MP wide, 48MP ultrawide and 48MP 5x telephoto cameras; optical and electronic stabilization on wide and telephoto.",
+        "front_camera_system": "42MP Dual PD selfie camera with autofocus.",
+        "battery_and_charging": "Typical 4850mAh battery; up to 55% in about 30 minutes with 30W USB-C PPS charging; Pixelsnap Qi2.2 wireless charging up to 25W.",
+        "operating_system": "Android 17.",
+        "durability": "IP68 dust and water resistance.",
+    },
+    "google|pixel 7a": {
+        "display_type_description": "6.1-inch OLED display with refresh rate up to 90Hz.",
+        "rear_camera_system": "64MP wide and 13MP ultrawide cameras.",
+        "front_camera_system": "13MP selfie camera.",
+        "battery_and_charging": "4385mAh battery; wired fast charging; Qi wireless charging.",
+        "operating_system": "Android.",
+        "durability": "IP67 dust and water resistance.",
+    },
+    "google|pixel 8a": {
+        "display_type_description": "6.1-inch Actua OLED display with refresh rate up to 120Hz.",
+        "rear_camera_system": "64MP wide and 13MP ultrawide cameras.",
+        "front_camera_system": "13MP selfie camera.",
+        "battery_and_charging": "Typical 4492mAh battery; wired fast charging; Qi wireless charging.",
+        "operating_system": "Android.",
+        "durability": "IP67 dust and water resistance.",
+    },
+    "google|pixel 9": {
+        "display_type_description": "6.3-inch Actua OLED display with Smooth Display from 60Hz to 120Hz.",
+        "rear_camera_system": "50MP wide and 48MP ultrawide cameras with Macro Focus; Super Res Zoom up to 8x.",
+        "front_camera_system": "10.5MP selfie camera with autofocus.",
+        "battery_and_charging": "Typical 4700mAh battery; up to 55% in about 30 minutes with 45W USB-C charging; Qi-certified wireless charging.",
+        "operating_system": "Android.",
+        "durability": "IP68 dust and water resistance.",
+    },
 }
 
 
@@ -576,10 +655,14 @@ def _apply_model_supplements(model_cards: list[dict[str, Any]]) -> None:
         supplements = APPLE_MODEL_SUPPLEMENTS.get(base)
         if not supplements:
             continue
+        approved_hosts = {
+            "support.apple.com", "www.apple.com", "store.google.com",
+            "support.google.com", "in.nothing.tech",
+        }
         source = next(
             (
                 url for url in card.get("source_urls") or []
-                if (urlparse(url).hostname or "").casefold() in {"support.apple.com", "www.apple.com"}
+                if (urlparse(url).hostname or "").casefold() in approved_hosts
             ),
             None,
         )
