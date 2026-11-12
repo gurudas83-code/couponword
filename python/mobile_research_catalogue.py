@@ -715,6 +715,74 @@ APPLE_MODEL_SUPPLEMENTS = {
         "operating_system": "Android-based XOS; version not confirmed in the cited page.",
         "durability": "IP64-rated dust and splash resistance.",
     },
+    "infinix|smart 20 4g": {
+        "display_type_description": "6.78-inch HD+ IPS a-Si LCD display with refresh rates up to 120Hz.",
+        "rear_camera_system": "8MP rear camera with autofocus and rear dual flash.",
+        "front_camera_system": "8MP front camera.",
+        "battery_and_charging": "5200mAh battery with 15W charging; 10W charger included.",
+        "operating_system": "XOS 16 powered by Android 16.",
+        "durability": "IP64-rated dust and splash resistance.",
+    },
+    "infinix|smart 8 128gb": {
+        "display_type_description": "6.76-inch IPS a-Si LCD display with 60/90Hz refresh rate.",
+        "rear_camera_system": "50MP dual AI camera.",
+        "battery_and_charging": "5000mAh battery with 10W charging.",
+        "operating_system": "Android 13 Go.",
+    },
+    "infinix|smart 8 hd": {
+        "display_type_description": "6.76-inch IPS a-Si LCD display with 60/90Hz refresh rate.",
+        "rear_camera_system": "13MP rear camera with AI lens.",
+        "front_camera_system": "8MP front camera.",
+        "battery_and_charging": "5000mAh battery with 10W charging.",
+        "operating_system": "XOS 13.",
+    },
+    "iqoo|13": {
+        "display_type_description": "6.82-inch AMOLED display with 3168 × 1440 resolution.",
+        "rear_camera_system": "50MP main, 50MP ultra-wide and 50MP 2x telephoto cameras.",
+        "front_camera_system": "32MP front camera.",
+        "battery_and_charging": "6000mAh battery with 120W fast charging.",
+        "operating_system": "Funtouch OS 15 based on Android 15.",
+    },
+    "iqoo|15": {
+        "display_type_description": "6.85-inch AMOLED display with 3168 × 1440 resolution.",
+        "rear_camera_system": "50MP main, 50MP ultra-wide and 50MP 3x periscope cameras.",
+        "front_camera_system": "32MP front camera.",
+        "battery_and_charging": "7000mAh battery with 100W wired and 40W wireless charging.",
+        "operating_system": "OriginOS 6 based on Android 16.",
+    },
+    "iqoo|15r": {
+        "display_type_description": "6.59-inch AMOLED display with 2750 × 1260 resolution.",
+        "rear_camera_system": "50MP main and 8MP ultra-wide cameras.",
+        "front_camera_system": "32MP front camera.",
+        "battery_and_charging": "7600mAh battery with 100W charging.",
+        "operating_system": "OriginOS 6.0.",
+    },
+    "iqoo|neo 10": {
+        "display_type_description": "6.78-inch AMOLED display with 2800 × 1260 (1.5K) resolution.",
+        "rear_camera_system": "50MP main and 8MP ultra-wide cameras.",
+        "front_camera_system": "32MP front camera.",
+        "battery_and_charging": "7000mAh typical battery with 120W charging.",
+    },
+    "iqoo|neo 9 pro": {
+        "display_type_description": "6.78-inch AMOLED display with 2800 × 1260 (1.5K) resolution.",
+        "rear_camera_system": "50MP main and 8MP ultra-wide cameras.",
+        "battery_and_charging": "5160mAh typical battery (5040mAh minimum) with 120W fast charging.",
+        "operating_system": "Funtouch OS 14 based on Android 14.",
+    },
+    "iqoo|z10r": {
+        "display_type_description": "6.77-inch AMOLED display with 2392 × 1080 resolution.",
+        "rear_camera_system": "50MP Sony main and 2MP bokeh cameras.",
+        "front_camera_system": "32MP front camera.",
+        "battery_and_charging": "5700mAh typical battery with 44W charging.",
+        "operating_system": "Funtouch OS 15 based on Android 15.",
+    },
+    "iqoo|z11 5g": {
+        "display_type_description": "6.83-inch AMOLED display with 2800 × 1260 resolution.",
+        "rear_camera_system": "50MP main and 8MP ultra-wide cameras.",
+        "front_camera_system": "32MP front camera.",
+        "battery_and_charging": "7050mAh battery with 44W charging.",
+        "operating_system": "OriginOS 6.0.",
+    },
 }
 
 
@@ -729,6 +797,7 @@ def _apply_model_supplements(model_cards: list[dict[str, Any]]) -> None:
         approved_hosts = {
             "support.apple.com", "www.apple.com", "store.google.com",
             "support.google.com", "in.nothing.tech", "infinixmobiles.in",
+            "www.iqoo.com",
         }
         source = next(
             (
