@@ -982,6 +982,66 @@ APPLE_MODEL_SUPPLEMENTS = {
         "battery_and_charging": "8000mAh battery with 45W SUPERVOOC fast charging.",
         "operating_system": "OxygenOS 16.",
     },
+    "oneplus|n6x 5g": {
+        "display_type_description": "6.8-inch display with 120Hz refresh rate.",
+        "battery_and_charging": "7000mAh battery with 45W SUPERVOOC fast charging.",
+        "operating_system": "OxygenOS 16.",
+        "durability": "MIL-STD-810H and IP64 durability ratings.",
+    },
+    "oneplus|nord 4": {
+        "display_type_description": "6.74-inch AMOLED display with 120Hz refresh rate.",
+        "rear_camera_system": "50MP OIS main and 8MP ultra-wide cameras.",
+        "front_camera_system": "16MP front camera.",
+        "battery_and_charging": "5500mAh battery with 100W SUPERVOOC charging.",
+        "operating_system": "OxygenOS 14.1 based on Android 14.",
+    },
+    "oneplus|nord 5": {
+        "display_type_description": "144Hz AMOLED display.",
+        "rear_camera_system": "50MP rear camera system; the cited page also describes 50MP front and back cameras.",
+        "front_camera_system": "50MP front camera.",
+    },
+    "oneplus|nord 6": {
+        "display_type_description": "165Hz Sunburst AMOLED display.",
+        "rear_camera_system": "50MP Sony main camera with dual-axis OIS.",
+        "front_camera_system": "32MP front camera with multi-focus sensor.",
+        "battery_and_charging": "9000mAh battery with 80W charging.",
+    },
+    "oneplus|nord ce 6 5g": {
+        "display_type_description": "1.5K AMOLED display with 144Hz refresh rate.",
+        "battery_and_charging": "8000mAh battery with power-bank reverse charging.",
+    },
+    "oneplus|nord ce 6 lite 5g": {
+        "display_type_description": "144Hz display with up to 1000 nits peak brightness.",
+        "rear_camera_system": "50MP main camera with 4K video and 4K Motion Photos.",
+        "battery_and_charging": "7000mAh battery with 45W SUPERVOOC fast charging.",
+        "operating_system": "OxygenOS 16.",
+    },
+    "oneplus|nord ce4": {
+        "rear_camera_system": "50MP Sony LYT600 main and 8MP Sony IMX355 ultra-wide cameras with OIS/EIS support.",
+        "battery_and_charging": "5500mAh battery with 100W SUPERVOOC charging.",
+        "operating_system": "OxygenOS 14 based on Android 14.",
+    },
+    "oppo|a17": {
+        "display_type_description": "6.56-inch LCD display with HD+ 1612 × 720 resolution.",
+        "rear_camera_system": "50MP main and secondary rear camera system.",
+        "front_camera_system": "5MP front camera.",
+        "battery_and_charging": "5000mAh typical battery.",
+        "operating_system": "ColorOS 12.1.",
+    },
+    "oppo|a38": {
+        "display_type_description": "6.56-inch LCD display with 90/60Hz refresh rate and HD+ 1612 × 720 resolution.",
+        "rear_camera_system": "50MP main and 2MP mono cameras.",
+        "front_camera_system": "5MP front camera.",
+        "battery_and_charging": "5000mAh typical battery with 33W SUPERVOOC charging.",
+        "operating_system": "ColorOS 13.1.",
+    },
+    "oppo|a3x 128gb": {
+        "display_type_description": "LCD display with 90Hz refresh rate and 1604 × 720 resolution.",
+        "rear_camera_system": "8MP main rear camera.",
+        "front_camera_system": "5MP front camera.",
+        "battery_and_charging": "5100mAh typical battery with 45W SUPERVOOC 2.0 charging.",
+        "operating_system": "ColorOS 14.0.",
+    },
 }
 
 
@@ -1000,6 +1060,7 @@ def _apply_model_supplements(model_cards: list[dict[str, Any]]) -> None:
             "checkout.nothing.tech",
             "en-in.support.motorola.com", "en-us.support.motorola.com",
             "www.oneplus.in",
+            "www.oppo.com",
         }
         source = next(
             (
