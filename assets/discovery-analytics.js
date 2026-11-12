@@ -48,8 +48,29 @@
     if (target.origin === window.location.origin) {
       if (target.pathname.indexOf('/phones/') === 0) kind = 'open_phone_specification';
       else if (target.pathname.indexOf('/seo/') === 0) kind = 'open_guide';
+      else if (target.pathname.indexOf('/compare/') === 0) kind = 'open_compare';
+      else if (target.pathname.indexOf('/guides/') === 0) kind = 'open_buying_guide';
+      else if (target.pathname.indexOf('/accessories/') === 0 || target.pathname.indexOf('/tvs/') === 0) kind = 'open_category';
       else if (target.pathname === '/' && target.hash === '#mobileResearchSearch') kind = 'start_research';
     } else if (['amazon.in','www.amazon.in','flipkart.com','www.flipkart.com','croma.com','www.croma.com'].includes(target.hostname)) kind = 'retailer_research';
     if (kind) send('discovery_action', {discovery_source:source, action_kind:kind, landing_path:path, destination_host:target.hostname, destination_path:target.pathname});
+
+    var control = event.target.closest && event.target.closest('[data-mobile-query],[data-mobile-research-query],[data-research-compare],[data-analytics-intent],#heroSearchButton,#mobileResearchSearchButton,#researchGuidedApply,#mobileResearchResultsMore');
+    if (control && (typeof control.matches === 'function' || typeof control.getAttribute === 'function')) {
+      var action = 'content_cta_click';
+      var matches = function (selector) { return typeof control.matches === 'function' && control.matches(selector); };
+      if (matches('#heroSearchButton, #mobileResearchSearchButton')) action = 'research_search_submit';
+      else if (matches('#researchGuidedApply')) action = 'guided_search_submit';
+      else if (matches('[data-research-compare]')) action = 'compare_toggle';
+      else if (matches('[data-mobile-query]')) action = 'budget_shortcut';
+      else if (matches('[data-mobile-research-query]')) action = 'research_shortcut';
+      else if (matches('#mobileResearchResultsMore')) action = 'research_results_expand';
+      send('research_action', {
+        discovery_source: source,
+        action_kind: action,
+        intent: typeof control.getAttribute === 'function' ? control.getAttribute('data-analytics-intent') || 'unspecified' : 'unspecified',
+        page_path: path
+      });
+    }
   });
 })();

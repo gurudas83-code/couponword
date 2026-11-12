@@ -335,7 +335,7 @@ def render_model(card: dict, related: list[dict]) -> str:
 <section><h2>Unknowns and purchasing limitations</h2>{missing_para}
 <p>{esc(budget_text)}</p><p>{esc(str(card.get("physical_variant_note") or "Exact physical RAM/storage variants must be confirmed independently."))}</p></section>
 <section><h2>Compare this phone with others</h2><p>Use Coupon World's existing research filter and compare up to three documented phones side by side. Compare specification sources and test conditions, not raw camera megapixels or battery capacity alone.</p>
-<p>{link(search, "Open this model in the phone research tool")}</p></section>
+<p>{link("/compare/", "Open the phone comparison workspace")} · {link("/phones/under-25000/", "Browse the under-₹25k guide")} · {link(search, "Open this model in the phone research tool")}</p></section>
 <section><h2>Check retailer listings independently</h2><p>These are retailer searches, not verified exact-product offers. A Croma link may lead only to the general phone category; confirm model, memory configuration, price, seller, stock, warranty and delivery there.</p><p class="mobile-fact-links">{" · ".join(retail)}</p></section>
 <section><h2>How this record was prepared</h2><p>Coupon World organizes source-linked manufacturer research. This is not a claim of first-hand phone ownership, testing, or an independent lab benchmark. Further evidence and corrections may change the record. {link("/seo/phone-research-evidence-method.html", "Review our evidence limitations")}.</p></section>
 </article><section><h2>Related documented phone research</h2><div class="mobile-fact-grid">{similar}</div></section>'''

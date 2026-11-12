@@ -146,6 +146,7 @@ class ResearchSeoTests(unittest.TestCase):
             descriptions.add(description)
             self.assertTrue(any(a.get("href", "").startswith("/?q=") for a in page.links), url)
             self.assertTrue(any(a.get("href", "") == HUB for a in page.links), url)
+            self.assertTrue(any(a.get("href", "") == "/compare/" for a in page.links), url)
             for attr in page.links:
                 href = attr.get("href", "")
                 if not href.startswith("/") or href.startswith("//"):
@@ -165,6 +166,8 @@ class ResearchSeoTests(unittest.TestCase):
         self.assertIn("Coverage gap", demand_html)
         self.assertIn(SITE + "/seo/india-smartphone-search-demand.html", self.sitemap)
         self.assertIn('href="/seo/india-smartphone-search-demand.html"', homepage)
+        self.assertIn('href="/phones/under-25000/"', homepage)
+        self.assertIn('href="/compare/"', homepage)
         # The market-signal hub is one additional curated research collection;
         # its ten noindex model-intake details do not enter the sitemap.
         market = SITE + HUB + "india-market-demand-q3-2026/"

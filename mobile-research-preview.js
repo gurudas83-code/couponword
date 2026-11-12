@@ -54,6 +54,21 @@
   var guidedStatus = document.getElementById("researchGuidedStatus");
   var comparisonSelection = [];
   var comparePanel = document.getElementById("mobileResearchCompare");
+  function researchIntent(query) {
+    var value = String(query || "").toLowerCase();
+    if (/under\s*\d|₹|budget|price|कीमत/.test(value)) return "budget";
+    if (/compare|\bvs\b|versus|और|तुलना/.test(value)) return "compare";
+    if (/camera|कैमरा/.test(value)) return "camera";
+    if (/battery|बैटरी/.test(value)) return "battery";
+    if (/gaming|गेमिंग/.test(value)) return "gaming";
+    if (/ram|storage|memory|रैम|स्टोरेज/.test(value)) return "memory_variant";
+    return "model_or_general";
+  }
+  function trackResearchEvent(name, params) {
+    try {
+      if (typeof window.gtag === "function") window.gtag("event", name, params || {});
+    } catch (_) { /* Analytics must never interrupt research. */ }
+  }
   var TECHNICAL_FIELD_LABELS = {
     chipset: "Chipset",
     gpu: "GPU",
@@ -799,6 +814,11 @@
   }
 
   function submitResearch(query) {
+    var submitted = String(query || "").trim();
+    if (submitted) trackResearchEvent("research_search_submit", {
+      search_intent: researchIntent(submitted),
+      comparison_query: /\b(?:compare|vs\.?|versus)\b|और/i.test(submitted) ? 1 : 0
+    });
     searchResearch(query);
     if (inventoryCards.length && researchConstraints(query).budget != null &&
         findResearchMatches(query).length > 0 &&
@@ -928,7 +948,11 @@
       if (researchQuery) researchQuery.value = requested;
       submitResearch(requested); });
   });
-  if (researchResultsMore) researchResultsMore.addEventListener("click", function () { searchExpanded = !searchExpanded; searchResearch(lastSearchQuery); });
+  if (researchResultsMore) researchResultsMore.addEventListener("click", function () {
+    searchExpanded = !searchExpanded;
+    trackResearchEvent("research_results_expand", { expanded: searchExpanded ? 1 : 0, search_intent: researchIntent(lastSearchQuery) });
+    searchResearch(lastSearchQuery);
+  });
   document.addEventListener("click", function (event) {
     if (event.target.closest("[data-research-verified-recommend]")) {
       if (typeof window.CouponWorldShoppingRecommend === "function" && lastSearchQuery) {
@@ -950,11 +974,16 @@
         if (existing >= 0) comparisonSelection.splice(existing, 1);
         else if (comparisonSelection.length < 3) comparisonSelection.push(candidate);
         else { if (researchSearchStatus) researchSearchStatus.textContent = "Compare up to 3 phones. Remove one before adding another."; return; }
+        trackResearchEvent("research_compare_toggle", { compare_action: existing >= 0 ? "remove" : "add", selection_count: comparisonSelection.length });
         renderSelectedComparison(); searchResearch(lastSearchQuery);
         if (comparisonSelection.length >= 2 && comparePanel) comparePanel.scrollIntoView({behavior: "smooth", block: "start"});
       }
     }
-    if (event.target.closest("[data-research-compare-clear]")) { comparisonSelection = []; renderSelectedComparison(); searchResearch(lastSearchQuery); }
+    if (event.target.closest("[data-research-compare-clear]")) {
+      comparisonSelection = [];
+      trackResearchEvent("research_compare_clear", { selection_count: 0 });
+      renderSelectedComparison(); searchResearch(lastSearchQuery);
+    }
     var detail = event.target.closest("[data-research-detail]");
     if (detail) {
       event.preventDefault();
