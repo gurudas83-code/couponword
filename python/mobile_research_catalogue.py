@@ -432,6 +432,101 @@ APPROVED_SPEC_CORRECTIONS = {
 }
 
 
+# Small, source-bound supplements for the first Apple review batch. These are
+# model-shared facts explicitly documented by Apple; variant-specific memory,
+# battery capacity in mAh, and update-year promises remain pending when Apple
+# does not publish them on the cited technical page.
+APPLE_MODEL_SUPPLEMENTS = {
+    "apple|iphone 11": {
+        "display_type_description": "Liquid Retina HD display; 6.1-inch all-screen LCD with IPS technology.",
+        "rear_camera_system": "Dual 12MP Wide and Ultra Wide cameras; optical image stabilization on the Wide camera.",
+        "front_camera_system": "TrueDepth camera system with a 12MP front camera.",
+        "battery_and_charging": "Built-in rechargeable lithium-ion battery; fast-charge capable; Qi wireless charging supported.",
+        "operating_system": "iOS",
+        "durability": "IP68-rated splash, water and dust resistance.",
+    },
+    "apple|iphone 13": {
+        "display_type_description": "Super Retina XDR display; 6.1-inch all-screen OLED display.",
+        "rear_camera_system": "Dual 12MP Wide and Ultra Wide cameras; sensor-shift optical image stabilization on the Wide camera.",
+        "front_camera_system": "TrueDepth camera system with a 12MP front camera.",
+        "battery_and_charging": "Built-in rechargeable lithium-ion battery; fast-charge capable; MagSafe and Qi wireless charging supported.",
+        "operating_system": "iOS",
+        "durability": "IP68-rated splash, water and dust resistance.",
+    },
+    "apple|iphone 15": {
+        "display_type_description": "Super Retina XDR display; 6.1-inch all-screen OLED display.",
+        "rear_camera_system": "48MP Main and 12MP Ultra Wide cameras; sensor-shift optical image stabilization on the Main camera.",
+        "front_camera_system": "12MP TrueDepth front camera with autofocus.",
+        "battery_and_charging": "Built-in rechargeable lithium-ion battery; USB-C charging; MagSafe and Qi2 wireless charging supported.",
+        "operating_system": "iOS",
+        "durability": "IP68-rated splash, water and dust resistance.",
+    },
+    "apple|iphone 15 plus": {
+        "display_type_description": "Super Retina XDR display; 6.7-inch all-screen OLED display.",
+        "rear_camera_system": "48MP Main and 12MP Ultra Wide cameras; sensor-shift optical image stabilization on the Main camera.",
+        "front_camera_system": "12MP TrueDepth front camera with autofocus.",
+        "battery_and_charging": "Built-in rechargeable lithium-ion battery; USB-C charging; MagSafe and Qi2 wireless charging supported.",
+        "operating_system": "iOS",
+        "durability": "IP68-rated splash, water and dust resistance.",
+    },
+    "apple|iphone 16": {
+        "display_type_description": "Super Retina XDR display; 6.1-inch all-screen OLED display.",
+        "rear_camera_system": "48MP Fusion Main and 12MP Ultra Wide cameras; sensor-shift optical image stabilization.",
+        "front_camera_system": "12MP TrueDepth front camera with autofocus.",
+        "battery_and_charging": "Built-in rechargeable lithium-ion battery; USB-C charging; MagSafe and Qi2 wireless charging supported.",
+        "operating_system": "iOS",
+        "durability": "IP68-rated splash, water and dust resistance.",
+    },
+    "apple|iphone 16 plus": {
+        "display_type_description": "Super Retina XDR display; 6.7-inch all-screen OLED display.",
+        "rear_camera_system": "48MP Fusion Main and 12MP Ultra Wide cameras; sensor-shift optical image stabilization.",
+        "front_camera_system": "12MP TrueDepth front camera with autofocus.",
+        "battery_and_charging": "Built-in rechargeable lithium-ion battery; USB-C charging; MagSafe and Qi2 wireless charging supported.",
+        "operating_system": "iOS",
+        "durability": "IP68-rated splash, water and dust resistance.",
+    },
+    "apple|iphone 16 pro": {
+        "display_type_description": "Super Retina XDR display with ProMotion; 6.3-inch all-screen OLED display.",
+        "rear_camera_system": "48MP Fusion Main, 48MP Ultra Wide and 12MP 5x Telephoto cameras; second-generation sensor-shift optical image stabilization.",
+        "front_camera_system": "12MP TrueDepth front camera with autofocus.",
+        "battery_and_charging": "Built-in rechargeable lithium-ion battery; USB-C charging; MagSafe and Qi2 wireless charging supported.",
+        "operating_system": "iOS",
+        "durability": "IP68-rated splash, water and dust resistance.",
+    },
+}
+
+
+def _apply_model_supplements(model_cards: list[dict[str, Any]]) -> None:
+    """Add only documented model-level supplements for the active review batch."""
+    for card in model_cards:
+        identity = f"{_norm(card.get('brand'))}|{_norm(card.get('model'))}"
+        base = re.sub(r"\s+(?:256|512)gb$", "", identity)
+        supplements = APPLE_MODEL_SUPPLEMENTS.get(base)
+        if not supplements:
+            continue
+        source = next(
+            (
+                url for url in card.get("source_urls") or []
+                if (urlparse(url).hostname or "").casefold() in {"support.apple.com", "www.apple.com"}
+            ),
+            None,
+        )
+        if not source:
+            continue
+        for key, value in supplements.items():
+            if key not in card.get("specifications", {}):
+                card["specifications"][key] = {
+                    "label": TECHNICAL_FIELD_LABELS[key],
+                    "value": value,
+                    "source_url": source,
+                    "applicability": "MODEL_SHARED",
+                    "checked_date": "2026-11-12",
+                }
+        card["missing_specifications"] = [key for key in TECHNICAL_FIELD_LABELS if key not in card["specifications"]]
+        card["available_specification_fields"] = [TECHNICAL_FIELD_LABELS[key] for key in card["specifications"]]
+        card["source_urls"] = list(dict.fromkeys([*card.get("source_urls", []), source]))
+
+
 def _apply_workbook_research(root, model_cards):
     """Add dated model research; never mutate frozen variants or shopping gates."""
     from urllib.parse import urlparse
@@ -697,6 +792,7 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
             card["verified_retailer_links"] = verified_retailer_links[identity]
 
     _apply_workbook_research(root, model_cards)
+    _apply_model_supplements(model_cards)
     _apply_independent_tests(root, model_cards)
 
     model_cards.sort(key=lambda card: (_norm(card["brand"]), _norm(card["model"]), card["model_key"]))
