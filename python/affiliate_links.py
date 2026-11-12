@@ -43,3 +43,21 @@ def tag_public_artifact(root):
             attr = 'rel="'+' '.join(sorted(tokens))+'"'
             return anchor.replace(rel.group(0),attr) if rel else anchor[:-1]+' '+attr+'>'
         path.write_text(re.sub(r'<a\b[^>]*>',tag_anchor,text),encoding='utf-8')
+
+    # Fail closed: every Amazon destination emitted into the public artifact
+    # must carry the approved tracking ID, including links introduced by a
+    # newly generated JSON/HTML surface. This does not make an unverified
+    # retailer search an offer; it only preserves attribution on destinations
+    # that the existing publication gates already allowed to be shown.
+    missing = []
+    for path in root.rglob('*'):
+        if not path.is_file() or path.suffix.lower() not in {'.html', '.js', '.json', '.css', '.txt', '.xml', '.svg'}:
+            continue
+        text = html.unescape(path.read_text(encoding='utf-8', errors='ignore'))
+        for match in re.finditer(r'https://(?:www\.)?amazon\.in[^\"\'<>\s\\]*', text):
+            parsed = urlsplit(match.group(0))
+            if parsed.hostname in {'amazon.in', 'www.amazon.in'} and dict(parse_qsl(parsed.query)).get('tag') != AMAZON_TAG:
+                missing.append(str(path.relative_to(root)))
+                break
+    if missing:
+        raise RuntimeError('public Amazon destinations missing affiliate tag: ' + ', '.join(sorted(set(missing))))
