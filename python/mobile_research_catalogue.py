@@ -932,6 +932,56 @@ APPLE_MODEL_SUPPLEMENTS = {
         "rear_camera_system": "50MP main camera with 4K video recording.",
         "operating_system": "Nothing OS with Essential AI tools.",
     },
+    "oneplus|12": {
+        "display_type_description": "6.82-inch 120Hz ProXDR LTPO display with 3168 × 1440 QHD+ resolution.",
+        "rear_camera_system": "50MP LYT-808 OIS wide, 64MP periscope telephoto and 48MP ultra-wide cameras.",
+        "battery_and_charging": "5400mAh battery with 100W wired and 50W wireless charging.",
+        "operating_system": "OxygenOS 14 based on Android 14.",
+    },
+    "oneplus|12r": {
+        "display_type_description": "6.78-inch 120Hz AMOLED ProXDR LTPO display with 2780 × 1264 resolution.",
+        "rear_camera_system": "50MP OIS main, 8MP ultra-wide and 2MP macro cameras.",
+        "battery_and_charging": "5500mAh battery with 100W SUPERVOOC charging.",
+        "operating_system": "OxygenOS 14 based on Android 14.",
+    },
+    "oneplus|13": {
+        "display_type_description": "6.82-inch 120Hz ProXDR LTPO 4.1 display with 3168 × 1440 QHD+ resolution.",
+        "rear_camera_system": "50MP wide, 50MP ultra-wide and 50MP telephoto cameras.",
+        "battery_and_charging": "6000mAh battery with 100W wired and 50W wireless charging.",
+        "operating_system": "OxygenOS 15 based on Android 15.",
+    },
+    "oneplus|13r": {
+        "display_type_description": "6.78-inch 120Hz ProXDR LTPO 4.1 display with 2780 × 1264 resolution.",
+        "rear_camera_system": "50MP OIS main, 50MP 2x telephoto and 8MP ultra-wide cameras.",
+        "battery_and_charging": "6000mAh battery with 80W SUPERVOOC charging.",
+        "operating_system": "OxygenOS 15 based on Android 15.",
+    },
+    "oneplus|13s": {
+        "display_type_description": "6.32-inch compact display with 120Hz refresh rate.",
+        "rear_camera_system": "50MP autofocus wide and 50MP autofocus 2x telephoto cameras.",
+        "front_camera_system": "32MP autofocus front camera.",
+        "battery_and_charging": "5850mAh battery with 80W SUPERVOOC fast charging.",
+    },
+    "oneplus|15r": {
+        "display_type_description": "165Hz display; exact panel type and resolution remain unconfirmed on the cited page.",
+        "rear_camera_system": "50MP Sony IMX906 OIS main and 8MP ultra-wide cameras.",
+        "front_camera_system": "32MP autofocus front camera.",
+        "battery_and_charging": "7400mAh battery with 80W SUPERVOOC charging.",
+        "operating_system": "OxygenOS 16.",
+    },
+    "oneplus|15r 16gb": {
+        "display_type_description": "165Hz display; exact panel type and resolution remain unconfirmed on the cited page.",
+        "rear_camera_system": "50MP Sony IMX906 OIS main and 8MP ultra-wide cameras.",
+        "front_camera_system": "32MP autofocus front camera.",
+        "battery_and_charging": "7400mAh battery with 80W SUPERVOOC charging.",
+        "operating_system": "OxygenOS 16.",
+    },
+    "oneplus|n6 5g": {
+        "display_type_description": "120Hz display; exact panel type and resolution remain unconfirmed on the cited page.",
+        "rear_camera_system": "50MP main camera with 60fps video recording.",
+        "battery_and_charging": "8000mAh battery with 45W SUPERVOOC fast charging.",
+        "operating_system": "OxygenOS 16.",
+    },
 }
 
 
@@ -949,6 +999,7 @@ def _apply_model_supplements(model_cards: list[dict[str, Any]]) -> None:
             "www.iqoo.com", "shop.iqoo.com", "www.lavamobiles.com",
             "checkout.nothing.tech",
             "en-in.support.motorola.com", "en-us.support.motorola.com",
+            "www.oneplus.in",
         }
         source = next(
             (
