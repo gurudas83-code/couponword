@@ -1111,6 +1111,14 @@ APPLE_MODEL_SUPPLEMENTS = {
         "battery_and_charging": "7000mAh battery with 80W SUPERVOOC charging.",
         "chipset": "Qualcomm Snapdragon 6 Gen 4.",
     },
+    "nothing|phone 3": {
+        "display_type_description": "6.67-inch flexible AMOLED display with 120Hz refresh rate and 1260 × 2800 resolution.",
+        "chipset": "Qualcomm Snapdragon 8s Gen 4.",
+        "rear_camera_system": "50MP OIS main, 50MP OIS periscope and 50MP ultra-wide cameras.",
+        "front_camera_system": "50MP front camera.",
+        "battery_and_charging": "5150mAh battery with fast wired charging and 15W wireless charging.",
+        "durability": "IP68 dust and water resistance.",
+    },
     "oppo|k13 turbo": {
         "display_type_description": "1.5K 120Hz flat display with 2800 × 1280 resolution.",
         "chipset": "MediaTek Dimensity 8450.",
@@ -1186,15 +1194,22 @@ APPLE_MODEL_SUPPLEMENTS = {
 
 def _apply_model_supplements(model_cards: list[dict[str, Any]]) -> None:
     """Add only documented model-level supplements for the active review batch."""
+    official_source_overrides = {
+        "nothing|phone 3": "https://nothing.tech/products/phone-3",
+    }
     for card in model_cards:
         identity = f"{_norm(card.get('brand'))}|{_norm(card.get('model'))}"
         base = re.sub(r"\s+(?:256|512)gb$", "", identity)
         supplements = APPLE_MODEL_SUPPLEMENTS.get(base)
         if not supplements:
             continue
+        override_source = official_source_overrides.get(base)
+        if override_source:
+            card["source_urls"] = list(dict.fromkeys([*card.get("source_urls", []), override_source]))
         approved_hosts = {
             "support.apple.com", "www.apple.com", "store.google.com",
             "support.google.com", "in.nothing.tech", "infinixmobiles.in",
+            "nothing.tech",
             "www.iqoo.com", "shop.iqoo.com", "www.lavamobiles.com",
             "checkout.nothing.tech",
             "en-in.support.motorola.com", "en-us.support.motorola.com",
