@@ -644,6 +644,77 @@ APPLE_MODEL_SUPPLEMENTS = {
         "operating_system": "Android.",
         "durability": "IP68 dust and water resistance.",
     },
+    "google|pixel 9 pro": {
+        "display_type_description": "6.3-inch Super Actua LTPO OLED display with Smooth Display from 1Hz to 120Hz.",
+        "rear_camera_system": "50MP wide, 48MP ultrawide with Macro Focus and 48MP 5x telephoto cameras.",
+        "front_camera_system": "42MP Dual PD selfie camera with autofocus.",
+        "battery_and_charging": "Typical 4700mAh battery; fast USB-C charging; Qi-certified wireless charging.",
+        "operating_system": "Android.",
+        "durability": "IP68 dust and water resistance.",
+    },
+    "google|pixel 9 pro xl": {
+        "display_type_description": "6.8-inch Super Actua LTPO OLED display with Smooth Display from 1Hz to 120Hz.",
+        "rear_camera_system": "50MP wide, 48MP ultrawide with Macro Focus and 48MP 5x telephoto cameras.",
+        "front_camera_system": "42MP Dual PD selfie camera with autofocus.",
+        "battery_and_charging": "Typical 5060mAh battery; fast USB-C charging; Qi-certified wireless charging.",
+        "operating_system": "Android.",
+        "durability": "IP68 dust and water resistance.",
+    },
+    "google|pixel 9a": {
+        "display_type_description": "6.3-inch Actua pOLED display with Smooth Display from 60Hz to 120Hz.",
+        "rear_camera_system": "48MP wide and 13MP ultrawide cameras; optical and electronic stabilization on the wide camera.",
+        "front_camera_system": "13MP selfie camera.",
+        "battery_and_charging": "Typical 5100mAh battery; fast charging; Qi-certified wireless charging.",
+        "operating_system": "Android.",
+        "durability": "IP68 dust and water resistance.",
+    },
+    "infinix|gt 30 pro": {
+        "display_type_description": "1.5K AMOLED display with a 144Hz refresh rate.",
+        "rear_camera_system": "108MP main and 8MP ultra-wide rear cameras.",
+        "front_camera_system": "13MP front camera.",
+        "battery_and_charging": "5500mAh battery; 45W wired charging and 30W wireless charging.",
+        "operating_system": "XOS 15 powered by Android 15.",
+        "durability": "IP64 splash and dust resistance.",
+    },
+    "infinix|hot 30i": {
+        "display_type_description": "6.6-inch HD+ IPS display.",
+        "rear_camera_system": "50MP primary camera with AI lens.",
+        "front_camera_system": "5MP front camera.",
+        "battery_and_charging": "5000mAh lithium-ion polymer battery with quick charging.",
+        "operating_system": "Android 12.",
+    },
+    "infinix|hot 50 5g": {
+        "display_type_description": "120Hz punch-hole display with Dynamic Bar.",
+        "rear_camera_system": "48MP rear camera.",
+        "front_camera_system": "Front camera specification is not confirmed in the cited page.",
+        "battery_and_charging": "5000mAh battery with 18W fast charging.",
+        "operating_system": "Android-based XOS; version not confirmed in the cited page.",
+        "durability": "IP54-rated dust and splash resistance.",
+    },
+    "infinix|hot 70 pro 5g": {
+        "display_type_description": "6.76-inch LCD display with a 144Hz refresh rate.",
+        "rear_camera_system": "Rear camera system is not fully confirmed in the cited product page.",
+        "front_camera_system": "Front camera specification is not confirmed in the cited product page.",
+        "battery_and_charging": "6000mAh battery with 45W wired charging.",
+        "operating_system": "Android-based XOS; version not confirmed in the cited page.",
+        "durability": "IP68-rated dust and water resistance.",
+    },
+    "infinix|note 50x": {
+        "display_type_description": "6.67-inch IPS display with a 120Hz refresh rate.",
+        "rear_camera_system": "50MP dual rear camera system.",
+        "front_camera_system": "8MP front camera.",
+        "battery_and_charging": "5500mAh battery with 45W wired charging.",
+        "operating_system": "XOS 15.",
+        "durability": "IP64-rated dust and splash resistance; MIL-STD-810H certification is listed by the manufacturer.",
+    },
+    "infinix|note 60 pro 5g": {
+        "display_type_description": "6.78-inch AMOLED display.",
+        "rear_camera_system": "Rear camera system is not fully confirmed in the cited product page.",
+        "front_camera_system": "Front camera specification is not confirmed in the cited product page.",
+        "battery_and_charging": "6500mAh battery with 90W wired charging.",
+        "operating_system": "Android-based XOS; version not confirmed in the cited page.",
+        "durability": "IP64-rated dust and splash resistance.",
+    },
 }
 
 
@@ -657,7 +728,7 @@ def _apply_model_supplements(model_cards: list[dict[str, Any]]) -> None:
             continue
         approved_hosts = {
             "support.apple.com", "www.apple.com", "store.google.com",
-            "support.google.com", "in.nothing.tech",
+            "support.google.com", "in.nothing.tech", "infinixmobiles.in",
         }
         source = next(
             (
