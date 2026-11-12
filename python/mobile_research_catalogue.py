@@ -1111,6 +1111,76 @@ APPLE_MODEL_SUPPLEMENTS = {
         "battery_and_charging": "7000mAh battery with 80W SUPERVOOC charging.",
         "chipset": "Qualcomm Snapdragon 6 Gen 4.",
     },
+    "oppo|k13 turbo": {
+        "display_type_description": "1.5K 120Hz flat display with 2800 × 1280 resolution.",
+        "chipset": "MediaTek Dimensity 8450.",
+        "battery_and_charging": "7000mAh battery with 80W SUPERVOOC charging.",
+        "rear_camera_system": "50MP main camera with OIS.",
+        "durability": "IP66, IP68 and IP69 water and dust resistance; cooling-fan module is independently sealed.",
+    },
+    "oppo|k13 turbo 5g": {
+        "display_type_description": "1.5K 120Hz flat display with 2800 × 1280 resolution.",
+        "chipset": "MediaTek Dimensity 8450.",
+        "battery_and_charging": "7000mAh battery with 80W SUPERVOOC charging.",
+        "rear_camera_system": "50MP main camera with OIS.",
+        "durability": "IP66, IP68 and IP69 water and dust resistance; cooling-fan module is independently sealed.",
+    },
+    "oppo|k14x 5g": {
+        "display_type_description": "17.15cm LCD display with 120Hz refresh rate and HD+ 1570 × 720 resolution.",
+        "chipset": "MediaTek Dimensity 6300.",
+        "rear_camera_system": "50MP main and 2MP monochrome cameras.",
+        "front_camera_system": "5MP front camera.",
+        "battery_and_charging": "6500mAh battery with 45W SUPERVOOC charging.",
+        "operating_system": "ColorOS 15.0.",
+        "durability": "IP64 water and dust resistance.",
+    },
+    "oppo|reno 11 pro": {
+        "display_type_description": "6.7-inch 120Hz AMOLED display.",
+        "rear_camera_system": "50MP main, 32MP telephoto portrait and 8MP ultra-wide cameras.",
+        "front_camera_system": "32MP front camera.",
+        "battery_and_charging": "4600mAh battery with 80W SUPERVOOC charging.",
+        "chipset": "MediaTek Dimensity 8200.",
+    },
+    "oppo|reno 12 pro": {
+        "display_type_description": "6.7-inch FHD+ AMOLED quad-curved display with 120Hz dynamic refresh rate.",
+        "rear_camera_system": "50MP OIS main, 50MP telephoto and 8MP ultra-wide cameras.",
+        "front_camera_system": "50MP autofocus front camera.",
+        "battery_and_charging": "5000mAh battery with 80W SUPERVOOC charging.",
+        "durability": "IP65 rating with Corning Gorilla Glass Victus 2.",
+    },
+    "oppo|reno12": {
+        "display_type_description": "6.7-inch FHD+ AMOLED 3D-curved display with 120Hz dynamic refresh rate.",
+        "rear_camera_system": "50MP OIS main, 8MP ultra-wide and 2MP macro cameras.",
+        "front_camera_system": "32MP front camera.",
+        "battery_and_charging": "5000mAh battery with 80W SUPERVOOC charging.",
+        "durability": "IP65 rating with Corning Gorilla Glass 7i.",
+    },
+    "oppo|reno14": {
+        "display_type_description": "16.74cm flexible AMOLED display with up to 120Hz refresh rate and 1256 × 2760 resolution.",
+        "rear_camera_system": "50MP OIS main, 8MP ultra-wide and 50MP OIS 3.5x telephoto cameras.",
+        "front_camera_system": "50MP autofocus front camera.",
+        "battery_and_charging": "6000mAh battery with 80W SUPERVOOC charging.",
+        "chipset": "MediaTek Dimensity 8350.",
+        "operating_system": "ColorOS 15.0.",
+    },
+    "oppo|reno16 5g": {
+        "rear_camera_system": "50MP OIS main, 50MP ultra-wide and 50MP OIS telephoto cameras.",
+        "front_camera_system": "50MP front camera.",
+        "battery_and_charging": "6700mAh battery with 80W SUPERVOOC charging.",
+        "chipset": "Qualcomm Snapdragon 7 Gen 4.",
+    },
+    "oppo|reno16c 5g": {
+        "display_type_description": "Reno16c 5G display and camera details remain limited to the cited official model page; unverified fields stay pending.",
+        "operating_system": "ColorOS 16.",
+    },
+    "poco|f6 5g": {
+        "display_type_description": "6.67-inch 1.5K Flow AMOLED display with up to 120Hz refresh rate and 2712 × 1220 resolution.",
+        "chipset": "Qualcomm Snapdragon 8s Gen 3.",
+        "rear_camera_system": "50MP Sony IMX882 OIS main and 8MP ultra-wide cameras.",
+        "front_camera_system": "20MP front camera.",
+        "battery_and_charging": "5000mAh battery with 90W wired charging.",
+        "operating_system": "Xiaomi HyperOS.",
+    },
 }
 
 
@@ -1130,6 +1200,7 @@ def _apply_model_supplements(model_cards: list[dict[str, Any]]) -> None:
             "en-in.support.motorola.com", "en-us.support.motorola.com",
             "www.oneplus.in",
             "www.oppo.com",
+            "www.mi.com", "mi.com",
         }
         source = next(
             (
