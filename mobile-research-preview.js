@@ -762,8 +762,16 @@
   function sortResearchMatches(matches, query) {
     var text = normalizeResearch(query);
     var priorityKeys = researchFeatureKeys(query);
+    function verifiedSpecCount(card, keys) {
+      var specs = card.specifications || {};
+      return keys.filter(function (key) {
+        var item = specs[key];
+        return !!(item && item.value != null && String(item.value).trim() !== "" &&
+          /^https:\/\/[^\\s<>"']+$/i.test(String(item.source_url || "")));
+      }).length;
+    }
     function relevantEvidenceCount(card) {
-      return priorityKeys.filter(function (key) { return Object.prototype.hasOwnProperty.call(card.specifications || {}, key); }).length;
+      return verifiedSpecCount(card, priorityKeys);
     }
     return matches.slice().sort(function (a, b) {
       var aExact = normalizeResearch(a.card.brand + " " + a.card.model) === text ? 1 : 0;
@@ -772,8 +780,8 @@
       // Prioritize documented evidence for the requested topic; never infer a performance winner.
       var aRelevant = relevantEvidenceCount(a.card), bRelevant = relevantEvidenceCount(b.card);
       if (aRelevant !== bRelevant) return bRelevant - aRelevant;
-      var aEvidence = Object.keys(a.card.specifications || {}).length;
-      var bEvidence = Object.keys(b.card.specifications || {}).length;
+      var aEvidence = verifiedSpecCount(a.card, Object.keys(a.card.specifications || {}));
+      var bEvidence = verifiedSpecCount(b.card, Object.keys(b.card.specifications || {}));
       return bEvidence - aEvidence || String(a.card.model).localeCompare(String(b.card.model));
     });
   }
