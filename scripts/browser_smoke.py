@@ -120,6 +120,28 @@ def run(root: Path):
                     full = page.evaluate("() => window.CouponWorldMobileResearch.search('phone under 30000 full budget').map(x => x.card.model_key)")
                     assert ordinary == full, width
 
+                    # Regression: strict under-budget semantics and no hidden lower band.
+                    for limit in (10000, 15000, 20000, 25000, 30000, 50000):
+                        prices = page.evaluate("""limit => window.CouponWorldMobileResearch.search(
+                            'phone under ' + limit
+                        ).map(item => item.card.research_budget_reference.reference_price_inr)""", limit)
+                        assert all(0 < price < limit for price in prices), (width, limit, prices)
+                    # Exact brand exclusion must survive mixed-language searches.
+                    excluded = page.evaluate("""() => window.CouponWorldMobileResearch.search(
+                        'phone under 30000 exclude samsung'
+                    ).map(item => String(item.card.brand).toLowerCase())""")
+                    assert all(brand != 'samsung' for brand in excluded), (width, excluded)
+                    # No invented recommendation when a nonsensical exact variant is requested.
+                    impossible = page.evaluate("""() => window.CouponWorldMobileResearch.search(
+                        'Galaxy A36 99GB RAM 9999GB storage'
+                    ).length""")
+                    assert impossible == 0, (width, impossible)
+                    # Research results must disclose their nature rather than claim a tested winner.
+                    page.evaluate("window.CouponWorldMobileResearch.search('best camera phone under 30000')")
+                    response_text = page.locator("#mobileResearchResults").inner_text().lower()
+                    assert "research coverage" in response_text, (width, response_text[:400])
+                    assert "performance-based recommendation" in response_text, width
+
 
                     page.evaluate("window.CouponWorldMobileResearch.search('Galaxy A36 8GB 256GB')")
                     names = page.locator("#mobileResearchResults [data-mobile-model-card]")
