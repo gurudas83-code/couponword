@@ -1,0 +1,509 @@
+{
+  "schema_version": 1,
+  "document_type": "READ_ONLY_TOP30_RESEARCH_PRIORITY_PILOT",
+  "created_date": "2026-11-13",
+  "market": "India",
+  "scope": "Thirty existing primary research model cards selected for evidence-enrichment work; not the 30 best or 30 top-selling India phones, not an active recommendation dataset.",
+  "active_engine_preservation": "No ranking or scoring code changes. Reuse existing Intent/Identity/Resolver/Evidence/Product DNA/Weighted Fit/retailer/SEO engines. Keep public research and shopping API separate until consistency checks pass.",
+  "selection_sources": [
+    {
+      "source": "Original 232-card catalogue",
+      "path": "data/mobile_research_catalogue.json"
+    },
+    {
+      "source": "6 Nov under-25000 editorial intake",
+      "path": "data/india_under_25000_editorial_coverage_20261106.json"
+    },
+    {
+      "source": "Counterpoint Q2 2026 sales models",
+      "path": "data/india_q2_2026_reported_top5_sales_models.json",
+      "url": "https://counterpointresearch.com/en/insights/top-5-smartphone-model-share-8-countries"
+    },
+    {
+      "source": "Omdia Q3 2026 shipment drivers",
+      "path": "data/india_q3_2026_sales_priority_models.json",
+      "url": "https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season"
+    },
+    {
+      "source": "Historical Google Ads Keyword Planner 2025-09/2026-08",
+      "path": "data/mobile_google_demand_ranked_126.json"
+    }
+  ],
+  "evidence_limitations": "Catalogue status fields are frozen/source snapshot categories and not a fresh per-field 2026-11-13 certification. 226/232 source-coverage claim for public build is different. Historical independent test ledger has 0 eligible rows. External editorial lists and shipment reports do not verify exact RAM/storage, fresh price, stock, India firmware or standardized performance winners.",
+  "test_evidence_ledger": "data/mobile_independent_test_evidence.json",
+  "required_admission_fields": [
+    "exact_india_model_and_sku",
+    "ram_gb",
+    "storage_gb",
+    "manufacturer_evidence_url_per_field",
+    "reviewed_at",
+    "battery_independent_test_protocol_version_unit_conditions",
+    "gaming_independent_test_protocol_version_unit_conditions",
+    "camera_independent_test_protocol_version_unit_conditions",
+    "source_conflicts_and_tested_unit_region",
+    "date_scoped_reference_price_budget_eligibility_only",
+    "retailer_exact_listing_identity_and_date",
+    "cross_path_result_consistency",
+    "quality_regressions"
+  ],
+  "release_guards": [
+    "0% reference price contribution to capability ranking; budget cap only",
+    "No ranking_eligible flag without verified independent comparable test protocol",
+    "Missing evidence stays unknown; do not infer performance wins from maker specs",
+    "No invention of fresh price/stock or buy links",
+    "No new engines, no automatic canonical admission, no production deployment"
+  ],
+  "selected_models": [
+    {
+      "priority_index": 1,
+      "model_key": "poco|x7 pro 5g",
+      "model_name": "POCO X7 Pro 5G",
+      "source_group": "EDITORIAL",
+      "source_rationale": "2026-11-06 editorial coverage audit",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.smartprix.com/mobiles/"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 2,
+      "model_key": "poco|m8 power 5g",
+      "model_name": "POCO M8 Power 5G",
+      "source_group": "EDITORIAL",
+      "source_rationale": "2026-11-06 editorial coverage audit",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.91mobiles.com/list-of-phones/iqoo-mobile-price-list-in-india"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 3,
+      "model_key": "oneplus|n6 5g",
+      "model_name": "OnePlus N6 5G",
+      "source_group": "EDITORIAL",
+      "source_rationale": "2026-11-06 editorial coverage audit",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.91mobiles.com/list-of-phones/OnePlus-mobile-price-list-in-india"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 4,
+      "model_key": "redmi|redmi note 15 5g",
+      "model_name": "Redmi Redmi Note 15 5G",
+      "source_group": "EDITORIAL",
+      "source_rationale": "2026-11-06 editorial coverage audit",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 5,
+      "model_key": "infinix|gt 30 pro",
+      "model_name": "Infinix GT 30 Pro",
+      "source_group": "EDITORIAL",
+      "source_rationale": "2026-11-06 editorial coverage audit",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.91mobiles.com/list-of-phones/infinix-mobile-price-list-in-india"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 6,
+      "model_key": "motorola|edge 60 fusion",
+      "model_name": "Motorola Edge 60 Fusion",
+      "source_group": "EDITORIAL",
+      "source_rationale": "2026-11-06 editorial coverage audit",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.91mobiles.com/list-of-phones/motorola-5g-mobile-price-list-in-india"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 7,
+      "model_key": "nothing|phone 3a",
+      "model_name": "Nothing Phone (3a)",
+      "source_group": "EDITORIAL",
+      "source_rationale": "2026-11-06 editorial coverage audit",
+      "original_catalogue_status": "OFFICIAL_VERIFIED",
+      "original_catalogue_source_urls": [
+        "https://in.nothing.tech/products/phone-3a",
+        "https://nothing.community/en/d/27793-phone-3a-and-3a-pro-are-here"
+      ],
+      "historical_independent_metrics_count": 3,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 8,
+      "model_key": "samsung|galaxy a36 5g",
+      "model_name": "Samsung Galaxy A36 5G",
+      "source_group": "EDITORIAL",
+      "source_rationale": "2026-11-06 editorial coverage audit",
+      "original_catalogue_status": "OFFICIAL_VERIFIED",
+      "original_catalogue_source_urls": [
+        "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+        "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a36-5g-awesome-black-128gb-sm-a366ezkjins/"
+      ],
+      "historical_independent_metrics_count": 3,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 9,
+      "model_key": "samsung|galaxy f70 pro 5g",
+      "model_name": "Samsung Galaxy F70 Pro 5G",
+      "source_group": "EDITORIAL",
+      "source_rationale": "2026-11-06 editorial coverage audit",
+      "original_catalogue_status": "OFFICIAL_VERIFIED",
+      "original_catalogue_source_urls": [
+        "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/",
+        "https://www.91mobiles.com/list-of-phones/SAMSUNG-mobile-price-list-in-india"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 10,
+      "model_key": "oppo|k13 5g",
+      "model_name": "OPPO K13 5G",
+      "source_group": "EDITORIAL",
+      "source_rationale": "2026-11-06 editorial coverage audit",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.91mobiles.com/list-of-phones/oppo-mobile-price-list-in-india"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 11,
+      "model_key": "samsung|galaxy m17 5g",
+      "model_name": "Samsung Galaxy M17 5G",
+      "source_group": "MARKET",
+      "source_rationale": "Q2 Counterpoint / Q3 Omdia (not same ranking period)",
+      "original_catalogue_status": "OFFICIAL_VERIFIED",
+      "original_catalogue_source_urls": [
+        "https://news.samsung.com/in/samsung-launches-galaxy-m17-5g-with-segment-first-ois-camera-enhanced-durability-ai-features-in-india",
+        "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 12,
+      "model_key": "samsung|galaxy a27 5g",
+      "model_name": "Samsung Galaxy A27 5G",
+      "source_group": "MARKET",
+      "source_rationale": "Q2 Counterpoint / Q3 Omdia (not same ranking period)",
+      "original_catalogue_status": "PARTIALLY_VERIFIED",
+      "original_catalogue_source_urls": [
+        "https://news.samsung.com/in/samsung-galaxy-a27-5g-launches-in-india-at-inr-28999-with-cashback-and-zero-down-payment-emi-schemes"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 13,
+      "model_key": "poco|x8 5g",
+      "model_name": "POCO X8 5G",
+      "source_group": "MARKET",
+      "source_rationale": "Q2 Counterpoint / Q3 Omdia (not same ranking period)",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 14,
+      "model_key": "vivo|t4x 5g",
+      "model_name": "vivo T4x 5G",
+      "source_group": "HISTORICAL_DEMAND",
+      "source_rationale": "2025-09 through 2026-08 Keyword Planner broad/model signals, NOT current demand/sales",
+      "original_catalogue_status": "OFFICIAL_VERIFIED",
+      "original_catalogue_source_urls": [
+        "https://shop.vivo.com/in/product/10303?skuId=19292"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 15,
+      "model_key": "oppo|a5x",
+      "model_name": "OPPO A5x",
+      "source_group": "HISTORICAL_DEMAND",
+      "source_rationale": "2025-09 through 2026-08 Keyword Planner broad/model signals, NOT current demand/sales",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.91mobiles.com/list-of-phones/oppo-mobile-price-10000-to-15000"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 16,
+      "model_key": "poco|m7 pro",
+      "model_name": "POCO M7 Pro",
+      "source_group": "HISTORICAL_DEMAND",
+      "source_rationale": "2025-09 through 2026-08 Keyword Planner broad/model signals, NOT current demand/sales",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.91mobiles.com/list-of-phones/poco-mobile-price-list-in-india"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 17,
+      "model_key": "realme|p3",
+      "model_name": "realme P3",
+      "source_group": "HISTORICAL_DEMAND",
+      "source_rationale": "2025-09 through 2026-08 Keyword Planner broad/model signals, NOT current demand/sales",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.91mobiles.com/list-of-phones/realme-mobile-price-list-in-india"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 18,
+      "model_key": "oppo|k14x 5g",
+      "model_name": "OPPO K14x 5G",
+      "source_group": "HISTORICAL_DEMAND",
+      "source_rationale": "2025-09 through 2026-08 Keyword Planner broad/model signals, NOT current demand/sales",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.91mobiles.com/list-of-phones/oppo-mobile-price-15000-to-20000"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 19,
+      "model_key": "vivo|t5x 5g",
+      "model_name": "vivo T5x 5G",
+      "source_group": "HISTORICAL_DEMAND",
+      "source_rationale": "2025-09 through 2026-08 Keyword Planner broad/model signals, NOT current demand/sales",
+      "original_catalogue_status": "OFFICIAL_VERIFIED",
+      "original_catalogue_source_urls": [
+        "https://shop.vivo.com/in/product/10339?skuId=19387"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 20,
+      "model_key": "nothing|phone 3a pro",
+      "model_name": "Nothing Phone 3a Pro",
+      "source_group": "HISTORICAL_DEMAND",
+      "source_rationale": "2025-09 through 2026-08 Keyword Planner broad/model signals, NOT current demand/sales",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.91mobiles.com/list-of-phones/nothing-mobile-price-list-in-india"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 21,
+      "model_key": "iqoo|z11x",
+      "model_name": "iQOO Z11x",
+      "source_group": "HISTORICAL_DEMAND",
+      "source_rationale": "2025-09 through 2026-08 Keyword Planner broad/model signals, NOT current demand/sales",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.91mobiles.com/list-of-phones/iqoo-mobile-price-list-in-india"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 22,
+      "model_key": "realme|p4 pro",
+      "model_name": "realme P4 Pro",
+      "source_group": "HISTORICAL_DEMAND",
+      "source_rationale": "2025-09 through 2026-08 Keyword Planner broad/model signals, NOT current demand/sales",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.91mobiles.com/list-of-phones/realme-mobile-price-list-in-india"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 23,
+      "model_key": "motorola|edge 60 pro",
+      "model_name": "Motorola Edge 60 Pro",
+      "source_group": "HISTORICAL_DEMAND",
+      "source_rationale": "2025-09 through 2026-08 Keyword Planner broad/model signals, NOT current demand/sales",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.91mobiles.com/list-of-phones/motorola-5g-mobile-price-list-in-india"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 24,
+      "model_key": "realme|p4 power",
+      "model_name": "realme P4 Power",
+      "source_group": "HISTORICAL_DEMAND",
+      "source_rationale": "2025-09 through 2026-08 Keyword Planner broad/model signals, NOT current demand/sales",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.91mobiles.com/list-of-phones/realme-mobile-price-list-in-india"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 25,
+      "model_key": "lava|agni 4",
+      "model_name": "Lava Agni 4",
+      "source_group": "HISTORICAL_DEMAND",
+      "source_rationale": "2025-09 through 2026-08 Keyword Planner broad/model signals, NOT current demand/sales",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.91mobiles.com/list-of-phones/lava-mobile-price-list-in-india"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 26,
+      "model_key": "oppo|a6 pro",
+      "model_name": "OPPO A6 Pro",
+      "source_group": "HISTORICAL_DEMAND",
+      "source_rationale": "2025-09 through 2026-08 Keyword Planner broad/model signals, NOT current demand/sales",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.91mobiles.com/list-of-phones/oppo-8gb-ram-128gb-rom-phones"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 27,
+      "model_key": "iqoo|neo 10",
+      "model_name": "iQOO Neo 10",
+      "source_group": "HISTORICAL_DEMAND",
+      "source_rationale": "2025-09 through 2026-08 Keyword Planner broad/model signals, NOT current demand/sales",
+      "original_catalogue_status": "OFFICIAL_VERIFIED",
+      "original_catalogue_source_urls": [
+        "https://shop.vivo.com/in/product/10325?skuId=19299",
+        "https://www.91mobiles.com/list-of-phones/iqoo-mobile-price-list-in-india"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 28,
+      "model_key": "oneplus|nord 6",
+      "model_name": "OnePlus Nord 6",
+      "source_group": "HISTORICAL_DEMAND",
+      "source_rationale": "2025-09 through 2026-08 Keyword Planner broad/model signals, NOT current demand/sales",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [
+        "https://www.91mobiles.com/list-of-phones/OnePlus-mobile-price-list-in-india"
+      ],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 29,
+      "model_key": "samsung|galaxy m36 5g",
+      "model_name": "Samsung Galaxy M36 5G",
+      "source_group": "CONTROL",
+      "source_rationale": "Existing documented Samsung baselines; not a demand rank",
+      "original_catalogue_status": "RESEARCH_ONLY",
+      "original_catalogue_source_urls": [],
+      "historical_independent_metrics_count": 0,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    },
+    {
+      "priority_index": 30,
+      "model_key": "samsung|galaxy a56 5g",
+      "model_name": "Samsung Galaxy A56 5G",
+      "source_group": "CONTROL",
+      "source_rationale": "Existing documented Samsung baselines; not a demand rank",
+      "original_catalogue_status": "OFFICIAL_VERIFIED",
+      "original_catalogue_source_urls": [
+        "https://news.samsung.com/in/samsung-india-launches-galaxy-a56-5g-galaxy-a36-5g-featuring-awesome-intelligence-all-new-design-and-enhanced-durability",
+        "https://www.samsung.com/in/smartphones/galaxy-a/galaxy-a56-5g-awesome-lightgray-256gb-sm-a566ezagins/"
+      ],
+      "historical_independent_metrics_count": 3,
+      "independent_performance_ranking_eligible_as_of_2026_11_04": false,
+      "exact_india_ram_storage_confirmed_in_this_pilot": false,
+      "current_live_offer_verified_in_this_pilot": false
+    }
+  ],
+  "missing_market_and_editorial_intake_note": "Research candidates absent from frozen 232, such as OPPO A6x 5G, vivo Y31 5G, Galaxy A07/A17 5G, OnePlus Nord CE5, vivo T4 5G and iQOO Neo 10R, remain in separate existing intake datasets; do not silently merge into this existing-30 pilot."
+}
