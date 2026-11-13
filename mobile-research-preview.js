@@ -539,7 +539,7 @@
       if (c.minimumBattery != null && !(Number(spec("battery_mah_typical")) >= c.minimumBattery)) return;
       if (c.minimumRefresh != null && !(Number(spec("display_refresh_max_hz")) >= c.minimumRefresh)) return;
       if (c.needOis && !/^(yes|true|supported)$/i.test(String(spec("ois") || ""))) return;
-      if (c.need5g && !/5g/i.test(String(spec("network_support") || "") + " " + card.model)) return;
+      if (c.need5g && !/5g/i.test(String(spec("network_support") || ""))) return;
       if (tokens.length) {
         var hayTokens = normalizeResearch(card.brand + " " + card.model).split(" ");
         if (!tokens.every(function (token) { return hayTokens.indexOf(token) >= 0; })) return;
