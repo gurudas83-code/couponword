@@ -539,7 +539,17 @@
       if (c.minimumBattery != null && !(Number(spec("battery_mah_typical")) >= c.minimumBattery)) return;
       if (c.minimumRefresh != null && !(Number(spec("display_refresh_max_hz")) >= c.minimumRefresh)) return;
       if (c.needOis && !/^(yes|true|supported)$/i.test(String(spec("ois") || ""))) return;
-      if (c.need5g && !/5g/i.test(String(spec("network_support") || "") + " " + card.model)) return;
+      if (c.need5g && normalizeResearch((card.brand + " " + card.model).replace(/\b5g\b/ig, "")) !== text) {
+        // An exact model-name lookup is an identity search, not proof of 5G support.
+        // Explicit category searches still require manufacturer-sourced network evidence.
+        var networkEvidence = specs.network_support;
+        var networkValue = String(networkEvidence && networkEvidence.value || "");
+        var networkSource = String(networkEvidence && networkEvidence.source_url || "");
+        var manufacturerDomains = /^(?:[a-z0-9-]+\.)*(?:samsung\.com|apple\.com|mi\.com|xiaomi\.com|oneplus\.com|oneplus\.in|oppo\.com|vivo\.com|realme\.com|motorola\.com|motorola\.in|nothing\.tech|google\.com|poco\.in|iqoo\.com|honor\.com|infinixmobility\.com|tecno-mobile\.com|hmd\.com|nokia\.com)$/i;
+        var sourceHost = /^https:\/\/([^\/:?#]+)/i.exec(networkSource);
+        var sourcedByManufacturer = !!(sourceHost && manufacturerDomains.test(sourceHost[1]));
+        if (!sourcedByManufacturer || !/(?:\b5g\b|\bnr\b|n(?:1|3|5|8|28|40|41|77|78|79)\b)/i.test(networkValue)) return;
+      }
       if (tokens.length) {
         var hayTokens = normalizeResearch(card.brand + " " + card.model).split(" ");
         if (!tokens.every(function (token) { return hayTokens.indexOf(token) >= 0; })) return;
