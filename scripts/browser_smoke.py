@@ -131,6 +131,13 @@ def run(root: Path):
                         'phone under 30000 exclude samsung'
                     ).map(item => String(item.card.brand).toLowerCase())""")
                     assert all(brand != 'samsung' for brand in excluded), (width, excluded)
+                    # A 5G model name alone must never satisfy the 5G requirement.
+                    unsupported_5g = page.evaluate("""() => window.CouponWorldMobileResearch.search(
+                        'phone under 50000 5g'
+                    ).filter(item => !/5g/i.test(String(
+                        (item.card.specifications || {}).network_support?.value || ''
+                    ))).map(item => item.card.model_key)""")
+                    assert not unsupported_5g, (width, unsupported_5g)
                     # No invented recommendation when a nonsensical exact variant is requested.
                     impossible = page.evaluate("""() => window.CouponWorldMobileResearch.search(
                         'Galaxy A36 99GB RAM 9999GB storage'
