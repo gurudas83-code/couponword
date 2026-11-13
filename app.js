@@ -620,6 +620,29 @@ function renderOfferUnavailable() {
   </section>`;
 }
 
+function renderOfferAvailabilitySummary(data, recommendations) {
+  const status = String(data?.status || "").trim().toUpperCase();
+  const marketStatus = String(data?.market_data_status || "").trim().toUpperCase();
+  const verifiedCount = Array.isArray(recommendations)
+    ? recommendations.filter(item =>
+        item && item.current_offer_verified === true && item.purchase_cta_eligible === true
+      ).length
+    : 0;
+
+  if (status !== "PARTIAL" && marketStatus !== "CURRENT_OFFERS_UNAVAILABLE" && verifiedCount > 0) {
+    return "";
+  }
+
+  const candidateCount = Array.isArray(recommendations) ? recommendations.length : 0;
+  return `<aside class="ai-offer-status" aria-label="Current offer status">
+    <strong>Research match, live offer not verified</strong>
+    <p>${candidateCount
+      ? `${candidateCount} research match${candidateCount === 1 ? "" : "es"} found, but no exact fresh in-stock retailer offer is eligible yet.`
+      : "The research catalogue may still help, but no exact fresh in-stock retailer offer is eligible yet."}
+      Confirm the exact RAM/storage variant and current price directly with the retailer.</p>
+  </aside>`;
+}
+
 function verifiedBackgroundRecommendation(product) {
   if (!product || product.current_offer_verified !== true || product.purchase_cta_eligible !== true) return null;
   const eligible = offer => offer?.cta_eligibility?.eligible === true &&
@@ -1208,6 +1231,7 @@ async function loadShoppingRecommendation(query, { background = false } = {}) {
       .join("");
 
     card.innerHTML = `
+      ${renderOfferAvailabilitySummary(data, recommendations)}
       ${budgetBandMode
         ? `<section class="ai-recommendation-section ai-primary-section">
             <h2>${escapeHTML(recommendationSections.primary_title || "Top verified phones")}</h2>
