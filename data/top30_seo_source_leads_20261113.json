@@ -1,0 +1,482 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-11-13",
+  "source": "Top30 pilot PR #87 and publicly inspected manufacturer URLs",
+  "mode": "RESEARCH_ONLY_SOURCE_LEADS_NOT_PUBLICATION_PROOF",
+  "goal": "Investigate 20 models not admitted by 50-page manufacturer-evidence editorial SEO gate, without creating thin pages or modifying engines.",
+  "selected_top30_count": 30,
+  "already_approved_existing_canonical_page_count": 10,
+  "unapproved_standalone_page_count": 20,
+  "source_leads_are_not_verified_fields": true,
+  "source_url_review_needed": true,
+  "requires_manual_editorial_admission": true,
+  "guardrails": [
+    "Do not publish standalone indexable page until >=8 distinct supported technical fields pass current field-level source policy and extra reviewed-addition rule.",
+    "Do not treat model-family name as exact India RAM/storage/5G SKU.",
+    "Do not infer camera/gaming/battery performance winners from marketing specifications.",
+    "Do not promote historical retailer URLs or prices to verified fresh offers.",
+    "Do not change approved weighted fit ranking or create new generators."
+  ],
+  "models": [
+    {
+      "model_key": "poco|x7 pro 5g",
+      "name": "POCO X7 Pro 5G",
+      "original_selection_priority": 1,
+      "source_group": "EDITORIAL",
+      "manufacturer_source_leads": [
+        "https://www.po.co/global/product/poco-x7-pro/specs/"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Global source, India RAM/storage and network applicability must be checked.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "poco|m8 power 5g",
+      "name": "POCO M8 Power 5G",
+      "original_selection_priority": 2,
+      "source_group": "EDITORIAL",
+      "manufacturer_source_leads": [
+        "https://www.poco.in/product-details/M8Power"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Poco India page found but no readable parameter evidence; do not substitute ordinary POCO M8 5G.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "oneplus|n6 5g",
+      "name": "OnePlus N6 5G",
+      "original_selection_priority": 3,
+      "source_group": "EDITORIAL",
+      "manufacturer_source_leads": [
+        "https://www.oneplus.in/n6"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Manufacturer page says OnePlus N6; validate 5G capability and memory variants independently.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "redmi|redmi note 15 5g",
+      "name": "Redmi Redmi Note 15 5G",
+      "original_selection_priority": 4,
+      "source_group": "EDITORIAL",
+      "manufacturer_source_leads": [
+        "https://www.mi.com/in/product/redmi-note-15-5g/specs/"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Manufacturer product-family presence is a lead, not India exact variant admission.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "infinix|gt 30 pro",
+      "name": "Infinix GT 30 Pro",
+      "original_selection_priority": 5,
+      "source_group": "EDITORIAL",
+      "manufacturer_source_leads": [
+        "https://infinixmobiles.in/products/gt-30-pro-5g"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Manufacturer identifies GT 30 Pro 5G model X6873; confirm baseline alias before admission.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "oppo|k13 5g",
+      "name": "OPPO K13 5G",
+      "original_selection_priority": 10,
+      "source_group": "EDITORIAL",
+      "manufacturer_source_leads": [
+        "https://www.oppo.com/in/newsroom/press/oppo-launches-k13-overpowered-performance-17999/"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Manufacturer product-family presence is a lead, not India exact variant admission.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "poco|x8 5g",
+      "name": "POCO X8 5G",
+      "original_selection_priority": 13,
+      "source_group": "MARKET",
+      "manufacturer_source_leads": [
+        "https://www.po.co/global/product/poco-x8/specs/"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Global source only; India variant and availability not validated.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "oppo|a5x",
+      "name": "OPPO A5x",
+      "original_selection_priority": 15,
+      "source_group": "HISTORICAL_DEMAND",
+      "manufacturer_source_leads": [
+        "https://www.oppo.com/in/smartphones/series-a/a5x/specs/"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "OPPO A5x India page is 4G (CPH2725); MUST NOT merge with A5x 5G (CPH2733).",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "poco|m7 pro",
+      "name": "POCO M7 Pro",
+      "original_selection_priority": 16,
+      "source_group": "HISTORICAL_DEMAND",
+      "manufacturer_source_leads": [
+        "https://www.po.co/global/product/poco-m7-pro-5g/specs/"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Global 5G model source; reconcile existing 'M7 Pro' display identity with India 5G SKU.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "realme|p3",
+      "name": "realme P3",
+      "original_selection_priority": 17,
+      "source_group": "HISTORICAL_DEMAND",
+      "manufacturer_source_leads": [
+        "https://www.realme.com/in/realme-p3-5g/specs"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Manufacturer source is P3 5G; confirm base key model identity.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "oppo|k14x 5g",
+      "name": "OPPO K14x 5G",
+      "original_selection_priority": 18,
+      "source_group": "HISTORICAL_DEMAND",
+      "manufacturer_source_leads": [
+        "https://www.oppo.com/in/smartphones/series-k/k14x-5g/specs/"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Manufacturer product-family presence is a lead, not India exact variant admission.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "nothing|phone 3a pro",
+      "name": "Nothing Phone 3a Pro",
+      "original_selection_priority": 20,
+      "source_group": "HISTORICAL_DEMAND",
+      "manufacturer_source_leads": [
+        "https://in.nothing.tech/products/phone-3a-pro"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Manufacturer product-family presence is a lead, not India exact variant admission.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "iqoo|z11x",
+      "name": "iQOO Z11x",
+      "original_selection_priority": 21,
+      "source_group": "HISTORICAL_DEMAND",
+      "manufacturer_source_leads": [
+        "https://www.iqoo.com/in/products/z11x"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Manufacturer page says Z11x 5G; region and physical variant admission still required.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "realme|p4 pro",
+      "name": "realme P4 Pro",
+      "original_selection_priority": 22,
+      "source_group": "HISTORICAL_DEMAND",
+      "manufacturer_source_leads": [
+        "https://www.realme.com/in/realme-p4-pro-5g/specs"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Manufacturer product-family presence is a lead, not India exact variant admission.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "motorola|edge 60 pro",
+      "name": "Motorola Edge 60 Pro",
+      "original_selection_priority": 23,
+      "source_group": "HISTORICAL_DEMAND",
+      "manufacturer_source_leads": [
+        "https://www.motorola.in/smartphones-motorola-edge-60-pro/p?skuId=525"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Manufacturer product-family presence is a lead, not India exact variant admission.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "realme|p4 power",
+      "name": "realme P4 Power",
+      "original_selection_priority": 24,
+      "source_group": "HISTORICAL_DEMAND",
+      "manufacturer_source_leads": [
+        "https://www.realme.com/in/realme-p4-power-5g/specs"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Source is explicitly realme P4 Power 5G; verify alias before merging.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "lava|agni 4",
+      "name": "Lava Agni 4",
+      "original_selection_priority": 25,
+      "source_group": "HISTORICAL_DEMAND",
+      "manufacturer_source_leads": [
+        "https://shop.lavamobiles.com/products/lava-agni-4"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Manufacturer product-family presence is a lead, not India exact variant admission.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "oppo|a6 pro",
+      "name": "OPPO A6 Pro",
+      "original_selection_priority": 26,
+      "source_group": "HISTORICAL_DEMAND",
+      "manufacturer_source_leads": [
+        "https://www.oppo.com/in/smartphones/series-a/a6-pro-5g/specs/"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Found India OPPO A6 Pro 5G (CPH2827); baseline key lacks explicit 5G; confirm exact intended SKU/model before admission.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "oneplus|nord 6",
+      "name": "OnePlus Nord 6",
+      "original_selection_priority": 28,
+      "source_group": "HISTORICAL_DEMAND",
+      "manufacturer_source_leads": [
+        "https://www.oneplus.in/oneplus-nord-6"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Manufacturer product-family presence is a lead, not India exact variant admission.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    },
+    {
+      "model_key": "samsung|galaxy m36 5g",
+      "name": "Samsung Galaxy M36 5G",
+      "original_selection_priority": 29,
+      "source_group": "CONTROL",
+      "manufacturer_source_leads": [
+        "https://news.samsung.com/in/samsung-launches-galaxy-m36-5g-in-india-introduces-advanced-ai-innovations-in-mid-segment-smartphones"
+      ],
+      "source_url_review_status": "REQUIRES_EXACT_IDENTITY_AND_FIELD_LEVEL_REVIEW",
+      "source_identity_caveat": "Manufacturer product-family presence is a lead, not India exact variant admission.",
+      "reviewed_distinct_source_fields": 0,
+      "verified_exact_india_variant": false,
+      "approved_editorial_addition": false,
+      "indexable_standalone_page_permitted": false,
+      "steps_remaining": [
+        "Manufacturer URL and model/SKU identity review",
+        "8+ distinct source-linked factual fields and reviewed dates",
+        "Explicit unresolved facts and India variant restrictions",
+        "Editorial admission using existing phone SEO gate",
+        "Build, semantic/SEO and browser QA",
+        "Verified production canonical/sitemap/link check"
+      ]
+    }
+  ]
+}
