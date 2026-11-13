@@ -159,6 +159,9 @@ def run(root: Path):
                         assert caution in priority_text, (width, priority, priority_text[:500])
                         assert "research coverage" in priority_text, (width, priority)
                         assert "check eligible recommendations" in priority_text, (width, priority)
+                        assert "decision evidence checklist" in priority_text, (width, priority)
+                        assert "source linked" in priority_text or "not source-confirmed" in priority_text, (width, priority)
+                        assert "not a measured performance verdict" in priority_text, (width, priority)
 
 
                     page.evaluate("window.CouponWorldMobileResearch.search('Galaxy A36 8GB 256GB')")

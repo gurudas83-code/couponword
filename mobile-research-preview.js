@@ -629,7 +629,31 @@
       fact = "Check the documented operating system and update policy below.";
       caution = "An update promise is not the remaining support period. Confirm launch and support-end dates.";
     }
-    return '<div class="research-context"><p><strong>What to consider</strong> ' + escapeHtml(fact) + '</p><p><strong>Before choosing</strong> ' + escapeHtml(caution) + '</p></div>';
+    var checks = [];
+    function hasEvidence(key) {
+      var item = specs[key];
+      return !!(item && item.value != null && String(item.value).trim() !== "" &&
+        /^https:\/\/[^\s<>"']+$/i.test(String(item.source_url || "")));
+    }
+    if (/camera|कैमरा/.test(text)) {
+      checks = [["OIS source", ["ois"]], ["Camera hardware", ["rear_main_mp", "rear_camera_system"]]];
+    } else if (/battery|बैटरी/.test(text)) {
+      checks = [["Battery capacity", ["battery_mah_typical", "battery_capacity_description"]], ["Charging", ["wired_charging_max_w", "charging_description"]]];
+    } else if (/gaming|game|गेमिंग/.test(text)) {
+      checks = [["Chipset", ["chipset"]], ["GPU", ["gpu"]]];
+    } else if (/software|support|update|android/.test(text)) {
+      checks = [["Operating system", ["operating_system"]], ["Update policy", ["security_update_policy", "security_support_years"]]];
+    } else if (/build|reliability|durability/.test(text)) {
+      checks = [["Ingress protection", ["ip_rating"]]];
+    }
+    var checklist = checks.length ? '<p><strong>Decision evidence checklist</strong> ' +
+      checks.map(function (entry) {
+        return escapeHtml(entry[0]) + ': ' +
+          (entry[1].some(hasEvidence) ? 'Source linked' : 'Not source-confirmed');
+      }).join(' · ') + '</p>' : '';
+    return '<div class="research-context"><p><strong>What to consider</strong> ' + escapeHtml(fact) +
+      '</p><p><strong>Before choosing</strong> ' + escapeHtml(caution) +
+      '</p>' + checklist + '<p><small>Research evidence is not a measured performance verdict.</small></p></div>';
   }
 
   function retailerResearchLinks(card) {
