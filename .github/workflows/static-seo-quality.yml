@@ -1,0 +1,21 @@
+name: Static SEO quality gate
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate sitemap, robots and homepage metadata
+        run: python scripts/quality_gate.py
+      - name: JavaScript syntax validation
+        run: |
+          node --check app.js
+          node --check mobile-research-preview.js
+      - name: Validate research and comparison evidence gates
+        run: python scripts/research_quality_gate.py

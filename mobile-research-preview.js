@@ -673,9 +673,56 @@
     if (!comparePanel) return;
     comparePanel.hidden = comparisonSelection.length === 0;
     if (!comparisonSelection.length) { comparePanel.innerHTML = ""; return; }
-    var fields = [ ["Processor", ["chipset"]], ["Display", ["display_type", "display_type_description"]], ["Refresh rate", ["display_refresh_max_hz", "display_refresh_description"]], ["Main camera", ["rear_main_mp", "rear_camera_system"]], ["Optical stabilization", ["ois"]], ["Battery", ["battery_mah_typical", "battery_capacity_description", "battery_and_charging"]], ["Charging", ["wired_charging_max_w", "charging_description"]], ["Software / updates", ["security_support_years", "security_update_policy", "operating_system"]] ];
-    function value(card, keys) { var key = keys.find(function (key) { return card.specifications && card.specifications[key]; }); if (!key) return "Not confirmed"; var item = card.specifications[key]; return (key === "chipset" && /ghz/i.test(String(item.value)) ? specificationLabel(key, item) + ": " : "") + specValue(key, item); }
-    comparePanel.innerHTML = '<div class="research-comparison-heading"><h3>Compare your shortlist (' + comparisonSelection.length + '/3)</h3><button type="button" class="btn btn-ghost" data-research-compare-clear>Clear comparison</button></div><p>Model specifications side by side; no performance winner is asserted. Unknown fields remain explicit.</p><div class="research-table-scroll" role="region" aria-label="Phone specification comparison" tabindex="0"><table class="research-spec-table"><caption>Documented specifications for the selected records</caption><thead><tr><th scope="col">Specification</th>' + comparisonSelection.map(function (item) { return '<th scope="col">' + escapeHtml(displayPhoneName(item.card)) + '<br><small>' + escapeHtml(item.rows.filter(function (row) { return row.ram_gb != null || row.storage_gb != null; }).map(function (row) { return (row.ram_gb != null ? row.ram_gb + 'GB' : 'RAM not stated') + ' / ' + (row.storage_gb != null ? row.storage_gb + 'GB' : 'storage not stated'); }).join('; ') || 'Memory not confirmed') + '</small></th>'; }).join('') + '</tr></thead><tbody>' + fields.map(function (field) { return '<tr><th scope="row">' + field[0] + '</th>' + comparisonSelection.map(function (item) { return '<td>' + escapeHtml(value(item.card, field[1])) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div><p>Use All specifications for each phone\'s original source and remaining gaps.</p>';
+    var fields = [
+      ["Processor", ["chipset"]], ["GPU", ["gpu"]],
+      ["Display", ["display_type", "display_type_description"]],
+      ["Resolution", ["display_resolution", "display_resolution_description"]],
+      ["Refresh rate", ["display_refresh_max_hz", "display_refresh_description"]],
+      ["Main camera", ["rear_main_mp", "rear_camera_system"]],
+      ["Ultrawide", ["rear_ultrawide_mp"]], ["Optical stabilization", ["ois"]],
+      ["Battery", ["battery_mah_typical", "battery_capacity_description", "battery_and_charging"]],
+      ["Charging", ["wired_charging_max_w", "charging_description"]],
+      ["Software / updates", ["security_support_years", "security_update_policy", "operating_system"]],
+      ["Water / dust resistance", ["ip_rating"]]
+    ];
+    function evidence(card, keys) {
+      var key = keys.find(function (name) {
+        var record = card.specifications && card.specifications[name];
+        return record && record.value != null && String(record.value).trim() !== "";
+      });
+      if (!key) return { html: '<span class="research-missing-evidence">Not confirmed</span>', confirmed: false };
+      var item = card.specifications[key];
+      var text = (key === "chipset" && /ghz/i.test(String(item.value)) ? specificationLabel(key, item) + ": " : "") + specValue(key, item);
+      var source = String(item.source_url || "");
+      var link = /^https:\/\/[^\s<>"']+$/i.test(source)
+        ? ' <a href="' + escapeHtml(source) + '" target="_blank" rel="noopener noreferrer" aria-label="Source for ' + escapeHtml(key) + '">Source</a>'
+        : ' <small>(source link unavailable)</small>';
+      return { html: escapeHtml(text) + link, confirmed: true };
+    }
+    var totals = comparisonSelection.map(function (selected) {
+      return fields.filter(function (field) { return evidence(selected.card, field[1]).confirmed; }).length;
+    });
+    var header = comparisonSelection.map(function (selected, index) {
+      var variants = selected.rows.filter(function (row) { return row.ram_gb != null || row.storage_gb != null; }).map(function (row) {
+        return (row.ram_gb != null ? row.ram_gb + 'GB' : 'RAM not stated') + ' / ' +
+          (row.storage_gb != null ? row.storage_gb + 'GB' : 'storage not stated');
+      });
+      return '<th scope="col">' + escapeHtml(displayPhoneName(selected.card)) +
+        '<br><small>' + escapeHtml(Array.from(new Set(variants)).join('; ') || 'Memory not confirmed') +
+        '</small><br><small>' + totals[index] + '/' + fields.length + ' documented comparison fields</small></th>';
+    }).join('');
+    var rows = fields.map(function (field) {
+      return '<tr><th scope="row">' + escapeHtml(field[0]) + '</th>' +
+        comparisonSelection.map(function (selected) { return '<td>' + evidence(selected.card, field[1]).html + '</td>'; }).join('') +
+        '</tr>';
+    }).join('');
+    comparePanel.innerHTML = '<div class="research-comparison-heading"><h3>Compare your shortlist (' +
+      comparisonSelection.length + '/3)</h3><button type="button" class="btn btn-ghost" data-research-compare-clear>Clear comparison</button></div>' +
+      '<p>Side-by-side documented specifications with per-field evidence links. Missing data is not a disadvantage or a zero score. There is no performance winner asserted from specification differences alone.</p>' +
+      '<div class="research-table-scroll" role="region" aria-label="Phone specification comparison" tabindex="0">' +
+      '<table class="research-spec-table"><caption>Documented specifications and evidence for selected models</caption><thead><tr><th scope="col">Specification</th>' +
+      header + '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
+      '<p>Verify exact RAM/storage, regional variant, and current retailer listing before buying. Manufacturer claims are not hands-on test results.</p>';
   }
 
   function sortResearchMatches(matches, query) {
