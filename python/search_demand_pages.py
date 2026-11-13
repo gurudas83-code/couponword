@@ -97,3 +97,228 @@ def publish_search_demand(destination: Path) -> str:
         ET.SubElement(node, f"{{{ns}}}lastmod").text = "2026-11-12"
     tree.write(sitemap, encoding="utf-8", xml_declaration=True)
     return url
+
+
+
+# The 30-phone pilot is an editorial RESEARCH PRIORITY, not an ordered
+# sales/performance ranking. Reuse the existing evidence-gated 50-page publisher
+# instead of creating 20 thin, duplicate or unsupported indexable model pages.
+TOP30_EN = "/seo/top-30-phone-research-india.html"
+TOP30_HI = "/hi/seo/top-30-phone-research-india.html"
+TOP30_FILE = ROOT / "data/top30_research_pilot_20261113.json"
+TOP30_GROUPS = (
+    ("EDITORIAL", "Under-₹25,000 editorial references", "₹25,000 के अंदर संपादकीय स्रोतों से चयन"),
+    ("MARKET", "Models cited in India market reports", "भारतीय बाजार रिपोर्टों में उल्लिखित मॉडल"),
+    ("HISTORICAL_DEMAND", "Historical search-demand research", "ऐतिहासिक सर्च-डिमांड पर आधारित रिसर्च"),
+    ("CONTROL", "Comparison and consistency baselines", "तुलना और परिणाम-जाँच के संदर्भ मॉडल"),
+)
+
+
+def publish_top30_research_hubs(destination: Path) -> list[str]:
+    """Publish two useful bilingual hubs, reusing existing canonical model pages.
+
+    Do not index or create a new model detail page without that model passing the
+    current 50-page manufacturer evidence and editorial admission checks.
+    """
+    from urllib.parse import urlencode
+    from python.phone_research_pages import (
+        EDITORIAL_MODEL_KEYS, accepted_specs, eligible, model_title, slug_for,
+        specification_label, specification_value,
+    )
+
+    pilot = json.loads(TOP30_FILE.read_text(encoding="utf-8"))
+    catalogue = json.loads(
+        (destination / "data/mobile_research_catalogue.json").read_text(encoding="utf-8")
+    )
+    cards = {card["model_key"]: card for card in catalogue["model_cards"]}
+    models = pilot["selected_models"]
+    keys = [row["model_key"] for row in models]
+    if pilot.get("document_type") != "READ_ONLY_TOP30_RESEARCH_PRIORITY_PILOT":
+        raise RuntimeError("Top30 pilot manifest has unexpected publication authority")
+    if len(cards) != 232 or len(keys) != 30 or len(set(keys)) != 30:
+        raise RuntimeError("Top30 pilot must preserve 30 distinct existing model keys")
+    if any(key not in cards for key in keys):
+        raise RuntimeError("Top30 pilot contains a non-canonical research identity")
+    group_counts = {group: sum(row["source_group"] == group for row in models)
+                    for group, _, _ in TOP30_GROUPS}
+    if group_counts != {"EDITORIAL": 10, "MARKET": 3, "HISTORICAL_DEMAND": 15, "CONTROL": 2}:
+        raise RuntimeError("Top30 selection grouping changed without editorial review")
+
+    approved = {key for key in EDITORIAL_MODEL_KEYS
+                if key in cards and eligible(cards[key])}
+    # A linked detail page is permitted ONLY when the existing editorial
+    # publisher will generate its matching canonical route.
+    if len(approved) != 50:
+        raise RuntimeError("Existing manufacturer-evidence SEO gate is not ready")
+
+    published_count = sum(key in approved for key in keys)
+    styles = ('<link rel="stylesheet" href="/assets/phone-guides.css?v=20261104">'
+              '<style>.cw-pilot-wrap{max-width:1100px;margin:auto;padding:1rem}'
+              '.cw-pilot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1rem}'
+              '.cw-pilot-card{border:1px solid #ccd6e0;border-radius:14px;padding:1rem;background:#fff}'
+              '.cw-pilot-card h3{margin-top:.25rem}.cw-pilot-card li{margin:.4rem 0}'
+              '.cw-pilot-note{background:#eef5fa;padding:1rem;border-left:4px solid #276a96}'
+              '.cw-pilot-links a{margin-right:1rem}.cw-pilot-card{overflow-wrap:anywhere}</style>')
+    output = []
+    for hindi, path, other in (
+        (False, TOP30_EN, TOP30_HI), (True, TOP30_HI, TOP30_EN)
+    ):
+        title = ("भारत के 30 प्राथमिकता वाले स्मार्टफोन: स्रोत-आधारित रिसर्च"
+                 if hindi else
+                 "30 India smartphone research priorities — sources and comparisons")
+        description = ("30 मौजूदा मॉडल, दस्तावेज़ित स्पेसिफिकेशन, प्रमाण की सीमाएँ और तुलना के लिंक। यह बिक्री या परफॉर्मेंस रैंकिंग नहीं है।"
+                       if hindi else
+                       "Explore 30 selected Indian smartphone research models, original specification sources, known gaps and exact-variant comparison. Not a top-selling or performance ranking.")
+        group_sections = []
+        for group, en_heading, hi_heading in TOP30_GROUPS:
+            parts = []
+            for row in [x for x in models if x["source_group"] == group]:
+                card = cards[row["model_key"]]
+                name = model_title(card)
+                specs = accepted_specs(card)
+                research_url = "/?" + urlencode({"q": name}) + "#mobileResearchSearch"
+                exact_page = ("/hi/phones/" if hindi else "/phones/") + slug_for(card) + "/"
+                is_published = row["model_key"] in approved
+                target = exact_page if is_published else research_url
+                status = (("निर्माता-स्रोत वाला विस्तृत पेज" if hindi else "Source-linked model page")
+                          if is_published else
+                          ("मॉडल का रिसर्च रिकॉर्ड; अलग SEO पेज अभी स्वीकृत नहीं" if hindi
+                           else "Research record; standalone SEO page not yet approved"))
+                facts = []
+                for key, item in specs[:3]:
+                    label = specification_label(key, item, hindi=hindi)
+                    value = specification_value(key, item)
+                    source = str(item["source_url"])
+                    # The source was previously admitted by the common
+                    # specification evidence adapter; the URL is not a claim
+                    # of independent device laboratory testing.
+                    facts.append(
+                        '<li>' + esc(label) + ': <strong>' + esc(value[:160]) +
+                        '</strong> · <a href="' + esc(source) +
+                        '" rel="noopener noreferrer"> ' +
+                        ("स्रोत" if hindi else "source") + '</a></li>'
+                    )
+                if not facts:
+                    facts.append('<li>' + ("इस रिकॉर्ड में अभी पर्याप्त फ़ील्ड-स्रोत नहीं हैं।"
+                                          if hindi else
+                                          "Sufficient source-linked technical fields are still pending.") + '</li>')
+                fact_note = ("दस्तावेज़ित जानकारी, वास्तविक दुनिया की परफॉर्मेंस रैंकिंग नहीं।"
+                             if hindi else
+                             "Documented facts, not a measured real-world performance ranking.")
+                parts.append(
+                    '<article class="cw-pilot-card" id="phone-' + esc(slug_for(card)) + '">' +
+                    '<h3>' + esc(name) + '</h3><p>' + esc(status) + '</p>' +
+                    '<ul>' + "".join(facts) + '</ul><p><small>' + esc(fact_note) +
+                    '</small></p><p class="cw-pilot-links"><a href="' + esc(target) + '">' +
+                    ("स्रोत/मॉडल देखें" if hindi else "View documented model / research") +
+                    '</a> <a href="' + esc(research_url) + '">' +
+                    ("रिसर्च टूल में खोजें" if hindi else "Open research search") +
+                    '</a></p></article>'
+                )
+            heading = hi_heading if hindi else en_heading
+            group_sections.append(
+                '<section><h2>' + esc(heading) + '</h2><div class="cw-pilot-grid">' +
+                "".join(parts) + '</div></section>'
+            )
+
+        explainer = (
+            '<p>यह 30 मॉडल सिर्फ शोध की प्राथमिकता हैं, भारत के 30 सबसे अधिक बिकने वाले या सर्वश्रेष्ठ फोन नहीं। '
+            'चयन में 6 नवंबर की संपादकीय सूची, 2026 की Q2/Q3 बाजार रिपोर्टों और सितंबर 2025–अगस्त 2026 के ऐतिहासिक '
+            'Keyword Planner डेटा का उपयोग हुआ है। दोनों तिमाही रिपोर्टों को एक संयुक्त बिक्री रैंकिंग नहीं बनाया गया।</p>'
+            '<p>निर्माता की स्पेसिफिकेशन वास्तविक बैटरी बैकअप, कैमरा गुणवत्ता या गेमिंग FPS नहीं मापती। '
+            'भारत के RAM/स्टोरेज वेरिएंट, स्रोत की जाँच-तिथि, परीक्षण पद्धति और कीमत/स्टॉक अलग से जाँचें। '
+            'जिन मॉडलों पर पर्याप्त तकनीकी प्रमाण नहीं है, उनके लिए गलत या पतला SEO पेज बनाने के बजाय रिसर्च टूल दिया गया है।</p>'
+            if hindi else
+            '<p>These 30 phones are a research worklist, NOT India’s current top 30 by sales '
+            'or best-performance winners. We combined a November editorial coverage audit, Q2/Q3 2026 '
+            'market references and historical Google Ads planning signals (September 2025–August 2026). '
+            'The market reports do not establish a combined top-30 model sales ranking.</p>'
+            '<p>Manufacturer specifications describe declared hardware, not measured battery endurance, '
+            'camera quality or sustained game frame rate. Exact India RAM/storage, testing protocols, '
+            'price and current stock need separate verification. Where a model lacks admitted evidence, '
+            'we provide research access rather than publishing a thin or misleading model SEO page.</p>'
+        )
+        heading = ("30 स्मार्टफोन: साक्ष्य और तुलना से शुरुआत"
+                   if hindi else "30 smartphones to research with evidence")
+        links = (
+            '<p><a href="/hi/phones/">निर्माता-स्रोत वाले मॉडल</a> · '
+            '<a href="/hi/phones/under-25000/">₹25,000 रिसर्च गाइड</a> · '
+            '<a href="/hi/compare/">फोन की तुलना</a> · '
+            '<a href="/hi/guides/phone-budget-guides/">खरीद गाइड</a></p>'
+            if hindi else
+            '<p><a href="/phones/">Source-linked model hub</a> · '
+            '<a href="/phones/under-25000/">Under-₹25,000 research</a> · '
+            '<a href="/compare/">Compare phones</a> · '
+            '<a href="/guides/phone-budget-guides/">Buying guides</a></p>'
+        )
+        note = (f'{published_count} मॉडल पर मौजूदा स्वीकृत स्रोत-पेज हैं; शेष के लिए रिसर्च टूल खोलें।'
+                if hindi else
+                f'{published_count} models already have evidence-approved canonical pages; the remaining models link to research rather than unsupported SEO detail URLs.')
+        schema = {
+            "@context": "https://schema.org", "@type": "CollectionPage", "name": title,
+            "url": BASE + path, "inLanguage": "hi-IN" if hindi else "en-IN",
+            "description": description,
+            "isPartOf": {"@type": "WebSite", "name": "Coupon World", "url": BASE + "/"}
+        }
+        jsonld = json.dumps(schema, ensure_ascii=False).replace("<", "\\u003c")
+        body = (
+            '<!doctype html><html lang="' + ("hi-IN" if hindi else "en-IN") +
+            '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+            '<title>' + esc(title) + ' | Coupon World</title>' +
+            '<meta name="description" content="' + esc(description) + '">' +
+            '<meta name="robots" content="index,follow,max-image-preview:large">' +
+            '<link rel="canonical" href="' + esc(BASE + path) + '">' +
+            '<link rel="alternate" hreflang="en-IN" href="' + esc(BASE + TOP30_EN) + '">' +
+            '<link rel="alternate" hreflang="hi-IN" href="' + esc(BASE + TOP30_HI) + '">' +
+            '<meta property="og:title" content="' + esc(title) + '">' +
+            '<meta property="og:description" content="' + esc(description) + '">' +
+            '<meta property="og:url" content="' + esc(BASE + path) + '">' +
+            styles + '<script type="application/ld+json">' + jsonld + '</script></head><body>' +
+            '<a class="skip" href="#main">Skip to content</a>' +
+            '<header><nav aria-label="Main navigation"><a href="/">Coupon World</a> · ' +
+            '<a href="' + esc(other) + '">' + ("English" if hindi else "हिंदी") +
+            '</a> · <a href="/phones/">Phone specifications</a></nav></header>' +
+            '<main id="main" class="cw-pilot-wrap"><nav class="crumbs" aria-label="Breadcrumb">' +
+            '<a href="/">Home</a> / <a href="/phones/">Phones</a> / ' +
+            ("30 प्राथमिकता मॉडल" if hindi else "30 research priorities") + '</nav>' +
+            '<article><div class="eyebrow">COUPON WORLD / EVIDENCE FIRST</div><h1>' +
+            esc(heading) + '</h1><p class="lead">' + esc(description) +
+            '</p><aside class="cw-pilot-note"><strong>' + esc(note) + '</strong></aside>' +
+            '<section><h2>' + ("यह चयन कैसे हुआ" if hindi else "How this shortlist was selected") +
+            '</h2>' + explainer +
+            '<p><a href="https://counterpointresearch.com/en/insights/top-5-smartphone-model-share-8-countries">Counterpoint Q2 2026</a> · ' +
+            '<a href="https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season">Omdia Q3 2026</a></p>' +
+            '</section>' + "".join(group_sections) +
+            '<section><h2>' + ("अगला सही कदम" if hindi else "Next research step") +
+            '</h2><p>' +
+            ("अपनी जरूरत और बजट की सीमा लिखकर सही मॉडल चुनें। खरीदने से पहले विक्रेता की कीमत, RAM/स्टोरेज और उपलब्धता जाँचें।"
+             if hindi else
+             "Compare the documented facts for your own needs, then check exact RAM/storage, current availability and final prices at the retailer.") +
+            '</p>' + links + '</section></article></main>' +
+            '<footer class="cw-pilot-wrap">' +
+            ("संपादकीय शोध; न कोई नया परफॉर्मेंस रैंक, न लाइव कीमत या स्टॉक का दावा।"
+             if hindi else
+             "Editorial research only. No current price, stock, measured-performance winner or independently certified top-30 sales rank.") +
+            '</footer></body></html>'
+        )
+        target = destination / path.lstrip("/")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(body, encoding="utf-8")
+        output.append(BASE + path)
+
+    # One canonical per language; only substantive hubs enter the sitemap.
+    ns = "http://www.sitemaps.org/schemas/sitemap/0.9"
+    ET.register_namespace("", ns)
+    sitemap = destination / "sitemap.xml"
+    tree = ET.parse(sitemap)
+    root = tree.getroot()
+    existing = {node.text for node in root.findall(f"{{{ns}}}url/{{{ns}}}loc")}
+    for url in output:
+        if url in existing:
+            raise RuntimeError("Duplicate top30 canonical URL: " + url)
+        node = ET.SubElement(root, f"{{{ns}}}url")
+        ET.SubElement(node, f"{{{ns}}}loc").text = url
+        ET.SubElement(node, f"{{{ns}}}lastmod").text = pilot["created_date"]
+    tree.write(sitemap, encoding="utf-8", xml_declaration=True)
+    print(f"Top30 bilingual research hubs: 2; selected: 30; existing model pages: {published_count}")
+    return output
