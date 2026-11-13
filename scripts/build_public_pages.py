@@ -438,6 +438,11 @@ def build(output: Path) -> Path:
     from python.search_demand_pages import publish_search_demand
     publish_search_demand(output)
 
+    # Reuse the approved model publication gate: two bilingual Top30 research hubs,
+    # no thin unverified model SEO pages, new scores, offers or ranking engine.
+    from python.search_demand_pages import publish_top30_research_hubs
+    publish_top30_research_hubs(output)
+
     # Consolidate repeated/unsupported landing-page batches into reviewed guides.
     from python.publication_policy import apply_policy
     apply_policy(output)

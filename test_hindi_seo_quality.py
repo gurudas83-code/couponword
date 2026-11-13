@@ -47,6 +47,7 @@ class HindiSEOContracts(unittest.TestCase):
         cls.routes=["/hi/seo/"+g["slug"]+".html" for g in cls.guides]
         cls.routes+=["/hi/phones/"+slug_for(card)+"/" for card in cls.phones]
         cls.routes+=["/hi/guides/phone-budget-guides/","/hi/phones/","/hi/budgets/"]
+        cls.routes+=["/hi/seo/top-30-phone-research-india.html"]
         cls.sitemap={e.text for e in ET.parse(PUBLIC/"sitemap.xml").getroot().iter() if e.tag.endswith("}loc")}
 
     def test_01_exact_twenty_english_topic_mirrors(self):
@@ -64,8 +65,8 @@ class HindiSEOContracts(unittest.TestCase):
             self.assertIn("स्पेसिफिकेशन",get("/hi/phones/"+slug_for(card)+"/"))
 
     def test_03_unique_hindi_canonical_urls_and_single_h1(self):
-        self.assertEqual(len(self.routes),73)
-        self.assertEqual(len(set(self.routes)),73)
+        self.assertEqual(len(self.routes),74)
+        self.assertEqual(len(set(self.routes)),74)
         for route in self.routes:
             parsed=Parsed(get(route))
             self.assertEqual(parsed.lang,"hi-IN",route)
