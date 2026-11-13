@@ -543,9 +543,9 @@
         var networkEvidence = specs.network_support;
         var networkValue = String(networkEvidence && networkEvidence.value || "");
         var networkSource = String(networkEvidence && networkEvidence.source_url || "");
-        var manufacturerSources = (card.source_urls || []).concat(card.manufacturer_urls || []);
-        var manufacturerDomains = /(?:samsung\.com|apple\.com|mi\.com|xiaomi\.com|oneplus\.(?:com|in)|oppo\.com|vivo\.com|realme\.com|motorola\.(?:com|in)|nothing\.tech|google\.com|poco\.in|iqoo\.com|honor\.com|infinixmobility\.com|tecno-mobile\.com|hmd\.com|nokia\.com)/i;
-        var sourcedByManufacturer = /^https:\/\//i.test(networkSource) && manufacturerDomains.test(new URL(networkSource).hostname) && manufacturerSources.some(function (url) { return String(url).indexOf(new URL(networkSource).hostname) >= 0; });
+        var manufacturerDomains = /^(?:[a-z0-9-]+\.)*(?:samsung\.com|apple\.com|mi\.com|xiaomi\.com|oneplus\.com|oneplus\.in|oppo\.com|vivo\.com|realme\.com|motorola\.com|motorola\.in|nothing\.tech|google\.com|poco\.in|iqoo\.com|honor\.com|infinixmobility\.com|tecno-mobile\.com|hmd\.com|nokia\.com)$/i;
+        var sourceHost = /^https:\/\/([^\/:?#]+)/i.exec(networkSource);
+        var sourcedByManufacturer = !!(sourceHost && manufacturerDomains.test(sourceHost[1]));
         if (!sourcedByManufacturer || !/(?:\b5g\b|\bnr\b|n(?:1|3|5|8|28|40|41|77|78|79)\b)/i.test(networkValue)) return;
       }
       if (tokens.length) {
