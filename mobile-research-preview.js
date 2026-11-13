@@ -718,7 +718,7 @@
     }).join('');
     comparePanel.innerHTML = '<div class="research-comparison-heading"><h3>Compare your shortlist (' +
       comparisonSelection.length + '/3)</h3><button type="button" class="btn btn-ghost" data-research-compare-clear>Clear comparison</button></div>' +
-      '<p>Side-by-side documented specifications with per-field evidence links. Missing data is not a disadvantage or a zero score. Specification differences alone do not establish real-world performance winners.</p>' +
+      '<p>Side-by-side documented specifications with per-field evidence links. Missing data is not a disadvantage or a zero score. There is no performance winner asserted from specification differences alone.</p>' +
       '<div class="research-table-scroll" role="region" aria-label="Phone specification comparison" tabindex="0">' +
       '<table class="research-spec-table"><caption>Documented specifications and evidence for selected models</caption><thead><tr><th scope="col">Specification</th>' +
       header + '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
