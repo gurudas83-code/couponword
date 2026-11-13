@@ -142,6 +142,24 @@ def run(root: Path):
                     assert "research coverage" in response_text, (width, response_text[:400])
                     assert "performance-based recommendation" in response_text, width
 
+                    # Priority answers are evidence-limited, not synthetic benchmark rankings.
+                    priority_cautions = {
+                        "camera": "megapixels alone do not establish photo quality",
+                        "battery": "capacity is not measured battery life",
+                        "gaming": "chipset names alone do not establish sustained fps",
+                        "software": "an update promise is not the remaining support period",
+                        "reliability": "an ip rating does not establish drop resistance",
+                    }
+                    for priority, caution in priority_cautions.items():
+                        count = page.evaluate("""priority => window.CouponWorldMobileResearch.search(
+                            'best ' + priority + ' phone under 30000'
+                        ).length""", priority)
+                        assert count > 0, (width, priority, 'no research results')
+                        priority_text = page.locator("#mobileResearchResults").inner_text().lower()
+                        assert caution in priority_text, (width, priority, priority_text[:500])
+                        assert "research coverage" in priority_text, (width, priority)
+                        assert "check eligible recommendations" in priority_text, (width, priority)
+
 
                     page.evaluate("window.CouponWorldMobileResearch.search('Galaxy A36 8GB 256GB')")
                     names = page.locator("#mobileResearchResults [data-mobile-model-card]")
