@@ -797,6 +797,24 @@ body.clean-ui .footer{border-top-color:#dce4ed}
   background:rgba(255,255,255,.035);
 }
 
+.ai-offer-status{
+  margin:0 0 1rem;
+  padding:13px 14px;
+  border:1px solid rgba(255,213,92,.45);
+  border-radius:16px;
+  background:rgba(255,213,92,.10);
+  color:#fff4c2;
+}
+
+.ai-offer-status strong{
+  display:block;
+  margin-bottom:.35rem;
+}
+
+.ai-offer-status p{
+  margin:0;
+}
+
 .ai-detail-title{
   margin-bottom:7px;
   color:#fff;
