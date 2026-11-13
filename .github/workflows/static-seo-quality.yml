@@ -13,3 +13,7 @@ jobs:
           python-version: '3.12'
       - name: Validate sitemap, robots and homepage metadata
         run: python scripts/quality_gate.py
+      - name: JavaScript syntax validation
+        run: |
+          node --check app.js
+          node --check mobile-research-preview.js
