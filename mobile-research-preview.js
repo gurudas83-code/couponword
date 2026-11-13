@@ -633,7 +633,7 @@
     function hasEvidence(key) {
       var item = specs[key];
       return !!(item && item.value != null && String(item.value).trim() !== "" &&
-        /^https:\/\/[^\\s<>"']+$/i.test(String(item.source_url || "")));
+        /^https:\/\/[^\s<>"']+$/i.test(String(item.source_url || "")));
     }
     if (/camera|कैमरा/.test(text)) {
       checks = [["OIS source", ["ois"]], ["Camera hardware", ["rear_main_mp", "rear_camera_system"]]];
