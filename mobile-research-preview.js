@@ -539,7 +539,9 @@
       if (c.minimumBattery != null && !(Number(spec("battery_mah_typical")) >= c.minimumBattery)) return;
       if (c.minimumRefresh != null && !(Number(spec("display_refresh_max_hz")) >= c.minimumRefresh)) return;
       if (c.needOis && !/^(yes|true|supported)$/i.test(String(spec("ois") || ""))) return;
-      if (c.need5g) {
+      if (c.need5g && normalizeResearch((card.brand + " " + card.model).replace(/\b5g\b/ig, "")) !== text) {
+        // An exact model-name lookup is an identity search, not proof of 5G support.
+        // Explicit category searches still require manufacturer-sourced network evidence.
         var networkEvidence = specs.network_support;
         var networkValue = String(networkEvidence && networkEvidence.value || "");
         var networkSource = String(networkEvidence && networkEvidence.source_url || "");
