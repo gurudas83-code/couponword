@@ -17,3 +17,5 @@ jobs:
         run: |
           node --check app.js
           node --check mobile-research-preview.js
+      - name: Validate research and comparison evidence gates
+        run: python scripts/research_quality_gate.py
