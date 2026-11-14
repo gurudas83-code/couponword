@@ -475,7 +475,11 @@ def publish_answers(destination):
                 body+=f'<p><a href="{("/hi" if hi else "")+existing}">Read the established budget guide</a></p>'
             if not indexed:
                 body+='<p class="note">Research limitations remain: some evidence is incomplete, or a dedicated buying guide already covers this decision. Use the original sources and check the exact variant before choosing.</p>'
-            save(dest,route(g,hi),document(title,body,route(g,hi),hi,indexed))
+            # Only reviewed, evidence-backed groups become public answer pages.
+            # The remaining historical groups stay in the coverage ledger and
+            # are deliberately not emitted as crawlable page permutations.
+            if indexed:
+                save(dest,route(g,hi),document(title,body,route(g,hi),hi,True))
         ledger.append(dict(group_id=g['id'],question=g['query'],aliases=g.get('aliases',[]),query_ids=g['query_ids'],route=route(g),hindi_route=route(g,True),indexable=indexed,matched_model_keys=[c['model_key'] for c in rows],mandatory=g['must'],preferred=g['preferred'],price_weight=0,live_offer=False,status='INDEXABLE_RESEARCH_ANSWER' if indexed else 'NOINDEX_EVIDENCE_OR_DUPLICATE_HOLD',existing_intent_page=existing))
     # The public directory is a curated navigation aid, not a keyword dump.
     for hi in (False,True):
@@ -483,7 +487,7 @@ def publish_answers(destination):
         title='मोबाइल खरीदने के सवाल और स्रोत-आधारित जवाब' if hi else 'Phone buying questions, answered with evidence'
         body=f'<h1>{title}</h1><p>Start with a concrete buying question. These answers keep mandatory conditions, preferences, dated references and unknowns visible. They do not claim live prices, a tested best phone or measured search volume.</p><p>Reviewed {REVIEWED} · <a href="/phones/">Source-linked models</a> · <a href="/compare/">Model comparisons</a></p><ul>{links}</ul><p><a href="{HI if hi else EN}coverage/">Question coverage and evidence gaps</a></p>'
         save(dest,HI if hi else EN,document(title,body,HI if hi else EN,hi,True))
-        table=''.join(f'<tr><td><a href="{x["hindi_route"] if hi else x["route"]}">{esc(x["question"])}</a></td><td>{len(x["matched_model_keys"])}</td><td>{"Reviewed research answer" if x["indexable"] else "Evidence gap or existing guide"}</td></tr>' for x in ledger)
+        table=''.join((f'<tr><td><a href="{x["hindi_route"] if hi else x["route"]}">{esc(x["question"])}</a></td>' if x["indexable"] else f'<tr><td>{esc(x["question"])}</td>') + f'<td>{len(x["matched_model_keys"])}</td><td>{"Reviewed research answer" if x["indexable"] else "Evidence gap or existing guide"}</td></tr>' for x in ledger)
         body='<h1>Question coverage and evidence gaps</h1><p>The recovered historical file contains 334 groups representing 1,000 wordings. Additional benchmark and remembered questions are reconciled by semantic requirements. The separate synthetic regression corpus and advertising keyword permutations are not evidence of search demand or automatic page-publication targets.</p><div class="table-wrap"><table><thead><tr><th>Question</th><th>Documented matches</th><th>Index status</th></tr></thead><tbody>'+table+'</tbody></table></div>'
         path=(HI if hi else EN)+'coverage/'
         save(dest,path,document('Question coverage',body,path,hi,False))

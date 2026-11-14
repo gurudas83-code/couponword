@@ -37,11 +37,20 @@ class AnswersTests(unittest.TestCase):
         for p in json.loads((ROOT/'data/mobile_query_benchmark_phase3.json').read_text()):self.assertIn(p['id'],covered)
         self.assertEqual(len(self.report['answers']),len(self.groups))
 
-    def test_mass_query_pages_are_not_published(self):
-        self.assertFalse((PUBLIC/'answers').exists())
-        self.assertFalse((PUBLIC/'hi/answers').exists())
-        self.assertFalse((PUBLIC/'data/mobile_query_answer_coverage.json').exists())
-        self.assertFalse(any('/answers/' in u for u in self.sitemap))
+    def test_only_reviewed_answer_hubs_are_published(self):
+        coverage_path=PUBLIC/'data/mobile_query_answer_coverage.json'
+        self.assertTrue(coverage_path.exists())
+        coverage=json.loads(coverage_path.read_text(encoding='utf-8'))
+        self.assertEqual(coverage['historical_wordings'],1000)
+        self.assertEqual(coverage['answer_groups'],len(self.groups))
+        self.assertEqual(coverage['indexable_groups'],12)
+        self.assertEqual(coverage['noindex_groups'],len(self.groups)-12)
+        self.assertTrue((PUBLIC/'answers').exists())
+        self.assertTrue((PUBLIC/'hi/answers').exists())
+        answer_urls={u for u in self.sitemap if '/answers/' in u and not u.endswith('/coverage/')}
+        self.assertEqual(len(answer_urls),26)
+        self.assertLessEqual(len(list((PUBLIC/'answers').iterdir())),14)
+        self.assertLessEqual(len(list((PUBLIC/'hi/answers').iterdir())),14)
 
     def test_price_and_memory_stay_on_the_same_reference(self):
         g=parsed_group('8GB RAM 256GB phone under 20000','T')

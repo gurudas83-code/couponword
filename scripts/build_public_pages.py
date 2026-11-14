@@ -447,6 +447,12 @@ def build(output: Path) -> Path:
     from python.publication_policy import apply_policy
     apply_policy(output)
 
+    # Publish only reviewed, source-backed question answers after cleanup. The
+    # publisher groups 1,000 historical wordings into semantic questions and
+    # adds only the approved answer routes to the sitemap.
+    from python.mobile_query_answers import publish_answers
+    publish_answers(output)
+
     # The source sitemap still lists historical catalogue URLs. Keep those
     # pages online, but do not encourage indexing without current offer proof.
     _prune_unverified_product_sitemap_entries(output)
