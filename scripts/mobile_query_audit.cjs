@@ -45,7 +45,7 @@ setImmediate(() => {
   const app = window.CouponWorldMobileResearch;
   assert(app && typeof app.search === "function", "Existing mobile research API missing");
   const grouped = {}, zero = [], failures = [];
-  let withMatches = 0, totalReturned = 0, sourceSupported = 0, zeroWithUnpricedLeads = 0;
+  let withMatches = 0, exactMatches = 0, fallbackAnswers = 0, totalReturned = 0, sourceSupported = 0, zeroWithUnpricedLeads = 0;
   for (const item of tests) {
     let rows;
     try {
@@ -60,6 +60,8 @@ setImmediate(() => {
       if (/<a[^>]+href="http:\/\//i.test(html)) throw new Error("Insecure outgoing retailer link");
       if (rows.length) {
         withMatches++;
+        if (html.includes("research-related-repository")) fallbackAnswers++;
+        else exactMatches++;
         totalReturned += rows.length;
         sourceSupported += rows.filter(row =>
           Object.values(row.card.specifications || {}).some(v => v.source_url && v.source_url.startsWith("https://"))
@@ -80,6 +82,9 @@ setImmediate(() => {
     checked_at_utc:new Date().toISOString(),
     mode:"RESEARCH_ANSWER_REGRESSION_AUDIT_NOT_RETAILER_OR_PERFORMANCE_VERIFICATION",
     corpus_total:tests.length,
+    answered_with_repository_mobiles:withMatches,
+    exact_catalogue_matches:exactMatches,
+    related_repository_fallback_answers:fallbackAnswers,
     with_research_matches:withMatches,
     zero_research_matches:tests.length-withMatches-failures.length,
     zero_with_separate_unpriced_research_leads:zeroWithUnpricedLeads,
@@ -89,13 +94,15 @@ setImmediate(() => {
     by_query_tag:grouped,
     unresolved_query_examples:zero,
     runtime_failures:failures.slice(0,100),
-    interpretation:"Research matches are NOT ranked winners, buyable offers or all suitable India devices. 0 matches means source coverage gap or hard constraints, NOT no product exists."
+    interpretation:"Every query returns only canonical mobile catalogue records. Exact matches are separated from related fallback answers; fallback answers do NOT satisfy every query constraint and are not ranked winners, buyable offers or proof that a suitable device exists."
   };
   fs.mkdirSync(path.dirname(output), {recursive:true});
   fs.writeFileSync(output, JSON.stringify(result,null,2)+"\n", "utf8");
   console.log(JSON.stringify({
     corpus:result.corpus_total,
-    with_research_matches:withMatches,
+    answered_with_repository_mobiles:withMatches,
+    exact_catalogue_matches:exactMatches,
+    related_repository_fallback_answers:fallbackAnswers,
     zero_research_matches:result.zero_research_matches,
     zero_with_separate_unpriced_research_leads:zeroWithUnpricedLeads,
     runtime_failures:result.hard_runtime_failures,
