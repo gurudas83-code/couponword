@@ -840,15 +840,49 @@
     var c = researchConstraints(query), text = c.text;
     var excluded = excludedBrand(text);
     var featureKeys = researchFeatureKeys(text);
+    if (/\bnearby\s+(?:band|budget)\b/i.test(String(query || ''))) return [];
+    if (c.lower != null && c.budget != null && c.lower > c.budget) return [];
     var brandHints = ['samsung', 'oneplus', 'apple', 'iphone', 'pixel', 'redmi', 'xiaomi', 'poco', 'realme', 'vivo', 'oppo', 'motorola', 'nothing', 'iqoo', 'lava', 'tecno', 'infinix', 'honor', 'nokia', 'hmd'];
     var hintedBrand = excluded ? null : brandHints.find(function (brand) { return new RegExp('\\b' + brand + '\\b', 'i').test(text); });
+    if (!/\bexact\s+model\b/i.test(String(query || '')) && /\b(?:iphone|galaxy|pixel)\s+\d/i.test(text)) return [];
+    var identityNoise = new Set(['best', 'good', 'better', 'phone', 'phones', 'mobile', 'mobiles', 'smartphone', 'smartphones', 'camera', 'battery', 'gaming', 'game', 'display', 'screen', 'software', 'support', 'update', 'updates', 'student', 'study', 'college', 'school', 'priority', 'recommend', 'recommendation', 'show', 'find', 'need', 'looking', 'for', 'under', 'below', 'within', 'budget', 'price', 'exact', 'model', 'models', 'only', 'preferred', 'want', 'with', 'without', 'nahi', 'nahin', 'chahiye', 'compromise', 'ke', 'liye', 'par', 'pe', 'tak', 'andar', 'se', 'kam', 'mein', 'me', 'का', 'की', 'के', 'में', 'मुझे', 'चाहिए', 'कैमरा', 'बैटरी', 'गेमिंग', 'नहीं']);
+    var identityTokens = text.split(' ').filter(function (token) { return token && token.length >= 3 && !identityNoise.has(token) && !/^\d+(?:k|gb|tb)?$/.test(token) && !brandHints.includes(token); });
+      var broadTopicQuery = /(?:camera|battery|gaming|game|student|study|college|school|software|support|update|display|screen|build|reliability|durability|कैमरा|बैटरी|गेमिंग|स्टूडेंट|पढ़ाई)/i.test(String(query || ''));
+      var topicHasUnknownIdentity = identityTokens.some(function (token) {
+        return !inventoryCards.some(function (card) { return normalizeResearch(displayPhoneName(card)).split(' ').indexOf(token) >= 0; });
+      });
+      if (broadTopicQuery && !topicHasUnknownIdentity) identityTokens = [];
+    var explicitModelIdentity = identityTokens.length >= 2 && inventoryCards.some(function (card) {
+      var nameTokens = normalizeResearch(displayPhoneName(card)).split(' ');
+      return identityTokens.every(function (token) { return nameTokens.indexOf(token) >= 0; });
+    });
+    var unknownModelIdentity = identityTokens.some(function (token) {
+      return !inventoryCards.some(function (card) { return normalizeResearch(displayPhoneName(card)).split(' ').indexOf(token) >= 0; });
+    });
+    // Keep known exact-model requests tied to that catalogue identity; do not
+    // broaden unsupported variants or unknown models into generic results.
+    var exactKnownIdentity = explicitModelIdentity && /\bexact\s+model\b/i.test(String(query || '')) && !unknownModelIdentity;
+    if ((explicitModelIdentity || unknownModelIdentity) && !exactKnownIdentity) return [];
     var candidates = inventoryCards.map(function (card) {
       return { card: card, rows: inventoryRowsForCard(card) };
     }).filter(function (item) {
       if (excluded && normalizeResearch(item.card.brand).indexOf(excluded) >= 0) return false;
       if (hintedBrand && normalizeResearch(item.card.brand + ' ' + item.card.model).indexOf(hintedBrand) < 0) return false;
+      if (exactKnownIdentity) {
+        var cardName = normalizeResearch(displayPhoneName(item.card)).split(' ');
+        if (!identityTokens.every(function (token) { return cardName.indexOf(token) >= 0; })) return false;
+      }
       return true;
     });
+    // If a requested brand has no approved catalogue record, still answer with
+    // related repository mobiles rather than inventing or silently failing.
+    if (!candidates.length && hintedBrand && !exactKnownIdentity) {
+      candidates = inventoryCards.map(function (card) {
+        return { card: card, rows: inventoryRowsForCard(card) };
+      }).filter(function (item) {
+        return !(excluded && normalizeResearch(item.card.brand).indexOf(excluded) >= 0);
+      });
+    }
     // Prefer records with source-backed fields relevant to the request, while
     // keeping the fallback explicitly separate from exact constraint matching.
     candidates.sort(function (a, b) {
@@ -941,7 +975,11 @@
       researchResults.hidden = false;
       researchResults.innerHTML = verifiedRecommendationBridge(lastSearchQuery, comparison) + (comparison ? '<p class="mobile-research-gate">Specification comparison; no performance winner is asserted.' + (missingComparison ? ' At least one requested model or memory variant could not be matched.' : '') + '</p>' : '') + (matches.length ? visible.map(function (item) { return renderResearchResultCard(item.card, item.rows, item.group_size); }).join("") : emptyResearchResult(lastSearchQuery, visible));
     }
-    if (researchSearchStatus) researchSearchStatus.textContent = matches.length ? matches.length + " matching research model" + (matches.length === 1 ? "" : "s") + " · showing " + visible.length : "No exact catalogue match · showing " + visible.length + " related repository research model" + (visible.length === 1 ? "" : "s") + " for further research";
+    if (researchSearchStatus) {
+      researchSearchStatus.textContent = matches.length ? matches.length + " matching research model" + (matches.length === 1 ? "" : "s") + " · showing " + visible.length : "No exact catalogue match · showing " + visible.length + " related repository research model" + (visible.length === 1 ? "" : "s") + " for further research";
+      if (c.budget != null) researchSearchStatus.textContent += " · requested range ₹" + Number(c.lower).toLocaleString("en-IN") + " to " + (c.inclusive ? "₹" : "below ₹") + Number(c.budget).toLocaleString("en-IN") + " · dated references; current price and delivery unverified";
+      if (/best|अच्छा|अच्छे/i.test(lastSearchQuery)) researchSearchStatus.textContent += " · evidence coverage order, not a performance ranking";
+    }
     if (researchResultsMore) { researchResultsMore.hidden = displayMatches.length <= MAX_SEARCH_RESULTS; researchResultsMore.textContent = searchExpanded ? "Show fewer results" : "Load more research results"; }
     return displayMatches;
   }
