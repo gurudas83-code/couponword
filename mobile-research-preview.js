@@ -694,7 +694,7 @@
     var launch = card.india_launch_date ? '<p class="mobile-research-launch">India launch: ' + escapeHtml(card.india_launch_date) + '</p>' : '';
     return '<article class="mobile-research-inventory-card mobile-research-result-card" data-mobile-model-card="' + escapeHtml(card.model_key) + '"><div class="mobile-research-inventory-body">' +
       '<div class="mobile-research-card-top"><span class="research-status">' + escapeHtml(status) + '</span><span class="research-status">Research only</span></div>' +
-      researchPhoneImage(card) + '<h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch + '<p class="mobile-research-variant">Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join("; ")) + '</p>' +
+      researchPhoneImage(card) + '<h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch + '<p class="mobile-research-variant">' + (variants.length ? 'Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join("; ")) : 'No exact variant recorded for this fallback record') + '</p>' +
       (groupSize > 1 ? '<p class="research-group-note">' + groupSize + ' matching catalogue entries grouped. Specifications below belong to the displayed record.</p>' : '') +
       (specs ? '<ul class="mobile-research-model-specs">' + specs + '</ul>' : '<p>Technical specifications are pending verification.</p>') + documentedContext(card, lastSearchQuery) + independentTestContext(card) +
       '<p class="research-source-note">' + (sourceItem ? link(sourceItem.source_url, "Specification source") : 'Specification source pending') + ' · Specification research snapshot: ' + escapeHtml(card.research_checked_at || sourceItem && (sourceItem.checked_at || sourceItem.checked_date) || 'date unavailable') + ' (not a live check)</p>' + (card.research_budget_reference ? '<p class="research-source-note">Budget filter uses a dated retailer observation: ' + escapeHtml(String(card.research_budget_reference.checked_at || 'date unavailable').match(/\d{4}-\d{2}-\d{2}/)?.[0] || String(card.research_budget_reference.checked_at || 'date unavailable')) + '. Current price and stock not verified.</p>' : '') +
@@ -836,13 +836,55 @@
       }).join('') + '</section>';
   }
 
-  function emptyResearchResult(query) {
+  function repositoryFallbackMatches(query) {
+    var c = researchConstraints(query), text = c.text;
+    var excluded = excludedBrand(text);
+    var featureKeys = researchFeatureKeys(text);
+    var brandHints = ['samsung', 'oneplus', 'apple', 'iphone', 'pixel', 'redmi', 'xiaomi', 'poco', 'realme', 'vivo', 'oppo', 'motorola', 'nothing', 'iqoo', 'lava', 'tecno', 'infinix', 'honor', 'nokia', 'hmd'];
+    var hintedBrand = excluded ? null : brandHints.find(function (brand) { return new RegExp('\\b' + brand + '\\b', 'i').test(text); });
+    var candidates = inventoryCards.map(function (card) {
+      return { card: card, rows: inventoryRowsForCard(card) };
+    }).filter(function (item) {
+      if (excluded && normalizeResearch(item.card.brand).indexOf(excluded) >= 0) return false;
+      if (hintedBrand && normalizeResearch(item.card.brand + ' ' + item.card.model).indexOf(hintedBrand) < 0) return false;
+      return true;
+    });
+    // Prefer records with source-backed fields relevant to the request, while
+    // keeping the fallback explicitly separate from exact constraint matching.
+    candidates.sort(function (a, b) {
+      function score(item) {
+        var specs = item.card.specifications || {};
+        var relevant = featureKeys.filter(function (key) {
+          var field = specs[key];
+          return field && field.value != null && /^https:\/\//i.test(String(field.source_url || ''));
+        }).length;
+        var evidence = Object.keys(specs).filter(function (key) {
+          var field = specs[key];
+          return field && field.value != null && /^https:\/\//i.test(String(field.source_url || ''));
+        }).length;
+        return relevant * 100 + evidence;
+      }
+      return score(b) - score(a) || String(a.card.model).localeCompare(String(b.card.model));
+    });
+    return candidates.slice(0, 3);
+  }
+
+  function relatedRepositoryResearch(query, items) {
+    if (!items.length) return '';
+    return '<section class="research-context research-related-repository">' +
+      '<h3>Related repository mobiles — exact request not confirmed</h3>' +
+      '<p>These are approved mobile records from our research catalogue. They are shown for further research only; they do not satisfy every budget, memory, brand or feature condition in the query.</p>' +
+      items.map(function (item) { return renderResearchResultCard(item.card, item.rows, 1); }).join('') +
+      '</section>';
+  }
+
+  function emptyResearchResult(query, fallback) {
     var c = researchConstraints(query);
     var message = "No documented match in our saved research for this request.";
     if (c.lower != null && c.budget != null && c.lower > c.budget) message = "The lower budget is higher than the upper budget. Please correct the range.";
     else if (c.ram != null || c.storage != null) message += " We cannot confirm the requested exact memory variant with all these conditions.";
     else if (c.budget != null) message += " No matching record passes this price band and the other conditions. Missing references and recorded out-of-stock entries are excluded.";
-    return '<div class="mobile-research-empty"><p>' + escapeHtml(message) + '</p><p>This is a research coverage gap, not proof that no suitable phone exists. No constraint has been relaxed for budget-qualified results.</p><a href="#mobileResearchCatalogue">Browse the full research catalogue</a>' + researchGuideFallback() + unpricedResearchLeads(query) + '</div>';
+    return '<div class="mobile-research-empty"><p>' + escapeHtml(message) + '</p><p>This is a research coverage gap, not proof that no suitable phone exists. No constraint has been relaxed for budget-qualified results.</p><a href="#mobileResearchCatalogue">Browse the full research catalogue</a>' + researchGuideFallback() + unpricedResearchLeads(query) + '</div>' + relatedRepositoryResearch(query, fallback || []);
   }
 
   function verifiedRecommendationBridge(query, isComparison) {
@@ -890,16 +932,18 @@
     }
     var c = researchConstraints(lastSearchQuery);
     matches = groupResearchMatches(matches);
-    lastSearchMatches = matches;
-    var visible = searchExpanded ? matches : matches.slice(0, MAX_SEARCH_RESULTS);
+    var fallback = matches.length ? [] : repositoryFallbackMatches(lastSearchQuery);
+    var displayMatches = matches.length ? matches : fallback;
+    lastSearchMatches = displayMatches;
+    var visible = searchExpanded ? displayMatches : displayMatches.slice(0, MAX_SEARCH_RESULTS);
     if (comparison && queryChanged) { comparisonSelection = matches.slice(0, 3); renderSelectedComparison(); }
     if (researchResults) {
       researchResults.hidden = false;
-      researchResults.innerHTML = verifiedRecommendationBridge(lastSearchQuery, comparison) + (comparison ? '<p class="mobile-research-gate">Specification comparison; no performance winner is asserted.' + (missingComparison ? ' At least one requested model or memory variant could not be matched.' : '') + '</p>' : '') + (visible.length ? visible.map(function (item) { return renderResearchResultCard(item.card, item.rows, item.group_size); }).join("") : emptyResearchResult(lastSearchQuery));
+      researchResults.innerHTML = verifiedRecommendationBridge(lastSearchQuery, comparison) + (comparison ? '<p class="mobile-research-gate">Specification comparison; no performance winner is asserted.' + (missingComparison ? ' At least one requested model or memory variant could not be matched.' : '') + '</p>' : '') + (matches.length ? visible.map(function (item) { return renderResearchResultCard(item.card, item.rows, item.group_size); }).join("") : emptyResearchResult(lastSearchQuery, visible));
     }
-    if (researchSearchStatus) researchSearchStatus.textContent = matches.length + " matching research model" + (matches.length === 1 ? "" : "s") + " · showing " + visible.length + (c.budget != null ? " · requested range ₹" + Number(c.lower).toLocaleString("en-IN") + " to " + (c.inclusive ? "₹" : "below ₹") + Number(c.budget).toLocaleString("en-IN") + " · dated references; current price and delivery unverified" : "") + (/best|अच्छा|अच्छे/i.test(lastSearchQuery) ? " · evidence coverage order, not a performance ranking" : "");
-    if (researchResultsMore) { researchResultsMore.hidden = matches.length <= MAX_SEARCH_RESULTS; researchResultsMore.textContent = searchExpanded ? "Show fewer results" : "Load more research results"; }
-    return matches;
+    if (researchSearchStatus) researchSearchStatus.textContent = matches.length ? matches.length + " matching research model" + (matches.length === 1 ? "" : "s") + " · showing " + visible.length : "No exact catalogue match · showing " + visible.length + " related repository research model" + (visible.length === 1 ? "" : "s") + " for further research";
+    if (researchResultsMore) { researchResultsMore.hidden = displayMatches.length <= MAX_SEARCH_RESULTS; researchResultsMore.textContent = searchExpanded ? "Show fewer results" : "Load more research results"; }
+    return displayMatches;
   }
 
   function submitResearch(query) {
