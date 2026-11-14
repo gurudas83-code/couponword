@@ -277,7 +277,12 @@ def run(root: Path):
                         assert page.locator('h1').count() == 1
                         assert page.evaluate('document.documentElement.scrollWidth') <= width+8
                         assert not page.locator('.rank,.answer-model,.comparison-list').count()
-                    for removed in ("answers/phone-under-25000-with-amoled-ois-and-8gb-ram/", "compare/apple-iphone-17-vs-apple-iphone-16/", "phones/under-25000/best-camera/"):
+                    for answer in ("answers/phone-for-student-under-18000/", "hi/answers/phone-for-student-under-18000/"):
+                        response=page.goto(url+answer, wait_until="domcontentloaded")
+                        assert response.status == 200, answer
+                        assert page.locator('h1').count() == 1
+                        assert "noindex" not in page.locator('meta[name="robots"]').get_attribute("content")
+                    for removed in ("answers/best-apple-phone-under-7000/", "compare/apple-iphone-17-vs-apple-iphone-16/", "phones/under-25000/best-camera/"):
                         response=page.goto(url+removed, wait_until="domcontentloaded")
                         assert response.status == 404, removed
                     assert not page_errors, f"{width}px uncaught JS errors: {page_errors}"

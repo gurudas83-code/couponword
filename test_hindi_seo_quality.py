@@ -48,6 +48,9 @@ class HindiSEOContracts(unittest.TestCase):
         cls.routes+=["/hi/phones/"+slug_for(card)+"/" for card in cls.phones]
         cls.routes+=["/hi/guides/phone-budget-guides/","/hi/phones/","/hi/budgets/"]
         cls.routes+=["/hi/seo/top-30-phone-research-india.html"]
+        coverage=json.loads((PUBLIC/"data/mobile_query_answer_coverage.json").read_text(encoding="utf-8"))
+        cls.answer_routes=["/hi/answers/"]+[x["hindi_route"] for x in coverage["answers"] if x["indexable"]]
+        cls.routes+=cls.answer_routes
         cls.sitemap={e.text for e in ET.parse(PUBLIC/"sitemap.xml").getroot().iter() if e.tag.endswith("}loc")}
 
     def test_01_exact_twenty_english_topic_mirrors(self):
@@ -65,8 +68,8 @@ class HindiSEOContracts(unittest.TestCase):
             self.assertIn("स्पेसिफिकेशन",get("/hi/phones/"+slug_for(card)+"/"))
 
     def test_03_unique_hindi_canonical_urls_and_single_h1(self):
-        self.assertEqual(len(self.routes),74)
-        self.assertEqual(len(set(self.routes)),74)
+        self.assertEqual(len(self.routes),74+len(self.answer_routes))
+        self.assertEqual(len(set(self.routes)),74+len(self.answer_routes))
         for route in self.routes:
             parsed=Parsed(get(route))
             self.assertEqual(parsed.lang,"hi-IN",route)
@@ -77,6 +80,7 @@ class HindiSEOContracts(unittest.TestCase):
         pairs=[("/seo/"+p["slug"]+".html","/hi/seo/"+p["slug"]+".html") for p in self.guides]
         pairs += [("/phones/"+slug_for(c)+"/","/hi/phones/"+slug_for(c)+"/") for c in self.phones]
         pairs += [("/phones/","/hi/phones/"),("/guides/phone-budget-guides/","/hi/guides/phone-budget-guides/")]
+        pairs += [(route.removeprefix("/hi"),route) for route in self.answer_routes]
         for english,hindi in pairs:
             required={("en-IN",SITE+english),("hi-IN",SITE+hindi)}
             self.assertTrue(required<=set(Parsed(get(english)).alternates),english)
