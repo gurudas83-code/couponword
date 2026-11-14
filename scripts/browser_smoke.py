@@ -281,7 +281,7 @@ def run(root: Path):
                         response=page.goto(url+answer, wait_until="domcontentloaded")
                         assert response.status == 200, answer
                         assert page.locator('h1').count() == 1
-                        assert "source" in page.locator('meta[name="robots"]').get_attribute("content")
+                        assert "noindex" not in page.locator('meta[name="robots"]').get_attribute("content")
                     for removed in ("answers/best-apple-phone-under-7000/", "compare/apple-iphone-17-vs-apple-iphone-16/", "phones/under-25000/best-camera/"):
                         response=page.goto(url+removed, wait_until="domcontentloaded")
                         assert response.status == 404, removed
