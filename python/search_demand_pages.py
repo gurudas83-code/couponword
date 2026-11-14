@@ -68,11 +68,13 @@ def publish_search_demand(destination: Path) -> str:
 <title>{esc(title)}</title><meta name="description" content="{esc(description)}"><meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="{BASE + PATH}"><link rel="alternate" hreflang="en-IN" href="{BASE + PATH}"><link rel="stylesheet" href="/assets/phone-guides.css?v=20261104">
 <meta property="og:type" content="article"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{BASE + PATH}">
-<script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "Article", "headline": title, "description": description, "mainEntityOfPage": BASE + PATH, "author": {"@type": "Organization", "name": "Coupon World"}}, ensure_ascii=False).replace("<", "\\u003c")}</script></head>
+<script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "Article", "headline": title, "description": description, "mainEntityOfPage": BASE + PATH, "dateModified": "2026-11-14", "author": {"@type": "Organization", "name": "Coupon World"}}, ensure_ascii=False).replace("<", "\\u003c")}</script></head>
 <body><a class="skip" href="#content">Skip to content</a><header><nav aria-label="Main navigation"><a class="brand" href="/">CW <span>Coupon World<small>Research before you buy</small></span></a><a href="/phones/">Phone specifications</a><a href="/guides/phone-budget-guides/">Buying guides</a><a href="/">Find a phone ↗</a></nav></header>
 <main id="content"><nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides/phone-budget-guides/">Phone guides</a> / Search demand</nav>
 <article><div class="eyebrow">COUPON WORLD / EDITORIAL PRIORITY</div><h1>India smartphone search demand: what we cover</h1>
+<p class="byline">By Coupon World editorial team · Updated <time datetime="2026-11-14">14 November 2026</time></p>
 <p class="lead">Use search demand to decide what to research next, not to manufacture pages. This page connects a historical planning signal to the source-linked phone research already published on Coupon World.</p>
+<section><h2>How this page was created</h2><p>We reviewed an archived Google Keyword Planner export, checked each model against our India-focused source catalogue, and linked only to pages that passed the current evidence review. The list is an editorial planning aid—not a promise of rankings, traffic, sales, or current search volume.</p></section>
 <aside class="note"><strong>Important context</strong><p>The underlying Google Keyword Planner export covers 1 September 2025 to 31 August 2026 and was exported on 12 September 2026. It is not a current Search Console report, a ranking report, a sales forecast, or proof that Google will send traffic.</p></aside>
 <section><h2>What people usually need from a phone page</h2><p>The demand file groups model research with practical follow-up questions: price, buy intent, and exact RAM/storage variants. A useful page must answer those questions with a clear model identity, India applicability, source-linked specifications, missing information, and honest retailer checks.</p><ul><li>Confirm the exact model and memory variant.</li><li>Separate dated budget references from today’s price and stock.</li><li>Explain trade-offs instead of inventing a universal “best” score.</li><li>Link to original manufacturer evidence and comparable independent tests where available.</li></ul></section>
 <section><h2>Coverage of the highest-priority planning signals</h2><p>These are the first ten entries in the archived planning file. “Published” means a source-linked research page exists. “Coverage gap” means we are deliberately not publishing a thin page yet.</p><div class="table-wrap"><table><thead><tr><th scope="col">Model signal</th><th scope="col">Planning tier</th><th scope="col">Editorial status</th></tr></thead><tbody>{''.join(coverage_rows)}</tbody></table></div></section>
@@ -282,7 +284,10 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
             '<a href="/">Home</a> / <a href="/phones/">Phones</a> / ' +
             ("30 प्राथमिकता मॉडल" if hindi else "30 research priorities") + '</nav>' +
             '<article><div class="eyebrow">COUPON WORLD / EVIDENCE FIRST</div><h1>' +
-            esc(heading) + '</h1><p class="lead">' + esc(description) +
+            esc(heading) + '</h1><p class="byline">' +
+            ("Coupon World संपादकीय टीम · अपडेट: 14 नवंबर 2026" if hindi else
+             "By Coupon World editorial team · Updated 14 November 2026") +
+            '</p><p class="lead">' + esc(description) +
             '</p><aside class="cw-pilot-note"><strong>' + esc(note) + '</strong></aside>' +
             '<section><h2>' + ("यह चयन कैसे हुआ" if hindi else "How this shortlist was selected") +
             '</h2>' + explainer +
