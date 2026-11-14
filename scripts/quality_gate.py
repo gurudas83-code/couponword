@@ -3,10 +3,18 @@
 from pathlib import Path
 import re
 import sys
+import argparse
 import xml.etree.ElementTree as ET
 from urllib.parse import urlparse
 
-ROOT = Path(__file__).resolve().parents[1]
+parser = argparse.ArgumentParser(description="Validate a Coupon World static publishing artifact.")
+parser.add_argument(
+    "--root",
+    type=Path,
+    default=Path(__file__).resolve().parents[1],
+    help="Artifact directory to validate; defaults to the repository root.",
+)
+ROOT = parser.parse_args().root.resolve()
 issues = []
 warnings = []
 def fail(message): issues.append(message)
