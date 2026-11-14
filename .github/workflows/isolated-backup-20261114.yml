@@ -1,0 +1,44 @@
+name: Coupon World isolated backup archive
+on:
+  push:
+    branches:
+      - backup/archive-20261114
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Export both repositories without modifying production
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p backup/repositories backup/manifests
+          for repo in couponword coupon-world; do
+            echo "Backing up $repo"
+            git clone --quiet --mirror "https://github.com/gurudas83-code/${repo}.git" "backup/repositories/${repo}.git"
+            git -C "backup/repositories/${repo}.git" fsck --full --no-progress
+            git -C "backup/repositories/${repo}.git" bundle create "../../${repo}-history.bundle" --all
+            git -C "backup/repositories/${repo}.git" bundle verify "../../${repo}-history.bundle"
+            git -C "backup/repositories/${repo}.git" archive --format=zip "--output=../../${repo}-main-source.zip" refs/heads/main
+            git -C "backup/repositories/${repo}.git" rev-parse refs/heads/main > "backup/manifests/${repo}-main-sha.txt"
+            git -C "backup/repositories/${repo}.git" branch -a > "backup/manifests/${repo}-branches.txt"
+            git -C "backup/repositories/${repo}.git" tag -l > "backup/manifests/${repo}-tags.txt"
+          done
+          tar -czf backup/couponworld-git-mirrors.tar.gz -C backup/repositories .
+          sha256sum backup/*.bundle backup/*-main-source.zip backup/couponworld-git-mirrors.tar.gz > backup/manifests/SHA256SUMS.txt
+          echo "Source repositories verified; production branches were not written." > backup/manifests/README.txt
+          echo "Excluded: GitHub settings/secrets, hosting configs not in Git, uncommitted PC files, analytics and API accounts." >> backup/manifests/README.txt
+          ls -lh backup/*.bundle backup/*.zip backup/*.tar.gz
+      - name: Upload recoverable full-source artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: couponworld-source-history-20261114
+          path: backup/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
