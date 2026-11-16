@@ -78,6 +78,7 @@ def main():
         print(json.dumps({
             "status": "RESEARCH_CALL_FAILED",
             "error_class": type(error).__name__,
+            "http_status": getattr(error, "code", None) if type(error).__name__ == "HTTPError" else None,
             "publishable": False
         }))
         return 1
