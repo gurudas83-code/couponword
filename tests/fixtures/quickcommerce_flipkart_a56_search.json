@@ -1,0 +1,74 @@
+{
+  "status": "success",
+  "request_id": "dea2c738-b0ba-4c74-bf07-3ac572dddb85",
+  "credits_remaining": 2849,
+  "data": {
+    "query": "Samsung Galaxy A56 5G 8GB 128GB",
+    "platform": "Flipkart",
+    "lat": 28.6315,
+    "lon": 77.2167,
+    "total_results": 48,
+    "products": [
+      {
+        "id": "MOBHQBE6G85PXAYG",
+        "name": "Samsung Galaxy A56 5G (Dark Blue, 128 GB)",
+        "brand": "Samsung",
+        "available": true,
+        "mrp": 49999,
+        "offer_price": 33415,
+        "quantity": "8 GB RAM",
+        "deeplink": "https://www.flipkart.com/-/p/-?pid=MOBHQBE6G85PXAYG",
+        "inventory": 1,
+        "currency": "INR"
+      },
+      {
+        "id": "MOBHQBDXXJUDBFVH",
+        "name": "Samsung Galaxy A56 5G (Light Violet, 128 GB)",
+        "brand": "Samsung",
+        "available": true,
+        "mrp": 49999,
+        "offer_price": 33175,
+        "quantity": "8 GB RAM",
+        "deeplink": "https://www.flipkart.com/-/p/-?pid=MOBHQBDXXJUDBFVH",
+        "inventory": 1,
+        "currency": "INR"
+      },
+      {
+        "id": "MOBHQBEBBFEH4PUR",
+        "name": "Samsung Galaxy A56 5G (Dark Blue, 256 GB)",
+        "brand": "Samsung",
+        "available": true,
+        "mrp": 54999,
+        "offer_price": 37774,
+        "quantity": "8 GB RAM",
+        "deeplink": "https://www.flipkart.com/-/p/-?pid=MOBHQBEBBFEH4PUR",
+        "inventory": 1,
+        "currency": "INR"
+      },
+      {
+        "id": "MOBHNJ8FASRHRJZS",
+        "name": "Samsung Galaxy A36 5G (Dark Green, 128 GB)",
+        "brand": "Samsung",
+        "available": true,
+        "mrp": 39499,
+        "offer_price": 28999,
+        "quantity": "8 GB RAM",
+        "deeplink": "https://www.flipkart.com/-/p/-?pid=MOBHNJ8FASRHRJZS",
+        "inventory": 1,
+        "currency": "INR"
+      },
+      {
+        "id": "ACCHZC5GYZZQEXUX",
+        "name": "Samsung Galaxy A56 charger",
+        "brand": "Samsung",
+        "available": true,
+        "mrp": 2999,
+        "offer_price": 554,
+        "quantity": "Black",
+        "deeplink": "https://www.flipkart.com/-/p/-?pid=ACCHZC5GYZZQEXUX",
+        "inventory": 1,
+        "currency": "INR"
+      }
+    ]
+  }
+}
