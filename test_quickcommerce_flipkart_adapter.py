@@ -138,6 +138,18 @@ class QuickCommerceFlipkartAdapterTests(unittest.TestCase):
         bad["data"]["products"][1]["available"] = "true"
         self.assertIsNone(normalize_search_response(bad, product()))
 
+    def test_smoke_script_defaults_to_offline_and_never_publishes(self):
+        import importlib.util
+        path = ROOT / "scripts" / "quickcommerce_flipkart_smoke.py"
+        spec = importlib.util.spec_from_file_location("quickcommerce_flipkart_smoke", path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        result = module.run(live=False)
+        self.assertEqual(result["status"], "RESEARCH_ONLY")
+        self.assertEqual(result["retailer_product_id"], "MOBHQBDXXJUDBFVH")
+        self.assertEqual(result["price_observation"], 33175.0)
+        self.assertFalse(result["publishable"])
+
     def test_live_requires_private_key(self):
         import os
         from unittest.mock import patch
