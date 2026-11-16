@@ -70,3 +70,31 @@ propagate as failures; no invalid offer is substituted.
 4. Keep all 232 research models and existing evidence/SEO gates intact;
    start the active refresh pool with 30 validated models.
 5. No use of price or affiliate status as a capability ranking signal.
+
+
+## Operator smoke command (one request; no production writes)
+
+The optional helper \`scripts/quickcommerce_flipkart_smoke.py\` defaults to the
+saved fixture. A real API call requires an explicit \`--live\` argument.
+
+\`\`\`bash
+python scripts/quickcommerce_flipkart_smoke.py
+\`\`\`
+
+On **Windows PowerShell** in a temporary local shell, the operator may set
+a private environment variable without passing the key as a CLI parameter:
+
+\`\`\`powershell
+$env:QUICKCOMMERCE_API_KEY = Read-Host "QuickCommerce API key"
+python scripts/quickcommerce_flipkart_smoke.py --live
+Remove-Item Env:\QUICKCOMMERCE_API_KEY
+\`\`\`
+
+This prints only the matching SKU, price observation, stock and source. It
+does not log the secret, write to the site or offers DB, or schedule further
+requests. Do not paste secrets in a ChatGPT message, GitHub issue, workflow
+output, or repository file. The key is held only for this command's session.
+
+**Stop criteria:** any unmatched SKU, wrong price, missing price,
+HTTP/authentication error, or provider limitation. Do not retry automatically
+or change the publication gate.
