@@ -42,9 +42,9 @@ def _valid_listing(item, product):
         return False
     brand = _tokens(product.brand)
     model = _tokens(product.model)
-    name = _tokens(item.get("name", ""))
+    name = _tokens(str(item.get("name", "")).split("(", 1)[0])
     # Enforce the full model phrase, rather than matching 'A56' to 'A56 Plus'.
-    if not brand or not model or not name.startswith(brand + " " + model + " "):
+    if not brand or not model or name != brand + " " + model:
         return False
     if _tokens(item.get("brand", "")) != brand:
         return False
