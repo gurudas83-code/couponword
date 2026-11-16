@@ -102,7 +102,10 @@ jobs:
       - name: Verify published phone SEO pages and canonical sitemap
         run: |
           python - <<'PY'
+          import json
           import time
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
           from urllib.request import Request, urlopen
           from urllib.error import HTTPError
           origin = "https://coupon-world.in"
@@ -147,6 +150,37 @@ jobs:
                       if attempt == 9:
                           raise RuntimeError("LIVE PUBLISHED FAIL: "+path) from exc
                       time.sleep(5)
+          # The curated answer publisher intentionally reintroduces /answers/
+          # and only its reviewed, evidence-backed question routes. The
+          # historical retirement list is not authoritative for these pages.
+          coverage = json.loads(Path("public/data/mobile_query_answer_coverage.json").read_text(encoding="utf-8"))
+          reviewed_answers = {"/answers/", "/hi/answers/"}
+          for row in coverage["answers"]:
+              if row["indexable"]:
+                  reviewed_answers.update((row["route"], row["hindi_route"]))
+          sitemap_urls = {
+              element.text
+              for element in ET.parse("public/sitemap.xml").getroot().iter()
+              if element.tag.endswith("}loc")
+          }
+          for path in sorted(reviewed_answers):
+              assert origin + path in sitemap_urls, "Reviewed answer missing from sitemap: " + path
+              for attempt in range(10):
+                  try:
+                      with urlopen(Request(origin + path, headers={"User-Agent":"CouponWorldReleaseMonitor/1.0"}), timeout=20) as res:
+                          body = res.read()
+                          assert res.status == 200, (path, res.status)
+                      assert f'<link rel="canonical" href="{origin + path}"'.encode() in body, "answer canonical mismatch"
+                      assert b'<meta name="robots" content="index,follow' in body, "reviewed answer not indexable"
+                      print("REVIEWED ANSWER PASS:", path, flush=True)
+                      break
+                  except Exception as exc:
+                      if attempt == 9:
+                          raise RuntimeError("REVIEWED ANSWER FAIL: " + path) from exc
+                      time.sleep(5)
+
+          # Only truly retired routes should return 404. A historical route
+          # revived through the reviewed-answer gate must remain accessible.
           retired = (
               "/answers/", "/answers/phone-under-25000-with-amoled-ois-and-8gb-ram/",
               "/hi/answers/phone-under-25000-with-amoled-ois-and-8gb-ram/",
@@ -155,10 +189,13 @@ jobs:
               "/seo/best-earbuds-under-2000.html",
           )
           for path in retired:
+              if path in reviewed_answers:
+                  print("REVIEWED ANSWER EXEMPT FROM RETIREMENT:", path, flush=True)
+                  continue
               try:
-                  with urlopen(Request(origin+path, headers={"User-Agent":"CouponWorldReleaseMonitor/1.0"}), timeout=20) as res:
-                      raise AssertionError("Retired URL returned "+str(res.status)+": "+path)
+                  with urlopen(Request(origin + path, headers={"User-Agent":"CouponWorldReleaseMonitor/1.0"}), timeout=20) as res:
+                      raise AssertionError("Retired URL returned " + str(res.status) + ": " + path)
               except HTTPError as error:
-                  assert error.code == 404, (path,error.code)
-                  print("RETIRED URL 404 PASS:",path,flush=True)
+                  assert error.code == 404, (path, error.code)
+                  print("RETIRED URL 404 PASS:", path, flush=True)
           PY
