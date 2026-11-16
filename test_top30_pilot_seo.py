@@ -23,6 +23,7 @@ class AuditHTML(HTMLParser):
         self.alternates = set()
         self.cards = []
         self.links = []
+        self.photos = []
         self.h1 = 0
         self.feed(body)
 
@@ -34,6 +35,8 @@ class AuditHTML(HTMLParser):
             self.alternates.add((attrs.get("hreflang"), attrs.get("href")))
         if tag == "h1":
             self.h1 += 1
+        if tag == "img" and attrs.get("src", "").startswith("/assets/phone-photos/"):
+            self.photos.append(attrs)
         if tag == "a":
             self.links.append(attrs.get("href", ""))
         if tag == "article" and "cw-pilot-card" in (attrs.get("class") or "").split():
@@ -121,6 +124,40 @@ class Top30ResearchPublicationTests(unittest.TestCase):
             self.assertNotIn('"@type": "Offer"', body)
             self.assertNotIn('"@type": "Review"', body)
             self.assertIn("स्रोत" if path == TOP30_HI else "source", body)
+
+    def test_licensed_existing_photos_only_with_model_identity_and_credit(self):
+        photo_records = json.loads(
+            (ROOT / "data/mobile_model_photos.json").read_text(encoding="utf-8")
+        )
+        expected = {}
+        for row in self.pilot["selected_models"]:
+            record = photo_records.get(row["model_key"]) or {}
+            local = ROOT / str(record.get("url") or "").lstrip("/")
+            if (str(record.get("url") or "").startswith("/assets/phone-photos/")
+                    and local.is_file()
+                    and str(record.get("source") or "").startswith("https://commons.wikimedia.org/wiki/File:")
+                    and str(record.get("license_url") or "").startswith("https://creativecommons.org/licenses/")
+                    and record.get("author") and record.get("license")
+                    and type(record.get("width")) is int and type(record.get("height")) is int
+                    and record["width"] > 0 and record["height"] > 0):
+                expected[row["model_key"]] = record
+        for path in (TOP30_EN, TOP30_HI):
+            body = self.html[path]
+            parsed = AuditHTML(body)
+            self.assertEqual(len(parsed.photos), len(expected))
+            self.assertNotIn('"@type": "Offer"', body)
+            for key, photo in expected.items():
+                card = self.cards[key]
+                self.assertIn('src="' + photo["url"] + '"', body)
+                self.assertIn('alt="' + model_title(card) + ' model photograph"', body)
+                self.assertIn('href="' + photo["source"] + '"', body.replace("&amp;", "&"))
+                self.assertIn('href="' + photo["license_url"] + '"', body)
+                self.assertIn(photo["author"], body)
+            for img in parsed.photos:
+                self.assertEqual(img.get("loading"), "lazy")
+                self.assertEqual(img.get("decoding"), "async")
+                self.assertTrue((ROOT / img["src"].lstrip("/")).is_file())
+                self.assertTrue(img.get("alt", "").endswith("model photograph"))
 
     def test_standalone_urls_not_mass_generated_without_evidence(self):
         # The 20 non-approved models are discoverable through the research
