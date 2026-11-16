@@ -129,6 +129,7 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
     )
 
     pilot = json.loads(TOP30_FILE.read_text(encoding="utf-8"))
+    photo_records = json.loads((ROOT / "data/mobile_model_photos.json").read_text(encoding="utf-8"))
     catalogue = json.loads(
         (destination / "data/mobile_research_catalogue.json").read_text(encoding="utf-8")
     )
@@ -159,6 +160,8 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
               '.cw-pilot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1rem}'
               '.cw-pilot-card{border:1px solid #ccd6e0;border-radius:14px;padding:1rem;background:#fff}'
               '.cw-pilot-card h3{margin-top:.25rem}.cw-pilot-card li{margin:.4rem 0}'
+              '.cw-pilot-photo{margin:.4rem 0 1rem}.cw-pilot-photo img{display:block;max-width:180px;max-height:210px;width:auto;height:auto;object-fit:contain}'
+              '.cw-pilot-photo figcaption{font-size:.75rem;line-height:1.45;overflow-wrap:anywhere}'
               '.cw-pilot-note{background:#eef5fa;padding:1rem;border-left:4px solid #276a96}'
               '.cw-pilot-links a{margin-right:1rem}.cw-pilot-card{overflow-wrap:anywhere}'
               '.cw-source-matrix{overflow-x:auto}.cw-source-matrix table{width:100%;border-collapse:collapse;min-width:630px}'
@@ -208,12 +211,41 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
                     facts.append('<li>' + ("इस रिकॉर्ड में अभी पर्याप्त फ़ील्ड-स्रोत नहीं हैं।"
                                           if hindi else
                                           "Sufficient source-linked technical fields are still pending.") + '</li>')
+                photo = photo_records.get(row["model_key"]) or {}
+                photo_html = ""
+                photo_path = str(photo.get("url") or "")
+                photo_source = str(photo.get("source") or "")
+                license_url = str(photo.get("license_url") or "")
+                photo_author = str(photo.get("author") or "").strip()
+                photo_license = str(photo.get("license") or "").strip()
+                # Model-matched local assets only. Fail closed when attribution,
+                # license or the actual image asset is missing.
+                if (photo_path.startswith("/assets/phone-photos/")
+                        and ".." not in photo_path
+                        and (ROOT / photo_path.lstrip("/")).is_file()
+                        and photo_source.startswith("https://commons.wikimedia.org/wiki/File:")
+                        and license_url.startswith("https://creativecommons.org/licenses/")
+                        and photo_author and photo_license
+                        and isinstance(photo.get("width"), int)
+                        and isinstance(photo.get("height"), int)
+                        and photo["width"] > 0 and photo["height"] > 0):
+                    photo_html = (
+                        '<figure class="cw-pilot-photo"><img src="' + esc(photo_path) +
+                        '" alt="' + esc(name) + ' model photograph" loading="lazy" decoding="async" width="' +
+                        str(photo["width"]) + '" height="' + str(photo["height"]) +
+                        '"><figcaption>' +
+                        ('मॉडल की फोटो: ' if hindi else 'Model photograph: ') +
+                        '<a href="' + esc(photo_source) + '" rel="noopener noreferrer">' +
+                        esc(photo_author) + '</a> · <a href="' + esc(license_url) +
+                        '" rel="noopener noreferrer">' + esc(photo_license) + '</a>' +
+                        '</figcaption></figure>'
+                    )
                 fact_note = ("दस्तावेज़ित जानकारी, वास्तविक दुनिया की परफॉर्मेंस रैंकिंग नहीं।"
                              if hindi else
                              "Documented facts, not a measured real-world performance ranking.")
                 parts.append(
                     '<article class="cw-pilot-card" id="phone-' + esc(slug_for(card)) + '">' +
-                    '<h3>' + esc(name) + '</h3><p>' + esc(status) + '</p>' +
+                    '<h3>' + esc(name) + '</h3>' + photo_html + '<p>' + esc(status) + '</p>' +
                     '<ul>' + "".join(facts) + '</ul>' +
                     (model_decision_lens(card, hindi=hindi, compact=True) if is_published else '') +
                     '<p><small>' + esc(fact_note) +
