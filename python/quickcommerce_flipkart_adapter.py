@@ -44,7 +44,7 @@ def _valid_listing(item, product):
     model = _tokens(product.model)
     name = _tokens(item.get("name", ""))
     # Enforce the full model phrase, rather than matching 'A56' to 'A56 Plus'.
-    if not brand or not model or not re.search(r"\b" + re.escape(brand + " " + model) + r"\b", name):
+    if not brand or not model or not name.startswith(brand + " " + model + " "):
         return False
     if _tokens(item.get("brand", "")) != brand:
         return False
