@@ -91,6 +91,53 @@ class QuickCommerceFlipkartAdapterTests(unittest.TestCase):
         self.assertEqual(result["price_observation"], 33175.0)
         self.assertIs(result["publishable"], False)
 
+    def test_live_request_is_private_and_stays_research_only(self):
+        from urllib.parse import parse_qs, urlsplit
+        from unittest.mock import patch
+        requests = []
+
+        class Response:
+            def __enter__(self):
+                return self
+            def __exit__(self, *args):
+                return False
+            def read(self, size=-1):
+                return json.dumps(QuickCommerceFlipkartAdapterTests.payload).encode("utf-8")
+
+        def fake_open(request, timeout):
+            requests.append((request, timeout))
+            return Response()
+
+        with patch.dict("os.environ", {"QUICKCOMMERCE_API_KEY": "TEST_PRIVATE_KEY"}):
+            offer = QuickCommerceFlipkartConnector(opener=fake_open).get_offer(product())
+        self.assertEqual(len(requests), 1)
+        request, timeout = requests[0]
+        self.assertEqual(timeout, 15)
+        self.assertTrue(request.full_url.startswith("https://api.quickcommerceapi.com/v1/search?"))
+        self.assertNotIn("TEST_PRIVATE_KEY", request.full_url)
+        self.assertEqual(request.get_header("X-api-key"), "TEST_PRIVATE_KEY")
+        query = parse_qs(urlsplit(request.full_url).query)
+        self.assertEqual(query["platform"], ["Flipkart"])
+        self.assertEqual(offer.price, 33175.0)
+        self.assertEqual(offer.source, SOURCE)
+        self.assertFalse(offer.metadata["publication_authorized"])
+
+    def test_rejects_untrusted_schema_and_invalid_price_types(self):
+        bad = copy.deepcopy(self.payload)
+        bad["data"]["platform"] = "Amazon"
+        with self.assertRaises(ValueError):
+            normalize_search_response(bad, product())
+        bad = copy.deepcopy(self.payload)
+        bad["data"]["products"][1]["offer_price"] = "NaN"
+        self.assertIsNone(normalize_search_response(bad, product()))
+        bad = copy.deepcopy(self.payload)
+        bad["data"]["products"][1]["currency"] = "USD"
+        with self.assertRaises(ValueError):
+            normalize_search_response(bad, product())
+        bad = copy.deepcopy(self.payload)
+        bad["data"]["products"][1]["available"] = "true"
+        self.assertIsNone(normalize_search_response(bad, product()))
+
     def test_live_requires_private_key(self):
         import os
         from unittest.mock import patch
