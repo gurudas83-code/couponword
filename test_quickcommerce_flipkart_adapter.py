@@ -118,6 +118,7 @@ class QuickCommerceFlipkartAdapterTests(unittest.TestCase):
         self.assertEqual(request.get_header("X-api-key"), "TEST_PRIVATE_KEY")
         query = parse_qs(urlsplit(request.full_url).query)
         self.assertEqual(query["platform"], ["Flipkart"])
+        self.assertEqual(query["pincode"], ["110001"])
         self.assertEqual(offer.price, 33175.0)
         self.assertEqual(offer.source, SOURCE)
         self.assertFalse(offer.metadata["publication_authorized"])
@@ -149,6 +150,11 @@ class QuickCommerceFlipkartAdapterTests(unittest.TestCase):
         self.assertEqual(result["retailer_product_id"], "MOBHQBDXXJUDBFVH")
         self.assertEqual(result["price_observation"], 33175.0)
         self.assertFalse(result["publishable"])
+
+    def test_invalid_pincode_rejected_without_request(self):
+        for invalid in ("", "000000", "11001", "1100010", "ABCDEF"):
+            with self.assertRaises(ValueError):
+                QuickCommerceFlipkartConnector(pincode=invalid)
 
     def test_live_requires_private_key(self):
         import os
