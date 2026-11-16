@@ -137,8 +137,11 @@ class QuickCommerceFlipkartConnector:
     name = "flipkart"
     live_data_available = False  # never claim authorized/publishable live offers
 
-    def __init__(self, *, lat=28.6315, lon=77.2167, fixture=None, api_key=None, opener=urlopen):
+    def __init__(self, *, lat=28.6315, lon=77.2167, pincode="110001", fixture=None, api_key=None, opener=urlopen):
         self.lat, self.lon = float(lat), float(lon)
+        self.pincode = str(pincode).strip()
+        if not re.fullmatch(r"[1-9][0-9]{5}", self.pincode):
+            raise ValueError("Valid 6-digit Indian pincode required")
         self.fixture = fixture
         self.api_key = api_key
         self.opener = opener
@@ -152,7 +155,8 @@ class QuickCommerceFlipkartConnector:
             if not key:
                 raise RuntimeError("Set QUICKCOMMERCE_API_KEY privately for a live request")
             query = f"{product.brand} {product.model} {product.variant}"
-            params = urlencode({"q": query, "lat": self.lat, "lon": self.lon, "platform": "Flipkart"})
+            params = urlencode({"q": query, "lat": self.lat, "lon": self.lon,
+                                "platform": "Flipkart", "pincode": self.pincode})
             request = Request(BASE_URL + "/v1/search?" + params,
                               headers={"X-API-Key": key, "Accept": "application/json"})
             with self.opener(request, timeout=15) as response:
