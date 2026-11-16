@@ -98,3 +98,26 @@ output, or repository file. The key is held only for this command's session.
 **Stop criteria:** any unmatched SKU, wrong price, missing price,
 HTTP/authentication error, or provider limitation. Do not retry automatically
 or change the publication gate.
+
+
+## November 16 live HTTPError follow-up
+
+The working Playground cURL for the successful test includes a location
+\`pincode=110001\` in addition to \`q\`, \`lat\`, \`lon\`, and \`platform\`.
+The Python adapter now includes the same PIN (validated, six digits).
+This was a plausible request mismatch, not a proven cause of HTTPError.
+
+The CLI reports only \`http_status\` (for example 401/422) on HTTP failures,
+never upstream response text, request headers, query secrets or API key.
+One call can consume API credits. Do not retry blindly.
+
+**Security:** A screenshot previously exposed a complete QuickCommerce API
+key. Revoke/rotate it in the provider dashboard before any further live test,
+and use only a newly generated key. Never save the credential in git or chat.
+
+**Local ZIP freshness:** GitHub branches change independently of prior
+downloaded ZIP files. Download the updated feature branch ZIP again before
+testing; otherwise the previous local copy still omits the PIN and safe
+HTTP status reporting. After rotation, the private PowerShell environment
+variable can be set with Read-Host, the explicit \`--live\` test run once,
+then Remove-Item Env:\QUICKCOMMERCE_API_KEY.
