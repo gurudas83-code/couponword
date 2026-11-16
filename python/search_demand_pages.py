@@ -171,7 +171,7 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
     ):
         title = ("भारत में 30 स्मार्टफोन की तुलना: स्रोत और खरीद से पहले की जाँच"
                  if hindi else
-                 "Compare 30 Smartphones in India (2026): Sources and Buying Checks")
+                 "30 Smartphones to Research Before Buying in India (2026)")
         description = ("30 मौजूदा मॉडल, दस्तावेज़ित स्पेसिफिकेशन, प्रमाण की सीमाएँ और तुलना के लिंक। यह बिक्री या परफॉर्मेंस रैंकिंग नहीं है।"
                        if hindi else
                        "Compare 30 smartphone research candidates in India using source-linked specifications where available, chipset, battery and charging evidence gaps, and buying checks. Not a performance ranking.")
@@ -289,7 +289,7 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
             'we provide research access rather than publishing a thin or misleading model SEO page.</p>'
         )
         heading = ("30 स्मार्टफोन: खरीदने से पहले तथ्यों की तुलना"
-                   if hindi else "Compare 30 smartphones before buying in India")
+                   if hindi else "30 smartphones to research before buying in India")
         links = (
             '<p><a href="/hi/phones/">निर्माता-स्रोत वाले मॉडल</a> · '
             '<a href="/hi/phones/under-25000/">₹25,000 रिसर्च गाइड</a> · '
