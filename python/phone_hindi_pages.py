@@ -13,7 +13,7 @@ from xml.etree import ElementTree as ET
 
 from python.phone_guides import budget_examples
 from python.phone_research_pages import (
-    EDITORIAL_MODEL_KEYS, accepted_specs, eligible, model_title, slug_for, specification_label, specification_value,
+    EDITORIAL_MODEL_KEYS, accepted_specs, eligible, model_title, slug_for, specification_label, specification_value, model_decision_lens,
 )
 
 SITE = "https://coupon-world.in"
@@ -272,6 +272,7 @@ def build(destination: Path) -> dict:
                 '<p>निर्माता का मॉडल-स्तरीय स्रोत हर भारतीय RAM/स्टोरेज विकल्प की पहचान,'
                 ' वास्तविक कैमरा गुणवत्ता, बैटरी रनटाइम, गेमिंग FPS, कीमत या स्टॉक प्रमाणित नहीं करता।</p></aside>'
                 f'<p class="byline">स्रोतों की रिसर्च जाँच: {esc(card.get("research_checked_at") or "तिथि उपलब्ध नहीं")}</p>'
+                + model_decision_lens(card, hindi=True) +
                 '<section><h2>निर्माता से दर्ज स्पेसिफिकेशन</h2>'
                 '<div class="mobile-fact-table-wrap"><table class="mobile-fact-table">'
                 '<thead><tr><th>तकनीकी जानकारी</th><th>दर्ज मान</th><th>प्रमाण</th></tr></thead>'

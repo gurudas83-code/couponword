@@ -244,6 +244,58 @@ def render_card(card: dict) -> str:
     return f'<article class="mobile-fact-card"><h3>{link(path, title)}</h3><p>{facts or "Documented specification sources available"}</p><p class="mobile-fact-small">{len(accepted_specs(card))} source-linked fields · Research, not a live offer</p></article>'
 
 
+def model_decision_lens(card: dict, hindi: bool = False, compact: bool = False) -> str:
+    """Explain one *documented* comparison question without inventing winners.
+
+    A model gets a lens only when two related manufacturer fields have original
+    evidence URLs. This is not a performance measurement or a buying verdict.
+    Vary the lens among documented topics to avoid duplicating the same boilerplate
+    under every model.
+    """
+    facts = dict(accepted_specs(card))
+    topics = (
+        (("rear_main_mp", "ois"), "Camera evidence", "कैमरा प्रमाण",
+         "A sensor resolution and an OIS claim do not establish better photographs. Compare similar original low-light and video samples before deciding.",
+         "मेगापिक्सल और OIS की जानकारी से बेहतर फोटो प्रमाणित नहीं होती। समान प्रकाश में फोटो और वीडियो के स्वतंत्र नमूने जाँचें।"),
+        (("chipset", "display_refresh_max_hz"), "Gaming and display", "गेमिंग और स्क्रीन",
+         "Chipset identification and display refresh rate are starting points; sustained FPS and heat require comparable independent tests.",
+         "चिपसेट और स्क्रीन रिफ्रेश रेट केवल शुरुआत हैं; लगातार FPS और तापमान के लिए तुलनीय स्वतंत्र परीक्षण चाहिए।"),
+        (("battery_mah_typical", "wired_charging_max_w"), "Endurance versus charging", "बैटरी और चार्जिंग",
+         "Battery capacity is not measured screen-on time; the listed peak charging power is not a full-charge timing result.",
+         "बैटरी क्षमता वास्तविक स्क्रीन-ऑन समय नहीं है और घोषित अधिकतम चार्जिंग पावर पूरा चार्ज होने का समय नहीं बताती।"),
+        (("network_support", "security_update_policy"), "Connectivity and ownership", "नेटवर्क और दीर्घकालीन उपयोग",
+         "Check the exact Indian network variant and the remaining support commitment before deciding how long to keep the handset.",
+         "भारतीय नेटवर्क वेरिएंट और बाकी बचे सॉफ्टवेयर सपोर्ट की पुष्टि करके ही लंबे उपयोग का निर्णय लें।"),
+        (("ip_rating", "os_upgrade_generations"), "Durability and software", "मजबूती और अपडेट",
+         "An ingress-protection claim and an upgrade commitment address different risks; neither proves general reliability.",
+         "IP सुरक्षा और OS अपडेट अलग जोखिमों से जुड़े हैं; दोनों से कुल भरोसेमंद प्रदर्शन प्रमाणित नहीं होता।"),
+    )
+    matched = [topic for topic in topics if all(k in facts for k in topic[0])]
+    if not matched:
+        return ""
+    # All choices require two admissible source-backed fields. Rotation only
+    # selects which equally valid evidence question to explain on each page.
+    topic = matched[sum(ord(char) for char in str(card.get("model_key") or "")) % len(matched)]
+    keys, en_title, hi_title, en_question, hi_question = topic
+    evidence = []
+    for key in keys:
+        item = facts[key]
+        evidence.append(
+            '<li><strong>' + esc(specification_label(key, item, hindi=hindi)) + ': ' +
+            esc(specification_value(key, item)[:140]) + '</strong> · ' +
+            link(str(item["source_url"]), "मूल स्रोत" if hindi else "Original source",
+                 "noopener noreferrer") + '</li>'
+        )
+    heading = hi_title if hindi else en_title
+    question = hi_question if hindi else en_question
+    if compact:
+        return '<div class="cw-decision-lens"><strong>' + esc(heading) + ':</strong><ul>' + "".join(evidence) + '</ul><p>' + esc(question) + '</p></div>'
+    return ('<section class="cw-decision-lens"><h2>' +
+            ("खरीद से पहले इस मॉडल में क्या जाँचें?" if hindi else "A useful comparison question for this model") +
+            '</h2><h3>' + esc(heading) + '</h3><ul>' +
+            "".join(evidence) + '</ul><p>' + esc(question) + '</p></section>')
+
+
 def render_model(card: dict, related: list[dict]) -> str:
     title = model_title(card)
     path = HUB + slug_for(card) + "/"
@@ -329,6 +381,7 @@ def render_model(card: dict, related: list[dict]) -> str:
 {checked_sources}
 {photo_html}
 {variant_html}
+{model_decision_lens(card)}
 <section><h2>Key documented facts</h2><ul>{facts}</ul>
 <p>Use the exact source links in the table; a headline battery capacity or megapixel count does not establish real-world battery or camera quality.</p></section>
 <section><h2>Specifications and original sources</h2>

@@ -125,7 +125,7 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
     from urllib.parse import urlencode
     from python.phone_research_pages import (
         EDITORIAL_MODEL_KEYS, accepted_specs, eligible, model_title, slug_for,
-        specification_label, specification_value,
+        specification_label, specification_value, model_decision_lens,
     )
 
     pilot = json.loads(TOP30_FILE.read_text(encoding="utf-8"))
@@ -160,17 +160,21 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
               '.cw-pilot-card{border:1px solid #ccd6e0;border-radius:14px;padding:1rem;background:#fff}'
               '.cw-pilot-card h3{margin-top:.25rem}.cw-pilot-card li{margin:.4rem 0}'
               '.cw-pilot-note{background:#eef5fa;padding:1rem;border-left:4px solid #276a96}'
-              '.cw-pilot-links a{margin-right:1rem}.cw-pilot-card{overflow-wrap:anywhere}</style>')
+              '.cw-pilot-links a{margin-right:1rem}.cw-pilot-card{overflow-wrap:anywhere}'
+              '.cw-source-matrix{overflow-x:auto}.cw-source-matrix table{width:100%;border-collapse:collapse;min-width:630px}'
+              '.cw-source-matrix th,.cw-source-matrix td{padding:.65rem;border:1px solid #ccd6e0;text-align:left;vertical-align:top}'
+              '.cw-decision-lens{padding:.4rem .7rem;background:#f6f8fb;border-radius:8px}'
+              '.cw-decision-lens ul{padding-left:1.2rem}</style>')
     output = []
     for hindi, path, other in (
         (False, TOP30_EN, TOP30_HI), (True, TOP30_HI, TOP30_EN)
     ):
-        title = ("भारत के 30 प्राथमिकता वाले स्मार्टफोन: स्रोत-आधारित रिसर्च"
+        title = ("भारत में 30 स्मार्टफोन की तुलना: स्रोत और खरीद से पहले की जाँच"
                  if hindi else
-                 "30 India smartphone research priorities — sources and comparisons")
+                 "30 Smartphones to Research Before Buying in India (2026)")
         description = ("30 मौजूदा मॉडल, दस्तावेज़ित स्पेसिफिकेशन, प्रमाण की सीमाएँ और तुलना के लिंक। यह बिक्री या परफॉर्मेंस रैंकिंग नहीं है।"
                        if hindi else
-                       "Explore 30 selected Indian smartphone research models, original specification sources, known gaps and exact-variant comparison. Not a top-selling or performance ranking.")
+                       "Compare 30 smartphone research candidates in India using source-linked specifications where available, chipset, battery and charging evidence gaps, and buying checks. Not a performance ranking.")
         group_sections = []
         for group, en_heading, hi_heading in TOP30_GROUPS:
             parts = []
@@ -210,7 +214,9 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
                 parts.append(
                     '<article class="cw-pilot-card" id="phone-' + esc(slug_for(card)) + '">' +
                     '<h3>' + esc(name) + '</h3><p>' + esc(status) + '</p>' +
-                    '<ul>' + "".join(facts) + '</ul><p><small>' + esc(fact_note) +
+                    '<ul>' + "".join(facts) + '</ul>' +
+                    (model_decision_lens(card, hindi=hindi, compact=True) if is_published else '') +
+                    '<p><small>' + esc(fact_note) +
                     '</small></p><p class="cw-pilot-links"><a href="' + esc(target) + '">' +
                     ("स्रोत/मॉडल देखें" if hindi else "View documented model / research") +
                     '</a> <a href="' + esc(research_url) + '">' +
@@ -222,6 +228,48 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
                 '<section><h2>' + esc(heading) + '</h2><div class="cw-pilot-grid">' +
                 "".join(parts) + '</div></section>'
             )
+
+        # A factual matrix belongs only to the ten approved canonical models.
+        # Source URLs remain attached to every visible value. Unknown remains
+        # unknown, rather than becoming a claimed benchmark or sales verdict.
+        matrix_rows = []
+        for candidate in models:
+            model_card = cards[candidate["model_key"]]
+            if candidate["model_key"] not in approved:
+                continue
+            spec_map = dict(accepted_specs(model_card))
+            def evidence_cell(field):
+                item = spec_map.get(field)
+                if not item:
+                    return ("<em>स्रोत उपलब्ध नहीं</em>" if hindi else "<em>Not documented</em>")
+                val = specification_value(field, item)[:110]
+                return (esc(val) + ' · <a href="' + esc(item["source_url"]) +
+                        '" rel="noopener noreferrer">' + ("स्रोत" if hindi else "source") + '</a>')
+            target = ("/hi/phones/" if hindi else "/phones/") + slug_for(model_card) + "/"
+            matrix_rows.append(
+                '<tr><th scope="row"><a href="' + esc(target) + '">' +
+                esc(model_title(model_card)) + '</a></th>' +
+                ''.join('<td>' + evidence_cell(field) + '</td>' for field in
+                        ("chipset", "battery_mah_typical", "wired_charging_max_w")) + '</tr>'
+            )
+        matrix_heading = ("निर्माता-स्रोत आधारित तुलना: प्रकाशित मॉडल"
+                          if hindi else "Source-backed comparison of published model pages")
+        matrix_note = ("ये निर्माता द्वारा घोषित तकनीकी आँकड़े हैं, वास्तविक बैटरी बैकअप, "
+                       "चार्जिंग अवधि या गेमिंग प्रदर्शन का परीक्षण नहीं। बाकी 20 मॉडल के "
+                       "अपूर्ण रिकॉर्ड इस तालिका में अनुमान से नहीं भरे गए हैं।" if hindi else
+                       "These are manufacturer-declared figures, not tested battery endurance, "
+                       "full-charge times or gaming benchmarks. The other 20 research-only "
+                       "records are excluded rather than filled with guesses.")
+        matrix = (
+            '<section class="cw-source-matrix"><h2>' + esc(matrix_heading) +
+            '</h2><p>' + esc(matrix_note) + '</p><table><caption>' +
+            ("स्रोत-सहित तकनीकी विवरण" if hindi else "Manufacturer-sourced specifications") +
+            '</caption><thead><tr><th scope="col">' + ("मॉडल" if hindi else "Model") +
+            '</th><th scope="col">' + ("चिपसेट" if hindi else "Chipset") +
+            '</th><th scope="col">' + ("बैटरी" if hindi else "Battery") +
+            '</th><th scope="col">' + ("चार्जिंग" if hindi else "Charging") +
+            '</th></tr></thead><tbody>' + ''.join(matrix_rows) + '</tbody></table></section>'
+        )
 
         explainer = (
             '<p>यह 30 मॉडल सिर्फ शोध की प्राथमिकता हैं, भारत के 30 सबसे अधिक बिकने वाले या सर्वश्रेष्ठ फोन नहीं। '
@@ -240,8 +288,8 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
             'price and current stock need separate verification. Where a model lacks admitted evidence, '
             'we provide research access rather than publishing a thin or misleading model SEO page.</p>'
         )
-        heading = ("30 स्मार्टफोन: साक्ष्य और तुलना से शुरुआत"
-                   if hindi else "30 smartphones to research with evidence")
+        heading = ("30 स्मार्टफोन: खरीदने से पहले तथ्यों की तुलना"
+                   if hindi else "30 smartphones to research before buying in India")
         links = (
             '<p><a href="/hi/phones/">निर्माता-स्रोत वाले मॉडल</a> · '
             '<a href="/hi/phones/under-25000/">₹25,000 रिसर्च गाइड</a> · '
@@ -293,7 +341,7 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
             '</h2>' + explainer +
             '<p><a href="https://counterpointresearch.com/en/insights/top-5-smartphone-model-share-8-countries">Counterpoint Q2 2026</a> · ' +
             '<a href="https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season">Omdia Q3 2026</a></p>' +
-            '</section>' + "".join(group_sections) +
+            '</section>' + matrix + "".join(group_sections) +
             '<section><h2>' + ("अगला सही कदम" if hindi else "Next research step") +
             '</h2><p>' +
             ("अपनी जरूरत और बजट की सीमा लिखकर सही मॉडल चुनें। खरीदने से पहले विक्रेता की कीमत, RAM/स्टोरेज और उपलब्धता जाँचें।"

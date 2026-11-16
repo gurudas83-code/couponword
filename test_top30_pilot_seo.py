@@ -110,6 +110,18 @@ class Top30ResearchPublicationTests(unittest.TestCase):
                 self.assertIn('href="/?q=', body)
         self.assertEqual(len(self.approved), 50)
 
+    def test_comparison_matrix_never_expands_unapproved_model_details(self):
+        for path, prefix in ((TOP30_EN, "/phones/"), (TOP30_HI, "/hi/phones/")):
+            body = self.html[path]
+            self.assertIn('class="cw-source-matrix"', body)
+            self.assertIn('class="cw-decision-lens"', body)
+            # Only the ten admitted canonical detail pages may appear in the
+            # comparison matrix. Twenty research-only candidates stay unranked.
+            self.assertEqual(body.count('<tr><th scope="row"><a href="' + prefix), 10)
+            self.assertNotIn('"@type": "Offer"', body)
+            self.assertNotIn('"@type": "Review"', body)
+            self.assertIn("स्रोत" if path == TOP30_HI else "source", body)
+
     def test_standalone_urls_not_mass_generated_without_evidence(self):
         # The 20 non-approved models are discoverable through the research
         # interface; they are not converted into thin, indexable SEO pages.
