@@ -113,7 +113,7 @@ jobs:
               "/compare/": (b"How to compare two phones", b"Galaxy A36", b"Galaxy A56"),
               "/hi/compare/": (b"Galaxy A36", b"Galaxy A56", b"hi-IN"),
               "/phones/under-25000/": (b"Choosing a phone under", b"6.67-inch", b"not a ranking"),
-              "/seo/top-30-phone-research-india.html": (b"30 smartphones to research with evidence", b"POCO X7 Pro", b"Samsung Galaxy A56"),
+              "/seo/top-30-phone-research-india.html": (b"Compare 30 smartphones before buying in India", b"POCO X7 Pro", b"Samsung Galaxy A56"),
               "/hi/seo/top-30-phone-research-india.html": (b"hi-IN", b"Samsung Galaxy A56", b"Samsung Galaxy M17"),
               "/hi/phones/under-25000/": (b"6.67-inch", b"hi-IN"),
 
