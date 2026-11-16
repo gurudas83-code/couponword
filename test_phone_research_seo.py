@@ -13,7 +13,7 @@ from urllib.parse import unquote, urlsplit
 from xml.etree import ElementTree as ET
 
 from python.phone_research_pages import (
-    EDITORIAL_MODEL_KEYS, CORE_EDITORIAL_KEYS, REVIEWED_ADDITIONS, HUB, SITE, accepted_specs, eligible, model_title, slug_for,
+    EDITORIAL_MODEL_KEYS, CORE_EDITORIAL_KEYS, REVIEWED_ADDITIONS, HUB, SITE, accepted_specs, eligible, model_title, slug_for, model_decision_lens,
 )
 from python.under25_seo_pages import EN as UNDER25_EN, CATEGORY_TEXT as UNDER25_CATEGORIES, valid_data as under25_data, pth as under25_path
 
@@ -153,6 +153,20 @@ class ResearchSeoTests(unittest.TestCase):
                     continue
                 destination = PUBLIC / unquote(urlsplit(href).path).lstrip("/")
                 self.assertTrue(destination.is_file() or (destination / "index.html").is_file(), href)
+
+    def test_evidence_lenses_are_documented_and_not_fake_verdicts(self):
+        for card in self.selected:
+            lens = model_decision_lens(card)
+            path = PUBLIC / "phones" / slug_for(card) / "index.html"
+            html = path.read_text(encoding="utf-8")
+            hindi = (PUBLIC / "hi" / "phones" / slug_for(card) / "index.html").read_text(encoding="utf-8")
+            if lens:
+                self.assertIn('class="cw-decision-lens"', html, card["model_key"])
+                self.assertIn('class="cw-decision-lens"', hindi, card["model_key"])
+                self.assertIn("Original source", html)
+                self.assertIn("मूल स्रोत", hindi)
+            self.assertNotIn('"@type": "Review"', html)
+            self.assertNotIn('"@type": "Offer"', hindi)
 
     def test_navigation_and_sitemap_include_research_hub(self):
         homepage = (PUBLIC / "index.html").read_text(encoding="utf-8")
