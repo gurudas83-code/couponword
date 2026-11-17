@@ -186,16 +186,24 @@
   }
 
   function researchPhoneImage(card) {
+    var name = displayPhoneName(card);
+    var trigger = '<button type="button" class="research-photo-open" data-research-detail="' +
+      escapeHtml(card.model_key) + '" aria-label="View specifications and retailer choices for ' + escapeHtml(name) + '">';
     var photo = card.image_status === "VERIFIED_MATCH" && card.photo;
     if (photo) {
-      return '<figure class="research-phone-photo"><img src="' + escapeHtml(photo.url) +
+      return '<figure class="research-phone-photo">' + trigger + '<img src="' + escapeHtml(photo.url) +
         '" width="' + escapeHtml(photo.width) + '" height="' + escapeHtml(photo.height) +
-        '" loading="lazy" decoding="async" alt="' + escapeHtml(displayPhoneName(card)) +
-        '"><figcaption>Model photo: <a href="' + escapeHtml(photo.source) + '">' +
+        '" loading="lazy" decoding="async" alt="' + escapeHtml(name) +
+        '"></button><figcaption>Model photo: <a href="' + escapeHtml(photo.source) + '">' +
         (photo.title ? escapeHtml(photo.title) + " by " : "") + escapeHtml(photo.author) + '</a> · <a href="' + escapeHtml(photo.license_url) +
         '">' + escapeHtml(photo.license) + '</a> · resized</figcaption></figure>';
     }
-    return '<div class="research-phone-visual" aria-hidden="true"><img src="/assets/phone-study.svg" width="600" height="540" alt="" loading="lazy"><span>' + escapeHtml(card.brand) + ' / PHONE RESEARCH</span></div><p class="research-illustration-label">Illustration · not a product photo</p>';
+    // An illustration is not a verified model photograph. The same accessible
+    // control opens existing details without claiming an exact product image.
+    return '<button type="button" class="research-photo-open research-phone-visual" data-research-detail="' +
+      escapeHtml(card.model_key) + '" aria-label="View specifications and retailer choices for ' + escapeHtml(name) +
+      '"><img src="/assets/phone-study.svg" width="600" height="540" alt="" loading="lazy"><span>' +
+      escapeHtml(card.brand) + ' / PHONE RESEARCH</span></button><p class="research-illustration-label">Illustration · not a product photo</p>';
   }
 
   function renderInventoryCard(card) {
@@ -667,13 +675,33 @@
   }
 
   function retailerResearchLinks(card) {
-    var exact = (card.verified_retailer_links || []).map(function (item) {
-      var label = "Exact " + String(item.retailer || "retailer") + " listing";
-      var variant = item.variant ? " (" + String(item.variant) + ")" : "";
-      return link(item.url, label + variant);
-    }).join(" ");
-    var searches = (card.retailer_search_links || []).map(function (item) { return link(item.url, "Search " + item.retailer + " for this model"); }).join(" ");
-    return '<div class="mobile-research-sources retailer-search-links">' + exact + (exact && searches ? " " : "") + searches + '</div>';
+    // Reuse the existing exact-identity and retailer-search records; never
+    // transform a research search into a verified buy/stock/price CTA.
+    var exact = card.verified_retailer_links || [];
+    var searches = card.retailer_search_links || [];
+    var stores = [
+      {id: "flipkart", name: "Flipkart", hosts: ["flipkart.com", "www.flipkart.com"]},
+      {id: "amazon", name: "Amazon", hosts: ["amazon.in", "www.amazon.in"]},
+      {id: "croma", name: "Croma", hosts: ["croma.com", "www.croma.com"]}
+    ];
+    return '<div class="mobile-research-sources retailer-search-links" aria-label="Retailer choices">' +
+      stores.map(function (store) {
+        var verified = exact.find(function (item) { return String(item.retailer || "").toLowerCase() === store.id; });
+        var fallback = searches.find(function (item) { return String(item.retailer || "").toLowerCase() === store.id; });
+        var item = verified || fallback;
+        if (item) {
+          try {
+            var parsed = new URL(String(item.url || ""));
+            if (parsed.protocol === "https:" && store.hosts.indexOf(parsed.hostname.toLowerCase()) >= 0) {
+              var label = verified ? "View exact " + store.name + " listing" :
+                (store.id === "croma" ? "Search Croma for this model" : "Search " + store.name);
+              return link(item.url, label);
+            }
+          } catch (error) { /* Invalid links remain unavailable, not clickable. */ }
+        }
+        return '<span class="retailer-choice-unavailable" aria-disabled="true">' +
+          escapeHtml(store.name) + '<small>Link unavailable</small></span>';
+      }).join(" ") + '</div>';
   }
 
   function independentTestContext(card) {
@@ -1017,8 +1045,11 @@
     var card = inventoryCards.find(function (item) { return item.model_key === modelKey; });
     if (!card || !detailSection || !detailContent) return;
     detailSection.hidden = false;
+    detailSection.dataset.modelKey = modelKey;
     if (detailTitle) detailTitle.textContent = displayPhoneName(card);
-    detailContent.innerHTML = renderInventoryCard(card) + '<p class="mobile-research-gate">Research detail only · no current offer, price or purchase action.</p>';
+    detailContent.innerHTML = renderInventoryCard(card) + '<p class="mobile-research-gate">Research detail only · check current price and availability with retailers.</p>';
+    var specifications = detailContent.querySelector("details.mobile-research-model-details");
+    if (specifications) specifications.open = true;
     detailSection.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -1158,8 +1189,15 @@
     var detail = event.target.closest("[data-research-detail]");
     if (detail) {
       event.preventDefault();
-      window.location.hash = "mobileResearchDetail/" + encodeURIComponent(detail.getAttribute("data-research-detail"));
-      showDetail(detail.getAttribute("data-research-detail"));
+      var selectedModel = detail.getAttribute("data-research-detail");
+      if (detailSection && !detailSection.hidden && detailSection.dataset.modelKey === selectedModel) {
+        detailSection.hidden = true;
+        delete detailSection.dataset.modelKey;
+        window.location.hash = "mobileResearchPreview";
+      } else {
+        window.location.hash = "mobileResearchDetail/" + encodeURIComponent(selectedModel);
+        showDetail(selectedModel);
+      }
     }
     var linkTarget = event.target.closest('a[href="#mobileResearchPreview"], a[href="#mobileResearchCatalogue"]');
     if (linkTarget) {
