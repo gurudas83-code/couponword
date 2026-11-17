@@ -694,7 +694,7 @@
             var parsed = new URL(String(item.url || ""));
             if (parsed.protocol === "https:" && store.hosts.indexOf(parsed.hostname.toLowerCase()) >= 0) {
               var label = verified ? "View exact " + store.name + " listing" :
-                (store.id === "croma" ? "Browse Croma" : "Search " + store.name);
+                (store.id === "croma" ? "Search Croma for this model" : "Search " + store.name);
               return link(item.url, label);
             }
           } catch (error) { /* Invalid links remain unavailable, not clickable. */ }
