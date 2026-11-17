@@ -67,7 +67,7 @@
     }).join("");
     panel.querySelector("[data-price-table]").innerHTML = '<p><strong>Listed configuration:</strong> ' +
       escape(configuration.variant) + " · Pincode " + escape(configuration.pincode) +
-      '</p><div class="api-observation-scroll"><table><caption>Listed price and stock observations via QuickCommerce API</caption>' +
+      '</p><div class="api-observation-scroll"><table><caption>Saved price and stock observations (QuickCommerce source)</caption>' +
       '<thead><tr><th scope="col">Store</th><th scope="col">Listed price</th><th scope="col">Stock observation</th><th scope="col">Checked</th><th scope="col">Retailer</th></tr></thead><tbody>' +
       rows + "</tbody></table></div>" +
       (stores.size < 2 ? "<p>No same-configuration comparison across two fresh in-stock stores is available.</p>" : "");
@@ -80,7 +80,7 @@
       return;
     }
     var id = "api-price-config-" + (++sequence);
-    panel.innerHTML = '<h4>Price &amp; availability observations</h4><p>Source: QuickCommerce API, a third-party data provider. These are listed prices, not checkout confirmation.</p>' +
+    panel.innerHTML = '<h4>Price &amp; availability observations</h4><p>Source: previously saved QuickCommerce third-party observations. Opening this panel does not call the paid API. Prices are not checkout confirmation.</p>' +
       '<label for="' + id + '">Choose the listed configuration</label><select id="' + id + '" data-price-config>' +
       configurations.map(function (configuration, index) {
         return '<option value="' + index + '">' + escape(configuration.variant) + "</option>";
@@ -108,7 +108,7 @@
       if (selected && panel._priceConfigurations) renderConfiguration(panel, panel._priceConfigurations[Number(selected.value)]);
       return;
     }
-    panel.innerHTML = '<p role="status">Loading API observations…</p>';
+    panel.innerHTML = '<p role="status">Loading saved price checks…</p>';
     if (!snapshotPromise) {
       snapshotPromise = fetch("/data/retailer_price_observations.json?v=20261117", {credentials: "omit"}).then(function (response) {
         if (!response.ok) throw new Error("Observation file unavailable");
@@ -123,7 +123,7 @@
       show(panel, payload, button.getAttribute("data-price-observations"));
       panel.dataset.loaded = "true";
     }).catch(function () {
-      panel.innerHTML = '<p role="status">API observations are temporarily unavailable. Check the retailer directly.</p>';
+      panel.innerHTML = '<p role="status">Saved observations are temporarily unavailable. Check the retailer directly.</p>';
     });
   });
 }());
