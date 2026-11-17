@@ -111,7 +111,7 @@ def doc(title: str, description: str, route: str, body: str, schema: dict, data:
 <meta property="og:type" content="website">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:url" content="{esc(canonical)}">
-<link rel="stylesheet" href="/assets/category-research.css">
+<link rel="stylesheet" href="/assets/category-research.css?v=shopper-ux-20261118">
 <script type="application/ld+json">{schema_txt}</script>
 </head><body class="category-research">
 <a class="cr-skip" href="#content">Skip to content</a>

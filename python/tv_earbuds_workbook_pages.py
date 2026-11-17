@@ -23,8 +23,8 @@ ROUTES = {
 HOSTS = {"amazon": ("amazon.in", "amzn.in"),
          "flipkart": ("flipkart.com",), "croma": ("croma.com",)}
 
-OBSERVATION_ASSETS = '<link rel="stylesheet" href="/assets/retailer-observations.css?v=20261117">' \
-    '<script defer src="/assets/retailer-observations.js?v=20261117"></script>'
+OBSERVATION_ASSETS = '<link rel="stylesheet" href="/assets/retailer-observations.css?v=shopper-ux-20261118">' \
+    '<script defer src="/assets/retailer-observations.js?v=shopper-ux-20261118"></script>'
 
 def observation_control(item):
     return '<div class="api-price-observations"><button type="button" data-price-observations="' + \
