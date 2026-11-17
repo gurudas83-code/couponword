@@ -179,19 +179,23 @@ def run(root: Path):
                     assert trigger.count() == 1, width
                     assert "Galaxy A36" in trigger.get_attribute("aria-label"), width
                     trigger.click()
-                    detail = page.locator("#mobileResearchDetail")
-                    assert detail.is_visible(), width
-                    assert page.locator("#mobileResearchDetailContent details.mobile-research-model-details").get_attribute("open") is not None, width
-                    retailer_choices = detail.locator(".retailer-search-links")
+                    panel = photo.locator(".research-photo-retailer-panel")
+                    assert panel.is_visible(), width
+                    retailer_choices = panel.locator(".retailer-search-links")
                     for retailer in ("Flipkart", "Amazon", "Croma"):
                         assert retailer in retailer_choices.inner_text(), (width, retailer)
                     assert "Search Croma for this model" in retailer_choices.inner_text(), width
-                    assert detail.locator(".shop-button,.purchase-cta").count() == 0, width
-                    # No page navigation or new indexable URL is required.
+                    assert panel.locator(".shop-button,.purchase-cta").count() == 0, width
+                    assert trigger.get_attribute("aria-expanded") == "true", width
+                    assert page.url == url, width
+                    panel.locator("[data-research-detail]").click()
+                    detail = page.locator("#mobileResearchDetail")
+                    assert detail.is_visible(), width
+                    assert page.locator("#mobileResearchDetailContent details.mobile-research-model-details").get_attribute("open") is not None, width
                     assert page.url.startswith(url + "#mobileResearchDetail/"), width
                     trigger.click()
-                    assert detail.is_hidden(), width
-                    assert page.url.startswith(url + "#mobileResearchPreview"), width
+                    assert panel.count() == 0, width
+                    assert trigger.get_attribute("aria-expanded") == "false", width
                     variants = page.evaluate("""() => window.CouponWorldMobileResearch.search(
                         'OnePlus 13 24GB RAM 1TB storage'
                     ).map(item => item.card.model_key)""")
