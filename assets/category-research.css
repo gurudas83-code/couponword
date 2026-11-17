@@ -65,3 +65,14 @@ body.category-research{margin:0;background:#f6f8f6;color:#172b29;font:16px/1.65 
 .cr-footer a{color:#dbefe4}
 @media(max-width:640px){.cr-header nav{padding:.8rem 1rem;gap:.7rem}.cr-header nav a{font-size:.79rem}.cr-header .cr-logo{flex-basis:100%}.cr-shell{padding:1rem}.cr-hero{border-radius:14px}.cr-grid{grid-template-columns:1fr}.cr-filters{display:grid}.cr-card{padding:1rem}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+
+/* Clear retailer path on TV/earbuds pages, without simulated buy buttons. */
+.cw-buying-steps { padding: .85rem 1rem; border:1px solid #cadccc; background:#edf7ef; border-radius:12px; color:#244738; }
+.cr-card .cw-store-title { margin: .35rem 0 .1rem; font-size:.88rem; color:#214b38; }
+.cr-card .cw-retailer-prices { padding:.75rem 1rem; margin:0 0 .35rem; border:1px solid #dbe6dc; border-radius:12px; background:#f7faf7; }
+.cr-card .cw-retailer-prices li { margin:.4rem 0; line-height:1.55; overflow-wrap:anywhere; }
+.cr-card .cw-retailer-prices a { display:inline-block; padding:4px 0; font-weight:700; }
+.cw-tv-visual-link { display:block; border-radius:16px; text-decoration:none; }
+.cw-tv-visual-link:focus-visible { outline:3px solid #b76b20; outline-offset:4px; }
+.cw-tv-visual-link:hover .cw-tv-visual { box-shadow:0 5px 20px #213d5a20; }
+.cw-retailer-prices:target, #cw-retailer-detail:target { outline:3px solid #6cae8c; outline-offset:5px; }

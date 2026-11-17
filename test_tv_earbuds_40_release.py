@@ -106,8 +106,13 @@ class WorkbookTvEarbudsRelease(unittest.TestCase):
                 self.assertIn('id="cr-payload"',hub)
                 self.assertIn('id="cr-comparison"',hub)
                 self.assertIn("not current offers",hub.lower())
+                self.assertIn("How to use:",hub)
+                self.assertIn("View saved price &amp; stock checks",hub)
                 if c == "tvs":
                     self.assertEqual(hub.count('class="cw-tv-visual"'),20)
+                    self.assertEqual(hub.count('class="cw-tv-visual-link"'),20)
+                    self.assertIn('href="#cw-retailers-tv01"',hub)
+                    self.assertIn('id="cw-retailers-tv01"',hub)
                     self.assertIn("Illustration · not product photo",hub)
                     self.assertEqual(hub.count("<img "),1)
                     self.assertIn("CC0 public-domain",hub)
@@ -119,6 +124,7 @@ class WorkbookTvEarbudsRelease(unittest.TestCase):
                     self.assertIn('rel="canonical"',page)
                     if c == "tvs":
                         self.assertIn('class="cw-tv-visual"',page)
+                        self.assertIn('href="#cw-retailer-detail"',page)
                         self.assertIn("not an exact product photo",page)
                         self.assertNotIn("<img ",page)
                     self.assertNotIn('"@type": "Offer"',page)
