@@ -188,13 +188,13 @@
   function researchPhoneImage(card) {
     var name = displayPhoneName(card);
     var trigger = '<button type="button" class="research-photo-open" data-research-detail="' +
-      escapeHtml(card.model_key) + '" aria-label="View specifications and retailer choices for ' + escapeHtml(name) + '">';
+      escapeHtml(card.model_key) + '" aria-label="View specifications and retailer choices for ' + escapeHtml(name) + '" aria-expanded="false">';
     var photo = card.image_status === "VERIFIED_MATCH" && card.photo;
     if (photo) {
       return '<figure class="research-phone-photo">' + trigger + '<img src="' + escapeHtml(photo.url) +
         '" width="' + escapeHtml(photo.width) + '" height="' + escapeHtml(photo.height) +
         '" loading="lazy" decoding="async" alt="' + escapeHtml(name) +
-        '"></button><figcaption>Model photo: <a href="' + escapeHtml(photo.source) + '">' +
+        '"></button><figcaption><span class="photo-tap-hint">Tap photo to see retailer choices</span>Model photo: <a href="' + escapeHtml(photo.source) + '">' +
         (photo.title ? escapeHtml(photo.title) + " by " : "") + escapeHtml(photo.author) + '</a> · <a href="' + escapeHtml(photo.license_url) +
         '">' + escapeHtml(photo.license) + '</a> · resized</figcaption></figure>';
     }
@@ -202,8 +202,8 @@
     // control opens existing details without claiming an exact product image.
     return '<button type="button" class="research-photo-open research-phone-visual" data-research-detail="' +
       escapeHtml(card.model_key) + '" aria-label="View specifications and retailer choices for ' + escapeHtml(name) +
-      '"><img src="/assets/phone-study.svg" width="600" height="540" alt="" loading="lazy"><span>' +
-      escapeHtml(card.brand) + ' / PHONE RESEARCH</span></button><p class="research-illustration-label">Illustration · not a product photo</p>';
+      '" aria-expanded="false"><img src="/assets/phone-study.svg" width="600" height="540" alt="" loading="lazy"><span>' +
+      escapeHtml(card.brand) + ' / PHONE RESEARCH</span></button><p class="research-illustration-label">Illustration · not a product photo · Tap to see retailers</p>';
   }
 
   function renderInventoryCard(card) {
@@ -703,7 +703,7 @@
           escapeHtml(store.name) + '<small>Link unavailable</small></span>';
       }).join(" ") + '</div>' +
       '<div class="api-price-observations"><button type="button" data-price-observations="' +
-      escapeHtml(card.model_key) + '" aria-expanded="false">Check API price &amp; availability</button>' +
+      escapeHtml(card.model_key) + '" aria-expanded="false">View saved price &amp; stock checks</button>' +
       '<div data-api-price-panel hidden aria-live="polite"></div></div>';
   }
 
