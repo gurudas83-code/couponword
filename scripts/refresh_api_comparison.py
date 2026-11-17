@@ -12,21 +12,32 @@ from quickcommerce_flipkart_adapter import QuickCommerceFlipkartConnector
 FIELDS = {"id", "item_id", "name", "brand", "available", "offer_price", "price",
           "mrp", "quantity", "currency", "deeplink", "model", "model_code"}
 
+
+def planned_queries():
+    """Research only the fixed Top-30 mobile worklist; never other product types."""
+    pilot = json.loads((ROOT / "data/top30_research_pilot_20261113.json").read_text(encoding="utf-8"))
+    selected = pilot.get("selected_models") or []
+    keys = [row["model_key"] for row in selected]
+    if len(keys) != 30 or len(set(keys)) != 30:
+        raise ValueError("Approved Top-30 worklist is invalid")
+    mobile = json.loads((ROOT / "data/mobile_research_catalogue.json").read_text(encoding="utf-8-sig"))["model_cards"]
+    cards = {card["model_key"]: card for card in mobile}
+    if any(key not in cards for key in keys):
+        raise ValueError("Top-30 research model is missing from catalogue")
+    calls = []
+    for key in keys:
+        card = cards[key]
+        query = card["model"] if card["model"].lower().startswith(card["brand"].lower() + " ") else card["brand"] + " " + card["model"]
+        calls.append((key, "Flipkart", query))
+    return calls
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--max-calls", type=int, default=0)
     args = parser.parse_args()
-    if not 0 <= args.max_calls <= 312:
-        parser.error("Explicit call cap must be 0..312")
-    mobile = json.loads((ROOT / "data/mobile_research_catalogue.json").read_text(encoding="utf-8-sig"))["model_cards"]
-    other = json.loads((ROOT / "data/india_tv_earbuds_40_catalogue.json").read_text(encoding="utf-8-sig"))["records"]
-    calls = []
-    for card in mobile:
-        query = card["model"] if card["model"].lower().startswith(card["brand"].lower() + " ") else card["brand"] + " " + card["model"]
-        calls.append((card["model_key"], "Amazon", query))
-    for row in other:
-        query = row["brand"] + " " + (row.get("model_code") or row["model"])
-        calls.extend((row["id"], platform, query) for platform in ("Amazon", "Flipkart"))
+    if not 0 <= args.max_calls <= 2:
+        parser.error("Only 0..2 manually authorized Top-30 searches allowed")
+    calls = planned_queries()
     connector = QuickCommerceFlipkartConnector()
     result = {"calls_attempted": 0, "records": [], "errors": [], "complete": False}
     output = ROOT / "private_observations/provider_refresh.json"
