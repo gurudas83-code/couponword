@@ -1,0 +1,35 @@
+name: QuickCommerce comparison integration
+on:
+  workflow_dispatch:
+    inputs:
+      max_calls:
+        description: "Explicit paid search cap (0 does not run; maximum 312)"
+        type: number
+        default: 0
+permissions:
+  contents: read
+concurrency:
+  group: quickcommerce-comparison
+  cancel-in-progress: false
+jobs:
+  refresh:
+    if: inputs.max_calls > 0
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - run: python -m unittest -q test_quickcommerce_flipkart_adapter test_quickcommerce_catalogue_audit test_api_price_observations
+      - name: Collect bounded observations for review; do not publish or retimestamp
+        env:
+          QUICKCOMMERCE_API_KEY: ${{ secrets.QUICKCOMMERCE_API_KEY }}
+          MAX_CALLS: ${{ inputs.max_calls }}
+        run: python scripts/refresh_api_comparison.py --max-calls "$MAX_CALLS"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: quickcommerce-comparison-refresh
+          path: private_observations/provider_refresh.json
+          retention-days: 14

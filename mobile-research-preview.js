@@ -701,7 +701,10 @@
         }
         return '<span class="retailer-choice-unavailable" aria-disabled="true">' +
           escapeHtml(store.name) + '<small>Link unavailable</small></span>';
-      }).join(" ") + '</div>';
+      }).join(" ") + '</div>' +
+      '<div class="api-price-observations"><button type="button" data-price-observations="' +
+      escapeHtml(card.model_key) + '" aria-expanded="false">Check API price &amp; availability</button>' +
+      '<div data-api-price-panel hidden aria-live="polite"></div></div>';
   }
 
   function independentTestContext(card) {

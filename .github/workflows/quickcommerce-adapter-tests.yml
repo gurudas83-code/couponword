@@ -7,6 +7,9 @@ on:
       - "test_quickcommerce_flipkart_adapter.py"
       - "scripts/quickcommerce_catalogue_audit.py"
       - "test_quickcommerce_catalogue_audit.py"
+      - "test_api_price_observations.py"
+      - "python/build_multi_retailer_public.py"
+      - "assets/retailer-observations.js"
       - "tests/fixtures/quickcommerce_flipkart_a56_search.json"
       - ".github/workflows/quickcommerce-adapter-tests.yml"
 permissions:
@@ -23,5 +26,5 @@ jobs:
       - name: Compile adapter
         run: python -m py_compile python/quickcommerce_flipkart_adapter.py
       - name: Run offline and publication-safety tests
-        run: python -m unittest -v test_quickcommerce_flipkart_adapter test_quickcommerce_catalogue_audit
+        run: python -m unittest -v test_quickcommerce_flipkart_adapter test_quickcommerce_catalogue_audit test_api_price_observations
 

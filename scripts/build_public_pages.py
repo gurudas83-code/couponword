@@ -23,7 +23,7 @@ PUBLIC_FILES = (
     "index.html", "style.css", "app.js", "mobile-research-preview.js", "coupons.json", "CNAME",
     "robots.txt", "sitemap.xml", "google54faf165096b5622.html", "buying-guides.html", "buying-guides.js",
 )
-PUBLIC_DATA_FILES = ("data/seo-pages.json", "data/mobile_research_preview.json")
+PUBLIC_DATA_FILES = ("data/seo-pages.json", "data/mobile_research_preview.json", "data/retailer_price_observations.json")
 PUBLIC_DIRECTORIES = ("assets", "seo", "guides")
 PUBLIC_SOURCE_DIRECTORIES = ("assets", "products", "seo", "guides")
 FORBIDDEN_NAMES = {
