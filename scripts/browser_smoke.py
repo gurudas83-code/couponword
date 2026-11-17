@@ -173,6 +173,25 @@ def run(root: Path):
                     assert photo.locator("img").get_attribute("src") == "/assets/phone-photos/samsung-galaxy-a36-5g.jpg", width
                     assert photo.locator("figcaption a").count() == 2, width
                     assert page.request.get(url + "assets/phone-photos/samsung-galaxy-a36-5g.jpg").ok, width
+                    # Existing product image opens the same-page model details,
+                    # exposes all three retailer choices, and toggles closed.
+                    trigger = photo.locator("button.research-photo-open")
+                    assert trigger.count() == 1, width
+                    assert "Galaxy A36" in trigger.get_attribute("aria-label"), width
+                    trigger.click()
+                    detail = page.locator("#mobileResearchDetail")
+                    assert detail.is_visible(), width
+                    assert page.locator("#mobileResearchDetailContent details.mobile-research-model-details").get_attribute("open") is not None, width
+                    retailer_choices = detail.locator(".retailer-search-links")
+                    for retailer in ("Flipkart", "Amazon", "Croma"):
+                        assert retailer in retailer_choices.inner_text(), (width, retailer)
+                    assert "Search Croma for this model" in retailer_choices.inner_text(), width
+                    assert detail.locator(".shop-button,.purchase-cta").count() == 0, width
+                    # No page navigation or new indexable URL is required.
+                    assert page.url.startswith(url + "#mobileResearchDetail/"), width
+                    trigger.click()
+                    assert detail.is_hidden(), width
+                    assert page.url.startswith(url + "#mobileResearchPreview"), width
                     variants = page.evaluate("""() => window.CouponWorldMobileResearch.search(
                         'OnePlus 13 24GB RAM 1TB storage'
                     ).map(item => item.card.model_key)""")
