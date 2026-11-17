@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       max_calls:
-        description: "Explicit paid search cap (0 does not run; maximum 312)"
+        description: "Only Top-30 mobile Flipkart research, maximum 2 paid calls; 0 does not run"
         type: number
         default: 0
 permissions:
