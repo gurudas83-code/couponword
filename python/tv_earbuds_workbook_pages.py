@@ -23,6 +23,14 @@ ROUTES = {
 HOSTS = {"amazon": ("amazon.in", "amzn.in"),
          "flipkart": ("flipkart.com",), "croma": ("croma.com",)}
 
+OBSERVATION_ASSETS = '<link rel="stylesheet" href="/assets/retailer-observations.css?v=20261117">' \
+    '<script defer src="/assets/retailer-observations.js?v=20261117"></script>'
+
+def observation_control(item):
+    return '<div class="api-price-observations"><button type="button" data-price-observations="' + \
+        esc(item["id"]) + '" aria-expanded="false">Check API price &amp; availability</button>' \
+        '<div data-api-price-panel hidden aria-live="polite"></div></div>'
+
 def clean_url(url):
     return str(url or "").strip()
 
@@ -141,7 +149,7 @@ data-search="{esc(search)}">
 {research_visual(item)}\n<h3><a href="{esc(route)}">{esc(item["model"])}</a></h3>
 <dl class="cr-facts">{first}</dl>
 <p class="cr-muted">Prices are dated research references, not current offers.</p>
-<ul class="cw-retailer-prices">{choices}</ul>
+<ul class="cw-retailer-prices">{choices}</ul>{observation_control(item)}
 <div class="cr-card-foot"><a href="{esc(route)}">Detailed research</a>
 <label class="cr-compare-label"><input type="checkbox" data-compare="{esc(item["id"].lower())}"> Compare</label></div></article>'''
 
@@ -186,7 +194,7 @@ def hub(category, items):
 <p>Amazon: no authorized live-price API connected; any attributed historical Amazon quotes stay out of public price promotion. Flipkart/Croma: amounts shown are dated public references, may vary by colour, seller, region or delivery address. Missing quote means unknown—not zero or unavailable.</p>
 <p>Research order is the workbook's editorial order. It is not a verified Top 20 performance ranking. Performance rank continues to exclude price (0% weight), and no product is declared purchase-eligible by this page.</p></section>'''
     script=f'<script type="application/json" id="cr-payload">{serialized}</script>' \
-           '<script defer src="/assets/category-research.js"></script>'
+           '<script defer src="/assets/category-research.js"></script>' + OBSERVATION_ASSETS
     return doc(title, "Comparison of 20 India-market " + ("televisions" if category == "tvs" else "wireless earbuds") +
                " with dated Amazon/Flipkart/Croma research links and source-grade disclosure.",
                route,body,schema(title,route,category),script)
@@ -232,6 +240,7 @@ def detail(item):
 <section><h2>Amazon, Flipkart and Croma</h2>
 <p>Only links marked <strong>Verified product</strong> have an independently matched product identity. Links marked <strong>Search model</strong> are retailer searches, not exact-product buy buttons. No current stock or shipping guarantee is made.</p>
 <div class="cr-scroll"><table class="cr-compare-table"><thead><tr><th>Retailer</th><th>Dated quoted reference</th><th>Research link</th></tr></thead><tbody>{merchant}</tbody></table></div></section>
+{observation_control(item)}
 <section><h2>Why this product may be considered</h2><p>{esc(item["buyer_use_case"] or "Model-specific suitability remains under review.")}</p></section>
 <section><h2>Important gaps and buyer checks</h2><p>{esc(item["evidence_caveat"])}</p>
 <ul><li>Confirm the precise model suffix and screen size / earbud colour and features</li>
@@ -243,7 +252,7 @@ def detail(item):
     # model/field review. Prevent scaling thin, unverified SEO pages.
     page=doc(item["model"]+" research India",item["brand"]+" "+item["model"]+
              " manufacturer, editorial and dated retailer references for India.",
-             route,body,schema(item["model"],route,cat))
+             route,body,schema(item["model"],route,cat),OBSERVATION_ASSETS)
     return page.replace('name="robots" content="index,follow"',
                         'name="robots" content="noindex,follow"',1)
 
