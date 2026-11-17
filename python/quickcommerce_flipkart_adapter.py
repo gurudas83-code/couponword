@@ -76,6 +76,8 @@ def _valid_listing(item, product):
 
 
 def _positive_price(value):
+    if isinstance(value, bool):
+        return None
     try:
         price = float(value)
         return price if math.isfinite(price) and price > 0 else None
@@ -147,6 +149,11 @@ class QuickCommerceFlipkartConnector:
         self.opener = opener
 
     def get_offer(self, product):
+        payload, observed = self.search(f"{product.brand} {product.model} {product.variant}")
+        return normalize_search_response(payload, product, observed_at=observed)
+
+    def search(self, query):
+        """One bounded provider search; caller must validate identity before use."""
         if self.fixture is not None:
             payload = self.fixture
             observed = ""  # fixtures are historical samples, never fresh evidence
@@ -154,7 +161,6 @@ class QuickCommerceFlipkartConnector:
             key = self.api_key or os.environ.get("QUICKCOMMERCE_API_KEY")
             if not key:
                 raise RuntimeError("Set QUICKCOMMERCE_API_KEY privately for a live request")
-            query = f"{product.brand} {product.model} {product.variant}"
             params = urlencode({"q": query, "lat": self.lat, "lon": self.lon,
                                 "platform": "Flipkart", "pincode": self.pincode})
             request = Request(BASE_URL + "/v1/search?" + params,
@@ -162,7 +168,7 @@ class QuickCommerceFlipkartConnector:
             with self.opener(request, timeout=15) as response:
                 payload = json.load(response)
             observed = datetime.now(timezone.utc).isoformat()
-        return normalize_search_response(payload, product, observed_at=observed)
+        return payload, observed
 
 
 def dry_run(fixture_path, product):
@@ -180,3 +186,4 @@ def dry_run(fixture_path, product):
         "source": offer.source,
         "publishable": False,
     }
+

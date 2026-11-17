@@ -60,3 +60,7 @@ python/tavily_test.py
 python_function_map.txt
 repository_tree.txt
 runtime_dependency_map.txt
+
+# Private provider observations must never be committed or served
+private_observations/
+
