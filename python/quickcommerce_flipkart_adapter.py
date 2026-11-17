@@ -28,6 +28,16 @@ def _tokens(value):
     return " ".join(MODEL_TOKEN.sub(" ", str(value).lower()).split())
 
 
+def _listing_model_name(title):
+    """Remove trailing memory/color groups, preserving model names like Phone (3a)."""
+    text = str(title).strip()
+    while True:
+        model = re.sub(r"\s*\([^()]*\b\d+\s*(?:GB|TB)\b[^()]*\)\s*$", "", text, flags=re.I).strip()
+        if model == text:
+            return text
+        text = model
+
+
 def _memory(variant):
     text = str(variant).replace(" ", "")
     match = re.search(r"(\d{1,3})GB/(\d{1,4})(GB|TB)", text, re.I)
@@ -42,7 +52,7 @@ def _valid_listing(item, product):
         return False
     brand = _tokens(product.brand)
     model = _tokens(product.model)
-    name = _tokens(str(item.get("name", "")).split("(", 1)[0])
+    name = _tokens(_listing_model_name(item.get("name", "")))
     # Enforce the full model phrase, rather than matching 'A56' to 'A56 Plus'.
     if not brand or not model or name != brand + " " + model:
         return False
