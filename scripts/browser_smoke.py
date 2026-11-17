@@ -45,6 +45,19 @@ def run(root: Path):
                     pending_offers = []
                     page.route("**/api/recommend?*", lambda route: pending_offers.append(route))
                     page.goto(url, wait_until="domcontentloaded", timeout=30000)
+                    # New visitors have a clear way to browse, compare and reach retailers.
+                    assert page.locator("#howToShop").is_visible(), width
+                    assert "Tap the phone photo" in page.locator("#howToShop").inner_text(), width
+                    assert page.locator(".cw-primary-actions a").count() == 4, width
+                    assert page.locator('.cw-primary-actions a[href="/seo/top-30-phone-research-india.html"]').count() == 1, width
+                    assert page.locator(".cw-budget-more").evaluate("(el) => !el.open"), width
+                    page.locator(".cw-budget-more summary").click()
+                    assert page.locator('[data-mobile-query="mobile under 50000"]').is_visible(), width
+                    page.locator(".cw-budget-more summary").click()
+                    assert page.locator(".cw-budget-more").evaluate("(el) => !el.open"), width
+                    assert page.locator("#researchCategories").evaluate(
+                        "(el) => !!(el.compareDocumentPosition(document.getElementById('mobileResearchSearch')) & Node.DOCUMENT_POSITION_FOLLOWING)"
+                    ), width
                     page.wait_for_function("() => !!window.CouponWorldMobileResearch", timeout=15000)
                     # Wait for the real fetch->catalogue->browser filtering chain.
                     page.wait_for_function(
@@ -178,10 +191,13 @@ def run(root: Path):
                     trigger = photo.locator("button.research-photo-open")
                     assert trigger.count() == 1, width
                     assert "Galaxy A36" in trigger.get_attribute("aria-label"), width
+                    assert trigger.get_attribute("aria-expanded") == "false", width
+                    assert "Tap photo to see retailer choices" in photo.locator("figcaption").inner_text(), width
                     trigger.click()
                     panel = photo.locator(".research-photo-retailer-panel")
                     assert panel.is_visible(), width
                     retailer_choices = panel.locator(".retailer-search-links")
+                    assert "View saved price & stock checks" in panel.inner_text(), width
                     for retailer in ("Flipkart", "Amazon", "Croma"):
                         assert retailer in retailer_choices.inner_text(), (width, retailer)
                     assert "Search Croma for this model" in retailer_choices.inner_text(), width
