@@ -64,6 +64,13 @@ class CatalogueAuditTests(unittest.TestCase):
         self.assertIsNone(audit._positive_price(True))
         self.assertIsNone(audit._positive_price(False))
 
+    def test_parenthesized_model_identity_is_preserved(self):
+        row = dict(self.row, brand="Nothing", model="Phone (3a)")
+        item = dict(self.payload["data"]["products"][1], brand="Nothing", name="Nothing Phone (3a) (Black, 128 GB)")
+        self.assertTrue(audit.listing_candidate(item, row))
+        self.assertFalse(audit.listing_candidate(dict(item, name="Nothing Phone (3a) Pro (Black, 128 GB)"), row))
+        self.assertEqual(audit._listing_model_name("Nothing Phone (3a)"), "Nothing Phone (3a)")
+
     def test_tv_requires_exact_model_code(self):
         row = {"brand": "Samsung", "model": "TV", "model_code": "QA55TEST", "category": "tvs"}
         item = dict(self.payload["data"]["products"][1], name="Samsung TV QA55TEST")

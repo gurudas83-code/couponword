@@ -17,7 +17,7 @@ from urllib.parse import parse_qs, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "python"))
-from quickcommerce_flipkart_adapter import QuickCommerceFlipkartConnector, SOURCE, _tokens, _positive_price
+from quickcommerce_flipkart_adapter import QuickCommerceFlipkartConnector, SOURCE, _tokens, _positive_price, _listing_model_name
 
 
 def load_targets(category="all"):
@@ -53,7 +53,7 @@ def listing_candidate(item, row):
             expected = expected[:storage.start()].strip()
             if not re.search(r"\b" + storage.group(1) + r"\s*" + storage.group(2) + r"\b", title, re.I):
                 return False
-        return _tokens(title.split("(", 1)[0]) == expected
+        return _tokens(_listing_model_name(title)) == expected
     # Non-mobile listings require a manufacturer model code, never RAM matching.
     code = str(row.get("model_code") or "").strip()
     return bool(code and re.search(r"(?<![a-z0-9])" + re.escape(code) + r"(?![a-z0-9])", title, re.I))
