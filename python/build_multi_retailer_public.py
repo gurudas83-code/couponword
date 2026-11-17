@@ -12,7 +12,6 @@ from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 from evidence_freshness import freshness_status
 from multi_retailer_engine import compare_offers
 from retailer_contract import RetailerOffer
-from stored_offer_comparison import load_product_offers
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -288,6 +287,7 @@ def build_observation_snapshot(audit, cards, diagnostics=(), *, now=None):
 
 
 def main():
+    from stored_offer_comparison import load_product_offers
     pilot = json.loads(
         PILOT_FILE.read_text(encoding="utf-8-sig")
     )
