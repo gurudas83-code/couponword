@@ -159,6 +159,25 @@ class Top30ResearchPublicationTests(unittest.TestCase):
                 self.assertTrue((ROOT / img["src"].lstrip("/")).is_file())
                 self.assertTrue(img.get("alt", "").endswith("model photograph"))
 
+    def test_photo_click_reveals_three_retailer_searches_without_buy_claims(self):
+        from urllib.parse import quote_plus
+        for path in (TOP30_EN, TOP30_HI):
+            body = self.html[path]
+            # Every research candidate has a search option, including the 23
+            # without a licensed photographed asset.
+            self.assertEqual(body.count('<details class="cw-retail-choices">'), 30)
+            self.assertEqual(body.count('<nav aria-label="Search retailers for ') if path == TOP30_EN else body.count('<nav aria-label="रिटेलर में खोजें: '), 30)
+            for row in self.pilot["selected_models"]:
+                model = self.cards[row["model_key"]]
+                query = quote_plus(model_title(model))
+                self.assertIn("https://www.amazon.in/s?k=" + query + "&amp;tag=guru07cc-21", body)
+                self.assertIn("https://www.flipkart.com/search?q=" + query, body)
+                self.assertIn("https://www.croma.com/searchB?q=" + query, body)
+            self.assertNotIn("Buy Now", body)
+            self.assertNotIn("current verified price", body.lower())
+            self.assertIn("nofollow sponsored noopener noreferrer", body)
+            self.assertGreaterEqual(body.count('target="_blank" rel="nofollow sponsored noopener noreferrer"'), 60)
+
     def test_standalone_urls_not_mass_generated_without_evidence(self):
         # The 20 non-approved models are discoverable through the research
         # interface; they are not converted into thin, indexable SEO pages.

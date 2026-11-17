@@ -122,7 +122,7 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
     Do not index or create a new model detail page without that model passing the
     current 50-page manufacturer evidence and editorial admission checks.
     """
-    from urllib.parse import urlencode
+    from urllib.parse import urlencode, quote_plus
     from python.phone_research_pages import (
         EDITORIAL_MODEL_KEYS, accepted_specs, eligible, model_title, slug_for,
         specification_label, specification_value, model_decision_lens,
@@ -162,6 +162,12 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
               '.cw-pilot-card h3{margin-top:.25rem}.cw-pilot-card li{margin:.4rem 0}'
               '.cw-pilot-photo{margin:.4rem 0 1rem}.cw-pilot-photo img{display:block;max-width:180px;max-height:210px;width:auto;height:auto;object-fit:contain}'
               '.cw-pilot-photo figcaption{font-size:.75rem;line-height:1.45;overflow-wrap:anywhere}'
+              '.cw-retail-choices{margin:.4rem 0 1rem}.cw-retail-choices summary{display:inline-block;cursor:pointer;border:1px solid #b8c6d5;border-radius:10px;padding:.5rem;list-style:none}'
+              '.cw-retail-choices summary::-webkit-details-marker{display:none}.cw-retail-choices summary:focus-visible{outline:3px solid #215fa1;outline-offset:3px}'
+              '.cw-retail-choices summary img{display:block;max-width:180px;max-height:210px;width:auto;height:auto;object-fit:contain}'
+              '.cw-retail-choices nav{display:flex;flex-wrap:wrap;gap:.5rem;padding:.65rem 0}.cw-retail-choices nav a{border:1px solid #2a587f;border-radius:8px;padding:.55rem .8rem;text-decoration:none}'
+              '.cw-retail-choices nav a:focus-visible{outline:3px solid #215fa1;outline-offset:3px}'
+              '.cw-retail-choices .cw-retail-note{font-size:.83rem;margin:.2rem 0}'
               '.cw-pilot-note{background:#eef5fa;padding:1rem;border-left:4px solid #276a96}'
               '.cw-pilot-links a{margin-right:1rem}.cw-pilot-card{overflow-wrap:anywhere}'
               '.cw-source-matrix{overflow-x:auto}.cw-source-matrix table{width:100%;border-collapse:collapse;min-width:630px}'
@@ -211,6 +217,29 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
                     facts.append('<li>' + ("इस रिकॉर्ड में अभी पर्याप्त फ़ील्ड-स्रोत नहीं हैं।"
                                           if hindi else
                                           "Sufficient source-linked technical fields are still pending.") + '</li>')
+                # Research-site navigation: retailer search, NEVER a verified Buy Now.
+                # A vendor search may return the wrong RAM/storage, so visitors
+                # must confirm the exact listing themselves.
+                query_string = quote_plus(name)
+                retailer_urls = (
+                    ("Amazon", "https://www.amazon.in/s?k=" + query_string + "&tag=guru07cc-21"),
+                    ("Flipkart", "https://www.flipkart.com/search?q=" + query_string),
+                    ("Croma", "https://www.croma.com/searchB?q=" + query_string),
+                )
+                retailer_actions = "".join(
+                    '<a href="' + esc(url) + '" target="_blank" rel="nofollow sponsored noopener noreferrer">' +
+                    esc(("खोजें: " if hindi else "Search ") + retailer) + '</a>'
+                    for retailer, url in retailer_urls
+                )
+                retailer_note = (
+                    "ये retailer के search results हैं, verified exact-product links नहीं। RAM, storage, price और stock retailer पर जाँचें।"
+                    if hindi else
+                    "Retailer searches only, not verified exact-product links. Confirm RAM, storage, price and stock on the retailer."
+                )
+                retailer_nav = ('<nav aria-label="' +
+                    esc(("रिटेलर में खोजें: " if hindi else "Search retailers for ") + name) +
+                    '">' + retailer_actions + '</nav><p class="cw-retail-note">' +
+                    esc(retailer_note) + '</p>')
                 photo = photo_records.get(row["model_key"]) or {}
                 photo_html = ""
                 photo_path = str(photo.get("url") or "")
@@ -230,16 +259,24 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
                         and isinstance(photo.get("height"), int)
                         and photo["width"] > 0 and photo["height"] > 0):
                     photo_html = (
-                        '<figure class="cw-pilot-photo"><img src="' + esc(photo_path) +
+                        '<details class="cw-retail-choices"><summary aria-label="' +
+                        esc(("फोटो पर क्लिक करके " if hindi else "Click photo for ") + name +
+                            (" के रिटेलर विकल्प खोलें" if hindi else " retailer choices")) +
+                        '"><img src="' + esc(photo_path) +
                         '" alt="' + esc(name) + ' model photograph" loading="lazy" decoding="async" width="' +
                         str(photo["width"]) + '" height="' + str(photo["height"]) +
-                        '"><figcaption>' +
+                        '"><span>' + ('रिटेलर विकल्प देखें' if hindi else 'Show retailer options') +
+                        '</span></summary>' + retailer_nav +
+                        '<div class="cw-pilot-photo"><small>' +
                         ('मॉडल की फोटो: ' if hindi else 'Model photograph: ') +
                         '<a href="' + esc(photo_source) + '" rel="noopener noreferrer">' +
                         esc(photo_author) + '</a> · <a href="' + esc(license_url) +
-                        '" rel="noopener noreferrer">' + esc(photo_license) + '</a>' +
-                        '</figcaption></figure>'
+                        '" rel="noopener noreferrer">' + esc(photo_license) + '</a></small></div></details>'
                     )
+                if not photo_html:
+                    photo_html = ('<details class="cw-retail-choices"><summary>' +
+                        ('तीनों रिटेलर में खोजें' if hindi else 'Search all three retailers') +
+                        '</summary>' + retailer_nav + '</details>')
                 fact_note = ("दस्तावेज़ित जानकारी, वास्तविक दुनिया की परफॉर्मेंस रैंकिंग नहीं।"
                              if hindi else
                              "Documented facts, not a measured real-world performance ranking.")
