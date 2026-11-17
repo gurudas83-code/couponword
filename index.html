@@ -29,10 +29,10 @@
   <meta name="twitter:description" content="Source-backed smartphone research and comparison in India." />
   <link rel="icon" href="/assets/coupon-world-og.svg?v=1" type="image/svg+xml" />
 
-  <link rel="stylesheet" href="/style.css?v=catalogue-width-20261117">
-  <link rel="preload" href="/data/mobile_research_catalogue.json?v=p1-20261107" as="fetch" crossorigin="anonymous">
+  <link rel="stylesheet" href="/style.css?v=shopping-journey-20261118">
+  <link rel="preload" href="/data/mobile_research_catalogue.json?v=licensed-photos-20261117" as="fetch" crossorigin="anonymous">
   <script defer src="/app.js?v=first-load-20261107"></script>
-  <script defer src="/mobile-research-preview.js?v=p1-20261107"></script>
+  <script defer src="/mobile-research-preview.js?v=shopping-journey-20261118"></script>
   <link rel="stylesheet" href="/assets/retailer-observations.css?v=20261117">
   <script defer src="/assets/retailer-observations.js?v=20261117"></script>
 
@@ -104,48 +104,57 @@
           <h1>Find a phone.<br><em>For your budget.</em></h1>
 
           <p>
-            Find and compare smartphones in India using sourced specifications and independent test context.
-            Tell us your budget and priorities. See the trade-offs, compare exact variants, then check retailers.
+            Find a phone by budget, camera, gaming or battery. Compare documented specifications,
+            then open the retailer options to check the current price and buy.
           </p>
 
           <div class="hero-search">
-            <label for="heroSearch">Search smartphones or requirements</label>
+            <label for="heroSearch">What phone are you looking for?</label>
             <div class="hero-search-row">
-              <input id="heroSearch" type="search" placeholder="Try camera phone under 30000, exclude Samsung" autocomplete="off" />
+              <input id="heroSearch" type="search" placeholder="e.g. camera phone under ₹25,000" autocomplete="off" />
               <button id="heroSearchButton" type="button">Search</button>
             </div>
           </div>
 
-          <div class="mobile-budget-chips" aria-label="Mobile budget searches">
-            <span>Mobile budget</span>
+<div class="mobile-budget-chips" aria-label="Quick smartphone budget searches">
+            <span>Choose a budget</span>
             <button type="button" data-mobile-query="mobile under 10000">₹10k</button>
             <button type="button" data-mobile-query="mobile under 15000">₹15k</button>
             <button type="button" data-mobile-query="mobile under 20000">₹20k</button>
             <button type="button" data-mobile-query="mobile under 25000">₹25k</button>
             <button type="button" data-mobile-query="mobile under 30000">₹30k</button>
-            <button type="button" data-mobile-query="mobile under 35000">₹35k</button>
-            <button type="button" data-mobile-query="mobile under 40000">₹40k</button>
-            <button type="button" data-mobile-query="mobile under 50000">₹50k</button>
-            <button type="button" data-mobile-query="mobile under 60000">₹60k</button>
-            <button type="button" data-mobile-query="mobile under 70000">₹70k</button>
-            <button type="button" data-mobile-query="mobile under 80000">₹80k</button>
-            <button type="button" data-mobile-query="mobile under 90000">₹90k</button>
-            <button type="button" data-mobile-query="mobile under 100000">₹1L</button>
+            <details class="cw-budget-more">
+              <summary>More budgets</summary>
+              <div class="cw-budget-more-options">
+                <button type="button" data-mobile-query="mobile under 35000">₹35k</button>
+                <button type="button" data-mobile-query="mobile under 40000">₹40k</button>
+                <button type="button" data-mobile-query="mobile under 50000">₹50k</button>
+                <button type="button" data-mobile-query="mobile under 60000">₹60k</button>
+                <button type="button" data-mobile-query="mobile under 70000">₹70k</button>
+                <button type="button" data-mobile-query="mobile under 80000">₹80k</button>
+                <button type="button" data-mobile-query="mobile under 90000">₹90k</button>
+                <button type="button" data-mobile-query="mobile under 100000">₹1L</button>
+              </div>
+            </details>
           </div>
 
-          <div class="hero-actions">
-            <a class="btn btn-ghost" href="/guides/smartphone-buying-guide/">Standard Buying Guide</a>
-            <a class="btn btn-ghost" href="/phones/">Source-linked phone specifications</a>
-            <a class="btn btn-ghost" href="#mobileResearchCatalogue">Browse all 232 catalogue entries</a>
-            <a class="btn btn-ghost" href="/seo/phone-research-evidence-method.html">How our evidence works</a>
-          </div>
-          <div class="hero-actions" aria-label="Popular phone research paths">
+          <div class="hero-actions cw-primary-actions" aria-label="Popular ways to start">
             <a class="btn btn-primary" data-analytics-intent="budget_25000" href="/phones/under-25000/">Phones under ₹25k</a>
+            <a class="btn btn-ghost" href="#mobileResearchCatalogue">Browse all 232 phones</a>
             <a class="btn btn-ghost" data-analytics-intent="compare" href="/compare/">Compare phones</a>
-            <a class="btn btn-ghost" data-analytics-intent="search_demand" href="/seo/india-smartphone-search-demand.html">What people search for</a>
+            <a class="btn btn-ghost" href="/seo/top-30-phone-research-india.html">30 phones to research</a>
           </div>
-          <p class="hero-evidence-note">Budget filters use dated reference prices. Confirm today's price and delivery with the retailer.</p>
-          <div class="hero-stats"><div><strong>232</strong><span>Phone research entries</span></div><div><strong>225</strong><span>With sourced specifications</span></div><div><strong>20</strong><span>Practical buying guides</span></div></div>
+          <details class="cw-extra-guides">
+            <summary>More buying and research guides</summary>
+            <div class="hero-actions">
+              <a class="btn btn-ghost" href="/guides/smartphone-buying-guide/">Phone buying guide</a>
+              <a class="btn btn-ghost" href="/phones/">Source-linked specifications</a>
+              <a class="btn btn-ghost" href="/seo/phone-research-evidence-method.html">Our evidence method</a>
+              <a class="btn btn-ghost" data-analytics-intent="search_demand" href="/seo/india-smartphone-search-demand.html">Search trends</a>
+            </div>
+          </details>
+          <p class="hero-evidence-note">Tap a phone photo for Amazon, Flipkart and Croma options where available. Confirm the exact variant, today's price and delivery on the retailer's site.</p>
+          <div class="hero-stats"><div><strong>232</strong><span>Phone research entries</span></div><div><strong>226</strong><span>With sourced specifications</span></div><div><strong>20</strong><span>Practical buying guides</span></div></div>
           <div hidden><span id="statDeals"></span><span id="statCategories"></span></div>
         </div>
 
@@ -167,6 +176,48 @@
         <p><a href="/seo/camera-phone-buying-guide.html">Camera guide</a> · <a href="/seo/gaming-phone-buying-guide.html">Gaming guide</a> · <a href="/seo/battery-phone-buying-guide.html">Battery guide</a></p>
       </section>
     </noscript>
+
+
+    <section class="container decision-path" id="howToShop" aria-label="Three steps to shop">
+      <div><span class="path-number">01</span><p><strong>Find your phone</strong><span>Search by model, budget or what matters most.</span></p></div>
+      <div><span class="path-number">02</span><p><strong>Tap the phone photo</strong><span>Open the retailer choices. Check the specifications and exact memory variant.</span></p></div>
+      <div><span class="path-number">03</span><p><strong>Check at the store</strong><span>Choose Amazon, Flipkart or Croma when linked. Confirm today's price, stock and delivery before purchasing.</span></p></div>
+    </section>
+
+    <section class="container cw-research-categories" id="researchCategories" aria-labelledby="researchCategoriesTitle">
+      <div class="section-heading standalone">
+        <div>
+          <span class="section-kicker">EXPLORE BY PRODUCT TYPE</span>
+          <h2 id="researchCategoriesTitle">One research standard. Three buying decisions.</h2>
+          <p>Start with the category that matches your need. We keep official sources, unknowns and current-offer eligibility distinct.</p>
+        </div>
+      </div>
+      <div class="cw-research-category-grid">
+        <article class="cw-research-category">
+          <span class="cw-research-category-label">01 / SMARTPHONES</span>
+          <h3>Choose a phone</h3>
+          <p>Explore 232 research model cards, exact memory filters and 50 curated manufacturer-source pages. Compare documented features and check the exact memory variant before choosing.</p>
+          <a href="/phones/">Explore smartphone specifications →</a>
+          <a href="/phones/india-market-demand-q3-2026/">India 2026 sales-report model coverage →</a>
+          <a href="#indiaPhoneSources">Recent India phone source checks →</a>
+        </article>
+        <article class="cw-research-category">
+          <span class="cw-research-category-label">02 / MOBILE ACCESSORIES</span>
+          <h3>Check compatibility first</h3>
+          <p>Compare documented chargers, earbuds and power banks, including supported interfaces, battery claims and device-specific caveats.</p>
+          <a href="/accessories/">Research mobile accessories →</a>
+          <a href="/accessories/earbuds-20/">Compare 20 earbuds →</a>
+        </article>
+        <article class="cw-research-category">
+          <span class="cw-research-category-label">03 / TELEVISIONS</span>
+          <h3>Choose for your room</h3>
+          <p>Study screen size, resolution, native refresh, HDMI and smart TV features from original maker sources. No invented prices or scores.</p>
+          <a href="/tvs/">Research televisions →</a>
+          <a href="/tvs/india-20/">Compare 20 TVs →</a>
+        </article>
+      </div>
+      <p class="cw-category-research-disclaimer">Accessory and TV research starts with a small curated set and will expand only after manufacturer evidence review. The phone shopping filters do not claim to search these categories.</p>
+    </section>
 
     <section class="container mobile-research-search-section" id="mobileResearchSearch" aria-labelledby="mobileResearchSearchTitle">
       <div class="section-panel premium-panel mobile-research-search-panel">
@@ -206,47 +257,6 @@
         <button id="mobileResearchResultsMore" class="btn btn-ghost" type="button" hidden>Load more research results</button>
         <a id="mobileResearchBrowse" class="small-action" href="#mobileResearchCatalogue">Browse all research models →</a>
       </div>
-    </section>
-
-    <section class="container cw-research-categories" id="researchCategories" aria-labelledby="researchCategoriesTitle">
-      <div class="section-heading standalone">
-        <div>
-          <span class="section-kicker">EXPLORE BY PRODUCT TYPE</span>
-          <h2 id="researchCategoriesTitle">One research standard. Three buying decisions.</h2>
-          <p>Start with the category that matches your need. We keep official sources, unknowns and current-offer eligibility distinct.</p>
-        </div>
-      </div>
-      <div class="cw-research-category-grid">
-        <article class="cw-research-category">
-          <span class="cw-research-category-label">01 / SMARTPHONES</span>
-          <h3>Choose a phone</h3>
-          <p>Explore 232 research model cards, exact memory filters and 50 curated manufacturer-source pages. Compare documented features and check the exact memory variant before choosing.</p>
-          <a href="/phones/">Explore smartphone specifications →</a>
-          <a href="/phones/india-market-demand-q3-2026/">India 2026 sales-report model coverage →</a>
-          <a href="#indiaPhoneSources">Recent India phone source checks →</a>
-        </article>
-        <article class="cw-research-category">
-          <span class="cw-research-category-label">02 / MOBILE ACCESSORIES</span>
-          <h3>Check compatibility first</h3>
-          <p>Compare documented chargers, earbuds and power banks, including supported interfaces, battery claims and device-specific caveats.</p>
-          <a href="/accessories/">Research mobile accessories →</a>
-          <a href="/accessories/earbuds-20/">Compare 20 earbuds →</a>
-        </article>
-        <article class="cw-research-category">
-          <span class="cw-research-category-label">03 / TELEVISIONS</span>
-          <h3>Choose for your room</h3>
-          <p>Study screen size, resolution, native refresh, HDMI and smart TV features from original maker sources. No invented prices or scores.</p>
-          <a href="/tvs/">Research televisions →</a>
-          <a href="/tvs/india-20/">Compare 20 TVs →</a>
-        </article>
-      </div>
-      <p class="cw-category-research-disclaimer">Accessory and TV research starts with a small curated set and will expand only after manufacturer evidence review. The phone shopping filters do not claim to search these categories.</p>
-    </section>
-
-    <section class="container decision-path" aria-label="How it works">
-      <div><span class="path-number">01</span><p><strong>Set your budget</strong><span>Under ₹30k includes documented phones below ₹30k. Narrow the range with filters.</span></p></div>
-      <div><span class="path-number">02</span><p><strong>Look beyond the headline</strong><span>Sourced specs, independent tests and clearly marked gaps.</span></p></div>
-      <div><span class="path-number">03</span><p><strong>Make your shortlist</strong><span>Compare up to 3 phones. Check current offers at the retailer.</span></p></div>
     </section>
 
     <section class="container" aria-labelledby="demandCoverageTitle">
