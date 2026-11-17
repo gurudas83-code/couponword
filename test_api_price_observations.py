@@ -78,6 +78,43 @@ class ObservationTests(unittest.TestCase):
         self.assertIsNotNone(observed_configuration(item, card, "flipkart"))
         self.assertIsNone(observed_configuration(dict(item, quantity="L55MC-FSMIN"), card, "flipkart"))
 
+    def test_croma_exact_reviewed_id_is_not_a_substring_match(self):
+        card = {"model_key": "TV01", "brand": "Xiaomi", "model": "S Mini LED 55", "category": "tvs", "model_code": "L55MC-IN",
+                "retailers": {"croma": {"exact_model_link_verified": True, "retailer_research_url": "https://www.croma.com/tv/p/315575"}}}
+        item = dict(self.item, id="315575", brand="Xiaomi", name="Xiaomi S Mini LED 55 inch", quantity="",
+                    deeplink="https://www.croma.com/tv/p/315575")
+        self.assertIsNotNone(observed_configuration(item, card, "croma"))
+        self.assertIsNone(observed_configuration(dict(item, id="31557"), card, "croma"))
+
+    def test_croma_false_string_is_out_of_stock_not_truthy(self):
+        card = {"model_key": "TV01", "brand": "Xiaomi", "model": "S Mini LED 55", "category": "tvs", "model_code": "L55MC-IN",
+                "retailers": {"croma": {"exact_model_link_verified": True, "retailer_research_url": "https://www.croma.com/tv/p/315575"}}}
+        item = {"item_id": "315575", "brand": "Xiaomi", "name": "Xiaomi S Mini LED 55 inch",
+                "available": "false", "price": "54999", "currency": "INR", "deeplink": "https://www.croma.com/tv/p/315575"}
+        row = {"endpoint": "item", "platform": "Croma", "status": "success", "model_key": "TV01",
+               "params": {"item_id": "315575"}, "observed_at": self.now.isoformat(), "items": [item]}
+        result = build_observation_snapshot({}, [card], [row], now=self.now)
+        offer = result["models"]["TV01"][0]["offers"][0]
+        self.assertEqual(offer["availability"], "out_of_stock")
+        self.assertIsNone(offer["price"])
+
+    def test_earbud_exact_model_prefix_and_pro_are_not_interchangeable(self):
+        card = {"model_key": "EB01", "brand": "OnePlus", "model": "Nord Buds 3r", "category": "accessories", "model_code": "E517A"}
+        item = dict(self.item, brand="OnePlus", name="OnePlus Nord Buds 3r TWS Earbud", quantity="Ash Black, True Wireless")
+        self.assertIsNotNone(observed_configuration(item, card, "flipkart"))
+        self.assertIsNone(observed_configuration(dict(item, name="OnePlus Nord Buds 3r Pro TWS Earbud"), card, "flipkart"))
+        self.assertIsNone(observed_configuration(dict(item, name="OnePlus Nord Buds 3 TWS Earbud"), card, "flipkart"))
+
+    def test_unknown_ram_is_labelled_and_kept_out_of_cross_store_comparison(self):
+        flipkart = dict(self.item, quantity="")
+        amazon = dict(self.item, id="B0TEST1234", name="Galaxy A56 5G (Light Violet, 128 GB)",
+                      quantity="", deeplink="https://www.amazon.in/dp/B0TEST1234")
+        result = build_observation_snapshot({}, [self.card], self.rows([flipkart]) + self.rows([amazon], "Amazon"), now=self.now)
+        configs = result["models"][self.card["model_key"]]
+        self.assertEqual(len(configs), 2)
+        self.assertTrue(all("RAM not stated" in c["variant"] for c in configs))
+        self.assertTrue(all(c["lowest_observed_retailer"] is None for c in configs))
+
     def test_transport_rejects_unapproved_endpoints_before_request(self):
         def opener(*args, **kwargs):
             self.fail("Network must not be called")

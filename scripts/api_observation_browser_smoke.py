@@ -39,6 +39,11 @@ def run(root):
                     panel.get_by_text("Price & availability observations", exact=True).wait_for()
                     assert panel.locator("tbody tr").count() > 0
                     assert panel.locator("img").count() == 0
+                    priced_index = next(i for i, configuration in enumerate(payload["models"]["samsung|galaxy a56 5g"])
+                                        if any(o.get("price") and o["availability"] == "in_stock" for o in configuration["offers"]))
+                    panel.locator("[data-price-config]").select_option(index=priced_index)
+                    panel.locator("[data-price-budget]").fill("1")
+                    assert "Listed amount over your entered cap" in panel.inner_text()
                     assert any("retailer_price_observations" in request for request in requests)
                     select = panel.locator("[data-price-config]")
                     if select.locator("option").count() > 1:

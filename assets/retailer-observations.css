@@ -10,4 +10,6 @@
 .api-observation-scroll a{white-space:nowrap}
 .api-observed-lowest{display:block;margin-top:5px;font-size:.75rem;color:#14643e;font-weight:700}
 .api-observation-note{font-size:.8rem;opacity:.85;line-height:1.5}
+.api-budget-check{display:block;margin-top:5px;font-size:.75rem}
+.api-price-observations input{font:inherit;display:block;box-sizing:border-box;width:100%;padding:8px;margin-top:5px;border:1px solid #8298b7;border-radius:7px;background:Canvas;color:CanvasText}
 @media(prefers-color-scheme:dark){.api-price-observations button{background:#162943;color:#d5e6ff}.api-observed-lowest{color:#8de2b4}}

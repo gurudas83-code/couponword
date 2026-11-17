@@ -21,11 +21,16 @@
       if (offer.retailer === "flipkart" && url.hostname === "www.flipkart.com" &&
           url.pathname.indexOf("/p/") >= 0 && url.searchParams.get("pid") === offer.retailer_product_id &&
           /^[A-Z0-9]{12,24}$/.test(offer.retailer_product_id)) return url.href;
+      if (offer.retailer === "croma" && url.hostname === "www.croma.com" &&
+          /^\d{5,9}$/.test(offer.retailer_product_id) &&
+          new RegExp("/p/" + offer.retailer_product_id + "/?$").test(url.pathname)) return url.href;
     } catch (error) { /* Reject malformed source URLs. */ }
     return "";
   }
   function renderConfiguration(panel, configuration) {
     var offers = configuration.offers || [];
+    var budgetInput = panel.querySelector("[data-price-budget]");
+    var budget = budgetInput && budgetInput.value.trim() ? Number(budgetInput.value) : null;
     var eligible = offers.filter(function (offer) {
       return fresh(offer) && offer.availability === "in_stock" &&
         typeof offer.price === "number" && Number.isFinite(offer.price) && offer.price > 0 && safeUrl(offer);
@@ -41,6 +46,9 @@
         offer.availability === "out_of_stock" ? "API observed out of stock" : "Stock unknown";
       var price = typeof offer.price === "number" && Number.isFinite(offer.price) && offer.price > 0 ?
         "₹" + offer.price.toLocaleString("en-IN", {maximumFractionDigits: 2}) : "No payable price observed";
+      var budgetNote = budget !== null && Number.isFinite(budget) && budget > 0 &&
+        isFresh && typeof offer.price === "number" && offer.price > 0 ?
+        "<small class=\"api-budget-check\">" + (offer.price <= budget ? "Listed amount within your entered cap" : "Listed amount over your entered cap") + "</small>" : "";
       var badge = lowest !== null && isFresh && offer.availability === "in_stock" && offer.price === lowest ?
         '<span class="api-observed-lowest">Lowest observed among these checked stores</span>' : "";
       var history = Array.isArray(offer.history) && offer.history.length > 1 ?
@@ -51,10 +59,11 @@
           return "<li>" + escape(new Date(point.observed_at).toLocaleString("en-IN", {timeZone: "Asia/Kolkata"})) +
             " IST: " + escape(amount) + " · " + escape(point.availability) + "</li>";
         }).join("") + "</ul></details>" : "";
-      return "<tr><th scope=\"row\">" + escape(offer.retailer) + "</th><td>" + escape(price) + badge +
+      var rel = "noopener noreferrer nofollow" + (offer.retailer === "amazon" && new URL(url).searchParams.has("tag") ? " sponsored" : "");
+      return "<tr><th scope=\"row\">" + escape(offer.retailer) + "</th><td>" + escape(price) + badge + budgetNote +
         "</td><td>" + escape(status) + "</td><td><time datetime=\"" + escape(offer.observed_at) + "\">" +
         escape(new Date(offer.observed_at).toLocaleString("en-IN", {timeZone: "Asia/Kolkata"})) +
-        " IST</time>" + history + "</td><td><a href=\"" + escape(url) + "\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Check retailer</a></td></tr>";
+        " IST</time>" + history + "</td><td><a href=\"" + escape(url) + "\" target=\"_blank\" rel=\"" + rel + "\">Check retailer</a></td></tr>";
     }).join("");
     panel.querySelector("[data-price-table]").innerHTML = '<p><strong>Listed configuration:</strong> ' +
       escape(configuration.variant) + " · Pincode " + escape(configuration.pincode) +
@@ -75,11 +84,14 @@
       '<label for="' + id + '">Choose the listed configuration</label><select id="' + id + '" data-price-config>' +
       configurations.map(function (configuration, index) {
         return '<option value="' + index + '">' + escape(configuration.variant) + "</option>";
-      }).join("") + '</select><div data-price-table></div>' +
+      }).join("") + '</select><label>Check this configuration against your budget (₹)<input type="number" min="1" step="1" inputmode="numeric" data-price-budget placeholder="Optional price cap"></label><div data-price-table></div>' +
       '<p class="api-observation-note">Prices can change. Bank/exchange offers and delivery charges are excluded. Confirm India variant, seller condition, warranty and delivery with the retailer. Manufacturer specifications remain separately sourced. Price has 0% weight in product quality ranking.</p>';
     renderConfiguration(panel, configurations[0]);
     panel.querySelector("[data-price-config]").addEventListener("change", function (event) {
       renderConfiguration(panel, configurations[Number(event.target.value)]);
+    });
+    panel.querySelector("[data-price-budget]").addEventListener("input", function () {
+      renderConfiguration(panel, configurations[Number(panel.querySelector("[data-price-config]").value)]);
     });
   }
   document.addEventListener("click", function (event) {
