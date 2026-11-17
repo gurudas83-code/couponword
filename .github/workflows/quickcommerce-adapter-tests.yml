@@ -1,0 +1,24 @@
+name: QuickCommerce research adapter tests
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "python/quickcommerce_flipkart_adapter.py"
+      - "test_quickcommerce_flipkart_adapter.py"
+      - "tests/fixtures/quickcommerce_flipkart_a56_search.json"
+      - ".github/workflows/quickcommerce-adapter-tests.yml"
+permissions:
+  contents: read
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile adapter
+        run: python -m py_compile python/quickcommerce_flipkart_adapter.py
+      - name: Run offline and publication-safety tests
+        run: python -m unittest -v test_quickcommerce_flipkart_adapter
