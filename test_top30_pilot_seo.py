@@ -166,7 +166,7 @@ class Top30ResearchPublicationTests(unittest.TestCase):
             # Every research candidate has a search option, including the 23
             # without a licensed photographed asset.
             self.assertEqual(body.count('<details class="cw-retail-choices">'), 30)
-            self.assertEqual(body.count('<nav aria-label="'), 30)
+            self.assertEqual(body.count('<nav aria-label="Search retailers for ') if path == TOP30_EN else body.count('<nav aria-label="रिटेलर में खोजें: '), 30)
             for row in self.pilot["selected_models"]:
                 model = self.cards[row["model_key"]]
                 query = quote_plus(model_title(model))
