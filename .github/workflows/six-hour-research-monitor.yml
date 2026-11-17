@@ -1,0 +1,86 @@
+name: Coupon World six-hour bounded API research agent
+
+on:
+  # Every six hours, staggered from existing source and mobile-integrity checks.
+  # UTC 02:23/08:23/14:23/20:23 = IST 07:53/13:53/19:53/01:53.
+  # GitHub Actions cron can be delayed; this does not guarantee real-time stock.
+  schedule:
+    - cron: "23 2,8,14,20 * * *"
+  workflow_dispatch:
+    inputs:
+      live:
+        description: "Allow paid research calls? Manual runs default to offline."
+        type: boolean
+        default: false
+      max_calls:
+        description: "Maximum paid searches for this run, 0..4"
+        type: number
+        default: 0
+  pull_request:
+    branches: [main]
+    paths:
+      - "scripts/six_hour_research_monitor.py"
+      - "test_six_hour_research_monitor.py"
+      - ".github/workflows/six-hour-research-monitor.yml"
+      - "scripts/quickcommerce_catalogue_audit.py"
+      - "python/retailer_publication_gate.py"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: couponworld-six-hour-bounded-research
+  cancel-in-progress: false
+
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout the existing engines without changing data
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - name: Set up Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.12"
+      - name: Validate old adapters, matching gates and monitoring agent offline
+        run: |
+          python -m unittest -v \
+            test_quickcommerce_flipkart_adapter \
+            test_quickcommerce_catalogue_audit \
+            test_six_hour_research_monitor
+      - name: Run safe, capped observation batch
+        env:
+          QUICKCOMMERCE_API_KEY: ${{ secrets.QUICKCOMMERCE_API_KEY }}
+          EVENT_NAME: ${{ github.event_name }}
+          LIVE_INPUT: ${{ inputs.live || 'false' }}
+          MAX_INPUT: ${{ inputs.max_calls || '0' }}
+        shell: bash
+        run: |
+          CALLS=0
+          if [ "$EVENT_NAME" = "schedule" ]; then
+            CALLS=4
+          elif [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$LIVE_INPUT" = "true" ]; then
+            CALLS="$MAX_INPUT"
+          fi
+          case "$CALLS" in
+            0|1|2|3|4) ;;
+            *) echo "::error::Allowed paid search cap is 0..4"; exit 1 ;;
+          esac
+          if [ "$CALLS" -gt 0 ] && [ -z "$QUICKCOMMERCE_API_KEY" ]; then
+            echo "::warning::QuickCommerce key not configured; running offline without charges"
+            CALLS=0
+          fi
+          if [ "$CALLS" -eq 0 ]; then
+            python scripts/six_hour_research_monitor.py
+          else
+            python scripts/six_hour_research_monitor.py --live --max-calls "$CALLS"
+          fi
+      - name: Keep bounded research evidence separate from public builds
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: six-hour-research-observations
+          path: private_observations/six_hour_research_monitor.json
+          if-no-files-found: warn
+          retention-days: 7
