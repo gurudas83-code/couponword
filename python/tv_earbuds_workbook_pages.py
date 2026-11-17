@@ -28,7 +28,7 @@ OBSERVATION_ASSETS = '<link rel="stylesheet" href="/assets/retailer-observations
 
 def observation_control(item):
     return '<div class="api-price-observations"><button type="button" data-price-observations="' + \
-        esc(item["id"]) + '" aria-expanded="false">Check API price &amp; availability</button>' \
+        esc(item["id"]) + '" aria-expanded="false">View saved price &amp; stock checks</button>' \
         '<div data-api-price-panel hidden aria-live="polite"></div></div>'
 
 def clean_url(url):
@@ -139,6 +139,9 @@ def card(item):
         " · " + retailer_link(item["retailers"][store], store, item["category"]) + "</li>"
         for store in ("amazon", "flipkart", "croma")
     )
+    visual = research_visual(item)
+    if visual:
+        visual = '<a class="cw-tv-visual-link" href="#cw-retailers-' + esc(item["id"].lower()) + '" aria-label="View Amazon, Flipkart and Croma options for ' + esc(item["model"]) + '">' + visual + '</a>'
     first = "".join("<dt>" + esc(f["label"]) + "</dt><dd>" + esc(f["value"]) + "</dd>"
                     for f in fields[:3])
     return f'''<article class="cr-card" data-model="{esc(item["id"].lower())}"
@@ -146,10 +149,10 @@ data-brand="{esc(item["brand"])}" data-type="{esc(item["product_type"])}"
 data-search="{esc(search)}">
 <div class="cr-card-head"><span class="cr-tag">{esc(item["brand"])}</span>
 <span class="cr-check">{esc(item["source_grade"])}</span></div>
-{research_visual(item)}\n<h3><a href="{esc(route)}">{esc(item["model"])}</a></h3>
+{visual}\n<h3><a href="{esc(route)}">{esc(item["model"])}</a></h3>
 <dl class="cr-facts">{first}</dl>
 <p class="cr-muted">Prices are dated research references, not current offers.</p>
-<ul class="cw-retailer-prices">{choices}</ul>{observation_control(item)}
+<p class="cw-store-title"><strong>Check retailer options</strong> · exact links only where verified</p>\n<ul id="cw-retailers-{esc(item["id"].lower())}" class="cw-retailer-prices">{choices}</ul>{observation_control(item)}
 <div class="cr-card-foot"><a href="{esc(route)}">Detailed research</a>
 <label class="cr-compare-label"><input type="checkbox" data-compare="{esc(item["id"].lower())}"> Compare</label></div></article>'''
 
@@ -173,7 +176,7 @@ def hub(category, items):
 <section class="cr-hero">
 <p class="cr-eyebrow">India · 5 November 2026 · Dated research snapshot</p>
 <h1>{esc(title)}</h1>
-<p>Research all 20 models from the Coupon World comparison workbook, check specifications and open independently labelled verified-product links or retailer searches for Amazon, Flipkart and Croma.</p>
+<p>Research all 20 models from the Coupon World comparison workbook, check specifications and open independently labelled verified-product links or retailer searches for Amazon, Flipkart and Croma.</p>\n<p class="cw-buying-steps"><strong>How to use:</strong> Choose a model → check its specification and exact size/variant → open a verified listing or a labelled retailer search. Confirm today's price and stock at the retailer.</p>
 <p><strong>Important:</strong> The reference prices are not live API quotes. No stock, exact purchase eligibility, independent sound/picture quality ranking, or retailer checkout is certified here.</p>
 <p><a href="/{esc(category)}/">Return to the source-reviewed category hub</a></p>
 {('<figure class="cw-licensed-tv-photo"><img src="https://c.pxhere.com/photos/af/b7/photo-156633.jpg!d" alt="Generic television in a room, CC0 public-domain editorial photograph; not one of the listed TV models" loading="lazy" decoding="async" referrerpolicy="no-referrer" width="960" height="640"><figcaption>Illustrative television photograph, not a listed model. <a href="https://pxhere.com/en/photo/156633" rel="noopener noreferrer nofollow" target="_blank">Photo source and CC0 public-domain license: PxHere</a>.</figcaption></figure><style>.cw-licensed-tv-photo{max-width:780px;margin:20px auto 24px}.cw-licensed-tv-photo img{width:100%;height:auto;max-height:360px;object-fit:cover;border-radius:18px;box-shadow:0 10px 28px #0002}.cw-licensed-tv-photo figcaption{font-size:12px;color:inherit;opacity:.82;margin-top:8px;text-align:center}</style>' if category == "tvs" else "")}
@@ -228,16 +231,19 @@ def detail(item):
         '</td><td>'+retailer_link(item["retailers"][s],s,item["category"])+'</td></tr>'
         for s in ("amazon","flipkart","croma")
     )
+    visual = research_visual(item)
+    if visual:
+        visual = '<a class="cw-tv-visual-link" href="#cw-retailer-detail" aria-label="View retailer options for ' + esc(item["model"]) + '">' + visual + '</a>'
     body=f'''<p class="cr-crumb"><a href="/">Home</a> / <a href="/{esc(cat)}/">{esc(cat.title())}</a> / <a href="{esc(list_route(cat))}">20-model shortlist</a> / {esc(item["model"])}</p>
 <article class="cr-detail">
 <p class="cr-eyebrow">{esc(item["brand"])} · Research-only model</p>
-<h1>{esc(item["model"])}</h1>\n{TV_VISUAL_CSS if cat == "tvs" else ""}\n{research_visual(item)}
+<h1>{esc(item["model"])}</h1>\n{TV_VISUAL_CSS if cat == "tvs" else ""}\n{visual}
 <p class="cr-lead">Specifications and dated retailer references from the comparison workbook. Not an independently tested recommendation or real-time buyable offer.</p>
 <p><b>Evidence grade:</b> {esc(item["source_grade"])} · <b>Model code:</b> {esc(item.get("model_code") or "Not established")}</p>
 <h2>Documented / researched specifications</h2>
 <dl class="cr-detail-facts">{fields}</dl>
 <p>These fields were compiled in the workbook and have not all been individually confirmed for the exact Indian retail SKU. {sources}</p>\n{editorial}
-<section><h2>Amazon, Flipkart and Croma</h2>
+<section id="cw-retailer-detail"><h2>Amazon, Flipkart and Croma</h2>
 <p>Only links marked <strong>Verified product</strong> have an independently matched product identity. Links marked <strong>Search model</strong> are retailer searches, not exact-product buy buttons. No current stock or shipping guarantee is made.</p>
 <div class="cr-scroll"><table class="cr-compare-table"><thead><tr><th>Retailer</th><th>Dated quoted reference</th><th>Research link</th></tr></thead><tbody>{merchant}</tbody></table></div></section>
 {observation_control(item)}
