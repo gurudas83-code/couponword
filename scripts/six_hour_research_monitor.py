@@ -2,7 +2,7 @@
 """Bounded six-hour Coupon World observation agent.
 
 Reuses the existing QuickCommerce catalogue audit, model-identity gate and
-retailer publication gate. Paid calls are capped at four per invocation.
+retailer publication gate. Paid calls are opt-in only, capped at two per invocation and restricted to the approved Top-30 phones.
 This agent never modifies public catalogues, ranking, photos or offers.
 Third-party API observations and images are private research evidence only.
 """
@@ -26,7 +26,7 @@ from retailer_publication_gate import evaluate_store
 
 SLOT_SECONDS = 6 * 60 * 60
 START = datetime(2026, 11, 17, tzinfo=timezone.utc)
-HARD_CALL_CAP = 4
+HARD_CALL_CAP = 2
 PRIVATE_DIR = ROOT / "private_observations"
 DEFAULT_OUTPUT = PRIVATE_DIR / "six_hour_research_monitor.json"
 
@@ -46,27 +46,27 @@ def _rotate(rows: list[dict], count: int, slot: int) -> list[dict]:
 
 
 def select_targets(now: datetime, *, limit: int = HARD_CALL_CAP) -> list[dict]:
-    """Three mobile queries plus one model-code-qualified TV/earbud query.
+    """Only the thirty existing research-priority phones may use paid API credits.
 
-    Deliberately rotates instead of querying all 272 entries four times daily.
-    Missing TV/earbud model codes are excluded to avoid paid ambiguous searches.
+    Scheduled reports are offline. Paid calls require manual workflow dispatch.
+    No TV, earbud or non-Top-30 mobile target can enter this list.
     """
     if not 0 <= limit <= HARD_CALL_CAP:
-        raise ValueError("Per-run limit must be between 0 and 4")
+        raise ValueError("Per-run limit must be between 0 and 2")
     if limit == 0:
         return []
-    slots = slot_index(now)
-    mobile = audit.load_targets("mobiles")
-    others = [row for row in audit.load_targets("all")
-              if row["category"] in {"tvs", "earbuds"} and str(row.get("model_code") or "").strip()]
-    secondary_calls = 1 if limit >= 2 and others else 0
-    mobile_calls = limit - secondary_calls
-    selected = _rotate(mobile, mobile_calls, slots)
-    selected += _rotate(others, secondary_calls, slots)
-    if len({row["audit_id"] for row in selected}) != len(selected):
-        raise ValueError("Duplicate research target identity")
-    return selected
-
+    pilot = json.loads((ROOT / "data/top30_research_pilot_20261113.json").read_text(encoding="utf-8"))
+    selected = pilot.get("selected_models") or []
+    keys = [entry["model_key"] for entry in selected]
+    if len(keys) != 30 or len(set(keys)) != 30:
+        raise ValueError("Top-30 approved research worklist is invalid")
+    indexed = {row["audit_id"]: row for row in audit.load_targets("mobiles")}
+    if any(key not in indexed for key in keys):
+        raise ValueError("An approved Top-30 model is absent from the current catalogue")
+    targets = _rotate([indexed[key] for key in keys], limit, slot_index(now))
+    if any(row["category"] != "mobiles" or row["audit_id"] not in keys for row in targets):
+        raise ValueError("Attempted to target a product outside the approved Top-30")
+    return targets
 
 def catalogue_health() -> dict:
     mobile = json.loads((ROOT / "data/mobile_research_catalogue.json").read_text(encoding="utf-8-sig"))
@@ -106,7 +106,7 @@ def public_offer_health() -> dict:
 def execute(*, now: datetime, live: bool, max_calls: int,
             connector=None, output: Path = DEFAULT_OUTPUT) -> dict:
     if not 0 <= max_calls <= HARD_CALL_CAP or (live and max_calls == 0):
-        raise ValueError("Live mode requires 1..4 calls; offline mode permits 0..4")
+        raise ValueError("Live mode requires 1..2 calls; offline mode permits 0..2")
     if not live and max_calls:
         raise ValueError("Offline mode cannot spend requests")
     output = output.resolve()
@@ -144,7 +144,7 @@ def execute(*, now: datetime, live: bool, max_calls: int,
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--live", action="store_true", help="Permit up to four paid searches per run")
+    parser.add_argument("--live", action="store_true", help="Permit up to two manually-approved Top-30 mobile searches")
     parser.add_argument("--max-calls", type=int, default=0, help="Paid searches; default zero")
     parser.add_argument("--pincode", default="110001")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)

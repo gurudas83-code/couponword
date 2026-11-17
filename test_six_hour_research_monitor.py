@@ -18,13 +18,15 @@ class SixHourResearchMonitorTests(unittest.TestCase):
         self.t0 = datetime(2026, 11, 17, tzinfo=timezone.utc)
         monitor.PRIVATE_DIR.mkdir(parents=True, exist_ok=True)
 
-    def test_four_targets_are_bounded_and_split_across_categories(self):
+    def test_paid_targets_are_two_approved_top30_mobiles_only(self):
         rows = monitor.select_targets(self.t0)
-        self.assertEqual(len(rows), 4)
-        self.assertEqual(len({x["audit_id"] for x in rows}), 4)
-        self.assertEqual([row["category"] for row in rows[:3]], ["mobiles"] * 3)
-        self.assertIn(rows[-1]["category"], {"tvs", "earbuds"})
-        self.assertTrue(rows[-1]["model_code"])
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(len({x["audit_id"] for x in rows}), 2)
+        pilot = json.loads((monitor.ROOT / "data/top30_research_pilot_20261113.json").read_text())
+        allowed = {item["model_key"] for item in pilot["selected_models"]}
+        self.assertEqual(len(allowed), 30)
+        self.assertTrue(all(row["category"] == "mobiles" and row["audit_id"] in allowed for row in rows))
+        self.assertTrue(all(row["audit_id"] not in {item["audit_id"] for item in audit.load_targets("all") if item["category"] != "mobiles"} for row in rows))
 
     def test_rotation_in_each_six_hour_slot(self):
         first = monitor.select_targets(self.t0)
@@ -35,13 +37,13 @@ class SixHourResearchMonitorTests(unittest.TestCase):
 
     def test_hard_cap_and_aware_clock(self):
         with self.assertRaises(ValueError):
-            monitor.select_targets(self.t0, limit=5)
+            monitor.select_targets(self.t0, limit=3)
         with self.assertRaises(ValueError):
             monitor.slot_index(datetime(2026, 11, 17))
         with self.assertRaises(ValueError):
             monitor.execute(now=self.t0, live=True, max_calls=0)
         with self.assertRaises(ValueError):
-            monitor.execute(now=self.t0, live=True, max_calls=5)
+            monitor.execute(now=self.t0, live=True, max_calls=3)
         with self.assertRaises(ValueError):
             monitor.execute(now=self.t0, live=False, max_calls=1)
 
@@ -63,14 +65,14 @@ class SixHourResearchMonitorTests(unittest.TestCase):
             self.assertEqual(stored["new_public_prices"], 0)
             self.assertFalse(stored["public_files_modified"])
 
-    def test_fixture_live_uses_four_calls_only_and_never_publishes(self):
+    def test_fixture_live_uses_two_top30_calls_only_and_never_publishes(self):
         fixture = json.loads((monitor.ROOT / "tests/fixtures/quickcommerce_flipkart_a56_search.json").read_text())
         connector = audit.QuickCommerceFlipkartConnector(fixture=fixture)
         with TemporaryDirectory(dir=monitor.PRIVATE_DIR) as tmp:
             with patch.object(audit.time, "sleep"):
-                result = monitor.execute(now=self.t0, live=True, max_calls=4,
+                result = monitor.execute(now=self.t0, live=True, max_calls=2,
                                          connector=connector, output=Path(tmp) / "report.json")
-        self.assertEqual(result["provider_research"]["calls_attempted"], 4)
+        self.assertEqual(result["provider_research"]["calls_attempted"], 2)
         self.assertFalse(result["provider_research"]["publishable"])
         self.assertFalse(result["ranking_modified"])
         self.assertEqual(result["new_public_stock_claims"], 0)
