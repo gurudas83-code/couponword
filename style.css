@@ -1253,3 +1253,11 @@ body.clean-ui .cw-category-research-disclaimer{color:#526176;font-size:.84rem;ma
 .research-photo-open.research-phone-visual{display:flex}
 .retailer-choice-unavailable{display:inline-flex;min-height:42px;align-items:center;justify-content:center;padding:8px 12px;border:1px solid #d7e0e7;border-radius:9px;color:#586875;background:#f6f8fa;font-size:.8rem}
 .retailer-choice-unavailable small{font-size:.67rem;margin-left:4px}
+
+/* Photo-tap retailer choices: compact, keyboard-accessible and mobile-first. */
+.research-photo-retailer-panel { margin: .65rem 0; padding: .8rem; border: 1px solid #cbd5e1; border-radius: .75rem; background: #fff; color: #172033; max-width: 100%; }
+.research-photo-retailer-panel p { margin: .35rem 0 .6rem; font-size: .85rem; }
+.research-photo-retailer-panel .retailer-search-links { display: flex; flex-wrap: wrap; gap: .5rem; }
+.research-photo-retailer-panel .retailer-search-links a { display: inline-flex; align-items: center; padding: .5rem .65rem; border: 1px solid #a8b8cc; border-radius: .5rem; overflow-wrap: anywhere; }
+.research-photo-retailer-panel button { margin-top: .65rem; }
+.research-photo-open:focus-visible { outline: 3px solid #2563eb; outline-offset: 3px; }
