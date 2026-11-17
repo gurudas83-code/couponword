@@ -308,6 +308,20 @@ def run(root: Path):
                     for removed in ("answers/best-apple-phone-under-7000/", "compare/apple-iphone-17-vs-apple-iphone-16/", "phones/under-25000/best-camera/"):
                         response=page.goto(url+removed, wait_until="domcontentloaded")
                         assert response.status == 404, removed
+                    # Reproduce the full-catalogue view shown in the narrow-card bug.
+                    page.goto(url + "#mobileResearchCatalogue", wait_until="domcontentloaded")
+                    page.locator("#mobileResearchCatalogueGrid .mobile-research-model-card").first.wait_for(state="visible")
+                    for inventory_card in page.locator("#mobileResearchCatalogueGrid .mobile-research-model-card").all()[:3]:
+                        dimensions = inventory_card.evaluate("""card => {
+                            const style = getComputedStyle(card);
+                            const body = card.querySelector('.mobile-research-inventory-body');
+                            return {
+                                available: card.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight),
+                                body: body.getBoundingClientRect().width
+                            };
+                        }""")
+                        assert dimensions["body"] >= dimensions["available"] - 2, (width, dimensions)
+                        assert dimensions["body"] > 180, (width, dimensions)
                     assert not page_errors, f"{width}px uncaught JS errors: {page_errors}"
                     results.append({"width": width, "search": "PASS", "full_budget_opt_in": "PASS", "exact_variant": "PASS",
                                     "comparison": "PASS", "engine_handoff": "PASS",
