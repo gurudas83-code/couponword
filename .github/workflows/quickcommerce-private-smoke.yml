@@ -1,8 +1,5 @@
 name: QuickCommerce bounded catalogue research
 on:
-  push:
-    branches: [feature/quickcommerce-catalogue-audit-20261117]
-    paths: [.github/workflows/quickcommerce-private-smoke.yml]
   workflow_dispatch:
     inputs:
       category:
@@ -21,7 +18,6 @@ concurrency:
   cancel-in-progress: false
 jobs:
   one-request:
-    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[audit-live-272]')
     runs-on: ubuntu-latest
     timeout-minutes: 80
     steps:
@@ -37,7 +33,7 @@ jobs:
         env:
           QUICKCOMMERCE_API_KEY: ${{ secrets.QUICKCOMMERCE_API_KEY }}
           CATEGORY: ${{ inputs.category || 'all' }}
-          MAX_CALLS: ${{ github.event_name == 'push' && '272' || inputs.max_calls }}
+          MAX_CALLS: ${{ inputs.max_calls }}
         run: python scripts/quickcommerce_catalogue_audit.py --live --category "$CATEGORY" --max-calls "$MAX_CALLS"
       - name: Preserve observations for review
         if: always()

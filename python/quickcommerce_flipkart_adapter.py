@@ -76,6 +76,8 @@ def _valid_listing(item, product):
 
 
 def _positive_price(value):
+    if isinstance(value, bool):
+        return None
     try:
         price = float(value)
         return price if math.isfinite(price) and price > 0 else None

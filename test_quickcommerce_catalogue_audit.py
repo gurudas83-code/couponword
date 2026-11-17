@@ -60,6 +60,10 @@ class CatalogueAuditTests(unittest.TestCase):
         self.assertEqual(audit.image_references({"images": ["https://evil.example/x.jpg", "https://rukminim2.flixcart.com/x.jpg"]}),
                          ["https://rukminim2.flixcart.com/x.jpg"])
 
+    def test_shared_price_parser_rejects_booleans(self):
+        self.assertIsNone(audit._positive_price(True))
+        self.assertIsNone(audit._positive_price(False))
+
     def test_tv_requires_exact_model_code(self):
         row = {"brand": "Samsung", "model": "TV", "model_code": "QA55TEST", "category": "tvs"}
         item = dict(self.payload["data"]["products"][1], name="Samsung TV QA55TEST")
