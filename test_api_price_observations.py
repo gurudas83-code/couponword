@@ -135,5 +135,16 @@ class ObservationTests(unittest.TestCase):
         self.assertEqual([p["price"] for p in offer["history"]], [34000, 33294])
         self.assertEqual(offer["history"][0]["observed_at"], earlier)
 
+
+class Top30PaidApiScopeTests(unittest.TestCase):
+    def test_refresh_queries_are_exactly_the_approved_top30_mobiles(self):
+        from scripts.refresh_api_comparison import planned_queries
+        calls = planned_queries()
+        self.assertEqual(len(calls), 30)
+        approved = json.loads((ROOT / "data/top30_research_pilot_20261113.json").read_text())
+        self.assertEqual([entry[0] for entry in calls], [row["model_key"] for row in approved["selected_models"]])
+        self.assertTrue(all(platform == "Flipkart" and query for _, platform, query in calls))
+        self.assertFalse(any(key.startswith(("tv", "earbuds")) for key, _, _ in calls))
+
 if __name__ == "__main__":
     unittest.main()
