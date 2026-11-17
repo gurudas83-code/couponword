@@ -164,6 +164,16 @@ class QuickCommerceFlipkartConnector:
 
     def search(self, query):
         """One bounded provider search; caller must validate identity before use."""
+        return self.fetch_observation("search", "Flipkart", q=query)
+
+    def fetch_observation(self, endpoint, platform, **parameters):
+        """Reuse private transport for attributed comparison data, not affiliate offers."""
+        if platform not in {"Amazon", "Flipkart", "Croma"}:
+            raise ValueError("Unsupported comparison platform")
+        if endpoint not in {"search", "item"} or (platform == "Croma" and endpoint != "item"):
+            raise ValueError("Unsupported comparison endpoint")
+        if set(parameters) != ({"q"} if endpoint == "search" else {"item_id"}):
+            raise ValueError("Unexpected comparison parameters")
         if self.fixture is not None:
             payload = self.fixture
             observed = ""  # fixtures are historical samples, never fresh evidence
@@ -171,9 +181,9 @@ class QuickCommerceFlipkartConnector:
             key = self.api_key or os.environ.get("QUICKCOMMERCE_API_KEY")
             if not key:
                 raise RuntimeError("Set QUICKCOMMERCE_API_KEY privately for a live request")
-            params = urlencode({"q": query, "lat": self.lat, "lon": self.lon,
-                                "platform": "Flipkart", "pincode": self.pincode})
-            request = Request(BASE_URL + "/v1/search?" + params,
+            params = urlencode({**parameters, "lat": self.lat, "lon": self.lon,
+                                "platform": platform, "pincode": self.pincode})
+            request = Request(BASE_URL + "/v1/" + endpoint + "?" + params,
                               headers={"X-API-Key": key, "Accept": "application/json"})
             with self.opener(request, timeout=15) as response:
                 payload = json.load(response)
