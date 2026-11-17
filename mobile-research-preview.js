@@ -1186,6 +1186,41 @@
       trackResearchEvent("research_compare_clear", { selection_count: 0 });
       renderSelectedComparison(); searchResearch(lastSearchQuery);
     }
+    // A photo tap reveals the retailer choices beside the selected photo.
+    // Reuse the existing verified-vs-search retailer gate; never invent links.
+    var photoButton = event.target.closest(".research-photo-open[data-research-detail]");
+    if (photoButton) {
+      event.preventDefault();
+      var photoModel = photoButton.getAttribute("data-research-detail");
+      var photoCard = inventoryCards.find(function (item) { return item.model_key === photoModel; });
+      if (photoCard) {
+        var photoHost = photoButton.closest(".research-phone-photo, .mobile-research-inventory-card, .mobile-research-result-card") || photoButton.parentElement;
+        var existingChoices = photoHost.querySelector(".research-photo-retailer-panel");
+        if (existingChoices) {
+          existingChoices.remove();
+          photoButton.setAttribute("aria-expanded", "false");
+        } else {
+          document.querySelectorAll(".research-photo-retailer-panel").forEach(function (panel) {
+            panel.remove();
+          });
+          document.querySelectorAll(".research-photo-open[aria-expanded='true']").forEach(function (button) {
+            button.setAttribute("aria-expanded", "false");
+          });
+          var choices = document.createElement("div");
+          choices.className = "research-photo-retailer-panel";
+          choices.setAttribute("role", "region");
+          choices.setAttribute("aria-label", "Retailer choices for " + displayPhoneName(photoCard));
+          choices.innerHTML = '<strong>' + escapeHtml(displayPhoneName(photoCard)) + '</strong>' +
+            '<p>Choose a retailer · verify variant, price and availability there.</p>' +
+            retailerResearchLinks(photoCard) +
+            '<button type="button" class="btn btn-ghost" data-research-detail="' +
+            escapeHtml(photoModel) + '">View full specifications</button>';
+          photoButton.insertAdjacentElement("afterend", choices);
+          photoButton.setAttribute("aria-expanded", "true");
+        }
+      }
+      return;
+    }
     var detail = event.target.closest("[data-research-detail]");
     if (detail) {
       event.preventDefault();
