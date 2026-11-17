@@ -1,7 +1,7 @@
 name: Coupon World six-hour bounded API research agent
 
 on:
-  # Every six hours, staggered from existing source and mobile-integrity checks.
+  # Scheduled runs are OFFLINE ONLY: no paid API calls or spending.
   # UTC 02:23/08:23/14:23/20:23 = IST 07:53/13:53/19:53/01:53.
   # GitHub Actions cron can be delayed; this does not guarantee real-time stock.
   schedule:
@@ -13,7 +13,7 @@ on:
         type: boolean
         default: false
       max_calls:
-        description: "Maximum paid searches for this run, 0..4"
+        description: "Manual paid Top-30 mobile searches only, 0..2"
         type: number
         default: 0
   pull_request:
@@ -58,14 +58,12 @@ jobs:
         shell: bash
         run: |
           CALLS=0
-          if [ "$EVENT_NAME" = "schedule" ]; then
-            CALLS=4
-          elif [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$LIVE_INPUT" = "true" ]; then
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$LIVE_INPUT" = "true" ]; then
             CALLS="$MAX_INPUT"
           fi
           case "$CALLS" in
-            0|1|2|3|4) ;;
-            *) echo "::error::Allowed paid search cap is 0..4"; exit 1 ;;
+            0|1|2) ;;
+            *) echo "::error::Allowed paid Top-30 search cap is 0..2"; exit 1 ;;
           esac
           if [ "$CALLS" -gt 0 ] && [ -z "$QUICKCOMMERCE_API_KEY" ]; then
             echo "::warning::QuickCommerce key not configured; running offline without charges"
