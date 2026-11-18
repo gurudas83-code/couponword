@@ -399,6 +399,10 @@ def build(output: Path) -> Path:
         shutil.copytree(source, output / relative)
 
     _generate_research_catalogue(output)
+    # Add the eight missing market-source models as a separate research lane;
+    # never mutate the frozen 232-model catalogue or quality ranking.
+    from python.india_missing_eight_pages import publish_eight
+    publish_eight(output)
     _render_verified_homepage_counts(output)
     _render_recent_phone_sources(output)
 
