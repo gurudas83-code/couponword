@@ -36,6 +36,8 @@ REVIEWED_SPECS = {
 }
 APPROVED = {
     "Motorola Signature 27": ("motorola", "signature 27", "motorola.in"),
+    "Karbonn Rebel": ("karbonn", "rebel", "karbonnr-bel.com"),
+    "Karbonn Rebel Pro": ("karbonn", "rebel pro", "karbonnr-bel.com"),
     "OPPO Find X10": ("oppo", "find x10", "oppo.com"),
     "OPPO Find X10 Pro Max": ("oppo", "find x10 pro max", "oppo.com"),
     "OPPO F35 5G": ("oppo", "f35 5g", "oppo.com"),
@@ -108,6 +110,8 @@ def build_recent() -> dict:
             "available_specification_fields": list(specs),
             "recent_source_intake": True,
             "research_checked_at": item.get("reviewed_on") or "2026-11-07",
+            "api_probe_eligible": item.get("api_probe_eligible", True),
+            "api_probe_note": item.get("api_probe_note"),
             "source_urls": [item["source"]] + ([item["store"]] if item.get("store") else []),
             "image_status": "PLACEHOLDER", "photo": None,
             "research_art_url": research_art_url(key), "detail_url": detail_route(key),
@@ -161,7 +165,7 @@ def _hub(cards: list[dict]) -> str:
     body = (
         '<p class="cr-crumb"><a href="/">Home</a> / <a href="/phones/">Phones</a> / New India research</p>'
         '<section class="cr-hero"><p class="cr-eyebrow">INDIA SMARTPHONE RESEARCH · 18 NOVEMBER 2026</p>'
-        '<h1>11 recently added India smartphones — official manufacturer sources</h1>'
+        '<h1>13 recently added India smartphones — official manufacturer sources</h1>'
         '<p>These are additional model-family research records beyond the original 232 phones, '
         'not a sales ranking or verified shopping inventory. Three models newly reviewed '
         'on 18 November are Samsung Galaxy F70 5G, REDMI 17C 5G and realme P4s Lite.</p>'
@@ -174,7 +178,7 @@ def _hub(cards: list[dict]) -> str:
     )
     return doc(
         "New India Smartphones 2026 — Manufacturer Source Research | Coupon World",
-        "Eleven recent manufacturer-linked India smartphone models with source references, documented facts and research-only retailer checks.",
+        "Thirteen recent manufacturer-linked India smartphone models with source references, documented facts and research-only retailer checks.",
         HUB, body, schema("Recent India smartphone manufacturer research", HUB, "phones")
     )
 
@@ -235,7 +239,7 @@ def _detail_page(card: dict) -> str:
 def publish_recent(destination: Path) -> dict:
     payload = build_recent()
     count = publish_art(destination, payload["model_cards"])
-    if count != 11:
+    if count != 13:
         raise ValueError("Missing model illustrations")
     for card in payload["model_cards"]:
         path = destination / detail_route(card["model_key"]).lstrip("/") / "index.html"

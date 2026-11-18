@@ -28,6 +28,9 @@ OUTPUT = ROOT / "private_observations" / "nineteen_new_mobile_api_probe.json"
 
 def approved_targets() -> list[dict]:
     cards = import_eight()["model_cards"] + build_recent()["model_cards"]
+    # Preserve the existing approved one-time cap: newly added Karbonn
+    # identities are published research-only but are not silently probed.
+    cards = [card for card in cards if card.get("api_probe_eligible", True)]
     core = json.loads((ROOT / "data/mobile_research_catalogue.json").read_text(encoding="utf-8"))
     core_keys = {x["model_key"] for x in core["model_cards"]}
     ids = [x["model_key"] for x in cards]
