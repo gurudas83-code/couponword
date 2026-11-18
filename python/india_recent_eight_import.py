@@ -32,7 +32,7 @@ def _name(card: dict) -> str:
                 if card["model_key"] == meta[0] + "|" + meta[1])
 REVIEWED_SPECS = {
     "chipset", "display_type_description", "display_refresh_description",
-    "battery_capacity_description", "rear_camera_system", "india_variant_description",
+    "battery_capacity_description", "charging_description", "rear_camera_system", "india_variant_description",
 }
 APPROVED = {
     "Motorola Signature 27": ("motorola", "signature 27", "motorola.in"),
