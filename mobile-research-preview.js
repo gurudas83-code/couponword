@@ -635,9 +635,12 @@
     ]);
     tokens = tokens.filter(function (token) { return !queryNoise.has(token); });
     var matches = [];
-    // A full model name with a memory constraint must not select a sibling.
-    var exactCard = (c.ram != null || c.storage != null) && inventoryCards.find(function (card) {
-      return normalizeResearch(displayPhoneName(card).replace(/\b5g\b/ig, "")) === text;
+    // If the user entered an exact known model name, never replace it with
+    // its Pro/Plus/Max/e sibling merely because most tokens overlap.
+    // Preserve all documented memory variants on that one model only.
+    var exactCard = text.split(" ").length >= 2 && inventoryCards.find(function (card) {
+      return normalizeResearch(displayPhoneName(card).replace(/\b5g\b/ig, "")) === text ||
+        normalizeResearch(displayPhoneName(card)) === text;
     });
     (exactCard ? [exactCard] : inventoryCards).forEach(function (card) {
       if (excluded && normalizeResearch(card.brand).indexOf(excluded) >= 0) return;
