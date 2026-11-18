@@ -90,6 +90,9 @@ def run(root: Path):
                         timeout=20000,
                     )
                     assert page.locator("#mobileResearchNewGrid [data-mobile-model-card]").count() == 19, width
+                    assert page.locator("#mobileResearchNewGrid a.research-model-name-link").count() == 19, width
+                    assert page.locator("#mobileResearchNewGrid img[src*='/assets/new-mobile-art/']").count() == 19, width
+                    assert "Price unavailable" in page.locator("#mobileResearchNewGrid").text_content(), width
                     assert page.evaluate(
                         "() => window.CouponWorldMobileResearch.search('Samsung Galaxy F70 5G').some("
                         "item => item.card.model_key === 'samsung|galaxy f70 5g' && item.card.market_intake === true)"
@@ -384,6 +387,18 @@ def run(root: Path):
                     assert "P4s Lite" in page.locator("main").inner_text(), width
                     assert page.locator('link[rel="canonical"]').get_attribute("href") == "https://coupon-world.in/phones/new-india-mobiles/"
                     assert page.locator(".purchase-cta, .shop-button").count() == 0, width
+                    assert page.evaluate("document.documentElement.scrollWidth") <= width + 8, width
+                    # Title click opens a real full-detail HTML page (not a search-only hash).
+                    new_model = "phones/new-india-mobiles/samsung-galaxy-f70-5g/"
+                    page.goto(url + new_model, wait_until="domcontentloaded", timeout=30000)
+                    assert "Samsung Galaxy F70 5G" in page.locator("h1").inner_text(), width
+                    assert "Current price unavailable" in page.locator("main").inner_text(), width
+                    assert page.locator("img[src^='/assets/new-mobile-art/']").count() == 1, width
+                    assert page.locator(".cr-detail-facts .cr-fact").count() >= 5, width
+                    assert page.locator('meta[name="robots"]').get_attribute("content") == "noindex,follow", width
+                    assert page.locator("a:has-text('Search Amazon')").count() == 1, width
+                    assert page.locator("a:has-text('Search Flipkart')").count() == 1, width
+                    assert page.locator("a:has-text('Search Croma')").count() == 1, width
                     assert page.evaluate("document.documentElement.scrollWidth") <= width + 8, width
                     page.goto(url + "phones/india-market-demand-q3-2026/", wait_until="domcontentloaded", timeout=30000)
                     assert page.locator(".cr-grid .cr-card").count() == 10

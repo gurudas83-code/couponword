@@ -1,0 +1,11 @@
+{
+  "approved_on": "2026-11-18",
+  "scope": "one read-only third-party research API query per 19 source-reviewed India phone identities",
+  "request_cap": 19,
+  "allowed_event": "one exact branch/file push only",
+  "retries": 0,
+  "scheduled": false,
+  "private_artifact_only": true,
+  "public_price_or_photo_promotion": false,
+  "note": "Only exact retailer authorized, nonstale and legal price feeds may ever publish; this third-party search is not such a feed."
+}

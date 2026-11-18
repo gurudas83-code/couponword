@@ -11,6 +11,7 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 
 from python.category_research_pages import SITE, doc, schema
+from python.new_mobile_media import url as research_art_url, publish_art, RIGHTS_NOTE
 from urllib.parse import quote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,6 +20,16 @@ CORE = ROOT / "data" / "mobile_research_catalogue.json"
 MODE = "RECENT_INDIA_MANUFACTURER_MODELS_RESEARCH_ONLY"
 PUBLIC_DATA_NAME = "india_recent_manufacturer_research.json"
 HUB = "/phones/new-india-mobiles/"
+
+
+def detail_route(model_key: str) -> str:
+    from python.new_mobile_media import slug
+    return HUB + slug(model_key) + "/"
+
+
+def _name(card: dict) -> str:
+    return next(name for name, meta in APPROVED.items()
+                if card["model_key"] == meta[0] + "|" + meta[1])
 REVIEWED_SPECS = {
     "chipset", "display_type_description", "display_refresh_description",
     "battery_capacity_description", "rear_camera_system", "india_variant_description",
@@ -99,6 +110,8 @@ def build_recent() -> dict:
             "research_checked_at": item.get("reviewed_on") or "2026-11-07",
             "source_urls": [item["source"]] + ([item["store"]] if item.get("store") else []),
             "image_status": "PLACEHOLDER", "photo": None,
+            "research_art_url": research_art_url(key), "detail_url": detail_route(key),
+            "photo_rights_status": "NOT_CLEARED",
             "verified_retailer_links": [], "retailer_search_links": links,
             "market_reference": "Recent India manufacturer model source",
             "manufacturer_page": item["source"],
@@ -127,8 +140,7 @@ def _hub(cards: list[dict]) -> str:
     ))
     items = []
     for card in ordered:
-        name = card["brand"].upper() if card["brand"] in ("oppo", "redmi") else card["brand"].title()
-        display = name + " " + card["model"]
+        display = _name(card)
         sources = card["source_urls"][0]
         facts = "".join(
             '<li>' + escape(key.replace("_", " ").title()) + ': ' +
@@ -137,14 +149,14 @@ def _hub(cards: list[dict]) -> str:
         )
         q = quote(display, safe="")
         items.append(
-            '<article class="cr-card"><h2>' + escape(display) + '</h2>' +
+            '<article class="cr-card"><a href="' + detail_route(card["model_key"]) + '"><img src="' + card["research_art_url"] + '" width="540" height="430" loading="lazy" alt="Generic smartphone illustration; not a photo of ' + escape(display) + '"></a><h2><a href="' + detail_route(card["model_key"]) + '">' + escape(display) + '</a></h2>' +
             ('<p><strong>Specifications reviewed 18 November 2026</strong></p>' if card.get("research_checked_at") == "2026-11-18"
              else '<p>Official India manufacturer model identified; full field verification pending</p>') +
             ('<ul>' + facts + '</ul>' if facts else '') +
             '<p><a href="' + escape(sources, quote=True) +
             '" rel="noopener noreferrer" target="_blank">Manufacturer source</a></p>' +
             '<p><a href="/?q=' + q + '#mobileResearchSearch">Compare in Coupon World research</a></p>' +
-            '<p>Exact retailer SKU, current price and India stock not certified.</p></article>'
+            '<p>Price: unavailable — no current exact-SKU API evidence. Photo: original illustration, not model photography.</p></article>'
         )
     body = (
         '<p class="cr-crumb"><a href="/">Home</a> / <a href="/phones/">Phones</a> / New India research</p>'
@@ -167,8 +179,68 @@ def _hub(cards: list[dict]) -> str:
     )
 
 
+def _detail_page(card: dict) -> str:
+    """Model identity and documented facts; not thin indexable SEO or a priced offer."""
+    name = _name(card)
+    route = detail_route(card["model_key"])
+    specs = "".join(
+        '<div class="cr-fact"><dt>' + escape(key.replace("_", " ").title()) +
+        '</dt><dd>' + escape(str(field["value"])) + ' · <a href="' +
+        escape(field["source_url"], quote=True) +
+        '" rel="noopener noreferrer" target="_blank">Maker source</a></dd></div>'
+        for key, field in card["specifications"].items()
+    )
+    links = "".join(
+        '<li><a href="' + escape(x["url"], quote=True) +
+        '" target="_blank" rel="noopener noreferrer nofollow' +
+        (' sponsored' if x["retailer"] == "amazon" else '') +
+        '">Search ' + escape(x["retailer"].title()) + ' for this model</a></li>'
+        for x in card["retailer_search_links"]
+    )
+    body = (
+        '<p class="cr-crumb"><a href="/">Home</a> / <a href="' + HUB +
+        '">New India mobiles</a> / ' + escape(name) + '</p>'
+        '<article class="cr-detail"><h1>' + escape(name) + '</h1>'
+        '<p>Manufacturer-linked smartphone research · exact India retail variants '
+        'and availability not certified.</p>'
+        '<img src="' + card["research_art_url"] + '" width="540" height="430" '
+        'loading="eager" alt="Generic smartphone illustration; not a photo of ' +
+        escape(name, quote=True) + '">'
+        '<p><small>Original illustrated artwork. NOT the exact product photograph. '
+        'Product imagery can be added only with model-verified commercial reuse rights.</small></p>'
+        '<h2>Specifications</h2>' +
+        ('<dl class="cr-detail-facts">' + specs + '</dl>' if specs else
+         '<p>Manufacturer model source is recorded; technical fields are pending '
+         'source-by-source verification. Do not assume missing specifications.</p>') +
+        '<h2>Price and availability</h2>'
+        '<p class="cr-muted"><strong>Current price unavailable.</strong> '
+        'No exact-variant, fresh, publisher-authorized API price has passed verification. '
+        'Retailer prices, stock, delivery location and warranty must be checked on their websites.</p>'
+        '<h2>Check retailer listings</h2><ul>' + links + '</ul>'
+        '<p><a href="' + escape(card["manufacturer_page"], quote=True) +
+        '" rel="noopener noreferrer" target="_blank">Official manufacturer page '
+        '(product photography and specifications)</a></p>'
+        '<p>Search results are not verified SKU listings and do not constitute '
+        'a price comparison. As an Amazon Associate we may earn from qualifying purchases.</p>'
+        '</article>'
+    )
+    html = doc(name + " — manufacturer-source India specifications",
+               "India manufacturer-source specifications and retailer searches for " +
+               name + "; prices are unavailable until verified.",
+               route, body, schema(name, route, "phones"))
+    return html.replace('name="robots" content="index,follow"',
+                        'name="robots" content="noindex,follow"', 1)
+
+
 def publish_recent(destination: Path) -> dict:
     payload = build_recent()
+    count = publish_art(destination, payload["model_cards"])
+    if count != 11:
+        raise ValueError("Missing model illustrations")
+    for card in payload["model_cards"]:
+        path = destination / detail_route(card["model_key"]).lstrip("/") / "index.html"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(_detail_page(card), encoding="utf-8")
     target = destination / "data" / PUBLIC_DATA_NAME
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

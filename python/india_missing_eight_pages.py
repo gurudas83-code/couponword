@@ -15,6 +15,7 @@ from urllib.parse import quote, urlsplit
 from xml.etree import ElementTree as ET
 
 from python.category_research_pages import SITE, doc, esc, schema
+from python.new_mobile_media import url as research_art_url, publish_art
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_Q2 = ROOT / "data" / "india_q2_2026_reported_top5_sales_models.json"
@@ -127,6 +128,7 @@ def import_eight() -> dict:
             "specifications": specs, "missing_specifications": [],
             "available_specification_fields": list(specs),
             "source_urls": [official, report], "image_status": "PLACEHOLDER", "photo": None,
+            "research_art_url": research_art_url(key), "detail_url": _route(key), "photo_rights_status": "NOT_CLEARED",
             "verified_retailer_links": [], "retailer_search_links": _retailer_links(brand, model),
             "market_intake": True, "market_reference": market, "market_report_url": report,
         })
@@ -159,9 +161,11 @@ def _research_page(card: dict) -> str:
 <article class="cr-detail"><h1>{esc(name)}</h1>
 <p class="cr-lead">Source-reviewed research model. {esc(card["market_reference"])}.
 This is not a certified exact retailer SKU, a live stock check or an independently tested recommendation.</p>
-<img src="/assets/phone-study.svg" width="350" height="280" loading="lazy"
+<img src="{esc(card["research_art_url"])}" width="540" height="430" loading="lazy"
  alt="Generic smartphone illustration; not a photo of this model">
+<p><small>Original generic illustration, not a manufacturer photo. Exact model imagery requires reuse clearance.</small></p>
 <h2>Manufacturer-linked specifications</h2><dl class="cr-detail-facts">{facts}</dl>
+<h2>Price and availability</h2><p><strong>Current price unavailable.</strong> No exact-variant fresh authorized API observation passed publication verification.</p>
 <h2>Check this model at retailers</h2><p>These three links open model-specific store searches.
 Confirm exact RAM/storage, model number, warranty, seller, payable price and availability independently before buying.</p>
 <ul>{searches}</ul>
@@ -206,6 +210,8 @@ No manufacturer source implies a live Amazon, Flipkart or Croma price.</p>
 
 def publish_eight(destination: Path) -> dict:
     payload = import_eight()
+    if publish_art(destination, payload["model_cards"]) != 8:
+        raise ValueError("Missing sales-research illustrations")
     target = destination / "data" / "india_sales_eight_research.json"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
