@@ -165,7 +165,12 @@ def run(root: Path):
                     related_text = page.locator("#mobileResearchResults .research-budget-unpriced").inner_text()
                     assert "galaxy f70 5g" in related_text.lower(), (width, related_text[:400])
                     assert "Price not verified" in related_text, width
-                    assert not page.locator("#mobileResearchResults .research-budget-primary-grid [data-mobile-model-card]").count(), width
+                    assert not page.locator("#mobileResearchResults .research-budget-primary-grid [data-mobile-model-card]").count(), (
+                        width,
+                        page.locator("#mobileResearchResults .research-budget-primary-grid [data-mobile-model-card]").evaluate_all(
+                            "(nodes) => nodes.map(n => ({ key: n.dataset.mobileModelCard, text: n.innerText.slice(0,120) }))"
+                        )
+                    )
                     page.evaluate("window.CouponWorldMobileResearch.search('Samsung Galaxy F70 5G 8GB RAM under 30000')")
                     assert not page.locator("#mobileResearchResults .research-budget-related-item").count(), width
                     page.evaluate("window.CouponWorldMobileResearch.search('phone under 30000 exclude Samsung')")
