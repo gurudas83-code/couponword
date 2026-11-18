@@ -1,0 +1,42 @@
+name: One-time 19 new India smartphone API identity probe
+on:
+  push:
+    branches:
+      - feature/new-mobiles-specs-licensed-photo-price-gates-20261118
+    paths:
+      - data/new_mobile_api_probe_activation_20261118.json
+
+permissions:
+  contents: read
+
+concurrency:
+  group: approved-19-new-phones-research-api-probe-once-20261118
+  cancel-in-progress: false
+
+jobs:
+  read-only-identity-probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Checkout read-only research code
+        uses: actions/checkout@v4
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate 19 approved research-only phone identities without requests
+        run: |
+          python -m unittest -q test_new_mobile_media_prices
+          python scripts/new_mobiles_api_probe.py --max-calls 0
+      - name: Try one strictly capped 19-call identity probe if existing API secret is configured
+        env:
+          QUICKCOMMERCE_API_KEY: ${{ secrets.QUICKCOMMERCE_API_KEY }}
+        run: python scripts/new_mobiles_api_probe.py --max-calls 19
+      - name: Keep API observations private, not a website product/price feed
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: private-new-mobile-api-identity-observations
+          path: private_observations/nineteen_new_mobile_api_probe.json
+          if-no-files-found: warn
+          retention-days: 7
