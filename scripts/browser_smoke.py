@@ -117,6 +117,14 @@ def run(root: Path):
                         })""")
                     print(f"Search click to next painted frame at {width}px: {research_visible_ms:.1f} ms", flush=True)
                     assert research_visible_ms < 300, (width, research_visible_ms)
+                    # Both budget lanes are painted from already-loaded local
+                    # research while the API request is deliberately held.
+                    assert page.locator("#mobileResearchResults .research-budget-evidenced").is_visible(), width
+                    assert page.locator("#mobileResearchResults .research-budget-unpriced").is_visible(), width
+                    assert page.locator("#mobileResearchResults .research-budget-primary-grid [data-mobile-model-card]").count() > 0, width
+                    assert page.locator("#mobileResearchResults .research-budget-related-item").count() > 0, width
+                    assert "price not verified" in page.locator("#mobileResearchResults .research-budget-unpriced").inner_text().lower(), width
+                    assert not page.locator("#mobileResearchResults .research-budget-unpriced .purchase-cta").count(), width
                     assert page.locator("#mobileResearchResults [data-mobile-model-card]").count() > 0, width
                     assert page.locator("#aiRecommendation").is_hidden(), width
                     pending_offers.pop().fulfill(status=503, headers={"Access-Control-Allow-Origin": "*"})
@@ -146,6 +154,26 @@ def run(root: Path):
                     page.route("**/api/recommend?*", lambda route: route.fulfill(
                         json={"recommendations": []}, headers={"Access-Control-Allow-Origin": "*"}
                     ))
+                    # Regression: exact-model, brand exclusion and memory hard
+                    # constraints are also preserved for price-unverified leads.
+                    elapsed_ms = page.evaluate("""() => {
+                      const started = performance.now();
+                      window.CouponWorldMobileResearch.search('Samsung Galaxy F70 5G under 25000');
+                      return performance.now() - started;
+                    }""")
+                    assert elapsed_ms < 1000, (width, elapsed_ms)
+                    related_text = page.locator("#mobileResearchResults .research-budget-unpriced").inner_text()
+                    assert "Galaxy F70 5G" in related_text, (width, related_text[:400])
+                    assert "Price not verified" in related_text, width
+                    assert not page.locator("#mobileResearchResults .research-budget-primary-grid [data-mobile-model-card]").count(), width
+                    page.evaluate("window.CouponWorldMobileResearch.search('Samsung Galaxy F70 5G 8GB RAM under 30000')")
+                    assert not page.locator("#mobileResearchResults .research-budget-related-item").count(), width
+                    page.evaluate("window.CouponWorldMobileResearch.search('phone under 30000 exclude Samsung')")
+                    assert not any("Samsung" in name for name in page.locator(
+                        "#mobileResearchResults .research-budget-related-item>strong"
+                    ).all_inner_texts()), width
+                    page.evaluate("window.CouponWorldMobileResearch.search('phone under 30000')")
+
                     # Nearby-band narrowing must be explicit.
                     nearby = page.evaluate("""() => window.CouponWorldMobileResearch.search('phone under 30000 nearby band').map(x => x.card.research_budget_reference.reference_price_inr)""")
                     assert nearby and all(25000 <= price < 30000 for price in nearby), width
