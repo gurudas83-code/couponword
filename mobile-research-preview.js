@@ -47,6 +47,7 @@
   var searchExpanded = false;
   var lastSearchQuery = "";
   var lastSearchMatches = [];
+  var lastStrictMatchCount = 0;
   var guidedControls = ["researchGuidedBudget", "researchGuidedPriority", "researchGuidedRam", "researchGuidedStorage", "researchGuidedExclude"].map(function (id) { return document.getElementById(id); });
   var guidedScope = document.getElementById("researchGuidedScope");
   var appliedFilters = document.getElementById("researchAppliedFilters");
@@ -952,29 +953,47 @@
 
   function unpricedResearchLeads(query) {
     var c = researchConstraints(query);
-    if (c.budget == null || (c.lower != null && c.lower > c.budget)) return "";
-    // Preserve model, RAM/storage, OIS, 5G, battery, refresh and brand filters.
-    // ONLY the budget reference gate is relaxed for a visibly separate panel.
+    if (c.budget == null || (c.lower != null && c.lower > c.budget)) {
+      return {count: 0, html: ""};
+    }
+    // Same model, brand, RAM/storage, 5G, OIS and feature constraints as
+    // the budget-qualified search. ONLY the dated price-reference gate
+    // is relaxed. These are NOT within-budget recommendations.
     var leads = findResearchMatches(query, true).filter(function (item) {
       var ref = item.card.research_budget_reference;
-      if (ref && ref.reference_price_inr > 0 &&
-          (c.inclusive ? ref.reference_price_inr > c.budget : ref.reference_price_inr >= c.budget)) return false;
-      return Object.keys(item.card.specifications || {}).length >= 3;
-    }).slice(0, 3);
-    if (!leads.length) return "";
-    return '<section class="research-context research-unpriced-leads">' +
-      '<h3>Related research — NOT within-budget recommendations</h3>' +
-      '<p>These models match other documented conditions, but the requested budget has NOT been verified for their exact RAM/storage variant. They may cost more. No price, stock, ranking or purchase eligibility is implied.</p>' +
-      leads.map(function (item) {
+      // A model with a dated numeric reference belongs in budget checking,
+      // not in the explicitly price-unknown lane (even when above the cap).
+      if (ref && Number(ref.reference_price_inr) > 0) return false;
+      var sourced = Object.values(item.card.specifications || {}).filter(function (field) {
+        return field && field.value != null && String(field.value).trim() &&
+          /^https:\/\//.test(String(field.source_url || ""));
+      });
+      return sourced.length >= 2;
+    }).slice(0, 4);
+    var html = '<section class="research-budget-tier research-budget-unpriced" aria-label="Related phones with unverified price">' +
+      '<h3>Additional relevant phones · price not verified (' + leads.length + ')</h3>' +
+      '<p>These phones match your other documented conditions, but we cannot confirm that their exact RAM/storage variant is within ₹' +
+      Number(c.budget).toLocaleString("en-IN") +
+      '. They may be over budget. They are not ranked, in-stock or purchasable recommendations.</p>';
+    if (!leads.length) {
+      html += '<p>No additional manufacturer/source-linked research matched all the other requested conditions.</p>';
+    } else {
+      html += '<div class="research-budget-related-list">' + leads.map(function (item) {
         var card = item.card;
         var proof = Object.values(card.specifications || {}).find(function (field) {
-          return field && /^https:\/\//.test(field.source_url || "");
+          return field && field.value != null && /^https:\/\//.test(String(field.source_url || ""));
         });
-        return '<div class="research-unpriced-item"><strong>' + escapeHtml(displayPhoneName(card)) + '</strong>' +
-          '<p>Specifications recorded: ' + escapeHtml(card.research_checked_at || 'date unavailable') +
-          ' · Budget status: not verified · ' + (proof ? link(proof.source_url, 'Original technical source') : 'Source unavailable') + '</p>' +
-          retailerResearchLinks(card) + '</div>';
-      }).join('') + '</section>';
+        return '<article class="research-budget-related-item">' +
+          '<strong>' + escapeHtml(displayPhoneName(card)) + '</strong>' +
+          '<span class="research-budget-unknown-label">Price not verified</span>' +
+          '<p>' + escapeHtml(card.status === "RESEARCH_ONLY" ? "Model research only" : "Source-backed specifications") +
+          ' · ' + escapeHtml(card.research_checked_at || "check date unavailable") +
+          ' · ' + (proof ? link(proof.source_url, 'Technical source') : 'Technical source unavailable') + '</p>' +
+          '<button type="button" class="btn btn-ghost" data-research-detail="' +
+          escapeHtml(card.model_key) + '">View specifications &amp; retailer searches</button></article>';
+      }).join("") + '</div>';
+    }
+    return {count: leads.length, html: html + '</section>'};
   }
 
   function repositoryFallbackMatches(query) {
@@ -1059,7 +1078,7 @@
     if (c.lower != null && c.budget != null && c.lower > c.budget) message = "The lower budget is higher than the upper budget. Please correct the range.";
     else if (c.ram != null || c.storage != null) message += " We cannot confirm the requested exact memory variant with all these conditions.";
     else if (c.budget != null) message += " No matching record passes this price band and the other conditions. Missing references and recorded out-of-stock entries are excluded.";
-    return '<div class="mobile-research-empty"><p>' + escapeHtml(message) + '</p><p>This is a research coverage gap, not proof that no suitable phone exists. No constraint has been relaxed for budget-qualified results.</p><a href="#mobileResearchCatalogue">Browse the full research catalogue</a>' + researchGuideFallback() + unpricedResearchLeads(query) + '</div>' + relatedRepositoryResearch(query, fallback || []);
+    return '<div class="mobile-research-empty"><p>' + escapeHtml(message) + '</p><p>This is a research coverage gap, not proof that no suitable phone exists. No constraint has been relaxed for budget-qualified results.</p><a href="#mobileResearchCatalogue">Browse the full research catalogue</a>' + researchGuideFallback() + '</div>' + relatedRepositoryResearch(query, fallback || []);
   }
 
   function verifiedRecommendationBridge(query, isComparison) {
@@ -1086,6 +1105,7 @@
       if (researchResults) { researchResults.hidden = true; researchResults.innerHTML = ""; }
       if (researchResultsMore) researchResultsMore.hidden = true;
       if (researchSearchStatus) researchSearchStatus.textContent = "";
+      lastStrictMatchCount = 0;
       return [];
     }
     revealSearch();
@@ -1107,6 +1127,7 @@
     }
     var c = researchConstraints(lastSearchQuery);
     matches = groupResearchMatches(matches);
+    lastStrictMatchCount = matches.length;
     var fallback = matches.length ? [] : repositoryFallbackMatches(lastSearchQuery);
     var displayMatches = matches.length ? matches : fallback;
     lastSearchMatches = displayMatches;
@@ -1116,14 +1137,49 @@
       persistShortlist();
       renderSelectedComparison();
     }
+    var validBudget = !comparison && c.budget != null && (c.lower == null || c.lower <= c.budget);
+    var additional = validBudget ? unpricedResearchLeads(lastSearchQuery) : {count: 0, html: ""};
     if (researchResults) {
       researchResults.hidden = false;
-      researchResults.innerHTML = verifiedRecommendationBridge(lastSearchQuery, comparison) + (comparison ? '<p class="mobile-research-gate">Specification comparison; no performance winner is asserted.' + (missingComparison ? ' At least one requested model or memory variant could not be matched.' : '') + '</p>' : '') + (matches.length ? visible.map(function (item) { return renderResearchResultCard(item.card, item.rows, item.group_size); }).join("") : emptyResearchResult(lastSearchQuery, visible));
+      var bridge = verifiedRecommendationBridge(lastSearchQuery, comparison);
+      if (validBudget) {
+        // Local, synchronous two-lane answer. No network round trip or
+        // third-party API is required before either lane appears.
+        var primary = '<section class="research-budget-tier research-budget-evidenced" aria-label="Phones with dated budget references">' +
+          '<h3>Within your budget · dated price reference (' + matches.length + ')</h3>' +
+          '<p>These source-backed variants pass the selected historical reference-price limit. Current checkout price, availability and delivery have NOT been confirmed. Ordering shows research coverage, not measured performance.</p>' +
+          (matches.length ?
+            '<div class="research-budget-primary-grid">' + visible.map(function (item) {
+              return renderResearchResultCard(item.card, item.rows, item.group_size);
+            }).join("") + '</div>' :
+            '<p>No saved dated price reference passes every condition. This does not prove that no suitable phone exists.</p>') +
+          '</section>';
+        researchResults.innerHTML = bridge + primary + additional.html +
+          (!matches.length && !additional.count ? relatedRepositoryResearch(lastSearchQuery, visible) : '');
+      } else {
+        researchResults.innerHTML = bridge +
+          (comparison ? '<p class="mobile-research-gate">Specification comparison; no performance winner is asserted.' +
+            (missingComparison ? ' At least one requested model or memory variant could not be matched.' : '') + '</p>' : '') +
+          (matches.length ? visible.map(function (item) {
+            return renderResearchResultCard(item.card, item.rows, item.group_size);
+          }).join("") : emptyResearchResult(lastSearchQuery, visible));
+      }
     }
     if (researchSearchStatus) {
-      researchSearchStatus.textContent = matches.length ? matches.length + " matching research model" + (matches.length === 1 ? "" : "s") + " · showing " + visible.length : "No exact catalogue match · showing " + visible.length + " related repository research model" + (visible.length === 1 ? "" : "s") + " for further research";
-      if (c.budget != null) researchSearchStatus.textContent += " · requested range ₹" + Number(c.lower).toLocaleString("en-IN") + " to " + (c.inclusive ? "₹" : "below ₹") + Number(c.budget).toLocaleString("en-IN") + " · dated references; current price and delivery unverified";
-      if (/best|अच्छा|अच्छे/i.test(lastSearchQuery)) researchSearchStatus.textContent += " · evidence coverage order, not a performance ranking";
+      if (validBudget) {
+        researchSearchStatus.textContent = matches.length + " dated budget-reference matches · " +
+          additional.count + " related phones with price unverified · local research results";
+        researchSearchStatus.textContent += " · requested range ₹" +
+          Number(c.lower).toLocaleString("en-IN") + " to " +
+          (c.inclusive ? "₹" : "below ₹") + Number(c.budget).toLocaleString("en-IN");
+      } else {
+        researchSearchStatus.textContent = matches.length ? matches.length + " matching research model" +
+          (matches.length === 1 ? "" : "s") + " · showing " + visible.length :
+          "No exact catalogue match · showing " + visible.length + " related repository research model" +
+          (visible.length === 1 ? "" : "s") + " for further research";
+      }
+      if (/best|अच्छा|अच्छे/i.test(lastSearchQuery)) researchSearchStatus.textContent +=
+        " · evidence coverage order, not a performance ranking";
     }
     if (researchResultsMore) { researchResultsMore.hidden = displayMatches.length <= MAX_SEARCH_RESULTS; researchResultsMore.textContent = searchExpanded ? "Show fewer results" : "Load more research results"; }
     return displayMatches;
@@ -1135,9 +1191,11 @@
       search_intent: researchIntent(submitted),
       comparison_query: /\b(?:compare|vs\.?|versus)\b|और/i.test(submitted) ? 1 : 0
     });
+    // Reuse the just-computed strict match count. Do not repeat the full
+    // catalogue scan (and never block local answers on retailer/API latency).
     searchResearch(query);
-    if (inventoryCards.length && researchConstraints(query).budget != null &&
-        findResearchMatches(query).length > 0 &&
+    if (inventoryCards.length && lastStrictMatchCount > 0 &&
+        researchConstraints(query).budget != null &&
         !/\b(?:compare|vs\.?|versus)\b|और/i.test(String(query || "")) &&
         typeof window.CouponWorldShoppingRecommend === "function") {
       window.CouponWorldShoppingRecommend(query, {background: true});
