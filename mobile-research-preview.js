@@ -84,7 +84,7 @@
   }
   function researchIntent(query) {
     var value = String(query || "").toLowerCase();
-    if (/under\s*\d|₹|budget|price|कीमत/.test(value)) return "budget";
+    if (/(?:under|below|within|for)\s*(?:₹|rs\.?|inr)?\s*\d|₹|budget|price|कीमत/.test(value)) return "budget";
     if (/compare|\bvs\b|versus|और|तुलना/.test(value)) return "compare";
     if (/camera|कैमरा/.test(value)) return "camera";
     if (/battery|बैटरी/.test(value)) return "battery";
@@ -527,13 +527,20 @@
     return String(value == null ? "" : value).toLowerCase()
       .replace(/[’']/g, "")
       .replace(/[^a-z0-9\u0900-\u097f]+/g, " ")
-      .replace(/\s+/g, " ").trim();
+      .replace(/\s+/g, " ").trim()
+      // Common mobile-search typos should still reach the documented catalogue.
+      .replace(/\bmobies\b/g, "mobiles")
+      .replace(/\bmoblies\b/g, "mobiles")
+      .replace(/\bmoblie\b/g, "mobile")
+      .replace(/\bmoible\b/g, "mobile");
   }
 
 
   function researchConstraints(query) {
     var text = String(query || "").toLowerCase().replace(/[०-९]/g, function (d) { return String("०१२३४५६७८९".indexOf(d)); }).replace(/,/g, "");
-    text = text.replace(/सैमसंग/g, "samsung").replace(/आईफोन/g, "iphone").replace(/रेडमी/g, "redmi").replace(/वनप्लस/g, "oneplus");
+    text = text.replace(/सैमसंग/g, "samsung").replace(/आईफोन/g, "iphone").replace(/रेडमी/g, "redmi").replace(/वनप्लस/g, "oneplus")
+      .replace(/\b(?:mobies|moblies)\b/g, "mobiles")
+      .replace(/\b(?:moblie|moible)\b/g, "mobile");
     var amount = "([0-9]+(?:\\.[0-9]+)?)\\s*(k|thousand|hazar|hazaar|हजार|हज़ार|lakh|lac|लाख)?";
     function value(n, unit) { return Number(n) * (/^(k|thousand|hazar|hazaar|हजार|हज़ार)$/.test(unit || "") ? 1000 : /^(lakh|lac|लाख)$/.test(unit || "") ? 100000 : 1); }
     var nearbyBudget = /\bnearby\s+(?:band|budget)\b/i.test(text);
@@ -544,7 +551,7 @@
     var between = text.match(new RegExp("(?:between|from)\\s*(?:rs\\.?|inr|₹)?\\s*" + amount + "\\s*(?:and|to|-)\\s*(?:rs\\.?|inr|₹)?\\s*" + amount));
     if (between) { lower = value(between[1], between[2] || between[4]); budget = value(between[3], between[4]); inclusive = true; text = text.replace(between[0], " "); }
     else {
-      var prefix = text.match(new RegExp("(?:under|below|within|upto|up to|budget(?: of)?)\\s*(?:rs\\.?|inr|₹)?\\s*" + amount));
+      var prefix = text.match(new RegExp("(?:under|below|within|upto|up to|budget(?: of)?|for)\\s*(?:rs\\.?|inr|₹)?\\s*" + amount));
       var suffix = text.match(new RegExp("(?:rs\\.?|inr|₹)?\\s*" + amount + "\\s*(?:rupees|रुपये|रुपए)?\\s*(?:ke\\s*)?(?:andar|se kam|के\\s*अंदर|के\\s*नीचे|से\\s*कम|तक)"));
       var currency = text.match(new RegExp("(?:₹|rs\\.?|inr)\\s*" + amount));
       var m = prefix || suffix || currency;
@@ -1468,7 +1475,7 @@
   window.addEventListener("hashchange", handleResearchHash);
   window.CouponWorldMobileResearch = {
     isResearchQuery: function (value) {
-      return researchConstraints(value).budget != null || /(?:phone|mobile|smartphone|galaxy|samsung|iphone|pixel|redmi|oneplus|nothing|realme|vivo|oppo|xiaomi|motorola|poco|iqoo|lava|tecno|infinix|camera|battery|gaming|display|software|build|reliability|durability|android|ram|storage|फोन|मोबाइल|कैमरा|बैटरी|गेमिंग|सैमसंग|अच्छा)/i.test(String(value || ""));
+      return researchConstraints(value).budget != null || /(?:phone|mobile|mobies|moblies|moblie|moible|smartphone|galaxy|samsung|iphone|pixel|redmi|oneplus|nothing|realme|vivo|oppo|xiaomi|motorola|poco|iqoo|lava|tecno|infinix|camera|battery|gaming|display|software|build|reliability|durability|android|ram|storage|फोन|मोबाइल|कैमरा|बैटरी|गेमिंग|सैमसंग|अच्छा)/i.test(String(value || ""));
     },
     search: searchResearch,
     submit: submitResearch,
