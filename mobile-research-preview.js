@@ -402,8 +402,8 @@
         // and exact retail SKUs. Ignore incomplete or conflicting data entirely.
         if (recent && recent.mode === "RECENT_INDIA_MANUFACTURER_MODELS_RESEARCH_ONLY" &&
             recent.core_model_count_unchanged === 232 &&
-            Array.isArray(recent.model_cards) && recent.model_cards.length === 11 &&
-            Array.isArray(recent.records) && recent.records.length === 11) {
+            Array.isArray(recent.model_cards) && recent.model_cards.length === 13 &&
+            Array.isArray(recent.records) && recent.records.length === 13) {
           var identifiers = new Set(inventoryCards.map(function (card) { return card.model_key; }));
           var recordIds = new Set(inventoryRows.map(function (row) { return row.record_key; }));
           var safeRecent = recent.model_cards.every(function (card) {
