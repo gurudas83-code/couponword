@@ -1343,3 +1343,14 @@ body.clean-ui #mobileResearchCompare:focus { outline:0; }
 .seo-crawl-grid a:hover,.seo-crawl-grid a:focus-visible{border-color:currentColor;text-decoration:underline;outline-offset:3px}
 @media(max-width:700px){.seo-crawl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:370px){.seo-crawl-grid{grid-template-columns:1fr}}
+
+
+/* Manufacturer-linked recent phones are fully discoverable, including research-only additions. */
+.mobile-research-new-section{scroll-margin-top:96px}
+.mobile-research-new-section .section-heading{align-items:start}
+.mobile-research-new-section .section-heading p{max-width:67ch}
+.recent-mobile-more{grid-column:1/-1;width:100%;min-width:0;border:1px solid rgba(120,130,150,.25);border-radius:14px;background:rgba(127,140,160,.045);padding:12px}
+.recent-mobile-more>summary{cursor:pointer;font-weight:750;padding:10px 12px;line-height:1.5}
+.recent-mobile-more>summary:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.recent-mobile-more>.mobile-research-results{margin-top:12px}
+@media(max-width:600px){.mobile-research-new-section .section-heading{display:block}.recent-mobile-more{padding:8px}}
