@@ -19,6 +19,8 @@ jobs:
         run: python -m unittest -q test_internal_link_audit
       - name: Verify technical-only public niche policy
         run: python -m unittest -q test_technical_niche_publication
+      - name: Validate nineteen model illustrations, full specification routes and API-price gates
+        run: python -m unittest -q test_new_mobile_media_prices
       - name: Verify recent India model importer and client discovery paths
         run: python -m unittest -q test_india_recent_eight_import test_new_mobile_visibility
       - name: Build the official public artifact
