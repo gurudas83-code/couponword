@@ -56,7 +56,9 @@ class SearchTrustHygiene(unittest.TestCase):
 
     def test_legacy_products_are_available_but_not_indexed_without_verified_offer(self):
         products = sorted((PUBLIC / "products").glob("*/index.html"))
-        self.assertGreaterEqual(len(products), 90)
+        # Only the reviewed technical subset is public; legacy lifestyle,
+        # fashion, toys and home products are intentionally retired.
+        self.assertEqual(len(products), 65)
         indexed = set(self.urls)
         for file in products:
             page = file.read_text(encoding="utf-8")

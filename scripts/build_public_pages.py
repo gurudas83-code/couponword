@@ -50,7 +50,8 @@ def _generate_product_pages(destination: Path) -> None:
     """Render product pages from current catalogue data into the artifact."""
     from python import build_product_pages as product_pages
 
-    products = product_pages.load_products()
+    from python.technical_niche_publication import select_tech_products
+    products = select_tech_products(product_pages.load_products())
     pages_root = destination / "products"
     for product in products:
         relative = product_pages.page_dir(product).relative_to(product_pages.OUT)
@@ -76,6 +77,14 @@ def _prune_unverified_product_sitemap_entries(destination: Path) -> None:
     root = tree.getroot()
     removed = 0
     retained = 0
+    from python import build_product_pages as product_pages
+    from python.technical_niche_publication import select_tech_products
+    source_products = product_pages.load_products()
+    kept_ids = {str(row["id"]) for row in select_tech_products(source_products)}
+    retired_urls = {
+        product_pages.page_url(row)
+        for row in source_products if str(row["id"]) not in kept_ids
+    }
     for entry in list(root.findall(f"{{{ns}}}url")):
         location = entry.find(f"{{{ns}}}loc")
         url = urlsplit(str(location.text or "") if location is not None else "")
@@ -85,7 +94,11 @@ def _prune_unverified_product_sitemap_entries(destination: Path) -> None:
             raise RuntimeError(f"Invalid canonical product URL in sitemap: {url.geturl()}")
         page_path = destination / url.path.lstrip("/") / "index.html"
         if not page_path.is_file():
-            raise RuntimeError(f"Sitemap refers to missing product page: {url.geturl()}")
+            if url.geturl() in retired_urls:
+                root.remove(entry)
+                removed += 1
+                continue
+            raise RuntimeError(f"Sitemap refers to missing technical product page: {url.geturl()}")
         page = page_path.read_text(encoding="utf-8")
         meta = re.search(r'<meta[ ]+name="robots"[ ]+content="([^"]+)"', page, flags=re.I)
         if not meta:
@@ -397,6 +410,13 @@ def build(output: Path) -> Path:
         if not source.is_dir():
             raise FileNotFoundError(f"required public directory is missing: {relative}")
         shutil.copytree(source, output / relative)
+
+    # Fail closed: source history stays intact, but visitors and the public
+    # catalogue see only reviewed technical products.
+    from python import build_product_pages as legacy_product_pages
+    from python.technical_niche_publication import publish_tech_subset
+    technical_report = publish_tech_subset(output, legacy_product_pages.load_products())
+    print("TECHNICAL-NICHE PUBLICATION:", technical_report)
 
     _generate_research_catalogue(output)
     # Add the eight missing market-source models as a separate research lane;
