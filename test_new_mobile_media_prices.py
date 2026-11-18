@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent
 class NewMobileMediaAndPricesTests(unittest.TestCase):
     def test_all_nineteen_have_exact_clickthrough_urls_and_no_unlicensed_images(self):
         cards = import_eight()["model_cards"] + build_recent()["model_cards"]
-        self.assertEqual(len(cards), 19)
+        self.assertEqual(len(cards), 21)
         self.assertEqual(len({row["model_key"] for row in cards}), 19)
         self.assertEqual(len(approved_targets()), 19)
         for row in cards:
