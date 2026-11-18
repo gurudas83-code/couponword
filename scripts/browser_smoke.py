@@ -163,7 +163,7 @@ def run(root: Path):
                     }""")
                     assert elapsed_ms < 1000, (width, elapsed_ms)
                     related_text = page.locator("#mobileResearchResults .research-budget-unpriced").inner_text()
-                    assert "Galaxy F70 5G" in related_text, (width, related_text[:400])
+                    assert "galaxy f70 5g" in related_text.lower(), (width, related_text[:400])
                     assert "Price not verified" in related_text, width
                     assert not page.locator("#mobileResearchResults .research-budget-primary-grid [data-mobile-model-card]").count(), width
                     page.evaluate("window.CouponWorldMobileResearch.search('Samsung Galaxy F70 5G 8GB RAM under 30000')")
