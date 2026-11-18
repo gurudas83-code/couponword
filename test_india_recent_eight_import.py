@@ -41,6 +41,11 @@ class RecentIndiaPhonesTests(unittest.TestCase):
 
     def test_publish_additive_not_core(self):
         with tempfile.TemporaryDirectory() as folder:
+            from xml.etree import ElementTree as ET
+            ns = "http://www.sitemaps.org/schemas/sitemap/0.9"
+            ET.ElementTree(ET.Element("{" + ns + "}urlset")).write(
+                Path(folder) / "sitemap.xml", encoding="utf-8"
+            )
             payload = publish_recent(Path(folder))
             output = Path(folder) / "data/india_recent_manufacturer_research.json"
             self.assertEqual(json.loads(output.read_text(encoding="utf-8")), payload)
