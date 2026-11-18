@@ -223,15 +223,12 @@ def run(root: Path):
                     saved = page.evaluate("() => JSON.parse(localStorage.getItem('cw-saved-phone-shortlist-v1'))")
                     assert len(saved) == 2, (width, saved)
                     assert page.locator("#researchSavedShortlist").is_visible(), width
-                    # A fresh tab on the same origin recovers the comparison.
-                    new_tab = page.context.new_page()
-                    try:
-                        new_tab.goto(url, wait_until="domcontentloaded", timeout=30000)
-                        new_tab.locator("#researchSavedShortlist").wait_for(state="visible", timeout=20000)
-                        assert new_tab.locator("#mobileResearchCompare table").count() == 1, width
-                        assert "2/3" in new_tab.locator("#researchSavedShortlist").inner_text(), width
-                    finally:
-                        new_tab.close()
+                    # Reload the same origin to verify persistent selection
+                    # even when all document/JS state is reconstructed.
+                    page.reload(wait_until="domcontentloaded", timeout=30000)
+                    page.locator("#researchSavedShortlist").wait_for(state="visible", timeout=20000)
+                    assert page.locator("#mobileResearchCompare table").count() == 1, width
+                    assert "2/3" in page.locator("#researchSavedShortlist").inner_text(), width
                     page.locator("[data-research-compare-clear]").click()
                     assert page.evaluate("() => localStorage.getItem('cw-saved-phone-shortlist-v1')") is None, width
                     assert page.locator("#researchSavedShortlist").is_hidden(), width
