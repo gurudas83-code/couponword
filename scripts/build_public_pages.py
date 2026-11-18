@@ -469,7 +469,7 @@ def build(output: Path) -> Path:
     sitemap_report = reconcile(output)
     report_path = output / "data/sitemap_integrity_report.json"
     report_path.parent.mkdir(parents=True, exist_ok=True)
-    report_path.write_text(json.dumps(sitemap_report, indent=2) + "\\n", encoding="utf-8")
+    report_path.write_text(json.dumps(sitemap_report, indent=2) + "\n", encoding="utf-8")
     print("Generated sitemap cleanup:", sitemap_report["retained"], "retained,", sitemap_report["removed"], "stale removed")
     _write_discovery_release_manifest(output)
 
