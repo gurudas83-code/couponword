@@ -23,7 +23,7 @@ class NewMobileVisibleTests(unittest.TestCase):
                           len(recent["model_cards"])), (232, 8, 13))
         keys = [c["model_key"] for group in (core, market, recent) for c in group["model_cards"]]
         self.assertEqual(len(keys), len(set(keys)))
-        self.assertEqual(len(keys), 251)
+        self.assertEqual(len(keys), 253)
         self.assertEqual(len(APPROVED), 13)
         self.assertTrue(THREE.issubset({c["model_key"] for c in recent["model_cards"]}))
         for card in recent["model_cards"]:
