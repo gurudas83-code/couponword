@@ -171,7 +171,7 @@ def publish_recent(destination: Path) -> dict:
     payload = build_recent()
     target = destination / "data" / PUBLIC_DATA_NAME
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    target.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     page = destination / HUB.lstrip("/") / "index.html"
     page.parent.mkdir(parents=True, exist_ok=True)
     page.write_text(_hub(payload["model_cards"]), encoding="utf-8")
