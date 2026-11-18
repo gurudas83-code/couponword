@@ -110,7 +110,7 @@ def build_recent() -> dict:
             "research_checked_at": item.get("reviewed_on") or "2026-11-07",
             "source_urls": [item["source"]] + ([item["store"]] if item.get("store") else []),
             "image_status": "PLACEHOLDER", "photo": None,
-            "research_art_url": research_art_url(key),
+            "research_art_url": research_art_url(key), "detail_url": detail_route(key),
             "photo_rights_status": "NOT_CLEARED",
             "verified_retailer_links": [], "retailer_search_links": links,
             "market_reference": "Recent India manufacturer model source",
