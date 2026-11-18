@@ -1,0 +1,43 @@
+name: One-time missing eight smartphone API identity research
+on:
+  # Never scheduled, and never triggered for ordinary source/code updates.
+  push:
+    branches:
+      - feature/import-8-sales-priority-models-20261118
+    paths:
+      - data/sales_eight_api_probe_activation_20261118.json
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sales-eight-private-api-probe-once-20261118
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - name: Checkout reviewed repository sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Verify eight manufacturer evidence records without charges
+        run: |
+          python -m unittest -q test_india_missing_eight_release
+          python -c 'from scripts.sales_eight_api_probe import approved_targets; assert len(approved_targets()) == 8'
+      - name: One read-only private API batch, two requests maximum
+        env:
+          QUICKCOMMERCE_API_KEY: ${{ secrets.QUICKCOMMERCE_API_KEY }}
+        run: python scripts/sales_eight_api_probe.py --max-calls 2
+      - name: Retain only non-public research evidence for review
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: sales-eight-private-api-audit
+          path: private_observations/sales_eight_api_probe.json
+          if-no-files-found: warn
+          retention-days: 7
