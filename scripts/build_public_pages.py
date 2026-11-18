@@ -476,6 +476,18 @@ def build(output: Path) -> Path:
     from python.affiliate_links import tag_public_artifact
     tag_public_artifact(output)
 
+    # Measure whether a Googlebot-like HTML-link crawl can discover pages.
+    # Sitemap visibility is not indexing; never claim GSC success here.
+    from scripts.internal_link_audit import audit as audit_internal_links, verify_priority
+    link_report = audit_internal_links(output)
+    verify_priority(link_report)
+    target = output / "data/internal_link_discovery_report.json"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps(link_report, indent=2) + "\n", encoding="utf-8")
+    print("STATIC HTML LINK DISCOVERY:", link_report["sitemap_urls_reachable_from_home"],
+          "/", link_report["sitemap_indexable_url_count"], "sitemap URLs reachable;",
+          link_report["sitemap_urls_without_homepage_link_path"], "unlinked")
+
     leaked = []
     for path in output.rglob("*"):
         parts = path.relative_to(output).parts
