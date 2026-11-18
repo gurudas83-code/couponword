@@ -59,8 +59,8 @@ def run(root: Path):
                     assert page.locator('[data-mobile-query="mobile under 50000"]').is_visible(), width
                     page.locator(".cw-budget-more summary").click()
                     assert page.locator(".cw-budget-more").evaluate("(el) => !el.open"), width
-                    assert page.locator("#researchCategories").evaluate(
-                        "(el) => !!(el.compareDocumentPosition(document.getElementById('mobileResearchSearch')) & Node.DOCUMENT_POSITION_FOLLOWING)"
+                    assert page.locator("#mobileResearchSearch").evaluate(
+                        "(el) => !!(el.compareDocumentPosition(document.getElementById('researchCategories')) & Node.DOCUMENT_POSITION_FOLLOWING)"
                     ), width
                     page.wait_for_function("() => !!window.CouponWorldMobileResearch", timeout=15000)
                     # Wait for the real fetch->catalogue->browser filtering chain.
