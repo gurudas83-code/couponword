@@ -1,5 +1,5 @@
 {
-  "checked_on": "2026-11-07",
+  "checked_on": "2026-11-18",
   "market": "India",
   "models": [
     {
@@ -123,6 +123,48 @@
       "photo_reuse": {
         "status": "COMMERCIAL_PERMISSION_NOT_ESTABLISHED",
         "review_source": "https://vivonewsroom.in/press-release/vivo-next-2026-marks-a-new-chapter-in-vivos-premium-journey-with-v80-x-fold6-s2-fe-originos-7-and-vivo-vision-discovery-edition12-mixed-reality-mr-headset/"
+      }
+    },
+    {
+      "name": "Samsung Galaxy F70 5G",
+      "source": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-5g-bold-black-128gb-sm-e176ezkains/",
+      "evidence": "Samsung India product page identifies Galaxy F70 5G, 4GB/128GB example SKU; other variants require independent listing verification.",
+      "reviewed_on": "2026-11-18",
+      "reviewed_specs": {
+        "chipset": "Octa-core CPU, 2.4GHz / 2.0GHz",
+        "display_type_description": "16.91 cm Super AMOLED, FHD+ 1080 × 2340",
+        "display_refresh_description": "90Hz",
+        "battery_capacity_description": "5000mAh typical",
+        "india_variant_description": "Samsung example: 4GB RAM / 128GB storage"
+      }
+    },
+    {
+      "name": "REDMI 17C 5G",
+      "source": "https://www.mi.com/in/product/redmi-17c-5g/specs/",
+      "evidence": "Xiaomi India official model specification page; 5G model, not the different 4G 17C.",
+      "reviewed_on": "2026-11-18",
+      "reviewed_specs": {
+        "chipset": "MediaTek Dimensity 6300 5G",
+        "display_type_description": "6.9-inch HD+ Dot Drop display",
+        "display_refresh_description": "Up to 120Hz",
+        "battery_capacity_description": "6000mAh typical; 33W wired charging support",
+        "rear_camera_system": "50MP main camera; 8MP front camera",
+        "india_variant_description": "Maker-listed: 4GB/128GB and 6GB/128GB"
+      }
+    },
+    {
+      "name": "realme P4s Lite",
+      "source": "https://www.realme.com/in/realme-p4s-lite/specs",
+      "store": "https://buy.realme.com/in/goods/824",
+      "evidence": "realme India specifications and official storefront; 4G model, not realme P4s 5G.",
+      "reviewed_on": "2026-11-18",
+      "reviewed_specs": {
+        "chipset": "T7250",
+        "display_type_description": "17.15 cm LCD, HD+ 1570 × 720",
+        "display_refresh_description": "Up to 120Hz",
+        "battery_capacity_description": "7000mAh typical; 15W maximum charging",
+        "rear_camera_system": "13MP rear; 5MP front",
+        "india_variant_description": "Maker-listed: 4GB/64GB and 4GB/128GB"
       }
     }
   ],
