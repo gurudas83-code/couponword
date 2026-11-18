@@ -21,6 +21,8 @@ jobs:
         run: python -m unittest -q test_technical_niche_publication
       - name: Build the official public artifact
         run: python scripts/build_public_pages.py --output public
+      - name: Validate built technical product routes (not just source fixtures)
+        run: python -m unittest -q test_technical_niche_publication test_seo_index_hygiene
       - name: Validate generated sitemap, robots and homepage metadata
         run: python scripts/quality_gate.py --root public
       - name: JavaScript syntax validation
