@@ -463,6 +463,14 @@ def build(output: Path) -> Path:
     # The source sitemap still lists historical catalogue URLs. Keep those
     # pages online, but do not encourage indexing without current offer proof.
     _prune_unverified_product_sitemap_entries(output)
+    # The checked-in source sitemap is historical. Remove only nonindexable,
+    # redirecting, alternate-canonical or missing URLs in the built artifact.
+    from scripts.sitemap_canonical_audit import reconcile
+    sitemap_report = reconcile(output)
+    report_path = output / "data/sitemap_integrity_report.json"
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_text(json.dumps(sitemap_report, indent=2) + "\n", encoding="utf-8")
+    print("Generated sitemap cleanup:", sitemap_report["retained"], "retained,", sitemap_report["removed"], "stale removed")
     _write_discovery_release_manifest(output)
 
     from python.affiliate_links import tag_public_artifact

@@ -40,6 +40,25 @@ else:
                 warn(section + " section absent from sitemap; verify generated routes before adding")
         print("Sitemap entries:", len(urls))
     except ET.ParseError as exc: fail("invalid sitemap XML: " + str(exc))
+# Audit the generated sitemap against real, self-canonical HTML pages.
+if sitemap.exists():
+    try:
+        from sitemap_canonical_audit import validate as validate_public_urls
+        technical = validate_public_urls(ROOT)
+        for url, problem in technical["problems"]:
+            fail("sitemap URL is not indexable canonical HTML (" + problem + "): " + url)
+        expected_paths = (
+            "/seo/phones-under-10000.html", "/seo/phones-under-15000.html",
+            "/seo/phones-under-20000.html", "/seo/camera-phone-buying-guide.html",
+            "/seo/gaming-phone-buying-guide.html", "/seo/5g-phone-india-checklist.html",
+            "/compare/",
+        )
+        urls_present = set(urls)
+        for route in expected_paths:
+            if "https://coupon-world.in" + route not in urls_present:
+                fail("popular homepage guide missing from sitemap: " + route)
+    except (ValueError, ET.ParseError) as exc:
+        fail("sitemap canonical audit error: " + str(exc))
 if not robots.exists(): fail("robots.txt missing")
 else:
     body = robots.read_text(encoding="utf-8")
@@ -48,6 +67,16 @@ else:
 home = ROOT / "index.html"
 if home.exists():
     body = home.read_text(encoding="utf-8")
+    # Every promoted destination must be a plain, crawlable <a href>.
+    for route in (
+        "/seo/phones-under-10000.html", "/seo/phones-under-15000.html",
+        "/seo/phones-under-20000.html", "/seo/camera-phone-buying-guide.html",
+        "/seo/gaming-phone-buying-guide.html", "/seo/5g-phone-india-checklist.html",
+        "/compare/",
+    ):
+        if 'href="' + route + '"' not in body:
+            fail("homepage is missing a crawlable direct link: " + route)
+
     if not re.search(r'<link\s+rel="canonical"\s+href="https://coupon-world.in/"', body):
         fail("homepage canonical missing")
     if not re.search(r'<meta\s+name="description"', body):
