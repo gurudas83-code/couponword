@@ -19,8 +19,12 @@ jobs:
         run: python -m unittest -q test_internal_link_audit
       - name: Verify technical-only public niche policy
         run: python -m unittest -q test_technical_niche_publication
+      - name: Verify recent India model importer and client discovery paths
+        run: python -m unittest -q test_india_recent_eight_import test_new_mobile_visibility
       - name: Build the official public artifact
         run: python scripts/build_public_pages.py --output public
+      - name: Verify published 11-model hub and 251-model discovery
+        run: python -m unittest -q test_india_recent_eight_import test_new_mobile_visibility
       - name: Validate built technical product routes (not just source fixtures)
         run: python -m unittest -q test_technical_niche_publication test_seo_index_hygiene
       - name: Validate generated sitemap, robots and homepage metadata

@@ -48,7 +48,8 @@ def run(root: Path):
                     # New visitors have a clear way to browse, compare and reach retailers.
                     assert page.locator("#howToShop").is_visible(), width
                     assert "Tap the phone photo" in page.locator("#howToShop").inner_text(), width
-                    assert page.locator(".cw-primary-actions a").count() == 4, width
+                    assert page.locator(".cw-primary-actions a").count() == 5, width
+                    assert page.locator('.cw-primary-actions a[href="/phones/new-india-mobiles/"]').count() == 1, width
                     assert page.locator('.cw-primary-actions a[href="/seo/top-30-phone-research-india.html"]').count() == 1, width
                     assert page.locator(".cw-budget-more").evaluate("(el) => !el.open"), width
                     page.locator(".cw-budget-more summary").click()
@@ -73,13 +74,25 @@ def run(root: Path):
                     )
                     a6 = page.locator("#mobileResearchResults [data-mobile-model-card='oppo|a6x 5g']")
                     assert a6.count() == 1, width
-                    assert "India sales-report research addition" in a6.inner_text(), width
+                    assert "India sales/shipments research addition" in a6.inner_text(), width
                     assert "Search Amazon" in a6.inner_text(), width
                     assert "Search Flipkart" in a6.inner_text(), width
                     assert "Search Croma" in a6.inner_text(), width
                     assert page.evaluate(
                         "() => window.CouponWorldMobileResearch.search('Samsung Galaxy A07 5G').some("
                         "item => item.card.model_key === 'samsung|galaxy a07 5g' && item.card.market_intake === true)"
+                    ), width
+                    # Verify all 19 research additions actually appear after fetch.
+                    page.wait_for_function(
+                        "() => !!document.querySelector('#mobileResearchNew') && "
+                        "!document.querySelector('#mobileResearchNew').hidden && "
+                        "document.querySelector('#mobileResearchNewCount').textContent.includes('19 additional')",
+                        timeout=20000,
+                    )
+                    assert page.locator("#mobileResearchNewGrid [data-mobile-model-card]").count() == 19, width
+                    assert page.evaluate(
+                        "() => window.CouponWorldMobileResearch.search('Samsung Galaxy F70 5G').some("
+                        "item => item.card.model_key === 'samsung|galaxy f70 5g' && item.card.market_intake === true)"
                     ), width
                     page.evaluate("window.CouponWorldMobileResearch.search('phone under 30000')")
                     assert page.locator("#mobileResearchResults [data-mobile-model-card]").count() > 0, width
@@ -329,6 +342,16 @@ def run(root: Path):
                         page.locator("#cr-grid input[data-compare]").nth(1).check()
                         assert page.locator("#cr-comparison-table table tbody tr").count() >= 3
                         assert page.locator(".purchase-cta, .shop-button").count() == 0
+                    # One indexable editorial page lists the 11 added official sources,
+                    # rather than manufacturing thin product SEO pages.
+                    page.goto(url + "phones/new-india-mobiles/", wait_until="domcontentloaded", timeout=30000)
+                    assert page.locator(".cr-grid .cr-card").count() == 11, width
+                    assert "Galaxy F70 5G" in page.locator("main").inner_text(), width
+                    assert "REDMI 17C 5G" in page.locator("main").inner_text(), width
+                    assert "P4s Lite" in page.locator("main").inner_text(), width
+                    assert page.locator('link[rel="canonical"]').get_attribute("href") == "https://coupon-world.in/phones/new-india-mobiles/"
+                    assert page.locator(".purchase-cta, .shop-button").count() == 0, width
+                    assert page.evaluate("document.documentElement.scrollWidth") <= width + 8, width
                     page.goto(url + "phones/india-market-demand-q3-2026/", wait_until="domcontentloaded", timeout=30000)
                     assert page.locator(".cr-grid .cr-card").count() == 10
                     assert "NOT an official nationwide Top 10 ranking" in page.locator("main").inner_text()

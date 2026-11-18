@@ -307,6 +307,12 @@
   function renderInventory() {
     if (!inventoryGrid) return;
     var filtered = inventoryCards.filter(inventoryMatches);
+    // New manufacturer-linked phones were formerly hidden after 232 core
+    // entries: bring them to the top without changing research ranking.
+    filtered = filtered.slice().sort(function (a, b) {
+      return Number(Boolean(b.market_intake)) - Number(Boolean(a.market_intake)) ||
+        String(b.research_checked_at || "").localeCompare(String(a.research_checked_at || ""));
+    });
     var matchingVariants = filtered.reduce(function (count, card) { return count + inventoryRowsForCard(card).length; }, 0);
     var isUnfiltered = !(inventoryQuery && inventoryQuery.value) && !(inventoryBrand && inventoryBrand.value) && !(inventoryRam && inventoryRam.value) && !(inventoryStorage && inventoryStorage.value) && !(inventoryStatus && inventoryStatus.value);
     if (inventoryCount) {
@@ -347,7 +353,7 @@
         if (!response.ok) throw new Error("market intake unavailable");
         return response.json();
       }).catch(function () { return null; });
-    var recentFetch = fetch("/data/india_recent_eight_research.json?v=20261118b", { credentials: "same-origin" })
+    var recentFetch = fetch("/data/india_recent_manufacturer_research.json?v=20261118d", { credentials: "same-origin" })
       .then(function (response) {
         if (!response.ok) throw new Error("recent phone research unavailable");
         return response.json();
@@ -379,10 +385,10 @@
         }
         // Strictly separate manufacturer-source discovery from canonical phones
         // and exact retail SKUs. Ignore incomplete or conflicting data entirely.
-        if (recent && recent.mode === "EIGHT_RECENT_MANUFACTURER_SOURCE_MODELS_RESEARCH_ONLY" &&
+        if (recent && recent.mode === "RECENT_INDIA_MANUFACTURER_MODELS_RESEARCH_ONLY" &&
             recent.core_model_count_unchanged === 232 &&
-            Array.isArray(recent.model_cards) && recent.model_cards.length === 8 &&
-            Array.isArray(recent.records) && recent.records.length === 8) {
+            Array.isArray(recent.model_cards) && recent.model_cards.length === 11 &&
+            Array.isArray(recent.records) && recent.records.length === 11) {
           var identifiers = new Set(inventoryCards.map(function (card) { return card.model_key; }));
           var recordIds = new Set(inventoryRows.map(function (row) { return row.record_key; }));
           var safeRecent = recent.model_cards.every(function (card) {
@@ -392,11 +398,14 @@
               Array.isArray(card.discovery_record_keys) && card.discovery_record_keys.length === 1 &&
               Array.isArray(card.verified_retailer_links) && !card.verified_retailer_links.length &&
               Array.isArray(card.frozen_variant_ids) && !card.frozen_variant_ids.length &&
-              card.specifications && Object.keys(card.specifications).length === 0;
+              card.specifications && Object.values(card.specifications).every(function (field) {
+                return field && typeof field.value === "string" && field.value.trim() &&
+                  field.source_url === card.manufacturer_page;
+              });
           }) && recent.records.every(function (row) {
             return row.status === "RESEARCH_ONLY" && !recordIds.has(row.record_key);
-          }) && new Set(recent.model_cards.map(function (card) { return card.model_key; })).size === 8 &&
-              new Set(recent.records.map(function (row) { return row.record_key; })).size === 8;
+          }) && new Set(recent.model_cards.map(function (card) { return card.model_key; })).size === recent.model_cards.length &&
+              new Set(recent.records.map(function (row) { return row.record_key; })).size === recent.records.length;
           if (safeRecent) {
             recent.records.forEach(function (row) { inventoryByKey.set(row.record_key, row); inventoryRows.push(row); });
             inventoryCards = inventoryCards.concat(recent.model_cards);
@@ -807,14 +816,20 @@
     var variants = Array.from(new Set(rows.map(function (row) { return (row.ram_gb != null ? row.ram_gb + "GB RAM" : "RAM not specified") + " · " + (row.storage_gb != null ? row.storage_gb + "GB storage" : "storage not specified"); })));
     var facts = compactSpecRows(card, lastSearchQuery);
     var specs = facts.map(function (item) { var value = String(item.value); return '<li><span>' + escapeHtml(item.label) + '</span><strong title="' + escapeHtml(value) + '">' + escapeHtml(value.length > 160 ? value.slice(0, 157) + "…" : value) + '</strong></li>'; }).join("");
-    var sourceItem = Object.values(card.specifications || {}).find(function (item) { return /^https:\/\//.test(item.source_url || ""); });
-    var status = card.status === "OFFICIAL_VERIFIED" ? "Manufacturer evidence" : card.status === "PARTIALLY_VERIFIED" ? "Partial specifications" : "Needs verification";
+    var sourceItem = Object.values(card.specifications || {}).find(function (item) { return /^https:\/\//.test(item.source_url || ""); }) ||
+      (card.market_intake && (card.manufacturer_page || (card.source_urls || [])[0]) ?
+       {source_url: card.manufacturer_page || card.source_urls[0], checked_at: card.research_checked_at} : null);
+    var status = card.market_intake ? "Manufacturer-linked model" :
+      card.status === "OFFICIAL_VERIFIED" ? "Manufacturer evidence" :
+      card.status === "PARTIALLY_VERIFIED" ? "Partial specifications" : "Needs verification";
     var selected = comparisonSelection.some(function (item) { return researchGroupKey(item.card) === researchGroupKey(card); });
     var launch = card.india_launch_date ? '<p class="mobile-research-launch">India launch: ' + escapeHtml(card.india_launch_date) + '</p>' : '';
     return '<article class="mobile-research-inventory-card mobile-research-result-card" data-mobile-model-card="' + escapeHtml(card.model_key) + '"><div class="mobile-research-inventory-body">' +
       '<div class="mobile-research-card-top"><span class="research-status">' + escapeHtml(status) + '</span><span class="research-status">Research only</span></div>' +
       researchPhoneImage(card) + '<h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch +
-      (card.market_intake ? '<p class="mobile-research-gate">India sales-report research addition · no verified current stock, price or exact retailer configuration.</p>' : '') +
+      (card.market_intake ? '<p class="mobile-research-gate">' +
+        (card.recent_source_intake ? 'Recently added manufacturer-sourced India model' : 'India sales/shipments research addition') +
+        ' · no verified current price, stock or exact retailer configuration.</p>' : '') +
       '<p class="mobile-research-variant">' + (variants.length ? 'Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join("; ")) : 'No exact variant recorded for this fallback record') + '</p>' +
       (groupSize > 1 ? '<p class="research-group-note">' + groupSize + ' matching catalogue entries grouped. Specifications below belong to the displayed record.</p>' : '') +
       (specs ? '<ul class="mobile-research-model-specs">' + specs + '</ul>' : '<p>Technical specifications are pending verification.</p>') + documentedContext(card, lastSearchQuery) + independentTestContext(card) +
@@ -1164,14 +1179,32 @@
 
   function renderNewNoteworthy() {
     if (!researchNewSection || !researchNewGrid) return;
-    var now = Date.now();
+    // No arbitrary launch-date or OFFICIAL_VERIFIED gate: a manufacturer-
+    // linked RESEARCH_ONLY model should be visible with accurate disclosure.
     var recent = inventoryCards.filter(function (card) {
-      var date = card.india_launch_date || card.launch_date_india || card.launch_date;
-      var time = Date.parse(String(date || ""));
-      return card.status === "OFFICIAL_VERIFIED" && Number.isFinite(time) && now - time >= 0 && now - time <= 365 * 24 * 60 * 60 * 1000 && (card.source_urls || []).length;
-    }).sort(function (a, b) { return Date.parse(b.india_launch_date || b.launch_date_india || b.launch_date) - Date.parse(a.india_launch_date || a.launch_date_india || a.launch_date); }).slice(0, 6);
+      return card.market_intake === true && (card.source_urls || []).length > 0;
+    }).sort(function (a, b) {
+      return Number(Boolean(b.recent_source_intake)) - Number(Boolean(a.recent_source_intake)) ||
+        String(b.research_checked_at || "").localeCompare(String(a.research_checked_at || "")) ||
+        String(a.model_key).localeCompare(String(b.model_key));
+    });
     researchNewSection.hidden = recent.length === 0;
-    researchNewGrid.innerHTML = recent.map(function (card) { return renderResearchResultCard(card, inventoryRowsForCard(card)); }).join("");
+    var counter = document.getElementById("mobileResearchNewCount");
+    if (counter) counter.textContent = recent.length + " additional India research models, separate from the original 232";
+    if (!recent.length) {
+      researchNewGrid.innerHTML = "";
+      return;
+    }
+    var first = recent.slice(0, 6).map(function (card) {
+      return renderResearchResultCard(card, inventoryRowsForCard(card));
+    }).join("");
+    var rest = recent.slice(6).map(function (card) {
+      return renderResearchResultCard(card, inventoryRowsForCard(card));
+    }).join("");
+    researchNewGrid.innerHTML = first + (rest ?
+      '<details class="recent-mobile-more"><summary>Show all ' + recent.length +
+      ' newly added phones (' + (recent.length - 6) + ' more)</summary>' +
+      '<div class="mobile-research-results">' + rest + '</div></details>' : '');
   }
 
   fetch("/data/mobile_research_preview.json", { credentials: "omit" })

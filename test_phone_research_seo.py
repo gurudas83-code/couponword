@@ -193,10 +193,11 @@ class ResearchSeoTests(unittest.TestCase):
         self.assertEqual(actual_under25, expected_under25)
         self.assertEqual(
             len([url for url in self.sitemap if url.startswith(SITE + HUB)]),
-            len(self.selected) + 3 + len(expected_under25),
+            len(self.selected) + 4 + len(expected_under25),  # new India manufacturer-source hub
         )
         self.assertFalse(any(url.startswith(market) and url != market for url in self.sitemap))
         self.assertIn(SITE + "/phones/india-sales-coverage-2026/", self.sitemap)
+        self.assertIn(SITE + "/phones/new-india-mobiles/", self.sitemap)
         self.assertFalse(any(url.startswith(SITE + "/phones/india-sales-coverage-2026/") and url != SITE + "/phones/india-sales-coverage-2026/" for url in self.sitemap))
 
     def test_outdated_thin_mobile_page_consolidates_into_real_guide(self):
@@ -210,7 +211,7 @@ class ResearchSeoTests(unittest.TestCase):
     def test_no_unreviewed_records_silently_get_seo_pages(self):
         allowed = {slug_for(card) for card in self.selected}
         produced = {p.name for p in (PUBLIC / "phones").iterdir() if p.is_dir()}
-        self.assertEqual(produced, allowed | {"india-market-demand-q3-2026", "india-sales-coverage-2026", "under-25000"})
+        self.assertEqual(produced, allowed | {"india-market-demand-q3-2026", "india-sales-coverage-2026", "new-india-mobiles", "under-25000"})
         for page in (PUBLIC / "phones" / "india-market-demand-q3-2026").glob("*/index.html"):
             self.assertIn('name="robots" content="noindex,follow"', page.read_text(encoding="utf-8"))
         self.assertFalse((PUBLIC / "phones" / "apple-iphone-11" / "index.html").exists())
