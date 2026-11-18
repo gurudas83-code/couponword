@@ -1,0 +1,8 @@
+{
+  "approved_on": "2026-11-18",
+  "purpose": "One-time read-only identity research for the 8 missing India sales/shipments phones",
+  "provider": "existing QuickCommerce Flipkart adapter",
+  "max_billable_requests": 2,
+  "no_schedule": true,
+  "no_public_price_or_photo_publication": true
+}
