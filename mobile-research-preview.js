@@ -607,13 +607,16 @@
 
   function findResearchMatches(query, ignoreBudgetForUnpricedResearch) {
     var c = researchConstraints(query), text = c.text;
+    // Remember the original budget intent before temporarily relaxing ONLY
+    // its price-reference constraint for the second evidence lane.
+    var priceUnknownBudgetResearch = ignoreBudgetForUnpricedResearch === true && c.budget != null;
     if (ignoreBudgetForUnpricedResearch === true) { c.budget = null; c.lower = null; }
     var excluded = excludedBrand(text), featureKeys = researchFeatureKeys(text);
     var stop = /^(best|good|phone|phones|mobile|mobiles|smartphone|smartphones|under|below|within|price|in|the|and|with|ram|storage|camera|battery|gaming|game|student|study|college|school|software|support|display|screen|build|reliability|durability|android|update|updates|ko|ke|ka|ki|bina|chhodkar|chhod|mujhe|mujhko|chahiye|batao|dikhao|achha|acha|accha|wala|wali|mein|me|se|kam|tak|rs|inr|rupees|minimum|least|at|above|over|more|than|का|की|के|में|मुझे|चाहिए|बताओ|दिखाओ|अच्छा|अच्छे|वाला|वाले|फोन|मोबाइल|कैमरा|बैटरी|गेमिंग|स्टूडेंट|पढ़ाई|डिस्प्ले|छोड़कर|छोड़|हटाकर|बिना|exclude|excluding|without|except|no)$/;
     var tokens = text.split(" ").filter(function (token) { return token && !stop.test(token) && token !== excluded; });
     var aliases = { "सैमसंग": "samsung", "आईफोन": "iphone", "रेडमी": "redmi", "पोको": "poco", "वनप्लस": "oneplus" };
     tokens = tokens.map(function (token) { return aliases[token] || token; });
-    if (!tokens.length && !featureKeys.length && !excluded && c.budget == null && c.ram == null && c.storage == null && !c.need5g) return [];
+    if (!tokens.length && !featureKeys.length && !excluded && c.budget == null && c.ram == null && c.storage == null && !c.need5g && !priceUnknownBudgetResearch) return [];
     // Natural-language instruction words are not product model tokens.
     // Keep model suffixes (Pro/Plus/Max), RAM, storage and hard gates intact.
     var queryNoise = new Set([
@@ -972,9 +975,7 @@
     }).slice(0, 4);
     var html = '<section class="research-budget-tier research-budget-unpriced" aria-label="Related phones with unverified price">' +
       '<h3>Additional relevant phones · price not verified (' + leads.length + ')</h3>' +
-      '<p>These phones match your other documented conditions, but we cannot confirm that their exact RAM/storage variant is within ₹' +
-      Number(c.budget).toLocaleString("en-IN") +
-      '. They may be over budget. They are not ranked, in-stock or purchasable recommendations.</p>';
+      '<p>These phones match your other documented conditions, but we cannot confirm that their exact RAM/storage variant falls within your selected budget. They may cost more. They are not ranked, in-stock or purchasable recommendations.</p>';
     if (!leads.length) {
       html += '<p>No additional manufacturer/source-linked research matched all the other requested conditions.</p>';
     } else {
