@@ -29,7 +29,15 @@
       "photo_reuse": {
         "status": "REUSE_GRANT_NOT_FOUND",
         "review_source": "https://karbonnr-bel.com/"
-      }
+      },
+      "reviewed_on": "2026-11-18",
+      "reviewed_specs": {
+        "battery_capacity_description": "7,000 mAh battery",
+        "charging_description": "18 W charging",
+        "rear_camera_system": "50 MP main camera"
+      },
+      "api_probe_eligible": false,
+      "api_probe_note": "Not included in the existing one-time 19-identity API authorization; current exact-SKU price remains unavailable."
     },
     {
       "name": "Karbonn Rebel Pro",
@@ -43,7 +51,15 @@
       "photo_reuse": {
         "status": "REUSE_GRANT_NOT_FOUND",
         "review_source": "https://karbonnr-bel.com/"
-      }
+      },
+      "reviewed_on": "2026-11-18",
+      "reviewed_specs": {
+        "battery_capacity_description": "6,000 mAh battery",
+        "charging_description": "20 W charging",
+        "display_refresh_description": "120 Hz display"
+      },
+      "api_probe_eligible": false,
+      "api_probe_note": "Not included in the existing one-time 19-identity API authorization; current exact-SKU price remains unavailable."
     },
     {
       "name": "OPPO Find X10",
