@@ -403,6 +403,9 @@ def build(output: Path) -> Path:
     # never mutate the frozen 232-model catalogue or quality ranking.
     from python.india_missing_eight_pages import publish_eight
     publish_eight(output)
+    # Source-only additions: public research search, never commercial catalogue.
+    from python.india_recent_eight_import import publish_recent
+    publish_recent(output)
     _render_verified_homepage_counts(output)
     _render_recent_phone_sources(output)
 
