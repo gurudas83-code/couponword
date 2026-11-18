@@ -73,6 +73,12 @@ class TechnicalNichePublicationTests(unittest.TestCase):
         ids = {int(product["id"]) for product in selected}
         public_json = json.loads((public / "coupons.json").read_text(encoding="utf-8"))
         self.assertEqual({int(row["id"]) for row in public_json}, ids)
+        # The Pages builder adds python/ to sys.path before importing its
+        # legacy renderer. Reproduce that same import setup in artifact QA.
+        import sys
+        python_directory = str(ROOT / "python")
+        if python_directory not in sys.path:
+            sys.path.insert(0, python_directory)
         from python.build_product_pages import page_dir
         expected_slugs = {page_dir(row).name for row in selected}
         actual_slugs = {path.parent.name for path in (public / "products").glob("*/index.html")}
