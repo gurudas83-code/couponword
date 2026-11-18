@@ -64,6 +64,24 @@ def run(root: Path):
                         "() => window.CouponWorldMobileResearch.search('phone under 30000').length > 0",
                         timeout=20000,
                     )
+                    # Original 232-card registry remains distinct from eight
+                    # manufacturer-sourced sales-report additions.
+                    page.wait_for_function(
+                        "() => window.CouponWorldMobileResearch.search('OPPO A6x 5G').some("
+                        "item => item.card.model_key === 'oppo|a6x 5g' && item.card.market_intake === true)",
+                        timeout=20000,
+                    )
+                    a6 = page.locator("#mobileResearchResults [data-mobile-model-card='oppo|a6x 5g']")
+                    assert a6.count() == 1, width
+                    assert "India sales-report research addition" in a6.inner_text(), width
+                    assert "Search Amazon" in a6.inner_text(), width
+                    assert "Search Flipkart" in a6.inner_text(), width
+                    assert "Search Croma" in a6.inner_text(), width
+                    assert page.evaluate(
+                        "() => window.CouponWorldMobileResearch.search('Samsung Galaxy A07 5G').some("
+                        "item => item.card.model_key === 'samsung|galaxy a07 5g' && item.card.market_intake === true)"
+                    ), width
+                    page.evaluate("window.CouponWorldMobileResearch.search('phone under 30000')")
                     assert page.locator("#mobileResearchResults [data-mobile-model-card]").count() > 0, width
                     assert page.locator("#mobileResearchResults").is_visible(), width
                     research_text = page.locator("#mobileResearchResults").text_content() or ""
