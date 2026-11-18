@@ -76,3 +76,14 @@ body.category-research{margin:0;background:#f6f8f6;color:#172b29;font:16px/1.65 
 .cw-tv-visual-link:focus-visible { outline:3px solid #b76b20; outline-offset:4px; }
 .cw-tv-visual-link:hover .cw-tv-visual { box-shadow:0 5px 20px #213d5a20; }
 .cw-retailer-prices:target, #cw-retailer-detail:target { outline:3px solid #6cae8c; outline-offset:5px; }
+
+
+/* Responsive original smartphone research art on new model hubs and details. */
+.cr-card,.cr-detail{min-width:0;overflow-wrap:anywhere}
+.cr-card img[src^="/assets/new-mobile-art/"],.cr-detail img[src^="/assets/new-mobile-art/"]{
+ display:block;width:100%;max-width:540px;height:auto;aspect-ratio:540/430;
+ object-fit:contain;border-radius:13px;margin:0 auto;
+}
+.cr-card > a:has(>img[src^="/assets/new-mobile-art/"]){display:block;min-width:0;max-width:100%}
+.cr-card > a:has(>img[src^="/assets/new-mobile-art/"]):focus-visible{outline:3px solid #16745b;outline-offset:3px}
+.cr-card h2,.cr-detail h1{overflow-wrap:anywhere}
