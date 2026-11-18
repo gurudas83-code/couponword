@@ -347,9 +347,14 @@
         if (!response.ok) throw new Error("market intake unavailable");
         return response.json();
       }).catch(function () { return null; });
-    Promise.all([coreFetch, marketFetch])
+    var recentFetch = fetch("/data/india_recent_eight_research.json?v=20261118b", { credentials: "same-origin" })
+      .then(function (response) {
+        if (!response.ok) throw new Error("recent phone research unavailable");
+        return response.json();
+      }).catch(function () { return null; });
+    Promise.all([coreFetch, marketFetch, recentFetch])
       .then(function (results) {
-        var payload = results[0], intake = results[1];
+        var payload = results[0], intake = results[1], recent = results[2];
         inventoryLoadFailed = false;
         inventoryRows = Array.isArray(payload.records) ? payload.records : [];
         inventoryByKey = new Map(inventoryRows.map(function (row) { return [row.record_key, row]; }));
@@ -370,6 +375,32 @@
             intake.records.forEach(function (row) { inventoryByKey.set(row.record_key, row); inventoryRows.push(row); });
             inventoryCards = inventoryCards.concat(intake.model_cards);
             marketIntakeCount = intake.model_cards.length;
+          }
+        }
+        // Strictly separate manufacturer-source discovery from canonical phones
+        // and exact retail SKUs. Ignore incomplete or conflicting data entirely.
+        if (recent && recent.mode === "EIGHT_RECENT_MANUFACTURER_SOURCE_MODELS_RESEARCH_ONLY" &&
+            recent.core_model_count_unchanged === 232 &&
+            Array.isArray(recent.model_cards) && recent.model_cards.length === 8 &&
+            Array.isArray(recent.records) && recent.records.length === 8) {
+          var identifiers = new Set(inventoryCards.map(function (card) { return card.model_key; }));
+          var recordIds = new Set(inventoryRows.map(function (row) { return row.record_key; }));
+          var safeRecent = recent.model_cards.every(function (card) {
+            return card.market_intake === true && card.status === "RESEARCH_ONLY" &&
+              card.image_status === "PLACEHOLDER" && !card.photo &&
+              !identifiers.has(card.model_key) &&
+              Array.isArray(card.discovery_record_keys) && card.discovery_record_keys.length === 1 &&
+              Array.isArray(card.verified_retailer_links) && !card.verified_retailer_links.length &&
+              Array.isArray(card.frozen_variant_ids) && !card.frozen_variant_ids.length &&
+              card.specifications && Object.keys(card.specifications).length === 0;
+          }) && recent.records.every(function (row) {
+            return row.status === "RESEARCH_ONLY" && !recordIds.has(row.record_key);
+          }) && new Set(recent.model_cards.map(function (card) { return card.model_key; })).size === 8 &&
+              new Set(recent.records.map(function (row) { return row.record_key; })).size === 8;
+          if (safeRecent) {
+            recent.records.forEach(function (row) { inventoryByKey.set(row.record_key, row); inventoryRows.push(row); });
+            inventoryCards = inventoryCards.concat(recent.model_cards);
+            marketIntakeCount += recent.model_cards.length;
           }
         }
         refreshInventoryControls();
