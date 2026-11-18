@@ -1,4 +1,4 @@
-"""Regression checks for eleven new India manufacturer-linked research models."""
+"""Regression checks for thirteen new India manufacturer-linked research models."""
 import json
 import tempfile
 import unittest
@@ -12,14 +12,14 @@ class RecentIndiaPhonesTests(unittest.TestCase):
         payload = build_recent()
         self.assertEqual(payload["mode"], MODE)
         self.assertEqual(payload["core_model_count_unchanged"], 232)
-        self.assertEqual(len(payload["model_cards"]), 11)
-        self.assertEqual(len(payload["records"]), 11)
+        self.assertEqual(len(payload["model_cards"]), 13)
+        self.assertEqual(len(payload["records"]), 13)
         self.assertEqual({c["brand"] + " " + c["model"] for c in payload["model_cards"]},
-                         {"motorola signature 27", "oppo find x10", "oppo find x10 pro max",
+                         {"motorola signature 27", "karbonn rebel", "karbonn rebel pro", "oppo find x10", "oppo find x10 pro max",
                           "oppo f35 5g", "oppo f35 pro 5g", "vivo v80",
                           "vivo x fold6", "vivo s2 fe", "samsung galaxy f70 5g",
                           "redmi redmi 17c 5g", "realme p4s lite"})
-        self.assertEqual(len(APPROVED), 11)
+        self.assertEqual(len(APPROVED), 13)
         for card in payload["model_cards"]:
             self.assertEqual(card["status"], "RESEARCH_ONLY")
             self.assertEqual(set(card["specifications"]), set(card["available_specification_fields"]))
