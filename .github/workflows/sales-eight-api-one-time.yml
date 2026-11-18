@@ -29,10 +29,10 @@ jobs:
         run: |
           python -m unittest -q test_india_missing_eight_release
           python -c 'from scripts.sales_eight_api_probe import approved_targets; assert len(approved_targets()) == 8'
-      - name: One read-only private API batch, two requests maximum
+      - name: One read-only private API follow-up of six remaining models
         env:
           QUICKCOMMERCE_API_KEY: ${{ secrets.QUICKCOMMERCE_API_KEY }}
-        run: python scripts/sales_eight_api_probe.py --max-calls 2
+        run: python scripts/sales_eight_api_probe.py --max-calls 6 --start-index 2
       - name: Retain only non-public research evidence for review
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
