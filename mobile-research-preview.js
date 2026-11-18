@@ -36,6 +36,7 @@
   var inventoryByKey = new Map();
   var verifiedById = new Map();
   var inventoryCards = [];
+  var marketIntakeCount = 0;
   var inventoryLoadFailed = false;
   var inventorySourceCounts = {};
   var verifiedRows = [];
@@ -290,11 +291,14 @@
       '<div class="mobile-research-inventory-body">' +
       '<div class="mobile-research-card-top"><span class="research-status inventory-status-' + escapeHtml(statusLabel.toLowerCase()) + '">' + escapeHtml(statusLabel) + '</span></div>' +
       researchPhoneImage(card) + '<h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch +
+      (card.market_intake ? '<p class="mobile-research-gate"><strong>New India market research intake:</strong> manufacturer facts only, not a certified exact SKU or a live offer. ' + link(card.market_report_url, "Market report") + '</p>' : '') +
       '<p class="mobile-research-variant">' + escapeHtml(counts || "Model research reference") + '</p>' +
       '<ul class="mobile-research-variant-list">' + (variantItems || "<li>Variant details are not specified in the source universe.</li>") + '</ul>' +
       '<p class="mobile-research-inventory-fields"><strong>Verified fields:</strong> ' + escapeHtml(fields) + '</p>' +
       '<details class="mobile-research-model-details"><summary>View specifications / details</summary>' + details + '</details>' +
-      '<p class="mobile-research-inventory-reason">Model card groups source-backed discovery records and frozen exact variants. It does not certify availability or purchase eligibility.</p>' +
+      '<p class="mobile-research-inventory-reason">' + (card.market_intake ?
+       'New India market research intake, separate from the 232 original catalogue cards. Exact retailer identity, prices, stock and image rights are unverified.' :
+       'Model card groups source-backed discovery records and frozen exact variants. It does not certify availability or purchase eligibility.') + '</p>' +
       '<div class="mobile-research-sources">' + sources + '</div>' + retailerResearchLinks(card) +
       '<p class="mobile-research-gate">Research only · no price · no stock · no purchase action</p>' +
       '</div></article>';
@@ -307,7 +311,7 @@
     var isUnfiltered = !(inventoryQuery && inventoryQuery.value) && !(inventoryBrand && inventoryBrand.value) && !(inventoryRam && inventoryRam.value) && !(inventoryStorage && inventoryStorage.value) && !(inventoryStatus && inventoryStatus.value);
     if (inventoryCount) {
       inventoryCount.textContent = isUnfiltered && inventorySourceCounts.visible_model_cards ?
-        inventorySourceCounts.visible_model_cards + " catalogue entries · " + (inventorySourceCounts.deduplicated_discovery_records || inventoryRows.length) + " research records · " + (inventorySourceCounts.frozen_verified_variants || verifiedRows.length) + " frozen exact variants" :
+        inventorySourceCounts.visible_model_cards + " original catalogue models" + (marketIntakeCount ? " + " + marketIntakeCount + " new market research models" : "") + " · " + (inventorySourceCounts.deduplicated_discovery_records || inventoryRows.length) + " original research records · " + (inventorySourceCounts.frozen_verified_variants || verifiedRows.length) + " frozen exact variants" :
         filtered.length + " catalogue entries · " + matchingVariants + " matching research/frozen variants";
     }
     var visible = inventoryExpanded ? filtered : filtered.slice(0, INVENTORY_PAGE_SIZE);
@@ -331,17 +335,43 @@
     if (!inventoryGrid) return;
     // Version the generated data URL so a reviewed catalogue refresh cannot
     // be hidden by a stale GitHub Pages/browser cache.
-    fetch("/data/mobile_research_catalogue.json?v=licensed-photos-20261117", { credentials: "same-origin" })
+    // Import only the eight source-reviewed missing market identities.
+    // They remain separate from the original 232-card registry, ratings and offers.
+    var coreFetch = fetch("/data/mobile_research_catalogue.json?v=licensed-photos-20261117", { credentials: "same-origin" })
       .then(function (response) {
         if (!response.ok) throw new Error("research catalogue unavailable");
         return response.json();
-      })
-      .then(function (payload) {
+      });
+    var marketFetch = fetch("/data/india_sales_eight_research.json?v=20261118", { credentials: "same-origin" })
+      .then(function (response) {
+        if (!response.ok) throw new Error("market intake unavailable");
+        return response.json();
+      }).catch(function () { return null; });
+    Promise.all([coreFetch, marketFetch])
+      .then(function (results) {
+        var payload = results[0], intake = results[1];
         inventoryLoadFailed = false;
         inventoryRows = Array.isArray(payload.records) ? payload.records : [];
         inventoryByKey = new Map(inventoryRows.map(function (row) { return [row.record_key, row]; }));
         inventoryCards = Array.isArray(payload.model_cards) ? payload.model_cards : [];
         inventorySourceCounts = payload.source_counts || {};
+        marketIntakeCount = 0;
+        if (intake && intake.mode === "EIGHT_SOURCE_REVIEWED_MARKET_ADDITIONS_NO_LIVE_OFFERS" &&
+            intake.core_model_count_unchanged === 232 &&
+            Array.isArray(intake.model_cards) && intake.model_cards.length === 8 &&
+            Array.isArray(intake.records) && intake.records.length === 8) {
+          var known = new Set(inventoryCards.map(function (card) { return card.model_key; }));
+          var imported = intake.model_cards.every(function (card) {
+            return card.market_intake === true && card.status === "RESEARCH_ONLY" &&
+              card.image_status === "PLACEHOLDER" && !card.photo && !known.has(card.model_key) &&
+              Array.isArray(card.verified_retailer_links) && !card.verified_retailer_links.length;
+          });
+          if (imported) {
+            intake.records.forEach(function (row) { inventoryByKey.set(row.record_key, row); inventoryRows.push(row); });
+            inventoryCards = inventoryCards.concat(intake.model_cards);
+            marketIntakeCount = intake.model_cards.length;
+          }
+        }
         refreshInventoryControls();
         restoreShortlist();
         renderNewNoteworthy();
@@ -752,7 +782,9 @@
     var launch = card.india_launch_date ? '<p class="mobile-research-launch">India launch: ' + escapeHtml(card.india_launch_date) + '</p>' : '';
     return '<article class="mobile-research-inventory-card mobile-research-result-card" data-mobile-model-card="' + escapeHtml(card.model_key) + '"><div class="mobile-research-inventory-body">' +
       '<div class="mobile-research-card-top"><span class="research-status">' + escapeHtml(status) + '</span><span class="research-status">Research only</span></div>' +
-      researchPhoneImage(card) + '<h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch + '<p class="mobile-research-variant">' + (variants.length ? 'Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join("; ")) : 'No exact variant recorded for this fallback record') + '</p>' +
+      researchPhoneImage(card) + '<h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch +
+      (card.market_intake ? '<p class="mobile-research-gate">India sales-report research addition · no verified current stock, price or exact retailer configuration.</p>' : '') +
+      '<p class="mobile-research-variant">' + (variants.length ? 'Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join("; ")) : 'No exact variant recorded for this fallback record') + '</p>' +
       (groupSize > 1 ? '<p class="research-group-note">' + groupSize + ' matching catalogue entries grouped. Specifications below belong to the displayed record.</p>' : '') +
       (specs ? '<ul class="mobile-research-model-specs">' + specs + '</ul>' : '<p>Technical specifications are pending verification.</p>') + documentedContext(card, lastSearchQuery) + independentTestContext(card) +
       '<p class="research-source-note">' + (sourceItem ? link(sourceItem.source_url, "Specification source") : 'Specification source pending') + ' · Specification research snapshot: ' + escapeHtml(card.research_checked_at || sourceItem && (sourceItem.checked_at || sourceItem.checked_date) || 'date unavailable') + ' (not a live check)</p>' + (card.research_budget_reference ? '<p class="research-source-note">Budget filter uses a dated retailer observation: ' + escapeHtml(String(card.research_budget_reference.checked_at || 'date unavailable').match(/\d{4}-\d{2}-\d{2}/)?.[0] || String(card.research_budget_reference.checked_at || 'date unavailable')) + '. Current price and stock not verified.</p>' : '') +
