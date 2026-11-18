@@ -82,16 +82,16 @@ def run(root: Path):
                         "() => window.CouponWorldMobileResearch.search('Samsung Galaxy A07 5G').some("
                         "item => item.card.model_key === 'samsung|galaxy a07 5g' && item.card.market_intake === true)"
                     ), width
-                    # Verify all 19 research additions actually appear after fetch.
+                    # Verify all 21 research additions actually appear after fetch.
                     page.wait_for_function(
                         "() => !!document.querySelector('#mobileResearchNew') && "
                         "!document.querySelector('#mobileResearchNew').hidden && "
-                        "document.querySelector('#mobileResearchNewCount').textContent.includes('19 additional')",
+                        "document.querySelector('#mobileResearchNewCount').textContent.includes('21 additional')",
                         timeout=20000,
                     )
-                    assert page.locator("#mobileResearchNewGrid [data-mobile-model-card]").count() == 19, width
-                    assert page.locator("#mobileResearchNewGrid a.research-model-name-link").count() == 19, width
-                    assert page.locator("#mobileResearchNewGrid img[src*='/assets/new-mobile-art/']").count() == 19, width
+                    assert page.locator("#mobileResearchNewGrid [data-mobile-model-card]").count() == 21, width
+                    assert page.locator("#mobileResearchNewGrid a.research-model-name-link").count() == 21, width
+                    assert page.locator("#mobileResearchNewGrid img[src*='/assets/new-mobile-art/']").count() == 21, width
                     assert "Price unavailable" in page.locator("#mobileResearchNewGrid").text_content(), width
                     assert page.evaluate(
                         "() => window.CouponWorldMobileResearch.search('Samsung Galaxy F70 5G').some("
