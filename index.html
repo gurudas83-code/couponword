@@ -29,10 +29,10 @@
   <meta name="twitter:description" content="Source-backed smartphone research and comparison in India." />
   <link rel="icon" href="/assets/coupon-world-og.svg?v=1" type="image/svg+xml" />
 
-  <link rel="stylesheet" href="/style.css?v=shopping-journey-20261118">
+  <link rel="stylesheet" href="/style.css?v=saved-shortlist-20261118">
   <link rel="preload" href="/data/mobile_research_catalogue.json?v=licensed-photos-20261117" as="fetch" crossorigin="anonymous">
   <script defer src="/app.js?v=first-load-20261107"></script>
-  <script defer src="/mobile-research-preview.js?v=shopping-journey-20261118"></script>
+  <script defer src="/mobile-research-preview.js?v=saved-shortlist-20261118"></script>
   <link rel="stylesheet" href="/assets/retailer-observations.css?v=shopper-ux-20261118">
   <script defer src="/assets/retailer-observations.js?v=shopper-ux-20261118"></script>
 
@@ -142,6 +142,7 @@
             <a class="btn btn-primary" data-analytics-intent="budget_25000" href="/phones/under-25000/">Phones under ₹25k</a>
             <a class="btn btn-ghost" href="#mobileResearchCatalogue">Browse all 232 phones</a>
             <a class="btn btn-ghost" data-analytics-intent="compare" href="/compare/">Compare phones</a>
+            <button id="researchSavedShortlist" type="button" class="btn btn-ghost" hidden>View saved shortlist</button>
             <a class="btn btn-ghost" href="/seo/top-30-phone-research-india.html">30 phones to research</a>
           </div>
           <details class="cw-extra-guides">
@@ -251,7 +252,7 @@
           <button type="button" data-mobile-research-query="software support phone">Software support</button>
         </div>
         <p class="research-help">Try a model and exact memory variant, or “5000mah battery phone under 30000”. “Under” includes all documented phones below your cap. Add “nearby band” to narrow the range. Compare up to 3 documented models; ordering reflects evidence coverage, not a tested performance winner.</p>
-        <div id="mobileResearchCompare" hidden aria-live="polite"></div>
+        <div id="mobileResearchCompare" hidden aria-live="polite" tabindex="-1"></div>
         <p id="mobileResearchSearchStatus" class="mobile-research-search-status" aria-live="polite"></p>
         <div id="mobileResearchResults" class="mobile-research-results" aria-live="polite" hidden></div>
         <button id="mobileResearchResultsMore" class="btn btn-ghost" type="button" hidden>Load more research results</button>

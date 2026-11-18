@@ -54,6 +54,32 @@
   var guidedStatus = document.getElementById("researchGuidedStatus");
   var comparisonSelection = [];
   var comparePanel = document.getElementById("mobileResearchCompare");
+  var savedShortlistButton = document.getElementById("researchSavedShortlist");
+  var SAVED_SHORTLIST_KEY = "cw-saved-phone-shortlist-v1";
+  // Only model identifiers are saved on-device; no queries, prices or API observations.
+  function persistShortlist() {
+    try {
+      var keys = comparisonSelection.map(function (item) { return item.card.model_key; });
+      if (keys.length) window.localStorage.setItem(SAVED_SHORTLIST_KEY, JSON.stringify(keys));
+      else window.localStorage.removeItem(SAVED_SHORTLIST_KEY);
+    } catch (_) { /* Storage may be disabled; comparing still works. */ }
+  }
+  function restoreShortlist() {
+    var stored;
+    try { stored = JSON.parse(window.localStorage.getItem(SAVED_SHORTLIST_KEY) || "[]"); }
+    catch (_) { stored = []; }
+    if (!Array.isArray(stored)) stored = [];
+    var seen = new Set();
+    comparisonSelection = stored.slice(0, 3).map(function (key) {
+      if (typeof key !== "string" || seen.has(key)) return null;
+      var card = inventoryCards.find(function (item) { return item.model_key === key; });
+      if (!card) return null;
+      seen.add(key);
+      return {card: card, rows: inventoryRowsForCard(card)};
+    }).filter(Boolean);
+    renderSelectedComparison();
+    if (stored.length && comparisonSelection.length !== stored.length) persistShortlist();
+  }
   function researchIntent(query) {
     var value = String(query || "").toLowerCase();
     if (/under\s*\d|₹|budget|price|कीमत/.test(value)) return "budget";
@@ -317,6 +343,7 @@
         inventoryCards = Array.isArray(payload.model_cards) ? payload.model_cards : [];
         inventorySourceCounts = payload.source_counts || {};
         refreshInventoryControls();
+        restoreShortlist();
         renderNewNoteworthy();
         handleResearchHash();
         var initialQuery = lastSearchQuery || new URLSearchParams(window.location.search || "").get("q");
@@ -735,6 +762,10 @@
   }
 
   function renderSelectedComparison() {
+    if (savedShortlistButton) {
+      savedShortlistButton.hidden = comparisonSelection.length === 0;
+      savedShortlistButton.textContent = "View saved shortlist (" + comparisonSelection.length + "/3)";
+    }
     if (!comparePanel) return;
     comparePanel.hidden = comparisonSelection.length === 0;
     if (!comparisonSelection.length) { comparePanel.innerHTML = ""; return; }
@@ -783,6 +814,7 @@
     }).join('');
     comparePanel.innerHTML = '<div class="research-comparison-heading"><h3>Compare your shortlist (' +
       comparisonSelection.length + '/3)</h3><button type="button" class="btn btn-ghost" data-research-compare-clear>Clear comparison</button></div>' +
+      '<p>Saved on this device when browser storage is available. Remove phones or clear anytime; no login needed.</p>' +
       '<p>Side-by-side documented specifications with per-field evidence links. Missing data is not a disadvantage or a zero score. There is no performance winner asserted from specification differences alone.</p>' +
       '<div class="research-table-scroll" role="region" aria-label="Phone specification comparison" tabindex="0">' +
       '<table class="research-spec-table"><caption>Documented specifications and evidence for selected models</caption><thead><tr><th scope="col">Specification</th>' +
@@ -1001,7 +1033,11 @@
     var displayMatches = matches.length ? matches : fallback;
     lastSearchMatches = displayMatches;
     var visible = searchExpanded ? displayMatches : displayMatches.slice(0, MAX_SEARCH_RESULTS);
-    if (comparison && queryChanged) { comparisonSelection = matches.slice(0, 3); renderSelectedComparison(); }
+    if (comparison && queryChanged) {
+      comparisonSelection = matches.slice(0, 3);
+      persistShortlist();
+      renderSelectedComparison();
+    }
     if (researchResults) {
       researchResults.hidden = false;
       researchResults.innerHTML = verifiedRecommendationBridge(lastSearchQuery, comparison) + (comparison ? '<p class="mobile-research-gate">Specification comparison; no performance winner is asserted.' + (missingComparison ? ' At least one requested model or memory variant could not be matched.' : '') + '</p>' : '') + (matches.length ? visible.map(function (item) { return renderResearchResultCard(item.card, item.rows, item.group_size); }).join("") : emptyResearchResult(lastSearchQuery, visible));
@@ -1180,6 +1216,7 @@
         else if (comparisonSelection.length < 3) comparisonSelection.push(candidate);
         else { if (researchSearchStatus) researchSearchStatus.textContent = "Compare up to 3 phones. Remove one before adding another."; return; }
         trackResearchEvent("research_compare_toggle", { compare_action: existing >= 0 ? "remove" : "add", selection_count: comparisonSelection.length });
+        persistShortlist();
         renderSelectedComparison(); searchResearch(lastSearchQuery);
         if (comparisonSelection.length >= 2 && comparePanel) comparePanel.scrollIntoView({behavior: "smooth", block: "start"});
       }
@@ -1187,6 +1224,7 @@
     if (event.target.closest("[data-research-compare-clear]")) {
       comparisonSelection = [];
       trackResearchEvent("research_compare_clear", { selection_count: 0 });
+      persistShortlist();
       renderSelectedComparison(); searchResearch(lastSearchQuery);
     }
     // A photo tap reveals the retailer choices beside the selected photo.
@@ -1241,6 +1279,12 @@
     if (linkTarget) {
       if (linkTarget.getAttribute("href") === "#mobileResearchPreview") revealPreview();
       if (linkTarget.getAttribute("href") === "#mobileResearchCatalogue") revealCatalogue();
+    }
+  });
+  if (savedShortlistButton) savedShortlistButton.addEventListener("click", function () {
+    if (comparePanel && !comparePanel.hidden) {
+      comparePanel.scrollIntoView({behavior: "smooth", block: "start"});
+      comparePanel.focus({preventScroll: true});
     }
   });
   window.addEventListener("hashchange", handleResearchHash);

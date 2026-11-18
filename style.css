@@ -1324,3 +1324,11 @@ body.clean-ui .cw-extra-guides summary:focus-visible {
 @media (max-width:355px) {
   body.clean-ui .cw-primary-actions { grid-template-columns:1fr; }
 }
+
+/* Saved shortlist appears only after a visitor selects a phone. */
+body.clean-ui .cw-primary-actions #researchSavedShortlist[hidden] { display:none!important; }
+body.clean-ui .cw-primary-actions #researchSavedShortlist {
+  cursor:pointer;
+  background:#e7f3e9; border:1px solid #82ab8c; color:#22583a;
+}
+body.clean-ui #mobileResearchCompare:focus { outline:0; }

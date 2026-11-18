@@ -220,6 +220,18 @@ def run(root: Path):
                     page.evaluate("window.CouponWorldMobileResearch.search('Galaxy A36 vs Galaxy A56')")
                     assert page.locator("#mobileResearchCompare table").count() == 1, width
                     assert "no performance winner" in page.locator("#mobileResearchCompare").inner_text().lower(), width
+                    saved = page.evaluate("() => JSON.parse(localStorage.getItem('cw-saved-phone-shortlist-v1'))")
+                    assert len(saved) == 2, (width, saved)
+                    assert page.locator("#researchSavedShortlist").is_visible(), width
+                    # Reload the same origin to verify persistent selection
+                    # even when all document/JS state is reconstructed.
+                    page.reload(wait_until="domcontentloaded", timeout=30000)
+                    page.locator("#researchSavedShortlist").wait_for(state="visible", timeout=20000)
+                    assert page.locator("#mobileResearchCompare table").count() == 1, width
+                    assert "2/3" in page.locator("#researchSavedShortlist").inner_text(), width
+                    page.locator("[data-research-compare-clear]").click()
+                    assert page.evaluate("() => localStorage.getItem('cw-saved-phone-shortlist-v1')") is None, width
+                    assert page.locator("#researchSavedShortlist").is_hidden(), width
 
                     page.evaluate(
                         """() => {
