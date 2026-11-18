@@ -1,5 +1,7 @@
 """Exercise generated price UI, lazy loading and stale fallback in Chromium."""
 import argparse
+import copy
+from datetime import datetime, timezone
 import functools
 import http.server
 import json
@@ -16,6 +18,15 @@ def run(root):
     thread.start()
     url = f"http://127.0.0.1:{server.server_port}"
     payload = json.loads((root / "data/retailer_price_observations.json").read_text(encoding="utf-8"))
+    # The committed API snapshot is intentionally historical. Test the fresh-price
+    # UI branch using a browser-only synthetic timestamp, never retimestamp the
+    # published JSON or falsely claim a live API refresh.
+    fresh_fixture = copy.deepcopy(payload)
+    fresh_at = datetime.now(timezone.utc).isoformat()
+    for configurations in fresh_fixture["models"].values():
+        for configuration in configurations:
+            for offer in configuration["offers"]:
+                offer["observed_at"] = fresh_at
     try:
         with sync_playwright() as pw:
             browser = pw.chromium.launch(headless=True, args=["--no-sandbox"])
@@ -26,6 +37,7 @@ def run(root):
                     page.on("pageerror", lambda error: errors.append(str(error)))
                     page.on("request", lambda request: requests.append(request.url))
                     page.route("https://www.googletagmanager.com/**", lambda route: route.abort())
+                    page.route("**/data/retailer_price_observations.json*", lambda route: route.fulfill(json=fresh_fixture))
                     page.route("**/api/recommend?*", lambda route: route.fulfill(json={"recommendations": []}, headers={"Access-Control-Allow-Origin": "*"}))
                     page.goto(url, wait_until="domcontentloaded")
                     page.wait_for_function("() => !!window.CouponWorldMobileResearch")
