@@ -220,6 +220,21 @@ def run(root: Path):
                     page.evaluate("window.CouponWorldMobileResearch.search('Galaxy A36 vs Galaxy A56')")
                     assert page.locator("#mobileResearchCompare table").count() == 1, width
                     assert "no performance winner" in page.locator("#mobileResearchCompare").inner_text().lower(), width
+                    saved = page.evaluate("() => JSON.parse(localStorage.getItem('cw-saved-phone-shortlist-v1'))")
+                    assert len(saved) == 2, (width, saved)
+                    assert page.locator("#researchSavedShortlist").is_visible(), width
+                    # A fresh tab on the same origin recovers the comparison.
+                    new_tab = page.context.new_page()
+                    try:
+                        new_tab.goto(url, wait_until="domcontentloaded", timeout=30000)
+                        new_tab.locator("#researchSavedShortlist").wait_for(state="visible", timeout=20000)
+                        assert new_tab.locator("#mobileResearchCompare table").count() == 1, width
+                        assert "2/3" in new_tab.locator("#researchSavedShortlist").inner_text(), width
+                    finally:
+                        new_tab.close()
+                    page.locator("[data-research-compare-clear]").click()
+                    assert page.evaluate("() => localStorage.getItem('cw-saved-phone-shortlist-v1')") is None, width
+                    assert page.locator("#researchSavedShortlist").is_hidden(), width
 
                     page.evaluate(
                         """() => {
