@@ -5,12 +5,17 @@
     {
       "name": "Motorola Signature 27",
       "source": "https://www.motorola.in/smartphones-motorola-signature-27/p?skuId=780",
-      "evidence": "India product page found. Local sale and stock remain unconfirmed.",
+      "evidence": "India product page found. Local sale and stock remain unconfirmed. Technical specification fields individually reviewed against official India manufacturer page on 18 November 2026; retailer stock/price not verified.",
       "context": "https://www.motorola.com/in/blogs/press-news/motorola-signature-27",
       "photo_reuse": {
         "status": "WRITTEN_PERMISSION_REQUIRED",
         "review_source": "https://www.motorola.in/legal/terms-of-use"
-      }
+      },
+      "reviewed_specs": {
+        "chipset": "Snapdragon 8 Elite Extreme Gen 6",
+        "display_type_description": "Extreme AMOLED Duo display; specific India display characteristics should be checked against the official model SKU"
+      },
+      "reviewed_on": "2026-11-18"
     },
     {
       "name": "Karbonn Rebel",
@@ -42,23 +47,41 @@
     },
     {
       "name": "OPPO Find X10",
-      "source": "https://www.oppo.com/in/articles/find-x10-series/find-x10-details/",
+      "source": "https://www.oppo.com/in/smartphones/series-find-x/find-x10/specs/",
       "store": "https://www.oppo.com/in/product/find-x10.P.P1110185",
-      "evidence": "Exact model listed on OPPO India’s official store.",
+      "evidence": "Exact model listed on OPPO India’s official store. Technical specification fields individually reviewed against official India manufacturer page on 18 November 2026; retailer stock/price not verified.",
       "photo_reuse": {
         "status": "WRITTEN_PERMISSION_REQUIRED",
         "review_source": "https://www.oppo.com/in/store/contents/legal/terms-of-use/"
-      }
+      },
+      "reviewed_specs": {
+        "chipset": "MediaTek Dimensity 9600M",
+        "display_type_description": "16.74 cm flexible AMOLED; 2768 × 1272 FHD+",
+        "display_refresh_description": "1–120 Hz adaptive; up to 144 Hz in supported games",
+        "battery_capacity_description": "8000 mAh typical; supports 80 W SUPERVOOC wired and 50 W AIRVOOC wireless",
+        "rear_camera_system": "200 MP wide with OIS; 200 MP telephoto with OIS; 50 MP ultra-wide",
+        "india_variant_description": "CPH2911: 12 GB/256 GB or 12 GB/512 GB"
+      },
+      "reviewed_on": "2026-11-18"
     },
     {
       "name": "OPPO Find X10 Pro Max",
-      "source": "https://www.oppo.com/in/articles/find-x10-series/find-x10-pro-max-details/",
+      "source": "https://www.oppo.com/in/smartphones/series-find-x/find-x10-pro-max/specs/",
       "store": "https://www.oppo.com/in/product/find-x10-pro-max.P.P1110186",
-      "evidence": "Exact model listed on OPPO India’s official store.",
+      "evidence": "Exact model listed on OPPO India’s official store. Technical specification fields individually reviewed against official India manufacturer page on 18 November 2026; retailer stock/price not verified.",
       "photo_reuse": {
         "status": "WRITTEN_PERMISSION_REQUIRED",
         "review_source": "https://www.oppo.com/in/store/contents/legal/terms-of-use/"
-      }
+      },
+      "reviewed_specs": {
+        "chipset": "MediaTek Dimensity 9600 Pro",
+        "display_type_description": "17.23 cm flexible AMOLED; 2772 × 1272 FHD+",
+        "display_refresh_description": "1–120 Hz adaptive; up to 144 Hz in supported games",
+        "battery_capacity_description": "8000 mAh typical; supports 80 W SUPERVOOC wired and 50 W AIRVOOC wireless",
+        "rear_camera_system": "200 MP wide with OIS; 200 MP telephoto with OIS; 200 MP ultra-wide",
+        "india_variant_description": "CPH2913: 12 GB/512 GB"
+      },
+      "reviewed_on": "2026-11-18"
     },
     {
       "name": "OPPO F35 5G",
@@ -68,11 +91,20 @@
         "MediaTek Dimensity 6360 MAX",
         "8,000 mAh typical battery"
       ],
-      "evidence": "Exact model listed on OPPO India’s official store.",
+      "evidence": "Exact model listed on OPPO India’s official store. Technical specification fields individually reviewed against official India manufacturer page on 18 November 2026; retailer stock/price not verified.",
       "photo_reuse": {
         "status": "WRITTEN_PERMISSION_REQUIRED",
         "review_source": "https://www.oppo.com/in/store/contents/legal/terms-of-use/"
-      }
+      },
+      "reviewed_specs": {
+        "chipset": "MediaTek Dimensity 6360 MAX",
+        "display_type_description": "16.69 cm AMOLED; FHD+ 2372 × 1080",
+        "display_refresh_description": "60/90/120 Hz adaptive",
+        "battery_capacity_description": "8000 mAh typical; up to 80 W SUPERVOOC",
+        "rear_camera_system": "50 MP wide + 2 MP monochrome; 50 MP front",
+        "india_variant_description": "CPH2931: 6 GB/128 GB or 8 GB/128 GB"
+      },
+      "reviewed_on": "2026-11-18"
     },
     {
       "name": "OPPO F35 Pro 5G",
@@ -81,11 +113,20 @@
       "facts": [
         "8,000 mAh typical battery"
       ],
-      "evidence": "Exact Pro model listed on OPPO India’s official store.",
+      "evidence": "Exact Pro model listed on OPPO India’s official store. Technical specification fields individually reviewed against official India manufacturer page on 18 November 2026; retailer stock/price not verified.",
       "photo_reuse": {
         "status": "WRITTEN_PERMISSION_REQUIRED",
         "review_source": "https://www.oppo.com/in/store/contents/legal/terms-of-use/"
-      }
+      },
+      "reviewed_specs": {
+        "chipset": "MediaTek Dimensity 7360 MAX",
+        "display_type_description": "17.22 cm flexible AMOLED; FHD+ 2772 × 1272",
+        "display_refresh_description": "60/90/120 Hz adaptive; up to 144 Hz in supported modes",
+        "battery_capacity_description": "8000 mAh typical; up to 80 W SUPERVOOC",
+        "rear_camera_system": "50 MP wide with OIS + 8 MP ultra-wide; 50 MP front",
+        "india_variant_description": "CPH2829: 6 GB/128 GB, 8 GB/128 GB or 8 GB/256 GB"
+      },
+      "reviewed_on": "2026-11-18"
     },
     {
       "name": "vivo V80",
@@ -93,11 +134,18 @@
       "facts": [
         "7,200 mAh typical battery"
       ],
-      "evidence": "India specifications verified. The e-store page could not be opened for a fresh availability check.",
+      "evidence": "India specifications verified. The e-store page could not be opened for a fresh availability check. Technical specification fields individually reviewed against official India manufacturer page on 18 November 2026; retailer stock/price not verified.",
       "photo_reuse": {
         "status": "COMMERCIAL_PERMISSION_NOT_ESTABLISHED",
         "review_source": "https://vivonewsroom.in/press-release/vivo-next-2026-marks-a-new-chapter-in-vivos-premium-journey-with-v80-x-fold6-s2-fe-originos-7-and-vivo-vision-discovery-edition12-mixed-reality-mr-headset/"
-      }
+      },
+      "reviewed_specs": {
+        "chipset": "Snapdragon 7 Gen 4",
+        "display_type_description": "6.59-inch AMOLED; 2750 × 1260",
+        "display_refresh_description": "Up to 144 Hz",
+        "battery_capacity_description": "7200 mAh typical; supports 90 W FlashCharge"
+      },
+      "reviewed_on": "2026-11-18"
     },
     {
       "name": "vivo X Fold6",
@@ -106,11 +154,18 @@
       "facts": [
         "6,900 mAh typical battery"
       ],
-      "evidence": "vivo announced India sales on 13 October 2026. Current stock is unconfirmed.",
+      "evidence": "vivo announced India sales on 13 October 2026. Current stock is unconfirmed. Technical specification fields individually reviewed against official India manufacturer page on 18 November 2026; retailer stock/price not verified.",
       "photo_reuse": {
         "status": "COMMERCIAL_PERMISSION_NOT_ESTABLISHED",
         "review_source": "https://vivonewsroom.in/press-release/vivo-next-2026-marks-a-new-chapter-in-vivos-premium-journey-with-v80-x-fold6-s2-fe-originos-7-and-vivo-vision-discovery-edition12-mixed-reality-mr-headset/"
-      }
+      },
+      "reviewed_specs": {
+        "chipset": "Dimensity 9500 Super Edition",
+        "display_type_description": "Foldable inner display and cover display; see official India display table for panel details",
+        "battery_capacity_description": "6900 mAh typical; supports 80 W FlashCharge",
+        "india_variant_description": "12 GB RAM / 512 GB storage"
+      },
+      "reviewed_on": "2026-11-18"
     },
     {
       "name": "vivo S2 FE",
@@ -119,11 +174,19 @@
       "facts": [
         "10,000 mAh typical battery"
       ],
-      "evidence": "Exact model listed on vivo India’s official store.",
+      "evidence": "Exact model listed on vivo India’s official store. Technical specification fields individually reviewed against official India manufacturer page on 18 November 2026; retailer stock/price not verified.",
       "photo_reuse": {
         "status": "COMMERCIAL_PERMISSION_NOT_ESTABLISHED",
         "review_source": "https://vivonewsroom.in/press-release/vivo-next-2026-marks-a-new-chapter-in-vivos-premium-journey-with-v80-x-fold6-s2-fe-originos-7-and-vivo-vision-discovery-edition12-mixed-reality-mr-headset/"
-      }
+      },
+      "reviewed_specs": {
+        "chipset": "Dimensity 7300e",
+        "display_type_description": "6.83-inch AMOLED; 2800 × 1260",
+        "display_refresh_description": "Up to 120 Hz",
+        "battery_capacity_description": "10000 mAh typical; supports 44 W fast charging",
+        "india_variant_description": "6 GB/128 GB or 8 GB/128 GB"
+      },
+      "reviewed_on": "2026-11-18"
     },
     {
       "name": "Samsung Galaxy F70 5G",
