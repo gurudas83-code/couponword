@@ -47,17 +47,20 @@ def run(root: Path):
                     page.goto(url, wait_until="domcontentloaded", timeout=30000)
                     # New visitors have a clear way to browse, compare and reach retailers.
                     assert page.locator("#howToShop").is_visible(), width
-                    assert "Tap the phone photo" in page.locator("#howToShop").inner_text(), width
-                    assert page.locator(".cw-primary-actions a").count() == 5, width
-                    assert page.locator('.cw-primary-actions a[href="/phones/new-india-mobiles/"]').count() == 1, width
-                    assert page.locator('.cw-primary-actions a[href="/seo/top-30-phone-research-india.html"]').count() == 1, width
+                    assert "Check the price" in page.locator("#howToShop").inner_text(), width
+                    assert page.locator(".cw-primary-actions a").count() == 2, width
+                    assert page.locator('.cw-home-explore a[href="/phones/new-india-mobiles/"]').count() == 1, width
+                    assert page.locator('.cw-home-explore a[href="/seo/top-30-phone-research-india.html"]').count() == 1, width
+                    assert page.locator("#couponsAndOffers").is_visible(), width
+                    assert page.locator("#couponsAndOffers .cw-offers-grid article").count() == 3, width
+                    assert "Not verified yet" in page.locator("#couponsAndOffers").inner_text(), width
                     assert page.locator(".cw-budget-more").evaluate("(el) => !el.open"), width
                     page.locator(".cw-budget-more summary").click()
                     assert page.locator('[data-mobile-query="mobile under 50000"]').is_visible(), width
                     page.locator(".cw-budget-more summary").click()
                     assert page.locator(".cw-budget-more").evaluate("(el) => !el.open"), width
-                    assert page.locator("#researchCategories").evaluate(
-                        "(el) => !!(el.compareDocumentPosition(document.getElementById('mobileResearchSearch')) & Node.DOCUMENT_POSITION_FOLLOWING)"
+                    assert page.locator("#mobileResearchSearch").evaluate(
+                        "(el) => !!(el.compareDocumentPosition(document.getElementById('researchCategories')) & Node.DOCUMENT_POSITION_FOLLOWING)"
                     ), width
                     page.wait_for_function("() => !!window.CouponWorldMobileResearch", timeout=15000)
                     # Wait for the real fetch->catalogue->browser filtering chain.
