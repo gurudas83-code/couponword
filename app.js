@@ -50,10 +50,10 @@ if (mobileNavToggle && mobileNav) {
 
 // Keep empty commerce panels out of the research-first homepage.
 function setOfferSectionsVisible(visible) {
-  ["catalogueDiscovery", "hot-deals", "browse", "categories", "under-budget", "legacyCategories"].forEach(id => {
-    const section = document.getElementById(id);
-    if (section) section.hidden = !visible;
-  });
+  // Only reviewed technical retailer offers can expose a shopping panel.
+  // Legacy mixed-category promotional blocks are retired from the homepage.
+  const section = document.getElementById("browse");
+  if (section) section.hidden = !visible;
   const featured = document.getElementById("featuredDeal");
   if (featured && featured.closest("aside")) featured.closest("aside").hidden = !visible;
 }
