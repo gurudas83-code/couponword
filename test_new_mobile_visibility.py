@@ -20,11 +20,11 @@ class NewMobileVisibleTests(unittest.TestCase):
         market = import_eight()
         recent = build_recent()
         self.assertEqual((len(core["model_cards"]), len(market["model_cards"]),
-                          len(recent["model_cards"])), (232, 8, 11))
+                          len(recent["model_cards"])), (232, 8, 13))
         keys = [c["model_key"] for group in (core, market, recent) for c in group["model_cards"]]
         self.assertEqual(len(keys), len(set(keys)))
         self.assertEqual(len(keys), 251)
-        self.assertEqual(len(APPROVED), 11)
+        self.assertEqual(len(APPROVED), 13)
         self.assertTrue(THREE.issubset({c["model_key"] for c in recent["model_cards"]}))
         for card in recent["model_cards"]:
             self.assertTrue(card["recent_source_intake"])
@@ -55,7 +55,7 @@ class NewMobileVisibleTests(unittest.TestCase):
             self.skipTest("Run after approved public build")
         payload = json.loads((public / "data" / PUBLIC_DATA_NAME).read_text(encoding="utf-8"))
         self.assertEqual(payload["mode"], MODE)
-        self.assertEqual(len(payload["model_cards"]), 11)
+        self.assertEqual(len(payload["model_cards"]), 13)
         html = (public / HUB.lstrip("/") / "index.html").read_text(encoding="utf-8")
         self.assertIn('rel="canonical" href="https://coupon-world.in' + HUB + '"', html)
         for name in ("Galaxy F70 5G", "17C 5G", "P4s Lite"):
