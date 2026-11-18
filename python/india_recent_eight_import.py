@@ -76,7 +76,7 @@ def build_recent() -> dict:
             raise ValueError("Unreviewed specification field: " + name)
         if any(not isinstance(value, str) or not value.strip() for value in facts.values()):
             raise ValueError("Empty manufacturer specification: " + name)
-        specs = {key: {"value": value, "source_url": item["source"], "checked_at": item.get("reviewed_on") or recent["checked_on"]}
+        specs = {key: {"value": value, "source_url": item["source"], "checked_at": item.get("reviewed_on") or "2026-11-07"}
                  for key, value in facts.items()}
         refkey = "recent-source|" + key
         query = quote(name, safe="")
@@ -96,7 +96,7 @@ def build_recent() -> dict:
             "specifications": specs, "missing_specifications": [],
             "available_specification_fields": list(specs),
             "recent_source_intake": True,
-            "research_checked_at": item.get("reviewed_on") or recent["checked_on"],
+            "research_checked_at": item.get("reviewed_on") or "2026-11-07",
             "source_urls": [item["source"]] + ([item["store"]] if item.get("store") else []),
             "image_status": "PLACEHOLDER", "photo": None,
             "verified_retailer_links": [], "retailer_search_links": links,
