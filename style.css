@@ -1332,3 +1332,14 @@ body.clean-ui .cw-primary-actions #researchSavedShortlist {
   background:#e7f3e9; border:1px solid #82ab8c; color:#22583a;
 }
 body.clean-ui #mobileResearchCompare:focus { outline:0; }
+
+
+/* Direct, crawlable links to useful guides; not JavaScript-only filter buttons. */
+.seo-crawl-paths{margin:1.1rem 0 1.3rem;max-width:920px}
+.seo-crawl-paths p{margin:0 0 .65rem;line-height:1.5}
+.seo-crawl-paths p span{font-size:.9rem;opacity:.8}
+.seo-crawl-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.55rem}
+.seo-crawl-grid a{display:flex;align-items:center;min-height:44px;padding:.68rem .85rem;border:1px solid rgba(128,128,128,.35);border-radius:12px;color:inherit;text-decoration:none;background:rgba(128,128,128,.065);font-size:.9rem;font-weight:600;line-height:1.35}
+.seo-crawl-grid a:hover,.seo-crawl-grid a:focus-visible{border-color:currentColor;text-decoration:underline;outline-offset:3px}
+@media(max-width:700px){.seo-crawl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:370px){.seo-crawl-grid{grid-template-columns:1fr}}
