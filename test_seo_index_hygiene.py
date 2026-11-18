@@ -46,10 +46,11 @@ class SearchTrustHygiene(unittest.TestCase):
         self.assertEqual(
             len([url for url in self.urls if url.startswith(ORIGIN + "/phones/")
                  and not url.startswith(ORIGIN + UNDER25_EN)]),
-            53,
+            54,  # original 53 phone routes + new manufacturer-source hub
         )
         self.assertIn(ORIGIN + "/phones/india-market-demand-q3-2026/", self.urls)
         self.assertIn(ORIGIN + "/phones/india-sales-coverage-2026/", self.urls)
+        self.assertIn(ORIGIN + "/phones/new-india-mobiles/", self.urls)
         self.assertNotIn(ORIGIN + "/phones/india-sales-coverage-2026/oppo-a6x-5g/", self.urls)
         self.assertNotIn(ORIGIN + "/phones/india-market-demand-q3-2026/samsung-galaxy-a07-5g/", self.urls)
         self.assertNotIn(ORIGIN + "/seo/best-mobile-under-15000.html", self.urls)
