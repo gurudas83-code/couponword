@@ -23,12 +23,14 @@ class RecentIndiaPhonesTests(unittest.TestCase):
         for card in payload["model_cards"]:
             self.assertEqual(card["status"], "RESEARCH_ONLY")
             self.assertEqual(set(card["specifications"]), set(card["available_specification_fields"]))
+            self.assertGreaterEqual(len(card["specifications"]), 2)
+            self.assertTrue(all(field["source_url"] == card["manufacturer_page"]
+                                for field in card["specifications"].values()))
+            self.assertTrue(all(field["checked_at"] == "2026-11-18"
+                                for field in card["specifications"].values()))
+            self.assertEqual(card["research_checked_at"], "2026-11-18")
             if card["model_key"] in {"samsung|galaxy f70 5g", "redmi|redmi 17c 5g", "realme|p4s lite"}:
                 self.assertGreaterEqual(len(card["specifications"]), 5)
-                self.assertTrue(all(field["source_url"] == card["manufacturer_page"]
-                                    for field in card["specifications"].values()))
-            else:
-                self.assertEqual(card["specifications"], {})
             self.assertEqual(card["verified_retailer_links"], [])
             self.assertEqual(card["frozen_variant_ids"], [])
             self.assertIsNone(card["photo"])
@@ -55,6 +57,14 @@ class RecentIndiaPhonesTests(unittest.TestCase):
             for model in ("Samsung Galaxy F70 5G", "REDMI 17C 5G", "realme P4s Lite"):
                 self.assertIn(model, html)
             self.assertIn('rel="canonical"', html)
+            for card in payload["model_cards"]:
+                detail = Path(folder) / card["detail_url"].lstrip("/") / "index.html"
+                content = detail.read_text(encoding="utf-8")
+                self.assertGreaterEqual(content.count('class="cr-fact"'), 2)
+                self.assertIn('name="robots" content="noindex,follow"', content)
+                self.assertIn("Current price unavailable", content)
+                self.assertIn('Maker source', content)
+
 
 
 if __name__ == "__main__":
