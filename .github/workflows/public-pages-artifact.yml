@@ -37,6 +37,8 @@ jobs:
         run: python scripts/build_public_pages.py --output public
       - name: Verify curated consumer-tech catalogue and legacy-page retirement
         run: python -m unittest -q test_technical_niche_publication test_seo_index_hygiene
+      - name: Validate nineteen model illustrations, full specification routes and API-price gates
+        run: python -m unittest -q test_new_mobile_media_prices
       - name: Verify new India mobiles, official sources and searchable hub
         run: python -m unittest -q test_india_recent_eight_import test_new_mobile_visibility
       - name: Check public research and budget contracts
