@@ -226,6 +226,17 @@
         (photo.title ? escapeHtml(photo.title) + " by " : "") + escapeHtml(photo.author) + '</a> · <a href="' + escapeHtml(photo.license_url) +
         '">' + escapeHtml(photo.license) + '</a> · resized</figcaption></figure>';
     }
+    // Original, model-labelled generic artwork, never a fake manufacturer photo.
+    // This asset is generated and owned by this site; exact model photographs
+    // require a commercial-use permission record before publication.
+    if (card.market_intake === true && typeof card.research_art_url === "string" &&
+        /^\/assets\/new-mobile-art\/[a-z0-9-]+\.svg$/.test(card.research_art_url)) {
+      return '<button type="button" class="research-photo-open research-phone-visual" data-research-detail="' +
+        escapeHtml(card.model_key) + '" aria-label="View retailer choices for ' + escapeHtml(name) +
+        '" aria-expanded="false"><img src="' + escapeHtml(card.research_art_url) +
+        '" width="540" height="430" loading="lazy" decoding="async" alt="Generic illustrated smartphone, not an actual photo of ' +
+        escapeHtml(name) + '"></button><p class="research-illustration-label">Original generic artwork · NOT an actual model photo · Tap to see retailers</p>';
+    }
     // An illustration is not a verified model photograph. The same accessible
     // control opens existing details without claiming an exact product image.
     return '<button type="button" class="research-photo-open research-phone-visual" data-research-detail="' +
@@ -291,8 +302,11 @@
     return '<article class="mobile-research-inventory-card mobile-research-model-card" data-mobile-model-card="' + escapeHtml(card.model_key) + '">' +
       '<div class="mobile-research-inventory-body">' +
       '<div class="mobile-research-card-top"><span class="research-status inventory-status-' + escapeHtml(statusLabel.toLowerCase()) + '">' + escapeHtml(statusLabel) + '</span></div>' +
-      researchPhoneImage(card) + '<h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch +
-      (card.market_intake ? '<p class="mobile-research-gate"><strong>New India market research intake:</strong> manufacturer facts only, not a certified exact SKU or a live offer. ' + link(card.market_report_url, "Market report") + '</p>' : '') +
+      researchPhoneImage(card) + '<h3>' +
+       (card.market_intake && /^\/phones\/[a-z0-9-]+\/(?:[a-z0-9-]+\/)?$/.test(String(card.detail_url || "")) ?
+        '<a class="research-model-name-link" href="' + escapeHtml(card.detail_url) + '">' + escapeHtml(displayPhoneName(card)) + '</a>' :
+        escapeHtml(displayPhoneName(card))) + '</h3>' + launch +
+      (card.market_intake ? '<p class="mobile-research-gate"><strong>Additional India research model:</strong> original illustration, not exact model photograph; fresh exact-SKU price unavailable. ' + link(card.manufacturer_page || (card.source_urls || [])[0], "Manufacturer source") + '</p>' : '') +
       '<p class="mobile-research-variant">' + escapeHtml(counts || "Model research reference") + '</p>' +
       '<ul class="mobile-research-variant-list">' + (variantItems || "<li>Variant details are not specified in the source universe.</li>") + '</ul>' +
       '<p class="mobile-research-inventory-fields"><strong>Verified fields:</strong> ' + escapeHtml(fields) + '</p>' +
@@ -835,7 +849,10 @@
     var launch = card.india_launch_date ? '<p class="mobile-research-launch">India launch: ' + escapeHtml(card.india_launch_date) + '</p>' : '';
     return '<article class="mobile-research-inventory-card mobile-research-result-card" data-mobile-model-card="' + escapeHtml(card.model_key) + '"><div class="mobile-research-inventory-body">' +
       '<div class="mobile-research-card-top"><span class="research-status">' + escapeHtml(status) + '</span><span class="research-status">Research only</span></div>' +
-      researchPhoneImage(card) + '<h3>' + escapeHtml(displayPhoneName(card)) + '</h3>' + launch +
+      researchPhoneImage(card) + '<h3>' +
+       (card.market_intake && /^\/phones\/[a-z0-9-]+\/(?:[a-z0-9-]+\/)?$/.test(String(card.detail_url || "")) ?
+        '<a class="research-model-name-link" href="' + escapeHtml(card.detail_url) + '">' + escapeHtml(displayPhoneName(card)) + '</a>' :
+        escapeHtml(displayPhoneName(card))) + '</h3>' + launch +
       (card.market_intake ? '<p class="mobile-research-gate">' +
         (card.recent_source_intake ? 'Recently added manufacturer-sourced India model' : 'India sales/shipments research addition') +
         ' · no verified current price, stock or exact retailer configuration.</p>' : '') +
@@ -845,7 +862,8 @@
       '<p class="research-source-note">' + (sourceItem ? link(sourceItem.source_url, "Specification source") : 'Specification source pending') + ' · Specification research snapshot: ' + escapeHtml(card.research_checked_at || sourceItem && (sourceItem.checked_at || sourceItem.checked_date) || 'date unavailable') + ' (not a live check)</p>' + (card.research_budget_reference ? '<p class="research-source-note">Budget filter uses a dated retailer observation: ' + escapeHtml(String(card.research_budget_reference.checked_at || 'date unavailable').match(/\d{4}-\d{2}-\d{2}/)?.[0] || String(card.research_budget_reference.checked_at || 'date unavailable')) + '. Current price and stock not verified.</p>' : '') +
       '<div class="research-card-actions"><button type="button" class="btn btn-ghost mobile-research-detail-button" data-research-detail="' + escapeHtml(card.model_key) + '">All specifications</button>' +
       '<button type="button" class="btn btn-ghost" data-research-compare="' + escapeHtml(card.model_key) + '" aria-pressed="' + selected + '">' + (selected ? 'Remove comparison' : 'Compare') + '</button></div>' + retailerResearchLinks(card) +
-      '<p class="mobile-research-gate">Model-targeted retailer searches only, not exact-SKU purchase links. Exact listing links appear only where a retailer ID, model and physical variant were separately verified. Other retailer links are model searches. Confirm RAM/storage, current price, stock and delivery on retailer sites.</p></div></article>';
+      (card.market_intake ? '<p class="mobile-research-gate"><strong>Price unavailable:</strong> no fresh authorized exact-SKU API price. Open the model specifications page for manufacturer evidence.</p>' : '') +
+       '<p class="mobile-research-gate">Model-targeted retailer searches only, not exact-SKU purchase links. Exact listing links appear only where a retailer ID, model and physical variant were separately verified. Other retailer links are model searches. Confirm RAM/storage, current price, stock and delivery on retailer sites.</p></div></article>';
   }
 
   function renderSelectedComparison() {
