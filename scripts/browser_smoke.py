@@ -378,10 +378,10 @@ def run(root: Path):
                         page.locator("#cr-grid input[data-compare]").nth(1).check()
                         assert page.locator("#cr-comparison-table table tbody tr").count() >= 3
                         assert page.locator(".purchase-cta, .shop-button").count() == 0
-                    # One indexable editorial page lists the 11 added official sources,
+                    # One indexable editorial page lists the 13 added official sources,
                     # rather than manufacturing thin product SEO pages.
                     page.goto(url + "phones/new-india-mobiles/", wait_until="domcontentloaded", timeout=30000)
-                    assert page.locator(".cr-grid .cr-card").count() == 11, width
+                    assert page.locator(".cr-grid .cr-card").count() == 13, width
                     assert "Galaxy F70 5G" in page.locator("main").inner_text(), width
                     assert "REDMI 17C 5G" in page.locator("main").inner_text(), width
                     assert "P4s Lite" in page.locator("main").inner_text(), width
