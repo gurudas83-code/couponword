@@ -128,7 +128,7 @@ def import_eight() -> dict:
             "specifications": specs, "missing_specifications": [],
             "available_specification_fields": list(specs),
             "source_urls": [official, report], "image_status": "PLACEHOLDER", "photo": None,
-            "research_art_url": research_art_url(key), "photo_rights_status": "NOT_CLEARED",
+            "research_art_url": research_art_url(key), "detail_url": _route(key), "photo_rights_status": "NOT_CLEARED",
             "verified_retailer_links": [], "retailer_search_links": _retailer_links(brand, model),
             "market_intake": True, "market_reference": market, "market_report_url": report,
         })
