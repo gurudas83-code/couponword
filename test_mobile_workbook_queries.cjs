@@ -152,8 +152,10 @@ setImmediate(()=> {
    const r=search('Apple iPhone 11 under 7000');
    assert.equal(r.length,0);
    const h=element('mobileResearchResults').innerHTML;
-   assert(h.includes('Related research — NOT within-budget recommendations'));
-   assert(h.includes('Budget status: not verified'));
+   assert(h.includes('Within your budget · dated price reference (0)'));
+   assert(h.includes('Additional relevant phones · price not verified'));
+   assert(h.includes('They may cost more'));
+   assert(h.includes('no saved dated price reference') || h.includes('No saved dated price reference'));
    assert(!h.includes('purchase-cta'));
  });
  console.log(checks+' checks passed');
