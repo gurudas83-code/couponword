@@ -635,10 +635,12 @@
     ]);
     tokens = tokens.filter(function (token) { return !queryNoise.has(token); });
     var matches = [];
-    // If the user entered an exact known model name, never replace it with
-    // its Pro/Plus/Max/e sibling merely because most tokens overlap.
-    // Preserve all documented memory variants on that one model only.
-    var exactCard = text.split(" ").length >= 2 && inventoryCards.find(function (card) {
+    // In a budget/physical-memory request, an exact model name must not
+    // be replaced with a priced Pro/Plus/Max/e sibling. Keep broad identity
+    // discovery ("iPhone 16", "Lava Bold N2") unchanged without hard filters.
+    var strictModelIdentity = c.budget != null || priceUnknownBudgetResearch ||
+      c.ram != null || c.storage != null;
+    var exactCard = strictModelIdentity && text.split(" ").length >= 2 && inventoryCards.find(function (card) {
       return normalizeResearch(displayPhoneName(card).replace(/\b5g\b/ig, "")) === text ||
         normalizeResearch(displayPhoneName(card)) === text;
     });
