@@ -1354,3 +1354,21 @@ body.clean-ui #mobileResearchCompare:focus { outline:0; }
 .recent-mobile-more>summary:focus-visible{outline:2px solid currentColor;outline-offset:4px}
 .recent-mobile-more>.mobile-research-results{margin-top:12px}
 @media(max-width:600px){.mobile-research-new-section .section-heading{display:block}.recent-mobile-more{padding:8px}}
+
+
+/* Two immediate research lanes: a dated budget reference is NOT a live offer. */
+.mobile-research-results>.research-budget-tier{grid-column:1/-1;min-width:0}
+.research-budget-tier{padding:16px;border:1px solid rgba(100,116,139,.25);border-radius:14px;background:rgba(100,116,139,.045)}
+.research-budget-tier h3{margin:0 0 7px;font-size:clamp(1rem,1.6vw,1.2rem);line-height:1.4}
+.research-budget-tier>p{margin:0 0 12px;line-height:1.55;font-size:.87rem;max-width:80ch}
+.research-budget-primary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.research-budget-related-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.research-budget-related-item{min-width:0;padding:13px;border:1px solid rgba(100,116,139,.18);border-radius:10px;background:var(--card-bg,#fff)}
+.research-budget-related-item>strong{display:block;font-size:.93rem;line-height:1.35}
+.research-budget-related-item>p{margin:8px 0 10px;font-size:.78rem;line-height:1.5;overflow-wrap:anywhere}
+.research-budget-related-item .btn{font-size:.77rem;max-width:100%;white-space:normal;text-align:center}
+.research-budget-unknown-label{display:inline-block;margin-top:6px;color:inherit;font-size:.71rem;font-weight:700;opacity:.75}
+@media(max-width:850px){
+  .research-budget-primary-grid,.research-budget-related-list{grid-template-columns:1fr}
+  .research-budget-tier{padding:12px}
+}
