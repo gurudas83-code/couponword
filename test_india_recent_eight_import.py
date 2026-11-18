@@ -15,7 +15,7 @@ class RecentIndiaPhonesTests(unittest.TestCase):
         self.assertEqual(len(payload["model_cards"]), 11)
         self.assertEqual(len(payload["records"]), 11)
         self.assertEqual({c["brand"] + " " + c["model"] for c in payload["model_cards"]},
-                         {"Motorola signature 27", "oppo find x10", "oppo find x10 pro max",
+                         {"motorola signature 27", "oppo find x10", "oppo find x10 pro max",
                           "oppo f35 5g", "oppo f35 pro 5g", "vivo v80",
                           "vivo x fold6", "vivo s2 fe", "samsung galaxy f70 5g",
                           "redmi redmi 17c 5g", "realme p4s lite"})
