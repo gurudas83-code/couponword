@@ -1,5 +1,8 @@
 name: QuickCommerce comparison integration
 on:
+  push:
+    branches: [work/missing-mobile-api-prices]
+    paths: ['.github/workflows/quickcommerce-comparison.yml']
   workflow_dispatch:
     inputs:
       max_calls:
@@ -13,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   refresh:
-    if: inputs.max_calls > 0
+    if: github.event_name == 'push' || inputs.max_calls > 0
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -26,10 +29,17 @@ jobs:
         env:
           QUICKCOMMERCE_API_KEY: ${{ secrets.QUICKCOMMERCE_API_KEY }}
           MAX_CALLS: ${{ inputs.max_calls }}
-        run: python scripts/refresh_api_comparison.py --max-calls "$MAX_CALLS"
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = push ]; then
+            python scripts/refresh_api_comparison.py --refresh-historical-dated-prices --max-calls 258
+          else
+            python scripts/refresh_api_comparison.py --max-calls "$MAX_CALLS"
+          fi
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
           name: quickcommerce-comparison-refresh
-          path: private_observations/provider_refresh.json
+          path: |
+            private_observations/provider_refresh.json
+            private_observations/missing_mobile_api_prices.json
           retention-days: 14
