@@ -133,15 +133,41 @@
         }
       }).finally(function () { clearTimeout(timeout); });
   }
+  function brandStorePrice(payload, modelKey, configurations) {
+    var price = (payload.brand_store_prices || {})[modelKey];
+    if (!price || !Number.isFinite(price.price_inr) || price.price_inr <= 0 ||
+        configurations.some(function (configuration) {
+          return (configuration.offers || []).some(function (offer) {
+            return offer.availability === "in_stock" && Number.isFinite(offer.price) &&
+              offer.price > 0 && fresh(offer) && safeUrl(offer);
+          });
+        })) return "";
+    var url;
+    try {
+      url = new URL(price.source_url);
+    } catch (error) {
+      return "";
+    }
+    var brandHosts = {"apple": "www.apple.com", "infinix": "infinixmobiles.in",
+      "iqoo": "shop.iqoo.com", "vivo": "shop.vivo.com"};
+    if (url.protocol !== "https:" || url.hostname !== brandHosts[modelKey.split("|")[0]] ||
+        url.username || url.password || url.port) return "";
+    return '<p><strong>Official India store price:</strong> ₹' +
+      price.price_inr.toLocaleString("en-IN", {maximumFractionDigits: 2}) +
+      ' · ' + escape(price.variant) + ' · ' + escape(price.store_status) +
+      ' · Checked ' + escape(price.checked_on) + '. <a href="' + escape(url.href) +
+      '" target="_blank" rel="noopener noreferrer">Check brand store</a></p>';
+  }
   function show(panel, payload, modelKey) {
     var configurations = (payload.models || {})[modelKey] || [];
     panel._priceConfigurations = configurations;
+    var brandPrice = brandStorePrice(payload, modelKey, configurations);
     if (!configurations.length) {
-      panel.innerHTML = '<p role="status">No saved price check for this model. A live API lookup does not guarantee a listing.</p><button type="button" data-check-live-price>Check live price observation (uses API quota)</button><div data-live-price aria-live="polite"></div>';
+      panel.innerHTML = brandPrice + '<p role="status">No saved retailer price check for this model. A live API lookup does not guarantee a listing.</p><button type="button" data-check-live-price>Check live price observation (uses API quota)</button><div data-live-price aria-live="polite"></div>';
       return;
     }
     var id = "api-price-config-" + (++sequence);
-    panel.innerHTML = '<h4>Price &amp; availability observations</h4><p>QuickCommerce third-party source; opening this price panel checks the private paid API through the server with a call limit. Checkout prices may differ.</p><button type="button" data-check-live-price>Check live price observation (uses API quota)</button><div data-live-price aria-live="polite"></div>' +
+    panel.innerHTML = '<h4>Price &amp; availability observations</h4>' + brandPrice + '<p>QuickCommerce third-party source; opening this price panel checks the private paid API through the server with a call limit. Checkout prices may differ.</p><button type="button" data-check-live-price>Check live price observation (uses API quota)</button><div data-live-price aria-live="polite"></div>' +
       '<label for="' + id + '">Choose the listed configuration</label><select id="' + id + '" data-price-config>' +
       configurations.map(function (configuration, index) {
         return '<option value="' + index + '">' + escape(configuration.variant) + "</option>";
@@ -191,7 +217,7 @@
     }
     panel.innerHTML = '<p role="status">Loading saved price checks…</p>';
     if (!snapshotPromise) {
-      snapshotPromise = fetch("/data/retailer_price_observations.json?v=20261117", {credentials: "omit"}).then(function (response) {
+      snapshotPromise = fetch("/data/retailer_price_observations.json?v=20261119-brand", {credentials: "omit"}).then(function (response) {
         if (!response.ok) throw new Error("Observation file unavailable");
         return response.json();
       }).then(function (payload) {
