@@ -35,8 +35,12 @@ def planned_queries():
         calls.append((key, "Flipkart", query))
     return calls
 
-def missing_price_cards():
-    queue = build()["verification_queue"]
+def missing_price_cards(refresh_historical=False):
+    report = build()
+    queue = report["verification_queue"]
+    if refresh_historical:
+        queue = [row for row in report["model_rows"] if row.get("source_date", "") and
+                 row["source_date"][:10] < "2026-11-19"]
     cards = json.loads(
         (ROOT / "data/mobile_research_catalogue.json").read_text(encoding="utf-8-sig")
     )["model_cards"]
@@ -44,8 +48,8 @@ def missing_price_cards():
     return [card for card in cards if card["model_key"] in missing]
 
 
-def refresh_missing_prices(max_calls):
-    cards = missing_price_cards()
+def refresh_missing_prices(max_calls, refresh_historical=False):
+    cards = missing_price_cards(refresh_historical)
     output = ROOT / "private_observations" / "missing_mobile_api_prices.json"
     output.parent.mkdir(exist_ok=True)
     records = []
@@ -110,14 +114,16 @@ def refresh_missing_prices(max_calls):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--max-calls", type=int, default=0)
-    parser.add_argument("--missing-prices", action="store_true")
+    scope = parser.add_mutually_exclusive_group()
+    scope.add_argument("--missing-prices", action="store_true")
+    scope.add_argument("--refresh-historical-dated-prices", action="store_true")
     args = parser.parse_args()
-    if args.missing_prices:
+    if args.missing_prices or args.refresh_historical_dated_prices:
         if not 0 <= args.max_calls <= 464:
             parser.error("Missing-price research allows at most two calls per core model")
         if args.max_calls and not os.environ.get("QUICKCOMMERCE_API_KEY"):
             parser.error("QUICKCOMMERCE_API_KEY is required")
-        return refresh_missing_prices(args.max_calls)
+        return refresh_missing_prices(args.max_calls, args.refresh_historical_dated_prices)
     if not 0 <= args.max_calls <= 2:
         parser.error("Only 0..2 manually authorized Top-30 searches allowed")
     calls = planned_queries()
