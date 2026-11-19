@@ -149,7 +149,7 @@
       return "";
     }
     var brandHosts = {"apple": "www.apple.com", "infinix": "infinixmobiles.in",
-      "iqoo": "shop.iqoo.com", "vivo": "shop.vivo.com"};
+      "iqoo": "shop.iqoo.com", "vivo": "shop.vivo.com", "xiaomi": "store.mi.com", "xiaomi redmi": "store.mi.com"};
     if (url.protocol !== "https:" || url.hostname !== brandHosts[modelKey.split("|")[0]] ||
         url.username || url.password || url.port) return "";
     return '<p><strong>Official India store price:</strong> ₹' +
