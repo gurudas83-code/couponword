@@ -79,6 +79,7 @@ setImmediate(()=> {
  check('retailer search links visible',()=>{search('Galaxy A36');let html=element('mobileResearchResults').innerHTML;assert(html.includes('Search Amazon'));assert(html.includes('Search Flipkart'));assert(html.includes('Search Croma for this model'));});
  check('main search recognizes bare budget',()=>assert(api.isResearchQuery('under 20k')));
  check('strict boundary excludes equality',()=>{let ref=catalogue.model_cards.find(c=>c.research_budget_reference).research_budget_reference;assert(search('phone under '+ref.reference_price_inr).every(x=>x.card.research_budget_reference.reference_price_inr<ref.reference_price_inr));});
+ check('typed up-to and within single-budget ranges never duplicate the cap model',()=>{let card=catalogue.model_cards.find(c=>c.research_budget_reference);let ref=card.research_budget_reference,old=ref.reference_price_inr;try{ref.reference_price_inr=20000;for(let q of ['phone under 20000','phone upto 20000','phone within 20000','20000 तक मोबाइल']){assert(!search(q).some(x=>x.card.model_key===card.model_key),'overlap '+q);}assert(search('phone between 15000 and 20000').some(x=>x.card.model_key===card.model_key));}finally{ref.reference_price_inr=old;}});
  check('repeated queries deterministic',()=>{let first=search('camera phone under 30000').map(x=>x.card.model_key);for(let i=0;i<20;i++)assert.deepEqual(search('camera phone under 30000').map(x=>x.card.model_key),first);});
  check('under 50000 stays within 45000 to below 50000',()=>{let r=search('mobile under 50000 nearby band');assert(r.length);assert(r.every(x=>x.card.research_budget_reference.reference_price_inr>=45000&&x.card.research_budget_reference.reference_price_inr<50000));assert(element('mobileResearchSearchStatus').textContent.includes('45,000'));});
  check('under 30000 stays within 25000 to below 30000',()=>{let r=search('mobile under 30000 nearby band');assert(r.length);assert(r.every(x=>x.card.research_budget_reference.reference_price_inr>=25000&&x.card.research_budget_reference.reference_price_inr<30000));});
@@ -161,7 +162,7 @@ setImmediate(()=> {
    const r=search('Apple iPhone 11 under 7000');
    assert.equal(r.length,0);
    const h=element('mobileResearchResults').innerHTML;
-   assert(h.includes('Within your budget · dated price reference (0)'));
+   assert(h.includes('Historical price-band matches · NOT current prices (0)'));
    assert(h.includes('Additional relevant phones · price not verified'));
    assert(h.includes('They may cost more'));
    assert(h.includes('no saved dated price reference') || h.includes('No saved dated price reference'));

@@ -56,6 +56,20 @@ jobs:
             price-evidence-reports/
           if-no-files-found: warn
           retention-days: 30
+      - name: Audit historic ₹5k budget conflicts without paid API calls
+        run: |
+          python -m unittest -v test_budget_price_conflicts test_phase_g_budget_band_contract test_phase_g_budget_presentation
+          python -m scripts.audit_budget_price_conflicts --out budget-price-conflicts.json
+      - name: Upload exact-memory price-band discrepancy evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: coupon-world-budget-price-conflicts
+          path: |
+            budget-price-conflicts.json
+            budget-price-conflicts.md
+          if-no-files-found: warn
+          retention-days: 30
       - name: Verify accessories and TV evidence, pages and comparison script
         run: |
           python -m unittest -v test_category_research_release

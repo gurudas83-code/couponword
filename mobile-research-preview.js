@@ -555,7 +555,7 @@
       var suffix = text.match(new RegExp("(?:rs\\.?|inr|₹)?\\s*" + amount + "\\s*(?:rupees|रुपये|रुपए)?\\s*(?:ke\\s*)?(?:andar|se kam|के\\s*अंदर|के\\s*नीचे|से\\s*कम|तक)"));
       var currency = text.match(new RegExp("(?:₹|rs\\.?|inr)\\s*" + amount));
       var m = prefix || suffix || currency;
-      if (m) { budget = value(m[1], m[2]); inclusive = /within|upto|up to|तक/.test(m[0]); text = text.replace(m[0], " "); }
+      if (m) { budget = value(m[1], m[2]); inclusive = false; text = text.replace(m[0], " "); }
     }
     // All ordinary "under" budgets are strict ₹5,000 reference-price bands:
     // ₹10k => [₹5k, ₹10k), ₹20k => [₹15k, ₹20k), etc.
@@ -1180,8 +1180,8 @@
         // Local, synchronous two-lane answer. No network round trip or
         // third-party API is required before either lane appears.
         var primary = '<section class="research-budget-tier research-budget-evidenced" aria-label="Phones with dated budget references">' +
-          '<h3>Within your budget · dated price reference (' + matches.length + ')</h3>' +
-          '<p>These source-backed variants pass the selected historical reference-price limit. Current checkout price, availability and delivery have NOT been confirmed. Ordering shows research coverage, not measured performance.</p>' +
+          '<h3>Historical price-band matches · NOT current prices (' + matches.length + ')</h3>' +
+          '<p>These phones match older dated retailer references, NOT current store prices. Saved API checks may be from a later date or a different colour, seller or retailer, so the handset can now fall into another five-thousand-rupee range. Compare exact memory and stock with the store before purchase. Ordering shows research coverage, not performance.</p>' +
           (matches.length ?
             '<div class="research-budget-primary-grid">' + visible.map(function (item) {
               return renderResearchResultCard(item.card, item.rows, item.group_size);

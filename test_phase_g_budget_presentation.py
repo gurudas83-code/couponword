@@ -23,6 +23,7 @@ class BudgetPresentationTests(unittest.TestCase):
         result = build_budget_presentation(
             [
                 self.item("near-1", 49998),
+                self.item("exact-cap", 50000),
                 self.item("near-2", 45000),
                 self.item("value-1", 31999),
                 self.item("value-2", 9099),
@@ -44,6 +45,10 @@ class BudgetPresentationTests(unittest.TestCase):
         self.assertNotIn(
             "over-budget",
             [row["product_id"] for row in result["primary_recommendations"] + result["value_recommendations"]],
+        )
+        self.assertNotIn(
+            "exact-cap",
+            [row["product_id"] for row in result["primary_recommendations"]],
         )
 
     def test_explicit_full_budget_keeps_cheaper_candidates_outside_band_mode(self):

@@ -62,7 +62,7 @@ def run(root):
                                         if any(o.get("price") and o["availability"] == "in_stock" for o in configuration["offers"]))
                     panel.locator("[data-price-config]").select_option(index=priced_index)
                     panel.locator("[data-price-budget]").fill("1")
-                    assert "Listed amount over your entered cap" in panel.inner_text()
+                    assert "Observed amount outside selected ₹5,000 band" in panel.inner_text()
                     assert any("retailer_price_observations" in request for request in requests)
                     select = panel.locator("[data-price-config]")
                     if select.locator("option").count() > 1:

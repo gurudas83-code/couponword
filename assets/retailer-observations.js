@@ -45,10 +45,14 @@
         offer.availability === "in_stock" ? "API observed in stock" :
         offer.availability === "out_of_stock" ? "API observed out of stock" : "Stock unknown";
       var price = typeof offer.price === "number" && Number.isFinite(offer.price) && offer.price > 0 ?
-        "₹" + offer.price.toLocaleString("en-IN", {maximumFractionDigits: 2}) : "No payable price observed";
+        (isFresh ? "₹" : "Historical ₹") + offer.price.toLocaleString("en-IN", {maximumFractionDigits: 2}) : "No payable price observed";
       var budgetNote = budget !== null && Number.isFinite(budget) && budget > 0 &&
         isFresh && typeof offer.price === "number" && offer.price > 0 ?
-        "<small class=\"api-budget-check\">" + (offer.price <= budget ? "Listed amount within your entered cap" : "Listed amount over your entered cap") + "</small>" : "";
+        "<small class=\"api-budget-check\">" + (
+          offer.price >= Math.max(0, budget - 5000) && offer.price < budget
+            ? "Observed amount in selected ₹5,000 band (not checkout verified)"
+            : "Observed amount outside selected ₹5,000 band"
+        ) + "</small>" : "";
       var badge = lowest !== null && isFresh && offer.availability === "in_stock" && offer.price === lowest ?
         '<span class="api-observed-lowest">Lowest observed among these checked stores</span>' : "";
       var history = Array.isArray(offer.history) && offer.history.length > 1 ?
@@ -141,11 +145,11 @@
       return;
     }
     var id = "api-price-config-" + (++sequence);
-    panel.innerHTML = '<h4>Price &amp; availability observations</h4><p>QuickCommerce third-party source; opening this price panel checks the private paid API through the server with a call limit. Checkout prices may differ.</p><button type="button" data-check-live-price>Check live price observation (uses API quota)</button><div data-live-price aria-live="polite"></div>' +
+    panel.innerHTML = '<h4>Price &amp; availability observations</h4><p>QuickCommerce third-party source; opening saved price history does NOT call the paid API. A separate live-check button may use paid quota. These historic observations are NOT the dated prices used by the main research filter. Checkout prices may differ.</p><button type="button" data-check-live-price>Check live price observation (uses API quota)</button><div data-live-price aria-live="polite"></div>' +
       '<label for="' + id + '">Choose the listed configuration</label><select id="' + id + '" data-price-config>' +
       configurations.map(function (configuration, index) {
         return '<option value="' + index + '">' + escape(configuration.variant) + "</option>";
-      }).join("") + '</select><label>Check this configuration against your budget (₹)<input type="number" min="1" step="1" inputmode="numeric" data-price-budget placeholder="Optional price cap"></label><div data-price-table></div>' +
+      }).join("") + '</select><label>Check against ₹5,000 price band ending below (₹)<input type="number" min="5000" step="1" inputmode="numeric" data-price-budget placeholder="e.g. 20000 = ₹15k–below ₹20k"></label><div data-price-table></div>' +
       '<p class="api-observation-note">Prices can change. Bank/exchange offers and delivery charges are excluded. Confirm India variant, seller condition, warranty and delivery with the retailer. Manufacturer specifications remain separately sourced. Price has 0% weight in product quality ranking.</p>';
     renderConfiguration(panel, configurations[0]);
     panel.querySelector("[data-price-config]").addEventListener("change", function (event) {

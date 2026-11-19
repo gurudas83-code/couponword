@@ -46,13 +46,15 @@ class BudgetBandContractTests(unittest.TestCase):
         self.assertEqual(data["recommendation_sections"]["primary_floor"], 45000)
         self.assertEqual(
             [row["price"] for row in data["primary_recommendations"]],
-            [45000, 49998, 50000],
+            [45000, 49998],
         )
         self.assertEqual(
             [row["price"] for row in data["value_recommendations"]],
             [],
         )
+        self.assertNotIn(50000, [row["price"] for row in data["primary_recommendations"] + data["value_recommendations"]])
         self.assertNotIn(50001, [row["price"] for row in data["primary_recommendations"] + data["value_recommendations"]])
+        self.assertIn("Below ₹50,000", data["recommendation_sections"]["primary_title"])
         self.assertNotIn(84000, [row["price"] for row in data["primary_recommendations"] + data["value_recommendations"]])
 
     def test_frontend_uses_serialized_sections_and_no_primary_message(self):
