@@ -1936,17 +1936,18 @@ def build_budget_presentation(
             price = float(item.get("price"))
         except (TypeError, ValueError):
             continue
-        if floor <= price <= budget_value:
+        # The public ₹5k quick filters use [floor, cap), never include the cap.
+        if floor <= price < budget_value:
             primary.append(dict(item, budget_band="primary"))
         # Below-floor candidates remain in ranked_recommendations for explicit
         # full-budget requests; they must not leak into the default range.
 
     base.update({
         "mode": "budget_band",
-        "primary_title": f"Top Phones Between ₹{floor:,} and ₹{int(budget_value):,}",
+        "primary_title": f"Eligible Phones From ₹{floor:,} to Below ₹{int(budget_value):,}",
         "value_title": None,
         "no_primary_message": (
-            f"No currently verified phones found in the ₹{floor:,}–₹{int(budget_value):,} primary range."
+            f"No currently verified phones found from ₹{floor:,} to below ₹{int(budget_value):,}."
         ),
         "primary_floor": floor,
         "primary_status": "PASS" if len(primary) >= DEFAULT_MIN_RESULTS else "PARTIAL",
