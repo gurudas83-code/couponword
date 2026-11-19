@@ -18,7 +18,8 @@ class BudgetBandContractTests(unittest.TestCase):
         rows = [
             {"product_id": "p31999", "price": 31999, "title": "A56"},
             {"product_id": "p39999", "price": 39999, "title": "Near"},
-            {"product_id": "p40000", "price": 40000, "title": "Floor"},
+            {"product_id": "p40000", "price": 40000, "title": "Below Band"},
+            {"product_id": "p45000", "price": 45000, "title": "Band Floor"},
             {"product_id": "p49998", "price": 49998, "title": "Upper"},
             {"product_id": "p50000", "price": 50000, "title": "Cap"},
         ]
@@ -42,14 +43,14 @@ class BudgetBandContractTests(unittest.TestCase):
             )
         self.assertEqual(response.status_code, 200)
         data = response.get_json()
-        self.assertEqual(data["recommendation_sections"]["primary_floor"], 40000)
+        self.assertEqual(data["recommendation_sections"]["primary_floor"], 45000)
         self.assertEqual(
             [row["price"] for row in data["primary_recommendations"]],
-            [40000, 49998, 50000],
+            [45000, 49998, 50000],
         )
         self.assertEqual(
             [row["price"] for row in data["value_recommendations"]],
-            [31999, 39999],
+            [],
         )
         self.assertNotIn(50001, [row["price"] for row in data["primary_recommendations"] + data["value_recommendations"]])
         self.assertNotIn(84000, [row["price"] for row in data["primary_recommendations"] + data["value_recommendations"]])
