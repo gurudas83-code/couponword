@@ -1181,7 +1181,7 @@
         // third-party API is required before either lane appears.
         var primary = '<section class="research-budget-tier research-budget-evidenced" aria-label="Phones with dated budget references">' +
           '<h3>Historical price-band matches · NOT current prices (' + matches.length + ')</h3>' +
-          '<p>These phones match older dated retailer references, NOT current store prices. Saved API checks may be from a later date or a different colour, seller or retailer, so the handset can now fall into another ₹5,000 range. Compare exact memory and stock with the store before purchase. Ordering shows research coverage, not performance.</p>' +
+          '<p>These phones match older dated retailer references, NOT current store prices. Saved API checks may be from a later date or a different colour, seller or retailer, so the handset can now fall into another five-thousand-rupee range. Compare exact memory and stock with the store before purchase. Ordering shows research coverage, not performance.</p>' +
           (matches.length ?
             '<div class="research-budget-primary-grid">' + visible.map(function (item) {
               return renderResearchResultCard(item.card, item.rows, item.group_size);
