@@ -93,6 +93,26 @@ class PaidApiBridgeTests(unittest.TestCase):
         result = bridge.observe_card(CARD, client=client, now=NOW)
         self.assertEqual(result["status"], "no_exact_in_stock_observation")
 
+    def test_source_reviewed_new_models_are_lookup_known_but_not_buyable(self):
+        from python.india_missing_eight_pages import import_eight
+        from python.india_recent_eight_import import build_recent
+        additions = import_eight()["model_cards"] + build_recent()["model_cards"]
+        known = bridge.catalogue()
+        self.assertGreaterEqual(len(additions), 8)
+        self.assertTrue(all(card["model_key"] in known for card in additions))
+        self.assertEqual(len(known), 232 + 40 + len(additions))
+
+    def test_price_panel_requires_explicit_paid_lookup_click(self):
+        script = (Path(__file__).resolve().parent / "assets" / "retailer-observations.js").read_text(encoding="utf-8")
+        self.assertIn("data-check-live-price", script)
+        self.assertIn("if (liveButton)", script)
+        for accidental in (
+            "checkPaidApi(panel, modelKey, null);",
+            "checkPaidApi(panel, modelKey, configurations[0]);",
+            "checkPaidApi(panel, modelKey, selected);",
+        ):
+            self.assertNotIn(accidental, script)
+
     def test_route_rejects_bad_model_or_variant_without_paid_call(self):
         import shopping_api
         client = shopping_api.app.test_client()
