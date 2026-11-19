@@ -52,6 +52,11 @@ jobs:
           node test_mobile_workbook_queries.cjs
           node test_standard_guide_fallback.cjs
           node test_search_discovery.cjs
+      - name: Validate guarded paid API integration without billed calls
+        run: |
+          python -m unittest -v test_paid_api_live_bridge test_api_price_observations test_quickcommerce_flipkart_adapter
+          python -m py_compile python/paid_api_live_bridge.py python/shopping_api.py
+          node --check assets/retailer-observations.js
       - name: Smoke-test live GitHub Pages content (scheduled and manual only)
         if: github.event_name != 'pull_request'
         run: |
