@@ -30,6 +30,16 @@ jobs:
         run: python -m pip install -r requirements.txt
       - name: Build exact publication artifact
         run: python scripts/build_public_pages.py --output public
+      - name: Build URL-by-URL frontend and SEO audit report
+        run: python scripts/frontend_page_audit.py --root public --out frontend-page-audit.json
+      - name: Upload audit of every generated public HTML route
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: coupon-world-frontend-page-audit
+          path: frontend-page-audit.json
+          if-no-files-found: warn
+          retention-days: 14
       - name: Audit source-backed public research and dated budgets
         run: python scripts/quality_audit.py --root public --report quality-audit.json
       - name: Verify accessories and TV evidence, pages and comparison script
