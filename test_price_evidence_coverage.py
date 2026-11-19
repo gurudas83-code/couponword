@@ -1,9 +1,10 @@
+import csv
 import tempfile
 import unittest
 from pathlib import Path
 
 from scripts.build_price_evidence_coverage import (
-    WIDTH, build, positive_historical_observations,
+    WIDTH, build, export_review_files, positive_historical_observations,
 )
 
 
@@ -43,6 +44,28 @@ class PriceEvidenceCoverageTests(unittest.TestCase):
             else:
                 self.assertTrue(model["band_floor_inr"] <= price < model["band_ceiling_exclusive_inr"])
                 self.assertEqual(model["band_ceiling_exclusive_inr"] - model["band_floor_inr"], WIDTH)
+
+    def test_reusable_existing_engine_exports_complete_232_inventory_and_103_queue(self):
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp)
+            result = export_review_files(self.report, out)
+            self.assertEqual(result["model_rows"], 232)
+            self.assertEqual(result["verification_queue"], 103)
+            with (out / "all-232-mobile-price-evidence.csv").open(encoding="utf-8", newline="") as fp:
+                records = list(csv.DictReader(fp))
+            with (out / "103-mobile-price-verification-queue.csv").open(encoding="utf-8", newline="") as fp:
+                missing = list(csv.DictReader(fp))
+            self.assertEqual(len(records), 232)
+            self.assertEqual(len(missing), 103)
+            self.assertEqual(len(set(row["model_key"] for row in records)), 232)
+            self.assertTrue(all(row["price_reference_inr"] in ("", "None") for row in missing))
+            self.assertTrue(all(row["live_price_verified"] == "False" for row in records))
+            self.assertTrue(all(row["buy_eligible"] == "False" for row in records))
+            self.assertTrue(all(row["next_action"] for row in missing))
+            text = (out / "232-mobile-price-coverage.md").read_text(encoding="utf-8")
+            self.assertIn("**232**", text)
+            self.assertIn("**103**", text)
+            self.assertIn("Historical research only", text)
 
     def test_historical_api_observation_has_exact_variant_and_source(self):
         for model in self.report["model_rows"]:
