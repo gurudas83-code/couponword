@@ -6,6 +6,7 @@ Never promote third-party observations into live offers, buy buttons or ranking.
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 from collections import Counter
 from datetime import datetime, timezone
@@ -172,14 +173,105 @@ def build(root: Path = ROOT) -> dict:
     }
 
 
+
+def export_review_files(report: dict, output_dir: Path) -> dict:
+    """Write per-model inventory, strict ₹5k tiers and the complete 103-model queue.
+
+    Derived exclusively from the existing offline evidence engine; never calls
+    or charges an API, changes the shopping gate or creates an affiliate offer.
+    """
+    output_dir.mkdir(parents=True, exist_ok=True)
+    rows = report["model_rows"]
+    queue = report["verification_queue"]
+    fields = [
+        "model_key", "brand", "model", "status", "catalogue_status",
+        "price_reference_inr", "band_floor_inr", "band_ceiling_exclusive_inr",
+        "source_date", "source", "source_url", "ram_gb", "storage_gb", "color",
+        "live_price_verified", "buy_eligible", "next_action",
+    ]
+    def flatten(item):
+        variant = item.get("recorded_variant") or {}
+        status = item["status"]
+        action = {
+            "WORKBOOK_DATED_REFERENCE": "Recheck exact SKU, current India price and availability; existing amount is historical",
+            "API_HISTORICAL_VARIANT_OBSERVATION": "Recheck 17-Nov exact variant, current source and pincode before allowing into live budget filter",
+            "API_ONLY_NO_POSITIVE_IN_STOCK_PRICE": "Resolve missing price, no-stock or unconfirmed RAM/storage; no substitute price",
+            "NOT_IN_SAVED_API_OBSERVATIONS": "Source-review India exact model and variant; obtain allowed retailer listing without guessing",
+        }[status]
+        return {
+            **{field: item.get(field) for field in fields if field not in {"ram_gb", "storage_gb", "color", "next_action"}},
+            "ram_gb": variant.get("ram_gb"),
+            "storage_gb": variant.get("storage_gb"),
+            "color": variant.get("color"),
+            "next_action": action,
+        }
+    for name, items in (
+        ("all-232-mobile-price-evidence.csv", rows),
+        ("103-mobile-price-verification-queue.csv",
+         [next(row for row in rows if row["model_key"] == task["model_key"]) for task in queue]),
+    ):
+        with (output_dir / name).open("w", encoding="utf-8", newline="") as fp:
+            writer = csv.DictWriter(fp, fieldnames=fields)
+            writer.writeheader()
+            writer.writerows(flatten(item) for item in items)
+    sums = report["summary"]
+    lines = [
+        "# Coupon World: price-evidence classification of all 232 core phones",
+        "",
+        "> **Historical research only.** No amount is a current verified checkout price;",
+        "> saved third-party observations do not authorize Buy buttons or ranking changes.",
+        "",
+        f'- Total core models: **{sums["total_models"]}**',
+        f'- Existing workbook dated references: **{sums["statuses"]["WORKBOOK_DATED_REFERENCE"]}**',
+        f'- Additional saved API historical observations: **{sums["statuses"]["API_HISTORICAL_VARIANT_OBSERVATION"]}**',
+        f'- No eligible positive quote in saved API: **{sums["statuses"]["API_ONLY_NO_POSITIVE_IN_STOCK_PRICE"]}**',
+        f'- No saved API observations: **{sums["statuses"]["NOT_IN_SAVED_API_OBSERVATIONS"]}**',
+        f'- Total having some dated price evidence: **{sums["with_any_dated_price_evidence"]}**',
+        f'- Still missing usable positive price evidence: **{sums["still_missing_positive_price_evidence"]}**',
+        "",
+        "One recorded model/variant belongs to one ₹5,000 audit band. Other RAM,",
+        "storage and colours of the *same model* may fall into other price bands.",
+        "This report does not change the source-backed public budget filter.",
+        "",
+        "| Historical ₹5k price band | Workbook | Saved API | Total |",
+        "|---|---:|---:|---:|",
+    ]
+    for b in report["budget_bands"]:
+        low, hi = b["floor_inr"], b["ceiling_exclusive_inr"]
+        if low > 100000 and b["total_with_some_dated_price_evidence"] == 0:
+            continue
+        lines.append(f'| ₹{low:,} to below ₹{hi:,} | {b["workbook_count"]} | {b["api_historical_count"]} | {b["total_with_some_dated_price_evidence"]} |')
+    lines.extend([
+        "",
+        "## Remaining 103 models",
+        "",
+        "The accompanying CSV identifies each missing model and the next",
+        "verification action. It does **not** claim a new API request was made.",
+        "",
+        "API snapshots can be stale; default observation pincode is 110001.",
+        "Retailer links, availability and pricing require independent re-verification.",
+        "All public price eligibility and ranking gates remain unchanged.",
+    ])
+    (output_dir / "232-mobile-price-coverage.md").write_text(
+        "\n".join(lines) + "\n", encoding="utf-8"
+    )
+    return {"model_rows": len(rows), "verification_queue": len(queue), "files": [
+        "all-232-mobile-price-evidence.csv", "103-mobile-price-verification-queue.csv",
+        "232-mobile-price-coverage.md",
+    ]}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--out", type=Path, default=Path("price-evidence-232.json"))
+    parser.add_argument("--report-dir", type=Path, default=None)
     args = parser.parse_args()
     report = build(args.root)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if args.report_dir:
+        export_review_files(report, args.report_dir)
     print(json.dumps({"summary": report["summary"], "bands_with_evidence": [x for x in report["budget_bands"] if x["total_with_some_dated_price_evidence"]]}, ensure_ascii=False))
     return 0
 
