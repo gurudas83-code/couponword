@@ -7,9 +7,10 @@ import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "python"))
 from quickcommerce_flipkart_adapter import QuickCommerceFlipkartConnector
-from build_price_evidence_coverage import build
+from scripts.build_price_evidence_coverage import build, positive_historical_observations
 from build_multi_retailer_public import build_observation_snapshot
 
 FIELDS = {"id", "item_id", "name", "brand", "available", "offer_price", "price",
@@ -56,8 +57,7 @@ def refresh_missing_prices(max_calls):
         snapshot = build_observation_snapshot({}, cards, records)
         priced = {
             key for key, variants in snapshot["models"].items()
-            if any(offer["availability"] == "in_stock" and offer["price"] is not None
-                   for variant in variants for offer in variant["offers"])
+            if positive_historical_observations(variants, key)
         }
         remaining = [card["model_key"] for card in cards if card["model_key"] not in priced]
         result = {
