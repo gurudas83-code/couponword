@@ -72,7 +72,7 @@
       rows + "</tbody></table></div>" +
       (stores.size < 2 ? "<p>No same-configuration comparison across two fresh in-stock stores is available.</p>" : "");
   }
-  var liveApiHost = /^(localhost|127\\.0\\.1)$/.test(window.location.hostname)
+  var liveApiHost = ["localhost", "127.0.0.1"].includes(window.location.hostname)
     ? "http://127.0.0.1:8000" : "https://couponword.onrender.com";
 
   function checkPaidApi(panel, modelKey, configuration) {
