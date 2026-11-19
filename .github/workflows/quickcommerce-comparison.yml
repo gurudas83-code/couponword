@@ -76,6 +76,7 @@ jobs:
 
           models = current['models']
           published = 0
+          added = {}
           for key, new_variants in incoming['models'].items():
               eligible = [row for row in new_variants if positive_historical_observations([row], key)]
               if not eligible:
@@ -97,6 +98,7 @@ jobs:
                       offers[offer['retailer']] = offer
                   existing[index] = dict(row, offers=list(offers.values()))
               published += 1
+              added[key] = positive_historical_observations(eligible, key)[0]
           if published != result['models_with_price']:
               raise ValueError('Publication count differs from eligible batch count')
           current['counts'] = {
@@ -109,7 +111,8 @@ jobs:
               current['generated_at'] = incoming['generated_at']
               output.write_text(json.dumps(current, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
           print(json.dumps({'api_calls': result['calls_attempted'], 'new_prices': published,
-                            'remaining_models': len(result['remaining_model_keys'])}))
+                            'remaining_models': len(result['remaining_model_keys']),
+                            'added': added}))
           PY
       - name: Validate and commit the price feed to the PR branch
         run: |
