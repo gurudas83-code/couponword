@@ -14,6 +14,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import sys
 import threading
 from datetime import datetime, timedelta, timezone
 from functools import lru_cache
@@ -47,6 +48,10 @@ def catalogue() -> dict[str, dict]:
     # Source-reviewed market additions appear on the public website but are
     # deliberately separate from the frozen 232-model research registry.
     # Include them for read-only third-party lookups, never for buy eligibility.
+    # Gunicorn starts with --chdir python, whereas the existing market
+    # source importers use the repository-root python.* namespace.
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
     from python.india_missing_eight_pages import import_eight
     from python.india_recent_eight_import import build_recent
     market = import_eight()["model_cards"] + build_recent()["model_cards"]
