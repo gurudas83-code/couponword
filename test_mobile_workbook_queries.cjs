@@ -113,6 +113,15 @@ setImmediate(()=> {
  check('unknown exact memory is explained without claiming market absence',()=>{search('Galaxy A36 16GB physical RAM 1TB storage');let html=element('mobileResearchResults').innerHTML;assert(html.includes('exact memory variant'));assert(html.includes('not proof that no suitable phone exists'));assert(html.includes('No constraint has been relaxed'));});
  check('invalid budget ranges have an actionable explanation',()=>{assert.equal(search('phone between 50000 and 20000').length,0);assert(element('mobileResearchResults').innerHTML.includes('lower budget is higher'));});
  check('build reliability only exposes documented fields and limitations',()=>{let r=search('build reliability phone under 50000');assert(r.length);assert(r.every(x=>x.card.specifications.ip_rating||x.card.specifications.durability));assert(element('mobileResearchResults').innerHTML.includes('does not establish drop resistance'));});
+ check('all 40 budget bands exist from ₹0 to ₹2L with no leakage',()=>{
+  const homepage=fs.readFileSync(path.join(root,'index.html'),'utf8');
+  for (let cap=5000;cap<=200000;cap+=5000) {
+   assert(homepage.includes('data-mobile-query="mobile under '+cap+'"'),'quick-chip '+cap);
+   assert(homepage.includes('<option value="'+cap+'">'),'guided filter '+cap);
+   const matches=search('phone under '+cap);
+   assert(matches.every(x=>x.card.research_budget_reference.reference_price_inr>=cap-5000&&x.card.research_budget_reference.reference_price_inr<cap),'price barrier '+cap);
+  }
+ });
  check('all headline budget shortcuts cover ₹10k to ₹1L',()=>{
   const homepage=fs.readFileSync(path.join(root,'index.html'),'utf8');
   for (let cap of [10000,15000,20000,25000,30000,35000,40000,50000,60000,70000,80000,90000,100000]) {

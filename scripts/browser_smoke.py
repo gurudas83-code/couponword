@@ -201,15 +201,14 @@ def run(root: Path):
                     assert ordinary == page.evaluate("() => window.CouponWorldMobileResearch.search('phone under 30000 nearby band').map(x => x.card.model_key)"), width
                     assert ordinary != full, width
 
-                    # Exercise every public budget filter with actual generated catalogue data.
+                    # Exercise all 40 five-thousand-rupee public budget filters using the generated catalogue.
                     # These are dated references, not live retailer prices or buy claims.
                     # Stub unrelated backend recommendations while testing chip click handlers.
                     page.route("**/api/recommend?*", lambda route: route.fulfill(
                         status=503, headers={"Access-Control-Allow-Origin": "*"}))
                     budget_audit = []
                     previous_keys = set()
-                    for limit in (10000, 15000, 20000, 25000, 30000, 35000,
-                                  40000, 50000, 60000, 70000, 80000, 90000, 100000):
+                    for limit in range(5000, 200001, 5000):
                         assert page.locator(f'[data-mobile-query="mobile under {limit}"]').count() == 1, (width, limit)
                         assert page.locator(f'#researchGuidedBudget option[value="{limit}"]').count() == 1, (width, limit)
                         page.locator(f'[data-mobile-query="mobile under {limit}"]').evaluate("(el) => el.click()")
@@ -243,8 +242,7 @@ def run(root: Path):
                         budget_audit.append(measure)
                         print("BUDGET_FILTER_AUDIT", width, json.dumps(measure, ensure_ascii=False), flush=True)
                     # Select each guided budget and actually click the Apply action.
-                    for cap in (10000, 15000, 20000, 25000, 30000, 35000,
-                                40000, 50000, 60000, 70000, 80000, 90000, 100000):
+                    for cap in range(5000, 200001, 5000):
                         page.locator("#researchGuidedBudget").select_option(str(cap))
                         page.locator("#researchGuidedScope").select_option("band")
                         page.locator("#researchGuidedApply").evaluate("(el) => el.click()")
