@@ -241,6 +241,51 @@ def health():
     )
 
 
+@app.get("/api/price-observation")
+def price_observation():
+    """User-triggered paid observation via Render; the API key stays private.
+
+    This does not enter the verified-offer API contract or product rankings.
+    The bounded paid API fallback is Flipkart -> Amazon -> reviewed Croma ID.
+    """
+    model_key = str(request.args.get("model_key") or "").strip()
+    if not model_key or len(model_key) > 160:
+        return jsonify({"status": "invalid_model"}), 400
+
+    def positive_int(name, *, minimum, maximum):
+        raw = request.args.get(name)
+        if raw is None or raw == "":
+            return None
+        if not re.fullmatch(r"\d{1,4}", raw):
+            raise ValueError(name)
+        value = int(raw)
+        if not minimum <= value <= maximum:
+            raise ValueError(name)
+        return value
+
+    try:
+        ram_gb = positive_int("ram_gb", minimum=1, maximum=32)
+        storage_gb = positive_int("storage_gb", minimum=32, maximum=2048)
+    except ValueError:
+        return jsonify({"status": "invalid_variant"}), 400
+    color = str(request.args.get("color") or "").strip() or None
+    if color is not None and (len(color) > 40 or not re.fullmatch(r"[a-zA-Z0-9 .-]+", color)):
+        return jsonify({"status": "invalid_variant"}), 400
+
+    try:
+        from paid_api_live_bridge import observe_model
+        result = observe_model(model_key, ram_gb=ram_gb,
+                               storage_gb=storage_gb, color=color)
+    except Exception:
+        app.logger.exception("Bounded QuickCommerce observation failed")
+        return jsonify({"status": "provider_unavailable"}), 503
+    status = result.get("status")
+    response = jsonify(result)
+    response.headers["Cache-Control"] = "no-store"
+    return response, {"invalid_model": 400, "unknown_model": 404,
+                      "not_configured": 503, "budget_exhausted": 429}.get(status, 200)
+
+
 @app.get("/api/recommend")
 def recommend():
     query = str(request.args.get("q") or "").strip()
