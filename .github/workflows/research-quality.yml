@@ -42,6 +42,18 @@ jobs:
           retention-days: 14
       - name: Audit source-backed public research and dated budgets
         run: python scripts/quality_audit.py --root public --report quality-audit.json
+      - name: Reconcile all 232 model price-evidence states without paid calls
+        run: |
+          python -m unittest -v test_price_evidence_coverage
+          python scripts/build_price_evidence_coverage.py --out price-evidence-232.json
+      - name: Upload non-live price evidence and 103-model verification queue
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: coupon-world-price-evidence-232
+          path: price-evidence-232.json
+          if-no-files-found: warn
+          retention-days: 30
       - name: Verify accessories and TV evidence, pages and comparison script
         run: |
           python -m unittest -v test_category_research_release
