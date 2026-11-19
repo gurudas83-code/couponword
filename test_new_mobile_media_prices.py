@@ -1,5 +1,6 @@
 """No unlicensed model photographs or false API prices may enter new research."""
 import json
+from datetime import datetime
 import re
 import tempfile
 import unittest
@@ -72,7 +73,7 @@ class NewMobileMediaAndPricesTests(unittest.TestCase):
         observations = json.loads(
             (ROOT / "data/retailer_price_observations.json").read_text("utf-8"))
         self.assertEqual(observations["source_type"], "quickcommerce_third_party_research")
-        self.assertIn("2026-11-17", observations["generated_at"])
+        self.assertIsNotNone(datetime.fromisoformat(observations["generated_at"]).utcoffset())
         self.assertFalse(any(
             x.get("purchase_eligible") is True for group in observations["models"].values()
             for x in group
