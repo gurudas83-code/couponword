@@ -23,6 +23,8 @@ jobs:
         run: python -m unittest -q test_new_mobile_media_prices
       - name: Verify recent India model importer and client discovery paths
         run: python -m unittest -q test_india_recent_eight_import test_new_mobile_visibility
+      - name: Unit-test generated page-level audit with synthetic fixtures
+        run: python -m unittest -q test_frontend_page_audit
       - name: Build the official public artifact
         run: python scripts/build_public_pages.py --output public
       - name: Verify published 11-model hub and 251-model discovery
