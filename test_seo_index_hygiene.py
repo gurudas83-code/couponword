@@ -75,6 +75,14 @@ class SearchTrustHygiene(unittest.TestCase):
                 self.assertNotIn('<span class="current-price">', page)
                 self.assertNotIn("View Best Verified Offer", page)
 
+    def test_legacy_js_only_buying_guide_is_not_a_duplicate_indexable_page(self):
+        legacy = (PUBLIC / "buying-guides.html").read_text(encoding="utf-8")
+        self.assertIn('name="robots" content="noindex,follow"', legacy)
+        self.assertIn('<link rel="canonical" href="https://coupon-world.in/guides/">', legacy)
+        self.assertIn('<meta http-equiv="refresh" content="0; url=https://coupon-world.in/guides/">', legacy)
+        self.assertNotIn(ORIGIN + "/buying-guides.html", self.urls)
+        self.assertTrue((PUBLIC / "guides" / "index.html").is_file())
+
     def test_google_search_console_ownership_file_is_published(self):
         token = (PUBLIC / "google54faf165096b5622.html").read_text(encoding="utf-8").strip()
         self.assertEqual(token, "google-site-verification: google54faf165096b5622.html")
