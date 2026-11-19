@@ -557,10 +557,11 @@
       var m = prefix || suffix || currency;
       if (m) { budget = value(m[1], m[2]); inclusive = /within|upto|up to|तक/.test(m[0]); text = text.replace(m[0], " "); }
     }
-    // Under-budget searches include every documented cheaper candidate.
-    // Only an explicit nearby-band choice or range adds a lower bound.
+    // All ordinary "under" budgets are strict ₹5,000 reference-price bands:
+    // ₹10k => [₹5k, ₹10k), ₹20k => [₹15k, ₹20k), etc.
+    // Explicit "full budget" and "between/from" ranges remain opt-in exceptions.
     if (budget != null && lower == null) {
-      lower = nearbyBudget && !fullBudget ? Math.max(0, budget - (budget <= 30000 ? 5000 : 10000)) : 0;
+      lower = fullBudget ? 0 : Math.max(0, budget - 5000);
     }
     var ram = null, storage = null;
     text = text.replace(/\b(\d{1,2})\s*\/\s*(\d{2,4})\b/g, function (_, r, t) { ram = Number(r); storage = Number(t); return " "; });
@@ -1347,7 +1348,7 @@
     var values = guidedControls.map(function (control) { return String(control && control.value || ""); });
     if (!values.some(Boolean)) { if (guidedStatus) guidedStatus.textContent = "Choose a budget, priority, exact memory or brand exclusion to start."; return; }
     var query = (values[1] ? values[1] + " " : "") + "phone";
-    if (values[0]) query += " under " + values[0] + (guidedScope && guidedScope.value === "band" ? " nearby band" : " full budget");
+    if (values[0]) query += " under " + values[0] + (guidedScope && guidedScope.value === "all" ? " full budget" : " nearby band");
     if (values[2]) query += " " + values[2] + "GB physical RAM";
     if (values[3]) query += " " + values[3] + "GB storage";
     if (values[4]) query += " exclude " + values[4];
@@ -1357,7 +1358,7 @@
   });
   if (clearSearchButton) clearSearchButton.addEventListener("click", function () {
     guidedControls.forEach(function (control) { if (control) control.value = ""; });
-    if (guidedScope) guidedScope.value = "all";
+    if (guidedScope) guidedScope.value = "band";
     if (guidedStatus) guidedStatus.textContent = "";
     var hero = document.getElementById("heroSearch"); if (hero) hero.value = "";
     searchResearch("");
