@@ -1160,7 +1160,9 @@
     var c = researchConstraints(lastSearchQuery);
     matches = groupResearchMatches(matches);
     lastStrictMatchCount = matches.length;
-    var fallback = matches.length ? [] : repositoryFallbackMatches(lastSearchQuery);
+    // Budget matching is strict: never replace an empty ₹5k band with unrelated
+    // repository results. Unverified-price research stays in a separate lane.
+    var fallback = matches.length || c.budget != null ? [] : repositoryFallbackMatches(lastSearchQuery);
     var displayMatches = matches.length ? matches : fallback;
     lastSearchMatches = displayMatches;
     var visible = searchExpanded ? displayMatches : displayMatches.slice(0, MAX_SEARCH_RESULTS);
