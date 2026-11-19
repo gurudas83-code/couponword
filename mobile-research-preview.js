@@ -555,7 +555,7 @@
       var suffix = text.match(new RegExp("(?:rs\\.?|inr|₹)?\\s*" + amount + "\\s*(?:rupees|रुपये|रुपए)?\\s*(?:ke\\s*)?(?:andar|se kam|के\\s*अंदर|के\\s*नीचे|से\\s*कम|तक)"));
       var currency = text.match(new RegExp("(?:₹|rs\\.?|inr)\\s*" + amount));
       var m = prefix || suffix || currency;
-      if (m) { budget = value(m[1], m[2]); inclusive = /within|upto|up to|तक/.test(m[0]); text = text.replace(m[0], " "); }
+      if (m) { budget = value(m[1], m[2]); inclusive = false; text = text.replace(m[0], " "); }
     }
     // All ordinary "under" budgets are strict ₹5,000 reference-price bands:
     // ₹10k => [₹5k, ₹10k), ₹20k => [₹15k, ₹20k), etc.
