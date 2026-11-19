@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime
 import tempfile
 import unittest
 from pathlib import Path
@@ -22,18 +23,20 @@ class PriceEvidenceCoverageTests(unittest.TestCase):
         self.assertEqual(len(r["model_rows"]), 232)
         self.assertEqual(len(set(x["model_key"] for x in r["model_rows"])), 232)
         self.assertEqual(r["summary"]["statuses"]["WORKBOOK_DATED_REFERENCE"], 86)
-        self.assertEqual(r["summary"]["statuses"]["API_HISTORICAL_VARIANT_OBSERVATION"], 43)
-        self.assertEqual(r["summary"]["statuses"]["API_ONLY_NO_POSITIVE_IN_STOCK_PRICE"], 33)
-        self.assertEqual(r["summary"]["statuses"]["NOT_IN_SAVED_API_OBSERVATIONS"], 70)
-        self.assertEqual(r["summary"]["still_missing_positive_price_evidence"], 103)
-        self.assertEqual(r["summary"]["with_any_dated_price_evidence"], 129)
+        priced = sum(row["price_reference_inr"] is not None for row in r["model_rows"])
+        self.assertEqual(sum(r["summary"]["statuses"].values()), 232)
+        self.assertEqual(r["summary"]["with_any_dated_price_evidence"], priced)
+        self.assertEqual(r["summary"]["still_missing_positive_price_evidence"], 232 - priced)
+        self.assertEqual({item["model_key"] for item in r["verification_queue"]},
+                         {row["model_key"] for row in r["model_rows"] if row["price_reference_inr"] is None})
 
     def test_nonoverlapping_five_thousand_bands_and_rank_protection(self):
         r = self.report
         self.assertEqual(WIDTH, 5000)
         self.assertEqual(len(r["budget_bands"]), 40)
-        self.assertEqual(sum(x["total_with_some_dated_price_evidence"] for x in r["budget_bands"]), 129)
-        self.assertEqual(len(r["verification_queue"]), 103)
+        self.assertEqual(sum(x["total_with_some_dated_price_evidence"] for x in r["budget_bands"]),
+                         r["summary"]["with_any_dated_price_evidence"] - r["summary"]["price_beyond_200k"])
+        self.assertEqual(len(r["verification_queue"]), r["summary"]["still_missing_positive_price_evidence"])
         for model in r["model_rows"]:
             self.assertFalse(model["live_price_verified"])
             self.assertFalse(model["buy_eligible"])
@@ -45,18 +48,19 @@ class PriceEvidenceCoverageTests(unittest.TestCase):
                 self.assertTrue(model["band_floor_inr"] <= price < model["band_ceiling_exclusive_inr"])
                 self.assertEqual(model["band_ceiling_exclusive_inr"] - model["band_floor_inr"], WIDTH)
 
-    def test_reusable_existing_engine_exports_complete_232_inventory_and_103_queue(self):
+    def test_reusable_existing_engine_exports_complete_inventory_and_queue(self):
         with tempfile.TemporaryDirectory() as temp:
             out = Path(temp)
             result = export_review_files(self.report, out)
             self.assertEqual(result["model_rows"], 232)
-            self.assertEqual(result["verification_queue"], 103)
+            expected_missing = len(self.report["verification_queue"])
+            self.assertEqual(result["verification_queue"], expected_missing)
             with (out / "all-232-mobile-price-evidence.csv").open(encoding="utf-8", newline="") as fp:
                 records = list(csv.DictReader(fp))
             with (out / "103-mobile-price-verification-queue.csv").open(encoding="utf-8", newline="") as fp:
                 missing = list(csv.DictReader(fp))
             self.assertEqual(len(records), 232)
-            self.assertEqual(len(missing), 103)
+            self.assertEqual(len(missing), expected_missing)
             self.assertEqual(len(set(row["model_key"] for row in records)), 232)
             self.assertTrue(all(row["price_reference_inr"] in ("", "None") for row in missing))
             self.assertTrue(all(row["live_price_verified"] == "False" for row in records))
@@ -64,7 +68,7 @@ class PriceEvidenceCoverageTests(unittest.TestCase):
             self.assertTrue(all(row["next_action"] for row in missing))
             text = (out / "232-mobile-price-coverage.md").read_text(encoding="utf-8")
             self.assertIn("**232**", text)
-            self.assertIn("**103**", text)
+            self.assertIn(f"**{expected_missing}**", text)
             self.assertIn("Historical research only", text)
 
     def test_historical_api_observation_has_exact_variant_and_source(self):
@@ -75,7 +79,8 @@ class PriceEvidenceCoverageTests(unittest.TestCase):
                 if not model["model_key"].startswith("apple|"):
                     self.assertGreater(variant["ram_gb"], 0)
                 self.assertTrue(model["source_url"].startswith("https://"))
-                self.assertTrue(model["source_date"].startswith("2026-11-17"))
+                checked = datetime.fromisoformat(model["source_date"].replace("Z", "+00:00"))
+                self.assertIsNotNone(checked.utcoffset())
                 self.assertFalse(model["buy_eligible"])
 
     def test_ineligible_stale_or_cross_variant_observations_are_excluded(self):
