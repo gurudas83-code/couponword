@@ -1300,6 +1300,7 @@ body.clean-ui .cw-budget-more summary {
 body.clean-ui .cw-budget-more[open] { width:100%; }
 body.clean-ui .cw-budget-more-options {
   display:flex; flex-wrap:wrap; gap:8px; padding:10px 0 4px;
+  max-height:280px; overflow-y:auto; overscroll-behavior:contain;
 }
 body.clean-ui .decision-path { margin-top:22px; margin-bottom:22px; }
 body.clean-ui .research-photo-open { cursor:pointer; }
