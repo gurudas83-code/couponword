@@ -1,5 +1,6 @@
 """Offline tests for paid QuickCommerce fallback; no network or credits."""
 import os
+import subprocess
 import sys
 import unittest
 from datetime import datetime, timezone
@@ -92,6 +93,20 @@ class PaidApiBridgeTests(unittest.TestCase):
         client = FakeProvider(flipkart=[dict(FLIPKART, offer_price=True)], amazon=[])
         result = bridge.observe_card(CARD, client=client, now=NOW)
         self.assertEqual(result["status"], "no_exact_in_stock_observation")
+
+    def test_catalogue_imports_under_render_gunicorn_chdir(self):
+        script = (
+            "import os, sys; from pathlib import Path; "
+            "root=Path.cwd(); sys.path.insert(0,str(root/'python')); "
+            "sys.path=[p for p in sys.path if p not in ('',str(root))]; "
+            "os.chdir(root/'python'); "
+            "import paid_api_live_bridge as bridge; "
+            "assert len(bridge.catalogue()) > 272"
+        )
+        run = subprocess.run([sys.executable, "-c", script],
+                             cwd=Path(__file__).resolve().parent, capture_output=True,
+                             text=True, timeout=25)
+        self.assertEqual(run.returncode, 0, run.stderr)
 
     def test_source_reviewed_new_models_are_lookup_known_but_not_buyable(self):
         from python.india_missing_eight_pages import import_eight
