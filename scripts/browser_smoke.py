@@ -182,10 +182,10 @@ def run(root: Path):
                     ).all_inner_texts()), width
                     page.evaluate("window.CouponWorldMobileResearch.search('phone under 30000')")
 
-                    # Nearby-band narrowing must be explicit.
+                    # Ordinary under-budget searches now default to strict previous-₹5k windows.
                     nearby = page.evaluate("""() => window.CouponWorldMobileResearch.search('phone under 30000 nearby band').map(x => x.card.research_budget_reference.reference_price_inr)""")
                     assert nearby and all(25000 <= price < 30000 for price in nearby), width
-                    # The ordinary under-budget shortcut matches the full-budget search.
+                    # Full-budget is an explicit opt-in exception, not the default.
                     details = page.locator("details.research-guided-search")
                     details.locator("summary").click()
                     page.locator("#researchGuidedBudget").select_option("30000")
@@ -198,7 +198,8 @@ def run(root: Path):
                     assert any(price < 25000 for price in expanded), width
                     ordinary = page.evaluate("() => window.CouponWorldMobileResearch.search('phone under 30000').map(x => x.card.model_key)")
                     full = page.evaluate("() => window.CouponWorldMobileResearch.search('phone under 30000 full budget').map(x => x.card.model_key)")
-                    assert ordinary == full, width
+                    assert ordinary == page.evaluate("() => window.CouponWorldMobileResearch.search('phone under 30000 nearby band').map(x => x.card.model_key)"), width
+                    assert ordinary != full, width
 
                     # Exercise every public budget filter with actual generated catalogue data.
                     # These are dated references, not live retailer prices or buy claims.
@@ -226,14 +227,14 @@ def run(root: Path):
                           return {
                             limit, count: matches.length, min_reference: prices.length ? Math.min(...prices) : null,
                             max_reference: prices.length ? Math.max(...prices) : null,
-                            invalid_references: prices.filter(price => !(price > 0 && price < limit)).length,
+                            invalid_references: prices.filter(price => !(price >= limit - 5000 && price < limit)).length,
                             keys, sample_names: names.slice(0, 5), related_unverified_preview: related,
                             rendered_cards_initial: rendered, heading, status
                           };
                         }""", limit)
                         assert measure["invalid_references"] == 0, (width, limit, measure)
                         assert len(measure["keys"]) == len(set(measure["keys"])), (width, limit, measure)
-                        assert previous_keys.issubset(set(measure["keys"])), (width, limit, "non-monotonic budget results")
+                        assert previous_keys.isdisjoint(set(measure["keys"])), (width, limit, "overlapping adjacent ₹5k budgets")
                         assert str(measure["count"]) in measure["heading"], (width, limit, measure["heading"])
                         assert "below ₹" in measure["status"], (width, limit, measure["status"])
                         assert measure["rendered_cards_initial"] <= measure["count"], (width, limit)
@@ -245,9 +246,9 @@ def run(root: Path):
                     for cap in (10000, 15000, 20000, 25000, 30000, 35000,
                                 40000, 50000, 60000, 70000, 80000, 90000, 100000):
                         page.locator("#researchGuidedBudget").select_option(str(cap))
-                        page.locator("#researchGuidedScope").select_option("all")
+                        page.locator("#researchGuidedScope").select_option("band")
                         page.locator("#researchGuidedApply").evaluate("(el) => el.click()")
-                        assert page.locator("#heroSearch").input_value() == f"phone under {cap} full budget", (width, cap)
+                        assert page.locator("#heroSearch").input_value() == f"phone under {cap} nearby band", (width, cap)
                         expected_count = next(a["count"] for a in budget_audit if a["limit"] == cap)
                         assert page.locator("#mobileResearchSearchStatus").inner_text().startswith(
                             f"{expected_count} dated budget-reference matches"

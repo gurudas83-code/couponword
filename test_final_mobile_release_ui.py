@@ -23,7 +23,7 @@ class FinalMobileReleaseUITests(unittest.TestCase):
                               ("₹1L", "mobile under 100000")):
             self.assertRegex(
                 source,
-                rf'data-mobile-query="{re.escape(query)}">{re.escape(budget)}',
+                rf'data-mobile-query="{re.escape(query)}"[^>]*>{re.escape(budget)}',
             )
 
     def test_retailer_choices_and_verification_explanation_are_visible(self):

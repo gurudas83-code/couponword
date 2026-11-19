@@ -12,7 +12,7 @@ class BudgetPresentationTests(unittest.TestCase):
     def item(self, product_id, price):
         return {"product_id": product_id, "price": price, "quality_score": 80}
 
-    def test_generic_under_budget_splits_primary_and_value_without_reordering_quality(self):
+    def test_generic_under_budget_presents_only_previous_5000_band_without_reordering_quality(self):
         intent = {
             "category": "smartphone",
             "budget_min": None,
@@ -23,7 +23,7 @@ class BudgetPresentationTests(unittest.TestCase):
         result = build_budget_presentation(
             [
                 self.item("near-1", 49998),
-                self.item("near-2", 42000),
+                self.item("near-2", 45000),
                 self.item("value-1", 31999),
                 self.item("value-2", 9099),
                 self.item("over-budget", 84000),
@@ -32,19 +32,31 @@ class BudgetPresentationTests(unittest.TestCase):
             "mobile under 50000",
         )
         self.assertEqual(result["mode"], "budget_band")
-        self.assertEqual(result["primary_floor"], 40000)
+        self.assertEqual(result["primary_floor"], 45000)
         self.assertEqual(
             [row["product_id"] for row in result["primary_recommendations"]],
             ["near-1", "near-2"],
         )
         self.assertEqual(
             [row["product_id"] for row in result["value_recommendations"]],
-            ["value-1", "value-2"],
+            [],
         )
         self.assertNotIn(
             "over-budget",
             [row["product_id"] for row in result["primary_recommendations"] + result["value_recommendations"]],
         )
+
+    def test_explicit_full_budget_keeps_cheaper_candidates_outside_band_mode(self):
+        intent = {
+            "category": "smartphone", "budget_min": None,
+            "budget_max": 50000, "brands": [], "must_have": [],
+        }
+        result = build_budget_presentation(
+            [self.item("cheap", 18000), self.item("near", 48000)],
+            intent, "phone under 50000 full budget",
+        )
+        self.assertEqual(result["mode"], "quality_ranked")
+        self.assertEqual([row["product_id"] for row in result["primary_recommendations"]], ["cheap", "near"])
 
     def test_value_language_keeps_quality_ranked_contract(self):
         intent = {

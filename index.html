@@ -117,23 +117,23 @@
           </div>
 
 <div class="mobile-budget-chips" aria-label="Quick smartphone budget searches">
-            <span>Choose a budget</span>
-            <button type="button" data-mobile-query="mobile under 10000">₹10k</button>
-            <button type="button" data-mobile-query="mobile under 15000">₹15k</button>
-            <button type="button" data-mobile-query="mobile under 20000">₹20k</button>
-            <button type="button" data-mobile-query="mobile under 25000">₹25k</button>
-            <button type="button" data-mobile-query="mobile under 30000">₹30k</button>
+            <span>Choose a ₹5,000 price-reference band</span>
+            <button type="button" data-mobile-query="mobile under 10000" title="₹5,000 to below ₹10,000 (dated price references)" aria-label="Phones ₹5,000 to below ₹10,000">₹10k</button>
+            <button type="button" data-mobile-query="mobile under 15000" title="₹10,000 to below ₹15,000 (dated price references)" aria-label="Phones ₹10,000 to below ₹15,000">₹15k</button>
+            <button type="button" data-mobile-query="mobile under 20000" title="₹15,000 to below ₹20,000 (dated price references)" aria-label="Phones ₹15,000 to below ₹20,000">₹20k</button>
+            <button type="button" data-mobile-query="mobile under 25000" title="₹20,000 to below ₹25,000 (dated price references)" aria-label="Phones ₹20,000 to below ₹25,000">₹25k</button>
+            <button type="button" data-mobile-query="mobile under 30000" title="₹25,000 to below ₹30,000 (dated price references)" aria-label="Phones ₹25,000 to below ₹30,000">₹30k</button>
             <details class="cw-budget-more">
               <summary>More budgets</summary>
               <div class="cw-budget-more-options">
-                <button type="button" data-mobile-query="mobile under 35000">₹35k</button>
-                <button type="button" data-mobile-query="mobile under 40000">₹40k</button>
-                <button type="button" data-mobile-query="mobile under 50000">₹50k</button>
-                <button type="button" data-mobile-query="mobile under 60000">₹60k</button>
-                <button type="button" data-mobile-query="mobile under 70000">₹70k</button>
-                <button type="button" data-mobile-query="mobile under 80000">₹80k</button>
-                <button type="button" data-mobile-query="mobile under 90000">₹90k</button>
-                <button type="button" data-mobile-query="mobile under 100000">₹1L</button>
+                <button type="button" data-mobile-query="mobile under 35000" title="₹30,000 to below ₹35,000 (dated price references)" aria-label="Phones ₹30,000 to below ₹35,000">₹35k</button>
+                <button type="button" data-mobile-query="mobile under 40000" title="₹35,000 to below ₹40,000 (dated price references)" aria-label="Phones ₹35,000 to below ₹40,000">₹40k</button>
+                <button type="button" data-mobile-query="mobile under 50000" title="₹45,000 to below ₹50,000 (dated price references)" aria-label="Phones ₹45,000 to below ₹50,000">₹50k</button>
+                <button type="button" data-mobile-query="mobile under 60000" title="₹55,000 to below ₹60,000 (dated price references)" aria-label="Phones ₹55,000 to below ₹60,000">₹60k</button>
+                <button type="button" data-mobile-query="mobile under 70000" title="₹65,000 to below ₹70,000 (dated price references)" aria-label="Phones ₹65,000 to below ₹70,000">₹70k</button>
+                <button type="button" data-mobile-query="mobile under 80000" title="₹75,000 to below ₹80,000 (dated price references)" aria-label="Phones ₹75,000 to below ₹80,000">₹80k</button>
+                <button type="button" data-mobile-query="mobile under 90000" title="₹85,000 to below ₹90,000 (dated price references)" aria-label="Phones ₹85,000 to below ₹90,000">₹90k</button>
+                <button type="button" data-mobile-query="mobile under 100000" title="₹95,000 to below ₹1,00,000 (dated price references)" aria-label="Phones ₹95,000 to below ₹1,00,000">₹1L</button>
               </div>
             </details>
           </div>
@@ -251,9 +251,9 @@
           <button id="mobileResearchSearchButton" class="btn btn-primary" type="button">Search smartphones</button>
         </div>
         </details>
-        <details class="research-guided-search"><summary>Choose filters instead of typing</summary><p>Build a new search. All documented phones below your budget are included by default; choose nearby band to narrow the range. To keep a specific model name, edit the search text above instead.</p><div class="research-guided-fields">
-<label>Budget range<select id="researchGuidedBudget"><option value="">No budget filter</option><option value="10000">Under ₹10,000</option><option value="15000">Under ₹15,000</option><option value="20000">Under ₹20,000</option><option value="25000">Under ₹25,000</option><option value="30000">Under ₹30,000</option><option value="35000">Under ₹35,000</option><option value="40000">Under ₹40,000</option><option value="50000">Under ₹50,000</option><option value="60000">Under ₹60,000</option><option value="70000">Under ₹70,000</option><option value="80000">Under ₹80,000</option><option value="90000">Under ₹90,000</option><option value="100000">Under ₹100,000</option></select></label>
-<label>Budget search scope<select id="researchGuidedScope"><option value="all">All phones below my budget (default)</option><option value="band">Nearby price band only</option></select></label>
+        <details class="research-guided-search"><summary>Choose filters instead of typing</summary><p>Build a new search. Every budget defaults to the preceding ₹5,000 range of dated reference prices (e.g. ₹15,000 to below ₹20,000). Choose "All below" only if you want a wider search. This does not confirm today's store price. To keep a specific model name, edit the search text above instead.</p><div class="research-guided-fields">
+<label>Budget range<select id="researchGuidedBudget"><option value="">No budget filter</option><option value="10000">₹5,000 to below ₹10,000</option><option value="15000">₹10,000 to below ₹15,000</option><option value="20000">₹15,000 to below ₹20,000</option><option value="25000">₹20,000 to below ₹25,000</option><option value="30000">₹25,000 to below ₹30,000</option><option value="35000">₹30,000 to below ₹35,000</option><option value="40000">₹35,000 to below ₹40,000</option><option value="50000">₹45,000 to below ₹50,000</option><option value="60000">₹55,000 to below ₹60,000</option><option value="70000">₹65,000 to below ₹70,000</option><option value="80000">₹75,000 to below ₹80,000</option><option value="90000">₹85,000 to below ₹90,000</option><option value="100000">₹95,000 to below ₹1,00,000</option></select></label>
+<label>Budget search scope<select id="researchGuidedScope"><option value="band" selected>Previous ₹5,000 band (default)</option><option value="all">All below my budget (optional)</option></select></label>
 <label>What matters most<select id="researchGuidedPriority"><option value="">Any priority</option><option value="camera">Camera</option><option value="battery">Battery</option><option value="gaming">Gaming</option><option value="display">Display</option><option value="software support">Software support</option><option value="build reliability">Build / reliability</option></select></label>
 <label>Exact physical RAM<select id="researchGuidedRam"><option value="">Any documented RAM</option><option value="4">4GB physical RAM</option><option value="6">6GB physical RAM</option><option value="8">8GB physical RAM</option><option value="12">12GB physical RAM</option><option value="16">16GB physical RAM</option><option value="24">24GB physical RAM</option></select></label>
 <label>Exact storage<select id="researchGuidedStorage"><option value="">Any documented storage</option><option value="64">64GB</option><option value="128">128GB</option><option value="256">256GB</option><option value="512">512GB</option><option value="1024">1024GB</option></select></label>
@@ -265,7 +265,7 @@
           <button type="button" data-mobile-research-query="gaming phone">Gaming</button>
           <button type="button" data-mobile-research-query="software support phone">Software support</button>
         </div>
-        <p class="research-help">Try a model and exact memory variant, or “5000mah battery phone under 30000”. The first group uses dated budget evidence; the second group may cost more because its price is unverified. Add “nearby band” to narrow the reference range. Compare up to 3 documented models; ordering reflects research evidence, not measured performance.</p>
+        <p class="research-help">Try a model and exact memory variant, or “5000mah battery phone under 30000”. The first group uses dated budget evidence; the second group may cost more because its price is unverified. Budget searches default to the previous ₹5,000 range of dated reference prices; use "full budget" only to include cheaper prices. Compare up to 3 documented models; ordering reflects research evidence, not measured performance.</p>
         <div id="mobileResearchCompare" hidden aria-live="polite" tabindex="-1"></div>
         <p id="mobileResearchSearchStatus" class="mobile-research-search-status" aria-live="polite"></p>
         <div id="mobileResearchResults" class="mobile-research-results" aria-live="polite" hidden></div>

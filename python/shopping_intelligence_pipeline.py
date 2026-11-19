@@ -1882,7 +1882,7 @@ def premium_market_quality_status(intent: dict[str, Any], discovery: dict[str, A
     return "VERIFIED_SCOPE", None
 
 
-BUDGET_PRIMARY_BAND_RATIO = 0.80
+BUDGET_PRIMARY_BAND_WIDTH_INR = 5000
 
 
 def build_budget_presentation(
@@ -1892,12 +1892,11 @@ def build_budget_presentation(
     *,
     exact_model_query: bool = False,
 ) -> dict[str, Any]:
-    """Split generic under-budget results without changing eligibility or scores.
+    """Present the preceding ₹5,000 price band without altering fit/eligibility.
 
-    ``ranked_recommendations`` is already hard-constraint and evidence checked.
-    This presentation layer only separates near-budget primary picks from
-    cheaper value alternatives; it never admits or removes a product from the
-    underlying ranked recommendation pool.
+    The ranked underlying pool is unchanged. Cheaper alternatives are not
+    promoted into the default budget filter, and remain available only on an
+    explicit full-budget/cheapest/value search.
     """
     base = {
         "mode": "quality_ranked",
@@ -1913,7 +1912,7 @@ def build_budget_presentation(
 
     budget = intent.get("budget_max")
     text = clean(query).lower()
-    value_language = re.search(r"\b(?:cheap(?:est)?|value|budget[- ]friendly)\b", text)
+    value_language = re.search(r"\b(?:cheap(?:est)?|value|budget[- ]friendly)\b|\bfull\s+budget\b|पूरे\s*बजट", text)
     if (
         clean(intent.get("category")) != "smartphone"
         or budget in (None, "")
@@ -1930,9 +1929,8 @@ def build_budget_presentation(
     if budget_value <= 0:
         return base
 
-    floor = int(round(budget_value * BUDGET_PRIMARY_BAND_RATIO))
+    floor = max(0, int(budget_value) - BUDGET_PRIMARY_BAND_WIDTH_INR)
     primary: list[dict[str, Any]] = []
-    value: list[dict[str, Any]] = []
     for item in ranked_recommendations:
         try:
             price = float(item.get("price"))
@@ -1940,20 +1938,20 @@ def build_budget_presentation(
             continue
         if floor <= price <= budget_value:
             primary.append(dict(item, budget_band="primary"))
-        elif 0 < price < floor:
-            value.append(dict(item, budget_band="value"))
+        # Below-floor candidates remain in ranked_recommendations for explicit
+        # full-budget requests; they must not leak into the default range.
 
     base.update({
         "mode": "budget_band",
         "primary_title": f"Top Phones Between ₹{floor:,} and ₹{int(budget_value):,}",
-        "value_title": f"Best Value Phones Below ₹{floor:,}",
+        "value_title": None,
         "no_primary_message": (
             f"No currently verified phones found in the ₹{floor:,}–₹{int(budget_value):,} primary range."
         ),
         "primary_floor": floor,
         "primary_status": "PASS" if len(primary) >= DEFAULT_MIN_RESULTS else "PARTIAL",
         "primary_recommendations": primary[:3],
-        "value_recommendations": value[:3],
+        "value_recommendations": [],
     })
     return base
 
