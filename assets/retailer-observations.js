@@ -99,7 +99,8 @@
         if (!target.isConnected || ticket !== panel._liveTicket) return;
         if (result.status !== "ok" || !result.configuration ||
             !Array.isArray(result.configuration.offers) || !result.configuration.offers.length) {
-          var note = result.status === "not_configured" ? "Paid API is not configured on this server." :
+          var note = result.status === "unknown_model" ? "Live API lookup does not currently cover this research-only model. Use the saved retailer searches." :
+            result.status === "not_configured" ? "Paid API is not configured on this server." :
             result.status === "budget_exhausted" ? "Paid API daily call limit reached. Check the retailer directly." :
             result.status === "no_exact_in_stock_observation" ?
               "No exact in-stock listing was observed in the checked stores." :
@@ -136,29 +137,45 @@
     var configurations = (payload.models || {})[modelKey] || [];
     panel._priceConfigurations = configurations;
     if (!configurations.length) {
-      panel.innerHTML = '<p role="status">No saved price check for this model. Checking the paid API does not guarantee a listing.</p><div data-live-price></div>';
-      checkPaidApi(panel, modelKey, null);
+      panel.innerHTML = '<p role="status">No saved price check for this model. A live API lookup does not guarantee a listing.</p><button type="button" data-check-live-price>Check live price observation (uses API quota)</button><div data-live-price aria-live="polite"></div>';
       return;
     }
     var id = "api-price-config-" + (++sequence);
-    panel.innerHTML = '<h4>Price &amp; availability observations</h4><p>QuickCommerce third-party source; opening this price panel checks the private paid API through the server with a call limit. Checkout prices may differ.</p><div data-live-price></div>' +
+    panel.innerHTML = '<h4>Price &amp; availability observations</h4><p>QuickCommerce third-party source; opening this price panel checks the private paid API through the server with a call limit. Checkout prices may differ.</p><button type="button" data-check-live-price>Check live price observation (uses API quota)</button><div data-live-price aria-live="polite"></div>' +
       '<label for="' + id + '">Choose the listed configuration</label><select id="' + id + '" data-price-config>' +
       configurations.map(function (configuration, index) {
         return '<option value="' + index + '">' + escape(configuration.variant) + "</option>";
       }).join("") + '</select><label>Check this configuration against your budget (₹)<input type="number" min="1" step="1" inputmode="numeric" data-price-budget placeholder="Optional price cap"></label><div data-price-table></div>' +
       '<p class="api-observation-note">Prices can change. Bank/exchange offers and delivery charges are excluded. Confirm India variant, seller condition, warranty and delivery with the retailer. Manufacturer specifications remain separately sourced. Price has 0% weight in product quality ranking.</p>';
     renderConfiguration(panel, configurations[0]);
-    checkPaidApi(panel, modelKey, configurations[0]);
     panel.querySelector("[data-price-config]").addEventListener("change", function (event) {
       var selected = configurations[Number(event.target.value)];
       renderConfiguration(panel, selected);
-      checkPaidApi(panel, modelKey, selected);
+      panel._liveTicket = (panel._liveTicket || 0) + 1;
+      var liveTarget = panel.querySelector("[data-live-price]");
+      if (liveTarget) liveTarget.textContent = "Live API not checked for the selected configuration.";
+      var liveButton = panel.querySelector("[data-check-live-price]");
+      if (liveButton) { liveButton.disabled = false; liveButton.textContent = "Check live price observation (uses API quota)"; }
     });
     panel.querySelector("[data-price-budget]").addEventListener("input", function () {
       renderConfiguration(panel, configurations[Number(panel.querySelector("[data-price-config]").value)]);
     });
   }
   document.addEventListener("click", function (event) {
+    var liveButton = event.target.closest("[data-check-live-price]");
+    if (liveButton) {
+      var livePanel = liveButton.closest("[data-api-price-panel]");
+      var box = liveButton.closest(".api-price-observations");
+      var opener = box && box.querySelector("[data-price-observations]");
+      if (!livePanel || !opener) return;
+      var selected = livePanel.querySelector("[data-price-config]");
+      var configuration = selected && livePanel._priceConfigurations ?
+        livePanel._priceConfigurations[Number(selected.value)] : null;
+      liveButton.disabled = true;
+      liveButton.textContent = "Live check requested";
+      checkPaidApi(livePanel, opener.getAttribute("data-price-observations"), configuration);
+      return;
+    }
     var button = event.target.closest("[data-price-observations]");
     if (!button) return;
     var parent = button.closest(".api-price-observations");
