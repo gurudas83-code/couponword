@@ -47,7 +47,7 @@ class HistoricalBudgetMismatchTests(unittest.TestCase):
         script = (ROOT / "mobile-research-preview.js").read_text(encoding="utf-8")
         price = (ROOT / "assets" / "retailer-observations.js").read_text(encoding="utf-8")
         self.assertIn("Historical price-band matches · NOT current prices", script)
-        self.assertIn("newer date or a different colour", script)
+        self.assertIn("later date or a different colour", script)
         self.assertIn('var price = typeof offer.price', price)
         self.assertIn('(isFresh ? "₹" : "Historical ₹")', price)
         self.assertIn("offer.price >= Math.max(0, budget - 5000) && offer.price < budget", price)
