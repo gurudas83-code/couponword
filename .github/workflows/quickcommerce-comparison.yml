@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   refresh:
-    if: github.event_name == 'push' || inputs.max_calls > 0
+    if: github.event_name == 'workflow_dispatch' && inputs.max_calls > 0
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -29,17 +29,104 @@ jobs:
         env:
           QUICKCOMMERCE_API_KEY: ${{ secrets.QUICKCOMMERCE_API_KEY }}
           MAX_CALLS: ${{ inputs.max_calls }}
-        run: |
-          if [ "$GITHUB_EVENT_NAME" = push ]; then
-            python scripts/refresh_api_comparison.py --refresh-historical-dated-prices --max-calls 258
-          else
-            python scripts/refresh_api_comparison.py --max-calls "$MAX_CALLS"
-          fi
+        run: python scripts/refresh_api_comparison.py --max-calls "$MAX_CALLS"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
           name: quickcommerce-comparison-refresh
-          path: |
-            private_observations/provider_refresh.json
-            private_observations/missing_mobile_api_prices.json
+          path: private_observations/provider_refresh.json
           retention-days: 14
+
+  import-backfill:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Import completed backfill into existing feed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run watch 44579646967 --exit-status --interval 15
+          gh run download 44579646967 --name quickcommerce-comparison-refresh --dir /tmp/cw-backfill
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from datetime import datetime, timedelta, timezone
+          from scripts.build_price_evidence_coverage import build, positive_historical_observations
+          evidence = build()
+          targets = {row['model_key'] for row in evidence['model_rows']
+                     if row.get('source_date') and row['source_date'][:10] < '2026-11-19'}
+          batch, = Path('/tmp/cw-backfill').rglob('missing_mobile_api_prices.json')
+          result = json.loads(batch.read_text(encoding='utf-8'))
+          if result['errors'] or result['targeted_models'] != len(targets):
+              raise ValueError('Incomplete or mismatched collection')
+          output = Path('data/retailer_price_observations.json')
+          current = json.loads(output.read_text(encoding='utf-8-sig'))
+          incoming = result['snapshot']
+          if incoming['mode'] != current['mode'] or incoming['source_type'] != current['source_type']:
+              raise ValueError('Unexpected source')
+          if set(incoming['models']) - targets:
+              raise ValueError('Batch contains out-of-scope models')
+
+          def identity(row):
+              return tuple(row.get(field) for field in ('ram_gb', 'storage_gb', 'color', 'pincode'))
+
+          models = current['models']
+          published = 0
+          added = {}
+          for key, new_variants in incoming['models'].items():
+              eligible = [row for row in new_variants if positive_historical_observations([row], key)]
+              for row in eligible:
+                  for offer in row['offers']:
+                      checked = datetime.fromisoformat(offer['observed_at'])
+                      if checked.astimezone(timezone(timedelta(hours=5, minutes=30))).date().isoformat() != '2026-11-19':
+                          raise ValueError('Observation is outside the requested India date')
+              if not eligible:
+                  continue
+              existing = models.setdefault(key, [])
+              by_variant = {identity(row): index for index, row in enumerate(existing)}
+              for row in eligible:
+                  index = by_variant.get(identity(row))
+                  if index is None:
+                      existing.append(row)
+                      continue
+                  previous = existing[index]
+                  offers = {offer['retailer']: offer for offer in previous['offers']}
+                  for offer in row['offers']:
+                      old = offers.get(offer['retailer'])
+                      if old and old['retailer_product_id'] == offer['retailer_product_id']:
+                          history = {point['observed_at']: point for point in old.get('history', []) + offer.get('history', [])}
+                          offer = dict(offer, history=[history[stamp] for stamp in sorted(history)][-90:])
+                      offers[offer['retailer']] = offer
+                  existing[index] = dict(row, offers=list(offers.values()))
+              published += 1
+              added[key] = positive_historical_observations(eligible, key)[0]
+          if published != result['models_with_price']:
+              raise ValueError('Publication count differs from eligible batch count')
+          current['counts'] = {
+              'models': len(models),
+              'configurations': sum(map(len, models.values())),
+              'retailer_rows': sum(len(row['offers']) for variants in models.values() for row in variants),
+              'rejected_rows': current['counts']['rejected_rows'] + incoming['counts']['rejected_rows'],
+          }
+          if published:
+              current['generated_at'] = incoming['generated_at']
+              output.write_text(json.dumps(current, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
+          print(json.dumps({'api_calls': result['calls_attempted'], 'new_prices': published,
+                            'remaining_models': len(result['remaining_model_keys']),
+                            'added': added}))
+          PY
+      - name: Validate and commit the price feed to the PR branch
+        run: |
+          python -m unittest -q test_api_price_observations test_price_evidence_coverage
+          git add data/retailer_price_observations.json
+          if ! git diff --cached --quiet; then
+            git -c user.name=github-actions -c 'user.email=41898282+github-actions[bot]@users.noreply.github.com' commit -m "Add exact mobile prices from the completed QuickCommerce batch"
+            git push origin HEAD:refs/heads/work/missing-mobile-api-prices
+          fi
