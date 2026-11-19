@@ -72,23 +72,87 @@
       rows + "</tbody></table></div>" +
       (stores.size < 2 ? "<p>No same-configuration comparison across two fresh in-stock stores is available.</p>" : "");
   }
+  var liveApiHost = /^(localhost|127\\.0\\.1)$/.test(window.location.hostname)
+    ? "http://127.0.0.1:8000" : "https://couponword.onrender.com";
+
+  function checkPaidApi(panel, modelKey, configuration) {
+    var target = panel.querySelector("[data-live-price]");
+    if (!target) return;
+    var ticket = (panel._liveTicket || 0) + 1;
+    panel._liveTicket = ticket;
+    target.innerHTML = '<p role="status">Checking recent paid API observations (Flipkart first, Amazon fallback)…</p>';
+    var params = new URLSearchParams({model_key: modelKey});
+    if (configuration) {
+      if (Number.isInteger(configuration.ram_gb)) params.set("ram_gb", configuration.ram_gb);
+      if (Number.isInteger(configuration.storage_gb)) params.set("storage_gb", configuration.storage_gb);
+      if (configuration.color && configuration.color !== "Not applicable" &&
+          !String(configuration.color).startsWith("Unspecified SKU")) {
+        params.set("color", configuration.color);
+      }
+    }
+    var controller = new AbortController();
+    var timeout = setTimeout(function () { controller.abort(); }, 50000);
+    fetch(liveApiHost + "/api/price-observation?" + params.toString(),
+      {credentials: "omit", signal: controller.signal}).then(function (response) {
+        return response.json();
+      }).then(function (result) {
+        if (!target.isConnected || ticket !== panel._liveTicket) return;
+        if (result.status !== "ok" || !result.configuration ||
+            !Array.isArray(result.configuration.offers) || !result.configuration.offers.length) {
+          var note = result.status === "not_configured" ? "Paid API is not configured on this server." :
+            result.status === "budget_exhausted" ? "Paid API daily call limit reached. Check the retailer directly." :
+            result.status === "no_exact_in_stock_observation" ?
+              "No exact in-stock listing was observed in the checked stores." :
+              "Recent API observation unavailable. Saved checks remain below.";
+          target.innerHTML = '<p role="status">' + escape(note) + '</p>';
+          return;
+        }
+        var c = result.configuration;
+        var offer = c.offers[0];
+        var url = safeUrl(offer);
+        if (!url || offer.availability !== "in_stock" ||
+            !Number.isFinite(offer.price) || offer.price <= 0 || !fresh(offer)) {
+          target.innerHTML = '<p role="status">An exact, fresh, in-stock price could not be confirmed. Use retailer links.</p>';
+          return;
+        }
+        var fromCache = (result.attempts || []).some(function (step) {
+          return step.status === "cached" && step.retailer === offer.retailer;
+        });
+        target.innerHTML = '<p><strong>' + (fromCache ? "Recent cached" : "Newly checked") +
+          ' paid API observation:</strong> ' + escape(offer.retailer) +
+          ' · ₹' + offer.price.toLocaleString("en-IN", {maximumFractionDigits: 2}) +
+          ' · ' + escape(c.variant) + ' · Pincode ' + escape(c.pincode) +
+          ' · ' + escape(new Date(offer.observed_at).toLocaleString("en-IN", {timeZone: "Asia/Kolkata"})) +
+          ' IST. <a href="' + escape(url) +
+          '" target="_blank" rel="noopener noreferrer nofollow">Confirm on retailer</a></p>' +
+          '<p class="api-observation-note">QuickCommerce third-party observation; not an official retailer API quote, checkout guarantee, or verified purchase offer.</p>';
+      }).catch(function () {
+        if (target.isConnected && ticket === panel._liveTicket) {
+          target.innerHTML = '<p role="status">Paid API check temporarily unavailable. Saved observations remain below.</p>';
+        }
+      }).finally(function () { clearTimeout(timeout); });
+  }
   function show(panel, payload, modelKey) {
     var configurations = (payload.models || {})[modelKey] || [];
     panel._priceConfigurations = configurations;
     if (!configurations.length) {
-      panel.innerHTML = '<p role="status">No matching API price observation for this catalogue entry. This does not mean unavailable. Use the retailer links to check.</p>';
+      panel.innerHTML = '<p role="status">No saved price check for this model. Checking the paid API does not guarantee a listing.</p><div data-live-price></div>';
+      checkPaidApi(panel, modelKey, null);
       return;
     }
     var id = "api-price-config-" + (++sequence);
-    panel.innerHTML = '<h4>Price &amp; availability observations</h4><p>Source: previously saved QuickCommerce third-party observations. Opening this panel does not call the paid API. Prices are not checkout confirmation.</p>' +
+    panel.innerHTML = '<h4>Price &amp; availability observations</h4><p>QuickCommerce third-party source; opening this price panel checks the private paid API through the server with a call limit. Checkout prices may differ.</p><div data-live-price></div>' +
       '<label for="' + id + '">Choose the listed configuration</label><select id="' + id + '" data-price-config>' +
       configurations.map(function (configuration, index) {
         return '<option value="' + index + '">' + escape(configuration.variant) + "</option>";
       }).join("") + '</select><label>Check this configuration against your budget (₹)<input type="number" min="1" step="1" inputmode="numeric" data-price-budget placeholder="Optional price cap"></label><div data-price-table></div>' +
       '<p class="api-observation-note">Prices can change. Bank/exchange offers and delivery charges are excluded. Confirm India variant, seller condition, warranty and delivery with the retailer. Manufacturer specifications remain separately sourced. Price has 0% weight in product quality ranking.</p>';
     renderConfiguration(panel, configurations[0]);
+    checkPaidApi(panel, modelKey, configurations[0]);
     panel.querySelector("[data-price-config]").addEventListener("change", function (event) {
-      renderConfiguration(panel, configurations[Number(event.target.value)]);
+      var selected = configurations[Number(event.target.value)];
+      renderConfiguration(panel, selected);
+      checkPaidApi(panel, modelKey, selected);
     });
     panel.querySelector("[data-price-budget]").addEventListener("input", function () {
       renderConfiguration(panel, configurations[Number(panel.querySelector("[data-price-config]").value)]);
