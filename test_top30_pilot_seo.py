@@ -93,7 +93,10 @@ class Top30ResearchPublicationTests(unittest.TestCase):
             self.assertEqual(len(set(parsed.cards)), 30)
             for row in self.pilot["selected_models"]:
                 model = self.cards[row["model_key"]]
-                self.assertIn(model_title(model), body)
+                title = model_title(model)
+                if title.casefold().startswith("redmi redmi "):
+                    title = title[len("Redmi "):]
+                self.assertIn(title, body)
                 self.assertIn("phone-" + slug_for(model), parsed.cards)
 
     def test_link_only_to_already_eligible_detail_pages(self):
@@ -177,6 +180,40 @@ class Top30ResearchPublicationTests(unittest.TestCase):
             self.assertNotIn("current verified price", body.lower())
             self.assertIn("nofollow sponsored noopener noreferrer", body)
             self.assertGreaterEqual(body.count('target="_blank" rel="nofollow sponsored noopener noreferrer"'), 60)
+
+    def test_bilingual_buyer_intents_use_existing_evidence_gated_routes(self):
+        for path in (TOP30_EN, TOP30_HI):
+            body = self.html[path]
+            for cap in (10000, 15000, 20000, 25000, 30000):
+                self.assertIn(
+                    'href="/?q=mobile+under+' + str(cap) +
+                    '+nearby+band#mobileResearchSearch"', body
+                )
+            for anchor in ("budget-paths", "buyer-questions", "documented-specs",
+                           "top30-faq", "group-editorial", "group-market",
+                           "group-historical-demand", "group-control"):
+                self.assertIn('id="' + anchor + '"', body)
+            for route in ("/seo/camera-phone-buying-guide.html",
+                          "/seo/gaming-phone-buying-guide.html",
+                          "/seo/5g-phone-india-checklist.html"):
+                self.assertIn('href="' + route + '"', body)
+            self.assertIn("Redmi Note 15 5G", body)
+            self.assertNotIn("Redmi Redmi Note 15 5G", body)
+            self.assertIn('"dateModified": "2026-11-20"', body)
+            self.assertNotIn('"@type": "FAQPage"', body)
+            self.assertNotIn('"@type": "Offer"', body)
+            self.assertNotIn('"@type": "Review"', body)
+            self.assertNotIn("Buy Now", body)
+            self.assertNotIn("₹19,999 current", body)
+        for path, terms in (
+            (TOP30_EN, ("Which phone should I shortlist for camera, gaming, battery or 5G?",
+                        "independently measured best-in-class results",
+                        "Are these the 30 best-selling or best-performing phones")),
+            (TOP30_HI, ("कैमरा, गेमिंग, बैटरी और 5G",
+                        "वास्तविक", "खरीद से पहले अक्सर पूछे सवाल")),
+        ):
+            for term in terms:
+                self.assertIn(term, self.html[path])
 
     def test_standalone_urls_not_mass_generated_without_evidence(self):
         # The 20 non-approved models are discoverable through the research
