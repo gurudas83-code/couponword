@@ -21,7 +21,7 @@ class LocalE2EApiOverrideTests(unittest.TestCase):
         self.assertEqual(APP.count('"/api/recommend?q="'), 1)
 
     def test_frontend_bundle_version_changes_with_local_override(self):
-        self.assertIn('/app.js?v=14', INDEX)
+        self.assertIn('/app.js?v=20261120-cold-start', INDEX)
 
 
 if __name__ == "__main__":
