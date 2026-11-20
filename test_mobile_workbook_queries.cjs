@@ -123,7 +123,7 @@ setImmediate(()=> {
  });
  check('five headline shortcuts preserve the full advanced budget selector',()=>{
   const homepage=fs.readFileSync(path.join(root,'index.html'),'utf8');
-  const quickRow=homepage.match(/<div class="mobile-budget-chips"[\\s\\S]*?<\\/div>/)?.[0] || '';
+  const quickRow=homepage.match(/<div class="mobile-budget-chips"[\s\S]*?<\/div>/)?.[0] || '';
   const primary=[10000,15000,20000,25000,30000];
   assert.equal((quickRow.match(/data-mobile-query=/g)||[]).length,5);
   for (let cap of primary) {
