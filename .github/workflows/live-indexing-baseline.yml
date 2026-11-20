@@ -1,0 +1,46 @@
+name: Read-only live indexing baseline
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Build public GitHub Pages artifact"]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: coupon-world-live-indexing-baseline
+  cancel-in-progress: true
+
+jobs:
+  live-indexability:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout current published-source branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: main
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+      - name: Install same dependencies as Pages build
+        run: python -m pip install -r requirements.txt
+      - name: Test indexing probe with controlled fixtures
+        run: python -m unittest -q test_live_indexability_audit
+      - name: Build same canonical public URL inventory
+        run: python scripts/build_public_pages.py --output public
+      - name: Verify live sitemap and all candidate HTML URLs (report-only)
+        run: python -m scripts.live_indexability_audit --root public --report outputs/live-indexability-baseline.json --csv outputs/live-indexability-baseline.csv
+      - name: Preserve per-URL evidence, including any anomalies
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: coupon-world-indexability-baseline-${{ github.run_id }}-${{ github.run_attempt }}
+          path: outputs/live-indexability-baseline.*
+          retention-days: 30
+          if-no-files-found: warn
+          overwrite: true
