@@ -830,6 +830,7 @@
         return '<span class="retailer-choice-unavailable" aria-disabled="true">' +
           escapeHtml(store.name) + '<small>Link unavailable</small></span>';
       }).join(" ") + '</div>' +
+      '<p class="retailer-choice-purchase-note"><strong>Want to buy this phone?</strong> Choose an available exact retailer listing or search Amazon, Flipkart or Croma for this model. The retailer handles the purchase, not Coupon World. Confirm the correct RAM/storage, current price, stock, warranty and delivery before paying. Store searches are not verified product offers.</p>' +
       '<div class="api-price-observations"><button type="button" data-price-observations="' +
       escapeHtml(card.model_key) + '" aria-expanded="false">View saved price &amp; stock checks</button>' +
       '<div data-api-price-panel hidden aria-live="polite"></div></div>';
