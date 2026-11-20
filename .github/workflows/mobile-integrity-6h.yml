@@ -19,12 +19,16 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: couponworld-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 permissions:
   contents: read
 
 jobs:
   mobile-integrity:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 22
     steps:
       - name: Checkout frozen research and current code
