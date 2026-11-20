@@ -59,9 +59,13 @@ class SearchTrustHygiene(unittest.TestCase):
         products = sorted((PUBLIC / "products").glob("*/index.html"))
         # Only the reviewed technical subset is public; legacy lifestyle,
         # fashion, toys and home products are intentionally retired.
-        self.assertEqual(len(products), 65)
+        from scripts.build_public_pages import GSC_MOVED_TECH_PRODUCT_ROUTES
+        canonical_products = [file for file in products
+                              if file.parent.name not in GSC_MOVED_TECH_PRODUCT_ROUTES]
+        self.assertEqual(len(products), 67)  # 65 reviewed + 2 moved-URL redirects
+        self.assertEqual(len(canonical_products), 65)
         indexed = set(self.urls)
-        for file in products:
+        for file in canonical_products:
             page = file.read_text(encoding="utf-8")
             canonical = ORIGIN + "/products/" + file.parent.name + "/"
             indexed_by_robots = "noindex" not in robots_instruction(page)

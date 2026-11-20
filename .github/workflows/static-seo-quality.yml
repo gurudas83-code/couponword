@@ -48,6 +48,8 @@ jobs:
         run: python -m unittest -q test_india_recent_eight_import test_new_mobile_visibility
       - name: Validate built technical product routes (not just source fixtures)
         run: python -m unittest -q test_technical_niche_publication test_seo_index_hygiene
+      - name: Verify six GSC 404 routes with two exact migrations and four intentional retirements
+        run: python -m unittest -q test_gsc_404_migrations
       - name: Validate generated sitemap, robots and homepage metadata
         run: python scripts/quality_gate.py --root public
       - name: JavaScript syntax validation

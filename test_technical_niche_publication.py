@@ -82,7 +82,8 @@ class TechnicalNichePublicationTests(unittest.TestCase):
         from python.build_product_pages import page_dir
         expected_slugs = {page_dir(row).name for row in selected}
         actual_slugs = {path.parent.name for path in (public / "products").glob("*/index.html")}
-        self.assertEqual(actual_slugs, expected_slugs)
+        from scripts.build_public_pages import GSC_MOVED_TECH_PRODUCT_ROUTES
+        self.assertEqual(actual_slugs, expected_slugs | set(GSC_MOVED_TECH_PRODUCT_ROUTES))
         for item in public_json:
             self.assertNotIn(item.get("category"), {"Fashion", "Home", "Toys", "Beauty", "Fitness", "Footwear"})
 
