@@ -97,17 +97,40 @@ class ActionsHealthTests(unittest.TestCase):
 
 
     def test_every_upload_artifact_is_unique_across_rerun_attempts(self):
+        # Inspect actual upload action steps, not a regex that accidentally
+        # matches zero actions and therefore reports a false PASS.
+        audited_uploads = 0
         for path in WORKFLOWS_DIR.glob("*.yml"):
-            text = path.read_text(encoding="utf-8")
-            for match in re.finditer(
-                r"(?m)^\\s*(?:-\\s+)?uses: actions/upload-(?:pages-)?artifact@", text
-            ):
-                segment = text[match.end():].split("\n      - ", 1)[0]
-                found = re.search(r"(?m)^\\s+name: ([^\\n]+)", segment)
-                with self.subTest(workflow=path.name):
-                    self.assertIsNotNone(found, "Artifact must have a chosen name")
-                    self.assertIn("github.run_id", found.group(1))
-                    self.assertIn("github.run_attempt", found.group(1))
+            lines = path.read_text(encoding="utf-8").splitlines()
+            for index, line in enumerate(lines):
+                if not re.search(
+                    r"\buses:\s*actions/upload-(?:pages-)?artifact@", line
+                ):
+                    continue
+                audited_uploads += 1
+                step_indent = len(line) - len(line.lstrip())
+                artifact_name = None
+                for subsequent in lines[index + 1:]:
+                    stripped = subsequent.strip()
+                    if not stripped or stripped.startswith("#"):
+                        continue
+                    indent = len(subsequent) - len(subsequent.lstrip())
+                    if indent <= step_indent and re.match(
+                        r"-\s+(?:name|uses):", stripped
+                    ):
+                        break
+                    matched = re.match(r"name:\s*(.+)", stripped)
+                    if matched and indent > step_indent:
+                        artifact_name = matched.group(1)
+                        break
+                with self.subTest(workflow=path.name, line=index + 1):
+                    self.assertIsNotNone(
+                        artifact_name, "Upload step is missing an artifact name"
+                    )
+                    self.assertIn("github.run_id", artifact_name)
+                    self.assertIn("github.run_attempt", artifact_name)
+        # Keep this check non-vacuous as the workflow inventory expands.
+        self.assertGreaterEqual(audited_uploads, 12)
 
 
 if __name__ == "__main__":
