@@ -9,6 +9,8 @@ const core = JSON.parse(fs.readFileSync("public/data/mobile_research_catalogue.j
 const preview = JSON.parse(fs.readFileSync("data/mobile_research_preview.json", "utf8"));
 const script = fs.readFileSync("mobile-research-preview.js", "utf8");
 const elements = new Map();
+let startedAt = 0;
+let firstResultPaintMs = null;
 
 function element(id) {
   if (!elements.has(id)) elements.set(id, {
@@ -19,7 +21,22 @@ function element(id) {
   });
   return elements.get(id);
 }
-const document = {
+// Measure the FIRST meaningful result write, not later catalogue controls,
+ // optional cards or Node's event-loop tick.
+ const searchContainer = element("mobileResearchResults");
+ let storedHtml = "";
+ Object.defineProperty(searchContainer, "innerHTML", {
+   get() { return storedHtml; },
+   set(value) {
+     storedHtml = String(value);
+     if (firstResultPaintMs === null &&
+         storedHtml.includes("research-budget-primary-grid") &&
+         storedHtml.includes("data-mobile-model-card=")) {
+       firstResultPaintMs = performance.now() - startedAt;
+     }
+   },
+ });
+ const document = {
   getElementById: element,
   querySelectorAll: () => [],
   addEventListener() {},
@@ -56,10 +73,9 @@ const context = vm.createContext({
   URL, URLSearchParams, Map, Set,
 });
 (async () => {
-  const started = performance.now();
+  startedAt = performance.now();
   vm.runInContext(script, context);
   await new Promise(resolve => setImmediate(resolve));
-  const elapsed = performance.now() - started;
   assert.equal(deferred.length, 2, "The two optional sources must remain pending");
   assert.equal(called.filter(s => s.includes("mobile_research_catalogue")).length, 1);
   const matches = window.CouponWorldMobileResearch.search("phone under 20000");
@@ -71,7 +87,9 @@ const context = vm.createContext({
     "The first three research cards must show before optional fetch resolves");
   assert.match(html, /not a verified Top-3 recommendation/);
   assert.match(html, /Current checkout price, availability and delivery have NOT been confirmed/);
-  assert(elapsed < 1000, "Synthetic warm-core search exceeded 1000ms: " + elapsed);
+  assert(firstResultPaintMs !== null, "Core results never appeared before optional requests");
+  assert(firstResultPaintMs < 1000,
+    "Synthetic first meaningful result paint exceeded 1000ms: " + firstResultPaintMs);
   // Start initial URL query directly from the core, without a second paid API
   // call when the optional resources finally resolve.
   const callsBefore = verifiedCalls.length;
@@ -83,5 +101,5 @@ const context = vm.createContext({
   assert.equal(called.filter(s => s.includes("india_recent_manufacturer_research")).length, 1);
   assert.match(element("mobileResearchResults").innerHTML, /not a verified Top-3 recommendation/);
   console.log("PASS: first three locally sourced research results before optional fetch, " +
-    "no invented live offers, no duplicate API call, synthetic first-paint " + elapsed.toFixed(1) + "ms");
+    "no invented live offers, no duplicate API call, synthetic first meaningful paint " + firstResultPaintMs.toFixed(1) + "ms");
 })().catch(error => { console.error(error); process.exitCode = 1; });
