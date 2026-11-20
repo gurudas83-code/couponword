@@ -5,6 +5,12 @@ on:
   schedule:
     - cron: "15 4,16 * * *"
   workflow_dispatch:
+  # Exercise the real read-only GitHub API monitor once on merge to main.
+  push:
+    branches: [main]
+    paths:
+      - "scripts/actions_health_monitor.py"
+      - ".github/workflows/actions-health.yml"
   pull_request:
     branches: [main]
     paths:
