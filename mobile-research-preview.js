@@ -42,7 +42,8 @@
   var verifiedRows = [];
   var CATALOGUE_INITIAL_LIMIT = 18;
   var INVENTORY_PAGE_SIZE = 18;
-  var MAX_SEARCH_RESULTS = 6;
+  // Paint up to three *research matches* first; never manufacture three verified offers.
+  var MAX_SEARCH_RESULTS = 3;
   var inventoryExpanded = false;
   var searchExpanded = false;
   var lastSearchQuery = "";
@@ -373,6 +374,24 @@
         if (!response.ok) throw new Error("recent phone research unavailable");
         return response.json();
       }).catch(function () { return null; });
+    // The core 232-phone research file is sufficient for instant local search.
+    // Don't hold its first result paint hostage to two optional India-source
+    // additions. Both optional requests still run once, in parallel, and their
+    // original identity/evidence gates remain unchanged.
+    coreFetch.then(function (payload) {
+      inventoryLoadFailed = false;
+      inventoryRows = Array.isArray(payload.records) ? payload.records : [];
+      inventoryByKey = new Map(inventoryRows.map(function (row) { return [row.record_key, row]; }));
+      inventoryCards = Array.isArray(payload.model_cards) ? payload.model_cards : [];
+      inventorySourceCounts = payload.source_counts || {};
+      marketIntakeCount = 0;
+      var requested = lastSearchQuery || new URLSearchParams(window.location.search || "").get("q");
+      if (requested) submitResearch(requested);
+      refreshInventoryControls();
+    }).catch(function () {
+      // The combined loading path below retains the documented offline guide.
+    });
+
     Promise.all([coreFetch, marketFetch, recentFetch])
       .then(function (results) {
         var payload = results[0], intake = results[1], recent = results[2];
@@ -432,7 +451,9 @@
         renderNewNoteworthy();
         handleResearchHash();
         var initialQuery = lastSearchQuery || new URLSearchParams(window.location.search || "").get("q");
-        if (initialQuery) submitResearch(initialQuery);
+        // A user search was already visible once the core file loaded.
+        // Enrich that result without creating a second background API request.
+        if (initialQuery) searchResearch(initialQuery);
       })
       .catch(function () {
         inventoryLoadFailed = true;
@@ -1183,6 +1204,9 @@
         var primary = '<section class="research-budget-tier research-budget-evidenced" aria-label="Phones with dated budget references">' +
           '<h3>Within your budget · dated price reference (' + matches.length + ')</h3>' +
           '<p>These source-backed variants pass the selected historical reference-price limit. Current checkout price, availability and delivery have NOT been confirmed. Ordering shows research coverage, not measured performance.</p>' +
+          (matches.length ? '<p class="research-first-three-note">Showing the first ' + visible.length +
+            ' documented research match' + (visible.length === 1 ? '' : 'es') +
+            ' · not a verified Top-3 recommendation.</p>' : '') +
           (matches.length ?
             '<div class="research-budget-primary-grid">' + visible.map(function (item) {
               return renderResearchResultCard(item.card, item.rows, item.group_size);
@@ -1195,7 +1219,9 @@
         researchResults.innerHTML = bridge +
           (comparison ? '<p class="mobile-research-gate">Specification comparison; no performance winner is asserted.' +
             (missingComparison ? ' At least one requested model or memory variant could not be matched.' : '') + '</p>' : '') +
-          (matches.length ? visible.map(function (item) {
+          (matches.length ? '<p class="research-first-three-note">Showing the first ' + visible.length +
+            ' documented research match' + (visible.length === 1 ? '' : 'es') +
+            ' · not a verified Top-3 recommendation.</p>' + visible.map(function (item) {
             return renderResearchResultCard(item.card, item.rows, item.group_size);
           }).join("") : emptyResearchResult(lastSearchQuery, visible));
       }
@@ -1313,6 +1339,9 @@
       refreshInventoryControls();
       renderNewNoteworthy();
       handleResearchHash();
+      // Frozen exact variants can arrive after the core research catalogue.
+      // Refresh the same local results without calling the offer API again.
+      if (lastSearchQuery && inventoryCards.length) searchResearch(lastSearchQuery);
     })
     .catch(function () {
       grid.innerHTML = "<p>Verified mobile research is currently unavailable.</p>";
