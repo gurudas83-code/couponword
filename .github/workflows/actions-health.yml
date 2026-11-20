@@ -1,0 +1,62 @@
+name: Coupon World main CI health watchdog
+
+on:
+  # At 09:45 and 21:45 IST. No merchant API calls or automatic reruns.
+  schedule:
+    - cron: "15 4,16 * * *"
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - "scripts/actions_health_monitor.py"
+      - "test_actions_health_monitor.py"
+      - ".github/workflows/actions-health.yml"
+      - ".github/workflows/static-seo-quality.yml"
+
+permissions:
+  contents: read
+  actions: read
+  issues: write
+
+concurrency:
+  group: couponworld-main-actions-health
+  cancel-in-progress: false
+
+jobs:
+  inspect-main:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Checkout audited code
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - name: Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.12"
+      - name: Validate watchdog with synthetic offline runs
+        run: python -m unittest -q test_actions_health_monitor
+      - name: Check only completed main-branch runs (never paid research)
+        if: github.event_name != 'pull_request'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python scripts/actions_health_monitor.py --report actions-health.json
+      - name: Open or update a single incident issue; close only after recovery
+        if: always() && github.event_name != 'pull_request'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f actions-health.json ]; then
+            python scripts/actions_health_monitor.py --notify --report actions-health.json
+          else
+            echo "No audit report generated; check preceding GitHub API/test errors."
+          fi
+      - name: Upload read-only main health evidence
+        if: always() && github.event_name != 'pull_request'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: actions-health-${{ github.run_id }}-${{ github.run_attempt }}
+          path: actions-health.json
+          if-no-files-found: warn
+          retention-days: 30
