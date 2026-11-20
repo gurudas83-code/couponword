@@ -152,7 +152,10 @@ class Top30ResearchPublicationTests(unittest.TestCase):
             for key, photo in expected.items():
                 card = self.cards[key]
                 self.assertIn('src="' + photo["url"] + '"', body)
-                self.assertIn('alt="' + model_title(card) + ' model photograph"', body)
+                photo_title = model_title(card)
+                if photo_title.casefold().startswith("redmi redmi "):
+                    photo_title = photo_title[len("Redmi "):]
+                self.assertIn('alt="' + photo_title + ' model photograph"', body)
                 self.assertIn('href="' + photo["source"] + '"', body.replace("&amp;", "&"))
                 self.assertIn('href="' + photo["license_url"] + '"', body)
                 self.assertIn(photo["author"], body)
