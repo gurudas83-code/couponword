@@ -39,7 +39,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: coupon-world-indexability-baseline
+          name: coupon-world-indexability-baseline-${{ github.run_id }}-${{ github.run_attempt }}
           path: outputs/live-indexability-baseline.*
           retention-days: 30
           if-no-files-found: warn
