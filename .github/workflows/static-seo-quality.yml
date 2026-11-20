@@ -13,6 +13,8 @@ jobs:
           python-version: '3.12'
       - name: Install publication dependencies
         run: python -m pip install -r requirements.txt
+      - name: Test Pages deployment artifact retry contract
+        run: python -m unittest -q test_pages_artifact_retry
       - name: Test sitemap canonical and indexability gates
         run: python -m unittest -q test_sitemap_canonical_audit
       - name: Test internal-link discovery audit
