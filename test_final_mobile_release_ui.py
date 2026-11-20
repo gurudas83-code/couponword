@@ -19,7 +19,7 @@ class FinalMobileReleaseUITests(unittest.TestCase):
                    ("₹25k", "mobile under 25000"),
                    ("₹30k", "mobile under 30000"))
         self.assertEqual(
-            len(re.findall(r'<button[^>]*data-mobile-query="mobile under \\d+"', source)),
+            len(re.findall(r'<button[^>]*data-mobile-query="mobile under \d+"', source)),
             len(primary),
         )
         for budget, query in primary:
