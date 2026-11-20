@@ -175,7 +175,10 @@ class Top30ResearchPublicationTests(unittest.TestCase):
             self.assertEqual(body.count('<nav aria-label="Search retailers for ') if path == TOP30_EN else body.count('<nav aria-label="रिटेलर में खोजें: '), 30)
             for row in self.pilot["selected_models"]:
                 model = self.cards[row["model_key"]]
-                query = quote_plus(model_title(model))
+                display_name = model_title(model)
+                if display_name.casefold().startswith("redmi redmi "):
+                    display_name = display_name[len("Redmi "):]
+                query = quote_plus(display_name)
                 self.assertIn("https://www.amazon.in/s?k=" + query + "&amp;tag=guru07cc-21", body)
                 self.assertIn("https://www.flipkart.com/search?q=" + query, body)
                 self.assertIn("https://www.croma.com/searchB?q=" + query, body)
