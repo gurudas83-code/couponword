@@ -108,8 +108,10 @@ def publish_search_demand(destination: Path) -> str:
 TOP30_EN = "/seo/top-30-phone-research-india.html"
 TOP30_HI = "/hi/seo/top-30-phone-research-india.html"
 TOP30_FILE = ROOT / "data/top30_research_pilot_20261113.json"
+# Updated only after a substantive editorial change, not on each rebuild.
+TOP30_REVIEW_DATE = "2026-11-20"
 TOP30_GROUPS = (
-    ("EDITORIAL", "Under-₹25,000 editorial references", "₹25,000 के अंदर संपादकीय स्रोतों से चयन"),
+    ("EDITORIAL", "Under-₹25,000 editorial research intake (prices unverified)", "₹25,000 रिसर्च सूची से चुने मॉडल (कीमतें सत्यापित नहीं)"),
     ("MARKET", "Models cited in India market reports", "भारतीय बाजार रिपोर्टों में उल्लिखित मॉडल"),
     ("HISTORICAL_DEMAND", "Historical search-demand research", "ऐतिहासिक सर्च-डिमांड पर आधारित रिसर्च"),
     ("CONTROL", "Comparison and consistency baselines", "तुलना और परिणाम-जाँच के संदर्भ मॉडल"),
@@ -173,7 +175,14 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
               '.cw-source-matrix{overflow-x:auto}.cw-source-matrix table{width:100%;border-collapse:collapse;min-width:630px}'
               '.cw-source-matrix th,.cw-source-matrix td{padding:.65rem;border:1px solid #ccd6e0;text-align:left;vertical-align:top}'
               '.cw-decision-lens{padding:.4rem .7rem;background:#f6f8fb;border-radius:8px}'
-              '.cw-decision-lens ul{padding-left:1.2rem}</style>')
+              '.cw-decision-lens ul{padding-left:1.2rem}'
+              '.cw-intent-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:.85rem}'
+              '.cw-intent-grid>div{border:1px solid #ccd6e0;border-radius:12px;padding:.8rem}'
+              '.cw-budget-paths{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}'
+              '.cw-budget-paths a{padding:.45rem .7rem;border:1px solid #2a587f;border-radius:8px}'
+              '.cw-intent-jump{display:flex;gap:.75rem;flex-wrap:wrap;padding:.75rem 0}'
+              '.cw-intent-faq dt{font-weight:700;margin-top:.8rem}.cw-intent-faq dd{margin:.25rem 0 1rem}'
+              '.cw-intent-grid a:focus-visible,.cw-budget-paths a:focus-visible{outline:3px solid #215fa1;outline-offset:3px}</style>')
     output = []
     for hindi, path, other in (
         (False, TOP30_EN, TOP30_HI), (True, TOP30_HI, TOP30_EN)
@@ -190,6 +199,9 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
             for row in [x for x in models if x["source_group"] == group]:
                 card = cards[row["model_key"]]
                 name = model_title(card)
+                # Correct a duplicate brand token only in human-facing text; keep model_key intact.
+                if name.casefold().startswith("redmi redmi "):
+                    name = name[len("Redmi "):]
                 specs = accepted_specs(card)
                 research_url = "/?" + urlencode({"q": name}) + "#mobileResearchSearch"
                 exact_page = ("/hi/phones/" if hindi else "/phones/") + slug_for(card) + "/"
@@ -294,7 +306,7 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
                 )
             heading = hi_heading if hindi else en_heading
             group_sections.append(
-                '<section><h2>' + esc(heading) + '</h2><div class="cw-pilot-grid">' +
+                '<section id="group-' + esc(group.casefold().replace('_', '-')) + '"><h2>' + esc(heading) + '</h2><div class="cw-pilot-grid">' +
                 "".join(parts) + '</div></section>'
             )
 
@@ -330,7 +342,7 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
                        "full-charge times or gaming benchmarks. The other 20 research-only "
                        "records are excluded rather than filled with guesses.")
         matrix = (
-            '<section class="cw-source-matrix"><h2>' + esc(matrix_heading) +
+            '<section class="cw-source-matrix" id="documented-specs"><h2>' + esc(matrix_heading) +
             '</h2><p>' + esc(matrix_note) + '</p><table><caption>' +
             ("स्रोत-सहित तकनीकी विवरण" if hindi else "Manufacturer-sourced specifications") +
             '</caption><thead><tr><th scope="col">' + ("मॉडल" if hindi else "Model") +
@@ -373,10 +385,118 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
         note = (f'{published_count} मॉडल पर मौजूदा स्वीकृत स्रोत-पेज हैं; शेष के लिए रिसर्च टूल खोलें।'
                 if hindi else
                 f'{published_count} models already have evidence-approved canonical pages; the remaining models link to research rather than unsupported SEO detail URLs.')
+        # Real buyer questions link to the existing validated guides/filter engine.
+        # Dated budget references are not current checkout prices or best-phone scores.
+        budgets = (10000, 15000, 20000, 25000, 30000)
+        budget_paths = ''.join(
+            '<a href="/?q=mobile+under+' + str(cap) +
+            '+nearby+band#mobileResearchSearch">₹' +
+            format(cap - 5000, ",") + '–₹' + format(cap - 1, ",") + '</a>'
+            for cap in budgets
+        )
+        intent_jump = (
+            '<nav class="cw-intent-jump" aria-label="' +
+            ("इस पेज पर जाएँ" if hindi else "Jump to a buyer question") + '">' +
+            '<a href="#budget-paths">' + ("बजट चुनें" if hindi else "Budget bands") + '</a>' +
+            '<a href="#buyer-questions">' + ("जरूरत से चुनें" if hindi else "Choose by need") + '</a>' +
+            '<a href="#documented-specs">' + ("स्पेक्स की तुलना" if hindi else "Compare sourced specs") + '</a>' +
+            '<a href="#group-editorial">' + ("30 मॉडल देखें" if hindi else "Browse all 30") + '</a>' +
+            '<a href="#top30-faq">' + ("सामान्य सवाल" if hindi else "Buyer FAQs") + '</a></nav>'
+        )
+        budget_guide = (
+            '<section id="budget-paths"><h2>' +
+            ("₹10,000–₹30,000: असली बजट बैंड में फोन खोजें" if hindi
+             else "Phones under ₹10k, ₹15k, ₹20k, ₹25k and ₹30k: start with a budget band") +
+            '</h2><p>' +
+            ("हर लिंक सिर्फ उस ₹5,000 के बैंड में दर्ज तारीख वाले price references जाँचता है। "
+             "उदाहरण: ₹20,000 वाला विकल्प ₹15,000 से ₹19,999 तक है; आज की लाइव बिक्री कीमत नहीं। "
+             "इस 30-मॉडल सूची को बजट के अनुसार सत्यापित बिक्री-सूची न मानें।" if hindi else
+             "Each shortcut applies a ₹5,000 interval to dated research-price references, "
+             "not current retailer offers. For example, the ₹20k link covers ₹15,000–₹19,999. "
+             "These 30 research candidates have NOT all been verified within any live budget.") +
+            '</p><nav class="cw-budget-paths" aria-label="' +
+            ("₹5,000 बजट बैंड" if hindi else "Five-thousand rupee budget bands") + '">' +
+            budget_paths + '</nav><p><a href="' +
+            ("/hi/phones/under-25000/" if hindi else "/phones/under-25000/") + '">' +
+            ("₹25,000 की खरीद गाइड" if hindi else "Read the under-₹25k buying guide") +
+            '</a></p></section>'
+        )
+        intent_guide = (
+            '<section id="buyer-questions"><h2>' +
+            ("कैमरा, गेमिंग, बैटरी और 5G के लिए क्या जाँचें?" if hindi
+             else "Which phone should I shortlist for camera, gaming, battery or 5G?") +
+            '</h2><p>' +
+            ("तकनीकी आंकड़े खरीद की शुरुआत हैं, मापा हुआ विजेता नहीं। "
+             "नीचे हर जरूरत के लिए जाँच और संबंधित रिसर्च गाइड है।" if hindi else
+             "Start from your real buying question. Manufacturer specifications are evidence "
+             "of declared hardware, not independently measured best-in-class results.") +
+            '</p><div class="cw-intent-grid">' +
+            '<div><h3>' + ("कैमरा / OIS" if hindi else "Camera and OIS") +
+            '</h3><p>' +
+            ("OIS और सेंसर देखें; एक-जैसी रोशनी में फोटो व वीडियो नमूने अलग से जाँचें।" if hindi else
+             "Confirm OIS and sensor evidence; compare independently captured low-light and video samples.") +
+            '</p><a href="/seo/camera-phone-buying-guide.html">' +
+            ("कैमरा जाँच गाइड" if hindi else "Camera evidence checklist") + '</a></div>' +
+            '<div><h3>' + ("गेमिंग / हीटिंग" if hindi else "Gaming and sustained speed") +
+            '</h3><p>' +
+            ("चिपसेट गेमिंग FPS नहीं बताता। समान गेम, सेटिंग और समय के तापमान/FPS टेस्ट जाँचें।" if hindi else
+             "Chipsets alone cannot establish gaming FPS or heat. Seek same-game, settings and duration tests.") +
+            '</p><a href="/seo/gaming-phone-buying-guide.html">' +
+            ("गेमिंग जाँच गाइड" if hindi else "Gaming test checklist") + '</a></div>' +
+            '<div><h3>' + ("बैटरी / चार्जिंग" if hindi else "Battery life and charging") +
+            '</h3><p>' +
+            ("mAh और W घोषित क्षमता हैं, असली बैकअप या चार्ज होने का समय नहीं।" if hindi else
+             "mAh and watts are specifications, not measured screen-on endurance or charging time.") +
+            '</p><a href="' +
+            ("/hi/guides/phone-budget-guides/" if hindi else "/guides/phone-budget-guides/") + '">' +
+            ("बैटरी और खरीद जाँच" if hindi else "Battery buying checks") + '</a></div>' +
+            '<div><h3>' + ("भारत में 5G / अपडेट" if hindi else "India 5G and software support") +
+            '</h3><p>' +
+            ("ठीक भारतीय SKU, ऑपरेटर बैंड और आधिकारिक अपडेट नीति की पुष्टि करें।" if hindi else
+             "Confirm the India SKU, relevant carrier bands and the maker's stated software-update policy.") +
+            '</p><a href="/seo/5g-phone-india-checklist.html">' +
+            ("5G भारत जाँच सूची" if hindi else "India 5G checklist") + '</a></div>' +
+            '<div><h3>' + ("दो फोन की तुलना" if hindi else "Comparing two exact models") +
+            '</h3><p>' +
+            ("एक ही RAM/storage variant, प्रमाण का स्रोत और जो अज्ञात है वह साथ दिखाएँ।" if hindi else
+             "Compare exact RAM/storage identities, linked facts and unknowns instead of declaring an invented winner.") +
+            '</p><a href="' + ("/hi/compare/" if hindi else "/compare/") + '">' +
+            ("फोन तुलना खोलें" if hindi else "Open documented phone comparisons") +
+            '</a></div></div></section>'
+        )
+        faq = (
+            '<section id="top30-faq" class="cw-intent-faq"><h2>' +
+            ("खरीद से पहले अक्सर पूछे सवाल" if hindi else "Frequently asked buying questions") +
+            '</h2><dl><dt>' +
+            ("क्या यह भारत के 30 सबसे अच्छे या सबसे ज्यादा बिकने वाले फोन हैं?" if hindi else
+             "Are these the 30 best-selling or best-performing phones in India?") +
+            '</dt><dd>' +
+            ("नहीं। यह संपादकीय रिसर्च के 30 मॉडल हैं; कोई स्वतंत्र बिक्री या प्रदर्शन रैंकिंग नहीं।" if hindi else
+             "No. This is an editorial research worklist, not an independently verified sales or performance ranking.") +
+            '</dd><dt>' +
+            ("क्या दिखी कीमत आज की है?" if hindi else "Are listed phones guaranteed to fit my budget today?") +
+            '</dt><dd>' +
+            ("नहीं। बजट फिल्टर तारीख वाले संदर्भ इस्तेमाल करते हैं। आज की कीमत, स्टॉक और RAM/storage retailer से मिलाएँ।" if hindi else
+             "No. Budget tools rely on dated references. Confirm today's checkout price, stock and exact memory variant at the retailer.") +
+            '</dd><dt>' +
+            ("कौन-सा फोन सबसे अच्छा कैमरा, गेमिंग या बैटरी देता है?" if hindi else
+             "Which one has the best camera, gaming or battery life?") +
+            '</dt><dd>' +
+            ("इस पेज के निर्माता-स्रोत वाले स्पेक्स से विजेता तय नहीं होता; एक-जैसी स्वतंत्र टेस्ट रिपोर्ट चाहिए।" if hindi else
+             "These manufacturer-linked specifications do not establish a winner. Comparable independent testing is required.") +
+            '</dd><dt>' +
+            ("कुछ मॉडल की अलग लिंक क्यों नहीं है?" if hindi else
+             "Why do some phones link to research instead of a detail page?") +
+            '</dt><dd>' +
+            ("केवल प्रमाण-परीक्षण पास करने वाले मॉडल के पेज हैं; बाकी को बिना आधार SEO पेज नहीं बनाया गया।" if hindi else
+             "Only models passing the existing manufacturer-evidence publication gate get canonical detail pages; others stay in research.") +
+            '</dd></dl></section>'
+        )
+
         schema = {
             "@context": "https://schema.org", "@type": "CollectionPage", "name": title,
             "url": BASE + path, "inLanguage": "hi-IN" if hindi else "en-IN",
-            "description": description,
+            "description": description, "dateModified": TOP30_REVIEW_DATE,
             "isPartOf": {"@type": "WebSite", "name": "Coupon World", "url": BASE + "/"}
         }
         jsonld = json.dumps(schema, ensure_ascii=False).replace("<", "\\u003c")
@@ -402,15 +522,15 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
             ("30 प्राथमिकता मॉडल" if hindi else "30 research priorities") + '</nav>' +
             '<article><div class="eyebrow">COUPON WORLD / EVIDENCE FIRST</div><h1>' +
             esc(heading) + '</h1><p class="byline">' +
-            ("Coupon World संपादकीय टीम · अपडेट: 14 नवंबर 2026" if hindi else
-             "By Coupon World editorial team · Updated 14 November 2026") +
+            ("Coupon World संपादकीय टीम · अपडेट: 20 नवंबर 2026" if hindi else
+             "By Coupon World editorial team · Updated 20 November 2026") +
             '</p><p class="lead">' + esc(description) +
             '</p><aside class="cw-pilot-note"><strong>' + esc(note) + '</strong></aside>' +
             '<section><h2>' + ("यह चयन कैसे हुआ" if hindi else "How this shortlist was selected") +
             '</h2>' + explainer +
             '<p><a href="https://counterpointresearch.com/en/insights/top-5-smartphone-model-share-8-countries">Counterpoint Q2 2026</a> · ' +
             '<a href="https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season">Omdia Q3 2026</a></p>' +
-            '</section>' + matrix + "".join(group_sections) +
+            '</section>' + intent_jump + budget_guide + intent_guide + matrix + "".join(group_sections) + faq +
             '<section><h2>' + ("अगला सही कदम" if hindi else "Next research step") +
             '</h2><p>' +
             ("अपनी जरूरत और बजट की सीमा लिखकर सही मॉडल चुनें। खरीदने से पहले विक्रेता की कीमत, RAM/स्टोरेज और उपलब्धता जाँचें।"
@@ -440,7 +560,7 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
             raise RuntimeError("Duplicate top30 canonical URL: " + url)
         node = ET.SubElement(root, f"{{{ns}}}url")
         ET.SubElement(node, f"{{{ns}}}loc").text = url
-        ET.SubElement(node, f"{{{ns}}}lastmod").text = pilot["created_date"]
+        ET.SubElement(node, f"{{{ns}}}lastmod").text = TOP30_REVIEW_DATE
     tree.write(sitemap, encoding="utf-8", xml_declaration=True)
     print(f"Top30 bilingual research hubs: 2; selected: 30; existing model pages: {published_count}")
     return output
