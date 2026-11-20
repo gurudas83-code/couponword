@@ -158,16 +158,38 @@
       ' · Checked ' + escape(price.checked_on) + '. <a href="' + escape(url.href) +
       '" target="_blank" rel="noopener noreferrer">Check brand store</a></p>';
   }
+  function historicalManufacturerPrice(payload, modelKey) {
+    var item = (payload.historical_manufacturer_prices || {})[modelKey];
+    if (!item || !Number.isFinite(item.price_inr) || item.price_inr <= 0 ||
+        !Number.isInteger(item.ram_gb) || item.ram_gb <= 0 ||
+        !Number.isInteger(item.storage_gb) || item.storage_gb <= 0 ||
+        item.live_price_verified !== false || item.purchase_eligible !== false ||
+        item.source_type !== "manufacturer_india_announcement" ||
+        !/^\\d{4}-\\d{2}-\\d{2}$/.test(item.source_date || "")) return "";
+    var url;
+    try { url = new URL(item.source_url); } catch (error) { return ""; }
+    var host = modelKey.split("|")[0] === "samsung" ? "news.samsung.com" :
+      modelKey.split("|")[0] === "oppo" ? "www.oppo.com" : "";
+    if (url.protocol !== "https:" || url.hostname !== host ||
+        url.username || url.password || url.port) return "";
+    return '<p class="api-observation-note"><strong>Historical manufacturer-announced price (NOT live):</strong> ₹' +
+      item.price_inr.toLocaleString("en-IN") + ' · ' + item.ram_gb + 'GB RAM / ' +
+      item.storage_gb + 'GB storage · Announced ' + escape(item.source_date) +
+      (item.conditions ? ' · ' + escape(item.conditions) : '') +
+      '. <a href="' + escape(url.href) + '" target="_blank" rel="noopener noreferrer">Original India announcement</a>' +
+      '. This is not an offer, current stock confirmation, or a price used by the budget filter.</p>';
+  }
   function show(panel, payload, modelKey) {
     var configurations = (payload.models || {})[modelKey] || [];
     panel._priceConfigurations = configurations;
     var brandPrice = brandStorePrice(payload, modelKey, configurations);
+    var historicalPrice = historicalManufacturerPrice(payload, modelKey);
     if (!configurations.length) {
-      panel.innerHTML = brandPrice + '<p role="status">No saved retailer price check for this model. A live API lookup does not guarantee a listing.</p><button type="button" data-check-live-price>Check live price observation (uses API quota)</button><div data-live-price aria-live="polite"></div>';
+      panel.innerHTML = brandPrice + historicalPrice + '<p role="status">No saved retailer price check for this model. A live API lookup does not guarantee a listing.</p><button type="button" data-check-live-price>Check live price observation (uses API quota)</button><div data-live-price aria-live="polite"></div>';
       return;
     }
     var id = "api-price-config-" + (++sequence);
-    panel.innerHTML = '<h4>Price &amp; availability observations</h4>' + brandPrice + '<p>QuickCommerce third-party source; opening this price panel checks the private paid API through the server with a call limit. Checkout prices may differ.</p><button type="button" data-check-live-price>Check live price observation (uses API quota)</button><div data-live-price aria-live="polite"></div>' +
+    panel.innerHTML = '<h4>Price &amp; availability observations</h4>' + brandPrice + historicalPrice + '<p>QuickCommerce third-party source; opening this price panel checks the private paid API through the server with a call limit. Checkout prices may differ.</p><button type="button" data-check-live-price>Check live price observation (uses API quota)</button><div data-live-price aria-live="polite"></div>' +
       '<label for="' + id + '">Choose the listed configuration</label><select id="' + id + '" data-price-config>' +
       configurations.map(function (configuration, index) {
         return '<option value="' + index + '">' + escape(configuration.variant) + "</option>";
