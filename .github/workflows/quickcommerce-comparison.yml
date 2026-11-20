@@ -30,6 +30,6 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: quickcommerce-comparison-refresh
+          name: quickcommerce-comparison-refresh-${{ github.run_id }}-${{ github.run_attempt }}
           path: private_observations/provider_refresh.json
           retention-days: 14
