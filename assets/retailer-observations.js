@@ -165,7 +165,7 @@
         !Number.isInteger(item.storage_gb) || item.storage_gb <= 0 ||
         item.live_price_verified !== false || item.purchase_eligible !== false ||
         item.source_type !== "manufacturer_india_announcement" ||
-        !/^\\d{4}-\\d{2}-\\d{2}$/.test(item.source_date || "")) return "";
+        !/^\d{4}-\d{2}-\d{2}$/.test(item.source_date || "")) return "";
     var url;
     try { url = new URL(item.source_url); } catch (error) { return ""; }
     var host = modelKey.split("|")[0] === "samsung" ? "news.samsung.com" :
