@@ -1,5 +1,6 @@
 """Offline regression tests for fail-visible CI reliability protections."""
 import unittest
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -93,6 +94,20 @@ class ActionsHealthTests(unittest.TestCase):
                 content = (WORKFLOWS_DIR / name).read_text(encoding="utf-8")
                 self.assertIn("runs-on: ubuntu-24.04", content)
                 self.assertNotIn("runs-on: ubuntu-latest", content)
+
+
+    def test_every_upload_artifact_is_unique_across_rerun_attempts(self):
+        for path in WORKFLOWS_DIR.glob("*.yml"):
+            text = path.read_text(encoding="utf-8")
+            for match in re.finditer(
+                r"(?m)^\\s*(?:-\\s+)?uses: actions/upload-(?:pages-)?artifact@", text
+            ):
+                segment = text[match.end():].split("\n      - ", 1)[0]
+                found = re.search(r"(?m)^\\s+name: ([^\\n]+)", segment)
+                with self.subTest(workflow=path.name):
+                    self.assertIsNotNone(found, "Artifact must have a chosen name")
+                    self.assertIn("github.run_id", found.group(1))
+                    self.assertIn("github.run_attempt", found.group(1))
 
 
 if __name__ == "__main__":
