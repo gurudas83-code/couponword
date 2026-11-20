@@ -19,12 +19,16 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: couponworld-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 permissions:
   contents: read
 
 jobs:
   mobile-integrity:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 22
     steps:
       - name: Checkout frozen research and current code
@@ -55,7 +59,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: mobile-integrity-evidence
+          name: mobile-integrity-evidence-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             mobile-integrity-audit.json
             mobile-query-audit.json

@@ -8,12 +8,16 @@ on:
     - cron: "20 3 * * *" # Daily at 08:50 IST
   workflow_dispatch:
 
+concurrency:
+  group: couponworld-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 permissions:
   contents: read
 
 jobs:
   validate-research:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - name: Checkout current candidate
@@ -36,7 +40,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: coupon-world-frontend-page-audit
+          name: coupon-world-frontend-page-audit-${{ github.run_id }}-${{ github.run_attempt }}
           path: frontend-page-audit.json
           if-no-files-found: warn
           retention-days: 14
@@ -50,7 +54,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: coupon-world-price-evidence-232
+          name: coupon-world-price-evidence-232-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             price-evidence-232.json
             price-evidence-reports/
