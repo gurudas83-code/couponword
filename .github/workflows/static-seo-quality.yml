@@ -30,6 +30,8 @@ jobs:
         run: python -m unittest -q test_sitemap_canonical_audit
       - name: Test read-only live-indexing evidence with offline fixtures
         run: python -m unittest -q test_live_indexability_audit
+      - name: Test owner GSC CSV import without any account or network calls
+        run: python -m unittest -q test_gsc_owner_exports
       - name: Test internal-link discovery audit
         run: python -m unittest -q test_internal_link_audit
       - name: Verify technical-only public niche policy
