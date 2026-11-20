@@ -126,6 +126,7 @@ class WorkbookTvEarbudsRelease(unittest.TestCase):
                         self.assertIn('class="cw-tv-visual"',page)
                         self.assertIn('href="#cw-retailer-detail"',page)
                         self.assertIn("not an exact product photo",page)
+                        self.assertNotIn("earbud",page.lower())
                         self.assertNotIn("<img ",page)
                     self.assertNotIn('"@type": "Offer"',page)
                     self.assertNotIn('class="shop-button"',page)
