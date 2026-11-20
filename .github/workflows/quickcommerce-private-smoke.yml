@@ -39,7 +39,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: quickcommerce-research-observations
+          name: quickcommerce-research-observations-${{ github.run_id }}-${{ github.run_attempt }}
           path: private_observations/quickcommerce_audit.json
           if-no-files-found: warn
           retention-days: 14
