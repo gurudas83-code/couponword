@@ -52,5 +52,8 @@ jobs:
         run: |
           node --check app.js
           node --check mobile-research-preview.js
+          node --check test_recommendation_cold_start.cjs
+      - name: Test cold-start wait, late success and bounded API timeout without network
+        run: node test_recommendation_cold_start.cjs
       - name: Validate research and comparison evidence gates
         run: python scripts/research_quality_gate.py

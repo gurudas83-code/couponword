@@ -6,7 +6,11 @@ const APPROVED_RETAILER_HOSTS = new Set([
   "amazon.in", "www.amazon.in", "amzn.in", "www.amzn.in",
   "flipkart.com", "www.flipkart.com", "croma.com", "www.croma.com"
 ]);
-const RECOMMENDATION_TIMEOUT_MS = 15000;
+// Render Free may need a full cold-start minute; never report a false timeout at 15s.
+// Keep background offer checks short; only an explicit user request gets the longer wait.
+const RECOMMENDATION_TIMEOUT_MS = 75000;
+const BACKGROUND_RECOMMENDATION_TIMEOUT_MS = 15000;
+const RECOMMENDATION_WAKE_NOTICE_MS = 8000;
 
 // Keep the published site on the approved Render API while making the
 // existing frontend route testable against the local backend.  The override
@@ -681,14 +685,23 @@ async function loadShoppingRecommendation(query, { background = false } = {}) {
   recommendationController = controller;
   const timeoutHandle = window.setTimeout(
     () => controller.abort(),
-    RECOMMENDATION_TIMEOUT_MS
+    background ? BACKGROUND_RECOMMENDATION_TIMEOUT_MS : RECOMMENDATION_TIMEOUT_MS
   );
 
   if (!background) card.innerHTML = `
     <h3>Finding verified matches...</h3>
-    <p>Checking for verified matches. You can use the standard guide while this request completes.</p>
+    <p data-recommendation-progress role="status" aria-live="polite">Checking for verified matches. You can browse saved research while this request completes.</p>
     ${standardBuyingGuideFallback()}
   `;
+
+  // Give useful progress during a cold server start without issuing another API call.
+  const wakeNoticeHandle = background ? null : window.setTimeout(() => {
+    if (requestId !== recommendationRequestId || controller.signal.aborted) return;
+    const progress = card.querySelector("[data-recommendation-progress]");
+    if (progress) progress.textContent =
+      "The recommendation service may be waking up. This can take about a minute. " +
+      "Saved smartphone research and buying guides are available now.";
+  }, RECOMMENDATION_WAKE_NOTICE_MS);
 
   if (section && !background) {
     section.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1363,7 +1376,7 @@ async function loadShoppingRecommendation(query, { background = false } = {}) {
     }
     const timedOut = error && error.name === "AbortError";
     const message = timedOut
-      ? "The recommendation service took too long to respond."
+      ? "The recommendation service did not respond within 75 seconds. Browse saved research or try again once."
       : error && /^Shopping API returned HTTP 4/.test(error.message || "")
         ? "Please check the search and try again."
         : error && /^Shopping API returned HTTP 5/.test(error.message || "")
@@ -1380,6 +1393,7 @@ async function loadShoppingRecommendation(query, { background = false } = {}) {
     });
   } finally {
     window.clearTimeout(timeoutHandle);
+    if (wakeNoticeHandle !== null) window.clearTimeout(wakeNoticeHandle);
     if (recommendationController === controller) recommendationController = null;
   }
 }
