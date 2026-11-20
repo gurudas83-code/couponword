@@ -64,6 +64,76 @@ def _generate_product_pages(destination: Path) -> None:
 
 
 
+# Search Console: 20 Nov 2026 / Not found (404).
+# These two previously published *technical* URLs moved to the same exact
+# product's current ASIN-based URL. Static GitHub Pages cannot configure a
+# server-side 301: Google's documented instant meta-refresh fallback is used.
+# Do not treat the moved URLs as new indexable product pages or live offers.
+GSC_MOVED_TECH_PRODUCT_ROUTES = {
+    "keyboard-case-for-samsung-galaxy-tab-a11-tab-a9-plus-11-folio-cover-sm-2": (2, "B0DM69148R"),
+    "boat-airdopes-311-pro-tws-earbuds-32": (32, "B0CZ3ZPD8B"),
+}
+
+# Historical non-tech routes deliberately retired in the reviewed tech-only
+# publication. A genuine 404 is appropriate: no equivalent *approved*
+# destination exists. Do not send these to unrelated product or home pages.
+GSC_RETIRED_NONTECH_404_ROUTES = {
+    "jiada-space-astronaut-stationery-set-for-boys-with-badge-notebook-and-1",
+    "bausch-lomb-fresh-multi-purpose-500ml-contact-lens-solution-pack-of-1-4",
+    "aasons-electric-drill-variable-angle-grinder-connecting-rod-with-1pc-w-5",
+    "hebezon-expandable-appliance-roller-stand-with-wheels-heavy-duty-mobil-6",
+}
+
+
+def _publish_moved_tech_product_aliases(destination: Path) -> None:
+    """Allow former bookmarked URLs to reach their *exact* approved model page.
+
+    Redirect only moved tech products. Do not re-publish the four retired
+    non-tech items or add aliases to sitemap/price/offer datasets.
+    """
+    from python import build_product_pages as product_pages
+    from python.technical_niche_publication import select_tech_products
+
+    products = select_tech_products(product_pages.load_products())
+    ids = {int(item["id"]): item for item in products}
+    aliases = set(GSC_MOVED_TECH_PRODUCT_ROUTES)
+    if aliases & GSC_RETIRED_NONTECH_404_ROUTES:
+        raise RuntimeError("GSC migrated URL overlaps deliberately retired nontech route")
+
+    for former_slug, (product_id, expected_asin) in GSC_MOVED_TECH_PRODUCT_ROUTES.items():
+        item = ids.get(product_id)
+        if not item or str(item.get("asin") or "").upper() != expected_asin:
+            raise RuntimeError("Moved technical product identity changed: " + former_slug)
+        canonical_slug = product_pages.page_dir(item).relative_to(product_pages.OUT).as_posix()
+        if canonical_slug == former_slug:
+            raise RuntimeError("Old GSC URL is already its canonical target: " + former_slug)
+        target_page = destination / "products" / canonical_slug / "index.html"
+        if not target_page.is_file():
+            raise RuntimeError("Moved technical product canonical page not published: " + canonical_slug)
+        # Exact same product only. No new product content, affiliate links,
+        # prices or JS redirect; an immediate meta refresh is crawl-visible.
+        canonical = f"https://coupon-world.in/products/{canonical_slug}/"
+        alias = destination / "products" / former_slug / "index.html"
+        if alias.exists():
+            raise RuntimeError("GSC legacy redirect would overwrite a real page: " + former_slug)
+        alias.parent.mkdir(parents=True, exist_ok=True)
+        alias.write_text(
+            '<!doctype html><html lang="en-IN"><head><meta charset="utf-8">'
+            '<meta name="viewport" content="width=device-width,initial-scale=1">'
+            '<title>Product page moved | Coupon World</title>'
+            '<meta http-equiv="refresh" content="0; url=' + escape(canonical, quote=True) + '">'
+            '<link rel="canonical" href="' + escape(canonical, quote=True) + '">'
+            '</head><body><main><h1>This product page has moved</h1>'
+            '<p>Continue to the same product at its updated URL: '
+            '<a href="' + escape(canonical, quote=True) + '">View product research</a>. '
+            'Check price, stock and exact variant with the retailer.</p></main></body></html>\n',
+            encoding="utf-8",
+        )
+    for old_slug in GSC_RETIRED_NONTECH_404_ROUTES:
+        if (destination / "products" / old_slug).exists():
+            raise RuntimeError("Retired non-tech 404 URL reappeared in Pages artifact: " + old_slug)
+
+
 def _prune_unverified_product_sitemap_entries(destination: Path) -> None:
     """Only offer-verified, indexable legacy pages belong in the live sitemap.
 
@@ -432,6 +502,7 @@ def build(output: Path) -> Path:
     # Product pages are generated from the same fail-closed renderer used
     # for local review. Never copy stale HTML from the source checkout.
     _generate_product_pages(output)
+    _publish_moved_tech_product_aliases(output)
 
     from python.phone_guides import render_phone_guides
     render_phone_guides(output)
