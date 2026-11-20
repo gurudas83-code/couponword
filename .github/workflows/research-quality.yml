@@ -8,12 +8,16 @@ on:
     - cron: "20 3 * * *" # Daily at 08:50 IST
   workflow_dispatch:
 
+concurrency:
+  group: couponworld-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 permissions:
   contents: read
 
 jobs:
   validate-research:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - name: Checkout current candidate
