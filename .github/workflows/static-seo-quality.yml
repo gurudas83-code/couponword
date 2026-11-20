@@ -22,6 +22,8 @@ jobs:
           python-version: '3.12'
       - name: Install publication dependencies
         run: python -m pip install -r requirements.txt
+      - name: Test main workflow health and safe scheduled automation
+        run: python -m unittest -q test_actions_health_monitor
       - name: Test Pages deployment artifact retry contract
         run: python -m unittest -q test_pages_artifact_retry
       - name: Test sitemap canonical and indexability gates
