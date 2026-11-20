@@ -7,6 +7,7 @@ on:
       - main
 
 permissions:
+  actions: read  # Poll for artifact visibility before starting a Pages deployment.
   contents: read
   pages: write
   id-token: write
@@ -100,13 +101,44 @@ jobs:
               raise SystemExit("forbidden files entered Pages artifact: " + ", ".join(leaks))
           print("public artifact verification passed")
           PY
+      # A rerun keeps github.run_id but increments github.run_attempt. Using
+      # the default "github-pages" name leaves duplicate artifacts behind after
+      # retries, which causes deploy-pages to reject the run.
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
+          name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
           path: public
+      # The upload API may report success before the artifact becomes visible
+      # to the listing API used by deploy-pages. Wait rather than racing it.
+      - name: Confirm Pages artifact is visible to the deployment API
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PAGES_ARTIFACT_NAME: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in {1..18}; do
+            names="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/artifacts?per_page=100" --jq '.artifacts[].name' 2>/dev/null || true)"
+            matches="$(printf '%s\n' "$names" | grep -Fxc "$PAGES_ARTIFACT_NAME" || true)"
+            if [ "$matches" -eq 1 ]; then
+              echo "Pages artifact is visible on attempt ${attempt}."
+              exit 0
+            fi
+            if [ "$matches" -gt 1 ]; then
+              echo "::error::Multiple artifacts share the current attempt's name."
+              exit 1
+            fi
+            echo "Artifact not visible yet (check ${attempt}/18); retrying."
+            sleep 5
+          done
+          echo "::error::Pages artifact did not appear in GitHub Actions API."
+          exit 1
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+        with:
+          artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
       - name: Verify published phone SEO pages and canonical sitemap
         run: |
           python - <<'PY'
