@@ -51,11 +51,13 @@ def run(root: Path):
                     assert page.locator(".cw-primary-actions a").count() == 5, width
                     assert page.locator('.cw-primary-actions a[href="/phones/new-india-mobiles/"]').count() == 1, width
                     assert page.locator('.cw-primary-actions a[href="/seo/top-30-phone-research-india.html"]').count() == 1, width
-                    assert page.locator(".cw-budget-more").evaluate("(el) => !el.open"), width
-                    page.locator(".cw-budget-more summary").click()
-                    assert page.locator('[data-mobile-query="mobile under 50000"]').is_visible(), width
-                    page.locator(".cw-budget-more summary").click()
-                    assert page.locator(".cw-budget-more").evaluate("(el) => !el.open"), width
+                    primary_shortcuts = (10000, 15000, 20000, 25000, 30000)
+                    assert page.locator(".mobile-budget-chips [data-mobile-query]").count() == 5, width
+                    for cap in primary_shortcuts:
+                        assert page.locator(
+                            f'.mobile-budget-chips [data-mobile-query="mobile under {cap}"]'
+                        ).is_visible(), (width, cap)
+                    assert page.locator(".cw-budget-more").count() == 0, width
                     assert page.locator("#researchCategories").evaluate(
                         "(el) => !!(el.compareDocumentPosition(document.getElementById('mobileResearchSearch')) & Node.DOCUMENT_POSITION_FOLLOWING)"
                     ), width
@@ -209,10 +211,23 @@ def run(root: Path):
                     budget_audit = []
                     previous_keys = set()
                     for limit in range(5000, 200001, 5000):
-                        assert page.locator(f'[data-mobile-query="mobile under {limit}"]').count() == 1, (width, limit)
+                        # Only five buttons are prominent. Other bands remain
+                        # fully accessible through the advanced budget selector.
+                        button = page.locator(
+                            f'.mobile-budget-chips [data-mobile-query="mobile under {limit}"]'
+                        )
                         assert page.locator(f'#researchGuidedBudget option[value="{limit}"]').count() == 1, (width, limit)
-                        page.locator(f'[data-mobile-query="mobile under {limit}"]').evaluate("(el) => el.click()")
-                        assert page.locator("#heroSearch").input_value() == f"mobile under {limit}", (width, limit)
+                        if limit in primary_shortcuts:
+                            assert button.count() == 1, (width, limit)
+                            button.evaluate("(el) => el.click()")
+                            expected_query = f"mobile under {limit}"
+                        else:
+                            assert button.count() == 0, (width, limit)
+                            page.locator("#researchGuidedBudget").select_option(str(limit))
+                            page.locator("#researchGuidedScope").select_option("band")
+                            page.locator("#researchGuidedApply").evaluate("(el) => el.click()")
+                            expected_query = f"phone under {limit} nearby band"
+                        assert page.locator("#heroSearch").input_value() == expected_query, (width, limit)
                         assert "dated budget-reference matches" in page.locator("#mobileResearchSearchStatus").inner_text(), (width, limit)
                         measure = page.evaluate("""limit => {
                           const matches = window.CouponWorldMobileResearch.search('phone under ' + limit);

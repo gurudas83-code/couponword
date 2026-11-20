@@ -11,20 +11,27 @@ class FinalMobileReleaseUITests(unittest.TestCase):
     def test_homepage_has_mobile_budget_shortcuts_and_clean_skin(self):
         source = (ROOT / "index.html").read_text(encoding="utf-8")
         self.assertIn('<body class="clean-ui">', source)
-        for budget, query in (("₹10k", "mobile under 10000"),
-                              ("₹20k", "mobile under 20000"),
-                              ("₹30k", "mobile under 30000"),
-                              ("₹40k", "mobile under 40000"),
-                              ("₹50k", "mobile under 50000"),
-                              ("₹60k", "mobile under 60000"),
-                              ("₹70k", "mobile under 70000"),
-                              ("₹80k", "mobile under 80000"),
-                              ("₹90k", "mobile under 90000"),
-                              ("₹1L", "mobile under 100000")):
+        # Five primary shortcuts; the full 40-band coverage stays in the
+        # advanced filter, not in a crowded homepage button menu.
+        primary = (("₹10k", "mobile under 10000"),
+                   ("₹15k", "mobile under 15000"),
+                   ("₹20k", "mobile under 20000"),
+                   ("₹25k", "mobile under 25000"),
+                   ("₹30k", "mobile under 30000"))
+        self.assertEqual(
+            len(re.findall(r'<button[^>]*data-mobile-query="mobile under \d+"', source)),
+            len(primary),
+        )
+        for budget, query in primary:
             self.assertRegex(
                 source,
                 rf'data-mobile-query="{re.escape(query)}"[^>]*>{re.escape(budget)}',
             )
+        self.assertNotIn('class="cw-budget-more"', source)
+        self.assertIn('id="researchGuidedBudget"', source)
+        for cap in range(5000, 200001, 5000):
+            self.assertIn(f'<option value="{cap}">', source)
+
 
     def test_retailer_choices_and_verification_explanation_are_visible(self):
         source = (ROOT / "app.js").read_text(encoding="utf-8")
