@@ -1267,10 +1267,21 @@
         // These are research picks, sorted by documented source coverage, NOT
         // measured performance winners, current stock or budget-qualified deals.
         var topThreeCards = researchTopThree.map(function (item, index) {
+          var datedReference = validBudget ? item.card.research_budget_reference : null;
+          var datedPrice = datedReference && typeof datedReference.reference_price_inr === "number" ?
+            '<p class="research-source-note"><strong>Dated budget reference: ₹' +
+              escapeHtml(Number(datedReference.reference_price_inr).toLocaleString("en-IN")) +
+              '</strong> · ' + escapeHtml(datedReference.retailer || "Retailer") +
+              ' · checked ' + escapeHtml(String(datedReference.checked_at || "date unavailable").match(/\\d{4}-\\d{2}-\\d{2}/)?.[0] || datedReference.checked_at || "date unavailable") +
+              ' · ' + escapeHtml(datedReference.ram_gb == null ? "RAM unspecified" : datedReference.ram_gb + "GB RAM") +
+              ' / ' + escapeHtml(datedReference.storage_gb + "GB storage") +
+              ' · NOT a live checkout price or stock confirmation. ' +
+              link(datedReference.source_url, "Dated price source") + '</p>' : "";
           return '<div class="research-top3-result">' +
             '<p class="research-first-three-note"><strong>Research pick ' + (index + 1) + '</strong> · ' +
             (validBudget ? 'Dated reference in selected band; current price unverified' :
               'Price and retailer stock unverified') + '</p>' +
+            datedPrice +
             renderResearchResultCard(item.card, item.rows, item.group_size || 1) +
             topThreeRetailerSearchButtons(item.card) + '</div>';
         }).join("");
