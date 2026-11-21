@@ -30,6 +30,16 @@ function click(url){
  const anchor={href:url};
  documentEvents.click({target:{closest(selector){return selector==="a[href]"?anchor:null}}});
 }
+// Budget chips are BUTTON elements, not anchor tags: track these too.
+documentEvents.click({target:{closest(selector){
+  if(selector==="a[href]") return null;
+  if(selector.indexOf("[data-mobile-query]")>=0) return {
+    matches(check){return check.indexOf("[data-mobile-query]")>=0},
+    getAttribute(key){return key==="data-analytics-intent"?"budget_15000":null}
+  };
+  return null;
+}}});
+assert(events.some(e=>e.name==="research_action"&&e.params.action_kind==="budget_shortcut"), "Budget button conversion event missing");
 click("https://www.amazon.in/s?k=iphone&tag=secrets");
 click("https://www.flipkart.com/apple-iphone/p/itm123");
 const outbound=events.filter(e=>e.name==="cw_retailer_outbound");
