@@ -1111,6 +1111,9 @@
   function identityOnlyResearchLeads(query, alreadyShownKeys) {
     var constraints = researchConstraints(query);
     if (constraints.budget == null || (constraints.lower != null && constraints.lower > constraints.budget)) return "";
+    // Exact memory is a hard SKU identity requirement: do not suggest an
+    // unverified catalogue identity as a matching RAM/storage variant.
+    if (constraints.ram != null || constraints.storage != null) return "";
     var text = constraints.text;
     var excluded = excludedBrand(text);
     var aliases = {
