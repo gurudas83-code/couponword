@@ -16,7 +16,7 @@
     [/मोबाइल|स्मार्टफोन|फ़ोन|फोन/g,"phone"],[/टीवी|टेलीविज़न|टेलीविजन/g,"tv"],
     [/ईयरबड्स|ईयरबड|इयरबड्स|इयरबड/g,"earbuds"],[/हेडफोन/g,"headphones"],
     [/चार्जर/g,"charger"],[/पावर बैंक|पावरबैंक/g,"power bank"],
-    [/नहीं चाहिए/g,"nahi chahiye"],[/छोड़कर|छोड़कर/g,"exclude"],
+    [/नहीं चाहिए/g,"nahi chahiye"],[/छोड़कर|छोड़कर/g,"chhodkar"],
     [/मुझे|बताओ|दिखाओ|चाहिए|कौन सा|कौनसे|के अंदर|के नीचे|से कम|वाला|वाले|में|का|की|के|और|ज़रा|जरा/g," "]
   ];
   function modulate(input, previous) {
@@ -53,6 +53,10 @@
     var clearBudget=/\b(?:no budget|remove budget|any budget|forget budget)\b|बजट हटाओ/i.test(raw);
     if (clearBudget) budget=null;
     else if (budget===null && category===memory.category && memory.budget!=null) budget=memory.budget;
+    if(budget!==null) {
+      // Spoken leading budgets must never become fictitious exact model tokens.
+      text=text.replace(new RegExp("(^|\\s)"+budget+"(?=\\s|$)")," ");
+    }
     var base=text.replace(/(?:₹|rs\.?|inr|rupees|under|below|within|upto|up to|budget|price|maximum|less than)\s*\d{4,7}\b/gi," ")
       .replace(/\b\d{4,7}\s*(?:rupees|tak|andar)\b/gi," ")
       .replace(/\b(?:please|tell|me|show|find|give|suggest|recommend|want|need|a|an|the|some|which|for|i|to|aur|batao|dikhao|chahiye|achha|accha|good)\b/gi," ")
