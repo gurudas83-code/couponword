@@ -471,7 +471,9 @@ document.querySelectorAll("[data-mobile-query]").forEach(el => {
     const query = String(el.dataset.mobileQuery || "").trim();
     if (!query) return;
     heroSearch.value = query;
-    if (!submitMobileResearchIfApplicable(query)) loadShoppingRecommendation(query);
+    // Keep stable shortcut attributes while using local Top 3 research.
+    const localTopThreeQuery = "top 3 " + query;
+    if (!submitMobileResearchIfApplicable(localTopThreeQuery)) loadShoppingRecommendation(query);
   });
 });
 
