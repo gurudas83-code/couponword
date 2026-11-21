@@ -1127,7 +1127,8 @@
         return (" " + text + " ").indexOf(" " + name + " ") >= 0;
       });
     });
-    var explicit = /\bexact\s+model\b/i.test(String(query || ""));
+    var exactNameMatch = String(query || "").match(/\bexact\s+model\s+(.+?)(?=\s+(?:phone|mobile|smartphone|under|below)\b|$)/i);
+    var explicit = !!exactNameMatch;
     var modelName = text.replace(/\bexact\s+model\b/g, " ")
       .replace(/\b(?:phone|mobile|smartphone|phones|mobiles|under|below|within|budget|best|good|recommend)\b/g, " ")
       .replace(/\b(?:ke|andar|tak|liye|ka|ki|ko|se|me|mein)\b/g, " ")
@@ -1135,6 +1136,9 @@
     if (hint) aliases[hint].forEach(function (alias) {
       if (modelName.indexOf(alias + " ") === 0) modelName = modelName.slice(alias.length + 1);
     });
+    // The original exact-model words override general query normalization.
+    // In particular, digits inside model names (Smart 8 HD) are not RAM specs.
+    if (exactNameMatch) modelName = normalizeResearch(exactNameMatch[1]);
     var options = inventoryCards.filter(function (card) {
       if ((alreadyShownKeys || []).indexOf(card.model_key) >= 0) return false;
       var brandName = normalizeResearch(card.brand);
