@@ -356,6 +356,8 @@ def _generate_assistant_category_research(destination: Path) -> None:
             raise RuntimeError("Assistant category catalogue source is no longer publication-approved")
         for row in payload.get("records", []):
             category = str(row.get("category", ""))
+            if category == "accessories" and re.search(r"earbuds?|earphones?|true wireless|\\btws\\b", str(row.get("product_type", "")), re.I):
+                category = "earbuds"
             if category not in {"tvs", "earbuds", "accessories"}:
                 continue
             brand, model = str(row.get("brand", "")).strip(), str(row.get("model", "")).strip()
