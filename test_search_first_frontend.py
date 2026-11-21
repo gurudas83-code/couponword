@@ -49,7 +49,8 @@ class SearchFirstFrontendTests(unittest.TestCase):
         self.assertEqual(sum(bool(card.get("specifications")) for card in self.payload["model_cards"]), 225)
         self.assertEqual(sum(len(card.get("specifications", {})) for card in self.payload["model_cards"]), 2479)
         self.assertNotIn("purchase_cta_eligible: true", self.html.lower())
-        self.assertNotIn("top 3", self.script.lower())
+        self.assertIn("Research-Verified Top 3", self.script)
+        self.assertIn("researchTopThreeEligible", self.script)
 
 
 if __name__ == "__main__":
