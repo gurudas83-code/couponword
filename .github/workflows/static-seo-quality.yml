@@ -56,9 +56,14 @@ jobs:
         run: |
           node --check app.js
           node --check mobile-research-preview.js
+          node --check assets/cw-query-parser.js
+          node --check assets/cw-research-assistant.js
+          node --check test_cw_research_assistant.cjs
           node --check test_recommendation_cold_start.cjs
       - name: Test cold-start wait, late success and bounded API timeout without network
         run: node test_recommendation_cold_start.cjs
+      - name: Validate first-party voice assistant queries and published research safety
+        run: node test_cw_research_assistant.cjs
       - name: Test first three local phone matches without slow optional sources
         run: node test_search_first3_progressive.cjs
       - name: Validate research and comparison evidence gates
