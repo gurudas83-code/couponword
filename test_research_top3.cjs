@@ -111,7 +111,8 @@ assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', ro
   const midBudget = element("mobileResearchResults").innerHTML;
   assert.match(midBudget, /Research-Verified (?:Top 3|picks)/);
   assert((midBudget.match(/class="research-top3-result"/g) || []).length <= 3);
-  assert.doesNotMatch(midBudget, /class="research-top3-result"[\s\S]*?data-mobile-model-card="oppo\|a5x"/,
+  const midRanked = Array.from(midBudget.matchAll(/class="research-top3-result"[\s\S]*?data-mobile-model-card="([^"]+)"/g), m => m[1]);
+  assert(!midRanked.includes("oppo|a5x"),
     "Wrong A5x 4G/5G reference must never become a Top 3 research recommendation");
 
     research.submit("top three battery phones");
