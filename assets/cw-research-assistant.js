@@ -110,6 +110,7 @@
     var apple=phrase.match(/\b(?:iphone\s*|apple\s+(?:(?:iphone|mobile|phone|smartphone)\s*)?)(\d{1,2}[a-z]?)(?:\s+(pro\s+max|pro|plus|max|mini|air))?(?=\s|$)/);
     if (apple) return "apple iphone "+apple[1]+(apple[2]?" "+apple[2]:"");
     var cleaned=phrase.replace(/\b(?:please|show|give|find|tell|me|i|want|need|a|the|best|top|good|suggest|recommend|for|with|camera|battery|gaming|display|storage|ram|price|model|models|buy|chahiye|batao|dikhao|hai|phone|mobile|smartphone)\b/g," ").replace(/\s+/g," ").trim();
+    if (/^nothing phone\b/.test(phrase)) cleaned=cleaned.replace(/^nothing\s+/,"nothing phone ");
     // Only infer a named model when brand AND a model identifier are explicit.
     // Broader brand/category searches keep the current evidence ordering.
     if (/^(?:samsung|google|oneplus|xiaomi|redmi|vivo|oppo|realme|motorola|poco|nothing|iqoo|lava|honor|hmd|nokia|infinix|tecno)\s/.test(cleaned) &&
