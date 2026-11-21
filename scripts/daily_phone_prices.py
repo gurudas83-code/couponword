@@ -24,6 +24,8 @@ from quickcommerce_flipkart_adapter import _tokens
 from python.category_research_pages import doc, esc
 
 ROUTE = "/seo/india-30-phone-price-watch.html"
+UPCOMING_ROUTE = "/phones/upcoming-india/"
+PRICE_MAX_AGE = timedelta(hours=36)
 SNAPSHOT_PATH = "data/india_daily_price_watch_snapshot.json"
 PLATFORMS = ("Amazon", "Flipkart", "Croma")
 IST = ZoneInfo("Asia/Kolkata")
@@ -43,7 +45,7 @@ def worklist():
     if len(rows) != 30 or len(keys) != 30 or any(key not in cards or cards[key].get("category") for key in keys):
         raise ValueError("Expected 30 distinct catalogue smartphones")
     for row in rows:
-        if row["evidence"] not in SOURCES:
+        if row["evidence"] not in SOURCES and not (row["evidence"] == "India product page" and row.get("source", "").startswith("https://")):
             raise ValueError("Unknown market evidence")
         url = row.get("croma_url")
         if url:
@@ -151,7 +153,7 @@ def displayable_prices(store, observed, now):
         checked = datetime.fromisoformat(observed.get("checked_at")).astimezone(IST)
     except (TypeError, ValueError):
         return None, []
-    if not timedelta(0) <= now - checked <= timedelta(hours=72):
+    if not timedelta(0) <= now - checked <= PRICE_MAX_AGE:
         return checked, []
     prices = []
     for offer in observed.get("offers", []):
@@ -175,7 +177,7 @@ def render_store(row, store, observed, now, name="", *, lowest=False):
         details = "Exact listing" if store == "Croma" and row.get("croma_id") else "Search listing"
     else:
         label = esc(checked.strftime("%d %b, %H:%M IST"))
-        if not timedelta(0) <= now - checked <= timedelta(hours=72):
+        if not timedelta(0) <= now - checked <= PRICE_MAX_AGE:
             details = f"Refresh pending · {label}"
         else:
             items = []
@@ -212,7 +214,8 @@ def render_image(media, output, name):
 def publish(output, snapshot_path=None):
     rows, cards = worklist()
     data = json.loads(Path(snapshot_path).read_text()) if snapshot_path else {}
-    stores = data.get("stores", {})
+    stores = {row["model_key"]: data.get("stores", {}).get(row["model_key"], {}) for row in rows}
+    data = {**data, "stores": stores}
     now = datetime.now(IST)
     media = {}
     for filename in ("mobile_research_catalogue", "india_sales_eight_research", "india_recent_manufacturer_research"):
@@ -224,42 +227,65 @@ def publish(output, snapshot_path=None):
         card = cards[key]
         name = card["model"] if card["model"].lower().startswith(card["brand"].lower() + " ") else f'{card["brand"]} {card["model"]}'
         evidence = row["evidence"]
-        source = f'<a href="{esc(SOURCES[evidence])}">{esc(evidence)}</a>'
+        source = f'<a href="{esc(row.get("source") or SOURCES[evidence])}">{esc(evidence)}</a>'
         observations = stores.get(key, {})
         price_candidates = []
         for store in PLATFORMS:
             _, prices = displayable_prices(store, observations.get(store, {}), now)
             if prices:
                 price_candidates.append((prices[0][0], store))
-        cheapest_store = min(price_candidates)[1] if price_candidates else None
-        badge = ('<span class="phone-watch-status has-price">Price found</span>' if cheapest_store else
-                 '<span class="phone-watch-status no-price">Price not verified</span>')
-        fallback = "" if cheapest_store else (
-            f'<a class="phone-watch-price-cta" rel="sponsored nofollow noopener" href="{esc(amazon_search_url(name))}">'
-            'Check today’s price on Amazon ↗</a>'
-            '<small>Choose the matching variant and check the final price in your cart.</small>'
-        )
+        if not price_candidates:
+            continue
+        cheapest_store = min(price_candidates)[1]
+        badge = '<span class="phone-watch-status has-price">In stock at last API check</span>'
         shop_links = "".join(
             render_store(row, store, observations.get(store, {}), now, name, lowest=store == cheapest_store)
             for store in PLATFORMS
         )
         body.append(
             '<article class="phone-watch-card">' + render_image(media.get(key, {}), output, name) +
-            f'<div class="phone-watch-details">{badge}<h2>{esc(name)}</h2><p>{source}</p>{fallback}' +
+            f'<div class="phone-watch-details">{badge}<h2>{esc(name)}</h2><p>{source}</p>' +
             f'<ul aria-label="{esc(name)} retailer options">{shop_links}</ul></div></article>'
         )
     status = f'Latest collection attempt {esc(data["attempted_on"])} · {int(data["calls_attempted"])} API requests.' if data.get("attempted_on") else "First API collection pending."
-    page = """<h1>India Top 30 Phones</h1>
-    <p>Five models are from the published Q2 India sales Top 5. The others are selected from shipment reports and sell-through tracking. The selection is a price watchlist rather than a national sales ranking.</p>
-    <p>Prices are dated API observations for Delhi PIN 110001. Retailer checks rotate within 60 requests per day. The lowest observed price can be for a different variant.</p>"""
-    page += f'<p>{status}</p><div class="phone-watch-grid">' + "".join(body) + "</div>"
+    page = """<h1>India Phone Price Watch</h1>
+    <p>We track 30 phones selected from India sales reports and reviewed product pages. The grid displays models with an in-stock listing and a verified variant price from a retailer API observation within 36 hours.</p>
+    <p>Prices and stock are dated observations for Delhi PIN 110001. Confirm the matching variant, seller and final checkout price. The lowest observed price can be for a different variant.</p>"""
+    page += f'<p><strong>{len(body)} of 30 tracked phones</strong> have recent in-stock price evidence. {status}</p>'
+    page += f'<p><a href="{UPCOMING_ROUTE}">Upcoming phones and India launch checks</a></p>'
+    if body:
+        page += '<div class="phone-watch-grid">' + "".join(body) + "</div>"
+    else:
+        page += "<p>Awaiting refreshed retailer availability.</p>"
     target = output / ROUTE.lstrip("/")
     target.parent.mkdir(parents=True, exist_ok=True)
-    html = doc("India Top 30 Phones", "Dated Amazon, Flipkart and Croma price observations for selected India phones.", ROUTE, page, {"@context": "https://schema.org", "@type": "WebPage"})
+    html = doc("India Phone Price Watch", "Dated Amazon, Flipkart and Croma price observations for selected India phones.", ROUTE, page, {"@context": "https://schema.org", "@type": "WebPage"})
     target.write_text(html.replace("</head>", '<link rel="stylesheet" href="/assets/phone-watch-grid.css?v=light-price-cta-v1">\n</head>'), encoding="utf-8")
     target = output / SNAPSHOT_PATH
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(data, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    reviewed = json.loads((ROOT / "data/india_phone_launch_review.json").read_text())
+    if {row["model_key"] for row in reviewed} & {row["model_key"] for row in rows}:
+        raise ValueError("Launch review exclusions cannot appear in the price watch")
+    entries = "".join(
+        f'<li><strong>{esc(row["name"])}</strong><br>{esc(row["note"])} '
+        f'<a href="{esc(row["source"])}">Official source</a></li>'
+        for row in reviewed
+    )
+    launch_page = (
+        '<h1>Upcoming Phones in India</h1>'
+        '<p>We list a phone as upcoming when its manufacturer confirms a future India release. '
+        'Retailer prices are published after the India launch and a matching in-stock listing is verified.</p>'
+        '<p>No confirmed upcoming models have been added to this watch yet.</p>'
+        '<h2>India launch status checked</h2>'
+        '<p>These models already launched in 2026 and have been removed from the price watch selection.</p>'
+        f'<ul>{entries}</ul><p><a href="{ROUTE}">See phones with recent in-stock price evidence</a></p>'
+    )
+    target = output / UPCOMING_ROUTE.lstrip("/") / "index.html"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(doc("Upcoming Phones in India", "Manufacturer-confirmed India launch checks and price publication rules.",
+                          UPCOMING_ROUTE, launch_page, {"@context": "https://schema.org", "@type": "WebPage"}), encoding="utf-8")
 
 
 def main():

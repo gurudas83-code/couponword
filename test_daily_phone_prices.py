@@ -54,3 +54,19 @@ class DailyPhonePriceTests(unittest.TestCase):
         cell = render_store({}, "Amazon", record, self.now, "Example Phone", lowest=True)
         self.assertIn('class="phone-watch-price phone-watch-lowest" href="https://www.amazon.in/dp/B987654321">₹21,999', cell)
         self.assertIn('class="phone-watch-price" href="https://www.amazon.in/dp/B012345678">₹24,999', cell)
+
+
+    def test_price_watch_excludes_reviewed_launch_models(self):
+        import json
+        from scripts.daily_phone_prices import ROOT
+
+        held = json.loads((ROOT / "data/india_phone_launch_review.json").read_text())
+        self.assertEqual(len(held), 6)
+        self.assertFalse({row["model_key"] for row in held} & {row["model_key"] for row in self.rows})
+
+    def test_price_expires_after_36_hours(self):
+        record = {"checked_at": (self.now - timedelta(hours=37)).isoformat(),
+                  "offers": [{"price": 21999, "availability": "in_stock",
+                              "retailer_product_id": "B987654321", "variant": "8GB / 128GB",
+                              "product_url": "https://www.amazon.in/dp/B987654321"}]}
+        self.assertNotIn("₹", render_store({}, "Amazon", record, self.now, "Example Phone"))

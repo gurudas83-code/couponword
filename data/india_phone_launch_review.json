@@ -1,0 +1,38 @@
+[
+  {
+    "model_key": "apple|iphone 18 pro",
+    "name": "iPhone 18 Pro",
+    "note": "Apple store availability began 18 September 2026.",
+    "source": "https://www.apple.com/in/newsroom/2026/09/the-latest-iphone-apple-watch-and-airpods-lineups-arrive-in-stores-worldwide/"
+  },
+  {
+    "model_key": "apple|iphone 18 pro max",
+    "name": "iPhone 18 Pro Max",
+    "note": "Apple store availability began 18 September 2026.",
+    "source": "https://www.apple.com/in/newsroom/2026/09/the-latest-iphone-apple-watch-and-airpods-lineups-arrive-in-stores-worldwide/"
+  },
+  {
+    "model_key": "samsung|galaxy s26",
+    "name": "Samsung Galaxy S26",
+    "note": "Samsung India announced early deliveries on 6 March 2026.",
+    "source": "https://news.samsung.com/in/samsung-announces-early-deliveries-of-galaxy-s26-series-in-india"
+  },
+  {
+    "model_key": "samsung|galaxy s26 ultra",
+    "name": "Samsung Galaxy S26 Ultra",
+    "note": "Samsung India announced early deliveries on 6 March 2026.",
+    "source": "https://news.samsung.com/in/samsung-announces-early-deliveries-of-galaxy-s26-series-in-india"
+  },
+  {
+    "model_key": "samsung|galaxy s26 fe",
+    "name": "Samsung Galaxy S26 FE",
+    "note": "Samsung India announced launch on 14 September 2026.",
+    "source": "https://news.samsung.com/in/samsung-launches-galaxy-s26-fe-in-india-bringing-flagship-camera-galaxy-ai-and-powerful-performance"
+  },
+  {
+    "model_key": "samsung|galaxy z fold 8",
+    "name": "Samsung Galaxy Z Fold8",
+    "note": "India pre-orders opened 22 July 2026. Samsung announced retail rollout on 7 August 2026.",
+    "source": "https://news.samsung.com/in/samsung-officially-launches-galaxy-z-fold8-ultra-fold8-flip8-watch-ultra2-and-watch9"
+  }
+]

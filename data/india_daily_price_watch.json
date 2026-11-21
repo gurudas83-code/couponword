@@ -90,42 +90,6 @@
     "croma_title": "vivo S2 5G (8GB RAM, 128GB, Regal Bronze)"
   },
   {
-    "model_key": "apple|iphone 18 pro",
-    "evidence": "Q3 model or portfolio mention",
-    "croma_url": "https://www.croma.com/a/p/324743",
-    "croma_title": "Apple iPhone 18 Pro (512GB, Silver)"
-  },
-  {
-    "model_key": "apple|iphone 18 pro max",
-    "evidence": "Q3 model or portfolio mention",
-    "croma_url": "https://www.croma.com/a/p/324774",
-    "croma_title": "Apple iPhone 18 Pro Max (256GB, Glacier)"
-  },
-  {
-    "model_key": "samsung|galaxy s26",
-    "evidence": "Q3 model or portfolio mention",
-    "croma_url": "https://www.croma.com/samsung-galaxy-s26-5g-12gb-ram-256gb-black-/p/321482",
-    "croma_title": "SAMSUNG Galaxy S26 5G (12GB RAM, 256GB, Black)"
-  },
-  {
-    "model_key": "samsung|galaxy s26 ultra",
-    "evidence": "Q3 Galaxy S26 series",
-    "croma_url": "https://www.croma.com/a/p/321494",
-    "croma_title": "SAMSUNG Galaxy S26 Ultra 5G (12GB RAM, 256GB, Black)"
-  },
-  {
-    "model_key": "samsung|galaxy s26 fe",
-    "evidence": "Q3 model or portfolio mention",
-    "croma_url": "https://www.croma.com/samsung-galaxy-s26-fe-5g-8gb-ram-256gb-graphite-/p/326502",
-    "croma_title": "SAMSUNG Galaxy S26 FE 5G (8GB RAM, 256GB, Graphite)"
-  },
-  {
-    "model_key": "samsung|galaxy z fold 8",
-    "evidence": "Q3 model or portfolio mention",
-    "croma_url": "https://www.croma.com/samsung-galaxy-z-fold8-5g-12gb-ram-256gb-lavender-/p/325156",
-    "croma_title": "SAMSUNG Galaxy Z Fold8 5G (12GB RAM, 256GB, Lavender)"
-  },
-  {
     "model_key": "samsung|galaxy a37 5g",
     "evidence": "Counterpoint India sell-through tracked model",
     "croma_url": "https://www.croma.com/samsung-galaxy-a37-5g-8gb-ram-128gb-awesome-charcoal-/p/322130",
@@ -168,5 +132,35 @@
     "evidence": "Counterpoint India sell-through tracked model",
     "croma_url": "https://www.croma.com/realme-p4x-5g-8gb-ram-128gb-matte-silver-/p/319741",
     "croma_title": "realme P4x 5G (8GB RAM, 128GB, Matte Silver)"
+  },
+  {
+    "model_key": "samsung|galaxy a36 5g",
+    "evidence": "India product page",
+    "source": "https://www.samsung.com/in/smartphones/galaxy-a36/buy/"
+  },
+  {
+    "model_key": "samsung|galaxy a56 5g",
+    "evidence": "India product page",
+    "source": "https://www.samsung.com/in/smartphones/galaxy-a56/buy/"
+  },
+  {
+    "model_key": "oneplus|nord 6",
+    "evidence": "India product page",
+    "source": "https://www.oneplus.in/oneplus-nord-6"
+  },
+  {
+    "model_key": "nothing|phone 3a",
+    "evidence": "India product page",
+    "source": "https://in.nothing.tech/products/phone-3a"
+  },
+  {
+    "model_key": "motorola|edge 60 fusion",
+    "evidence": "India product page",
+    "source": "https://www.motorola.in/smartphones-motorola-edge-60-fusion/p?skuId=491"
+  },
+  {
+    "model_key": "iqoo|neo 10",
+    "evidence": "India product page",
+    "source": "https://www.iqoo.com/in/products/neo10"
   }
 ]
