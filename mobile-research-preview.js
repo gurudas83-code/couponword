@@ -1251,18 +1251,14 @@
     var wantsTopThree = isResearchTopThreeQuery(lastSearchQuery) && !comparison;
     var researchTopThree = [];
     if (wantsTopThree) {
-      // Reuse existing matching, source-coverage sorting, grouping and budget
-      // rules. Only a manufacturer-backed model with >=2 sourced technical
-      // fields qualifies for the research lane. No commerce gate is bypassed.
-      var pricedCandidates = matches.filter(hasResearchVerifiedEvidence);
-      var unpricedCandidates = validBudget ? findResearchMatches(lastSearchQuery, true)
-        .filter(hasResearchVerifiedEvidence)
-        .filter(function (item) {
-          // Do not portray a recorded out-of-band dated price as unknown.
-          var ref = item.card.research_budget_reference;
-          return !ref || !(Number(ref.reference_price_inr) > 0);
-        }) : [];
-      researchTopThree = groupResearchMatches(pricedCandidates.concat(unpricedCandidates)).slice(0, 3);
+      // Only match the EXISTING source-backed strict budget lane. If the
+      // shopper specified a budget, "matches" already requires an exact
+      // dated price reference in that ₹5k band and the matching variant.
+      // Never silently fill ranked budget slots with price-unknown models.
+      // These remain separately labelled unpriced research alternatives.
+      researchTopThree = groupResearchMatches(
+        matches.filter(hasResearchVerifiedEvidence)
+      ).slice(0, 3);
     }
     if (researchResults) {
       researchResults.hidden = false;
@@ -1270,14 +1266,10 @@
       if (wantsTopThree) {
         // These are research picks, sorted by documented source coverage, NOT
         // measured performance winners, current stock or budget-qualified deals.
-        var priceVerifiedKeys = new Set(matches.map(function (item) { return item.card.model_key; }));
         var topThreeCards = researchTopThree.map(function (item, index) {
-          var datedBandReference = validBudget && priceVerifiedKeys.has(item.card.model_key);
           return '<div class="research-top3-result">' +
             '<p class="research-first-three-note"><strong>Research pick ' + (index + 1) + '</strong> · ' +
-            (validBudget && !datedBandReference ?
-              'Current price and selected budget range unverified' :
-              validBudget ? 'Dated reference in selected band; current price unverified' :
+            (validBudget ? 'Dated reference in selected band; current price unverified' :
               'Price and retailer stock unverified') + '</p>' +
             renderResearchResultCard(item.card, item.rows, item.group_size || 1) +
             topThreeRetailerSearchButtons(item.card) + '</div>';
@@ -1286,11 +1278,12 @@
           '<h3>' + (researchTopThree.length === 3 ? 'Research-Verified Top 3' :
             'Research-Verified picks (' + researchTopThree.length + '/3 available)') + '</h3>' +
           '<p>Existing catalogue filter; ordered by documented manufacturer/source specification coverage, not measured camera, gaming or battery superiority. These are research selections, NOT live-stock recommendations or confirmed buyable offers.</p>' +
-          (validBudget ? '<p><strong>Budget warning:</strong> where no dated price reference meets the selected band, the shown source-backed alternatives are NOT confirmed within ₹' +
-            escapeHtml(Number(c.budget).toLocaleString("en-IN")) + '. Verify the exact RAM/storage variant and payable price at the retailer.</p>' : '') +
+          (validBudget ? '<p><strong>Budget evidence:</strong> ranked picks use only documented historical prices in the selected ₹5,000 band. Current store price and stock are not verified. Price-unknown phones appear separately below, never as budget-qualified Top 3.</p>' : '') +
           (researchTopThree.length ? '<div class="research-budget-primary-grid">' + topThreeCards + '</div>' :
-            '<p>No model meets the minimum manufacturer-backed research evidence requirements for this query. Try fewer constraints.</p>') +
-          '</section>';
+            '<p>' + (validBudget ?
+              'No manufacturer-backed models with dated price evidence passed the selected budget band. Research alternatives below have unknown current prices and are NOT ranked budget recommendations.' :
+              'No model meets the minimum manufacturer-backed research evidence requirements for this query. Try fewer constraints.') + '</p>') +
+          '</section>' + (validBudget ? additional.html : '');
       } else if (validBudget) {
         // Local, synchronous two-lane answer. No network round trip or
         // third-party API is required before either lane appears.
@@ -1321,8 +1314,10 @@
     }
     if (researchSearchStatus) {
       if (wantsTopThree) {
-        researchSearchStatus.textContent = researchTopThree.length + " Research-Verified model" +
-          (researchTopThree.length === 1 ? "" : "s") + " · local results · no live-price API";
+        researchSearchStatus.textContent = researchTopThree.length + (validBudget ?
+          " research picks with dated references in this budget band · " +
+          additional.count + " unpriced research alternatives" :
+          " Research-Verified models") + " · local results · no live-price API";
       } else if (validBudget) {
         researchSearchStatus.textContent = matches.length + " dated budget-reference matches · " +
           additional.count + " related phones with price unverified · local research results";
