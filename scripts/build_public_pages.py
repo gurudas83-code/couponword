@@ -446,6 +446,134 @@ def _generate_research_catalogue(destination: Path) -> None:
     )
 
 
+
+def _build_top50_research_queue(destination: Path) -> None:
+    """Prioritize 50 model/variant candidates, not 50 invented verified offers.
+
+    Demand is historical Keyword Planner research, never measured live sales.
+    Retailer SKU identity and API evidence remain explicit prerequisites.
+    """
+    source = json.loads((ROOT / "data/mobile_google_demand_ranked_126.json").read_text(encoding="utf-8"))
+    catalogue = json.loads((destination / "data/mobile_research_catalogue.json").read_text(encoding="utf-8"))
+    if source.get("market") != "IN" or len(catalogue["model_cards"]) != 232:
+        raise RuntimeError("Top50 source market or catalogue count changed")
+
+    def canonical(text: str) -> str:
+        return re.sub(r"[^a-z0-9]+", " ", re.sub(r"\b5g\b", "", str(text).casefold())).strip()
+
+    by_name = {
+        canonical(card["brand"] + " " + card["model"]): card
+        for card in catalogue["model_cards"]
+    }
+    ranked = sorted(
+        (row for row in source["products"]
+         if isinstance(row.get("google_demand_rank"), (int, float))
+         and row.get("google_demand_rank") > 0),
+        key=lambda row: (
+            row["google_demand_rank"],
+            -float(row.get("model_avg_monthly_searches") or 0),
+            canonical(row["brand"] + " " + row["model"]),
+        )
+    )
+    selected = []
+    seen = set()
+    records_by_key = {row["record_key"]: row for row in catalogue["records"]}
+    for demand in ranked:
+        card = by_name.get(canonical(demand["brand"] + " " + demand["model"]))
+        if not card or card["model_key"] in seen:
+            continue
+        seen.add(card["model_key"])
+        variant = str(demand.get("variant") or "").strip()
+        match = re.fullmatch(r"(\d+)GB/(\d+)GB", variant, re.I)
+        matching_record = next((
+            records_by_key[key] for key in card.get("discovery_record_keys", [])
+            if key in records_by_key and match
+            and str(records_by_key[key].get("ram_gb")) == match.group(1)
+            and str(records_by_key[key].get("storage_gb")) == match.group(2)
+            and records_by_key[key].get("status") == "OFFICIAL_VERIFIED"
+        ), None)
+        selected.append({
+            "priority": len(selected) + 1,
+            "model_key": card["model_key"],
+            "brand": card["brand"],
+            "model": card["model"],
+            "variant_to_check": variant,
+            "historical_google_demand_rank": demand["google_demand_rank"],
+            "research_status": card["status"],
+            "exact_research_variant_evidence": bool(matching_record),
+            "exact_retailer_sku_status": "NOT_VERIFIED",
+            "amazon_api": "PENDING_EXACT_ASIN_AND_AUTHORIZATION",
+            "flipkart_api": "PENDING_EXACT_PRODUCT_ID_AND_AUTHORIZATION",
+            "current_verified_price_inr": None,
+            "current_stock": None,
+        })
+        if len(selected) == 50:
+            break
+    if len(selected) != 50 or len({row["model_key"] for row in selected}) != 50:
+        raise RuntimeError("Historical demand-to-catalogue join produced fewer than 50 unique model candidates")
+    manifest = {
+        "mode": "TOP50_HISTORICAL_DEMAND_RESEARCH_QUEUE_NOT_LIVE_OFFERS",
+        "market": "IN",
+        "count": 50,
+        "demand_period": "September 2025 to August 2026",
+        "notice": "Priority candidates only. Variants, retailer IDs, live prices and stock require independent exact-SKU/API verification. No purchase eligibility is granted.",
+        "products": selected,
+    }
+    target = destination / "data/top50_sku_research_queue.json"
+    target.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def _render_static_phone_inventory(destination: Path) -> None:
+    """Publish the complete 232-model index as crawlable build-time HTML.
+
+    JavaScript hydrates optional details and filtering later. No retail price,
+    inventory claim or invented specification is embedded in the static page.
+    """
+    catalogue = json.loads((destination / "data/mobile_research_catalogue.json").read_text(encoding="utf-8"))
+    cards = catalogue["model_cards"]
+    if len(cards) != 232:
+        raise RuntimeError("Refuse to publish incomplete static mobile inventory")
+    generated = []
+    for card in cards:
+        name = (str(card.get("brand") or "") + " " + str(card.get("model") or "")).strip()
+        key = str(card["model_key"])
+        status = str(card["status"])
+        known = card.get("specifications") or {}
+        facts = []
+        for field, label in (
+            ("chipset", "Chipset"),
+            ("battery_mah_typical", "Battery"),
+            ("display_refresh_max_hz", "Refresh"),
+            ("network_support", "Network"),
+        ):
+            datum = known.get(field) or {}
+            if datum.get("value") is not None and str(datum["value"]).strip() and str(datum.get("source_url") or "").startswith("https://"):
+                facts.append(escape(label + ": " + str(datum["value"])))
+        source_url = next((
+            url for url in card.get("source_urls") or []
+            if isinstance(url, str) and url.startswith("https://")
+            and urlsplit(url).hostname
+        ), "")
+        href = '<a href="' + escape(source_url, quote=True) + '" rel="noopener noreferrer">Source record</a>' if source_url else '<span>Source link pending</span>'
+        generated.append(
+            '<article class="mobile-research-inventory-card mobile-research-static-card" '
+            'data-static-mobile-model="' + escape(key, quote=True) + '">'
+            '<div class="mobile-research-inventory-body">'
+            '<span class="research-status">' + escape(status.replace("_", " ").title()) + '</span>'
+            '<h3>' + escape(name) + '</h3>'
+            '<p>' + (" · ".join(facts[:3]) if facts else "Specifications require further source review") + '</p>'
+            '<p>' + href + ' · <a href="/phones/">Compare phone specifications</a></p>'
+            '<p class="mobile-research-gate">Research only. Check exact variant, current price and stock with the retailer.</p>'
+            '</div></article>'
+        )
+    page = destination / "index.html"
+    content = page.read_text(encoding="utf-8")
+    marker = "<!-- STATIC_232_PHONE_CARDS -->"
+    if content.count(marker) != 1:
+        raise RuntimeError("Homepage has no unique static mobile inventory mount")
+    page.write_text(content.replace(marker, "\n".join(generated)), encoding="utf-8")
+    print("Build-time crawlable inventory:", len(generated), "model entries")
+
 def _validate_public_content(output: Path) -> None:
     preview_path = output / "data" / "mobile_research_preview.json"
     preview = json.loads(preview_path.read_text(encoding="utf-8"))
@@ -464,6 +592,12 @@ def _validate_public_content(output: Path) -> None:
         if commerce.get("purchase_cta_eligible") or commerce.get("publication_eligible"):
             raise RuntimeError("research preview exposes a commerce CTA")
 
+    homepage = (output / "index.html").read_text(encoding="utf-8")
+    if homepage.count('data-static-mobile-model=') != 232:
+        raise RuntimeError("Public homepage must contain exactly 232 server-rendered phone entries")
+    top50 = json.loads((output / "data/top50_sku_research_queue.json").read_text(encoding="utf-8"))
+    if len(top50.get("products", [])) != 50 or any(row.get("current_verified_price_inr") is not None for row in top50["products"]):
+        raise RuntimeError("Top50 research queue cannot claim a live price or missing SKU validation")
     catalogue_path = output / "data" / "mobile_research_catalogue.json"
     catalogue = json.loads(catalogue_path.read_text(encoding="utf-8"))
     discovery_rows = catalogue.get("records")
@@ -587,6 +721,8 @@ def build(output: Path) -> Path:
     from python.india_recent_eight_import import publish_recent
     publish_recent(output)
     _render_verified_homepage_counts(output)
+    _render_static_phone_inventory(output)
+    _build_top50_research_queue(output)
     _render_recent_phone_sources(output)
 
     # Product pages are generated from the same fail-closed renderer used
