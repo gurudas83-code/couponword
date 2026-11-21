@@ -632,7 +632,15 @@
     var rows;
     if (c.budget != null) {
       var ref = card.research_budget_reference;
-      if (!ref || ref.live_offer !== false || !(ref.reference_price_inr > 0)) return [];
+      // Align public Top 3/ordinary budget matching with the offline source
+      // audit: a numeric dated, exact-SKU reference is essential. Never treat
+      // sold-out records or ranking-weighted prices as buyable evidence.
+      if (!ref || ref.live_offer !== false ||
+          typeof ref.reference_price_inr !== "number" ||
+          !Number.isFinite(ref.reference_price_inr) || ref.reference_price_inr <= 0 ||
+          !/\b20\d{2}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01])\b/.test(String(ref.checked_at || "")) ||
+          ref.ranking_weight !== 0 ||
+          /OUT.OF.STOCK|UNAVAILABLE|SOLD.OUT|DISCONTINUED/i.test(String(ref.stock_indication || ""))) return [];
       if (c.inclusive ? ref.reference_price_inr > c.budget : ref.reference_price_inr >= c.budget) return [];
       if (c.lower != null && ref.reference_price_inr < c.lower) return [];
       rows = [{ ram_gb: ref.ram_gb, storage_gb: ref.storage_gb, variant_text: (ref.ram_gb == null ? "RAM not officially specified" : ref.ram_gb + "GB RAM") + " / " + ref.storage_gb + "GB storage", research_reference: true }];
