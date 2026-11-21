@@ -96,7 +96,7 @@
   // "Top 3" is a request for the number of results, not model number 3.
   // Keep model names such as "Nothing Phone (3)" intact.
   function isResearchTopThreeQuery(query) {
-    return /(?:\\b(?:top|best)\\s*(?:3|three)\\b|\\bfirst\\s*3\\b|टॉप\\s*[३3]|शीर्ष\\s*[३3])/i.test(String(query || ""));
+    return /(?:\b(?:top|best)\s*(?:3|three)\b|\bfirst\s*3\b|टॉप\s*[३3]|शीर्ष\s*[३3])/i.test(String(query || ""));
   }
 
   function hasResearchVerifiedEvidence(item) {
@@ -104,7 +104,7 @@
     if (!card || card.status !== "OFFICIAL_VERIFIED" || !(item.rows || []).length) return false;
     return Object.values(card.specifications || {}).filter(function (spec) {
       return spec && spec.value != null && String(spec.value).trim() &&
-        /^https:\\/\\/[^\\s<>"']+$/i.test(String(spec.source_url || ""));
+        /^https:\/\/[^\s<>"']+$/i.test(String(spec.source_url || ""));
     }).length >= 2;
   }
 
@@ -585,7 +585,7 @@
 
   function researchConstraints(query) {
     var text = String(query || "").toLowerCase()
-      .replace(/(?:\\b(?:top|best)\\s*(?:3|three)\\b|\\bfirst\\s*3\\b|टॉप\\s*[३3]|शीर्ष\\s*[३3])/gi, " ")
+      .replace(/(?:\b(?:top|best)\s*(?:3|three)\b|\bfirst\s*3\b|टॉप\s*[३3]|शीर्ष\s*[३3])/gi, " ")
       .replace(/[०-९]/g, function (d) { return String("०१२३४५६७८९".indexOf(d)); }).replace(/,/g, "");
     text = text.replace(/सैमसंग/g, "samsung").replace(/आईफोन/g, "iphone").replace(/रेडमी/g, "redmi").replace(/वनप्लस/g, "oneplus")
       .replace(/\b(?:mobies|moblies)\b/g, "mobiles")
