@@ -1250,7 +1250,7 @@
       researchResults.hidden = false;
       var bridge = verifiedRecommendationBridge(lastSearchQuery, comparison);
       if (researchTopThreeMode && !comparison) {
-        var label = visible.length === 3 ? "Research-Verified Top-3" :
+        var label = visible.length === 3 ? "Research-Verified Top 3" :
           "Research-Verified matches (" + visible.length + " of 3)";
         researchResults.innerHTML = '<section class="research-budget-tier research-budget-evidenced research-top-three" aria-label="Source-backed research recommendations">' +
           '<h3>' + label + '</h3>' +
