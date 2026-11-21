@@ -46,7 +46,7 @@
     else if (/^\s*\d{4,7}\b/.test(text) && /(?:phone|tv|earbuds|charger|battery|camera)/i.test(text))
       budget=Number(text.match(/^\s*(\d{4,7})/)[1]);
     else {
-      var money=text.match(/\b(\d{4,7})\s*(?:rupees|tak|andar)\b/i);
+      var money=text.match(/\b(\d{4,7})\s*(?:rupees|tak|andar|ke\s+andar)\b/i);
       if(money) budget=Number(money[1]);
     }
     if(budget!==null && (budget<1000 || budget>1000000)) budget=null;
@@ -56,7 +56,7 @@
     // Strip only price-amount expressions. Do not turn 55-inch, 8GB or
     // the number inside a model identifier into an assumed price.
     var base=text.replace(/(?:₹|rs\.?|inr|rupees|under|below|within|upto|up to|budget(?: of)?|price|maximum|less than)\s*\d{4,7}\b/gi," ")
-      .replace(/\b\d{4,7}\s*(?:rupees|tak|andar)\b/gi," ")
+      .replace(/\b\d{4,7}\s*(?:rupees|tak|andar|ke\s+andar)\b/gi," ")
       .replace(/(^|\s)\d{4,7}(?=\s|$)/g,function(match,prefix) {
         return budget!==null && Number(match.trim())===budget ? prefix : match;
       })
