@@ -105,6 +105,12 @@ def publish_search_demand(destination: Path) -> str:
 # The 30-phone pilot is an editorial RESEARCH PRIORITY, not an ordered
 # sales/performance ranking. Reuse the existing evidence-gated 50-page publisher
 # instead of creating 20 thin, duplicate or unsupported indexable model pages.
+REPRESENTATIVE_PHONE_MODELS = {
+    "oppo|a5x", "oppo|a6 pro", "oppo|k13 5g", "oppo|k14x 5g",
+    "poco|m8 power 5g", "poco|x7 pro 5g", "poco|x8 5g",
+}
+REPRESENTATIVE_PHONE_IMAGE = "/assets/phone-illustrations/representative-smartphone.webp"
+
 TOP30_EN = "/seo/top-30-phone-research-india.html"
 TOP30_HI = "/hi/seo/top-30-phone-research-india.html"
 TOP30_FILE = ROOT / "data/top30_research_pilot_20261113.json"
@@ -167,6 +173,9 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
               '.cw-retail-choices{margin:.4rem 0 1rem}.cw-retail-choices summary{display:inline-block;cursor:pointer;border:1px solid #b8c6d5;border-radius:10px;padding:.5rem;list-style:none}'
               '.cw-retail-choices summary::-webkit-details-marker{display:none}.cw-retail-choices summary:focus-visible{outline:3px solid #215fa1;outline-offset:3px}'
               '.cw-retail-choices summary img{display:block;max-width:180px;max-height:210px;width:auto;height:auto;object-fit:contain}'
+              '.cw-retail-choices summary.cw-representative-phone{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:center;gap:.7rem;width:100%;box-sizing:border-box;background:#f3f6f5}'
+              '.cw-retail-choices summary.cw-representative-phone img{width:100%;height:auto;max-width:none;max-height:none;border-radius:7px}'
+              '.cw-representative-phone span{display:grid;gap:.32rem}.cw-representative-phone small{font-size:.75rem;line-height:1.35}.cw-representative-phone em{font-size:.75rem;font-style:normal;text-decoration:underline}'
               '.cw-retail-choices nav{display:flex;flex-wrap:wrap;gap:.5rem;padding:.65rem 0}.cw-retail-choices nav a{border:1px solid #2a587f;border-radius:8px;padding:.55rem .8rem;text-decoration:none}'
               '.cw-retail-choices nav a:focus-visible{outline:3px solid #215fa1;outline-offset:3px}'
               '.cw-retail-choices .cw-retail-note{font-size:.83rem;margin:.2rem 0}'
@@ -286,6 +295,19 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
                         '" rel="noopener noreferrer">' + esc(photo_license) + '</a>' +
                         ((' · आकार बदला गया' if hindi else ' · resized') if photo.get("resized") else "") +
                         '</small></div></details>'
+                    )
+                if (not photo_html and row["model_key"] in REPRESENTATIVE_PHONE_MODELS
+                        and (ROOT / REPRESENTATIVE_PHONE_IMAGE.lstrip("/")).is_file()):
+                    disclosure = ("प्रतिनिधि चित्र · वास्तविक मॉडल की फोटो नहीं"
+                                  if hindi else "Representative illustration · not the actual phone")
+                    retailer_label = "रिटेलर विकल्प देखें" if hindi else "Show retailer options"
+                    photo_html = (
+                        '<details class="cw-retail-choices"><summary class="cw-representative-phone">'
+                        '<img src="' + REPRESENTATIVE_PHONE_IMAGE +
+                        '" alt="" width="640" height="640" loading="lazy" decoding="async">'
+                        '<span><strong>' + esc(name) + '</strong><small>' + esc(disclosure) +
+                        '</small><em>' + esc(retailer_label) + '</em></span></summary>' +
+                        retailer_nav + '</details>'
                     )
                 if not photo_html:
                     photo_html = ('<details class="cw-retail-choices"><summary>' +
