@@ -823,6 +823,31 @@
       '</p>' + checklist + '<p><small>Research evidence is not a measured performance verdict.</small></p></div>';
   }
 
+  function assistantRetailerOptions(card) {
+    // Same existing source records as the phone cards: exact verified links
+    // take precedence; otherwise show only retailer search destinations.
+    // This never grants current offer/stock/purchase eligibility.
+    var exact = Array.isArray(card && card.verified_retailer_links) ? card.verified_retailer_links : [];
+    var searches = Array.isArray(card && card.retailer_search_links) ? card.retailer_search_links : [];
+    var stores = [
+      {id:"flipkart", name:"Flipkart", hosts:["flipkart.com", "www.flipkart.com"]},
+      {id:"amazon", name:"Amazon", hosts:["amazon.in", "www.amazon.in"]},
+      {id:"croma", name:"Croma", hosts:["croma.com", "www.croma.com"]}
+    ];
+    return stores.map(function(store) {
+      var verified=exact.find(function(item) {return String(item && item.retailer || "").toLowerCase()===store.id;});
+      var fallback=searches.find(function(item) {return String(item && item.retailer || "").toLowerCase()===store.id;});
+      var item=verified || fallback;
+      if(!item)return null;
+      try {
+        var url=new URL(String(item.url||""));
+        if(url.protocol!=="https:" || url.username || url.password || stores.find(function(s){return s.id===store.id;}).hosts.indexOf(url.hostname.toLowerCase())<0)return null;
+        if(store.id==="amazon")url.searchParams.set("tag","guru07cc-21");
+        return {retailer:store.name,url:url.href,exact_model_link:Boolean(verified),affiliate:store.id==="amazon"};
+      } catch (_) {return null;}
+    }).filter(Boolean);
+  }
+
   function retailerResearchLinks(card) {
     // Reuse the existing exact-identity and retailer-search records; never
     // transform a research search into a verified buy/stock/price CTA.
@@ -1511,6 +1536,7 @@
       return researchConstraints(value).budget != null || /(?:phone|mobile|mobies|moblies|moblie|moible|smartphone|galaxy|samsung|iphone|pixel|redmi|oneplus|nothing|realme|vivo|oppo|xiaomi|motorola|poco|iqoo|lava|tecno|infinix|camera|battery|gaming|display|software|build|reliability|durability|android|ram|storage|फोन|मोबाइल|कैमरा|बैटरी|गेमिंग|सैमसंग|अच्छा)/i.test(String(value || ""));
     },
     search: searchResearch,
+    retailerOptions: assistantRetailerOptions,
     submit: submitResearch,
     clear: function () { if (researchQuery) researchQuery.value = ""; searchResearch(""); },
     revealPreview: revealPreview,
