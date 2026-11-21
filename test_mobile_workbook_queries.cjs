@@ -172,5 +172,20 @@ setImmediate(()=> {
    assert(h.includes('no saved dated price reference') || h.includes('No saved dated price reference'));
    assert(!h.includes('purchase-cta'));
  });
+ check('explicit generic Top 3 returns three source-backed research candidates',()=>{
+   api.submit('best phones',{top3:true});
+   const html=element('mobileResearchResults').innerHTML;
+   assert(html.includes('Research-Verified Top 3'),html.slice(0,500));
+   assert.equal((html.match(/data-mobile-model-card=/g)||[]).length,3);
+   assert(html.includes('NOT a live offer'));
+ });
+ check('budgeted Top 3 never treats unknown retailer price as within budget',()=>{
+   api.submit('best phone under 20000',{top3:true});
+   const html=element('mobileResearchResults').innerHTML;
+   assert(html.includes('Research-Verified Top 3'),html.slice(0,500));
+   assert(html.includes('budget unverified'));
+   assert(html.includes('may exceed the requested budget'));
+   assert(!html.includes('purchase-cta'));
+ });
  console.log(checks+' checks passed');
 });
