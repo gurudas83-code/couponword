@@ -42,6 +42,24 @@ function fetch(url) {
 const context = vm.createContext({window, document, fetch, console, URL, URLSearchParams, Map, Set});
 vm.runInContext(fs.readFileSync("mobile-research-preview.js", "utf8"), context);
 
+const appSource = fs.readFileSync("app.js", "utf8");
+const routeStart = appSource.indexOf("function isExplicitTopThreeQuery(");
+const routeEnd = appSource.indexOf('heroSearchButton.addEventListener("click"', routeStart);
+assert(routeStart >= 0 && routeEnd > routeStart, "Existing hero search route not found");
+let routedSearch = null;
+const routeContext = vm.createContext({
+  window: {CouponWorldMobileResearch: {
+    isResearchQuery() { return false; },
+    submit(query) { routedSearch = query; },
+  }},
+  document: {getElementById() { return {scrollIntoView() {}}; }},
+});
+vm.runInContext(appSource.slice(routeStart, routeEnd), routeContext);
+assert.equal(vm.runInContext('submitMobileResearchIfApplicable("top 3 phones under 25000")', routeContext), true);
+assert.equal(routedSearch, "top 3 phones under 25000");
+assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', routeContext), false,
+  "A normal model number must not be mistaken for Top 3");
+
 (async () => {
   await new Promise(resolve => setImmediate(resolve));
   const research = window.CouponWorldMobileResearch;
