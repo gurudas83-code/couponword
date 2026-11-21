@@ -49,6 +49,7 @@
   var lastSearchQuery = "";
   var lastSearchMatches = [];
   var lastStrictMatchCount = 0;
+  var researchTopThreeMode = false;
   var guidedControls = ["researchGuidedBudget", "researchGuidedPriority", "researchGuidedRam", "researchGuidedStorage", "researchGuidedExclude"].map(function (id) { return document.getElementById(id); });
   var guidedScope = document.getElementById("researchGuidedScope");
   var appliedFilters = document.getElementById("researchAppliedFilters");
@@ -131,11 +132,10 @@
     durability: "Durability"
   };
 
-  // Keep the research catalogue out of the idle homepage. It is revealed by an
-  // explicit search, comparison link, or Browse All action.
+  // Keep the detailed 10-variant panel optional, but do not conceal the
+  // crawlable 232-model static inventory on the idle homepage.
   section.hidden = true;
   var catalogueSection = document.getElementById("mobileResearchCatalogue");
-  if (catalogueSection) catalogueSection.hidden = true;
 
   function escapeHtml(value) {
     return String(value == null ? "" : value)
@@ -336,10 +336,17 @@
         inventorySourceCounts.visible_model_cards + " original catalogue models" + (marketIntakeCount ? " + " + marketIntakeCount + " new market research models" : "") + " · " + (inventorySourceCounts.deduplicated_discovery_records || inventoryRows.length) + " original research records · " + (inventorySourceCounts.frozen_verified_variants || verifiedRows.length) + " frozen exact variants" :
         filtered.length + " catalogue entries · " + matchingVariants + " matching research/frozen variants";
     }
+    // Keep all 232 source-backed HTML cards in the initial DOM even after
+    // hydration. Google and no-JS users must not lose 214 cards when JS loads.
+    var staticFullIndex = isUnfiltered && !inventoryExpanded &&
+      inventoryGrid.querySelector && inventoryGrid.querySelector('[data-static-mobile-model]') &&
+      inventoryGrid.querySelectorAll('[data-static-mobile-model]').length === 232;
     var visible = inventoryExpanded ? filtered : filtered.slice(0, INVENTORY_PAGE_SIZE);
-    inventoryGrid.innerHTML = visible.length ? visible.map(renderInventoryCard).join("") : "<p>No smartphone models match these filters.</p>";
+    if (!staticFullIndex) {
+      inventoryGrid.innerHTML = visible.length ? visible.map(renderInventoryCard).join("") : "<p>No smartphone models match these filters.</p>";
+    }
     if (inventoryMore) {
-      inventoryMore.hidden = filtered.length <= INVENTORY_PAGE_SIZE;
+      inventoryMore.hidden = Boolean(staticFullIndex) || filtered.length <= INVENTORY_PAGE_SIZE;
       inventoryMore.textContent = inventoryExpanded ? "Show fewer research models" : "Load more research models";
     }
   }
@@ -386,7 +393,10 @@
       inventorySourceCounts = payload.source_counts || {};
       marketIntakeCount = 0;
       var requested = lastSearchQuery || new URLSearchParams(window.location.search || "").get("q");
-      if (requested) submitResearch(requested);
+      if (requested) {
+        if (researchTopThreeMode) searchResearch(requested);
+        else submitResearch(requested);
+      }
       refreshInventoryControls();
     }).catch(function () {
       // The combined loading path below retains the documented offline guide.
@@ -460,7 +470,10 @@
         if (researchSearchStatus) researchSearchStatus.textContent = "Saved smartphone research is temporarily unavailable. Use the Standard Buying Guide below.";
         if (researchResults) { researchResults.hidden = false; researchResults.innerHTML = researchGuideFallback(); }
         if (inventoryCount) inventoryCount.textContent = "Research catalogue unavailable";
-        inventoryGrid.innerHTML = "<p>Existing research records are currently unavailable.</p>" + researchGuideFallback();
+        // Preserve the already-rendered 232 static cards if optional feeds fail.
+        if (!inventoryCards.length && !inventoryGrid.innerHTML.includes('data-static-mobile-model')) {
+          inventoryGrid.innerHTML = "<p>Existing research records are currently unavailable.</p>" + researchGuideFallback();
+        }
       });
   }
 
@@ -867,8 +880,8 @@
           try {
             var parsed = new URL(String(item.url || ""));
             if (parsed.protocol === "https:" && store.hosts.indexOf(parsed.hostname.toLowerCase()) >= 0) {
-              var label = verified ? "View exact " + store.name + " listing" :
-                (store.id === "croma" ? "Search Croma for this model" : "Search " + store.name);
+              var label = store.id === "croma" ? "Check live price on Croma" :
+                "Check live price on " + store.name + (verified ? " (exact listing)" : " (search results)");
               return link(item.url, label);
             }
           } catch (error) { /* Invalid links remain unavailable, not clickable. */ }
@@ -1010,6 +1023,18 @@
   }
 
 
+
+  // Research eligibility must never depend on a retailer stock observation.
+  // Source-backed model-level facts are not claims of exact-SKU certification
+  // or tested real-world camera, battery, or gaming performance.
+  function researchTopThreeEligible(item) {
+    var card = item && item.card || {};
+    if (card.status !== "OFFICIAL_VERIFIED" && card.status !== "PARTIALLY_VERIFIED") return false;
+    return Object.values(card.specifications || {}).filter(function (field) {
+      return field && field.value != null && String(field.value).trim() !== "" &&
+        typeof field.source_url === "string" && field.source_url.startsWith("https://");
+    }).length >= 2;
+  }
 
   function showAppliedConditions(query) {
     var c = researchConstraints(query), labels = [];
@@ -1206,10 +1231,31 @@
     }
     var c = researchConstraints(lastSearchQuery);
     matches = groupResearchMatches(matches);
+    if (researchTopThreeMode && !comparison) matches = matches.filter(researchTopThreeEligible);
+    // A source-reviewed model may have NO dated price reference. Distinguish
+    // budget-unknown candidates from budget-qualified recommendations: do
+    // not keep an empty Top 3 solely because no live offer or price exists.
+    var researchTopThreeBudgetUnverified = false;
+    if (researchTopThreeMode && !comparison && c.budget != null && !matches.length) {
+      var unpriced = groupResearchMatches(findResearchMatches(lastSearchQuery, true)).filter(researchTopThreeEligible);
+      if (unpriced.length) {
+        matches = unpriced;
+        researchTopThreeBudgetUnverified = true;
+      }
+    }
+    // Generic "Top 3 phones" has no model/feature constraint; the existing
+    // search intentionally returns [] for generic input. Rank only models
+    // with manufacturer/source-backed facts via the existing evidence sort.
+    if (researchTopThreeMode && !comparison && c.budget == null && !matches.length &&
+        /^(?:best\s*)?(?:phones?|mobiles?|smartphones?)?$/i.test(lastSearchQuery.trim())) {
+      matches = sortResearchMatches(inventoryCards.map(function (card) {
+        return {card: card, rows: inventoryRowsForCard(card)};
+      }).filter(researchTopThreeEligible), lastSearchQuery);
+    }
     lastStrictMatchCount = matches.length;
     // Budget matching is strict: never replace an empty ₹5k band with unrelated
     // repository results. Unverified-price research stays in a separate lane.
-    var fallback = matches.length || c.budget != null ? [] : repositoryFallbackMatches(lastSearchQuery);
+    var fallback = researchTopThreeMode || matches.length || c.budget != null ? [] : repositoryFallbackMatches(lastSearchQuery);
     var displayMatches = matches.length ? matches : fallback;
     lastSearchMatches = displayMatches;
     var visible = searchExpanded ? displayMatches : displayMatches.slice(0, MAX_SEARCH_RESULTS);
@@ -1219,11 +1265,24 @@
       renderSelectedComparison();
     }
     var validBudget = !comparison && c.budget != null && (c.lower == null || c.lower <= c.budget);
-    var additional = validBudget ? unpricedResearchLeads(lastSearchQuery) : {count: 0, html: ""};
+    var additional = validBudget && !researchTopThreeMode ? unpricedResearchLeads(lastSearchQuery) : {count: 0, html: ""};
     if (researchResults) {
       researchResults.hidden = false;
       var bridge = verifiedRecommendationBridge(lastSearchQuery, comparison);
-      if (validBudget) {
+      if (researchTopThreeMode && !comparison) {
+        var label = visible.length === 3 ? "Research-Verified Top 3" :
+          "Research-Verified matches (" + visible.length + " of 3)";
+        if (researchTopThreeBudgetUnverified) label += " · budget unverified";
+        researchResults.innerHTML = '<section class="research-budget-tier research-budget-evidenced research-top-three" aria-label="Source-backed research recommendations">' +
+          '<h3>' + label + '</h3>' +
+          '<p>Ordered by documented evidence relevant to your request, not independent performance tests. Retailer stock is NOT required for this research list. This is NOT a live offer, a tested winner, or proof of today\'s price.</p>' +
+          (researchTopThreeBudgetUnverified ? '<p><strong>Budget NOT verified:</strong> These are source-backed research candidates that match the non-price requirements. Their exact variants may exceed the requested budget. Check the current retailer price before deciding.</p>' :
+            validBudget ? '<p>Budget fit uses dated price references only; recheck the exact RAM/storage variant and current price.</p>' : '') +
+          (visible.length ? '<div class="research-budget-primary-grid">' + visible.map(function (item) {
+            return renderResearchResultCard(item.card, item.rows, item.group_size);
+          }).join("") + '</div>' : '<p>No sufficiently source-backed model meets every requested condition. We will not manufacture a Top-3 list.</p>') +
+          '</section>' + (validBudget ? additional.html : '');
+      } else if (validBudget) {
         // Local, synchronous two-lane answer. No network round trip or
         // third-party API is required before either lane appears.
         var primary = '<section class="research-budget-tier research-budget-evidenced" aria-label="Phones with dated budget references">' +
@@ -1252,7 +1311,10 @@
       }
     }
     if (researchSearchStatus) {
-      if (validBudget) {
+      if (researchTopThreeMode && researchTopThreeBudgetUnverified) {
+        researchSearchStatus.textContent = Math.min(matches.length, 3) +
+          " source-backed research candidates · requested budget NOT verified · check retailer prices";
+      } else if (validBudget) {
         researchSearchStatus.textContent = matches.length + " dated budget-reference matches · " +
           additional.count + " related phones with price unverified · local research results";
         researchSearchStatus.textContent += " · requested range ₹" +
@@ -1267,11 +1329,12 @@
       if (/best|अच्छा|अच्छे/i.test(lastSearchQuery)) researchSearchStatus.textContent +=
         " · evidence coverage order, not a performance ranking";
     }
-    if (researchResultsMore) { researchResultsMore.hidden = displayMatches.length <= MAX_SEARCH_RESULTS; researchResultsMore.textContent = searchExpanded ? "Show fewer results" : "Load more research results"; }
+    if (researchResultsMore) { researchResultsMore.hidden = researchTopThreeMode || displayMatches.length <= MAX_SEARCH_RESULTS; researchResultsMore.textContent = searchExpanded ? "Show fewer results" : "Load more research results"; }
     return displayMatches;
   }
 
-  function submitResearch(query) {
+  function submitResearch(query, options) {
+    researchTopThreeMode = Boolean(options && options.top3 === true);
     var submitted = String(query || "").trim();
     if (submitted) trackResearchEvent("research_search_submit", {
       search_intent: researchIntent(submitted),

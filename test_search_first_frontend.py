@@ -19,7 +19,8 @@ class SearchFirstFrontendTests(unittest.TestCase):
         self.assertIn('id="mobileResearchSearch"', self.html)
         self.assertIn('id="mobileResearchResults"', self.html)
         self.assertRegex(self.html, r'id="mobileResearchPreview"[^>]*\shidden')
-        self.assertRegex(self.html, r'id="mobileResearchCatalogue"[^>]*\shidden')
+        self.assertRegex(self.html, r'id="mobileResearchCatalogue"[^>]*>')
+        self.assertIn("<!-- STATIC_232_PHONE_CARDS -->", self.html)
         self.assertIn("section.hidden = true", self.script)
         self.assertIn("MAX_SEARCH_RESULTS", self.script)
         self.assertIn("INVENTORY_PAGE_SIZE", self.script)
@@ -48,7 +49,8 @@ class SearchFirstFrontendTests(unittest.TestCase):
         self.assertEqual(sum(bool(card.get("specifications")) for card in self.payload["model_cards"]), 225)
         self.assertEqual(sum(len(card.get("specifications", {})) for card in self.payload["model_cards"]), 2479)
         self.assertNotIn("purchase_cta_eligible: true", self.html.lower())
-        self.assertNotIn("top 3", self.script.lower())
+        self.assertIn("Research-Verified Top 3", self.script)
+        self.assertIn("researchTopThreeEligible", self.script)
 
 
 if __name__ == "__main__":

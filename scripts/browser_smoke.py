@@ -101,9 +101,9 @@ def run(root: Path):
                     a6 = page.locator("#mobileResearchResults [data-mobile-model-card='oppo|a6x 5g']")
                     assert a6.count() == 1, width
                     assert "India sales/shipments research addition" in a6.inner_text(), width
-                    assert "Search Amazon" in a6.inner_text(), width
-                    assert "Search Flipkart" in a6.inner_text(), width
-                    assert "Search Croma" in a6.inner_text(), width
+                    assert "Check live price on Amazon" in a6.inner_text(), width
+                    assert "Check live price on Flipkart" in a6.inner_text(), width
+                    assert "Check live price on Croma" in a6.inner_text(), width
                     assert page.evaluate(
                         "() => window.CouponWorldMobileResearch.search('Samsung Galaxy A07 5G').some("
                         "item => item.card.model_key === 'samsung|galaxy a07 5g' && item.card.market_intake === true)"
@@ -353,7 +353,7 @@ def run(root: Path):
                     assert "View saved price & stock checks" in panel.inner_text(), width
                     for retailer in ("Flipkart", "Amazon", "Croma"):
                         assert retailer in retailer_choices.inner_text(), (width, retailer)
-                    assert "Search Croma for this model" in retailer_choices.inner_text(), width
+                    assert "Check live price on Croma" in retailer_choices.inner_text(), width
                     assert panel.locator(".shop-button,.purchase-cta").count() == 0, width
                     assert trigger.get_attribute("aria-expanded") == "true", width
                     assert page.url == url, width

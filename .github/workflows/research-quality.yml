@@ -34,6 +34,11 @@ jobs:
         run: python -m pip install -r requirements.txt
       - name: Build exact publication artifact
         run: python scripts/build_public_pages.py --output public
+      - name: Verify static 232-model inventory and guarded Top50 affiliate queue
+        run: |
+          python -m unittest -v test_top50_static_release
+          python scripts/verify_top50_affiliate.py --queue public/data/top50_sku_research_queue.json --out reports/top50_affiliate_private_review.json
+          python -m py_compile python/top50_affiliate_checks.py scripts/verify_top50_affiliate.py
       - name: Build URL-by-URL frontend and SEO audit report
         run: python scripts/frontend_page_audit.py --root public --out frontend-page-audit.json
       - name: Upload audit of every generated public HTML route

@@ -76,7 +76,7 @@ setImmediate(()=> {
    // Two legacy Redmi identities normalize to the same human product name.
    assert.equal(seen.size,231);
  });
- check('retailer search links visible',()=>{search('Galaxy A36');let html=element('mobileResearchResults').innerHTML;assert(html.includes('Search Amazon'));assert(html.includes('Search Flipkart'));assert(html.includes('Search Croma for this model'));});
+ check('retailer search links visible',()=>{search('Galaxy A36');let html=element('mobileResearchResults').innerHTML;assert(html.includes('Check live price on Amazon (search results)'));assert(html.includes('Check live price on Flipkart (search results)'));assert(html.includes('Check live price on Croma'));});
  check('main search recognizes bare budget',()=>assert(api.isResearchQuery('under 20k')));
  check('strict boundary excludes equality',()=>{let ref=catalogue.model_cards.find(c=>c.research_budget_reference).research_budget_reference;assert(search('phone under '+ref.reference_price_inr).every(x=>x.card.research_budget_reference.reference_price_inr<ref.reference_price_inr));});
  check('repeated queries deterministic',()=>{let first=search('camera phone under 30000').map(x=>x.card.model_key);for(let i=0;i<20;i++)assert.deepEqual(search('camera phone under 30000').map(x=>x.card.model_key),first);});
@@ -171,6 +171,26 @@ setImmediate(()=> {
    assert(h.includes('They may cost more'));
    assert(h.includes('no saved dated price reference') || h.includes('No saved dated price reference'));
    assert(!h.includes('purchase-cta'));
+ });
+ check('explicit generic Top 3 returns three source-backed research candidates',()=>{
+   api.submit('best phones',{top3:true});
+   const html=element('mobileResearchResults').innerHTML;
+   assert(html.includes('Research-Verified Top 3'),html.slice(0,500));
+   assert.equal((html.match(/data-mobile-model-card=/g)||[]).length,3);
+   assert(html.includes('NOT a live offer'));
+ });
+ check('budgeted Top 3 never treats unknown retailer price as within budget',()=>{
+   api.submit('best phone under 20000',{top3:true});
+   const html=element('mobileResearchResults').innerHTML;
+   assert(html.includes('Research-Verified Top 3'),html.slice(0,500));
+   if (html.includes('budget unverified')) {
+     assert(html.includes('may exceed the requested budget'));
+   } else {
+     assert(html.includes('Budget fit uses dated price references only'),html.slice(0,800));
+     assert(api.search('best phone under 20000').every(x=>x.card.research_budget_reference &&
+       x.card.research_budget_reference.reference_price_inr < 20000));
+   }
+   assert(!html.includes('purchase-cta'));
  });
  console.log(checks+' checks passed');
 });
