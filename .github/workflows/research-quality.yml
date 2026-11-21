@@ -50,6 +50,18 @@ jobs:
         run: |
           python -m unittest -v test_price_evidence_coverage
           python scripts/build_price_evidence_coverage.py --out price-evidence-232.json --report-dir price-evidence-reports
+      - name: Gate India exact variants across 232 and audit Top30 retailer observations
+        run: |
+          python -m unittest -v test_mobile_p0_india_identity
+          python -m python.mobile_p0_identity --out p0-india-top30.json
+      - name: Archive all 30 model/source/SKU verification gaps
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: couponworld-p0-india-top30-${{ github.run_id }}-${{ github.run_attempt }}
+          path: p0-india-top30.json
+          if-no-files-found: warn
+          retention-days: 30
       - name: Audit 232-phone A-to-Z release readiness without billed calls
         run: |
           python -m unittest -v test_mobile_a_to_z_readiness
