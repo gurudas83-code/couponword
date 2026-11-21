@@ -99,9 +99,24 @@
     return /(?:\b(?:top|best)\s*(?:3|three)\b|\bfirst\s*3\b|टॉप\s*[३3]|शीर्ष\s*[३3])/i.test(String(query || ""));
   }
 
+  function hasIndiaExactResearchVariant(item) {
+    // Maker-backed India model and exact physical RAM/storage, never inferred
+    // from a sibling model or historical API product observation.
+    var evidence = item && item.card && item.card.india_identity_evidence;
+    if (!evidence || evidence.status !== "INDIA_EXACT_VARIANT_DOCUMENTED" ||
+        !Array.isArray(evidence.verified_variants)) return false;
+    return (item.rows || []).some(function (row) {
+      return Number.isInteger(row.ram_gb) && Number.isInteger(row.storage_gb) &&
+        evidence.verified_variants.some(function (confirmed) {
+          return confirmed.ram_gb === row.ram_gb && confirmed.storage_gb === row.storage_gb &&
+            /^https:\/\//.test(String(confirmed.source_url || ""));
+        });
+    });
+  }
+
   function hasResearchVerifiedEvidence(item) {
     var card = item && item.card;
-    if (!card || card.status !== "OFFICIAL_VERIFIED" || !(item.rows || []).length) return false;
+    if (!card || card.status !== "OFFICIAL_VERIFIED" || !hasIndiaExactResearchVariant(item) || !(item.rows || []).length) return false;
     return Object.values(card.specifications || {}).filter(function (spec) {
       return spec && spec.value != null && String(spec.value).trim() &&
         /^https:\/\/[^\s<>"']+$/i.test(String(spec.source_url || ""));
@@ -933,6 +948,10 @@
     var sourceItem = Object.values(card.specifications || {}).find(function (item) { return /^https:\/\//.test(item.source_url || ""); }) ||
       (card.market_intake && (card.manufacturer_page || (card.source_urls || [])[0]) ?
        {source_url: card.manufacturer_page || card.source_urls[0], checked_at: card.research_checked_at} : null);
+    var india = card.india_identity_evidence || {};
+    var indiaNote = india.status === "INDIA_EXACT_VARIANT_DOCUMENTED" ?
+      '<p class="mobile-research-gate">India model/variant documented by manufacturer; live retailer price, pincode and stock not verified.</p>' :
+      '<p class="mobile-research-gate"><strong>India identity/variant pending.</strong> Research only; excluded from evidence-qualified buying picks until the exact Indian model and RAM/storage are sourced.</p>';
     var status = card.market_intake ? "Manufacturer-linked model" :
       card.status === "OFFICIAL_VERIFIED" ? "Manufacturer evidence" :
       card.status === "PARTIALLY_VERIFIED" ? "Partial specifications" : "Needs verification";
@@ -944,6 +963,7 @@
        (card.market_intake && /^\/phones\/[a-z0-9-]+\/(?:[a-z0-9-]+\/)?$/.test(String(card.detail_url || "")) ?
         '<a class="research-model-name-link" href="' + escapeHtml(card.detail_url) + '">' + escapeHtml(displayPhoneName(card)) + '</a>' :
         escapeHtml(displayPhoneName(card))) + '</h3>' + launch +
+      indiaNote +
       (card.market_intake ? '<p class="mobile-research-gate">' +
         (card.recent_source_intake ? 'Recently added manufacturer-sourced India model' : 'India sales/shipments research addition') +
         ' · no verified current price, stock or exact retailer configuration.</p>' : '') +
@@ -1347,7 +1367,8 @@
       researchResults.hidden = false;
       var bridge = verifiedRecommendationBridge(lastSearchQuery, comparison);
       if (wantsTopThree) {
-        // These are research picks, sorted by documented source coverage, NOT
+        // P0: require exact maker-backed India RAM/storage identity for every pick.
+      // These are research picks, sorted by documented source coverage, NOT
         // measured performance winners, current stock or budget-qualified deals.
         var topThreeCards = researchTopThree.map(function (item, index) {
           var datedReference = validBudget ? item.card.research_budget_reference : null;
