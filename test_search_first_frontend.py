@@ -48,7 +48,18 @@ class SearchFirstFrontendTests(unittest.TestCase):
         self.assertEqual(sum(bool(card.get("specifications")) for card in self.payload["model_cards"]), 225)
         self.assertEqual(sum(len(card.get("specifications", {})) for card in self.payload["model_cards"]), 2479)
         self.assertNotIn("purchase_cta_eligible: true", self.html.lower())
-        self.assertNotIn("top 3", self.script.lower())
+        self.assertIn("Research-Verified Top 3", self.script)
+        self.assertIn('card.status !== "OFFICIAL_VERIFIED"', self.script)
+        self.assertIn("hasResearchVerifiedEvidence", self.script)
+        self.assertIn("isResearchTopThreeQuery(query)", self.script)
+        self.assertIn("Check live price on Amazon (search)", self.script)
+        self.assertIn("Check live price on Flipkart (search)", self.script)
+
+    def test_top_three_routes_to_existing_local_research_without_paid_api(self):
+        self.assertIn("if (!isExplicitTopThreeQuery(query) && !research.isResearchQuery(query)) return false;", self.app)
+        self.assertIn("var wantsTopThree = isResearchTopThreeQuery(lastSearchQuery)", self.script)
+        self.assertIn('!isResearchTopThreeQuery(query) && inventoryCards.length', self.script)
+        self.assertIn("No model meets the minimum manufacturer-backed research evidence", self.script)
 
 
 if __name__ == "__main__":
