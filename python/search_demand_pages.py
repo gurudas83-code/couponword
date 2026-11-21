@@ -296,8 +296,10 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
                         ((' · आकार बदला गया' if hindi else ' · resized') if photo.get("resized") else "") +
                         '</small></div></details>'
                     )
-                illustration = REPRESENTATIVE_PHONE_DIRECTORY + slug_for(card) + "-ai-front.webp"
-                if (not photo_html and row["model_key"] in REPRESENTATIVE_PHONE_MODELS
+                illustration = card.get("representative_illustration")
+                if row["model_key"] in REPRESENTATIVE_PHONE_MODELS:
+                    illustration = REPRESENTATIVE_PHONE_DIRECTORY + slug_for(card) + "-ai-front.webp"
+                if (not photo_html and illustration
                         and (ROOT / illustration.lstrip("/")).is_file()):
                     disclosure = ("AI प्रतिनिधि चित्र · वास्तविक मॉडल की फोटो नहीं"
                                   if hindi else "AI illustration · not the actual phone")

@@ -24,3 +24,30 @@ The illustrative assets appear in research card HTML. Generic front views do not
 - [Xiaomi India terms](https://www.mi.com/in/support/terms/termsofuse/)
 - [Flipkart site terms](https://affiliate.flipkart.com/terms-of-use)
 - [Google Merchant image policy](https://support.google.com/merchants/answer/6324350)
+
+## Next 20 catalogue entries
+
+Source pages were checked for candidate identity and reuse rights. An image or product page link alone is a research lead. AI entries use the existing labelled representative phone illustration.
+
+| Model | Source | Published image |
+|---|---|---|
+| iQOO Neo 10 | [Research lead](<https://community.iqoo.com/in/thread/94868>) | AI illustration. Exact-photo reuse rights pending |
+| iQOO Z11x | [Research lead](<https://www.iqoo.com/in/products/param/z11x>) | AI illustration. Exact-photo reuse rights pending |
+| Lava Agni 4 | [Research lead](<https://indianexpress.com/article/technology/tech-news-technology/lava-launches-agni-4-mid-range-with-dimensity-8350-price-starts-at-rs-22999-10375763/>) | AI illustration. Exact-photo reuse rights pending |
+| Motorola Edge 60 Fusion | [Research lead](<https://www.motorola.in/smartphones-motorola-edge-60-fusion/p?idsku=624>) | AI illustration. Exact-photo reuse rights pending |
+| Nothing Phone 3a | [Research lead](<https://in.nothing.tech/products/phone-3a>) | AI illustration. Exact-photo reuse rights pending |
+| OnePlus N6 5G | [Research lead](<https://www.91mobiles.com/oneplus-n6-5g-price-in-india>) | AI illustration. Exact-photo reuse rights pending |
+| OnePlus Nord 6 | [Research lead](<https://www.oneplus.in/nord-6>) | AI illustration. Exact-photo reuse rights pending |
+| realme P3 | [Research lead](<https://www.realme.com/in/realme-p3-5g>) | AI illustration. Exact-photo reuse rights pending |
+| realme P4 Power | [Research lead](<https://www.realme.com/in/realme-p4-power-5g>) | AI illustration. Exact-photo reuse rights pending |
+| realme P4 Pro | [Research lead](<https://www.realme.com/in/realme-p4-pro-5g>) | AI illustration. Exact-photo reuse rights pending |
+| Samsung Galaxy F70 Pro | [Research lead](<https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-alpha-black-256gb-sm-e476bzkgins/>) | AI illustration. Exact-photo reuse rights pending |
+| Samsung Galaxy M17 | [Research lead](<https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m17-5g-black-128gb-sm-m176bzkains/>) | AI illustration. Exact-photo reuse rights pending |
+| Samsung Galaxy M36 | [Commons file](<https://commons.wikimedia.org/wiki/File:Galaxy_M36_front.jpg>) | CC BY-SA 4.0, Curvasingh, resized |
+| vivo T4x | [Research lead](<https://www.vivo.com/in/products/param/t4x-5g>) | AI illustration. Exact-photo reuse rights pending |
+| vivo T5x | [Research lead](<https://www.vivo.com/in/products/t5x>) | AI illustration. Exact-photo reuse rights pending |
+| iPhone 16e | [Research lead](<https://support.apple.com/en-in/122208>) | AI illustration. Exact-photo reuse rights pending |
+| iPhone 18 Pro | [Commons file](<https://commons.wikimedia.org/wiki/File:IPhone_18_Pro_rear.jpg>) | CC BY-SA 4.0, 茅野ふたば, resized |
+| iPhone 18 Pro Max | [Commons file](<https://commons.wikimedia.org/wiki/File:IPhone_18_Pro_Max_rear.jpg>) | CC BY-SA 4.0, 茅野ふたば, resized |
+| iPhone SE 2022 | [Commons file](<https://commons.wikimedia.org/wiki/File:Back_of_the_iPhone_SE_(3rd_generation).jpg>) | CC BY-SA 4.0, Hajoon0102, resized |
+| Google Pixel 10 | [Research lead](<https://store.google.com/in/product/pixel_10?hl=en-in>) | AI illustration. Exact-photo reuse rights pending |

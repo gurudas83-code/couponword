@@ -268,6 +268,11 @@
         (photo.title ? escapeHtml(photo.title) + " by " : "") + escapeHtml(photo.author) + '</a> · <a href="' + escapeHtml(photo.license_url) +
         '">' + escapeHtml(photo.license) + '</a> · resized</figcaption></figure>';
     }
+    if (card.representative_illustration === "/assets/phone-illustrations/representative-smartphone.webp") {
+      return '<figure class="research-phone-photo">' + trigger + '<img src="' +
+        escapeHtml(card.representative_illustration) + '" width="640" height="640" loading="lazy" decoding="async" alt="">' +
+        '</button><figcaption>AI illustration · not the actual phone · Tap to see retailers</figcaption></figure>';
+    }
     // Original, model-labelled generic artwork, never a fake manufacturer photo.
     // This asset is generated and owned by this site; exact model photographs
     // require a commercial-use permission record before publication.
@@ -400,7 +405,7 @@
     // be hidden by a stale GitHub Pages/browser cache.
     // Import only the eight source-reviewed missing market identities.
     // They remain separate from the original 232-card registry, ratings and offers.
-    var coreFetch = fetch("/data/mobile_research_catalogue.json?v=licensed-photos-20261117", { credentials: "same-origin" })
+    var coreFetch = fetch("/data/mobile_research_catalogue.json?v=phone-image-batch20-20261121", { credentials: "same-origin" })
       .then(function (response) {
         if (!response.ok) throw new Error("research catalogue unavailable");
         return response.json();

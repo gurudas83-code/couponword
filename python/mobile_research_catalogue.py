@@ -2215,6 +2215,7 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
     models = universe_payload.get("models") or []
     preview = preview_payload.get("products") or []
     photos = _load_model_photos(root, models)
+    illustrations = _read_json(root / "data/mobile_representative_illustrations.json")
     india_variants = _read_json(root / "data/mobile_india_variant_sources.json")
     for key, variants in india_variants.items():
         pairs = {(row["ram_gb"], row["storage_gb"]) for row in variants}
@@ -2309,6 +2310,8 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
         photo = photos.get(card["model_key"])
         if photo:
             card.update(image_status="VERIFIED_MATCH", photo=photo)
+        elif card["model_key"] in illustrations:
+            card["representative_illustration"] = illustrations[card["model_key"]]
         if card["model_key"] in india_variants:
             card["verified_india_variants"] = india_variants[card["model_key"]]
         launch = RECENT_INDIA_LAUNCHES.get(identity)

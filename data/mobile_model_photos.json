@@ -163,6 +163,26 @@
     "title": "IPhone 17e backside.jpg",
     "same_model_as": "apple|iphone 17e"
   },
+  "apple|iphone 18 pro": {
+    "url": "/assets/phone-photos/apple-iphone-18-pro.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_18_Pro_rear.jpg",
+    "author": "茅野ふたば",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "width": 487,
+    "height": 650,
+    "resized": true
+  },
+  "apple|iphone 18 pro max": {
+    "url": "/assets/phone-photos/apple-iphone-18-pro-max.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPhone_18_Pro_Max_rear.jpg",
+    "author": "茅野ふたば",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "width": 487,
+    "height": 650,
+    "resized": true
+  },
   "apple|iphone air": {
     "url": "/assets/phone-photos/apple-iphone-air.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:IPhone_Air_(Cloud_White)_-_Backside.jpg",
@@ -172,6 +192,16 @@
     "title": "IPhone Air (Cloud White) - Backside.jpg",
     "width": 330,
     "height": 495
+  },
+  "apple|iphone se 2022 iphone se 3": {
+    "url": "/assets/phone-photos/apple-iphone-se-2022-iphone-se-3.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Back_of_the_iPhone_SE_(3rd_generation).jpg",
+    "author": "Hajoon0102",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "width": 386,
+    "height": 650,
+    "resized": true
   },
   "cmf|phone 1": {
     "url": "/assets/phone-photos/cmf-phone-1.jpg",
@@ -436,6 +466,16 @@
     "license_url": "https://creativecommons.org/licenses/by/4.0",
     "width": 330,
     "height": 586
+  },
+  "samsung|galaxy m36 5g": {
+    "url": "/assets/phone-photos/samsung-galaxy-m36-5g.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Galaxy_M36_front.jpg",
+    "author": "Curvasingh",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "width": 487,
+    "height": 650,
+    "resized": true
   },
   "samsung|galaxy s24": {
     "url": "/assets/phone-photos/samsung-galaxy-s24.jpg",
