@@ -2169,7 +2169,7 @@ def _apply_reviewed_budget_price_snapshots(root, model_cards):
                 "/p/itm" not in parsed.path or
                 item.get("retailer") != "Flipkart" or
                 item.get("evidence_basis") != "DIRECT_RETAILER_PAGE_SNAPSHOT" or
-                item.get("stock_indication") != "DELIVERY_SHOWN_PINCODE_UNVERIFIED" or
+                item.get("stock_indication") not in {"DELIVERY_SHOWN_PINCODE_UNVERIFIED", "SELLER_LISTED_PINCODE_UNVERIFIED"} or
                 observation_date != payload["research_as_of"] or
                 date.fromisoformat(observation_date) > date.today()):
             raise ValueError("unsafe snapshot or conflicting SKU for " + item["model_key"])
