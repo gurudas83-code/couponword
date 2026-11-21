@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "scope": "Infinix cases within 623 unanswered historic queries; research queue only, not publishable specifications",
+  "review_date": "2026-11-21",
+  "policy": "Only exact manufacturer-backed India-specific records, exact RAM/storage and dated retailer evidence can clear budget recommendation gates. Never infer stock, India prices or equivalence from global pages.",
+  "source_links_are": "Candidate leads; NOT complete manufacturer spec verification",
+  "records": [
+    {
+      "model_key": "infinix|gt 30 pro",
+      "manufacturer_url": "https://www.infinixmobility.com/learn/Infinix-Launches-GT-30-Pro-A-Gaming-Flagship-Built-to-Carry-with%20All-Day-Full-FPS-Performance",
+      "source_model_name": "GT 30 Pro",
+      "match": "EXACT_MODEL_GLOBAL",
+      "review": "Requires India SKU and exact retail price; official product launch specs can be separately transcribed with source per field"
+    },
+    {
+      "model_key": "infinix|hot 11",
+      "manufacturer_url": null,
+      "source_model_name": "HOT 11 PLAY (not HOT 11)",
+      "match": "NO_EXACT_OFFICIAL_SOURCE_CONFIRMED",
+      "review": "Do not map HOT 11 Play specifications to HOT 11"
+    },
+    {
+      "model_key": "infinix|hot 30i",
+      "manufacturer_url": "https://wap.cz.infinixmobility.com/specs/hot-30i",
+      "source_model_name": "HOT 30i",
+      "match": "EXACT_NAME_OTHER_REGION",
+      "review": "Potential hardware differences; validate Indian model code X669/X669C before importing fields"
+    },
+    {
+      "model_key": "infinix|hot 50 5g",
+      "manufacturer_url": "https://id.infinixmobility.com/specs/hot-50-5g?cId=24&cName=Latest+Product",
+      "source_model_name": "HOT 50 5G",
+      "match": "EXACT_NAME_OTHER_REGION",
+      "review": "Check Indian hardware variant and region-specific radio/battery differences"
+    },
+    {
+      "model_key": "infinix|hot 70 pro 5g",
+      "manufacturer_url": "https://bd.infinixmobility.com/specs/hot-70-pro-5g%2B",
+      "source_model_name": "HOT 70 Pro 5G+",
+      "match": "MODEL_NAME_CONFLICT",
+      "review": "Plus suffix is materially different. No automatic join or equivalence"
+    },
+    {
+      "model_key": "infinix|note 50x",
+      "manufacturer_url": "https://my.infinixmobility.com/shop/1193",
+      "source_model_name": "NOTE 50X 5G",
+      "match": "SERIES_NAME_REQUIRES_VARIANT_ID",
+      "review": "Exact model and Indian variant confirmation needed; foreign price must not be converted into India price"
+    },
+    {
+      "model_key": "infinix|note 60 pro 5g",
+      "manufacturer_url": "https://www.infinixmobility.com/smartphones?cName=Latest+Product",
+      "source_model_name": "NOTE 60 Pro",
+      "match": "MODEL_NAME_CONFLICT",
+      "review": "Catalogue 5G suffix needs official validation; never silently treat as identical"
+    },
+    {
+      "model_key": "infinix|smart 20 4g",
+      "manufacturer_url": "https://www.infinixmobility.com/smartphones?cName=Latest+Product",
+      "source_model_name": "SMART 20",
+      "match": "CONNECTIVITY_UNCONFIRMED",
+      "review": "Need explicit LTE/4G variant check and India availability"
+    },
+    {
+      "model_key": "infinix|smart 8 128gb",
+      "manufacturer_url": "https://www.infinixmobility.com/smart-8",
+      "source_model_name": "SMART 8",
+      "match": "CAPACITY_VARIANT_UNCONFIRMED",
+      "review": "Manufacturer describes SMART 8, but 128GB India exact SKU and physical RAM need verified source"
+    },
+    {
+      "model_key": "infinix|smart 8 hd",
+      "manufacturer_url": null,
+      "source_model_name": "SMART 8 (not SMART 8 HD)",
+      "match": "NO_EXACT_OFFICIAL_SOURCE_CONFIRMED",
+      "review": "Do not import SMART 8 specifications for SMART 8 HD"
+    }
+  ]
+}
