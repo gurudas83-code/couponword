@@ -109,7 +109,7 @@ REPRESENTATIVE_PHONE_MODELS = {
     "oppo|a5x", "oppo|a6 pro", "oppo|k13 5g", "oppo|k14x 5g",
     "poco|m8 power 5g", "poco|x7 pro 5g", "poco|x8 5g",
 }
-REPRESENTATIVE_PHONE_IMAGE = "/assets/phone-illustrations/representative-smartphone.webp"
+REPRESENTATIVE_PHONE_DIRECTORY = "/assets/phone-illustrations/"
 
 TOP30_EN = "/seo/top-30-phone-research-india.html"
 TOP30_HI = "/hi/seo/top-30-phone-research-india.html"
@@ -296,14 +296,15 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
                         ((' · आकार बदला गया' if hindi else ' · resized') if photo.get("resized") else "") +
                         '</small></div></details>'
                     )
+                illustration = REPRESENTATIVE_PHONE_DIRECTORY + slug_for(card) + "-ai-front.webp"
                 if (not photo_html and row["model_key"] in REPRESENTATIVE_PHONE_MODELS
-                        and (ROOT / REPRESENTATIVE_PHONE_IMAGE.lstrip("/")).is_file()):
-                    disclosure = ("प्रतिनिधि चित्र · वास्तविक मॉडल की फोटो नहीं"
-                                  if hindi else "Representative illustration · not the actual phone")
+                        and (ROOT / illustration.lstrip("/")).is_file()):
+                    disclosure = ("AI प्रतिनिधि चित्र · वास्तविक मॉडल की फोटो नहीं"
+                                  if hindi else "AI illustration · not the actual phone")
                     retailer_label = "रिटेलर विकल्प देखें" if hindi else "Show retailer options"
                     photo_html = (
                         '<details class="cw-retail-choices"><summary class="cw-representative-phone">'
-                        '<img src="' + REPRESENTATIVE_PHONE_IMAGE +
+                        '<img src="' + esc(illustration) +
                         '" alt="" width="640" height="640" loading="lazy" decoding="async">'
                         '<span><strong>' + esc(name) + '</strong><small>' + esc(disclosure) +
                         '</small><em>' + esc(retailer_label) + '</em></span></summary>' +
