@@ -204,7 +204,22 @@
   function phoneReply(request,matches) {
     var condition=request.budget!==null?"₹"+request.budget.toLocaleString("en-IN")+" तक के dated-reference price band":"आपकी खोज";
     var groups=classifyPhoneMatches(request,matches);
-    if(!matches.length) return {paragraphs:[condition+" के लिए मौजूदा मोबाइल रिसर्च में पुष्ट मिलान नहीं मिला। कोई मनगढ़ंत Top-3 या current price नहीं दिखाऊँगा।","फ़िल्टर बदलें या मौजूदा मोबाइल खोज के विस्तृत परिणाम देखें।"],links:[{label:"मोबाइल रिसर्च",url:"#mobileResearchSearch"}]};
+    if(!matches.length) {
+      // The strict ranking remains empty, but the research view can show
+      // identity-only cards without claiming budget/variant eligibility.
+      var identityNames=Array.from(document.querySelectorAll(
+        "#mobileResearchResults .research-identity-only .research-budget-related-item strong"
+      )).map(function(node){return String(node.textContent||"").trim();}).filter(Boolean);
+      var researchNames=Array.from(document.querySelectorAll(
+        "#mobileResearchResults .research-budget-unpriced .research-budget-related-item strong"
+      )).map(function(node){return String(node.textContent||"").trim();}).filter(Boolean);
+      var names=Array.from(new Set(researchNames.concat(identityNames))).slice(0,3);
+      if(names.length) return {paragraphs:[
+        condition+" में पूरी तरह प्रमाणित budget match नहीं मिला, लेकिन हमारे मोबाइल data bank में संबंधित research records हैं: "+names.join(", ")+".",
+        "ये केवल संबंधित मॉडल हैं। इनका माँगा गया budget, exact RAM/storage, 5G और अन्य जरूरी features अभी सत्यापित नहीं हैं। कोई काल्पनिक कीमत, stock या Top 3 नहीं दिया गया है।"
+      ],links:[{label:"मॉडल के स्रोत और बाकी जाँच देखें",url:"#mobileResearchSearch"}]};
+      return {paragraphs:[condition+" के लिए मौजूदा मोबाइल रिसर्च में पुष्ट मिलान नहीं मिला। कोई मनगढ़ंत Top-3 या current price नहीं दिखाऊँगा।","फ़िल्टर बदलें या मौजूदा मोबाइल खोज के विस्तृत परिणाम देखें।"],links:[{label:"मोबाइल रिसर्च",url:"#mobileResearchSearch"}]};
+    }
     var status=document.getElementById("mobileResearchSearchStatus");
     var fallback=!!(status&&/no exact catalogue match/i.test(status.textContent));
     var paragraphs=[],links=[{label:"इन मोबाइलों के प्रमाण और फ़िल्टर देखें",url:"#mobileResearchSearch"}];
