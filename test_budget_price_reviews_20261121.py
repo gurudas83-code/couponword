@@ -43,7 +43,7 @@ class BudgetResearchPriceReviewTests(unittest.TestCase):
                          {"lava|bold n2", "lava|virat v1", "lava|virat v1 5g"})
         a5x = self.cards["oppo|a5x"]
         self.assertIsNone(a5x["research_budget_reference"])
-        self.assertIn("5G retailer", a5x["research_budget_reference_block_reason"])
+        self.assertIn("A5x 5G", a5x["research_budget_reference_block_reason"])
 
     def test_unavailable_and_unmatched_variants_are_not_promoted(self):
         self.assertEqual(len(self.ledger["excluded_observations"]), 4)
