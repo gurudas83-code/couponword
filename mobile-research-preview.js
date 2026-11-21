@@ -353,13 +353,13 @@
        (card.market_intake && /^\/phones\/[a-z0-9-]+\/(?:[a-z0-9-]+\/)?$/.test(String(card.detail_url || "")) ?
         '<a class="research-model-name-link" href="' + escapeHtml(card.detail_url) + '">' + escapeHtml(displayPhoneName(card)) + '</a>' :
         escapeHtml(displayPhoneName(card))) + '</h3>' + launch +
-      (card.market_intake ? '<p class="mobile-research-gate"><strong>Additional India research model:</strong> original illustration, not exact model photograph; fresh exact-SKU price unavailable. ' + link(card.manufacturer_page || (card.source_urls || [])[0], "Manufacturer source") + '</p>' : '') +
+      (card.market_intake ? '<p class="mobile-research-gate"><strong>Additional India research model:</strong> Exact-SKU price has not been verified. ' + link(card.manufacturer_page || (card.source_urls || [])[0], "Manufacturer source") + '</p>' : '') +
       '<p class="mobile-research-variant">' + escapeHtml(counts || "Model research reference") + '</p>' +
       '<ul class="mobile-research-variant-list">' + (variantItems || "<li>Variant details are not specified in the source universe.</li>") + '</ul>' +
       '<p class="mobile-research-inventory-fields"><strong>Verified fields:</strong> ' + escapeHtml(fields) + '</p>' +
       '<details class="mobile-research-model-details"><summary>View specifications / details</summary>' + details + '</details>' +
       '<p class="mobile-research-inventory-reason">' + (card.market_intake ?
-       'New India market research intake, separate from the 232 original catalogue cards. Exact retailer identity, prices, stock and image rights are unverified.' :
+       'Part of our India market research. Exact retailer variant, price and stock are still unverified.' :
        'Model card groups source-backed discovery records and frozen exact variants. It does not certify availability or purchase eligibility.') + '</p>' +
       '<div class="mobile-research-sources">' + sources + '</div>' + retailerResearchLinks(card) +
       '<p class="mobile-research-gate">Research only · no price · no stock · no purchase action</p>' +

@@ -184,6 +184,10 @@ def run(root: Path):
                             "img[src^='/assets/new-mobile-art/']"
                         )
                         assert image.count() == 1, width
+                        assert image.evaluate("img => img.getBoundingClientRect().height") >= 180, width
+                        assert card.locator("h3").evaluate(
+                            "heading => parseFloat(getComputedStyle(heading).fontSize)"
+                        ) >= 20, width
                         src = image.get_attribute("src") or ""
                         text = card.text_content() or ""
                         if src.startswith("/assets/phone-photos/"):

@@ -1244,8 +1244,39 @@ body.clean-ui .cw-category-research-disclaimer{color:#526176;font-size:.84rem;ma
 @media(min-width:981px) and (max-width:1180px){body.clean-ui .desktop-nav{gap:2px}body.clean-ui .desktop-nav a{font-size:.76rem;padding:8px 6px}}
 
 .research-phone-photo{margin:4px 0 8px;text-align:center}
-.research-phone-photo img{display:block;width:100%;height:155px;object-fit:contain;background:#eff3e9;border-radius:10px}
-.research-phone-photo figcaption{font-size:.7rem;line-height:1.4;margin-top:4px;overflow-wrap:anywhere}
+.research-phone-photo img {
+  display: block;
+  width: 100%;
+  height: clamp(184px, 18vw, 216px);
+  object-fit: contain;
+  background: #f2f5ee;
+  border-radius: 10px;
+}
+.research-phone-photo figcaption {
+  color: #45566a;
+  font-size: .8125rem;
+  line-height: 1.5;
+  margin-top: 6px;
+  overflow-wrap: anywhere;
+}
+body.clean-ui .mobile-research-inventory-body h3 {
+  font-size: clamp(1.3rem, 1.7vw, 1.5rem);
+  line-height: 1.3;
+  letter-spacing: -.015em;
+}
+body.clean-ui .mobile-research-inventory-body :is(
+  .mobile-research-variant, .mobile-research-variant-list,
+  .mobile-research-inventory-fields, .mobile-research-model-details,
+  .mobile-research-inventory-reason, .mobile-research-launch,
+  .mobile-research-gate, .research-source-note, .research-group-note
+) {
+  font-size: .875rem;
+  line-height: 1.55;
+}
+body.clean-ui .mobile-research-inventory-body .mobile-research-model-specs li {
+  font-size: .9375rem;
+  line-height: 1.55;
+}
 
 /* Photo detail trigger: enhance existing research cards, not URLs or page content. */
 .research-photo-open{display:block;width:100%;padding:0;border:0;cursor:pointer;text-align:inherit;color:inherit;font:inherit;background:transparent}
