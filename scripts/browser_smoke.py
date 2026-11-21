@@ -305,14 +305,15 @@ def run(root: Path):
                     assert "not budget-qualified" in identity_text, width
                     assert not page.locator("#mobileResearchResults .research-identity-only .purchase-cta").count(), width
                     page.evaluate("window.CouponWorldMobileResearch.search('exact model Smart 8 HD phone under 25000')")
-                    print("SMART_8_HD_DIAGNOSTIC", width, page.evaluate("""() => ({
-                        status:document.getElementById('mobileResearchSearchStatus').innerText,
-                        html:document.getElementById('mobileResearchResults').innerText.slice(0,1400),
-                        identity:document.querySelectorAll('.research-identity-only').length,
-                        ranked:document.querySelectorAll('.research-budget-primary-grid [data-mobile-model-card]').length
-                    })"""), flush=True)
-                    assert "Smart 8 HD" in page.locator("#mobileResearchResults .research-identity-only").inner_text(), width
-                    assert "GT 30 Pro" not in page.locator("#mobileResearchResults .research-identity-only").inner_text(), width
+                    # The exact identity may already qualify for the source-linked
+                    # unpriced lane, in which case it must NOT repeat in identity-only.
+                    related_names = page.locator(
+                        "#mobileResearchResults .research-budget-unpriced .research-budget-related-item strong, "
+                        "#mobileResearchResults .research-identity-only .research-budget-related-item strong"
+                    ).all_inner_texts()
+                    assert any("Smart 8 HD" in name for name in related_names), (width, related_names)
+                    assert all("GT 30 Pro" not in name for name in related_names), (width, related_names)
+                    assert sum("Smart 8 HD" in name for name in related_names) == 1, (width, related_names)
                     page.evaluate("window.CouponWorldMobileResearch.search('Samsung nahi chahiye phone under 8000')")
                     assert "Samsung" not in page.locator("#mobileResearchResults .research-identity-only").inner_text(), width
                     page.evaluate("window.CouponWorldMobileResearch.search('exact model Unknown Phantom 888 phone under 25000')")
