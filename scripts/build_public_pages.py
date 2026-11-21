@@ -437,11 +437,12 @@ def _generate_assistant_category_research(destination: Path) -> None:
 def _generate_research_catalogue(destination: Path) -> None:
     """Write a sanitized discovery index derived from existing research files."""
     from python.mobile_research_catalogue import build_public_catalogue
+    from python.mobile_p0_identity import enrich_public_catalogue
 
     target = destination / "data" / "mobile_research_catalogue.json"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(
-        json.dumps(build_public_catalogue(ROOT), ensure_ascii=False, indent=2) + "\n",
+        json.dumps(enrich_public_catalogue(build_public_catalogue(ROOT), ROOT), ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
 
@@ -506,6 +507,20 @@ def _validate_public_content(output: Path) -> None:
             raise RuntimeError("public mobile research catalogue exposes a commerce CTA")
         if row.get("status") == "OFFICIAL_VERIFIED" and not set(("brand", "model", "ram_gb", "storage_gb")) <= set(row.get("verified_fields") or []):
             raise RuntimeError("officially verified discovery row is missing exact variant fields")
+    # India identity remains independent from research specifications and stock.
+    # No unconfirmed India model or RAM/storage variant becomes a purchase CTA.
+    for card in model_cards:
+        identity = card.get("india_identity_evidence") or {}
+        variants = identity.get("verified_variants") or []
+        if identity.get("status") not in {"INDIA_EXACT_VARIANT_DOCUMENTED", "INDIA_IDENTITY_OR_VARIANT_UNCONFIRMED"}:
+            raise RuntimeError("Missing strict Indian market identity gate: " + str(card.get("model_key")))
+        if bool(variants) != (identity["status"] == "INDIA_EXACT_VARIANT_DOCUMENTED"):
+            raise RuntimeError("India status/variant contradiction: " + card["model_key"])
+        if identity.get("purchase_eligible") is not False or identity.get("current_stock_verified") is not False or identity.get("current_price_verified") is not False:
+            raise RuntimeError("India manufacturer proof was incorrectly promoted to a live retailer offer")
+        if len(variants) != len({(v["ram_gb"], v["storage_gb"]) for v in variants}):
+            raise RuntimeError("Duplicated India variant for " + card["model_key"])
+
     card_record_keys = [key for card in model_cards for key in (card.get("discovery_record_keys") or [])]
     if sorted(card_record_keys) != sorted(keys):
         raise RuntimeError("public model cards do not retain each discovery record exactly once")
