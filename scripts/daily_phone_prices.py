@@ -256,7 +256,7 @@ def publish(output, snapshot_path=None):
     target = output / ROUTE.lstrip("/")
     target.parent.mkdir(parents=True, exist_ok=True)
     html = doc("India Top 30 Phones", "Dated Amazon, Flipkart and Croma price observations for selected India phones.", ROUTE, page, {"@context": "https://schema.org", "@type": "WebPage"})
-    target.write_text(html.replace("</head>", '<link rel="stylesheet" href="/assets/phone-watch-grid.css?v=price-status-v1">\n</head>'), encoding="utf-8")
+    target.write_text(html.replace("</head>", '<link rel="stylesheet" href="/assets/phone-watch-grid.css?v=light-price-cta-v1">\n</head>'), encoding="utf-8")
     target = output / SNAPSHOT_PATH
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(data, ensure_ascii=False) + "\n", encoding="utf-8")

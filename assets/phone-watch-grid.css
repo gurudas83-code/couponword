@@ -53,11 +53,13 @@
   margin-bottom: 4px;
   padding: 7px 10px;
   border-radius: 8px;
-  background: #264e3e;
-  color: #fff;
+  border: 1px solid #b6d5eb;
+  background: #e3f3ff;
+  color: #174763;
   font-size: .84rem;
   font-weight: 700;
   text-decoration: none;
 }
-.phone-watch-price-cta:hover,.phone-watch-price-cta:focus-visible {background:#193a2d;color:#fff}
+.phone-watch-price-cta:hover,.phone-watch-price-cta:focus-visible {background:#d1eafb;color:#123a54}
+.phone-watch-price-cta:focus-visible {outline:2px solid #396a8d;outline-offset:2px}
 .phone-watch-price-cta + small {margin-bottom:9px}

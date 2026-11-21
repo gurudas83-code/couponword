@@ -1434,3 +1434,20 @@ body.clean-ui #mobileResearchCompare:focus { outline:0; }
   .phone-editorial .hero-phone-art,.phone-editorial .editorial-caption {grid-row:3}
   .phone-editorial .editorial-cta {grid-row:4}
 }
+
+.phone-editorial .hero-phone-preview {
+  width: min(100%, 320px);
+  margin: 10px auto 14px;
+  border-radius: 14px;
+  animation: hero-phone-preview-turn 850ms ease-out both;
+}
+@keyframes hero-phone-preview-turn {
+  from {transform: perspective(750px) rotateY(-14deg) translateY(5px)}
+  to {transform: perspective(750px) rotateY(0) translateY(0)}
+}
+@media(max-width:640px) {
+  .phone-editorial .hero-phone-preview {width:100%;margin:0}
+}
+@media(prefers-reduced-motion:reduce) {
+  .phone-editorial .hero-phone-preview {animation:none}
+}

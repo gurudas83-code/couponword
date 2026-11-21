@@ -619,6 +619,13 @@ def run(root: Path):
                     page.goto(url, wait_until="domcontentloaded")
                     watch_link = page.locator(".phone-editorial .india-watch-feature")
                     assert watch_link.is_visible(), width
+                    hero_phone = page.locator(".hero-phone-preview")
+                    assert hero_phone.is_visible(), width
+                    hero_phone.evaluate("img => img.decode()")
+                    assert hero_phone.evaluate("img => getComputedStyle(img).animationName") == "hero-phone-preview-turn", width
+                    page.emulate_media(reduced_motion="reduce")
+                    assert hero_phone.evaluate("img => getComputedStyle(img).animationName") == "none", width
+                    page.emulate_media(reduced_motion="no-preference")
                     if width == 1440:
                         assert watch_link.bounding_box()["x"] > page.locator(".hero-copy").bounding_box()["x"], width
                     watch_link.click()
