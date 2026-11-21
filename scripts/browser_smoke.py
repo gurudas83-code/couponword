@@ -80,7 +80,10 @@ def run(root: Path):
                     affiliate.wait_for(timeout=12000)
                     assert "tag=guru07cc-21" in affiliate.get_attribute("href"), width
                     assert "sponsored" in affiliate.get_attribute("rel"), width
-                    assert "matched model listing" in affiliate.inner_text().lower(), width
+                    label = affiliate.inner_text().lower()
+                    assert "matched model listing" in label or "search amazon" in label, (width, label)
+                    if "search amazon" in label:
+                        assert "not an exact listing" in label, (width, label)
                     assert "research" in page.locator("#cwAssistantMessages .cw-assistant-bot").last.inner_text().lower(), width
                     assert page.evaluate("document.documentElement.scrollWidth") <= width + 8, width
                     # Wait for the real fetch->catalogue->browser filtering chain.
