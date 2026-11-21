@@ -855,6 +855,16 @@ async function loadShoppingRecommendation(query, { background = false } = {}) {
       } else if (isExplicitTopThreeQuery(cleanQuery)) {
         // A zero-result Top-3 answer is not a successful ranking. Surface the
         // backend's machine-readable status without guessing missing evidence.
+        const backendReason = String(data.response_reason || "").toUpperCase();
+        const knownReasons = {
+          NO_CURRENT_VERIFIED_OFFER: "No current verified retailer offer passed the existing price, identity and freshness checks.",
+          EXACT_VARIANT_UNAVAILABLE: "The requested RAM/storage variant could not be verified as an exact model.",
+          NO_FRESH_STORED_OFFER: "No fresh verified retailer offer is stored yet."
+        };
+        const firstGate = Array.isArray(data.hard_gate_rejections) ? data.hard_gate_rejections[0] : null;
+        const gateCode = String(firstGate && firstGate.code || "").toUpperCase();
+        const reasonText = knownReasons[backendReason] || knownReasons[gateCode] ||
+          "No model met all existing ranking and evidence requirements for this search.";
         const resultStatus = String(data.result_status || "UNKNOWN").toUpperCase();
         const marketStatus = String(data.market_data_status || "UNKNOWN").toUpperCase();
         const safeStatuses = ["PASS", "PARTIAL", "FAIL", "UNKNOWN"];
@@ -863,7 +873,7 @@ async function loadShoppingRecommendation(query, { background = false } = {}) {
         const marketText = safeMarkets.includes(marketStatus) ? marketStatus : "OTHER";
         card.innerHTML = `<h3>Verified Top 3 is not available for this search</h3>
           <p>The recommendation service returned no eligible ranked models. It would be misleading to label the first three research matches as Top 3.</p>
-          <p role="status">Result status: ${statusText}. Market evidence: ${marketText}.</p>
+          <p role="status">${escapeHTML(reasonText)}</p>\n          <p>Result status: ${statusText}. Market evidence: ${marketText}.</p>
           <p>Try a wider budget or fewer restrictions. Current prices and availability must be verified before purchase.</p>
           ${standardBuyingGuideFallback()}`;
       } else if (String(data.market_data_status || "").toUpperCase() === "CURRENT_OFFERS_UNAVAILABLE") {
