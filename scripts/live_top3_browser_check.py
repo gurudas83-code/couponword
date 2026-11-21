@@ -69,11 +69,11 @@ def main() -> None:
                     if dated != cards.count():
                         failures.append(device + " showed ranked phone without dated price-band evidence")
                     if device == "mobile-10k":
-                        if "Lava Bold N2 Lite" not in result.inner_text() or "9,299" not in result.inner_text():
+                        if "lava bold n2 lite" not in result.inner_text().casefold() or "9,299" not in result.inner_text():
                             failures.append("₹10k is missing checked Lava Bold N2 Lite 3/64 ₹9,299")
                     if device == "mobile-15k":
                         for expected in ("Lava Bold N2", "Lava Virat V1", "10,499", "10,799", "12,999"):
-                            if expected not in result.inner_text():
+                            if expected.casefold() not in result.inner_text().casefold():
                                 failures.append("₹15k missing reviewed SKU evidence: " + expected)
                     if device in ("mobile-10k", "mobile-15k"):
                         if "OPPO A5x" in result.locator(".research-verified-top3").inner_text():
