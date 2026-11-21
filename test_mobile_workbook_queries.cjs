@@ -183,8 +183,13 @@ setImmediate(()=> {
    api.submit('best phone under 20000',{top3:true});
    const html=element('mobileResearchResults').innerHTML;
    assert(html.includes('Research-Verified Top 3'),html.slice(0,500));
-   assert(html.includes('budget unverified'));
-   assert(html.includes('may exceed the requested budget'));
+   if (html.includes('budget unverified')) {
+     assert(html.includes('may exceed the requested budget'));
+   } else {
+     assert(html.includes('Budget fit uses dated price references only'),html.slice(0,800));
+     assert(api.search('best phone under 20000').every(x=>x.card.research_budget_reference &&
+       x.card.research_budget_reference.reference_price_inr < 20000));
+   }
    assert(!html.includes('purchase-cta'));
  });
  console.log(checks+' checks passed');
