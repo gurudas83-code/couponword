@@ -1272,7 +1272,7 @@
             '<p class="research-source-note"><strong>Dated budget reference: ₹' +
               escapeHtml(Number(datedReference.reference_price_inr).toLocaleString("en-IN")) +
               '</strong> · ' + escapeHtml(datedReference.retailer || "Retailer") +
-              ' · checked ' + escapeHtml(String(datedReference.checked_at || "date unavailable").match(/\\d{4}-\\d{2}-\\d{2}/)?.[0] || datedReference.checked_at || "date unavailable") +
+              ' · checked ' + escapeHtml(String(datedReference.checked_at || "date unavailable").match(/\d{4}-\d{2}-\d{2}/)?.[0] || datedReference.checked_at || "date unavailable") +
               ' · ' + escapeHtml(datedReference.ram_gb == null ? "RAM unspecified" : datedReference.ram_gb + "GB RAM") +
               ' / ' + escapeHtml(datedReference.storage_gb + "GB storage") +
               ' · NOT a live checkout price or stock confirmation. ' +
