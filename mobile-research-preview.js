@@ -132,11 +132,10 @@
     durability: "Durability"
   };
 
-  // Keep the research catalogue out of the idle homepage. It is revealed by an
-  // explicit search, comparison link, or Browse All action.
+  // Keep the detailed 10-variant panel optional, but do not conceal the
+  // crawlable 232-model static inventory on the idle homepage.
   section.hidden = true;
   var catalogueSection = document.getElementById("mobileResearchCatalogue");
-  if (catalogueSection) catalogueSection.hidden = true;
 
   function escapeHtml(value) {
     return String(value == null ? "" : value)
