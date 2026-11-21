@@ -75,6 +75,25 @@ assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', ro
   assert.match(first, /tag=guru07cc-21/);
   assert.equal(shoppingCalls, 0, "Research Top 3 must not make an external shopping/paid API call");
 
+  // Budget Top 3 must never admit unpriced models just to fill three slots.
+  for (const budget of [10000, 15000, 20000, 25000, 30000]) {
+    research.submit("top 3 phones under " + budget);
+    const budgetHtml = element("mobileResearchResults").innerHTML;
+    const budgetPicks = (budgetHtml.match(/class="research-top3-result"/g) || []).length;
+    const datedQualified = (budgetHtml.match(/Dated reference in selected band; current price unverified/g) || []).length;
+    assert.equal(budgetPicks, datedQualified, budget +
+      " must not rank a phone without a dated reference in its budget band");
+    assert.doesNotMatch(budgetHtml, /Current price and selected budget range unverified/,
+      budget + " has an unpriced phone incorrectly inside ranked Top 3");
+    assert.match(budgetHtml, /Price-unknown phones appear separately below/,
+      "Price unknown research must stay in a separate lane");
+  }
+  research.submit("top 3 phones under 10000");
+  const lowerBudget = element("mobileResearchResults").innerHTML;
+  assert.match(lowerBudget, /Research-Verified picks \(0\/3 available\)/);
+  assert.match(lowerBudget, /Additional relevant phones/);
+  assert.equal((lowerBudget.match(/class="research-top3-result"/g) || []).length, 0);
+
   research.submit("top three battery phones");
   const second = element("mobileResearchResults").innerHTML;
   assert.match(second, /Research-Verified Top 3|Research-Verified picks \([012]\/3 available\)/);
