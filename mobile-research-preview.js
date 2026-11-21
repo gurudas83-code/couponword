@@ -337,10 +337,17 @@
         inventorySourceCounts.visible_model_cards + " original catalogue models" + (marketIntakeCount ? " + " + marketIntakeCount + " new market research models" : "") + " · " + (inventorySourceCounts.deduplicated_discovery_records || inventoryRows.length) + " original research records · " + (inventorySourceCounts.frozen_verified_variants || verifiedRows.length) + " frozen exact variants" :
         filtered.length + " catalogue entries · " + matchingVariants + " matching research/frozen variants";
     }
+    // Keep all 232 source-backed HTML cards in the initial DOM even after
+    // hydration. Google and no-JS users must not lose 214 cards when JS loads.
+    var staticFullIndex = isUnfiltered && !inventoryExpanded &&
+      inventoryGrid.querySelector && inventoryGrid.querySelector('[data-static-mobile-model]') &&
+      inventoryGrid.querySelectorAll('[data-static-mobile-model]').length === 232;
     var visible = inventoryExpanded ? filtered : filtered.slice(0, INVENTORY_PAGE_SIZE);
-    inventoryGrid.innerHTML = visible.length ? visible.map(renderInventoryCard).join("") : "<p>No smartphone models match these filters.</p>";
+    if (!staticFullIndex) {
+      inventoryGrid.innerHTML = visible.length ? visible.map(renderInventoryCard).join("") : "<p>No smartphone models match these filters.</p>";
+    }
     if (inventoryMore) {
-      inventoryMore.hidden = filtered.length <= INVENTORY_PAGE_SIZE;
+      inventoryMore.hidden = Boolean(staticFullIndex) || filtered.length <= INVENTORY_PAGE_SIZE;
       inventoryMore.textContent = inventoryExpanded ? "Show fewer research models" : "Load more research models";
     }
   }
@@ -1026,7 +1033,7 @@
     if (card.status !== "OFFICIAL_VERIFIED" && card.status !== "PARTIALLY_VERIFIED") return false;
     return Object.values(card.specifications || {}).filter(function (field) {
       return field && field.value != null && String(field.value).trim() !== "" &&
-        /^https:\/\/[^\\s<>"']+$/i.test(String(field.source_url || ""));
+        typeof field.source_url === "string" && field.source_url.startsWith("https://");
     }).length >= 2;
   }
 
