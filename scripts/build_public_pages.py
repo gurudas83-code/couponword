@@ -570,6 +570,10 @@ def build(output: Path) -> Path:
             raise FileNotFoundError(f"required public directory is missing: {relative}")
         shutil.copytree(source, output / relative)
 
+    # Publish the reviewed static 232-model research index explicitly. The
+    # public artifact is allow-listed; a source-only file is not deployed.
+    _copy_file("phones/all/index.html", output)
+
     # Fail closed: source history stays intact, but visitors and the public
     # catalogue see only reviewed technical products.
     from python import build_product_pages as legacy_product_pages
