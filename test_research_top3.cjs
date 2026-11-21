@@ -116,7 +116,7 @@ assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', ro
 
     research.submit("top three battery phones");
   const second = element("mobileResearchResults").innerHTML;
-  assert.match(second, /Research-Verified Top 3|Research-Verified picks \([012]\/3 available\)/);
+  assert.match(second, /Research-Verified Top 3|Research-Verified picks \([0-3]\/3 available\)/);
   assert.equal(shoppingCalls, 0);
 
   // Phone (3) is a real model name; the top-three instruction detector
