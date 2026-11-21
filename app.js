@@ -414,9 +414,9 @@ function cancelShoppingRecommendation() {
 
 window.CouponWorldCancelShoppingRecommendation = cancelShoppingRecommendation;
 
-// Route explicit Top-3 shopping requests to the existing verified ranking API,
-// not the unranked mobile research catalogue. Keep model names such as
-// "iPhone 13" intact; only strip an explicit top-three instruction.
+// Explicit Top-3 requests use the source-backed local research ordering.
+// The separately triggered backend offer check retains its strict commerce gate.
+// Keep model names such as "iPhone 13" intact.
 function isExplicitTopThreeQuery(query) {
   return /(?:\btop\s*(?:3|three)\b|\bbest\s*(?:3|three)\b|\bfirst\s*3\b|टॉप\s*[३3]|शीर्ष\s*[३3])/i.test(String(query || ""));
 }
@@ -426,7 +426,13 @@ function rankingQueryWithoutCount(query) {
 
 function submitMobileResearchIfApplicable(query) {
   const research = window.CouponWorldMobileResearch;
-  if (isExplicitTopThreeQuery(query)) return false;
+  if (isExplicitTopThreeQuery(query)) {
+    if (!research) return false;
+    research.submit(rankingQueryWithoutCount(query), {top3: true});
+    const section = document.getElementById("mobileResearchSearch");
+    if (section) section.scrollIntoView({behavior: "instant", block: "start"});
+    return true;
+  }
   if (!research || !research.isResearchQuery(query)) return false;
   research.submit(query);
   const section = document.getElementById("mobileResearchSearch");
