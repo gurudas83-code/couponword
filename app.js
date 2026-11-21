@@ -852,6 +852,20 @@ async function loadShoppingRecommendation(query, { background = false } = {}) {
           return;
         }
         card.innerHTML = `<h3>Verified smartphone research is temporarily unavailable</h3><p>Please try the comparison again.</p>${standardBuyingGuideFallback()}`;
+      } else if (isExplicitTopThreeQuery(cleanQuery)) {
+        // A zero-result Top-3 answer is not a successful ranking. Surface the
+        // backend's machine-readable status without guessing missing evidence.
+        const resultStatus = String(data.result_status || "UNKNOWN").toUpperCase();
+        const marketStatus = String(data.market_data_status || "UNKNOWN").toUpperCase();
+        const safeStatuses = ["PASS", "PARTIAL", "FAIL", "UNKNOWN"];
+        const safeMarkets = ["CURRENT_OFFERS_UNAVAILABLE", "UNKNOWN", "AVAILABLE", "PARTIAL"];
+        const statusText = safeStatuses.includes(resultStatus) ? resultStatus : "OTHER";
+        const marketText = safeMarkets.includes(marketStatus) ? marketStatus : "OTHER";
+        card.innerHTML = `<h3>Verified Top 3 is not available for this search</h3>
+          <p>The recommendation service returned no eligible ranked models. It would be misleading to label the first three research matches as Top 3.</p>
+          <p role="status">Result status: ${statusText}. Market evidence: ${marketText}.</p>
+          <p>Try a wider budget or fewer restrictions. Current prices and availability must be verified before purchase.</p>
+          ${standardBuyingGuideFallback()}`;
       } else if (String(data.market_data_status || "").toUpperCase() === "CURRENT_OFFERS_UNAVAILABLE") {
         card.innerHTML = renderOfferUnavailable();
       } else {
