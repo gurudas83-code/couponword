@@ -41,7 +41,7 @@ class Top50StaticReleaseTests(unittest.TestCase):
         frontend = (ROOT / "app.js").read_text(encoding="utf-8")
         self.assertIn("NO_CURRENT_VERIFIED_OFFER", backend)
         self.assertIn("researchTopThreeEligible", source)
-        self.assertIn("Research-Verified Top-3", source)
+        self.assertIn("Research-Verified Top 3", source)
         self.assertIn("retailer stock observation", source.lower())
         self.assertIn("research.submit(rankingQueryWithoutCount(query), {top3: true})", frontend)
         self.assertNotIn("catalogueSection.hidden = true", source)
