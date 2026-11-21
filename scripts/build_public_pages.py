@@ -345,6 +345,95 @@ def _render_recent_phone_sources(destination: Path) -> None:
     home.write_text(html.replace(placeholder, section), encoding="utf-8")
 
 
+
+def _generate_assistant_category_research(destination: Path) -> None:
+    """Publish a small factual subset for the on-site assistant, never internal offers."""
+    records = []
+    seen = set()
+    for source in ("data/india_tv_earbuds_40_catalogue.json", "data/category_research_verified.json"):
+        payload = json.loads((ROOT / source).read_text(encoding="utf-8"))
+        if payload.get("mode") not in ("DATED_RESEARCH_ONLY_NO_LIVE_OFFERS", "CATEGORY_RESEARCH_ONLY"):
+            raise RuntimeError("Assistant category catalogue source is no longer publication-approved")
+        for row in payload.get("records", []):
+            category = str(row.get("category", ""))
+            if category == "accessories" and re.search(r"earbuds?|earphones?|true wireless|\\btws\\b", str(row.get("product_type", "")), re.I):
+                category = "earbuds"
+            if category not in {"tvs", "earbuds", "accessories"}:
+                continue
+            brand, model = str(row.get("brand", "")).strip(), str(row.get("model", "")).strip()
+            key = (brand.casefold(), model.casefold())
+            if not brand or not model or key in seen:
+                continue
+            source_url = str(row.get("source_url", ""))
+            if not source_url.startswith("https://"):
+                continue
+            # Include only attributed factual specifications. Retain source
+            # reliability labels and do not expose any dated merchant quote.
+            fields = []
+            for spec in row.get("specifications", []):
+                if not isinstance(spec, dict):
+                    continue
+                label, value = str(spec.get("label", "")), str(spec.get("value", ""))
+                field_url = str(spec.get("source_url", ""))
+                if not (label.strip() and value.strip() and field_url.startswith("https://")):
+                    continue
+                fields.append({
+                    "label": label[:90], "value": value[:250],
+                    "source_url": field_url,
+                    "evidence": str(spec.get("evidence", "SOURCE_ATTRIBUTED"))[:110],
+                })
+            if not fields:
+                continue
+            # Reuse ONLY existing reviewed retailer research URLs. Never
+            # convert an exact-model research link into live-stock/buy eligibility.
+            links = []
+            approved_hosts = {
+                "amazon": {"amazon.in", "www.amazon.in"},
+                "flipkart": {"flipkart.com", "www.flipkart.com"},
+                "croma": {"croma.com", "www.croma.com"},
+            }
+            for store in ("amazon", "flipkart", "croma"):
+                info = (row.get("retailers") or {}).get(store)
+                if not isinstance(info, dict):
+                    continue
+                url = str(info.get("retailer_research_url") or "").strip()
+                parsed = urlsplit(url)
+                if (parsed.scheme != "https" or parsed.netloc.lower() not in approved_hosts[store]
+                        or parsed.username or parsed.password):
+                    continue
+                scope = str(info.get("link_scope") or "")
+                if scope not in {
+                    "EXACT_MODEL_LISTING_RESEARCH_NOT_LIVE_OFFER",
+                    "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
+                }:
+                    continue
+                exact = (scope == "EXACT_MODEL_LISTING_RESEARCH_NOT_LIVE_OFFER"
+                         and info.get("exact_model_link_verified") is True)
+                links.append({
+                    "retailer": store, "url": url,
+                    "exact_model_link": exact, "affiliate": store == "amazon",
+                })
+            records.append({
+                "category": category, "brand": brand, "model": model,
+                "model_code": str(row.get("model_code") or row.get("manufacturer_model_code") or "")[:90],
+                "product_type": str(row.get("product_type", ""))[:90],
+                "source_url": source_url,
+                "source_status": str(row.get("source_status") or row.get("review_status") or "SOURCE_ATTRIBUTED")[:140],
+                "reviewed_at": str(row.get("reviewed_at", ""))[:20],
+                "specifications": fields[:20],
+                "retailer_links": links,
+            })
+            seen.add(key)
+    if not records:
+        raise RuntimeError("No attributable category research for assistant")
+    target = destination / "data" / "assistant_category_research.json"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps({
+        "mode": "PUBLIC_RESEARCH_ASSISTANT_NO_OFFERS", "records": records,
+        "notice": "Dated source-attributed research, not independently tested rankings, live offers or availability.",
+    }, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+
+
 def _generate_research_catalogue(destination: Path) -> None:
     """Write a sanitized discovery index derived from existing research files."""
     from python.mobile_research_catalogue import build_public_catalogue
@@ -489,6 +578,7 @@ def build(output: Path) -> Path:
     print("TECHNICAL-NICHE PUBLICATION:", technical_report)
 
     _generate_research_catalogue(output)
+    _generate_assistant_category_research(output)
     # Add the eight missing market-source models as a separate research lane;
     # never mutate the frozen 232-model catalogue or quality ranking.
     from python.india_missing_eight_pages import publish_eight

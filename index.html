@@ -33,6 +33,9 @@
   <link rel="preload" href="/data/mobile_research_catalogue.json?v=licensed-photos-20261117" as="fetch" crossorigin="anonymous">
   <script defer src="/app.js?v=20261120-cold-start"></script>
   <script defer src="/mobile-research-preview.js?v=first-three-core-20261120"></script>
+  <link rel="stylesheet" href="/assets/cw-research-assistant.css?v=20261121">
+  <script defer src="/assets/cw-query-parser.js?v=20261121"></script>
+  <script defer src="/assets/cw-research-assistant.js?v=20261121"></script>
   <link rel="stylesheet" href="/assets/retailer-observations.css?v=shopper-ux-20261118">
   <script defer src="/assets/retailer-observations.js?v=shopper-ux-20261119-paid-api"></script>
 
@@ -115,6 +118,29 @@
               <button id="heroSearchButton" type="button">Search</button>
             </div>
           </div>
+
+          <section class="cw-assistant" id="cwAssistant" aria-label="Ask Coupon World about products">
+            <div class="cw-assistant-head"><strong>Ask Coupon World · सवाल पूछें</strong><span>Our research, not a ChatGPT clone</span></div>
+            <div class="cw-assistant-messages" id="cwAssistantMessages" role="log" aria-live="polite" aria-relevant="additions text">
+              <div class="cw-assistant-message cw-assistant-bot"><strong>Coupon World research</strong><p>फोन, TV, earbuds या chargers के बारे में पूछें। मैं हमारी प्रकाशित रिसर्च से जवाब दूँगा और उसकी सीमाएँ बताऊँगा।</p></div>
+            </div>
+            <div class="cw-assistant-examples" aria-label="Example questions">
+              <button type="button" data-cw-assistant-example="camera phone under 20000">₹20k camera phone</button>
+              <button type="button" data-cw-assistant-example="55 inch Xiaomi TV">55-inch TV</button>
+              <button type="button" data-cw-assistant-example="noise cancelling earbuds">Earbuds</button>
+            </div>
+            <form id="cwAssistantForm" class="cw-assistant-form" role="search">
+              <label class="sr-only" for="cwAssistantInput">Ask about phones, TVs, earbuds, or accessories</label>
+              <input id="cwAssistantInput" name="question" type="text" maxlength="240" autocomplete="off" placeholder="बोलें या लिखें: 15 हजार में कैमरा फोन?" />
+              <button type="button" id="cwAssistantMic" aria-label="Speak question" aria-pressed="false">🎙 बोलें</button>
+              <button type="submit">Ask</button>
+            </form>
+            <div class="cw-assistant-options">
+              <label for="cwAssistantLanguage">Voice <select id="cwAssistantLanguage"><option value="hi-IN">हिंदी</option><option value="en-IN">English</option></select></label>
+              <label><input type="checkbox" id="cwAssistantSpeak" /> Read answers aloud</label>
+            </div>
+            <p class="cw-assistant-note" id="cwAssistantNotice">Voice requires browser support and microphone permission. No audio recording is stored by Coupon World; browser speech services may process audio. Answers use dated research, not live retailer prices.</p>
+          </section>
 
 <div class="mobile-budget-chips" aria-label="Quick smartphone budget searches">
             <span>Choose a ₹5,000 price-reference band</span>

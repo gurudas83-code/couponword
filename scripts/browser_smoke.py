@@ -62,6 +62,30 @@ def run(root: Path):
                         "(el) => !!(el.compareDocumentPosition(document.getElementById('mobileResearchSearch')) & Node.DOCUMENT_POSITION_FOLLOWING)"
                     ), width
                     page.wait_for_function("() => !!window.CouponWorldMobileResearch", timeout=15000)
+                    # First-party chat must answer via the published local catalogues,
+                    # without a paid AI API or changing the existing mobile search.
+                    page.wait_for_function(
+                        "() => !!window.CouponWorldAssistant && !!window.CouponWorldAssistantCore && !!window.CouponWorldQueryParser",
+                        timeout=15000,
+                    )
+                    assert page.locator("#cwAssistantForm").is_visible(), width
+                    page.locator("#cwAssistantInput").fill("55 inch Xiaomi TV")
+                    page.locator('#cwAssistantForm button[type="submit"]').click()
+                    page.wait_for_function(
+                        "() => document.querySelector('#cwAssistantMessages').innerText.includes('Xiaomi')",
+                        timeout=12000,
+                    )
+                    page.locator("#cwAssistantMessages .cw-assistant-bot").last.locator('a[href^="https://"]').first.wait_for(timeout=12000)
+                    affiliate = page.locator("#cwAssistantMessages .cw-assistant-bot").last.locator('a[href*="amazon.in"]').first
+                    affiliate.wait_for(timeout=12000)
+                    assert "tag=guru07cc-21" in affiliate.get_attribute("href"), width
+                    assert "sponsored" in affiliate.get_attribute("rel"), width
+                    label = affiliate.inner_text().lower()
+                    assert "matched model listing" in label or "search amazon" in label, (width, label)
+                    if "search amazon" in label:
+                        assert "not an exact listing" in label, (width, label)
+                    assert "research" in page.locator("#cwAssistantMessages .cw-assistant-bot").last.inner_text().lower(), width
+                    assert page.evaluate("document.documentElement.scrollWidth") <= width + 8, width
                     # Wait for the real fetch->catalogue->browser filtering chain.
                     page.wait_for_function(
                         "() => window.CouponWorldMobileResearch.search('phone under 30000').length > 0",
