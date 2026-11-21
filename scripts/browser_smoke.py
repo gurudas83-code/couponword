@@ -252,6 +252,12 @@ def run(root: Path):
                             page.locator("#researchGuidedApply").evaluate("(el) => el.click()")
                             expected_query = f"phone under {limit} nearby band"
                         assert page.locator("#heroSearch").input_value() == expected_query, (width, limit)
+                        if limit in primary_shortcuts:
+                            # Quick buttons intentionally target local Research Top 3.
+                            assert page.locator("#mobileResearchResults .research-verified-top3").count() == 1, (width, limit)
+                            assert "research picks" in page.locator("#mobileResearchSearchStatus").inner_text(), (width, limit)
+                            # The 40-band audit below exercises the ordinary two-lane budget query.
+                            page.evaluate("(limit) => window.CouponWorldMobileResearch.search('phone under ' + limit)", limit)
                         assert "dated budget-reference matches" in page.locator("#mobileResearchSearchStatus").inner_text(), (width, limit)
                         measure = page.evaluate("""limit => {
                           const matches = window.CouponWorldMobileResearch.search('phone under ' + limit);
@@ -292,6 +298,19 @@ def run(root: Path):
                         ), (width, cap)
                     page.unroute("**/api/recommend?*")
                     page.evaluate("window.CouponWorldMobileResearch.search('phone under 30000')")
+                    # Identity-only research is never mistaken for a valid budget match.
+                    page.evaluate("window.CouponWorldMobileResearch.search('Infinix 5G mobile 10k ke andar')")
+                    identity_text = page.locator("#mobileResearchResults .research-identity-only").inner_text().lower()
+                    assert "verification pending" in identity_text, (width, identity_text[:300])
+                    assert "not budget-qualified" in identity_text, width
+                    assert not page.locator("#mobileResearchResults .research-identity-only .purchase-cta").count(), width
+                    page.evaluate("window.CouponWorldMobileResearch.search('exact model Smart 8 HD phone under 25000')")
+                    assert "Smart 8 HD" in page.locator("#mobileResearchResults .research-identity-only").inner_text(), width
+                    assert "GT 30 Pro" not in page.locator("#mobileResearchResults .research-identity-only").inner_text(), width
+                    page.evaluate("window.CouponWorldMobileResearch.search('Samsung nahi chahiye phone under 8000')")
+                    assert "Samsung" not in page.locator("#mobileResearchResults .research-identity-only").inner_text(), width
+                    page.evaluate("window.CouponWorldMobileResearch.search('exact model Unknown Phantom 888 phone under 25000')")
+                    assert not page.locator("#mobileResearchResults .research-identity-only").count(), width
                     # Exact brand exclusion must survive mixed-language searches.
                     excluded = page.evaluate("""() => window.CouponWorldMobileResearch.search(
                         'phone under 30000 exclude samsung'
