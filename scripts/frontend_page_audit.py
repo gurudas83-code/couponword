@@ -204,9 +204,12 @@ def main():
           result["sitemap_entries"], "sitemap URLs;",
           result["issue_count"], "review findings")
     for page in result["pages"]:
-        major = [item for item in page["issues"] if item["severity"] == "error"]
-        if major:
-            print("REVIEW", page["path"], [(item["code"], item["line"]) for item in major])
+        # Surface all warnings and review requests in CI, not just fatal errors.
+        # A review finding is an inspection prompt, NOT evidence of a Google
+        # penalty, manual action or indexed-status report.
+        findings = [item for item in page["issues"] if item["severity"] in ("error", "warning", "review")]
+        if findings:
+            print("PAGE_AUDIT_FINDING", page["path"], [(item["severity"], item["code"], item["line"]) for item in findings])
     return 0  # report-only until findings are adjudicated; existing release gates remain fail-closed
 
 
