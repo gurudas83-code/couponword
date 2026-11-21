@@ -230,7 +230,15 @@ def main():
     parser.add_argument("--collect", action="store_true")
     args = parser.parse_args()
     rows, cards = worklist()
-    previous = read_previous()
+    candidates = [read_previous()]
+    for path in (args.output, ROOT / "data/india_daily_price_watch_seed.json"):
+        try:
+            saved = json.loads(path.read_text(encoding="utf-8"))
+            if isinstance(saved, dict) and isinstance(saved.get("stores"), dict):
+                candidates.append(saved)
+        except (OSError, ValueError):
+            continue
+    previous = max(candidates, key=lambda snapshot: snapshot.get("attempted_on", ""))
     if args.collect:
         if os.environ.get("QUICKCOMMERCE_API_KEY"):
             previous = collect(previous, rows, cards, QuickCommerceFlipkartConnector(pincode=PINCODE), datetime.now(IST))
