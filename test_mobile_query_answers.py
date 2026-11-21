@@ -264,6 +264,8 @@ process.stdout.write(JSON.stringify({durations,answers}));
             'has_manufacturer_documented_unpriced':sum(x['manufacturer_documented_models']>0 for x in detail),
             'query_detail_first_30':detail[:30]
         },ensure_ascii=False))
+        for offset in range(0,len(detail),40):
+            print('UNANSWERED_623_AUDIT_CHUNK '+json.dumps({'offset':offset,'rows':detail[offset:offset+40]},ensure_ascii=False))
         self.assertEqual(len(detail),623)
         self.assertEqual(sum(summary.values()),623)
 
