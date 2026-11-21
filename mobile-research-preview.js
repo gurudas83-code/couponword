@@ -1232,6 +1232,26 @@
     var c = researchConstraints(lastSearchQuery);
     matches = groupResearchMatches(matches);
     if (researchTopThreeMode && !comparison) matches = matches.filter(researchTopThreeEligible);
+    // A source-reviewed model may have NO dated price reference. Distinguish
+    // budget-unknown candidates from budget-qualified recommendations: do
+    // not keep an empty Top 3 solely because no live offer or price exists.
+    var researchTopThreeBudgetUnverified = false;
+    if (researchTopThreeMode && !comparison && c.budget != null && !matches.length) {
+      var unpriced = groupResearchMatches(findResearchMatches(lastSearchQuery, true)).filter(researchTopThreeEligible);
+      if (unpriced.length) {
+        matches = unpriced;
+        researchTopThreeBudgetUnverified = true;
+      }
+    }
+    // Generic "Top 3 phones" has no model/feature constraint; the existing
+    // search intentionally returns [] for generic input. Rank only models
+    // with manufacturer/source-backed facts via the existing evidence sort.
+    if (researchTopThreeMode && !comparison && c.budget == null && !matches.length &&
+        /^(?:best\\s*)?(?:phones?|mobiles?|smartphones?)?$/i.test(lastSearchQuery.trim())) {
+      matches = sortResearchMatches(inventoryCards.map(function (card) {
+        return {card: card, rows: inventoryRowsForCard(card)};
+      }).filter(researchTopThreeEligible), lastSearchQuery);
+    }
     lastStrictMatchCount = matches.length;
     // Budget matching is strict: never replace an empty ₹5k band with unrelated
     // repository results. Unverified-price research stays in a separate lane.
@@ -1252,10 +1272,12 @@
       if (researchTopThreeMode && !comparison) {
         var label = visible.length === 3 ? "Research-Verified Top 3" :
           "Research-Verified matches (" + visible.length + " of 3)";
+        if (researchTopThreeBudgetUnverified) label += " · budget unverified";
         researchResults.innerHTML = '<section class="research-budget-tier research-budget-evidenced research-top-three" aria-label="Source-backed research recommendations">' +
           '<h3>' + label + '</h3>' +
           '<p>Ordered by documented evidence relevant to your request, not independent performance tests. Retailer stock is NOT required for this research list. This is NOT a live offer, a tested winner, or proof of today\'s price.</p>' +
-          (validBudget ? '<p>Budget fit uses dated price references only; recheck the exact RAM/storage variant and current price.</p>' : '') +
+          (researchTopThreeBudgetUnverified ? '<p><strong>Budget NOT verified:</strong> These are source-backed research candidates that match the non-price requirements. Their exact variants may exceed the requested budget. Check the current retailer price before deciding.</p>' :
+            validBudget ? '<p>Budget fit uses dated price references only; recheck the exact RAM/storage variant and current price.</p>' : '') +
           (visible.length ? '<div class="research-budget-primary-grid">' + visible.map(function (item) {
             return renderResearchResultCard(item.card, item.rows, item.group_size);
           }).join("") + '</div>' : '<p>No sufficiently source-backed model meets every requested condition. We will not manufacture a Top-3 list.</p>') +
