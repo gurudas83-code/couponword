@@ -1,0 +1,5 @@
+{
+  "mode": "REVIEWED_TOP50_VARIANT_TO_RETAILER_SKU",
+  "notice": "Exact model/RAM/storage to retailer ASIN/PID mappings must be reviewed manually against manufacturer and retailer evidence. API observation does not automatically authorize public prices.",
+  "records": []
+}
