@@ -64,7 +64,7 @@ assert.match(html,/assets\/cw-query-parser\.js/);
 assert.match(html,/assets\/cw-research-assistant\.js/);
 const prior=html.match(/data-mobile-query="/g)||[];
 assert.equal(prior.length,5,"Keep the existing five budget buttons unchanged");
-assert.match(html,/first-three-core-20261120/,"Preserve existing progressive search entry point");
+assert.match(html,/mobile-research-preview\.js\?v=[a-z0-9-]+/,"Preserve versioned progressive search entry point");
 const published=path.join(root,"public/data/assistant_category_research.json");
 if(fs.existsSync(published)){
   const data=JSON.parse(fs.readFileSync(published,"utf8"));
