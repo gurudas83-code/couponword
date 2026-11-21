@@ -1247,7 +1247,7 @@
     // search intentionally returns [] for generic input. Rank only models
     // with manufacturer/source-backed facts via the existing evidence sort.
     if (researchTopThreeMode && !comparison && c.budget == null && !matches.length &&
-        /^(?:best\\s*)?(?:phones?|mobiles?|smartphones?)?$/i.test(lastSearchQuery.trim())) {
+        /^(?:best\s*)?(?:phones?|mobiles?|smartphones?)?$/i.test(lastSearchQuery.trim())) {
       matches = sortResearchMatches(inventoryCards.map(function (card) {
         return {card: card, rows: inventoryRowsForCard(card)};
       }).filter(researchTopThreeEligible), lastSearchQuery);
