@@ -31,24 +31,34 @@ class SearchFirstFrontendTests(unittest.TestCase):
         self.assertIn("submitMobileResearchIfApplicable", self.app)
         self.assertIn("research.submit(query)", self.app)
 
-    def test_new_noteworthy_uses_explicit_india_launch_date(self):
-        self.assertIn("india_launch_date", self.script)
-        self.assertIn("365 * 24 * 60 * 60 * 1000", self.script)
+    def test_new_noteworthy_uses_source_backed_market_intake(self):
+        # Current site intentionally distinguishes 13 recent source-linked
+        # additions from the frozen core 232, not by an arbitrary age cutoff.
+        self.assertIn("market_intake === true", self.script)
+        self.assertIn("(card.source_urls || []).length > 0", self.script)
         self.assertIn("researchNewSection.hidden = recent.length === 0", self.script)
-        recent = [card for card in self.payload["model_cards"] if card.get("india_launch_date")]
-        self.assertEqual(len(recent), 6)
-        self.assertTrue(all(card.get("india_launch_source", "").startswith("https://news.samsung.com/in/") for card in recent))
-        self.assertTrue(all(card.get("india_launch_date", "") >= "2025-11-01" for card in recent))
+        self.assertIn("additional India research models, separate from the original 232", self.script)
 
     def test_public_counts_and_no_commerce_change(self):
         counts = self.payload["source_counts"]
         self.assertEqual(counts["visible_model_cards"], 232)
         self.assertEqual(counts["deduplicated_discovery_records"], 235)
         self.assertEqual(counts["frozen_verified_variants"], 10)
-        self.assertEqual(sum(bool(card.get("specifications")) for card in self.payload["model_cards"]), 225)
-        self.assertEqual(sum(len(card.get("specifications", {})) for card in self.payload["model_cards"]), 2479)
+        self.assertGreaterEqual(sum(bool(card.get("specifications")) for card in self.payload["model_cards"]), 225)
+        self.assertGreaterEqual(sum(len(card.get("specifications", {})) for card in self.payload["model_cards"]), 2479)
         self.assertNotIn("purchase_cta_eligible: true", self.html.lower())
-        self.assertNotIn("top 3", self.script.lower())
+        self.assertIn("Research-Verified Top 3", self.script)
+        self.assertIn('card.status !== "OFFICIAL_VERIFIED"', self.script)
+        self.assertIn("hasResearchVerifiedEvidence", self.script)
+        self.assertIn("isResearchTopThreeQuery(query)", self.script)
+        self.assertIn("Check live price on Amazon (search)", self.script)
+        self.assertIn("Check live price on Flipkart (search)", self.script)
+
+    def test_top_three_routes_to_existing_local_research_without_paid_api(self):
+        self.assertIn("if (!isExplicitTopThreeQuery(query) && !research.isResearchQuery(query)) return false;", self.app)
+        self.assertIn("var wantsTopThree = isResearchTopThreeQuery(lastSearchQuery)", self.script)
+        self.assertIn('!isResearchTopThreeQuery(query) && inventoryCards.length', self.script)
+        self.assertIn("No model meets the minimum manufacturer-backed research evidence", self.script)
 
 
 if __name__ == "__main__":

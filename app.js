@@ -414,9 +414,9 @@ function cancelShoppingRecommendation() {
 
 window.CouponWorldCancelShoppingRecommendation = cancelShoppingRecommendation;
 
-// Route explicit Top-3 shopping requests to the existing verified ranking API,
-// not the unranked mobile research catalogue. Keep model names such as
-// "iPhone 13" intact; only strip an explicit top-three instruction.
+// Route explicit Top-3 requests to the source-backed local research results.
+// The live shopping API retains its strict commerce eligibility gate and is
+// still available separately; never report research picks as buyable offers.
 function isExplicitTopThreeQuery(query) {
   return /(?:\btop\s*(?:3|three)\b|\bbest\s*(?:3|three)\b|\bfirst\s*3\b|टॉप\s*[३3]|शीर्ष\s*[३3])/i.test(String(query || ""));
 }
@@ -426,8 +426,11 @@ function rankingQueryWithoutCount(query) {
 
 function submitMobileResearchIfApplicable(query) {
   const research = window.CouponWorldMobileResearch;
-  if (isExplicitTopThreeQuery(query)) return false;
-  if (!research || !research.isResearchQuery(query)) return false;
+  if (!research) return false;
+  // Research-Verified Top 3 must not wait on a live retailer-stock query.
+  // The research view applies its own manufacturer-evidence gate, not a
+  // false live-price/stock assertion.
+  if (!isExplicitTopThreeQuery(query) && !research.isResearchQuery(query)) return false;
   research.submit(query);
   const section = document.getElementById("mobileResearchSearch");
   if (section) section.scrollIntoView({ behavior: "instant", block: "start" });

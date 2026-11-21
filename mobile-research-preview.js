@@ -93,6 +93,32 @@
     if (/ram|storage|memory|रैम|स्टोरेज/.test(value)) return "memory_variant";
     return "model_or_general";
   }
+  // "Top 3" is a request for the number of results, not model number 3.
+  // Keep model names such as "Nothing Phone (3)" intact.
+  function isResearchTopThreeQuery(query) {
+    return /(?:\b(?:top|best)\s*(?:3|three)\b|\bfirst\s*3\b|टॉप\s*[३3]|शीर्ष\s*[३3])/i.test(String(query || ""));
+  }
+
+  function hasResearchVerifiedEvidence(item) {
+    var card = item && item.card;
+    if (!card || card.status !== "OFFICIAL_VERIFIED" || !(item.rows || []).length) return false;
+    return Object.values(card.specifications || {}).filter(function (spec) {
+      return spec && spec.value != null && String(spec.value).trim() &&
+        /^https:\/\/[^\s<>"']+$/i.test(String(spec.source_url || ""));
+    }).length >= 2;
+  }
+
+  function topThreeRetailerSearchButtons(card) {
+    // Search links do not imply an exact listing, live verified price, or stock.
+    var model = displayPhoneName(card);
+    var amazon = "https://www.amazon.in/s?tag=guru07cc-21&k=" + encodeURIComponent(model);
+    var flipkart = "https://www.flipkart.com/search?q=" + encodeURIComponent(model);
+    return '<div class="research-top3-price-links" aria-label="Search live retailer prices">' +
+      '<a class="btn btn-ghost" href="' + escapeHtml(amazon) + '" target="_blank" rel="sponsored nofollow noopener noreferrer">Check live price on Amazon (search)</a> ' +
+      '<a class="btn btn-ghost" href="' + escapeHtml(flipkart) + '" target="_blank" rel="nofollow noopener noreferrer">Check live price on Flipkart (search)</a>' +
+      '</div>';
+  }
+
   function trackResearchEvent(name, params) {
     try {
       if (typeof window.gtag === "function") window.gtag("event", name, params || {});
@@ -558,7 +584,9 @@
 
 
   function researchConstraints(query) {
-    var text = String(query || "").toLowerCase().replace(/[०-९]/g, function (d) { return String("०१२३४५६७८९".indexOf(d)); }).replace(/,/g, "");
+    var text = String(query || "").toLowerCase()
+      .replace(/(?:\b(?:top|best)\s*(?:3|three)\b|\bfirst\s*3\b|टॉप\s*[३3]|शीर्ष\s*[३3])/gi, " ")
+      .replace(/[०-९]/g, function (d) { return String("०१२३४५६७८९".indexOf(d)); }).replace(/,/g, "");
     text = text.replace(/सैमसंग/g, "samsung").replace(/आईफोन/g, "iphone").replace(/रेडमी/g, "redmi").replace(/वनप्लस/g, "oneplus")
       .replace(/\b(?:mobies|moblies)\b/g, "mobiles")
       .replace(/\b(?:moblie|moible)\b/g, "mobile");
@@ -659,7 +687,7 @@
     var tokens = text.split(" ").filter(function (token) { return token && !stop.test(token) && token !== excluded; });
     var aliases = { "सैमसंग": "samsung", "आईफोन": "iphone", "रेडमी": "redmi", "पोको": "poco", "वनप्लस": "oneplus" };
     tokens = tokens.map(function (token) { return aliases[token] || token; });
-    if (!tokens.length && !featureKeys.length && !excluded && c.budget == null && c.ram == null && c.storage == null && !c.need5g && !priceUnknownBudgetResearch) return [];
+    if (!tokens.length && !featureKeys.length && !excluded && c.budget == null && c.ram == null && c.storage == null && !c.need5g && !priceUnknownBudgetResearch && !isResearchTopThreeQuery(query)) return [];
     // Natural-language instruction words are not product model tokens.
     // Keep model suffixes (Pro/Plus/Max), RAM, storage and hard gates intact.
     var queryNoise = new Set([
@@ -1220,10 +1248,50 @@
     }
     var validBudget = !comparison && c.budget != null && (c.lower == null || c.lower <= c.budget);
     var additional = validBudget ? unpricedResearchLeads(lastSearchQuery) : {count: 0, html: ""};
+    var wantsTopThree = isResearchTopThreeQuery(lastSearchQuery) && !comparison;
+    var researchTopThree = [];
+    if (wantsTopThree) {
+      // Reuse existing matching, source-coverage sorting, grouping and budget
+      // rules. Only a manufacturer-backed model with >=2 sourced technical
+      // fields qualifies for the research lane. No commerce gate is bypassed.
+      var pricedCandidates = matches.filter(hasResearchVerifiedEvidence);
+      var unpricedCandidates = validBudget ? findResearchMatches(lastSearchQuery, true)
+        .filter(hasResearchVerifiedEvidence)
+        .filter(function (item) {
+          // Do not portray a recorded out-of-band dated price as unknown.
+          var ref = item.card.research_budget_reference;
+          return !ref || !(Number(ref.reference_price_inr) > 0);
+        }) : [];
+      researchTopThree = groupResearchMatches(pricedCandidates.concat(unpricedCandidates)).slice(0, 3);
+    }
     if (researchResults) {
       researchResults.hidden = false;
       var bridge = verifiedRecommendationBridge(lastSearchQuery, comparison);
-      if (validBudget) {
+      if (wantsTopThree) {
+        // These are research picks, sorted by documented source coverage, NOT
+        // measured performance winners, current stock or budget-qualified deals.
+        var priceVerifiedKeys = new Set(matches.map(function (item) { return item.card.model_key; }));
+        var topThreeCards = researchTopThree.map(function (item, index) {
+          var datedBandReference = validBudget && priceVerifiedKeys.has(item.card.model_key);
+          return '<div class="research-top3-result">' +
+            '<p class="research-first-three-note"><strong>Research pick ' + (index + 1) + '</strong> · ' +
+            (validBudget && !datedBandReference ?
+              'Current price and selected budget range unverified' :
+              validBudget ? 'Dated reference in selected band; current price unverified' :
+              'Price and retailer stock unverified') + '</p>' +
+            renderResearchResultCard(item.card, item.rows, item.group_size || 1) +
+            topThreeRetailerSearchButtons(item.card) + '</div>';
+        }).join("");
+        researchResults.innerHTML = '<section class="research-budget-tier research-verified-top3" aria-label="Research-verified smartphone selections">' +
+          '<h3>' + (researchTopThree.length === 3 ? 'Research-Verified Top 3' :
+            'Research-Verified picks (' + researchTopThree.length + '/3 available)') + '</h3>' +
+          '<p>Existing catalogue filter; ordered by documented manufacturer/source specification coverage, not measured camera, gaming or battery superiority. These are research selections, NOT live-stock recommendations or confirmed buyable offers.</p>' +
+          (validBudget ? '<p><strong>Budget warning:</strong> where no dated price reference meets the selected band, the shown source-backed alternatives are NOT confirmed within ₹' +
+            escapeHtml(Number(c.budget).toLocaleString("en-IN")) + '. Verify the exact RAM/storage variant and payable price at the retailer.</p>' : '') +
+          (researchTopThree.length ? '<div class="research-budget-primary-grid">' + topThreeCards + '</div>' :
+            '<p>No model meets the minimum manufacturer-backed research evidence requirements for this query. Try fewer constraints.</p>') +
+          '</section>';
+      } else if (validBudget) {
         // Local, synchronous two-lane answer. No network round trip or
         // third-party API is required before either lane appears.
         var primary = '<section class="research-budget-tier research-budget-evidenced" aria-label="Phones with dated budget references">' +
@@ -1252,7 +1320,10 @@
       }
     }
     if (researchSearchStatus) {
-      if (validBudget) {
+      if (wantsTopThree) {
+        researchSearchStatus.textContent = researchTopThree.length + " Research-Verified model" +
+          (researchTopThree.length === 1 ? "" : "s") + " · local results · no live-price API";
+      } else if (validBudget) {
         researchSearchStatus.textContent = matches.length + " dated budget-reference matches · " +
           additional.count + " related phones with price unverified · local research results";
         researchSearchStatus.textContent += " · requested range ₹" +
@@ -1267,7 +1338,7 @@
       if (/best|अच्छा|अच्छे/i.test(lastSearchQuery)) researchSearchStatus.textContent +=
         " · evidence coverage order, not a performance ranking";
     }
-    if (researchResultsMore) { researchResultsMore.hidden = displayMatches.length <= MAX_SEARCH_RESULTS; researchResultsMore.textContent = searchExpanded ? "Show fewer results" : "Load more research results"; }
+    if (researchResultsMore) { researchResultsMore.hidden = wantsTopThree || displayMatches.length <= MAX_SEARCH_RESULTS; researchResultsMore.textContent = searchExpanded ? "Show fewer results" : "Load more research results"; }
     return displayMatches;
   }
 
@@ -1280,7 +1351,7 @@
     // Reuse the just-computed strict match count. Do not repeat the full
     // catalogue scan (and never block local answers on retailer/API latency).
     searchResearch(query);
-    if (inventoryCards.length && lastStrictMatchCount > 0 &&
+    if (!isResearchTopThreeQuery(query) && inventoryCards.length && lastStrictMatchCount > 0 &&
         researchConstraints(query).budget != null &&
         !/\b(?:compare|vs\.?|versus)\b|और/i.test(String(query || "")) &&
         typeof window.CouponWorldShoppingRecommend === "function") {
