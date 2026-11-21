@@ -93,7 +93,7 @@ def amazon_get_item(asin: str) -> dict:
     if not isinstance(price_field, dict):
         price_field = {}
     money = price_field.get("money") or {}
-    raw_price = money.get("amount") if isinstance(money, dict) else None
+    raw_price = money.get("amount") if isinstance(money, dict) and money.get("currency") == "INR" else None
     # No explicit live stock proof: never infer it from an offer/price.
     availability = listing.get("availability")
     title = ((matched.get("itemInfo") or {}).get("title") or {}).get("displayValue")
