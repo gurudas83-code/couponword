@@ -24,8 +24,6 @@ setImmediate(()=> {
  check('10 frozen variants retained',()=>assert.equal(preview.products.length,10));
  check('226 model cards have technical specifications',()=>assert.equal(catalogue.model_cards.filter(c=>Object.keys(c.specifications).length).length,226));
  check('86 original references plus five reviewed prices minus invalid A5x retained safely',()=>{let rows=catalogue.model_cards.filter(c=>c.research_budget_reference);assert.equal(rows.length,86+5-1);assert.equal(rows.filter(c=>c.research_budget_reference.evidence_basis==='DIRECT_RETAILER_PAGE_SNAPSHOT').length,5);assert(rows.every(c=>!/(OUT.OF.STOCK|UNAVAILABLE|DISCONTINUED)/i.test(c.research_budget_reference.stock_indication)));assert(rows.every(c=>c.research_budget_reference.live_offer===false&&c.research_budget_reference.ranking_weight===0));assert.equal(catalogue.model_cards.find(c=>c.model_key==='oppo|a5x').research_budget_reference,null);});
- const debugRefs=catalogue.model_cards.filter(c=>c.research_budget_reference).slice(0,3);
- console.log('TOP3_REFERENCE_DIAGNOSTIC '+JSON.stringify(debugRefs.map(c=>({model:c.model,ref:c.research_budget_reference}))));
  check('budget is strict and nonempty',()=>{let r=search('phone under 20000');assert(r.length>0);assert(r.every(x=>x.card.research_budget_reference.reference_price_inr<20000));});
  check('20k equals 20000',()=>assert.deepEqual(search('phone under 20k').map(x=>x.card.model_key),search('phone under 20000').map(x=>x.card.model_key)));
  check('Hindi budget matches English',()=>assert.deepEqual(search('20000 के अंदर मोबाइल').map(x=>x.card.model_key),search('phone under 20000').map(x=>x.card.model_key)));
