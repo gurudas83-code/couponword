@@ -53,12 +53,13 @@
     var clearBudget=/\b(?:no budget|remove budget|any budget|forget budget)\b|बजट हटाओ/i.test(raw);
     if (clearBudget) budget=null;
     else if (budget===null && category===memory.category && memory.budget!=null) budget=memory.budget;
-    if(budget!==null) {
-      // Spoken leading budgets must never become fictitious exact model tokens.
-      text=text.replace(new RegExp("(^|\\s)"+budget+"(?=\\s|$)")," ");
-    }
-    var base=text.replace(/(?:₹|rs\.?|inr|rupees|under|below|within|upto|up to|budget|price|maximum|less than)\s*\d{4,7}\b/gi," ")
+    // Strip only price-amount expressions. Do not turn 55-inch, 8GB or
+    // the number inside a model identifier into an assumed price.
+    var base=text.replace(/(?:₹|rs\.?|inr|rupees|under|below|within|upto|up to|budget(?: of)?|price|maximum|less than)\s*\d{4,7}\b/gi," ")
       .replace(/\b\d{4,7}\s*(?:rupees|tak|andar)\b/gi," ")
+      .replace(/(^|\s)\d{4,7}(?=\s|$)/g,function(match,prefix) {
+        return budget!==null && Number(match.trim())===budget ? prefix : match;
+      })
       .replace(/\b(?:please|tell|me|show|find|give|suggest|recommend|want|need|a|an|the|some|which|for|i|to|aur|batao|dikhao|chahiye|achha|accha|good)\b/gi," ")
       .replace(/\s+/g," ").trim();
     // A short follow-up can refine earlier intent without repeating the whole query.
