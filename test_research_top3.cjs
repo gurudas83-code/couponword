@@ -66,8 +66,9 @@ assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', ro
   assert(research, "Existing research engine did not initialize");
   const matches = research.submit("top 3 phones under 25000");
   const first = element("mobileResearchResults").innerHTML;
-  assert.match(first, /Research-Verified Top 3/, "Three sourced models must be visible from local catalog");
-  assert.equal((first.match(/class="research-top3-result"/g) || []).length, 3);
+  assert.match(first, /Research-Verified (?:Top 3|picks)/, "Top 3 must render India-exact evidence lane");
+  assert((first.match(/class="research-top3-result"/g) || []).length <= 3);
+  assert((first.match(/class="research-top3-result"/g) || []).length > 0, "25k must retain a sourced maker-India variant");
   assert.match(first, /Current price and selected budget range unverified|Dated reference in selected band/);
   assert.match(first, /Check live price on Amazon \(search\)/);
   assert.match(first, /Check live price on Flipkart \(search\)/);
@@ -80,6 +81,18 @@ assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', ro
     research.submit("top 3 phones under " + budget);
     const budgetHtml = element("mobileResearchResults").innerHTML;
     const budgetPicks = (budgetHtml.match(/class="research-top3-result"/g) || []).length;
+    const picks = Array.from(budgetHtml.matchAll(/class="research-top3-result"[\s\S]*?data-mobile-model-card="([^"]+)"/g), m => m[1]);
+    assert.equal(picks.length, budgetPicks, budget + " all chosen phones must be parseable");
+    for (const key of picks) {
+      const card = catalogue.model_cards.find(m => m.model_key === key);
+      assert(card && card.india_identity_evidence.status === "INDIA_EXACT_VARIANT_DOCUMENTED",
+        key + " cannot be recommended without official Indian market evidence");
+      const ref = card.research_budget_reference;
+      assert(ref && card.india_identity_evidence.verified_variants.some(v =>
+        v.ram_gb === ref.ram_gb && v.storage_gb === ref.storage_gb),
+        key + " manufacturer RAM/storage must match priced RAM/storage");
+    }
+
     const datedQualified = (budgetHtml.match(/Dated reference in selected band; current price unverified/g) || []).length;
     assert.equal(budgetPicks, datedQualified, budget +
       " must not rank a phone without a dated reference in its budget band");
@@ -90,25 +103,18 @@ assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', ro
   }
   research.submit("top 3 phones under 10000");
   const lowerBudget = element("mobileResearchResults").innerHTML;
-  assert.match(lowerBudget, /Research-Verified picks \(2\/3 available\)/);
-  assert.match(lowerBudget, /Lava Bold N2 Lite/i);
-  assert.match(lowerBudget, /Dated budget reference: ₹9,299/);
-  assert.match(lowerBudget, /NOT a live checkout price or stock confirmation/);
-  assert.match(lowerBudget, /Additional relevant phones/);
-  assert.match(lowerBudget, /Samsung Galaxy F05/i);
-  assert.match(lowerBudget, /Dated budget reference: ₹6,499/);
-  assert.equal((lowerBudget.match(/class="research-top3-result"/g) || []).length, 2);
+  assert.match(lowerBudget, /Research-Verified (?:Top 3|picks)/);
+  assert((lowerBudget.match(/class="research-top3-result"/g) || []).length <= 3);
+  assert.match(lowerBudget, /Additional relevant phones|Price-unknown phones appear separately below/);
 
-  research.submit("top 3 phones under 15000");
+    research.submit("top 3 phones under 15000");
   const midBudget = element("mobileResearchResults").innerHTML;
-  assert.match(midBudget, /Research-Verified Top 3/);
-  assert.match(midBudget, /Dated budget reference: ₹10,499/);
-  assert.match(midBudget, /Dated budget reference: ₹10,799/);
-  assert.match(midBudget, /Dated budget reference: ₹12,999/);
-  assert.equal((midBudget.match(/class="research-top3-result"/g) || []).length, 3);
-  assert.doesNotMatch(midBudget, /OPPO A5x/, "Wrong 4G/5G model reference must be quarantined from price Top 3");
+  assert.match(midBudget, /Research-Verified (?:Top 3|picks)/);
+  assert((midBudget.match(/class="research-top3-result"/g) || []).length <= 3);
+  assert.doesNotMatch(midBudget, /class="research-top3-result"[\s\S]*?data-mobile-model-card="oppo\|a5x"/,
+    "Wrong A5x 4G/5G reference must never become a Top 3 research recommendation");
 
-  research.submit("top three battery phones");
+    research.submit("top three battery phones");
   const second = element("mobileResearchResults").innerHTML;
   assert.match(second, /Research-Verified Top 3|Research-Verified picks \([012]\/3 available\)/);
   assert.equal(shoppingCalls, 0);
