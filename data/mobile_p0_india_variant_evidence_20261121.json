@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "mode": "MANUFACTURER_INDIA_VARIANT_EVIDENCE_ONLY_NOT_CURRENT_STOCK_OR_OFFER",
+  "reviewed_on": "2026-11-21",
+  "notice": "Exact model/physical RAM/storage combinations from source manufacturer India pages; these are NOT live retailer stock, price, buy links, pincode delivery or performance ranks.",
+  "records": [
+    {
+      "model_key": "nothing|phone 3a",
+      "manufacturer": "Nothing",
+      "india_model_url": "https://in.nothing.tech/products/phone-3a",
+      "india_model_code": null,
+      "variants": [
+        {
+          "ram_gb": 8,
+          "storage_gb": 128,
+          "source_url": "https://in.nothing.tech/products/phone-3a"
+        }
+      ]
+    },
+    {
+      "model_key": "nothing|phone 3a pro",
+      "manufacturer": "Nothing",
+      "india_model_url": "https://in.nothing.tech/products/phone-3a-pro",
+      "india_model_code": null,
+      "variants": [
+        {
+          "ram_gb": 8,
+          "storage_gb": 128,
+          "source_url": "https://in.nothing.tech/products/phone-3a-pro"
+        }
+      ]
+    },
+    {
+      "model_key": "oppo|k13 5g",
+      "manufacturer": "OPPO",
+      "india_model_url": "https://www.oppo.com/in/smartphones/series-k/k13-5g/specs/",
+      "india_model_code": "CPH2729",
+      "variants": [
+        {
+          "ram_gb": 8,
+          "storage_gb": 128,
+          "source_url": "https://www.oppo.com/in/newsroom/press/oppo-launches-k13-overpowered-performance-17999/"
+        },
+        {
+          "ram_gb": 8,
+          "storage_gb": 256,
+          "source_url": "https://www.oppo.com/in/newsroom/press/oppo-launches-k13-overpowered-performance-17999/"
+        }
+      ]
+    },
+    {
+      "model_key": "oneplus|nord 6",
+      "manufacturer": "OnePlus",
+      "india_model_url": "https://www.oneplus.in/oneplus-nord-6",
+      "india_model_code": null,
+      "variants": [
+        {
+          "ram_gb": 8,
+          "storage_gb": 256,
+          "source_url": "https://www.oneplus.in/oneplus-nord-6"
+        },
+        {
+          "ram_gb": 12,
+          "storage_gb": 256,
+          "source_url": "https://www.oneplus.in/oneplus-nord-6"
+        }
+      ]
+    },
+    {
+      "model_key": "vivo|t5x 5g",
+      "manufacturer": "vivo",
+      "india_model_url": "https://shop.vivo.com/in/product/10339",
+      "india_model_code": null,
+      "variants": [
+        {
+          "ram_gb": 6,
+          "storage_gb": 128,
+          "source_url": "https://shop.vivo.com/in/product/10339"
+        },
+        {
+          "ram_gb": 8,
+          "storage_gb": 256,
+          "source_url": "https://shop.vivo.com/in/product/10339?skuId=19392"
+        }
+      ]
+    }
+  ]
+}
