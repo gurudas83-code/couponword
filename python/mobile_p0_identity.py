@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OFFICIAL_HOSTS = {
     "in.nothing.tech", "www.oppo.com", "www.oneplus.in",
     "shop.vivo.com", "www.samsung.com", "news.samsung.com",
-    "www.mi.com", "www.realme.com",
+    "www.mi.com", "www.realme.com", "buy.realme.com", "www.motorola.in",
 }
 RETAILER_HOSTS = {
     "amazon": {"www.amazon.in", "amazon.in"},
