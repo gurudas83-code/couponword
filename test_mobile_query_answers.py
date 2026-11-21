@@ -96,4 +96,52 @@ class AnswersTests(unittest.TestCase):
         self.assertEqual(len(poco),1)
         self.assertEqual(poco[0]['specifications']['battery_mah_typical']['value'],6550)
 
+
+    def test_original_corpus_1000_answer_regression_and_latency(self):
+        """Exercise all original query texts against current parsed answers and source-gated candidates."""
+        import time
+        corpus=json.loads((ROOT/'data/mobile_query_corpus_1000.json').read_text(encoding='utf-8'))
+        cases=[row for split in ('train','validation','test') for row in corpus['splits'][split]]
+        self.assertEqual(len(cases),1000)
+        self.assertEqual(len({c['id'] for c in cases}),1000)
+        latencies=[]
+        counts={'nonempty':0,'honest_incomplete':0,'parser_mismatch':0,'exceptions':0}
+        failures=[]
+        for row in cases:
+            start=time.perf_counter()
+            try:
+                group=parsed_group(row['query'],row['id'])
+                if group['cap'] != row['budget_context']:
+                    counts['parser_mismatch']+=1
+                    failures.append((row['id'],'budget',group['cap'],row['budget_context']))
+                matches=candidates(group,self.cards)
+                answer=description(group,matches)
+                if not isinstance(answer,str) or not answer.strip():
+                    failures.append((row['id'],'empty answer'))
+                if matches:
+                    counts['nonempty']+=1
+                else:
+                    counts['honest_incomplete']+=1
+                for candidate in matches:
+                    reference=candidate.get('research_budget_reference') or {}
+                    price=reference.get('reference_price_inr')
+                    if not isinstance(price,(int,float)) or not price < row['budget_context']:
+                        failures.append((row['id'],'invalid budget match',candidate.get('model_key')))
+            except Exception as exc:
+                counts['exceptions']+=1
+                failures.append((row['id'],'exception',str(exc)))
+            latencies.append((time.perf_counter()-start)*1000)
+        ordered=sorted(latencies)
+        print('CORPUS_1000_ANSWER_REPORT '+json.dumps({
+            'total':len(cases),'nonempty':counts['nonempty'],
+            'honest_incomplete':counts['honest_incomplete'],
+            'parser_mismatch':counts['parser_mismatch'],
+            'exceptions':counts['exceptions'],
+            'mean_ms':round(sum(latencies)/len(latencies),3),
+            'p95_ms':round(ordered[int(.95*(len(ordered)-1))],3),
+            'max_ms':round(max(latencies),3),
+            'failed_examples':failures[:30]
+        },ensure_ascii=False))
+        self.assertFalse(failures[:30],str(failures[:30]))
+
 if __name__=='__main__':unittest.main()
