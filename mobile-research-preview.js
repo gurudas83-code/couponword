@@ -1106,49 +1106,47 @@
   // A last-resort research identity lane for unanswered budget questions.
   // It never relaxes the strict price, 5G, RAM/storage or evidence gates above.
   // Names here are catalogue identities, not evidence of satisfying conditions.
-  function identityOnlyResearchLeads(query, existingLeads) {
+  // Catalogue identities are disclosed separately; they NEVER qualify for
+  // within-budget or verified-spec rankings without the original evidence gates.
+  function identityOnlyResearchLeads(query) {
     var constraints = researchConstraints(query);
     if (constraints.budget == null || (constraints.lower != null && constraints.lower > constraints.budget)) return "";
     var text = constraints.text;
     var excluded = excludedBrand(text);
-    var brandAliases = {
+    var aliases = {
       samsung: ["samsung"], apple: ["apple", "iphone"], redmi: ["redmi", "xiaomi redmi"],
       poco: ["poco"], motorola: ["motorola", "moto"], vivo: ["vivo"],
-      oppo: ["oppo"], realme: ["realme"], infinix: ["infinix"],
-      lava: ["lava"], oneplus: ["oneplus"], iqoo: ["iqoo"]
+      oppo: ["oppo"], realme: ["realme"], infinix: ["infinix"], lava: ["lava"],
+      oneplus: ["oneplus"], iqoo: ["iqoo"]
     };
-    var hint = Object.keys(brandAliases).find(function (brand) {
-      return brandAliases[brand].some(function (alias) {
-        return new RegExp("(?:^|\\\\s)" + alias + "(?:\\\\s|$)", "i").test(text);
+    var hint = Object.keys(aliases).find(function (brand) {
+      return aliases[brand].some(function (name) {
+        return (" " + text + " ").indexOf(" " + name + " ") >= 0;
       });
     });
-    var explicit = /\\bexact\\s+model\\b/i.test(String(query || ""));
-    var rawName = text.replace(/\\bexact\\s+model\\b/g, " ")
-      .replace(/\\b(?:phone|mobile|smartphone|phones|mobiles|under|below|within|budget|best|good|recommend|recommendation)\\b/g, " ")
-      .replace(/\\b(?:ke|andar|tak|liye|ka|ki|ko|se|me|mein)\\b/g, " ")
-      .replace(/\\s+/g, " ").trim();
-    var known = (existingLeads || []).map(function (item) { return item.card.model_key; });
+    var explicit = /\bexact\s+model\b/i.test(String(query || ""));
+    var modelName = text.replace(/\bexact\s+model\b/g, " ")
+      .replace(/\b(?:phone|mobile|smartphone|phones|mobiles|under|below|within|budget|best|good|recommend)\b/g, " ")
+      .replace(/\b(?:ke|andar|tak|liye|ka|ki|ko|se|me|mein)\b/g, " ")
+      .replace(/\s+/g, " ").trim();
+    if (hint) aliases[hint].forEach(function (alias) {
+      if (modelName.indexOf(alias + " ") === 0) modelName = modelName.slice(alias.length + 1);
+    });
     var options = inventoryCards.filter(function (card) {
-      var brandText = normalizeResearch(card.brand + " " + card.model);
-      if (excluded && normalizeResearch(card.brand).indexOf(excluded) >= 0) return false;
-      if (hint && !brandAliases[hint].some(function (alias) { return brandText.indexOf(alias) >= 0; })) return false;
-      if (known.indexOf(card.model_key) >= 0) return false;
-      if (explicit) {
-        var modelText = normalizeResearch(card.model);
-        var modelRequest = rawName;
-        if (hint) brandAliases[hint].forEach(function (alias) {
-          modelRequest = modelRequest.replace(new RegExp("^" + alias + "\\\\s+", "i"), "");
-        });
-        if (modelText !== modelRequest) return false;
-      }
+      var brandName = normalizeResearch(card.brand);
+      var name = normalizeResearch(card.brand + " " + card.model);
+      if (excluded && brandName.indexOf(excluded) >= 0) return false;
+      if (hint && !aliases[hint].some(function (alias) {
+        return (" " + name + " ").indexOf(" " + alias + " ") >= 0;
+      })) return false;
+      if (explicit && normalizeResearch(card.model) !== modelName) return false;
       return true;
     });
-    // Do not manufacture a result for an unknown exact model or unknown brand.
     if (!options.length) return "";
     options.sort(function (a, b) {
       function proof(card) {
         return Object.values(card.specifications || {}).filter(function (item) {
-          return item && item.value != null && /^https:\\/\\//.test(String(item.source_url || ""));
+          return item && item.value != null && /^https:\/\//.test(String(item.source_url || ""));
         }).length;
       }
       return proof(b) - proof(a) || displayPhoneName(a).localeCompare(displayPhoneName(b));
@@ -1156,10 +1154,10 @@
     var shown = options.slice(0, 4);
     return '<section class="research-budget-tier research-identity-only" aria-label="Related catalogue identities requiring verification">' +
       '<h3>Related models in our catalogue · verification pending (' + shown.length + ')</h3>' +
-      '<p>These names exist in the research database, but we have NOT confirmed the requested price band, exact RAM/storage, 5G support, camera or gaming performance, or current availability. They are NOT verified budget matches or ranked recommendations.</p>' +
+      '<p>These model identities exist in our research bank, but the requested price, exact RAM/storage, 5G, camera/gaming ability or stock may be unverified. Not budget-qualified, not ranked and not buy recommendations.</p>' +
       '<div class="research-budget-related-list">' + shown.map(function (card) {
         var source = Object.values(card.specifications || {}).find(function (item) {
-          return item && item.value != null && /^https:\\/\\//.test(String(item.source_url || ""));
+          return item && item.value != null && /^https:\/\//.test(String(item.source_url || ""));
         });
         return '<article class="research-budget-related-item">' +
           '<strong>' + escapeHtml(displayPhoneName(card)) + '</strong>' +
@@ -1316,7 +1314,7 @@
     }
     var validBudget = !comparison && c.budget != null && (c.lower == null || c.lower <= c.budget);
     var additional = validBudget ? unpricedResearchLeads(lastSearchQuery) : {count: 0, html: ""};
-    var identityLane = validBudget && !matches.length ? identityOnlyResearchLeads(lastSearchQuery, []) : "";
+    var identityLane = validBudget && !matches.length ? identityOnlyResearchLeads(lastSearchQuery) : "";
     var wantsTopThree = isResearchTopThreeQuery(lastSearchQuery) && !comparison;
     var researchTopThree = [];
     if (wantsTopThree) {
