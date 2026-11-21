@@ -135,13 +135,17 @@ def run(root: Path):
                         const result=[];
                         try {
                             for(const [name,patch] of tests){
+                                Object.keys(ref).forEach(k=>delete ref[k]);
                                 Object.assign(ref,original,patch);
                                 const ranked=window.CouponWorldMobileResearch.search('top 3 '+query);
                                 const budget=window.CouponWorldMobileResearch.search(query);
                                 result.push({name,excluded:!budget.some(x=>x.card.model_key===item.model_key),
                                     excludedFromTop3:!ranked.some(x=>x.card.model_key===item.model_key)});
                             }
-                        } finally {Object.assign(ref,original);}
+                        } finally {
+                            Object.keys(ref).forEach(k=>delete ref[k]);
+                            Object.assign(ref,original);
+                        }
                         return {result};
                     }""")
                     assert 'error' not in gated, (width, gated)
