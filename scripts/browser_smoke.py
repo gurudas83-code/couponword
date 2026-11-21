@@ -176,6 +176,8 @@ def run(root: Path):
                     )
                     assert page.locator("#mobileResearchNewGrid [data-mobile-model-card]").count() == 21, width
                     assert page.locator("#mobileResearchNewGrid a.research-model-name-link").count() == 21, width
+                    more_phones = page.locator("#mobileResearchNewGrid details.recent-mobile-more")
+                    more_phones.evaluate("details => { details.open = true; }")
                     new_cards = page.locator("#mobileResearchNewGrid [data-mobile-model-card]")
                     for card in new_cards.all():
                         image = card.locator(
@@ -194,6 +196,7 @@ def run(root: Path):
                             assert "Model photo:" in text, width
                         elif src.startswith("/assets/phone-illustrations/"):
                             assert "AI illustration" in text, width
+                    more_phones.evaluate("details => { details.open = false; }")
                     assert "Price unavailable" in page.locator("#mobileResearchNewGrid").text_content(), width
                     assert page.evaluate(
                         "() => window.CouponWorldMobileResearch.search('Samsung Galaxy F70 5G').some("
