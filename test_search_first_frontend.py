@@ -31,14 +31,13 @@ class SearchFirstFrontendTests(unittest.TestCase):
         self.assertIn("submitMobileResearchIfApplicable", self.app)
         self.assertIn("research.submit(query)", self.app)
 
-    def test_new_noteworthy_uses_explicit_india_launch_date(self):
-        self.assertIn("india_launch_date", self.script)
-        self.assertIn("365 * 24 * 60 * 60 * 1000", self.script)
+    def test_new_noteworthy_uses_source_backed_market_intake(self):
+        # Current site intentionally distinguishes 13 recent source-linked
+        # additions from the frozen core 232, not by an arbitrary age cutoff.
+        self.assertIn("market_intake === true", self.script)
+        self.assertIn("(card.source_urls || []).length > 0", self.script)
         self.assertIn("researchNewSection.hidden = recent.length === 0", self.script)
-        recent = [card for card in self.payload["model_cards"] if card.get("india_launch_date")]
-        self.assertEqual(len(recent), 6)
-        self.assertTrue(all(card.get("india_launch_source", "").startswith("https://news.samsung.com/in/") for card in recent))
-        self.assertTrue(all(card.get("india_launch_date", "") >= "2025-11-01" for card in recent))
+        self.assertIn("additional India research models, separate from the original 232", self.script)
 
     def test_public_counts_and_no_commerce_change(self):
         counts = self.payload["source_counts"]
