@@ -42,3 +42,15 @@ class DailyPhonePriceTests(unittest.TestCase):
         cell = render_store({}, "Amazon", {"checked_at": "2026-11-17T10:00:00+05:30"}, self.now)
         self.assertIn("Refresh pending", cell)
         self.assertNotIn("₹", cell)
+
+
+    def test_lowest_listing_is_sorted_before_alternative_prices(self):
+        def offer(price, identifier):
+            return {"price": price, "availability": "in_stock", "variant": "8GB / 128GB",
+                    "retailer_product_id": identifier, "product_url": "https://www.amazon.in/dp/" + identifier}
+
+        record = {"checked_at": self.now.isoformat(),
+                  "offers": [offer(24999, "B012345678"), offer(21999, "B987654321")]}
+        cell = render_store({}, "Amazon", record, self.now, "Example Phone", lowest=True)
+        self.assertIn('class="phone-watch-price phone-watch-lowest" href="https://www.amazon.in/dp/B987654321">₹21,999', cell)
+        self.assertIn('class="phone-watch-price" href="https://www.amazon.in/dp/B012345678">₹24,999', cell)

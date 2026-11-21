@@ -33,3 +33,31 @@
 .phone-watch-details small {display:block;font-size:.78rem;line-height:1.5;color:#45584f}
 @media(max-width:850px){.phone-watch-grid{grid-template-columns:1fr}}
 @media(max-width:420px){.phone-watch-card{grid-template-columns:minmax(88px,34%) minmax(0,1fr);gap:10px;padding:12px}.phone-watch-details h2{font-size:1.08rem}}
+
+.phone-watch-status {
+  display: inline-block;
+  margin-bottom: 7px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: .73rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.phone-watch-status.has-price {background:#dff4e6;color:#185331}
+.phone-watch-status.no-price {background:#fee9e7;color:#8b2927}
+.phone-watch-price {font-size:.8rem;font-weight:400}
+.phone-watch-price.phone-watch-lowest {font-size:1.16rem;font-weight:750;color:#155336}
+.phone-watch-lowest-label {font-size:.72rem;color:#155336}
+.phone-watch-price-cta {
+  display: inline-block;
+  margin-bottom: 4px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: #264e3e;
+  color: #fff;
+  font-size: .84rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.phone-watch-price-cta:hover,.phone-watch-price-cta:focus-visible {background:#193a2d;color:#fff}
+.phone-watch-price-cta + small {margin-bottom:9px}

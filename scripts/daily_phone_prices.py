@@ -142,33 +142,54 @@ def collect(previous, rows, cards, client, now, pause=time.sleep):
     return previous
 
 
-def render_store(row, store, observed, now, name=""):
+def amazon_search_url(name):
+    return "https://www.amazon.in/s?k=" + quote_plus(name) + "&tag=guru07cc-21"
+
+
+def displayable_prices(store, observed, now):
+    try:
+        checked = datetime.fromisoformat(observed.get("checked_at")).astimezone(IST)
+    except (TypeError, ValueError):
+        return None, []
+    if not timedelta(0) <= now - checked <= timedelta(hours=72):
+        return checked, []
+    prices = []
+    for offer in observed.get("offers", []):
+        price = offer.get("price")
+        url = observation_url(store.lower(), offer)
+        if type(price) in (int, float) and price > 0 and offer.get("availability") == "in_stock" and url:
+            prices.append((price, url, offer["variant"]))
+    return checked, sorted(prices)
+
+
+def render_store(row, store, observed, now, name="", *, lowest=False):
     q = quote_plus(name)
     search_url = {
-        "Amazon": "https://www.amazon.in/s?k=" + q + "&tag=guru07cc-21",
+        "Amazon": amazon_search_url(name),
         "Flipkart": "https://www.flipkart.com/search?q=" + q,
         "Croma": row.get("croma_url") or "https://www.croma.com/searchB?q=" + q,
     }[store]
-    direct_listing = store == "Croma" and row.get("croma_id")
     actions = f'<a class="phone-watch-store-link" rel="sponsored nofollow noopener" href="{esc(search_url)}">{esc(store)} ↗</a>'
-    details = "Search listing" if not direct_listing else "Exact listing"
-    stamp = observed.get("checked_at")
-    if stamp:
-        try:
-            checked = datetime.fromisoformat(stamp).astimezone(IST)
-        except (TypeError, ValueError):
-            checked = None
-        if checked:
-            label = esc(checked.strftime("%d %b, %H:%M IST"))
+    checked, prices = displayable_prices(store, observed, now)
+    if not checked:
+        details = "Exact listing" if store == "Croma" and row.get("croma_id") else "Search listing"
+    else:
+        label = esc(checked.strftime("%d %b, %H:%M IST"))
+        if not timedelta(0) <= now - checked <= timedelta(hours=72):
             details = f"Refresh pending · {label}"
-            if timedelta(0) <= now - checked <= timedelta(hours=72):
-                prices = []
-                for offer in observed.get("offers", []):
-                    price = offer.get("price")
-                    url = observation_url(store.lower(), offer)
-                    if type(price) in (int, float) and price > 0 and offer.get("availability") == "in_stock" and url:
-                        prices.append(f'<a href="{esc(url)}">₹{price:,.0f}</a> <span>{esc(offer["variant"])}</span>')
-                details = ("<br>".join(prices[:3]) if prices else "No exact in-stock price returned") + f"<br>{label}"
+        else:
+            items = []
+            for index, (price, url, variant) in enumerate(prices[:3]):
+                price_class = "phone-watch-price"
+                label_prefix = ""
+                if lowest and index == 0:
+                    price_class += " phone-watch-lowest"
+                    label_prefix = '<span class="phone-watch-lowest-label">Lowest observed</span> '
+                items.append(
+                    f'{label_prefix}<a class="{price_class}" href="{esc(url)}">₹{price:,.0f}</a> '
+                    f'<span>{esc(variant)}</span>'
+                )
+            details = ("<br>".join(items) if items else "No exact in-stock price returned") + f"<br>{label}"
     return f'<li>{actions}<small>{details}</small></li>'
 
 
@@ -204,21 +225,38 @@ def publish(output, snapshot_path=None):
         name = card["model"] if card["model"].lower().startswith(card["brand"].lower() + " ") else f'{card["brand"]} {card["model"]}'
         evidence = row["evidence"]
         source = f'<a href="{esc(SOURCES[evidence])}">{esc(evidence)}</a>'
-        shop_links = "".join(render_store(row, store, stores.get(key, {}).get(store, {}), now, name) for store in PLATFORMS)
+        observations = stores.get(key, {})
+        price_candidates = []
+        for store in PLATFORMS:
+            _, prices = displayable_prices(store, observations.get(store, {}), now)
+            if prices:
+                price_candidates.append((prices[0][0], store))
+        cheapest_store = min(price_candidates)[1] if price_candidates else None
+        badge = ('<span class="phone-watch-status has-price">Price found</span>' if cheapest_store else
+                 '<span class="phone-watch-status no-price">Price not verified</span>')
+        fallback = "" if cheapest_store else (
+            f'<a class="phone-watch-price-cta" rel="sponsored nofollow noopener" href="{esc(amazon_search_url(name))}">'
+            'Check today’s price on Amazon ↗</a>'
+            '<small>Choose the matching variant and check the final price in your cart.</small>'
+        )
+        shop_links = "".join(
+            render_store(row, store, observations.get(store, {}), now, name, lowest=store == cheapest_store)
+            for store in PLATFORMS
+        )
         body.append(
             '<article class="phone-watch-card">' + render_image(media.get(key, {}), output, name) +
-            f'<div class="phone-watch-details"><h2>{esc(name)}</h2><p>{source}</p>' +
+            f'<div class="phone-watch-details">{badge}<h2>{esc(name)}</h2><p>{source}</p>{fallback}' +
             f'<ul aria-label="{esc(name)} retailer options">{shop_links}</ul></div></article>'
         )
     status = f'Latest collection attempt {esc(data["attempted_on"])} · {int(data["calls_attempted"])} API requests.' if data.get("attempted_on") else "First API collection pending."
     page = """<h1>India Top 30 Phones</h1>
     <p>Five models are from the published Q2 India sales Top 5. The others are selected from shipment reports and sell-through tracking. The selection is a price watchlist rather than a national sales ranking.</p>
-    <p>Prices are dated API observations for Delhi PIN 110001. Retailer checks rotate within 60 requests per day.</p>"""
+    <p>Prices are dated API observations for Delhi PIN 110001. Retailer checks rotate within 60 requests per day. The lowest observed price can be for a different variant.</p>"""
     page += f'<p>{status}</p><div class="phone-watch-grid">' + "".join(body) + "</div>"
     target = output / ROUTE.lstrip("/")
     target.parent.mkdir(parents=True, exist_ok=True)
     html = doc("India Top 30 Phones", "Dated Amazon, Flipkart and Croma price observations for selected India phones.", ROUTE, page, {"@context": "https://schema.org", "@type": "WebPage"})
-    target.write_text(html.replace("</head>", '<link rel="stylesheet" href="/assets/phone-watch-grid.css">\n</head>'), encoding="utf-8")
+    target.write_text(html.replace("</head>", '<link rel="stylesheet" href="/assets/phone-watch-grid.css?v=price-status-v1">\n</head>'), encoding="utf-8")
     target = output / SNAPSHOT_PATH
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(data, ensure_ascii=False) + "\n", encoding="utf-8")
