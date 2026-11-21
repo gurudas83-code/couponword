@@ -7,8 +7,13 @@ from playwright.sync_api import sync_playwright
 
 SITE = "https://coupon-world.in/"
 SCENARIOS = [
-    ("mobile", 390, 844, "top 3 phones under 25000"),
-    ("desktop", 1365, 850, "top 3 battery phones"),
+    ("mobile-10k", 390, 844, "top 3 phones under 10000"),
+    ("mobile-15k", 390, 844, "top 3 phones under 15000"),
+    ("mobile-20k", 390, 844, "top 3 phones under 20000"),
+    ("mobile-25k", 390, 844, "top 3 phones under 25000"),
+    ("desktop-30k", 1365, 850, "top 3 phones under 30000"),
+    ("desktop-battery", 1365, 850, "top 3 battery phones"),
+    ("desktop-gaming", 1365, 850, "top 3 gaming phones"),
 ]
 
 def main() -> None:
@@ -46,6 +51,8 @@ def main() -> None:
                     "flipkart_links": result.locator("a:has-text('Check live price on Flipkart')").count(),
                     "shopping_api_requests": shopping_requests, "page_errors": errors[:3],
                     "section_text": result.inner_text()[:600],
+                    "unverified_budget_labels": result.inner_text().count("selected budget range unverified"),
+                    "dated_price_band_labels": result.inner_text().count("Dated reference in selected band"),
                 }
                 print("LIVE_TOP3_AUDIT " + json.dumps(output, ensure_ascii=False), flush=True)
                 if cards.count() != 3: failures.append(device + " returned " + str(cards.count()) + " research selections")
