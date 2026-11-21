@@ -67,7 +67,8 @@ function harness() {
     escapeHTML: s => s,
     console: { error() {}, log() {} },
   });
-  vm.runInContext(constants + "\n" + fn, context);
+  const routing = source.slice(source.indexOf("function isExplicitTopThreeQuery("), source.indexOf("function submitMobileResearchIfApplicable("));
+  vm.runInContext(constants + "\n" + routing + "\n" + fn, context);
   return {
     context, timers, requests, card, progress, section,
     load(query, background) {
