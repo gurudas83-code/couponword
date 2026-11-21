@@ -414,8 +414,19 @@ function cancelShoppingRecommendation() {
 
 window.CouponWorldCancelShoppingRecommendation = cancelShoppingRecommendation;
 
+// Route explicit Top-3 shopping requests to the existing verified ranking API,
+// not the unranked mobile research catalogue. Keep model names such as
+// "iPhone 13" intact; only strip an explicit top-three instruction.
+function isExplicitTopThreeQuery(query) {
+  return /(?:\btop\s*(?:3|three)\b|\bbest\s*(?:3|three)\b|\bfirst\s*3\b|टॉप\s*[३3]|शीर्ष\s*[३3])/i.test(String(query || ""));
+}
+function rankingQueryWithoutCount(query) {
+  return String(query || "").replace(/(?:\btop\s*(?:3|three)\b|\bbest\s*(?:3|three)\b|\bfirst\s*3\b|टॉप\s*[३3]|शीर्ष\s*[३3])/gi, "best").replace(/\s+/g, " ").trim();
+}
+
 function submitMobileResearchIfApplicable(query) {
   const research = window.CouponWorldMobileResearch;
+  if (isExplicitTopThreeQuery(query)) return false;
   if (!research || !research.isResearchQuery(query)) return false;
   research.submit(query);
   const section = document.getElementById("mobileResearchSearch");
@@ -711,7 +722,7 @@ async function loadShoppingRecommendation(query, { background = false } = {}) {
     const endpoint =
       API_BASE_URL +
       "/api/recommend?q=" +
-      encodeURIComponent(cleanQuery) +
+      encodeURIComponent(isExplicitTopThreeQuery(cleanQuery) ? rankingQueryWithoutCount(cleanQuery) : cleanQuery) +
       (background ? "&offer_check=background" : "");
 
     const response = await fetch(endpoint, { signal: controller.signal });
