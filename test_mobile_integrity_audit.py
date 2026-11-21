@@ -43,8 +43,11 @@ class MobileIntegrityAuditTests(unittest.TestCase):
         dates = [card["research_checked_at"] for card in self.catalogue["model_cards"]]
         self.assertIn("2026-11-03", dates)
         self.assertIn("2026-11-04", dates)
-        self.assertTrue(all(date in ("2026-11-03", "2026-11-04") for date in dates))
-        self.assertEqual(self.report["inventory"]["historical_budget_references"], 86)
+        self.assertTrue(all(date in ("2026-11-03", "2026-11-04", "2026-11-21") for date in dates))
+        self.assertEqual(dates.count("2026-11-21"), 4)
+        # 86 workbook references + four new reviewed snapshots - mismatched
+        # A5x 4G/5G legacy source removed: historical only, never live offers.
+        self.assertEqual(self.report["inventory"]["historical_budget_references"], 89)
         for card in self.catalogue["model_cards"]:
             ref = card.get("research_budget_reference")
             if ref:
