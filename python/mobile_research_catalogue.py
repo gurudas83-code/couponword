@@ -2121,6 +2121,70 @@ def _apply_workbook_research(root, model_cards):
         ]
         card["research_checked_at"] = max([payload["research_as_of"], *field_dates])
 
+
+def _apply_reviewed_budget_price_snapshots(root, model_cards):
+    """Import reviewed exact variants as dated references, never live offers."""
+    from datetime import date
+    path = root / "data" / "mobile_budget_price_reviews_20261121.json"
+    if not path.exists():
+        return
+    payload = _read_json(path)
+    if (payload.get("schema_version") != 1 or
+            payload.get("mode") != "DIRECT_RETAILER_DATED_RESEARCH_PRICE_REFERENCES_NOT_LIVE_OFFERS" or
+            payload.get("research_as_of") != "2026-11-21"):
+        raise ValueError("unexpected retailer research evidence mode")
+    cards = {card["model_key"]: card for card in model_cards}
+    entries = payload.get("records") or []
+    blocked = payload.get("blocked_model_keys") or []
+    keys = [item.get("model_key") for item in entries]
+    blocked_keys = [item.get("model_key") for item in blocked]
+    if (len(keys) != len(set(keys)) or len(blocked_keys) != len(set(blocked_keys)) or
+            set(keys) & set(blocked_keys) or not set(keys + blocked_keys) <= set(cards)):
+        raise ValueError("unknown or duplicated exact-variant research price")
+    for item in blocked:
+        card = cards[item["model_key"]]
+        if not str(item.get("reason") or "").strip():
+            raise ValueError("blocked price identity has no explanation")
+        card["research_budget_reference"] = None
+        card["research_budget_reference_block_reason"] = item["reason"]
+
+    for item in entries:
+        card = cards[item["model_key"]]
+        ref = card.get("research_budget_reference")
+        price = item.get("reference_price_inr")
+        ram, storage = item.get("ram_gb"), item.get("storage_gb")
+        url = str(item.get("source_url") or "")
+        parsed = urlparse(url)
+        observation_date = str(item.get("checked_at") or "")
+        sources = [
+            field for field in (card.get("specifications") or {}).values()
+            if field.get("value") is not None and
+            str(field.get("source_url") or "").startswith("https://")
+        ]
+        if (card.get("status") != "OFFICIAL_VERIFIED" or len(sources) < 2 or ref or
+                type(price) not in (int, float) or not 5000 <= price < 15000 or
+                type(ram) is not int or ram <= 0 or
+                type(storage) is not int or storage <= 0 or
+                parsed.scheme != "https" or parsed.hostname != "www.flipkart.com" or
+                "/p/itm" not in parsed.path or
+                item.get("retailer") != "Flipkart" or
+                item.get("evidence_basis") != "DIRECT_RETAILER_PAGE_SNAPSHOT" or
+                item.get("stock_indication") != "DELIVERY_SHOWN_PINCODE_UNVERIFIED" or
+                observation_date != payload["research_as_of"] or
+                date.fromisoformat(observation_date) > date.today()):
+            raise ValueError("unsafe snapshot or conflicting SKU for " + item["model_key"])
+        card["research_budget_reference"] = {
+            "ram_gb": ram, "storage_gb": storage,
+            "reference_price_inr": price, "color": item.get("color"),
+            "source_url": url, "retailer": "Flipkart",
+            "checked_at": observation_date,
+            "evidence_basis": "DIRECT_RETAILER_PAGE_SNAPSHOT",
+            "stock_indication": "DELIVERY_SHOWN_PINCODE_UNVERIFIED",
+            "delivery_status": "NOT_VERIFIED",
+            "ranking_weight": 0, "live_offer": False,
+        }
+        card["research_checked_at"] = max(str(card.get("research_checked_at") or ""), observation_date)
+
 def _apply_independent_tests(root, model_cards):
     path = root / "data" / "mobile_independent_test_evidence.json"
     if not path.exists():
@@ -2324,6 +2388,7 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
 
     _apply_workbook_research(root, model_cards)
     _apply_model_supplements(model_cards)
+    _apply_reviewed_budget_price_snapshots(root, model_cards)
     _apply_independent_tests(root, model_cards)
 
     model_cards.sort(key=lambda card: (_norm(card["brand"]), _norm(card["model"]), card["model_key"]))

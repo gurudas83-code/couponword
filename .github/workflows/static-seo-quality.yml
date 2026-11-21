@@ -66,6 +66,8 @@ jobs:
         run: node test_cw_research_assistant.cjs
       - name: Test first three local phone matches without slow optional sources
         run: node test_search_first3_progressive.cjs
+      - name: Audit four reviewed exact-variant price observations and exclusion gate
+        run: python -m unittest -q test_budget_price_reviews_20261121
       - name: Regression-test Top 3 research filter (no external API calls)
         run: |
           python -m unittest -q test_search_first_frontend

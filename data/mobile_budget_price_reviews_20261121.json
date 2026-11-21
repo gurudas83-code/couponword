@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "mode": "DIRECT_RETAILER_DATED_RESEARCH_PRICE_REFERENCES_NOT_LIVE_OFFERS",
+  "research_as_of": "2026-11-21",
+  "policy": "Each amount is an exact selected RAM/storage retailer-page snapshot, not current checkout confirmation. No price weight in ranking. Never assert availability or delivery.",
+  "records": [
+    {
+      "model_key": "lava|bold n2 lite",
+      "ram_gb": 3,
+      "storage_gb": 64,
+      "color": "Nilgiri Blue",
+      "reference_price_inr": 9299,
+      "retailer": "Flipkart",
+      "source_url": "https://www.flipkart.com/lava-bold-n2-lite-nilgiri-blue-64-gb/p/itm7556929e81999",
+      "checked_at": "2026-11-21",
+      "evidence_basis": "DIRECT_RETAILER_PAGE_SNAPSHOT",
+      "stock_indication": "DELIVERY_SHOWN_PINCODE_UNVERIFIED"
+    },
+    {
+      "model_key": "lava|bold n2",
+      "ram_gb": 4,
+      "storage_gb": 64,
+      "color": "Indus Black",
+      "reference_price_inr": 10799,
+      "retailer": "Flipkart",
+      "source_url": "https://www.flipkart.com/lava-bold-n2-siachen-white-64-gb/p/itm525af7ffb8e2c",
+      "checked_at": "2026-11-21",
+      "evidence_basis": "DIRECT_RETAILER_PAGE_SNAPSHOT",
+      "stock_indication": "DELIVERY_SHOWN_PINCODE_UNVERIFIED"
+    },
+    {
+      "model_key": "lava|virat v1",
+      "ram_gb": 4,
+      "storage_gb": 64,
+      "color": "Nilgiri Blue",
+      "reference_price_inr": 10499,
+      "retailer": "Flipkart",
+      "source_url": "https://www.flipkart.com/lava-virat-v1-himalayan-silver-64-gb/p/itmed225fe6c3db4",
+      "checked_at": "2026-11-21",
+      "evidence_basis": "DIRECT_RETAILER_PAGE_SNAPSHOT",
+      "stock_indication": "DELIVERY_SHOWN_PINCODE_UNVERIFIED"
+    },
+    {
+      "model_key": "lava|virat v1 5g",
+      "ram_gb": 4,
+      "storage_gb": 64,
+      "color": "Arya Blue",
+      "reference_price_inr": 12999,
+      "retailer": "Flipkart",
+      "source_url": "https://www.flipkart.com/lava-virat-v1-5g-arya-blue-64-gb/p/itm3ccc431ccf8aa?pid=MOBHZGPPCXREAUTN",
+      "checked_at": "2026-11-21",
+      "evidence_basis": "DIRECT_RETAILER_PAGE_SNAPSHOT",
+      "stock_indication": "DELIVERY_SHOWN_PINCODE_UNVERIFIED"
+    }
+  ],
+  "blocked_model_keys": [
+    {
+      "model_key": "oppo|a5x",
+      "reason": "Old workbook ₹9,999 reference pointed to OPPO A5x 5G while official technical specifications describe OPPO A5x 4G. The correct 4G listing showed out of stock when checked 21-Nov-2026."
+    }
+  ],
+  "excluded_observations": [
+    {
+      "model_key": "samsung|galaxy f06 5g",
+      "variant": "Lit Violet, 4GB RAM/64GB",
+      "price_inr": 12499,
+      "reason": "out_of_stock_on_retailer_page",
+      "source_url": "https://www.flipkart.com/samsung-galaxy-f06-5g-lit-violet-64-gb/p/itm117697f080048"
+    },
+    {
+      "model_key": "samsung|galaxy f06 5g bahama",
+      "variant": "Bahama Blue, 4GB RAM/128GB",
+      "price_inr": 13999,
+      "reason": "out_of_stock_on_retailer_page",
+      "source_url": "https://www.flipkart.com/samsung-galaxy-f06-5g-bahama-blue-128-gb/p/itm58189fada62cb"
+    },
+    {
+      "model_key": "samsung|galaxy f16 5g",
+      "variant": "Vibing Blue, 4GB RAM/128GB",
+      "price_inr": 12499,
+      "reason": "unavailable_online_store_only",
+      "source_url": "https://www.reliancedigital.in/product/samsung-galaxy-f16-5g-128-gb-4-gb-ram-vibing-blue-mobile-phone-mdmvux-9303184"
+    },
+    {
+      "model_key": "oppo|a5x",
+      "variant": "A5x 4G, 4GB RAM/64GB Laser White",
+      "price_inr": 8999,
+      "reason": "out_of_stock_on_retailer_page",
+      "source_url": "https://www.flipkart.com/oppo-a5x-laser-white-64-gb/p/itm28b5fccc11288"
+    }
+  ]
+}
