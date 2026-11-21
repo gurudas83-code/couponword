@@ -111,7 +111,7 @@
   function topThreeRetailerSearchButtons(card) {
     // Search links do not imply an exact listing, live verified price, or stock.
     var model = displayPhoneName(card);
-    var amazon = "https://www.amazon.in/s?k=" + encodeURIComponent(model) + "&tag=guru07cc-21";
+    var amazon = "https://www.amazon.in/s?tag=guru07cc-21&k=" + encodeURIComponent(model);
     var flipkart = "https://www.flipkart.com/search?q=" + encodeURIComponent(model);
     return '<div class="research-top3-price-links" aria-label="Search live retailer prices">' +
       '<a class="btn btn-ghost" href="' + escapeHtml(amazon) + '" target="_blank" rel="sponsored nofollow noopener noreferrer">Check live price on Amazon (search)</a> ' +
