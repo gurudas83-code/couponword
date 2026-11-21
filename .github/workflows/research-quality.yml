@@ -50,6 +50,18 @@ jobs:
         run: |
           python -m unittest -v test_price_evidence_coverage
           python scripts/build_price_evidence_coverage.py --out price-evidence-232.json --report-dir price-evidence-reports
+      - name: Audit 232-phone A-to-Z release readiness without billed calls
+        run: |
+          python -m unittest -v test_mobile_a_to_z_readiness
+          python scripts/mobile_a_to_z_readiness.py --out mobile-a-to-z-readiness.json
+      - name: Upload all 232 phone readiness records and work queues
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: coupon-world-mobile-a-to-z-readiness-${{ github.run_id }}-${{ github.run_attempt }}
+          path: mobile-a-to-z-readiness.json
+          if-no-files-found: warn
+          retention-days: 30
       - name: Upload non-live price evidence and 103-model verification queue
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
