@@ -12,6 +12,35 @@
       return url.protocol==="https:" && url.hostname && !url.username && !url.password ? url.href : "";
     } catch (_) {return "";}
   }
+  function retailerOption(item) {
+    // Host-and-scope validated; user still checks SKU, price and stock.
+    if(!item || typeof item!=="object")return null;
+    var retailer=String(item.retailer||"").toLowerCase();
+    var hosts={amazon:["amazon.in","www.amazon.in"],
+      flipkart:["flipkart.com","www.flipkart.com"],croma:["croma.com","www.croma.com"]};
+    if(!hosts[retailer])return null;
+    try {
+      var parsed=new URL(String(item.url||""));
+      if(parsed.protocol!=="https:"||parsed.username||parsed.password||
+         !hosts[retailer].includes(parsed.hostname.toLowerCase()))return null;
+      if(retailer==="amazon")parsed.searchParams.set("tag","guru07cc-21");
+      var name={amazon:"Amazon",flipkart:"Flipkart",croma:"Croma"}[retailer];
+      return {retailer:name,url:parsed.href,exact_model_link:item.exact_model_link===true,
+        affiliate:retailer==="amazon"};
+    } catch(_){return null;}
+  }
+  function retailerLinksFor(record) {
+    return (Array.isArray(record&&record.retailer_links)?record.retailer_links:[])
+      .map(retailerOption).filter(Boolean);
+  }
+  function retailLinksForAnswer(record,model) {
+    return retailerLinksFor(record).map(function(item) {
+      return {label:item.exact_model_link?
+        item.retailer+" · matched model listing (check price and stock)":
+        "Search "+item.retailer+" for "+model+" (not an exact listing)",
+        url:item.url,affiliate:item.affiliate};
+    });
+  }
   function topic(query) {
     var s=fold(query);
     if (/camera|कैमरा|photo/.test(s)) return /camera|कैमरा|photo/;
@@ -49,7 +78,7 @@
     var ignored=/^(?:best|top|good|great|suggest|compare|recommend|recommendation|for|under|below|with|and|the|a|an|one|in|on|show|give|me|please|want|need|phone|mobile|tv|television|smart|earbuds?|earphones?|headphones?|tws|accessories|accessory|audio|charger|power|bank|buds|budget|cheap|low|price|buy|camera|battery|gaming|sound|anc|bluetooth|noise|cancel|cancelling|cancellation|display|led|oled|screen|inch|inches|quality|size|battery|life|speaker|speakers|wireless|charging|5g|4k)$/;
     var terms=query.split(" ").filter(function(t) {return t.length>1 && !ignored.test(t) && !/^\d{4,7}$/.test(t);});
     var bare=generic.test(query)||terms.length===0;
-    var wantsAnc=/(?:noise\\s+cancel|\\banc\\b|active\\s+noise)/i.test(query);
+    var wantsAnc=/(?:noise\s+cancel|\banc\b|active\s+noise)/i.test(query);
     var exactNumbers=terms.filter(function(t){return /^\d{2,3}$/.test(t);});
     // Size and product-code matches must be real: never reinterpret 55-inch as a budget.
     var choices=(records||[]).filter(function(x){return eligibleRecord(x,category);}).map(function(record){
@@ -71,7 +100,7 @@
     choices.sort(function(a,b){return b.score-a.score||String(a.record.model).localeCompare(String(b.record.model));});
     return choices.slice(0,3).map(function(x){return x.record;});
   }
-  var core={fold:fold,sourceUrl:sourceUrl,resultFields:resultFields,selectResearch:selectResearch};
+  var core={fold:fold,sourceUrl:sourceUrl,resultFields:resultFields,selectResearch:selectResearch,retailerOption:retailerOption,retailerLinksFor:retailerLinksFor};
   root.CouponWorldAssistantCore=core;
   if(typeof document==="undefined")return;
   var host=document.getElementById("cwAssistant");
@@ -94,7 +123,7 @@
     });
     (links||[]).filter(function(l){return l&&l.url;}).forEach(function(l){
       var a=document.createElement("a");a.textContent=l.label+" ↗";a.href=l.url;
-      if(/^https:\/\//.test(l.url)){a.target="_blank";a.rel="noopener noreferrer";}
+      if(/^https:\/\//.test(l.url)){a.target="_blank";a.rel=(l.affiliate?"sponsored nofollow ":"")+"noopener noreferrer";}
       item.appendChild(a);
     });
     chat.appendChild(item);
@@ -135,8 +164,10 @@
       paragraphs.push(rec.brand+" "+rec.model+(fields.length?" — "+fields.map(function(f){return f.label+": "+f.value;}).join("; "):" — स्रोत-समर्थित तकनीकी जानकारी अभी सीमित है।"));
       var url=sourceUrl(rec.source_url)||fields[0]&&fields[0].url;
       if(url)links.push({label:rec.brand+" "+rec.model+" — research source",url:url});
+      retailLinksForAnswer(rec,rec.brand+" "+rec.model).forEach(function(link){links.push(link);});
     });
-    paragraphs.push("आज की कीमत, स्टॉक, warranty और exact model code retailer पर जाँचें; अलग-अलग स्रोतों के दावों को independent testing न मानें।");
+    paragraphs.push("रिटेलर लिंक सिर्फ मॉडल के verified listing या saved search के लिए हैं; लाइव checkout price, stock, warranty और delivery की पुष्टि स्टोर पर ही करें। Amazon affiliate links पर Coupon World को commission मिल सकता है; कोई अतिरिक्त शुल्क नहीं।");
+    if(!links.some(function(l){return l.label.includes("Amazon")||l.label.includes("Flipkart")||l.label.includes("Croma");})) paragraphs.push("इन मॉडल के लिए मौजूदा डेटा में सही retailer links नहीं हैं। वेबसाइट के TV/earbuds पेज पर उपलब्ध विकल्प देखें।");
     return {paragraphs:paragraphs,links:links};
   }
   function phoneReply(request,matches) {
@@ -145,13 +176,25 @@
     var status=document.getElementById("mobileResearchSearchStatus");
     var fallback=!!(status&&/no exact catalogue match/i.test(status.textContent));
     var paragraphs=[(fallback?"सटीक मिलान नहीं मिला; पास के documented मॉडल: ":"मौजूदा शोध में "+matches.length+" संबंधित मोबाइल मॉडल: ")];
+    var links=[{label:"इन मोबाइलों के प्रमाण और फ़िल्टर देखें",url:"#mobileResearchSearch"}];
+    var shopping=root.CouponWorldMobileResearch;
     matches.slice(0,3).forEach(function(item) {
       var card=item.card||{},fields=resultFields(card,request.query,2);
       var name=(card.brand||"")+" "+(card.model||"");
       paragraphs.push(name.trim()+(fields.length?" — "+fields.map(function(f){return f.label+": "+f.value;}).join("; "):" — विवरण के लिए स्रोत देखें।"));
+      if(shopping&&typeof shopping.retailerOptions==="function") {
+        var choices=shopping.retailerOptions(card);
+        choices.forEach(function(choice) {
+          var safe=retailerOption({retailer:String(choice.retailer||"").toLowerCase(),url:choice.url,
+            exact_model_link:choice.exact_model_link});
+          if(safe)links.push({label:safe.exact_model_link?safe.retailer+" · exact-model listing for "+name+" (verify variant and price)":
+            "Search "+safe.retailer+" for "+name+" (listing unverified)",
+            url:safe.url,affiliate:safe.affiliate});
+        });
+      }
     });
-    paragraphs.push("यह research coverage क्रम है, verified Top-3 खरीद सलाह नहीं। बजट में केवल dated price references उपयोग होते हैं; current price और उपलब्धता retailer पर जाँचें।");
-    return {paragraphs:paragraphs,links:[{label:"इन मोबाइलों के प्रमाण और फ़िल्टर देखें",url:"#mobileResearchSearch"}]};
+    paragraphs.push("यह research coverage क्रम है, verified Top-3 खरीद सलाह नहीं। सिर्फ पहले से saved exact-model listing या retailer searches दिखाई गई हैं। Amazon affiliate links से Coupon World को commission मिल सकता है; खरीद और price/stock की पुष्टि retailer पर करें।");
+    return {paragraphs:paragraphs,links:links};
   }
   async function ask(value) {
     var raw=String(value||"").trim().slice(0,240);
