@@ -89,19 +89,20 @@
   send('discovery_landing', {discovery_source:source, landing_path:path, page_kind:path.indexOf('/phones/') === 0 ? 'phone_specification' : path.indexOf('/seo/') === 0 ? 'phone_guide' : path.indexOf('/guides/') === 0 ? 'guide_collection' : 'research'});
   document.addEventListener('click', function (event) {
     var anchor = event.target.closest && event.target.closest('a[href]');
-    if (!anchor) return;
-    var target;
-    try { target = new URL(anchor.href, window.location.href); } catch (_) { return; }
+    var target = null;
+    if (anchor) {
+      try { target = new URL(anchor.href, window.location.href); } catch (_) { /* Still track button-only searches. */ }
+    }
     var kind = '';
-    if (target.origin === window.location.origin) {
+    if (target && target.origin === window.location.origin) {
       if (target.pathname.indexOf('/phones/') === 0) kind = 'open_phone_specification';
       else if (target.pathname.indexOf('/seo/') === 0) kind = 'open_guide';
       else if (target.pathname.indexOf('/compare/') === 0) kind = 'open_compare';
       else if (target.pathname.indexOf('/guides/') === 0) kind = 'open_buying_guide';
       else if (target.pathname.indexOf('/accessories/') === 0 || target.pathname.indexOf('/tvs/') === 0) kind = 'open_category';
       else if (target.pathname === '/' && target.hash === '#mobileResearchSearch') kind = 'start_research';
-    } else if (['amazon.in','www.amazon.in','flipkart.com','www.flipkart.com','croma.com','www.croma.com'].includes(target.hostname)) kind = 'retailer_research';
-    if (kind) send('discovery_action', {discovery_source:source, action_kind:kind, landing_path:path, destination_host:target.hostname, destination_path:target.pathname});
+    } else if (target && ['amazon.in','www.amazon.in','flipkart.com','www.flipkart.com','croma.com','www.croma.com'].includes(target.hostname)) kind = 'retailer_research';
+    if (kind && target) send('discovery_action', {discovery_source:source, action_kind:kind, landing_path:path, destination_host:target.hostname, destination_path:target.pathname});
     // A retailer visit is a measurable outbound lead, NOT an order, purchase or commission.
     if (kind === 'retailer_research') send('cw_retailer_outbound', {
       retailer: target.hostname.replace(/^www\./, ''),
