@@ -90,9 +90,21 @@ assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', ro
   }
   research.submit("top 3 phones under 10000");
   const lowerBudget = element("mobileResearchResults").innerHTML;
-  assert.match(lowerBudget, /Research-Verified picks \(0\/3 available\)/);
+  assert.match(lowerBudget, /Research-Verified picks \(1\/3 available\)/);
+  assert.match(lowerBudget, /Lava Bold N2 Lite/i);
+  assert.match(lowerBudget, /Dated budget reference: ₹9,299/);
+  assert.match(lowerBudget, /NOT a live checkout price or stock confirmation/);
   assert.match(lowerBudget, /Additional relevant phones/);
-  assert.equal((lowerBudget.match(/class="research-top3-result"/g) || []).length, 0);
+  assert.equal((lowerBudget.match(/class="research-top3-result"/g) || []).length, 1);
+
+  research.submit("top 3 phones under 15000");
+  const midBudget = element("mobileResearchResults").innerHTML;
+  assert.match(midBudget, /Research-Verified Top 3/);
+  assert.match(midBudget, /Dated budget reference: ₹10,499/);
+  assert.match(midBudget, /Dated budget reference: ₹10,799/);
+  assert.match(midBudget, /Dated budget reference: ₹12,999/);
+  assert.equal((midBudget.match(/class="research-top3-result"/g) || []).length, 3);
+  assert.doesNotMatch(midBudget, /OPPO A5x/, "Wrong 4G/5G model reference must be quarantined from price Top 3");
 
   research.submit("top three battery phones");
   const second = element("mobileResearchResults").innerHTML;
