@@ -211,7 +211,7 @@ class ResearchSeoTests(unittest.TestCase):
     def test_no_unreviewed_records_silently_get_seo_pages(self):
         allowed = {slug_for(card) for card in self.selected}
         produced = {p.name for p in (PUBLIC / "phones").iterdir() if p.is_dir()}
-        self.assertEqual(produced, allowed | {"india-market-demand-q3-2026", "india-sales-coverage-2026", "new-india-mobiles", "under-25000"})
+        self.assertEqual(produced, allowed | {"india-market-demand-q3-2026", "india-sales-coverage-2026", "new-india-mobiles", "under-25000", "upcoming-india"})
         for page in (PUBLIC / "phones" / "india-market-demand-q3-2026").glob("*/index.html"):
             self.assertIn('name="robots" content="noindex,follow"', page.read_text(encoding="utf-8"))
         self.assertFalse((PUBLIC / "phones" / "apple-iphone-11" / "index.html").exists())
