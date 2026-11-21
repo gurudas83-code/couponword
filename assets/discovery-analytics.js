@@ -104,11 +104,11 @@
     if (kind) send('discovery_action', {discovery_source:source, action_kind:kind, landing_path:path, destination_host:target.hostname, destination_path:target.pathname});
     // A retailer visit is a measurable outbound lead, NOT an order, purchase or commission.
     if (kind === 'retailer_research') send('cw_retailer_outbound', {
-      retailer: target.hostname.replace(/^www\\./, ''),
+      retailer: target.hostname.replace(/^www\./, ''),
       discovery_source: source,
       page_path: path,
       // Avoid recording affiliate tags, product URLs or private search terms.
-      listing_type: /\\/search\\b|\\/s\\b/.test(target.pathname) ? 'retailer_search' : 'retailer_page'
+      listing_type: /\/search\b|\/s\b/.test(target.pathname) ? 'retailer_search' : 'retailer_page'
     });
 
     var control = event.target.closest && event.target.closest('[data-mobile-query],[data-mobile-research-query],[data-research-compare],[data-analytics-intent],#heroSearchButton,#mobileResearchSearchButton,#researchGuidedApply,#mobileResearchResultsMore');
