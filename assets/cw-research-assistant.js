@@ -46,9 +46,10 @@
   function selectResearch(records, request, category) {
     var query=fold(request.baseQuery||request.query||"");
     var generic=/^(?:tv|television|smart tv|earbuds?|earphones?|headphones?|tws|accessories|accessory|charger|power bank|phone|mobile|audio|buds|बड्स|टीवी)?$/;
-    var ignored=/^(?:best|top|good|great|suggest|compare|recommend|recommendation|for|under|below|with|and|the|a|an|one|in|on|show|give|me|please|want|need|phone|mobile|tv|television|smart|earbuds?|earphones?|headphones?|tws|accessories|accessory|audio|charger|power|bank|buds|budget|cheap|low|price|buy|camera|battery|gaming|sound|anc|bluetooth|noise|cancel|display|led|oled|screen|inch|inches|quality|size|battery|life|speaker|speakers|wireless|charging|5g|4k)$/;
+    var ignored=/^(?:best|top|good|great|suggest|compare|recommend|recommendation|for|under|below|with|and|the|a|an|one|in|on|show|give|me|please|want|need|phone|mobile|tv|television|smart|earbuds?|earphones?|headphones?|tws|accessories|accessory|audio|charger|power|bank|buds|budget|cheap|low|price|buy|camera|battery|gaming|sound|anc|bluetooth|noise|cancel|cancelling|cancellation|display|led|oled|screen|inch|inches|quality|size|battery|life|speaker|speakers|wireless|charging|5g|4k)$/;
     var terms=query.split(" ").filter(function(t) {return t.length>1 && !ignored.test(t) && !/^\d{4,7}$/.test(t);});
     var bare=generic.test(query)||terms.length===0;
+    var wantsAnc=/(?:noise\\s+cancel|\\banc\\b|active\\s+noise)/i.test(query);
     var exactNumbers=terms.filter(function(t){return /^\d{2,3}$/.test(t);});
     // Size and product-code matches must be real: never reinterpret 55-inch as a budget.
     var choices=(records||[]).filter(function(x){return eligibleRecord(x,category);}).map(function(record){
@@ -60,6 +61,7 @@
       return {record:record,score:score,hits:hits.length};
     }).filter(function(x){
       // A named model / brand request must not be silently replaced with unrelated products.
+      if(wantsAnc&&!/anc|noise cancel|adaptive noise/.test(fold((x.record.specifications||[]).filter(function(field){return sourceUrl(field.source_url);}).map(function(field){return field.label+" "+field.value;}).join(" "))))return false;
       if(bare)return true;
       if(!x.score)return false;
       if(terms.length>=2 && x.hits<terms.length)return false;
@@ -111,19 +113,12 @@
   }
   function catalogue() {
     if(categoryPromise)return categoryPromise;
-    categoryPromise=Promise.all([
-      fetch("/data/category_research_verified.json",{credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("category research unavailable");return r.json();}),
-      fetch("/data/india_tv_earbuds_40_catalogue.json",{credentials:"same-origin"}).then(function(r){if(!r.ok)throw Error("TV/audio research unavailable");return r.json();})
-    ]).then(function(payloads){
-      if(!Array.isArray(payloads[0].records)||!Array.isArray(payloads[1].records))throw Error("Invalid catalogue");
-      var joined=payloads[1].records.slice();
-      var known=new Set(joined.map(function(x){return fold(x.brand+" "+x.model);}));
-      payloads[0].records.forEach(function(x){
-        var key=fold(x.brand+" "+x.model);
-        if(!known.has(key)){joined.push(x);known.add(key);}
-      });
-      return joined;
-    }).catch(function(e){categoryPromise=null;throw e;});
+    categoryPromise=fetch("/data/assistant_category_research.json",{credentials:"same-origin"})
+      .then(function(response){if(!response.ok)throw Error("Category research unavailable");return response.json();})
+      .then(function(payload){
+        if(payload.mode!=="PUBLIC_RESEARCH_ASSISTANT_NO_OFFERS"||!Array.isArray(payload.records))throw Error("Invalid published catalogue");
+        return payload.records;
+      }).catch(function(e){categoryPromise=null;throw e;});
     return categoryPromise;
   }
   function overviewReply(request, matches) {
