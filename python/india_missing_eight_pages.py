@@ -210,6 +210,8 @@ No manufacturer source implies a live Amazon, Flipkart or Croma price.</p>
 
 def publish_eight(destination: Path) -> dict:
     payload = import_eight()
+    from python.mobile_research_catalogue import apply_representative_illustrations
+    apply_representative_illustrations(ROOT, payload["model_cards"], intake=True)
     if publish_art(destination, payload["model_cards"]) != 8:
         raise ValueError("Missing sales-research illustrations")
     target = destination / "data" / "india_sales_eight_research.json"

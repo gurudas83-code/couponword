@@ -240,6 +240,17 @@
     "width": 330,
     "height": 330
   },
+  "google|pixel 9 pro": {
+    "url": "/assets/phone-photos/google-pixel-9-pro.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Camera_of_Google_Pixel_9_Pro_-_1.jpg",
+    "author": "Kyu3a",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 366,
+    "height": 650,
+    "resized": true,
+    "title": "Side view of the rear camera"
+  },
   "google|pixel 9 pro xl": {
     "url": "/assets/phone-photos/google-pixel-9-pro-xl.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Google_Pixel_9_Pro_XL_(back).jpg",
@@ -568,6 +579,17 @@
     "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
     "width": 330,
     "height": 440
+  },
+  "vivo|x200 pro": {
+    "url": "/assets/phone-photos/vivo-x200-pro.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Vivo_X200_Pro_blue.png",
+    "author": "X-SHLIED",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "width": 513,
+    "height": 650,
+    "resized": true,
+    "title": "Blue model, rear view"
   },
   "xiaomi|14": {
     "url": "/assets/phone-photos/xiaomi-14.jpg",

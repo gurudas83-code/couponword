@@ -205,14 +205,19 @@ def _load_verified_mobile_retailer_links(root: Path) -> dict[tuple[str, str], li
     return result
 
 
-def _load_model_photos(root: Path, models: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+def _load_model_photos(
+    root: Path, models: list[dict[str, Any]], *, intake: bool = False
+) -> dict[str, dict[str, Any]]:
     """Load reviewed photos by exact catalogue model key."""
-    photos = _read_json(root / "data/mobile_model_photos.json")
+    filename = "mobile_intake_model_photos.json" if intake else "mobile_model_photos.json"
+    photos = _read_json(root / "data" / filename)
     model_keys = {model["model_key"] for model in models}
     used_assets: set[str] = set()
     for key, photo in photos.items():
         asset = photo["url"]
         if key not in model_keys:
+            if intake:
+                continue
             raise ValueError(f"unknown model photo assignment: {key}")
         alias = photo.get("same_model_as")
         if alias:
@@ -239,7 +244,7 @@ def _load_model_photos(root: Path, models: list[dict[str, Any]]) -> dict[str, di
             raise ValueError(f"phone photo dimensions missing: {key}")
         if not alias:
             used_assets.add(asset)
-    return photos
+    return {key: photo for key, photo in photos.items() if key in model_keys}
 
 
 def _status(model: dict[str, Any], variant: dict[str, Any], ram: int | None, storage: int | None) -> tuple[str, str, list[str]]:
@@ -2206,6 +2211,24 @@ def _apply_independent_tests(root, model_cards):
         card["independent_test_limitation"] = item["limitation"]
 
 
+def apply_representative_illustrations(
+    root: Path, cards: list[dict[str, Any]], *, intake: bool = False
+) -> None:
+    illustrations = _read_json(root / "data/mobile_representative_illustrations.json")
+    intake_photos = _load_model_photos(root, cards, intake=True) if intake else {}
+    for card in cards:
+        if card["model_key"] in intake_photos:
+            card["reviewed_model_photo"] = intake_photos[card["model_key"]]
+            continue
+        path = illustrations.get(card["model_key"])
+        if path and card["image_status"] == "PLACEHOLDER":
+            if not re.fullmatch(r"/assets/phone-illustrations/(?:representative-smartphone|[a-z0-9-]+-ai-front)\.webp", path):
+                raise ValueError(f"Invalid representative illustration path: {path}")
+            if not (root / path.lstrip("/")).is_file():
+                raise ValueError(f"Missing representative illustration: {path}")
+            card["representative_illustration"] = path
+
+
 def build_public_catalogue(root: Path) -> dict[str, Any]:
     priority_payload = _read_json(root / "data/mobile_universe_priority_126.json")
     universe_payload = _read_json(root / "data/mobile_universe_2023_2026.json")
@@ -2215,7 +2238,6 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
     models = universe_payload.get("models") or []
     preview = preview_payload.get("products") or []
     photos = _load_model_photos(root, models)
-    illustrations = _read_json(root / "data/mobile_representative_illustrations.json")
     india_variants = _read_json(root / "data/mobile_india_variant_sources.json")
     for key, variants in india_variants.items():
         pairs = {(row["ram_gb"], row["storage_gb"]) for row in variants}
@@ -2310,8 +2332,6 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
         photo = photos.get(card["model_key"])
         if photo:
             card.update(image_status="VERIFIED_MATCH", photo=photo)
-        elif card["model_key"] in illustrations:
-            card["representative_illustration"] = illustrations[card["model_key"]]
         if card["model_key"] in india_variants:
             card["verified_india_variants"] = india_variants[card["model_key"]]
         launch = RECENT_INDIA_LAUNCHES.get(identity)
@@ -2324,6 +2344,7 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
             card["source_urls"].append(launch["india_launch_source"])
         cards_by_identity[identity] = card
         model_cards.append(card)
+    apply_representative_illustrations(root, model_cards)
 
     # Prefer the frozen display name where punctuation differs from the source
     # model label (for example, Nothing Phone (3a) versus Phone 3a). This keeps

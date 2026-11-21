@@ -1,0 +1,35 @@
+{
+  "oppo|find x10": {
+    "url": "/assets/phone-photos/oppo-find-x10.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:OPPO_Find_X10_rear.jpg",
+    "author": "茅野ふたば",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 487,
+    "height": 650,
+    "resized": true,
+    "title": "Rear view of a display unit"
+  },
+  "oppo|find x10 pro max": {
+    "url": "/assets/phone-photos/oppo-find-x10-pro-max.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:OPPO_Find_X10_Pro_Max_rear.jpg",
+    "author": "茅野ふたば",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 487,
+    "height": 650,
+    "resized": true,
+    "title": "Rear view of a display unit"
+  },
+  "samsung|galaxy a17 5g": {
+    "url": "/assets/phone-photos/samsung-galaxy-a17-5g.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_A17_5G_2026_%282%29.jpg",
+    "author": "Captainmorlypogi1959",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 487,
+    "height": 650,
+    "resized": true,
+    "title": "Front view of a store display"
+  }
+}

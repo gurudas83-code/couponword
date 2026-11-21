@@ -259,7 +259,7 @@
     var name = displayPhoneName(card);
     var trigger = '<button type="button" class="research-photo-open" data-research-detail="' +
       escapeHtml(card.model_key) + '" aria-label="View specifications and retailer choices for ' + escapeHtml(name) + '" aria-expanded="false">';
-    var photo = card.image_status === "VERIFIED_MATCH" && card.photo;
+    var photo = card.image_status === "VERIFIED_MATCH" ? card.photo : card.reviewed_model_photo;
     if (photo) {
       return '<figure class="research-phone-photo">' + trigger + '<img src="' + escapeHtml(photo.url) +
         '" width="' + escapeHtml(photo.width) + '" height="' + escapeHtml(photo.height) +
@@ -268,7 +268,7 @@
         (photo.title ? escapeHtml(photo.title) + " by " : "") + escapeHtml(photo.author) + '</a> · <a href="' + escapeHtml(photo.license_url) +
         '">' + escapeHtml(photo.license) + '</a> · resized</figcaption></figure>';
     }
-    if (card.representative_illustration === "/assets/phone-illustrations/representative-smartphone.webp") {
+    if (/^\/assets\/phone-illustrations\/(?:representative-smartphone|[a-z0-9-]+-ai-front)\.webp$/.test(card.representative_illustration || "")) {
       return '<figure class="research-phone-photo">' + trigger + '<img src="' +
         escapeHtml(card.representative_illustration) + '" width="640" height="640" loading="lazy" decoding="async" alt="">' +
         '</button><figcaption>AI illustration · not the actual phone · Tap to see retailers</figcaption></figure>';
@@ -405,17 +405,17 @@
     // be hidden by a stale GitHub Pages/browser cache.
     // Import only the eight source-reviewed missing market identities.
     // They remain separate from the original 232-card registry, ratings and offers.
-    var coreFetch = fetch("/data/mobile_research_catalogue.json?v=phone-image-batch20-20261121", { credentials: "same-origin" })
+    var coreFetch = fetch("/data/mobile_research_catalogue.json?v=phone-illustrations-coverage-v2", { credentials: "same-origin" })
       .then(function (response) {
         if (!response.ok) throw new Error("research catalogue unavailable");
         return response.json();
       });
-    var marketFetch = fetch("/data/india_sales_eight_research.json?v=20261118", { credentials: "same-origin" })
+    var marketFetch = fetch("/data/india_sales_eight_research.json?v=phone-illustrations-coverage-v2", { credentials: "same-origin" })
       .then(function (response) {
         if (!response.ok) throw new Error("market intake unavailable");
         return response.json();
       }).catch(function () { return null; });
-    var recentFetch = fetch("/data/india_recent_manufacturer_research.json?v=20261118d", { credentials: "same-origin" })
+    var recentFetch = fetch("/data/india_recent_manufacturer_research.json?v=phone-illustrations-coverage-v2", { credentials: "same-origin" })
       .then(function (response) {
         if (!response.ok) throw new Error("recent phone research unavailable");
         return response.json();

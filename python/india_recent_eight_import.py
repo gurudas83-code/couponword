@@ -238,6 +238,8 @@ def _detail_page(card: dict) -> str:
 
 def publish_recent(destination: Path) -> dict:
     payload = build_recent()
+    from python.mobile_research_catalogue import apply_representative_illustrations
+    apply_representative_illustrations(ROOT, payload["model_cards"], intake=True)
     count = publish_art(destination, payload["model_cards"])
     if count != 13:
         raise ValueError("Missing model illustrations")
