@@ -283,7 +283,9 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
                         ('मॉडल की फोटो: ' if hindi else 'Model photograph: ') +
                         '<a href="' + esc(photo_source) + '" rel="noopener noreferrer">' +
                         esc(photo_author) + '</a> · <a href="' + esc(license_url) +
-                        '" rel="noopener noreferrer">' + esc(photo_license) + '</a></small></div></details>'
+                        '" rel="noopener noreferrer">' + esc(photo_license) + '</a>' +
+                        ((' · आकार बदला गया' if hindi else ' · resized') if photo.get("resized") else "") +
+                        '</small></div></details>'
                     )
                 if not photo_html:
                     photo_html = ('<details class="cw-retail-choices"><summary>' +

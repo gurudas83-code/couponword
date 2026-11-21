@@ -346,6 +346,16 @@
     "width": 330,
     "height": 440
   },
+  "poco|m7 pro": {
+    "url": "/assets/phone-photos/poco-m7-pro-5g.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Poco_M7_Pro_5G.jpg",
+    "author": "Morekar",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 312,
+    "height": 650,
+    "resized": true
+  },
   "redmi|redmi note 15 5g": {
     "url": "/assets/phone-photos/redmi-redmi-note-15-5g.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:REDMI_Note_15_5G_back.jpg",
