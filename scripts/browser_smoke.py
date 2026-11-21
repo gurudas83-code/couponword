@@ -91,6 +91,61 @@ def run(root: Path):
                         "() => window.CouponWorldMobileResearch.search('phone under 30000').length > 0",
                         timeout=20000,
                     )
+                    # Top 3 must never invent 3 winners, exceed the correct
+                    # ₹5k band or include price-unknown phones among ranked picks.
+                    for cap in (10000, 15000, 20000, 25000, 30000):
+                        top3 = page.evaluate("""cap => {
+                            const t0=performance.now();
+                            const matches=window.CouponWorldMobileResearch.search('top 3 mobile under '+cap);
+                            const elapsed=performance.now()-t0;
+                            const tier=document.querySelector('#mobileResearchResults .research-verified-top3');
+                            const picks=[...document.querySelectorAll('#mobileResearchResults .research-top3-result')];
+                            return {
+                                elapsed, count:picks.length, matched:matches.length,
+                                text:tier?.innerText||'',
+                                prices:matches.map(x=>x.card.research_budget_reference?.reference_price_inr),
+                                keys:matches.map(x=>x.card.model_key)
+                            };
+                        }""", cap)
+                        assert top3['count'] <= 3, (width, cap, top3)
+                        assert top3['elapsed'] < 1000, (width, cap, top3['elapsed'])
+                        assert 'Research-Verified' in top3['text'], (width, cap)
+                        assert 'current price' in top3['text'].lower() or 'current stock' in top3['text'].lower(), (width, cap)
+                        print('TOP3_BUDGET_AUDIT', width, cap, json.dumps({
+                            'ranked':top3['count'], 'strict_matches':top3['matched'],
+                            'local_js_ms':round(top3['elapsed'],1)
+                        }), flush=True)
+
+                    # Corrupted saved evidence must not qualify in Top 3 or
+                    # ordinary budget filters; restore the record each time.
+                    gated = page.evaluate("""() => {
+                        const query='phone under 15000';
+                        const before=window.CouponWorldMobileResearch.search(query);
+                        if(!before.length)return {error:'no dated references'};
+                        const item=before[0].card, ref=item.research_budget_reference;
+                        const original={...ref};
+                        const tests=[
+                            ['missing date',{checked_at:''}],
+                            ['expired evidence',{checked_at:'not-a-date'}],
+                            ['ranking weight',{ranking_weight:0.5}],
+                            ['sold out',{stock_indication:'OUT_OF_STOCK'}],
+                            ['no offer distinction',{live_offer:true}],
+                            ['string price',{reference_price_inr:'12999'}]
+                        ];
+                        const result=[];
+                        try {
+                            for(const [name,patch] of tests){
+                                Object.assign(ref,original,patch);
+                                const ranked=window.CouponWorldMobileResearch.search('top 3 '+query);
+                                const budget=window.CouponWorldMobileResearch.search(query);
+                                result.push({name,excluded:!budget.some(x=>x.card.model_key===item.model_key),
+                                    excludedFromTop3:!ranked.some(x=>x.card.model_key===item.model_key)});
+                            }
+                        } finally {Object.assign(ref,original);}
+                        return {result};
+                    }""")
+                    assert 'error' not in gated, (width, gated)
+                    assert all(row['excluded'] and row['excludedFromTop3'] for row in gated['result']), (width, gated)
                     # Original 232-card registry remains distinct from eight
                     # manufacturer-sourced sales-report additions.
                     page.wait_for_function(
