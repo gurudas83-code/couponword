@@ -42,6 +42,18 @@ assert.equal(follow.budget,15000,"a short follow-up inherits the earlier limit")
 const changed=parser("55 inch TV",hindi);
 assert.equal(changed.category,"tvs");
 assert.equal(changed.budget,null,"new category must not inherit phone price");
+const reviewedLinks=source.find(x=>x.retailers&&x.retailers.amazon&&x.retailers.amazon.retailer_research_url);
+assert(reviewedLinks,"A reviewed TV/audio model should have a saved Amazon research destination");
+const retailer=core.retailerOption({retailer:"amazon",
+  url:reviewedLinks.retailers.amazon.retailer_research_url,
+  exact_model_link:reviewedLinks.retailers.amazon.exact_model_link_verified});
+assert(retailer&&retailer.url.startsWith("https://www.amazon.in/"),"Preserve existing Amazon research destination");
+assert.equal(new URL(retailer.url).searchParams.get("tag"),"guru07cc-21","Amazon affiliate tag required");
+assert.equal(retailer.affiliate,true);
+assert.equal(core.retailerOption({retailer:"amazon",url:"https://amazon.in.evil.test/dp/X"}),null);
+assert.equal(core.retailerOption({retailer:"flipkart",url:"https://www.amazon.in/dp/X"}),null);
+assert.equal(core.retailerOption({retailer:"croma",url:"javascript:alert(1)"}),null);
+assert.equal(core.retailerOption({retailer:"amazon",url:"http://www.amazon.in/dp/X"}),null);
 assert.equal(core.sourceUrl("javascript:alert(1)"),"");
 assert.equal(core.sourceUrl("http://example.org"),"");
 const fields=core.resultFields(tvMatches[0],tv.query,3);
@@ -61,6 +73,17 @@ if(fs.existsSync(published)){
   assert(data.records.some(x=>x.category==="tvs"));
   assert(data.records.some(x=>x.category==="earbuds"));
   assert(data.records.some(x=>x.category==="accessories"));
+  const links=data.records.flatMap(x=>x.retailer_links||[]);
+  assert(links.some(x=>x.retailer==="amazon"),"Published catalog retains existing Amazon retailer links");
+  assert(links.some(x=>x.retailer==="flipkart"),"Published catalog retains existing Flipkart retailer links");
+  assert(links.some(x=>x.retailer==="croma"),"Published catalog retains existing Croma retailer searches");
+  for(const item of links){
+    const safe=core.retailerOption(item);
+    assert(safe,"No unknown or unsafe retailer destination may be published");
+    assert(item.exact_model_link===true||item.exact_model_link===false);
+    assert(!("price_inr" in item)&&!("stock_status" in item)&&!("checkout_eligible" in item),
+      "Retailer research URLs never imply live purchase eligibility");
+  }
   const raw=JSON.stringify(data).toLowerCase();
   for (const forbidden of ["retailers","price_inr","purchase_cta_eligible","affiliate_url","private_product_id"])assert(!raw.includes('"'+forbidden+'"'),"Never export offer/private field "+forbidden);
 }
