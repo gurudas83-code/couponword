@@ -66,5 +66,9 @@ jobs:
         run: node test_cw_research_assistant.cjs
       - name: Test first three local phone matches without slow optional sources
         run: node test_search_first3_progressive.cjs
+      - name: Regression-test Top 3 research filter (no external API calls)
+        run: |
+          python -m unittest -q test_search_first_frontend
+          node test_research_top3.cjs
       - name: Validate research and comparison evidence gates
         run: python scripts/research_quality_gate.py
