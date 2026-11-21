@@ -1119,7 +1119,7 @@
       oppo: ["oppo"], realme: ["realme"], infinix: ["infinix"], lava: ["lava"],
       oneplus: ["oneplus"], iqoo: ["iqoo"]
     };
-    var hint = Object.keys(aliases).find(function (brand) {
+    var hint = excluded ? null : Object.keys(aliases).find(function (brand) {
       return aliases[brand].some(function (name) {
         return (" " + text + " ").indexOf(" " + name + " ") >= 0;
       });
