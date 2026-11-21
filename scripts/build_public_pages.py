@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shutil
 import sys
@@ -333,6 +334,7 @@ def _render_recent_phone_sources(destination: Path) -> None:
         '<h2 id="indiaPhoneSourcesTitle">Recent phones in India</h2>'
         f'<p>Source check: <time datetime="{checked.isoformat()}">{checked:%d %B %Y}</time>. '
         'Open the manufacturer or store to see product photos and check current price and delivery.</p>'
+        '<p><a href="/seo/india-30-phone-price-watch.html">India phone price watch · 30 models</a></p>'
         '</div></div><div class="mobile-research-results">'
         + "".join(cards) + '</div><h3>Source-checked phone answers</h3>'
         '<div class="mobile-research-results">' + "".join(answers) + "</div></div></section>"
@@ -645,6 +647,9 @@ def build(output: Path) -> Path:
     # no thin unverified model SEO pages, new scores, offers or ranking engine.
     from python.search_demand_pages import publish_top30_research_hubs
     publish_top30_research_hubs(output)
+
+    from scripts.daily_phone_prices import publish as publish_daily_phone_prices
+    publish_daily_phone_prices(output, os.environ.get("CW_DAILY_PRICE_SNAPSHOT"))
 
     # Consolidate repeated/unsupported landing-page batches into reviewed guides.
     from python.publication_policy import apply_policy

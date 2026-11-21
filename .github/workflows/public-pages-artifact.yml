@@ -2,6 +2,9 @@ name: Build public GitHub Pages artifact
 
 on:
   workflow_dispatch:
+  schedule:
+    # Daily at 07:43 IST.
+    - cron: "13 2 * * *"
   push:
     branches:
       - main
@@ -34,6 +37,15 @@ jobs:
           python-version: "3.12"
       - name: Install test dependencies
         run: python -m pip install -r requirements.txt
+      - name: Restore and refresh the daily India phone watch
+        env:
+          QUICKCOMMERCE_API_KEY: ${{ secrets.QUICKCOMMERCE_API_KEY }}
+          COLLECT: ${{ github.run_attempt == 1 && (github.event_name == 'schedule' || (github.event_name == 'push' && github.event.head_commit.message == 'Activate daily India 30-phone price watch')) }}
+        run: |
+          args=()
+          if [[ "$COLLECT" == "true" ]]; then args+=(--collect); fi
+          python scripts/daily_phone_prices.py --output "$RUNNER_TEMP/india-daily-prices.json" "${args[@]}"
+          echo "CW_DAILY_PRICE_SNAPSHOT=$RUNNER_TEMP/india-daily-prices.json" >> "$GITHUB_ENV"
       - name: Build allow-listed public artifact
         run: python scripts/build_public_pages.py --output public
       - name: Verify curated consumer-tech catalogue and legacy-page retirement

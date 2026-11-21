@@ -1,0 +1,213 @@
+"""Refresh the India 30-phone price watch using the existing research adapter."""
+
+import argparse
+from datetime import datetime, timedelta
+import json
+import os
+from pathlib import Path
+import re
+import sys
+import time
+from urllib.error import HTTPError, URLError
+from urllib.request import urlopen
+from zoneinfo import ZoneInfo
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path[:0] = [str(ROOT), str(ROOT / "python")]
+
+from paid_api_live_bridge import PINCODE, catalogue
+from quickcommerce_flipkart_adapter import QuickCommerceFlipkartConnector
+from scripts.refresh_api_comparison import FIELDS
+from build_multi_retailer_public import build_observation_snapshot, observation_url
+from quickcommerce_flipkart_adapter import _tokens
+from python.category_research_pages import doc, esc
+
+ROUTE = "/seo/india-30-phone-price-watch.html"
+SNAPSHOT_PATH = "data/india_daily_price_watch_snapshot.json"
+PLATFORMS = ("Amazon", "Flipkart", "Croma")
+IST = ZoneInfo("Asia/Kolkata")
+DAILY_LIMIT = 60
+SOURCES = {
+    "Q2 India sell-through Top 5": "https://counterpointresearch.com/en/insights/top-5-smartphone-model-share-8-countries",
+    "Q3 model or portfolio mention": "https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season",
+    "Q3 Galaxy S26 series": "https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season",
+    "Counterpoint India sell-through tracked model": "https://dir.counterpointresearch.com/smartphones/in",
+}
+
+
+def worklist():
+    rows = json.loads((ROOT / "data/india_daily_price_watch.json").read_text())
+    keys = {row["model_key"] for row in rows}
+    cards = catalogue()
+    if len(rows) != 30 or len(keys) != 30 or any(key not in cards or cards[key].get("category") for key in keys):
+        raise ValueError("Expected 30 distinct catalogue smartphones")
+    for row in rows:
+        if row["evidence"] not in SOURCES:
+            raise ValueError("Unknown market evidence")
+        url = row.get("croma_url")
+        if url:
+            match = re.search(r"/p/(\d{5,9})$", url)
+            if not match or not observation_url("croma", {"id": match[1], "deeplink": url}):
+                raise ValueError("Croma needs an exact product URL")
+            row["croma_id"] = match[1]
+    return rows, cards
+
+
+def planned_calls(rows, day):
+    calls = []
+    for index, row in enumerate(rows):
+        platforms = list(PLATFORMS[:2])
+        if row.get("croma_id"):
+            platforms = list(PLATFORMS)
+            platforms.pop((day.toordinal() + index) % len(PLATFORMS))
+        calls.extend((row, platform) for platform in platforms)
+    if len(calls) != DAILY_LIMIT:
+        raise ValueError("Unexpected daily API call budget")
+    return calls
+
+
+def read_previous():
+    try:
+        with urlopen("https://coupon-world.in/" + SNAPSHOT_PATH, timeout=10) as response:
+            data = json.loads(response.read(2_000_000))
+        if not isinstance(data, dict) or not isinstance(data.get("stores"), dict):
+            return {}
+        return data
+    except (URLError, TimeoutError, ValueError):
+        return {}
+
+
+def collect(previous, rows, cards, client, now, pause=time.sleep):
+    day = now.astimezone(IST).date()
+    stores = previous.get("stores", {})
+    previous = dict(previous, stores={key: dict(value) for key, value in stores.items() if isinstance(value, dict)})
+    if previous.get("attempted_on") == str(day):
+        return previous
+    previous.update(attempted_on=str(day), calls_attempted=0, run_status="completed")
+    previous["stores"] = {row["model_key"]: previous["stores"].get(row["model_key"], {}) for row in rows}
+    for row, platform in planned_calls(rows, day):
+        key = row["model_key"]
+        card = cards[key]
+        brand, model = card["brand"], card["model"]
+        query = model if model.lower().startswith(brand.lower() + " ") else brand + " " + model
+        endpoint = "item" if platform == "Croma" else "search"
+        params = {"item_id": row["croma_id"]} if endpoint == "item" else {"q": query}
+        previous["calls_attempted"] += 1
+        try:
+            payload, checked = client.fetch_observation(endpoint, platform, **params)
+            body = payload.get("data") or {}
+            field = "items" if endpoint == "item" else "products"
+            items = body.get(field)
+            if payload.get("status") != "success" or body.get("platform", platform) != platform or not isinstance(items, list):
+                raise ValueError("Unexpected provider response")
+        except (URLError, TimeoutError, ValueError, OSError) as error:
+            previous["stores"][key].setdefault(platform, {})["last_attempt"] = "provider_error"
+            previous["run_status"] = "partial"
+            if isinstance(error, HTTPError) and error.code in (401, 403, 429):
+                break
+            pause(1)
+            continue
+        if platform == "Croma":
+            normalized = []
+            for item in items:
+                if not isinstance(item, dict):
+                    continue
+                pid = str(item.get("id") or item.get("item_id") or "")
+                title = str(item.get("name") or "")
+                reference = row["croma_title"]
+                if pid != row["croma_id"] or _tokens(title).replace(" ", "") != _tokens(reference).replace(" ", ""):
+                    continue
+                # Croma displays RAM, storage, then color. Use the reviewed exact
+                # ID and matching title to rearrange those fields for the parser.
+                match = re.fullmatch(r".+\((?:(\d+GB RAM), )?(\d+(?:GB|TB)), ([^)]+)\)", reference, re.I)
+                if not match:
+                    continue
+                ram, storage, color = match.groups()
+                quantity = ram or ""
+                item = dict(item, name=f"{query} ({color}, {storage}) {quantity}",
+                            quantity=quantity, brand=brand)
+                normalized.append(item)
+            items = normalized
+        snapshots = build_observation_snapshot({}, [card], [{
+            "model_key": key, "endpoint": endpoint, "platform": platform, "params": params,
+            "status": "success", "observed_at": checked,
+            "items": [{k: v for k, v in item.items() if k in FIELDS} for item in items if isinstance(item, dict)]
+        }])
+        offers = []
+        for config in snapshots["models"].get(key, []):
+            offers.extend(dict(offer, variant=config["variant"]) for offer in config["offers"])
+        previous["stores"][key][platform] = {"checked_at": checked, "last_attempt": "checked", "offers": offers[:12]}
+        pause(1)
+    return previous
+
+
+def render_store(row, store, observed, now):
+    if store == "Croma" and not row.get("croma_id"):
+        return "<td>Exact Croma listing pending</td>"
+    stamp = observed.get("checked_at")
+    if not stamp:
+        return "<td>Awaiting API observation</td>"
+    try:
+        checked = datetime.fromisoformat(stamp).astimezone(IST)
+    except (TypeError, ValueError):
+        return "<td>Awaiting API observation</td>"
+    label = checked.strftime("%d %b, %H:%M IST")
+    if not timedelta(0) <= now - checked <= timedelta(hours=72):
+        return f"<td>Refresh pending<br><small>Last checked {esc(label)}</small></td>"
+    prices = []
+    for offer in observed.get("offers", []):
+        price = offer.get("price")
+        url = observation_url(store.lower(), offer)
+        if type(price) in (int, float) and price > 0 and offer.get("availability") == "in_stock" and url:
+            prices.append(f'<a href="{esc(url)}">₹{price:,.0f}</a> <small>{esc(offer["variant"])}</small>')
+    details = "<br>".join(prices[:3]) if prices else "No exact in-stock price returned"
+    return f"<td>{details}<br><small>{esc(label)}</small></td>"
+
+
+def publish(output, snapshot_path=None):
+    rows, cards = worklist()
+    data = json.loads(Path(snapshot_path).read_text()) if snapshot_path else {}
+    stores = data.get("stores", {})
+    now = datetime.now(IST)
+    body = []
+    for row in rows:
+        key = row["model_key"]
+        card = cards[key]
+        name = card["model"] if card["model"].lower().startswith(card["brand"].lower() + " ") else f'{card["brand"]} {card["model"]}'
+        evidence = row["evidence"]
+        source = f'<a href="{esc(SOURCES[evidence])}">{esc(evidence)}</a>'
+        body.append(f"<tr><th scope='row'>{esc(name)}</th><td>{source}</td>" +
+                    "".join(render_store(row, store, stores.get(key, {}).get(store, {}), now) for store in PLATFORMS) + "</tr>")
+    status = f'Latest collection attempt {esc(data["attempted_on"])} · {int(data["calls_attempted"])} API requests.' if data.get("attempted_on") else "First API collection pending."
+    page = """<h1>India phone price watch · 30 models</h1>
+    <p>All 30 are already in the Coupon World research catalogue. Five have a published Q2 2026 India sell-through rank.
+    Other models come from Q3 shipment coverage and tracked sell-through. This watchlist does not represent a current national sales ranking.</p>
+    <p>QuickCommerce API research observations for Delhi PIN 110001. Retailer checks rotate within 60 requests per day.
+    Each observation shows its own time and listing configuration. Check the retailer for the final price, stock and charges.</p>"""
+    page += f'<p>{status}</p><div style="overflow-x:auto"><table><thead><tr><th>Phone</th><th>Selection evidence</th>' + "".join(f"<th>{p}</th>" for p in PLATFORMS) + "</tr></thead><tbody>" + "".join(body) + "</tbody></table></div>"
+    target = output / ROUTE.lstrip("/")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(doc("India phone price watch · 30 models", "Dated Amazon, Flipkart and Croma price observations for selected India phones.", ROUTE, page, {"@context": "https://schema.org", "@type": "WebPage"}), encoding="utf-8")
+    target = output / SNAPSHOT_PATH
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps(data, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--collect", action="store_true")
+    args = parser.parse_args()
+    rows, cards = worklist()
+    previous = read_previous()
+    if args.collect:
+        if os.environ.get("QUICKCOMMERCE_API_KEY"):
+            previous = collect(previous, rows, cards, QuickCommerceFlipkartConnector(pincode=PINCODE), datetime.now(IST))
+        else:
+            previous["run_status"] = "missing_provider_secret"
+        print(json.dumps({key: previous.get(key) for key in ("attempted_on", "calls_attempted", "run_status")}))
+    args.output.write_text(json.dumps(previous, ensure_ascii=False), encoding="utf-8")
+
+
+if __name__ == "__main__":
+    main()

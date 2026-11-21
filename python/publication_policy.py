@@ -202,7 +202,7 @@ def apply_policy(destination):
     guides=json.loads((ROOT/'data/phone-guides.json').read_text(encoding='utf-8'))['pages']
     # Two reviewed Top30 research hubs are substantive bilingual editorial resources,
     # not per-model keyword permutations; retain the English hub through cleanup.
-    approved={g['slug']+'.html' for g in guides} | {'india-smartphone-search-demand.html', 'top-30-phone-research-india.html'}
+    approved={g['slug']+'.html' for g in guides} | {'india-smartphone-search-demand.html', 'top-30-phone-research-india.html', 'india-30-phone-price-watch.html'}
     for file in (root/'seo').glob('*.html'):
         if file.name not in approved:file.unlink()
     # The legacy guide directory must list real reviewed pages, not 50
