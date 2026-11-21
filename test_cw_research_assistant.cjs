@@ -87,4 +87,31 @@ if(fs.existsSync(published)){
   const raw=JSON.stringify(data).toLowerCase();
   for (const forbidden of ["retailers","price_inr","purchase_cta_eligible","affiliate_url","private_product_id"])assert(!raw.includes('"'+forbidden+'"'),"Never export offer/private field "+forbidden);
 }
+// Real phone catalogue regression: a specific requested model must not be
+// confused with Pro/Max variants or an unrelated search result.
+const mobileCards=JSON.parse(fs.readFileSync(path.join(root,"data/mobile_research_catalogue.json"),"utf8")).model_cards;
+const iphoneCandidates=mobileCards.filter(x=>x.brand==="Apple"&&/^iPhone 17(?: Pro(?: Max)?)?$/.test(x.model))
+  .map(x=>({card:x}));
+assert(iphoneCandidates.length>=3,"Original iPhone 17 / Pro / Max fixture is required");
+const standard=parser("मुझे Apple mobile 17 चाहिए");
+assert.equal(core.requestedPhoneIdentity(standard),"apple iphone 17");
+const splitStandard=core.classifyPhoneMatches(standard,iphoneCandidates);
+assert.equal(splitStandard.exact.length,1);
+assert.equal(splitStandard.exact[0].card.model,"iPhone 17");
+assert.equal(splitStandard.related.length,2,"Pro and Pro Max are related, not the requested standard model");
+const pro=core.classifyPhoneMatches(parser("iPhone 17 Pro"),iphoneCandidates);
+assert.equal(pro.exact.length,1);
+assert.equal(pro.exact[0].card.model,"iPhone 17 Pro");
+const max=core.classifyPhoneMatches(parser("iPhone 17 Pro Max"),iphoneCandidates);
+assert.equal(max.exact.length,1);
+assert.equal(max.exact[0].card.model,"iPhone 17 Pro Max");
+assert.equal(core.classifyPhoneMatches(parser("iPhone 19"),iphoneCandidates).exact.length,0,
+  "Unknown model must not silently use a different iPhone");
+assert.equal(core.requestedPhoneIdentity(parser("Apple phone")),"",
+  "Broad brand searches must not be narrowed into an exact model");
+assert.equal(core.requestedPhoneIdentity(parser("Samsung Galaxy A56 5G")),"samsung galaxy a56 5g");
+assert.equal(core.requestedPhoneIdentity(parser("Nothing Phone 3a")),"nothing phone 3a");
+assert.equal(core.requestedPhoneIdentity(parser("compare iPhone 17 vs iPhone 17 Pro")),"",
+  "Comparison intent is not a single exact-model request");
+
 console.log("PASS Coupon World assistant: Hindi budget, TV size, ANC, unknown identity, follow-up memory, safety, UI, unchanged budget buttons"+(fs.existsSync(published)?", public payload":""));
