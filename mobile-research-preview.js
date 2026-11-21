@@ -638,7 +638,7 @@
       if (!ref || ref.live_offer !== false ||
           typeof ref.reference_price_inr !== "number" ||
           !Number.isFinite(ref.reference_price_inr) || ref.reference_price_inr <= 0 ||
-          !/^\d{4}-\d{2}-\d{2}/.test(String(ref.checked_at || "")) ||
+          !/\b20\d{2}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01])\b/.test(String(ref.checked_at || "")) ||
           ref.ranking_weight !== 0 ||
           /OUT.OF.STOCK|UNAVAILABLE|SOLD.OUT|DISCONTINUED/i.test(String(ref.stock_indication || ""))) return [];
       if (c.inclusive ? ref.reference_price_inr > c.budget : ref.reference_price_inr >= c.budget) return [];
