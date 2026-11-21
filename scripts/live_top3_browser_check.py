@@ -55,7 +55,21 @@ def main() -> None:
                     "dated_price_band_labels": result.inner_text().count("Dated reference in selected band"),
                 }
                 print("LIVE_TOP3_AUDIT " + json.dumps(output, ensure_ascii=False), flush=True)
-                if cards.count() != 3: failures.append(device + " returned " + str(cards.count()) + " research selections")
+                expected_count = {
+                    "mobile-10k": 0, "mobile-15k": 0, "mobile-20k": 3,
+                    "mobile-25k": 3, "desktop-30k": 2,
+                    "desktop-battery": 3, "desktop-gaming": 3,
+                }[device]
+                if cards.count() != expected_count:
+                    failures.append(device + " returned " + str(cards.count()) +
+                        " budget-qualified picks instead of " + str(expected_count))
+                if "under " in query:
+                    dated = result.inner_text().count("Dated reference in selected band; current price unverified")
+                    if dated != cards.count():
+                        failures.append(device + " showed ranked phone without dated price-band evidence")
+                    if device in ("mobile-10k", "mobile-15k"):
+                        if "Additional relevant phones" not in result.inner_text():
+                            failures.append(device + " missing separately-labelled research alternatives")
                 if len(titles) != len(set(titles)): failures.append(device + " duplicate model names")
                 if result.locator("a:has-text('Check live price on Amazon')").count() != cards.count():
                     failures.append(device + " Amazon price-search links missing")
