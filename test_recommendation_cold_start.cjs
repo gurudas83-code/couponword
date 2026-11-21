@@ -112,6 +112,37 @@ async function run() {
   assert.equal(hung.requests.length, 1, "Do not automatically replay paid/shopping requests");
   assert.equal(hung.timers.size, 0);
 
+  // Empty Top 3 must not manufacture ranked winners or strand the shopper.
+  const emptyTop3 = harness();
+  const top3Promise = emptyTop3.load("top 3 camera phones under 20000");
+  assert.equal(emptyTop3.requests.length, 1, "Explicit Top 3 uses one existing API request");
+  assert.match(emptyTop3.requests[0], /\/api\/recommend\?q=best%20camera%20phones%20under%2020000/);
+  emptyTop3.settle({
+    recommendations: [],
+    response_reason: "NO_CURRENT_VERIFIED_OFFER",
+    result_status: "PARTIAL",
+    market_data_status: "CURRENT_OFFERS_UNAVAILABLE",
+    hard_gate_rejections: [{code: "NO_CURRENT_VERIFIED_OFFER"}]
+  });
+  await top3Promise;
+  assert.match(emptyTop3.card.innerHTML, /Verified Top 3 is not available/);
+  assert.match(emptyTop3.card.innerHTML, /No current verified retailer offer passed/);
+  assert.match(emptyTop3.card.innerHTML, /Explore 30 source-linked phone candidates/);
+  assert.match(emptyTop3.card.innerHTML, /href="\/compare\/"/);
+  assert(!emptyTop3.card.innerHTML.includes("</p>\\n"), "Literal newline escapes must not leak into HTML");
+  assert.equal(emptyTop3.requests.length, 1, "No hidden paid or extra API call");
+
+  const exactVariant = harness();
+  const exactPromise = exactVariant.load("top 3 phones with 8GB 256GB under 25000");
+  exactVariant.settle({
+    recommendations: [],
+    response_reason: "EXACT_VARIANT_UNAVAILABLE",
+    result_status: "PARTIAL",
+    hard_gate_rejections: [{code: "EXACT_VARIANT_UNAVAILABLE"}]
+  });
+  await exactPromise;
+  assert.match(exactVariant.card.innerHTML, /requested RAM\/storage variant could not be verified/);
+
   const background = harness();
   const bgPromise = background.load("phone under 25000", true);
   assert.deepEqual([...background.timers.values()].map(t => t.delay), [15000]);
