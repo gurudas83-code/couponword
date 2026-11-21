@@ -1063,7 +1063,7 @@
   function unpricedResearchLeads(query) {
     var c = researchConstraints(query);
     if (c.budget == null || (c.lower != null && c.lower > c.budget)) {
-      return {count: 0, html: ""};
+      return {count: 0, html: "", keys: []};
     }
     // Same model, brand, RAM/storage, 5G, OIS and feature constraints as
     // the budget-qualified search. ONLY the dated price-reference gate
@@ -1100,7 +1100,7 @@
           escapeHtml(card.model_key) + '">View specifications &amp; retailer searches</button></article>';
       }).join("") + '</div>';
     }
-    return {count: leads.length, html: html + '</section>'};
+    return {count: leads.length, html: html + '</section>', keys: leads.map(function (item) { return item.card.model_key; })};
   }
 
   // A last-resort research identity lane for unanswered budget questions.
@@ -1108,7 +1108,7 @@
   // Names here are catalogue identities, not evidence of satisfying conditions.
   // Catalogue identities are disclosed separately; they NEVER qualify for
   // within-budget or verified-spec rankings without the original evidence gates.
-  function identityOnlyResearchLeads(query) {
+  function identityOnlyResearchLeads(query, alreadyShownKeys) {
     var constraints = researchConstraints(query);
     if (constraints.budget == null || (constraints.lower != null && constraints.lower > constraints.budget)) return "";
     var text = constraints.text;
@@ -1133,6 +1133,7 @@
       if (modelName.indexOf(alias + " ") === 0) modelName = modelName.slice(alias.length + 1);
     });
     var options = inventoryCards.filter(function (card) {
+      if ((alreadyShownKeys || []).indexOf(card.model_key) >= 0) return false;
       var brandName = normalizeResearch(card.brand);
       var name = normalizeResearch(card.brand + " " + card.model);
       if (excluded && brandName.indexOf(excluded) >= 0) return false;
@@ -1314,7 +1315,7 @@
     }
     var validBudget = !comparison && c.budget != null && (c.lower == null || c.lower <= c.budget);
     var additional = validBudget ? unpricedResearchLeads(lastSearchQuery) : {count: 0, html: ""};
-    var identityLane = validBudget && !matches.length ? identityOnlyResearchLeads(lastSearchQuery) : "";
+    var identityLane = validBudget && !matches.length ? identityOnlyResearchLeads(lastSearchQuery, additional.keys) : "";
     var wantsTopThree = isResearchTopThreeQuery(lastSearchQuery) && !comparison;
     var researchTopThree = [];
     if (wantsTopThree) {
