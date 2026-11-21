@@ -384,6 +384,35 @@ def _generate_assistant_category_research(destination: Path) -> None:
                 })
             if not fields:
                 continue
+            # Reuse ONLY existing reviewed retailer research URLs. Never
+            # convert an exact-model research link into live-stock/buy eligibility.
+            links = []
+            approved_hosts = {
+                "amazon": {"amazon.in", "www.amazon.in"},
+                "flipkart": {"flipkart.com", "www.flipkart.com"},
+                "croma": {"croma.com", "www.croma.com"},
+            }
+            for store in ("amazon", "flipkart", "croma"):
+                info = (row.get("retailers") or {}).get(store)
+                if not isinstance(info, dict):
+                    continue
+                url = str(info.get("retailer_research_url") or "").strip()
+                parsed = urlsplit(url)
+                if (parsed.scheme != "https" or parsed.netloc.lower() not in approved_hosts[store]
+                        or parsed.username or parsed.password):
+                    continue
+                scope = str(info.get("link_scope") or "")
+                if scope not in {
+                    "EXACT_MODEL_LISTING_RESEARCH_NOT_LIVE_OFFER",
+                    "EXACT_MODEL_SEARCH_NOT_VERIFIED_SKU_CTA",
+                }:
+                    continue
+                exact = (scope == "EXACT_MODEL_LISTING_RESEARCH_NOT_LIVE_OFFER"
+                         and info.get("exact_model_link_verified") is True)
+                links.append({
+                    "retailer": store, "url": url,
+                    "exact_model_link": exact, "affiliate": store == "amazon",
+                })
             records.append({
                 "category": category, "brand": brand, "model": model,
                 "model_code": str(row.get("model_code") or row.get("manufacturer_model_code") or "")[:90],
@@ -392,6 +421,7 @@ def _generate_assistant_category_research(destination: Path) -> None:
                 "source_status": str(row.get("source_status") or row.get("review_status") or "SOURCE_ATTRIBUTED")[:140],
                 "reviewed_at": str(row.get("reviewed_at", ""))[:20],
                 "specifications": fields[:20],
+                "retailer_links": links,
             })
             seen.add(key)
     if not records:
