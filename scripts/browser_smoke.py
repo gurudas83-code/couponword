@@ -176,7 +176,20 @@ def run(root: Path):
                     )
                     assert page.locator("#mobileResearchNewGrid [data-mobile-model-card]").count() == 21, width
                     assert page.locator("#mobileResearchNewGrid a.research-model-name-link").count() == 21, width
-                    assert page.locator("#mobileResearchNewGrid img[src*='/assets/new-mobile-art/']").count() == 21, width
+                    new_cards = page.locator("#mobileResearchNewGrid [data-mobile-model-card]")
+                    for card in new_cards.all():
+                        image = card.locator(
+                            "img[src^='/assets/phone-photos/'], "
+                            "img[src^='/assets/phone-illustrations/'], "
+                            "img[src^='/assets/new-mobile-art/']"
+                        )
+                        assert image.count() == 1, width
+                        src = image.get_attribute("src") or ""
+                        text = card.text_content() or ""
+                        if src.startswith("/assets/phone-photos/"):
+                            assert "Model photo:" in text, width
+                        elif src.startswith("/assets/phone-illustrations/"):
+                            assert "AI illustration" in text, width
                     assert "Price unavailable" in page.locator("#mobileResearchNewGrid").text_content(), width
                     assert page.evaluate(
                         "() => window.CouponWorldMobileResearch.search('Samsung Galaxy F70 5G').some("
