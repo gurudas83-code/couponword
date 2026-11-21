@@ -1265,7 +1265,7 @@
       renderSelectedComparison();
     }
     var validBudget = !comparison && c.budget != null && (c.lower == null || c.lower <= c.budget);
-    var additional = validBudget ? unpricedResearchLeads(lastSearchQuery) : {count: 0, html: ""};
+    var additional = validBudget && !researchTopThreeMode ? unpricedResearchLeads(lastSearchQuery) : {count: 0, html: ""};
     if (researchResults) {
       researchResults.hidden = false;
       var bridge = verifiedRecommendationBridge(lastSearchQuery, comparison);
@@ -1311,7 +1311,10 @@
       }
     }
     if (researchSearchStatus) {
-      if (validBudget) {
+      if (researchTopThreeMode && researchTopThreeBudgetUnverified) {
+        researchSearchStatus.textContent = Math.min(matches.length, 3) +
+          " source-backed research candidates · requested budget NOT verified · check retailer prices";
+      } else if (validBudget) {
         researchSearchStatus.textContent = matches.length + " dated budget-reference matches · " +
           additional.count + " related phones with price unverified · local research results";
         researchSearchStatus.textContent += " · requested range ₹" +
