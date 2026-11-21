@@ -90,12 +90,14 @@ assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', ro
   }
   research.submit("top 3 phones under 10000");
   const lowerBudget = element("mobileResearchResults").innerHTML;
-  assert.match(lowerBudget, /Research-Verified picks \(1\/3 available\)/);
+  assert.match(lowerBudget, /Research-Verified picks \(2\/3 available\)/);
   assert.match(lowerBudget, /Lava Bold N2 Lite/i);
   assert.match(lowerBudget, /Dated budget reference: ₹9,299/);
   assert.match(lowerBudget, /NOT a live checkout price or stock confirmation/);
   assert.match(lowerBudget, /Additional relevant phones/);
-  assert.equal((lowerBudget.match(/class="research-top3-result"/g) || []).length, 1);
+  assert.match(lowerBudget, /Samsung Galaxy F05/i);
+  assert.match(lowerBudget, /Dated budget reference: ₹6,499/);
+  assert.equal((lowerBudget.match(/class="research-top3-result"/g) || []).length, 2);
 
   research.submit("top 3 phones under 15000");
   const midBudget = element("mobileResearchResults").innerHTML;

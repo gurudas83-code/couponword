@@ -15,7 +15,7 @@ class BudgetResearchPriceReviewTests(unittest.TestCase):
 
     def test_exact_variant_and_price_provenance(self):
         self.assertEqual(len(self.catalogue["model_cards"]), 232)
-        self.assertEqual(len(self.ledger["records"]), 4)
+        self.assertEqual(len(self.ledger["records"]), 5)
         for item in self.ledger["records"]:
             card = self.cards[item["model_key"]]
             ref = card["research_budget_reference"]
@@ -38,7 +38,7 @@ class BudgetResearchPriceReviewTests(unittest.TestCase):
                     (card.get("research_budget_reference") or {}).get("reference_price_inr") is not None and
                     lo <= card["research_budget_reference"]["reference_price_inr"] < hi and
                     len(card["specifications"]) >= 2}
-        self.assertEqual(candidates(5000, 10000), {"lava|bold n2 lite"})
+        self.assertEqual(candidates(5000, 10000), {"lava|bold n2 lite", "samsung|galaxy f05"})
         self.assertEqual(candidates(10000, 15000),
                          {"lava|bold n2", "lava|virat v1", "lava|virat v1 5g"})
         a5x = self.cards["oppo|a5x"]
@@ -52,6 +52,10 @@ class BudgetResearchPriceReviewTests(unittest.TestCase):
                 "out_of_stock_on_retailer_page", "unavailable_online_store_only"})
         self.assertNotIn("oppo|a5x", {row["model_key"] for row in self.ledger["records"]})
         self.assertTrue(all(row["reference_price_inr"] < 15000 for row in self.ledger["records"]))
+        f05 = next(row for row in self.ledger["records"] if row["model_key"] == "samsung|galaxy f05")
+        self.assertEqual((f05["ram_gb"], f05["storage_gb"], f05["reference_price_inr"]), (4, 64, 6499))
+        self.assertEqual(f05["stock_indication"], "SELLER_LISTED_PINCODE_UNVERIFIED")
+        self.assertEqual(self.cards["samsung|galaxy f05"]["research_budget_reference"]["delivery_status"], "NOT_VERIFIED")
 
 if __name__ == "__main__":
     unittest.main()
