@@ -144,4 +144,65 @@ class AnswersTests(unittest.TestCase):
         },ensure_ascii=False))
         self.assertFalse(failures[:30],str(failures[:30]))
 
+
+    def test_voice_transcript_modulation_1000_and_variants(self):
+        """Measure actual JS voice-transcript parser, not microphone/STT accuracy."""
+        import subprocess
+        import time
+        corpus=json.loads((ROOT/'data/mobile_query_corpus_1000.json').read_text(encoding='utf-8'))
+        originals=[r for key in ('train','validation','test') for r in corpus['splits'][key]]
+        variants=[]
+        for row in originals:
+            q=row['query']
+            variants.extend((q, q.replace('phone','mobile').replace('under','below'),
+                             q.replace('mobile','phone').replace('below','under')))
+        # Spoken number, Hindi, and mixed-language transcript samples.
+        spoken=[
+            ('दस हजार में अच्छा मोबाइल',10000),
+            ('पंद्रह हजार में कैमरा फोन',15000),
+            ('बीस हजार में गेमिंग मोबाइल',20000),
+            ('पच्चीस हजार के अंदर फोन',25000),
+            ('तीस हजार में बैटरी वाला फोन',30000),
+            ('20k phone under',20000),
+            ('mobile under 15000',15000),
+            ('phone below 25000',25000)
+        ]
+        js=r"""
+const fs=require('fs'), vm=require('vm');
+const source=fs.readFileSync('assets/cw-query-parser.js','utf8');
+const sandbox={window:{}};vm.runInNewContext(source,sandbox);
+const parser=sandbox.window.CouponWorldQueryParser;
+const items=JSON.parse(fs.readFileSync(0,'utf8'));
+const durations=[],answers=[];
+for(const item of items){
+ const t=process.hrtime.bigint();
+ try{const result=parser.modulate(item);answers.push({budget:result.budget,query:result.query,category:result.category});}
+ catch(e){answers.push({error:String(e)});}
+ durations.push(Number(process.hrtime.bigint()-t)/1e6);
+}
+process.stdout.write(JSON.stringify({durations,answers}));
+"""
+        started=time.perf_counter()
+        result=subprocess.run(['node','-e',js],input=json.dumps(variants+[q for q,_ in spoken]),
+                              text=True,capture_output=True,cwd=ROOT,timeout=90,check=True)
+        elapsed=round((time.perf_counter()-started)*1000,2)
+        values=json.loads(result.stdout)
+        times=sorted(values['durations'])
+        failures=[i for i,x in enumerate(values['answers']) if 'error' in x or not x.get('query')]
+        missing_budget=[originals[i]['id'] for i in range(len(originals))
+                        if values['answers'][3*i].get('budget')!=originals[i]['budget_context']]
+        spoken_mismatches=[(q,b,values['answers'][len(variants)+i].get('budget'))
+                           for i,(q,b) in enumerate(spoken)
+                           if values['answers'][len(variants)+i].get('budget')!=b]
+        print('VOICE_TRANSCRIPT_1000_REPORT '+json.dumps({
+            'original_queries':len(originals),'total_transcripts':len(variants)+len(spoken),
+            'parser_failures':len(failures),'original_budget_mismatches':len(missing_budget),
+            'spoken_budget_mismatches':spoken_mismatches,
+            'mean_parser_ms':round(sum(values['durations'])/len(times),4),
+            'p95_parser_ms':round(times[int(.95*(len(times)-1))],4),
+            'max_parser_ms':round(times[-1],4),'batch_wall_ms':elapsed,
+            'budget_mismatch_examples':missing_budget[:20]
+        },ensure_ascii=False))
+        self.assertEqual(len(failures),0,str(failures[:12]))
+
 if __name__=='__main__':unittest.main()
