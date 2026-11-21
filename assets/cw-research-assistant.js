@@ -100,7 +100,37 @@
     choices.sort(function(a,b){return b.score-a.score||String(a.record.model).localeCompare(String(b.record.model));});
     return choices.slice(0,3).map(function(x){return x.record;});
   }
-  var core={fold:fold,sourceUrl:sourceUrl,resultFields:resultFields,selectResearch:selectResearch,retailerOption:retailerOption,retailerLinksFor:retailerLinksFor};
+  // Exact model intent is separate from finding related research records. A request
+  // for "iPhone 17" must never silently be answered as "iPhone 17 Pro".
+  function requestedPhoneIdentity(request) {
+    var phrase=fold(request && (request.baseQuery || request.raw) || "");
+    if (/\b(?:compare|versus|vs)\b/.test(phrase)) return "";
+    // "Apple mobile 17", "Apple 17" and "iPhone17" all refer to the
+    // standard iPhone 17 unless the user explicitly says Pro, Max, etc.
+    var apple=phrase.match(/\b(?:iphone\s*|apple\s+(?:(?:iphone|mobile|phone|smartphone)\s*)?)(\d{1,2}[a-z]?)(?:\s+(pro\s+max|pro|plus|max|mini|air))?(?=\s|$)/);
+    if (apple) return "apple iphone "+apple[1]+(apple[2]?" "+apple[2]:"");
+    var cleaned=phrase.replace(/\b(?:please|show|give|find|tell|me|i|want|need|a|the|best|top|good|suggest|recommend|for|with|camera|battery|gaming|display|storage|ram|price|model|models|buy|chahiye|batao|dikhao|hai|phone|mobile|smartphone)\b/g," ").replace(/\s+/g," ").trim();
+    // Only infer a named model when brand AND a model identifier are explicit.
+    // Broader brand/category searches keep the current evidence ordering.
+    if (/^(?:samsung|google|oneplus|xiaomi|redmi|vivo|oppo|realme|motorola|poco|nothing|iqoo|lava|honor|hmd|nokia|infinix|tecno)\s/.test(cleaned) &&
+        /\b(?:[a-z]{1,4}\d{1,4}[a-z]?|\d{1,3}[a-z]?)\b/.test(cleaned)) return cleaned;
+    return "";
+  }
+  function classifyPhoneMatches(request,matches) {
+    var identity=requestedPhoneIdentity(request);
+    var entries=Array.isArray(matches)?matches:[];
+    if (!identity) return {identity:"",exact:entries,related:[]};
+    var exact=[],related=[];
+    entries.forEach(function(item) {
+      var card=item&&item.card||{};
+      var brand=fold(card.brand),model=fold(card.model);
+      var full=model.indexOf(brand+" ")===0?model:(brand+" "+model).trim();
+      (full===identity?exact:related).push(item);
+    });
+    return {identity:identity,exact:exact,related:related};
+  }
+  var core={fold:fold,sourceUrl:sourceUrl,resultFields:resultFields,selectResearch:selectResearch,retailerOption:retailerOption,retailerLinksFor:retailerLinksFor,
+    requestedPhoneIdentity:requestedPhoneIdentity,classifyPhoneMatches:classifyPhoneMatches};
   root.CouponWorldAssistantCore=core;
   if(typeof document==="undefined")return;
   var host=document.getElementById("cwAssistant");
@@ -172,17 +202,30 @@
   }
   function phoneReply(request,matches) {
     var condition=request.budget!==null?"₹"+request.budget.toLocaleString("en-IN")+" तक के dated-reference price band":"आपकी खोज";
-    if(!matches.length)return {paragraphs:[condition+" के लिए मौजूदा मोबाइल रिसर्च में पुष्ट मिलान नहीं मिला। कोई मनगढ़ंत Top-3 या current price नहीं दिखाऊँगा।","फ़िल्टर बदलें या मौजूदा मोबाइल खोज के विस्तृत परिणाम देखें।"],links:[{label:"मोबाइल रिसर्च",url:"#mobileResearchSearch"}]};
+    var groups=classifyPhoneMatches(request,matches);
+    if(!matches.length) return {paragraphs:[condition+" के लिए मौजूदा मोबाइल रिसर्च में पुष्ट मिलान नहीं मिला। कोई मनगढ़ंत Top-3 या current price नहीं दिखाऊँगा।","फ़िल्टर बदलें या मौजूदा मोबाइल खोज के विस्तृत परिणाम देखें।"],links:[{label:"मोबाइल रिसर्च",url:"#mobileResearchSearch"}]};
     var status=document.getElementById("mobileResearchSearchStatus");
     var fallback=!!(status&&/no exact catalogue match/i.test(status.textContent));
-    var paragraphs=[(fallback?"सटीक मिलान नहीं मिला; पास के documented मॉडल: ":"मौजूदा शोध में "+matches.length+" संबंधित मोबाइल मॉडल: ")];
-    var links=[{label:"इन मोबाइलों के प्रमाण और फ़िल्टर देखें",url:"#mobileResearchSearch"}];
+    var paragraphs=[],links=[{label:"इन मोबाइलों के प्रमाण और फ़िल्टर देखें",url:"#mobileResearchSearch"}];
+    if(groups.identity) {
+      if(groups.exact.length) {
+        paragraphs.push("सटीक मॉडल मिला: "+(groups.exact[0].card.brand||"")+" "+(groups.exact[0].card.model||"")+". नीचे इससे अलग मॉडल केवल संबंधित विकल्प के रूप में दिखेंगे।");
+      } else {
+        paragraphs.push("आपने "+groups.identity+" माँगा था, लेकिन उस सटीक मॉडल की पुष्टि इन खोज परिणामों में नहीं हुई। दूसरे मॉडल को वही फोन बताकर नहीं दिखाऊँगा।");
+      }
+    } else {
+      paragraphs.push(fallback?"सटीक मिलान नहीं मिला; पास के documented मॉडल: ":"मौजूदा शोध में "+matches.length+" संबंधित मोबाइल मॉडल:");
+    }
+    var visible=groups.identity?groups.exact.slice(0,1).concat(groups.related.slice(0,2)):matches.slice(0,3);
     var shopping=root.CouponWorldMobileResearch;
-    matches.slice(0,3).forEach(function(item) {
-      var card=item.card||{},fields=resultFields(card,request.query,2);
-      var name=(card.brand||"")+" "+(card.model||"");
-      paragraphs.push(name.trim()+(fields.length?" — "+fields.map(function(f){return f.label+": "+f.value;}).join("; "):" — विवरण के लिए स्रोत देखें।"));
-      if(shopping&&typeof shopping.retailerOptions==="function") {
+    visible.forEach(function(item) {
+      var card=item.card||{}, fields=resultFields(card,request.query,2);
+      var name=((card.brand||"")+" "+(card.model||"")).trim();
+      var isExact=!groups.identity||groups.exact.indexOf(item)>=0;
+      paragraphs.push((groups.identity?(isExact?"सटीक मॉडल — ":"संबंधित विकल्प (अलग मॉडल) — "):"")+name+
+        (fields.length?" — "+fields.map(function(f){return f.label+": "+f.value;}).join("; "):" — स्रोत-समर्थित विस्तृत विवरण अभी उपलब्ध नहीं है।"));
+      // Never supply purchase links for a different model in an exact-model request.
+      if(isExact&&shopping&&typeof shopping.retailerOptions==="function") {
         var choices=shopping.retailerOptions(card);
         choices.forEach(function(choice) {
           var safe=retailerOption({retailer:String(choice.retailer||"").toLowerCase(),url:choice.url,
@@ -193,7 +236,7 @@
         });
       }
     });
-    paragraphs.push("यह research coverage क्रम है, verified Top-3 खरीद सलाह नहीं। सिर्फ पहले से saved exact-model listing या retailer searches दिखाई गई हैं। Amazon affiliate links से Coupon World को commission मिल सकता है; खरीद और price/stock की पुष्टि retailer पर करें।");
+    paragraphs.push("यह research coverage क्रम है, verified Top-3 खरीद सलाह नहीं। कीमत, स्टॉक और RAM/storage की पुष्टि स्टोर पर करें। केवल पहले से सहेजे गए मॉडल लिंक या retailer searches उपलब्ध हैं; Amazon affiliate links से Coupon World को commission मिल सकता है।");
     return {paragraphs:paragraphs,links:links};
   }
   async function ask(value) {
