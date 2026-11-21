@@ -51,12 +51,13 @@ def main() -> None:
                     "flipkart_links": result.locator("a:has-text('Check live price on Flipkart')").count(),
                     "shopping_api_requests": shopping_requests, "page_errors": errors[:3],
                     "section_text": result.inner_text()[:600],
+                    "reviewed_amounts": result.locator(".research-top3-result .research-source-note").all_text_contents(),
                     "unverified_budget_labels": result.inner_text().count("selected budget range unverified"),
                     "dated_price_band_labels": result.inner_text().count("Dated reference in selected band"),
                 }
                 print("LIVE_TOP3_AUDIT " + json.dumps(output, ensure_ascii=False), flush=True)
                 expected_count = {
-                    "mobile-10k": 0, "mobile-15k": 0, "mobile-20k": 3,
+                    "mobile-10k": 1, "mobile-15k": 3, "mobile-20k": 3,
                     "mobile-25k": 3, "desktop-30k": 2,
                     "desktop-battery": 3, "desktop-gaming": 3,
                 }[device]
@@ -67,7 +68,18 @@ def main() -> None:
                     dated = result.inner_text().count("Dated reference in selected band; current price unverified")
                     if dated != cards.count():
                         failures.append(device + " showed ranked phone without dated price-band evidence")
+                    if device == "mobile-10k":
+                        if "Lava Bold N2 Lite" not in result.inner_text() or "9,299" not in result.inner_text():
+                            failures.append("₹10k is missing checked Lava Bold N2 Lite 3/64 ₹9,299")
+                    if device == "mobile-15k":
+                        for expected in ("Lava Bold N2", "Lava Virat V1", "10,499", "10,799", "12,999"):
+                            if expected not in result.inner_text():
+                                failures.append("₹15k missing reviewed SKU evidence: " + expected)
                     if device in ("mobile-10k", "mobile-15k"):
+                        if "OPPO A5x" in result.locator(".research-verified-top3").inner_text():
+                            failures.append(device + " admitted mismatched OPPO A5x 4G/5G")
+                        if result.locator("a:has-text('Dated price source')").count() != cards.count():
+                            failures.append(device + " dated price source links missing")
                         if "Additional relevant phones" not in result.inner_text():
                             failures.append(device + " missing separately-labelled research alternatives")
                 if len(titles) != len(set(titles)): failures.append(device + " duplicate model names")
