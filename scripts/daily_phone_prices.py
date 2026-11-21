@@ -10,6 +10,7 @@ import sys
 import time
 from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
+from urllib.parse import quote_plus
 from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -141,27 +142,50 @@ def collect(previous, rows, cards, client, now, pause=time.sleep):
     return previous
 
 
-def render_store(row, store, observed, now):
-    if store == "Croma" and not row.get("croma_id"):
-        return "<td>Exact Croma listing pending</td>"
+def render_store(row, store, observed, now, name=""):
+    q = quote_plus(name)
+    search_url = {
+        "Amazon": "https://www.amazon.in/s?k=" + q + "&tag=guru07cc-21",
+        "Flipkart": "https://www.flipkart.com/search?q=" + q,
+        "Croma": row.get("croma_url") or "https://www.croma.com/searchB?q=" + q,
+    }[store]
+    direct_listing = store == "Croma" and row.get("croma_id")
+    actions = f'<a class="phone-watch-store-link" rel="sponsored nofollow noopener" href="{esc(search_url)}">{esc(store)} ↗</a>'
+    details = "Search listing" if not direct_listing else "Exact listing"
     stamp = observed.get("checked_at")
-    if not stamp:
-        return "<td>Awaiting API observation</td>"
-    try:
-        checked = datetime.fromisoformat(stamp).astimezone(IST)
-    except (TypeError, ValueError):
-        return "<td>Awaiting API observation</td>"
-    label = checked.strftime("%d %b, %H:%M IST")
-    if not timedelta(0) <= now - checked <= timedelta(hours=72):
-        return f"<td>Refresh pending<br><small>Last checked {esc(label)}</small></td>"
-    prices = []
-    for offer in observed.get("offers", []):
-        price = offer.get("price")
-        url = observation_url(store.lower(), offer)
-        if type(price) in (int, float) and price > 0 and offer.get("availability") == "in_stock" and url:
-            prices.append(f'<a href="{esc(url)}">₹{price:,.0f}</a> <small>{esc(offer["variant"])}</small>')
-    details = "<br>".join(prices[:3]) if prices else "No exact in-stock price returned"
-    return f"<td>{details}<br><small>{esc(label)}</small></td>"
+    if stamp:
+        try:
+            checked = datetime.fromisoformat(stamp).astimezone(IST)
+        except (TypeError, ValueError):
+            checked = None
+        if checked:
+            label = esc(checked.strftime("%d %b, %H:%M IST"))
+            details = f"Refresh pending · {label}"
+            if timedelta(0) <= now - checked <= timedelta(hours=72):
+                prices = []
+                for offer in observed.get("offers", []):
+                    price = offer.get("price")
+                    url = observation_url(store.lower(), offer)
+                    if type(price) in (int, float) and price > 0 and offer.get("availability") == "in_stock" and url:
+                        prices.append(f'<a href="{esc(url)}">₹{price:,.0f}</a> <span>{esc(offer["variant"])}</span>')
+                details = ("<br>".join(prices[:3]) if prices else "No exact in-stock price returned") + f"<br>{label}"
+    return f'<li>{actions}<small>{details}</small></li>'
+
+
+def render_image(media, output, name):
+    photo = media.get("photo") or media.get("reviewed_model_photo")
+    path = photo["url"] if photo else media.get("representative_illustration")
+    if not path or not (output / path.lstrip("/")).is_file():
+        path = "/assets/phone-illustrations/representative-smartphone.webp"
+        photo = None
+    caption = "AI illustration · not the actual phone"
+    alt = ""
+    if photo:
+        alt = name + " model photograph"
+        caption = (f'<a href="{esc(photo["source"])}">{esc(photo["author"])}</a> · '
+                   f'<a href="{esc(photo["license_url"])}">{esc(photo["license"])}</a> · resized')
+    return (f'<figure class="phone-watch-image"><img src="{esc(path)}" alt="{esc(alt)}" '
+            f'loading="lazy" decoding="async"><figcaption>{caption}</figcaption></figure>')
 
 
 def publish(output, snapshot_path=None):
@@ -169,6 +193,10 @@ def publish(output, snapshot_path=None):
     data = json.loads(Path(snapshot_path).read_text()) if snapshot_path else {}
     stores = data.get("stores", {})
     now = datetime.now(IST)
+    media = {}
+    for filename in ("mobile_research_catalogue", "india_sales_eight_research", "india_recent_manufacturer_research"):
+        feed = json.loads((output / "data" / f"{filename}.json").read_text())
+        media.update({card["model_key"]: card for card in feed["model_cards"]})
     body = []
     for row in rows:
         key = row["model_key"]
@@ -176,18 +204,21 @@ def publish(output, snapshot_path=None):
         name = card["model"] if card["model"].lower().startswith(card["brand"].lower() + " ") else f'{card["brand"]} {card["model"]}'
         evidence = row["evidence"]
         source = f'<a href="{esc(SOURCES[evidence])}">{esc(evidence)}</a>'
-        body.append(f"<tr><th scope='row'>{esc(name)}</th><td>{source}</td>" +
-                    "".join(render_store(row, store, stores.get(key, {}).get(store, {}), now) for store in PLATFORMS) + "</tr>")
+        shop_links = "".join(render_store(row, store, stores.get(key, {}).get(store, {}), now, name) for store in PLATFORMS)
+        body.append(
+            '<article class="phone-watch-card">' + render_image(media.get(key, {}), output, name) +
+            f'<div class="phone-watch-details"><h2>{esc(name)}</h2><p>{source}</p>' +
+            f'<ul aria-label="{esc(name)} retailer options">{shop_links}</ul></div></article>'
+        )
     status = f'Latest collection attempt {esc(data["attempted_on"])} · {int(data["calls_attempted"])} API requests.' if data.get("attempted_on") else "First API collection pending."
-    page = """<h1>India phone price watch · 30 models</h1>
-    <p>All 30 are already in the Coupon World research catalogue. Five have a published Q2 2026 India sell-through rank.
-    Other models come from Q3 shipment coverage and tracked sell-through. This watchlist does not represent a current national sales ranking.</p>
-    <p>QuickCommerce API research observations for Delhi PIN 110001. Retailer checks rotate within 60 requests per day.
-    Each observation shows its own time and listing configuration. Check the retailer for the final price, stock and charges.</p>"""
-    page += f'<p>{status}</p><div style="overflow-x:auto"><table><thead><tr><th>Phone</th><th>Selection evidence</th>' + "".join(f"<th>{p}</th>" for p in PLATFORMS) + "</tr></thead><tbody>" + "".join(body) + "</tbody></table></div>"
+    page = """<h1>India Top 30 Phones</h1>
+    <p>Five models are from the published Q2 India sales Top 5. The others are selected from shipment reports and sell-through tracking. The selection is a price watchlist rather than a national sales ranking.</p>
+    <p>Prices are dated API observations for Delhi PIN 110001. Retailer checks rotate within 60 requests per day.</p>"""
+    page += f'<p>{status}</p><div class="phone-watch-grid">' + "".join(body) + "</div>"
     target = output / ROUTE.lstrip("/")
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(doc("India phone price watch · 30 models", "Dated Amazon, Flipkart and Croma price observations for selected India phones.", ROUTE, page, {"@context": "https://schema.org", "@type": "WebPage"}), encoding="utf-8")
+    html = doc("India Top 30 Phones", "Dated Amazon, Flipkart and Croma price observations for selected India phones.", ROUTE, page, {"@context": "https://schema.org", "@type": "WebPage"})
+    target.write_text(html.replace("</head>", '<link rel="stylesheet" href="/assets/phone-watch-grid.css">\n</head>'), encoding="utf-8")
     target = output / SNAPSHOT_PATH
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(data, ensure_ascii=False) + "\n", encoding="utf-8")

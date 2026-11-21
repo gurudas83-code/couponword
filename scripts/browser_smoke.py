@@ -616,6 +616,22 @@ def run(root: Path):
                     for removed in ("answers/best-apple-phone-under-7000/", "compare/apple-iphone-17-vs-apple-iphone-16/", "phones/under-25000/best-camera/"):
                         response=page.goto(url+removed, wait_until="domcontentloaded")
                         assert response.status == 404, removed
+                    page.goto(url, wait_until="domcontentloaded")
+                    watch_link = page.locator(".phone-editorial .india-watch-feature")
+                    assert watch_link.is_visible(), width
+                    if width == 1440:
+                        assert watch_link.bounding_box()["x"] > page.locator(".hero-copy").bounding_box()["x"], width
+                    watch_link.click()
+                    page.wait_for_url("**/seo/india-30-phone-price-watch.html")
+                    cards = page.locator(".phone-watch-card")
+                    assert cards.count() == 30, width
+                    assert cards.locator("img").count() == 30, width
+                    assert cards.locator(".phone-watch-store-link").count() == 90, width
+                    loaded_image = cards.first.locator("img")
+                    loaded_image.scroll_into_view_if_needed()
+                    loaded_image.evaluate("img => img.decode()")
+                    assert cards.first.locator("h2").bounding_box()["x"] > loaded_image.bounding_box()["x"], width
+                    assert page.evaluate("document.documentElement.scrollWidth") <= width + 8, width
                     # Reproduce the full-catalogue view shown in the narrow-card bug.
                     page.goto(url + "#mobileResearchCatalogue", wait_until="domcontentloaded")
                     page.locator("#mobileResearchCatalogueGrid .mobile-research-model-card").first.wait_for(state="visible")

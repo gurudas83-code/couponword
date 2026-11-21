@@ -1404,3 +1404,33 @@ body.clean-ui #mobileResearchCompare:focus { outline:0; }
   .research-budget-primary-grid,.research-budget-related-list{grid-template-columns:1fr}
   .research-budget-tier{padding:12px}
 }
+
+.india-watch-feature {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin: 0 0 16px;
+  padding: clamp(14px, 2vw, 22px);
+  background: #264e3e;
+  border: 1px solid #315c49;
+  border-radius: 15px;
+  color: #fff;
+  text-decoration: none;
+}
+.india-watch-feature strong {
+  display: block;
+  font-size: clamp(1.4rem, 2.5vw, 2.1rem);
+  line-height: 1.15;
+  letter-spacing: -.025em;
+}
+.india-watch-feature-copy > span {display:block;margin-top:6px;color:#e3eee6;font-size:.86rem}
+.india-watch-feature > span:last-child {font-size:1.5rem;color:#dce7c8}
+.india-watch-feature:hover {background:#1d4031;color:#fff}
+.india-watch-feature:focus-visible {outline:3px solid #ab763d;outline-offset:3px}
+@media(max-width:640px) {
+  .phone-editorial .india-watch-feature {grid-column:1/-1;grid-row:1;margin-bottom:4px}
+  .phone-editorial .editorial-topline {grid-row:2}
+  .phone-editorial .hero-phone-art,.phone-editorial .editorial-caption {grid-row:3}
+  .phone-editorial .editorial-cta {grid-row:4}
+}
