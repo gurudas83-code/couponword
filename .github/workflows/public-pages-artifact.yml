@@ -3,8 +3,8 @@ name: Build public GitHub Pages artifact
 on:
   workflow_dispatch:
   schedule:
-    # Daily at 07:43 IST.
-    - cron: "13 2 * * *"
+    # Daily at 17:13 IST, ahead of the 18:00–19:00 IST target window.
+    - cron: "43 11 * * *"
   push:
     branches:
       - main
