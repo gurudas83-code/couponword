@@ -68,7 +68,10 @@ def run(root: Path):
                         "() => !!window.CouponWorldAssistant && !!window.CouponWorldAssistantCore && !!window.CouponWorldQueryParser",
                         timeout=15000,
                     )
-                    assert page.locator("#cwAssistantForm").is_visible(), width
+                    assistant_form = page.locator("#cwAssistantForm")
+                    assert not assistant_form.is_visible(), width
+                    page.locator("#cwAssistant > summary").click()
+                    assert assistant_form.is_visible(), width
                     page.locator("#cwAssistantInput").fill("55 inch Xiaomi TV")
                     page.locator('#cwAssistantForm button[type="submit"]').click()
                     page.wait_for_function(
