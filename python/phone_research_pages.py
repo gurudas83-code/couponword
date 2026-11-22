@@ -201,6 +201,12 @@ def html_doc(title: str, description: str, path: str, body: str, structured: dic
 .mobile-fact-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}}
 .mobile-fact-card{{border:1px solid #c8d4df;border-radius:12px;padding:1rem}}
 .mobile-fact-card h3{{margin:0 0 .5rem}}
+.mobile-fact-media{{margin:0 0 .85rem}}
+.mobile-fact-media a{{display:block;border-radius:10px}}
+.mobile-fact-media img{{display:block;width:100%;height:clamp(140px,36vw,180px);object-fit:contain;border-radius:10px;background:#eff4ef}}
+.mobile-fact-media figcaption{{margin-top:.35rem;font-size:.75rem;line-height:1.4;overflow-wrap:anywhere}}
+.mobile-fact-brand-nav{{display:flex;flex-wrap:wrap;gap:.45rem;margin:1rem 0}}
+.mobile-fact-brand-nav a{{display:inline-flex;align-items:center;min-height:44px;padding:0 .8rem;border:1px solid #c8d4df;border-radius:8px}}
 .mobile-fact-table-wrap{{overflow-x:auto}}
 .mobile-fact-table{{border-collapse:collapse;width:100%;font-size:.95rem}}
 .mobile-fact-table th,.mobile-fact-table td{{padding:.75rem;text-align:left;border-bottom:1px solid #dbe3ea;vertical-align:top}}
@@ -236,12 +242,29 @@ def summary_fields(card: dict, maximum: int = 3) -> list[tuple[str, str]]:
     return result
 
 
-def render_card(card: dict) -> str:
+def render_card(card: dict, *, image_root: Path | None = None) -> str:
     title = model_title(card)
     keyfacts = summary_fields(card, maximum=2)
     facts = " · ".join(f"{esc(k)}: {esc(v)}" for k, v in keyfacts)
     path = HUB + slug_for(card) + "/"
-    return f'<article class="mobile-fact-card"><h3>{link(path, title)}</h3><p>{facts or "Documented specification sources available"}</p><p class="mobile-fact-small">{len(accepted_specs(card))} source-linked fields · Research, not a live offer</p></article>'
+    image = ""
+    if image_root is not None:
+        photo = card.get("photo") or {}
+        photo_url = photo.get("url", "")
+        if photo_url.startswith("/assets/") and (image_root / photo_url.lstrip("/")).is_file():
+            url = photo_url
+            alt = title
+            credit = f'{link(photo["source"], photo["author"])} · {link(photo["license_url"], photo["license"])} · resized'
+        else:
+            url = "/assets/phone-illustrations/representative-smartphone.webp"
+            alt = ""
+            credit = "AI-generated phone illustration"
+        image = (
+            f'<figure class="mobile-fact-media"><a href="{esc(path)}" aria-label="View {esc(title)} specifications">'
+            f'<img src="{esc(url)}" alt="{esc(alt)}" loading="lazy" decoding="async"></a>'
+            f'<figcaption>{credit}</figcaption></figure>'
+        )
+    return f'<article class="mobile-fact-card">{image}<h3>{link(path, title)}</h3><p>{facts or "Documented specification sources available"}</p><p class="mobile-fact-small">{len(accepted_specs(card))} source-linked fields · Research, not a live offer</p></article>'
 
 
 def model_decision_lens(card: dict, hindi: bool = False, compact: bool = False) -> str:
@@ -406,22 +429,25 @@ def render_model(card: dict, related: list[dict]) -> str:
     return html_doc(headline, description, path, body, schema)
 
 
-def render_hub(cards: list[dict]) -> str:
+def render_hub(cards: list[dict], *, image_root: Path | None = None) -> str:
     title = "Smartphone specifications with original sources"
     description = (f"Browse {len(cards)} curated India smartphone research pages with manufacturer-linked facts, "
                    "exact-variant cautions, missing fields and independent retailer searches.")
     by_brand: dict[str, list[dict]] = {}
     for card in cards:
         by_brand.setdefault(str(card["brand"]).title(), []).append(card)
-    sections = "".join(f'<section><h2>{esc(brand)} phones</h2><div class="mobile-fact-grid">'
-                       + "".join(render_card(c) for c in sorted(rows, key=lambda r: model_title(r).casefold()))
-                       + "</div></section>" for brand, rows in sorted(by_brand.items()))
+    groups = sorted(by_brand.items())
+    brand_links = "".join(link(f"#brand-{index}", brand) for index, (brand, _) in enumerate(groups, 1))
+    sections = "".join(f'<section id="brand-{index}"><h2>{esc(brand)} phones</h2><div class="mobile-fact-grid">'
+                       + "".join(render_card(c, image_root=image_root) for c in sorted(rows, key=lambda r: model_title(r).casefold()))
+                       + "</div></section>" for index, (brand, rows) in enumerate(groups, 1))
     body = f'''<nav class="crumbs" aria-label="Breadcrumb">{link("/", "Home")} / Phone specifications</nav>
 <div class="eyebrow">SMARTPHONE RESEARCH / INDIA</div><h1>Smartphone specifications with original sources</h1>
 <p class="lead">{esc(description)}</p>
 <aside class="mobile-fact-note"><strong>Editorially selected, source-linked records.</strong>
 <p>These pages reflect the existing research database, not all phones sold today. No phone on this hub has a certified live offer or an independent overall winner from this page. More models will be published only after sufficient source-backed fields pass the existing evidence checks.</p></aside>
 <p>{link("/guides/phone-budget-guides/", "Browse budget and priority guides")} · {link("/#mobileResearchSearch", "Search all 232 research models")}</p>
+<nav class="mobile-fact-brand-nav" aria-label="Browse phones by brand">{brand_links}</nav>
 {sections}
 <section><h2>What to compare before buying</h2><p>Use the linked manufacturer specifications to verify processor, display, connectivity and physical memory. Then inspect comparable independent tests for camera, battery and gaming. A missing lab result is not a poor result; it is unknown evidence. Compare the exact India RAM and storage configuration at the retailer.</p></section>'''
     schema = {"@context": "https://schema.org", "@graph": [
@@ -459,7 +485,7 @@ def render_phone_research_pages(destination: Path) -> list[str]:
     selected.sort(key=lambda c: model_title(c).casefold())
     output = destination / HUB.lstrip("/")
     output.mkdir(parents=True, exist_ok=True)
-    (output / "index.html").write_text(render_hub(selected), encoding="utf-8")
+    (output / "index.html").write_text(render_hub(selected, image_root=destination), encoding="utf-8")
     urls = [SITE + HUB]
     for card in selected:
         name = slug_for(card)
