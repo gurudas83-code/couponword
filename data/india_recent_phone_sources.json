@@ -5,17 +5,26 @@
     {
       "name": "Motorola Signature 27",
       "source": "https://www.motorola.in/smartphones-motorola-signature-27/p?skuId=780",
-      "evidence": "India product page found. Local sale and stock remain unconfirmed. Technical specification fields individually reviewed against official India manufacturer page on 18 November 2026; retailer stock/price not verified.",
+      "evidence": "Specifications reviewed against Motorola India's product listing. Current retailer price, stock and exact India RAM/storage combinations have not been independently confirmed.",
       "context": "https://www.motorola.com/in/blogs/press-news/motorola-signature-27",
       "photo_reuse": {
         "status": "WRITTEN_PERMISSION_REQUIRED",
         "review_source": "https://www.motorola.in/legal/terms-of-use"
       },
       "reviewed_specs": {
-        "chipset": "Snapdragon 8 Elite Extreme Gen 6",
-        "display_type_description": "Extreme AMOLED Duo display; specific India display characteristics should be checked against the official model SKU"
+        "chipset": "Qualcomm Snapdragon 8 Elite Extreme Gen 6",
+        "display_type_description": "6.8-inch Extreme AMOLED Duo, 2772 × 1272, LTPO",
+        "battery_capacity_description": "7,000 mAh silicon-carbon battery",
+        "rear_camera_system": "50 MP Sony LYTIA L910 main (OIS), 50 MP ultrawide and 200 MP periscope (OIS), 3.5× optical zoom",
+        "charging_description": "90 W wired and 50 W wireless TurboPower",
+        "front_camera_system": "50 MP with autofocus",
+        "memory_storage_description": "12 GB or 16 GB LPDDR5X RAM; 256 GB or 512 GB UFS 4.1 storage listed. Exact RAM/storage pairings depend on the SKU.",
+        "operating_system": "Android 17; Motorola lists up to seven years of OS and security support.",
+        "durability": "IP68 and IP69; Gorilla Glass Ceramic 3 front; aluminium frame",
+        "audio": "Audio by Bang & Olufsen",
+        "colour_options": "PANTONE Capulet Olive or PANTONE Coal Smoke"
       },
-      "reviewed_on": "2026-11-18"
+      "reviewed_on": "2026-11-22"
     },
     {
       "name": "Karbonn Rebel",

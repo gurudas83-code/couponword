@@ -26,9 +26,10 @@ class RecentIndiaPhonesTests(unittest.TestCase):
             self.assertGreaterEqual(len(card["specifications"]), 2)
             self.assertTrue(all(field["source_url"] == card["manufacturer_page"]
                                 for field in card["specifications"].values()))
-            self.assertTrue(all(field["checked_at"] == "2026-11-18"
+            reviewed = "2026-11-22" if card["model_key"] == "motorola|signature 27" else "2026-11-18"
+            self.assertTrue(all(field["checked_at"] == reviewed
                                 for field in card["specifications"].values()))
-            self.assertEqual(card["research_checked_at"], "2026-11-18")
+            self.assertEqual(card["research_checked_at"], reviewed)
             if card["model_key"] in {"samsung|galaxy f70 5g", "redmi|redmi 17c 5g", "realme|p4s lite"}:
                 self.assertGreaterEqual(len(card["specifications"]), 5)
             self.assertEqual(card["verified_retailer_links"], [])
