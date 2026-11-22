@@ -49,38 +49,47 @@ def budget_examples(destination, guide, hindi=False):
 
 
 def budget_lane_widgets(destination, guide, hindi=False):
-    """Show budget slots that populate only from verified affiliate offers."""
+    """Show budget slots from the saved retailer observations, with gates visible."""
     from python.phone_research_pages import model_title, slug_for
     caps = (10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 70000)
     catalogue = json.loads((Path(destination) / "data/mobile_research_catalogue.json").read_text(encoding="utf-8"))
     cards = catalogue.get("model_cards") or []
     by_name = {(str(c.get("brand", "")).casefold(), str(c.get("model", "")).casefold()): c for c in cards}
-    path = Path(destination) / "data/retailer_offers.json"
+    path = Path(destination) / "data/retailer_price_observations.json"
     payload = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
-    offers = payload.get("offers", []) if isinstance(payload, dict) else payload if isinstance(payload, list) else []
-    verified = []
-    for offer in offers:
-        if not isinstance(offer, dict) or str(offer.get("verification_status", "")).upper() != "VERIFIED":
+    observed = []
+    for model_key, rows in (payload.get("models", {}) if isinstance(payload, dict) else {}).items():
+        card = next((c for c in cards if c.get("model_key") == model_key), None)
+        if not card:
             continue
-        if not (offer.get("cta_eligible") or offer.get("purchase_cta_eligible")) or not offer.get("affiliate_url"):
-            continue
-        try:
-            price = float(offer.get("price"))
-        except (TypeError, ValueError):
-            continue
-        card = by_name.get((str(offer.get("brand", "")).casefold(), str(offer.get("model", "")).casefold()))
-        if card and price > 0:
-            verified.append((price, offer, card))
+        for row in rows if isinstance(rows, list) else []:
+            for offer in row.get("offers", []) if isinstance(row, dict) else []:
+                if not isinstance(offer, dict) or offer.get("availability") not in {"in_stock", "available", "instock"}:
+                    continue
+                try:
+                    price = float(offer.get("price"))
+                except (TypeError, ValueError):
+                    continue
+                if price <= 0:
+                    continue
+                retailer = str(offer.get("retailer", "")).lower()
+                product_id = str(offer.get("retailer_product_id", "")).strip()
+                if retailer == "amazon" and product_id:
+                    link = f"https://www.amazon.in/dp/{product_id}?tag=guru07cc-21"
+                else:
+                    link = str(offer.get("product_url", ""))
+                if link:
+                    observed.append((price, offer, row, card, link))
     items = []
     prefix = "/hi" if hindi else ""
     for cap in caps:
-        candidates = [row for row in verified if row[0] < cap]
+        candidates = [row for row in observed if row[0] < cap]
         if candidates:
-            price, offer, card = sorted(candidates, key=lambda row: row[0], reverse=True)[0]
-            items.append(f'<article class="budget-lane-card"><p class="budget-lane-cap">Under ₹{cap:,}</p><h3><a href="{prefix}/phones/{slug_for(card)}/">{esc(model_title(card))}</a></h3><p><strong>₹{price:,.0f}</strong> · {esc(str(offer.get("availability", "in stock")))}</p><p class="budget-lane-meta">{esc(str(offer.get("variant", "Exact variant")))} · checked {esc(str(offer.get("checked_at", "recently")))}</p><a class="budget-lane-cta" href="{esc(offer["affiliate_url"])}" rel="sponsored nofollow noopener" target="_blank">View retailer offer</a></article>')
+            price, offer, row, card, link = sorted(candidates, key=lambda item: item[0], reverse=True)[0]
+            items.append(f'<article class="budget-lane-card"><p class="budget-lane-cap">Under ₹{cap:,}</p><h3><a href="{prefix}/phones/{slug_for(card)}/">{esc(model_title(card))}</a></h3><p><strong>₹{price:,.0f} observed</strong> · {esc(str(offer.get("availability", "in stock")))}</p><p class="budget-lane-meta">{esc(str(row.get("variant", "Exact variant")))} · checked {esc(str(offer.get("observed_at", "recently")))}</p><a class="budget-lane-cta" href="{esc(link)}" rel="sponsored nofollow noopener" target="_blank">Open retailer listing</a></article>')
         else:
-            items.append(f'<article class="budget-lane-card budget-lane-empty"><p class="budget-lane-cap">Under ₹{cap:,}</p><h3>Verified pick pending</h3><p>Exact price, stock and retailer SKU have not passed the live-offer gate yet.</p><a href="{prefix}/#mobileResearchSearch">Search documented phones</a></article>')
-    return '<section class="budget-lanes" aria-labelledby="budget-lanes-title"><h2 id="budget-lanes-title">Verified picks by budget</h2><p>These cards populate only when an authorized fresh offer passes the exact-variant, price, stock and freshness gates.</p><div class="budget-lane-grid">' + "".join(items) + '</div></section>'
+            items.append(f'<article class="budget-lane-card budget-lane-empty"><p class="budget-lane-cap">Under ₹{cap:,}</p><h3>No observed phone in this lane</h3><p>Search the documented 232-phone catalogue and confirm today’s exact offer.</p><a href="{prefix}/#mobileResearchSearch">Search documented phones</a></article>')
+    return '<section class="budget-lanes" aria-labelledby="budget-lanes-title"><h2 id="budget-lanes-title">Observed phone picks by budget</h2><p>Selected from saved in-stock retailer observations. These are not quality rankings; re-check exact variant, price, stock and delivery before buying.</p><div class="budget-lane-grid">' + "".join(items) + '</div></section>'
 
 
 def decision_support(guide):
