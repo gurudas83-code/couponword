@@ -57,6 +57,12 @@ class RecentIndiaPhonesTests(unittest.TestCase):
             for model in ("Samsung Galaxy F70 5G", "REDMI 17C 5G", "realme P4s Lite"):
                 self.assertIn(model, html)
             self.assertIn('rel="canonical"', html)
+            self.assertEqual(html.count("AI-generated · two views of the same model"), 13)
+            for card in payload["model_cards"]:
+                slug = card["detail_url"].rstrip("/").rsplit("/", 1)[-1]
+                image = f"assets/phone-illustrations/recent-india-pairs/{slug}.png"
+                self.assertIn(f'src="/{image}"', html)
+                self.assertTrue((Path(folder) / image).is_file())
             for card in payload["model_cards"]:
                 detail = Path(folder) / card["detail_url"].lstrip("/") / "index.html"
                 content = detail.read_text(encoding="utf-8")
