@@ -242,6 +242,15 @@ def summary_fields(card: dict, maximum: int = 3) -> list[tuple[str, str]]:
     return result
 
 
+APPLE_ILLUSTRATIONS = {
+    "apple-iphone-16": "/assets/phone-illustrations/apple-iphone-16-ai.png",
+    "apple-iphone-16-pro": "/assets/phone-illustrations/apple-iphone-16-pro-ai.png",
+    "apple-iphone-17": "/assets/phone-illustrations/apple-iphone-17-ai.png",
+    "apple-iphone-17-pro": "/assets/phone-illustrations/apple-iphone-17-pro-ai.png",
+    "apple-iphone-17-pro-max": "/assets/phone-illustrations/apple-iphone-17-pro-max-ai.png",
+}
+
+
 def render_card(card: dict, *, image_root: Path | None = None) -> str:
     title = model_title(card)
     keyfacts = summary_fields(card, maximum=2)
@@ -251,7 +260,11 @@ def render_card(card: dict, *, image_root: Path | None = None) -> str:
     if image_root is not None:
         photo = card.get("photo") or {}
         photo_url = photo.get("url", "")
-        if photo_url.startswith("/assets/") and (image_root / photo_url.lstrip("/")).is_file():
+        if apple_url := APPLE_ILLUSTRATIONS.get(slug_for(card)):
+            url = apple_url
+            alt = f"AI illustration of {title}"
+            credit = "AI-generated image"
+        elif photo_url.startswith("/assets/") and (image_root / photo_url.lstrip("/")).is_file():
             url = photo_url
             alt = title
             credit = f'{link(photo["source"], photo["author"])} · {link(photo["license_url"], photo["license"])} · resized'
@@ -368,7 +381,13 @@ def render_model(card: dict, related: list[dict]) -> str:
     facts = "".join(f"<li>{esc(k)}: <strong>{esc(v)}</strong></li>" for k,v in summary_fields(card, maximum=3))
     photo = card.get("photo")
     photo_html = ""
-    if photo:
+    if apple_url := APPLE_ILLUSTRATIONS.get(slug_for(card)):
+        photo_html = (
+            f'<figure class="mobile-fact-media"><img src="{esc(apple_url)}" width="1254" height="1254" '
+            f'alt="AI illustration of {esc(title)}" decoding="async">'
+            '<figcaption>AI-generated image</figcaption></figure>'
+        )
+    elif photo:
         credit = f'{photo["title"]} by {photo["author"]}' if photo.get("title") else photo["author"]
         photo_html = (
             f'<figure><img src="{esc(photo["url"])}" width="{photo["width"]}" height="{photo["height"]}" '
