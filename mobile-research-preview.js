@@ -578,7 +578,7 @@
     var rows;
     if (c.budget != null) {
       var ref = card.research_budget_reference;
-      if (!ref || ref.live_offer !== false || !(ref.reference_price_inr > 0)) return [];
+      if (!validResearchBudgetReference(ref)) return [];
       if (c.inclusive ? ref.reference_price_inr > c.budget : ref.reference_price_inr >= c.budget) return [];
       if (c.lower != null && ref.reference_price_inr < c.lower) return [];
       rows = [{ ram_gb: ref.ram_gb, storage_gb: ref.storage_gb, variant_text: (ref.ram_gb == null ? "RAM not officially specified" : ref.ram_gb + "GB RAM") + " / " + ref.storage_gb + "GB storage", research_reference: true }];
@@ -586,6 +586,14 @@
       rows = inventoryRowsForCard(card);
     }
     return rows.filter(function (row) { return (c.ram == null || Number(row.ram_gb) === c.ram) && (c.storage == null || Number(row.storage_gb) === c.storage); });
+  }
+
+  function validResearchBudgetReference(ref) {
+    if (!ref || ref.live_offer !== false || ref.ranking_weight !== 0) return false;
+    if (typeof ref.reference_price_inr !== "number" || !Number.isFinite(ref.reference_price_inr) || ref.reference_price_inr <= 0) return false;
+    if (!ref.checked_at || !Number.isFinite(Date.parse(String(ref.checked_at)))) return false;
+    if (/(OUT[\s._-]*OF[\s._-]*STOCK|UNAVAILABLE|DISCONTINUED)/i.test(String(ref.stock_indication || ""))) return false;
+    return true;
   }
 
   function excludedBrand(query) {
