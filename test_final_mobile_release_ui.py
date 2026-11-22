@@ -13,11 +13,11 @@ class FinalMobileReleaseUITests(unittest.TestCase):
         self.assertIn('<body class="clean-ui">', source)
         # Five primary shortcuts; the full 40-band coverage stays in the
         # advanced filter, not in a crowded homepage button menu.
-        primary = (("₹10k", "mobile under 10000"),
-                   ("₹15k", "mobile under 15000"),
-                   ("₹20k", "mobile under 20000"),
-                   ("₹25k", "mobile under 25000"),
-                   ("₹30k", "mobile under 30000"))
+        primary = (("₹5k–&lt;₹10k", "mobile under 10000"),
+                   ("₹10k–&lt;₹15k", "mobile under 15000"),
+                   ("₹15k–&lt;₹20k", "mobile under 20000"),
+                   ("₹20k–&lt;₹25k", "mobile under 25000"),
+                   ("₹25k–&lt;₹30k", "mobile under 30000"))
         self.assertEqual(
             len(re.findall(r'<button[^>]*data-mobile-query="mobile under \d+"', source)),
             len(primary),
@@ -25,7 +25,7 @@ class FinalMobileReleaseUITests(unittest.TestCase):
         for budget, query in primary:
             self.assertRegex(
                 source,
-                rf'data-mobile-query="{re.escape(query)}"[^>]*>{re.escape(budget)}',
+                rf'data-mobile-query="{re.escape(query)}"[^>]*>{re.escape(budget)}</button>',
             )
         self.assertNotIn('class="cw-budget-more"', source)
         self.assertIn('id="researchGuidedBudget"', source)
