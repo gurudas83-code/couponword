@@ -632,6 +632,44 @@ function standardBuyingGuideFallback() {
   return '<p class="standard-guide-fallback"><a class="btn btn-ghost" href="/guides/smartphone-buying-guide/">Standard Buying Guide</a> <a class="btn btn-ghost" href="#mobileResearchSearch">Browse saved smartphone research</a></p><p>Saved research is dated context; current price, stock and delivery require retailer confirmation.</p>';
 }
 
+async function renderOfferUnavailableWithResearch(query, signal) {
+  try {
+    const response = await fetch("/data/mobile_research_preview.json", { credentials: "omit", signal });
+    if (!response.ok) throw new Error("Research preview unavailable");
+    const payload = await response.json();
+    const products = Array.isArray(payload.products) ? payload.products : [];
+    const terms = normalize(query).split(/\\s+/).filter(term => term.length > 2);
+    let matches = products.filter(product => {
+      const specs = product.specifications && typeof product.specifications === "object" ? Object.values(product.specifications).map(item => item && item.value).join(" ") : "";
+      const haystack = normalize([product.brand, product.model, product.ram_gb + "gb", product.storage_gb + "gb", specs].join(" "));
+      return !terms.length || terms.some(term => haystack.includes(term));
+    }).slice(0, 4);
+    if (!matches.length) {
+      const catalogueResponse = await fetch("/data/mobile_research_catalogue.json", { credentials: "omit", signal });
+      if (catalogueResponse.ok) {
+        const catalogue = await catalogueResponse.json();
+        const catalogueProducts = Array.isArray(catalogue.model_cards) ? catalogue.model_cards : [];
+        const catalogueTerms = terms.filter(term => !/^(mobile|mobiles|phone|phones|smartphone|smartphones|under|below|within|budget|price|in|india|\\d+)$/.test(term));
+        const catalogueMatches = catalogueProducts.filter(product => {
+          const haystack = normalize([product.brand, product.model, product.variant_text, product.status].join(" "));
+          return catalogueTerms.length ? catalogueTerms.some(term => haystack.includes(term)) : product.status !== "NEEDS_VERIFICATION";
+        });
+        matches = (catalogueMatches.length ? catalogueMatches : catalogueProducts.filter(product => product.status !== "NEEDS_VERIFICATION")).slice(0, 4);
+      }
+    }
+    if (!matches.length) { renderOfferUnavailable(); return; }
+    const cards = matches.map(product => {
+      const specs = product.specifications && typeof product.specifications === "object" ? Object.values(product.specifications).filter(item => item && item.value != null).slice(0, 4).map(item => "<li><strong>" + escapeHTML(item.label || "Specification") + "</strong><span>" + escapeHTML(String(item.value)) + "</span></li>").join("") : "<li><strong>Research status</strong><span>" + escapeHTML(product.status || "RESEARCH_ONLY") + "</span></li><li><strong>Variant</strong><span>" + escapeHTML(product.variant_text || "Not specified") + "</span></li>";
+      const source = product.official_source || (product.source_provenance && product.source_provenance.identity_source) || (Array.isArray(product.source_urls) ? product.source_urls[0] : "");
+      return "<article class=\"ai-result-card research-fallback-card\"><div class=\"research-status\">EVIDENCE-BACKED REFERENCE</div><h3>" + escapeHTML((product.brand || "") + " " + (product.model || "")).trim() + "</h3><p><strong>" + escapeHTML(product.ram_gb || "?") + "GB RAM · " + escapeHTML(product.storage_gb || "?") + "GB storage</strong></p><ul class=\"research-fallback-specs\">" + specs + "</ul><p class=\"card-note\">Technical research only. Price, stock and delivery still need retailer confirmation.</p>" + (source ? "<a class=\"btn btn-ghost\" href=\"" + escapeHTML(safeLink(source)) + "\" target=\"_blank\" rel=\"noopener noreferrer\">View source evidence</a>" : "") + "</article>";
+    }).join("");
+    const card = document.getElementById("shoppingBrainCard");
+    if (card) card.innerHTML = "<section class=\"ai-detail-block ai-unknowns\" aria-label=\"Verified offer status\"><h3>Live offers are unavailable right now</h3><p>No current in-stock retailer offer passed the price, identity and freshness gates for this search. We found the closest documented phone references below so your research does not stop here.</p><div class=\"ai-section-card-grid research-fallback-grid\">" + cards + "</div><p class=\"card-note\">Research references are not purchase offers. Confirm the exact variant, current price, stock and delivery with a retailer before buying.</p></section>";
+  } catch (error) {
+    if (error && error.name === "AbortError") return;
+    renderOfferUnavailable();
+  }
+}
 function renderOfferUnavailable() {
   return `<section class="ai-detail-block ai-unknowns" aria-label="Verified offer status">
     <h3>Verified offers are currently unavailable</h3>
@@ -882,7 +920,7 @@ async function loadShoppingRecommendation(query, { background = false } = {}) {
           <p>Try a wider budget or fewer restrictions. Current prices and availability must be verified before purchase.</p>
           ${standardBuyingGuideFallback()}`;
       } else if (String(data.market_data_status || "").toUpperCase() === "CURRENT_OFFERS_UNAVAILABLE") {
-        card.innerHTML = renderOfferUnavailable();
+        await renderOfferUnavailableWithResearch(cleanQuery, controller.signal);
       } else {
         card.innerHTML = `
           <h3>No strong match found</h3>
