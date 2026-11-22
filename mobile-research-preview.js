@@ -1106,10 +1106,13 @@
     return '<div class="mobile-research-empty"><p>' + escapeHtml(message) + '</p><p>This is a research coverage gap, not proof that no suitable phone exists. No constraint has been relaxed for budget-qualified results.</p><a href="#mobileResearchCatalogue">Browse the full research catalogue</a>' + researchGuideFallback() + '</div>' + relatedRepositoryResearch(query, fallback || []);
   }
 
-  function verifiedRecommendationBridge(query, isComparison) {
+  function verifiedRecommendationBridge(query, isComparison, matches) {
     var c = researchConstraints(query);
     if (isComparison || c.budget == null) return "";
-    return '<div class="research-context research-verified-recommendations">' +
+    var topThree = /\btop\s*3\b/i.test(String(query || "")) ? (matches || []).slice(0, 3) : [];
+    var topThreeHtml = topThree.length ? '<section class="research-verified-top3" aria-label="Research-Verified top 3"><h3>Research-Verified top 3 for this budget band</h3><p>Ordered by source coverage and constraint fit, not a measured performance winner. Current price and current stock are not verified.</p><div class="research-top3-grid">' +
+      topThree.map(function (item) { return '<div class="research-top3-result">' + renderResearchResultCard(item.card, item.rows, item.group_size) + '</div>'; }).join("") + '</div></section>' : "";
+    return topThreeHtml + '<div class="research-context research-verified-recommendations">' +
       '<p><strong>Need a performance-based recommendation?</strong> This list is ordered by research coverage, not proven camera, gaming or battery performance. Check the existing recommendation engine separately; it will show results only when its evidence and eligibility rules pass.</p>' +
       '<button type="button" class="btn btn-ghost" data-research-verified-recommend>Check eligible recommendations</button></div>';
   }
@@ -1168,7 +1171,7 @@
     var additional = validBudget ? unpricedResearchLeads(lastSearchQuery) : {count: 0, html: ""};
     if (researchResults) {
       researchResults.hidden = false;
-      var bridge = verifiedRecommendationBridge(lastSearchQuery, comparison);
+      var bridge = verifiedRecommendationBridge(lastSearchQuery, comparison, matches);
       if (validBudget) {
         // Local, synchronous two-lane answer. No network round trip or
         // third-party API is required before either lane appears.
