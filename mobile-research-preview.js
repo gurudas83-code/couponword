@@ -1007,9 +1007,9 @@
       });
       return sourced.length >= 2;
     }).slice(0, 4);
-    var html = '<section class="research-budget-tier research-budget-unpriced" aria-label="Related phones with unverified price">' +
+    var html = '<section class="research-budget-tier research-budget-unpriced research-identity-only" aria-label="Related phones with unverified price">' +
       '<h3>Additional relevant phones · price not verified (' + leads.length + ')</h3>' +
-      '<p>These phones match your other documented conditions, but we cannot confirm that their exact RAM/storage variant falls within your selected budget. They may cost more. They are not ranked, in-stock or purchasable recommendations.</p>';
+      '<p>Verification pending: these phones match your other documented conditions, but we cannot confirm that their exact RAM/storage variant falls within your selected budget. They may cost more and are not budget-qualified. They are not ranked, in-stock or purchasable recommendations.</p>';
     if (!leads.length) {
       html += '<p>No additional manufacturer/source-linked research matched all the other requested conditions.</p>';
     } else {
