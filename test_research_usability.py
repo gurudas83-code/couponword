@@ -28,15 +28,19 @@ class UsabilityTests(unittest.TestCase):
             hindi = budget_examples(ROOT/'public', guide, hindi=True)
             self.assertEqual(english.count('<li>'), hindi.count('<li>'))
             self.assertLessEqual(english.count('<li>'), 6)
+            research_examples = english.split('<section class="budget-lanes"', 1)[0]
             for card in cards:
                 from python.phone_research_pages import slug_for
-                if f'/phones/{slug_for(card)}/' in english:
+                if f'/phones/{slug_for(card)}/' in research_examples:
                     ref = card['research_budget_reference']
                     self.assertLess(ref['reference_price_inr'], cap)
-                    self.assertIn(str(ref['checked_at']), english)
-            if english:
-                self.assertIn('not a performance ranking', english)
-                self.assertNotIn('₹', english)  # amounts stay hidden
-        self.assertEqual(budget_examples(ROOT/'public', {'slug': 'phone-camera-guide'}), '')
+                    self.assertIn(str(ref['checked_at']), research_examples)
+            self.assertIn('budget-lanes', english)
+            self.assertIn('Under ₹', english)
+            if research_examples:
+                self.assertIn('not a performance ranking', research_examples)
+                self.assertNotIn('₹', research_examples)  # dated amounts stay hidden
+        self.assertIn('budget-lanes', budget_examples(ROOT/'public', {'slug': 'phone-camera-guide'}))
 
 if __name__ == '__main__': unittest.main()
+
