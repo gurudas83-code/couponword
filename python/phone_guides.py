@@ -19,7 +19,7 @@ def budget_examples(destination, guide, hindi=False):
     from python.phone_research_pages import eligible, model_title, slug_for, summary_fields
     match = re.fullmatch(r"phones-under-(\d+)", guide["slug"])
     if not match:
-        return ""
+        return budget_lane_widgets(destination, guide, hindi)
     cap = int(match[1])
     catalogue = json.loads((Path(destination) / "data/mobile_research_catalogue.json").read_text(encoding="utf-8"))
     selected = []
