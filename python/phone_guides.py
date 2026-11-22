@@ -91,7 +91,9 @@ def budget_lane_widgets(destination, guide, hindi=False):
         candidates = [row for row in observed if row[0] < cap]
         if candidates:
             price, offer, row, card, link = sorted(candidates, key=lambda item: (relevance(item[3]), item[0]), reverse=True)[0]
-            items.append(f'<article class="budget-lane-card"><p class="budget-lane-cap">Under ₹{cap:,}</p><h3><a href="{prefix}/phones/{slug_for(card)}/">{esc(model_title(card))}</a></h3><p><strong>₹{price:,.0f} observed</strong> · {esc(str(offer.get("availability", "in stock")))}</p><p class="budget-lane-meta">{esc(str(row.get("variant", "Exact variant")))} · checked {esc(str(offer.get("observed_at", "recently")))}</p><a class="budget-lane-cta" href="{esc(link)}" rel="sponsored nofollow noopener" target="_blank">Open retailer listing</a></article>')
+            slug = slug_for(card)
+            detail = f'{prefix}/phones/{slug}/' if (Path(destination) / "phones" / slug / "index.html").is_file() else f'{prefix}/phones/'
+            items.append(f'<article class="budget-lane-card"><p class="budget-lane-cap">Under ₹{cap:,}</p><h3><a href="{detail}">{esc(model_title(card))}</a></h3><p><strong>₹{price:,.0f} observed</strong> · {esc(str(offer.get("availability", "in stock")))}</p><p class="budget-lane-meta">{esc(str(row.get("variant", "Exact variant")))} · checked {esc(str(offer.get("observed_at", "recently")))}</p><a class="budget-lane-cta" href="{esc(link)}" rel="sponsored nofollow noopener" target="_blank">Open retailer listing</a></article>')
         else:
             items.append(f'<article class="budget-lane-card budget-lane-empty"><p class="budget-lane-cap">Under ₹{cap:,}</p><h3>No observed phone in this lane</h3><p>Search the documented 232-phone catalogue and confirm today’s exact offer.</p><a href="{prefix}/#mobileResearchSearch">Search documented phones</a></article>')
     label = focus_terms[0].title()
