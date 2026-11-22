@@ -164,15 +164,30 @@ def displayable_prices(store, observed, now):
     return checked, sorted(prices)
 
 
-def render_store(row, store, observed, now, name="", *, lowest=False):
+def render_store(row, store, observed, now, name="", *, lowest=False, listed_price=None, reviewed_on=""):
     q = quote_plus(name)
     search_url = {
         "Amazon": amazon_search_url(name),
         "Flipkart": "https://www.flipkart.com/search?q=" + q,
         "Croma": row.get("croma_url") or "https://www.croma.com/searchB?q=" + q,
     }[store]
-    actions = f'<a class="phone-watch-store-link" rel="sponsored nofollow noopener" href="{esc(search_url)}">{esc(store)} ↗</a>'
     checked, prices = displayable_prices(store, observed, now)
+    classes = "phone-watch-store-link"
+    label = store
+    if not prices and not listed_price:
+        classes += " phone-watch-price-cta"
+        label = f"Check price on {store}"
+    if not prices and listed_price:
+        search_url = listed_price.get("listing", listed_price["source"])
+    actions = (f'<a class="{classes}" rel="sponsored nofollow noopener" '
+               f'href="{esc(search_url)}">{esc(label)} ↗</a>')
+    if not prices and listed_price:
+        amount = listed_price["price"]
+        source = esc(listed_price["source"])
+        variant = esc(listed_price["variant"])
+        return (f'<li>{actions}<small class="phone-watch-croma-reference">'
+                f'<a href="{source}">₹{amount:,} listed by Croma</a> · {variant}<br>'
+                f'Reviewed {esc(reviewed_on)} · check stock for your PIN</small></li>')
     if not checked:
         details = "Open product listing" if store == "Croma" and row.get("croma_id") else f"Search on {store}"
     else:
@@ -269,25 +284,28 @@ def publish(output, snapshot_path=None):
         cheapest_store = min(price_candidates)[1] if price_candidates else None
         in_stock_count += bool(price_candidates)
         model_research = research["models"].get(key, {})
+        croma_reference = research["croma_listed_prices"].get(key)
         if price_candidates:
             badge = '<span class="phone-watch-status has-price">Price and stock checked</span>'
-            cta = ""
         else:
-            has_reference = bool(model_research.get("reference"))
+            has_reference = bool(model_research.get("reference") or croma_reference)
             reference_count += has_reference
             label = "Store price reference" if has_reference else "Check price and stock"
             badge = f'<span class="phone-watch-status no-price">{label}</span>'
-            cta = (f'<p><a class="phone-watch-price-cta" rel="sponsored nofollow noopener" '
-                   f'href="{esc(amazon_search_url(name))}">Check price on Amazon ↗</a></p>')
         model_details = render_research(model_research, research["reviewed_on"], bool(price_candidates))
         shop_links = "".join(
-            render_store(row, store, observations.get(store, {}), now, name, lowest=store == cheapest_store)
+            render_store(
+                row, store, observations.get(store, {}), now, name,
+                lowest=store == cheapest_store,
+                listed_price=croma_reference if store == "Croma" else None,
+                reviewed_on=research["croma_reviewed_on"],
+            )
             for store in PLATFORMS
         )
         body.append(
             '<article class="phone-watch-card">' + render_image(media.get(key, {}), output, name) +
             f'<div class="phone-watch-details">{badge}<h2>{esc(name)}</h2><p>{source}</p>'
-            f'{model_details}{cta}<ul aria-label="{esc(name)} retailer options">{shop_links}</ul></div></article>'
+            f'{model_details}<ul aria-label="{esc(name)} retailer options">{shop_links}</ul></div></article>'
         )
     check_count = len(body) - in_stock_count - reference_count
     updated_at = esc(now.strftime("%d %b %Y, %H:%M IST"))

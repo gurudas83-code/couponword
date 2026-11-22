@@ -636,7 +636,8 @@ def run(root: Path):
                     assert cards.locator("img").count() == count, width
                     assert cards.locator(".phone-watch-store-link").count() == count * 3, width
                     assert cards.locator(".phone-watch-status").count() == count, width
-                    assert cards.locator(".phone-watch-price-cta").count() == cards.locator(".phone-watch-status.no-price").count(), width
+                    for store in ("Amazon", "Flipkart", "Croma"):
+                        assert cards.get_by_role("link", name=f"Check price on {store} ↗", exact=True).count() > 0, width
                     if count:
                         loaded_image = cards.first.locator("img")
                         loaded_image.scroll_into_view_if_needed()

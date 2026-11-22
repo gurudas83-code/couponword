@@ -196,5 +196,41 @@
       ],
       "listing": "https://shop.iqoo.com/in/product/2063?skuId=8374"
     }
-  }
+  },
+  "croma_listed_prices": {
+    "apple|iphone 16": {
+      "price": 69900,
+      "variant": "128 GB · Black",
+      "source": "https://www.croma.com/l/iphone-16-128gb-0ahz00a.html"
+    },
+    "samsung|galaxy a57 5g": {
+      "price": 54499,
+      "variant": "8 GB RAM / 256 GB · Awesome Icyblue",
+      "source": "https://www.croma.com/l/geomagnetic-sensor-0afz13b.html",
+      "listing": "https://www.croma.com/a/p/322129"
+    },
+    "realme|p4 power": {
+      "price": 34999,
+      "variant": "8 GB RAM / 256 GB · Trans Silver",
+      "source": "https://www.croma.com/realme-android-phones/bc/b-1090-95",
+      "listing": "https://www.croma.com/realme-p4-power-5g-8gb-ram-256gb-trans-silver-/p/320977"
+    },
+    "realme|p4x": {
+      "price": 23499,
+      "variant": "8 GB RAM / 128 GB · Matte Silver",
+      "source": "https://www.croma.com/l/672-inch-phones-0aoz00a.html",
+      "listing": "https://www.croma.com/realme-p4x-5g-8gb-ram-128gb-matte-sliver-/p/323095"
+    },
+    "samsung|galaxy a36 5g": {
+      "price": 33999,
+      "variant": "8 GB RAM / 128 GB · Awesome Black",
+      "source": "https://www.croma.com/l/samsung-galaxy-a36-5g-ram-0asz00a.html"
+    },
+    "samsung|galaxy a56 5g": {
+      "price": 46999,
+      "variant": "8 GB RAM / 256 GB · Awesome Graphite",
+      "source": "https://www.croma.com/accessories/samsung-a-series/c/6836"
+    }
+  },
+  "croma_reviewed_on": "22 Nov 2026"
 }
