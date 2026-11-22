@@ -145,6 +145,33 @@ def import_eight() -> dict:
 def _research_page(card: dict) -> str:
     name = card["brand"] + " " + card["model"]
     route = _route(card["model_key"])
+    variant_fields = {
+        "india_variant_description", "maker_ram_storage_examples",
+        "india_variant_description", "ram_storage_variant", "ram_storage_variants",
+    }
+    variant = next((field["value"] for key, field in card["specifications"].items()
+                    if key in variant_fields), "Manufacturer-listed variant; exact retailer SKU unverified")
+    image_verified = card.get("image_status") == "VERIFIED_MATCH" and bool(card.get("photo"))
+    image_text = "Verified model image" if image_verified else "Not verified — current illustration is not a model photo"
+    image_html = ('<img src="' + esc(card["photo"]) + '" width="540" height="430" loading="lazy" alt="' +
+                  esc(name) + ' verified product image">') if image_verified else (
+                  '<img src="' + esc(card["research_art_url"]) + '" width="540" height="430" loading="lazy" alt="Generic smartphone illustration; not a photo of this model">')
+    retailer = next((row for row in card.get("retailer_search_links", []) if row.get("retailer") == "amazon"), None)
+    affiliate_html = ('<a class="cr-button" href="' + esc(retailer["url"]) +
+                      '" rel="sponsored nofollow noopener" target="_blank">Search Amazon for this model</a>'
+                      if retailer else 'Affiliate link not configured')
+    commerce = f'''<section class="cr-commerce" aria-labelledby="commerce-title">
+<h2 id="commerce-title">Customer buying details</h2>
+<dl class="cr-commerce-grid">
+<div><dt>Exact variant</dt><dd>{esc(variant)}</dd></div>
+<div><dt>Verified image</dt><dd>{esc(image_text)}</dd></div>
+<div><dt>Current price</dt><dd><strong>Not verified</strong><br><small>Live authorized retailer feed required.</small></dd></div>
+<div><dt>Stock status</dt><dd><strong>Not verified</strong><br><small>Stock changes by retailer and pincode.</small></dd></div>
+<div><dt>Affiliate buying link</dt><dd>{affiliate_html}<br><small>Search link only; exact offer is not certified.</small></dd></div>
+<div><dt>Last checked</dt><dd><strong>Retailer price/stock: not checked</strong><br><small>Manufacturer research source reviewed; this is not a live offer timestamp.</small></dd></div>
+</dl>
+<p class="cr-note"><strong>Before buying:</strong> confirm RAM/storage, seller, warranty, payable price and delivery at the retailer.</p>
+</section>'''
     facts = "".join(
         '<div class="cr-fact"><dt>' + esc(key.replace("_", " ").title()) +
         '</dt><dd>' + esc(field["value"]) +
@@ -161,11 +188,10 @@ def _research_page(card: dict) -> str:
 <article class="cr-detail"><h1>{esc(name)}</h1>
 <p class="cr-lead">Source-reviewed research model. {esc(card["market_reference"])}.
 This is not a certified exact retailer SKU, a live stock check or an independently tested recommendation.</p>
-<img src="{esc(card["research_art_url"])}" width="540" height="430" loading="lazy"
- alt="Generic smartphone illustration; not a photo of this model">
-<p><small>Original generic illustration, not a manufacturer photo. Exact model imagery requires reuse clearance.</small></p>
+{image_html}
+<p><small>{esc(image_text)}. Exact model imagery requires reuse clearance unless an approved source is recorded.</small></p>
 <h2>Manufacturer-linked specifications</h2><dl class="cr-detail-facts">{facts}</dl>
-<h2>Price and availability</h2><p><strong>Current price unavailable.</strong> No exact-variant fresh authorized API observation passed publication verification.</p>
+{commerce}
 <h2>Check this model at retailers</h2><p>These three links open model-specific store searches.
 Confirm exact RAM/storage, model number, warranty, seller, payable price and availability independently before buying.</p>
 <ul>{searches}</ul>
@@ -210,8 +236,6 @@ No manufacturer source implies a live Amazon, Flipkart or Croma price.</p>
 
 def publish_eight(destination: Path) -> dict:
     payload = import_eight()
-    from python.mobile_research_catalogue import apply_representative_illustrations
-    apply_representative_illustrations(ROOT, payload["model_cards"], intake=True)
     if publish_art(destination, payload["model_cards"]) != 8:
         raise ValueError("Missing sales-research illustrations")
     target = destination / "data" / "india_sales_eight_research.json"
@@ -237,3 +261,4 @@ def publish_eight(destination: Path) -> dict:
     tree.write(sitemap, encoding="utf-8", xml_declaration=True)
     print("8 market research models added; frozen original 232, scoring and offers unchanged")
     return payload
+
