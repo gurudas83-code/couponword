@@ -632,10 +632,11 @@ def run(root: Path):
                     page.wait_for_url("**/seo/india-30-phone-price-watch.html")
                     cards = page.locator(".phone-watch-card")
                     count = cards.count()
-                    assert 0 <= count <= 30, width
+                    assert count == 30, width
                     assert cards.locator("img").count() == count, width
                     assert cards.locator(".phone-watch-store-link").count() == count * 3, width
-                    assert cards.locator(".phone-watch-status.has-price").count() == count, width
+                    assert cards.locator(".phone-watch-status").count() == count, width
+                    assert cards.locator(".phone-watch-price-cta").count() == cards.locator(".phone-watch-status.no-price").count(), width
                     if count:
                         loaded_image = cards.first.locator("img")
                         loaded_image.scroll_into_view_if_needed()

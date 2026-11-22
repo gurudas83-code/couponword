@@ -211,17 +211,41 @@ def render_image(media, output, name):
             f'loading="lazy" decoding="async"><figcaption>{caption}</figcaption></figure>')
 
 
+def render_research(research, review_date, has_api_price):
+    if not research:
+        return ""
+    specs = " · ".join(esc(value) for value in research["specs"])
+    details = (f'<p class="phone-watch-specs">{specs} · '
+               f'<a href="{esc(research["spec_source"])}">Official specs</a></p>')
+    if has_api_price:
+        return details
+    listing = esc(research["listing"])
+    reference = research.get("reference")
+    if reference:
+        amount = reference["amount"]
+        variant = esc(reference["variant"])
+        store = esc(reference["store"])
+        details += (f'<p class="phone-watch-reference">Listed price reference · '
+                    f'<a href="{listing}" rel="nofollow noopener">{store} ₹{amount:,}</a> · {variant}<br>'
+                    f'Source reviewed {esc(review_date)} · confirm current price and stock at checkout.</p>')
+    else:
+        details += f'<p><a href="{listing}" rel="nofollow noopener">Open exact listing</a></p>'
+    return details
+
+
 def publish(output, snapshot_path=None):
     rows, cards = worklist()
     data = json.loads(Path(snapshot_path).read_text()) if snapshot_path else {}
     stores = {row["model_key"]: data.get("stores", {}).get(row["model_key"], {}) for row in rows}
     data = {**data, "stores": stores}
     now = datetime.now(IST)
+    research = json.loads((ROOT / "data/india_phone_watch_research.json").read_text())
     media = {}
     for filename in ("mobile_research_catalogue", "india_sales_eight_research", "india_recent_manufacturer_research"):
         feed = json.loads((output / "data" / f"{filename}.json").read_text())
         media.update({card["model_key"]: card for card in feed["model_cards"]})
     body = []
+    in_stock_count = 0
     for row in rows:
         key = row["model_key"]
         card = cards[key]
@@ -234,32 +258,36 @@ def publish(output, snapshot_path=None):
             _, prices = displayable_prices(store, observations.get(store, {}), now)
             if prices:
                 price_candidates.append((prices[0][0], store))
-        if not price_candidates:
-            continue
-        cheapest_store = min(price_candidates)[1]
-        badge = '<span class="phone-watch-status has-price">In stock at last API check</span>'
+        cheapest_store = min(price_candidates)[1] if price_candidates else None
+        in_stock_count += bool(price_candidates)
+        model_research = research["models"].get(key, {})
+        if price_candidates:
+            badge = '<span class="phone-watch-status has-price">In stock at last API check</span>'
+            cta = ""
+        else:
+            badge = '<span class="phone-watch-status no-price">Stock and price unverified by API</span>'
+            cta = (f'<p><a class="phone-watch-price-cta" rel="sponsored nofollow noopener" '
+                   f'href="{esc(amazon_search_url(name))}">Check today’s price on Amazon ↗</a></p>')
+        model_details = render_research(model_research, research["reviewed_on"], bool(price_candidates))
         shop_links = "".join(
             render_store(row, store, observations.get(store, {}), now, name, lowest=store == cheapest_store)
             for store in PLATFORMS
         )
         body.append(
             '<article class="phone-watch-card">' + render_image(media.get(key, {}), output, name) +
-            f'<div class="phone-watch-details">{badge}<h2>{esc(name)}</h2><p>{source}</p>' +
-            f'<ul aria-label="{esc(name)} retailer options">{shop_links}</ul></div></article>'
+            f'<div class="phone-watch-details">{badge}<h2>{esc(name)}</h2><p>{source}</p>'
+            f'{model_details}{cta}<ul aria-label="{esc(name)} retailer options">{shop_links}</ul></div></article>'
         )
     status = f'Latest collection attempt {esc(data["attempted_on"])} · {int(data["calls_attempted"])} API requests.' if data.get("attempted_on") else "First API collection pending."
-    page = """<h1>India Phone Price Watch</h1>
-    <p>We track 30 phones selected from India sales reports and reviewed product pages. The grid displays models with an in-stock listing and a verified variant price from a retailer API observation within 36 hours.</p>
-    <p>Prices and stock are dated observations for Delhi PIN 110001. Confirm the matching variant, seller and final checkout price. The lowest observed price can be for a different variant.</p>"""
-    page += f'<p><strong>{len(body)} of 30 tracked phones</strong> have recent in-stock price evidence. {status}</p>'
+    page = """<h1>India Top 30 Phones · Price Watch</h1>
+    <p>Explore 30 phones selected using India sales reports and reviewed India product pages. The order is editorial.</p>
+    <p>Green badges show in-stock API observations from the last 36 hours for Delhi PIN 110001. Listed price references come from public store pages. Confirm the variant, seller and checkout price before buying.</p>"""
+    page += f'<p><strong>{len(body)} phones shown · {in_stock_count} with recent in-stock API prices</strong>. {status}</p>'
     page += f'<p><a href="{UPCOMING_ROUTE}">Upcoming phones and India launch checks</a></p>'
-    if body:
-        page += '<div class="phone-watch-grid">' + "".join(body) + "</div>"
-    else:
-        page += "<p>Awaiting refreshed retailer availability.</p>"
+    page += '<div class="phone-watch-grid">' + "".join(body) + "</div>"
     target = output / ROUTE.lstrip("/")
     target.parent.mkdir(parents=True, exist_ok=True)
-    html = doc("India Phone Price Watch", "Dated Amazon, Flipkart and Croma price observations for selected India phones.", ROUTE, page, {"@context": "https://schema.org", "@type": "WebPage"})
+    html = doc("India Top 30 Phones · Price Watch", "Dated Amazon, Flipkart and Croma price observations for selected India phones.", ROUTE, page, {"@context": "https://schema.org", "@type": "WebPage"})
     target.write_text(html.replace("</head>", '<link rel="stylesheet" href="/assets/phone-watch-grid.css?v=light-price-cta-v1">\n</head>'), encoding="utf-8")
     target = output / SNAPSHOT_PATH
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -280,7 +308,7 @@ def publish(output, snapshot_path=None):
         '<p>No confirmed upcoming models have been added to this watch yet.</p>'
         '<h2>India launch status checked</h2>'
         '<p>These models already launched in 2026 and have been removed from the price watch selection.</p>'
-        f'<ul>{entries}</ul><p><a href="{ROUTE}">See phones with recent in-stock price evidence</a></p>'
+        f'<ul>{entries}</ul><p><a href="{ROUTE}">See the India Top 30 phone price watch</a></p>'
     )
     target = output / UPCOMING_ROUTE.lstrip("/") / "index.html"
     target.parent.mkdir(parents=True, exist_ok=True)

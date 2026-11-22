@@ -1,0 +1,200 @@
+{
+  "reviewed_on": "2026-11-22",
+  "models": {
+    "apple|iphone 16": {
+      "spec_source": "https://www.apple.com/in/iphone-16/specs/",
+      "specs": [
+        "Apple A18",
+        "6.1-inch OLED",
+        "48 MP + 12 MP rear",
+        "IP68"
+      ],
+      "listing": "https://www.apple.com/in/shop/buy-iphone/iphone-16?product=MYEH3HN%2FA&step=select",
+      "reference": {
+        "amount": 89900,
+        "variant": "128 GB",
+        "store": "Apple India"
+      }
+    },
+    "redmi|redmi 15a 5g": {
+      "spec_source": "https://www.mi.com/in/product/redmi-15a-5g/specs/",
+      "specs": [
+        "Unisoc T8300",
+        "6.9-inch HD+ 120 Hz",
+        "6,300 mAh",
+        "32 MP rear"
+      ],
+      "listing": "https://www.mytmobiles.com/p/redmi-15a-5g",
+      "reference": {
+        "amount": 16499,
+        "variant": "4 GB / 64 GB",
+        "store": "myT Mobiles"
+      }
+    },
+    "samsung|galaxy a57 5g": {
+      "spec_source": "https://news.samsung.com/in/galaxy-a57-5g-and-a37-5g-give-young-users-ai-tools-for-photo-editing-productivity-and-social-media",
+      "specs": [
+        "Exynos 1680",
+        "6.7-inch AMOLED 120 Hz",
+        "5,000 mAh",
+        "50 MP main"
+      ],
+      "listing": "https://www.samsung.com/in/smartphones/galaxy-a57/buy/",
+      "reference": {
+        "amount": 62999,
+        "variant": "8 GB / 256 GB",
+        "store": "Samsung India"
+      }
+    },
+    "samsung|galaxy m36 5g": {
+      "spec_source": "https://news.samsung.com/in/samsung-launches-galaxy-m36-5g-in-india-introduces-advanced-ai-innovations-in-mid-segment-smartphones",
+      "specs": [
+        "Exynos 1380",
+        "6.7-inch AMOLED 120 Hz",
+        "5,000 mAh",
+        "50 MP OIS main"
+      ],
+      "listing": "https://www.amazon.in/dp/B0FDB9H277?tag=guru07cc-21"
+    },
+    "vivo|t4x 5g": {
+      "spec_source": "https://www.vivo.com/in/products/param/t4x-5g",
+      "specs": [
+        "Dimensity 7300",
+        "6.72-inch LCD 120 Hz",
+        "6,500 mAh / 44 W",
+        "50 MP main"
+      ],
+      "listing": "https://shop.vivo.com/in/product/10303?skuId=19292"
+    },
+    "realme|p4 pro": {
+      "spec_source": "https://www.realme.com/in/realme-p4-pro-5g/specs",
+      "specs": [
+        "Snapdragon 7 Gen 4",
+        "6.8-inch 144 Hz",
+        "7,000 mAh / 80 W",
+        "50 MP OIS main"
+      ],
+      "listing": "https://buy.realme.com/in/goods/766",
+      "reference": {
+        "amount": 30999,
+        "variant": "8 GB / 256 GB, Birch Wood",
+        "store": "realme India"
+      }
+    },
+    "realme|p4 power": {
+      "spec_source": "https://www.realme.com/in/realme-p4-power-5g/specs",
+      "specs": [
+        "Dimensity 7400 Ultra",
+        "6.8-inch 144 Hz",
+        "10,001 mAh / 80 W",
+        "50 MP OIS main"
+      ],
+      "listing": "https://buy.realme.com/in/goods/810",
+      "reference": {
+        "amount": 32999,
+        "variant": "8 GB / 128 GB, TransSilver",
+        "store": "realme India"
+      }
+    },
+    "realme|p4x": {
+      "spec_source": "https://www.realme.com/in/realme-p4x-5g/specs",
+      "specs": [
+        "Dimensity 7400 Ultra",
+        "6.72-inch LCD 144 Hz",
+        "7,000 mAh / 45 W",
+        "50 MP main"
+      ],
+      "listing": "https://buy.realme.com/in/goods/807",
+      "reference": {
+        "amount": 29999,
+        "variant": "8 GB / 128 GB, Matte Silver",
+        "store": "realme India"
+      }
+    },
+    "samsung|galaxy a36 5g": {
+      "spec_source": "https://www.samsung.com/in/smartphones/galaxy-a36/",
+      "specs": [
+        "Snapdragon 6 Gen 3",
+        "6.7-inch AMOLED 120 Hz",
+        "5,000 mAh / 45 W",
+        "50 MP OIS main"
+      ],
+      "listing": "https://www.samsung.com/in/smartphones/galaxy-a36/buy/",
+      "reference": {
+        "amount": 31999,
+        "variant": "8 GB / 128 GB",
+        "store": "Samsung India"
+      }
+    },
+    "samsung|galaxy a56 5g": {
+      "spec_source": "https://www.samsung.com/in/smartphones/galaxy-a56/",
+      "specs": [
+        "Exynos 1580",
+        "6.7-inch AMOLED 120 Hz",
+        "5,000 mAh / 45 W",
+        "50 MP OIS main"
+      ],
+      "listing": "https://www.samsung.com/in/smartphones/galaxy-a56/buy/",
+      "reference": {
+        "amount": 36999,
+        "variant": "8 GB / 128 GB",
+        "store": "Samsung India"
+      }
+    },
+    "oneplus|nord 6": {
+      "spec_source": "https://www.oneplus.in/nord-6",
+      "specs": [
+        "Snapdragon 8s Gen 4",
+        "6.78-inch AMOLED 165 Hz",
+        "9,000 mAh / 80 W",
+        "50 MP main"
+      ],
+      "listing": "https://www.oneplus.in/oneplus-nord-6",
+      "reference": {
+        "amount": 46999,
+        "variant": "8 GB / 256 GB, Fresh Mint",
+        "store": "OnePlus India"
+      }
+    },
+    "nothing|phone 3a": {
+      "spec_source": "https://in.nothing.tech/products/phone-3a",
+      "specs": [
+        "Snapdragon 7s Gen 3",
+        "6.77-inch AMOLED 120 Hz",
+        "5,000 mAh / 50 W",
+        "50 MP main + 50 MP telephoto"
+      ],
+      "listing": "https://www.amazon.in/dp/B0DZTMZL4X?tag=guru07cc-21",
+      "reference": {
+        "amount": 24999,
+        "variant": "8 GB / 128 GB, Blue",
+        "store": "Amazon India"
+      }
+    },
+    "motorola|edge 60 fusion": {
+      "spec_source": "https://en-in.support.motorola.com/app/answers/detail/a_id/187360",
+      "specs": [
+        "Dimensity 7400",
+        "6.67-inch pOLED 120 Hz",
+        "5,500 mAh / 68 W",
+        "50 MP OIS main"
+      ],
+      "listing": "https://www.motorola.in/motorola",
+      "reference": {
+        "amount": 30999,
+        "variant": "12 GB / 256 GB, Pantone Amazonite",
+        "store": "Motorola India"
+      }
+    },
+    "iqoo|neo 10": {
+      "spec_source": "https://www.iqoo.com/in/products/param/neo10",
+      "specs": [
+        "Snapdragon 8s Gen 4",
+        "6.78-inch AMOLED",
+        "7,000 mAh / 120 W",
+        "50 MP main"
+      ],
+      "listing": "https://shop.iqoo.com/in/product/2063?skuId=8374"
+    }
+  }
+}
