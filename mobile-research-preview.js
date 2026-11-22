@@ -550,10 +550,11 @@
       var m = prefix || suffix || currency;
       if (m) { budget = value(m[1], m[2]); inclusive = /within|upto|up to|तक/.test(m[0]); text = text.replace(m[0], " "); }
     }
-    // Under-budget searches include every documented cheaper candidate.
-    // Only an explicit nearby-band choice or range adds a lower bound.
+    // Budget shortcuts show the immediately preceding five-thousand-rupee
+    // reference band. The explicit "full budget" option is the opt-in path
+    // for every documented cheaper candidate below the cap.
     if (budget != null && lower == null) {
-      lower = nearbyBudget && !fullBudget ? Math.max(0, budget - 5000) : 0;
+      lower = !fullBudget ? Math.max(0, budget - 5000) : 0;
     }
     var ram = null, storage = null;
     text = text.replace(/\b(\d{1,2})\s*\/\s*(\d{2,4})\b/g, function (_, r, t) { ram = Number(r); storage = Number(t); return " "; });
