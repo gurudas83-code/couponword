@@ -13,8 +13,10 @@ import json
 import os
 from datetime import datetime, timezone
 from pathlib import Path
+import sys
 from urllib.request import Request, urlopen
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "python"))
 from retailer_publication_gate import evaluate_offer
 
 ROOT = Path(__file__).resolve().parents[1]
