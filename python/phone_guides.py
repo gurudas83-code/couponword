@@ -58,6 +58,11 @@ def budget_lane_widgets(destination, guide, hindi=False):
     path = Path(destination) / "data/retailer_price_observations.json"
     payload = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
     observed = []
+    guide_slug = str(guide.get("slug", "")).casefold()
+    focus_terms = ("gaming", ("chipset", "processor", "snapdragon", "dimensity", "gpu")) if "gaming" in guide_slug else ("camera", ("camera", "ois", "telephoto", "periscope")) if "camera" in guide_slug else ("battery", ("battery", "charging", "mah")) if "battery" in guide_slug or "charging" in guide_slug else ("5g", ("5g", "network")) if "5g" in guide_slug else ("phone", ())
+    def relevance(card):
+        text = json.dumps(card.get("specifications", {}), ensure_ascii=False).casefold()
+        return sum(text.count(term) for term in focus_terms[1])
     for model_key, rows in (payload.get("models", {}) if isinstance(payload, dict) else {}).items():
         card = next((c for c in cards if c.get("model_key") == model_key), None)
         if not card:
@@ -85,11 +90,12 @@ def budget_lane_widgets(destination, guide, hindi=False):
     for cap in caps:
         candidates = [row for row in observed if row[0] < cap]
         if candidates:
-            price, offer, row, card, link = sorted(candidates, key=lambda item: item[0], reverse=True)[0]
+            price, offer, row, card, link = sorted(candidates, key=lambda item: (relevance(item[3]), item[0]), reverse=True)[0]
             items.append(f'<article class="budget-lane-card"><p class="budget-lane-cap">Under ₹{cap:,}</p><h3><a href="{prefix}/phones/{slug_for(card)}/">{esc(model_title(card))}</a></h3><p><strong>₹{price:,.0f} observed</strong> · {esc(str(offer.get("availability", "in stock")))}</p><p class="budget-lane-meta">{esc(str(row.get("variant", "Exact variant")))} · checked {esc(str(offer.get("observed_at", "recently")))}</p><a class="budget-lane-cta" href="{esc(link)}" rel="sponsored nofollow noopener" target="_blank">Open retailer listing</a></article>')
         else:
             items.append(f'<article class="budget-lane-card budget-lane-empty"><p class="budget-lane-cap">Under ₹{cap:,}</p><h3>No observed phone in this lane</h3><p>Search the documented 232-phone catalogue and confirm today’s exact offer.</p><a href="{prefix}/#mobileResearchSearch">Search documented phones</a></article>')
-    return '<section class="budget-lanes" aria-labelledby="budget-lanes-title"><h2 id="budget-lanes-title">Observed phone picks by budget</h2><p>Selected from saved in-stock retailer observations. These are not quality rankings; re-check exact variant, price, stock and delivery before buying.</p><div class="budget-lane-grid">' + "".join(items) + '</div></section>'
+    label = focus_terms[0].title()
+    return f'<section class="budget-lanes" aria-labelledby="budget-lanes-title"><h2 id="budget-lanes-title">Observed {esc(label)} phones by budget</h2><p>Selected from saved in-stock retailer observations with {esc(label.casefold())}-related evidence where available. These are not quality rankings; re-check exact variant, price, stock and delivery before buying.</p><div class="budget-lane-grid">' + "".join(items) + '</div></section>'
 
 
 def decision_support(guide):
