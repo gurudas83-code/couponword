@@ -1359,7 +1359,7 @@
   });
   if (clearSearchButton) clearSearchButton.addEventListener("click", function () {
     guidedControls.forEach(function (control) { if (control) control.value = ""; });
-    if (guidedScope) guidedScope.value = "all";
+    if (guidedScope) guidedScope.value = "band";
     if (guidedStatus) guidedStatus.textContent = "";
     var hero = document.getElementById("heroSearch"); if (hero) hero.value = "";
     searchResearch("");
