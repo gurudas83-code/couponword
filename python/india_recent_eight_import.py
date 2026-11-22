@@ -237,6 +237,7 @@ def _detail_page(card: dict) -> str:
         '<p>Manufacturer-linked smartphone research · exact India retail variants '
         'and availability not certified.</p>'
         + visual
+        + '<span hidden data-research-art="' + escape(card["research_art_url"], quote=True) + '"></span>'
         + '<h2>Specifications</h2>' +
         ('<dl class="cr-detail-facts">' + specs + '</dl>' if specs else
          '<p>Manufacturer model source is recorded; technical fields are pending '
