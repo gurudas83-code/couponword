@@ -1220,7 +1220,7 @@
       }
       if (/best|अच्छा|अच्छे/i.test(lastSearchQuery)) researchSearchStatus.textContent +=
         " · evidence coverage order, not a performance ranking";
-      if (document.querySelector(".research-verified-top3")) researchSearchStatus.textContent += " · research picks";
+      if (researchResults && String(researchResults.innerHTML || "").indexOf("research-verified-top3") >= 0) researchSearchStatus.textContent += " · research picks";
     }
     if (researchResultsMore) { researchResultsMore.hidden = displayMatches.length <= MAX_SEARCH_RESULTS; researchResultsMore.textContent = searchExpanded ? "Show fewer results" : "Load more research results"; }
     return displayMatches;
