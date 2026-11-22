@@ -30,7 +30,7 @@ def budget_examples(destination, guide, hindi=False):
             selected.append(card)
     selected.sort(key=lambda c: model_title(c).casefold())
     if not selected:
-        return ""
+        return budget_lane_widgets(destination, guide, hindi)
     heading = "शोध शुरू करने के लिए मॉडल" if hindi else "Models to start researching"
     note = ("पुरानी कीमत के प्रमाण पर आधारित उदाहरण; नाम के क्रम में, प्रदर्शन रैंकिंग नहीं। आज की कीमत और सटीक RAM/स्टोरेज विक्रेता पर जाँचें।" if hindi else
             "Examples with dated budget evidence, in alphabetical order, not a performance ranking. Confirm today’s price and exact RAM/storage at the retailer. Prices do not affect performance scores.")
@@ -45,7 +45,42 @@ def budget_examples(destination, guide, hindi=False):
         parts.append(f'<li><h3><a href="{path}">{esc(title)}</a></h3><p>{facts}</p><p>{date_label}: {date}. '
                      + ("सीमा: वास्तविक बैटरी रनटाइम और कैमरा गुणवत्ता सिर्फ इन आँकड़ों से तय नहीं होते।" if hindi else "Trade-off to check: these specifications do not establish real battery runtime or camera quality.")
                      + '</p></li>')
-    return f'<section class="budget-examples"><h2>{heading}</h2><p>{note}</p><ul>'+"".join(parts)+'</ul></section>'
+    return f'<section class="budget-examples"><h2>{heading}</h2><p>{note}</p><ul>'+"".join(parts)+'</ul></section>' + budget_lane_widgets(destination, guide, hindi)
+
+
+def budget_lane_widgets(destination, guide, hindi=False):
+    """Show budget slots that populate only from verified affiliate offers."""
+    from python.phone_research_pages import model_title, slug_for
+    caps = (10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 70000)
+    catalogue = json.loads((Path(destination) / "data/mobile_research_catalogue.json").read_text(encoding="utf-8"))
+    cards = catalogue.get("model_cards") or []
+    by_name = {(str(c.get("brand", "")).casefold(), str(c.get("model", "")).casefold()): c for c in cards}
+    path = Path(destination) / "data/retailer_offers.json"
+    payload = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+    offers = payload.get("offers", []) if isinstance(payload, dict) else payload if isinstance(payload, list) else []
+    verified = []
+    for offer in offers:
+        if not isinstance(offer, dict) or str(offer.get("verification_status", "")).upper() != "VERIFIED":
+            continue
+        if not (offer.get("cta_eligible") or offer.get("purchase_cta_eligible")) or not offer.get("affiliate_url"):
+            continue
+        try:
+            price = float(offer.get("price"))
+        except (TypeError, ValueError):
+            continue
+        card = by_name.get((str(offer.get("brand", "")).casefold(), str(offer.get("model", "")).casefold()))
+        if card and price > 0:
+            verified.append((price, offer, card))
+    items = []
+    prefix = "/hi" if hindi else ""
+    for cap in caps:
+        candidates = [row for row in verified if row[0] < cap]
+        if candidates:
+            price, offer, card = sorted(candidates, key=lambda row: row[0], reverse=True)[0]
+            items.append(f'<article class="budget-lane-card"><p class="budget-lane-cap">Under ₹{cap:,}</p><h3><a href="{prefix}/phones/{slug_for(card)}/">{esc(model_title(card))}</a></h3><p><strong>₹{price:,.0f}</strong> · {esc(str(offer.get("availability", "in stock")))}</p><p class="budget-lane-meta">{esc(str(offer.get("variant", "Exact variant")))} · checked {esc(str(offer.get("checked_at", "recently")))}</p><a class="budget-lane-cta" href="{esc(offer["affiliate_url"])}" rel="sponsored nofollow noopener" target="_blank">View retailer offer</a></article>')
+        else:
+            items.append(f'<article class="budget-lane-card budget-lane-empty"><p class="budget-lane-cap">Under ₹{cap:,}</p><h3>Verified pick pending</h3><p>Exact price, stock and retailer SKU have not passed the live-offer gate yet.</p><a href="{prefix}/#mobileResearchSearch">Search documented phones</a></article>')
+    return '<section class="budget-lanes" aria-labelledby="budget-lanes-title"><h2 id="budget-lanes-title">Verified picks by budget</h2><p>These cards populate only when an authorized fresh offer passes the exact-variant, price, stock and freshness gates.</p><div class="budget-lane-grid">' + "".join(items) + '</div></section>'
 
 
 def decision_support(guide):
@@ -113,7 +148,7 @@ def render_phone_guides(destination):
             ledger = json.loads((ROOT / 'data/mobile_independent_test_evidence.json').read_text(encoding="utf-8"))
             review = ledger['models'][1]['metrics'][0]['source_url']
             evidence_links = '<li><a href="'+esc(review)+'" rel="noopener noreferrer" target="_blank">Notebookcheck Galaxy A56 review — original lab test context</a></li>'
-        content=f'''<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="{HUB}">Phone guides</a> / Guide</nav><article><div class="eyebrow">THE PHONE EDIT / BUYING GUIDE</div><h1>{esc(p['title'])}</h1><p class="lead">{esc(p['intro'])}</p><p class="byline">By {esc(data['editor'])} · Updated <time datetime="{data['updated']}">{esc(data['updated'])}</time></p><aside class="note"><strong>Research, with the limits visible.</strong><p>This is an editorial buying guide based on saved research, not a hands-on review or a live-offer list. Budget references are dated. No current price, stock or performance winner is certified here.</p></aside><section class="quick-answer" aria-label="Quick answer"><h2>{esc(p["reader_question"])}</h2><p>{esc(p["quick_answer"])}</p></section>{decision_support(p)}{toc}{sections}{budget_examples(destination, p)}<section class="action"><h2>Turn the guide into a shortlist</h2><p>Open the existing research tool with “{esc(p['query'])}”. Add your budget, physical RAM, storage or excluded brand. Inspect each source and any missing information, then compare up to three matching phones. No condition is silently relaxed.</p><a class="button" href="{esc(query)}">Explore matching research ↗</a> <a class="button" href="/compare/">Compare exact variants ↗</a><p><a href="{esc(amazon)}" rel="sponsored nofollow noopener noreferrer" target="_blank">Search Amazon (affiliate link)</a> · Confirm the selected variant and current offer at the retailer.</p></section><section><h2>Sources and how to verify</h2><p>Follow the specification sources on each research card for the exact model. Independent measurements retain their original source, tested unit and conditions. A research checking date does not imply that a lab test or retailer price was measured that day.</p><ul><li><a href="/guides/smartphone-buying-guide/">Standard smartphone buying checklist</a></li><li><a href="/seo/phone-research-evidence-method.html">Coupon World evidence method and limitations</a></li><li><a href="/phones/">Curated phone specifications with original sources</a></li>{evidence_links}</ul></section></article><section class="related"><h2>Continue your research</h2>{cards(related)}</section>'''
+        content=f'''<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="{HUB}">Phone guides</a> / Guide</nav><article><div class="eyebrow">THE PHONE EDIT / BUYING GUIDE</div><h1>{esc(p['title'])}</h1><p class="lead">{esc(p['intro'])}</p><p class="byline">By {esc(data['editor'])} · Updated <time datetime="{data['updated']}">{esc(data['updated'])}</time></p><aside class="note"><strong>Research, with the limits visible.</strong><p>This is an editorial buying guide based on saved research, not a hands-on review or a live-offer list. Budget references are dated. No current price, stock or performance winner is certified here.</p></aside><section class="quick-answer" aria-label="Quick answer"><h2>{esc(p["reader_question"])}</h2><p>{esc(p["quick_answer"])}</p></section>{decision_support(p)}{toc}{sections}{budget_examples(destination, p)}<section class="action"><h2>Turn the guide into a shortlist</h2><p>Open the existing research tool with “{esc(p['query'])}”. Add your budget, physical RAM, storage or excluded brand. Inspect each source and any missing information, then compare up to three matching phones. No condition is silently relaxed.</p><a class="button" href="{esc(query)}">Explore matching research ↗</a> <a class="button" href="/compare/">Compare exact variants ↗</a><p><a href="{esc(amazon)}" rel="sponsored nofollow noopener" target="_blank">Search Amazon (affiliate link)</a> · Confirm the selected variant and current offer at the retailer.</p></section><section><h2>Sources and how to verify</h2><p>Follow the specification sources on each research card for the exact model. Independent measurements retain their original source, tested unit and conditions. A research checking date does not imply that a lab test or retailer price was measured that day.</p><ul><li><a href="/guides/smartphone-buying-guide/">Standard smartphone buying checklist</a></li><li><a href="/seo/phone-research-evidence-method.html">Coupon World evidence method and limitations</a></li><li><a href="/phones/">Curated phone specifications with original sources</a></li>{evidence_links}</ul></section></article><section class="related"><h2>Continue your research</h2>{cards(related)}</section>'''
         article={'@context':'https://schema.org','@graph':[{'@type':'Article','headline':p['title'],'description':p['intro'],'dateModified':data['updated'],'datePublished':data['updated'],'author':{'@type':'Organization','name':data['editor']},'publisher':{'@type':'Organization','name':'Coupon World'},'mainEntityOfPage':BASE+path},{'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Home','item':BASE+'/'},{'@type':'ListItem','position':2,'name':'Phone guides','item':BASE+HUB},{'@type':'ListItem','position':3,'name':p['title'],'item':BASE+path}]}]}
         target=destination/path.lstrip('/');target.parent.mkdir(parents=True,exist_ok=True)
         description=p['intro'].split('. ')[0]+'.'
@@ -129,3 +164,4 @@ def render_phone_guides(destination):
         if BASE+path in existing:continue
         node=ET.SubElement(root,f'{{{ns}}}url');ET.SubElement(node,f'{{{ns}}}loc').text=BASE+path;ET.SubElement(node,f'{{{ns}}}lastmod').text=data['updated']
     tree.write(sitemap,encoding='utf-8',xml_declaration=True)
+
