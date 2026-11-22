@@ -174,11 +174,11 @@ def render_store(row, store, observed, now, name="", *, lowest=False):
     actions = f'<a class="phone-watch-store-link" rel="sponsored nofollow noopener" href="{esc(search_url)}">{esc(store)} ↗</a>'
     checked, prices = displayable_prices(store, observed, now)
     if not checked:
-        details = "Exact listing" if store == "Croma" and row.get("croma_id") else "Search listing"
+        details = "Open product listing" if store == "Croma" and row.get("croma_id") else f"Search on {store}"
     else:
         label = esc(checked.strftime("%d %b, %H:%M IST"))
         if not timedelta(0) <= now - checked <= PRICE_MAX_AGE:
-            details = f"Refresh pending · {label}"
+            details = f"Refresh pending · last checked {label}"
         else:
             items = []
             for index, (price, url, variant) in enumerate(prices[:3]):
@@ -186,12 +186,12 @@ def render_store(row, store, observed, now, name="", *, lowest=False):
                 label_prefix = ""
                 if lowest and index == 0:
                     price_class += " phone-watch-lowest"
-                    label_prefix = '<span class="phone-watch-lowest-label">Lowest observed</span> '
+                    label_prefix = '<span class="phone-watch-lowest-label">Lowest price found</span> '
                 items.append(
                     f'{label_prefix}<a class="{price_class}" href="{esc(url)}">₹{price:,.0f}</a> '
                     f'<span>{esc(variant)}</span>'
                 )
-            details = ("<br>".join(items) if items else "No exact in-stock price returned") + f"<br>{label}"
+            details = ("<br>".join(items) if items else "No matching in-stock offer found") + f"<br>{label}"
     return f'<li>{actions}<small>{details}</small></li>'
 
 
@@ -201,7 +201,7 @@ def render_image(media, output, name):
     if not path or not (output / path.lstrip("/")).is_file():
         path = "/assets/phone-illustrations/representative-smartphone.webp"
         photo = None
-    caption = "AI illustration · not the actual phone"
+    caption = "AI-generated illustration"
     alt = ""
     if photo:
         alt = name + " model photograph"
@@ -225,11 +225,11 @@ def render_research(research, review_date, has_api_price):
         amount = reference["amount"]
         variant = esc(reference["variant"])
         store = esc(reference["store"])
-        details += (f'<p class="phone-watch-reference">Listed price reference · '
+        details += (f'<p class="phone-watch-reference">Store price reference · '
                     f'<a href="{listing}" rel="nofollow noopener">{store} ₹{amount:,}</a> · {variant}<br>'
-                    f'Source reviewed {esc(review_date)} · confirm current price and stock at checkout.</p>')
+                    f'Source reviewed {esc(review_date)}. Check current price and stock with the store.</p>')
     else:
-        details += f'<p><a href="{listing}" rel="nofollow noopener">Open exact listing</a></p>'
+        details += f'<p><a href="{listing}" rel="nofollow noopener">View product listing</a></p>'
     return details
 
 
@@ -246,12 +246,20 @@ def publish(output, snapshot_path=None):
         media.update({card["model_key"]: card for card in feed["model_cards"]})
     body = []
     in_stock_count = 0
+    reference_count = 0
     for row in rows:
         key = row["model_key"]
         card = cards[key]
         name = card["model"] if card["model"].lower().startswith(card["brand"].lower() + " ") else f'{card["brand"]} {card["model"]}'
         evidence = row["evidence"]
-        source = f'<a href="{esc(row.get("source") or SOURCES[evidence])}">{esc(evidence)}</a>'
+        source_label = {
+            "Q2 India sell-through Top 5": "Counterpoint · India top 5, Q2 2026",
+            "Q3 model or portfolio mention": "Omdia · India shipments, Q3 2026",
+            "Q3 Galaxy S26 series": "Omdia · India shipments, Q3 2026",
+            "Counterpoint India sell-through tracked model": "Counterpoint · India smartphone tracker",
+            "India product page": "Manufacturer’s India product page",
+        }[evidence]
+        source = f'<a href="{esc(row.get("source") or SOURCES[evidence])}">{esc(source_label)}</a>'
         observations = stores.get(key, {})
         price_candidates = []
         for store in PLATFORMS:
@@ -262,12 +270,15 @@ def publish(output, snapshot_path=None):
         in_stock_count += bool(price_candidates)
         model_research = research["models"].get(key, {})
         if price_candidates:
-            badge = '<span class="phone-watch-status has-price">In stock at last API check</span>'
+            badge = '<span class="phone-watch-status has-price">Price and stock checked</span>'
             cta = ""
         else:
-            badge = '<span class="phone-watch-status no-price">Stock and price unverified by API</span>'
+            has_reference = bool(model_research.get("reference"))
+            reference_count += has_reference
+            label = "Store price reference" if has_reference else "Check price and stock"
+            badge = f'<span class="phone-watch-status no-price">{label}</span>'
             cta = (f'<p><a class="phone-watch-price-cta" rel="sponsored nofollow noopener" '
-                   f'href="{esc(amazon_search_url(name))}">Check today’s price on Amazon ↗</a></p>')
+                   f'href="{esc(amazon_search_url(name))}">Check price on Amazon ↗</a></p>')
         model_details = render_research(model_research, research["reviewed_on"], bool(price_candidates))
         shop_links = "".join(
             render_store(row, store, observations.get(store, {}), now, name, lowest=store == cheapest_store)
@@ -278,11 +289,19 @@ def publish(output, snapshot_path=None):
             f'<div class="phone-watch-details">{badge}<h2>{esc(name)}</h2><p>{source}</p>'
             f'{model_details}{cta}<ul aria-label="{esc(name)} retailer options">{shop_links}</ul></div></article>'
         )
-    status = f'Latest collection attempt {esc(data["attempted_on"])} · {int(data["calls_attempted"])} API requests.' if data.get("attempted_on") else "First API collection pending."
-    page = """<h1>India Top 30 Phones · Price Watch</h1>
-    <p>Explore 30 phones selected using India sales reports and reviewed India product pages. The order is editorial.</p>
-    <p>Green badges show in-stock API observations from the last 36 hours for Delhi PIN 110001. Listed price references come from public store pages. Confirm the variant, seller and checkout price before buying.</p>"""
-    page += f'<p><strong>{len(body)} phones shown · {in_stock_count} with recent in-stock API prices</strong>. {status}</p>'
+    check_count = len(body) - in_stock_count - reference_count
+    updated_at = esc(now.strftime("%d %b %Y, %H:%M IST"))
+    page = (
+        '<h1>India Top 30 Phones · Price Watch</h1>'
+        '<p>Compare prices for 30 phones in India and check offers on Amazon, Flipkart and Croma. '
+        'Coupon World selects these models using India market reports and manufacturer product pages.</p>'
+        f'<p><strong>All {len(body)} phones are listed below.</strong> At the {updated_at} page update, '
+        f'{in_stock_count} had a retailer price with stock confirmed within the previous 36 hours for Delhi PIN 110001. '
+        f'{reference_count} had a store price reference with stock to be confirmed, and {check_count} had '
+        'retailer links to check the price.</p>'
+        '<p>Prices vary by storage, colour, seller and delivery PIN. Confirm your variant, '
+        'availability and total price at checkout.</p>'
+    )
     page += f'<p><a href="{UPCOMING_ROUTE}">Upcoming phones and India launch checks</a></p>'
     page += '<div class="phone-watch-grid">' + "".join(body) + "</div>"
     target = output / ROUTE.lstrip("/")
