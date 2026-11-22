@@ -642,7 +642,7 @@ def run(root: Path):
                         loaded_image = cards.first.locator("img")
                         loaded_image.scroll_into_view_if_needed()
                         loaded_image.evaluate("img => img.decode()")
-                        assert cards.first.locator("h2").bounding_box()["x"] > loaded_image.bounding_box()["x"], width
+                        assert cards.first.locator(".phone-watch-details h2").bounding_box()["x"] > loaded_image.bounding_box()["x"], width
                     for card in cards.all() if width == 1440 else [cards.first]:
                         title = card.locator("h2 button")
                         title.click()
