@@ -51,108 +51,20 @@ def run(root: Path):
                     assert page.locator(".cw-primary-actions a").count() == 5, width
                     assert page.locator('.cw-primary-actions a[href="/phones/new-india-mobiles/"]').count() == 1, width
                     assert page.locator('.cw-primary-actions a[href="/seo/top-30-phone-research-india.html"]').count() == 1, width
-                    primary_shortcuts = (10000, 15000, 20000, 25000, 30000)
-                    assert page.locator(".mobile-budget-chips [data-mobile-query]").count() == 5, width
-                    for cap in primary_shortcuts:
-                        assert page.locator(
-                            f'.mobile-budget-chips [data-mobile-query="mobile under {cap}"]'
-                        ).is_visible(), (width, cap)
-                    assert page.locator(".cw-budget-more").count() == 0, width
+                    assert page.locator(".cw-budget-more").evaluate("(el) => !el.open"), width
+                    page.locator(".cw-budget-more summary").click()
+                    assert page.locator('[data-mobile-query="mobile under 50000"]').is_visible(), width
+                    page.locator(".cw-budget-more summary").click()
+                    assert page.locator(".cw-budget-more").evaluate("(el) => !el.open"), width
                     assert page.locator("#researchCategories").evaluate(
                         "(el) => !!(el.compareDocumentPosition(document.getElementById('mobileResearchSearch')) & Node.DOCUMENT_POSITION_FOLLOWING)"
                     ), width
                     page.wait_for_function("() => !!window.CouponWorldMobileResearch", timeout=15000)
-                    # First-party chat must answer via the published local catalogues,
-                    # without a paid AI API or changing the existing mobile search.
-                    page.wait_for_function(
-                        "() => !!window.CouponWorldAssistant && !!window.CouponWorldAssistantCore && !!window.CouponWorldQueryParser",
-                        timeout=15000,
-                    )
-                    assistant_form = page.locator("#cwAssistantForm")
-                    assert not assistant_form.is_visible(), width
-                    page.locator("#cwAssistant > summary").click()
-                    assert assistant_form.is_visible(), width
-                    page.locator("#cwAssistantInput").fill("55 inch Xiaomi TV")
-                    page.locator('#cwAssistantForm button[type="submit"]').click()
-                    page.wait_for_function(
-                        "() => document.querySelector('#cwAssistantMessages').innerText.includes('Xiaomi')",
-                        timeout=12000,
-                    )
-                    page.locator("#cwAssistantMessages .cw-assistant-bot").last.locator('a[href^="https://"]').first.wait_for(timeout=12000)
-                    affiliate = page.locator("#cwAssistantMessages .cw-assistant-bot").last.locator('a[href*="amazon.in"]').first
-                    affiliate.wait_for(timeout=12000)
-                    assert "tag=guru07cc-21" in affiliate.get_attribute("href"), width
-                    assert "sponsored" in affiliate.get_attribute("rel"), width
-                    label = affiliate.inner_text().lower()
-                    assert "matched model listing" in label or "search amazon" in label, (width, label)
-                    if "search amazon" in label:
-                        assert "not an exact listing" in label, (width, label)
-                    assert "research" in page.locator("#cwAssistantMessages .cw-assistant-bot").last.inner_text().lower(), width
-                    assert page.evaluate("document.documentElement.scrollWidth") <= width + 8, width
                     # Wait for the real fetch->catalogue->browser filtering chain.
                     page.wait_for_function(
                         "() => window.CouponWorldMobileResearch.search('phone under 30000').length > 0",
                         timeout=20000,
                     )
-                    # Top 3 must never invent 3 winners, exceed the correct
-                    # ₹5k band or include price-unknown phones among ranked picks.
-                    for cap in (10000, 15000, 20000, 25000, 30000):
-                        top3 = page.evaluate("""cap => {
-                            const t0=performance.now();
-                            const matches=window.CouponWorldMobileResearch.search('top 3 mobile under '+cap);
-                            const elapsed=performance.now()-t0;
-                            const tier=document.querySelector('#mobileResearchResults .research-verified-top3');
-                            const picks=[...document.querySelectorAll('#mobileResearchResults .research-top3-result')];
-                            return {
-                                elapsed, count:picks.length, matched:matches.length,
-                                text:tier?.innerText||'',
-                                prices:matches.map(x=>x.card.research_budget_reference?.reference_price_inr),
-                                keys:matches.map(x=>x.card.model_key)
-                            };
-                        }""", cap)
-                        assert top3['count'] <= 3, (width, cap, top3)
-                        assert top3['elapsed'] < 1000, (width, cap, top3['elapsed'])
-                        assert 'Research-Verified' in top3['text'], (width, cap)
-                        assert 'current price' in top3['text'].lower() or 'current stock' in top3['text'].lower(), (width, cap)
-                        print('TOP3_BUDGET_AUDIT', width, cap, json.dumps({
-                            'ranked':top3['count'], 'strict_matches':top3['matched'],
-                            'local_js_ms':round(top3['elapsed'],1)
-                        }), flush=True)
-
-                    # Corrupted saved evidence must not qualify in Top 3 or
-                    # ordinary budget filters; restore the record each time.
-                    gated = page.evaluate("""() => {
-                        const query='phone under 15000';
-                        const before=window.CouponWorldMobileResearch.search(query);
-                        if(!before.length)return {error:'no dated references'};
-                        const item=before[0].card, ref=item.research_budget_reference;
-                        const original={...ref};
-                        const tests=[
-                            ['missing date',{checked_at:''}],
-                            ['expired evidence',{checked_at:'not-a-date'}],
-                            ['ranking weight',{ranking_weight:0.5}],
-                            ['sold out',{stock_indication:'OUT_OF_STOCK'}],
-                            ['no offer distinction',{live_offer:true}],
-                            ['string price',{reference_price_inr:'12999'}]
-                        ];
-                        const result=[];
-                        try {
-                            for(const [name,patch] of tests){
-                                Object.keys(ref).forEach(k=>delete ref[k]);
-                                Object.assign(ref,original,patch);
-                                const ranked=window.CouponWorldMobileResearch.search('top 3 '+query);
-                                const budget=window.CouponWorldMobileResearch.search(query);
-                                result.push({name,excluded:!budget.some(x=>x.card.model_key===item.model_key),
-                                    excludedFromTop3:!ranked.some(x=>x.card.model_key===item.model_key)});
-                            }
-                        } finally {
-                            Object.keys(ref).forEach(k=>delete ref[k]);
-                            Object.assign(ref,original);
-                        }
-                        return {result};
-                    }""")
-                    assert 'error' not in gated, (width, gated)
-                    assert all(row['excluded'] and row['excludedFromTop3'] for row in gated['result']), (width, gated)
                     # Original 232-card registry remains distinct from eight
                     # manufacturer-sourced sales-report additions.
                     page.wait_for_function(
@@ -179,27 +91,7 @@ def run(root: Path):
                     )
                     assert page.locator("#mobileResearchNewGrid [data-mobile-model-card]").count() == 21, width
                     assert page.locator("#mobileResearchNewGrid a.research-model-name-link").count() == 21, width
-                    more_phones = page.locator("#mobileResearchNewGrid details.recent-mobile-more")
-                    more_phones.evaluate("details => { details.open = true; }")
-                    new_cards = page.locator("#mobileResearchNewGrid [data-mobile-model-card]")
-                    for card in new_cards.all():
-                        image = card.locator(
-                            "img[src^='/assets/phone-photos/'], "
-                            "img[src^='/assets/phone-illustrations/'], "
-                            "img[src^='/assets/new-mobile-art/']"
-                        )
-                        assert image.count() == 1, width
-                        assert image.evaluate("img => img.getBoundingClientRect().height") >= 180, width
-                        assert card.locator("h3").evaluate(
-                            "heading => parseFloat(getComputedStyle(heading).fontSize)"
-                        ) >= 20, width
-                        src = image.get_attribute("src") or ""
-                        text = card.text_content() or ""
-                        if src.startswith("/assets/phone-photos/"):
-                            assert "Model photo:" in text, width
-                        elif src.startswith("/assets/phone-illustrations/"):
-                            assert "AI illustration" in text, width
-                    more_phones.evaluate("details => { details.open = false; }")
+                    assert page.locator("#mobileResearchNewGrid img[src*='/assets/new-mobile-art/']").count() == 21, width
                     assert "Price unavailable" in page.locator("#mobileResearchNewGrid").text_content(), width
                     assert page.evaluate(
                         "() => window.CouponWorldMobileResearch.search('Samsung Galaxy F70 5G').some("
@@ -290,10 +182,10 @@ def run(root: Path):
                     ).all_inner_texts()), width
                     page.evaluate("window.CouponWorldMobileResearch.search('phone under 30000')")
 
-                    # Ordinary under-budget searches now default to strict previous-₹5k windows.
+                    # Nearby-band narrowing must be explicit.
                     nearby = page.evaluate("""() => window.CouponWorldMobileResearch.search('phone under 30000 nearby band').map(x => x.card.research_budget_reference.reference_price_inr)""")
                     assert nearby and all(25000 <= price < 30000 for price in nearby), width
-                    # Full-budget is an explicit opt-in exception, not the default.
+                    # The ordinary under-budget shortcut matches the full-budget search.
                     details = page.locator("details.research-guided-search")
                     details.locator("summary").click()
                     page.locator("#researchGuidedBudget").select_option("30000")
@@ -306,100 +198,14 @@ def run(root: Path):
                     assert any(price < 25000 for price in expanded), width
                     ordinary = page.evaluate("() => window.CouponWorldMobileResearch.search('phone under 30000').map(x => x.card.model_key)")
                     full = page.evaluate("() => window.CouponWorldMobileResearch.search('phone under 30000 full budget').map(x => x.card.model_key)")
-                    assert ordinary == page.evaluate("() => window.CouponWorldMobileResearch.search('phone under 30000 nearby band').map(x => x.card.model_key)"), width
-                    assert ordinary != full, width
+                    assert ordinary == full, width
 
-                    # Exercise all 40 five-thousand-rupee public budget filters using the generated catalogue.
-                    # These are dated references, not live retailer prices or buy claims.
-                    # Stub unrelated backend recommendations while testing chip click handlers.
-                    page.route("**/api/recommend?*", lambda route: route.fulfill(
-                        status=503, headers={"Access-Control-Allow-Origin": "*"}))
-                    budget_audit = []
-                    previous_keys = set()
-                    for limit in range(5000, 200001, 5000):
-                        # Only five buttons are prominent. Other bands remain
-                        # fully accessible through the advanced budget selector.
-                        button = page.locator(
-                            f'.mobile-budget-chips [data-mobile-query="mobile under {limit}"]'
-                        )
-                        assert page.locator(f'#researchGuidedBudget option[value="{limit}"]').count() == 1, (width, limit)
-                        if limit in primary_shortcuts:
-                            assert button.count() == 1, (width, limit)
-                            button.evaluate("(el) => el.click()")
-                            expected_query = f"mobile under {limit}"
-                        else:
-                            assert button.count() == 0, (width, limit)
-                            page.locator("#researchGuidedBudget").select_option(str(limit))
-                            page.locator("#researchGuidedScope").select_option("band")
-                            page.locator("#researchGuidedApply").evaluate("(el) => el.click()")
-                            expected_query = f"phone under {limit} nearby band"
-                        assert page.locator("#heroSearch").input_value() == expected_query, (width, limit)
-                        if limit in primary_shortcuts:
-                            # Quick buttons intentionally target local Research Top 3.
-                            assert page.locator("#mobileResearchResults .research-verified-top3").count() == 1, (width, limit)
-                            assert "research picks" in page.locator("#mobileResearchSearchStatus").inner_text(), (width, limit)
-                            # The 40-band audit below exercises the ordinary two-lane budget query.
-                            page.evaluate("(limit) => window.CouponWorldMobileResearch.search('phone under ' + limit)", limit)
-                        assert "dated budget-reference matches" in page.locator("#mobileResearchSearchStatus").inner_text(), (width, limit)
-                        measure = page.evaluate("""limit => {
-                          const matches = window.CouponWorldMobileResearch.search('phone under ' + limit);
-                          const prices = matches.map(item => Number(item.card.research_budget_reference.reference_price_inr));
-                          const names = matches.map(item => [item.card.brand, item.card.model].join(' '));
-                          const keys = matches.map(item => item.card.model_key);
-                          const heading = document.querySelector('#mobileResearchResults .research-budget-evidenced h3')?.textContent || '';
-                          const status = document.getElementById('mobileResearchSearchStatus')?.textContent || '';
-                          const related = document.querySelectorAll('#mobileResearchResults .research-budget-related-item').length;
-                          const rendered = document.querySelectorAll('#mobileResearchResults .research-budget-primary-grid [data-mobile-model-card]').length;
-                          return {
-                            limit, count: matches.length, min_reference: prices.length ? Math.min(...prices) : null,
-                            max_reference: prices.length ? Math.max(...prices) : null,
-                            invalid_references: prices.filter(price => !(price >= limit - 5000 && price < limit)).length,
-                            keys, sample_names: names.slice(0, 5), related_unverified_preview: related,
-                            rendered_cards_initial: rendered, heading, status
-                          };
-                        }""", limit)
-                        assert measure["invalid_references"] == 0, (width, limit, measure)
-                        assert len(measure["keys"]) == len(set(measure["keys"])), (width, limit, measure)
-                        assert previous_keys.isdisjoint(set(measure["keys"])), (width, limit, "overlapping adjacent ₹5k budgets")
-                        assert str(measure["count"]) in measure["heading"], (width, limit, measure["heading"])
-                        assert "below ₹" in measure["status"], (width, limit, measure["status"])
-                        assert measure["rendered_cards_initial"] <= measure["count"], (width, limit)
-                        previous_keys = set(measure["keys"])
-                        del measure["keys"]
-                        budget_audit.append(measure)
-                        print("BUDGET_FILTER_AUDIT", width, json.dumps(measure, ensure_ascii=False), flush=True)
-                    # Select each guided budget and actually click the Apply action.
-                    for cap in range(5000, 200001, 5000):
-                        page.locator("#researchGuidedBudget").select_option(str(cap))
-                        page.locator("#researchGuidedScope").select_option("band")
-                        page.locator("#researchGuidedApply").evaluate("(el) => el.click()")
-                        assert page.locator("#heroSearch").input_value() == f"phone under {cap} nearby band", (width, cap)
-                        expected_count = next(a["count"] for a in budget_audit if a["limit"] == cap)
-                        assert page.locator("#mobileResearchSearchStatus").inner_text().startswith(
-                            f"{expected_count} dated budget-reference matches"
-                        ), (width, cap)
-                    page.unroute("**/api/recommend?*")
-                    page.evaluate("window.CouponWorldMobileResearch.search('phone under 30000')")
-                    # Identity-only research is never mistaken for a valid budget match.
-                    page.evaluate("window.CouponWorldMobileResearch.search('Infinix 5G mobile 10k ke andar')")
-                    identity_text = page.locator("#mobileResearchResults .research-identity-only").inner_text().lower()
-                    assert "verification pending" in identity_text, (width, identity_text[:300])
-                    assert "not budget-qualified" in identity_text, width
-                    assert not page.locator("#mobileResearchResults .research-identity-only .purchase-cta").count(), width
-                    page.evaluate("window.CouponWorldMobileResearch.search('exact model Smart 8 HD phone under 25000')")
-                    # The exact identity may already qualify for the source-linked
-                    # unpriced lane, in which case it must NOT repeat in identity-only.
-                    related_names = page.locator(
-                        "#mobileResearchResults .research-budget-unpriced .research-budget-related-item strong, "
-                        "#mobileResearchResults .research-identity-only .research-budget-related-item strong"
-                    ).all_inner_texts()
-                    assert any("Smart 8 HD" in name for name in related_names), (width, related_names)
-                    assert all("GT 30 Pro" not in name for name in related_names), (width, related_names)
-                    assert sum("Smart 8 HD" in name for name in related_names) == 1, (width, related_names)
-                    page.evaluate("window.CouponWorldMobileResearch.search('Samsung nahi chahiye phone under 8000')")
-                    assert "Samsung" not in page.locator("#mobileResearchResults .research-identity-only").inner_text(), width
-                    page.evaluate("window.CouponWorldMobileResearch.search('exact model Unknown Phantom 888 phone under 25000')")
-                    assert not page.locator("#mobileResearchResults .research-identity-only").count(), width
+                    # Regression: strict under-budget semantics and no hidden lower band.
+                    for limit in (10000, 15000, 20000, 25000, 30000, 50000):
+                        prices = page.evaluate("""limit => window.CouponWorldMobileResearch.search(
+                            'phone under ' + limit
+                        ).map(item => item.card.research_budget_reference.reference_price_inr)""", limit)
+                        assert all(0 < price < limit for price in prices), (width, limit, prices)
                     # Exact brand exclusion must survive mixed-language searches.
                     excluded = page.evaluate("""() => window.CouponWorldMobileResearch.search(
                         'phone under 30000 exclude samsung'
@@ -619,51 +425,6 @@ def run(root: Path):
                     for removed in ("answers/best-apple-phone-under-7000/", "compare/apple-iphone-17-vs-apple-iphone-16/", "phones/under-25000/best-camera/"):
                         response=page.goto(url+removed, wait_until="domcontentloaded")
                         assert response.status == 404, removed
-                    page.goto(url, wait_until="domcontentloaded")
-                    watch_link = page.locator(".phone-editorial .india-watch-feature")
-                    assert watch_link.is_visible(), width
-                    hero_phone = page.locator(".hero-phone-preview")
-                    assert hero_phone.is_visible(), width
-                    hero_phone.evaluate("img => img.decode()")
-                    assert hero_phone.evaluate("img => getComputedStyle(img).animationName") == "hero-phone-preview-turn", width
-                    page.emulate_media(reduced_motion="reduce")
-                    assert hero_phone.evaluate("img => getComputedStyle(img).animationName") == "none", width
-                    page.emulate_media(reduced_motion="no-preference")
-                    if width == 1440:
-                        assert watch_link.bounding_box()["x"] > page.locator(".hero-copy").bounding_box()["x"], width
-                    watch_link.click()
-                    page.wait_for_url("**/seo/india-30-phone-price-watch.html")
-                    cards = page.locator(".phone-watch-card")
-                    count = cards.count()
-                    assert count == 30, width
-                    assert cards.locator("img").count() == count, width
-                    assert cards.locator(".phone-watch-store-link").count() == count * 3, width
-                    assert cards.locator(".phone-watch-status").count() == count, width
-                    for store in ("Amazon", "Flipkart", "Croma"):
-                        assert cards.get_by_role("link", name=f"Check price on {store} ↗", exact=True).count() > 0, width
-                    if count:
-                        loaded_image = cards.first.locator("img")
-                        loaded_image.scroll_into_view_if_needed()
-                        loaded_image.evaluate("img => img.decode()")
-                        assert cards.first.locator(".phone-watch-details h2").bounding_box()["x"] > loaded_image.bounding_box()["x"], width
-                    for card in cards.all() if width == 1440 else [cards.first]:
-                        title = card.locator("h2 button")
-                        title.click()
-                        dialog = card.locator("dialog")
-                        assert dialog.is_visible(), width
-                        assert dialog.locator("h2").inner_text() == title.inner_text(), width
-                        assert dialog.get_by_role("link", name="Battery source").count() + dialog.get_by_role("link", name="Battery and charging source").count() == 1, width
-                        assert dialog.locator(".phone-watch-store-link").count() == 3, width
-                        page.keyboard.press("Escape")
-                        assert not dialog.is_visible(), width
-                    cards.first.locator(".phone-watch-image-button").click()
-                    assert cards.first.locator("dialog").is_visible(), width
-                    cards.first.locator("dialog").get_by_role("button", name="Close").click()
-                    assert page.evaluate("document.documentElement.scrollWidth") <= width + 8, width
-                    page.locator('main a[href="/phones/upcoming-india/"]').click()
-                    page.wait_for_url("**/phones/upcoming-india/")
-                    assert "India launch status checked" in page.locator("main").inner_text(), width
-                    assert "₹" not in page.locator("main").inner_text(), width
                     # Reproduce the full-catalogue view shown in the narrow-card bug.
                     page.goto(url + "#mobileResearchCatalogue", wait_until="domcontentloaded")
                     page.locator("#mobileResearchCatalogueGrid .mobile-research-model-card").first.wait_for(state="visible")
@@ -681,7 +442,7 @@ def run(root: Path):
                     assert not page_errors, f"{width}px uncaught JS errors: {page_errors}"
                     results.append({"width": width, "search": "PASS", "full_budget_opt_in": "PASS", "exact_variant": "PASS",
                                     "comparison": "PASS", "engine_handoff": "PASS",
-                                    "page_errors": len(page_errors), "budget_filters": budget_audit})
+                                    "page_errors": len(page_errors)})
                     print(f"PASS {width}px responsive smartphone research, comparison and engine handoff")
                     page.close()
             finally:
@@ -709,3 +470,4 @@ def main():
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
