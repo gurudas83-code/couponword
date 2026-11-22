@@ -1007,9 +1007,10 @@
       });
       return sourced.length >= 2;
     }).slice(0, 4);
-    var html = '<section class="research-budget-tier research-budget-unpriced research-identity-only" aria-label="Related phones with unverified price">' +
+    var identityOnly = /\b(?:samsung|oneplus|apple|iphone|pixel|redmi|xiaomi|poco|realme|vivo|oppo|motorola|nothing|iqoo|lava|tecno|infinix|honor|nokia|hmd)\b/i.test(String(query || "")) && !/\bexact\s+model\b/i.test(String(query || ""));
+    var html = '<section class="research-budget-tier research-budget-unpriced' + (identityOnly ? ' research-identity-only' : '') + '" aria-label="Related phones with unverified price">' +
       '<h3>Additional relevant phones · price not verified (' + leads.length + ')</h3>' +
-      '<p>Verification pending: these phones match your other documented conditions, but we cannot confirm that their exact RAM/storage variant falls within your selected budget. They may cost more and are not budget-qualified. They are not ranked, in-stock or purchasable recommendations.</p>';
+      '<p>' + (identityOnly ? 'Verification pending: ' : '') + 'These phones match your other documented conditions, but we cannot confirm that their exact RAM/storage variant falls within your selected budget. They may cost more and are not budget-qualified. They are not ranked, in-stock or purchasable recommendations.</p>';
     if (!leads.length) {
       html += '<p>No additional manufacturer/source-linked research matched all the other requested conditions.</p>';
     } else {
