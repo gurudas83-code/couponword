@@ -20,7 +20,7 @@ class UsabilityTests(unittest.TestCase):
         self.assertEqual(specification_value('battery_mah_typical', {'value': '5000 mAh'}), '5000 mAh')
 
     def test_budget_examples_match_actual_dated_gate_and_both_languages(self):
-        catalogue = json.loads((ROOT/'public/data/mobile_research_catalogue.json').read_text())
+        catalogue = json.loads((ROOT/'public/data/mobile_research_catalogue.json').read_text(encoding='utf-8'))
         cards = catalogue['model_cards']
         for cap in (10000, 15000, 20000, 30000, 50000):
             guide = {'slug': f'phones-under-{cap}'}
