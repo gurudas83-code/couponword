@@ -540,6 +540,8 @@
     text = text.replace(/\bnearby\s+(?:band|budget)\b/gi, " ");
     var fullBudget = /\bfull\s+budget\b|पूरे\s*बजट/i.test(text);
     text = text.replace(/\bfull\s+budget\b|पूरे\s*बजट/gi, " ");
+    // "Top 3" controls presentation only; the numeral is not a phone-model token.
+    text = text.replace(/\btop\s*3\b/gi, " ");
     var budget = null, lower = null, inclusive = false;
     var between = text.match(new RegExp("(?:between|from)\\s*(?:rs\\.?|inr|₹)?\\s*" + amount + "\\s*(?:and|to|-)\\s*(?:rs\\.?|inr|₹)?\\s*" + amount));
     if (between) { lower = value(between[1], between[2] || between[4]); budget = value(between[3], between[4]); inclusive = true; text = text.replace(between[0], " "); }
