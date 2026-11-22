@@ -52,6 +52,52 @@
     }
   }
   </script>
+  <style>
+    body.clean-ui .mobile-budget-chips > span {
+      width: 100%;
+      color: #243e31;
+      font-size: .95rem;
+      font-weight: 700;
+    }
+    .mobile-budget-chips small {
+      display: block;
+      margin-top: 2px;
+      font-size: .8rem;
+      font-weight: 400;
+    }
+    body.clean-ui .mobile-budget-chips button {
+      min-height: 44px;
+      background: #f0f5ee;
+      font-size: .85rem;
+    }
+    .cw-assistant > summary {
+      box-sizing: border-box;
+      min-height: 44px;
+      padding: 10px 0;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .cw-assistant[open] > summary { margin-bottom: 8px; }
+    .cw-assistant > summary:focus-visible,
+    .hero-watch-shortcut:focus-visible { outline: 2px solid #376db7; outline-offset: 3px; }
+    .hero-watch-shortcut { display: none; }
+    @media (max-width: 640px) {
+      .hero-watch-shortcut {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 44px;
+        margin-top: 12px;
+        padding: 0 12px;
+        border: 1px solid #315c49;
+        border-radius: 9px;
+        color: #264e3e;
+        font-weight: 700;
+      }
+      .phone-editorial .editorial-caption {grid-column: 1/-1;grid-row: 4}
+      .phone-editorial .editorial-cta {grid-row: 5}
+    }
+  </style>
 </head>
 
 <body class="clean-ui">
@@ -107,8 +153,7 @@
           <h1>Find a phone.<br><em>For your budget.</em></h1>
 
           <p>
-            Find a phone by budget, camera, gaming or battery. Compare documented specifications,
-            then open the retailer options to check the current price and buy.
+            Search by model or feature, or pick a budget below.
           </p>
 
           <div class="hero-search">
@@ -119,8 +164,19 @@
             </div>
           </div>
 
-          <section class="cw-assistant" id="cwAssistant" aria-label="Ask Coupon World about products">
-            <div class="cw-assistant-head"><strong>Ask Coupon World · सवाल पूछें</strong><span>Our research, not a ChatGPT clone</span></div>
+          <div class="mobile-budget-chips" aria-label="Quick smartphone budget searches">
+            <span>Browse by budget <small>Based on dated price references</small></span>
+            <button type="button" data-mobile-query="mobile under 10000" title="₹5,000 to below ₹10,000 (dated price references)" aria-label="Phones ₹5,000 to below ₹10,000">₹5k–&lt;₹10k</button>
+            <button type="button" data-mobile-query="mobile under 15000" title="₹10,000 to below ₹15,000 (dated price references)" aria-label="Phones ₹10,000 to below ₹15,000">₹10k–&lt;₹15k</button>
+            <button type="button" data-mobile-query="mobile under 20000" title="₹15,000 to below ₹20,000 (dated price references)" aria-label="Phones ₹15,000 to below ₹20,000">₹15k–&lt;₹20k</button>
+            <button type="button" data-mobile-query="mobile under 25000" title="₹20,000 to below ₹25,000 (dated price references)" aria-label="Phones ₹20,000 to below ₹25,000">₹20k–&lt;₹25k</button>
+            <button type="button" data-mobile-query="mobile under 30000" title="₹25,000 to below ₹30,000 (dated price references)" aria-label="Phones ₹25,000 to below ₹30,000">₹25k–&lt;₹30k</button>
+
+          </div>
+          <a class="hero-watch-shortcut" href="/seo/india-30-phone-price-watch.html">India Top 30 Phones <span aria-hidden="true">↗</span></a>
+
+          <details class="cw-assistant" id="cwAssistant" aria-label="Ask Coupon World about products">
+            <summary>Ask Coupon World · सवाल पूछें</summary>
             <div class="cw-assistant-messages" id="cwAssistantMessages" role="log" aria-live="polite" aria-relevant="additions text">
               <div class="cw-assistant-message cw-assistant-bot"><strong>Coupon World research</strong><p>फोन, TV, earbuds या chargers के बारे में पूछें। मैं हमारी प्रकाशित रिसर्च से जवाब दूँगा और उसकी सीमाएँ बताऊँगा।</p></div>
             </div>
@@ -140,17 +196,7 @@
               <label><input type="checkbox" id="cwAssistantSpeak" /> Read answers aloud</label>
             </div>
             <p class="cw-assistant-note" id="cwAssistantNotice">Voice requires browser support and microphone permission. No audio recording is stored by Coupon World; browser speech services may process audio. Answers use dated research, not live retailer prices.</p>
-          </section>
-
-<div class="mobile-budget-chips" aria-label="Quick smartphone budget searches">
-            <span>Choose a ₹5,000 price-reference band</span>
-            <button type="button" data-mobile-query="mobile under 10000" title="₹5,000 to below ₹10,000 (dated price references)" aria-label="Phones ₹5,000 to below ₹10,000">₹10k</button>
-            <button type="button" data-mobile-query="mobile under 15000" title="₹10,000 to below ₹15,000 (dated price references)" aria-label="Phones ₹10,000 to below ₹15,000">₹15k</button>
-            <button type="button" data-mobile-query="mobile under 20000" title="₹15,000 to below ₹20,000 (dated price references)" aria-label="Phones ₹15,000 to below ₹20,000">₹20k</button>
-            <button type="button" data-mobile-query="mobile under 25000" title="₹20,000 to below ₹25,000 (dated price references)" aria-label="Phones ₹20,000 to below ₹25,000">₹25k</button>
-            <button type="button" data-mobile-query="mobile under 30000" title="₹25,000 to below ₹30,000 (dated price references)" aria-label="Phones ₹25,000 to below ₹30,000">₹30k</button>
-
-          </div>
+          </details>
 
           <div class="hero-actions cw-primary-actions" aria-label="Popular ways to start">
             <a class="btn btn-primary" data-analytics-intent="budget_25000" href="/phones/under-25000/">Phones under ₹25k</a>
@@ -161,7 +207,7 @@
             <a class="btn btn-primary" href="/phones/new-india-mobiles/">New India phones (11)</a>
           </div>
           <nav class="seo-crawl-paths" aria-label="Popular phone guides">
-            <p><strong>Explore phone buying guides</strong> <span>Open a useful guide directly — no search form needed.</span></p>
+            <p><strong>Explore phone buying guides</strong></p>
             <div class="seo-crawl-grid">
               <a href="/seo/phones-under-10000.html">Phones under ₹10,000</a>
               <a href="/seo/phones-under-15000.html">Phones under ₹15,000</a>
@@ -191,13 +237,12 @@
           <a class="india-watch-feature" href="/seo/india-30-phone-price-watch.html">
             <span class="india-watch-feature-copy">
               <strong>India Top 30 Phones</strong>
-              <span>30 tracked models · in-stock price checks</span>
+              <span>See phone specs and retailer prices</span>
             </span>
             <span aria-hidden="true">↗</span>
           </a>
-          <div class="editorial-topline"><span>THE PHONE EDIT</span><span>01 / EXPLORE</span></div>
           <img class="hero-phone-art hero-phone-preview" src="/assets/phone-illustrations/representative-smartphone.webp" width="640" height="640" alt="3D illustration of a graphite smartphone" fetchpriority="high" />
-          <div class="editorial-caption"><span class="art-caption">Concept illustration · not a specific model</span><h2>Your priorities.<br>Your next phone.</h2><p>Camera. Battery. Gaming. Find the details that matter to you.</p></div>
+          <div class="editorial-caption"><span class="art-caption">Concept illustration · not a specific model</span></div>
           <button type="button" class="editorial-cta" data-mobile-research-query="camera phone under 30000">Explore camera phones under ₹30k <span aria-hidden="true">↗</span></button>
         </aside>
         <aside class="spotlight" aria-label="Featured deal" hidden><div id="featuredDeal"></div></aside>
