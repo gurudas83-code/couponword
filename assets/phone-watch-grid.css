@@ -63,3 +63,44 @@
 .phone-watch-price-cta:hover,.phone-watch-price-cta:focus-visible {background:#d1eafb;color:#123a54}
 .phone-watch-price-cta:focus-visible {outline:2px solid #396a8d;outline-offset:2px}
 .phone-watch-price-cta + small {margin-bottom:9px}
+
+.phone-watch-image-button,
+.phone-watch-details h2 button {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+.phone-watch-image-button {display:block;width:100%}
+.phone-watch-details h2 button {text-decoration:underline;text-underline-offset:.18em}
+.phone-watch-dialog {
+  width: min(42rem, calc(100% - 1.5rem));
+  max-height: 85vh;
+  box-sizing: border-box;
+  padding: clamp(1rem, 4vw, 2rem);
+  border: 1px solid #dce5da;
+  border-radius: 16px;
+  background: #fff;
+  color: #17261c;
+  overflow-wrap:anywhere;
+}
+.phone-watch-dialog::backdrop {background:rgb(16 30 23 / 65%)}
+.phone-watch-dialog form {float:right;margin:0 0 .5rem .75rem}
+.phone-watch-dialog form button {padding:.45rem .75rem;cursor:pointer}
+.phone-watch-dialog dl div {
+  display:grid;
+  grid-template-columns:minmax(7rem, 38%) minmax(0, 1fr);
+  gap:.5rem;
+  padding:.5rem 0;
+  border-bottom:1px solid #e2eae0;
+}
+.phone-watch-dialog dt {font-weight:700}
+.phone-watch-dialog dd {margin:0}
+.phone-watch-dialog dd a {font-size:.82em}
+.phone-watch-dialog-prices ul {padding-left:1.25rem}
+.phone-watch-dialog-prices li {margin-block:.6rem}
+.phone-watch-dialog-prices small {display:block}
+.phone-watch-dialog .phone-watch-image {max-width:12rem;margin:1rem 0}

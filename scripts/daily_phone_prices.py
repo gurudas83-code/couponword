@@ -10,7 +10,7 @@ import sys
 import time
 from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
-from urllib.parse import quote_plus
+from urllib.parse import quote_plus, urlsplit
 from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -210,7 +210,7 @@ def render_store(row, store, observed, now, name="", *, lowest=False, listed_pri
     return f'<li>{actions}<small>{details}</small></li>'
 
 
-def render_image(media, output, name):
+def render_image(media, output, name, dialog_id):
     photo = media.get("photo") or media.get("reviewed_model_photo")
     path = photo["url"] if photo else media.get("representative_illustration")
     if not path or not (output / path.lstrip("/")).is_file():
@@ -222,8 +222,12 @@ def render_image(media, output, name):
         alt = name + " model photograph"
         caption = (f'<a href="{esc(photo["source"])}">{esc(photo["author"])}</a> · '
                    f'<a href="{esc(photo["license_url"])}">{esc(photo["license"])}</a> · resized')
-    return (f'<figure class="phone-watch-image"><img src="{esc(path)}" alt="{esc(alt)}" '
-            f'loading="lazy" decoding="async"><figcaption>{caption}</figcaption></figure>')
+    return (
+        f'<figure class="phone-watch-image"><button type="button" class="phone-watch-image-button" '
+        f'data-phone-dialog="{dialog_id}" aria-haspopup="dialog" aria-label="View {esc(name)} specifications">'
+        f'<img src="{esc(path)}" alt="{esc(alt)}" loading="lazy" decoding="async"></button>'
+        f'<figcaption>{caption}</figcaption></figure>'
+    )
 
 
 def render_research(research, review_date, has_api_price):
@@ -248,6 +252,62 @@ def render_research(research, review_date, has_api_price):
     return details
 
 
+SPEC_FIELDS = (
+    ("india_variant_description", "India RAM / storage options", ""),
+    ("chipset", "Processor", ""),
+    ("display_type_description", "Display", ""),
+    ("display_type", "Display", ""),
+    ("display_size_description", "Display size", ""),
+    ("display_inches", "Display size", " inches"),
+    ("display_resolution_description", "Display resolution", ""),
+    ("display_refresh_description", "Refresh rate", ""),
+    ("display_refresh_max_hz", "Refresh rate", " Hz"),
+    ("battery_mah_typical", "Battery", " mAh"),
+    ("battery_capacity_description", "Battery", ""),
+    ("charging_description", "Charging", ""),
+    ("wired_charging_max_w", "Charging", " W"),
+    ("rear_camera_system", "Rear camera", ""),
+    ("rear_main_mp", "Main camera", " MP"),
+    ("rear_ultrawide_mp", "Ultrawide camera", " MP"),
+    ("front_camera_system", "Front camera", ""),
+    ("front_mp", "Front camera", " MP"),
+    ("launch_android", "Android version at launch", ""),
+    ("os_upgrade_generations", "OS upgrades", " generations"),
+    ("security_support_years", "Security support", " years"),
+    ("security_update_policy", "Security update policy", ""),
+    ("network_support", "Network", ""),
+)
+
+
+def render_spec_dialog(dialog_id, name, card, reviewed):
+    fields = {label: (value, reviewed["source"]) for label, value in reviewed.get("fields", {}).items()}
+    catalogue_specs = card["specifications"]
+    for key, label, unit in SPEC_FIELDS:
+        entry = catalogue_specs.get(key, {})
+        if not entry.get("source_url") or not entry.get("value") or label in fields:
+            continue
+        if label in ("Battery", "Charging") and "Battery and charging" in fields:
+            continue
+        if label == "Battery" and str(entry["value"]).isdigit():
+            unit = " mAh"
+        fields[label] = (str(entry["value"]) + unit, entry["source_url"])
+    specs = "".join(
+        f'<div><dt>{esc(label)}</dt><dd>{esc(value)} '
+        f'<a href="{esc(source)}" aria-label="{esc(label)} source">{esc(urlsplit(source).netloc.removeprefix("www."))}</a></dd></div>'
+        for label, (value, source) in fields.items()
+    )
+    return (
+        f'<dialog id="{dialog_id}" class="phone-watch-dialog" aria-labelledby="{dialog_id}-title">'
+        '<form method="dialog"><button type="submit" autofocus>Close</button></form>'
+        f'<h2 id="{dialog_id}-title">{esc(name)}</h2>'
+        '<h3>Phone specifications</h3><dl>' + specs + '</dl>'
+        '<h3>Prices by retailer and variant</h3>'
+        '<p>Match RAM, storage and colour before comparing offers. '
+        'Store references may require a PIN or a fresh stock check.</p>'
+        '<div class="phone-watch-dialog-prices"></div></dialog>'
+    )
+
+
 def publish(output, snapshot_path=None):
     rows, cards = worklist()
     data = json.loads(Path(snapshot_path).read_text()) if snapshot_path else {}
@@ -255,6 +315,7 @@ def publish(output, snapshot_path=None):
     data = {**data, "stores": stores}
     now = datetime.now(IST)
     research = json.loads((ROOT / "data/india_phone_watch_research.json").read_text())
+    spec_reviews = json.loads((ROOT / "data/india_phone_watch_specs.json").read_text())
     media = {}
     for filename in ("mobile_research_catalogue", "india_sales_eight_research", "india_recent_manufacturer_research"):
         feed = json.loads((output / "data" / f"{filename}.json").read_text())
@@ -262,9 +323,10 @@ def publish(output, snapshot_path=None):
     body = []
     in_stock_count = 0
     reference_count = 0
-    for row in rows:
+    for index, row in enumerate(rows, 1):
         key = row["model_key"]
         card = cards[key]
+        dialog_id = f"phone-specs-{index}"
         name = card["model"] if card["model"].lower().startswith(card["brand"].lower() + " ") else f'{card["brand"]} {card["model"]}'
         evidence = row["evidence"]
         source_label = {
@@ -303,9 +365,10 @@ def publish(output, snapshot_path=None):
             for store in PLATFORMS
         )
         body.append(
-            '<article class="phone-watch-card">' + render_image(media.get(key, {}), output, name) +
-            f'<div class="phone-watch-details">{badge}<h2>{esc(name)}</h2><p>{source}</p>'
-            f'{model_details}<ul aria-label="{esc(name)} retailer options">{shop_links}</ul></div></article>'
+            '<article class="phone-watch-card">' + render_image(media.get(key, {}), output, name, dialog_id) +
+            f'<div class="phone-watch-details">{badge}<h2><button type="button" data-phone-dialog="{dialog_id}" aria-haspopup="dialog">{esc(name)}</button></h2><p>{source}</p>'
+            f'{model_details}<ul aria-label="{esc(name)} retailer options">{shop_links}</ul></div>' +
+            render_spec_dialog(dialog_id, name, card, spec_reviews.get(key, {})) + '</article>'
         )
     check_count = len(body) - in_stock_count - reference_count
     updated_at = esc(now.strftime("%d %b %Y, %H:%M IST"))
@@ -325,7 +388,7 @@ def publish(output, snapshot_path=None):
     target = output / ROUTE.lstrip("/")
     target.parent.mkdir(parents=True, exist_ok=True)
     html = doc("India Top 30 Phones · Price Watch", "Dated Amazon, Flipkart and Croma price observations for selected India phones.", ROUTE, page, {"@context": "https://schema.org", "@type": "WebPage"})
-    target.write_text(html.replace("</head>", '<link rel="stylesheet" href="/assets/phone-watch-grid.css?v=light-price-cta-v1">\n</head>'), encoding="utf-8")
+    target.write_text(html.replace("</head>", '<link rel="stylesheet" href="/assets/phone-watch-grid.css?v=spec-dialog-v1"><script defer src="/assets/phone-watch-dialog.js"></script>\n</head>'), encoding="utf-8")
     target = output / SNAPSHOT_PATH
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(data, ensure_ascii=False) + "\n", encoding="utf-8")

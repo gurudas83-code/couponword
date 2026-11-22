@@ -1,0 +1,223 @@
+{
+  "apple|iphone 17": {
+    "source": "https://www.apple.com/in/iphone-17/specs/",
+    "fields": {
+      "India RAM / storage options": "256 GB or 512 GB storage",
+      "Processor": "Apple A19",
+      "Display": "6.3-inch OLED, up to 120 Hz",
+      "Battery and charging": "Up to 30 hours video playback",
+      "Rear camera": "48 MP main + 48 MP ultrawide",
+      "Front camera": "18 MP",
+      "Other features": "IP68"
+    }
+  },
+  "apple|iphone 16": {
+    "source": "https://www.apple.com/in/iphone-16/specs/",
+    "fields": {
+      "India RAM / storage options": "128 GB, 256 GB or 512 GB storage",
+      "Processor": "Apple A18",
+      "Display": "6.1-inch OLED",
+      "Battery and charging": "Up to 22 hours video playback",
+      "Rear camera": "48 MP main + 12 MP ultrawide",
+      "Front camera": "12 MP",
+      "Other features": "IP68"
+    }
+  },
+  "samsung|galaxy a27 5g": {
+    "source": "https://news.samsung.com/in/samsung-galaxy-a27-5g-launches-in-india-at-inr-28999-with-cashback-and-zero-down-payment-emi-schemes",
+    "fields": {
+      "India RAM / storage options": "6/128 GB, 8/128 GB, 8/256 GB",
+      "Processor": "Snapdragon 6 Gen 3",
+      "Display": "6.7-inch Super AMOLED, 120 Hz",
+      "Battery and charging": "5,000 mAh / 25 W",
+      "Rear camera": "50 MP + 5 MP + 2 MP",
+      "Front camera": "12 MP"
+    }
+  },
+  "oppo|reno16 5g": {
+    "source": "https://www.oppo.com/in/smartphones/series-reno/reno16/specs/",
+    "fields": {
+      "India RAM / storage options": "8/128 GB, 8/256 GB, 12/256 GB",
+      "Processor": "Dimensity 7300",
+      "Display": "6.57-inch AMOLED, 120 Hz",
+      "Battery and charging": "7,000 mAh / 80 W",
+      "Rear camera": "50 MP main + 50 MP telephoto + 8 MP ultrawide",
+      "Front camera": "50 MP"
+    }
+  },
+  "poco|x8 5g": {
+    "source": "https://www.91mobiles.com/poco-x8-5g-price-in-india",
+    "fields": {
+      "India RAM / storage options": "6/128 GB, 8/128 GB, 8/256 GB",
+      "Processor": "Snapdragon 6s Gen 4",
+      "Display": "6.83-inch AMOLED, 120 Hz",
+      "Battery and charging": "9,000 mAh",
+      "Rear camera": "50 MP + 2 MP",
+      "Front camera": "16 MP"
+    }
+  },
+  "poco|x8 power 5g": {
+    "source": "https://www.91mobiles.com/poco-x8-power-5g-price-in-india",
+    "fields": {
+      "India RAM / storage options": "8/128 GB, 8/256 GB",
+      "Processor": "Snapdragon 6 Gen 5",
+      "Display": "6.83-inch AMOLED, 120 Hz",
+      "Battery and charging": "10,000 mAh",
+      "Rear camera": "50 MP + 8 MP",
+      "Front camera": "32 MP"
+    }
+  },
+  "vivo|s2 5g": {
+    "source": "https://www.91mobiles.com/vivo-s2-5g-price-in-india",
+    "fields": {
+      "India RAM / storage options": "8/128 GB, 8/256 GB",
+      "Processor": "Dimensity 7360 Turbo",
+      "Display": "6.83-inch AMOLED, 120 Hz",
+      "Battery and charging": "7,050 mAh",
+      "Rear camera": "50 MP + 2 MP",
+      "Front camera": "32 MP"
+    }
+  },
+  "vivo|t5x 5g": {
+    "source": "https://www.vivo.com/in/products/param/t5x?id=819",
+    "fields": {
+      "India RAM / storage options": "6/128 GB, 8/128 GB, 8/256 GB",
+      "Processor": "Dimensity 7400 Turbo",
+      "Display": "6.76-inch LCD",
+      "Battery and charging": "7,200 mAh",
+      "Rear camera": "50 MP + 2 MP",
+      "Front camera": "32 MP"
+    }
+  },
+  "samsung|galaxy m36 5g": {
+    "source": "https://news.samsung.com/in/samsung-launches-galaxy-m36-5g-in-india-introduces-advanced-ai-innovations-in-mid-segment-smartphones",
+    "fields": {
+      "India RAM / storage options": "6/128 GB, 8/128 GB, 8/256 GB",
+      "Processor": "Exynos 1380",
+      "Display": "6.7-inch Super AMOLED, 120 Hz",
+      "Battery and charging": "5,000 mAh / 25 W",
+      "Rear camera": "50 MP OIS + 8 MP + 2 MP",
+      "Front camera": "13 MP"
+    }
+  },
+  "vivo|t4x 5g": {
+    "source": "https://www.vivo.com/in/products/param/t4x-5g",
+    "fields": {
+      "India RAM / storage options": "6/128 GB, 8/128 GB, 8/256 GB",
+      "Processor": "Dimensity 7300",
+      "Display": "6.72-inch LCD, 120 Hz",
+      "Battery and charging": "6,500 mAh / 44 W",
+      "Rear camera": "50 MP + 2 MP",
+      "Front camera": "8 MP",
+      "Other features": "IP64"
+    }
+  },
+  "realme|p4 pro": {
+    "source": "https://www.realme.com/in/realme-p4-pro-5g/specs",
+    "fields": {
+      "India RAM / storage options": "8/128 GB, 8/256 GB, 12/256 GB",
+      "Processor": "Snapdragon 7 Gen 4",
+      "Display": "6.8-inch, 144 Hz",
+      "Battery and charging": "7,000 mAh / 80 W",
+      "Rear camera": "50 MP OIS + 8 MP ultrawide",
+      "Front camera": "50 MP"
+    }
+  },
+  "realme|p4 power": {
+    "source": "https://www.realme.com/in/realme-p4-power-5g/specs",
+    "fields": {
+      "India RAM / storage options": "8/128 GB, 8/256 GB, 12/256 GB",
+      "Processor": "Dimensity 7400 Ultra",
+      "Display": "6.8-inch, 144 Hz",
+      "Battery and charging": "10,001 mAh / 80 W",
+      "Rear camera": "50 MP OIS + 8 MP ultrawide",
+      "Front camera": "16 MP"
+    }
+  },
+  "realme|p4x": {
+    "source": "https://www.realme.com/in/realme-p4x-5g",
+    "fields": {
+      "India RAM / storage options": "6/128 GB, 8/128 GB, 8/256 GB",
+      "Processor": "Dimensity 7400 Ultra",
+      "Display": "6.72-inch LCD, 144 Hz",
+      "Battery and charging": "7,000 mAh / 45 W",
+      "Rear camera": "50 MP main",
+      "Front camera": "8 MP"
+    }
+  },
+  "oneplus|nord 6": {
+    "source": "https://www.oneplus.in/oneplus-nord-6",
+    "fields": {
+      "India RAM / storage options": "8/256 GB, 12/256 GB",
+      "Processor": "Snapdragon 8s Gen 4",
+      "Display": "6.78-inch AMOLED, 165 Hz",
+      "Battery and charging": "9,000 mAh / 80 W",
+      "Rear camera": "50 MP main + 8 MP ultrawide",
+      "Front camera": "32 MP"
+    }
+  },
+  "motorola|edge 60 fusion": {
+    "source": "https://www.motorola.in/smartphones-motorola-edge-60-fusion/p",
+    "fields": {
+      "India RAM / storage options": "8/128 GB, 8/256 GB, 12/256 GB",
+      "Processor": "Dimensity 7400",
+      "Display": "6.67-inch pOLED, 120 Hz",
+      "Battery and charging": "5,500 mAh / 68 W",
+      "Rear camera": "50 MP OIS + 13 MP ultrawide",
+      "Front camera": "32 MP"
+    }
+  },
+  "iqoo|neo 10": {
+    "source": "https://www.iqoo.com/in/products/param/neo10",
+    "fields": {
+      "India RAM / storage options": "RAM up to 16 GB; storage up to 512 GB",
+      "Processor": "Snapdragon 8s Gen 4",
+      "Display": "6.78-inch AMOLED",
+      "Battery and charging": "7,000 mAh / 120 W",
+      "Rear camera": "50 MP + 8 MP ultrawide",
+      "Front camera": "32 MP"
+    }
+  },
+  "samsung|galaxy a36 5g": {
+    "source": "https://www.samsung.com/in/smartphones/galaxy-a36/buy/",
+    "fields": {
+      "India RAM / storage options": "8/128 GB, 8/256 GB, 12/256 GB",
+      "Other features": "IP67"
+    }
+  },
+  "samsung|galaxy a56 5g": {
+    "source": "https://www.samsung.com/in/smartphones/galaxy-a56/buy/",
+    "fields": {
+      "India RAM / storage options": "8/128 GB, 8/256 GB, 12/256 GB",
+      "Other features": "IP67"
+    }
+  },
+  "samsung|galaxy a37 5g": {
+    "source": "https://www.samsung.com/in/smartphones/galaxy-a37/buy/",
+    "fields": {
+      "India RAM / storage options": "8/128 GB, 8/256 GB"
+    }
+  },
+  "samsung|galaxy a57 5g": {
+    "source": "https://www.samsung.com/in/smartphones/galaxy-a57/buy/",
+    "fields": {
+      "India RAM / storage options": "8/256 GB, 12/256 GB"
+    }
+  },
+  "samsung|galaxy m17 5g": {
+    "source": "https://news.samsung.com/in/samsung-launches-galaxy-m17-5g-with-segment-first-ois-camera-enhanced-durability-ai-features-in-india",
+    "fields": {
+      "India RAM / storage options": "4/128 GB, 6/128 GB, 8/128 GB",
+      "Processor": "Exynos 1330",
+      "Display": "6.7-inch Super AMOLED, 90 Hz",
+      "Battery and charging": "5,000 mAh"
+    }
+  },
+  "nothing|phone 3a": {
+    "source": "https://in.nothing.tech/products/phone-3a",
+    "fields": {
+      "India RAM / storage options": "See India store listings for exact RAM and storage pairs",
+      "Rear camera": "50 MP main + 50 MP telephoto + 8 MP ultrawide"
+    }
+  }
+}

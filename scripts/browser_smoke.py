@@ -643,6 +643,19 @@ def run(root: Path):
                         loaded_image.scroll_into_view_if_needed()
                         loaded_image.evaluate("img => img.decode()")
                         assert cards.first.locator("h2").bounding_box()["x"] > loaded_image.bounding_box()["x"], width
+                    for card in cards.all() if width == 1440 else [cards.first]:
+                        title = card.locator("h2 button")
+                        title.click()
+                        dialog = card.locator("dialog")
+                        assert dialog.is_visible(), width
+                        assert dialog.locator("h2").inner_text() == title.inner_text(), width
+                        assert dialog.get_by_role("link", name="Battery source").count() + dialog.get_by_role("link", name="Battery and charging source").count() == 1, width
+                        assert dialog.locator(".phone-watch-store-link").count() == 3, width
+                        page.keyboard.press("Escape")
+                        assert not dialog.is_visible(), width
+                    cards.first.locator(".phone-watch-image-button").click()
+                    assert cards.first.locator("dialog").is_visible(), width
+                    cards.first.locator("dialog").get_by_role("button", name="Close").click()
                     assert page.evaluate("document.documentElement.scrollWidth") <= width + 8, width
                     page.locator('main a[href="/phones/upcoming-india/"]').click()
                     page.wait_for_url("**/phones/upcoming-india/")
