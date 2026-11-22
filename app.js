@@ -638,7 +638,7 @@ async function renderOfferUnavailableWithResearch(query, signal) {
     if (!response.ok) throw new Error("Research preview unavailable");
     const payload = await response.json();
     const products = Array.isArray(payload.products) ? payload.products : [];
-    const terms = normalize(query).split(/\\s+/).filter(term => term.length > 2);
+    const terms = normalize(query).split(/\s+/).filter(term => term.length > 2);
     let matches = products.filter(product => {
       const specs = product.specifications && typeof product.specifications === "object" ? Object.values(product.specifications).map(item => item && item.value).join(" ") : "";
       const haystack = normalize([product.brand, product.model, product.ram_gb + "gb", product.storage_gb + "gb", specs].join(" "));
@@ -649,7 +649,7 @@ async function renderOfferUnavailableWithResearch(query, signal) {
       if (catalogueResponse.ok) {
         const catalogue = await catalogueResponse.json();
         const catalogueProducts = Array.isArray(catalogue.model_cards) ? catalogue.model_cards : [];
-        const catalogueTerms = terms.filter(term => !/^(mobile|mobiles|phone|phones|smartphone|smartphones|under|below|within|budget|price|in|india|\\d+)$/.test(term));
+        const catalogueTerms = terms.filter(term => !/^(mobile|mobiles|phone|phones|smartphone|smartphones|under|below|within|budget|price|in|india|\d+)$/.test(term));
         const catalogueMatches = catalogueProducts.filter(product => {
           const haystack = normalize([product.brand, product.model, product.variant_text, product.status].join(" "));
           return catalogueTerms.length ? catalogueTerms.some(term => haystack.includes(term)) : product.status !== "NEEDS_VERIFICATION";
