@@ -1151,9 +1151,12 @@
       matches = findResearchMatches(lastSearchQuery);
     }
     var c = researchConstraints(lastSearchQuery);
+    var validBudget = !comparison && c.budget != null && (c.lower == null || c.lower <= c.budget);
     matches = groupResearchMatches(matches);
     lastStrictMatchCount = matches.length;
-    var fallback = matches.length ? [] : repositoryFallbackMatches(lastSearchQuery);
+    // Never broaden an explicit budget band into unrelated catalogue matches.
+    // The price-unknown lane below is the only allowed additional context.
+    var fallback = matches.length || validBudget ? [] : repositoryFallbackMatches(lastSearchQuery);
     var displayMatches = matches.length ? matches : fallback;
     lastSearchMatches = displayMatches;
     var visible = searchExpanded ? displayMatches : displayMatches.slice(0, MAX_SEARCH_RESULTS);
@@ -1162,7 +1165,6 @@
       persistShortlist();
       renderSelectedComparison();
     }
-    var validBudget = !comparison && c.budget != null && (c.lower == null || c.lower <= c.budget);
     var additional = validBudget ? unpricedResearchLeads(lastSearchQuery) : {count: 0, html: ""};
     if (researchResults) {
       researchResults.hidden = false;
