@@ -553,7 +553,7 @@
     // Under-budget searches include every documented cheaper candidate.
     // Only an explicit nearby-band choice or range adds a lower bound.
     if (budget != null && lower == null) {
-      lower = nearbyBudget && !fullBudget ? Math.max(0, budget - (budget <= 30000 ? 5000 : 10000)) : 0;
+      lower = nearbyBudget && !fullBudget ? Math.max(0, budget - 5000) : 0;
     }
     var ram = null, storage = null;
     text = text.replace(/\b(\d{1,2})\s*\/\s*(\d{2,4})\b/g, function (_, r, t) { ram = Number(r); storage = Number(t); return " "; });
