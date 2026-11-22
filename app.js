@@ -916,8 +916,10 @@ async function loadShoppingRecommendation(query, { background = false } = {}) {
         const marketText = safeMarkets.includes(marketStatus) ? marketStatus : "OTHER";
         card.innerHTML = `<h3>Verified Top 3 is not available for this search</h3>
           <p>The recommendation service returned no eligible ranked models. It would be misleading to label the first three research matches as Top 3.</p>
-          <p role="status">${escapeHTML(reasonText)}</p>\n          <p>Result status: ${statusText}. Market evidence: ${marketText}.</p>
+          <p role="status">${escapeHTML(reasonText)}</p>
+          <p>Result status: ${statusText}. Market evidence: ${marketText}.</p>
           <p>Try a wider budget or fewer restrictions. Current prices and availability must be verified before purchase.</p>
+          <p class="standard-guide-fallback"><a class="btn btn-ghost" href="/seo/top-30-phone-research-india.html">Explore 30 source-linked phone candidates</a> <a class="btn btn-ghost" href="/compare/">Compare documented specs</a></p>
           ${standardBuyingGuideFallback()}`;
       } else if (String(data.market_data_status || "").toUpperCase() === "CURRENT_OFFERS_UNAVAILABLE") {
         await renderOfferUnavailableWithResearch(cleanQuery, controller.signal);
