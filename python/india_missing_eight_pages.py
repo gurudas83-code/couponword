@@ -165,7 +165,7 @@ def _research_page(card: dict) -> str:
 <dl class="cr-commerce-grid">
 <div><dt>Exact variant</dt><dd>{esc(variant)}</dd></div>
 <div><dt>Verified image</dt><dd>{esc(image_text)}</dd></div>
-<div><dt>Current price</dt><dd><strong>Not verified</strong><br><small>Live authorized retailer feed required.</small></dd></div>
+<div><dt>Current price</dt><dd><strong>Current price unavailable</strong><br><small>Live authorized retailer feed required.</small></dd></div>
 <div><dt>Stock status</dt><dd><strong>Not verified</strong><br><small>Stock changes by retailer and pincode.</small></dd></div>
 <div><dt>Affiliate buying link</dt><dd>{affiliate_html}<br><small>Search link only; exact offer is not certified.</small></dd></div>
 <div><dt>Last checked</dt><dd><strong>Retailer price/stock: not checked</strong><br><small>Manufacturer research source reviewed; this is not a live offer timestamp.</small></dd></div>
