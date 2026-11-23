@@ -82,10 +82,11 @@ const context = vm.createContext({
   assert(matches.length >= 1);
   assert.equal(element("mobileResearchResults").hidden, false);
   const html = element("mobileResearchResults").innerHTML;
-  const visible = (html.match(/data-mobile-model-card=/g) || []).length;
-  assert.equal(visible, Math.min(3, matches.length),
-    "The first three research cards must show before optional fetch resolves");
-  assert.match(html, /not a verified Top-3 recommendation/);
+  const budgetLane = html.split('</section>')[0];
+  const visible = (budgetLane.match(/data-mobile-model-card=/g) || []).length;
+  assert.equal(visible, Math.min(6, matches.length),
+    "The first page of research cards must show before optional fetch resolves");
+  assert.match(html, /Within your budget · dated price reference/);
   assert.match(html, /Current checkout price, availability and delivery have NOT been confirmed/);
   assert(firstResultPaintMs !== null, "Core results never appeared before optional requests");
   // Node VM startup and runner CPU contention are not a browser first-paint
@@ -102,7 +103,7 @@ const context = vm.createContext({
     "Optional data refresh must not duplicate backend offer checks");
   assert.equal(called.filter(s => s.includes("india_sales_eight_research")).length, 1);
   assert.equal(called.filter(s => s.includes("india_recent_manufacturer_research")).length, 1);
-  assert.match(element("mobileResearchResults").innerHTML, /not a verified Top-3 recommendation/);
-  console.log("PASS: first three locally sourced research results before optional fetch, " +
+  assert.match(element("mobileResearchResults").innerHTML, /Within your budget · dated price reference/);
+  console.log("PASS: first page of locally sourced research results before optional fetch, " +
     "no invented live offers, no duplicate API call, synthetic first meaningful paint " + firstResultPaintMs.toFixed(1) + "ms");
 })().catch(error => { console.error(error); process.exitCode = 1; });
