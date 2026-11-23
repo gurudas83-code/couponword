@@ -46,6 +46,15 @@ def listing_candidate(item, row):
         return False
     title = str(item.get("name") or "")
     expected = _tokens(query_for(row))
+    candidate_model = _tokens(_listing_model_name(title))
+    # A few Indian catalogue records omit the radio variant from the model
+    # key (for example `Infinix GT 30 Pro`), while Flipkart titles publish the
+    # same handset as `Infinix GT 30 Pro 5G`. Treat only that trailing network
+    # suffix as a display-name alias; the brand, model stem, SKU and physical
+    # configuration gates remain strict.
+    model_matches = candidate_model == expected or (
+        not expected.endswith(" 5g") and candidate_model == expected + " 5g"
+    )
     # Storage-specific catalogue cards must state the requested capacity too.
     storage = re.search(r"\s+(\d+)\s*(GB|TB)$", expected, re.I)
     if row["category"] == "mobiles":
@@ -53,7 +62,7 @@ def listing_candidate(item, row):
             expected = expected[:storage.start()].strip()
             if not re.search(r"\b" + storage.group(1) + r"\s*" + storage.group(2) + r"\b", title, re.I):
                 return False
-        return _tokens(_listing_model_name(title)) == expected
+        return model_matches
     # Non-mobile listings require a manufacturer model code, never RAM matching.
     code = str(row.get("model_code") or "").strip()
     return bool(code and re.search(r"(?<![a-z0-9])" + re.escape(code) + r"(?![a-z0-9])", title, re.I))
@@ -179,3 +188,4 @@ def main():
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

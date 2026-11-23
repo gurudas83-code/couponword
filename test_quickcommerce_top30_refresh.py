@@ -114,6 +114,30 @@ class QuickCommerceTop30RefreshTests(unittest.TestCase):
         self.assertEqual(offer["availability"], "out_of_stock")
         self.assertIsNone(offer["price"])
 
+    def test_catalogue_model_key_accepts_only_provider_trailing_5g_alias(self):
+        pid = "MOB123456789012"
+        payload = {
+            "status": "success",
+            "data": {
+                "platform": "Flipkart",
+                "products": [{
+                    "id": pid,
+                    "name": "Infinix GT 30 Pro 5G (Shadow Ash, 256 GB)",
+                    "brand": "Infinix",
+                    "available": True,
+                    "offer_price": 23999,
+                    "mrp": 29999,
+                    "quantity": "12 GB RAM",
+                    "currency": "INR",
+                    "deeplink": f"https://www.flipkart.com/-/p/-?pid={pid}",
+                }],
+            },
+        }
+        row = {"audit_id": "infinix|gt 30 pro", "brand": "Infinix", "model": "GT 30 Pro", "category": "mobiles"}
+        item, variant = select_exact_listing(payload, row)
+        self.assertEqual(item["id"], pid)
+        self.assertEqual(variant["variant"], "12GB/256GB · Shadow Ash")
+
 
 if __name__ == "__main__":
     unittest.main()
