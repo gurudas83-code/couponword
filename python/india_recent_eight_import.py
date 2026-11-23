@@ -221,15 +221,7 @@ def _detail_page(card: dict) -> str:
         '">Search ' + escape(x["retailer"].title()) + ' for this model</a></li>'
         for x in card["retailer_search_links"]
     )
-    visual = (
-        '<img src="' + card["research_art_url"] + '" width="540" height="430" '
-        'loading="eager" alt="Generic smartphone illustration; not a photo of ' +
-        escape(name, quote=True) + '">'
-        '<p><small>Original illustrated artwork. NOT the exact product photograph. '
-        'Product imagery can be added only with model-verified commercial reuse rights.</small></p>'
-    )
-    if card["model_key"] == "motorola|signature 27":
-        visual = _review_views(card, name, linked=False)
+    visual = _review_views(card, name, linked=False)
     body = (
         '<p class="cr-crumb"><a href="/">Home</a> / <a href="' + HUB +
         '">New India mobiles</a> / ' + escape(name) + '</p>'

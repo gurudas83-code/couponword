@@ -67,6 +67,9 @@ class RecentIndiaPhonesTests(unittest.TestCase):
             for card in payload["model_cards"]:
                 detail = Path(folder) / card["detail_url"].lstrip("/") / "index.html"
                 content = detail.read_text(encoding="utf-8")
+                slug = card["detail_url"].rstrip("/").rsplit("/", 1)[-1]
+                self.assertIn(f'src="/assets/phone-illustrations/recent-india-pairs/{slug}.webp"', content)
+                self.assertIn("AI-generated · two views of the same model", content)
                 self.assertGreaterEqual(content.count('class="cr-fact"'), 2)
                 self.assertIn('name="robots" content="noindex,follow"', content)
                 self.assertIn("Current price unavailable", content)
