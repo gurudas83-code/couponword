@@ -149,7 +149,9 @@
     if (!/^https:\/\//i.test(String(url || ""))) return "";
     var amazon = /^https:\/\/(?:www\.)?amazon\.in(?:[/?#]|$)/i.test(String(url));
     if (amazon) { var parsed = new URL(url); parsed.searchParams.set("tag", "guru07cc-21"); url = parsed.href; }
-    return '<a class="mobile-research-link" href="' + escapeHtml(url) + '" target="_blank" rel="' + (amazon ? 'sponsored nofollow noopener noreferrer' : 'noopener noreferrer') + '">' + escapeHtml(label) + " ↗</a>";
+    var legacySearchLabel = label === "Check live price on Amazon (search)" ? ' aria-label="Search Amazon"' :
+      label === "Check live price on Flipkart (search)" ? ' aria-label="Search Flipkart"' : "";
+    return '<a class="mobile-research-link" href="' + escapeHtml(url) + '" target="_blank" rel="' + (amazon ? 'sponsored nofollow noopener noreferrer' : 'noopener noreferrer') + '"' + legacySearchLabel + '>' + escapeHtml(label) + " ↗</a>";
   }
 
   function optionValues(rows, key) {
