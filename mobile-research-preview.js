@@ -1354,7 +1354,7 @@
     // recorded; dated India launch evidence is limited to the last 365 days.
     var recentLaunchCutoff = Date.now() - 365 * 24 * 60 * 60 * 1000;
     var recent = inventoryCards.filter(function (card) {
-      if (card.market_intake !== true || !(card.source_urls || []).length) return false;
+      if (card.market_intake !== true || !((card.source_urls || []).length > 0)) return false;
       if (!card.india_launch_date) return true;
       if (!card.india_launch_date) return true;
       var launchTime = Date.parse(String(card.india_launch_date) + "T00:00:00Z");
