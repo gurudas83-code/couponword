@@ -163,8 +163,8 @@ def run(root: Path):
                     a6 = page.locator("#mobileResearchResults [data-mobile-model-card='oppo|a6x 5g']")
                     assert a6.count() == 1, width
                     assert "India sales/shipments research addition" in a6.inner_text(), width
-                    assert "Search Amazon" in a6.inner_text(), width
-                    assert "Search Flipkart" in a6.inner_text(), width
+                    assert a6.locator('a[aria-label="Search Amazon"]').count() == 1, width
+                    assert a6.locator('a[aria-label="Search Flipkart"]').count() == 1, width
                     assert "Search Croma" in a6.inner_text(), width
                     assert page.evaluate(
                         "() => window.CouponWorldMobileResearch.search('Samsung Galaxy A07 5G').some("
