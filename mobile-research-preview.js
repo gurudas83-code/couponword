@@ -242,8 +242,8 @@
       return sum + character.codePointAt(0);
     }, 0) % 8;
     return '<figure class="research-phone-photo">' + trigger +
-      '<img src="/assets/phone-illustrations/generic-3d-' + illustration + '.webp" width="440" height="440" loading="lazy" decoding="async" alt="">' +
-      '</button><figcaption>Generic 3D illustration · Not an actual product photo · Tap to see retailer options</figcaption></figure>';
+      '<img src="/assets/phone-illustrations/generic-3d-' + illustration + '.webp" style="filter:hue-rotate(-10deg)" width="440" height="440" loading="lazy" decoding="async" alt="">' +
+      '</button><figcaption>AI-generated 3D image · Not an actual product photo · Tap to see retailer options</figcaption></figure>';
   }
 
   function renderInventoryCard(card) {
