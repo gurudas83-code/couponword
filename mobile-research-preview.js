@@ -46,6 +46,7 @@
   var inventoryExpanded = false;
   var searchExpanded = false;
   var lastSearchQuery = "";
+  var queryWaitingForInventory = "";
   var lastSearchMatches = [];
   var lastStrictMatchCount = 0;
   var guidedControls = ["researchGuidedBudget", "researchGuidedPriority", "researchGuidedRam", "researchGuidedStorage", "researchGuidedExclude"].map(function (id) { return document.getElementById(id); });
@@ -377,7 +378,6 @@
         return response.json();
       }).catch(function () { return null; });
     var initialQueryStarted = false;
-    var queryWaitingForInventory = "";
     function runInitialQueryOnce() {
       var urlQuery = new URLSearchParams(window.location.search || "").get("q");
       var initialQuery = urlQuery || queryWaitingForInventory;
