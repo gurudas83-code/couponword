@@ -271,10 +271,11 @@ def render_card(card: dict, *, image_root: Path | None = None) -> str:
         else:
             url = "/assets/phone-illustrations/generic-3d-0.webp"
             alt = ""
-            credit = "Generic 3D illustration · Not an actual product photo"
+            credit = "AI-generated 3D image · Not an actual product photo"
+        image_style = 'style="filter:hue-rotate(-10deg)" ' if url.endswith("/generic-3d-0.webp") else ""
         image = (
             f'<figure class="mobile-fact-media"><a href="{esc(path)}" aria-label="View {esc(title)} specifications">'
-            f'<img src="{esc(url)}" alt="{esc(alt)}" loading="lazy" decoding="async"></a>'
+            f'<img src="{esc(url)}" {image_style}alt="{esc(alt)}" loading="lazy" decoding="async"></a>'
             f'<figcaption>{credit}</figcaption></figure>'
         )
     return f'<article class="mobile-fact-card">{image}<h3>{link(path, title)}</h3><p>{facts or "Documented specification sources available"}</p><p class="mobile-fact-small">{len(accepted_specs(card))} source-linked fields · Research, not a live offer</p></article>'
@@ -398,9 +399,9 @@ def render_model(card: dict, related: list[dict]) -> str:
     else:
         photo_html = (
             '<figure class="mobile-fact-media">'
-            '<img src="/assets/phone-illustrations/generic-3d-0.webp" width="440" height="440" '
+            '<img src="/assets/phone-illustrations/generic-3d-0.webp" style="filter:hue-rotate(-10deg)" width="440" height="440" '
             'alt="" loading="lazy" decoding="async">'
-            '<figcaption>Generic 3D illustration · Not an actual product photo</figcaption></figure>'
+            '<figcaption>AI-generated 3D image · Not an actual product photo</figcaption></figure>'
         )
     variants = card.get("verified_india_variants") or []
     variant_html = ""
