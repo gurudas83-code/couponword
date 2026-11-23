@@ -1169,7 +1169,7 @@
     var topThreeHtml = topThree.length ? '<section class="research-verified-top3" aria-label="Research-Verified top 3"><h3>Research-Verified top 3 for this budget band</h3><p>Ordered by source coverage and constraint fit, not a measured performance winner. Current price and current stock are not verified.</p><div class="research-top3-grid">' +
       topThree.map(function (item) { return '<div class="research-top3-result">' + renderResearchResultCard(item.card, item.rows, item.group_size) + '</div>'; }).join("") + '</div></section>' : "";
     return topThreeHtml + '<div class="research-context research-verified-recommendations">' +
-      '<p><strong>Need a performance-based recommendation?</strong> This list is ordered by research coverage, not proven camera, gaming or battery performance. Check the existing recommendation engine separately; it will show results only when its evidence and eligibility rules pass.</p>' +
+      '<p><strong>Need a performance-based recommendation?</strong> This list is ordered by research coverage, not proven camera, gaming or battery performance. This is not a verified Top-3 recommendation. Check the existing recommendation engine separately; it will show results only when its evidence and eligibility rules pass.</p>' +
       '<button type="button" class="btn btn-ghost" data-research-verified-recommend>Check eligible recommendations</button></div>';
   }
 
