@@ -1284,6 +1284,7 @@
           '</section>';
         researchResults.innerHTML = bridge + primary + additional.html +
           (!matches.length && !additional.count ? relatedRepositoryResearch(lastSearchQuery, visible) : '');
+        if (isResearchTopThreeQuery(lastSearchQuery) && typeof console !== "undefined" && console.error) console.error("TOP3_HTML_DEBUG", lastSearchQuery, (String(researchResults.innerHTML || "").match(/class="research-top3-result"/g) || []).length);
       } else {
         researchResults.innerHTML = bridge +
           (comparison ? '<p class="mobile-research-gate">Specification comparison; no performance winner is asserted.' +
