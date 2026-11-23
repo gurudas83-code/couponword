@@ -850,7 +850,9 @@
             var parsed = new URL(String(item.url || ""));
             if (parsed.protocol === "https:" && store.hosts.indexOf(parsed.hostname.toLowerCase()) >= 0) {
               var label = verified ? "View exact " + store.name + " listing" :
-                (store.id === "croma" ? "Search Croma for this model" : "Search " + store.name);
+                (store.id === "amazon" ? "Check live price on Amazon (search)" :
+                  store.id === "flipkart" ? "Check live price on Flipkart (search)" :
+                  "Search Croma for this model");
               return link(item.url, label);
             }
           } catch (error) { /* Invalid links remain unavailable, not clickable. */ }
@@ -1153,24 +1155,43 @@
       '</section>';
   }
 
+  function isResearchTopThreeQuery(query) {
+    return /\btop\s*(?:3|three)\b/i.test(String(query || ""));
+  }
+
+  function hasResearchVerifiedEvidence(card) {
+    if (!card || card.status !== "OFFICIAL_VERIFIED") return false;
+    var specs = card.specifications || {};
+    var sourced = Object.keys(specs).filter(function (key) {
+      var item = specs[key] || {};
+      return item.value != null && String(item.value).trim() !== "" &&
+        /^https:\/\/[^\s<>"']+$/i.test(String(item.source_url || ""));
+    });
+    return sourced.length >= 2;
+  }
+
+  function shouldUseCoreResearch(query) {
+    return !isResearchTopThreeQuery(query) && inventoryCards.length;
+  }
+
   function emptyResearchResult(query, fallback) {
     var c = researchConstraints(query);
-    var message = "No documented match in our saved research for this request.";
-    if (c.lower != null && c.budget != null && c.lower > c.budget) message = "The lower budget is higher than the upper budget. Please correct the range.";
-    else if (c.ram != null || c.storage != null) message += " We cannot confirm the requested exact memory variant with all these conditions.";
-    else if (c.budget != null) message += " No matching record passes this price band and the other conditions. Missing references and recorded out-of-stock entries are excluded.";
+    var message = isResearchTopThreeQuery(query) ? "No model meets the minimum manufacturer-backed research evidence for this Top-3 request." : "No documented match in our saved research for this request.";
+    if (!isResearchTopThreeQuery(query) && c.lower != null && c.budget != null && c.lower > c.budget) message = "The lower budget is higher than the upper budget. Please correct the range.";
+    else if (!isResearchTopThreeQuery(query) && (c.ram != null || c.storage != null)) message += " We cannot confirm the requested exact memory variant with all these conditions.";
+    else if (!isResearchTopThreeQuery(query) && c.budget != null) message += " No matching record passes this price band and the other conditions. Missing references and recorded out-of-stock entries are excluded.";
     return '<div class="mobile-research-empty"><p>' + escapeHtml(message) + '</p><p>This is a research coverage gap, not proof that no suitable phone exists. No constraint has been relaxed for budget-qualified results.</p><a href="#mobileResearchCatalogue">Browse the full research catalogue</a>' + researchGuideFallback() + '</div>' + relatedRepositoryResearch(query, fallback || []);
   }
 
   function verifiedRecommendationBridge(query, isComparison, matches) {
     var c = researchConstraints(query);
     if (isComparison || c.budget == null) return "";
-    var topThree = /\btop\s*3\b/i.test(String(query || "")) ? (matches || []).slice(0, 3) : [];
-    var topThreeHtml = topThree.length ? '<section class="research-verified-top3" aria-label="Research-Verified top 3"><h3>Research-Verified top 3 for this budget band</h3><p>Ordered by source coverage and constraint fit, not a measured performance winner. Current price and current stock are not verified.</p><div class="research-top3-grid">' +
+    var topThree = isResearchTopThreeQuery(query) ? (matches || []).filter(function (item) { return hasResearchVerifiedEvidence(item.card); }).slice(0, 3) : [];
+    var topThreeHtml = topThree.length ? '<section class="research-verified-top3" aria-label="Research-Verified Top 3"><h3>Research-Verified Top 3 for this budget band</h3><p>Ordered by source coverage and constraint fit, not a measured performance winner. Current price and current stock are not verified.</p><div class="research-top3-grid">' +
       topThree.map(function (item) { return '<div class="research-top3-result">' + renderResearchResultCard(item.card, item.rows, item.group_size) + '</div>'; }).join("") + '</div></section>' : "";
-    return topThreeHtml + '<div class="research-context research-verified-recommendations">' +
+    return topThreeHtml + (isResearchTopThreeQuery(query) ? "" : '<div class="research-context research-verified-recommendations">' +
       '<p><strong>Need a performance-based recommendation?</strong> This list is ordered by research coverage, not proven camera, gaming or battery performance. This is not a verified Top-3 recommendation. Check the existing recommendation engine separately; it will show results only when its evidence and eligibility rules pass.</p>' +
-      '<button type="button" class="btn btn-ghost" data-research-verified-recommend>Check eligible recommendations</button></div>';
+      '<button type="button" class="btn btn-ghost" data-research-verified-recommend>Check eligible recommendations</button></div>');
   }
 
   function searchResearch(query) {
@@ -1210,6 +1231,8 @@
       matches = findResearchMatches(lastSearchQuery);
     }
     var c = researchConstraints(lastSearchQuery);
+    var wantsTopThree = isResearchTopThreeQuery(lastSearchQuery);
+    var coreResearchReady = shouldUseCoreResearch(lastSearchQuery);
     var validBudget = !comparison && c.budget != null && (c.lower == null || c.lower <= c.budget);
     matches = groupResearchMatches(matches);
     lastStrictMatchCount = matches.length;
