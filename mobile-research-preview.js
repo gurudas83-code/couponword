@@ -1161,7 +1161,9 @@
 
   function hasResearchVerifiedEvidence(card) {
     var isResearchCard = !!card && card.status !== "OFFICIAL_VERIFIED";
-    if (!isResearchCard) return false;
+    var acceptedStatus = isResearchCard ?
+      (card.status === "PARTIALLY_VERIFIED" || card.status === "RESEARCH_ONLY") : !!card;
+    if (!acceptedStatus) return false;
     if (card.research_budget_reference) {
       var identity = card.india_identity_evidence || {};
       var variants = Array.isArray(identity.verified_variants) ? identity.verified_variants : [];
