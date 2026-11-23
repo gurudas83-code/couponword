@@ -904,7 +904,6 @@
       card.status === "OFFICIAL_VERIFIED" ? "Manufacturer evidence" :
       card.status === "PARTIALLY_VERIFIED" ? "Partial specifications" : "Needs verification";
     var selected = comparisonSelection.some(function (item) { return researchGroupKey(item.card) === researchGroupKey(card); });
-    if (isTopThreeResult && typeof console !== "undefined" && console.error) console.error("TOP3_CARD_DEBUG", card.model_key, !!card.research_budget_reference, card.research_budget_reference && card.research_budget_reference.reference_price_inr);
     var launch = card.india_launch_date ? '<p class="mobile-research-launch">India launch: ' + escapeHtml(card.india_launch_date) + '</p>' : '';
     return '<article class="mobile-research-inventory-card mobile-research-result-card" data-mobile-model-card="' + escapeHtml(card.model_key) + '"><div class="mobile-research-inventory-body">' +
       '<div class="mobile-research-card-top"><span class="research-status">' + escapeHtml(status) + '</span><span class="research-status">Research only</span></div>' +
@@ -918,10 +917,7 @@
       '<p class="mobile-research-variant">' + (variants.length ? 'Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join("; ")) : 'No exact variant recorded for this fallback record') + '</p>' +
       (groupSize > 1 ? '<p class="research-group-note">' + groupSize + ' matching catalogue entries grouped. Specifications below belong to the displayed record.</p>' : '') +
       (specs ? '<ul class="mobile-research-model-specs">' + specs + '</ul>' : '<p>Technical specifications are pending verification.</p>') + documentedContext(card, lastSearchQuery) + independentTestContext(card) +
-      '<p class="research-source-note">' + (sourceItem ? link(sourceItem.source_url, "Specification source") : 'Specification source pending') + ' · Specification research snapshot: ' + escapeHtml(card.research_checked_at || sourceItem && (sourceItem.checked_at || sourceItem.checked_date) || 'date unavailable') + ' (not a live check)</p>' +
-      (isTopThreeResult ?
-        '<p class="research-source-note">Dated reference in selected band; current price unverified.</p>' :
-        (card.research_budget_reference ? '<p class="research-source-note">Budget filter uses a dated retailer observation: ' + escapeHtml(String(card.research_budget_reference.checked_at || 'date unavailable').match(/\\d{4}-\\d{2}-\\d{2}/)?.[0] || String(card.research_budget_reference.checked_at || 'date unavailable')) + '. Current price and stock not verified.</p>' : '')) +
+      '<p class="research-source-note">' + (sourceItem ? link(sourceItem.source_url, "Specification source") : 'Specification source pending') + ' · Specification research snapshot: ' + escapeHtml(card.research_checked_at || sourceItem && (sourceItem.checked_at || sourceItem.checked_date) || 'date unavailable') + ' (not a live check)</p>' + (card.research_budget_reference ? '<p class="research-source-note">' + (isResearchTopThreeQuery(lastSearchQuery) ? 'Dated reference in selected band; current price unverified. Observation date: ' : 'Budget filter uses a dated retailer observation: ') + escapeHtml(String(card.research_budget_reference.checked_at || 'date unavailable').match(/\\d{4}-\\d{2}-\\d{2}/)?.[0] || String(card.research_budget_reference.checked_at || 'date unavailable')) + '. Current price and stock not verified.</p>' : '') +
       '<div class="research-card-actions"><button type="button" class="btn btn-ghost mobile-research-detail-button" data-research-detail="' + escapeHtml(card.model_key) + '">All specifications</button>' +
       '<button type="button" class="btn btn-ghost" data-research-compare="' + escapeHtml(card.model_key) + '" aria-pressed="' + selected + '">' + (selected ? 'Remove comparison' : 'Compare') + '</button></div>' + retailerResearchLinks(card) +
       (card.market_intake ? '<p class="mobile-research-gate"><strong>Price unavailable:</strong> no fresh authorized exact-SKU API price. Open the model specifications page for manufacturer evidence.</p>' : '') +
@@ -1205,7 +1201,6 @@
       return hasResearchVerifiedEvidence(item.card) &&
         (researchConstraints(query).budget == null || !!item.card.research_budget_reference);
     }).slice(0, 3) : [];
-    if (isResearchTopThreeQuery(query) && typeof console !== "undefined" && console.error) console.error("TOP3_BRIDGE_DEBUG", query, JSON.stringify(topThree.map(function (item) { return [item.card.model_key, !!item.card.research_budget_reference, item.card.research_budget_reference && item.card.research_budget_reference.reference_price_inr]; })));
     var topThreeHtml = topThree.length ? '<section class="research-verified-top3" aria-label="Research-Verified Top 3"><h3>Research-Verified Top 3 for this budget band</h3><p>Ordered by source coverage and constraint fit, not measured camera, gaming or battery superiority. Dated reference in selected band; current price unverified; current stock is not verified.</p><div class="research-top3-grid">' +
       topThree.map(function (item) { return '<div class="research-top3-result">' + renderResearchResultCard(item.card, item.rows, item.group_size, true) + '</div>'; }).join("") + '</div></section>' : "";
     return topThreeHtml + (isResearchTopThreeQuery(query) ? "" : '<div class="research-context research-verified-recommendations">' +
@@ -1284,7 +1279,6 @@
           '</section>';
         researchResults.innerHTML = bridge + primary + additional.html +
           (!matches.length && !additional.count ? relatedRepositoryResearch(lastSearchQuery, visible) : '');
-        if (isResearchTopThreeQuery(lastSearchQuery) && typeof console !== "undefined" && console.error) console.error("TOP3_HTML_DEBUG", lastSearchQuery, (String(researchResults.innerHTML || "").match(/class="research-top3-result"/g) || []).length);
       } else {
         researchResults.innerHTML = bridge +
           (comparison ? '<p class="mobile-research-gate">Specification comparison; no performance winner is asserted.' +
