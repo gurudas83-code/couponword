@@ -1,5 +1,63 @@
-Get-Content: 
-Line |
-   2 |  Get-Content .github\workflows\affiliate-price-refresh.yml -Raw
-     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     | Cannot find path 'C:\Users\HP\Documents\Codex\2026-11-18\referenced-chatgpt-conversation-this-is-an\work\.github\workflows\affiliate-price-refresh.yml' because it does not exist.
+name: Daily Top-30 affiliate price refresh
+
+on:
+  # 17:00 IST = 11:30 UTC. GitHub Actions may start a few minutes late.
+  schedule:
+    - cron: "30 11 * * *"
+  # A workflow file/script change immediately exercises the price-watch path;
+  # the offer commit itself does not match these paths, so it cannot loop.
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/affiliate-price-refresh.yml"
+      - "scripts/refresh_affiliate_offers.py"
+      - "python/retailer_publication_gate.py"
+      - "data/top30_research_pilot_20261113.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: couponworld-affiliate-price-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - name: Set up Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.12"
+      - name: Require paid affiliate feed configuration
+        env:
+          AFFILIATE_PRICE_FEED_URL: ${{ secrets.AFFILIATE_PRICE_FEED_URL }}
+          AFFILIATE_PRICE_FEED_TOKEN: ${{ secrets.AFFILIATE_PRICE_FEED_TOKEN }}
+        shell: bash
+        run: |
+          if [[ -z "$AFFILIATE_PRICE_FEED_URL" || -z "$AFFILIATE_PRICE_FEED_TOKEN" ]]; then
+            echo "::error::Paid affiliate feed secrets are missing; no Top-30 price refresh can be trusted."
+            exit 1
+          fi
+      - name: Refresh only a fully verified affiliate feed
+        env:
+          AFFILIATE_PRICE_FEED_URL: ${{ secrets.AFFILIATE_PRICE_FEED_URL }}
+          AFFILIATE_PRICE_FEED_TOKEN: ${{ secrets.AFFILIATE_PRICE_FEED_TOKEN }}
+        run: python scripts/refresh_affiliate_offers.py --max-age-hours 6
+      - name: Publish changed offer store through Pages build
+        shell: bash
+        run: |
+          if git diff --quiet -- data/retailer_offers.json; then
+            echo "No verified affiliate offer changes to publish."
+            exit 0
+          fi
+          git config user.name "coupon-world-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/retailer_offers.json
+          git commit -m "chore: refresh verified affiliate offers"
+          git push
+
