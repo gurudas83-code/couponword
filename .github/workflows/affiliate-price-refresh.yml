@@ -1,4 +1,5 @@
 name: Daily Top-30 affiliate price refresh
+run-name: Top-30 price refresh (${{ github.event_name }})
 
 on:
   # 17:00 IST = 11:30 UTC. GitHub Actions may start a few minutes late.
