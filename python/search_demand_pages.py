@@ -298,8 +298,9 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
                 illustration = card.get("representative_illustration")
                 if row["model_key"] in REPRESENTATIVE_PHONE_MODELS:
                     illustration = REPRESENTATIVE_PHONE_DIRECTORY + slug_for(card) + "-ai-front.webp"
-                if (not photo_html and illustration
-                        and (ROOT / illustration.lstrip("/")).is_file()):
+                if not illustration or not (ROOT / illustration.lstrip("/")).is_file():
+                    illustration = "/assets/phone-illustrations/generic-3d-0.webp"
+                if not photo_html:
                     disclosure = ("AI प्रतिनिधि चित्र · वास्तविक मॉडल की फोटो नहीं"
                                   if hindi else "AI illustration · not the actual phone")
                     retailer_label = "रिटेलर विकल्प देखें" if hindi else "Show retailer options"
@@ -311,10 +312,6 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
                         '</small><em>' + esc(retailer_label) + '</em></span></summary>' +
                         retailer_nav + '</details>'
                     )
-                if not photo_html:
-                    photo_html = ('<details class="cw-retail-choices"><summary>' +
-                        ('तीनों रिटेलर में खोजें' if hindi else 'Search all three retailers') +
-                        '</summary>' + retailer_nav + '</details>')
                 fact_note = ("दस्तावेज़ित जानकारी, वास्तविक दुनिया की परफॉर्मेंस रैंकिंग नहीं।"
                              if hindi else
                              "Documented facts, not a measured real-world performance ranking.")
