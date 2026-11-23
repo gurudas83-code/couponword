@@ -374,66 +374,74 @@
         if (!response.ok) throw new Error("recent phone research unavailable");
         return response.json();
       }).catch(function () { return null; });
-    Promise.all([coreFetch, marketFetch, recentFetch])
-      .then(function (results) {
-        var payload = results[0], intake = results[1], recent = results[2];
+    coreFetch
+      .then(function (payload) {
         inventoryLoadFailed = false;
         inventoryRows = Array.isArray(payload.records) ? payload.records : [];
         inventoryByKey = new Map(inventoryRows.map(function (row) { return [row.record_key, row]; }));
         inventoryCards = Array.isArray(payload.model_cards) ? payload.model_cards : [];
         inventorySourceCounts = payload.source_counts || {};
         marketIntakeCount = 0;
-        if (intake && intake.mode === "EIGHT_SOURCE_REVIEWED_MARKET_ADDITIONS_NO_LIVE_OFFERS" &&
-            intake.core_model_count_unchanged === 232 &&
-            Array.isArray(intake.model_cards) && intake.model_cards.length === 8 &&
-            Array.isArray(intake.records) && intake.records.length === 8) {
-          var known = new Set(inventoryCards.map(function (card) { return card.model_key; }));
-          var imported = intake.model_cards.every(function (card) {
-            return card.market_intake === true && card.status === "RESEARCH_ONLY" &&
-              card.image_status === "PLACEHOLDER" && !card.photo && !known.has(card.model_key) &&
-              Array.isArray(card.verified_retailer_links) && !card.verified_retailer_links.length;
-          });
-          if (imported) {
-            intake.records.forEach(function (row) { inventoryByKey.set(row.record_key, row); inventoryRows.push(row); });
-            inventoryCards = inventoryCards.concat(intake.model_cards);
-            marketIntakeCount = intake.model_cards.length;
-          }
-        }
-        // Strictly separate manufacturer-source discovery from canonical phones
-        // and exact retail SKUs. Ignore incomplete or conflicting data entirely.
-        if (recent && recent.mode === "RECENT_INDIA_MANUFACTURER_MODELS_RESEARCH_ONLY" &&
-            recent.core_model_count_unchanged === 232 &&
-            Array.isArray(recent.model_cards) && recent.model_cards.length === 13 &&
-            Array.isArray(recent.records) && recent.records.length === 13) {
-          var identifiers = new Set(inventoryCards.map(function (card) { return card.model_key; }));
-          var recordIds = new Set(inventoryRows.map(function (row) { return row.record_key; }));
-          var safeRecent = recent.model_cards.every(function (card) {
-            return card.market_intake === true && card.status === "RESEARCH_ONLY" &&
-              card.image_status === "PLACEHOLDER" && !card.photo &&
-              !identifiers.has(card.model_key) &&
-              Array.isArray(card.discovery_record_keys) && card.discovery_record_keys.length === 1 &&
-              Array.isArray(card.verified_retailer_links) && !card.verified_retailer_links.length &&
-              Array.isArray(card.frozen_variant_ids) && !card.frozen_variant_ids.length &&
-              card.specifications && Object.values(card.specifications).every(function (field) {
-                return field && typeof field.value === "string" && field.value.trim() &&
-                  field.source_url === card.manufacturer_page;
-              });
-          }) && recent.records.every(function (row) {
-            return row.status === "RESEARCH_ONLY" && !recordIds.has(row.record_key);
-          }) && new Set(recent.model_cards.map(function (card) { return card.model_key; })).size === recent.model_cards.length &&
-              new Set(recent.records.map(function (row) { return row.record_key; })).size === recent.records.length;
-          if (safeRecent) {
-            recent.records.forEach(function (row) { inventoryByKey.set(row.record_key, row); inventoryRows.push(row); });
-            inventoryCards = inventoryCards.concat(recent.model_cards);
-            marketIntakeCount += recent.model_cards.length;
-          }
-        }
         refreshInventoryControls();
         restoreShortlist();
         renderNewNoteworthy();
         handleResearchHash();
         var initialQuery = lastSearchQuery || new URLSearchParams(window.location.search || "").get("q");
         if (initialQuery) submitResearch(initialQuery);
+        Promise.all([marketFetch, recentFetch]).then(function (results) {
+          var intake = results[0], recent = results[1];
+          if (intake && intake.mode === "EIGHT_SOURCE_REVIEWED_MARKET_ADDITIONS_NO_LIVE_OFFERS" &&
+              intake.core_model_count_unchanged === 232 &&
+              Array.isArray(intake.model_cards) && intake.model_cards.length === 8 &&
+              Array.isArray(intake.records) && intake.records.length === 8) {
+            var known = new Set(inventoryCards.map(function (card) { return card.model_key; }));
+            var imported = intake.model_cards.every(function (card) {
+              return card.market_intake === true && card.status === "RESEARCH_ONLY" &&
+                card.image_status === "PLACEHOLDER" && !card.photo && !known.has(card.model_key) &&
+                Array.isArray(card.verified_retailer_links) && !card.verified_retailer_links.length;
+            });
+            if (imported) {
+              intake.records.forEach(function (row) { inventoryByKey.set(row.record_key, row); inventoryRows.push(row); });
+              inventoryCards = inventoryCards.concat(intake.model_cards);
+              marketIntakeCount = intake.model_cards.length;
+            }
+          }
+          // Strictly separate manufacturer-source discovery from canonical phones
+          // and exact retail SKUs. Ignore incomplete or conflicting data entirely.
+          if (recent && recent.mode === "RECENT_INDIA_MANUFACTURER_MODELS_RESEARCH_ONLY" &&
+              recent.core_model_count_unchanged === 232 &&
+              Array.isArray(recent.model_cards) && recent.model_cards.length === 13 &&
+              Array.isArray(recent.records) && recent.records.length === 13) {
+            var identifiers = new Set(inventoryCards.map(function (card) { return card.model_key; }));
+            var recordIds = new Set(inventoryRows.map(function (row) { return row.record_key; }));
+            var safeRecent = recent.model_cards.every(function (card) {
+              return card.market_intake === true && card.status === "RESEARCH_ONLY" &&
+                card.image_status === "PLACEHOLDER" && !card.photo &&
+                !identifiers.has(card.model_key) &&
+                Array.isArray(card.discovery_record_keys) && card.discovery_record_keys.length === 1 &&
+                Array.isArray(card.verified_retailer_links) && !card.verified_retailer_links.length &&
+                Array.isArray(card.frozen_variant_ids) && !card.frozen_variant_ids.length &&
+                card.specifications && Object.values(card.specifications).every(function (field) {
+                  return field && typeof field.value === "string" && field.value.trim() &&
+                    field.source_url === card.manufacturer_page;
+                });
+            }) && recent.records.every(function (row) {
+              return row.status === "RESEARCH_ONLY" && !recordIds.has(row.record_key);
+            }) && new Set(recent.model_cards.map(function (card) { return card.model_key; })).size === recent.model_cards.length &&
+                new Set(recent.records.map(function (row) { return row.record_key; })).size === recent.records.length;
+            if (safeRecent) {
+              recent.records.forEach(function (row) { inventoryByKey.set(row.record_key, row); inventoryRows.push(row); });
+              inventoryCards = inventoryCards.concat(recent.model_cards);
+              marketIntakeCount += recent.model_cards.length;
+            }
+          }
+          if (!marketIntakeCount) return;
+          refreshInventoryControls();
+          restoreShortlist();
+          renderNewNoteworthy();
+          handleResearchHash();
+          if (lastSearchQuery) searchResearch(lastSearchQuery);
+        });
       })
       .catch(function () {
         inventoryLoadFailed = true;
@@ -532,6 +540,8 @@
   }
 
 
+  var explicitTopThree = /(?:\b(?:top|best)\s*(?:3|three)\b|\bfirst\s*3\b|(?:टॉप|शीर्ष)\s*[३3])/i;
+
   function researchConstraints(query) {
     var text = String(query || "").toLowerCase().replace(/[०-९]/g, function (d) { return String("०१२३४५६७८९".indexOf(d)); }).replace(/,/g, "");
     text = text.replace(/सैमसंग/g, "samsung").replace(/आईफोन/g, "iphone").replace(/रेडमी/g, "redmi").replace(/वनप्लस/g, "oneplus");
@@ -542,7 +552,7 @@
     var fullBudget = /\bfull\s+budget\b|पूरे\s*बजट/i.test(text);
     text = text.replace(/\bfull\s+budget\b|पूरे\s*बजट/gi, " ");
     // "Top 3" controls presentation only; the numeral is not a phone-model token.
-    text = text.replace(/\btop\s*3\b/gi, " ");
+    text = text.replace(explicitTopThree, " ");
     var budget = null, lower = null, inclusive = false;
     var between = text.match(new RegExp("(?:between|from)\\s*(?:rs\\.?|inr|₹)?\\s*" + amount + "\\s*(?:and|to|-)\\s*(?:rs\\.?|inr|₹)?\\s*" + amount));
     if (between) { lower = value(between[1], between[2] || between[4]); budget = value(between[3], between[4]); inclusive = true; text = text.replace(between[0], " "); }
@@ -592,7 +602,10 @@
   function validResearchBudgetReference(ref) {
     if (!ref || ref.live_offer !== false || ref.ranking_weight !== 0) return false;
     if (typeof ref.reference_price_inr !== "number" || !Number.isFinite(ref.reference_price_inr) || ref.reference_price_inr <= 0) return false;
-    if (!ref.checked_at || !Number.isFinite(Date.parse(String(ref.checked_at)))) return false;
+    var checkedAt = String(ref.checked_at || "").replace(
+      /^IST (\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}:\d{2})$/, "$1T$2+05:30"
+    );
+    if (!Number.isFinite(Date.parse(checkedAt))) return false;
     if (/(OUT[\s._-]*OF[\s._-]*STOCK|UNAVAILABLE|DISCONTINUED)/i.test(String(ref.stock_indication || ""))) return false;
     return true;
   }
@@ -1121,8 +1134,17 @@
   function verifiedRecommendationBridge(query, isComparison, matches) {
     var c = researchConstraints(query);
     if (isComparison || c.budget == null) return "";
-    var topThree = /\btop\s*3\b/i.test(String(query || "")) ? (matches || []).slice(0, 3) : [];
-    var topThreeHtml = topThree.length ? '<section class="research-verified-top3" aria-label="Research-Verified top 3"><h3>Research-Verified top 3 for this budget band</h3><p>Ordered by source coverage and constraint fit, not a measured performance winner. Current price and current stock are not verified.</p><div class="research-top3-grid">' +
+    var requestedTopThree = explicitTopThree.test(String(query || ""));
+    var topThree = requestedTopThree ? matches.filter(function (item) {
+      var evidence = item.card.india_identity_evidence;
+      var ref = item.card.research_budget_reference;
+      return evidence && evidence.status === "INDIA_EXACT_VARIANT_DOCUMENTED" && ref &&
+        (evidence.verified_variants || []).some(function (variant) {
+          return variant.ram_gb === ref.ram_gb && variant.storage_gb === ref.storage_gb;
+        });
+    }).slice(0, 3) : [];
+    var title = topThree.length === 3 ? "Research-Verified Top 3" : "Research-Verified picks (" + topThree.length + "/3 available)";
+    var topThreeHtml = requestedTopThree ? '<section class="research-verified-top3" aria-label="' + title + '"><h3>' + title + '</h3><p>Ranked picks require documented Indian RAM/storage and a dated price in the selected band. Ordering reflects source coverage and constraint fit. Check current price and stock on the retailer site.</p><div class="research-top3-grid">' +
       topThree.map(function (item) { return '<div class="research-top3-result">' + renderResearchResultCard(item.card, item.rows, item.group_size) + '</div>'; }).join("") + '</div></section>' : "";
     return topThreeHtml + '<div class="research-context research-verified-recommendations">' +
       '<p><strong>Need a performance-based recommendation?</strong> This list is ordered by research coverage, not proven camera, gaming or battery performance. Check the existing recommendation engine separately; it will show results only when its evidence and eligibility rules pass.</p>' +
@@ -1237,7 +1259,7 @@
     // Reuse the just-computed strict match count. Do not repeat the full
     // catalogue scan (and never block local answers on retailer/API latency).
     searchResearch(query);
-    if (/(?:\btop\s*(?:3|three)\b|\bbest\s*(?:3|three)\b|\bfirst\s*3\b|टॉप\s*[३3]|शीर्ष\s*[३3])/i.test(submitted)) return;
+    if (explicitTopThree.test(submitted)) return;
     if (inventoryCards.length && lastStrictMatchCount > 0 &&
         researchConstraints(query).budget != null &&
         !/\b(?:compare|vs\.?|versus)\b|और/i.test(String(query || "")) &&

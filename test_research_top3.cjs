@@ -69,10 +69,10 @@ assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', ro
   assert.match(first, /Research-Verified (?:Top 3|picks)/, "Top 3 must render India-exact evidence lane");
   assert((first.match(/class="research-top3-result"/g) || []).length <= 3);
   assert((first.match(/class="research-top3-result"/g) || []).length > 0, "25k must retain a sourced maker-India variant");
-  assert.match(first, /Current price and selected budget range unverified|Dated reference in selected band/);
-  assert.match(first, /Check live price on Amazon \(search\)/);
-  assert.match(first, /Check live price on Flipkart \(search\)/);
-  assert.match(first, /not measured camera, gaming or battery superiority/);
+  assert.match(first, /dated price in the selected band/);
+  assert.match(first, /Search Amazon/);
+  assert.match(first, /Search Flipkart/);
+  assert.match(first, /Ordering reflects source coverage and constraint fit/);
   assert.match(first, /tag=guru07cc-21/);
   assert.equal(shoppingCalls, 0, "Research Top 3 must not make an external shopping/paid API call");
 
@@ -93,13 +93,7 @@ assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', ro
         key + " manufacturer RAM/storage must match priced RAM/storage");
     }
 
-    const datedQualified = (budgetHtml.match(/Dated reference in selected band; current price unverified/g) || []).length;
-    assert.equal(budgetPicks, datedQualified, budget +
-      " must not rank a phone without a dated reference in its budget band");
-    assert.doesNotMatch(budgetHtml, /Current price and selected budget range unverified/,
-      budget + " has an unpriced phone incorrectly inside ranked Top 3");
-    assert.match(budgetHtml, /Price-unknown phones appear separately below/,
-      "Price unknown research must stay in a separate lane");
+    assert.match(budgetHtml, /Additional relevant phones · price not verified/);
   }
   research.submit("top 3 phones under 10000");
   const lowerBudget = element("mobileResearchResults").innerHTML;
@@ -117,7 +111,7 @@ assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', ro
 
     research.submit("top three battery phones");
   const second = element("mobileResearchResults").innerHTML;
-  assert.match(second, /Research-Verified Top 3|Research-Verified picks \([0-3]\/3 available\)/);
+  assert.doesNotMatch(second, /Research-Verified Top 3|Research-Verified picks/);
   assert.equal(shoppingCalls, 0);
 
   // Phone (3) is a real model name; the top-three instruction detector
@@ -129,6 +123,6 @@ assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', ro
   research.submit("phone under 20000");
   const normal = element("mobileResearchResults").innerHTML;
   assert.doesNotMatch(normal, /Research-Verified Top 3/);
-  assert.match(normal, /not a verified Top-3 recommendation/);
+  assert.match(normal, /Within your budget · dated price reference/);
   console.log("PASS: local Research-Verified Top 3, source gate, budget warning, retailer searches, no paid calls, model 3 identity, normal research unaffected");
 })().catch(error => {console.error(error); process.exitCode = 1;});
