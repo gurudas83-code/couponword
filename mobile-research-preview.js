@@ -904,6 +904,7 @@
       card.status === "OFFICIAL_VERIFIED" ? "Manufacturer evidence" :
       card.status === "PARTIALLY_VERIFIED" ? "Partial specifications" : "Needs verification";
     var selected = comparisonSelection.some(function (item) { return researchGroupKey(item.card) === researchGroupKey(card); });
+    if (isTopThreeResult && typeof console !== "undefined" && console.error) console.error("TOP3_CARD_DEBUG", card.model_key, !!card.research_budget_reference, card.research_budget_reference && card.research_budget_reference.reference_price_inr);
     var launch = card.india_launch_date ? '<p class="mobile-research-launch">India launch: ' + escapeHtml(card.india_launch_date) + '</p>' : '';
     return '<article class="mobile-research-inventory-card mobile-research-result-card" data-mobile-model-card="' + escapeHtml(card.model_key) + '"><div class="mobile-research-inventory-body">' +
       '<div class="mobile-research-card-top"><span class="research-status">' + escapeHtml(status) + '</span><span class="research-status">Research only</span></div>' +
@@ -1204,6 +1205,7 @@
       return hasResearchVerifiedEvidence(item.card) &&
         (researchConstraints(query).budget == null || !!item.card.research_budget_reference);
     }).slice(0, 3) : [];
+    if (isResearchTopThreeQuery(query) && typeof console !== "undefined" && console.error) console.error("TOP3_BRIDGE_DEBUG", query, JSON.stringify(topThree.map(function (item) { return [item.card.model_key, !!item.card.research_budget_reference, item.card.research_budget_reference && item.card.research_budget_reference.reference_price_inr]; })));
     var topThreeHtml = topThree.length ? '<section class="research-verified-top3" aria-label="Research-Verified Top 3"><h3>Research-Verified Top 3 for this budget band</h3><p>Ordered by source coverage and constraint fit, not measured camera, gaming or battery superiority. Dated reference in selected band; current price unverified; current stock is not verified.</p><div class="research-top3-grid">' +
       topThree.map(function (item) { return '<div class="research-top3-result">' + renderResearchResultCard(item.card, item.rows, item.group_size, true) + '</div>'; }).join("") + '</div></section>' : "";
     return topThreeHtml + (isResearchTopThreeQuery(query) ? "" : '<div class="research-context research-verified-recommendations">' +
