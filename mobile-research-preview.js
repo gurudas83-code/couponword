@@ -375,12 +375,16 @@
         return response.json();
       }).catch(function () { return null; });
     var initialQueryStarted = false;
+    var queryWaitingForInventory = "";
     function runInitialQueryOnce() {
-      var initialQuery = lastSearchQuery || new URLSearchParams(window.location.search || "").get("q");
+      var urlQuery = new URLSearchParams(window.location.search || "").get("q");
+      var initialQuery = urlQuery || queryWaitingForInventory;
       if (initialQuery && !initialQueryStarted) {
         initialQueryStarted = true;
+        queryWaitingForInventory = "";
         submitResearch(initialQuery);
       }
+    }
     }
     // Paint the core 232-card catalogue as soon as it is ready. The market
     // and recent-manufacturer feeds are optional research lanes and must not
@@ -1221,6 +1225,7 @@
     showAppliedConditions(lastSearchQuery);
     if (researchQuery && researchQuery.value !== nextQuery) researchQuery.value = nextQuery;
     if (!lastSearchQuery) {
+      queryWaitingForInventory = "";
       if (researchResults) { researchResults.hidden = true; researchResults.innerHTML = ""; }
       if (researchResultsMore) researchResultsMore.hidden = true;
       if (researchSearchStatus) researchSearchStatus.textContent = "";
@@ -1228,7 +1233,7 @@
       return [];
     }
     revealSearch();
-    if (!inventoryCards.length) { if (researchSearchStatus) researchSearchStatus.textContent = inventoryLoadFailed ? "Saved smartphone research is temporarily unavailable." : "Loading smartphone research…"; if (researchResults) { researchResults.hidden = false; researchResults.innerHTML = researchGuideFallback(); } return []; }
+    if (!inventoryCards.length) { queryWaitingForInventory = lastSearchQuery; if (researchSearchStatus) researchSearchStatus.textContent = inventoryLoadFailed ? "Saved smartphone research is temporarily unavailable." : "Loading smartphone research…"; if (researchResults) { researchResults.hidden = false; researchResults.innerHTML = researchGuideFallback(); } return []; }
     var parts = lastSearchQuery.replace(/^compare\s+/i, "").split(/\s+(?:vs\.?|versus|और|compare)\s+/i);
     if (/^compare\s/i.test(lastSearchQuery) && parts.length === 1) parts = parts[0].split(/\s+and\s+/i);
     var comparison = parts.length > 1;
