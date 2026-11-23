@@ -54,7 +54,13 @@
         "5,000 mAh",
         "50 MP OIS main"
       ],
-      "listing": "https://www.amazon.in/dp/B0FDB9H277?tag=guru07cc-21"
+      "listing": "https://www.flipkart.com/product/p/itm4cf1eae54334f",
+      "reference": {
+        "amount": 14360,
+        "variant": "6 GB / 128 GB, Light Green",
+        "store": "Flipkart",
+        "reviewed_on": "2026-11-23"
+      }
     },
     "vivo|t4x 5g": {
       "spec_source": "https://www.vivo.com/in/products/param/t4x-5g",
@@ -64,7 +70,13 @@
         "6,500 mAh / 44 W",
         "50 MP main"
       ],
-      "listing": "https://shop.vivo.com/in/product/10303?skuId=19292"
+      "listing": "https://shop.vivo.com/in/product/10303?skuId=19292%26from%3DT4x%25205G%2520Fest",
+      "reference": {
+        "amount": 16999,
+        "variant": "6 GB / 128 GB, Glacial Teal",
+        "store": "vivo India",
+        "reviewed_on": "2026-11-23"
+      }
     },
     "realme|p4 pro": {
       "spec_source": "https://www.realme.com/in/realme-p4-pro-5g/specs",
@@ -194,7 +206,13 @@
         "7,000 mAh / 120 W",
         "50 MP main"
       ],
-      "listing": "https://shop.iqoo.com/in/product/2063?skuId=8374"
+      "listing": "https://www.iqoo.com/in/activity/iqoo-live",
+      "reference": {
+        "amount": 31999,
+        "variant": "8 GB / 128 GB, Inferno Red",
+        "store": "iQOO India",
+        "reviewed_on": "2026-11-23"
+      }
     }
   },
   "croma_listed_prices": {

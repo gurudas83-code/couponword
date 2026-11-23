@@ -242,6 +242,7 @@ def render_research(research, review_date, has_api_price):
     listing = esc(research["listing"])
     reference = research.get("reference")
     if reference:
+        review_date = reference.get("reviewed_on", review_date)
         amount = reference["amount"]
         variant = esc(reference["variant"])
         store = esc(reference["store"])
