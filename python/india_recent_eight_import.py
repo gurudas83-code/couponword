@@ -142,7 +142,7 @@ def build_recent() -> dict:
 def _review_views(card: dict, name: str, *, linked: bool = True) -> str:
     route = detail_route(card["model_key"])
     slug = route.rstrip("/").rsplit("/", 1)[-1]
-    src = f"/assets/phone-illustrations/recent-india-pairs/{slug}.png"
+    src = f"/assets/phone-illustrations/recent-india-pairs/{slug}.webp"
     image = (
         f'<img src="{src}" loading="lazy" decoding="async" style="width:100%;height:auto;display:block" '
         f'alt="Two illustrated views of {escape(name, quote=True)}">'
@@ -280,7 +280,7 @@ def publish_recent(destination: Path) -> dict:
     page.parent.mkdir(parents=True, exist_ok=True)
     for card in payload["model_cards"]:
         slug = detail_route(card["model_key"]).rstrip("/").rsplit("/", 1)[-1]
-        relative = Path("assets/phone-illustrations/recent-india-pairs") / f"{slug}.png"
+        relative = Path("assets/phone-illustrations/recent-india-pairs") / f"{slug}.webp"
         target_image = destination / relative
         if not target_image.is_file():
             target_image.parent.mkdir(parents=True, exist_ok=True)

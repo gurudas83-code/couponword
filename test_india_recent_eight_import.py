@@ -61,7 +61,7 @@ class RecentIndiaPhonesTests(unittest.TestCase):
             self.assertEqual(html.count("AI-generated · two views of the same model"), 13)
             for card in payload["model_cards"]:
                 slug = card["detail_url"].rstrip("/").rsplit("/", 1)[-1]
-                image = f"assets/phone-illustrations/recent-india-pairs/{slug}.png"
+                image = f"assets/phone-illustrations/recent-india-pairs/{slug}.webp"
                 self.assertIn(f'src="/{image}"', html)
                 self.assertTrue((Path(folder) / image).is_file())
             for card in payload["model_cards"]:
