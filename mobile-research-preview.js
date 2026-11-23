@@ -42,7 +42,7 @@
   var verifiedRows = [];
   var CATALOGUE_INITIAL_LIMIT = 18;
   var INVENTORY_PAGE_SIZE = 18;
-  var MAX_SEARCH_RESULTS = 6;
+  var MAX_SEARCH_RESULTS = 3;
   var inventoryExpanded = false;
   var searchExpanded = false;
   var lastSearchQuery = "";
