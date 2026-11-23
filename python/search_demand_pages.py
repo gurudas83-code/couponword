@@ -298,16 +298,20 @@ def publish_top30_research_hubs(destination: Path) -> list[str]:
                 illustration = card.get("representative_illustration")
                 if row["model_key"] in REPRESENTATIVE_PHONE_MODELS:
                     illustration = REPRESENTATIVE_PHONE_DIRECTORY + slug_for(card) + "-ai-front.webp"
-                if not illustration or not (ROOT / illustration.lstrip("/")).is_file():
+                generic = not illustration or not (ROOT / illustration.lstrip("/")).is_file()
+                if generic:
                     illustration = "/assets/phone-illustrations/generic-3d-0.webp"
                 if not photo_html:
                     disclosure = ("AI प्रतिनिधि चित्र · वास्तविक मॉडल की फोटो नहीं"
                                   if hindi else "AI illustration · not the actual phone")
+                    if generic:
+                        disclosure = "AI-generated 3D image · " + ("असली फोन की फोटो नहीं" if hindi else "not an actual product photo")
+                    image_style = ' style="filter:hue-rotate(-10deg)"' if generic else ""
                     retailer_label = "रिटेलर विकल्प देखें" if hindi else "Show retailer options"
                     photo_html = (
                         '<details class="cw-retail-choices"><summary class="cw-representative-phone">'
                         '<img src="' + esc(illustration) +
-                        '" alt="" width="640" height="640" loading="lazy" decoding="async">'
+                        '"' + image_style + ' alt="" width="640" height="640" loading="lazy" decoding="async">'
                         '<span><strong>' + esc(name) + '</strong><small>' + esc(disclosure) +
                         '</small><em>' + esc(retailer_label) + '</em></span></summary>' +
                         retailer_nav + '</details>'
