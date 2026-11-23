@@ -269,9 +269,9 @@ def render_card(card: dict, *, image_root: Path | None = None) -> str:
             alt = title
             credit = f'{link(photo["source"], photo["author"])} · {link(photo["license_url"], photo["license"])} · resized'
         else:
-            url = "/assets/phone-illustrations/representative-smartphone.webp"
+            url = "/assets/phone-illustrations/generic-3d-0.webp"
             alt = ""
-            credit = "AI-generated phone illustration"
+            credit = "Generic 3D illustration · Not an actual product photo"
         image = (
             f'<figure class="mobile-fact-media"><a href="{esc(path)}" aria-label="View {esc(title)} specifications">'
             f'<img src="{esc(url)}" alt="{esc(alt)}" loading="lazy" decoding="async"></a>'
@@ -394,6 +394,13 @@ def render_model(card: dict, related: list[dict]) -> str:
             f'alt="{esc(title)}" loading="lazy" decoding="async" style="max-width:100%;height:auto">'
             f'<figcaption>Model photo: {link(photo["source"], credit)} · '
             f'{link(photo["license_url"], photo["license"])} · resized</figcaption></figure>'
+        )
+    else:
+        photo_html = (
+            '<figure class="mobile-fact-media">'
+            '<img src="/assets/phone-illustrations/generic-3d-0.webp" width="440" height="440" '
+            'alt="" loading="lazy" decoding="async">'
+            '<figcaption>Generic 3D illustration · Not an actual product photo</figcaption></figure>'
         )
     variants = card.get("verified_india_variants") or []
     variant_html = ""
