@@ -1160,7 +1160,8 @@
   }
 
   function hasResearchVerifiedEvidence(card) {
-    if (!card || card.status !== "OFFICIAL_VERIFIED") return false;
+    var isResearchCard = !!card && card.status !== "OFFICIAL_VERIFIED";
+    if (!isResearchCard) return false;
     var specs = card.specifications || {};
     var sourced = Object.keys(specs).filter(function (key) {
       var item = specs[key] || {};
