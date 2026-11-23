@@ -1162,6 +1162,14 @@
   function hasResearchVerifiedEvidence(card) {
     var isResearchCard = !!card && card.status !== "OFFICIAL_VERIFIED";
     if (!isResearchCard) return false;
+    if (card.research_budget_reference) {
+      var identity = card.india_identity_evidence || {};
+      var variants = Array.isArray(identity.verified_variants) ? identity.verified_variants : [];
+      if (identity.status !== "INDIA_EXACT_VARIANT_DOCUMENTED" || !variants.some(function (variant) {
+        return Number(variant.ram_gb) === Number(card.research_budget_reference.ram_gb) &&
+          Number(variant.storage_gb) === Number(card.research_budget_reference.storage_gb);
+      })) return false;
+    }
     var specs = card.specifications || {};
     var sourced = Object.keys(specs).filter(function (key) {
       var item = specs[key] || {};
