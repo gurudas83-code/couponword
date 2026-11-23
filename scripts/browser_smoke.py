@@ -587,7 +587,8 @@ def run(root: Path):
                     page.goto(url + new_model, wait_until="domcontentloaded", timeout=30000)
                     assert "Samsung Galaxy F70 5G" in page.locator("h1").inner_text(), width
                     assert "Current price unavailable" in page.locator("main").inner_text(), width
-                    assert page.locator("img[src^='/assets/new-mobile-art/']").count() == 1, width
+                    assert page.locator("img[src='/assets/phone-illustrations/recent-india-pairs/samsung-galaxy-f70-5g.webp']").count() == 1, width
+                    assert "AI-generated" in page.locator(".cr-detail figcaption").inner_text(), width
                     assert page.locator(".cr-detail-facts .cr-fact").count() >= 5, width
                     assert page.locator('meta[name="robots"]').get_attribute("content") == "noindex,follow", width
                     assert page.locator("a:has-text('Search Amazon')").count() == 1, width
