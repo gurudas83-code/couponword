@@ -27,6 +27,7 @@ AUTHORIZED_SOURCES = {
     "retailer_page_verified",
     "retailer_api_verified",
     "provider_verified",
+    "quickcommerce_authorized_api",
 }
 
 

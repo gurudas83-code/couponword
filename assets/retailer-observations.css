@@ -1,4 +1,8 @@
 .api-price-observations{margin:14px 0;padding-top:12px;border-top:1px solid #ccd8e8}
+.research-current-offer{display:flex;flex-wrap:wrap;gap:6px 14px;margin:12px 0;padding:10px 12px;border:1px solid #b8d8c3;border-radius:8px;background:#f2fbf4;color:#173d27}
+.research-current-offer strong{font-weight:700}
+.research-current-offer span{font-size:.88rem}
+.research-retailer-note{font-size:.84rem;line-height:1.45;margin:8px 0 0}
 .api-price-observations button{font:inherit;cursor:pointer;padding:9px 13px;border:1px solid #456ca3;border-radius:9px;background:#edf4ff;color:#163a6b}
 .api-price-observations [data-api-price-panel]{padding:12px 0;font-size:.9rem}
 .api-price-observations label{display:block;margin:10px 0 5px;font-weight:600}
@@ -13,3 +17,4 @@
 .api-budget-check{display:block;margin-top:5px;font-size:.75rem}
 .api-price-observations input{font:inherit;display:block;box-sizing:border-box;width:100%;padding:8px;margin-top:5px;border:1px solid #8298b7;border-radius:7px;background:Canvas;color:CanvasText}
 @media(prefers-color-scheme:dark){.api-price-observations button{background:#162943;color:#d5e6ff}.api-observed-lowest{color:#8de2b4}}
+

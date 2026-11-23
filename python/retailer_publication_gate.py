@@ -17,7 +17,13 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_STORE = ROOT / "data" / "retailer_offers.json"
 DEFAULT_MAX_AGE_HOURS = 6
-AUTHORIZED_SOURCES = {"amazon_creators_api", "amazon_pa_api", "flipkart_affiliate_feed", "croma_authorized_feed"}
+AUTHORIZED_SOURCES = {
+    "amazon_creators_api",
+    "amazon_pa_api",
+    "flipkart_affiliate_feed",
+    "croma_authorized_feed",
+    "quickcommerce_authorized_api",
+}
 VALID_AVAILABILITY = {"available", "in_stock", "instock", "unavailable", "out_of_stock", "outofstock"}
 
 
@@ -36,10 +42,29 @@ def _parse_time(value: object) -> datetime | None:
 
 def _is_https_product_url(value: object) -> bool:
     parsed = urlparse(str(value or "").strip())
-    if parsed.scheme != "https" or not parsed.netloc or parsed.path in {"", "/"} or parsed.query:
+    if (
+        parsed.scheme != "https"
+        or not parsed.netloc
+        or parsed.path in {"", "/"}
+        or parsed.username
+        or parsed.password
+        or parsed.port not in {None, 443}
+    ):
         return False
     path = parsed.path.lower().rstrip("/")
-    return not any(token in path for token in ("/search", "/s", "/q/", "/category", "/browse"))
+    if any(token in path for token in ("/search", "/s", "/q/", "/category", "/browse")):
+        return False
+    if not parsed.query:
+        return True
+    # QuickCommerce returns a canonical Flipkart product URL whose SKU is in
+    # the pid query parameter.  Permit only that exact product form; arbitrary
+    # tracking/search parameters remain ineligible.
+    return (
+        parsed.hostname in {"flipkart.com", "www.flipkart.com"}
+        and "/p/" in path
+        and set(parse_qs(parsed.query, keep_blank_values=True)) == {"pid"}
+        and bool(parse_qs(parsed.query, keep_blank_values=True).get("pid", [""])[0])
+    )
 
 
 def evaluate_offer(record: dict, *, now: datetime, max_age_hours: int) -> tuple[bool, str]:

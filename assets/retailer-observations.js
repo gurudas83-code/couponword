@@ -67,107 +67,20 @@
     }).join("");
     panel.querySelector("[data-price-table]").innerHTML = '<p><strong>Listed configuration:</strong> ' +
       escape(configuration.variant) + " · Pincode " + escape(configuration.pincode) +
-      '</p><div class="api-observation-scroll"><table><caption>Saved price and stock observations (QuickCommerce source)</caption>' +
+      '</p><div class="api-observation-scroll"><table><caption>Saved price and stock observations (source and checked time shown)</caption>' +
       '<thead><tr><th scope="col">Store</th><th scope="col">Listed price</th><th scope="col">Stock observation</th><th scope="col">Checked</th><th scope="col">Retailer</th></tr></thead><tbody>' +
       rows + "</tbody></table></div>" +
       (stores.size < 2 ? "<p>No same-configuration comparison across two fresh in-stock stores is available.</p>" : "");
   }
-  var liveApiHost = ["localhost", "127.0.0.1"].includes(window.location.hostname)
-    ? "http://127.0.0.1:8000" : "https://couponword.onrender.com";
-
-  function checkPaidApi(panel, modelKey, configuration) {
-    var target = panel.querySelector("[data-live-price]");
-    if (!target) return;
-    var ticket = (panel._liveTicket || 0) + 1;
-    panel._liveTicket = ticket;
-    target.innerHTML = '<p role="status">Checking recent paid API observations (Flipkart first, Amazon fallback)…</p>';
-    var params = new URLSearchParams({model_key: modelKey});
-    if (configuration) {
-      if (Number.isInteger(configuration.ram_gb)) params.set("ram_gb", configuration.ram_gb);
-      if (Number.isInteger(configuration.storage_gb)) params.set("storage_gb", configuration.storage_gb);
-      if (configuration.color && configuration.color !== "Not applicable" &&
-          !String(configuration.color).startsWith("Unspecified SKU")) {
-        params.set("color", configuration.color);
-      }
-    }
-    var controller = new AbortController();
-    var timeout = setTimeout(function () { controller.abort(); }, 50000);
-    fetch(liveApiHost + "/api/price-observation?" + params.toString(),
-      {credentials: "omit", signal: controller.signal}).then(function (response) {
-        return response.json();
-      }).then(function (result) {
-        if (!target.isConnected || ticket !== panel._liveTicket) return;
-        if (result.status !== "ok" || !result.configuration ||
-            !Array.isArray(result.configuration.offers) || !result.configuration.offers.length) {
-          var note = result.status === "unknown_model" ? "Live API lookup does not currently cover this research-only model. Use the saved retailer searches." :
-            result.status === "not_configured" ? "Paid API is not configured on this server." :
-            result.status === "budget_exhausted" ? "Paid API daily call limit reached. Check the retailer directly." :
-            result.status === "no_exact_in_stock_observation" ?
-              "No exact in-stock listing was observed in the checked stores." :
-              "Recent API observation unavailable. Saved checks remain below.";
-          target.innerHTML = '<p role="status">' + escape(note) + '</p>';
-          return;
-        }
-        var c = result.configuration;
-        var offer = c.offers[0];
-        var url = safeUrl(offer);
-        if (!url || offer.availability !== "in_stock" ||
-            !Number.isFinite(offer.price) || offer.price <= 0 || !fresh(offer)) {
-          target.innerHTML = '<p role="status">An exact, fresh, in-stock price could not be confirmed. Use retailer links.</p>';
-          return;
-        }
-        var fromCache = (result.attempts || []).some(function (step) {
-          return step.status === "cached" && step.retailer === offer.retailer;
-        });
-        target.innerHTML = '<p><strong>' + (fromCache ? "Recent cached" : "Newly checked") +
-          ' paid API observation:</strong> ' + escape(offer.retailer) +
-          ' · ₹' + offer.price.toLocaleString("en-IN", {maximumFractionDigits: 2}) +
-          ' · ' + escape(c.variant) + ' · Pincode ' + escape(c.pincode) +
-          ' · ' + escape(new Date(offer.observed_at).toLocaleString("en-IN", {timeZone: "Asia/Kolkata"})) +
-          ' IST. <a href="' + escape(url) +
-          '" target="_blank" rel="noopener noreferrer nofollow">Confirm on retailer</a></p>' +
-          '<p class="api-observation-note">QuickCommerce third-party observation; not an official retailer API quote, checkout guarantee, or verified purchase offer.</p>';
-      }).catch(function () {
-        if (target.isConnected && ticket === panel._liveTicket) {
-          target.innerHTML = '<p role="status">Paid API check temporarily unavailable. Saved observations remain below.</p>';
-        }
-      }).finally(function () { clearTimeout(timeout); });
-  }
-  function brandStorePrice(payload, modelKey, configurations) {
-    var price = (payload.brand_store_prices || {})[modelKey];
-    if (!price || !Number.isFinite(price.price_inr) || price.price_inr <= 0 ||
-        configurations.some(function (configuration) {
-          return (configuration.offers || []).some(function (offer) {
-            return offer.availability === "in_stock" && Number.isFinite(offer.price) &&
-              offer.price > 0 && fresh(offer) && safeUrl(offer);
-          });
-        })) return "";
-    var url;
-    try {
-      url = new URL(price.source_url);
-    } catch (error) {
-      return "";
-    }
-    var brandHosts = {"apple": "www.apple.com", "infinix": "infinixmobiles.in",
-      "iqoo": "shop.iqoo.com", "vivo": "shop.vivo.com", "xiaomi": "store.mi.com", "xiaomi redmi": "store.mi.com"};
-    if (url.protocol !== "https:" || url.hostname !== brandHosts[modelKey.split("|")[0]] ||
-        url.username || url.password || url.port) return "";
-    return '<p><strong>Official India store price:</strong> ₹' +
-      price.price_inr.toLocaleString("en-IN", {maximumFractionDigits: 2}) +
-      ' · ' + escape(price.variant) + ' · ' + escape(price.store_status) +
-      ' · Checked ' + escape(price.checked_on) + '. <a href="' + escape(url.href) +
-      '" target="_blank" rel="noopener noreferrer">Check brand store</a></p>';
-  }
   function show(panel, payload, modelKey) {
     var configurations = (payload.models || {})[modelKey] || [];
     panel._priceConfigurations = configurations;
-    var brandPrice = brandStorePrice(payload, modelKey, configurations);
     if (!configurations.length) {
-      panel.innerHTML = brandPrice + '<p role="status">No saved retailer price check for this model. A live API lookup does not guarantee a listing.</p><button type="button" data-check-live-price>Check live price observation (uses API quota)</button><div data-live-price aria-live="polite"></div>';
+      panel.innerHTML = '<p role="status">No matching API price observation for this catalogue entry. This does not mean unavailable. Use the retailer links to check.</p>';
       return;
     }
     var id = "api-price-config-" + (++sequence);
-    panel.innerHTML = '<h4>Price &amp; availability observations</h4>' + brandPrice + '<p>QuickCommerce third-party source; opening this price panel checks the private paid API through the server with a call limit. Checkout prices may differ.</p><button type="button" data-check-live-price>Check live price observation (uses API quota)</button><div data-live-price aria-live="polite"></div>' +
+    panel.innerHTML = '<h4>Price &amp; availability observations</h4><p>These are previously saved retailer observations. Opening this panel does not call the paid API. Prices are not checkout confirmation.</p>' +
       '<label for="' + id + '">Choose the listed configuration</label><select id="' + id + '" data-price-config>' +
       configurations.map(function (configuration, index) {
         return '<option value="' + index + '">' + escape(configuration.variant) + "</option>";
@@ -175,33 +88,13 @@
       '<p class="api-observation-note">Prices can change. Bank/exchange offers and delivery charges are excluded. Confirm India variant, seller condition, warranty and delivery with the retailer. Manufacturer specifications remain separately sourced. Price has 0% weight in product quality ranking.</p>';
     renderConfiguration(panel, configurations[0]);
     panel.querySelector("[data-price-config]").addEventListener("change", function (event) {
-      var selected = configurations[Number(event.target.value)];
-      renderConfiguration(panel, selected);
-      panel._liveTicket = (panel._liveTicket || 0) + 1;
-      var liveTarget = panel.querySelector("[data-live-price]");
-      if (liveTarget) liveTarget.textContent = "Live API not checked for the selected configuration.";
-      var liveButton = panel.querySelector("[data-check-live-price]");
-      if (liveButton) { liveButton.disabled = false; liveButton.textContent = "Check live price observation (uses API quota)"; }
+      renderConfiguration(panel, configurations[Number(event.target.value)]);
     });
     panel.querySelector("[data-price-budget]").addEventListener("input", function () {
       renderConfiguration(panel, configurations[Number(panel.querySelector("[data-price-config]").value)]);
     });
   }
   document.addEventListener("click", function (event) {
-    var liveButton = event.target.closest("[data-check-live-price]");
-    if (liveButton) {
-      var livePanel = liveButton.closest("[data-api-price-panel]");
-      var box = liveButton.closest(".api-price-observations");
-      var opener = box && box.querySelector("[data-price-observations]");
-      if (!livePanel || !opener) return;
-      var selected = livePanel.querySelector("[data-price-config]");
-      var configuration = selected && livePanel._priceConfigurations ?
-        livePanel._priceConfigurations[Number(selected.value)] : null;
-      liveButton.disabled = true;
-      liveButton.textContent = "Live check requested";
-      checkPaidApi(livePanel, opener.getAttribute("data-price-observations"), configuration);
-      return;
-    }
     var button = event.target.closest("[data-price-observations]");
     if (!button) return;
     var parent = button.closest(".api-price-observations");
@@ -217,7 +110,7 @@
     }
     panel.innerHTML = '<p role="status">Loading saved price checks…</p>';
     if (!snapshotPromise) {
-      snapshotPromise = fetch("/data/retailer_price_observations.json?v=20261119-brand", {credentials: "omit"}).then(function (response) {
+      snapshotPromise = fetch("/data/retailer_price_observations.json?v=20261117", {credentials: "omit"}).then(function (response) {
         if (!response.ok) throw new Error("Observation file unavailable");
         return response.json();
       }).then(function (payload) {
@@ -234,3 +127,4 @@
     });
   });
 }());
+

@@ -141,9 +141,27 @@ def find_fresh_verified_offer(
 
     current_time = now or datetime.now(timezone.utc)
     records = load_offer_database().get("offers", []) if _records is None else _records
+    model_key = "|".join(
+        " ".join(value.split()).casefold()
+        for value in (str(brand or ""), str(model or ""))
+    ).strip("|")
     for record in records:
-        if not isinstance(record, dict) or str(record.get("product_id") or "").strip() != product_id:
+        if not isinstance(record, dict):
             continue
+
+        record_product_id = str(record.get("product_id") or "").strip()
+        if record_product_id != product_id:
+            metadata = record.get("metadata") if isinstance(record.get("metadata"), dict) else {}
+            # The scheduled Top-30 watcher owns model-key rows because the
+            # 232-card research catalogue has no canonical SKU for most of
+            # those research-only models.  Permit that row only after the
+            # exact brand/model/physical variant checks below; never use a
+            # generic or stale product-name fallback.
+            if (
+                record_product_id != model_key
+                or metadata.get("source_type") != "quickcommerce_authorized_api"
+            ):
+                continue
 
         if expected_brand and str(record.get("brand") or "").strip().casefold() != expected_brand:
             continue

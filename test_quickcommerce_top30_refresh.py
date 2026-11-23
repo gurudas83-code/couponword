@@ -1,0 +1,120 @@
+import copy
+import json
+import unittest
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+
+from scripts.refresh_quickcommerce_affiliate_offers import (
+    TOP30_COUNT,
+    build_offer,
+    load_top30_targets,
+    refresh_targets,
+    select_exact_listing,
+)
+
+
+ROOT = Path(__file__).resolve().parent
+FIXTURE = ROOT / "tests" / "fixtures" / "quickcommerce_flipkart_a56_search.json"
+
+
+class FakeConnector:
+    def __init__(self, payloads, observed, pincode="110001"):
+        self.payloads = payloads
+        self.observed = observed
+        self.pincode = pincode
+        self.calls = []
+
+    def search(self, query):
+        self.calls.append(query)
+        return self.payloads[query], self.observed
+
+
+class QuickCommerceTop30RefreshTests(unittest.TestCase):
+    def test_existing_fixture_produces_one_exact_physical_variant(self):
+        payload = json.loads(FIXTURE.read_text(encoding="utf-8"))
+        row = {
+            "audit_id": "samsung|galaxy a56 5g",
+            "brand": "Samsung",
+            "model": "Galaxy A56 5G",
+            "category": "mobiles",
+        }
+        item, variant = select_exact_listing(payload, row)
+        self.assertEqual(item["id"], "MOBHQBE6G85PXAYG")
+        self.assertEqual(variant["variant"], "8GB/128GB · Dark Blue")
+        offer = build_offer(
+            item,
+            variant,
+            row,
+            observed_at="2026-11-23T10:00:00+00:00",
+            pincode="110001",
+            request_id="fixture-request",
+        )
+        self.assertEqual(offer["price"], 33415.0)
+        self.assertEqual(offer["availability"], "in_stock")
+        self.assertEqual(offer["source_type"], "quickcommerce_authorized_api")
+        self.assertEqual(offer["metadata"]["affiliate_attribution"], "not_asserted")
+
+    def test_batch_calls_each_model_once_and_requires_complete_coverage(self):
+        now = datetime.now(timezone.utc)
+        observed = (now - timedelta(minutes=1)).isoformat()
+        targets = []
+        payloads = {}
+        for index in range(TOP30_COUNT):
+            brand = f"Brand{index}"
+            model = f"Model {index}"
+            row = {"audit_id": f"{brand.casefold()}|{model.casefold()}", "brand": brand, "model": model, "category": "mobiles"}
+            query = f"{brand} {model}"
+            pid = f"MOB{index:012d}"
+            payloads[query] = {
+                "status": "success",
+                "request_id": f"request-{index}",
+                "data": {
+                    "platform": "Flipkart",
+                    "products": [{
+                        "id": pid,
+                        "name": f"{brand} {model} (Black, 128 GB)",
+                        "brand": brand,
+                        "available": True,
+                        "offer_price": 10000 + index,
+                        "mrp": 15000 + index,
+                        "quantity": "8 GB RAM",
+                        "currency": "INR",
+                        "deeplink": f"https://www.flipkart.com/-/p/-?pid={pid}",
+                    }],
+                },
+            }
+            targets.append(row)
+        connector = FakeConnector(payloads, observed)
+        result = refresh_targets(targets, connector, delay_seconds=0, now=now)
+        self.assertEqual(result["model_count"], TOP30_COUNT)
+        self.assertEqual(len(result["offers"]), TOP30_COUNT)
+        self.assertEqual(len(connector.calls), TOP30_COUNT)
+        self.assertEqual(len(set(connector.calls)), TOP30_COUNT)
+
+    def test_missing_exact_model_fails_before_a_store_write(self):
+        now = datetime.now(timezone.utc)
+        observed = (now - timedelta(minutes=1)).isoformat()
+        targets = load_top30_targets()
+        payloads = {}
+        for row in targets:
+            payloads[" ".join((row["brand"], row["model"]))] = {"status": "success", "data": {"platform": "Flipkart", "products": []}}
+        connector = FakeConnector(payloads, observed)
+        with self.assertRaisesRegex(ValueError, "no exact current Flipkart listing"):
+            refresh_targets(targets, connector, delay_seconds=0, now=now)
+        self.assertEqual(len(connector.calls), 1)
+
+    def test_out_of_stock_exact_sku_has_no_payable_price(self):
+        payload = json.loads(FIXTURE.read_text(encoding="utf-8"))
+        payload["data"]["products"] = [copy.deepcopy(payload["data"]["products"][1])]
+        payload["data"]["products"][0]["available"] = False
+        payload["data"]["products"][0]["offer_price"] = 0
+        row = {"audit_id": "samsung|galaxy a56 5g", "brand": "Samsung", "model": "Galaxy A56 5G", "category": "mobiles"}
+        item, variant = select_exact_listing(payload, row)
+        offer = build_offer(item, variant, row, observed_at="2026-11-23T10:00:00+00:00", pincode="110001", request_id="out")
+        self.assertEqual(offer["availability"], "out_of_stock")
+        self.assertIsNone(offer["price"])
+
+
+if __name__ == "__main__":
+    unittest.main()
+

@@ -816,6 +816,9 @@
       {id: "amazon", name: "Amazon", hosts: ["amazon.in", "www.amazon.in"]},
       {id: "croma", name: "Croma", hosts: ["croma.com", "www.croma.com"]}
     ];
+    var exactNote = exact.length ?
+      'Exact retailer listing verified for the recorded physical variant. Price and stock are checked separately below.' :
+      'No exact listing is currently attached; retailer links search the model and still need variant confirmation.';
     return '<div class="mobile-research-sources retailer-search-links" aria-label="Retailer choices">' +
       stores.map(function (store) {
         var verified = exact.find(function (item) { return String(item.retailer || "").toLowerCase() === store.id; });
@@ -834,9 +837,29 @@
         return '<span class="retailer-choice-unavailable" aria-disabled="true">' +
           escapeHtml(store.name) + '<small>Link unavailable</small></span>';
       }).join(" ") + '</div>' +
+      '<p class="research-retailer-note">' + escapeHtml(exactNote) + '</p>' +
       '<div class="api-price-observations"><button type="button" data-price-observations="' +
       escapeHtml(card.model_key) + '" aria-expanded="false">View saved price &amp; stock checks</button>' +
       '<div data-api-price-panel hidden aria-live="polite"></div></div>';
+  }
+
+  function authorizedOfferSummary(card) {
+    var exact = Array.isArray(card.verified_retailer_links) ? card.verified_retailer_links : [];
+    var current = exact.filter(function (item) {
+      return String(item.source || '').toLowerCase() === 'quickcommerce_authorized_api' &&
+        String(item.availability || '').toLowerCase() === 'in_stock' &&
+        Number(item.price) > 0;
+    });
+    if (!current.length) return '';
+    var item = current[0];
+    var checked = String(item.checked_at || '');
+    var checkedLabel = checked;
+    try {
+      checkedLabel = new Date(checked).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) + ' IST';
+    } catch (error) { /* Keep the source timestamp when formatting fails. */ }
+    return '<aside class="research-current-offer" aria-label="Current retailer offer"><strong>Current verified listing: ₹' +
+      escapeHtml(Number(item.price).toLocaleString('en-IN')) + '</strong><span>In stock on Flipkart · exact ' +
+      escapeHtml(String(item.variant || 'variant')) + ' · checked ' + escapeHtml(checkedLabel) + '</span></aside>';
   }
 
   function independentTestContext(card) {

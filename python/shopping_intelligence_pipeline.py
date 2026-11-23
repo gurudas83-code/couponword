@@ -359,9 +359,22 @@ def enrich_with_multi_retailer(
             from retailer_contract import RetailerOffer
             from multi_retailer_engine import compare_offers
 
+            # Top-30 research cards use a stable model key because most of
+            # their exact retailer SKUs are not canonical catalogue IDs yet.
+            # find_fresh_verified_offer has already bound the row to this
+            # recommendation's exact brand/model/physical variant. Rebind
+            # only that verified in-memory projection to the recommendation
+            # ID so the public CTA and response contract can remain exact.
+            stored_metadata = stored_offer.get("metadata") if isinstance(stored_offer.get("metadata"), dict) else {}
+            if stored_offer.get("product_id") != canonical.product_id:
+                stored_metadata = {
+                    **stored_metadata,
+                    "stored_model_key": stored_offer.get("product_id"),
+                    "canonical_product_id_bound": canonical.product_id,
+                }
             stored_model = RetailerOffer(
                 retailer=stored_offer.get("retailer", ""),
-                product_id=stored_offer.get("product_id", ""),
+                product_id=canonical.product_id,
                 retailer_product_id=stored_offer.get("retailer_product_id", ""),
                 brand=stored_offer.get("brand", ""),
                 model=stored_offer.get("model", ""),
@@ -376,7 +389,7 @@ def enrich_with_multi_retailer(
                 source=stored_offer.get("source", ""),
                 confidence=float(stored_offer.get("confidence", 0.0) or 0.0),
                 last_checked=stored_offer.get("last_checked", ""),
-                metadata=stored_offer.get("metadata", {}),
+                metadata=stored_metadata,
             )
             existing_offers = list(retailer_result.get("offers") or [])
             stored_key = (

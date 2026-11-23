@@ -449,6 +449,108 @@ def _generate_research_catalogue(destination: Path) -> None:
     )
 
 
+def _merge_authorized_offer_snapshot(destination: Path) -> None:
+    """Expose a sanitized Top-30 price snapshot to the existing public panel.
+
+    The offer store itself is private build input. Only exact retailer URL,
+    variant, price, stock and timestamp fields are copied into the already
+    allow-listed observation shape. Research-only QuickCommerce rows never
+    enter this merge.
+    """
+    store_path = ROOT / "data" / "retailer_offers.json"
+    target_path = destination / "data" / "retailer_price_observations.json"
+    if not store_path.is_file() or not target_path.is_file():
+        return
+    store = json.loads(store_path.read_text(encoding="utf-8-sig"))
+    payload = json.loads(target_path.read_text(encoding="utf-8-sig"))
+    models = payload.setdefault("models", {})
+    added = 0
+    for offer in store.get("offers", []) if isinstance(store, dict) else []:
+        if not isinstance(offer, dict) or offer.get("source_type") != "quickcommerce_authorized_api":
+            continue
+        model_key = str(offer.get("model_key") or offer.get("product_id") or "").strip()
+        if not model_key:
+            continue
+        metadata = offer.get("metadata") if isinstance(offer.get("metadata"), dict) else {}
+        variant = str(offer.get("variant") or "").strip()
+        if not variant:
+            continue
+        configuration = next(
+            (
+                item for item in models.setdefault(model_key, [])
+                if isinstance(item, dict) and str(item.get("variant") or "").strip() == variant
+            ),
+            None,
+        )
+        if configuration is None:
+            configuration = {
+                "ram_gb": metadata.get("ram_gb"),
+                "storage_gb": metadata.get("storage_gb"),
+                "color": metadata.get("color") or "Colour not stated",
+                "variant": variant,
+                "pincode": metadata.get("pincode") or "110001",
+                "offers": [],
+                "lowest_observed_retailer": None,
+                "comparison_scope": "same exact provider-listed configuration; current authorized observation",
+                "purchase_eligible": False,
+            }
+            models[model_key].append(configuration)
+        observed = {
+            "retailer": str(offer.get("retailer") or "flipkart"),
+            "retailer_product_id": str(offer.get("retailer_product_id") or ""),
+            "title": str(offer.get("title") or ""),
+            "price": offer.get("price"),
+            "currency": str(offer.get("currency") or "INR"),
+            "availability": str(offer.get("availability") or "unknown"),
+            "observed_at": str(offer.get("checked_at") or offer.get("last_checked") or ""),
+            "product_url": str(offer.get("product_url") or ""),
+            "source": "quickcommerce_authorized_api",
+            "history": [{
+                "observed_at": str(offer.get("checked_at") or offer.get("last_checked") or ""),
+                "price": offer.get("price"),
+                "availability": str(offer.get("availability") or "unknown"),
+            }],
+        }
+        offers = configuration.setdefault("offers", [])
+        replaced = False
+        for index, current in enumerate(offers):
+            if isinstance(current, dict) and (
+                current.get("retailer") == observed["retailer"]
+                and current.get("retailer_product_id") == observed["retailer_product_id"]
+            ):
+                offers[index] = observed
+                replaced = True
+                break
+        if not replaced:
+            offers.append(observed)
+            added += 1
+        configuration["purchase_eligible"] = any(
+            isinstance(item, dict)
+            and item.get("availability") == "in_stock"
+            and isinstance(item.get("price"), (int, float))
+            and item.get("price") > 0
+            for item in offers
+        )
+    payload["authorized_offer_watch"] = {
+        "provider": "quickcommerce_authorized_api",
+        "refreshed_at_utc": store.get("refreshed_at_utc") if isinstance(store, dict) else None,
+        "model_count": store.get("model_count") if isinstance(store, dict) else 0,
+        "offer_count": store.get("offer_count") if isinstance(store, dict) else 0,
+    }
+    payload["counts"] = {
+        **(payload.get("counts") if isinstance(payload.get("counts"), dict) else {}),
+        "authorized_offer_rows_added": added,
+        "authorized_offer_models": sum(
+            1 for rows in models.values()
+            if any(isinstance(row, dict) and any(
+                isinstance(item, dict) and item.get("source") == "quickcommerce_authorized_api"
+                for item in row.get("offers", [])
+            ) for row in rows if isinstance(row, dict))
+        ),
+    }
+    target_path.write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+
+
 def _validate_public_content(output: Path) -> None:
     preview_path = output / "data" / "mobile_research_preview.json"
     preview = json.loads(preview_path.read_text(encoding="utf-8"))
@@ -595,6 +697,7 @@ def build(output: Path) -> Path:
     print("TECHNICAL-NICHE PUBLICATION:", technical_report)
 
     _generate_research_catalogue(output)
+    _merge_authorized_offer_snapshot(output)
     _generate_assistant_category_research(output)
     # Add the eight missing market-source models as a separate research lane;
     # never mutate the frozen 232-model catalogue or quality ranking.

@@ -145,7 +145,10 @@ def _https_urls(values: Any) -> list[str]:
     return list(dict.fromkeys(item for item in values if isinstance(item, str) and item.startswith("https://")))
 
 
-def _load_verified_mobile_retailer_links(root: Path) -> dict[tuple[str, str], list[dict[str, Any]]]:
+def _load_verified_mobile_retailer_links(
+    root: Path,
+    model_keys: set[str] | None = None,
+) -> dict[tuple[str, str], list[dict[str, Any]]]:
     """Load exact mobile listing evidence without turning it into a live offer.
 
     The research catalogue may show a direct listing only when the existing
@@ -163,6 +166,7 @@ def _load_verified_mobile_retailer_links(root: Path) -> dict[tuple[str, str], li
         for item in coupons
         if isinstance(item, dict) and str(item.get("category") or "").casefold() in {"mobile", "mobiles", "phone", "phones"}
     }
+    accepted_product_ids = set(mobile_ids) | {str(key).strip() for key in (model_keys or set())}
     allowed_hosts = {
         "amazon": {"amazon.in", "www.amazon.in"},
         "flipkart": {"flipkart.com", "www.flipkart.com"},
@@ -170,7 +174,7 @@ def _load_verified_mobile_retailer_links(root: Path) -> dict[tuple[str, str], li
     }
     result: dict[tuple[str, str], list[dict[str, Any]]] = {}
     for offer in offers:
-        if not isinstance(offer, dict) or offer.get("product_id") not in mobile_ids:
+        if not isinstance(offer, dict) or offer.get("product_id") not in accepted_product_ids:
             continue
         retailer = str(offer.get("retailer") or "").casefold()
         url = str(offer.get("product_url") or "")
@@ -184,7 +188,12 @@ def _load_verified_mobile_retailer_links(root: Path) -> dict[tuple[str, str], li
             or not offer.get("brand")
             or not offer.get("model")
             or not offer.get("variant")
-            or offer.get("source") not in {"retailer_page_verified", "amazon_primary_buybox", "retailer_price_observed"}
+            or offer.get("source") not in {
+                "retailer_page_verified",
+                "amazon_primary_buybox",
+                "retailer_price_observed",
+                "quickcommerce_authorized_api",
+            }
         ):
             continue
         identity = (_norm(offer.get("brand")), _norm(offer.get("model")))
@@ -194,7 +203,11 @@ def _load_verified_mobile_retailer_links(root: Path) -> dict[tuple[str, str], li
             "retailer_product_id": listing_id,
             "variant": str(offer.get("variant")),
             "source": str(offer.get("source")),
+            "source_type": str(offer.get("source_type") or ""),
             "confidence": offer.get("confidence"),
+            "price": offer.get("price"),
+            "availability": str(offer.get("availability") or ""),
+            "affiliate_url": str(offer.get("affiliate_url") or ""),
             "checked_at": str(offer.get("last_checked") or offer.get("observed_at") or ""),
             "exact_identity_verified": True,
         })
@@ -2389,7 +2402,10 @@ def build_public_catalogue(root: Path) -> dict[str, Any]:
         identity = (_norm(product.get("brand")), _norm(product.get("model")))
         preview_by_identity.setdefault(identity, []).append(product)
     source_specs_by_identity = _load_existing_source_specs(root)
-    verified_retailer_links = _load_verified_mobile_retailer_links(root)
+    verified_retailer_links = _load_verified_mobile_retailer_links(
+        root,
+        {str(card.get("model_key") or "") for card in model_cards},
+    )
     for identity, card in cards_by_identity.items():
         preview_products = preview_by_identity.get(identity, [])
         preview_keys = {

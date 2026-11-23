@@ -168,6 +168,56 @@ def _offer_mapping_verified(recommendation: dict[str, Any], canonical_id: str) -
     return False
 
 
+def _current_retailer_offer_evidence(recommendation: dict[str, Any], now: datetime) -> dict[str, Any] | None:
+    """Project an already gated stored retailer offer into price evidence.
+
+    The Core pipeline keeps manufacturer/market price evidence separate from
+    the offer store. A scheduled authorized offer therefore needs this small
+    bridge or the API would continue reporting CURRENT_OFFERS_UNAVAILABLE even
+    when the exact stored offer is fresh and CTA-eligible.
+    """
+    candidates = []
+    candidates.extend(recommendation.get("retailer_offers") or [])
+    candidates.append(recommendation.get("best_offer"))
+    for offer in candidates:
+        if not isinstance(offer, dict):
+            continue
+        decision = offer.get("cta_eligibility") if isinstance(offer.get("cta_eligibility"), dict) else {}
+        if decision.get("eligible") is not True:
+            continue
+        try:
+            price = float(offer.get("price"))
+        except (TypeError, ValueError):
+            continue
+        if price <= 0:
+            continue
+        observed_at = _text(
+            (offer.get("metadata") or {}).get("evidence_observed_at")
+            if isinstance(offer.get("metadata"), dict)
+            else ""
+        ) or _text(offer.get("last_checked") or offer.get("observed_at"))
+        observed = _utc(observed_at)
+        if observed is None:
+            continue
+        age = (now - observed).total_seconds()
+        if age < 0 or age > CACHE_MAX_AGE_SECONDS:
+            continue
+        source_url = _text(offer.get("product_url"))
+        if not retailer_host_allowed(source_url):
+            continue
+        return {
+            "price": price,
+            "verified": True,
+            "source_type": _text(offer.get("source_type") or offer.get("source")),
+            "source_url": source_url,
+            "verified_at": observed_at,
+            "availability": _text(offer.get("availability")).casefold(),
+            "retailer_product_id": _text(offer.get("retailer_product_id")),
+            "evidence_method": "authorized_retailer_offer_store",
+        }
+    return None
+
+
 def _price_contract(recommendation: dict[str, Any], canonical_id: str, now: datetime) -> dict[str, Any]:
     evidence = ((recommendation.get("provenance") or {}).get("price_evidence") or {})
     observed_at = _text(evidence.get("verified_at"))
@@ -198,6 +248,39 @@ def _price_contract(recommendation: dict[str, Any], canonical_id: str, now: date
         and availability == "in_stock"
         and fresh
     )
+    if exact_current:
+        price_status = "VERIFIED_CURRENT"
+    elif observed is not None and (not fresh or availability in {"out_of_stock", "expired"}):
+        price_status = "HISTORICAL_OR_EXPIRED"
+    else:
+        price_status = "CURRENT_OFFER_UNAVAILABLE"
+    stored_offer_evidence = _current_retailer_offer_evidence(recommendation, now)
+    if not exact_current and stored_offer_evidence is not None:
+        # Prefer a fresh exact offer-store observation when Core's optional
+        # upstream price evidence is absent. This does not create a price: the
+        # offer already passed identity, source, URL, stock and six-hour CTA
+        # gates before it reaches this response contract.
+        evidence = stored_offer_evidence
+        observed_at = _text(evidence.get("verified_at"))
+        observed = _utc(observed_at)
+        source_url = _text(evidence.get("source_url"))
+        availability = _text(evidence.get("availability")).casefold()
+        try:
+            price = float(evidence.get("price"))
+        except (TypeError, ValueError):
+            price = None
+        fresh = bool(
+            observed is not None
+            and 0 <= (now - observed).total_seconds() <= CACHE_MAX_AGE_SECONDS
+        )
+        exact_current = bool(
+            price is not None
+            and price > 0
+            and _text(evidence.get("retailer_product_id"))
+            and retailer_host_allowed(source_url)
+            and availability == "in_stock"
+            and fresh
+        )
     if exact_current:
         price_status = "VERIFIED_CURRENT"
     elif observed is not None and (not fresh or availability in {"out_of_stock", "expired"}):
