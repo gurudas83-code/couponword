@@ -114,6 +114,14 @@ def _variant_from_listing(item: dict) -> dict[str, object] | None:
         return None
 
     ram_values = [int(value) for value in RAM_PATTERN.findall(combined)]
+    if not ram_values:
+        # Some provider listings expose the handset memory as a bare single
+        # GB token in quantity (for example `8 GB`) rather than `8 GB RAM`.
+        # Treat only one 1–32 GB quantity value as RAM; storage remains bound
+        # to the product title and ambiguous values still fail closed.
+        quantity_values = [int(value) for value in re.findall(r"\b(\d{1,2})\s*GB\b", quantity, re.I)]
+        if len(set(quantity_values)) == 1:
+            ram_values = quantity_values
     if len(set(ram_values)) != 1 or not 1 <= ram_values[0] <= 32:
         return None
     storage_values = _storage_values(title)

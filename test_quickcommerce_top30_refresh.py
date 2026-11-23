@@ -127,7 +127,7 @@ class QuickCommerceTop30RefreshTests(unittest.TestCase):
                     "available": True,
                     "offer_price": 23999,
                     "mrp": 29999,
-                    "quantity": "12 GB RAM",
+                    "quantity": "12 GB",
                     "currency": "INR",
                     "deeplink": f"https://www.flipkart.com/-/p/-?pid={pid}",
                 }],

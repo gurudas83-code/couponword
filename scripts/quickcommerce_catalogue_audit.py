@@ -35,7 +35,7 @@ def query_for(row):
 
 def listing_candidate(item, row):
     """Conservative candidate identity; no fuzzy or cheapest-price selection."""
-    if not isinstance(item, dict) or _tokens(item.get("brand")) != _tokens(row["brand"]):
+    if not isinstance(item, dict):
         return False
     pid = str(item.get("id") or "")
     url = urlsplit(str(item.get("deeplink") or ""))
@@ -65,7 +65,11 @@ def listing_candidate(item, row):
         return model_matches
     # Non-mobile listings require a manufacturer model code, never RAM matching.
     code = str(row.get("model_code") or "").strip()
-    return bool(code and re.search(r"(?<![a-z0-9])" + re.escape(code) + r"(?![a-z0-9])", title, re.I))
+    return bool(
+        _tokens(item.get("brand")) == _tokens(row["brand"])
+        and code
+        and re.search(r"(?<![a-z0-9])" + re.escape(code) + r"(?![a-z0-9])", title, re.I)
+    )
 
 
 def image_references(item):
