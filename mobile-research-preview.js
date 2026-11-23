@@ -385,7 +385,6 @@
         submitResearch(initialQuery);
       }
     }
-    }
     // Paint the core 232-card catalogue as soon as it is ready. The market
     // and recent-manufacturer feeds are optional research lanes and must not
     // delay the first useful search result or duplicate the initial query.
