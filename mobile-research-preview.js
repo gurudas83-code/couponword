@@ -1197,7 +1197,10 @@
   function verifiedRecommendationBridge(query, isComparison, matches) {
     var c = researchConstraints(query);
     if (isComparison || (c.budget == null && !isResearchTopThreeQuery(query))) return "";
-    var topThree = isResearchTopThreeQuery(query) ? (matches || []).filter(function (item) { return hasResearchVerifiedEvidence(item.card); }).slice(0, 3) : [];
+    var topThree = isResearchTopThreeQuery(query) ? (matches || []).filter(function (item) {
+      return hasResearchVerifiedEvidence(item.card) &&
+        (researchConstraints(query).budget == null || !!item.card.research_budget_reference);
+    }).slice(0, 3) : [];
     var topThreeHtml = topThree.length ? '<section class="research-verified-top3" aria-label="Research-Verified Top 3"><h3>Research-Verified Top 3 for this budget band</h3><p>Ordered by source coverage and constraint fit, not measured camera, gaming or battery superiority. Dated reference in selected band; current price unverified; current stock is not verified.</p><div class="research-top3-grid">' +
       topThree.map(function (item) { return '<div class="research-top3-result">' + renderResearchResultCard(item.card, item.rows, item.group_size, true) + '</div>'; }).join("") + '</div></section>' : "";
     return topThreeHtml + (isResearchTopThreeQuery(query) ? "" : '<div class="research-context research-verified-recommendations">' +
