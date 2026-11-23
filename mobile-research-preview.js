@@ -374,6 +374,29 @@
         if (!response.ok) throw new Error("recent phone research unavailable");
         return response.json();
       }).catch(function () { return null; });
+    var initialQueryStarted = false;
+    function runInitialQueryOnce() {
+      var initialQuery = lastSearchQuery || new URLSearchParams(window.location.search || "").get("q");
+      if (initialQuery && !initialQueryStarted) {
+        initialQueryStarted = true;
+        submitResearch(initialQuery);
+      }
+    }
+    // Paint the core 232-card catalogue as soon as it is ready. The market
+    // and recent-manufacturer feeds are optional research lanes and must not
+    // delay the first useful search result or duplicate the initial query.
+    coreFetch.then(function (payload) {
+      inventoryLoadFailed = false;
+      inventoryRows = Array.isArray(payload.records) ? payload.records : [];
+      inventoryByKey = new Map(inventoryRows.map(function (row) { return [row.record_key, row]; }));
+      inventoryCards = Array.isArray(payload.model_cards) ? payload.model_cards : [];
+      inventorySourceCounts = payload.source_counts || {};
+      refreshInventoryControls();
+      restoreShortlist();
+      renderNewNoteworthy();
+      handleResearchHash();
+      runInitialQueryOnce();
+    }).catch(function () { /* Promise.all below renders the canonical fallback. */ });
     Promise.all([coreFetch, marketFetch, recentFetch])
       .then(function (results) {
         var payload = results[0], intake = results[1], recent = results[2];
@@ -432,9 +455,7 @@
         restoreShortlist();
         renderNewNoteworthy();
         handleResearchHash();
-        var initialQuery = lastSearchQuery || new URLSearchParams(window.location.search || "").get("q");
-        if (initialQuery) submitResearch(initialQuery);
-      })
+        runInitialQueryOnce();      })
       .catch(function () {
         inventoryLoadFailed = true;
         if (researchSearchStatus) researchSearchStatus.textContent = "Saved smartphone research is temporarily unavailable. Use the Standard Buying Guide below.";
