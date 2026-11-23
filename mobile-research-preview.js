@@ -1236,6 +1236,7 @@
     // Reuse the just-computed strict match count. Do not repeat the full
     // catalogue scan (and never block local answers on retailer/API latency).
     searchResearch(query);
+    if (/(?:\btop\s*(?:3|three)\b|\bbest\s*(?:3|three)\b|\bfirst\s*3\b|टॉप\s*[३3]|शीर्ष\s*[३3])/i.test(submitted)) return;
     if (inventoryCards.length && lastStrictMatchCount > 0 &&
         researchConstraints(query).budget != null &&
         !/\b(?:compare|vs\.?|versus)\b|और/i.test(String(query || "")) &&
