@@ -5,15 +5,6 @@ on:
   # 17:00 IST = 11:30 UTC. GitHub Actions may start a few minutes late.
   schedule:
     - cron: "30 11 * * *"
-  # A workflow file/script change immediately exercises the price-watch path;
-  # the offer commit itself does not match these paths, so it cannot loop.
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/affiliate-price-refresh.yml"
-      - "scripts/refresh_affiliate_offers.py"
-      - "python/retailer_publication_gate.py"
-      - "data/top30_research_pilot_20261113.json"
   workflow_dispatch:
 
 permissions:
