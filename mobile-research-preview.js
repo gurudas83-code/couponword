@@ -237,12 +237,13 @@
         '" width="540" height="430" loading="lazy" decoding="async" alt="Generic illustrated smartphone, not an actual photo of ' +
         escapeHtml(name) + '"></button><p class="research-illustration-label">Original generic artwork · NOT an actual model photo · Tap to see retailers</p>';
     }
-    // An illustration is not a verified model photograph. The same accessible
-    // control opens existing details without claiming an exact product image.
-    return '<button type="button" class="research-photo-open research-phone-visual" data-research-detail="' +
-      escapeHtml(card.model_key) + '" aria-label="View specifications and retailer choices for ' + escapeHtml(name) +
-      '" aria-expanded="false"><img src="/assets/phone-study.svg" width="600" height="540" alt="" loading="lazy"><span>' +
-      escapeHtml(card.brand) + ' / PHONE RESEARCH</span></button><p class="research-illustration-label">Illustration · not a product photo · Tap to see retailers</p>';
+    // Keep the same representative artwork on every card for a given model.
+    var illustration = Array.from(card.model_key).reduce(function (sum, character) {
+      return sum + character.codePointAt(0);
+    }, 0) % 8;
+    return '<figure class="research-phone-photo">' + trigger +
+      '<img src="/assets/phone-illustrations/generic-3d-' + illustration + '.webp" width="440" height="440" loading="lazy" decoding="async" alt="">' +
+      '</button><figcaption>AI illustration · Tap to see retailer options</figcaption></figure>';
   }
 
   function renderInventoryCard(card) {

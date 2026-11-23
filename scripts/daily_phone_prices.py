@@ -210,11 +210,12 @@ def render_store(row, store, observed, now, name="", *, lowest=False, listed_pri
     return f'<li>{actions}<small>{details}</small></li>'
 
 
-def render_image(media, output, name, dialog_id):
+def render_image(media, output, name, dialog_id, model_key):
     photo = media.get("photo") or media.get("reviewed_model_photo")
     path = photo["url"] if photo else media.get("representative_illustration")
     if not path or not (output / path.lstrip("/")).is_file():
-        path = "/assets/phone-illustrations/representative-smartphone.webp"
+        illustration = sum(map(ord, model_key)) % 8
+        path = f"/assets/phone-illustrations/generic-3d-{illustration}.webp"
         photo = None
     caption = "AI-generated illustration"
     alt = ""
@@ -365,7 +366,7 @@ def publish(output, snapshot_path=None):
             for store in PLATFORMS
         )
         body.append(
-            '<article class="phone-watch-card">' + render_image(media.get(key, {}), output, name, dialog_id) +
+            '<article class="phone-watch-card">' + render_image(media.get(key, {}), output, name, dialog_id, key) +
             f'<div class="phone-watch-details">{badge}<h2><button type="button" data-phone-dialog="{dialog_id}" aria-haspopup="dialog">{esc(name)}</button></h2><p>{source}</p>'
             f'{model_details}<ul aria-label="{esc(name)} retailer options">{shop_links}</ul></div>' +
             render_spec_dialog(dialog_id, name, card, spec_reviews.get(key, {})) + '</article>'
