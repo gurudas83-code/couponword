@@ -1042,6 +1042,34 @@
     return '<p class="standard-guide-fallback"><a class="btn btn-ghost" href="/guides/smartphone-buying-guide/">Standard Buying Guide</a></p>';
   }
 
+  function budgetResearchAnswer(query, c, unpricedCount) {
+    var exactLookup = /\bexact\s+model\b/i.test(String(query || ""));
+    var documented = exactLookup ? groupResearchMatches(findResearchMatches(query, true)) : [];
+    var outsideRange = unpricedCount ? [] : documented.filter(function (item) {
+      return Number(item.card.research_budget_reference?.reference_price_inr) > 0;
+    }).slice(0, 3);
+    var answer;
+    if (unpricedCount) {
+      answer = "The research below matches your other filters. Check the exact variant’s current price and delivery before deciding.";
+    } else if (outsideRange.length) {
+      answer = "The requested phone is documented. Its saved price evidence does not qualify for this budget search. Open the specifications to check the exact variant and retailer options.";
+    } else if (c.ram != null || c.storage != null) {
+      answer = "No saved evidence confirms the requested RAM or storage and budget together. If that memory is essential, keep it fixed and check a wider budget. If it is flexible, try changing just one memory filter.";
+    } else if (exactLookup) {
+      answer = "No saved evidence confirms this model under your budget. Check the spelling, including suffixes like 5G or Pro, or search for the model name alone to see its documented variants.";
+    } else if (c.minimumBattery != null || c.minimumRefresh != null || c.need5g || c.needOis) {
+      answer = "No saved result meets this budget and every requested feature. Keep the feature you need most and adjust one other filter to see which condition limits the results.";
+    } else {
+      answer = "No saved price reference matches this combination. Try widening the budget range or changing one brand or feature filter to see more documented options.";
+    }
+    return '<section class="research-context research-budget-answer" aria-label="Answer to your budget search">' +
+      '<h3>Answer to your budget search</h3><p>' + escapeHtml(answer) + '</p>' +
+      outsideRange.map(function (item) {
+        return '<p><button type="button" class="btn btn-ghost" data-research-detail="' +
+          escapeHtml(item.card.model_key) + '">View ' + escapeHtml(displayPhoneName(item.card)) + ' specifications</button></p>';
+      }).join('') + '<a href="#mobileResearchCatalogue">Browse the phone catalogue</a></section>';
+  }
+
   function unpricedResearchLeads(query) {
     var c = researchConstraints(query);
     if (c.budget == null || (c.lower != null && c.lower > c.budget)) {
@@ -1288,7 +1316,8 @@
             }).join("") + '</div>' :
             '<p>No saved dated price reference passes every condition. This does not prove that no suitable phone exists.</p>') +
           '</section>';
-        researchResults.innerHTML = bridge + primary + additional.html +
+        researchResults.innerHTML = bridge + primary +
+          (!matches.length ? budgetResearchAnswer(lastSearchQuery, c, additional.count) : '') + additional.html +
           (!matches.length && !additional.count ? relatedRepositoryResearch(lastSearchQuery, visible) : '');
       } else {
         researchResults.innerHTML = bridge +

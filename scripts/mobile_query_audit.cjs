@@ -69,7 +69,8 @@ setImmediate(() => {
       } else {
         const unpricedLeads = (html.match(/class="research-budget-related-item"/g) || []).length;
         if (unpricedLeads) zeroWithUnpricedLeads++;
-        zero.push({id:item.id, split:item.split, query:item.query, tags:item.tags || [], unpriced_leads:unpricedLeads});
+        zero.push({id:item.id, split:item.split, query:item.query, tags:item.tags || [], unpriced_leads:unpricedLeads,
+          has_budget_answer: html.includes('class="research-context research-budget-answer"')});
       }
       for (const tag of item.tags || []) {
         (grouped[tag] ||= {queries:0, with_results:0}).queries++;
