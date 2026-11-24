@@ -99,13 +99,20 @@ def source_table(left: dict, right: dict, hi: bool) -> tuple[str, int, int]:
 
 def retailer_links(card: dict, hi: bool) -> str:
     name = model_title(card)
-    amazon = "https://www.amazon.in/s?" + urlencode({"k": name, "tag": AMAZON_TAG})
-    flipkart = "https://www.flipkart.com/search?" + urlencode({"q": name})
+    direct = {
+        str(item.get("retailer") or "").casefold(): item
+        for item in card.get("verified_retailer_links") or []
+        if isinstance(item, dict) and item.get("url")
+    }
+    amazon = str((direct.get("amazon") or {}).get("url") or
+                 ("https://www.amazon.in/s?" + urlencode({"k": name, "tag": AMAZON_TAG})))
+    flipkart = str((direct.get("flipkart") or {}).get("url") or
+                   ("https://www.flipkart.com/search?" + urlencode({"q": name})))
     # Croma has no verified exact listing for these models. Browse category only.
     croma = "https://www.croma.com/"
     options = (
-        (amazon, "Amazon पर खोजें (affiliate)" if hi else "Search Amazon (affiliate)", True),
-        (flipkart, "Flipkart पर खोजें" if hi else "Search Flipkart", False),
+        (amazon, "Amazon पर जाएँ" if hi and "amazon" in direct else "Go to Amazon" if "amazon" in direct else "Amazon पर खोजें (affiliate)" if hi else "Search Amazon (affiliate)", True),
+        (flipkart, "Flipkart पर जाएँ" if hi and "flipkart" in direct else "Go to Flipkart" if "flipkart" in direct else "Flipkart पर खोजें" if hi else "Search Flipkart", False),
         (croma, "Croma ब्राउज़ करें" if hi else "Browse Croma", False),
     )
     links = []

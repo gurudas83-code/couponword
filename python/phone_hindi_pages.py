@@ -258,12 +258,24 @@ def build(destination: Path) -> dict:
         missing = card.get("missing_specifications") or []
         missing_text = ", ".join(SPEC_LABELS.get(k, str(k).replace("_", " ")) for k in missing[:8])
         retailer_search = []
-        for item in card.get("retailer_search_links") or []:
-            u = str(item.get("url") or "")
-            if not u.startswith(("https://www.amazon.in/", "https://www.flipkart.com/", "https://www.croma.com/")):
+        direct_by_retailer = {
+            str(item.get("retailer") or "").casefold(): item
+            for item in card.get("verified_retailer_links") or []
+            if isinstance(item, dict) and item.get("url")
+        }
+        seen_retailers = set()
+        for item in [*(card.get("verified_retailer_links") or []), *(card.get("retailer_search_links") or [])]:
+            retailer = str(item.get("retailer") or "विक्रेता").strip()
+            retailer_key = retailer.casefold()
+            if retailer_key in seen_retailers:
                 continue
-            retailer_search.append(f'<a href="{esc(u)}" rel="sponsored nofollow noopener noreferrer" target="_blank">'
-                                   f'{esc(item.get("retailer") or "विक्रेता")} पर खोज</a>')
+            chosen = direct_by_retailer.get(retailer_key) or item
+            u = str(chosen.get("url") or "")
+            if not u.startswith(("https://www.amazon.in/", "https://amazon.in/", "https://www.flipkart.com/", "https://flipkart.com/", "https://www.croma.com/", "https://croma.com/")):
+                continue
+            seen_retailers.add(retailer_key)
+            label = f"{retailer} पर जाएँ" if retailer_key in direct_by_retailer else f"{retailer} पर खोज"
+            retailer_search.append(f'<a href="{esc(u)}" rel="sponsored nofollow noopener noreferrer" target="_blank">{esc(label)}</a>')
         main = (f'<article><div class="eyebrow">स्रोत-सहित तकनीकी जानकारी / भारत</div>'
                 f'<h1>{esc(model)} के स्पेसिफिकेशन</h1>'
                 f'<p class="lead">{esc(model)} के {len(specs)} स्रोत-जुड़े तकनीकी विवरण, '

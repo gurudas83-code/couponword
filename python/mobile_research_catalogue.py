@@ -15,6 +15,11 @@ from urllib.parse import urlparse
 from pathlib import Path
 from typing import Any
 
+try:
+    from python.retailer_link_registry import affiliate_url, load_registry_direct_links
+except ModuleNotFoundError:  # pragma: no cover - supports direct script execution
+    from retailer_link_registry import affiliate_url, load_registry_direct_links
+
 
 STATUS_ORDER = {
     "NEEDS_VERIFICATION": 0,
@@ -197,9 +202,10 @@ def _load_verified_mobile_retailer_links(
         ):
             continue
         identity = (_norm(offer.get("brand")), _norm(offer.get("model")))
+        direct_url = affiliate_url(url, retailer)
         result.setdefault(identity, []).append({
             "retailer": retailer,
-            "url": url,
+            "url": direct_url,
             "retailer_product_id": listing_id,
             "variant": str(offer.get("variant")),
             "source": str(offer.get("source")),
@@ -207,10 +213,26 @@ def _load_verified_mobile_retailer_links(
             "confidence": offer.get("confidence"),
             "price": offer.get("price"),
             "availability": str(offer.get("availability") or ""),
-            "affiliate_url": str(offer.get("affiliate_url") or ""),
+            "affiliate_url": affiliate_url(str(offer.get("affiliate_url") or direct_url), retailer),
             "checked_at": str(offer.get("last_checked") or offer.get("observed_at") or ""),
             "exact_identity_verified": True,
+            "direct_product": True,
         })
+
+    # The registry contains reviewed direct product destinations even when no
+    # current price/stock offer is available.  Keep these links separate from
+    # the live-offer gate: a customer may open the exact product page, but the
+    # catalogue must not imply that the old observation is still current.
+    registry_links = load_registry_direct_links(root, accepted_product_ids)
+    for identity, items in registry_links.items():
+        bucket = result.setdefault(identity, [])
+        for item in items:
+            if not any(
+                existing["retailer"] == item["retailer"]
+                and existing["url"] == item["url"]
+                for existing in bucket
+            ):
+                bucket.append(item)
     for identity in result:
         result[identity] = sorted(
             result[identity], key=lambda item: (item["retailer"], item["variant"], item["url"])

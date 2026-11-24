@@ -150,9 +150,11 @@
     if (!/^https:\/\//i.test(String(url || ""))) return "";
     var amazon = /^https:\/\/(?:www\.)?amazon\.in(?:[/?#]|$)/i.test(String(url));
     if (amazon) { var parsed = new URL(url); parsed.searchParams.set("tag", "guru07cc-21"); url = parsed.href; }
-    var legacySearchLabel = label === "Check live price on Amazon (search)" ? ' aria-label="Search Amazon"' :
+    var retailerAriaLabel = label === "Go to Amazon product" ? ' aria-label="Go to Amazon product"' :
+      label === "Go to Flipkart product" ? ' aria-label="Go to Flipkart product"' :
+      label === "Check live price on Amazon (search)" ? ' aria-label="Search Amazon"' :
       label === "Check live price on Flipkart (search)" ? ' aria-label="Search Flipkart"' : "";
-    return '<a class="mobile-research-link" href="' + escapeHtml(url) + '" target="_blank" rel="' + (amazon ? 'sponsored nofollow noopener noreferrer' : 'noopener noreferrer') + '"' + legacySearchLabel + '>' + escapeHtml(label) + " ↗</a>";
+    return '<a class="mobile-research-link" href="' + escapeHtml(url) + '" target="_blank" rel="' + (amazon ? 'sponsored nofollow noopener noreferrer' : 'noopener noreferrer') + '"' + retailerAriaLabel + '>' + escapeHtml(label) + " ↗</a>";
   }
 
   function optionValues(rows, key) {
@@ -854,7 +856,7 @@
           try {
             var parsed = new URL(String(item.url || ""));
             if (parsed.protocol === "https:" && store.hosts.indexOf(parsed.hostname.toLowerCase()) >= 0) {
-              var label = verified ? "View exact " + store.name + " listing" :
+              var label = verified ? "Go to " + store.name + " product" :
                 (store.id === "amazon" ? "Check live price on Amazon (search)" :
                   store.id === "flipkart" ? "Check live price on Flipkart (search)" :
                   "Search Croma for this model");

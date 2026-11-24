@@ -92,8 +92,15 @@ def pth(m, hi=False):
 
 def seller_links(m, hi=False):
     name = display_name(m)
-    amazon = "https://www.amazon.in/s?"+urlencode({"k":name,"tag":AMAZON_TAG})
-    flipkart = "https://www.flipkart.com/search?"+urlencode({"q":name})
+    direct = {
+        str(item.get("retailer") or "").casefold(): item
+        for item in m.get("verified_retailer_links") or []
+        if isinstance(item, dict) and item.get("url")
+    }
+    amazon = str((direct.get("amazon") or {}).get("url") or
+                 ("https://www.amazon.in/s?"+urlencode({"k":name,"tag":AMAZON_TAG})))
+    flipkart = str((direct.get("flipkart") or {}).get("url") or
+                   ("https://www.flipkart.com/search?"+urlencode({"q":name})))
     # Croma has no verified model-exact listing for most of these brands.
     # Use known public brand catalogues only when brand is appropriate.
     if m["brand"].lower()=="samsung":
@@ -106,9 +113,9 @@ def seller_links(m, hi=False):
         parsed = urlsplit(u)
         if parsed.scheme!="https" or parsed.hostname not in {"www.amazon.in","www.flipkart.com","www.croma.com"}:
             raise ValueError("Unapproved retailer host")
-    return (('<div class="buy-options" aria-label="'+("विक्रेता खोज" if hi else "Retailer research links")+'">'
-             '<a target="_blank" rel="sponsored nofollow noopener noreferrer" href="'+esc(amazon)+'">'+("Amazon पर खोजें (affiliate)" if hi else "Search Amazon (affiliate)")+'</a>'
-             '<a target="_blank" rel="nofollow noopener noreferrer" href="'+esc(flipkart)+'">'+("Flipkart पर खोजें" if hi else "Search Flipkart")+'</a>'
+    return (('<div class="buy-options" aria-label="'+("विक्रेता लिंक" if hi else "Retailer links")+'">'
+             '<a target="_blank" rel="sponsored nofollow noopener noreferrer" href="'+esc(amazon)+'">'+("Amazon पर जाएँ" if hi and "amazon" in direct else "Go to Amazon" if "amazon" in direct else "Amazon पर खोजें (affiliate)" if hi else "Search Amazon (affiliate)")+'</a>'
+             '<a target="_blank" rel="nofollow noopener noreferrer" href="'+esc(flipkart)+'">'+("Flipkart पर जाएँ" if hi and "flipkart" in direct else "Go to Flipkart" if "flipkart" in direct else "Flipkart पर खोजें" if hi else "Search Flipkart")+'</a>'
              '<a target="_blank" rel="nofollow noopener noreferrer" href="'+esc(croma)+'">'+("Croma में देखें" if hi else "Browse Croma")+'</a>'
              '</div>'))
 
@@ -357,6 +364,10 @@ def publish_under25(destination:Path)->list[str]:
     cards={item["model_key"]:item for item in coredata["model_cards"]}
     if len(cards)!=232:
         raise ValueError("Do not replace original 232 primary phone cards")
+    for item in data["models"]:
+        card = cards.get(item["key"])
+        if card and card.get("verified_retailer_links"):
+            item["verified_retailer_links"] = card["verified_retailer_links"]
     lookup={m["key"]:m for m in data["models"]}
     urls=[]
     for hi in (False,True):

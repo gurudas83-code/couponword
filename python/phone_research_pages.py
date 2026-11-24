@@ -370,13 +370,27 @@ def render_model(card: dict, related: list[dict]) -> str:
                    'not a current price, stock signal or performance-ranking input.' if c else
                    'No dated price reference is available in this record; it is not eligible for reference-price budget filtering.')
     retail = []
-    for item in card.get("retailer_search_links") or []:
-        host = urlsplit(str(item.get("url") or "")).hostname
-        if host not in {"www.amazon.in", "www.flipkart.com", "www.croma.com"}:
+    direct_by_retailer = {
+        str(item.get("retailer") or "").casefold(): item
+        for item in card.get("verified_retailer_links") or []
+        if isinstance(item, dict) and item.get("url")
+    }
+    seen_retailers = set()
+    for item in [*(card.get("verified_retailer_links") or []), *(card.get("retailer_search_links") or [])]:
+        retailer = str(item.get("retailer") or "").strip()
+        retailer_key = retailer.casefold()
+        if retailer_key in seen_retailers:
             continue
-        retailer = str(item.get("retailer") or "")
-        label = ("Browse Croma category" if retailer == "Croma" else f"Search {retailer}")
-        retail.append(link(str(item["url"]), label, "nofollow sponsored noopener noreferrer"))
+        chosen = direct_by_retailer.get(retailer_key) or item
+        host = urlsplit(str(chosen.get("url") or "")).hostname
+        if host not in {"www.amazon.in", "www.flipkart.com", "www.croma.com", "amazon.in", "flipkart.com", "croma.com"}:
+            continue
+        seen_retailers.add(retailer_key)
+        is_direct = retailer_key in direct_by_retailer
+        retailer_label = retailer.title()
+        label = (f"Go to {retailer_label} product" if is_direct else
+                 "Browse Croma category" if retailer_key == "croma" else f"Search {retailer_label}")
+        retail.append(link(str(chosen["url"]), label, "nofollow sponsored noopener noreferrer"))
     query = urlencode({"q": title})
     search = f"/?{query}#mobileResearchSearch"
     facts = "".join(f"<li>{esc(k)}: <strong>{esc(v)}</strong></li>" for k,v in summary_fields(card, maximum=3))

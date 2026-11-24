@@ -72,6 +72,7 @@ jobs:
           python -m unittest -v test_under25_seo_release
           python -m unittest -v test_mobile_seo_comparisons
           python -m py_compile python/mobile_seo_comparisons.py
+          python -m py_compile python/retailer_link_registry.py
           python -m py_compile python/india_sales_priority_pages.py
           python -m py_compile python/india_missing_eight_pages.py
           python -m py_compile python/tv_earbuds_workbook_pages.py
@@ -82,6 +83,7 @@ jobs:
       - name: Run smartphone recommendation and evidence regression tests
         run: |
           python -m unittest -v             test_phase_g_ranking_contract             test_mobile_research_inventory_visibility             test_mobile_independent_tests             test_publication_policy test_mobile_query_answers test_research_usability test_phone_guides_release test_phone_research_seo test_top30_pilot_seo test_hindi_seo_quality test_seo_index_hygiene             test_recommendation_timeout_guard test_phase_g_frontend_offer test_frontend_recommendation_layout test_final_mobile_release_ui
+          python -m unittest -v test_retailer_link_registry
           node test_mobile_workbook_queries.cjs
           node test_standard_guide_fallback.cjs
           node test_search_discovery.cjs
