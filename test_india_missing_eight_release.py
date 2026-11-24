@@ -53,9 +53,11 @@ class EightMarketAdditionsTests(unittest.TestCase):
             self.assertEqual(data["mode"], MODE)
             self.assertEqual(len(data["model_cards"]), 8)
             hub = (destination / HUB.lstrip("/") / "index.html").read_text(encoding="utf-8")
-            self.assertIn("232 original research cards plus 8 distinct", hub)
+            self.assertIn("All eight phones are searchable in the Coupon World catalogue", hub)
+            self.assertNotIn("232 original research", hub)
+            self.assertNotIn("Redmi Redmi", hub)
             self.assertIn('name="robots" content="index,follow"', hub)
-            self.assertIn("Q3 is not an ordered Top-10", hub)
+            self.assertIn("Omdia’s report describes shipment drivers by brand", hub)
             sitemap = (destination / "sitemap.xml").read_text(encoding="utf-8")
             self.assertIn("https://coupon-world.in" + HUB, sitemap)
             for card in payload["model_cards"]:

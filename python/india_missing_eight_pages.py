@@ -48,6 +48,19 @@ FIELD_KEYS = {
     "ram/storage variant": "india_variant_description",
 }
 
+SPEC_LABELS = {
+    "display_type_description": "Display",
+    "display_refresh_description": "Refresh rate",
+    "battery_capacity_description": "Battery",
+    "charging_description": "Charging",
+    "india_variant_description": "India RAM and storage",
+}
+
+
+def _phone_name(card: dict) -> str:
+    brand, model = card["brand"], card["model"]
+    return model if model.casefold().startswith(brand.casefold() + " ") else f"{brand} {model}"
+
 
 def _source_ok(url: str, brand: str) -> bool:
     parts = urlsplit(url)
@@ -86,7 +99,7 @@ def import_eight() -> dict:
         raise ValueError("The eight market intake keys changed; manual review required")
     rows, cards = [], []
     for key in Q2_KEYS + Q3_KEYS:
-        market = "Q2 ranked model sales" if key in q2_rows else "Q3 shipments, not sales rank"
+        market = "Counterpoint · India sales Top 5, Q2 2026" if key in q2_rows else "Omdia · India shipment coverage, Q3 2026"
         item = (q2_rows.get(key) or q3_rows.get(key))
         if key in existing_keys:
             raise ValueError("Duplicate market addition in the 232 canonical catalogue: " + key)
@@ -143,11 +156,11 @@ def import_eight() -> dict:
 
 
 def _research_page(card: dict) -> str:
-    name = card["brand"] + " " + card["model"]
+    name = _phone_name(card)
     route = _route(card["model_key"])
     variant_fields = {
         "india_variant_description", "maker_ram_storage_examples",
-        "india_variant_description", "ram_storage_variant", "ram_storage_variants",
+        "ram_storage_variant", "ram_storage_variants",
     }
     variant = next((field["value"] for key, field in card["specifications"].items()
                     if key in variant_fields), "Manufacturer-listed variant; exact retailer SKU unverified")
@@ -167,13 +180,13 @@ def _research_page(card: dict) -> str:
 <div><dt>Verified image</dt><dd>{esc(image_text)}</dd></div>
 <div><dt>Current price</dt><dd><strong>Current price unavailable</strong><br><small>Live authorized retailer feed required.</small></dd></div>
 <div><dt>Stock status</dt><dd><strong>Not verified</strong><br><small>Stock changes by retailer and pincode.</small></dd></div>
-<div><dt>Affiliate buying link</dt><dd>{affiliate_html}<br><small>Search link only; exact offer is not certified.</small></dd></div>
+<div><dt>Retailer search</dt><dd>{affiliate_html}<br><small>Confirm the exact listing on the retailer’s site.</small></dd></div>
 <div><dt>Last checked</dt><dd><strong>Retailer price/stock: not checked</strong><br><small>Manufacturer research source reviewed; this is not a live offer timestamp.</small></dd></div>
 </dl>
 <p class="cr-note"><strong>Before buying:</strong> confirm RAM/storage, seller, warranty, payable price and delivery at the retailer.</p>
 </section>'''
     facts = "".join(
-        '<div class="cr-fact"><dt>' + esc(key.replace("_", " ").title()) +
+        '<div class="cr-fact"><dt>' + esc(SPEC_LABELS.get(key, key.replace("_", " ").title())) +
         '</dt><dd>' + esc(field["value"]) +
         ' · <a href="' + esc(field["source_url"]) + '" rel="noopener noreferrer" target="_blank">Maker source</a></dd></div>'
         for key, field in card["specifications"].items()
@@ -208,30 +221,28 @@ No performance ranking, price or stock has been inferred from market sales or sh
 def _hub(cards: list[dict]) -> str:
     items = []
     for item in cards:
-        name = item["brand"] + " " + item["model"]
+        name = _phone_name(item)
         main_specs = list(item["specifications"].items())[:3]
-        facts = "".join('<div class="cr-fact"><dt>' + esc(k.replace("_", " ").title()) +
+        facts = "".join('<div class="cr-fact"><dt>' + esc(SPEC_LABELS.get(k, k.replace("_", " ").title())) +
              '</dt><dd>' + esc(v["value"]) + '</dd></div>' for k, v in main_specs)
         items.append('<article class="cr-card"><h3><a href="' + _route(item["model_key"]) + '">' +
           esc(name) + '</a></h3><p class="cr-muted">' + esc(item["market_reference"]) +
-          ' · manufacturer-linked research, not live availability</p><dl class="cr-facts">' +
-          facts + '</dl><div class="cr-card-foot"><a href="' + _route(item["model_key"]) +
-          '">Specifications and retailer searches</a></div></article>')
+          '</p><dl class="cr-facts">' + facts + '</dl></article>')
     body = f'''<p class="cr-crumb"><a href="/">Home</a> / <a href="/phones/">Phones</a>
-/ Sales-report coverage</p><section class="cr-hero">
+/ India market reports</p><section class="cr-hero cr-market-hero">
 <p class="cr-eyebrow">India · market coverage · 2026 Q2/Q3</p>
-<h1>8 missing phones now searchable in Coupon World research</h1>
-<p>Two models appeared in the <a href="https://counterpointresearch.com/en/insights/top-5-smartphone-model-share-8-countries">Q2 Counterpoint sales Top-5</a>.
-Six additional models were identified from <a href="https://omdia.tech.informa.com/pr/2026/oct/indias-smartphone-shipments-fell-26percent-to-a-decade-low-third-quarter-level-despite-festive-season">Q3 Omdia shipment signals</a>.
-Q3 is not an ordered Top-10 model sales ranking.</p>
-<p><strong>Coverage:</strong> 232 original research cards plus 8 distinct source-reviewed market additions.
-All eight remain research-only pending exact retailer SKU and photo-use clearance.
-No manufacturer source implies a live Amazon, Flipkart or Croma price.</p>
-<p><a href="/#mobileResearchSearch">Search and compare these models with the existing phones</a></p></section>
-<section><h2>The 8 market additions</h2><div class="cr-grid">{''.join(items)}</div></section>'''
-    return doc("8 India sales-report models added to Coupon World research",
-      "Eight source-backed Indian smartphone sales and shipment research additions, separate from the original 232-model catalogue.",
-      HUB, body, schema("India smartphone market coverage", HUB, "phones"))
+<h1>8 phones from India market reports</h1>
+<p>Two phones appeared in <a href="{esc(cards[0]["market_report_url"])}">Counterpoint’s India sales Top 5 for Q2 2026</a>.
+The other six were selected from models or families mentioned in <a href="{esc(cards[2]["market_report_url"])}">Omdia’s Q3 2026 India shipment report</a>.
+Omdia’s report describes shipment drivers by brand.</p>
+<p>All eight phones are searchable in the Coupon World catalogue. Open a model below for its specifications and sources.
+Check the exact variant, price and availability with the retailer.</p>
+<p><a href="/#mobileResearchSearch">Search all phones</a></p></section>
+<section><h2>Phones and specifications</h2><div class="cr-grid">{''.join(items)}</div></section>'''
+    return doc("8 phones from India market reports",
+      "Explore specifications for eight phones selected from Counterpoint India sales and Omdia India shipment coverage in 2026.",
+      HUB, body, schema("India smartphone market coverage", HUB, "phones")).replace(
+          "category-research.css?v=model-art-20261118", "category-research.css?v=market-coverage-v2")
 
 
 def publish_eight(destination: Path) -> dict:

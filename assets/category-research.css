@@ -20,6 +20,7 @@ body.category-research{margin:0;background:#f6f8f6;color:#172b29;font:16px/1.65 
 .cr-crumb{font-size:.88rem;color:#60746b;margin:1rem 0 1.4rem}
 .cr-hero{background:linear-gradient(110deg,#e6f0ea,#f8f4ec);border:1px solid #cfdfd4;padding:clamp(1.3rem,4vw,3.3rem);border-radius:22px;margin-bottom:2.4rem}
 .cr-hero p{max-width:750px}
+.cr-market-hero h1{max-width:22ch;font-size:clamp(1.8rem,5vw,3.25rem);overflow-wrap:anywhere}
 .cr-eyebrow{color:#346e5e;text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:800}
 .cr-muted{color:#596d65;font-size:.9rem}
 .cr-actions{display:flex;flex-wrap:wrap;gap:1.1rem;align-items:center;margin-top:1.5rem}
