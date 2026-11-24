@@ -171,7 +171,7 @@ def _research_page(card: dict) -> str:
                   '<img src="' + esc(card["research_art_url"]) + '" width="540" height="430" loading="lazy" alt="Generic smartphone illustration; not a photo of this model">')
     retailer = next((row for row in card.get("retailer_search_links", []) if row.get("retailer") == "amazon"), None)
     affiliate_html = ('<a class="cr-button" href="' + esc(retailer["url"]) +
-                      '" rel="sponsored nofollow noopener" target="_blank">Search Amazon for this model</a>'
+                      '" rel="sponsored nofollow noopener noreferrer" target="_blank">Search Amazon for this model</a>'
                       if retailer else 'Affiliate link not configured')
     commerce = f'''<section class="cr-commerce" aria-labelledby="commerce-title">
 <h2 id="commerce-title">Customer buying details</h2>

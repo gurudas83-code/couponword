@@ -22,7 +22,7 @@ class Page(HTMLParser):
 class AnswersTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.catalogue=json.loads((PUBLIC/'data/mobile_research_catalogue.json').read_text())
+        cls.catalogue=json.loads((PUBLIC/'data/mobile_research_catalogue.json').read_text(encoding='utf-8'))
         cls.cards=cls.catalogue['model_cards']
         cls.groups=load_groups()
         cls.report={'answers':[dict(query_ids=g['query_ids']) for g in cls.groups]}
@@ -34,7 +34,7 @@ class AnswersTests(unittest.TestCase):
         self.assertEqual(len(ids),1000);self.assertEqual(len(set(ids)),1000)
         covered={q for a in self.report['answers'] for q in a['query_ids']}
         self.assertTrue(set(ids)<=covered)
-        for p in json.loads((ROOT/'data/mobile_query_benchmark_phase3.json').read_text()):self.assertIn(p['id'],covered)
+        for p in json.loads((ROOT/'data/mobile_query_benchmark_phase3.json').read_text(encoding='utf-8')):self.assertIn(p['id'],covered)
         self.assertEqual(len(self.report['answers']),len(self.groups))
 
     def test_only_reviewed_answer_hubs_are_published(self):
@@ -184,7 +184,7 @@ process.stdout.write(JSON.stringify({durations,answers}));
 """
         started=time.perf_counter()
         result=subprocess.run(['node','-e',js],input=json.dumps(variants+[q for q,_ in spoken]),
-                              text=True,capture_output=True,cwd=ROOT,timeout=90,check=True)
+                              text=True,encoding='utf-8',capture_output=True,cwd=ROOT,timeout=90,check=True)
         elapsed=round((time.perf_counter()-started)*1000,2)
         values=json.loads(result.stdout)
         times=sorted(values['durations'])

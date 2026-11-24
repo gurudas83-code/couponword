@@ -39,14 +39,15 @@ class SearchTrustHygiene(unittest.TestCase):
         self.assertIn(ORIGIN + "/", self.urls)
         self.assertIn(ORIGIN + "/phones/", self.urls)
         self.assertIn(ORIGIN + "/guides/phone-budget-guides/", self.urls)
-        # Existing 50 source-linked models + the two hubs remain distinct.
+        # Existing 50 source-linked models, the market-coverage hubs, and the
+        # two linked price-watch/launch-status routes remain distinct.
         # Verify exact under-25k pages, excluding any unapproved model alias.
         expected_under25 = {ORIGIN + UNDER25_EN}
         self.assertEqual({u for u in self.urls if u.startswith(ORIGIN + UNDER25_EN)}, expected_under25)
         self.assertEqual(
             len([url for url in self.urls if url.startswith(ORIGIN + "/phones/")
                  and not url.startswith(ORIGIN + UNDER25_EN)]),
-            54,  # original 53 phone routes + new manufacturer-source hub
+            55,  # curated phone routes + market hubs + price-watch routes
         )
         self.assertIn(ORIGIN + "/phones/india-market-demand-q3-2026/", self.urls)
         self.assertIn(ORIGIN + "/phones/india-sales-coverage-2026/", self.urls)

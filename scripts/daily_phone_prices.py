@@ -12,6 +12,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
 from urllib.parse import quote_plus, urlsplit
 from zoneinfo import ZoneInfo
+from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT), str(ROOT / "python")]
@@ -39,7 +40,7 @@ SOURCES = {
 
 
 def worklist():
-    rows = json.loads((ROOT / "data/india_daily_price_watch.json").read_text())
+    rows = json.loads((ROOT / "data/india_daily_price_watch.json").read_text(encoding="utf-8"))
     keys = {row["model_key"] for row in rows}
     cards = catalogue()
     if len(rows) != 30 or len(keys) != 30 or any(key not in cards or cards[key].get("category") for key in keys):
@@ -312,15 +313,15 @@ def render_spec_dialog(dialog_id, name, card, reviewed):
 
 def publish(output, snapshot_path=None):
     rows, cards = worklist()
-    data = json.loads(Path(snapshot_path).read_text()) if snapshot_path else {}
+    data = json.loads(Path(snapshot_path).read_text(encoding="utf-8")) if snapshot_path else {}
     stores = {row["model_key"]: data.get("stores", {}).get(row["model_key"], {}) for row in rows}
     data = {**data, "stores": stores}
     now = datetime.now(IST)
-    research = json.loads((ROOT / "data/india_phone_watch_research.json").read_text())
-    spec_reviews = json.loads((ROOT / "data/india_phone_watch_specs.json").read_text())
+    research = json.loads((ROOT / "data/india_phone_watch_research.json").read_text(encoding="utf-8"))
+    spec_reviews = json.loads((ROOT / "data/india_phone_watch_specs.json").read_text(encoding="utf-8"))
     media = {}
     for filename in ("mobile_research_catalogue", "india_sales_eight_research", "india_recent_manufacturer_research"):
-        feed = json.loads((output / "data" / f"{filename}.json").read_text())
+        feed = json.loads((output / "data" / f"{filename}.json").read_text(encoding="utf-8"))
         media.update({card["model_key"]: card for card in feed["model_cards"]})
     groups = {"reported-top-five": [], "market-tracked": [], "india-product": []}
     in_stock_count = 0
@@ -420,7 +421,7 @@ def publish(output, snapshot_path=None):
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(data, ensure_ascii=False) + "\n", encoding="utf-8")
 
-    reviewed = json.loads((ROOT / "data/india_phone_launch_review.json").read_text())
+    reviewed = json.loads((ROOT / "data/india_phone_launch_review.json").read_text(encoding="utf-8"))
     if {row["model_key"] for row in reviewed} & {row["model_key"] for row in rows}:
         raise ValueError("Launch review exclusions cannot appear in the price watch")
     entries = "".join(
@@ -441,6 +442,23 @@ def publish(output, snapshot_path=None):
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(doc("Upcoming Phones in India", "Manufacturer-confirmed India launch checks and price publication rules.",
                           UPCOMING_ROUTE, launch_page, {"@context": "https://schema.org", "@type": "WebPage"}), encoding="utf-8")
+
+    # Both generated watch pages are indexable, linked from the homepage and
+    # useful entry points. Keep them in the generated sitemap so the
+    # indexability audit does not report an avoidable orphan.
+    sitemap = output / "sitemap.xml"
+    ns = "http://www.sitemaps.org/schemas/sitemap/0.9"
+    ET.register_namespace("", ns)
+    tree = ET.parse(sitemap)
+    root = tree.getroot()
+    existing = {node.text for node in root.findall(f"{{{ns}}}url/{{{ns}}}loc") if node.text}
+    for route in (ROUTE, UPCOMING_ROUTE):
+        url = "https://coupon-world.in" + route
+        if url in existing:
+            continue
+        entry = ET.SubElement(root, f"{{{ns}}}url")
+        ET.SubElement(entry, f"{{{ns}}}loc").text = url
+    tree.write(sitemap, encoding="utf-8", xml_declaration=True)
 
 
 def main():

@@ -193,7 +193,7 @@ class ResearchSeoTests(unittest.TestCase):
         self.assertEqual(actual_under25, expected_under25)
         self.assertEqual(
             len([url for url in self.sitemap if url.startswith(SITE + HUB)]),
-            len(self.selected) + 4 + len(expected_under25),  # new India manufacturer-source hub
+            len(self.selected) + 5 + len(expected_under25),  # adds the indexable launch-status route
         )
         self.assertFalse(any(url.startswith(market) and url != market for url in self.sitemap))
         self.assertIn(SITE + "/phones/india-sales-coverage-2026/", self.sitemap)

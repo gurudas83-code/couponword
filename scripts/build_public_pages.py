@@ -122,6 +122,7 @@ def _publish_moved_tech_product_aliases(destination: Path) -> None:
             '<!doctype html><html lang="en-IN"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width,initial-scale=1">'
             '<title>Product page moved | Coupon World</title>'
+            '<meta name="robots" content="noindex,follow">'
             '<meta http-equiv="refresh" content="0; url=' + escape(canonical, quote=True) + '">'
             '<link rel="canonical" href="' + escape(canonical, quote=True) + '">'
             '</head><body><main><h1>This product page has moved</h1>'

@@ -22,12 +22,12 @@ class ReleaseTests(unittest.TestCase):
         for u in ['https://www.flipkart.com/search?q=phone','https://www.croma.com/','https://amazon.in.evil.test/']:
             self.assertEqual(amazon_link(u),u)
     def test_twenty_distinct_indexable_substantial_pages(self):
-        pages=json.loads((ROOT/'data/phone-guides.json').read_text())['pages']
+        pages=json.loads((ROOT/'data/phone-guides.json').read_text(encoding='utf-8'))['pages']
         self.assertEqual(len(pages),20)
         sitemap={x.text for x in ET.parse(ROOT/'public/sitemap.xml').getroot().iter() if x.tag.endswith('}loc')}
         titles=set()
         for item in pages:
-            route='/seo/'+item['slug']+'.html';text=(ROOT/'public'/route.lstrip('/')).read_text();page=Page(text)
+            route='/seo/'+item['slug']+'.html';text=(ROOT/'public'/route.lstrip('/')).read_text(encoding='utf-8');page=Page(text)
             self.assertGreater(len(' '.join(page.text).split()),350)
             self.assertNotIn(item['title'],titles);titles.add(item['title'])
             self.assertEqual(sum(t=='h1' for t,a in page.tags),1)
@@ -49,10 +49,10 @@ class ReleaseTests(unittest.TestCase):
                 for x in value:visit(x)
             elif isinstance(value,str) and value.startswith('https://') and urlsplit(value).hostname in {'amazon.in','www.amazon.in'}:
                 self.assertEqual(parse_qs(urlsplit(value).query).get('tag'),['guru07cc-21']);count+=1
-        for path in (ROOT/'public').rglob('*.json'):visit(json.loads(path.read_text()))
+        for path in (ROOT/'public').rglob('*.json'):visit(json.loads(path.read_text(encoding='utf-8')))
         self.assertGreater(count,232)
         for path in (ROOT/'public').rglob('*.html'):
-            for tag,a in Page(path.read_text()).tags:
+            for tag,a in Page(path.read_text(encoding='utf-8')).tags:
                 if tag=='a' and urlsplit(a.get('href','')).hostname in {'amazon.in','www.amazon.in'}:
                     self.assertEqual(parse_qs(urlsplit(a['href']).query).get('tag'),['guru07cc-21'])
                     self.assertIn('sponsored',a.get('rel',''))
