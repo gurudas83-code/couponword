@@ -70,8 +70,8 @@ assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', ro
   assert((first.match(/class="research-top3-result"/g) || []).length <= 3);
   assert((first.match(/class="research-top3-result"/g) || []).length > 0, "25k must retain a sourced maker-India variant");
   assert.match(first, /Current price and selected budget range unverified|Dated reference in selected band/);
-  assert.match(first, /Check live price on Amazon \(search\)/);
-  assert.match(first, /Check live price on Flipkart \(search\)/);
+  assert.match(first, /Go to Amazon product|Search Amazon/);
+  assert.match(first, /Go to Flipkart product|Search Flipkart/);
   assert.match(first, /not measured camera, gaming or battery superiority/);
   assert.match(first, /tag=guru07cc-21/);
   assert.equal(shoppingCalls, 0, "Research Top 3 must not make an external shopping/paid API call");

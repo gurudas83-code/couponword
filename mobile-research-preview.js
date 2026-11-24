@@ -152,8 +152,8 @@
     if (amazon) { var parsed = new URL(url); parsed.searchParams.set("tag", "guru07cc-21"); url = parsed.href; }
     var retailerAriaLabel = label === "Go to Amazon product" ? ' aria-label="Go to Amazon product"' :
       label === "Go to Flipkart product" ? ' aria-label="Go to Flipkart product"' :
-      label === "Check live price on Amazon (search)" ? ' aria-label="Search Amazon"' :
-      label === "Check live price on Flipkart (search)" ? ' aria-label="Search Flipkart"' : "";
+      label === "Search Amazon" ? ' aria-label="Search Amazon"' :
+      label === "Search Flipkart" ? ' aria-label="Search Flipkart"' : "";
     return '<a class="mobile-research-link" href="' + escapeHtml(url) + '" target="_blank" rel="' + (amazon ? 'sponsored nofollow noopener noreferrer' : 'noopener noreferrer') + '"' + retailerAriaLabel + '>' + escapeHtml(label) + " ↗</a>";
   }
 
@@ -857,8 +857,8 @@
             var parsed = new URL(String(item.url || ""));
             if (parsed.protocol === "https:" && store.hosts.indexOf(parsed.hostname.toLowerCase()) >= 0) {
               var label = verified ? "Go to " + store.name + " product" :
-                (store.id === "amazon" ? "Check live price on Amazon (search)" :
-                  store.id === "flipkart" ? "Check live price on Flipkart (search)" :
+                (store.id === "amazon" ? "Search Amazon" :
+                  store.id === "flipkart" ? "Search Flipkart" :
                   "Search Croma for this model");
               return link(item.url, label);
             }

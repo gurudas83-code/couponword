@@ -51,8 +51,10 @@ class SearchFirstFrontendTests(unittest.TestCase):
         self.assertIn('card.status !== "OFFICIAL_VERIFIED"', self.script)
         self.assertIn("hasResearchVerifiedEvidence", self.script)
         self.assertIn("isResearchTopThreeQuery(query)", self.script)
-        self.assertIn("Check live price on Amazon (search)", self.script)
-        self.assertIn("Check live price on Flipkart (search)", self.script)
+        self.assertIn("Go to Amazon product", self.script)
+        self.assertIn("Go to Flipkart product", self.script)
+        self.assertIn("Search Amazon", self.script)
+        self.assertIn("Search Flipkart", self.script)
 
     def test_top_three_routes_to_existing_local_research_without_paid_api(self):
         self.assertIn("if (!isExplicitTopThreeQuery(query) && !research.isResearchQuery(query)) return false;", self.app)
