@@ -37,7 +37,7 @@ class SearchFirstFrontendTests(unittest.TestCase):
         self.assertIn("market_intake === true", self.script)
         self.assertIn("(card.source_urls || []).length > 0", self.script)
         self.assertIn("researchNewSection.hidden = recent.length === 0", self.script)
-        self.assertIn("additional India research models, separate from the original 232", self.script)
+        self.assertIn("recently added phones in the searchable catalogue", self.script)
 
     def test_public_counts_and_no_commerce_change(self):
         counts = self.payload["source_counts"]

@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="/style.css?v=phone-hero-preview-v1">
   <link rel="preload" href="/data/mobile_research_catalogue.json?v=phone-illustrations-coverage-v2" as="fetch" fetchpriority="high" crossorigin="anonymous">
   <script defer src="/app.js?v=research-top3-20261121"></script>
-  <script defer src="/mobile-research-preview.js?v=shared-budget-guidance-v1"></script>
+  <script defer src="/mobile-research-preview.js?v=unified-phone-catalogue-v1"></script>
   <link rel="stylesheet" href="/assets/cw-research-assistant.css?v=20261121">
   <script defer src="/assets/cw-query-parser.js?v=20261121"></script>
   <script defer src="/assets/cw-research-assistant.js?v=shared-budget-guidance-v1"></script>
@@ -208,7 +208,7 @@
 
           <div class="hero-actions cw-primary-actions" aria-label="Popular ways to start">
             <a class="btn btn-primary" data-analytics-intent="budget_25000" href="/phones/under-25000/">Phones under ₹25k</a>
-            <a class="btn btn-ghost" href="#mobileResearchCatalogue">Browse all 232 phones</a>
+            <a class="btn btn-ghost" href="#mobileResearchCatalogue">Browse all phones</a>
             <a class="btn btn-ghost" data-analytics-intent="compare" href="/compare/">Compare phones</a>
             <button id="researchSavedShortlist" type="button" class="btn btn-ghost" hidden>View saved shortlist</button>
             <a class="btn btn-ghost" href="/seo/top-30-phone-research-india.html">30 phones to research</a>
@@ -273,7 +273,7 @@
         <article class="cw-research-category">
           <span class="cw-research-category-label">01 / SMARTPHONES</span>
           <h3>Choose a phone</h3>
-          <p>Explore 232 research model cards, exact memory filters and 50 curated manufacturer-source pages. Compare documented features and check the exact memory variant before choosing.</p>
+          <p>Explore the phone catalogue, filter by memory and compare documented specifications.</p>
           <a href="/phones/">Explore smartphone specifications →</a>
           <a href="/phones/india-market-demand-q3-2026/">India 2026 sales-report model coverage →</a>
           <a href="#indiaPhoneSources">Recent India phone source checks →</a>
@@ -346,13 +346,13 @@
           <div>
             <span class="section-kicker">Just added · India smartphone research</span>
             <h2 id="mobileResearchNewTitle">New mobiles you can now explore</h2>
-            <p id="mobileResearchNewCount">Loading additional manufacturer-linked India models…</p>
-            <p>These are source-linked research models, not confirmed live deals or tested performance winners.</p>
+            <p id="mobileResearchNewCount">Loading recently added phones…</p>
+            <p>Open a phone to see its specifications and sources. Check current price and availability with the retailer.</p>
           </div>
           <span class="research-badge">Research only</span>
         </div>
-        <p><a class="btn btn-primary" href="/phones/new-india-mobiles/">11 new manufacturer-source phones</a>
-          <a class="btn btn-ghost" href="/phones/india-sales-coverage-2026/">8 more market research additions</a></p>
+        <p><a class="btn btn-primary" href="/phones/new-india-mobiles/">Explore recent phones</a>
+          <a class="btn btn-ghost" href="/phones/india-sales-coverage-2026/">See phones from India market reports</a></p>
         <div id="mobileResearchNewGrid" class="mobile-research-results" aria-live="polite"></div>
       </div>
     </section>
@@ -407,8 +407,8 @@
         <div class="section-heading">
           <div>
             <span class="section-kicker">Existing mobile inventory</span>
-            <h2 id="mobileResearchCatalogueTitle">Explore 232 Smartphone Entries + New India Models</h2>
-            <p><span id="mobileResearchCatalogueCount">Loading 232 smartphone entries…</span> from 235 research records and 10 frozen verified exact variants.</p>
+            <h2 id="mobileResearchCatalogueTitle">Explore the phone catalogue</h2>
+            <p id="mobileResearchCatalogueCount">Loading phone catalogue…</p>
           </div>
           <span class="research-badge catalogue-badge">Research browsing</span>
         </div>

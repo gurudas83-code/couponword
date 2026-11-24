@@ -36,9 +36,7 @@
   var inventoryByKey = new Map();
   var verifiedById = new Map();
   var inventoryCards = [];
-  var marketIntakeCount = 0;
   var inventoryLoadFailed = false;
-  var inventorySourceCounts = {};
   var verifiedRows = [];
   var CATALOGUE_INITIAL_LIMIT = 18;
   var INVENTORY_PAGE_SIZE = 18;
@@ -318,7 +316,7 @@
       '<p class="mobile-research-inventory-fields"><strong>Verified fields:</strong> ' + escapeHtml(fields) + '</p>' +
       '<details class="mobile-research-model-details"><summary>View specifications / details</summary>' + details + '</details>' +
       '<p class="mobile-research-inventory-reason">' + (card.market_intake ?
-       'New India market research intake, separate from the 232 original catalogue cards. Exact retailer identity, prices, stock and image rights are unverified.' :
+       'Recently added phone. Check the exact variant, current price and availability with the retailer.' :
        'Model card groups source-backed discovery records and frozen exact variants. It does not certify availability or purchase eligibility.') + '</p>' +
       '<div class="mobile-research-sources">' + sources + '</div>' + retailerResearchLinks(card) +
       '<p class="mobile-research-gate">Research only · no price · no stock · no purchase action</p>' +
@@ -337,9 +335,8 @@
     var matchingVariants = filtered.reduce(function (count, card) { return count + inventoryRowsForCard(card).length; }, 0);
     var isUnfiltered = !(inventoryQuery && inventoryQuery.value) && !(inventoryBrand && inventoryBrand.value) && !(inventoryRam && inventoryRam.value) && !(inventoryStorage && inventoryStorage.value) && !(inventoryStatus && inventoryStatus.value);
     if (inventoryCount) {
-      inventoryCount.textContent = isUnfiltered && inventorySourceCounts.visible_model_cards ?
-        inventorySourceCounts.visible_model_cards + " original catalogue models" + (marketIntakeCount ? " + " + marketIntakeCount + " new market research models" : "") + " · " + (inventorySourceCounts.deduplicated_discovery_records || inventoryRows.length) + " original research records · " + (inventorySourceCounts.frozen_verified_variants || verifiedRows.length) + " frozen exact variants" :
-        filtered.length + " catalogue entries · " + matchingVariants + " matching research/frozen variants";
+      inventoryCount.textContent = isUnfiltered ? inventoryCards.length + " phone research entries" :
+        filtered.length + " matching phone entries · " + matchingVariants + " documented variants";
     }
     var visible = inventoryExpanded ? filtered : filtered.slice(0, INVENTORY_PAGE_SIZE);
     inventoryGrid.innerHTML = visible.length ? visible.map(renderInventoryCard).join("") : "<p>No smartphone models match these filters.</p>";
@@ -397,7 +394,6 @@
       inventoryRows = Array.isArray(payload.records) ? payload.records : [];
       inventoryByKey = new Map(inventoryRows.map(function (row) { return [row.record_key, row]; }));
       inventoryCards = Array.isArray(payload.model_cards) ? payload.model_cards : [];
-      inventorySourceCounts = payload.source_counts || {};
       refreshInventoryControls();
       restoreShortlist();
       renderNewNoteworthy();
@@ -411,8 +407,6 @@
         inventoryRows = Array.isArray(payload.records) ? payload.records : [];
         inventoryByKey = new Map(inventoryRows.map(function (row) { return [row.record_key, row]; }));
         inventoryCards = Array.isArray(payload.model_cards) ? payload.model_cards : [];
-        inventorySourceCounts = payload.source_counts || {};
-        marketIntakeCount = 0;
         if (intake && intake.mode === "EIGHT_SOURCE_REVIEWED_MARKET_ADDITIONS_NO_LIVE_OFFERS" &&
             intake.core_model_count_unchanged === 232 &&
             Array.isArray(intake.model_cards) && intake.model_cards.length === 8 &&
@@ -426,7 +420,6 @@
           if (imported) {
             intake.records.forEach(function (row) { inventoryByKey.set(row.record_key, row); inventoryRows.push(row); });
             inventoryCards = inventoryCards.concat(intake.model_cards);
-            marketIntakeCount = intake.model_cards.length;
           }
         }
         // Strictly separate manufacturer-source discovery from canonical phones
@@ -455,14 +448,15 @@
           if (safeRecent) {
             recent.records.forEach(function (row) { inventoryByKey.set(row.record_key, row); inventoryRows.push(row); });
             inventoryCards = inventoryCards.concat(recent.model_cards);
-            marketIntakeCount += recent.model_cards.length;
           }
         }
         refreshInventoryControls();
         restoreShortlist();
         renderNewNoteworthy();
         handleResearchHash();
-        runInitialQueryOnce();      })
+        if (lastSearchQuery) searchResearch(lastSearchQuery);
+        else runInitialQueryOnce();
+      })
       .catch(function () {
         inventoryLoadFailed = true;
         if (researchSearchStatus) researchSearchStatus.textContent = "Saved smartphone research is temporarily unavailable. Use the Standard Buying Guide below.";
@@ -919,8 +913,7 @@
         '<a class="research-model-name-link" href="' + escapeHtml(card.detail_url) + '">' + escapeHtml(displayPhoneName(card)) + '</a>' :
         escapeHtml(displayPhoneName(card))) + '</h3>' + launch +
       (card.market_intake ? '<p class="mobile-research-gate">' +
-        (card.recent_source_intake ? 'Recently added manufacturer-sourced India model' : 'India sales/shipments research addition') +
-        ' · no verified current price, stock or exact retailer configuration.</p>' : '') +
+        'Check the exact variant, current price and availability with the retailer.</p>' : '') +
       '<p class="mobile-research-variant">' + (variants.length ? 'Matching documented variant' + (variants.length > 1 ? "s" : "") + ': ' + escapeHtml(variants.join("; ")) : 'No exact variant recorded for this fallback record') + '</p>' +
       (groupSize > 1 ? '<p class="research-group-note">' + groupSize + ' matching catalogue entries grouped. Specifications below belong to the displayed record.</p>' : '') +
       (specs ? '<ul class="mobile-research-model-specs">' + specs + '</ul>' : '<p>Technical specifications are pending verification.</p>') + documentedContext(card, lastSearchQuery) + independentTestContext(card) +
@@ -1419,7 +1412,7 @@
     });
     researchNewSection.hidden = recent.length === 0;
     var counter = document.getElementById("mobileResearchNewCount");
-    if (counter) counter.textContent = recent.length + " additional India research models, separate from the original 232";
+    if (counter) counter.textContent = recent.length + " recently added phones in the searchable catalogue";
     if (!recent.length) {
       researchNewGrid.innerHTML = "";
       return;

@@ -82,6 +82,10 @@ class PublicationPolicyTests(unittest.TestCase):
         home = (PUBLIC / "index.html").read_text(encoding="utf-8")
         data = json.loads((PUBLIC / "data/mobile_research_catalogue.json").read_text(encoding="utf-8"))
         cards = data["model_cards"]
+        for filename in ("india_sales_eight_research", "india_recent_manufacturer_research"):
+            intake = json.loads((PUBLIC / "data" / f"{filename}.json").read_text(encoding="utf-8"))
+            cards.extend(intake["model_cards"])
+        self.assertEqual(len({card["model_key"] for card in cards}), len(cards))
         guides = json.loads((Path(__file__).resolve().parent / "data/phone-guides.json").read_text(encoding="utf-8"))
         values = (
             ("Phone research entries", len(cards)),

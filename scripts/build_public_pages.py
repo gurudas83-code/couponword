@@ -192,7 +192,10 @@ def _render_verified_homepage_counts(destination: Path) -> None:
     catalogue = json.loads(
         (destination / "data/mobile_research_catalogue.json").read_text(encoding="utf-8")
     )
-    cards = catalogue["model_cards"]
+    cards = list(catalogue["model_cards"])
+    for filename in ("india_sales_eight_research", "india_recent_manufacturer_research"):
+        intake = json.loads((destination / "data" / f"{filename}.json").read_text(encoding="utf-8"))
+        cards.extend(intake["model_cards"])
     if len({card["model_key"] for card in cards}) != len(cards):
         raise RuntimeError("Duplicate public model identity in homepage metrics")
     counts = {
