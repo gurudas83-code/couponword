@@ -581,11 +581,11 @@
       var m = prefix || suffix || currency;
       if (m) { budget = value(m[1], m[2]); inclusive = /within|upto|up to|तक/.test(m[0]); text = text.replace(m[0], " "); }
     }
-    // Budget shortcuts show the immediately preceding five-thousand-rupee
-    // reference band. The explicit "full budget" option is the opt-in path
-    // for every documented cheaper candidate below the cap.
+    // An explicit exact-model lookup treats "under" as a cap. Discovery
+    // shortcuts retain their preceding band, as does an explicit nearby band.
     if (budget != null && lower == null) {
-      lower = !fullBudget ? Math.max(0, budget - 5000) : 0;
+      var exactModelCap = !nearbyBudget && /\bexact\s+model\b/i.test(text);
+      lower = fullBudget || exactModelCap ? 0 : Math.max(0, budget - 5000);
     }
     var ram = null, storage = null;
     text = text.replace(/\b(\d{1,2})\s*\/\s*(\d{2,4})\b/g, function (_, r, t) { ram = Number(r); storage = Number(t); return " "; });
