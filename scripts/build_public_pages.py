@@ -286,6 +286,8 @@ def _write_discovery_release_manifest(destination: Path) -> None:
 
 def _render_recent_phone_sources(destination: Path) -> None:
     """Expose reviewed India model links without generating retail offers."""
+    from python.india_recent_eight_import import APPROVED, detail_route
+
     data = json.loads((ROOT / "data/india_recent_phone_sources.json").read_text(encoding="utf-8"))
     checked = date.fromisoformat(data["checked_on"])
     if data["market"] != "India":
@@ -304,6 +306,10 @@ def _render_recent_phone_sources(destination: Path) -> None:
         if not name.strip() or name.casefold() in names:
             raise ValueError(f"missing or repeated phone name: {name}")
         names.add(name.casefold())
+        brand, model_id, _ = APPROVED[name]
+        route = detail_route(f"{brand}|{model_id}")
+        if not (destination / route.lstrip("/") / "index.html").is_file():
+            raise ValueError(f"Missing exact detail page for {name}: {route}")
         links = [source_link(model["source"], "Manufacturer page")]
         if model.get("store"):
             links.append(source_link(model["store"], "Official store listing"))
@@ -312,7 +318,7 @@ def _render_recent_phone_sources(destination: Path) -> None:
         facts = " · ".join(model.get("facts", []))
         cards.append(
             '<article class="mobile-research-result-card">'
-            f'<h3>{escape(name)}</h3><p>{escape(model["evidence"])}</p>'
+            f'<h3><a href="{escape(route)}">{escape(name)}</a></h3><p>{escape(model["evidence"])}</p>'
             + (f'<p>{escape(facts)}</p>' if facts else "")
             + f'<p>{" · ".join(links)}</p></article>'
         )
