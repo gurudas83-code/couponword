@@ -153,8 +153,7 @@ def run(root: Path):
                     }""")
                     assert 'error' not in gated, (width, gated)
                     assert all(row['excluded'] and row['excludedFromTop3'] for row in gated['result']), (width, gated)
-                    # Original 232-card registry remains distinct from eight
-                    # manufacturer-sourced sales-report additions.
+                    # Market additions are searchable alongside the core models.
                     page.wait_for_function(
                         "() => window.CouponWorldMobileResearch.search('OPPO A6x 5G').some("
                         "item => item.card.model_key === 'oppo|a6x 5g' && item.card.market_intake === true)",
@@ -162,7 +161,7 @@ def run(root: Path):
                     )
                     a6 = page.locator("#mobileResearchResults [data-mobile-model-card='oppo|a6x 5g']")
                     assert a6.count() == 1, width
-                    assert "India sales/shipments research addition" in a6.inner_text(), width
+                    assert "current price and availability with the retailer" in a6.inner_text(), width
                     assert a6.locator('a[aria-label="Search Amazon"]').count() == 1, width
                     assert a6.locator('a[aria-label="Search Flipkart"]').count() == 1, width
                     assert "Search Croma" in a6.inner_text(), width
@@ -174,10 +173,11 @@ def run(root: Path):
                     page.wait_for_function(
                         "() => !!document.querySelector('#mobileResearchNew') && "
                         "!document.querySelector('#mobileResearchNew').hidden && "
-                        "document.querySelector('#mobileResearchNewCount').textContent.includes('21 additional')",
+                        "document.querySelector('#mobileResearchNewCount').textContent.includes('21 recently added phones')",
                         timeout=20000,
                     )
                     assert page.locator("#mobileResearchNewGrid [data-mobile-model-card]").count() == 21, width
+                    assert page.locator(".hero-stats strong").all_text_contents() == ["253", "247", "20"], width
                     assert page.locator("#mobileResearchNewGrid a.research-model-name-link").count() == 21, width
                     more_phones = page.locator("#mobileResearchNewGrid details.recent-mobile-more")
                     more_phones.evaluate("details => { details.open = true; }")
