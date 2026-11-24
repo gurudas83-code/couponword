@@ -228,10 +228,9 @@ def audit(root):
     require(len(market_details) == 10, f"Market-signal model research page count {len(market_details)} != 10")
     if market_hub.is_file():
         hub = market_hub.read_text(encoding="utf-8")
-        require("NOT an official nationwide Top 10 ranking" in hub,
+        require("does not rank these ten models by units sold" in hub,
                 "National model-specific rankings falsely asserted")
-        require("6 were missing" in hub and "4 already included" in hub,
-                "Market audit missing 4-existing / 6-new reconciliation")
+        require("ten research entries" in hub, "Market coverage overview missing")
         require('href="/phones/india-market-demand-q3-2026/"' in (
             root / "index.html").read_text(encoding="utf-8"),
             "Market coverage has no internal homepage link")

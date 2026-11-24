@@ -146,6 +146,8 @@ jobs:
             matches="$(printf '%s\n' "$names" | grep -Fxc "$PAGES_ARTIFACT_NAME" || true)"
             if [ "$matches" -eq 1 ]; then
               echo "Pages artifact is visible on attempt ${attempt}."
+              # Pages metadata can lag behind the Actions artifact listing.
+              sleep 20
               exit 0
             fi
             if [ "$matches" -gt 1 ]; then
@@ -182,7 +184,8 @@ jobs:
 
               "/": (b'href="/phones/"', b'href="/accessories/"', b'href="/tvs/"', b'href="/phones/india-market-demand-q3-2026/"'),
               "/phones/": (b"Browse 50 curated India smartphone research pages", b"/phones/apple-iphone-17/", b"/phones/google-pixel-10/"),
-              "/phones/india-market-demand-q3-2026/": (b"6 were missing", b"NOT an official nationwide Top 10 ranking", b"Galaxy A07 5G"),
+              "/phones/india-market-demand-q3-2026/": (b"ten research entries", b"does not rank these ten models by units sold", b"Galaxy A07 5G"),
+              "/phones/india-sales-coverage-2026/": (b"8 phones from India market reports", b"All eight phones are searchable"),
               "/phones/india-market-demand-q3-2026/samsung-galaxy-a07-5g/": (b"Galaxy A07 5G", b"Manufacturer source", b"noindex,follow"),
               "/phones/samsung-galaxy-a56-5g/": (b"Manufacturer source", b"Unknowns and purchasing limitations"),
               "/phones/google-pixel-10/": (b"Google Pixel 10", b"Manufacturer source"),

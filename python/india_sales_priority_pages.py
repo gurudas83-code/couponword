@@ -115,7 +115,7 @@ def _hub(data):
     rows=data["models"]
     items=[]
     for row in rows:
-        state="Already in the 232-model catalogue" if row["repository_snapshot_status"]=="EXISTING_232_MODEL" else "New verified-source research intake"
+        state="Specifications from manufacturer"
         summary="".join('<div class="cr-fact"><dt>'+esc(f["label"])+
              '</dt><dd>'+esc(f["value"])+'</dd></div>' for f in row["specs"][:3])
         items.append('<article class="cr-card"><div class="cr-card-head"><span class="cr-tag">'+
@@ -129,16 +129,15 @@ def _hub(data):
             '" target="_blank" rel="noopener noreferrer">Maker source</a></div></article>')
     body=f'''<p class="cr-crumb"><a href="/">Home</a> / <a href="/phones/">Phones</a> / India market coverage</p>
 <section class="cr-hero"><p class="cr-eyebrow">2026 Q3 · India smartphone shipment signals</p>
-<h1>10 important models in India's 2026 sales reports</h1>
+<h1>Phones in India’s Q3 2026 shipment report</h1>
 <p>{esc(data["ranking_disclosure"])}</p>
-<p><strong>Repository audit:</strong> 4 already included in our existing 232-model research catalogue, 6 were missing and have now been recorded with official India manufacturer research as new intake candidates.</p>
-<p>This is NOT an official nationwide Top 10 ranking by phone units, not a shopping recommendation, and not evidence of live retailer stock or prices.</p>
+<p>These ten research entries cover phones or families mentioned as shipment drivers. The report does not rank these ten models by units sold.</p>
 <p>Primary source: <a href="{esc(data["sales_evidence_url"])}" target="_blank" rel="noopener noreferrer">Omdia, 19 October 2026</a>.</p></section>
 <section><h2>The ten model-level research references</h2>
 <p>Listed by manufacturer group, not sales position. Models cited as families/series are identified explicitly.</p>
 <div class="cr-grid">{''.join(items)}</div></section>
-<section class="cr-guidance"><h2>Why six are not yet certified recommendations</h2>
-<p>The existing approved phone ranking requires verified exact India variant identity, a documented performance formula and fresh authorized retailer offers. The newly researched models remain separate from the frozen original 232-card registry until those gates are met. No price is used as a performance scoring signal.</p>
+<section class="cr-guidance"><h2>How to use this research</h2>
+<p>Use the manufacturer links to compare specifications. Confirm the India variant, price and stock with the retailer before buying.</p>
 <p>See the existing <a href="/phones/">phone specification library</a> and <a href="/guides/phone-budget-guides/">budget research guides</a>.</p></section>'''
     return doc("India sales-report model coverage, Q3 2026",
         "Research-backed coverage check for ten smartphone model families named by Omdia for India Q3 2026 shipments; not a unit-ranked Top 10.",

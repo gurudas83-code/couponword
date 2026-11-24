@@ -597,8 +597,8 @@ def run(root: Path):
                     assert page.evaluate("document.documentElement.scrollWidth") <= width + 8, width
                     page.goto(url + "phones/india-market-demand-q3-2026/", wait_until="domcontentloaded", timeout=30000)
                     assert page.locator(".cr-grid .cr-card").count() == 10
-                    assert "NOT an official nationwide Top 10 ranking" in page.locator("main").inner_text()
-                    assert "6 were missing" in page.locator("main").inner_text()
+                    assert "does not rank these ten models by units sold" in page.locator("main").inner_text()
+                    assert "ten research entries" in page.locator("main").inner_text()
                     assert page.locator("a[href*='galaxy-a07-5g/']").count() >= 1
                     assert page.evaluate("document.documentElement.scrollWidth") <= width + 8, width
                     page.goto(url + "phones/india-market-demand-q3-2026/samsung-galaxy-a07-5g/", wait_until="domcontentloaded", timeout=30000)
