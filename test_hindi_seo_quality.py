@@ -136,6 +136,10 @@ class HindiSEOContracts(unittest.TestCase):
             self.assertNotIn("noindex",page)
             for href in Parsed(page).links:
                 url=urlsplit(href)
+                # An external retailer may legitimately use /hi/ in its own
+                # product path; only local/relative URLs are internal pages.
+                if url.netloc and url.netloc.casefold() not in {"coupon-world.in", "www.coupon-world.in"}:
+                    continue
                 if not url.path.startswith("/hi/"): continue
                 target=PUBLIC/unquote(url.path).lstrip("/")
                 self.assertTrue(target.is_file() or (target/"index.html").is_file(),
