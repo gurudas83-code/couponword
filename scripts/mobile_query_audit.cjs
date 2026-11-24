@@ -67,8 +67,9 @@ setImmediate(() => {
           Object.values(row.card.specifications || {}).some(v => v.source_url && v.source_url.startsWith("https://"))
         ).length;
       } else {
-        if (html.includes("research-unpriced-leads")) zeroWithUnpricedLeads++;
-        if (zero.length < 125) zero.push({id:item.id, split:item.split, query:item.query, tags:item.tags || []});
+        const unpricedLeads = (html.match(/class="research-budget-related-item"/g) || []).length;
+        if (unpricedLeads) zeroWithUnpricedLeads++;
+        zero.push({id:item.id, split:item.split, query:item.query, tags:item.tags || [], unpriced_leads:unpricedLeads});
       }
       for (const tag of item.tags || []) {
         (grouped[tag] ||= {queries:0, with_results:0}).queries++;
