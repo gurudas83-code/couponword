@@ -33,17 +33,19 @@ jobs:
                       "Authorization": "Token " + key,
                       "Accept": "application/json",
                       "Content-Type": "application/json",
+                      "User-Agent": "CouponWorld-Cuelinks/1.0",
                   }), timeout=20) as response:
                       return json.load(response).get("data")
               except HTTPError as error:
-                  raise SystemExit(f"Cuelinks {path.split('?')[0]} returned HTTP {error.code}")
+                  print(f"Cuelinks {path.split('?')[0]} returned HTTP {error.code} ({error.headers.get_content_type()})")
+                  return None
               except (URLError, TimeoutError, ValueError):
                   raise SystemExit(f"Cuelinks {path.split('?')[0]} request failed")
 
+          request("ping")
           offers = request("offers?q=Flipkart&per_page=5")
-          if not isinstance(offers, list):
-              raise SystemExit("Unexpected offers response")
-          print(f"Offers access verified. Flipkart search sample: {len(offers)}")
+          if isinstance(offers, list):
+              print(f"Offers access verified. Flipkart search sample: {len(offers)}")
 
           url = "https://www.flipkart.com/samsung-m36-5g-velvet-black-black-128-gb/p/itm1e7be51802033?pid=MOBHEYY2FCCGHYEM"
           link = request("links/convert", {"url": url, "subid": "couponworld_pilot"})
@@ -54,4 +56,6 @@ jobs:
           if tracking.scheme != "https" or link.get("original_url") != url:
               raise SystemExit("Conversion did not return a valid tracking URL for the requested product")
           print("Conversion returned an HTTPS tracking URL for the reviewed product")
+          if not isinstance(offers, list):
+              raise SystemExit("Offers access is unverified")
           PY
