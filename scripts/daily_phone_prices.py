@@ -322,7 +322,7 @@ def publish(output, snapshot_path=None):
     for filename in ("mobile_research_catalogue", "india_sales_eight_research", "india_recent_manufacturer_research"):
         feed = json.loads((output / "data" / f"{filename}.json").read_text())
         media.update({card["model_key"]: card for card in feed["model_cards"]})
-    body = []
+    groups = {"reported-top-five": [], "market-tracked": [], "india-product": []}
     in_stock_count = 0
     reference_count = 0
     for index, row in enumerate(rows, 1):
@@ -331,6 +331,10 @@ def publish(output, snapshot_path=None):
         dialog_id = f"phone-specs-{index}"
         name = card["model"] if card["model"].lower().startswith(card["brand"].lower() + " ") else f'{card["brand"]} {card["model"]}'
         evidence = row["evidence"]
+        group = (
+            "reported-top-five" if evidence == "Q2 India sell-through Top 5" else
+            "india-product" if evidence == "India product page" else "market-tracked"
+        )
         source_label = {
             "Q2 India sell-through Top 5": "Counterpoint · India top 5, Q2 2026",
             "Q3 model or portfolio mention": "Omdia · India shipments, Q3 2026",
@@ -366,19 +370,25 @@ def publish(output, snapshot_path=None):
             )
             for store in PLATFORMS
         )
-        body.append(
+        groups[group].append(
             '<article class="phone-watch-card">' + render_image(media.get(key, {}), output, name, dialog_id, key) +
             f'<div class="phone-watch-details">{badge}<h2><button type="button" data-phone-dialog="{dialog_id}" aria-haspopup="dialog">{esc(name)}</button></h2><p>{source}</p>'
             f'{model_details}<ul aria-label="{esc(name)} retailer options">{shop_links}</ul></div>' +
             render_spec_dialog(dialog_id, name, card, spec_reviews.get(key, {})) + '</article>'
         )
-    check_count = len(body) - in_stock_count - reference_count
+    total = sum(map(len, groups.values()))
+    check_count = total - in_stock_count - reference_count
+    group_titles = {
+        "reported-top-five": ("Start here · India sales Top 5", "These models appeared in Counterpoint’s India sell-through Top 5 for Q2 2026."),
+        "market-tracked": ("Also tracked in India market reports", "These models or their portfolios appear in Counterpoint tracking or Omdia shipment coverage."),
+        "india-product": ("More phones with official India listings", "These phones have a manufacturer India product page to support checking the model and its specifications."),
+    }
     updated_at = esc(now.strftime("%d %b %Y, %H:%M IST"))
     page = (
         '<h1>India Top 30 Phones · Price Watch</h1>'
         '<p>Compare prices for 30 phones in India and check offers on Amazon, Flipkart and Croma. '
         'Coupon World selects these models using India market reports and manufacturer product pages.</p>'
-        f'<p><strong>All {len(body)} phones are listed below.</strong> At the {updated_at} page update, '
+        f'<p><strong>All {total} phones are listed below.</strong> At the {updated_at} page update, '
         f'{in_stock_count} had a retailer price with stock confirmed within the previous 36 hours for Delhi PIN 110001. '
         f'{reference_count} had a store price reference with stock to be confirmed, and {check_count} had '
         'retailer links to check the price.</p>'
@@ -386,11 +396,26 @@ def publish(output, snapshot_path=None):
         'availability and total price at checkout.</p>'
     )
     page += f'<p><a href="{UPCOMING_ROUTE}">Upcoming phones and India launch checks</a></p>'
-    page += '<div class="phone-watch-grid">' + "".join(body) + "</div>"
+    page += (
+        '<aside class="phone-watch-selection" aria-label="Why these 30 phones">'
+        '<h2>Why these 30?</h2>'
+        '<p>Start with phones named in an India sales Top 5. The rest have market-report coverage or an official India product listing. '
+        'The groups reflect the evidence for inclusion. Each card links to its source.</p>'
+        '<nav aria-label="Jump to phone groups">' +
+        " ".join(f'<a href="#{key}">{esc(title.split(" · ")[-1])} ({len(groups[key])})</a>'
+                 for key, (title, _) in group_titles.items()) + '</nav></aside>'
+    )
+    for key, (title, description) in group_titles.items():
+        page += (
+            f'<section id="{key}" class="phone-watch-priority" aria-labelledby="{key}-title">'
+            f'<h2 id="{key}-title">{esc(title)} <small>({len(groups[key])})</small></h2>'
+            f'<p>{esc(description)}</p><div class="phone-watch-grid">'
+            + "".join(groups[key]) + '</div></section>'
+        )
     target = output / ROUTE.lstrip("/")
     target.parent.mkdir(parents=True, exist_ok=True)
     html = doc("India Top 30 Phones · Price Watch", "Dated Amazon, Flipkart and Croma price observations for selected India phones.", ROUTE, page, {"@context": "https://schema.org", "@type": "WebPage"})
-    target.write_text(html.replace("</head>", '<link rel="stylesheet" href="/assets/phone-watch-grid.css?v=spec-dialog-v1"><script defer src="/assets/phone-watch-dialog.js"></script>\n</head>'), encoding="utf-8")
+    target.write_text(html.replace("</head>", '<link rel="stylesheet" href="/assets/phone-watch-grid.css?v=source-priority-v1"><script defer src="/assets/phone-watch-dialog.js"></script>\n</head>'), encoding="utf-8")
     target = output / SNAPSHOT_PATH
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(data, ensure_ascii=False) + "\n", encoding="utf-8")
