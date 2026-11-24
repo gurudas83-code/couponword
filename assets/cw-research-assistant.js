@@ -205,6 +205,8 @@
     var condition=request.budget!==null?"₹"+request.budget.toLocaleString("en-IN")+" तक के dated-reference price band":"आपकी खोज";
     var groups=classifyPhoneMatches(request,matches);
     if(!matches.length) {
+      var guidance=document.querySelector("#mobileResearchResults .research-budget-answer > p");
+      var nextStep=guidance&&String(guidance.textContent||"").trim();
       // The strict ranking remains empty, but the research view can show
       // identity-only cards without claiming budget/variant eligibility.
       var identityNames=Array.from(document.querySelectorAll(
@@ -216,9 +218,9 @@
       var names=Array.from(new Set(researchNames.concat(identityNames))).slice(0,3);
       if(names.length) return {paragraphs:[
         condition+" में पूरी तरह प्रमाणित budget match नहीं मिला, लेकिन हमारे मोबाइल data bank में संबंधित research records हैं: "+names.join(", ")+".",
-        "ये केवल संबंधित मॉडल हैं। इनका माँगा गया budget, exact RAM/storage, 5G और अन्य जरूरी features अभी सत्यापित नहीं हैं। कोई काल्पनिक कीमत, stock या Top 3 नहीं दिया गया है।"
+        nextStep||"इन मॉडलों की कीमत और उपलब्धता रिटेलर पर जाँचें।"
       ],links:[{label:"मॉडल के स्रोत और बाकी जाँच देखें",url:"#mobileResearchSearch"}]};
-      return {paragraphs:[condition+" के लिए मौजूदा मोबाइल रिसर्च में पुष्ट मिलान नहीं मिला। कोई मनगढ़ंत Top-3 या current price नहीं दिखाऊँगा।","फ़िल्टर बदलें या मौजूदा मोबाइल खोज के विस्तृत परिणाम देखें।"],links:[{label:"मोबाइल रिसर्च",url:"#mobileResearchSearch"}]};
+      return {paragraphs:[condition+" के लिए मौजूदा मोबाइल रिसर्च में पुष्ट मिलान नहीं मिला।",nextStep||"फ़िल्टर बदलें या मौजूदा मोबाइल खोज के विस्तृत परिणाम देखें।"],links:[{label:"खोज का जवाब और अगले कदम देखें",url:"#mobileResearchResults"}]};
     }
     var status=document.getElementById("mobileResearchSearchStatus");
     var fallback=!!(status&&/no exact catalogue match/i.test(status.textContent));
@@ -272,14 +274,15 @@
         if(!research||typeof research.search!=="function") {
           respond(["मोबाइल सर्च अभी उपलब्ध नहीं है; कृपया नीचे मौजूदा मोबाइल रिसर्च देखें।"],[{label:"मोबाइल खोज",url:"#mobileResearchSearch"}]);
         } else {
-          var matches=research.search(request.query);
+          var searchQuery=typeof research.assistantQuery==="function" ? research.assistantQuery(request) : request.query;
+          var matches=research.search(searchQuery);
           var status=document.getElementById("mobileResearchSearchStatus");
           // Core catalogue fetch starts on page load; do not make a duplicate fetch.
           if(!matches.length&&status&&/loading|लोड|research unavailable/i.test(status.textContent)) {
             var retries=0;
             while(retries<24&&local===turn) {
               await new Promise(function(resolve){setTimeout(resolve,150);});
-              matches=research.search(request.query);
+              matches=research.search(searchQuery);
               if(matches.length||!/loading|लोड/i.test(status.textContent))break;
               retries++;
             }

@@ -40,6 +40,8 @@ const context = vm.createContext({
     ? catalogue : url.includes("mobile_research_preview") ? preview : []})
 });
 vm.runInContext(fs.readFileSync(path.join(root, "mobile-research-preview.js"), "utf8"), context);
+vm.runInContext(fs.readFileSync(path.join(root, "assets/cw-query-parser.js"), "utf8"), context);
+const assistantMode = process.argv.includes("--assistant");
 
 setImmediate(() => {
   const app = window.CouponWorldMobileResearch;
@@ -49,7 +51,9 @@ setImmediate(() => {
   for (const item of tests) {
     let rows;
     try {
-      rows = app.search(item.query);
+      const request = assistantMode ? window.CouponWorldQueryParser.modulate(item.query) : null;
+      if (request) assert.equal(request.category, "phones");
+      rows = app.search(request ? app.assistantQuery(request) : item.query);
       if (!Array.isArray(rows)) throw new Error("Query did not return an array");
       for (const row of rows) {
         if (!row || !row.card || !row.card.model_key) throw new Error("Noncanonical match");

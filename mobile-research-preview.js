@@ -1614,6 +1614,11 @@
   });
   window.addEventListener("hashchange", handleResearchHash);
   window.CouponWorldMobileResearch = {
+    assistantQuery: function (request) {
+      // Preserve explicit budgets, exclusions and model words when the
+      // research engine already understands the original question.
+      return researchConstraints(request.raw).budget != null ? request.raw : request.query;
+    },
     isResearchQuery: function (value) {
       return researchConstraints(value).budget != null || /(?:phone|mobile|smartphone|galaxy|samsung|iphone|pixel|redmi|oneplus|nothing|realme|vivo|oppo|xiaomi|motorola|poco|iqoo|lava|tecno|infinix|camera|battery|gaming|display|software|build|reliability|durability|android|ram|storage|फोन|मोबाइल|कैमरा|बैटरी|गेमिंग|सैमसंग|अच्छा)/i.test(String(value || ""));
     },
