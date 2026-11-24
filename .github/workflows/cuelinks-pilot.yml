@@ -1,0 +1,57 @@
+name: Coupon World Cuelinks pilot
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/cuelinks-pilot.yml]
+permissions: {}
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Check offers access and convert one reviewed Flipkart URL
+        env:
+          CUELINKS_API_KEY: ${{ secrets.CUELINKS_API_KEY }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import urlsplit
+          from urllib.request import Request, urlopen
+
+          key = os.environ.get("CUELINKS_API_KEY")
+          if not key:
+              raise SystemExit("CUELINKS_API_KEY is missing")
+
+          def request(path, payload=None):
+              body = json.dumps(payload).encode() if payload else None
+              url = "https://developers.cuelinks.com/pub_api/v3/" + path
+              try:
+                  with urlopen(Request(url, data=body, headers={
+                      "Authorization": "Token " + key,
+                      "Accept": "application/json",
+                      "Content-Type": "application/json",
+                  }), timeout=20) as response:
+                      return json.load(response).get("data")
+              except HTTPError as error:
+                  raise SystemExit(f"Cuelinks {path.split('?')[0]} returned HTTP {error.code}")
+              except (URLError, TimeoutError, ValueError):
+                  raise SystemExit(f"Cuelinks {path.split('?')[0]} request failed")
+
+          offers = request("offers?q=Flipkart&per_page=5")
+          if not isinstance(offers, list):
+              raise SystemExit("Unexpected offers response")
+          print(f"Offers access verified. Flipkart search sample: {len(offers)}")
+
+          url = "https://www.flipkart.com/samsung-m36-5g-velvet-black-black-128-gb/p/itm1e7be51802033?pid=MOBHEYY2FCCGHYEM"
+          link = request("links/convert", {"url": url, "subid": "couponworld_pilot"})
+          if not isinstance(link, dict):
+              raise SystemExit("Unexpected conversion response")
+          tracking = urlsplit(link.get("tracking_url") or "")
+          print(f"Affiliate eligibility: {link.get('affiliated') is True}")
+          if tracking.scheme != "https" or link.get("original_url") != url:
+              raise SystemExit("Conversion did not return a valid tracking URL for the requested product")
+          print("Conversion returned an HTTPS tracking URL for the reviewed product")
+          PY
