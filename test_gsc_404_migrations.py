@@ -67,7 +67,9 @@ class GSC404MigrationTests(unittest.TestCase):
             GSC_RETIRED_NONTECH_404_ROUTES))
 
     def test_sitemap_and_technical_product_count_do_not_expand(self):
-        self.assertEqual(len(self.public_urls), 199)
+        # Two intentionally indexable research entry points (price watch and
+        # upcoming India phones) are now included in the generated sitemap.
+        self.assertEqual(len(self.public_urls), 201)
         self.assertEqual(
             len(list((PUBLIC / "products").glob("*/index.html"))),
             65 + len(GSC_MOVED_TECH_PRODUCT_ROUTES),
