@@ -350,7 +350,9 @@ def _render_recent_phone_sources(destination: Path) -> None:
     placeholder = "<!-- REVIEWED_INDIA_PHONE_SOURCES -->"
     if html.count(placeholder) != 1:
         raise RuntimeError("missing or repeated recent phone source section")
-    home.write_text(html.replace(placeholder, section), encoding="utf-8")
+    from scripts.cuelinks_phone_deals import render_phone_deals
+    home.write_text(html.replace(placeholder, section).replace(
+        "<!-- CUELINKS_PHONE_DEALS -->", render_phone_deals()), encoding="utf-8")
 
 
 

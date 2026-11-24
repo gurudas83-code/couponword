@@ -54,6 +54,8 @@ jobs:
           python scripts/daily_phone_prices.py --output "$RUNNER_TEMP/india-daily-prices.json" "${args[@]}"
           echo "CW_DAILY_PRICE_SNAPSHOT=$RUNNER_TEMP/india-daily-prices.json" >> "$GITHUB_ENV"
       - name: Build allow-listed public artifact
+        env:
+          CUELINKS_API_KEY: ${{ secrets.CUELINKS_API_KEY }}
         run: python scripts/build_public_pages.py --output public
       - name: Verify curated consumer-tech catalogue and legacy-page retirement
         run: python -m unittest -q test_technical_niche_publication test_seo_index_hygiene
