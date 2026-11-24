@@ -80,7 +80,15 @@
     .cw-assistant[open] > summary { margin-bottom: 8px; }
     .cw-assistant > summary:focus-visible,
     .hero-watch-shortcut:focus-visible { outline: 2px solid #376db7; outline-offset: 3px; }
-    .hero-watch-shortcut { display: none; }
+    .hero-watch-shortcut {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      margin-top: 8px;
+      color: #264e3e;
+      font-weight: 700;
+    }
     @media (max-width: 640px) {
       .hero-watch-shortcut {
         display: flex;
@@ -173,7 +181,7 @@
             <button type="button" data-mobile-query="mobile under 30000" title="₹25,000 to below ₹30,000 (dated price references)" aria-label="Phones ₹25,000 to below ₹30,000">₹25k–&lt;₹30k</button>
 
           </div>
-          <a class="hero-watch-shortcut" href="/seo/india-30-phone-price-watch.html">India Top 30 Phones <span aria-hidden="true">↗</span></a>
+          <a class="hero-watch-shortcut" href="/seo/india-30-phone-price-watch.html">India Top 30 Phones · Price Watch <span aria-hidden="true">↗</span></a>
 
           <details class="cw-assistant" id="cwAssistant" aria-label="Ask Coupon World about products">
             <summary>Ask Coupon World · सवाल पूछें</summary>
