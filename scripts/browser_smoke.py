@@ -621,17 +621,15 @@ def run(root: Path):
                         response=page.goto(url+removed, wait_until="domcontentloaded")
                         assert response.status == 404, removed
                     page.goto(url, wait_until="domcontentloaded")
-                    watch_link = page.locator(".phone-editorial .india-watch-feature")
+                    recent_links = page.locator("#indiaPhoneSources article h3 a[href^='/phones/new-india-mobiles/']")
+                    assert recent_links.count() == 13, width
+                    assert len(set(recent_links.evaluate_all("links => links.map(link => link.href)"))) == 13
+                    watch_link = page.locator("#indiaPhoneSources a[href='/seo/india-30-phone-price-watch.html']")
                     assert watch_link.is_visible(), width
-                    hero_phone = page.locator(".hero-phone-preview")
+                    hero_phone = page.locator(".hero-copy h1 img[src$='phone-in-magnifier.webp']")
                     assert hero_phone.is_visible(), width
                     hero_phone.evaluate("img => img.decode()")
-                    assert hero_phone.evaluate("img => getComputedStyle(img).animationName") == "hero-phone-preview-turn", width
-                    page.emulate_media(reduced_motion="reduce")
-                    assert hero_phone.evaluate("img => getComputedStyle(img).animationName") == "none", width
-                    page.emulate_media(reduced_motion="no-preference")
-                    if width == 1440:
-                        assert watch_link.bounding_box()["x"] > page.locator(".hero-copy").bounding_box()["x"], width
+                    assert hero_phone.bounding_box()["width"] <= 64, width
                     watch_link.click()
                     page.wait_for_url("**/seo/india-30-phone-price-watch.html")
                     cards = page.locator(".phone-watch-card")
