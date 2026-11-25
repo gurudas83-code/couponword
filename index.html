@@ -273,7 +273,9 @@
           </div>
           <span class="research-badge">Research only</span>
         </div>
-        <aside class="always-guide" aria-label="Smartphone buying help"><div><strong>Not sure where to start?</strong><p>Our standard guide covers camera, battery, memory and software. Available while offers or research are loading.</p></div><a class="btn btn-ghost" href="/guides/smartphone-buying-guide/">Standard Buying Guide ↗</a></aside>
+        <div class="research-search-workspace">
+          <div class="research-search-controls">
+            <aside class="always-guide" aria-label="Smartphone buying help"><div><strong>Not sure where to start?</strong><p>Our standard guide covers camera, battery, memory and software. Available while offers or research are loading.</p></div><a class="btn btn-ghost" href="/guides/smartphone-buying-guide/">Standard Buying Guide ↗</a></aside>
         <details class="research-secondary-search"><summary>Edit search text</summary><div class="mobile-research-search-row" role="search">
           <label class="sr-only" for="mobileResearchQuery">Search smartphone research</label>
           <input id="mobileResearchQuery" type="search" placeholder="Try camera phone under 20000 or Galaxy A36 8GB 256GB" autocomplete="off" />
@@ -295,11 +297,15 @@
           <button type="button" data-mobile-research-query="software support phone">Software support</button>
         </div>
         <p class="research-help">Try a model and exact memory variant, or “5000mah battery phone under 30000”. The first group uses dated budget evidence; the second group may cost more because its price is unverified. Budget searches default to the previous ₹5,000 range of dated reference prices; use "full budget" only to include cheaper prices. Compare up to 3 documented models; ordering reflects research evidence, not measured performance.</p>
-        <div id="mobileResearchCompare" hidden aria-live="polite" tabindex="-1"></div>
-        <p id="mobileResearchSearchStatus" class="mobile-research-search-status" aria-live="polite"></p>
-        <div id="mobileResearchResults" class="mobile-research-results" aria-live="polite" hidden></div>
-        <button id="mobileResearchResultsMore" class="btn btn-ghost" type="button" hidden>Load more research results</button>
-        <a id="mobileResearchBrowse" class="small-action" href="#mobileResearchCatalogue">Browse all research models →</a>
+          </div>
+          <div class="research-search-output">
+            <div id="mobileResearchCompare" hidden aria-live="polite" tabindex="-1"></div>
+            <p id="mobileResearchSearchStatus" class="mobile-research-search-status" aria-live="polite"></p>
+            <div id="mobileResearchResults" class="mobile-research-results" aria-live="polite" hidden></div>
+            <button id="mobileResearchResultsMore" class="btn btn-ghost" type="button" hidden>Load more research results</button>
+            <a id="mobileResearchBrowse" class="small-action" href="#mobileResearchCatalogue">Browse all research models →</a>
+          </div>
+        </div>
       </div>
     </section>
 
