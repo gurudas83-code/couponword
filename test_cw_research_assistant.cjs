@@ -62,7 +62,7 @@ const html=fs.readFileSync(path.join(root,"index.html"),"utf8");
 assert.match(html,/id="cwAssistantForm"/);
 assert.match(html,/assets\/cw-query-parser\.js/);
 assert.match(html,/assets\/cw-research-assistant\.js/);
-const prior=html.match(/data-mobile-query="/g)||[];
+const prior=html.match(/data-mobile-query="mobile under \d+"/g)||[];
 assert.equal(prior.length,5,"Keep the existing five budget buttons unchanged");
 assert.match(html,/mobile-research-preview\.js\?v=[a-z0-9-]+/,"Preserve versioned progressive search entry point");
 const published=path.join(root,"public/data/assistant_category_research.json");
