@@ -718,6 +718,17 @@ def build(output: Path) -> Path:
     # Source-only additions: public research search, never commercial catalogue.
     from python.india_recent_eight_import import publish_recent
     publish_recent(output)
+    # Apply existing reviewed media permissions independently of SKU/price eligibility.
+    from python.mobile_research_catalogue import _load_model_photos
+    for filename in ("india_sales_eight_research", "india_recent_manufacturer_research"):
+        target = output / "data" / (filename + ".json")
+        feed = json.loads(target.read_text(encoding="utf-8"))
+        photos = _load_model_photos(ROOT, feed["model_cards"], intake=True)
+        for card in feed["model_cards"]:
+            if card["model_key"] in photos:
+                card["reviewed_model_photo"] = photos[card["model_key"]]
+                card["photo_rights_status"] = "CLEARED_LICENSED_MODEL_PHOTOGRAPH"
+        target.write_text(json.dumps(feed, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     _render_verified_homepage_counts(output)
     _render_recent_phone_sources(output)
 
@@ -811,6 +822,16 @@ def build(output: Path) -> Path:
             leaked.append(str(path.relative_to(output)))
     if leaked:
         raise RuntimeError("forbidden files entered public artifact: " + ", ".join(leaked))
+    # One lightweight shared stylesheet keeps the generated guides, model pages,
+    # TV/audio research and price watch aligned with the homepage branding.
+    for page in output.rglob("*.html"):
+        if page == output / "index.html":
+            continue
+        markup = page.read_text(encoding="utf-8")
+        if "</head>" in markup and re.search(r"<body\b", markup):
+            markup = markup.replace("</head>", '<link rel="stylesheet" href="/assets/cw-site-theme.css?v=20261125"></head>', 1)
+            markup = re.sub(r"<body\b", '<body data-cw-theme="navy-mint"', markup, count=1)
+            page.write_text(markup, encoding="utf-8")
     _validate_public_content(output)
     return output
 

@@ -1,0 +1,16 @@
+/* Shared navy/mint treatment for generated buying guides and research pages. */
+body[data-cw-theme]{background:#f4f7fb;color:#172d46;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.65}
+body[data-cw-theme] h1,body[data-cw-theme] h2,body[data-cw-theme] h3{color:#142d49;letter-spacing:-.025em}
+body[data-cw-theme] a{color:#0b736c;text-underline-offset:3px}
+body[data-cw-theme] header,body[data-cw-theme] .cr-header{background:#fff;border-color:#d8e3ee}
+body[data-cw-theme] header a,body[data-cw-theme] .cr-logo{color:#17344e}
+body[data-cw-theme] .cr-hero{background:linear-gradient(115deg,#e2f6f1,#edf3fb);border-color:#cfdfeb;border-radius:22px}
+body[data-cw-theme] .guide-card,body[data-cw-theme] .mobile-fact-card,body[data-cw-theme] .cr-card,body[data-cw-theme] .phone-watch-card{background:#fff;border-color:#d8e3ee;box-shadow:0 5px 22px #17314c06}
+body[data-cw-theme] .guide-card:hover,body[data-cw-theme] .mobile-fact-card:hover,body[data-cw-theme] .phone-watch-card:target{border-color:#71b7ad;box-shadow:0 8px 26px #17314c12}
+body[data-cw-theme] .phone-watch-card:target{outline:3px solid #0b736c;outline-offset:4px;scroll-margin-top:100px}
+body[data-cw-theme] .note,body[data-cw-theme] .quick-answer,body[data-cw-theme] .phone-watch-selection{background:#e8f4f3;color:#234e57;border-color:#c8dfdf}
+body[data-cw-theme] .button,body[data-cw-theme] .budget-lane-cta{background:#0b736c;color:#fff}
+body[data-cw-theme] .button:hover{background:#085951;color:#fff}
+body[data-cw-theme] footer{background:#10253e;color:#d3e1ef;border-color:#203d59}
+body[data-cw-theme] footer p,body[data-cw-theme] footer a{color:#d3e1ef}
+body[data-cw-theme] :is(a,button,input,select,summary):focus-visible{outline:3px solid #158d82;outline-offset:4px}

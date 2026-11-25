@@ -153,6 +153,167 @@
           "source_url": "https://buy.realme.com/in/goods/810"
         }
       ]
+    },
+    {
+      "model_key": "samsung|galaxy f05",
+      "manufacturer": "Samsung",
+      "india_model_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/",
+      "india_model_code": null,
+      "reviewed_on": "2026-11-25",
+      "variants": [
+        {
+          "ram_gb": 4,
+          "storage_gb": 64,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f05-blue-64gb-sm-e055fdbdins/"
+        }
+      ]
+    },
+    {
+      "model_key": "samsung|galaxy a06 5g",
+      "manufacturer": "Samsung",
+      "india_model_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a06-5g-kaam-ka-5g-with-superfast-connectivity-powerful-performance-at-an-affordable-price",
+      "india_model_code": null,
+      "reviewed_on": "2026-11-25",
+      "variants": [
+        {
+          "ram_gb": 4,
+          "storage_gb": 64,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a06-5g-kaam-ka-5g-with-superfast-connectivity-powerful-performance-at-an-affordable-price"
+        },
+        {
+          "ram_gb": 4,
+          "storage_gb": 128,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a06-5g-kaam-ka-5g-with-superfast-connectivity-powerful-performance-at-an-affordable-price"
+        },
+        {
+          "ram_gb": 6,
+          "storage_gb": 128,
+          "source_url": "https://news.samsung.com/in/samsung-india-launches-galaxy-a06-5g-kaam-ka-5g-with-superfast-connectivity-powerful-performance-at-an-affordable-price"
+        }
+      ]
+    },
+    {
+      "model_key": "samsung|galaxy f06 5g bahama",
+      "manufacturer": "Samsung",
+      "india_model_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-bahama-blue-64gb-sm-e066bzbdins/",
+      "india_model_code": null,
+      "reviewed_on": "2026-11-25",
+      "variants": [
+        {
+          "ram_gb": 4,
+          "storage_gb": 64,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f06-bahama-blue-64gb-sm-e066bzbdins/"
+        }
+      ]
+    },
+    {
+      "model_key": "samsung|galaxy f16 5g",
+      "manufacturer": "Samsung",
+      "india_model_url": "https://news.samsung.com/in/samsung-launches-galaxy-f16-5g-with-segment-leading-features-in-india",
+      "india_model_code": null,
+      "reviewed_on": "2026-11-25",
+      "variants": [
+        {
+          "ram_gb": 4,
+          "storage_gb": 128,
+          "source_url": "https://news.samsung.com/in/samsung-launches-galaxy-f16-5g-with-segment-leading-features-in-india"
+        },
+        {
+          "ram_gb": 6,
+          "storage_gb": 128,
+          "source_url": "https://news.samsung.com/in/samsung-launches-galaxy-f16-5g-with-segment-leading-features-in-india"
+        },
+        {
+          "ram_gb": 8,
+          "storage_gb": 128,
+          "source_url": "https://news.samsung.com/in/samsung-launches-galaxy-f16-5g-with-segment-leading-features-in-india"
+        }
+      ]
+    },
+    {
+      "model_key": "oppo|a5 5g",
+      "manufacturer": "OPPO",
+      "india_model_url": "https://www.oppo.com/in/smartphones/series-a/a5-5g/specs/",
+      "india_model_code": null,
+      "reviewed_on": "2026-11-25",
+      "variants": [
+        {
+          "ram_gb": 6,
+          "storage_gb": 128,
+          "source_url": "https://www.oppo.com/in/smartphones/series-a/a5-5g/specs/"
+        },
+        {
+          "ram_gb": 8,
+          "storage_gb": 128,
+          "source_url": "https://www.oppo.com/in/smartphones/series-a/a5-5g/specs/"
+        }
+      ]
+    },
+    {
+      "model_key": "cmf|phone 1",
+      "manufacturer": "CMF",
+      "india_model_url": "https://in.nothing.tech/products/cmf-phone-1",
+      "india_model_code": null,
+      "reviewed_on": "2026-11-25",
+      "variants": [
+        {
+          "ram_gb": 8,
+          "storage_gb": 128,
+          "source_url": "https://in.nothing.tech/products/cmf-phone-1"
+        }
+      ]
+    },
+    {
+      "model_key": "oppo|k13 turbo",
+      "manufacturer": "OPPO",
+      "india_model_url": "https://www.oppo.com/in/smartphones/series-k/k13-turbo/specs/",
+      "india_model_code": null,
+      "reviewed_on": "2026-11-25",
+      "variants": [
+        {
+          "ram_gb": 8,
+          "storage_gb": 128,
+          "source_url": "https://www.oppo.com/in/smartphones/series-k/k13-turbo/specs/"
+        },
+        {
+          "ram_gb": 8,
+          "storage_gb": 256,
+          "source_url": "https://www.oppo.com/in/smartphones/series-k/k13-turbo/specs/"
+        }
+      ]
+    },
+    {
+      "model_key": "redmi|redmi note 15 5g",
+      "manufacturer": "Redmi",
+      "india_model_url": "https://www.mi.com/in/product/redmi-note-15-5g/specs/",
+      "india_model_code": null,
+      "reviewed_on": "2026-11-25",
+      "variants": [
+        {
+          "ram_gb": 8,
+          "storage_gb": 128,
+          "source_url": "https://www.mi.com/in/product/redmi-note-15-5g/specs/"
+        },
+        {
+          "ram_gb": 8,
+          "storage_gb": 256,
+          "source_url": "https://www.mi.com/in/product/redmi-note-15-5g/specs/"
+        }
+      ]
+    },
+    {
+      "model_key": "samsung|galaxy f70 pro 5g",
+      "manufacturer": "Samsung",
+      "india_model_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/",
+      "india_model_code": null,
+      "reviewed_on": "2026-11-25",
+      "variants": [
+        {
+          "ram_gb": 6,
+          "storage_gb": 128,
+          "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/"
+        }
+      ]
     }
   ]
 }

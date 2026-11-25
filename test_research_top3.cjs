@@ -101,6 +101,17 @@ assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', ro
     assert.match(budgetHtml, /Price-unknown phones appear separately below/,
       "Price unknown research must stay in a separate lane");
   }
+  // Manufacturer India evidence is linked without manufacturing extra winners.
+  for (const cap of [15000, 20000, 25000, 30000]) {
+    research.submit("top 3 phones under " + cap);
+    assert.equal((element("mobileResearchResults").innerHTML.match(/class="research-top3-result"/g) || []).length, 3,
+      cap + " should now have three independently documented India variants");
+  }
+  research.submit("top 3 phones under 30000");
+  assert.match(element("mobileResearchResults").innerHTML, /data-mobile-model-card="vivo\|t5x 5g"/,
+    "Display deduplication must keep the verified India record over its weaker spelling alias");
+  assert.match(element("mobileResearchResults").innerHTML, /data-research-compare-picks/);
+
   research.submit("top 3 phones under 10000");
   const lowerBudget = element("mobileResearchResults").innerHTML;
   assert.match(lowerBudget, /Research-Verified (?:Top 3|picks)/);
@@ -132,3 +143,22 @@ assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', ro
   assert.match(normal, /not a verified Top-3 recommendation/);
   console.log("PASS: local Research-Verified Top 3, source gate, budget warning, retailer searches, no paid calls, model 3 identity, normal research unaffected");
 })().catch(error => {console.error(error); process.exitCode = 1;});
+
+// A tab left open overnight must not keep presenting an expired quote as recent.
+{
+  const now = Date.now();
+  function tile(date) {
+    const slots = {'[data-watch-amount]': {textContent: '₹12,499'}, '[data-watch-status]': {textContent: 'Retailer stock observed'}};
+    return {getAttribute() {return date;}, querySelector(s) {return slots[s];}, classList: {add() {}}, slots};
+  }
+  const fresh = tile(new Date(now - 3600000).toISOString());
+  const stale = tile(new Date(now - 37 * 3600000).toISOString());
+  const future = tile(new Date(now + 60000).toISOString());
+  vm.runInNewContext(fs.readFileSync('assets/cw-shopping-experience.js', 'utf8'), {
+    document: {querySelectorAll() {return [fresh, stale, future];}, addEventListener() {}},
+    window: {setInterval() {}}, Date, Number,
+  });
+  assert.equal(fresh.slots['[data-watch-amount]'].textContent, '₹12,499');
+  assert.equal(stale.slots['[data-watch-amount]'].textContent, 'Check current price');
+  assert.equal(future.slots['[data-watch-amount]'].textContent, 'Check current price');
+}

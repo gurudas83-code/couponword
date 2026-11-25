@@ -119,6 +119,17 @@ def run(root: Path):
                             'local_js_ms':round(top3['elapsed'],1)
                         }), flush=True)
 
+                    # Select the complete, India-sourced shortlist in one action.
+                    page.evaluate("window.CouponWorldMobileResearch.search('top 3 mobile under 30000')")
+                    assert page.locator(".research-top3-result").count() == 3, width
+                    page.locator("[data-research-compare-picks]").click()
+                    assert "3/3" in page.locator("#mobileResearchCompare").inner_text(), width
+                    page.locator("[data-compare-differences]").check()
+                    assert page.locator("#mobileResearchCompare tr[hidden]").count() >= 1, width
+                    page.locator("[data-compare-differences]").uncheck()
+                    assert page.locator("#mobileResearchCompare tr[hidden]").count() == 0, width
+                    page.locator("[data-research-compare-clear]").click()
+
                     # Corrupted saved evidence must not qualify in Top 3 or
                     # ordinary budget filters; restore the record each time.
                     gated = page.evaluate("""() => {

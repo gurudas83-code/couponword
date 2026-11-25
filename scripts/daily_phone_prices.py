@@ -311,6 +311,63 @@ def render_spec_dialog(dialog_id, name, card, reviewed):
     )
 
 
+def render_home_watch(output, rows, cards, media, stores, now):
+    """Use the same reviewed snapshot as the price-watch page; never collect here."""
+    chosen = []
+    for row in rows:
+        key = row["model_key"]
+        offers = []
+        for retailer in PLATFORMS:
+            checked, prices = displayable_prices(retailer, stores.get(key, {}).get(retailer, {}), now)
+            if prices:
+                amount, url, variant = prices[0]
+                offers.append((amount, retailer, url, variant, checked))
+        if offers:
+            amount, retailer, url, variant, checked = min(offers, key=lambda offer: (offer[0], offer[1]))
+            chosen.append((amount, key, retailer, url, variant, checked))
+    chosen.sort(key=lambda item: (item[0], item[1]))
+    tiles = []
+    for amount, key, retailer, url, variant, checked in chosen[:6]:
+        card = cards[key]
+        name = card["model"] if card["model"].lower().startswith(card["brand"].lower() + " ") else card["brand"] + " " + card["model"]
+        model_media = media.get(key, {})
+        photo = model_media.get("photo") or model_media.get("reviewed_model_photo")
+        if photo:
+            image = f'<img src="{esc(photo["url"])}" alt="{esc(name)} model photograph" width="220" height="220" loading="lazy" decoding="async">'
+            caption = f'<a href="{esc(photo["source"])}">{esc(photo["author"])}</a> · <a href="{esc(photo["license_url"])}">{esc(photo["license"])}</a>'
+        else:
+            image = '<img src="/assets/phone-illustrations/generic-3d-2.webp" alt="Generic smartphone illustration, not the named model" width="220" height="220" loading="lazy" decoding="async">'
+            caption = 'Illustration · not a model photo'
+        target = ROUTE + "#watch-" + re.sub(r"[^a-z0-9]+", "-", key).strip("-")
+        tiles.append(
+            f'<article class="cw-watch-tile" data-watch-price-checked="{esc(checked.isoformat())}">'
+            f'<figure>{image}<figcaption>{caption}</figcaption></figure>'
+            f'<div class="cw-watch-tile-copy"><span class="cw-watch-freshness" data-watch-status>Retailer stock observed</span>'
+            f'<h3><a href="{esc(target)}">{esc(name)}</a></h3><p>{esc(variant)}</p>'
+            f'<p class="cw-watch-amount" data-watch-amount>₹{amount:,.0f}</p>'
+            f'<p class="cw-watch-time">{esc(retailer)} · <time datetime="{esc(checked.isoformat())}">{checked.strftime("%d %b, %H:%M IST")}</time> · PIN 110001</p>'
+            f'<a class="btn btn-primary" href="{esc(url)}" target="_blank" rel="sponsored noopener noreferrer">Check price at {esc(retailer)} ↗</a>'
+            f'<a class="cw-watch-specs" href="{esc(target)}">Specifications &amp; other stores →</a></div></article>'
+        )
+    body = '<div class="cw-home-watch-grid">' + "".join(tiles) + '</div>' if tiles else (
+        '<p>No saved in-stock price check is within 36 hours for this build. '
+        'Open the price watch for dated store references and retailer links.</p>')
+    section = (
+        '<section class="container cw-home-watch" aria-labelledby="cwHomeWatchTitle">'
+        '<div class="section-heading"><div><span class="section-kicker">PRICE WATCH · 30 INDIA PHONES</span>'
+        '<h2 id="cwHomeWatchTitle">Recently checked prices. Clearly dated.</h2>'
+        '<p>Selected retailer observations from the same 30-phone price watch. Price order only, not a quality ranking. '
+        'Memory, colour and seller vary; confirm today’s checkout amount and delivery.</p></div>'
+        f'<a href="{ROUTE}" class="btn btn-ghost">See all 30 phones →</a></div>' + body + '</section>'
+    )
+    home = output / "index.html"
+    html = home.read_text(encoding="utf-8")
+    marker = "<!-- HOMEPAGE_PRICE_WATCH -->"
+    if html.count(marker) != 1:
+        raise ValueError("Homepage price-watch placeholder missing or repeated")
+    home.write_text(html.replace(marker, section), encoding="utf-8")
+
+
 def publish(output, snapshot_path=None):
     rows, cards = worklist()
     data = json.loads(Path(snapshot_path).read_text(encoding="utf-8")) if snapshot_path else {}
@@ -323,6 +380,16 @@ def publish(output, snapshot_path=None):
     for filename in ("mobile_research_catalogue", "india_sales_eight_research", "india_recent_manufacturer_research"):
         feed = json.loads((output / "data" / f"{filename}.json").read_text(encoding="utf-8"))
         media.update({card["model_key"]: card for card in feed["model_cards"]})
+    # Connect research cards to the same model's current watch, without copying
+    # a different memory variant's price into the research budget gate.
+    watch_keys = {row["model_key"] for row in rows}
+    for filename in ("mobile_research_catalogue", "india_sales_eight_research", "india_recent_manufacturer_research"):
+        target = output / "data" / (filename + ".json")
+        feed = json.loads(target.read_text(encoding="utf-8"))
+        for card in feed["model_cards"]:
+            if card["model_key"] in watch_keys:
+                card["price_watch_url"] = ROUTE + "#watch-" + re.sub(r"[^a-z0-9]+", "-", card["model_key"]).strip("-")
+        target.write_text(json.dumps(feed, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     groups = {"reported-top-five": [], "market-tracked": [], "india-product": []}
     in_stock_count = 0
     reference_count = 0
@@ -372,11 +439,12 @@ def publish(output, snapshot_path=None):
             for store in PLATFORMS
         )
         groups[group].append(
-            '<article class="phone-watch-card">' + render_image(media.get(key, {}), output, name, dialog_id, key) +
+            f'<article class="phone-watch-card" id="watch-{re.sub(r"[^a-z0-9]+", "-", key).strip("-")}">' + render_image(media.get(key, {}), output, name, dialog_id, key) +
             f'<div class="phone-watch-details">{badge}<h2><button type="button" data-phone-dialog="{dialog_id}" aria-haspopup="dialog">{esc(name)}</button></h2><p>{source}</p>'
             f'{model_details}<ul aria-label="{esc(name)} retailer options">{shop_links}</ul></div>' +
             render_spec_dialog(dialog_id, name, card, spec_reviews.get(key, {})) + '</article>'
         )
+    render_home_watch(output, rows, cards, media, stores, now)
     total = sum(map(len, groups.values()))
     check_count = total - in_stock_count - reference_count
     group_titles = {

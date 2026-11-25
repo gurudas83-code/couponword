@@ -70,3 +70,38 @@ class DailyPhonePriceTests(unittest.TestCase):
                               "retailer_product_id": "B987654321", "variant": "8GB / 128GB",
                               "product_url": "https://www.amazon.in/dp/B987654321"}]}
         self.assertNotIn("₹", render_store({}, "Amazon", record, self.now, "Example Phone"))
+
+class HomepageSharedWatchTests(unittest.TestCase):
+    def test_homepage_uses_same_fresh_exact_listing_and_keeps_original_check_date(self):
+        import tempfile
+        from pathlib import Path
+        from scripts.daily_phone_prices import render_home_watch
+        now = datetime(2026, 11, 25, 14, tzinfo=IST)
+        key = 'samsung|galaxy f16 5g'
+        rows = [{'model_key': key}]
+        cards = {key: {'brand': 'Samsung', 'model': 'Galaxy F16 5G'}}
+        checked = now - timedelta(hours=2)
+        store = {'checked_at': checked.isoformat(), 'offers': [{
+            'price': 12499, 'availability': 'in_stock', 'retailer_product_id': 'B0TEST1234',
+            'product_url': 'https://www.amazon.in/dp/B0TEST1234',
+            'variant': '4GB RAM / 128GB · Green',
+        }]}
+        with tempfile.TemporaryDirectory() as folder:
+            output = Path(folder)
+            home = output / 'index.html'
+            home.write_text('<!-- HOMEPAGE_PRICE_WATCH -->')
+            render_home_watch(output, rows, cards, {}, {key: {'Amazon': store}}, now)
+            html = home.read_text()
+            self.assertIn('₹12,499', html)
+            self.assertIn(checked.isoformat(), html)
+            self.assertIn('4GB RAM / 128GB', html)
+            self.assertIn('PIN 110001', html)
+            self.assertIn('not a quality ranking', html)
+            self.assertIn('sponsored noopener noreferrer', html)
+            self.assertIn('#watch-samsung-galaxy-f16-5g', html)
+            for invalid in (now - timedelta(hours=37), now + timedelta(minutes=1)):
+                store['checked_at'] = invalid.isoformat()
+                home.write_text('<!-- HOMEPAGE_PRICE_WATCH -->')
+                render_home_watch(output, rows, cards, {}, {key: {'Amazon': store}}, now)
+                self.assertNotIn('₹12,499', home.read_text())
+                self.assertIn('No saved in-stock price check', home.read_text())

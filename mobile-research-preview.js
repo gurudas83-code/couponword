@@ -53,6 +53,7 @@
   var clearSearchButton = document.getElementById("researchClearSearch");
   var guidedApply = document.getElementById("researchGuidedApply");
   var guidedStatus = document.getElementById("researchGuidedStatus");
+  var comparisonDifferencesOnly = false;
   var comparisonSelection = [];
   var comparePanel = document.getElementById("mobileResearchCompare");
   var savedShortlistButton = document.getElementById("researchSavedShortlist");
@@ -220,7 +221,7 @@
     var name = displayPhoneName(card);
     var trigger = '<button type="button" class="research-photo-open" data-research-detail="' +
       escapeHtml(card.model_key) + '" aria-label="View specifications and retailer choices for ' + escapeHtml(name) + '" aria-expanded="false">';
-    var photo = card.image_status === "VERIFIED_MATCH" && card.photo;
+    var photo = (card.image_status === "VERIFIED_MATCH" && card.photo) || card.reviewed_model_photo;
     if (photo) {
       return '<figure class="research-phone-photo">' + trigger + '<img src="' + escapeHtml(photo.url) +
         '" width="' + escapeHtml(photo.width) + '" height="' + escapeHtml(photo.height) +
@@ -310,7 +311,7 @@
        (card.market_intake && /^\/phones\/[a-z0-9-]+\/(?:[a-z0-9-]+\/)?$/.test(String(card.detail_url || "")) ?
         '<a class="research-model-name-link" href="' + escapeHtml(card.detail_url) + '">' + escapeHtml(displayPhoneName(card)) + '</a>' :
         escapeHtml(displayPhoneName(card))) + '</h3>' + launch +
-      (card.market_intake ? '<p class="mobile-research-gate"><strong>Additional India research model:</strong> original illustration, not exact model photograph; fresh exact-SKU price unavailable. ' + link(card.manufacturer_page || (card.source_urls || [])[0], "Manufacturer source") + '</p>' : '') +
+      (card.market_intake ? '<p class="mobile-research-gate"><strong>Additional India research model:</strong> ' + (card.reviewed_model_photo ? 'Licensed model photograph; ' : 'Original illustration, not exact model photograph; ') + 'fresh exact-SKU price unavailable. ' + link(card.manufacturer_page || (card.source_urls || [])[0], "Manufacturer source") + '</p>' : '') +
       '<p class="mobile-research-variant">' + escapeHtml(counts || "Model research reference") + '</p>' +
       '<ul class="mobile-research-variant-list">' + (variantItems || "<li>Variant details are not specified in the source universe.</li>") + '</ul>' +
       '<p class="mobile-research-inventory-fields"><strong>Verified fields:</strong> ' + escapeHtml(fields) + '</p>' +
@@ -361,7 +362,7 @@
     // be hidden by a stale GitHub Pages/browser cache.
     // Import only the eight source-reviewed missing market identities.
     // They remain separate from the original 232-card registry, ratings and offers.
-    var coreFetch = fetch("/data/mobile_research_catalogue.json?v=licensed-photos-20261117", { credentials: "same-origin" })
+    var coreFetch = fetch("/data/mobile_research_catalogue.json?v=identity-review-20261125", { credentials: "same-origin" })
       .then(function (response) {
         if (!response.ok) throw new Error("research catalogue unavailable");
         return response.json();
@@ -751,7 +752,16 @@
     var seen = {}, result = [];
     matches.forEach(function (item) {
       var key = researchGroupKey(item.card);
-      if (seen[key]) { seen[key].group_size += 1; return; }
+      if (seen[key]) {
+        seen[key].group_size += 1;
+        // Keep an entire better-supported record. Never transfer an alias's
+        // price, physical variant or maker evidence onto another model record.
+        if (!hasResearchVerifiedEvidence(seen[key].card) && hasResearchVerifiedEvidence(item.card)) {
+          seen[key].card = item.card;
+          seen[key].rows = item.rows;
+        }
+        return;
+      }
       var copy = {card: item.card, rows: item.rows, group_size: 1};
       seen[key] = copy; result.push(copy);
     });
@@ -920,6 +930,7 @@
       '<p class="research-source-note">' + (sourceItem ? link(sourceItem.source_url, "Specification source") : 'Specification source pending') + ' · Specification research snapshot: ' + escapeHtml(card.research_checked_at || sourceItem && (sourceItem.checked_at || sourceItem.checked_date) || 'date unavailable') + ' (not a live check)</p>' + (card.research_budget_reference ? '<p class="research-source-note">' + (isTopThreeResult ? 'Dated reference in selected band; current price unverified. Observation date: ' : 'Budget filter uses a dated retailer observation: ') + escapeHtml(String(card.research_budget_reference.checked_at || 'date unavailable').match(/\\d{4}-\\d{2}-\\d{2}/)?.[0] || String(card.research_budget_reference.checked_at || 'date unavailable')) + '. Current price and stock not verified.</p>' : '') +
       '<div class="research-card-actions"><button type="button" class="btn btn-ghost mobile-research-detail-button" data-research-detail="' + escapeHtml(card.model_key) + '">All specifications</button>' +
       '<button type="button" class="btn btn-ghost" data-research-compare="' + escapeHtml(card.model_key) + '" aria-pressed="' + selected + '">' + (selected ? 'Remove comparison' : 'Compare') + '</button></div>' + retailerResearchLinks(card) +
+      (card.price_watch_url ? '<a class="research-current-price-link" href="' + escapeHtml(card.price_watch_url) + '">Recent retailer prices &amp; variants →</a>' : '') +
       (card.market_intake ? '<p class="mobile-research-gate"><strong>Price unavailable:</strong> no fresh authorized exact-SKU API price. Open the model specifications page for manufacturer evidence.</p>' : '') +
        '<p class="mobile-research-gate">Model-targeted retailer searches only, not exact-SKU purchase links. Exact listing links appear only where a retailer ID, model and physical variant were separately verified. Other retailer links are model searches. Confirm RAM/storage, current price, stock and delivery on retailer sites.</p></div></article>';
   }
@@ -956,7 +967,7 @@
       var link = /^https:\/\/[^\s<>"']+$/i.test(source)
         ? ' <a href="' + escapeHtml(source) + '" target="_blank" rel="noopener noreferrer" aria-label="Source for ' + escapeHtml(key) + '">Source</a>'
         : ' <small>(source link unavailable)</small>';
-      return { html: escapeHtml(text) + link, confirmed: true };
+      return { html: escapeHtml(text) + link, confirmed: true, text: text };
     }
     var totals = comparisonSelection.map(function (selected) {
       return fields.filter(function (field) { return evidence(selected.card, field[1]).confirmed; }).length;
@@ -971,12 +982,15 @@
         '</small><br><small>' + totals[index] + '/' + fields.length + ' documented comparison fields</small></th>';
     }).join('');
     var rows = fields.map(function (field) {
-      return '<tr><th scope="row">' + escapeHtml(field[0]) + '</th>' +
+      var values = comparisonSelection.map(function (selected) { return evidence(selected.card, field[1]); });
+      var identical = values.length > 1 && values.every(function (value) { return value.confirmed && value.text === values[0].text; });
+      return '<tr' + (identical ? ' data-comparison-identical' + (comparisonDifferencesOnly ? ' hidden' : '') : '') + '><th scope="row">' + escapeHtml(field[0]) + '</th>' +
         comparisonSelection.map(function (selected) { return '<td>' + evidence(selected.card, field[1]).html + '</td>'; }).join('') +
         '</tr>';
     }).join('');
     comparePanel.innerHTML = '<div class="research-comparison-heading"><h3>Compare your shortlist (' +
       comparisonSelection.length + '/3)</h3><button type="button" class="btn btn-ghost" data-research-compare-clear>Clear comparison</button></div>' +
+      '<label class="research-difference-toggle"><input type="checkbox" data-compare-differences' + (comparisonDifferencesOnly ? ' checked' : '') + '> Show differences only</label>' +
       '<p>Saved on this device when browser storage is available. Remove phones or clear anytime; no login needed.</p>' +
       '<p>Side-by-side documented specifications with per-field evidence links. Missing data is not a disadvantage or a zero score. There is no performance winner asserted from specification differences alone.</p>' +
       '<div class="research-table-scroll" role="region" aria-label="Phone specification comparison" tabindex="0">' +
@@ -1232,8 +1246,8 @@
       return hasResearchVerifiedEvidence(item.card) &&
         (researchConstraints(query).budget == null || !!item.card.research_budget_reference);
     }).slice(0, 3) : [];
-    var topThreeHtml = isResearchTopThreeQuery(query) ? '<section class="research-verified-top3" aria-label="Research-Verified Top 3"><h3>Research-Verified Top 3 for this budget band</h3><p>Ordered by source coverage and constraint fit, not measured camera, gaming or battery superiority. Dated reference in selected band; current price is not a live offer; current stock is not verified.</p>' +
-      (topThree.length ? '<div class="research-top3-grid">' + topThree.map(function (item) { return '<div class="research-top3-result">' + renderResearchResultCard(item.card, item.rows, item.group_size, true) + '</div>'; }).join("") + '</div>' : '<p>Research-Verified picks (0/3 available): no exact India variant and dated reference passed every gate for this request.</p>') + '</section>' : "";
+    var topThreeHtml = isResearchTopThreeQuery(query) ? '<section class="research-verified-top3" aria-label="Research-Verified Top 3"><h3>Research-Verified Top 3 for this budget band</h3><p class="research-pick-count">' + topThree.length + '/3 picks meet the documented conditions</p><p>Ordered by source coverage and constraint fit, not measured camera, gaming or battery superiority. Dated reference in selected band; current price is not a live offer; current stock is not verified.</p>' +
+      (topThree.length ? '<div class="research-top3-grid">' + topThree.map(function (item) { return '<div class="research-top3-result">' + renderResearchResultCard(item.card, item.rows, item.group_size, true) + '</div>'; }).join("") + '</div>' + (topThree.length > 1 ? '<button type="button" class="btn btn-primary" data-research-compare-picks>Compare these picks side by side</button>' : '') : '<p>Research-Verified picks (0/3 available): no exact India variant and dated reference passed every gate for this request.</p>') + '</section>' : "";
     return topThreeHtml + (isResearchTopThreeQuery(query) ? "" : '<div class="research-context research-verified-recommendations">' +
       '<p><strong>Need a performance-based recommendation?</strong> This list is ordered by research coverage, not proven camera, gaming or battery performance. This is not a verified Top-3 recommendation. Check the existing recommendation engine separately; it will show results only when its evidence and eligibility rules pass.</p>' +
       '<button type="button" class="btn btn-ghost" data-research-verified-recommend>Check eligible recommendations</button></div>');
@@ -1519,6 +1533,23 @@
       } else if (researchSearchStatus) {
         researchSearchStatus.textContent = "Recommendation service is unavailable. Research results remain accessible.";
       }
+      return;
+    }
+    if (event.target.closest("[data-compare-differences]")) {
+      comparisonDifferencesOnly = event.target.checked;
+      comparePanel.querySelectorAll("[data-comparison-identical]").forEach(function (row) {
+        row.hidden = event.target.checked;
+      });
+      return;
+    }
+    if (event.target.closest("[data-research-compare-picks]")) {
+      comparisonSelection = lastSearchMatches.filter(function (item) {
+        return hasResearchVerifiedEvidence(item.card);
+      }).slice(0, 3);
+      persistShortlist();
+      renderSelectedComparison();
+      searchResearch(lastSearchQuery);
+      if (comparePanel) comparePanel.scrollIntoView({behavior: "smooth", block: "start"});
       return;
     }
     var compareButton = event.target.closest("[data-research-compare]");
