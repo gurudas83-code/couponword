@@ -433,7 +433,7 @@
           var recordIds = new Set(inventoryRows.map(function (row) { return row.record_key; }));
           var safeRecent = recent.model_cards.every(function (card) {
             return card.market_intake === true && card.status === "RESEARCH_ONLY" &&
-              card.image_status === "PLACEHOLDER" && !card.photo &&
+              card.image_status === "PLACEHOLDER" && (!card.photo || card.photo_rights_status === "CLEARED_LICENSED_MODEL_PHOTOGRAPH") &&
               !identifiers.has(card.model_key) &&
               Array.isArray(card.discovery_record_keys) && card.discovery_record_keys.length === 1 &&
               Array.isArray(card.verified_retailer_links) && !card.verified_retailer_links.length &&
