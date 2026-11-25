@@ -1532,8 +1532,12 @@ body.cw-navy-theme #researchSavedShortlist{position:fixed;right:22px;bottom:18px
 .research-difference-toggle input{width:18px;height:18px;accent-color:#0b736c}
 .research-spec-table tr[hidden]{display:none!important}
 .research-pick-count{display:inline-block;background:#dcf5ec;color:#0b6658;border-radius:8px;padding:8px 12px;font-weight:650}
+.mobile-research-results>.research-verified-top3{grid-column:1/-1;min-width:0}
 .research-top3-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:16px 0}
-.research-top3-grid .mobile-research-result-card{height:100%}
+.research-top3-result{min-width:0}
+.research-top3-grid .mobile-research-result-card{height:100%;min-width:0}
+.research-top3-grid .research-phone-visual{height:210px;margin-top:8px}
+.research-top3-grid .research-phone-visual img{width:220px;height:205px;margin:0 auto;transform:none}
 .research-verified-top3>[data-research-compare-picks]{margin:8px 0 20px}
 @media(max-width:1000px){.cw-home-watch-grid,.research-top3-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.cw-home-watch-grid,.research-top3-grid{grid-template-columns:1fr}.cw-watch-tile{display:grid;grid-template-columns:minmax(90px,32%) minmax(0,1fr)}.cw-watch-tile figure{padding:14px 8px}.cw-watch-tile img{height:150px}.cw-watch-tile-copy{padding:16px;gap:8px}.cw-watch-tile-copy h3{font-size:1rem}.cw-watch-tile-copy .cw-watch-amount{font-size:1.5rem}.cw-watch-tile .btn{font-size:.73rem;padding:10px 8px}.cw-watch-freshness{font-size:.6rem}.cw-home-watch .section-heading{display:block}}
