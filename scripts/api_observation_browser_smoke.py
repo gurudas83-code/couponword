@@ -55,7 +55,7 @@ def run(root):
                     panel.get_by_text("Price & availability observations", exact=True).wait_for()
                     # Opening saved observations must not automatically bill the API.
                     assert not any("/api/price-observation?" in request for request in requests)
-                    assert panel.locator("[data-check-live-price]").count() == 1
+                    assert panel.locator("[data-check-live-price]").count() == 0
                     assert panel.locator("tbody tr").count() > 0
                     assert panel.locator("img").count() == 0
                     priced_index = next(i for i, configuration in enumerate(payload["models"]["samsung|galaxy a56 5g"])
@@ -69,9 +69,8 @@ def run(root):
                         select.select_option(index=1)
                     # Changing RAM/storage must also keep paid lookups opt-in.
                     assert not any("/api/price-observation?" in request for request in requests)
-                    panel.locator("[data-check-live-price]").click()
-                    panel.get_by_text("No exact in-stock listing was observed in the checked stores.").wait_for()
-                    assert any("/api/price-observation?" in request for request in requests)
+                    # Saved observations stay read-only after configuration and budget edits.
+                    assert not any("/api/price-observation?" in request for request in requests)
                     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1")
                     page.goto(url + "/tvs/india-20/tv01/", wait_until="domcontentloaded")
                     page.locator('[data-price-observations="TV01"]').click()
