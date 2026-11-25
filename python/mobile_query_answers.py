@@ -401,11 +401,32 @@ def model_card(card,hi=False):
     dates=sorted({str(v.get("checked_at") or v.get("checked_date") or "") for _,v in fields if v.get("checked_at") or v.get("checked_date")})
     dates_text=", ".join(dates) or str(card.get("research_checked_at") or "Not recorded")
     ref_link=(f'<a href="{esc(amazon_link(ref["source_url"]))}" rel="sponsored nofollow noopener noreferrer" target="_blank">Dated retailer evidence (not a current offer)</a>' if str(ref.get('source_url','')).startswith('https://') else '')
+    # The workbook reference is intentionally not presented as today's price.
+    # Give the shopper an exact-variant, server-side live check instead. The
+    # paid key remains on Render; the static Pages site only sends the model
+    # identity and requested RAM/storage to that bounded endpoint.
+    live_attrs = (
+        f' data-live-price-check="{esc(card.get("model_key") or "")}"'
+        f' data-live-price-ram="{esc(ref.get("ram_gb") or "")}"'
+        f' data-live-price-storage="{esc(ref.get("storage_gb") or "")}"'
+        if card.get("model_key") and ref.get("ram_gb") and ref.get("storage_gb") else ""
+    )
+    live_panel = (
+        '<section class="answer-live-price" aria-labelledby="live-price-heading-' +
+        esc(re.sub(r"[^a-zA-Z0-9-]+", "-", str(card.get("model_key") or "phone"))) + '">' +
+        '<h4 id="live-price-heading-' + esc(re.sub(r"[^a-zA-Z0-9-]+", "-", str(card.get("model_key") or "phone"))) + '">' +
+        ("वर्तमान कीमत जाँच" if hi else "Current price check") + '</h4>' +
+        '<p>' + ("यह exact RAM/storage variant के लिए server-side retailer check है। पुराना research price current नहीं माना गया है।" if hi else "This checks the exact RAM/storage variant through the server-side retailer connector. The dated research price is not treated as current.") + '</p>' +
+        '<button type="button" class="live-price-button"' + live_attrs + '>' +
+        ("अभी current price जाँचें" if hi else "Check current price now") + '</button>' +
+        '<div class="answer-live-price-result" data-live-price-result role="status" aria-live="polite"></div>' +
+        '</section>'
+    )
     return (f'<article class="answer-model"><h3>{esc(model_title(card))}</h3><p>{esc(memory)}</p>'
             f'<p>{"बजट प्रमाण जाँच" if hi else "Budget evidence checked"}: {esc(ref.get("checked_at") or "Not available")}. '
             f'{"स्पेक रिकॉर्ड जाँच" if hi else "Saved specification checks"}: {esc(dates_text)}. {ref_link}</p>'
             '<div class="table-wrap"><table><caption>Manufacturer-linked model facts; exact India SKU still requires confirmation</caption><thead><tr><th>Field</th><th>Value</th><th>Evidence</th></tr></thead><tbody>'+cells+'</tbody></table></div>'
-            '<p class="retail">'+" · ".join(links)+'</p><p>'
+            + live_panel + '<p class="retail">'+" · ".join(links)+'</p><p>'
             + ("ये खोज/ब्राउज़ लिंक हैं, सटीक ऑफर नहीं। Croma सामान्य श्रेणी खोल सकता है। कीमत, मेमोरी, स्टॉक और डिलीवरी विक्रेता पर जाँचें।" if hi else "Search/browse destinations, not verified exact offers. Croma may open a general category. Confirm memory, price, stock and delivery at the retailer.")+'</p></article>')
 
 def route(g,hi=False):
@@ -421,7 +442,7 @@ def document(title,body,path,hi,indexed,canonical=None):
     canon=SITE+(canonical or path)
     robots="index,follow,max-image-preview:large" if indexed else "noindex,follow"
     schema={"@context":"https://schema.org","@type":"WebPage","name":title,"url":canon,"inLanguage":"hi-IN" if hi else "en-IN","dateModified":REVIEWED}
-    return f'''<!doctype html><html lang="{"hi-IN" if hi else "en-IN"}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} | Coupon World</title><meta name="description" content="{esc(title)} — sourced facts, exact requirements, dated budget evidence and the limits of what can be concluded."><meta name="robots" content="{robots}"><link rel="canonical" href="{esc(canon)}"><link rel="alternate" hreflang="{"hi-IN" if hi else "en-IN"}" href="{esc(SITE+path)}"><link rel="alternate" hreflang="{"en-IN" if hi else "hi-IN"}" href="{esc(SITE+other)}"><link rel="stylesheet" href="/assets/phone-guides.css"><link rel="stylesheet" href="/assets/query-answers.css"><script type="application/ld+json">{json.dumps(schema,ensure_ascii=False).replace('<','\\u003c')}</script></head><body><a class="skip" href="#main">{"मुख्य सामग्री" if hi else "Skip to content"}</a><header><nav aria-label="Main navigation"><a href="/">Coupon World</a><a href="{HI if hi else EN}">{"मोबाइल सवाल" if hi else "Phone questions"}</a><a href="{other}">{"English" if hi else "हिंदी"}</a><a href="/#mobileResearchSearch">Find a phone</a></nav></header><main id="main"><p class="eyebrow">COUPON WORLD / SOURCE-LINKED ANSWERS</p>{body}</main><footer><p><a href="/guides/about-coupon-world/">About our research and corrections</a> · <a href="/seo/phone-research-evidence-method.html">Evidence method</a></p><p>Prepared with AI assistance from saved manufacturer-source research. No hands-on testing or current offer is certified. As an Amazon Associate I earn from qualifying purchases.</p></footer></body></html>'''
+    return f'''<!doctype html><html lang="{"hi-IN" if hi else "en-IN"}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} | Coupon World</title><meta name="description" content="{esc(title)} — sourced facts, exact requirements, dated budget evidence and the limits of what can be concluded."><meta name="robots" content="{robots}"><link rel="canonical" href="{esc(canon)}"><link rel="alternate" hreflang="{"hi-IN" if hi else "en-IN"}" href="{esc(SITE+path)}"><link rel="alternate" hreflang="{"en-IN" if hi else "hi-IN"}" href="{esc(SITE+other)}"><link rel="stylesheet" href="/assets/phone-guides.css"><link rel="stylesheet" href="/assets/query-answers.css"><link rel="stylesheet" href="/assets/answer-live-price.css"><script type="application/ld+json">{json.dumps(schema,ensure_ascii=False).replace('<','\\u003c')}</script></head><body><a class="skip" href="#main">{"मुख्य सामग्री" if hi else "Skip to content"}</a><header><nav aria-label="Main navigation"><a href="/">Coupon World</a><a href="{HI if hi else EN}">{"मोबाइल सवाल" if hi else "Phone questions"}</a><a href="{other}">{"English" if hi else "हिंदी"}</a><a href="/#mobileResearchSearch">Find a phone</a></nav></header><main id="main"><p class="eyebrow">COUPON WORLD / SOURCE-LINKED ANSWERS</p>{body}</main><footer><p><a href="/guides/about-coupon-world/">About our research and corrections</a> · <a href="/seo/phone-research-evidence-method.html">Evidence method</a></p><p>Prepared with AI assistance from saved manufacturer-source research. No hands-on testing or current offer is certified. As an Amazon Associate I earn from qualifying purchases.</p></footer><script src="/assets/answer-live-price.js" defer></script></body></html>'''
 
 def publish_answers(destination):
     dest=Path(destination)

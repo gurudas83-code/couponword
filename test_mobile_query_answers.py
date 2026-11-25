@@ -64,6 +64,14 @@ class AnswersTests(unittest.TestCase):
         ref['reference_price_inr']=19999;ref['stock_indication']='OUT_OF_STOCK'
         self.assertEqual(candidates(g,[base]),[])
 
+    def test_battery_answer_exposes_exact_variant_live_price_checks(self):
+        page=(PUBLIC/'answers'/'best-battery-phone-under-35000'/'index.html').read_text(encoding='utf-8')
+        self.assertEqual(page.count('data-live-price-check="'), 6)
+        self.assertIn('https://couponword.onrender.com/api/price-observation', (ROOT/'assets'/'answer-live-price.js').read_text(encoding='utf-8'))
+        self.assertIn('/assets/answer-live-price.js', page)
+        self.assertIn('/assets/answer-live-price.css', page)
+        self.assertNotIn('reference_price_inr', page)
+
     def test_brand_exclusions_and_soft_preferences_remain_distinct(self):
         g=parsed_group('Redmi nahi chahiye phone under 20000','T')
         self.assertTrue(all(brand_key(c['brand'])!='redmi' for c in candidates(g,self.cards)))

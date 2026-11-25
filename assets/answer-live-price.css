@@ -1,0 +1,12 @@
+.answer-live-price{margin:16px 0;padding:14px;border:1px solid #b8d8c3;border-radius:10px;background:#f5fbf4}
+.answer-live-price h4{margin:0 0 6px;color:#123d36}
+.answer-live-price p{margin:6px 0;line-height:1.45}
+.live-price-button{font:inherit;font-weight:700;cursor:pointer;padding:9px 13px;border:1px solid #176653;border-radius:8px;background:#176653;color:#fff}
+.live-price-button:disabled{cursor:wait;opacity:.7}
+.answer-live-price-result{margin-top:10px}
+.live-price-scroll{overflow-x:auto}
+.live-price-scroll table{border-collapse:collapse;width:100%;min-width:560px;text-align:left}
+.live-price-scroll th,.live-price-scroll td{padding:8px;border-bottom:1px solid #cfe0d4;vertical-align:top}
+.live-price-scroll caption{text-align:left;font-weight:700;padding:5px 0}
+.live-price-disclaimer{font-size:.83rem}
+@media(prefers-color-scheme:dark){.answer-live-price{background:#162b25;border-color:#4d9b7a}.answer-live-price h4{color:#d7f4e4}.live-price-button{background:#45c294;color:#09241a}.live-price-scroll th,.live-price-scroll td{border-color:#355d4c}}
