@@ -1535,7 +1535,7 @@
       }
       return;
     }
-    if (event.target.matches("[data-compare-differences]")) {
+    if (event.target.closest("[data-compare-differences]")) {
       comparisonDifferencesOnly = event.target.checked;
       comparePanel.querySelectorAll("[data-comparison-identical]").forEach(function (row) {
         row.hidden = event.target.checked;
