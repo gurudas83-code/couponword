@@ -5,6 +5,8 @@ const fs = require("node:fs");
 const vm = require("node:vm");
 
 const catalogue = JSON.parse(fs.readFileSync("public/data/mobile_research_catalogue.json", "utf8"));
+const recent = JSON.parse(fs.readFileSync("public/data/india_recent_manufacturer_research.json", "utf8"));
+const allCards = catalogue.model_cards.concat(recent.model_cards);
 const preview = JSON.parse(fs.readFileSync("data/mobile_research_preview.json", "utf8"));
 assert.equal(catalogue.model_cards.length, 232);
 
@@ -34,6 +36,7 @@ function fetch(url) {
   if (url.includes("mobile_research_catalogue")) return Promise.resolve({ok: true, json: async () => catalogue});
   if (url.includes("mobile_research_preview")) return Promise.resolve({ok: true, json: async () => preview});
   if (url.includes("/coupons.json")) return Promise.resolve({ok: true, json: async () => []});
+  if (url.includes("india_recent_manufacturer_research")) return Promise.resolve({ok: true, json: async () => recent});
   if (url.includes("india_sales_eight_research") || url.includes("india_recent_manufacturer_research")) {
     return Promise.resolve({ok: true, json: async () => null});
   }
@@ -84,7 +87,7 @@ assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', ro
     const picks = Array.from(budgetHtml.matchAll(/class="research-top3-result"[\s\S]*?data-mobile-model-card="([^"]+)"/g), m => m[1]);
     assert.equal(picks.length, budgetPicks, budget + " all chosen phones must be parseable");
     for (const key of picks) {
-      const card = catalogue.model_cards.find(m => m.model_key === key);
+      const card = allCards.find(m => m.model_key === key);
       assert(card && card.india_identity_evidence.status === "INDIA_EXACT_VARIANT_DOCUMENTED",
         key + " cannot be recommended without official Indian market evidence");
       const ref = card.research_budget_reference;
@@ -102,7 +105,7 @@ assert.equal(vm.runInContext('submitMobileResearchIfApplicable("iPhone 13")', ro
       "Price unknown research must stay in a separate lane");
   }
   // Manufacturer India evidence is linked without manufacturing extra winners.
-  for (const cap of [15000, 20000, 25000, 30000]) {
+  for (const cap of [10000, 15000, 20000, 25000, 30000]) {
     research.submit("top 3 phones under " + cap);
     assert.equal((element("mobileResearchResults").innerHTML.match(/class="research-top3-result"/g) || []).length, 3,
       cap + " should now have three independently documented India variants");

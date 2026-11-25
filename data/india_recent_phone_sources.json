@@ -1,5 +1,5 @@
 {
-  "checked_on": "2026-11-18",
+  "checked_on": "2026-11-25",
   "market": "India",
   "models": [
     {
@@ -253,6 +253,48 @@
         "battery_capacity_description": "7000mAh typical; 15W maximum charging",
         "rear_camera_system": "13MP rear; 5MP front",
         "india_variant_description": "Maker-listed: 4GB/64GB and 4GB/128GB"
+      }
+    },
+    {
+      "name": "Redmi A5",
+      "source": "https://www.mi.com/in/product/redmi-a5/specs/",
+      "reviewed_on": "2026-11-25",
+      "evidence": "Official India physical RAM/storage and specifications; dated retailer reference is not current stock or a live offer.",
+      "api_probe_eligible": false,
+      "api_probe_note": "Uses reviewed public evidence only; no additional paid API target.",
+      "reviewed_specs": {
+        "chipset": "Octa-core processor, up to 1.8 GHz (manufacturer description)",
+        "display_type_description": "6.88-inch Dot Drop display, 1650 × 720",
+        "display_refresh_description": "Up to 120 Hz adaptive refresh rate",
+        "battery_capacity_description": "5,200 mAh typical",
+        "charging_description": "15 W charging, USB Type-C",
+        "rear_camera_system": "32 MP AI dual camera",
+        "front_camera_system": "8 MP",
+        "memory_storage_description": "3 GB physical RAM / 64 GB storage or 4 GB physical RAM / 128 GB storage; extended RAM excluded",
+        "operating_system": "Android 15; two major Android updates and four years of security patches",
+        "durability": "IP52"
+      },
+      "reviewed_india_variants": [
+        {
+          "ram_gb": 3,
+          "storage_gb": 64,
+          "source_url": "https://www.mi.com/in/product/redmi-a5/specs/"
+        },
+        {
+          "ram_gb": 4,
+          "storage_gb": 128,
+          "source_url": "https://www.mi.com/in/product/redmi-a5/specs/"
+        }
+      ],
+      "dated_price_reference": {
+        "ram_gb": 3,
+        "storage_gb": 64,
+        "color": "Just Black",
+        "reference_price_inr": 6999,
+        "retailer": "BigBasket",
+        "source_url": "https://www.bigbasket.com/pd/40348973/redmi-a5-364gb-black-1-unit/",
+        "checked_at": "2026-11-25",
+        "stock_indication": "ADD_TO_BASKET_SHOWN_PINCODE_UNVERIFIED"
       }
     }
   ],

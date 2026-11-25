@@ -13,7 +13,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 OFFICIAL_HOSTS = {
-    "in.nothing.tech", "www.oppo.com", "www.oneplus.in",
+    "www.lavamobiles.com", "in.nothing.tech", "www.oppo.com", "www.oneplus.in",
     "shop.vivo.com", "www.samsung.com", "news.samsung.com",
     "www.mi.com", "www.realme.com", "buy.realme.com", "www.motorola.in",
 }

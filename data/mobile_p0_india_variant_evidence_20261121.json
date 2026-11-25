@@ -314,6 +314,21 @@
           "source_url": "https://www.samsung.com/in/smartphones/galaxy-f/galaxy-f70-pro-5g-aura-green-128gb-sm-e476bzgbins/"
         }
       ]
+    },
+    {
+      "model_key": "lava|bold n2 lite",
+      "manufacturer": "lava",
+      "india_model_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite",
+      "india_model_code": null,
+      "reviewed_on": "2026-11-25",
+      "variants": [
+        {
+          "ram_gb": 3,
+          "storage_gb": 64,
+          "source_url": "https://www.lavamobiles.com/smartphones/bold-n2-lite"
+        }
+      ],
+      "note": "Manufacturer specification table lists physical RAM 3GB plus virtual RAM separately; virtual RAM excluded."
     }
   ]
 }

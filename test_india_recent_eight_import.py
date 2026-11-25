@@ -12,21 +12,21 @@ class RecentIndiaPhonesTests(unittest.TestCase):
         payload = build_recent()
         self.assertEqual(payload["mode"], MODE)
         self.assertEqual(payload["core_model_count_unchanged"], 232)
-        self.assertEqual(len(payload["model_cards"]), 13)
-        self.assertEqual(len(payload["records"]), 13)
+        self.assertEqual(len(payload["model_cards"]), 14)
+        self.assertEqual(len(payload["records"]), 14)
         self.assertEqual({c["brand"] + " " + c["model"] for c in payload["model_cards"]},
                          {"motorola signature 27", "karbonn rebel", "karbonn rebel pro", "oppo find x10", "oppo find x10 pro max",
                           "oppo f35 5g", "oppo f35 pro 5g", "vivo v80",
                           "vivo x fold6", "vivo s2 fe", "samsung galaxy f70 5g",
-                          "redmi redmi 17c 5g", "realme p4s lite"})
-        self.assertEqual(len(APPROVED), 13)
+                          "redmi redmi 17c 5g", "realme p4s lite", "redmi a5"})
+        self.assertEqual(len(APPROVED), 14)
         for card in payload["model_cards"]:
             self.assertEqual(card["status"], "RESEARCH_ONLY")
             self.assertEqual(set(card["specifications"]), set(card["available_specification_fields"]))
             self.assertGreaterEqual(len(card["specifications"]), 2)
             self.assertTrue(all(field["source_url"] == card["manufacturer_page"]
                                 for field in card["specifications"].values()))
-            reviewed = "2026-11-22" if card["model_key"] == "motorola|signature 27" else "2026-11-18"
+            reviewed = "2026-11-25" if card["model_key"] == "redmi|a5" else "2026-11-22" if card["model_key"] == "motorola|signature 27" else "2026-11-18"
             self.assertTrue(all(field["checked_at"] == reviewed
                                 for field in card["specifications"].values()))
             self.assertEqual(card["research_checked_at"], reviewed)
@@ -60,6 +60,9 @@ class RecentIndiaPhonesTests(unittest.TestCase):
             self.assertIn('rel="canonical"', html)
             self.assertEqual(html.count("AI-generated · two views of the same model"), 13)
             for card in payload["model_cards"]:
+                if card["model_key"] == "redmi|a5":
+                    self.assertIn("Generic illustration — not a product photo", html)
+                    continue
                 slug = card["detail_url"].rstrip("/").rsplit("/", 1)[-1]
                 image = f"assets/phone-illustrations/recent-india-pairs/{slug}.webp"
                 self.assertIn(f'src="/{image}"', html)
@@ -67,6 +70,9 @@ class RecentIndiaPhonesTests(unittest.TestCase):
             for card in payload["model_cards"]:
                 detail = Path(folder) / card["detail_url"].lstrip("/") / "index.html"
                 content = detail.read_text(encoding="utf-8")
+                if card["model_key"] == "redmi|a5":
+                    self.assertIn("Generic illustration — not a product photo", html)
+                    continue
                 slug = card["detail_url"].rstrip("/").rsplit("/", 1)[-1]
                 self.assertIn(f'src="/assets/phone-illustrations/recent-india-pairs/{slug}.webp"', content)
                 self.assertIn("AI-generated · two views of the same model", content)
