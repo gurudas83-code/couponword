@@ -218,7 +218,7 @@ def html_doc(title: str, description: str, path: str, body: str, structured: dic
 <script type="application/ld+json">{js}</script>
 </head><body><a class="skip" href="#content">Skip to content</a>
 <header><nav aria-label="Main navigation"><a class="brand" href="/">CW <span>Coupon World</span></a>
-<a href="/phones/">Phone specifications</a><a href="/hi{path}" lang="hi">हिंदी</a><a href="/guides/phone-budget-guides/">Buying guides</a>
+<a href="/phones/">Phone specifications</a><a href="/hi{path}" lang="hi">हिंदी</a><a href="/guides/phone-budget-guides/">Buying guides</a><a href="/seo/top-30-phone-research-india.html">Top 30 research</a>
 <a href="/#mobileResearchSearch">Find a phone</a></nav></header>
 <main id="content" class="page-shell">{body}{feedback_markup("phone_specification")}</main>
 <script defer src="/assets/page-feedback.js?v=20261112"></script>
