@@ -30,6 +30,11 @@ def load_targets(category="all"):
 
 def query_for(row):
     brand, model = str(row["brand"]).strip(), str(row["model"]).strip()
+    # Retailer search treats the parentheses in names such as "Phone (3a)"
+    # inconsistently. Keep the canonical model identity unchanged, but send a
+    # provider-friendly search phrase so the exact listing gate can inspect the
+    # returned SKU instead of failing before identity validation.
+    model = re.sub(r"[()]", "", model)
     return model if _tokens(model).startswith(_tokens(brand) + " ") else f"{brand} {model}"
 
 

@@ -11,6 +11,7 @@ from scripts.refresh_quickcommerce_affiliate_offers import (
     refresh_targets,
     select_exact_listing,
 )
+from scripts.quickcommerce_catalogue_audit import query_for
 
 
 ROOT = Path(__file__).resolve().parent
@@ -30,6 +31,10 @@ class FakeConnector:
 
 
 class QuickCommerceTop30RefreshTests(unittest.TestCase):
+    def test_provider_query_normalizes_parenthesized_phone_name(self):
+        row = {"brand": "Nothing", "model": "Phone (3a)"}
+        self.assertEqual(query_for(row), "Nothing Phone 3a")
+
     def test_existing_fixture_produces_one_exact_physical_variant(self):
         payload = json.loads(FIXTURE.read_text(encoding="utf-8"))
         row = {
