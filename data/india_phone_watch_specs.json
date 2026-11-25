@@ -38,10 +38,10 @@
     "source": "https://www.oppo.com/in/smartphones/series-reno/reno16/specs/",
     "fields": {
       "India RAM / storage options": "8/128 GB, 8/256 GB, 12/256 GB",
-      "Processor": "Dimensity 7300",
-      "Display": "6.57-inch AMOLED, 120 Hz",
-      "Battery and charging": "7,000 mAh / 80 W",
-      "Rear camera": "50 MP main + 50 MP telephoto + 8 MP ultrawide",
+      "Processor": "Qualcomm Snapdragon 7 Gen 4",
+      "Display": "16.05 cm AMOLED, 2640 × 1216, up to 120 Hz",
+      "Battery and charging": "6,700 mAh typical / 80 W",
+      "Rear camera": "50 MP main (OIS) + 50 MP telephoto (OIS) + 50 MP ultrawide",
       "Front camera": "50 MP"
     }
   },

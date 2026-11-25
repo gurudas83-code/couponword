@@ -180,16 +180,16 @@ def run(root: Path):
                         "() => window.CouponWorldMobileResearch.search('Samsung Galaxy A07 5G').some("
                         "item => item.card.model_key === 'samsung|galaxy a07 5g' && item.card.market_intake === true)"
                     ), width
-                    # Verify all 21 research additions actually appear after fetch.
+                    # Verify all 22 research additions actually appear after fetch.
                     page.wait_for_function(
                         "() => !!document.querySelector('#mobileResearchNew') && "
                         "!document.querySelector('#mobileResearchNew').hidden && "
-                        "document.querySelector('#mobileResearchNewCount').textContent.includes('21 recently added phones')",
+                        "document.querySelector('#mobileResearchNewCount').textContent.includes('22 recently added phones')",
                         timeout=20000,
                     )
-                    assert page.locator("#mobileResearchNewGrid [data-mobile-model-card]").count() == 21, width
-                    assert page.locator(".hero-stats strong").all_text_contents() == ["253", "247", "20"], width
-                    assert page.locator("#mobileResearchNewGrid a.research-model-name-link").count() == 21, width
+                    assert page.locator("#mobileResearchNewGrid [data-mobile-model-card]").count() == 22, width
+                    assert page.locator(".hero-stats strong").all_text_contents() == ["254", "248", "20"], width
+                    assert page.locator("#mobileResearchNewGrid a.research-model-name-link").count() == 22, width
                     more_phones = page.locator("#mobileResearchNewGrid details.recent-mobile-more")
                     more_phones.evaluate("details => { details.open = true; }")
                     new_cards = page.locator("#mobileResearchNewGrid [data-mobile-model-card]")
@@ -583,10 +583,10 @@ def run(root: Path):
                         page.locator("#cr-grid input[data-compare]").nth(1).check()
                         assert page.locator("#cr-comparison-table table tbody tr").count() >= 3
                         assert page.locator(".purchase-cta, .shop-button").count() == 0
-                    # One indexable editorial page lists the 13 added official sources,
+                    # One indexable editorial page lists the 14 added official sources,
                     # rather than manufacturing thin product SEO pages.
                     page.goto(url + "phones/new-india-mobiles/", wait_until="domcontentloaded", timeout=30000)
-                    assert page.locator(".cr-grid .cr-card").count() == 13, width
+                    assert page.locator(".cr-grid .cr-card").count() == 14, width
                     assert "Galaxy F70 5G" in page.locator("main").inner_text(), width
                     assert "REDMI 17C 5G" in page.locator("main").inner_text(), width
                     assert "P4s Lite" in page.locator("main").inner_text(), width
@@ -633,8 +633,8 @@ def run(root: Path):
                         assert response.status == 404, removed
                     page.goto(url, wait_until="domcontentloaded")
                     recent_links = page.locator("#indiaPhoneSources article h3 a[href^='/phones/new-india-mobiles/']")
-                    assert recent_links.count() == 13, width
-                    assert len(set(recent_links.evaluate_all("links => links.map(link => link.href)"))) == 13
+                    assert recent_links.count() == 14, width
+                    assert len(set(recent_links.evaluate_all("links => links.map(link => link.href)"))) == 14
                     watch_link = page.locator("#indiaPhoneSources a[href='/seo/india-30-phone-price-watch.html']")
                     assert watch_link.is_visible(), width
                     hero_phone = page.locator(".hero-copy h1 img[src$='phone-in-magnifier.webp']")

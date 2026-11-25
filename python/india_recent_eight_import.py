@@ -50,6 +50,7 @@ APPROVED = {
     "vivo S2 FE": ("vivo", "s2 fe", "vivo.com"),
     "Samsung Galaxy F70 5G": ("samsung", "galaxy f70 5g", "samsung.com"),
     "REDMI 17C 5G": ("redmi", "redmi 17c 5g", "mi.com"),
+    "Redmi A5": ("redmi", "a5", "mi.com"),
     "realme P4s Lite": ("realme", "p4s lite", "realme.com"),
 }
 
@@ -60,6 +61,39 @@ def _official(url: str, host: str) -> bool:
             and parsed.hostname in (host, "www." + host)
             and parsed.username is None and parsed.password is None
             and parsed.port in (None, 443))
+
+
+def _attach_reviewed_budget(card: dict, item: dict) -> None:
+    """Reviewed exact India variant and dated quote; never a live checkout offer."""
+    variants = item.get("reviewed_india_variants") or []
+    ref = item.get("dated_price_reference")
+    if not variants and not ref:
+        return
+    from python.mobile_p0_identity import _pair
+    pairs = set()
+    for row in variants:
+        pair = _pair(row)
+        if pair in pairs or row.get("source_url") != card["manufacturer_page"]:
+            raise ValueError("Unreviewed or duplicate intake India variant")
+        pairs.add(pair)
+    if not ref or _pair(ref) not in pairs:
+        raise ValueError("Dated intake quote requires matching manufacturer India variant")
+    parsed = urlsplit(ref.get("source_url", ""))
+    checked = date.fromisoformat(ref.get("checked_at", ""))
+    if (type(ref.get("reference_price_inr")) is not int or
+            not 5000 <= ref["reference_price_inr"] < 10000 or
+            ref.get("retailer") != "BigBasket" or parsed.scheme != "https" or
+            parsed.hostname != "www.bigbasket.com" or parsed.username or parsed.password or
+            not parsed.path.startswith("/pd/") or checked > date.today() or
+            ref.get("stock_indication") != "ADD_TO_BASKET_SHOWN_PINCODE_UNVERIFIED"):
+        raise ValueError("Unreviewed intake budget observation")
+    card["status_reason"] = "Manufacturer India physical RAM/storage documented; dated retailer reference only. Current checkout price, stock, delivery and photo rights unverified."
+    card["india_identity_evidence"] = {
+        "status": "INDIA_EXACT_VARIANT_DOCUMENTED", "verified_variants": variants,
+        "current_stock_verified": False, "current_price_verified": False, "purchase_eligible": False,
+    }
+    card["research_budget_reference"] = dict(ref, ranking_weight=0, live_offer=False,
+        evidence_basis="DIRECT_RETAILER_PAGE_SNAPSHOT", delivery_status="NOT_VERIFIED")
 
 
 def build_recent() -> dict:
@@ -123,6 +157,7 @@ def build_recent() -> dict:
             "market_reference": "Recent India manufacturer model source",
             "manufacturer_page": item["source"],
         })
+        _attach_reviewed_budget(cards[-1], item)
         records.append({
             "record_key": refkey, "status": "RESEARCH_ONLY",
             "ram_gb": None, "storage_gb": None,
@@ -142,6 +177,11 @@ def build_recent() -> dict:
 def _review_views(card: dict, name: str, *, linked: bool = True) -> str:
     route = detail_route(card["model_key"])
     slug = route.rstrip("/").rsplit("/", 1)[-1]
+    pair = ROOT / f"assets/phone-illustrations/recent-india-pairs/{slug}.webp"
+    if not pair.is_file():
+        return ('<figure><img src="' + card["research_art_url"] +
+                '" alt="Generic smartphone research illustration" loading="lazy">'
+                '<figcaption>Generic illustration — not a product photo</figcaption></figure>')
     src = f"/assets/phone-illustrations/recent-india-pairs/{slug}.webp"
     image = (
         f'<img src="{src}" loading="lazy" decoding="async" style="width:100%;height:auto;display:block" '
@@ -185,7 +225,7 @@ def _hub(cards: list[dict]) -> str:
     body = (
         '<p class="cr-crumb"><a href="/">Home</a> / <a href="/phones/">Phones</a> / New India research</p>'
         '<section class="cr-hero"><p class="cr-eyebrow">INDIA SMARTPHONE RESEARCH · NOVEMBER 2026</p>'
-        '<h1>13 recently added India smartphones — official manufacturer sources</h1>'
+        f'<h1>{len(cards)} additional India smartphones — official manufacturer sources</h1>'
         '<p>These are additional model-family research records beyond the original 232 phones, '
         'not a sales ranking or verified shopping inventory. Three models newly reviewed '
         'on 18 November are Samsung Galaxy F70 5G, REDMI 17C 5G and realme P4s Lite.</p>'
@@ -198,7 +238,7 @@ def _hub(cards: list[dict]) -> str:
     )
     return doc(
         "New India Smartphones 2026 — Manufacturer Source Research | Coupon World",
-        "Thirteen recent manufacturer-linked India smartphone models with source references, documented facts and research-only retailer checks.",
+        "Additional manufacturer-linked India smartphones with source references, documented facts and research-only retailer checks.",
         HUB, body, schema("Recent India smartphone manufacturer research", HUB, "phones")
     )
 
@@ -221,6 +261,12 @@ def _detail_page(card: dict) -> str:
         '">Search ' + escape(x["retailer"].title()) + ' for this model</a></li>'
         for x in card["retailer_search_links"]
     )
+    ref = card.get("research_budget_reference")
+    dated_note = ('<p>Dated budget reference: ₹' + str(ref["reference_price_inr"]) +
+        ' · ' + str(ref["ram_gb"]) + ' GB physical RAM / ' + str(ref["storage_gb"]) +
+        ' GB storage · observed ' + escape(ref["checked_at"]) + ' on <a href="' +
+        escape(ref["source_url"], quote=True) + '" rel="noopener noreferrer nofollow" target="_blank">' +
+        escape(ref["retailer"]) + '</a>. Current price and local availability unverified.</p>') if ref else ""
     visual = _review_views(card, name, linked=False)
     body = (
         '<p class="cr-crumb"><a href="/">Home</a> / <a href="' + HUB +
@@ -238,7 +284,7 @@ def _detail_page(card: dict) -> str:
         '<p class="cr-muted"><strong>Current price unavailable.</strong> '
         'No exact-variant, fresh, publisher-authorized API price has passed verification. '
         'Retailer prices, stock, delivery location and warranty must be checked on their websites.</p>'
-        '<h2>Check retailer listings</h2><ul>' + links + '</ul>'
+        + dated_note + '<h2>Check retailer listings</h2><ul>' + links + '</ul>'
         '<p><a href="' + escape(card["manufacturer_page"], quote=True) +
         '" rel="noopener noreferrer" target="_blank">Official manufacturer page '
         '(product photography and specifications)</a></p>'
@@ -259,7 +305,7 @@ def publish_recent(destination: Path) -> dict:
     from python.mobile_research_catalogue import apply_representative_illustrations
     apply_representative_illustrations(ROOT, payload["model_cards"], intake=True)
     count = publish_art(destination, payload["model_cards"])
-    if count != 13:
+    if count != len(APPROVED):
         raise ValueError("Missing model illustrations")
     for card in payload["model_cards"]:
         path = destination / detail_route(card["model_key"]).lstrip("/") / "index.html"
@@ -276,7 +322,8 @@ def publish_recent(destination: Path) -> dict:
         target_image = destination / relative
         if not target_image.is_file():
             target_image.parent.mkdir(parents=True, exist_ok=True)
-            copyfile(ROOT / relative, target_image)
+            if (ROOT / relative).is_file():
+                copyfile(ROOT / relative, target_image)
     page.write_text(_hub(payload["model_cards"]), encoding="utf-8")
     ns = "http://www.sitemaps.org/schemas/sitemap/0.9"
     ET.register_namespace("", ns)
