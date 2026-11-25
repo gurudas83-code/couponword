@@ -1508,3 +1508,33 @@ body.cw-navy-theme a:focus-visible,body.cw-navy-theme button:focus-visible,body.
 
 body.cw-navy-theme #researchSavedShortlist[hidden]{display:none!important}
 body.cw-navy-theme #researchSavedShortlist{margin:8px 0;color:#0b736c;background:#e2f6f1;border:1px solid #91c7bd;padding:12px;border-radius:10px}
+
+/* Faster choices: shared price watch, visible shortlist and readable evidence. */
+body.cw-navy-theme .cw-home-watch{margin-top:32px;margin-bottom:40px}
+body.cw-navy-theme .cw-home-watch .section-heading p{max-width:66ch}
+.cw-home-watch-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.cw-watch-tile{min-width:0;border:1px solid #d8e3ee;background:#fff;border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
+.cw-watch-tile figure{margin:0;padding:18px 18px 10px;background:#edf3f8;text-align:center}
+.cw-watch-tile img{width:100%;height:180px;object-fit:contain;display:block}
+.cw-watch-tile figcaption{font-size:.65rem;color:#5c6c80;line-height:1.5;margin-top:10px}
+.cw-watch-tile-copy{padding:20px;display:flex;flex-direction:column;flex:1;gap:10px}
+.cw-watch-tile-copy h3{font-size:1.15rem;line-height:1.3;margin:0;color:#17314d}
+.cw-watch-tile-copy h3 a{color:inherit;text-decoration:none}
+.cw-watch-tile-copy p{font-size:.8rem;line-height:1.55;margin:0;color:#54657a}
+.cw-watch-tile-copy .cw-watch-amount{font-size:1.8rem;font-weight:750;color:#0a7067;letter-spacing:-.04em;margin-top:auto}
+.cw-watch-freshness{align-self:start;font-size:.67rem;color:#0b6658;background:#dcf5ec;padding:5px 8px;border-radius:6px;font-weight:650}
+.cw-watch-time{font-size:.68rem!important}
+.cw-watch-tile .btn{font-size:.8rem;min-height:44px;text-align:center;justify-content:center}
+.cw-watch-specs{color:#0b736c;font-size:.75rem;text-align:center;line-height:1.5;padding-top:4px}
+.cw-watch-stale .cw-watch-freshness{background:#fff0d9;color:#785114}
+body.cw-navy-theme #researchSavedShortlist{position:fixed;right:22px;bottom:18px;z-index:80;box-shadow:0 8px 24px #152c3d30;max-width:calc(100vw - 36px);min-height:48px;font-size:.9rem;background:#10253e;color:#fff;border-color:#41657e}
+.research-difference-toggle{display:flex;align-items:center;gap:10px;font-weight:650;margin:14px 0;padding:12px;border-radius:10px;background:#edf5f7}
+.research-difference-toggle input{width:18px;height:18px;accent-color:#0b736c}
+.research-spec-table tr[hidden]{display:none!important}
+.research-pick-count{display:inline-block;background:#dcf5ec;color:#0b6658;border-radius:8px;padding:8px 12px;font-weight:650}
+.research-top3-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:16px 0}
+.research-top3-grid .mobile-research-result-card{height:100%}
+.research-verified-top3>[data-research-compare-picks]{margin:8px 0 20px}
+@media(max-width:1000px){.cw-home-watch-grid,.research-top3-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.cw-home-watch-grid,.research-top3-grid{grid-template-columns:1fr}.cw-watch-tile{display:grid;grid-template-columns:minmax(90px,32%) minmax(0,1fr)}.cw-watch-tile figure{padding:14px 8px}.cw-watch-tile img{height:150px}.cw-watch-tile-copy{padding:16px;gap:8px}.cw-watch-tile-copy h3{font-size:1rem}.cw-watch-tile-copy .cw-watch-amount{font-size:1.5rem}.cw-watch-tile .btn{font-size:.73rem;padding:10px 8px}.cw-watch-freshness{font-size:.6rem}.cw-home-watch .section-heading{display:block}}
+.research-current-price-link{display:block;padding:12px 14px;margin:12px 0;background:#e3f5f0;border:1px solid #b4d9d0;border-radius:10px;color:#0a695e;font-weight:700;text-decoration:none;line-height:1.4;font-size:.85rem}

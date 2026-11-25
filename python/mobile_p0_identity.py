@@ -102,7 +102,7 @@ def enrich_public_catalogue(catalogue: dict, root: Path = ROOT) -> dict:
                 "ram_gb": row["ram_gb"], "storage_gb": row["storage_gb"],
                 "source_url": row["source_url"],
                 "evidence_kind": "MANUALLY_REVIEWED_OFFICIAL_INDIA_VARIANT",
-                "reviewed_on": manual["reviewed_on"],
+                "reviewed_on": record.get("reviewed_on", manual["reviewed_on"]),
             }
     for key, card in by_key.items():
         variant_rows = list(variants_by_key.get(key, {}).values())
