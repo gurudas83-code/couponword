@@ -117,16 +117,13 @@ class PaidApiBridgeTests(unittest.TestCase):
         self.assertTrue(all(card["model_key"] in known for card in additions))
         self.assertEqual(len(known), 232 + 40 + len(additions))
 
-    def test_price_panel_requires_explicit_paid_lookup_click(self):
+    def test_saved_price_panel_does_not_offer_or_call_paid_lookup(self):
         script = (Path(__file__).resolve().parent / "assets" / "retailer-observations.js").read_text(encoding="utf-8")
-        self.assertIn("data-check-live-price", script)
-        self.assertIn("if (liveButton)", script)
-        for accidental in (
-            "checkPaidApi(panel, modelKey, null);",
-            "checkPaidApi(panel, modelKey, configurations[0]);",
-            "checkPaidApi(panel, modelKey, selected);",
-        ):
-            self.assertNotIn(accidental, script)
+        self.assertIn("Opening this panel does not call the paid API", script)
+        self.assertIn('fetch("/data/retailer_price_observations.json', script)
+        self.assertNotIn("data-check-live-price", script)
+        self.assertNotIn("/api/price-observation", script)
+        self.assertNotIn("checkPaidApi(", script)
 
     def test_route_rejects_bad_model_or_variant_without_paid_call(self):
         import shopping_api

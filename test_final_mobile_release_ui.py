@@ -10,7 +10,9 @@ ROOT = Path(__file__).resolve().parent
 class FinalMobileReleaseUITests(unittest.TestCase):
     def test_homepage_has_mobile_budget_shortcuts_and_clean_skin(self):
         source = (ROOT / "index.html").read_text(encoding="utf-8")
-        self.assertIn('<body class="clean-ui">', source)
+        body_classes = re.search(r'<body class="([^"]+)"', source)
+        self.assertIsNotNone(body_classes)
+        self.assertIn('clean-ui', body_classes.group(1).split())
         # Five primary shortcuts; the full 40-band coverage stays in the
         # advanced filter, not in a crowded homepage button menu.
         primary = (("₹5k–&lt;₹10k", "mobile under 10000"),

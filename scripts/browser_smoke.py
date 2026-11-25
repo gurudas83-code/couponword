@@ -58,8 +58,8 @@ def run(root: Path):
                             f'.mobile-budget-chips [data-mobile-query="mobile under {cap}"]'
                         ).is_visible(), (width, cap)
                     assert page.locator(".cw-budget-more").count() == 0, width
-                    assert page.locator("#researchCategories").evaluate(
-                        "(el) => !!(el.compareDocumentPosition(document.getElementById('mobileResearchSearch')) & Node.DOCUMENT_POSITION_FOLLOWING)"
+                    assert page.locator("#mobileResearchSearch").evaluate(
+                        "(el) => !!(el.compareDocumentPosition(document.getElementById('researchCategories')) & Node.DOCUMENT_POSITION_FOLLOWING)"
                     ), width
                     page.wait_for_function("() => !!window.CouponWorldMobileResearch", timeout=15000)
                     # First-party chat must answer via the published local catalogues,
