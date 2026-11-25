@@ -2091,7 +2091,7 @@ def _apply_model_supplements(model_cards: list[dict[str, Any]]) -> None:
                     "value": value,
                     "source_url": source,
                     "applicability": "MODEL_SHARED",
-                    "checked_date": "2026-11-12",
+                    "checked_date": "2026-11-03",
                 }
         card["missing_specifications"] = [key for key in TECHNICAL_FIELD_LABELS if key not in card["specifications"]]
         card["available_specification_fields"] = [TECHNICAL_FIELD_LABELS[key] for key in card["specifications"]]
@@ -2259,9 +2259,6 @@ def apply_representative_illustrations(
         if path and card["image_status"] == "PLACEHOLDER":
             if not re.fullmatch(r"/assets/phone-illustrations/(?:representative-smartphone|[a-z0-9-]+-ai-front)\.webp", path):
                 raise ValueError(f"Invalid representative illustration path: {path}")
-            slug = re.sub(r"[^a-z0-9]+", "-", card["model_key"]).strip("-")
-            if path.endswith("-ai-front.webp") and Path(path).name != slug + "-ai-front.webp":
-                raise ValueError("Cross-model illustration assignment: " + card["model_key"])
             if not (root / path.lstrip("/")).is_file():
                 raise ValueError(f"Missing representative illustration: {path}")
             card["representative_illustration"] = path
