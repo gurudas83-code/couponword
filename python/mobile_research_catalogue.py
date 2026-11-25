@@ -2259,6 +2259,9 @@ def apply_representative_illustrations(
         if path and card["image_status"] == "PLACEHOLDER":
             if not re.fullmatch(r"/assets/phone-illustrations/(?:representative-smartphone|[a-z0-9-]+-ai-front)\.webp", path):
                 raise ValueError(f"Invalid representative illustration path: {path}")
+            slug = re.sub(r"[^a-z0-9]+", "-", card["model_key"]).strip("-")
+            if path.endswith("-ai-front.webp") and Path(path).name != slug + "-ai-front.webp":
+                raise ValueError("Cross-model illustration assignment: " + card["model_key"])
             if not (root / path.lstrip("/")).is_file():
                 raise ValueError(f"Missing representative illustration: {path}")
             card["representative_illustration"] = path
