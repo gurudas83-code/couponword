@@ -2091,7 +2091,7 @@ def _apply_model_supplements(model_cards: list[dict[str, Any]]) -> None:
                     "value": value,
                     "source_url": source,
                     "applicability": "MODEL_SHARED",
-                    "checked_date": "2026-11-12",
+                    "checked_date": "2026-11-03",
                 }
         card["missing_specifications"] = [key for key in TECHNICAL_FIELD_LABELS if key not in card["specifications"]]
         card["available_specification_fields"] = [TECHNICAL_FIELD_LABELS[key] for key in card["specifications"]]

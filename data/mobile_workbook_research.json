@@ -1116,6 +1116,38 @@
           "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
           "applicability": "MODEL_SHARED"
         },
+        "display_size_description": {
+          "value": "6.3-inch diagonal all-screen OLED display (6.27-inch when measured as a standard rectangle)",
+          "label": "Display size detail",
+          "source_url": "https://support.apple.com/en-in/121031",
+          "checked_at": "2026-11-03",
+          "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
+          "applicability": "MODEL_SHARED"
+        },
+        "display_resolution_description": {
+          "value": "2622x1206 pixels at 460 ppi",
+          "label": "Display resolution detail",
+          "source_url": "https://support.apple.com/en-in/121031",
+          "checked_at": "2026-11-03",
+          "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
+          "applicability": "MODEL_SHARED"
+        },
+        "display_type_description": {
+          "value": "Super Retina XDR all-screen OLED display with Dynamic Island, Always-On display and HDR",
+          "label": "Display type detail",
+          "source_url": "https://support.apple.com/en-in/121031",
+          "checked_at": "2026-11-03",
+          "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
+          "applicability": "MODEL_SHARED"
+        },
+        "display_refresh_description": {
+          "value": "ProMotion adaptive refresh rates up to 120Hz",
+          "label": "Refresh rate detail",
+          "source_url": "https://support.apple.com/en-in/121031",
+          "checked_at": "2026-11-03",
+          "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
+          "applicability": "MODEL_SHARED"
+        },
         "rear_main_mp": {
           "value": 48,
           "label": "Main camera",
@@ -1167,6 +1199,54 @@
         "network_support": {
           "value": "5G",
           "label": "Network support",
+          "source_url": "https://support.apple.com/en-in/121031",
+          "checked_at": "2026-11-03",
+          "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
+          "applicability": "MODEL_SHARED"
+        },
+        "rear_camera_system": {
+          "value": "48MP Fusion main with second-generation sensor-shift OIS; 48MP Ultra Wide; 12MP 5x Telephoto with 3D sensor-shift OIS and autofocus",
+          "label": "Rear camera system",
+          "source_url": "https://support.apple.com/en-in/121031",
+          "checked_at": "2026-11-03",
+          "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
+          "applicability": "MODEL_SHARED"
+        },
+        "front_camera_system": {
+          "value": "12MP TrueDepth camera with f/1.9 aperture and autofocus with Focus Pixels",
+          "label": "Front camera system",
+          "source_url": "https://support.apple.com/en-in/121031",
+          "checked_at": "2026-11-03",
+          "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
+          "applicability": "MODEL_SHARED"
+        },
+        "battery_capacity_description": {
+          "value": "Built-in rechargeable lithium-ion battery; Apple rates video playback up to 27 hours, streamed video up to 22 hours and audio up to 85 hours",
+          "label": "Battery detail",
+          "source_url": "https://support.apple.com/en-in/121031",
+          "checked_at": "2026-11-03",
+          "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
+          "applicability": "MODEL_SHARED"
+        },
+        "charging_description": {
+          "value": "MagSafe wireless charging up to 25W with 30W adapter or higher; Qi wireless charging up to 7.5W; fast charge up to 50% in around 30 minutes with compatible adapter",
+          "label": "Charging detail",
+          "source_url": "https://support.apple.com/en-in/121031",
+          "checked_at": "2026-11-03",
+          "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
+          "applicability": "MODEL_SHARED"
+        },
+        "battery_and_charging": {
+          "value": "Up to 27 hours video playback; MagSafe up to 25W and Qi up to 7.5W; fast charge up to 50% in around 30 minutes with compatible adapter",
+          "label": "Battery and charging",
+          "source_url": "https://support.apple.com/en-in/121031",
+          "checked_at": "2026-11-03",
+          "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
+          "applicability": "MODEL_SHARED"
+        },
+        "durability": {
+          "value": "IP68 splash, water and dust resistance, maximum depth 6 metres for up to 30 minutes under IEC 60529",
+          "label": "Durability detail",
           "source_url": "https://support.apple.com/en-in/121031",
           "checked_at": "2026-11-03",
           "evidence_status": "WORKBOOK_MANUFACTURER_REVIEW",
