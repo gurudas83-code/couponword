@@ -206,12 +206,12 @@
             <p class="cw-assistant-note" id="cwAssistantNotice">Voice requires browser support and microphone permission. No audio recording is stored by Coupon World; browser speech services may process audio. Answers use dated research, not live retailer prices.</p>
           </details>
 
+            <button id="researchSavedShortlist" type="button" class="btn btn-ghost" hidden>View saved shortlist</button>
           <details class="cw-explore-more"><summary>Explore guides, comparisons &amp; new phones <span aria-hidden="true">＋</span></summary>
           <div class="hero-actions cw-primary-actions" aria-label="Popular ways to start">
             <a class="btn btn-primary" data-analytics-intent="budget_25000" href="/phones/under-25000/">Phones under ₹25k</a>
             <a class="btn btn-ghost" href="#mobileResearchCatalogue">Browse all phones</a>
             <a class="btn btn-ghost" data-analytics-intent="compare" href="/compare/">Compare phones</a>
-            <button id="researchSavedShortlist" type="button" class="btn btn-ghost" hidden>View saved shortlist</button>
             <a class="btn btn-ghost" href="/seo/top-30-phone-research-india.html">30 phones to research</a>
             <a class="btn btn-primary" href="/phones/new-india-mobiles/">New India phones (11)</a>
           </div>
@@ -526,40 +526,477 @@
     <h2 id="page-feedback-title">Was this page useful?</h2>
     <p>One-click feedback helps us improve sources, comparisons and missing information. No account or message is required.</p>
     <div class="page-feedback-actions"><button type="button" data-feedback-value="helpful">Yes, it helped</button><button type="button" data-feedback-value="needs_work">Needs improvement</button></div>
-    <div class="page-feedback-reasons" data-feedback-reasons hidden><p>What was missing?</p><button type="button" data-feedback-reason="missing_specs">Some specifications were missing</button><button type="button" data-feedback-reason="hard_to_choose">The decision was hard to make</button><button type="button" data-feedback-reason="needs_freshness">I needed newer price/stock information</button></div>
-    <p class="page-feedback-status" data-feedback-status role="status" aria-live="polite"></p>
-  </section>
-</main>
+    <div class="page-feedback-reasons" data-feedback-reasons hidden><p>What was missing?</p><button type="button" data-feedback-reason="missing_specs">Some specifications were missin…4637 tokens truncated…            assert "price not verified" in page.locator("#mobileResearchResults .research-budget-unpriced").inner_text().lower(), width
+                    assert not page.locator("#mobileResearchResults .research-budget-unpriced .purchase-cta").count(), width
+                    assert page.locator("#mobileResearchResults [data-mobile-model-card]").count() > 0, width
+                    assert page.locator("#aiRecommendation").is_hidden(), width
+                    pending_offers.pop().fulfill(status=503, headers={"Access-Control-Allow-Origin": "*"})
+                    assert page.locator("#mobileResearchResults [data-mobile-model-card]").first.is_visible(), width
+                    assert page.locator("#aiRecommendation").is_hidden(), width
+                    page.unroute("**/api/recommend?*")
+                    page.route("**/api/recommend?*", lambda route: route.fulfill(
+                        json={"recommendations": [
+                            {"title": "Unverified fixture", "current_offer_verified": False},
+                            {"title": "Verified offer fixture", "current_offer_verified": True,
+                             "purchase_cta_eligible": True, "retailer_offers": [{
+                                 "retailer": "flipkart", "price": 14999, "availability": "in_stock",
+                                 "product_url": "https://www.flipkart.com/test/p/itmfixture",
+                                 "cta_eligibility": {"eligible": True},
+                             }]},
+                        ]},
+                        headers={"Access-Control-Allow-Origin": "*"},
+                    ))
+                    page.locator("#heroSearchButton").click()
+                    page.locator("#aiRecommendation").wait_for(state="visible", timeout=10000)
+                    assert "Verified offer fixture" in page.locator("#aiRecommendation").inner_text(), width
+                    assert "Unverified fixture" not in page.locator("#aiRecommendation").inner_text(), width
+                    assert page.locator("#mobileResearchResults [data-mobile-model-card]").first.is_visible(), width
+                    page.locator("#researchClearSearch").click()
+                    assert page.locator("#aiRecommendation").is_hidden(), width
+                    page.unroute("**/api/recommend?*")
+                    page.route("**/api/recommend?*", lambda route: route.fulfill(
+                        json={"recommendations": []}, headers={"Access-Control-Allow-Origin": "*"}
+                    ))
+                    # Regression: exact-model, brand exclusion and memory hard
+                    # constraints are also preserved for price-unverified leads.
+                    elapsed_ms = page.evaluate("""() => {
+                      const started = performance.now();
+                      window.CouponWorldMobileResearch.search('Samsung Galaxy F70 5G under 25000');
+                      return performance.now() - started;
+                    }""")
+                    assert elapsed_ms < 1000, (width, elapsed_ms)
+                    related_text = page.locator("#mobileResearchResults .research-budget-unpriced").inner_text()
+                    assert "galaxy f70 5g" in related_text.lower(), (width, related_text[:400])
+                    assert "Price not verified" in related_text, width
+                    assert not page.locator("#mobileResearchResults .research-budget-primary-grid [data-mobile-model-card]").count(), (
+                        width,
+                        page.locator("#mobileResearchResults .research-budget-primary-grid [data-mobile-model-card]").evaluate_all(
+                            "(nodes) => nodes.map(n => ({ key: n.dataset.mobileModelCard, text: n.innerText.slice(0,120) }))"
+                        )
+                    )
+                    page.evaluate("window.CouponWorldMobileResearch.search('Samsung Galaxy F70 5G 8GB RAM under 30000')")
+                    assert not page.locator("#mobileResearchResults .research-budget-related-item").count(), width
+                    page.evaluate("window.CouponWorldMobileResearch.search('phone under 30000 exclude Samsung')")
+                    assert not any("Samsung" in name for name in page.locator(
+                        "#mobileResearchResults .research-budget-related-item>strong"
+                    ).all_inner_texts()), width
+                    page.evaluate("window.CouponWorldMobileResearch.search('phone under 30000')")
 
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div>
-        <a class="brand footer-brand" href="/">
-          <span class="brand-mark">CW</span>
-          <span>Coupon World<small>Research before you buy</small></span>
-        </a>
-        <p>Independent phone, accessory and TV research for India. Compare manufacturer-linked facts and verify current offers with the retailer.</p>
-      </div>
+                    # Ordinary under-budget searches now default to strict previous-₹5k windows.
+                    nearby = page.evaluate("""() => window.CouponWorldMobileResearch.search('phone under 30000 nearby band').map(x => x.card.research_budget_reference.reference_price_inr)""")
+                    assert nearby and all(25000 <= price < 30000 for price in nearby), width
+                    # Full-budget is an explicit opt-in exception, not the default.
+                    details = page.locator("details.research-guided-search")
+                    details.locator("summary").click()
+                    page.locator("#researchGuidedBudget").select_option("30000")
+                    page.locator("#researchGuidedScope").select_option("all")
+                    page.locator("#researchGuidedApply").click()
+                    assert "full budget" in page.locator("#mobileResearchQuery").input_value(), width
+                    expanded = page.evaluate("""() => window.CouponWorldMobileResearch.search('phone under 30000 full budget').map(x => x.card.research_budget_reference.reference_price_inr)""")
+                    assert len(expanded) > len(nearby), width
+                    assert all(0 < price < 30000 for price in expanded), width
+                    assert any(price < 25000 for price in expanded), width
+                    ordinary = page.evaluate("() => window.CouponWorldMobileResearch.search('phone under 30000').map(x => x.card.model_key)")
+                    full = page.evaluate("() => window.CouponWorldMobileResearch.search('phone under 30000 full budget').map(x => x.card.model_key)")
+                    assert ordinary == page.evaluate("() => window.CouponWorldMobileResearch.search('phone under 30000 nearby band').map(x => x.card.model_key)"), width
+                    assert ordinary != full, width
 
-      <div class="footer-links">
-        <a href="#mobileResearchSearch">Find a phone</a>
-        <a href="/phones/">Phone specifications</a>
-        <a href="/compare/">Compare phones</a>
-        <a href="/phones/new-india-mobiles/">New India mobile research</a>
-        <a href="/accessories/earbuds-20/">Earbuds research</a>
-        <a href="/tvs/india-20/">TV research</a>
-        <a href="/guides/phone-budget-guides/">Buying guides</a>
-        <a href="/seo/india-smartphone-search-demand.html">Our research priorities</a>
-        <a href="/guides/about-coupon-world/">About &amp; affiliate disclosure</a>
-        <a href="#top">Back to top</a>
-      </div>
-    </div>
-  <p class="affiliate-disclosure">Coupon World may earn a commission from qualifying purchases made through affiliate links on this website, at no extra cost to you.</p>
-</footer>
+                    # Exercise all 40 five-thousand-rupee public budget filters using the generated catalogue.
+                    # These are dated references, not live retailer prices or buy claims.
+                    # Stub unrelated backend recommendations while testing chip click handlers.
+                    page.route("**/api/recommend?*", lambda route: route.fulfill(
+                        status=503, headers={"Access-Control-Allow-Origin": "*"}))
+                    budget_audit = []
+                    previous_keys = set()
+                    for limit in range(5000, 200001, 5000):
+                        # Only five buttons are prominent. Other bands remain
+                        # fully accessible through the advanced budget selector.
+                        button = page.locator(
+                            f'.mobile-budget-chips [data-mobile-query="mobile under {limit}"]'
+                        )
+                        assert page.locator(f'#researchGuidedBudget option[value="{limit}"]').count() == 1, (width, limit)
+                        if limit in primary_shortcuts:
+                            assert button.count() == 1, (width, limit)
+                            button.evaluate("(el) => el.click()")
+                            expected_query = f"mobile under {limit}"
+                        else:
+                            assert button.count() == 0, (width, limit)
+                            page.locator("#researchGuidedBudget").select_option(str(limit))
+                            page.locator("#researchGuidedScope").select_option("band")
+                            page.locator("#researchGuidedApply").evaluate("(el) => el.click()")
+                            expected_query = f"phone under {limit} nearby band"
+                        assert page.locator("#heroSearch").input_value() == expected_query, (width, limit)
+                        if limit in primary_shortcuts:
+                            # Quick buttons intentionally target local Research Top 3.
+                            assert page.locator("#mobileResearchResults .research-verified-top3").count() == 1, (width, limit)
+                            assert "research picks" in page.locator("#mobileResearchSearchStatus").inner_text(), (width, limit)
+                            # The 40-band audit below exercises the ordinary two-lane budget query.
+                            page.evaluate("(limit) => window.CouponWorldMobileResearch.search('phone under ' + limit)", limit)
+                        assert "dated budget-reference matches" in page.locator("#mobileResearchSearchStatus").inner_text(), (width, limit)
+                        measure = page.evaluate("""limit => {
+                          const matches = window.CouponWorldMobileResearch.search('phone under ' + limit);
+                          const prices = matches.map(item => Number(item.card.research_budget_reference.reference_price_inr));
+                          const names = matches.map(item => [item.card.brand, item.card.model].join(' '));
+                          const keys = matches.map(item => item.card.model_key);
+                          const heading = document.querySelector('#mobileResearchResults .research-budget-evidenced h3')?.textContent || '';
+                          const status = document.getElementById('mobileResearchSearchStatus')?.textContent || '';
+                          const related = document.querySelectorAll('#mobileResearchResults .research-budget-related-item').length;
+                          const rendered = document.querySelectorAll('#mobileResearchResults .research-budget-primary-grid [data-mobile-model-card]').length;
+                          return {
+                            limit, count: matches.length, min_reference: prices.length ? Math.min(...prices) : null,
+                            max_reference: prices.length ? Math.max(...prices) : null,
+                            invalid_references: prices.filter(price => !(price >= limit - 5000 && price < limit)).length,
+                            keys, sample_names: names.slice(0, 5), related_unverified_preview: related,
+                            rendered_cards_initial: rendered, heading, status
+                          };
+                        }""", limit)
+                        assert measure["invalid_references"] == 0, (width, limit, measure)
+                        assert len(measure["keys"]) == len(set(measure["keys"])), (width, limit, measure)
+                        assert previous_keys.isdisjoint(set(measure["keys"])), (width, limit, "overlapping adjacent ₹5k budgets")
+                        assert str(measure["count"]) in measure["heading"], (width, limit, measure["heading"])
+                        assert "below ₹" in measure["status"], (width, limit, measure["status"])
+                        assert measure["rendered_cards_initial"] <= measure["count"], (width, limit)
+                        previous_keys = set(measure["keys"])
+                        del measure["keys"]
+                        budget_audit.append(measure)
+                        print("BUDGET_FILTER_AUDIT", width, json.dumps(measure, ensure_ascii=False), flush=True)
+                    # Select each guided budget and actually click the Apply action.
+                    for cap in range(5000, 200001, 5000):
+                        page.locator("#researchGuidedBudget").select_option(str(cap))
+                        page.locator("#researchGuidedScope").select_option("band")
+                        page.locator("#researchGuidedApply").evaluate("(el) => el.click()")
+                        assert page.locator("#heroSearch").input_value() == f"phone under {cap} nearby band", (width, cap)
+                        expected_count = next(a["count"] for a in budget_audit if a["limit"] == cap)
+                        assert page.locator("#mobileResearchSearchStatus").inner_text().startswith(
+                            f"{expected_count} dated budget-reference matches"
+                        ), (width, cap)
+                    page.unroute("**/api/recommend?*")
+                    page.evaluate("window.CouponWorldMobileResearch.search('phone under 30000')")
+                    # Identity-only research is never mistaken for a valid budget match.
+                    page.evaluate("window.CouponWorldMobileResearch.search('Infinix 5G mobile 10k ke andar')")
+                    identity_text = page.locator("#mobileResearchResults .research-identity-only").inner_text().lower()
+                    assert "verification pending" in identity_text, (width, identity_text[:300])
+                    assert "not budget-qualified" in identity_text, width
+                    assert not page.locator("#mobileResearchResults .research-identity-only .purchase-cta").count(), width
+                    page.evaluate("window.CouponWorldMobileResearch.search('exact model Smart 8 HD phone under 25000')")
+                    # The exact identity may already qualify for the source-linked
+                    # unpriced lane, in which case it must NOT repeat in identity-only.
+                    related_names = page.locator(
+                        "#mobileResearchResults .research-budget-unpriced .research-budget-related-item strong, "
+                        "#mobileResearchResults .research-identity-only .research-budget-related-item strong"
+                    ).all_inner_texts()
+                    assert any("Smart 8 HD" in name for name in related_names), (width, related_names)
+                    assert all("GT 30 Pro" not in name for name in related_names), (width, related_names)
+                    assert sum("Smart 8 HD" in name for name in related_names) == 1, (width, related_names)
+                    page.evaluate("window.CouponWorldMobileResearch.search('Samsung nahi chahiye phone under 8000')")
+                    assert "Samsung" not in page.locator("#mobileResearchResults .research-identity-only").inner_text(), width
+                    page.evaluate("window.CouponWorldMobileResearch.search('exact model Unknown Phantom 888 phone under 25000')")
+                    assert not page.locator("#mobileResearchResults .research-identity-only").count(), width
+                    # Exact brand exclusion must survive mixed-language searches.
+                    excluded = page.evaluate("""() => window.CouponWorldMobileResearch.search(
+                        'phone under 30000 exclude samsung'
+                    ).map(item => String(item.card.brand).toLowerCase())""")
+                    assert all(brand != 'samsung' for brand in excluded), (width, excluded)
+                    # No invented recommendation when a nonsensical exact variant is requested.
+                    impossible = page.evaluate("""() => window.CouponWorldMobileResearch.search(
+                        'Galaxy A36 99GB RAM 9999GB storage'
+                    ).length""")
+                    assert impossible == 0, (width, impossible)
+                    # Research results must disclose their nature rather than claim a tested winner.
+                    page.evaluate("window.CouponWorldMobileResearch.search('best camera phone under 30000')")
+                    response_text = page.locator("#mobileResearchResults").inner_text().lower()
+                    assert "research coverage" in response_text, (width, response_text[:400])
+                    assert "performance-based recommendation" in response_text, width
 
-  <link rel="stylesheet" href="/assets/page-feedback.css?v=20261112">
-  <script defer src="/assets/discovery-analytics.js?v=field-metrics-20261121"></script>
-  <script defer src="/assets/page-feedback.js?v=20261112"></script>
-  <!-- deployment-refresh: 2026-07-21T17:26:00.696191+00:00 -->
-</body>
-</html>
+                    # Priority answers are evidence-limited, not synthetic benchmark rankings.
+                    priority_cautions = {
+                        "camera": "megapixels alone do not establish photo quality",
+                        "battery": "capacity is not measured battery life",
+                        "gaming": "chipset names alone do not establish sustained fps",
+                        "software": "an update promise is not the remaining support period",
+                        "reliability": "an ip rating does not establish drop resistance",
+                    }
+                    for priority, caution in priority_cautions.items():
+                        count = page.evaluate("""priority => window.CouponWorldMobileResearch.search(
+                            'best ' + priority + ' phone under 30000'
+                        ).length""", priority)
+                        assert count > 0, (width, priority, 'no research results')
+                        priority_text = page.locator("#mobileResearchResults").inner_text().lower()
+                        assert caution in priority_text, (width, priority, priority_text[:500])
+                        assert "research coverage" in priority_text, (width, priority)
+                        assert "check eligible recommendations" in priority_text, (width, priority)
+                        assert "decision evidence checklist" in priority_text, (width, priority)
+                        assert "source linked" in priority_text or "not source-confirmed" in priority_text, (width, priority)
+                        assert "not a measured performance verdict" in priority_text, (width, priority)
+
+
+                    page.evaluate("window.CouponWorldMobileResearch.search('Galaxy A36 8GB 256GB')")
+                    names = page.locator("#mobileResearchResults [data-mobile-model-card]")
+                    assert names.count() == 1, f"{width}: exact-variant result count {names.count()}"
+                    assert "8GB RAM" in names.first.inner_text(), width
+                    assert "256GB storage" in names.first.inner_text(), width
+                    photo = names.first.locator("figure.research-phone-photo")
+                    assert photo.locator("img").get_attribute("src") == "/assets/phone-photos/samsung-galaxy-a36-5g.jpg", width
+                    assert photo.locator("figcaption a").count() == 2, width
+                    assert page.request.get(url + "assets/phone-photos/samsung-galaxy-a36-5g.jpg").ok, width
+                    # Existing product image opens the same-page model details,
+                    # exposes all three retailer choices, and toggles closed.
+                    trigger = photo.locator("button.research-photo-open")
+                    assert trigger.count() == 1, width
+                    assert "Galaxy A36" in trigger.get_attribute("aria-label"), width
+                    assert trigger.get_attribute("aria-expanded") == "false", width
+                    assert "Tap photo to see retailer choices" in photo.locator("figcaption").inner_text(), width
+                    trigger.click()
+                    panel = photo.locator(".research-photo-retailer-panel")
+                    assert panel.is_visible(), width
+                    retailer_choices = panel.locator(".retailer-search-links")
+                    assert "View saved price & stock checks" in panel.inner_text(), width
+                    for retailer in ("Flipkart", "Amazon", "Croma"):
+                        assert retailer in retailer_choices.inner_text(), (width, retailer)
+                    assert "Search Croma for this model" in retailer_choices.inner_text(), width
+                    assert panel.locator(".shop-button,.purchase-cta").count() == 0, width
+                    assert trigger.get_attribute("aria-expanded") == "true", width
+                    assert page.url == url, width
+                    panel.locator("[data-research-detail]").click()
+                    detail = page.locator("#mobileResearchDetail")
+                    assert detail.is_visible(), width
+                    assert page.locator("#mobileResearchDetailContent details.mobile-research-model-details").get_attribute("open") is not None, width
+                    assert page.url.startswith(url + "#mobileResearchDetail/"), width
+                    trigger.click()
+                    assert panel.count() == 0, width
+                    assert trigger.get_attribute("aria-expanded") == "false", width
+                    variants = page.evaluate("""() => window.CouponWorldMobileResearch.search(
+                        'OnePlus 13 24GB RAM 1TB storage'
+                    ).map(item => item.card.model_key)""")
+                    assert variants == ["oneplus|13"], (width, variants)
+
+                    page.evaluate("window.CouponWorldMobileResearch.search('Galaxy A36 vs Galaxy A56')")
+                    assert page.locator("#mobileResearchCompare table").count() == 1, width
+                    assert "no performance winner" in page.locator("#mobileResearchCompare").inner_text().lower(), width
+                    saved = page.evaluate("() => JSON.parse(localStorage.getItem('cw-saved-phone-shortlist-v1'))")
+                    assert len(saved) == 2, (width, saved)
+                    assert page.locator("#researchSavedShortlist").is_visible(), width
+                    # Reload the same origin to verify persistent selection
+                    # even when all document/JS state is reconstructed.
+                    page.reload(wait_until="domcontentloaded", timeout=30000)
+                    page.locator("#researchSavedShortlist").wait_for(state="visible", timeout=20000)
+                    assert page.locator("#mobileResearchCompare table").count() == 1, width
+                    assert "2/3" in page.locator("#researchSavedShortlist").inner_text(), width
+                    page.locator("[data-research-compare-clear]").click()
+                    assert page.evaluate("() => localStorage.getItem('cw-saved-phone-shortlist-v1')") is None, width
+                    assert page.locator("#researchSavedShortlist").is_hidden(), width
+
+                    page.evaluate(
+                        """() => {
+                          window.__handedOff = null;
+                          window.CouponWorldShoppingRecommend = q => { window.__handedOff = q; };
+                          window.CouponWorldMobileResearch.search('camera phone under 30000 exclude Samsung');
+                        }"""
+                    )
+                    bridge = page.locator("[data-research-verified-recommend]")
+                    assert bridge.is_visible(), width
+                    bridge.click()
+                    handed_off = page.evaluate("window.__handedOff")
+                    assert handed_off == "camera phone under 30000 exclude Samsung", (width, handed_off)
+
+                    # Front-end research does not turn historical budgets into purchase CTAs.
+                    assert page.locator("#mobileResearchResults .shop-button").count() == 0, width
+                    # The evidence-rich pages must also work without submitting
+                    # any JavaScript search or relying on generated hidden data.
+                    page.goto(url + "phones/samsung-galaxy-a56-5g/", wait_until="domcontentloaded", timeout=30000)
+                    assert page.locator("#variant-12-256").get_by_text("Manufacturer India source").is_visible(), width
+                    assert page.locator("figcaption").get_by_text("CC BY-SA 4.0").is_visible(), width
+                    assert "Galaxy A56 5G" in page.locator("h1").inner_text(), width
+                    assert page.locator(".mobile-fact-table tbody tr").count() >= 8, width
+                    assert page.locator('a:has-text("Manufacturer source")').count() >= 8, width
+                    assert page.locator('link[rel="canonical"]').get_attribute("href") == (
+                        "https://coupon-world.in/phones/samsung-galaxy-a56-5g/"
+                    ), width
+                    assert not page.locator(".shop-button").count(), width
+                    document_width = page.evaluate("document.documentElement.scrollWidth")
+                    assert document_width <= width + 8, (
+                        f"Phone research page overflows {width}px viewport: {document_width}"
+                    )
+                    page.goto(url + "phones/", wait_until="domcontentloaded", timeout=30000)
+                    assert page.locator(".mobile-fact-card").count() == 50, width
+                    assert page.locator('a[href="/phones/samsung-galaxy-a56-5g/"]').count() >= 1, width
+                    assert page.locator('a[href="/phones/apple-iphone-17/"]').count() >= 1, width
+                    assert page.locator('a[href="/phones/google-pixel-10/"]').count() >= 1, width
+                    page.goto(url + "phones/samsung-galaxy-f05/", wait_until="domcontentloaded", timeout=30000)
+                    assert "4G LTE" in page.locator(".mobile-fact-table").inner_text(), width
+                    assert "5G" not in page.locator(".mobile-fact-table").inner_text(), width
+                    page.goto(url + "phones/google-pixel-10/", wait_until="domcontentloaded", timeout=30000)
+                    assert page.locator(".mobile-fact-table tbody tr").count() >= 10, width
+                    assert not page.locator(".shop-button").count(), width
+                    # New research categories must work in the same public
+                    # artifact at mobile, tablet and desktop widths.
+                    for category in ("accessories", "tvs"):
+                        page.goto(url + category + "/", wait_until="domcontentloaded", timeout=30000)
+                        page.locator("#cr-grid .cr-card").first.wait_for(timeout=10000)
+                        assert page.locator("#cr-grid .cr-card").count() == 4, (width, category)
+                        page.locator("#cr-query").fill("Sony" if category == "tvs" else "Apple")
+                        assert page.locator("#cr-grid .cr-card:visible").count() == 1, (width, category)
+                        page.locator("#cr-query").fill("")
+                        if category == "accessories":
+                            candidates = page.locator('#cr-grid .cr-card[data-type="Chargers"] input[data-compare]')
+                        else:
+                            candidates = page.locator('#cr-grid input[data-compare]')
+                        candidates.nth(0).check()
+                        candidates.nth(1).check()
+                        assert page.locator("#cr-comparison").is_visible(), (width, category)
+                        assert page.locator("#cr-comparison-table table tbody tr").count() >= 5
+                        assert page.locator(".shop-button, .purchase-cta").count() == 0
+                        cr_width = page.evaluate("document.documentElement.scrollWidth")
+                        assert cr_width <= width + 8, (category, width, cr_width)
+                        page.goto(url + category + "/" + (
+                            "samsung-ep-t2510-25w" if category == "accessories" else "sony-k-43s20-bravia-2"
+                        ) + "/", wait_until="domcontentloaded", timeout=30000)
+                        assert page.locator(".cr-detail-facts .cr-fact").count() >= 5
+                        assert page.locator('a:has-text("Maker source")').count() >= 5
+                        assert page.locator(".purchase-cta, .shop-button").count() == 0
+                        cr_width = page.evaluate("document.documentElement.scrollWidth")
+                        assert cr_width <= width + 8, (category, width, cr_width)
+                    for new_path in ("tvs/india-20/", "accessories/earbuds-20/"):
+                        page.goto(url + new_path, wait_until="domcontentloaded", timeout=30000)
+                        page.locator("#cr-grid .cr-card").first.wait_for(timeout=10000)
+                        assert page.locator("#cr-grid .cr-card").count() == 20, (width, new_path)
+                        page.locator("#cr-grid input[data-compare]").nth(0).check()
+                        page.locator("#cr-grid input[data-compare]").nth(1).check()
+                        assert page.locator("#cr-comparison-table table tbody tr").count() >= 3
+                        assert page.locator(".purchase-cta, .shop-button").count() == 0
+                    # One indexable editorial page lists the 13 added official sources,
+                    # rather than manufacturing thin product SEO pages.
+                    page.goto(url + "phones/new-india-mobiles/", wait_until="domcontentloaded", timeout=30000)
+                    assert page.locator(".cr-grid .cr-card").count() == 13, width
+                    assert "Galaxy F70 5G" in page.locator("main").inner_text(), width
+                    assert "REDMI 17C 5G" in page.locator("main").inner_text(), width
+                    assert "P4s Lite" in page.locator("main").inner_text(), width
+                    assert page.locator('link[rel="canonical"]').get_attribute("href") == "https://coupon-world.in/phones/new-india-mobiles/"
+                    assert page.locator(".purchase-cta, .shop-button").count() == 0, width
+                    assert page.evaluate("document.documentElement.scrollWidth") <= width + 8, width
+                    # Title click opens a real full-detail HTML page (not a search-only hash).
+                    new_model = "phones/new-india-mobiles/samsung-galaxy-f70-5g/"
+                    page.goto(url + new_model, wait_until="domcontentloaded", timeout=30000)
+                    assert "Samsung Galaxy F70 5G" in page.locator("h1").inner_text(), width
+                    assert "Current price unavailable" in page.locator("main").inner_text(), width
+                    assert page.locator("img[src='/assets/phone-illustrations/recent-india-pairs/samsung-galaxy-f70-5g.webp']").count() == 1, width
+                    assert "AI-generated" in page.locator(".cr-detail figcaption").inner_text(), width
+                    assert page.locator(".cr-detail-facts .cr-fact").count() >= 5, width
+                    assert page.locator('meta[name="robots"]').get_attribute("content") == "noindex,follow", width
+                    assert page.locator("a:has-text('Search Amazon')").count() == 1, width
+                    assert page.locator("a:has-text('Search Flipkart')").count() == 1, width
+                    assert page.locator("a:has-text('Search Croma')").count() == 1, width
+                    assert page.evaluate("document.documentElement.scrollWidth") <= width + 8, width
+                    page.goto(url + "phones/india-market-demand-q3-2026/", wait_until="domcontentloaded", timeout=30000)
+                    assert page.locator(".cr-grid .cr-card").count() == 10
+                    assert "does not rank these ten models by units sold" in page.locator("main").inner_text()
+                    assert "ten research entries" in page.locator("main").inner_text()
+                    assert page.locator("a[href*='galaxy-a07-5g/']").count() >= 1
+                    assert page.evaluate("document.documentElement.scrollWidth") <= width + 8, width
+                    page.goto(url + "phones/india-market-demand-q3-2026/samsung-galaxy-a07-5g/", wait_until="domcontentloaded", timeout=30000)
+                    assert "Galaxy A07 5G" in page.locator("h1").inner_text()
+                    assert page.locator(".cr-detail-facts .cr-fact").count() >= 5
+                    assert page.locator('meta[name="robots"]').get_attribute("content") == "noindex,follow"
+                    assert not page.locator(".shop-button,.purchase-cta").count()
+                    for guide in ("compare/", "hi/compare/", "phones/under-25000/", "hi/phones/under-25000/"):
+                        response=page.goto(url+guide, wait_until="domcontentloaded")
+                        assert response.status == 200
+                        assert page.locator('h1').count() == 1
+                        assert page.evaluate('document.documentElement.scrollWidth') <= width+8
+                        assert not page.locator('.rank,.answer-model,.comparison-list').count()
+                    for answer in ("answers/phone-for-student-under-18000/", "hi/answers/phone-for-student-under-18000/"):
+                        response=page.goto(url+answer, wait_until="domcontentloaded")
+                        assert response.status == 200, answer
+                        assert page.locator('h1').count() == 1
+                        assert "noindex" not in page.locator('meta[name="robots"]').get_attribute("content")
+                    for removed in ("answers/best-apple-phone-under-7000/", "compare/apple-iphone-17-vs-apple-iphone-16/", "phones/under-25000/best-camera/"):
+                        response=page.goto(url+removed, wait_until="domcontentloaded")
+                        assert response.status == 404, removed
+                    page.goto(url, wait_until="domcontentloaded")
+                    recent_links = page.locator("#indiaPhoneSources article h3 a[href^='/phones/new-india-mobiles/']")
+                    assert recent_links.count() == 13, width
+                    assert len(set(recent_links.evaluate_all("links => links.map(link => link.href)"))) == 13
+                    watch_link = page.locator("#indiaPhoneSources a[href='/seo/india-30-phone-price-watch.html']")
+                    assert watch_link.is_visible(), width
+                    hero_phone = page.locator(".hero-copy h1 img[src$='phone-in-magnifier.webp']")
+                    assert hero_phone.is_visible(), width
+                    hero_phone.evaluate("img => img.decode()")
+                    assert hero_phone.bounding_box()["width"] <= 64, width
+                    watch_link.click()
+                    page.wait_for_url("**/seo/india-30-phone-price-watch.html")
+                    cards = page.locator(".phone-watch-card")
+                    count = cards.count()
+                    assert count == 30, width
+                    assert cards.locator("img").count() == count, width
+                    assert cards.locator(".phone-watch-store-link").count() == count * 3, width
+                    assert cards.locator(".phone-watch-status").count() == count, width
+                    for store in ("Amazon", "Flipkart", "Croma"):
+                        assert cards.get_by_role("link", name=f"Check price on {store} ↗", exact=True).count() > 0, width
+                    if count:
+                        loaded_image = cards.first.locator("img")
+                        loaded_image.scroll_into_view_if_needed()
+                        loaded_image.evaluate("img => img.decode()")
+                        assert cards.first.locator(".phone-watch-details h2").bounding_box()["x"] > loaded_image.bounding_box()["x"], width
+                    for card in cards.all() if width == 1440 else [cards.first]:
+                        title = card.locator("h2 button")
+                        title.click()
+                        dialog = card.locator("dialog")
+                        assert dialog.is_visible(), width
+                        assert dialog.locator("h2").inner_text() == title.inner_text(), width
+                        assert dialog.get_by_role("link", name="Battery source").count() + dialog.get_by_role("link", name="Battery and charging source").count() == 1, width
+                        assert dialog.locator(".phone-watch-store-link").count() == 3, width
+                        page.keyboard.press("Escape")
+                        assert not dialog.is_visible(), width
+                    cards.first.locator(".phone-watch-image-button").click()
+                    assert cards.first.locator("dialog").is_visible(), width
+                    cards.first.locator("dialog").get_by_role("button", name="Close").click()
+                    assert page.evaluate("document.documentElement.scrollWidth") <= width + 8, width
+                    page.locator('main a[href="/phones/upcoming-india/"]').click()
+                    page.wait_for_url("**/phones/upcoming-india/")
+                    assert "India launch status checked" in page.locator("main").inner_text(), width
+                    assert "₹" not in page.locator("main").inner_text(), width
+                    # Reproduce the full-catalogue view shown in the narrow-card bug.
+                    page.goto(url + "#mobileResearchCatalogue", wait_until="domcontentloaded")
+                    page.locator("#mobileResearchCatalogueGrid .mobile-research-model-card").first.wait_for(state="visible")
+                    for inventory_card in page.locator("#mobileResearchCatalogueGrid .mobile-research-model-card").all()[:3]:
+                        dimensions = inventory_card.evaluate("""card => {
+                            const style = getComputedStyle(card);
+                            const body = card.querySelector('.mobile-research-inventory-body');
+                            return {
+                                available: card.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight),
+                                body: body.getBoundingClientRect().width
+                            };
+                        }""")
+                        assert dimensions["body"] >= dimensions["available"] - 2, (width, dimensions)
+                        assert dimensions["body"] > 180, (width, dimensions)
+                    assert not page_errors, f"{width}px uncaught JS errors: {page_errors}"
+                    results.append({"width": width, "search": "PASS", "full_budget_opt_in": "PASS", "exact_variant": "PASS",
+                                    "comparison": "PASS", "engine_handoff": "PASS",
+                                    "page_errors": len(page_errors), "budget_filters": budget_audit})
+                    print(f"PASS {width}px responsive smartphone research, comparison and engine handoff")
+                    page.close()
+            finally:
+                browser.close()
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=5)
+    return results
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--root", type=Path, default=Path("public"))
+    parser.add_argument("--report", type=Path)
+    args = parser.parse_args()
+    result = {"status": "PASS", "scope": "loopback public-site Chromium QA (not real retailer availability)",
+              "results": run(args.root)}
+    if args.report:
+        args.report.parent.mkdir(parents=True, exist_ok=True)
+        args.report.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(result))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
