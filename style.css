@@ -1537,4 +1537,20 @@ body.cw-navy-theme #researchSavedShortlist{position:fixed;right:22px;bottom:18px
 .research-verified-top3>[data-research-compare-picks]{margin:8px 0 20px}
 @media(max-width:1000px){.cw-home-watch-grid,.research-top3-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.cw-home-watch-grid,.research-top3-grid{grid-template-columns:1fr}.cw-watch-tile{display:grid;grid-template-columns:minmax(90px,32%) minmax(0,1fr)}.cw-watch-tile figure{padding:14px 8px}.cw-watch-tile img{height:150px}.cw-watch-tile-copy{padding:16px;gap:8px}.cw-watch-tile-copy h3{font-size:1rem}.cw-watch-tile-copy .cw-watch-amount{font-size:1.5rem}.cw-watch-tile .btn{font-size:.73rem;padding:10px 8px}.cw-watch-freshness{font-size:.6rem}.cw-home-watch .section-heading{display:block}}
-.research-current-price-link{display:block;padding:12px 14px;margin:12px 0;background:#e3f5f0;border:1px solid #b4d9d0;border-radius:10px;color:#0a695e;font-weight:700;text-decoration:none;line-height:1.4;font-size:.85rem}
+ .research-current-price-link{display:block;padding:12px 14px;margin:12px 0;background:#e3f5f0;border:1px solid #b4d9d0;border-radius:10px;color:#0a695e;font-weight:700;text-decoration:none;line-height:1.4;font-size:.85rem}
+body.clean-ui .hero-intents{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:4px 0 7px}
+body.clean-ui .hero-intents>span{color:#6a786c;font-size:.72rem;margin-right:3px}
+body.clean-ui .hero-intents button{background:#fff;border:1px solid #d1dccd;color:#345440;border-radius:999px;font-size:.72rem;padding:7px 10px;box-shadow:none}
+body.clean-ui .hero-intents button:hover,body.clean-ui .hero-intents button:focus-visible{background:#e6eddf;border-color:#698967;color:#234b37}
+body.clean-ui .hero-watch-shortcut{display:inline-flex;align-items:center;gap:7px;margin:9px 0 0;color:#356149;font-size:.74rem;font-weight:700;text-decoration:none}
+body.clean-ui .hero-watch-shortcut:hover{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:850px){
+  body.clean-ui .hero>.container{grid-template-columns:1fr;gap:22px}
+  body.clean-ui .hero-proof-card{justify-self:stretch;max-width:none}
+}
+@media(max-width:540px){
+  body.clean-ui .hero-intents{align-items:flex-start}
+  body.clean-ui .hero-intents>span{width:100%;margin-bottom:1px}
+  body.clean-ui .hero-proof-card{padding:21px 19px 19px;border-radius:17px}
+  body.clean-ui .hero-proof-card h2{font-size:1.75rem}
+}

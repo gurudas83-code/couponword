@@ -11,10 +11,15 @@ import contextlib
 import functools
 import http.server
 import json
+import sys
 import threading
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
+
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 
 def run(root: Path):
