@@ -96,7 +96,7 @@ class QuickCommerceTop30RefreshTests(unittest.TestCase):
         self.assertEqual(len(connector.calls), TOP30_COUNT)
         self.assertEqual(len(set(connector.calls)), TOP30_COUNT)
 
-    def test_missing_exact_model_fails_before_a_store_write(self):
+    def test_all_missing_exact_models_produce_no_store_payload(self):
         now = datetime.now(timezone.utc)
         observed = (now - timedelta(minutes=1)).isoformat()
         targets = load_top30_targets()
@@ -104,9 +104,48 @@ class QuickCommerceTop30RefreshTests(unittest.TestCase):
         for row in targets:
             payloads[" ".join((row["brand"], row["model"]))] = {"status": "success", "data": {"platform": "Flipkart", "products": []}}
         connector = FakeConnector(payloads, observed)
-        with self.assertRaisesRegex(ValueError, "no exact current Flipkart listing"):
+        with self.assertRaisesRegex(ValueError, "no publishable offers"):
             refresh_targets(targets, connector, delay_seconds=0, now=now)
-        self.assertEqual(len(connector.calls), 1)
+        self.assertEqual(len(connector.calls), TOP30_COUNT)
+
+    def test_missing_model_does_not_block_verified_models(self):
+        now = datetime.now(timezone.utc)
+        observed = (now - timedelta(minutes=1)).isoformat()
+        targets = []
+        payloads = {}
+        missing_index = 7
+        for index in range(TOP30_COUNT):
+            brand = f"Brand{index}"
+            model = f"Model {index}"
+            row = {"audit_id": f"{brand.casefold()}|{model.casefold()}", "brand": brand, "model": model, "category": "mobiles"}
+            query = f"{brand} {model}"
+            targets.append(row)
+            if index == missing_index:
+                payloads[query] = {"status": "success", "data": {"platform": "Flipkart", "products": []}}
+                continue
+            pid = f"MOB{index:012d}"
+            payloads[query] = {
+                "status": "success",
+                "request_id": f"request-{index}",
+                "data": {
+                    "platform": "Flipkart",
+                    "products": [{
+                        "id": pid,
+                        "name": f"{brand} {model} (Black, 128 GB)",
+                        "brand": brand,
+                        "available": True,
+                        "offer_price": 10000 + index,
+                        "mrp": 15000 + index,
+                        "quantity": "8 GB RAM",
+                        "currency": "INR",
+                        "deeplink": f"https://www.flipkart.com/-/p/-?pid={pid}",
+                    }],
+                },
+            }
+        result = refresh_targets(targets, FakeConnector(payloads, observed), delay_seconds=0, now=now)
+        self.assertEqual(result["model_count"], TOP30_COUNT)
+        self.assertEqual(result["offer_count"], TOP30_COUNT - 1)
+        self.assertEqual(result["refresh_failures"][0]["model_key"], f"brand{missing_index}|model {missing_index}")
 
     def test_out_of_stock_exact_sku_has_no_payable_price(self):
         payload = json.loads(FIXTURE.read_text(encoding="utf-8"))
@@ -146,4 +185,5 @@ class QuickCommerceTop30RefreshTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
 
