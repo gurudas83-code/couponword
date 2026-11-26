@@ -1,5 +1,6 @@
 import copy
 import json
+import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -8,6 +9,7 @@ from scripts.refresh_quickcommerce_affiliate_offers import (
     TOP30_COUNT,
     build_offer,
     load_top30_targets,
+    merge_with_previous_store,
     refresh_targets,
     select_exact_listing,
 )
@@ -147,6 +149,21 @@ class QuickCommerceTop30RefreshTests(unittest.TestCase):
         self.assertEqual(result["offer_count"], TOP30_COUNT - 1)
         self.assertEqual(result["refresh_failures"][0]["model_key"], f"brand{missing_index}|model {missing_index}")
 
+    def test_missing_model_retains_previous_verified_offer(self):
+        fresh = {"offers": [{"model_key": "brand0|model 0", "price": 11000}]}
+        previous = {"offers": [
+            {"model_key": "brand0|model 0", "price": 10000},
+            {"model_key": "brand7|model 7", "price": 17000},
+        ]}
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "retailer_offers.json"
+            path.write_text(json.dumps(previous), encoding="utf-8")
+            merged = merge_with_previous_store(fresh, path)
+        self.assertEqual(merged["offer_count"], 2)
+        self.assertEqual(merged["retained_previous_offer_count"], 1)
+        self.assertEqual(merged["offers"][0]["price"], 11000)
+        self.assertEqual(merged["offers"][1]["price"], 17000)
+
     def test_out_of_stock_exact_sku_has_no_payable_price(self):
         payload = json.loads(FIXTURE.read_text(encoding="utf-8"))
         payload["data"]["products"] = [copy.deepcopy(payload["data"]["products"][1])]
@@ -185,5 +202,6 @@ class QuickCommerceTop30RefreshTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
 
 
