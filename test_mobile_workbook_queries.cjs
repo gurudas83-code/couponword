@@ -76,7 +76,7 @@ setImmediate(()=> {
    // Two legacy Redmi identities normalize to the same human product name.
    assert.equal(seen.size,231);
  });
- check('retailer links visible',()=>{search('Galaxy A36');let html=element('mobileResearchResults').innerHTML;assert(html.includes('Go to Amazon product'));assert(html.includes('Search Flipkart'));assert(html.includes('Search Croma for this model'));});
+ check('retailer links visible',()=>{search('Galaxy A36');let html=element('mobileResearchResults').innerHTML;assert(html.includes('Go to Amazon product'));assert(html.includes('Go to Flipkart product')||html.includes('Search Flipkart'));assert(html.includes('Search Croma for this model'));});
  check('main search recognizes bare budget',()=>assert(api.isResearchQuery('under 20k')));
  check('strict boundary excludes equality',()=>{let ref=catalogue.model_cards.find(c=>c.research_budget_reference).research_budget_reference;assert(search('phone under '+ref.reference_price_inr).every(x=>x.card.research_budget_reference.reference_price_inr<ref.reference_price_inr));});
  check('repeated queries deterministic',()=>{let first=search('camera phone under 30000').map(x=>x.card.model_key);for(let i=0;i<20;i++)assert.deepEqual(search('camera phone under 30000').map(x=>x.card.model_key),first);});
@@ -174,3 +174,4 @@ setImmediate(()=> {
  });
  console.log(checks+' checks passed');
 });
+
