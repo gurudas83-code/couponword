@@ -315,6 +315,44 @@ def write_store(payload: dict, path: Path = DEFAULT_STORE) -> None:
             temporary.unlink(missing_ok=True)
 
 
+def merge_with_previous_store(payload: dict, path: Path) -> dict:
+    """Keep the last verified offer when today's exact lookup is unavailable.
+
+    A failed lookup must never erase a previously verified price. Fresh offers
+    replace the same model, while unrelated legacy/retailer rows remain in the
+    store. Freshness gates still decide whether a retained row may be shown as
+    a current offer; this merge only preserves the audit/history record.
+    """
+    if not path.is_file():
+        payload["retained_previous_offer_count"] = 0
+        return payload
+    try:
+        previous = json.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, ValueError):
+        payload["retained_previous_offer_count"] = 0
+        return payload
+    if not isinstance(previous, dict) or not isinstance(previous.get("offers"), list):
+        payload["retained_previous_offer_count"] = 0
+        return payload
+
+    fresh = [offer for offer in payload.get("offers", []) if isinstance(offer, dict)]
+    fresh_keys = {
+        str(offer.get("model_key") or offer.get("product_id") or "").strip().casefold()
+        for offer in fresh
+    }
+    retained = []
+    for offer in previous["offers"]:
+        if not isinstance(offer, dict):
+            continue
+        key = str(offer.get("model_key") or offer.get("product_id") or "").strip().casefold()
+        if key and key not in fresh_keys:
+            retained.append(offer)
+    payload["offers"] = fresh + retained
+    payload["offer_count"] = len(payload["offers"])
+    payload["retained_previous_offer_count"] = len(retained)
+    return payload
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--pincode", default="110001")
@@ -327,12 +365,14 @@ def main() -> int:
     targets = load_top30_targets(args.top30)
     connector = QuickCommerceFlipkartConnector(pincode=args.pincode)
     payload = refresh_targets(targets, connector, delay_seconds=args.delay_seconds)
+    payload = merge_with_previous_store(payload, args.store)
     write_store(payload, args.store)
     print(json.dumps({
         "status": "UPDATED",
         "watch": payload["watch"],
         "model_count": payload["model_count"],
         "offer_count": payload["offer_count"],
+        "retained_previous_offer_count": payload["retained_previous_offer_count"],
         "refresh_failures": payload["refresh_failures"],
         "refreshed_at_utc": payload["refreshed_at_utc"],
     }))
@@ -341,5 +381,6 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
 
 
