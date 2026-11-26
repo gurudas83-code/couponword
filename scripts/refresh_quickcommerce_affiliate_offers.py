@@ -2,10 +2,11 @@
 """Refresh the approved India Top-30 offer store from QuickCommerce.
 
 This is the one paid price-watch path. It makes exactly one bounded Flipkart
-search per approved Top-30 model, validates the returned SKU, derives the
-physical RAM/storage/colour variant from that same listing, and replaces the
-store only after all 30 models pass. It never retries and never publishes a
-partial batch.
+search per approved Top-30 model, validates the returned SKU, and derives the
+physical RAM/storage/colour variant from that same listing. Verified results
+are published even when an individual model has no current exact listing;
+that model is reported as a refresh failure and is omitted rather than given
+an invented or stale price.
 
 The QuickCommerce deeplink is a retailer buying destination. The compatibility
 ``affiliate_url`` field is populated for the existing offer contract, but the
@@ -251,30 +252,39 @@ def refresh_targets(targets: list[dict], connector, *, delay_seconds: float = 1.
         raise ValueError("delay_seconds cannot be negative")
     now = now or datetime.now(timezone.utc)
     offers = []
+    failures = []
     seen_keys = set()
     for index, row in enumerate(targets):
         key = str(row.get("audit_id") or "").strip().casefold()
         if not key or key in seen_keys:
             raise ValueError("duplicate or missing Top-30 target: " + (key or "unknown"))
         seen_keys.add(key)
-        payload, observed = connector.search(query_for(row))
-        item, variant = select_exact_listing(payload, row)
-        offer = build_offer(
-            item,
-            variant,
-            row,
-            observed_at=observed,
-            pincode=connector.pincode,
-            request_id=str(payload.get("request_id") or ""),
-        )
-        ok, reason = evaluate_offer(offer, now=now, max_age_hours=6)
-        if not ok:
-            raise ValueError(f"{key}: publication gate rejected selected listing ({reason})")
-        offers.append(offer)
+        try:
+            payload, observed = connector.search(query_for(row))
+            item, variant = select_exact_listing(payload, row)
+            offer = build_offer(
+                item,
+                variant,
+                row,
+                observed_at=observed,
+                pincode=connector.pincode,
+                request_id=str(payload.get("request_id") or ""),
+            )
+            ok, reason = evaluate_offer(offer, now=now, max_age_hours=6)
+            if not ok:
+                raise ValueError(f"publication gate rejected selected listing ({reason})")
+            offers.append(offer)
+        except Exception as error:
+            failures.append({
+                "model_key": key,
+                "error": str(error),
+                "error_type": type(error).__name__,
+            })
         if delay_seconds and index + 1 < len(targets):
             time.sleep(delay_seconds)
-    if len(offers) != TOP30_COUNT or {offer["product_id"] for offer in offers} != seen_keys:
-        raise ValueError("Top-30 refresh did not produce complete model coverage")
+    if not offers:
+        reason = failures[0]["error"] if failures else "no verified offers returned"
+        raise ValueError("Top-30 refresh produced no publishable offers: " + reason)
     refreshed_at = max(str(offer["checked_at"]) for offer in offers)
     return {
         "version": 2,
@@ -282,6 +292,7 @@ def refresh_targets(targets: list[dict], connector, *, delay_seconds: float = 1.
         "provider": SOURCE,
         "model_count": TOP30_COUNT,
         "offer_count": len(offers),
+        "refresh_failures": failures,
         "refreshed_at_utc": refreshed_at,
         "offers": offers,
     }
@@ -322,6 +333,7 @@ def main() -> int:
         "watch": payload["watch"],
         "model_count": payload["model_count"],
         "offer_count": payload["offer_count"],
+        "refresh_failures": payload["refresh_failures"],
         "refreshed_at_utc": payload["refreshed_at_utc"],
     }))
     return 0
@@ -329,4 +341,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
 
