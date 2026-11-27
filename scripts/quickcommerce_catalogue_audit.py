@@ -58,7 +58,7 @@ def listing_candidate(item, row):
     # suffix as a display-name alias; the brand, model stem, SKU and physical
     # configuration gates remain strict.
     # Storage-specific catalogue cards must state the requested capacity too.
-    storage = re.search(r"\\s+(\\d+)\\s*(GB|TB)$", expected, re.I)
+    storage = re.search(r"\s+(\d+)\s*(GB|TB)$", expected, re.I)
     if row["category"] == "mobiles":
         # Require the provider's brand field as well as the title. A wrong-brand
         # item can otherwise pass when its display title repeats the target name.
@@ -67,7 +67,7 @@ def listing_candidate(item, row):
         model_expected = expected
         if storage:
             model_expected = expected[:storage.start()].strip()
-            if not re.search(r"\\b" + storage.group(1) + r"\\s*" + storage.group(2) + r"\\b", title, re.I):
+            if not re.search(r"\b" + storage.group(1) + r"\s*" + storage.group(2) + r"\b", title, re.I):
                 return False
         model_matches = candidate_model == model_expected or (
             not model_expected.endswith(" 5g") and candidate_model == model_expected + " 5g"
