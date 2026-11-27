@@ -57,16 +57,21 @@ def listing_candidate(item, row):
     # same handset as `Infinix GT 30 Pro 5G`. Treat only that trailing network
     # suffix as a display-name alias; the brand, model stem, SKU and physical
     # configuration gates remain strict.
-    model_matches = candidate_model == expected or (
-        not expected.endswith(" 5g") and candidate_model == expected + " 5g"
-    )
-    # Storage-specific catalogue cards must state the requested capacity too.
+    # Keep the selected storage variant attached to the model identity check.
     storage = re.search(r"\s+(\d+)\s*(GB|TB)$", expected, re.I)
     if row["category"] == "mobiles":
+        # Require the provider's brand field as well as the title. A wrong-brand
+        # item can otherwise pass when its display title repeats the target name.
+        if _tokens(item.get("brand")) != _tokens(row["brand"]):
+            return False
+        model_expected = expected
         if storage:
-            expected = expected[:storage.start()].strip()
+            model_expected = expected[:storage.start()].strip()
             if not re.search(r"\b" + storage.group(1) + r"\s*" + storage.group(2) + r"\b", title, re.I):
                 return False
+        model_matches = candidate_model == model_expected or (
+            not model_expected.endswith(" 5g") and candidate_model == model_expected + " 5g"
+        )
         return model_matches
     # Non-mobile listings require a manufacturer model code, never RAM matching.
     code = str(row.get("model_code") or "").strip()
