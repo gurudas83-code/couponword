@@ -24,7 +24,7 @@ from python.phone_research_pages import accepted_specs, eligible, model_title, s
 ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://coupon-world.in"
 EN, HI = "/answers/", "/hi/answers/"
-REVIEWED = "2026-11-06"
+REVIEWED = "2026-11-27"
 HISTORY = ROOT / "data/mobile_historical_query_groups_20261014.csv"
 MAKER_HOSTS = {"samsung.com", "news.samsung.com", "apple.com", "support.apple.com", "oneplus.in", "oneplus.com", "mi.com", "po.co", "vivo.com", "vivonewsroom.in", "motorola.in", "motorola.com", "support.motorola.com", "nothing.tech", "in.nothing.tech", "realme.com", "oppo.com", "iqoo.com", "google.com", "store.google.com", "support.google.com", "lava.in", "lavamobiles.com", "infinixmobility.com", "tecno-mobile.com"}
 
@@ -53,7 +53,7 @@ INDEX_REVIEW_QUERIES = {
     "Redmi nahi chahiye 20k ke andar", "120Hz AMOLED phone under 25000",
     "phone for student under 18000", "phone for office use under 20000",
     "phone under 25000 with AMOLED OIS and 8GB RAM", "5G mobile under 30000",
-    "phone with long updates under 40000", "gaming phone under 30000",
+    "gaming phone under 30000",
     "best battery phone under 35000", "Galaxy A36 vs Galaxy A56",
 }
 
@@ -441,8 +441,25 @@ def document(title,body,path,hi,indexed,canonical=None):
     other=path.removeprefix('/hi') if hi else '/hi'+path
     canon=SITE+(canonical or path)
     robots="index,follow,max-image-preview:large" if indexed else "noindex,follow"
-    schema={"@context":"https://schema.org","@type":"WebPage","name":title,"url":canon,"inLanguage":"hi-IN" if hi else "en-IN","dateModified":REVIEWED}
-    return f'''<!doctype html><html lang="{"hi-IN" if hi else "en-IN"}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} | Coupon World</title><meta name="description" content="{esc(title)} — sourced facts, exact requirements, dated budget evidence and the limits of what can be concluded."><meta name="robots" content="{robots}"><link rel="canonical" href="{esc(canon)}"><link rel="alternate" hreflang="{"hi-IN" if hi else "en-IN"}" href="{esc(SITE+path)}"><link rel="alternate" hreflang="{"en-IN" if hi else "hi-IN"}" href="{esc(SITE+other)}"><link rel="stylesheet" href="/assets/phone-guides.css"><link rel="stylesheet" href="/assets/query-answers.css"><link rel="stylesheet" href="/assets/answer-live-price.css"><script type="application/ld+json">{json.dumps(schema,ensure_ascii=False).replace('<','\\u003c')}</script></head><body><a class="skip" href="#main">{"मुख्य सामग्री" if hi else "Skip to content"}</a><header><nav aria-label="Main navigation"><a href="/">Coupon World</a><a href="{HI if hi else EN}">{"मोबाइल सवाल" if hi else "Phone questions"}</a><a href="{other}">{"English" if hi else "हिंदी"}</a><a href="/#mobileResearchSearch">Find a phone</a></nav></header><main id="main"><p class="eyebrow">COUPON WORLD / SOURCE-LINKED ANSWERS</p>{body}</main><footer><p><a href="/guides/about-coupon-world/">About our research and corrections</a> · <a href="/seo/phone-research-evidence-method.html">Evidence method</a></p><p>Prepared with AI assistance from saved manufacturer-source research. No hands-on testing or current offer is certified. As an Amazon Associate I earn from qualifying purchases.</p></footer><script src="/assets/answer-live-price.js" defer></script></body></html>'''
+    lang="hi-IN" if hi else "en-IN"
+    crumb_home="होम" if hi else "Home"
+    crumb_answers="मोबाइल सवाल" if hi else "Phone questions"
+    crumb_current=title
+    schema={"@context":"https://schema.org","@type":"WebPage","name":title,"url":canon,"inLanguage":lang,"dateModified":REVIEWED,"isPartOf":{"@type":"WebSite","name":"Coupon World","url":SITE+"/"}}
+    breadcrumb={"@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":crumb_home,"item":SITE+"/"},
+        {"@type":"ListItem","position":2,"name":crumb_answers,"item":SITE+(HI if hi else EN)},
+        {"@type":"ListItem","position":3,"name":crumb_current,"item":canon},
+    ]}
+    graph={"@context":"https://schema.org","@graph":[schema,breadcrumb]}
+    breadcrumb_html=f'<nav class="answer-breadcrumbs" aria-label="Breadcrumb"><a href="/">{esc(crumb_home)}</a> <span aria-hidden="true">›</span> <a href="{HI if hi else EN}">{esc(crumb_answers)}</a> <span aria-hidden="true">›</span> <span>{esc(crumb_current)}</span></nav>'
+    related_label="इस जवाब से जुड़े पेज" if hi else "Related Coupon World pages"
+    related=(f'<aside class="answer-related" aria-labelledby="related-heading"><h2 id="related-heading">{related_label}</h2><ul>'
+             f'<li><a href="{HI if hi else EN}">{"सभी मोबाइल सवाल" if hi else "All phone questions"}</a></li>'
+             f'<li><a href="/phones/">{"स्रोत-आधारित मोबाइल स्पेसिफिकेशन" if hi else "Source-linked phone specifications"}</a></li>'
+             f'<li><a href="/compare/">{"मोबाइल तुलना" if hi else "Phone comparisons"}</a></li>'
+             f'<li><a href="/guides/">{"खरीद गाइड" if hi else "Buying guides"}</a></li></ul></aside>')
+    return f'''<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} | Coupon World</title><meta name="description" content="{esc(title)} — sourced facts, exact requirements, dated budget evidence and the limits of what can be concluded."><meta name="robots" content="{robots}"><link rel="canonical" href="{esc(canon)}"><link rel="alternate" hreflang="{lang}" href="{esc(SITE+path)}"><link rel="alternate" hreflang="{"en-IN" if hi else "hi-IN"}" href="{esc(SITE+other)}"><link rel="stylesheet" href="/assets/phone-guides.css"><link rel="stylesheet" href="/assets/query-answers.css"><link rel="stylesheet" href="/assets/answer-live-price.css"><script type="application/ld+json">{json.dumps(graph,ensure_ascii=False).replace('<','\\u003c')}</script></head><body><a class="skip" href="#main">{"मुख्य सामग्री" if hi else "Skip to content"}</a><header><nav aria-label="Main navigation"><a href="/">Coupon World</a><a href="{HI if hi else EN}">{"मोबाइल सवाल" if hi else "Phone questions"}</a><a href="/phones/">{"फोन" if hi else "Phones"}</a><a href="/compare/">{"तुलना" if hi else "Compare"}</a><a href="/guides/">{"गाइड" if hi else "Guides"}</a><a href="{other}">{"English" if hi else "हिंदी"}</a></nav></header><main id="main"><p class="eyebrow">COUPON WORLD / SOURCE-LINKED ANSWERS</p>{breadcrumb_html}{body}{related}</main><footer><p><a href="/guides/about-coupon-world/">About our research and corrections</a> · <a href="/seo/phone-research-evidence-method.html">Evidence method</a></p><p>Prepared with AI assistance from saved manufacturer-source research. No hands-on testing or current offer is certified. As an Amazon Associate I earn from qualifying purchases.</p></footer><script src="/assets/answer-live-price.js" defer></script></body></html>'''
 
 def publish_answers(destination):
     dest=Path(destination)
@@ -527,3 +544,4 @@ def publish_answers(destination):
     homepage=dest/'index.html';text=homepage.read_text(encoding='utf-8');text=text.replace('</main>','<section class="container"><h2><a href="/answers/">Phone buying questions, answered with evidence</a></h2><p>Exact requirements, documented alternatives and clearly explained evidence gaps.</p></section></main>');homepage.write_text(text, encoding='utf-8')
     print(f'Question answers: {len(ledger)} EN/HI groups; {report["indexable_groups"]} indexable, {report["noindex_groups"]} held noindex')
     return report
+
