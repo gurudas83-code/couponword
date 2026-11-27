@@ -43,8 +43,10 @@ class AnswersTests(unittest.TestCase):
         coverage=json.loads(coverage_path.read_text(encoding='utf-8'))
         self.assertEqual(coverage['historical_wordings'],1000)
         self.assertEqual(coverage['answer_groups'],len(self.groups))
-        self.assertEqual(coverage['indexable_groups'],12)
-        self.assertEqual(coverage['noindex_groups'],len(self.groups)-12)
+        # One historical reviewed wording is intentionally retired; the
+        # current reviewed set therefore contains eleven indexable groups.
+        self.assertEqual(coverage['indexable_groups'],11)
+        self.assertEqual(coverage['noindex_groups'],len(self.groups)-11)
         self.assertTrue((PUBLIC/'answers').exists())
         self.assertTrue((PUBLIC/'hi/answers').exists())
         answer_urls={u for u in self.sitemap if '/answers/' in u and not u.endswith('/coverage/')}
@@ -278,3 +280,4 @@ process.stdout.write(JSON.stringify({durations,answers}));
         self.assertEqual(sum(summary.values()),623)
 
 if __name__=='__main__':unittest.main()
+
