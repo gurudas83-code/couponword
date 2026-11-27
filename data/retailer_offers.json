@@ -46,7 +46,7 @@
       "error_type": "ValueError"
     }
   ],
-  "refreshed_at_utc": "2026-11-26T20:30:02.922537+00:00",
+  "refreshed_at_utc": "2026-11-27T20:14:15.832752+00:00",
   "offers": [
     {
       "model_key": "poco|x7 pro 5g",
@@ -67,9 +67,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:28:38.362784+00:00",
-      "observed_at": "2026-11-26T20:28:38.362784+00:00",
-      "last_checked": "2026-11-26T20:28:38.362784+00:00",
+      "checked_at": "2026-11-27T20:12:56.198300+00:00",
+      "observed_at": "2026-11-27T20:12:56.198300+00:00",
+      "last_checked": "2026-11-27T20:12:56.198300+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -78,13 +78,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "e846acea-8ef3-4345-bfec-cf4fa4ce17f5",
+        "provider_request_id": "02519a55-5eed-48ff-8ad6-da36ef7cb6aa",
         "provider_query": "POCO X7 Pro 5G",
         "pincode": "110001",
         "ram_gb": 12,
         "storage_gb": 256,
         "color": "Obsidian Black",
-        "evidence_observed_at": "2026-11-26T20:28:38.362784+00:00"
+        "evidence_observed_at": "2026-11-27T20:12:56.198300+00:00"
       }
     },
     {
@@ -106,9 +106,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:28:41.136264+00:00",
-      "observed_at": "2026-11-26T20:28:41.136264+00:00",
-      "last_checked": "2026-11-26T20:28:41.136264+00:00",
+      "checked_at": "2026-11-27T20:12:58.761914+00:00",
+      "observed_at": "2026-11-27T20:12:58.761914+00:00",
+      "last_checked": "2026-11-27T20:12:58.761914+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -117,13 +117,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "d58328a9-d817-4a60-a058-f35f24e5caeb",
+        "provider_request_id": "7e4a4c85-39ba-4226-a8b6-69a0c0c954e8",
         "provider_query": "POCO M8 Power 5G",
         "pincode": "110001",
         "ram_gb": 6,
         "storage_gb": 128,
         "color": "Blaze Orange",
-        "evidence_observed_at": "2026-11-26T20:28:41.136264+00:00"
+        "evidence_observed_at": "2026-11-27T20:12:58.761914+00:00"
       }
     },
     {
@@ -135,7 +135,7 @@
       "model": "N6 5G",
       "variant": "6GB/128GB · Fresh Mint",
       "title": "OnePlus N6 5G (Fresh Mint, 128 GB)",
-      "price": 26646.0,
+      "price": 26590.0,
       "mrp": 33999.0,
       "currency": "INR",
       "availability": "in_stock",
@@ -145,9 +145,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:28:44.287075+00:00",
-      "observed_at": "2026-11-26T20:28:44.287075+00:00",
-      "last_checked": "2026-11-26T20:28:44.287075+00:00",
+      "checked_at": "2026-11-27T20:13:01.706239+00:00",
+      "observed_at": "2026-11-27T20:13:01.706239+00:00",
+      "last_checked": "2026-11-27T20:13:01.706239+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -156,13 +156,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "2106a104-11e1-4734-8023-780624febb5b",
+        "provider_request_id": "bf191e33-f27f-417a-9e58-7ca315ab87cb",
         "provider_query": "OnePlus N6 5G",
         "pincode": "110001",
         "ram_gb": 6,
         "storage_gb": 128,
         "color": "Fresh Mint",
-        "evidence_observed_at": "2026-11-26T20:28:44.287075+00:00"
+        "evidence_observed_at": "2026-11-27T20:13:01.706239+00:00"
       }
     },
     {
@@ -184,9 +184,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:28:47.130835+00:00",
-      "observed_at": "2026-11-26T20:28:47.130835+00:00",
-      "last_checked": "2026-11-26T20:28:47.130835+00:00",
+      "checked_at": "2026-11-27T20:13:04.364793+00:00",
+      "observed_at": "2026-11-27T20:13:04.364793+00:00",
+      "last_checked": "2026-11-27T20:13:04.364793+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -195,13 +195,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "406a881b-1a6a-4bd0-98a3-45d5bde6db28",
+        "provider_request_id": "bbc86eaf-b881-4d44-8711-b6e7a37f958d",
         "provider_query": "Redmi Note 15 5G",
         "pincode": "110001",
         "ram_gb": 8,
         "storage_gb": 256,
         "color": "Black",
-        "evidence_observed_at": "2026-11-26T20:28:47.130835+00:00"
+        "evidence_observed_at": "2026-11-27T20:13:04.364793+00:00"
       }
     },
     {
@@ -223,9 +223,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:28:50.229729+00:00",
-      "observed_at": "2026-11-26T20:28:50.229729+00:00",
-      "last_checked": "2026-11-26T20:28:50.229729+00:00",
+      "checked_at": "2026-11-27T20:13:07.189424+00:00",
+      "observed_at": "2026-11-27T20:13:07.189424+00:00",
+      "last_checked": "2026-11-27T20:13:07.189424+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -234,37 +234,37 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "0f4cd7af-51d4-47fe-b36b-5504ccc0612e",
+        "provider_request_id": "1206809d-a0ae-45ae-b870-3cea85a171df",
         "provider_query": "Infinix GT 30 Pro",
         "pincode": "110001",
         "ram_gb": 8,
         "storage_gb": 256,
         "color": "Dark Flare",
-        "evidence_observed_at": "2026-11-26T20:28:50.229729+00:00"
+        "evidence_observed_at": "2026-11-27T20:13:07.189424+00:00"
       }
     },
     {
       "model_key": "motorola|edge 60 fusion",
       "product_id": "motorola|edge 60 fusion",
       "retailer": "flipkart",
-      "retailer_product_id": "MOBHN974NUGGH4FH",
+      "retailer_product_id": "MOBHN974GZMDARQ9",
       "brand": "Motorola",
       "model": "Edge 60 Fusion",
-      "variant": "12GB/256GB · PANTONE Slipstream",
-      "title": "MOTOROLA Edge 60 Fusion 5G (PANTONE Slipstream, 256 GB)",
+      "variant": "12GB/256GB · PANTONE Amazonite",
+      "title": "MOTOROLA Edge 60 Fusion 5G (PANTONE Amazonite, 256 GB)",
       "price": null,
       "mrp": 37999.0,
       "currency": "INR",
       "availability": "out_of_stock",
-      "product_url": "https://www.flipkart.com/-/p/-?pid=MOBHN974NUGGH4FH",
-      "affiliate_url": "https://www.flipkart.com/-/p/-?pid=MOBHN974NUGGH4FH",
+      "product_url": "https://www.flipkart.com/-/p/-?pid=MOBHN974GZMDARQ9",
+      "affiliate_url": "https://www.flipkart.com/-/p/-?pid=MOBHN974GZMDARQ9",
       "source": "quickcommerce_authorized_api",
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:28:52.316438+00:00",
-      "observed_at": "2026-11-26T20:28:52.316438+00:00",
-      "last_checked": "2026-11-26T20:28:52.316438+00:00",
+      "checked_at": "2026-11-27T20:13:09.219288+00:00",
+      "observed_at": "2026-11-27T20:13:09.219288+00:00",
+      "last_checked": "2026-11-27T20:13:09.219288+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -273,13 +273,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "e1c2fa20-143e-4c76-95be-00df47b6ca0f",
+        "provider_request_id": "a6b2e0dd-dc7c-4466-be42-c89c87be3dca",
         "provider_query": "Motorola Edge 60 Fusion",
         "pincode": "110001",
         "ram_gb": 12,
         "storage_gb": 256,
-        "color": "PANTONE Slipstream",
-        "evidence_observed_at": "2026-11-26T20:28:52.316438+00:00"
+        "color": "PANTONE Amazonite",
+        "evidence_observed_at": "2026-11-27T20:13:09.219288+00:00"
       }
     },
     {
@@ -301,9 +301,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:28:58.490116+00:00",
-      "observed_at": "2026-11-26T20:28:58.490116+00:00",
-      "last_checked": "2026-11-26T20:28:58.490116+00:00",
+      "checked_at": "2026-11-27T20:13:15.020893+00:00",
+      "observed_at": "2026-11-27T20:13:15.020893+00:00",
+      "last_checked": "2026-11-27T20:13:15.020893+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -312,13 +312,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "ee4cebcc-dbeb-415c-a596-3e4f354aeb4a",
+        "provider_request_id": "b6f588aa-f4d9-445e-84a8-9e055733b1f4",
         "provider_query": "Samsung Galaxy A36 5G",
         "pincode": "110001",
         "ram_gb": 8,
         "storage_gb": 128,
         "color": "Awesome Lavender",
-        "evidence_observed_at": "2026-11-26T20:28:58.490116+00:00"
+        "evidence_observed_at": "2026-11-27T20:13:15.020893+00:00"
       }
     },
     {
@@ -340,9 +340,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:29:01.470958+00:00",
-      "observed_at": "2026-11-26T20:29:01.470958+00:00",
-      "last_checked": "2026-11-26T20:29:01.470958+00:00",
+      "checked_at": "2026-11-27T20:13:17.699018+00:00",
+      "observed_at": "2026-11-27T20:13:17.699018+00:00",
+      "last_checked": "2026-11-27T20:13:17.699018+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -351,13 +351,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "e7aab3ec-28d5-4ef0-a9b3-3371bde8922c",
+        "provider_request_id": "4abd3d6d-40e9-4e5e-9fbf-7afa2d1adb14",
         "provider_query": "Samsung Galaxy F70 Pro 5G",
         "pincode": "110001",
         "ram_gb": 8,
         "storage_gb": 128,
         "color": "Alpha Black",
-        "evidence_observed_at": "2026-11-26T20:29:01.470958+00:00"
+        "evidence_observed_at": "2026-11-27T20:13:17.699018+00:00"
       }
     },
     {
@@ -369,7 +369,7 @@
       "model": "Galaxy M17 5G",
       "variant": "4GB/128GB · Sapphire Black",
       "title": "Samsung Galaxy M17 5G (Sapphire Black, 128 GB)",
-      "price": 18940.0,
+      "price": 18999.0,
       "mrp": 27999.0,
       "currency": "INR",
       "availability": "in_stock",
@@ -379,9 +379,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:29:07.798431+00:00",
-      "observed_at": "2026-11-26T20:29:07.798431+00:00",
-      "last_checked": "2026-11-26T20:29:07.798431+00:00",
+      "checked_at": "2026-11-27T20:13:23.629248+00:00",
+      "observed_at": "2026-11-27T20:13:23.629248+00:00",
+      "last_checked": "2026-11-27T20:13:23.629248+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -390,13 +390,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "87269c24-be0a-4506-af0e-eb9de8f45541",
+        "provider_request_id": "1fe026db-1d83-41be-bcdf-b3a87b6ed669",
         "provider_query": "Samsung Galaxy M17 5G",
         "pincode": "110001",
         "ram_gb": 4,
         "storage_gb": 128,
         "color": "Sapphire Black",
-        "evidence_observed_at": "2026-11-26T20:29:07.798431+00:00"
+        "evidence_observed_at": "2026-11-27T20:13:23.629248+00:00"
       }
     },
     {
@@ -418,9 +418,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:29:10.318933+00:00",
-      "observed_at": "2026-11-26T20:29:10.318933+00:00",
-      "last_checked": "2026-11-26T20:29:10.318933+00:00",
+      "checked_at": "2026-11-27T20:13:26.078244+00:00",
+      "observed_at": "2026-11-27T20:13:26.078244+00:00",
+      "last_checked": "2026-11-27T20:13:26.078244+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -429,13 +429,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "3920e897-24bd-4756-a81e-4558826f7558",
+        "provider_request_id": "329bfbab-a52e-4ed5-b5c0-737bb2818a19",
         "provider_query": "Samsung Galaxy A27 5G",
         "pincode": "110001",
         "ram_gb": 8,
         "storage_gb": 128,
         "color": "Light Green",
-        "evidence_observed_at": "2026-11-26T20:29:10.318933+00:00"
+        "evidence_observed_at": "2026-11-27T20:13:26.078244+00:00"
       }
     },
     {
@@ -457,9 +457,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:29:13.489913+00:00",
-      "observed_at": "2026-11-26T20:29:13.489913+00:00",
-      "last_checked": "2026-11-26T20:29:13.489913+00:00",
+      "checked_at": "2026-11-27T20:13:29.171764+00:00",
+      "observed_at": "2026-11-27T20:13:29.171764+00:00",
+      "last_checked": "2026-11-27T20:13:29.171764+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -468,13 +468,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "0f836cd5-fd69-4385-94b5-0a10c5072cf4",
+        "provider_request_id": "16b3f6f3-b532-4b25-b6a2-6dcbf3c3f1e0",
         "provider_query": "POCO X8 5G",
         "pincode": "110001",
         "ram_gb": 6,
         "storage_gb": 128,
         "color": "Black",
-        "evidence_observed_at": "2026-11-26T20:29:13.489913+00:00"
+        "evidence_observed_at": "2026-11-27T20:13:29.171764+00:00"
       }
     },
     {
@@ -496,9 +496,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:29:19.804452+00:00",
-      "observed_at": "2026-11-26T20:29:19.804452+00:00",
-      "last_checked": "2026-11-26T20:29:19.804452+00:00",
+      "checked_at": "2026-11-27T20:13:35.609714+00:00",
+      "observed_at": "2026-11-27T20:13:35.609714+00:00",
+      "last_checked": "2026-11-27T20:13:35.609714+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -507,13 +507,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "762dd7e2-867d-4ba4-a229-ebeae62afa85",
+        "provider_request_id": "034b312c-2368-49d7-b9f9-94defd8a18b2",
         "provider_query": "OPPO A5x",
         "pincode": "110001",
         "ram_gb": 4,
         "storage_gb": 128,
         "color": "Laser White",
-        "evidence_observed_at": "2026-11-26T20:29:19.804452+00:00"
+        "evidence_observed_at": "2026-11-27T20:13:35.609714+00:00"
       }
     },
     {
@@ -535,9 +535,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:29:22.965313+00:00",
-      "observed_at": "2026-11-26T20:29:22.965313+00:00",
-      "last_checked": "2026-11-26T20:29:22.965313+00:00",
+      "checked_at": "2026-11-27T20:13:38.407265+00:00",
+      "observed_at": "2026-11-27T20:13:38.407265+00:00",
+      "last_checked": "2026-11-27T20:13:38.407265+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -546,13 +546,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "d8a19488-3c0a-4752-bb9c-604a26229b08",
+        "provider_request_id": "0e731895-d14e-49c9-a094-4edf2173fdac",
         "provider_query": "POCO M7 Pro",
         "pincode": "110001",
         "ram_gb": 6,
         "storage_gb": 128,
         "color": "Lavender Frost",
-        "evidence_observed_at": "2026-11-26T20:29:22.965313+00:00"
+        "evidence_observed_at": "2026-11-27T20:13:38.407265+00:00"
       }
     },
     {
@@ -574,9 +574,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:29:26.070329+00:00",
-      "observed_at": "2026-11-26T20:29:26.070329+00:00",
-      "last_checked": "2026-11-26T20:29:26.070329+00:00",
+      "checked_at": "2026-11-27T20:13:41.327532+00:00",
+      "observed_at": "2026-11-27T20:13:41.327532+00:00",
+      "last_checked": "2026-11-27T20:13:41.327532+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -585,13 +585,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "5ad792b4-e76a-4693-8180-8035d69867cd",
+        "provider_request_id": "a9dd167e-2815-43f6-9df1-74bb227a6c2e",
         "provider_query": "realme P3",
         "pincode": "110001",
         "ram_gb": 8,
         "storage_gb": 128,
         "color": "Comet Grey",
-        "evidence_observed_at": "2026-11-26T20:29:26.070329+00:00"
+        "evidence_observed_at": "2026-11-27T20:13:41.327532+00:00"
       }
     },
     {
@@ -613,9 +613,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:29:29.206219+00:00",
-      "observed_at": "2026-11-26T20:29:29.206219+00:00",
-      "last_checked": "2026-11-26T20:29:29.206219+00:00",
+      "checked_at": "2026-11-27T20:13:44.309150+00:00",
+      "observed_at": "2026-11-27T20:13:44.309150+00:00",
+      "last_checked": "2026-11-27T20:13:44.309150+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -624,13 +624,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "8d916880-7301-47db-9844-46ad45ec972f",
+        "provider_request_id": "918d4033-37bb-42d4-a154-3615a098ccfa",
         "provider_query": "OPPO K14x 5G",
         "pincode": "110001",
         "ram_gb": 4,
         "storage_gb": 64,
         "color": "Icy Blue",
-        "evidence_observed_at": "2026-11-26T20:29:29.206219+00:00"
+        "evidence_observed_at": "2026-11-27T20:13:44.309150+00:00"
       }
     },
     {
@@ -652,9 +652,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:29:32.509918+00:00",
-      "observed_at": "2026-11-26T20:29:32.509918+00:00",
-      "last_checked": "2026-11-26T20:29:32.509918+00:00",
+      "checked_at": "2026-11-27T20:13:47.216167+00:00",
+      "observed_at": "2026-11-27T20:13:47.216167+00:00",
+      "last_checked": "2026-11-27T20:13:47.216167+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -663,13 +663,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "6795c1ea-a540-488a-a64a-8893aa9d9830",
+        "provider_request_id": "5f3e1f52-073f-4063-a447-bfbe5ed3df58",
         "provider_query": "vivo T5x 5G",
         "pincode": "110001",
         "ram_gb": 6,
         "storage_gb": 128,
         "color": "Flame Red",
-        "evidence_observed_at": "2026-11-26T20:29:32.509918+00:00"
+        "evidence_observed_at": "2026-11-27T20:13:47.216167+00:00"
       }
     },
     {
@@ -681,7 +681,7 @@
       "model": "Z11x",
       "variant": "6GB/128GB · Titan Black",
       "title": "IQOO Z11x 5G (Titan Black, 128 GB)",
-      "price": 27748.0,
+      "price": 27728.0,
       "mrp": 28999.0,
       "currency": "INR",
       "availability": "in_stock",
@@ -691,9 +691,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:29:37.830921+00:00",
-      "observed_at": "2026-11-26T20:29:37.830921+00:00",
-      "last_checked": "2026-11-26T20:29:37.830921+00:00",
+      "checked_at": "2026-11-27T20:13:52.425929+00:00",
+      "observed_at": "2026-11-27T20:13:52.425929+00:00",
+      "last_checked": "2026-11-27T20:13:52.425929+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -702,13 +702,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "aa0594b2-e1c3-4837-a197-eb2e3c5f5fcf",
+        "provider_request_id": "398f2024-7b77-440b-b573-96001350e65b",
         "provider_query": "iQOO Z11x",
         "pincode": "110001",
         "ram_gb": 6,
         "storage_gb": 128,
         "color": "Titan Black",
-        "evidence_observed_at": "2026-11-26T20:29:37.830921+00:00"
+        "evidence_observed_at": "2026-11-27T20:13:52.425929+00:00"
       }
     },
     {
@@ -730,9 +730,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:29:40.574488+00:00",
-      "observed_at": "2026-11-26T20:29:40.574488+00:00",
-      "last_checked": "2026-11-26T20:29:40.574488+00:00",
+      "checked_at": "2026-11-27T20:13:54.894245+00:00",
+      "observed_at": "2026-11-27T20:13:54.894245+00:00",
+      "last_checked": "2026-11-27T20:13:54.894245+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -741,13 +741,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "bfff6b9d-3554-4ee3-a9f0-8329ccc662e8",
+        "provider_request_id": "34eb8d57-f0b4-44c0-9e04-f26718b7dc7f",
         "provider_query": "realme P4 Pro",
         "pincode": "110001",
         "ram_gb": 8,
         "storage_gb": 256,
         "color": "Midnight Ivy",
-        "evidence_observed_at": "2026-11-26T20:29:40.574488+00:00"
+        "evidence_observed_at": "2026-11-27T20:13:54.894245+00:00"
       }
     },
     {
@@ -759,7 +759,7 @@
       "model": "P4 Power",
       "variant": "8GB/128GB · TransBlue",
       "title": "realme P4 Power 5G (TransBlue, 128 GB)",
-      "price": 30999.0,
+      "price": 29999.0,
       "mrp": 32999.0,
       "currency": "INR",
       "availability": "in_stock",
@@ -769,9 +769,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:29:45.014540+00:00",
-      "observed_at": "2026-11-26T20:29:45.014540+00:00",
-      "last_checked": "2026-11-26T20:29:45.014540+00:00",
+      "checked_at": "2026-11-27T20:13:59.011603+00:00",
+      "observed_at": "2026-11-27T20:13:59.011603+00:00",
+      "last_checked": "2026-11-27T20:13:59.011603+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -780,13 +780,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "7efb0241-b2fa-4d0d-b781-cd95d1e3c2ce",
+        "provider_request_id": "143986d5-9928-4b5e-a486-30938bc62654",
         "provider_query": "realme P4 Power",
         "pincode": "110001",
         "ram_gb": 8,
         "storage_gb": 128,
         "color": "TransBlue",
-        "evidence_observed_at": "2026-11-26T20:29:45.014540+00:00"
+        "evidence_observed_at": "2026-11-27T20:13:59.011603+00:00"
       }
     },
     {
@@ -798,19 +798,19 @@
       "model": "Neo 10",
       "variant": "8GB/256GB · Alpine White",
       "title": "IQOO Neo 10 (Alpine White, 256 GB)",
-      "price": null,
-      "mrp": 45999.0,
+      "price": 47999.0,
+      "mrp": 47999.0,
       "currency": "INR",
-      "availability": "out_of_stock",
+      "availability": "in_stock",
       "product_url": "https://www.flipkart.com/-/p/-?pid=MOBHN6VSWBUHVZGY",
       "affiliate_url": "https://www.flipkart.com/-/p/-?pid=MOBHN6VSWBUHVZGY",
       "source": "quickcommerce_authorized_api",
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:29:54.188605+00:00",
-      "observed_at": "2026-11-26T20:29:54.188605+00:00",
-      "last_checked": "2026-11-26T20:29:54.188605+00:00",
+      "checked_at": "2026-11-27T20:14:07.272909+00:00",
+      "observed_at": "2026-11-27T20:14:07.272909+00:00",
+      "last_checked": "2026-11-27T20:14:07.272909+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -819,13 +819,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "5ade6173-6f72-4a54-800a-a3675f1e88f5",
+        "provider_request_id": "043aab04-815a-4bd4-b10b-2cfb5eaec3ae",
         "provider_query": "iQOO Neo 10",
         "pincode": "110001",
         "ram_gb": 8,
         "storage_gb": 256,
         "color": "Alpine White",
-        "evidence_observed_at": "2026-11-26T20:29:54.188605+00:00"
+        "evidence_observed_at": "2026-11-27T20:14:07.272909+00:00"
       }
     },
     {
@@ -837,7 +837,7 @@
       "model": "Nord 6",
       "variant": "12GB/256GB · Fresh Mint",
       "title": "OnePlus Nord 6 (Fresh Mint, 256 GB)",
-      "price": 54814.0,
+      "price": 54770.0,
       "mrp": 56999.0,
       "currency": "INR",
       "availability": "in_stock",
@@ -847,9 +847,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:29:57.091192+00:00",
-      "observed_at": "2026-11-26T20:29:57.091192+00:00",
-      "last_checked": "2026-11-26T20:29:57.091192+00:00",
+      "checked_at": "2026-11-27T20:14:09.920366+00:00",
+      "observed_at": "2026-11-27T20:14:09.920366+00:00",
+      "last_checked": "2026-11-27T20:14:09.920366+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -858,13 +858,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "732d217e-f81f-4ed1-b966-f4a9329e5c5b",
+        "provider_request_id": "f0d5d046-babc-438f-b4a0-c2e4eda1265b",
         "provider_query": "OnePlus Nord 6",
         "pincode": "110001",
         "ram_gb": 12,
         "storage_gb": 256,
         "color": "Fresh Mint",
-        "evidence_observed_at": "2026-11-26T20:29:57.091192+00:00"
+        "evidence_observed_at": "2026-11-27T20:14:09.920366+00:00"
       }
     },
     {
@@ -876,7 +876,7 @@
       "model": "Galaxy A56 5G",
       "variant": "8GB/128GB · Awesome Olive",
       "title": "Samsung Galaxy A56 5G (Awesome Olive, 128 GB)",
-      "price": 33674.0,
+      "price": 33574.0,
       "mrp": 49999.0,
       "currency": "INR",
       "availability": "in_stock",
@@ -886,9 +886,9 @@
       "source_type": "quickcommerce_authorized_api",
       "verification_status": "VERIFIED",
       "confidence": 0.92,
-      "checked_at": "2026-11-26T20:30:02.922537+00:00",
-      "observed_at": "2026-11-26T20:30:02.922537+00:00",
-      "last_checked": "2026-11-26T20:30:02.922537+00:00",
+      "checked_at": "2026-11-27T20:14:15.832752+00:00",
+      "observed_at": "2026-11-27T20:14:15.832752+00:00",
+      "last_checked": "2026-11-27T20:14:15.832752+00:00",
       "metadata": {
         "source_type": "quickcommerce_authorized_api",
         "publication_authorized": true,
@@ -897,13 +897,13 @@
         "identity_match_method": "strict_model_brand_variant_pid",
         "provider": "QuickCommerce API",
         "provider_platform": "Flipkart",
-        "provider_request_id": "86e1b942-c605-464e-b4ba-0aaaff4aad1c",
+        "provider_request_id": "ce1c2c2b-1454-4d5e-aa36-ace90a614e0e",
         "provider_query": "Samsung Galaxy A56 5G",
         "pincode": "110001",
         "ram_gb": 8,
         "storage_gb": 128,
         "color": "Awesome Olive",
-        "evidence_observed_at": "2026-11-26T20:30:02.922537+00:00"
+        "evidence_observed_at": "2026-11-27T20:14:15.832752+00:00"
       }
     }
   ],
