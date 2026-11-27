@@ -50,7 +50,7 @@ class AnswersTests(unittest.TestCase):
         self.assertTrue((PUBLIC/'answers').exists())
         self.assertTrue((PUBLIC/'hi/answers').exists())
         answer_urls={u for u in self.sitemap if '/answers/' in u and not u.endswith('/coverage/')}
-        self.assertEqual(len(answer_urls),26)
+        self.assertEqual(len(answer_urls),24)
         self.assertLessEqual(len(list((PUBLIC/'answers').iterdir())),14)
         self.assertLessEqual(len(list((PUBLIC/'hi/answers').iterdir())),14)
 
