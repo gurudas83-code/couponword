@@ -167,6 +167,19 @@ def hub_html(category: str, meta: dict, items: list[dict]) -> str:
     checks = "".join("<li>" + esc(x) + "</li>" for x in meta["buyer_checks"])
     other = "tvs" if category == "accessories" else "accessories"
     data = json.dumps({"category":category,"records":items}, ensure_ascii=False).replace("<", "\\u003c").replace("&", "\\u0026")
+    tv_guide = """
+<section class="cr-guidance" aria-labelledby="tv-choose-title">
+<h2 id="tv-choose-title">How to choose a TV in India</h2>
+<p>Start with your room, viewing distance and budget. Screen size alone does not decide picture quality, and there is no single best size for every room.</p>
+<h3>Compare size and budget without guessing</h3>
+<p>Check the exact screen-size variant and model code before comparing prices. Our expanded 20-TV list is a dated research snapshot, not a live price list. We do not currently have enough verified, current offers to publish a reliable “best TV under ₹30,000” or “best TV under ₹50,000” ranking. <a href="/tvs/india-20/">Browse the dated 20-TV research list</a> and confirm today's checkout price and stock with the retailer.</p>
+<h3>QLED, OLED and Mini-LED are different display approaches</h3>
+<p>Check the exact model's panel or backlight source and look for comparable independent brightness, contrast, reflection and viewing-angle tests. A technology label by itself does not prove which TV will look best in your room. Product-specific test evidence is not available for all models in our catalogue.</p>
+<h3>For PS5, Xbox and gaming PCs</h3>
+<p>Verify native refresh rate, HDMI capabilities, VRR and ALLM for the exact regional model. ALLM alone does not establish 120Hz or VRR; a “120Hz” gaming mode may use a different signal or resolution. Our source-reviewed records do not yet support a “best gaming TV” ranking.</p>
+<h3>What our TV pages call a review</h3>
+<p>These pages currently provide manufacturer-sourced specifications and buying cautions, not hands-on or lab-tested reviews. We do not assign star ratings or “best” labels without comparable test evidence. Check each fact at its linked manufacturer source.</p>
+</section>""" if category == "tvs" else ""
     body = f'''<p class="cr-crumb"><a href="/">Home</a> / {esc(title)}</p>
 <section class="cr-hero"><p class="cr-eyebrow">India · evidence-first research</p>
 <h1>{esc(title)}, with the sources visible.</h1>
@@ -187,7 +200,7 @@ def hub_html(category: str, meta: dict, items: list[dict]) -> str:
 </section>
 <section class="cr-comparison" id="cr-comparison" hidden aria-labelledby="cr-compare-title"><h2 id="cr-compare-title">Compare manufacturer-documented facts</h2><p id="cr-comparison-status" role="status"></p><div class="cr-scroll" id="cr-comparison-table"></div><button type="button" id="cr-clear-compare">Clear comparison</button></section>
 <section class="cr-guidance"><h2>What to verify before buying</h2><ul>{checks}</ul>
-<p>Evidence shown here comes from original maker pages. Missing independent testing, compatibility, price or stock stays <strong>unknown</strong>. We do not promote these research cards into the existing purchase-eligible recommendation engine without its normal verified evidence and identity gates.</p></section>'''
+<p>Evidence shown here comes from original maker pages. Missing independent testing, compatibility, price or stock stays <strong>unknown</strong>. We do not promote these research cards into the existing purchase-eligible recommendation engine without its normal verified evidence and identity gates.</p></section>{tv_guide}'''
     script = (f'<script type="application/json" id="cr-payload">{data}</script>'
               '<script defer src="/assets/category-research.js"></script>')
     return doc(title, meta["description"], route, body, schema(title, route), script)
