@@ -107,21 +107,28 @@ def research_visual(item):
     if item.get("category") != "tvs":
         return ""
     import hashlib
-    palette = [("#123c64", "#42c4df"), ("#2d275f", "#d174e9"),
-               ("#143e43", "#6fe2a9"), ("#3d2850", "#f9a566")]
-    a, b = palette[int(hashlib.sha256(item["id"].encode()).hexdigest()[:2], 16) % len(palette)]
+    import re
+    # Keep the TV object stable; vary only its surrounding background. 50 deterministic
+    # palettes give every catalogue card a distinct visual without implying a real SKU photo.
+    palette = []
+    for i in range(50):
+        hue = (i * 137.5) % 360
+        palette.append((f"hsl({hue:.1f} 56% 92%)", f"hsl({(hue + 34) % 360:.1f} 66% 78%)"))
+    ordinal = re.search(r"(\d+)$", str(item.get("id", "")))
+    palette_index = (int(ordinal.group(1)) - 1) % len(palette) if ordinal else int(hashlib.sha256(item["id"].encode()).hexdigest()[:2], 16) % len(palette)
+    bg_a, bg_b = palette[palette_index]
     return (
         '<div class="cw-tv-visual" role="img" aria-label="Illustrative television graphic, not an exact product photo" '
-        'style="--cw-tv-a:' + a + ';--cw-tv-b:' + b + '">'
+        'style="--cw-tv-bg-a:' + bg_a + ';--cw-tv-bg-b:' + bg_b + '">'
         '<div class="cw-tv-bezel"><div class="cw-tv-screen"><span class="cw-tv-glow"></span>'
         '<span class="cw-tv-landscape"></span></div></div>'
-        '<div class="cw-tv-foot"></div><span class="cw-tv-visual-caption">Illustration · not product photo</span></div>'
+        '<div class="cw-tv-foot"></div><span class="cw-tv-visual-caption">AI-generated image · not an exact product photo</span></div>'
     )
 
 TV_VISUAL_CSS = """<style>
-.cw-tv-visual{width:100%;max-width:420px;box-sizing:border-box;display:flex;align-items:center;flex-direction:column;justify-content:center;padding:18px 18px 9px;border-radius:16px;background:linear-gradient(145deg,#f3f6fc,#e8edf5);margin:12px auto 16px}
+.cw-tv-visual{width:100%;max-width:420px;box-sizing:border-box;display:flex;align-items:center;flex-direction:column;justify-content:center;padding:18px 18px 9px;border-radius:16px;background:linear-gradient(145deg,var(--cw-tv-bg-a),var(--cw-tv-bg-b));margin:12px auto 16px}
 .cw-tv-bezel{width:90%;aspect-ratio:16/9;padding:5px;border-radius:9px;background:linear-gradient(135deg,#202937,#05080d);box-shadow:0 13px 23px #192c4836,0 2px 3px #15233d40}
-.cw-tv-screen{width:100%;height:100%;position:relative;overflow:hidden;border-radius:4px;background:linear-gradient(130deg,var(--cw-tv-a) 0%,#142e56 45%,var(--cw-tv-b) 100%)}
+.cw-tv-screen{width:100%;height:100%;position:relative;overflow:hidden;border-radius:4px;background:linear-gradient(130deg,#0d1b2d 0%,#1d365e 45%,#3a5874 100%)}
 .cw-tv-glow{position:absolute;inset:-30% -10%;background:radial-gradient(ellipse at 78% 23%,#ffffffaa,transparent 34%),radial-gradient(ellipse at 22% 80%,#50e4f5aa,transparent 48%);transform:rotate(-9deg)}
 .cw-tv-landscape{position:absolute;left:-10%;right:-10%;bottom:-25%;height:68%;border-radius:50% 45% 0 0;background:linear-gradient(155deg,#ffffff66,#121d5eaa);transform:rotate(-11deg)}
 .cw-tv-foot{width:27%;height:13px;border-bottom:4px solid #424a58;background:linear-gradient(90deg,transparent 44%,#525e6e 44%,#525e6e 56%,transparent 56%);border-radius:0 0 45% 45%}
@@ -297,7 +304,10 @@ def publish_workbook_catalogue(destination):
     # Only substantive list pages are indexable; not the 40 noindex detail
     # pages. They remain linked from each list and are live for visitors.
     for url in urls:
-        if url in existing:raise ValueError("Duplicate collection sitemap "+url)
+        # Idempotent regeneration: the collection page may already be in the sitemap
+        # after a prior publish. Do not add a duplicate entry on visual-only updates.
+        if url in existing:
+            continue
         node=ET.SubElement(root,f"{{{ns}}}url")
         ET.SubElement(node,f"{{{ns}}}loc").text=url
     tree.write(sitemap,encoding="utf-8",xml_declaration=True)
@@ -306,3 +316,4 @@ def publish_workbook_catalogue(destination):
 
 if __name__=="__main__":
     print(load_catalogue()["counts"])
+
