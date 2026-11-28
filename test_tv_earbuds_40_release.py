@@ -113,7 +113,7 @@ class WorkbookTvEarbudsRelease(unittest.TestCase):
                     self.assertEqual(hub.count('class="cw-tv-visual-link"'),20)
                     self.assertIn('href="#cw-retailers-tv01"',hub)
                     self.assertIn('id="cw-retailers-tv01"',hub)
-                    self.assertIn("Illustration · not product photo",hub)
+                    self.assertIn("AI-generated image · not an exact product photo",hub)
                     self.assertEqual(hub.count("<img "),1)
                     self.assertIn("CC0 public-domain",hub)
                     self.assertIn("pxhere.com/en/photo/156633",hub)
