@@ -711,6 +711,12 @@ def build(output: Path) -> Path:
     from python.tv_earbuds_workbook_pages import publish_workbook_catalogue
     publish_workbook_catalogue(output)
 
+    # Publish the expanded 50-model TV research catalogue with AI illustrations
+    # and retailer research links. This remains a research catalogue: no live
+    # stock or lowest-price claim is admitted by this route.
+    from python.tv_50_live_page import build as publish_tv_50_catalogue
+    publish_tv_50_catalogue(output)
+
     from python.tv_size_calculator import publish as publish_tv_size_calculator
     publish_tv_size_calculator(output)
 
