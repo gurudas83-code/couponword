@@ -38,8 +38,8 @@ def publish(destination: Path):
     hub = destination / "tvs" / "index.html"
     if hub.exists():
         hub_html = hub.read_text(encoding="utf-8")
-        link = '<section class="cr-guidance"><h2>How to choose your TV</h2><p>Read the room-size, display-technology and eye-comfort guide, then open the 3D calculator: <a href="' + ROUTE + '">TV buying knowledge portal</a>.</p></section>'
-        if "How to choose your TV" not in hub_html:
+        link = '''<section class="cr-guidance tv-tools-guides"><h2>TV Tools &amp; Guides</h2><p>Start here to choose the right TV, understand display technology and compare India-market models.</p><div class="tv-tools-grid"><a href="/tvs/tv-size-calculator/"><strong>3D TV Size Calculator</strong><span>Enter room size and viewing distance; see the recommended size and rotate the room view.</span></a><a href="/tvs/how-to-choose/"><strong>How to Choose Your TV</strong><span>Bedroom, living room and hall sizing, LED/QLED/OLED/Mini LED guide and eye-comfort tips.</span></a><a href="/tvs/india-20/"><strong>India TV Comparison</strong><span>Source-linked India-market TV research with technical notes and retailer references.</span></a></div></section><style>.tv-tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}.tv-tools-grid a{display:block;padding:15px;border:1px solid #dbe3ef;border-radius:14px;background:#f8fafc;color:inherit;text-decoration:none}.tv-tools-grid a:hover{border-color:#0ea5e9;background:#eff6ff}.tv-tools-grid strong,.tv-tools-grid span{display:block}.tv-tools-grid strong{color:#075985;margin-bottom:6px}.tv-tools-grid span{font-size:13px}@media(max-width:760px){.tv-tools-grid{grid-template-columns:1fr}}</style>'''
+        if "TV Tools &amp; Guides" not in hub_html:
             hub.write_text(hub_html.replace("</main>", link + "</main>", 1), encoding="utf-8")
     ns="http://www.sitemaps.org/schemas/sitemap/0.9"; sitemap=destination/"sitemap.xml"; tree=ET.parse(sitemap); root=tree.getroot(); url=SITE+ROUTE
     existing={str(e.text) for e in root.findall(f"{{{ns}}}url/{{{ns}}}loc")}
@@ -47,3 +47,4 @@ def publish(destination: Path):
         node=ET.SubElement(root,f"{{{ns}}}url"); ET.SubElement(node,f"{{{ns}}}loc").text=url; tree.write(sitemap,encoding="utf-8",xml_declaration=True)
     print("Published TV knowledge portal", url)
     return [url]
+
